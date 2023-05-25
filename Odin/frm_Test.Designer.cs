@@ -70,6 +70,7 @@
             this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_email = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.buttonSpecAny5 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.kryptonButton2 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonDockableWorkspace1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -488,11 +489,24 @@
             this.buttonSpecAny5.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny5.UniqueName = "ECFB869BD7764A9C8F8EA2E658584FE7";
             // 
+            // kryptonButton2
+            // 
+            this.kryptonButton2.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Alternate;
+            this.kryptonButton2.Location = new System.Drawing.Point(479, 221);
+            this.kryptonButton2.Name = "kryptonButton2";
+            this.kryptonButton2.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
+            this.kryptonButton2.Size = new System.Drawing.Size(117, 34);
+            this.kryptonButton2.TabIndex = 302;
+            this.kryptonButton2.Values.Image = global::Odin.Global_Resourses.ObjectSmall;
+            this.kryptonButton2.Values.Text = "Test";
+            this.kryptonButton2.Visible = false;
+            // 
             // frm_Test
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(753, 582);
+            this.Controls.Add(this.kryptonButton2);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.txt_Test);
             this.Controls.Add(this.kryptonLabel3);
@@ -560,5 +574,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonRadioButton rb_Ssl;
         private ComponentFactory.Krypton.Toolkit.KryptonRadioButton rb_Auto;
         private ComponentFactory.Krypton.Toolkit.KryptonRadioButton rb_None;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton2;
     }
 }
