@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="PrintHelperDataSet" targetNamespace="http://tempuri.org/PrintHelperDataSet.xsd" xmlns:mstns="http://tempuri.org/PrintHelperDataSet.xsd" xmlns="http://tempuri.org/PrintHelperDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="PrintHelperDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="PrintHelperDataSet" msprop:Generator_UserDSName="PrintHelperDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="dt_DataMatrixField" msprop:Generator_TableClassName="dt_DataMatrixFieldDataTable" msprop:Generator_TableVarName="tabledt_DataMatrixField" msprop:Generator_TablePropName="dt_DataMatrixField" msprop:Generator_RowDeletingName="dt_DataMatrixFieldRowDeleting" msprop:Generator_RowChangingName="dt_DataMatrixFieldRowChanging" msprop:Generator_RowEvHandlerName="dt_DataMatrixFieldRowChangeEventHandler" msprop:Generator_RowDeletedName="dt_DataMatrixFieldRowDeleted" msprop:Generator_UserTableName="dt_DataMatrixField" msprop:Generator_RowChangedName="dt_DataMatrixFieldRowChanged" msprop:Generator_RowEvArgName="dt_DataMatrixFieldRowChangeEvent" msprop:Generator_RowClassName="dt_DataMatrixFieldRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DMatrix" msprop:Generator_ColumnVarNameInTable="columnDMatrix" msprop:Generator_ColumnPropNameInRow="DMatrix" msprop:Generator_ColumnPropNameInTable="DMatrixColumn" msprop:Generator_UserColumnName="DMatrix" type="xs:base64Binary" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dt_Logo" msprop:Generator_TableClassName="dt_LogoDataTable" msprop:Generator_TableVarName="tabledt_Logo" msprop:Generator_TablePropName="dt_Logo" msprop:Generator_RowDeletingName="dt_LogoRowDeleting" msprop:Generator_RowChangingName="dt_LogoRowChanging" msprop:Generator_RowEvHandlerName="dt_LogoRowChangeEventHandler" msprop:Generator_RowDeletedName="dt_LogoRowDeleted" msprop:Generator_UserTableName="dt_Logo" msprop:Generator_RowChangedName="dt_LogoRowChanged" msprop:Generator_RowEvArgName="dt_LogoRowChangeEvent" msprop:Generator_RowClassName="dt_LogoRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DLogo" msprop:Generator_ColumnVarNameInTable="columnDLogo" msprop:Generator_ColumnPropNameInRow="DLogo" msprop:Generator_ColumnPropNameInTable="DLogoColumn" msprop:Generator_UserColumnName="DLogo" type="xs:base64Binary" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dt_DataMatrixFieldA" msprop:Generator_TableClassName="dt_DataMatrixFieldADataTable" msprop:Generator_TableVarName="tabledt_DataMatrixFieldA" msprop:Generator_TablePropName="dt_DataMatrixFieldA" msprop:Generator_RowDeletingName="dt_DataMatrixFieldARowDeleting" msprop:Generator_RowChangingName="dt_DataMatrixFieldARowChanging" msprop:Generator_RowEvHandlerName="dt_DataMatrixFieldARowChangeEventHandler" msprop:Generator_RowDeletedName="dt_DataMatrixFieldARowDeleted" msprop:Generator_UserTableName="dt_DataMatrixFieldA" msprop:Generator_RowChangedName="dt_DataMatrixFieldARowChanged" msprop:Generator_RowEvArgName="dt_DataMatrixFieldARowChangeEvent" msprop:Generator_RowClassName="dt_DataMatrixFieldARow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DMatrixA" msprop:Generator_ColumnVarNameInTable="columnDMatrixA" msprop:Generator_ColumnPropNameInRow="DMatrixA" msprop:Generator_ColumnPropNameInTable="DMatrixAColumn" msprop:Generator_UserColumnName="DMatrixA" type="xs:base64Binary" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
