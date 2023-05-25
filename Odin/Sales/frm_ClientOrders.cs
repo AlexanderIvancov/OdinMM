@@ -49,7 +49,7 @@ namespace Odin.Sales
         public int ColumnIndex = 0;
         public string ColumnName = "";
         public string CellValue = "";
-       
+
 
         public int COId
         {
@@ -122,7 +122,7 @@ namespace Odin.Sales
             p.TextTitle = name;
             p.TextDescription = name;
             p.ImageSmall = imageListSmall.Images[image];
-           
+
             //p.Width = _Width;
 
             // Add the control for display inside the page
@@ -199,7 +199,7 @@ namespace Odin.Sales
             ctlHistory.COId = _COId;
             //ctlConf.ShowSaveButton(true);
             //ctlConf.SendCOId += new COIdSendingEventHandler(ChangeCOIdSelection);
-            
+
             return NewPage("History ", 1, ctlHistory, ctlHistory.Width);
         }
 
@@ -207,7 +207,7 @@ namespace Odin.Sales
         {
             ctlBatches = new ctl_Batches();
             ControlWidth = ctlBatches.Width;
-                        
+
             ctlBatches.cmb_SalesOrdersWithLines1.SalesOrderLineId = _COId;
             //ctlBatches.ArticleId = COBll.COArtId;
             //ctlBatches.QtyInCO = COBll.COQty;
@@ -298,7 +298,7 @@ namespace Odin.Sales
                                             cmb_Articles1.ArticleId, cmb_Articles1.Article.Trim(), txt_CustArticle.Text, txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
                                             txt_CreatDateTill.Value == null ? "" : txt_CreatDateTill.Value.ToString().Trim(), txt_CustOrder.Text, txt_Comments.Text,
                                             txt_ReqDateFrom.Value == null ? "" : txt_ReqDateFrom.Value.ToString().Trim(), txt_ReqDateTill.Value == null ? "" : txt_ReqDateTill.Value.ToString().Trim());
-            
+
             gv_List.ThreadSafeCall(delegate
             {
                 gv_List.AutoGenerateColumns = false;
@@ -349,8 +349,8 @@ namespace Odin.Sales
                 _coid = frm.ctl_CODets1.COId;
 
             if (frm.ctl_CODets1.COArtId != 0
-                /*&& frm.ctl_CODets1.COQty != 0
-                 *&& frm.ctl_CODets1.COUnitPrice != 0*/)
+                 /*&& frm.ctl_CODets1.COQty != 0
+                  *&& frm.ctl_CODets1.COUnitPrice != 0*/)
             {
                 DataTable datastages = new DataTable();
                 datastages.Columns.Add("id", typeof(int));
@@ -369,19 +369,19 @@ namespace Odin.Sales
 
 
                     dr["checked"] = Convert.ToInt32(row.Cells["chk_checked"].Value);
-                                       
+
 
                     datastages.Rows.Add(dr);
                 }
 
                 NewLineId = COBll.SaveCOLine(_coid, frm.ctl_CODets1.COHeadId, frm.ctl_CODets1.COLine, frm.ctl_CODets1.COCustOrder, frm.ctl_CODets1.COCustLine,
                                             "", "", frm.ctl_CODets1.COArtId, frm.ctl_CODets1.COCustArticle, frm.ctl_CODets1.COService, frm.ctl_CODets1.COQty,
-                                            frm.ctl_CODets1.COUnitId, frm.ctl_CODets1.COReqDate, frm.ctl_CODets1.COStateId , frm.ctl_CODets1.COUnitPrice,
+                                            frm.ctl_CODets1.COUnitId, frm.ctl_CODets1.COReqDate, frm.ctl_CODets1.COStateId, frm.ctl_CODets1.COUnitPrice,
                                             frm.ctl_CODets1.COVat, frm.ctl_CODets1.COComments, frm.ctl_CODets1.COComments1,
-                                            frm.ctl_CODets1.COLogComments, frm.ctl_CODets1.CODelivPlaceId, frm.ctl_CODets1.CODelivAddressId, frm.ctl_CODets1.COEndCustId, "", "", "", 
+                                            frm.ctl_CODets1.COLogComments, frm.ctl_CODets1.CODelivPlaceId, frm.ctl_CODets1.CODelivAddressId, frm.ctl_CODets1.COEndCustId, "", "", "",
                                             datastages, frm.ctl_CODets1.COInternal, frm.ctl_CODets1.COResale, frm.ctl_CODets1.COSpoilage, frm.ctl_CODets1.COBlocked, frm.ctl_CODets1.COSalesComments);
 
-                
+
                 bwStart(bw_List);
 
                 frm.Close();
@@ -401,7 +401,7 @@ namespace Odin.Sales
             {
                 COId = 0;
             }
-            
+
             if (_PrevId == COId)
             {
                 return true;
@@ -534,9 +534,9 @@ namespace Odin.Sales
                     //ctlBatch1.ResDate = Convert.ToDateTime(COBll.COReqDate).AddDays(-14).ToShortDateString();
                     //ctlBatch1.EndDate = COBll.COReqDate;
                     //ctlBatch1.Customer = COBll.COCustomer;
-                    
-                
-                        //ctlConf11.COId = coid;
+
+
+                    //ctlConf11.COId = coid;
                 }
                 //break;
             }
@@ -718,12 +718,12 @@ namespace Odin.Sales
 
         #endregion
 
-        
+
         private void buttonSpecAny1_Click(object sender, EventArgs e)
         {
             txt_CustOrder.Text = string.Empty;
         }
-               
+
 
         private void frm_ClientOrders_Load(object sender, EventArgs e)
         {
@@ -833,21 +833,21 @@ namespace Odin.Sales
             if (globClass.IsFormAlreadyOpen("frm_AddCODet") || cmb_SalesOrders1.SalesOrderId == 0) return;
 
             _iscopy = false;
-            
+
             frm = new frm_AddCODet();
             frm.ctl_CODets1.COId = 0;
             frm.ctl_CODets1.COHeadId = cmb_SalesOrders1.SalesOrderId;
-            
-            
+
+
             frm.ctl_CODets1.CODelivPlaceId = cmb_SalesOrders1.ClientId;
             frm.ctl_CODets1.FillAddress(cmb_SalesOrders1.ClientId);
             frm.ctl_CODets1.ShowSaveButton(false);
             frm.ctl_CODets1.COLine = COBll.LastCOLine(cmb_SalesOrders1.SalesOrderId) + 1;
             frm.ctl_CODets1.COStateId = 1;
             frm.ctl_CODets1.COReqDate = System.DateTime.Now.ToShortDateString();
-            
+
             frm.SaveChanges += new SaveChangesEventHandler(AddCOLine);
-            
+
             frm.Show();
         }
 
@@ -916,7 +916,7 @@ namespace Odin.Sales
                                               DockingEdge.Left,
                                               new KryptonPage[] { NewInputBatch(COBll.COId) });
         }
-            
+
 
         private void buttonSpecAny5_Click(object sender, EventArgs e)
         {
@@ -969,7 +969,10 @@ namespace Odin.Sales
 
                 string strMessage = "Order: " + COBll.COHeader;
                 strMessage = strMessage + "\r\nCustomer: " + COBll.COCustomer;
+                strMessage = strMessage + "\r\nEnd Customer: " + Helper.GetOneRecord("select company from bas_companies where id = " + COBll.COEndCustId).ToString();
                 strMessage = strMessage + "\r\nArticle: " + DAL.Article(COBll.COArtId);
+
+                //strMessage = strMessage + "\r\nArticle: " + DAL.Article();
                 strMessage = strMessage + "\r\nCust. article: " + COBll.COCustArticle;
                 strMessage = strMessage + "\r\nQty: " + COBll.COQty;
                 //strMessage = strMessage + System.Environment.NewLine + "PCB: " + COBll.QPCBText;
@@ -978,7 +981,7 @@ namespace Odin.Sales
                 strMessage = strMessage + "\r\nComments: " + COBll.COComments;
                 strMessage = strMessage + "\r\n" + _neworder;
                 MyHelper.SendMessage(emailaddresses, "Order: " + COBll.COHeader, strMessage);
-                
+
             }
         }
 
