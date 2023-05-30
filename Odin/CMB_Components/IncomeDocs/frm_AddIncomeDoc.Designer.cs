@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.chk_Check = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonLabel18 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_MediatedCost = new Owf.Controls.NumericTetxBox();
             this.buttonSpecAny11 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
@@ -83,7 +84,6 @@
             this.btn_Cancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
-            this.chk_Check = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -138,6 +138,14 @@
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
             this.kryptonPanel1.Size = new System.Drawing.Size(451, 464);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // chk_Check
+            // 
+            this.chk_Check.Location = new System.Drawing.Point(331, 152);
+            this.chk_Check.Name = "chk_Check";
+            this.chk_Check.Size = new System.Drawing.Size(56, 20);
+            this.chk_Check.TabIndex = 283;
+            this.chk_Check.Values.Text = "Check";
             // 
             // kryptonLabel18
             // 
@@ -258,6 +266,7 @@
             this.txt_AdvanceDate.NullValue = " ";
             this.txt_AdvanceDate.Size = new System.Drawing.Size(106, 21);
             this.txt_AdvanceDate.TabIndex = 243;
+            this.txt_AdvanceDate.ValueChanged += new System.EventHandler(this.txt_AdvanceDate_ValueChanged);
             this.txt_AdvanceDate.DropDown += new System.EventHandler<ComponentFactory.Krypton.Toolkit.DateTimePickerDropArgs>(this.txt_AdvanceDate_DropDown);
             // 
             // buttonSpecAny7
@@ -295,6 +304,7 @@
             this.txt_Advance.StateCommon.Content.Padding = new System.Windows.Forms.Padding(3);
             this.txt_Advance.TabIndex = 240;
             this.txt_Advance.Text = "0";
+            this.txt_Advance.TextChanged += new System.EventHandler(this.txt_Advance_TextChanged);
             // 
             // buttonSpecAny6
             // 
@@ -625,14 +635,6 @@
             // kryptonManager1
             // 
             this.kryptonManager1.GlobalPaletteMode = ComponentFactory.Krypton.Toolkit.PaletteModeManager.Office2010Silver;
-            // 
-            // chk_Check
-            // 
-            this.chk_Check.Location = new System.Drawing.Point(331, 152);
-            this.chk_Check.Name = "chk_Check";
-            this.chk_Check.Size = new System.Drawing.Size(56, 20);
-            this.chk_Check.TabIndex = 283;
-            this.chk_Check.Values.Text = "Check";
             // 
             // frm_AddIncomeDoc
             // 

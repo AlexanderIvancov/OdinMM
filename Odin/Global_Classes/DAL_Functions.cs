@@ -62,6 +62,39 @@ namespace Odin.Global_Classes
 
         }
 
+        public double CurrencyRate(int CurId, string CurDate)
+        {
+            double _res = 0;
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_SelectCurRate", sqlConn);
+
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.Add("@CurID", SqlDbType.Int);
+            sqlComm.Parameters["@CurID"].Value = CurId;
+
+            sqlComm.Parameters.Add("@CurDate", SqlDbType.NVarChar);
+            sqlComm.Parameters["@CurDate"].Value = CurDate;
+
+            try
+            {
+                sqlConn.Open();
+                SqlDataReader sqlReader = sqlComm.ExecuteReader();
+                sqlReader.Read();
+
+                _res = Convert.ToDouble(sqlReader[0].ToString());
+
+                sqlReader.Close();
+                sqlConn.Close();
+
+            }
+            catch
+            {
+                _res = 0;
+            }
+            return _res;
+        }
+
         public void ShowCurRate(int CurId, string CurDate)
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);

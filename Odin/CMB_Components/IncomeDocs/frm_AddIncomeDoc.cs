@@ -290,12 +290,23 @@ namespace Odin.CMB_Components.IncomeDocs
         {
             double _oldcurrate = 0;
             _oldcurrate = CurRate;
+            double _sumdoc = 0;
+            double _doccurrate = 0;
+            double _advcurrate = 0;
 
             txt_CurRate.ThreadSafeCall(delegate
             {
-                DLL.ShowCurRate(CurId, RegDate.Trim() == "" ? System.DateTime.Now.ToShortDateString() : RegDate.Trim());
-                CurRate = DLL.CurRate;
-                if (CurRate == 0)
+                _sumdoc = Math.Round(Convert.ToDouble(Helper.GetOneRecord("select sum(unitprice * qty) from STO_StockInDets where headid = " + Id)));
+                _doccurrate = DLL.CurrencyRate(CurId, RegDate.Trim() == "" ? System.DateTime.Now.ToShortDateString() : RegDate.Trim());
+                _advcurrate = DLL.CurrencyRate(CurId, AdvanceDate.Trim() == "" ? System.DateTime.Now.ToShortDateString() : AdvanceDate.Trim());
+
+                if (_sumdoc == 0)
+                    CurRate = _doccurrate;
+                else
+                    CurRate = (Advance * _advcurrate + (_sumdoc - Advance) * _doccurrate) / _sumdoc;
+
+                if (CurRate == 0
+                    || (Advance != 0 && _advcurrate == 0))
                     txt_CurRate.StateCommon.Back.Color1 = Color.Red;
                 else
                 {
@@ -305,7 +316,7 @@ namespace Odin.CMB_Components.IncomeDocs
                         txt_CurRate.StateCommon.Back.Color1 = Color.White;
                 }
 
-               
+
             });
 
             CheckEmpty();
@@ -318,15 +329,16 @@ namespace Odin.CMB_Components.IncomeDocs
 
         private void cmb_Currency1_CurrencyChanged(object sender)
         {
-            txt_CurRate.ThreadSafeCall(delegate
-            {
-               DLL.ShowCurRate(CurId, RegDate.Trim() == "" ? System.DateTime.Now.ToShortDateString() : RegDate.Trim());
-               CurRate = DLL.CurRate;
-                if (CurRate == 0)
-                    txt_CurRate.StateCommon.Back.Color1 = Color.Red;
-                else
-                    txt_CurRate.StateCommon.Back.Color1 = Color.White;
-            });
+            RecalcCurRate();
+            //txt_CurRate.ThreadSafeCall(delegate
+            //{
+            //   DLL.ShowCurRate(CurId, RegDate.Trim() == "" ? System.DateTime.Now.ToShortDateString() : RegDate.Trim());
+            //   CurRate = DLL.CurRate;
+            //    if (CurRate == 0)
+            //        txt_CurRate.StateCommon.Back.Color1 = Color.Red;
+            //    else
+            //        txt_CurRate.StateCommon.Back.Color1 = Color.White;
+            //});
 
             CheckEmpty();
         }
@@ -366,16 +378,16 @@ namespace Odin.CMB_Components.IncomeDocs
 
         private void txt_RegDate_ValueChanged(object sender, EventArgs e)
         {
-            txt_CurRate.ThreadSafeCall(delegate
-            {
-                DLL.ShowCurRate(CurId, RegDate.Trim() == "" ? System.DateTime.Now.ToShortDateString() : RegDate.Trim());
-                CurRate = DLL.CurRate;
-                if (CurRate == 0)
-                    txt_CurRate.StateCommon.Back.Color1 = Color.Red;
-                else
-                    txt_CurRate.StateCommon.Back.Color1 = Color.White;
-            });
-
+            //txt_CurRate.ThreadSafeCall(delegate
+            //{
+            //    DLL.ShowCurRate(CurId, RegDate.Trim() == "" ? System.DateTime.Now.ToShortDateString() : RegDate.Trim());
+            //    CurRate = DLL.CurRate;
+            //    if (CurRate == 0)
+            //        txt_CurRate.StateCommon.Back.Color1 = Color.Red;
+            //    else
+            //        txt_CurRate.StateCommon.Back.Color1 = Color.White;
+            //});
+            RecalcCurRate();
             CheckEmpty();
         }
 
@@ -401,6 +413,18 @@ namespace Odin.CMB_Components.IncomeDocs
 
         private void txt_CurRate_TextChanged(object sender, EventArgs e)
         {
+            CheckEmpty();
+        }
+
+        private void txt_Advance_TextChanged(object sender, EventArgs e)
+        {
+            RecalcCurRate();
+            CheckEmpty();
+        }
+
+        private void txt_AdvanceDate_ValueChanged(object sender, EventArgs e)
+        {
+            RecalcCurRate();
             CheckEmpty();
         }
     }
