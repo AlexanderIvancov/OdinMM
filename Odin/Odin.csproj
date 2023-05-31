@@ -1765,7 +1765,7 @@
     <Compile Include="Register\Articles\frm_AddArticle.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Register\Articles\frm_AddArticle.Designer.cs">
+    <Compile Include="Register\Articles\frm_AddArticle.designer.cs">
       <DependentUpon>frm_AddArticle.cs</DependentUpon>
     </Compile>
     <Compile Include="Register\Articles\frm_AddBOM.cs">

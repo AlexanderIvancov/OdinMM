@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_AddArticle));
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.btn_CreatePF = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Cancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
@@ -86,7 +87,6 @@
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_Id = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.btn_Concidences = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.btn_CreatePF = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
@@ -105,13 +105,23 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 400);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(631, 59);
+            this.kryptonPanel1.Size = new System.Drawing.Size(684, 59);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // btn_CreatePF
+            // 
+            this.btn_CreatePF.Location = new System.Drawing.Point(12, 13);
+            this.btn_CreatePF.Name = "btn_CreatePF";
+            this.btn_CreatePF.Size = new System.Drawing.Size(93, 34);
+            this.btn_CreatePF.TabIndex = 12;
+            this.btn_CreatePF.Values.Image = global::Odin.Global_Resourses.wizard;
+            this.btn_CreatePF.Values.Text = "Create PF";
+            this.btn_CreatePF.Click += new System.EventHandler(this.btn_CreatePF_Click);
             // 
             // btn_Cancel
             // 
             this.btn_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_Cancel.Location = new System.Drawing.Point(529, 13);
+            this.btn_Cancel.Location = new System.Drawing.Point(582, 13);
             this.btn_Cancel.Name = "btn_Cancel";
             this.btn_Cancel.Size = new System.Drawing.Size(90, 34);
             this.btn_Cancel.TabIndex = 10;
@@ -122,7 +132,7 @@
             // 
             this.btn_OK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btn_OK.Enabled = false;
-            this.btn_OK.Location = new System.Drawing.Point(430, 13);
+            this.btn_OK.Location = new System.Drawing.Point(483, 13);
             this.btn_OK.Name = "btn_OK";
             this.btn_OK.Size = new System.Drawing.Size(93, 34);
             this.btn_OK.TabIndex = 9;
@@ -179,7 +189,7 @@
             this.kryptonPanel2.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel2.Name = "kryptonPanel2";
             this.kryptonPanel2.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonPanel2.Size = new System.Drawing.Size(631, 400);
+            this.kryptonPanel2.Size = new System.Drawing.Size(684, 400);
             this.kryptonPanel2.TabIndex = 1;
             // 
             // cmb_Articles2
@@ -260,7 +270,7 @@
             // 
             // kryptonLabel17
             // 
-            this.kryptonLabel17.Location = new System.Drawing.Point(281, 92);
+            this.kryptonLabel17.Location = new System.Drawing.Point(333, 92);
             this.kryptonLabel17.Name = "kryptonLabel17";
             this.kryptonLabel17.Size = new System.Drawing.Size(37, 20);
             this.kryptonLabel17.TabIndex = 44;
@@ -279,7 +289,7 @@
             "5",
             "5A",
             "6"});
-            this.cmb_MSL.Location = new System.Drawing.Point(324, 91);
+            this.cmb_MSL.Location = new System.Drawing.Point(376, 92);
             this.cmb_MSL.Name = "cmb_MSL";
             this.cmb_MSL.Size = new System.Drawing.Size(44, 21);
             this.cmb_MSL.TabIndex = 20;
@@ -287,7 +297,7 @@
             // 
             // kryptonLabel16
             // 
-            this.kryptonLabel16.Location = new System.Drawing.Point(136, 91);
+            this.kryptonLabel16.Location = new System.Drawing.Point(178, 91);
             this.kryptonLabel16.Name = "kryptonLabel16";
             this.kryptonLabel16.Size = new System.Drawing.Size(44, 20);
             this.kryptonLabel16.TabIndex = 42;
@@ -296,7 +306,7 @@
             // cmb_Common1
             // 
             this.cmb_Common1.IsEmptyColor = false;
-            this.cmb_Common1.Location = new System.Drawing.Point(186, 91);
+            this.cmb_Common1.Location = new System.Drawing.Point(228, 91);
             this.cmb_Common1.Name = "cmb_Common1";
             this.cmb_Common1.OrderBy = "id";
             this.cmb_Common1.sCurrentValue = "";
@@ -320,7 +330,7 @@
             // 
             this.txt_QtyReserve.Location = new System.Drawing.Point(326, 311);
             this.txt_QtyReserve.Name = "txt_QtyReserve";
-            this.txt_QtyReserve.Size = new System.Drawing.Size(42, 23);
+            this.txt_QtyReserve.Size = new System.Drawing.Size(94, 23);
             this.txt_QtyReserve.TabIndex = 60;
             this.txt_QtyReserve.Text = "0";
             // 
@@ -354,7 +364,7 @@
             // 
             this.txt_Weight.Location = new System.Drawing.Point(326, 336);
             this.txt_Weight.Name = "txt_Weight";
-            this.txt_Weight.Size = new System.Drawing.Size(42, 23);
+            this.txt_Weight.Size = new System.Drawing.Size(94, 23);
             this.txt_Weight.TabIndex = 66;
             this.txt_Weight.Text = "0";
             // 
@@ -406,7 +416,7 @@
             this.buttonSpecAny7});
             this.txt_StorRules.Location = new System.Drawing.Point(93, 225);
             this.txt_StorRules.Name = "txt_StorRules";
-            this.txt_StorRules.Size = new System.Drawing.Size(275, 23);
+            this.txt_StorRules.Size = new System.Drawing.Size(327, 23);
             this.txt_StorRules.TabIndex = 28;
             // 
             // buttonSpecAny7
@@ -443,7 +453,7 @@
             // btn_GetImage
             // 
             this.btn_GetImage.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Gallery;
-            this.btn_GetImage.Location = new System.Drawing.Point(588, 355);
+            this.btn_GetImage.Location = new System.Drawing.Point(641, 355);
             this.btn_GetImage.Name = "btn_GetImage";
             this.btn_GetImage.Size = new System.Drawing.Size(31, 32);
             this.btn_GetImage.TabIndex = 19;
@@ -465,7 +475,7 @@
             this.buttonSpecAny5});
             this.txt_Image.Location = new System.Drawing.Point(93, 361);
             this.txt_Image.Name = "txt_Image";
-            this.txt_Image.Size = new System.Drawing.Size(489, 23);
+            this.txt_Image.Size = new System.Drawing.Size(542, 23);
             this.txt_Image.TabIndex = 68;
             // 
             // buttonSpecAny5
@@ -497,7 +507,7 @@
             // kryptonPanel3
             // 
             this.kryptonPanel3.Controls.Add(this.pic_Image);
-            this.kryptonPanel3.Location = new System.Drawing.Point(374, 65);
+            this.kryptonPanel3.Location = new System.Drawing.Point(427, 65);
             this.kryptonPanel3.Name = "kryptonPanel3";
             this.kryptonPanel3.Size = new System.Drawing.Size(245, 284);
             this.kryptonPanel3.TabIndex = 14;
@@ -551,7 +561,7 @@
             this.txt_Comments.Location = new System.Drawing.Point(93, 169);
             this.txt_Comments.Multiline = true;
             this.txt_Comments.Name = "txt_Comments";
-            this.txt_Comments.Size = new System.Drawing.Size(275, 52);
+            this.txt_Comments.Size = new System.Drawing.Size(327, 52);
             this.txt_Comments.TabIndex = 26;
             // 
             // buttonSpecAny4
@@ -574,7 +584,7 @@
             this.buttonSpecAny3});
             this.txt_Description.Location = new System.Drawing.Point(93, 143);
             this.txt_Description.Name = "txt_Description";
-            this.txt_Description.Size = new System.Drawing.Size(275, 23);
+            this.txt_Description.Size = new System.Drawing.Size(327, 23);
             this.txt_Description.TabIndex = 24;
             // 
             // buttonSpecAny3
@@ -594,7 +604,7 @@
             // cmb_Units1
             // 
             this.cmb_Units1.EnableSearchId = false;
-            this.cmb_Units1.Location = new System.Drawing.Point(63, 91);
+            this.cmb_Units1.Location = new System.Drawing.Point(93, 91);
             this.cmb_Units1.Name = "cmb_Units1";
             this.cmb_Units1.Size = new System.Drawing.Size(67, 20);
             this.cmb_Units1.TabIndex = 14;
@@ -616,7 +626,7 @@
             this.buttonSpecAny2});
             this.txt_2ndName.Location = new System.Drawing.Point(93, 117);
             this.txt_2ndName.Name = "txt_2ndName";
-            this.txt_2ndName.Size = new System.Drawing.Size(275, 23);
+            this.txt_2ndName.Size = new System.Drawing.Size(327, 23);
             this.txt_2ndName.TabIndex = 22;
             // 
             // buttonSpecAny2
@@ -681,23 +691,13 @@
             this.btn_Concidences.Values.Text = "";
             this.btn_Concidences.Click += new System.EventHandler(this.btn_Concidences_Click);
             // 
-            // btn_CreatePF
-            // 
-            this.btn_CreatePF.Location = new System.Drawing.Point(12, 13);
-            this.btn_CreatePF.Name = "btn_CreatePF";
-            this.btn_CreatePF.Size = new System.Drawing.Size(93, 34);
-            this.btn_CreatePF.TabIndex = 12;
-            this.btn_CreatePF.Values.Image = global::Odin.Global_Resourses.wizard;
-            this.btn_CreatePF.Values.Text = "Create PF";
-            this.btn_CreatePF.Click += new System.EventHandler(this.btn_CreatePF_Click);
-            // 
             // frm_AddArticle
             // 
             this.AcceptButton = this.btn_OK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_Cancel;
-            this.ClientSize = new System.Drawing.Size(631, 459);
+            this.ClientSize = new System.Drawing.Size(684, 459);
             this.Controls.Add(this.btn_Concidences);
             this.Controls.Add(this.kryptonPanel2);
             this.Controls.Add(this.kryptonPanel1);
