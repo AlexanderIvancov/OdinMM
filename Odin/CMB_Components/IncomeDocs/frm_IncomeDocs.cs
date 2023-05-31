@@ -108,7 +108,7 @@ namespace Odin.CMB_Components.IncomeDocs
 
                 Bll.IncomeDocHeadId = _id;
                 frm.IncomeDoc = Bll.IncomeDocName;
-
+                frm.Id = _id;
                 frm.HeaderText = "Edit income document: " + frm.IncomeDoc;
 
                 frm.Serie = Bll.IncomeDocSerie;
