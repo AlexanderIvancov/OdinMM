@@ -611,6 +611,7 @@ namespace Odin.Warehouse.StockIn
                 //MessageBox.Show(cmb_Articles1.ArticleId.ToString());
                 ClearFields();
                 UnitId = cmb_Articles1.UnitId;
+                Weight = cmb_Articles1.Weight;
             }
             else
             {

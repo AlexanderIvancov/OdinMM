@@ -24,8 +24,10 @@ namespace Odin.CMB_Components.IncomeDocs
 
 
         #region Variables
+        int _id = 0;
         public int Id
-        { get; set; }
+        { get { return _id; }
+            set { _id = value; } }
 
         public string HeaderText
         {
@@ -296,7 +298,11 @@ namespace Odin.CMB_Components.IncomeDocs
 
             txt_CurRate.ThreadSafeCall(delegate
             {
-                _sumdoc = Math.Round(Convert.ToDouble(Helper.GetOneRecord("select sum(unitprice * qty) from STO_StockInDets where headid = " + Id)));
+                try
+                {
+                    _sumdoc = Math.Round(Convert.ToDouble(Helper.GetOneRecord("select sum(unitprice * qty) from STO_StockInDets where headid = " + Id)));
+                }
+                catch { }
                 _doccurrate = DLL.CurrencyRate(CurId, RegDate.Trim() == "" ? System.DateTime.Now.ToShortDateString() : RegDate.Trim());
                 _advcurrate = DLL.CurrencyRate(CurId, AdvanceDate.Trim() == "" ? System.DateTime.Now.ToShortDateString() : AdvanceDate.Trim());
 

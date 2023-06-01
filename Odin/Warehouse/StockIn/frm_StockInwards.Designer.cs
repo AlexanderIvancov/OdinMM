@@ -145,6 +145,7 @@
             this.cn_regdateat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_regdateby = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_pcesperunit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_totalweight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
@@ -653,7 +654,8 @@
             this.cn_type,
             this.cn_regdateat,
             this.cn_regdateby,
-            this.cn_pcesperunit});
+            this.cn_pcesperunit,
+            this.cn_totalweight});
             this.gv_List.ContextMenuStrip = this.mnu_Lines;
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_List.Location = new System.Drawing.Point(0, 0);
@@ -1320,6 +1322,13 @@
             this.cn_pcesperunit.Name = "cn_pcesperunit";
             this.cn_pcesperunit.ReadOnly = true;
             // 
+            // cn_totalweight
+            // 
+            this.cn_totalweight.DataPropertyName = "totalweight";
+            this.cn_totalweight.HeaderText = "Total weight";
+            this.cn_totalweight.Name = "cn_totalweight";
+            this.cn_totalweight.ReadOnly = true;
+            // 
             // frm_StockInwards
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1481,5 +1490,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_regdateat;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_regdateby;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_pcesperunit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_totalweight;
     }
 }
