@@ -458,8 +458,8 @@ namespace Odin.Workshop
         #endregion
 
         #region Results
-        public static DataTable getProductionResults(string _serial, int _launchid, int _batchid, int _conforderid, int _artid, 
-                                                    int _typeid, int _workerid, string _datefrom, string _datetill, int _sum)
+        public static DataTable getProductionResults(string _serial, int _launchid, int _batchid, int _conforderid, int _artid,
+                                                    int _typeid, int _workerid, string _datefrom, string _datetill, int _sum, int _concoper)
         {
             string query = "sp_SelectProductionResults";
 
@@ -474,13 +474,13 @@ namespace Odin.Workshop
                 new SqlParameter("@workerid",SqlDbType.Int){Value = _workerid },
                 new SqlParameter("@datefrom",SqlDbType.NVarChar){Value = _datefrom },
                 new SqlParameter("@datetill",SqlDbType.NVarChar){Value = _datetill },
-                new SqlParameter("@sum",SqlDbType.Int){Value = _sum }
+                new SqlParameter("@sum",SqlDbType.Int){Value = _sum },
+                new SqlParameter("@concoper",SqlDbType.Int){Value = _concoper }
 
             };
 
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
-
         public static DataTable getProductionMaterials(int _launchid, int _batchid, int _conforderid, int _artid,
                                                     int _typeid, int _workerid, string _datefrom, string _datetill)
         {

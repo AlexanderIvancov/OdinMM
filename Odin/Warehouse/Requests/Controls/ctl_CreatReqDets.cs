@@ -33,6 +33,7 @@ namespace Odin.Warehouse.Requests.Controls
         Requests_BLL ReqBLL = new Requests_BLL();
         AdmMenu mMenu = new AdmMenu();
         Plan_BLL PlanBLL = new Plan_BLL();
+        Helper MyHelper = new Helper();
 
         public int RowIndex = 0;
         public int ColumnIndex = 0;
@@ -408,6 +409,7 @@ namespace Odin.Warehouse.Requests.Controls
         private void btn_Save_Click(object sender, EventArgs e)
         {
             bool _test = true;
+            bool _testurgent = false;
             bool _isreqdate = true;
             DateTime reqdate;
             //check for header
@@ -466,7 +468,24 @@ namespace Odin.Warehouse.Requests.Controls
                                                     Convert.ToInt32(row.Cells["chk_Reserve"].Value),
                                                     0,
                                                     ProdPlaceId);
+                        if (Convert.ToInt32(row.Cells["chk_Urgent"].Value) == -1)
+                            _testurgent = true;
                     }
+                }
+                if (_testurgent == true)
+                {
+                    //Send letter
+                    string emailaddresses = "";
+                    emailaddresses = DAL.EmailAddressesByType(4);
+
+                    if (emailaddresses != "")
+                    {
+
+                        string strMessage = "Request number: " + ReqBLL.RDReqName;
+                        strMessage = strMessage + "\r\nBatch: " + cmb_Batches1.Batch.ToString();
+                        MyHelper.SendMessage(glob_Class.ReplaceChar(emailaddresses, ";", ","), "Urgent request NR : " + ReqBLL.RDReqName + " was created!", strMessage);
+                    }
+
                 }
             }
 

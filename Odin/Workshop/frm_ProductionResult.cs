@@ -408,9 +408,9 @@ namespace Odin.Workshop
         public void bw_List(object sender, DoWorkEventArgs e)
         {
 
-            var data = Processing_BLL.getProductionResults(txt_Serial.Text, cmb_Launches1.LaunchId, cmb_Batches1.BatchId, cmb_SalesOrdersWithLines1.SalesOrderLineId, cmb_Articles1.ArticleId, 
+            var data = Processing_BLL.getProductionResults(txt_Serial.Text, cmb_Launches1.LaunchId, cmb_Batches1.BatchId, cmb_SalesOrdersWithLines1.SalesOrderLineId, cmb_Articles1.ArticleId,
                                             cmb_Types1.TypeId, cmb_Common1.SelectedValue, txt_DateFrom.Value == null ? "" : txt_DateFrom.Value.ToString().Trim(),
-                                            txt_DateTill.Value == null ? "" : txt_DateTill.Value.ToString().Trim(), chk_Sum.Checked == true ? -1 : 0);
+                                            txt_DateTill.Value == null ? "" : txt_DateTill.Value.ToString().Trim(), chk_Sum.Checked == true ? -1 : 0, chk_ConcOperations.Checked == true ? -1 : 0);
 
             var datam = Processing_BLL.getProductionMaterials(cmb_Launches1.LaunchId, cmb_Batches1.BatchId, cmb_SalesOrdersWithLines1.SalesOrderLineId, cmb_Articles1.ArticleId,
                                             cmb_Types1.TypeId, cmb_Common1.SelectedValue, txt_DateFrom.Value == null ? "" : txt_DateFrom.Value.ToString().Trim(),
