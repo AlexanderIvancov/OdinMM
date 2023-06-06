@@ -606,17 +606,17 @@
             // 
             this.kryptonLabel12.Location = new System.Drawing.Point(8, 156);
             this.kryptonLabel12.Name = "kryptonLabel12";
-            this.kryptonLabel12.Size = new System.Drawing.Size(91, 20);
+            this.kryptonLabel12.Size = new System.Drawing.Size(108, 20);
             this.kryptonLabel12.TabIndex = 266;
-            this.kryptonLabel12.Values.Text = "Total profit (€):";
+            this.kryptonLabel12.Values.Text = "Total profit (BYN):";
             // 
             // txt_TotalProfit
             // 
             this.txt_TotalProfit.AllowDecimalSeparator = true;
             this.txt_TotalProfit.AllowSpace = false;
-            this.txt_TotalProfit.Location = new System.Drawing.Point(105, 156);
+            this.txt_TotalProfit.Location = new System.Drawing.Point(122, 156);
             this.txt_TotalProfit.Name = "txt_TotalProfit";
-            this.txt_TotalProfit.Size = new System.Drawing.Size(122, 21);
+            this.txt_TotalProfit.Size = new System.Drawing.Size(105, 21);
             this.txt_TotalProfit.StateActive.Content.Color1 = System.Drawing.Color.Red;
             this.txt_TotalProfit.StateActive.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txt_TotalProfit.StateActive.Content.Padding = new System.Windows.Forms.Padding(3);

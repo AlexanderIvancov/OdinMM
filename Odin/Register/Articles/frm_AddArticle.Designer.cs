@@ -293,7 +293,7 @@
             this.cmb_MSL.Name = "cmb_MSL";
             this.cmb_MSL.Size = new System.Drawing.Size(44, 21);
             this.cmb_MSL.TabIndex = 20;
-            this.cmb_MSL.Text = "1";
+            this.cmb_MSL.Text = "0";
             // 
             // kryptonLabel16
             // 

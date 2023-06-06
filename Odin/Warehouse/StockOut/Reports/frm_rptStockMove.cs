@@ -368,7 +368,7 @@ namespace Odin.Warehouse.StockOut.Reports
             report.SetParameterValue("Stage", Stage);
             report.SetParameterValue("MoveDate", MoveDate);
             report.SetParameterValue("Serials", Serials);
-            report.SetParameterValue("Comment", Comments);
+            report.SetParameterValue("Comments", Comments);
 
             return report;
 
