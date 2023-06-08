@@ -585,6 +585,12 @@
     <Compile Include="CMB_Components\IncomeDocs\frm_AddIncomeDoc.Designer.cs">
       <DependentUpon>frm_AddIncomeDoc.cs</DependentUpon>
     </Compile>
+    <Compile Include="CMB_Components\IncomeDocs\frm_AdvancePayments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CMB_Components\IncomeDocs\frm_AdvancePayments.Designer.cs">
+      <DependentUpon>frm_AdvancePayments.cs</DependentUpon>
+    </Compile>
     <Compile Include="CMB_Components\IncomeDocs\frm_IncomeDocs.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -3115,6 +3121,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CMB_Components\IncomeDocs\frm_AddIncomeDoc.resx">
       <DependentUpon>frm_AddIncomeDoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CMB_Components\IncomeDocs\frm_AdvancePayments.resx">
+      <DependentUpon>frm_AdvancePayments.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CMB_Components\IncomeDocs\frm_IncomeDocs.resx">
       <DependentUpon>frm_IncomeDocs.cs</DependentUpon>

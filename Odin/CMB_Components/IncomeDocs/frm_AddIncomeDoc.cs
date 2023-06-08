@@ -433,5 +433,10 @@ namespace Odin.CMB_Components.IncomeDocs
             RecalcCurRate();
             CheckEmpty();
         }
+
+        private void btn_AdvancePayments_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
