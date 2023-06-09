@@ -168,6 +168,7 @@
             this.btn_Deliveries = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Confirmations = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.bs_List = new Odin.Global_Classes.SyncBindingSource();
+            this.btn_CapacityAnalyze = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.mnu_Lines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
@@ -209,7 +210,6 @@
             // mni_FilterFor
             // 
             this.mni_FilterFor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.mni_FilterFor.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.mni_FilterFor.Name = "mni_FilterFor";
             this.mni_FilterFor.Size = new System.Drawing.Size(150, 23);
             this.mni_FilterFor.TextChanged += new System.EventHandler(this.mni_FilterFor_TextChanged);
@@ -507,6 +507,7 @@
             // 
             this.cmb_Articles1.Article = "";
             this.cmb_Articles1.ArticleId = 0;
+            this.cmb_Articles1.ArticleIdRec = 0;
             this.cmb_Articles1.ArtType = null;
             this.cmb_Articles1.BOMState = 0;
             this.cmb_Articles1.Comments = null;
@@ -525,6 +526,7 @@
             this.cmb_Articles1.ProjectId = 0;
             this.cmb_Articles1.QtyAvail = 0D;
             this.cmb_Articles1.QtyConsStock = 0D;
+            this.cmb_Articles1.RMId = 0;
             this.cmb_Articles1.SecName = null;
             this.cmb_Articles1.Size = new System.Drawing.Size(283, 20);
             this.cmb_Articles1.SMTType = 0;
@@ -768,6 +770,7 @@
             this.cmb_Batches1.CustArticle = "";
             this.cmb_Batches1.Customer = "";
             this.cmb_Batches1.IsActive = 0;
+            this.cmb_Batches1.IsGroup = 0;
             this.cmb_Batches1.IsProject = 0;
             this.cmb_Batches1.IsQuote = 0;
             this.cmb_Batches1.Location = new System.Drawing.Point(131, 77);
@@ -1289,7 +1292,6 @@
             // 
             this.bindingNavigatorPositionItem.AccessibleName = "Position";
             this.bindingNavigatorPositionItem.AutoSize = false;
-            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
             this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
             this.bindingNavigatorPositionItem.Text = "0";
@@ -1423,6 +1425,7 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.btn_CapacityAnalyze);
             this.kryptonPanel1.Controls.Add(this.btn_Invoices);
             this.kryptonPanel1.Controls.Add(this.btn_Launches);
             this.kryptonPanel1.Controls.Add(this.btn_AwaitingCost);
@@ -1443,7 +1446,7 @@
             // 
             // btn_Invoices
             // 
-            this.btn_Invoices.Location = new System.Drawing.Point(1209, 5);
+            this.btn_Invoices.Location = new System.Drawing.Point(1344, 5);
             this.btn_Invoices.Name = "btn_Invoices";
             this.btn_Invoices.Size = new System.Drawing.Size(105, 39);
             this.btn_Invoices.TabIndex = 16;
@@ -1558,6 +1561,16 @@
             this.btn_Confirmations.Values.Image = global::Odin.Global_Resourses.signature_5789;
             this.btn_Confirmations.Values.Text = "Confirmations";
             this.btn_Confirmations.Click += new System.EventHandler(this.btn_Confirmations_Click);
+            // 
+            // btn_CapacityAnalyze
+            // 
+            this.btn_CapacityAnalyze.Location = new System.Drawing.Point(1209, 5);
+            this.btn_CapacityAnalyze.Name = "btn_CapacityAnalyze";
+            this.btn_CapacityAnalyze.Size = new System.Drawing.Size(144, 39);
+            this.btn_CapacityAnalyze.TabIndex = 18;
+            this.btn_CapacityAnalyze.Values.Image = global::Odin.Global_Resourses.participation_rate;
+            this.btn_CapacityAnalyze.Values.Text = "Capacity analyze";
+            this.btn_CapacityAnalyze.Click += new System.EventHandler(this.btn_CapacityAnalyze_Click);
             // 
             // frm_ClientOrders
             // 
@@ -1735,5 +1748,6 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn cn_blockdelivery;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_salescomments;
         private System.Windows.Forms.ToolStripButton btn_MakeCOAsPO;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btn_CapacityAnalyze;
     }
 }

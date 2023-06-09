@@ -1078,6 +1078,56 @@ namespace Odin.Sales
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
             }
         }
+
+        private void btn_CapacityAnalyze_Click(object sender, EventArgs e)
+        {
+            int _days = 0;
+            DataTable datacos = new DataTable();
+            datacos.Columns.Add("id", typeof(int));
+
+            foreach (DataGridViewRow row in this.gv_List.SelectedRows)
+            {
+                DataRow dr = datacos.NewRow();
+                dr["id"] = Convert.ToInt32(row.Cells["cn_id"].Value);
+                datacos.Rows.Add(dr);
+            }
+
+            if (datacos.Rows.Count > 0)
+            {
+                frm_cmbNumber frm = new frm_cmbNumber();
+                frm.HeaderText = "Enter production days";
+                frm.LabelText = "Production days:";
+                frm.FormNumber = 1;
+                DialogResult result = frm.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    if (frm.FormNumber != 0)
+                    {
+                        _days = Convert.ToInt32(frm.FormNumber);
+                        var _query = "sp_SelectCOCapacity";
+
+                        var sqlparams = new List<SqlParameter>
+                        {
+                            new SqlParameter("@days",SqlDbType.Int){Value = _days },
+                            new SqlParameter("@tablescos", SqlDbType.Structured) { TypeName = "UT_IDs", Value = datacos}
+
+                        };
+
+
+                        Template_DataGridView frmt = new Template_DataGridView();
+
+                        frmt.Text = "Stage needs (workers count) ";
+                        frmt.Query = _query;
+                        frmt.SqlParams = sqlparams;
+                        frmt.Show();
+                    }
+                }
+
+
+
+            }
+        }
     }
 
     #endregion

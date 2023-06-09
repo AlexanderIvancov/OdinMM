@@ -880,11 +880,23 @@ namespace Odin.Sales
             DataSet ds = new DataSet();
 
             SqlDataAdapter adapter =
-                new SqlDataAdapter("SELECT top 1 isnull(d.ispaid, 0) as ispaid, isnull(q.name, '') as quotation, " +
-                                    "isnull(c.company, '') as customer, isnull(q.article, '') as custarticle " + 
-                                    "FROM FIN_DocDets d INNER JOIN SAL_Quotations q on q.id = d.quotid " +
-                                    "INNER JOIN BAS_Companies c on c.id = q.custid " +
-                                    "WHERE d.id = " + InvoiceDetId.ToString(), conn);
+                //new SqlDataAdapter("SELECT top 1 isnull(d.ispaid, 0) as ispaid, isnull(q.name, '') as quotation, " +
+                //                    "isnull(c.company, '') as customer, isnull(q.article, '') as custarticle " + 
+                //                    "FROM FIN_DocDets d INNER JOIN SAL_Quotations q on q.id = d.quotid " +
+                //                    "INNER JOIN BAS_Companies c on c.id = q.custid " +
+                //                    "WHERE d.id = " + InvoiceDetId.ToString(), conn);
+                new SqlDataAdapter("SELECT top 1 isnull(d.ispaid, 0) as ispaid,  " +
+                                "isnull(q.name, isnulL(q1.name, ch.name)) as quotation,  " +
+                                "isnull(c.company, isnull(c1.company, '')) as customer,  " +
+                                "isnull(q.article, isnull(cd.custarticle, 'custarticle')) as custarticle " +
+                                "FROM FIN_DocDets d " +
+                                "LEFT JOIN SAL_Quotations q on q.id = d.quotid " +
+                                "left JOIN BAS_Companies c on c.id = q.custid " +
+                                "left join SAL_ClientOrdersDets cd on cd.id = d.coid " +
+                                "left join SAL_ClientOrdersHead ch on ch.id = cd.headid " +
+                                "left JOIN BAS_Companies c1 on c1.id = ch.clientid " +
+                                "LEFT JOIN SAL_Quotations q1 on q1.id = cd.quotid " +
+                                "WHERE d.id = " + InvoiceDetId.ToString(), conn);
             adapter.Fill(ds);
 
             conn.Close();
@@ -902,10 +914,10 @@ namespace Odin.Sales
 
                         string emailaddresses = DAL.EmailAddressesByType(6);
 
-                        string strMessage = "Quotation " + dr["quotation"].ToString() + " is paid!";
+                        string strMessage = "Quotation/conf.order " + dr["quotation"].ToString() + " is paid!";
                         strMessage = strMessage + "\r\nCustomer: " + dr["customer"].ToString();
                         strMessage = strMessage + "\r\nArticle: " + dr["custarticle"].ToString();
-                        MyHelper.SendDirectEMail(glob_Class.ReplaceChar(emailaddresses, ";", ","), "Quotation: " + dr["quotation"].ToString() + " is paid!", strMessage);
+                        MyHelper.SendDirectEMail(glob_Class.ReplaceChar(emailaddresses, ";", ","), "Quotation/conf.order: " + dr["quotation"].ToString() + " is paid!", strMessage);
 
                     }
                 }
