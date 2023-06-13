@@ -135,6 +135,9 @@
     <Reference Include="GanttChart">
       <HintPath>..\..\CSharpGanttChart\GanttChart\bin\Debug\GanttChart.dll</HintPath>
     </Reference>
+    <Reference Include="GanttChartV2">
+      <HintPath>D:\MyWork\Projects\ganttchart-master\GanttChart\bin\Debug\GanttChartV2.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
       <Private>True</Private>
@@ -1476,6 +1479,12 @@
     </Compile>
     <Compile Include="Planning\frm_LaunchStartMissings.Designer.cs">
       <DependentUpon>frm_LaunchStartMissings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Planning\frm_PlanningView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Planning\frm_PlanningView.designer.cs">
+      <DependentUpon>frm_PlanningView.cs</DependentUpon>
     </Compile>
     <Compile Include="Planning\frm_ProdRMDeficite.cs">
       <SubType>Form</SubType>
@@ -3545,6 +3554,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Planning\frm_LaunchStartMissings.resx">
       <DependentUpon>frm_LaunchStartMissings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Planning\frm_PlanningView.resx">
+      <DependentUpon>frm_PlanningView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Planning\frm_ProdRMDeficite.resx">
       <DependentUpon>frm_ProdRMDeficite.cs</DependentUpon>

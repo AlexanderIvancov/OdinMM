@@ -121,6 +121,7 @@ namespace Odin
         frm_ProductionResult ProdResult = null;
         frm_BatchProjects BatchProjects = null;
         frm_BatchesNew BatchesNew = null;
+        frm_PlanningView PlanningView = null;
 
         #endregion
 
@@ -1355,6 +1356,18 @@ namespace Odin
 
             frm_ProjectPlanning frm = new frm_ProjectPlanning();
             frm.Show();
+        }
+
+        private void btn_PlanningView_Click(object sender, EventArgs e)
+        {
+            foreach (var f in MdiChildren.Where(f => f.Name == "frm_ProjectPlanningV2"))
+            {
+                f.BringToFront();
+                return;
+            }
+            PlanningView = new frm_PlanningView();
+            PlanningView._Main = this;
+            PlanningView.Show(pn_Main);
         }
     }
 }

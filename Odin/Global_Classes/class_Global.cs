@@ -725,5 +725,9 @@ namespace Odin.Global_Classes
 
             return _res;
         }
+        public static float ToSingle(double value)
+        {
+            return (float)value;
+        }
     }
 }

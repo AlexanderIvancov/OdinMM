@@ -847,7 +847,7 @@ namespace Odin.Planning
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    PlanBll.AddBatchPlanning(frm.BatchId, frm.Qty, frm.PlanDate);
+                    PlanBll.AddBatchPlanning(frm.BatchId, frm.Qty, frm.PlanDate, frm.Comments);
                     bwStart(bw_List);
                 }
             }

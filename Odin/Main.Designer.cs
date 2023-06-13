@@ -235,6 +235,8 @@
             this.kryptonPalette1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.pn_Main = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.mdiClientController1 = new Panels.MdiClientController();
+            this.kryptonRibbonGroupTriple41 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
+            this.btn_PlanningView = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonRibbon1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -263,7 +265,6 @@
             this.tab_DataCollection,
             this.tab_ReadOnly,
             this.tab_Settings});
-            this.kryptonRibbon1.SelectedContext = null;
             this.kryptonRibbon1.SelectedTab = this.tab_Register;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1660, 115);
             this.kryptonRibbon1.TabIndex = 0;
@@ -430,6 +431,7 @@
             // kryptonRibbonGroup8
             // 
             this.kryptonRibbonGroup8.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupContainer[] {
+            this.kryptonRibbonGroupTriple41,
             this.kryptonRibbonGroupTriple38,
             this.kryptonRibbonGroupTriple5,
             this.kryptonRibbonGroupTriple28,
@@ -1679,6 +1681,18 @@
             this.mdiClientController1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.mdiClientController1.ParentForm = this;
             // 
+            // kryptonRibbonGroupTriple41
+            // 
+            this.kryptonRibbonGroupTriple41.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupItem[] {
+            this.btn_PlanningView});
+            // 
+            // btn_PlanningView
+            // 
+            this.btn_PlanningView.ImageLarge = global::Odin.Global_Resourses.chart_organisation;
+            this.btn_PlanningView.TextLine1 = "Planning";
+            this.btn_PlanningView.TextLine2 = "view";
+            this.btn_PlanningView.Click += new System.EventHandler(this.btn_PlanningView_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1912,6 +1926,8 @@
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple40;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_PCBLabels;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_ProjectPlanning;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple41;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_PlanningView;
     }
 }
 

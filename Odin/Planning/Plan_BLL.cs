@@ -2263,12 +2263,19 @@ namespace Odin.Planning
 
         #region Project planning
 
+
         public static DataTable getProjectPlanning(int custid, int perc)
         {
             return Helper.QueryDT("execute sp_SelectProjectPlanningFin @custid = " + custid + ", @perc = " + perc);
         }
 
-        public void AddBatchPlanning(int batchid, double qty, string plandate)
+
+        public static DataTable getPlanningView(int custid)
+        {
+            return Helper.QueryDT("execute sp_PlanningView @custid = " + custid);
+        }
+
+        public void AddBatchPlanning(int batchid, double qty, string plandate, string comments)
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_AddBatchPlanning", sqlConn);
@@ -2277,6 +2284,22 @@ namespace Odin.Planning
             sqlComm.Parameters.AddWithValue("@batchid", batchid);
             sqlComm.Parameters.AddWithValue("@qty", qty);
             sqlComm.Parameters.AddWithValue("@plandate", plandate);
+            sqlComm.Parameters.AddWithValue("@comments", comments);
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+        }
+
+        public void EditBatchPlanning(int id, double qty, string plandate, string comments)
+        {
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_EditBatchPlanning", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@id", id);
+            sqlComm.Parameters.AddWithValue("@qty", qty);
+            sqlComm.Parameters.AddWithValue("@plandate", plandate);
+            sqlComm.Parameters.AddWithValue("@comments", comments);
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
@@ -2295,6 +2318,18 @@ namespace Odin.Planning
             sqlConn.Close();
         }
 
+        public void DeleteBatchPlanning(int planid)
+        {
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_DeleteBatchPlanningById", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@id", planid);
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+        }
+
         public static DataTable getProjectPlanningCapa(int weekscount, DataTable databatches)
         {
             string query = "sp_SelectProjectPlanningCapacityNeeds";
@@ -2307,6 +2342,39 @@ namespace Odin.Planning
 
 
             return Helper.QuerySP(query, sqlparams.ToArray());
+        }
+
+        public static DataTable getPlanningCapa(int weekscount)
+        {
+            string query = "sp_SelectPlanningCapacityNeeds";
+
+            var sqlparams = new List<SqlParameter>
+            {
+                new SqlParameter("@weekscount",SqlDbType.Int){Value = weekscount }
+            };
+
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
+        }
+
+        #endregion
+
+        #region Capacity
+
+        public static DataTable getCapacityAnalyzis(int _days, DataTable _coids)
+        {
+            string query = "sp_SelectCOCapacity";
+
+            var sqlparams = new List<SqlParameter>
+            {
+                new SqlParameter("@days",SqlDbType.Int){Value = _days },
+                new SqlParameter("@tablescos", SqlDbType.Structured) { TypeName = "UT_IDs", Value = _coids}
+
+            };
+
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
+
         }
 
         #endregion

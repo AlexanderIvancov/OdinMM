@@ -67,7 +67,11 @@ namespace Odin.Planning
             get { return cmb_Week1.Week; }
             set { cmb_Week1.Week = value; }
         }
-
+        public string Comments
+        {
+           get { return txt_Comments.Text; }
+            set { txt_Comments.Text = value;}
+        }
         #endregion
 
         private void txt_PlanDate_ValueChanged(object sender, EventArgs e)
