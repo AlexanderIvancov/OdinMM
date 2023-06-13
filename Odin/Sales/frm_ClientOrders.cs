@@ -949,6 +949,7 @@ namespace Odin.Sales
         {
             COBll.COId = COId;
             COBll.COHeadId = COBll.COHeadId1;
+           
             if (COId != 0)
             {
                 string emailaddresses = "";
@@ -963,13 +964,15 @@ namespace Odin.Sales
                     emailaddresses = DAL.EmailAddressesByType(2);
                     _neworder = "New order";
                 }
-
+                string _endcustomer = "";
+                try { _endcustomer = Helper.GetOneRecord("select company from bas_companies where id = " + COBll.COEndCustId).ToString(); }
+                catch { }
                 //if (emailaddresses != "")
                 //{
 
                 string strMessage = "Order: " + COBll.COHeader;
                 strMessage = strMessage + "\r\nCustomer: " + COBll.COCustomer;
-                strMessage = strMessage + "\r\nEnd Customer: " + Helper.GetOneRecord("select company from bas_companies where id = " + COBll.COEndCustId).ToString();
+                strMessage = strMessage + "\r\nEnd Customer: " + _endcustomer;
                 strMessage = strMessage + "\r\nArticle: " + DAL.Article(COBll.COArtId);
 
                 //strMessage = strMessage + "\r\nArticle: " + DAL.Article();
