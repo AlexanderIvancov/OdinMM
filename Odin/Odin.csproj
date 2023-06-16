@@ -401,11 +401,17 @@
     <Compile Include="CMB_Components\Common\cmb_Common.Designer.cs">
       <DependentUpon>cmb_Common.cs</DependentUpon>
     </Compile>
+    <Compile Include="CMB_Components\Common\cmb_CommonPDA.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="CMB_Components\Common\frm_Common.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CMB_Components\Common\frm_Common.Designer.cs">
       <DependentUpon>frm_Common.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CMB_Components\Common\frm_CommonPDA.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="CMB_Components\Companies\cmb_Firms.cs">
       <SubType>UserControl</SubType>

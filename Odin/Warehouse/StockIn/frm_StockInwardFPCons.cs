@@ -244,6 +244,7 @@ namespace Odin.Warehouse.StockIn
                 UnitPrice = SIBll.BUnitPrice;
                 ConfOrder = _FromBox == false ? SIBll.BConfOrder : bConfOrder;
                 ConfOrderId = _FromBox == false ? SIBll.BCOid : bConfOrderId;
+                
             }
             else
             {
@@ -288,6 +289,7 @@ namespace Odin.Warehouse.StockIn
                 }
                 databoxes.Clear();
 
+                RecalcRMConsumption(QtyIn, cmb_Batches1.Qty);
 
             }
 
