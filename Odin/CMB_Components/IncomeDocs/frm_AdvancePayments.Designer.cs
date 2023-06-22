@@ -35,6 +35,7 @@
             this.btn_Edit = new System.Windows.Forms.ToolStripButton();
             this.btn_Delete = new System.Windows.Forms.ToolStripButton();
             this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.bs_List = new Odin.Global_Classes.SyncBindingSource();
             this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_headid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,7 +44,7 @@
             this.cn_paydate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_when = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_who = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bs_List = new Odin.Global_Classes.SyncBindingSource();
+            this.cn_curid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bn_List)).BeginInit();
             this.bn_List.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_List)).BeginInit();
@@ -80,6 +81,7 @@
             this.btn_AddNew.RightToLeftAutoMirrorImage = true;
             this.btn_AddNew.Size = new System.Drawing.Size(23, 22);
             this.btn_AddNew.Text = "Add new";
+            this.btn_AddNew.Click += new System.EventHandler(this.btn_AddNew_Click);
             // 
             // btn_Edit
             // 
@@ -89,6 +91,7 @@
             this.btn_Edit.Name = "btn_Edit";
             this.btn_Edit.Size = new System.Drawing.Size(23, 22);
             this.btn_Edit.Text = "Edit";
+            this.btn_Edit.Click += new System.EventHandler(this.btn_Edit_Click);
             // 
             // btn_Delete
             // 
@@ -98,6 +101,7 @@
             this.btn_Delete.RightToLeftAutoMirrorImage = true;
             this.btn_Delete.Size = new System.Drawing.Size(23, 22);
             this.btn_Delete.Text = "Delete";
+            this.btn_Delete.Click += new System.EventHandler(this.btn_Delete_Click);
             // 
             // gv_List
             // 
@@ -111,7 +115,8 @@
             this.cn_currate,
             this.cn_paydate,
             this.cn_when,
-            this.cn_who});
+            this.cn_who,
+            this.cn_curid});
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_List.Location = new System.Drawing.Point(0, 0);
             this.gv_List.Name = "gv_List";
@@ -130,6 +135,7 @@
             // 
             // cn_headid
             // 
+            this.cn_headid.DataPropertyName = "headid";
             this.cn_headid.HeaderText = "headid";
             this.cn_headid.Name = "cn_headid";
             this.cn_headid.Visible = false;
@@ -158,7 +164,7 @@
             // 
             // cn_paydate
             // 
-            this.cn_paydate.DataPropertyName = "curdate";
+            this.cn_paydate.DataPropertyName = "paydate";
             this.cn_paydate.HeaderText = "Payment date";
             this.cn_paydate.Name = "cn_paydate";
             // 
@@ -173,6 +179,13 @@
             this.cn_who.DataPropertyName = "who";
             this.cn_who.HeaderText = "Who";
             this.cn_who.Name = "cn_who";
+            // 
+            // cn_curid
+            // 
+            this.cn_curid.DataPropertyName = "curid";
+            this.cn_curid.HeaderText = "curid";
+            this.cn_curid.Name = "cn_curid";
+            this.cn_curid.Visible = false;
             // 
             // frm_AdvancePayments
             // 
@@ -202,7 +215,8 @@
         private System.Windows.Forms.ToolStripButton btn_AddNew;
         private System.Windows.Forms.ToolStripButton btn_Edit;
         private System.Windows.Forms.ToolStripButton btn_Delete;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridView gv_List;
+        private Global_Classes.SyncBindingSource bs_List;
+        public ComponentFactory.Krypton.Toolkit.KryptonDataGridView gv_List;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_headid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_amount;
@@ -211,6 +225,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_paydate;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_when;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_who;
-        private Global_Classes.SyncBindingSource bs_List;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_curid;
     }
 }

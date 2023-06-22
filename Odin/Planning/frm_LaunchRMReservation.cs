@@ -293,6 +293,7 @@ namespace Odin.Planning
 
         private void btn_Save_Click(object sender, EventArgs e)
         {
+            double _qtytmp = 0;
             gv_Labels.EndEdit();
             {
                 int _launchdetid = 0;
@@ -313,17 +314,20 @@ namespace Odin.Planning
                         dr["reserve"] = Convert.ToInt32(row.Cells["chk_rchecked"].Value);
                         dr["qty"] = Convert.ToDouble(row.Cells["cn_toreserve"].Value);
                         datastages.Rows.Add(dr);
-                        
 
+                        if (Convert.ToInt32(row.Cells["chk_rchecked"].Value) == -1)
+                            _qtytmp = _qtytmp + Convert.ToDouble(row.Cells["cn_rqty"].Value);
                     }
 
                     BLL.ReserveLaunchLabels(_launchdetid, datastages);
 
-                    gv_List.ThreadSafeCall(delegate { FillList(LaunchId); }) ;
-                    gv_Labels.ThreadSafeCall(delegate { FillLabels(_launchdetid); }) ;
+                    gv_List.CurrentRow.Cells["cn_reserved"].Value = _qtytmp;
+                    SetCellsColor();
+                    //gv_List.ThreadSafeCall(delegate { FillList(LaunchId); }) ;
+                    gv_Labels.ThreadSafeCall(delegate { FillLabels(_launchdetid); });
                 }
             }
-           
+
         }
         
         private void frm_LaunchRMReservation_Load(object sender, EventArgs e)
@@ -368,6 +372,11 @@ namespace Odin.Planning
                 gv_List.ThreadSafeCall(delegate { FillList(LaunchId); });
 
             }
+        }
+
+        private void gv_List_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            SetCellsColor();
         }
     }
 }

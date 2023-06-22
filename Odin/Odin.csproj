@@ -404,6 +404,9 @@
     <Compile Include="CMB_Components\Common\cmb_CommonPDA.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="CMB_Components\Common\cmb_CommonPDA.designer.cs">
+      <DependentUpon>cmb_CommonPDA.cs</DependentUpon>
+    </Compile>
     <Compile Include="CMB_Components\Common\frm_Common.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -412,6 +415,9 @@
     </Compile>
     <Compile Include="CMB_Components\Common\frm_CommonPDA.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CMB_Components\Common\frm_CommonPDA.designer.cs">
+      <DependentUpon>frm_CommonPDA.cs</DependentUpon>
     </Compile>
     <Compile Include="CMB_Components\Companies\cmb_Firms.cs">
       <SubType>UserControl</SubType>
@@ -587,6 +593,12 @@
     </Compile>
     <Compile Include="CMB_Components\IncomeDocs\cmb_IncomeDoc.Designer.cs">
       <DependentUpon>cmb_IncomeDoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CMB_Components\IncomeDocs\frm_AddAdvance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CMB_Components\IncomeDocs\frm_AddAdvance.Designer.cs">
+      <DependentUpon>frm_AddAdvance.cs</DependentUpon>
     </Compile>
     <Compile Include="CMB_Components\IncomeDocs\frm_AddIncomeDoc.cs">
       <SubType>Form</SubType>
@@ -3044,8 +3056,14 @@
     <EmbeddedResource Include="CMB_Components\Common\cmb_Common.resx">
       <DependentUpon>cmb_Common.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CMB_Components\Common\cmb_CommonPDA.resx">
+      <DependentUpon>cmb_CommonPDA.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CMB_Components\Common\frm_Common.resx">
       <DependentUpon>frm_Common.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CMB_Components\Common\frm_CommonPDA.resx">
+      <DependentUpon>frm_CommonPDA.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CMB_Components\Companies\cmb_Firms.resx">
       <DependentUpon>cmb_Firms.cs</DependentUpon>
@@ -3133,6 +3151,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CMB_Components\IncomeDocs\cmb_IncomeDoc.resx">
       <DependentUpon>cmb_IncomeDoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CMB_Components\IncomeDocs\frm_AddAdvance.resx">
+      <DependentUpon>frm_AddAdvance.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CMB_Components\IncomeDocs\frm_AddIncomeDoc.resx">
       <DependentUpon>frm_AddIncomeDoc.cs</DependentUpon>

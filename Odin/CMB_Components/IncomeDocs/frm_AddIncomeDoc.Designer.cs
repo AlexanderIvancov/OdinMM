@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.btn_AdvancePayments = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.chk_Check = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonLabel18 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_MediatedCost = new Owf.Controls.NumericTetxBox();
@@ -84,7 +85,6 @@
             this.btn_Cancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
-            this.btn_AdvancePayments = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -140,6 +140,17 @@
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
             this.kryptonPanel1.Size = new System.Drawing.Size(451, 464);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // btn_AdvancePayments
+            // 
+            this.btn_AdvancePayments.Location = new System.Drawing.Point(246, 427);
+            this.btn_AdvancePayments.Name = "btn_AdvancePayments";
+            this.btn_AdvancePayments.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Silver;
+            this.btn_AdvancePayments.Size = new System.Drawing.Size(145, 34);
+            this.btn_AdvancePayments.TabIndex = 284;
+            this.btn_AdvancePayments.Values.Image = global::Odin.Global_Resourses.coins1;
+            this.btn_AdvancePayments.Values.Text = "Advance payments";
+            this.btn_AdvancePayments.Click += new System.EventHandler(this.btn_AdvancePayments_Click);
             // 
             // chk_Check
             // 
@@ -637,18 +648,6 @@
             // kryptonManager1
             // 
             this.kryptonManager1.GlobalPaletteMode = ComponentFactory.Krypton.Toolkit.PaletteModeManager.Office2010Silver;
-            // 
-            // btn_AdvancePayments
-            // 
-            this.btn_AdvancePayments.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btn_AdvancePayments.Location = new System.Drawing.Point(246, 427);
-            this.btn_AdvancePayments.Name = "btn_AdvancePayments";
-            this.btn_AdvancePayments.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Silver;
-            this.btn_AdvancePayments.Size = new System.Drawing.Size(145, 34);
-            this.btn_AdvancePayments.TabIndex = 284;
-            this.btn_AdvancePayments.Values.Image = global::Odin.Global_Resourses.coins1;
-            this.btn_AdvancePayments.Values.Text = "Advance payments";
-            this.btn_AdvancePayments.Click += new System.EventHandler(this.btn_AdvancePayments_Click);
             // 
             // frm_AddIncomeDoc
             // 

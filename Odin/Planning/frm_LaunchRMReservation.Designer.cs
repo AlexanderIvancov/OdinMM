@@ -48,6 +48,8 @@
             this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.btn_Save = new System.Windows.Forms.ToolStripButton();
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.btn_ReleaseLabels = new System.Windows.Forms.ToolStripButton();
             this.kryptonSeparator1 = new ComponentFactory.Krypton.Toolkit.KryptonSeparator();
             this.bn_List = new System.Windows.Forms.BindingNavigator(this.components);
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
@@ -80,8 +82,6 @@
             this.mni_Admin = new System.Windows.Forms.ToolStripMenuItem();
             this.bs_List = new Odin.Global_Classes.SyncBindingSource();
             this.bs_Labels = new Odin.Global_Classes.SyncBindingSource();
-            this.btn_ReleaseLabels = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2.Panel)).BeginInit();
             this.kryptonHeaderGroup2.Panel.SuspendLayout();
@@ -286,6 +286,22 @@
             this.btn_Save.Text = "Save";
             this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
             // 
+            // toolStripLabel3
+            // 
+            this.toolStripLabel3.Name = "toolStripLabel3";
+            this.toolStripLabel3.Size = new System.Drawing.Size(73, 22);
+            this.toolStripLabel3.Text = "                      ";
+            // 
+            // btn_ReleaseLabels
+            // 
+            this.btn_ReleaseLabels.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_ReleaseLabels.Image = global::Odin.Global_Resourses.Cancel;
+            this.btn_ReleaseLabels.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_ReleaseLabels.Name = "btn_ReleaseLabels";
+            this.btn_ReleaseLabels.Size = new System.Drawing.Size(23, 22);
+            this.btn_ReleaseLabels.Text = "Release labels";
+            this.btn_ReleaseLabels.Click += new System.EventHandler(this.btn_ReleaseLabels_Click);
+            // 
             // kryptonSeparator1
             // 
             this.kryptonSeparator1.Dock = System.Windows.Forms.DockStyle.Right;
@@ -428,6 +444,7 @@
             this.gv_List.RowHeadersWidth = 25;
             this.gv_List.Size = new System.Drawing.Size(554, 440);
             this.gv_List.TabIndex = 35;
+            this.gv_List.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_List_ColumnHeaderMouseClick);
             this.gv_List.SelectionChanged += new System.EventHandler(this.gv_List_SelectionChanged);
             // 
             // cn_id
@@ -569,22 +586,6 @@
             this.mni_Admin.Size = new System.Drawing.Size(210, 22);
             this.mni_Admin.Text = "List settings";
             this.mni_Admin.Click += new System.EventHandler(this.mni_Admin_Click);
-            // 
-            // btn_ReleaseLabels
-            // 
-            this.btn_ReleaseLabels.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btn_ReleaseLabels.Image = global::Odin.Global_Resourses.Cancel;
-            this.btn_ReleaseLabels.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_ReleaseLabels.Name = "btn_ReleaseLabels";
-            this.btn_ReleaseLabels.Size = new System.Drawing.Size(23, 22);
-            this.btn_ReleaseLabels.Text = "Release labels";
-            this.btn_ReleaseLabels.Click += new System.EventHandler(this.btn_ReleaseLabels_Click);
-            // 
-            // toolStripLabel3
-            // 
-            this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(73, 22);
-            this.toolStripLabel3.Text = "                      ";
             // 
             // frm_LaunchRMReservation
             // 

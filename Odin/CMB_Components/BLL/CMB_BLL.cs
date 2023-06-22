@@ -1745,6 +1745,66 @@ namespace Odin.CMB_Components.BLL
 
         }
 
+        public static DataTable getIncomeAdvances(int _headid)
+        {
+            string query = "EXECUTE sp_SelectIncomeDocAdvances @headid = " + _headid;
+
+            return Helper.QueryDT(query);
+        }
+
+        public void AddIncomeDocAdvance(int _headid, double _amount, int _curid, string _curdate, double _currate)
+        {
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_AddIncomeDocAdvance", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@headid", _headid);
+            sqlComm.Parameters.AddWithValue("@amount", _amount);
+            sqlComm.Parameters.AddWithValue("@curid", _curid);
+            sqlComm.Parameters.AddWithValue("@curdate", _curdate);
+            sqlComm.Parameters.AddWithValue("@currate", _currate);
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+           
+            sqlConn.Close();
+
+        }
+
+        public void EditIncomeDocAdvance(int _id, double _amount, int _curid, string _curdate, double _currate)
+        {
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_EditIncomeDocAdvance", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@id", _id);
+            sqlComm.Parameters.AddWithValue("@amount", _amount);
+            sqlComm.Parameters.AddWithValue("@curid", _curid);
+            sqlComm.Parameters.AddWithValue("@curdate", _curdate);
+            sqlComm.Parameters.AddWithValue("@currate", _currate);
+            
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+
+        }
+
+        public void DeleteIncomeDocAdvance(int _id)
+        {
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_DeleteIncomeDocAdvance", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@id", _id);
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+
+        }
+
         #endregion
 
         #region Movements

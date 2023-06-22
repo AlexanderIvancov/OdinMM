@@ -21,7 +21,7 @@ namespace Odin.CMB_Components.IncomeDocs
         }
 
         DAL_Functions DLL = new DAL_Functions();
-
+        class_Global glob_Class = new class_Global();
 
         #region Variables
         int _id = 0;
@@ -436,7 +436,17 @@ namespace Odin.CMB_Components.IncomeDocs
 
         private void btn_AdvancePayments_Click(object sender, EventArgs e)
         {
+            if (glob_Class.IsFormAlreadyOpen("frm_AdvancePayments")) return;
 
+            if (Id != 0)
+            {
+                frm_AdvancePayments frm = new frm_AdvancePayments();
+                frm.HeadId = Id;
+                frm.Show();
+                frm.gv_List.ThreadSafeCall(delegate { frm.FillAdvances(frm.HeadId); });
+            }
+            else
+                glob_Class.ShowMessage("Registration impossible", "Please register document!", "You must register document at the first!");
         }
     }
 }

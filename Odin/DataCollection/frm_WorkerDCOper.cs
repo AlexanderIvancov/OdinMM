@@ -403,7 +403,9 @@ namespace Odin.DataCollection
         public void CheckViza(int LaunchId)
         {
             int _res = Convert.ToInt32(Helper.GetOneRecord("select lh.id from PROD_LaunchHead lh where lh.id = " + LaunchId + " and isnull(lh.qualvisaby, '') != '' and isnull(lh.ingenvisaby, '') != ''"));
-            if (_res == 0)
+            int _res1 = Convert.ToInt32(Helper.GetOneRecord("select lh.id from PROD_LaunchAdditVisas lh where lh.launchid = " + LaunchId + " and isnull(lh.qualvisaby, '') != '' and isnull(lh.ingenvisaby, '') != ''"));
+
+            if (_res == 0 && _res1 == 0)
                 lbl_Viza.Visible = true;
             else
                 lbl_Viza.Visible = false;
