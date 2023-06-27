@@ -56,6 +56,8 @@
             this.kryptonRibbonGroupButton11 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.tab_Needs = new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab();
             this.kryptonRibbonGroup8 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
+            this.kryptonRibbonGroupTriple41 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
+            this.btn_PlanningView = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.kryptonRibbonGroupTriple38 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
             this.btn_BatchProject = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.btn_BatchManagementP = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
@@ -235,8 +237,6 @@
             this.kryptonPalette1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.pn_Main = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.mdiClientController1 = new Panels.MdiClientController();
-            this.kryptonRibbonGroupTriple41 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
-            this.btn_PlanningView = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonRibbon1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -265,7 +265,8 @@
             this.tab_DataCollection,
             this.tab_ReadOnly,
             this.tab_Settings});
-            this.kryptonRibbon1.SelectedTab = this.tab_Register;
+            this.kryptonRibbon1.SelectedContext = null;
+            this.kryptonRibbon1.SelectedTab = this.tab_DataCollection;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1660, 115);
             this.kryptonRibbon1.TabIndex = 0;
             // 
@@ -437,6 +438,18 @@
             this.kryptonRibbonGroupTriple28,
             this.kryptonRibbonGroupTriple37});
             this.kryptonRibbonGroup8.TextLine1 = "Register";
+            // 
+            // kryptonRibbonGroupTriple41
+            // 
+            this.kryptonRibbonGroupTriple41.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupItem[] {
+            this.btn_PlanningView});
+            // 
+            // btn_PlanningView
+            // 
+            this.btn_PlanningView.ImageLarge = global::Odin.Global_Resourses.chart_organisation;
+            this.btn_PlanningView.TextLine1 = "Planning";
+            this.btn_PlanningView.TextLine2 = "view";
+            this.btn_PlanningView.Click += new System.EventHandler(this.btn_PlanningView_Click);
             // 
             // kryptonRibbonGroupTriple38
             // 
@@ -1680,18 +1693,6 @@
             // 
             this.mdiClientController1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.mdiClientController1.ParentForm = this;
-            // 
-            // kryptonRibbonGroupTriple41
-            // 
-            this.kryptonRibbonGroupTriple41.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupItem[] {
-            this.btn_PlanningView});
-            // 
-            // btn_PlanningView
-            // 
-            this.btn_PlanningView.ImageLarge = global::Odin.Global_Resourses.chart_organisation;
-            this.btn_PlanningView.TextLine1 = "Planning";
-            this.btn_PlanningView.TextLine2 = "view";
-            this.btn_PlanningView.Click += new System.EventHandler(this.btn_PlanningView_Click);
             // 
             // Main
             // 

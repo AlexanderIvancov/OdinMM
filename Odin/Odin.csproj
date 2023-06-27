@@ -1052,25 +1052,25 @@
     <Compile Include="DataCollection\frm_MasterApprove.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DataCollection\frm_MasterApprove.Designer.cs">
+    <Compile Include="DataCollection\frm_MasterApprove.designer.cs">
       <DependentUpon>frm_MasterApprove.cs</DependentUpon>
     </Compile>
     <Compile Include="DataCollection\frm_MasterApproveDets.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DataCollection\frm_MasterApproveDets.Designer.cs">
+    <Compile Include="DataCollection\frm_MasterApproveDets.designer.cs">
       <DependentUpon>frm_MasterApproveDets.cs</DependentUpon>
     </Compile>
     <Compile Include="DataCollection\frm_MasterApproveFin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DataCollection\frm_MasterApproveFin.Designer.cs">
+    <Compile Include="DataCollection\frm_MasterApproveFin.designer.cs">
       <DependentUpon>frm_MasterApproveFin.cs</DependentUpon>
     </Compile>
     <Compile Include="DataCollection\frm_MasterApproveTot.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DataCollection\frm_MasterApproveTot.Designer.cs">
+    <Compile Include="DataCollection\frm_MasterApproveTot.designer.cs">
       <DependentUpon>frm_MasterApproveTot.cs</DependentUpon>
     </Compile>
     <Compile Include="DataCollection\frm_WorkerDC.cs">
@@ -1082,7 +1082,7 @@
     <Compile Include="DataCollection\frm_WorkerDCOper.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DataCollection\frm_WorkerDCOper.Designer.cs">
+    <Compile Include="DataCollection\frm_WorkerDCOper.designer.cs">
       <DependentUpon>frm_WorkerDCOper.cs</DependentUpon>
     </Compile>
     <Compile Include="DataSets\Common.Designer.cs">

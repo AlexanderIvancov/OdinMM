@@ -83,25 +83,26 @@ namespace Odin.DataCollection
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
 
-        public static DataTable getSerialNumbersNotApproved(int _launchid)
+        public static DataTable getSerialNumbersNotApproved(int _launchid, int _placeid)
         {
             string query = "sp_SelectSerialNumbersNA";
 
             var sqlparams = new List<SqlParameter>
             {
-                 new SqlParameter("@launchid",SqlDbType.Int){Value = _launchid }
+                 new SqlParameter("@launchid",SqlDbType.Int){Value = _launchid },
+                 new SqlParameter("@placeid",SqlDbType.Int){Value = _placeid }
             };
 
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
 
-        public static DataTable getSerialNumbersNotApprovedAll()
+        public static DataTable getSerialNumbersNotApprovedAll(int _placeid)
         {
             string query = "sp_SelectSerialNumbersNAAll";
 
             var sqlparams = new List<SqlParameter>
             {
-                
+                new SqlParameter("@placeid",SqlDbType.Int){Value = _placeid }
             };
 
             return Helper.QuerySP(query, sqlparams.ToArray());
@@ -171,7 +172,7 @@ namespace Odin.DataCollection
             //catch { }
             return _res;
         }
-        public string AddDataCollectionSerialOper(int WorkerId, string Serial, int LaunchId, int PrevStageId, int OperId, int IsLast)
+        public string AddDataCollectionSerialOper(int WorkerId, string Serial, int LaunchId, int PrevStageId, int OperId, int IsLast,int PlaceId)
         {
             string _res = "";
 
@@ -186,6 +187,7 @@ namespace Odin.DataCollection
             sqlComm.Parameters.AddWithValue("@operid", OperId);
             sqlComm.Parameters.AddWithValue("@islast", IsLast);
             sqlComm.Parameters.AddWithValue("@prevstageid", PrevStageId);
+            sqlComm.Parameters.AddWithValue("@placeid", PlaceId);
             sqlComm.Parameters.Add("@label", SqlDbType.Int).Direction = ParameterDirection.Output;
             sqlComm.Parameters.Add("@successid", SqlDbType.Int).Direction = ParameterDirection.Output;
             sqlComm.Parameters.Add("@success", SqlDbType.NVarChar, 150).Direction = ParameterDirection.Output;
@@ -228,7 +230,7 @@ namespace Odin.DataCollection
             //catch { }
             return _res;
         }
-        public string AddDataCollectionQtyOper(int WorkerId, int LaunchId, double Qty, int OperId, int IsLast)
+        public string AddDataCollectionQtyOper(int WorkerId, int LaunchId, double Qty, int OperId, int IsLast, int PlaceId)
         {
             string _res = "";
 
@@ -242,6 +244,7 @@ namespace Odin.DataCollection
             sqlComm.Parameters.AddWithValue("@qty", Qty);
             sqlComm.Parameters.AddWithValue("@operid", OperId);
             sqlComm.Parameters.AddWithValue("@islast", IsLast);
+            sqlComm.Parameters.AddWithValue("@placeid", PlaceId);
             sqlComm.Parameters.Add("@successid", SqlDbType.Int).Direction = ParameterDirection.Output;
             sqlComm.Parameters.Add("@success", SqlDbType.NVarChar, 150).Direction = ParameterDirection.Output;
 

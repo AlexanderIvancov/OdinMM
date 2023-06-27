@@ -35,9 +35,9 @@
             this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
             this.kryptonHeaderGroup1 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.gv_List = new CombBoxGridView.ComboBoxGrid();
-            this.bs_List = new System.Windows.Forms.BindingSource(this.components);
             this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bs_List = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).BeginInit();
             this.kryptonHeaderGroup1.Panel.SuspendLayout();
@@ -94,6 +94,7 @@
             this.gv_List.Location = new System.Drawing.Point(0, 0);
             this.gv_List.Name = "gv_List";
             this.gv_List.RowHeadersVisible = false;
+            this.gv_List.RowTemplate.Height = 35;
             this.gv_List.Size = new System.Drawing.Size(423, 261);
             this.gv_List.TabIndex = 5;
             this.gv_List.TabStop = false;

@@ -46,7 +46,7 @@ namespace Odin.DataCollection
         DC_BLL DCBll = new DC_BLL();
         frm_cmbTextPDA_NC frmSer = null;
 
-        string _worker = "";
+       string _worker = "";
         int _workerid = 0;
         public string Worker
         {
@@ -404,8 +404,8 @@ namespace Odin.DataCollection
         {
             int _res = Convert.ToInt32(Helper.GetOneRecord("select lh.id from PROD_LaunchHead lh where lh.id = " + LaunchId + " and isnull(lh.qualvisaby, '') != '' and isnull(lh.ingenvisaby, '') != ''"));
             int _res1 = Convert.ToInt32(Helper.GetOneRecord("select lh.id from PROD_LaunchAdditVisas lh where lh.launchid = " + LaunchId + " and isnull(lh.qualvisaby, '') != '' and isnull(lh.ingenvisaby, '') != ''"));
-
-            if (_res == 0 && _res1 == 0)
+            if (_res == 0
+                && _res1 == 0)
                 lbl_Viza.Visible = true;
             else
                 lbl_Viza.Visible = false;
@@ -591,14 +591,14 @@ namespace Odin.DataCollection
         }
         public void AddSerialAnalogue(string serial, string analogue, int asprimary)
         {
-            string _res = ProdBll.AddSerialNumberAnalogue(serial, analogue, asprimary);
+            string _res = ProdBll.AddSerialNumberAnalogue(serial, analogue, asprimary);            
         }
 
         public void AddSerialAnalog(string Analogue)
         {
             if (Analogue != "")
             {
-                AddSerialAnalogue(TmpSerial, Analogue, -1);
+                AddSerialAnalogue(TmpSerial, Analogue, 0);
                 frmSer.Close();
             }
             //else
@@ -637,7 +637,8 @@ namespace Odin.DataCollection
                 else
                 {
                     string _serial = txt_Oper.Text.Trim();
-                    string _res = DCBll.AddDataCollectionSerialOper(WorkerId, _serial, LaunchId, PrevStageId, OperNO, OperNO == 0 ? -1 : IsLast);
+                    string _res = DCBll.AddDataCollectionSerialOper(WorkerId, _serial, LaunchId, PrevStageId, OperNO, OperNO == 0 ? -1 :IsLast, cmb_CommonPDA1.SelectedValue);
+                    //MessageBox.Show(DCBll.SuccessId.ToString());
                     if (DCBll.SuccessId == -1)
                         FillList(WorkerId, LaunchId);
                     else if (DCBll.SuccessId == 1)
@@ -645,8 +646,7 @@ namespace Odin.DataCollection
                     else if (DCBll.SuccessId == -2)
                     {
                         TmpSerial = _serial;
-                        ShowFrmAnalog();
-
+                        ShowFrmAnalog();                       
                     }
                     else
                     {
@@ -681,7 +681,7 @@ namespace Odin.DataCollection
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    string _res = DCBll.AddDataCollectionQtyOper(WorkerId, LaunchId, frm.Qty, OperNO, OperNO == 0 ? -1 : IsLast);
+                    string _res = DCBll.AddDataCollectionQtyOper(WorkerId, LaunchId, frm.Qty, OperNO, OperNO == 0 ? -1 : IsLast, cmb_CommonPDA1.SelectedValue);
                     if (DCBll.SuccessId == -1)
                         FillList(WorkerId, LaunchId);
                     else
@@ -717,7 +717,7 @@ namespace Odin.DataCollection
         public void AddManualSerial(string _Serial)
         {
             string _serial = _Serial;
-            string _res = DCBll.AddDataCollectionSerialOper(WorkerId, _serial, LaunchId, PrevStageId, OperNO, OperNO == 0 ? -1 : IsLast);
+            string _res = DCBll.AddDataCollectionSerialOper(WorkerId, _serial, LaunchId, PrevStageId, OperNO, OperNO == 0 ? -1 : IsLast, cmb_CommonPDA1.SelectedValue);
             if (DCBll.SuccessId == -1)
                 FillList(WorkerId, LaunchId);
             else if (DCBll.SuccessId == 1)
@@ -751,10 +751,31 @@ namespace Odin.DataCollection
                 frm.FormClosing += new FormClosingEventHandler(FocusOn);
 
                 frm.Show();
-
+                
             }
             //txt_Oper.Text = "";
             //txt_Oper.Focus();
+        }
+
+        public void FillPlace()
+        {
+            int _id = 0;
+            try
+            {
+               _id = Convert.ToInt32(Helper.GetOneRecord("select placeid from SYS_PCPlaces where pcname = '" + System.Environment.MachineName + "'"));
+            }
+            catch { }
+            cmb_CommonPDA1.SelectedValue = _id;
+        }
+
+        private void btn_SetPlace_Click(object sender, EventArgs e)
+        {
+            DAL.MakeDefaultPlace(cmb_CommonPDA1.SelectedValue);
+        }
+
+        private void cmb_CommonPDA1_SelectedValueChanged(object sender)
+        {
+
         }
     }
 }

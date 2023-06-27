@@ -105,33 +105,36 @@ namespace Odin.DataCollection
 
         public int ProdPlace
         {
-            get
-            {
-                if (rb_Valkas2.Checked == true)
-                    return 1;
-                else if (rb_Valkas2B.Checked == true)
-                    return 2;
-                else
-                    return 0;
-            }
-            set
-            {
-                if (value == 1)
-                {
-                    rb_Valkas2.Checked = true;
-                    rb_Valkas2B.Checked = false;
-                }
-                else if (value == 2)
-                {
-                    rb_Valkas2.Checked = false;
-                    rb_Valkas2B.Checked = true;
-                }
-                else
-                {
-                    rb_Valkas2.Checked = false;
-                    rb_Valkas2B.Checked = false;
-                }
-            }
+            get { return  cmb_CommonPDA1.SelectedValue; }
+            set { cmb_CommonPDA1.SelectedValue = value; }
+
+        //    get
+        //    {
+        //        if (rb_Valkas2.Checked == true)
+        //            return 1;
+        //        else if (rb_Valkas2B.Checked == true)
+        //            return 2;
+        //        else
+        //            return 0;
+        //    }
+        //    set
+        //    {
+        //        if (value == 1)
+        //        {
+        //            rb_Valkas2.Checked = true;
+        //            rb_Valkas2B.Checked = false;
+        //        }
+        //        else if (value == 2)
+        //        {
+        //            rb_Valkas2.Checked = false;
+        //            rb_Valkas2B.Checked = true;
+        //        }
+        //        else
+        //        {
+        //            rb_Valkas2.Checked = false;
+        //            rb_Valkas2B.Checked = false;
+        //        }
+        //    }
         }
 
         public int StageId
@@ -181,7 +184,7 @@ namespace Odin.DataCollection
         }
         public void FillList()
         {
-            var data = DC_BLL.getSerialNumbersNotApprovedAll();
+            var data = DC_BLL.getSerialNumbersNotApprovedAll(ProdPlace);
 
 
             gv_List.ThreadSafeCall(delegate
@@ -199,7 +202,7 @@ namespace Odin.DataCollection
         public void FillListLaunch(int _launchid)
         {
             //datadetails.Clear();
-            datadetails = DC_BLL.getSerialNumbersNotApproved(_launchid);
+            datadetails = DC_BLL.getSerialNumbersNotApproved(_launchid, ProdPlace);
 
             gv_Serials.ThreadSafeCall(delegate
             {
@@ -692,6 +695,7 @@ namespace Odin.DataCollection
                 frm.ApplyApproveChanges += new ApplyApprovingChangesEventHandler(RefreshData);
 
                 frm.Show();
+                frm.gv_List.ThreadSafeCall(delegate { frm.FillList(frm.LaunchId, frm.ProdPlace); });
             }
         }
 
@@ -900,6 +904,27 @@ namespace Odin.DataCollection
                     DialogResult result1 = frm1.ShowDialog();
                 }
             }
+        }
+
+        public void FillPlace()
+        {
+            int _id = 0;
+            try
+            {
+                _id = Convert.ToInt32(Helper.GetOneRecord("select placeid from SYS_PCPlaces where pcname = '" + System.Environment.MachineName + "'"));
+            }
+            catch { }
+            cmb_CommonPDA1.SelectedValue = _id;
+        }
+
+        private void btn_SetPlace_Click(object sender, EventArgs e)
+        {
+            DAL.MakeDefaultPlace(cmb_CommonPDA1.SelectedValue);
+        }
+
+        private void cmb_CommonPDA1_SelectedValueChanged(object sender)
+        {
+            FillList();
         }
     }
 }

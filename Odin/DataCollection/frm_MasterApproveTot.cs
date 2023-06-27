@@ -164,7 +164,7 @@ namespace Odin.DataCollection
         }
         public void FillList()
         {
-            var data = DC_BLL.getSerialNumbersNotApprovedAll();
+            var data = DC_BLL.getSerialNumbersNotApprovedAll(ProdPlace);
 
 
             gv_List.ThreadSafeCall(delegate
@@ -179,10 +179,21 @@ namespace Odin.DataCollection
           
         }
 
+        public void FillPlace()
+        {
+            int _id = 0;
+            try
+            {
+                _id = Convert.ToInt32(Helper.GetOneRecord("select placeid from SYS_PCPlaces where pcname = '" + System.Environment.MachineName + "'"));
+            }
+            catch { }
+            cmb_CommonPDA1.SelectedValue = _id;
+        }
+
         public void FillListLaunch(int _launchid)
         {
             //datadetails.Clear();
-            datadetails = DC_BLL.getSerialNumbersNotApproved(_launchid);
+            datadetails = DC_BLL.getSerialNumbersNotApproved(_launchid, ProdPlace);
         }
 
         public void FillData(int _batchid, int _stageid)
@@ -526,6 +537,11 @@ namespace Odin.DataCollection
         private void btn_Refresh_Click(object sender, EventArgs e)
         {
             FillList();
+        }
+
+        private void btn_SetPlace_Click(object sender, EventArgs e)
+        {
+            DAL.MakeDefaultPlace(cmb_CommonPDA1.SelectedValue);
         }
     }
 }

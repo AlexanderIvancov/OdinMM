@@ -34,6 +34,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_WorkerDCOper));
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.kryptonHeaderGroup2 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
+            this.btn_SetPlace = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.cmb_CommonPDA1 = new Odin.CMB_Components.Common.cmb_CommonPDA();
+            this.lbl_Viza = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.btn_Manual = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.txt_OperNO = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -95,7 +98,7 @@
             this.cn_isapproved = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_operno = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_islast = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lbl_Viza = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.cn_analog = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2.Panel)).BeginInit();
             this.kryptonHeaderGroup2.Panel.SuspendLayout();
@@ -132,6 +135,8 @@
             // 
             // kryptonHeaderGroup2.Panel
             // 
+            this.kryptonHeaderGroup2.Panel.Controls.Add(this.btn_SetPlace);
+            this.kryptonHeaderGroup2.Panel.Controls.Add(this.cmb_CommonPDA1);
             this.kryptonHeaderGroup2.Panel.Controls.Add(this.lbl_Viza);
             this.kryptonHeaderGroup2.Panel.Controls.Add(this.btn_Manual);
             this.kryptonHeaderGroup2.Panel.Controls.Add(this.txt_OperNO);
@@ -153,6 +158,47 @@
             this.kryptonHeaderGroup2.ValuesPrimary.Heading = "Worker\'s actions";
             this.kryptonHeaderGroup2.ValuesPrimary.Image = global::Odin.Global_Resourses.role;
             this.kryptonHeaderGroup2.ValuesSecondary.Heading = "Worker info";
+            // 
+            // btn_SetPlace
+            // 
+            this.btn_SetPlace.Location = new System.Drawing.Point(261, 441);
+            this.btn_SetPlace.Name = "btn_SetPlace";
+            this.btn_SetPlace.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Silver;
+            this.btn_SetPlace.Size = new System.Drawing.Size(62, 59);
+            this.btn_SetPlace.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btn_SetPlace.TabIndex = 264;
+            this.btn_SetPlace.Values.Image = global::Odin.Global_Resourses.Ok_big;
+            this.btn_SetPlace.Values.Text = "";
+            this.btn_SetPlace.Click += new System.EventHandler(this.btn_SetPlace_Click);
+            // 
+            // cmb_CommonPDA1
+            // 
+            this.cmb_CommonPDA1.IsEmptyColor = false;
+            this.cmb_CommonPDA1.Location = new System.Drawing.Point(17, 449);
+            this.cmb_CommonPDA1.Name = "cmb_CommonPDA1";
+            this.cmb_CommonPDA1.OrderBy = "id";
+            this.cmb_CommonPDA1.sCurrentValue = "";
+            this.cmb_CommonPDA1.SelectedValue = 0;
+            this.cmb_CommonPDA1.sID_Filled = "id";
+            this.cmb_CommonPDA1.Size = new System.Drawing.Size(240, 41);
+            this.cmb_CommonPDA1.sTable = "PROD_ProdPlaces";
+            this.cmb_CommonPDA1.sText_Filled = "place";
+            this.cmb_CommonPDA1.sTitle = "Production place";
+            this.cmb_CommonPDA1.TabIndex = 263;
+            this.cmb_CommonPDA1.SelectedValueChanged += new Odin.CMB_Components.Common.CommonPDAEventHandler(this.cmb_CommonPDA1_SelectedValueChanged);
+            // 
+            // lbl_Viza
+            // 
+            this.lbl_Viza.Location = new System.Drawing.Point(18, 178);
+            this.lbl_Viza.Name = "lbl_Viza";
+            this.lbl_Viza.Size = new System.Drawing.Size(234, 26);
+            this.lbl_Viza.StateCommon.LongText.Color1 = System.Drawing.Color.Red;
+            this.lbl_Viza.StateCommon.LongText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbl_Viza.StateCommon.ShortText.Color1 = System.Drawing.Color.Red;
+            this.lbl_Viza.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbl_Viza.TabIndex = 262;
+            this.lbl_Viza.Values.Text = "NO VIZA ON LAUNCH!!!";
+            this.lbl_Viza.Visible = false;
             // 
             // btn_Manual
             // 
@@ -445,6 +491,7 @@
             // 
             this.btn_DeleteMT.Image = global::Odin.Global_Resourses.delete2;
             this.btn_DeleteMT.UniqueName = "D99B0837D9DD4DE92CB7204AFFD1D4CD";
+            this.btn_DeleteMT.Click += new System.EventHandler(this.btn_DeleteMT_Click);
             // 
             // gv_Materials
             // 
@@ -671,7 +718,8 @@
             this.cn_id,
             this.cn_isapproved,
             this.cn_operno,
-            this.cn_islast});
+            this.cn_islast,
+            this.cn_analog});
             this.gv_List.ContextMenuStrip = this.mnu_Serials;
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_List.Location = new System.Drawing.Point(0, 0);
@@ -800,18 +848,13 @@
             this.cn_islast.Name = "cn_islast";
             this.cn_islast.Visible = false;
             // 
-            // lbl_Viza
+            // cn_analog
             // 
-            this.lbl_Viza.Location = new System.Drawing.Point(18, 178);
-            this.lbl_Viza.Name = "lbl_Viza";
-            this.lbl_Viza.Size = new System.Drawing.Size(234, 26);
-            this.lbl_Viza.StateCommon.LongText.Color1 = System.Drawing.Color.Red;
-            this.lbl_Viza.StateCommon.LongText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbl_Viza.StateCommon.ShortText.Color1 = System.Drawing.Color.Red;
-            this.lbl_Viza.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbl_Viza.TabIndex = 263;
-            this.lbl_Viza.Values.Text = "NO VIZA ON LAUNCH!!!";
-            this.lbl_Viza.Visible = false;
+            this.cn_analog.DataPropertyName = "analog";
+            this.cn_analog.FillWeight = 250F;
+            this.cn_analog.HeaderText = "Analog";
+            this.cn_analog.Name = "cn_analog";
+            this.cn_analog.Width = 250;
             // 
             // frm_WorkerDCOper
             // 
@@ -895,6 +938,18 @@
         public System.Windows.Forms.TextBox txt_OperNO_Old;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_IsLast;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_OperNO;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_bartid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_bid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_barticle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_blaunch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_label;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_bwhen;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_who;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Manual;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel lbl_Viza;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_index;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_serial;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_launch;
@@ -909,17 +964,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_isapproved;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_operno;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_islast;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_OperNO;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_bartid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_bid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_barticle;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_blaunch;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_label;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_bwhen;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_who;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Manual;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel lbl_Viza;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_analog;
+        private CMB_Components.Common.cmb_CommonPDA cmb_CommonPDA1;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btn_SetPlace;
     }
 }

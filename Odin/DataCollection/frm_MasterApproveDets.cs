@@ -163,9 +163,9 @@ namespace Odin.DataCollection
                     row.DefaultCellStyle.BackColor = Color.FromArgb(192, 255, 192);
             }
         }
-        public void FillList(int launchid)
+        public void FillList(int launchid, int prodplace)
         {
-            var data = DC_BLL.getSerialNumbersNotApproved(LaunchId);
+            var data = DC_BLL.getSerialNumbersNotApproved(LaunchId, prodplace);
 
 
             gv_List.ThreadSafeCall(delegate
@@ -310,7 +310,7 @@ namespace Odin.DataCollection
                             DCBll.DeleteDataCollection(_id, _issn);
                         }
                     }                    
-                    FillList(LaunchId);
+                    FillList(LaunchId, ProdPlace);
                     if (ApplyApproveChanges != null)
                         ApplyApproveChanges(this);
                 }
@@ -485,7 +485,7 @@ namespace Odin.DataCollection
 
         private void frm_MasterApproveDets_Load(object sender, EventArgs e)
         {
-            FillList(LaunchId);
+            //FillList(LaunchId);
         }
     }
 }

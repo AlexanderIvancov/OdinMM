@@ -1178,6 +1178,7 @@ namespace Odin
             WorkerDCOper = new frm_WorkerDCOper();
             WorkerDCOper._frm_Main = this;
             WorkerDCOper.Show(pn_Main);
+            WorkerDCOper.FillPlace();
             //foreach (var f in MdiChildren.Where(f => f.Name == "frm_WorkerDC"))
             //{
             //    f.BringToFront();
@@ -1218,6 +1219,8 @@ namespace Odin
             MasterApprove = new frm_MasterApproveFin();
             MasterApprove._frm_Main = this;
             MasterApprove.Show(pn_Main);
+            MasterApprove.FillPlace();
+            MasterApprove.gv_List.ThreadSafeCall(delegate { MasterApprove.FillList(); });
         }
 
         private void btn_KillDeadlocks_Click(object sender, EventArgs e)

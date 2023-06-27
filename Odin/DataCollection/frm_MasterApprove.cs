@@ -189,7 +189,7 @@ namespace Odin.DataCollection
         }
         public void FillList(int launchid)
         {
-            var data = DC_BLL.getSerialNumbersNotApproved(LaunchId);
+            var data = DC_BLL.getSerialNumbersNotApproved(LaunchId, ProdPlace);
 
 
             gv_List.ThreadSafeCall(delegate

@@ -1420,6 +1420,24 @@ namespace Odin.Global_Classes
         }
 
         #endregion
+        #region Places&PCs
 
+        public void MakeDefaultPlace(int PlaceId)
+        {
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_MakePlaceByDefault", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@id", PlaceId);
+            sqlComm.Parameters.AddWithValue("@pcname", System.Environment.MachineName);
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+
+
+        }
+
+        #endregion
     }
 }

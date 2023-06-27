@@ -30,6 +30,19 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_MasterApproveDets));
             this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.kryptonHeaderGroup1 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
+            this.btn_Delete = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
+            this.kryptonHeaderGroup2 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
+            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.txt_Qty = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btn_Clean = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.rb_Valkas2B = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
+            this.rb_Valkas2 = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
+            this.btn_Approve = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btn_Close = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.txt_Oper = new ComponentFactory.Krypton.Toolkit.KryptonRichTextBox();
+            this.bs_List = new Odin.Global_Classes.SyncBindingSource();
             this.chk_check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.cn_serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_artid = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,19 +57,7 @@
             this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_isapproved = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_issn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kryptonHeaderGroup1 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
-            this.kryptonHeaderGroup2 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btn_Close = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.txt_Oper = new ComponentFactory.Krypton.Toolkit.KryptonRichTextBox();
-            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.txt_Qty = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.btn_Approve = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.rb_Valkas2B = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
-            this.rb_Valkas2 = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
-            this.btn_Clean = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.btn_Delete = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
-            this.bs_List = new Odin.Global_Classes.SyncBindingSource();
+            this.cn_analog = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gv_List)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).BeginInit();
@@ -90,7 +91,8 @@
             this.cn_when,
             this.cn_id,
             this.cn_isapproved,
-            this.cn_issn});
+            this.cn_issn,
+            this.cn_analog});
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_List.Location = new System.Drawing.Point(0, 0);
             this.gv_List.Name = "gv_List";
@@ -105,6 +107,155 @@
             this.gv_List.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_List_CellContentClick);
             this.gv_List.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_List_CellEndEdit);
             this.gv_List.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_List_CellValueChanged);
+            // 
+            // kryptonHeaderGroup1
+            // 
+            this.kryptonHeaderGroup1.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup[] {
+            this.btn_Delete});
+            this.kryptonHeaderGroup1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonHeaderGroup1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonHeaderGroup1.Name = "kryptonHeaderGroup1";
+            // 
+            // kryptonHeaderGroup1.Panel
+            // 
+            this.kryptonHeaderGroup1.Panel.Controls.Add(this.gv_List);
+            this.kryptonHeaderGroup1.Size = new System.Drawing.Size(1054, 768);
+            this.kryptonHeaderGroup1.TabIndex = 251;
+            this.kryptonHeaderGroup1.ValuesPrimary.Heading = "Serial numbers of products";
+            this.kryptonHeaderGroup1.ValuesPrimary.Image = global::Odin.Global_Resourses.pci;
+            this.kryptonHeaderGroup1.ValuesSecondary.Heading = "Labels list ";
+            // 
+            // btn_Delete
+            // 
+            this.btn_Delete.Image = global::Odin.Global_Resourses.delete2;
+            this.btn_Delete.UniqueName = "DC665B7820CF4C89ECADA5A64DA32509";
+            this.btn_Delete.Click += new System.EventHandler(this.btn_Delete_Click);
+            // 
+            // kryptonHeaderGroup2
+            // 
+            this.kryptonHeaderGroup2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.kryptonHeaderGroup2.Location = new System.Drawing.Point(1054, 0);
+            this.kryptonHeaderGroup2.Name = "kryptonHeaderGroup2";
+            // 
+            // kryptonHeaderGroup2.Panel
+            // 
+            this.kryptonHeaderGroup2.Panel.Controls.Add(this.kryptonLabel4);
+            this.kryptonHeaderGroup2.Panel.Controls.Add(this.txt_Qty);
+            this.kryptonHeaderGroup2.Panel.Controls.Add(this.panel1);
+            this.kryptonHeaderGroup2.Size = new System.Drawing.Size(172, 768);
+            this.kryptonHeaderGroup2.TabIndex = 249;
+            this.kryptonHeaderGroup2.ValuesPrimary.Heading = "Actions";
+            this.kryptonHeaderGroup2.ValuesPrimary.Image = global::Odin.Global_Resourses.agt_update_critical;
+            this.kryptonHeaderGroup2.ValuesSecondary.Heading = "Worker info";
+            // 
+            // kryptonLabel4
+            // 
+            this.kryptonLabel4.Location = new System.Drawing.Point(6, 10);
+            this.kryptonLabel4.Name = "kryptonLabel4";
+            this.kryptonLabel4.Size = new System.Drawing.Size(151, 26);
+            this.kryptonLabel4.StateCommon.LongText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.kryptonLabel4.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.kryptonLabel4.TabIndex = 252;
+            this.kryptonLabel4.Values.Text = "Qty to approve:";
+            // 
+            // txt_Qty
+            // 
+            this.txt_Qty.Enabled = false;
+            this.txt_Qty.Location = new System.Drawing.Point(16, 41);
+            this.txt_Qty.Margin = new System.Windows.Forms.Padding(2);
+            this.txt_Qty.Multiline = true;
+            this.txt_Qty.Name = "txt_Qty";
+            this.txt_Qty.ReadOnly = true;
+            this.txt_Qty.Size = new System.Drawing.Size(141, 45);
+            this.txt_Qty.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txt_Qty.StateCommon.Content.Padding = new System.Windows.Forms.Padding(2);
+            this.txt_Qty.StateDisabled.Back.Color1 = System.Drawing.Color.Yellow;
+            this.txt_Qty.StateDisabled.Border.Color1 = System.Drawing.Color.White;
+            this.txt_Qty.StateDisabled.Border.Color2 = System.Drawing.Color.White;
+            this.txt_Qty.StateDisabled.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.txt_Qty.StateDisabled.Content.Color1 = System.Drawing.Color.Black;
+            this.txt_Qty.StateDisabled.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txt_Qty.StateNormal.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txt_Qty.TabIndex = 251;
+            this.txt_Qty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.Controls.Add(this.btn_Clean);
+            this.panel1.Controls.Add(this.rb_Valkas2B);
+            this.panel1.Controls.Add(this.rb_Valkas2);
+            this.panel1.Controls.Add(this.btn_Approve);
+            this.panel1.Controls.Add(this.btn_Close);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 369);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(170, 341);
+            this.panel1.TabIndex = 244;
+            // 
+            // btn_Clean
+            // 
+            this.btn_Clean.Location = new System.Drawing.Point(16, 82);
+            this.btn_Clean.Name = "btn_Clean";
+            this.btn_Clean.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Silver;
+            this.btn_Clean.Size = new System.Drawing.Size(141, 77);
+            this.btn_Clean.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btn_Clean.TabIndex = 254;
+            this.btn_Clean.Values.Image = global::Odin.Global_Resourses.clean;
+            this.btn_Clean.Values.Text = "Clear";
+            this.btn_Clean.Click += new System.EventHandler(this.btn_Clean_Click);
+            // 
+            // rb_Valkas2B
+            // 
+            this.rb_Valkas2B.Location = new System.Drawing.Point(31, 50);
+            this.rb_Valkas2B.Name = "rb_Valkas2B";
+            this.rb_Valkas2B.Size = new System.Drawing.Size(113, 26);
+            this.rb_Valkas2B.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.rb_Valkas2B.TabIndex = 253;
+            this.rb_Valkas2B.Values.Text = "Valkas 2B";
+            // 
+            // rb_Valkas2
+            // 
+            this.rb_Valkas2.Location = new System.Drawing.Point(31, 18);
+            this.rb_Valkas2.Name = "rb_Valkas2";
+            this.rb_Valkas2.Size = new System.Drawing.Size(100, 26);
+            this.rb_Valkas2.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.rb_Valkas2.TabIndex = 252;
+            this.rb_Valkas2.Values.Text = "Valkas 2";
+            // 
+            // btn_Approve
+            // 
+            this.btn_Approve.Location = new System.Drawing.Point(16, 165);
+            this.btn_Approve.Name = "btn_Approve";
+            this.btn_Approve.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Silver;
+            this.btn_Approve.Size = new System.Drawing.Size(141, 77);
+            this.btn_Approve.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btn_Approve.TabIndex = 243;
+            this.btn_Approve.Values.Image = global::Odin.Global_Resourses.Approve_48;
+            this.btn_Approve.Values.Text = "Approve";
+            this.btn_Approve.Click += new System.EventHandler(this.btn_Approve_Click);
+            // 
+            // btn_Close
+            // 
+            this.btn_Close.Location = new System.Drawing.Point(16, 248);
+            this.btn_Close.Name = "btn_Close";
+            this.btn_Close.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Silver;
+            this.btn_Close.Size = new System.Drawing.Size(141, 77);
+            this.btn_Close.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btn_Close.TabIndex = 240;
+            this.btn_Close.Values.Image = global::Odin.Global_Resourses.exit;
+            this.btn_Close.Values.Text = "Exit";
+            this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
+            // 
+            // txt_Oper
+            // 
+            this.txt_Oper.Location = new System.Drawing.Point(559, 485);
+            this.txt_Oper.Name = "txt_Oper";
+            this.txt_Oper.Size = new System.Drawing.Size(121, 91);
+            this.txt_Oper.TabIndex = 250;
+            this.txt_Oper.Text = "";
             // 
             // chk_check
             // 
@@ -222,154 +373,13 @@
             this.cn_issn.Name = "cn_issn";
             this.cn_issn.Visible = false;
             // 
-            // kryptonHeaderGroup1
+            // cn_analog
             // 
-            this.kryptonHeaderGroup1.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup[] {
-            this.btn_Delete});
-            this.kryptonHeaderGroup1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonHeaderGroup1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonHeaderGroup1.Name = "kryptonHeaderGroup1";
-            // 
-            // kryptonHeaderGroup1.Panel
-            // 
-            this.kryptonHeaderGroup1.Panel.Controls.Add(this.gv_List);
-            this.kryptonHeaderGroup1.Size = new System.Drawing.Size(1054, 768);
-            this.kryptonHeaderGroup1.TabIndex = 251;
-            this.kryptonHeaderGroup1.ValuesPrimary.Heading = "Serial numbers of products";
-            this.kryptonHeaderGroup1.ValuesPrimary.Image = global::Odin.Global_Resourses.pci;
-            this.kryptonHeaderGroup1.ValuesSecondary.Heading = "Labels list ";
-            // 
-            // kryptonHeaderGroup2
-            // 
-            this.kryptonHeaderGroup2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.kryptonHeaderGroup2.Location = new System.Drawing.Point(1054, 0);
-            this.kryptonHeaderGroup2.Name = "kryptonHeaderGroup2";
-            // 
-            // kryptonHeaderGroup2.Panel
-            // 
-            this.kryptonHeaderGroup2.Panel.Controls.Add(this.kryptonLabel4);
-            this.kryptonHeaderGroup2.Panel.Controls.Add(this.txt_Qty);
-            this.kryptonHeaderGroup2.Panel.Controls.Add(this.panel1);
-            this.kryptonHeaderGroup2.Size = new System.Drawing.Size(172, 768);
-            this.kryptonHeaderGroup2.TabIndex = 249;
-            this.kryptonHeaderGroup2.ValuesPrimary.Heading = "Actions";
-            this.kryptonHeaderGroup2.ValuesPrimary.Image = global::Odin.Global_Resourses.agt_update_critical;
-            this.kryptonHeaderGroup2.ValuesSecondary.Heading = "Worker info";
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.Controls.Add(this.btn_Clean);
-            this.panel1.Controls.Add(this.rb_Valkas2B);
-            this.panel1.Controls.Add(this.rb_Valkas2);
-            this.panel1.Controls.Add(this.btn_Approve);
-            this.panel1.Controls.Add(this.btn_Close);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 369);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(170, 341);
-            this.panel1.TabIndex = 244;
-            // 
-            // btn_Close
-            // 
-            this.btn_Close.Location = new System.Drawing.Point(16, 248);
-            this.btn_Close.Name = "btn_Close";
-            this.btn_Close.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Silver;
-            this.btn_Close.Size = new System.Drawing.Size(141, 77);
-            this.btn_Close.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_Close.TabIndex = 240;
-            this.btn_Close.Values.Image = global::Odin.Global_Resourses.exit;
-            this.btn_Close.Values.Text = "Exit";
-            this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
-            // 
-            // txt_Oper
-            // 
-            this.txt_Oper.Location = new System.Drawing.Point(559, 485);
-            this.txt_Oper.Name = "txt_Oper";
-            this.txt_Oper.Size = new System.Drawing.Size(121, 91);
-            this.txt_Oper.TabIndex = 250;
-            this.txt_Oper.Text = "";
-            // 
-            // kryptonLabel4
-            // 
-            this.kryptonLabel4.Location = new System.Drawing.Point(6, 10);
-            this.kryptonLabel4.Name = "kryptonLabel4";
-            this.kryptonLabel4.Size = new System.Drawing.Size(151, 26);
-            this.kryptonLabel4.StateCommon.LongText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.kryptonLabel4.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.kryptonLabel4.TabIndex = 252;
-            this.kryptonLabel4.Values.Text = "Qty to approve:";
-            // 
-            // txt_Qty
-            // 
-            this.txt_Qty.Enabled = false;
-            this.txt_Qty.Location = new System.Drawing.Point(16, 41);
-            this.txt_Qty.Margin = new System.Windows.Forms.Padding(2);
-            this.txt_Qty.Multiline = true;
-            this.txt_Qty.Name = "txt_Qty";
-            this.txt_Qty.ReadOnly = true;
-            this.txt_Qty.Size = new System.Drawing.Size(141, 45);
-            this.txt_Qty.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txt_Qty.StateCommon.Content.Padding = new System.Windows.Forms.Padding(2);
-            this.txt_Qty.StateDisabled.Back.Color1 = System.Drawing.Color.Yellow;
-            this.txt_Qty.StateDisabled.Border.Color1 = System.Drawing.Color.White;
-            this.txt_Qty.StateDisabled.Border.Color2 = System.Drawing.Color.White;
-            this.txt_Qty.StateDisabled.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.txt_Qty.StateDisabled.Content.Color1 = System.Drawing.Color.Black;
-            this.txt_Qty.StateDisabled.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txt_Qty.StateNormal.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txt_Qty.TabIndex = 251;
-            this.txt_Qty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // btn_Approve
-            // 
-            this.btn_Approve.Location = new System.Drawing.Point(16, 165);
-            this.btn_Approve.Name = "btn_Approve";
-            this.btn_Approve.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Silver;
-            this.btn_Approve.Size = new System.Drawing.Size(141, 77);
-            this.btn_Approve.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_Approve.TabIndex = 243;
-            this.btn_Approve.Values.Image = global::Odin.Global_Resourses.Approve_48;
-            this.btn_Approve.Values.Text = "Approve";
-            this.btn_Approve.Click += new System.EventHandler(this.btn_Approve_Click);
-            // 
-            // rb_Valkas2B
-            // 
-            this.rb_Valkas2B.Location = new System.Drawing.Point(31, 50);
-            this.rb_Valkas2B.Name = "rb_Valkas2B";
-            this.rb_Valkas2B.Size = new System.Drawing.Size(113, 26);
-            this.rb_Valkas2B.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.rb_Valkas2B.TabIndex = 253;
-            this.rb_Valkas2B.Values.Text = "Valkas 2B";
-            // 
-            // rb_Valkas2
-            // 
-            this.rb_Valkas2.Location = new System.Drawing.Point(31, 18);
-            this.rb_Valkas2.Name = "rb_Valkas2";
-            this.rb_Valkas2.Size = new System.Drawing.Size(100, 26);
-            this.rb_Valkas2.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.rb_Valkas2.TabIndex = 252;
-            this.rb_Valkas2.Values.Text = "Valkas 2";
-            // 
-            // btn_Clean
-            // 
-            this.btn_Clean.Location = new System.Drawing.Point(16, 82);
-            this.btn_Clean.Name = "btn_Clean";
-            this.btn_Clean.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Silver;
-            this.btn_Clean.Size = new System.Drawing.Size(141, 77);
-            this.btn_Clean.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_Clean.TabIndex = 254;
-            this.btn_Clean.Values.Image = global::Odin.Global_Resourses.clean;
-            this.btn_Clean.Values.Text = "Clear";
-            this.btn_Clean.Click += new System.EventHandler(this.btn_Clean_Click);
-            // 
-            // btn_Delete
-            // 
-            this.btn_Delete.Image = global::Odin.Global_Resourses.delete2;
-            this.btn_Delete.UniqueName = "DC665B7820CF4C89ECADA5A64DA32509";
-            this.btn_Delete.Click += new System.EventHandler(this.btn_Delete_Click);
+            this.cn_analog.DataPropertyName = "analog";
+            this.cn_analog.FillWeight = 250F;
+            this.cn_analog.HeaderText = "Analog";
+            this.cn_analog.Name = "cn_analog";
+            this.cn_analog.Width = 250;
             // 
             // frm_MasterApproveDets
             // 
@@ -404,6 +414,19 @@
 
         #endregion
         public ComponentFactory.Krypton.Toolkit.KryptonDataGridView gv_List;
+        private Global_Classes.SyncBindingSource bs_List;
+        private ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup kryptonHeaderGroup1;
+        private ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup kryptonHeaderGroup2;
+        private System.Windows.Forms.Panel panel1;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Close;
+        private ComponentFactory.Krypton.Toolkit.KryptonRichTextBox txt_Oper;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_Qty;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Approve;
+        private ComponentFactory.Krypton.Toolkit.KryptonRadioButton rb_Valkas2B;
+        private ComponentFactory.Krypton.Toolkit.KryptonRadioButton rb_Valkas2;
+        private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup btn_Delete;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Clean;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chk_check;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_serial;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_artid;
@@ -418,18 +441,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_isapproved;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_issn;
-        private Global_Classes.SyncBindingSource bs_List;
-        private ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup kryptonHeaderGroup1;
-        private ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup kryptonHeaderGroup2;
-        private System.Windows.Forms.Panel panel1;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Close;
-        private ComponentFactory.Krypton.Toolkit.KryptonRichTextBox txt_Oper;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_Qty;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Approve;
-        private ComponentFactory.Krypton.Toolkit.KryptonRadioButton rb_Valkas2B;
-        private ComponentFactory.Krypton.Toolkit.KryptonRadioButton rb_Valkas2;
-        private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup btn_Delete;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Clean;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_analog;
     }
 }

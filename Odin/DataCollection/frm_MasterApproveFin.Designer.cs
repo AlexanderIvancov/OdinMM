@@ -47,14 +47,16 @@
             this.kryptonHeaderGroup1 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.btn_Refresh = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
             this.kryptonHeaderGroup2 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
+            this.rb_Valkas2B = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
             this.btn_Clean = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.rb_Valkas2 = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
             this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_Qty = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.btn_EditContent = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_AssignMaster = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.rb_Valkas2B = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
-            this.rb_Valkas2 = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
+            this.btn_SetPlace = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.cmb_CommonPDA1 = new Odin.CMB_Components.Common.cmb_CommonPDA();
             this.btn_Approve = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Close = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -62,7 +64,6 @@
             this.kryptonHeaderGroup3 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.btn_Delete = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
             this.gv_Serials = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.bs_Serials = new Odin.Global_Classes.SyncBindingSource();
             this.cn_select = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.cn_serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -78,6 +79,7 @@
             this.cn_isapproved = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_issn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_opernum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bs_Serials = new Odin.Global_Classes.SyncBindingSource();
             ((System.ComponentModel.ISupportInitialize)(this.gv_List)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
@@ -250,7 +252,9 @@
             // 
             // kryptonHeaderGroup2.Panel
             // 
+            this.kryptonHeaderGroup2.Panel.Controls.Add(this.rb_Valkas2B);
             this.kryptonHeaderGroup2.Panel.Controls.Add(this.btn_Clean);
+            this.kryptonHeaderGroup2.Panel.Controls.Add(this.rb_Valkas2);
             this.kryptonHeaderGroup2.Panel.Controls.Add(this.kryptonLabel4);
             this.kryptonHeaderGroup2.Panel.Controls.Add(this.txt_Qty);
             this.kryptonHeaderGroup2.Panel.Controls.Add(this.btn_EditContent);
@@ -264,6 +268,16 @@
             this.kryptonHeaderGroup2.ValuesPrimary.Image = global::Odin.Global_Resourses.agt_update_critical;
             this.kryptonHeaderGroup2.ValuesSecondary.Heading = "Worker info";
             // 
+            // rb_Valkas2B
+            // 
+            this.rb_Valkas2B.Location = new System.Drawing.Point(167, 266);
+            this.rb_Valkas2B.Name = "rb_Valkas2B";
+            this.rb_Valkas2B.Size = new System.Drawing.Size(113, 26);
+            this.rb_Valkas2B.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.rb_Valkas2B.TabIndex = 251;
+            this.rb_Valkas2B.Values.Text = "Valkas 2B";
+            this.rb_Valkas2B.Visible = false;
+            // 
             // btn_Clean
             // 
             this.btn_Clean.Location = new System.Drawing.Point(252, 384);
@@ -275,6 +289,16 @@
             this.btn_Clean.Values.Image = global::Odin.Global_Resourses.clean;
             this.btn_Clean.Values.Text = "";
             this.btn_Clean.Click += new System.EventHandler(this.btn_Clean_Click_1);
+            // 
+            // rb_Valkas2
+            // 
+            this.rb_Valkas2.Location = new System.Drawing.Point(16, 266);
+            this.rb_Valkas2.Name = "rb_Valkas2";
+            this.rb_Valkas2.Size = new System.Drawing.Size(100, 26);
+            this.rb_Valkas2.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.rb_Valkas2.TabIndex = 250;
+            this.rb_Valkas2.Values.Text = "Valkas 2";
+            this.rb_Valkas2.Visible = false;
             // 
             // kryptonLabel4
             // 
@@ -337,8 +361,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.Controls.Add(this.rb_Valkas2B);
-            this.panel1.Controls.Add(this.rb_Valkas2);
+            this.panel1.Controls.Add(this.btn_SetPlace);
+            this.panel1.Controls.Add(this.cmb_CommonPDA1);
             this.panel1.Controls.Add(this.btn_Approve);
             this.panel1.Controls.Add(this.btn_Close);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -347,23 +371,33 @@
             this.panel1.Size = new System.Drawing.Size(333, 258);
             this.panel1.TabIndex = 244;
             // 
-            // rb_Valkas2B
+            // btn_SetPlace
             // 
-            this.rb_Valkas2B.Location = new System.Drawing.Point(167, 26);
-            this.rb_Valkas2B.Name = "rb_Valkas2B";
-            this.rb_Valkas2B.Size = new System.Drawing.Size(113, 26);
-            this.rb_Valkas2B.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.rb_Valkas2B.TabIndex = 251;
-            this.rb_Valkas2B.Values.Text = "Valkas 2B";
+            this.btn_SetPlace.Location = new System.Drawing.Point(251, 17);
+            this.btn_SetPlace.Name = "btn_SetPlace";
+            this.btn_SetPlace.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Silver;
+            this.btn_SetPlace.Size = new System.Drawing.Size(62, 59);
+            this.btn_SetPlace.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btn_SetPlace.TabIndex = 266;
+            this.btn_SetPlace.Values.Image = global::Odin.Global_Resourses.Ok_big;
+            this.btn_SetPlace.Values.Text = "";
+            this.btn_SetPlace.Click += new System.EventHandler(this.btn_SetPlace_Click);
             // 
-            // rb_Valkas2
+            // cmb_CommonPDA1
             // 
-            this.rb_Valkas2.Location = new System.Drawing.Point(16, 26);
-            this.rb_Valkas2.Name = "rb_Valkas2";
-            this.rb_Valkas2.Size = new System.Drawing.Size(100, 26);
-            this.rb_Valkas2.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.rb_Valkas2.TabIndex = 250;
-            this.rb_Valkas2.Values.Text = "Valkas 2";
+            this.cmb_CommonPDA1.IsEmptyColor = false;
+            this.cmb_CommonPDA1.Location = new System.Drawing.Point(16, 25);
+            this.cmb_CommonPDA1.Name = "cmb_CommonPDA1";
+            this.cmb_CommonPDA1.OrderBy = "id";
+            this.cmb_CommonPDA1.sCurrentValue = "";
+            this.cmb_CommonPDA1.SelectedValue = 0;
+            this.cmb_CommonPDA1.sID_Filled = "id";
+            this.cmb_CommonPDA1.Size = new System.Drawing.Size(231, 41);
+            this.cmb_CommonPDA1.sTable = "PROD_ProdPlaces";
+            this.cmb_CommonPDA1.sText_Filled = "place";
+            this.cmb_CommonPDA1.sTitle = "Production place";
+            this.cmb_CommonPDA1.TabIndex = 265;
+            this.cmb_CommonPDA1.SelectedValueChanged += new Odin.CMB_Components.Common.CommonPDAEventHandler(this.cmb_CommonPDA1_SelectedValueChanged);
             // 
             // btn_Approve
             // 
@@ -629,7 +663,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2)).EndInit();
             this.kryptonHeaderGroup2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup3.Panel)).EndInit();
             this.kryptonHeaderGroup3.Panel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup3)).EndInit();
@@ -689,5 +722,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_isapproved;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_issn;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_opernum;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btn_SetPlace;
+        private CMB_Components.Common.cmb_CommonPDA cmb_CommonPDA1;
     }
 }

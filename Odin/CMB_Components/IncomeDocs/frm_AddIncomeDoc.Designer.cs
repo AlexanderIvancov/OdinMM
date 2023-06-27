@@ -138,12 +138,12 @@
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonPanel1.Size = new System.Drawing.Size(451, 464);
+            this.kryptonPanel1.Size = new System.Drawing.Size(451, 449);
             this.kryptonPanel1.TabIndex = 0;
             // 
             // btn_AdvancePayments
             // 
-            this.btn_AdvancePayments.Location = new System.Drawing.Point(246, 427);
+            this.btn_AdvancePayments.Location = new System.Drawing.Point(246, 402);
             this.btn_AdvancePayments.Name = "btn_AdvancePayments";
             this.btn_AdvancePayments.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Silver;
             this.btn_AdvancePayments.Size = new System.Drawing.Size(145, 34);
@@ -246,7 +246,7 @@
             this.txt_PayDate.CalendarShowWeekNumbers = true;
             this.txt_PayDate.CustomFormat = null;
             this.txt_PayDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.txt_PayDate.Location = new System.Drawing.Point(132, 430);
+            this.txt_PayDate.Location = new System.Drawing.Point(132, 408);
             this.txt_PayDate.Name = "txt_PayDate";
             this.txt_PayDate.NullValue = " ";
             this.txt_PayDate.Size = new System.Drawing.Size(104, 21);
@@ -261,7 +261,7 @@
             // 
             // kryptonLabel25
             // 
-            this.kryptonLabel25.Location = new System.Drawing.Point(14, 431);
+            this.kryptonLabel25.Location = new System.Drawing.Point(14, 409);
             this.kryptonLabel25.Name = "kryptonLabel25";
             this.kryptonLabel25.Size = new System.Drawing.Size(88, 20);
             this.kryptonLabel25.TabIndex = 273;
@@ -274,11 +274,12 @@
             this.txt_AdvanceDate.CalendarShowWeekNumbers = true;
             this.txt_AdvanceDate.CustomFormat = null;
             this.txt_AdvanceDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.txt_AdvanceDate.Location = new System.Drawing.Point(333, 403);
+            this.txt_AdvanceDate.Location = new System.Drawing.Point(132, 79);
             this.txt_AdvanceDate.Name = "txt_AdvanceDate";
             this.txt_AdvanceDate.NullValue = " ";
             this.txt_AdvanceDate.Size = new System.Drawing.Size(106, 21);
             this.txt_AdvanceDate.TabIndex = 243;
+            this.txt_AdvanceDate.Visible = false;
             this.txt_AdvanceDate.ValueChanged += new System.EventHandler(this.txt_AdvanceDate_ValueChanged);
             this.txt_AdvanceDate.DropDown += new System.EventHandler<ComponentFactory.Krypton.Toolkit.DateTimePickerDropArgs>(this.txt_AdvanceDate_DropDown);
             // 
@@ -290,19 +291,21 @@
             // 
             // kryptonLabel16
             // 
-            this.kryptonLabel16.Location = new System.Drawing.Point(240, 404);
+            this.kryptonLabel16.Location = new System.Drawing.Point(39, 80);
             this.kryptonLabel16.Name = "kryptonLabel16";
             this.kryptonLabel16.Size = new System.Drawing.Size(87, 20);
             this.kryptonLabel16.TabIndex = 242;
             this.kryptonLabel16.Values.Text = "Advance date:";
+            this.kryptonLabel16.Visible = false;
             // 
             // kryptonLabel14
             // 
-            this.kryptonLabel14.Location = new System.Drawing.Point(14, 404);
+            this.kryptonLabel14.Location = new System.Drawing.Point(14, 26);
             this.kryptonLabel14.Name = "kryptonLabel14";
             this.kryptonLabel14.Size = new System.Drawing.Size(60, 20);
             this.kryptonLabel14.TabIndex = 241;
             this.kryptonLabel14.Values.Text = "Advance:";
+            this.kryptonLabel14.Visible = false;
             // 
             // txt_Advance
             // 
@@ -310,13 +313,14 @@
             this.txt_Advance.AllowSpace = false;
             this.txt_Advance.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
             this.buttonSpecAny6});
-            this.txt_Advance.Location = new System.Drawing.Point(132, 404);
+            this.txt_Advance.Location = new System.Drawing.Point(132, 26);
             this.txt_Advance.Name = "txt_Advance";
             this.txt_Advance.Size = new System.Drawing.Size(104, 21);
             this.txt_Advance.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txt_Advance.StateCommon.Content.Padding = new System.Windows.Forms.Padding(3);
             this.txt_Advance.TabIndex = 240;
             this.txt_Advance.Text = "0";
+            this.txt_Advance.Visible = false;
             this.txt_Advance.TextChanged += new System.EventHandler(this.txt_Advance_TextChanged);
             // 
             // buttonSpecAny6
@@ -653,7 +657,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(451, 464);
+            this.ClientSize = new System.Drawing.Size(451, 449);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "frm_AddIncomeDoc";
