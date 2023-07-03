@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_AddAdvance));
             this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.cmb_Currency1 = new Odin.CMB_Components.Currencies.cmb_Currency();
             this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_Amount = new Owf.Controls.NumericTetxBox();
             this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -43,7 +44,6 @@
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.btn_Cancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.cmb_Currency1 = new Odin.CMB_Components.Currencies.cmb_Currency();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -72,6 +72,17 @@
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
             this.kryptonPanel1.Size = new System.Drawing.Size(310, 206);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // cmb_Currency1
+            // 
+            this.cmb_Currency1.Currency = "";
+            this.cmb_Currency1.CurrencyId = 0;
+            this.cmb_Currency1.EnableSearchId = false;
+            this.cmb_Currency1.Location = new System.Drawing.Point(102, 119);
+            this.cmb_Currency1.Name = "cmb_Currency1";
+            this.cmb_Currency1.Size = new System.Drawing.Size(100, 20);
+            this.cmb_Currency1.TabIndex = 24;
+            this.cmb_Currency1.CurrencyChanged += new Odin.CMB_Components.Currencies.CurrenciesEventHandler(this.cmb_Currency1_CurrencyChanged_1);
             // 
             // kryptonLabel5
             // 
@@ -129,7 +140,7 @@
             this.txt_Rate.Name = "txt_Rate";
             this.txt_Rate.Size = new System.Drawing.Size(100, 23);
             this.txt_Rate.TabIndex = 17;
-            this.txt_Rate.Text = "0";
+            this.txt_Rate.Text = "1";
             this.txt_Rate.TextChanged += new System.EventHandler(this.txt_Rate_TextChanged);
             // 
             // kryptonLabel2
@@ -175,16 +186,6 @@
             this.btn_OK.TabIndex = 11;
             this.btn_OK.Values.Image = global::Odin.Global_Resourses.Ok;
             this.btn_OK.Values.Text = "OK";
-            // 
-            // cmb_Currency1
-            // 
-            this.cmb_Currency1.Currency = "";
-            this.cmb_Currency1.CurrencyId = 0;
-            this.cmb_Currency1.EnableSearchId = false;
-            this.cmb_Currency1.Location = new System.Drawing.Point(102, 119);
-            this.cmb_Currency1.Name = "cmb_Currency1";
-            this.cmb_Currency1.Size = new System.Drawing.Size(100, 20);
-            this.cmb_Currency1.TabIndex = 24;
             // 
             // frm_AddAdvance
             // 

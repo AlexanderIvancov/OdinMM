@@ -274,7 +274,7 @@
             this.txt_AdvanceDate.CalendarShowWeekNumbers = true;
             this.txt_AdvanceDate.CustomFormat = null;
             this.txt_AdvanceDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.txt_AdvanceDate.Location = new System.Drawing.Point(132, 79);
+            this.txt_AdvanceDate.Location = new System.Drawing.Point(132, 52);
             this.txt_AdvanceDate.Name = "txt_AdvanceDate";
             this.txt_AdvanceDate.NullValue = " ";
             this.txt_AdvanceDate.Size = new System.Drawing.Size(106, 21);
@@ -291,7 +291,7 @@
             // 
             // kryptonLabel16
             // 
-            this.kryptonLabel16.Location = new System.Drawing.Point(39, 80);
+            this.kryptonLabel16.Location = new System.Drawing.Point(15, 52);
             this.kryptonLabel16.Name = "kryptonLabel16";
             this.kryptonLabel16.Size = new System.Drawing.Size(87, 20);
             this.kryptonLabel16.TabIndex = 242;

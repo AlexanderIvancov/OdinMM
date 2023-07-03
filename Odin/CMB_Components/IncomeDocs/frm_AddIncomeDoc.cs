@@ -290,39 +290,49 @@ namespace Odin.CMB_Components.IncomeDocs
 
         public void RecalcCurRate()
         {
-            double _oldcurrate = 0;
-            _oldcurrate = CurRate;
-            double _sumdoc = 0;
-            double _doccurrate = 0;
-            double _advcurrate = 0;
+            //double _oldcurrate = 0;
+            //_oldcurrate = CurRate;
+            //double _sumdoc = 0;
+            //double _doccurrate = 0;
+            //double _advcurrate = 0;
+
+            //txt_CurRate.ThreadSafeCall(delegate
+            //{
+            //    try
+            //    {
+            //        _sumdoc = Math.Round(Convert.ToDouble(Helper.GetOneRecord("select sum(unitprice * qty) from STO_StockInDets where headid = " + Id)));
+            //    }
+            //    catch { }
+            //    _doccurrate = DLL.CurrencyRate(CurId, RegDate.Trim() == "" ? System.DateTime.Now.ToShortDateString() : RegDate.Trim());
+            //    _advcurrate = DLL.CurrencyRate(CurId, AdvanceDate.Trim() == "" ? System.DateTime.Now.ToShortDateString() : AdvanceDate.Trim());
+
+            //    if (_sumdoc == 0)
+            //        CurRate = _doccurrate;
+            //    else
+            //        CurRate = (Advance * _advcurrate + (_sumdoc - Advance) * _doccurrate) / _sumdoc;
+
+            //    if (CurRate == 0
+            //        || (Advance != 0 && _advcurrate == 0))
+            //        txt_CurRate.StateCommon.Back.Color1 = Color.Red;
+            //    else
+            //    {
+            //        if (_oldcurrate != CurRate)
+            //            txt_CurRate.StateCommon.Back.Color1 = Color.Yellow;
+            //        else
+            //            txt_CurRate.StateCommon.Back.Color1 = Color.White;
+            //    }
+
+
+            //});
 
             txt_CurRate.ThreadSafeCall(delegate
             {
-                try
-                {
-                    _sumdoc = Math.Round(Convert.ToDouble(Helper.GetOneRecord("select sum(unitprice * qty) from STO_StockInDets where headid = " + Id)));
-                }
-                catch { }
-                _doccurrate = DLL.CurrencyRate(CurId, RegDate.Trim() == "" ? System.DateTime.Now.ToShortDateString() : RegDate.Trim());
-                _advcurrate = DLL.CurrencyRate(CurId, AdvanceDate.Trim() == "" ? System.DateTime.Now.ToShortDateString() : AdvanceDate.Trim());
-
-                if (_sumdoc == 0)
-                    CurRate = _doccurrate;
-                else
-                    CurRate = (Advance * _advcurrate + (_sumdoc - Advance) * _doccurrate) / _sumdoc;
-
-                if (CurRate == 0
-                    || (Advance != 0 && _advcurrate == 0))
+                DLL.ShowCurRate(CurId, RegDate.Trim() == "" ? System.DateTime.Now.ToShortDateString() : RegDate.Trim());
+                CurRate = DLL.CurRate;
+                if (CurRate == 0)
                     txt_CurRate.StateCommon.Back.Color1 = Color.Red;
                 else
-                {
-                    if (_oldcurrate != CurRate)
-                        txt_CurRate.StateCommon.Back.Color1 = Color.Yellow;
-                    else
-                        txt_CurRate.StateCommon.Back.Color1 = Color.White;
-                }
-
-
+                    txt_CurRate.StateCommon.Back.Color1 = Color.White;
             });
 
             CheckEmpty();

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ComponentFactory.Krypton.Toolkit;
 using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
 
 namespace Odin.CMB_Components.IncomeDocs
 {
@@ -18,6 +19,10 @@ namespace Odin.CMB_Components.IncomeDocs
         {
             InitializeComponent();
         }
+
+        DAL_Functions DLL = new DAL_Functions();
+        class_Global glob_Class = new class_Global();
+
         public string HeaderText
         {
             get { return this.Text; }
@@ -94,6 +99,21 @@ namespace Odin.CMB_Components.IncomeDocs
 
         private void txt_Amount_TextChanged(object sender, EventArgs e)
         {
+            CheckEmpty();
+        }
+
+        private void cmb_Currency1_CurrencyChanged_1(object sender)
+        {
+            txt_Rate.ThreadSafeCall(delegate
+            {
+                DLL.ShowCurRate(CurId, CurDate.Trim() == "" ? System.DateTime.Now.ToShortDateString() : CurDate.Trim());
+                Rate = DLL.CurRate;
+                if (Rate == 0)
+                    txt_Rate.StateCommon.Back.Color1 = Color.Red;
+                else
+                    txt_Rate.StateCommon.Back.Color1 = Color.White;
+            });
+
             CheckEmpty();
         }
     }
