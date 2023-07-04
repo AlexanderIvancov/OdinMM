@@ -878,9 +878,15 @@ namespace Odin.Global_Classes
             //Temporary not used!
             var param = new SqlParameter("@ArtId", SqlDbType.Int);
             param.Value = ArtId;
+            string strSQL = "declare @rmt int " +
+                " select top 1 @rmt = value from BAS_Defaults def where def.field = 'rmtype'" +
+                " SELECT iif(isnull(rmt.IdTY, 0) = 0, -99, isnull(msl, '0')) " +
+	            " from bas_articles a " +
+                " left join dbo.ifn_Types(@rmt)rmt on rmt.IdTY = a.TypeID " +
+                " where a.id = @artid";
             try
             {
-                return Convert.ToString(Helper.GetOneRecord("SELECT isnull(msl, '0') from bas_articles where id = @artid", param));
+                return Convert.ToString(Helper.GetOneRecord(strSQL, param));
             }
             catch { return "0"; }
             //return "a";
