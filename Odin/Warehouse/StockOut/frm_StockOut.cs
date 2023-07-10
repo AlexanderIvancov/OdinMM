@@ -43,6 +43,7 @@ namespace Odin.Warehouse.StockOut
         DAL_Functions DAL = new DAL_Functions();
         AdmMenu mMenu = new AdmMenu();
         class_Global globClass = new class_Global();
+        PrinterLabels PrintLabels = new PrinterLabels();
         ExportData ED;
         ExportData ED1;
         Helper MyHelper = new Helper();
@@ -1514,6 +1515,30 @@ namespace Odin.Warehouse.StockOut
             DAL.DeleteBatchLock(cmb_Batches1.BatchId, this.Name);
         }
 
-       
+        private void btn_PrintLabel_Click(object sender, EventArgs e)
+        {
+            frm_Print frm = new frm_Print();
+            frm.cmb_LabPrinter1.ShowDefaults();
+            DialogResult result = frm.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                PrintLabels.PrinterIp = frm.IP_Address;
+                PrintLabels.PrinterDPI = frm.Printer_DPI;
+
+                foreach (DataGridViewRow row in this.gv_Dets.SelectedRows)
+                {
+                    var sqlparamsfields = new List<SqlParameter>()
+                    {
+                        new SqlParameter("@id",SqlDbType.Int) {Value = Convert.ToInt32(row.Cells["cn_id"].Value) },
+                        new SqlParameter("@labelqty",SqlDbType.Int) {Value = frm.LabelQty}
+                    };
+                    if (frm.LabelQty != 0)
+                        PrintLabels.PrintLabel(PrintLabels.LabelConstructor(5, "sp_SelectStockOutDetForLabel", sqlparamsfields.ToArray()), 1/*frm.LabelQty*/);
+                }
+            }
+            else
+            { }
+        }
     }
 }

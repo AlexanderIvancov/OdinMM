@@ -152,6 +152,7 @@
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.kryptonHeader3 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.buttonSpecAny1 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.btn_PrintLabel = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.tgv_List)).BeginInit();
             this.mnu_Lines.SuspendLayout();
             this.mnu_LinesDets.SuspendLayout();
@@ -1280,7 +1281,8 @@
             this.toolStripButton4,
             this.toolStripSeparator4,
             this.btn_Delete,
-            this.toolStripButton5});
+            this.toolStripButton5,
+            this.btn_PrintLabel});
             this.bn_Dets.Location = new System.Drawing.Point(0, 31);
             this.bn_Dets.MoveFirstItem = this.toolStripButton1;
             this.bn_Dets.MoveLastItem = this.toolStripButton4;
@@ -1393,6 +1395,16 @@
             // 
             this.buttonSpecAny1.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny1.UniqueName = "ED62D4F425E1454A7EB8AAF6D8EF2F6F";
+            // 
+            // btn_PrintLabel
+            // 
+            this.btn_PrintLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_PrintLabel.Image = ((System.Drawing.Image)(resources.GetObject("btn_PrintLabel.Image")));
+            this.btn_PrintLabel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_PrintLabel.Name = "btn_PrintLabel";
+            this.btn_PrintLabel.Size = new System.Drawing.Size(23, 22);
+            this.btn_PrintLabel.Text = "Print outcome label";
+            this.btn_PrintLabel.Click += new System.EventHandler(this.btn_PrintLabel_Click);
             // 
             // frm_StockOut
             // 
@@ -1568,5 +1580,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_EnabledRequests;
         public CMB_Components.Requests.cmb_Requests cmb_Requests1;
         private System.Windows.Forms.ToolStripMenuItem mnu_MapBatch;
+        private System.Windows.Forms.ToolStripButton btn_PrintLabel;
     }
 }

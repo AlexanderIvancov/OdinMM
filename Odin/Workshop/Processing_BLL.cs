@@ -388,7 +388,7 @@ namespace Odin.Workshop
 
             sqlComm.Parameters.AddWithValue("@machinename", machinename);
             sqlComm.Parameters.Add("@tableserials", SqlDbType.Structured);
-            sqlComm.Parameters["@tableserials"].TypeName = "UT_Serials";
+            sqlComm.Parameters["@tableserials"].TypeName = "UT_SerialsD";
             sqlComm.Parameters["@tableserials"].Value = dataserials;
 
             sqlConn.Open();

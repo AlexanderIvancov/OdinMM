@@ -463,6 +463,8 @@ namespace Odin.Workshop
             string sql = "";
             bool isserial = false;
             int succount = 0;
+            int blockno = 0;
+            string _group = "";
 
             //_lastnum = Convert.ToInt64(Helper.GetOneRecord("select top 1 LastNum from PROD_SerialLastUpload"));
 
@@ -474,7 +476,8 @@ namespace Odin.Workshop
             DataTable dataserials = new DataTable();
             dataserials.Columns.Add("serial", typeof(string));
             dataserials.Columns.Add("tablename", typeof(string));
-           
+            dataserials.Columns.Add("group", typeof(string));
+
 
             DataSet ds = new DataSet();
 
@@ -547,7 +550,7 @@ namespace Odin.Workshop
                     if (foundrow.Length == 0)
                     {
                         lbl_Progess.ThreadSafeCall(delegate { lbl_Progess.Text = "Downloading: " + _tablename; });
-                            
+
                         // do something...
                         indexOfSubstring = _tablename.IndexOf("Block");
 
@@ -568,6 +571,7 @@ namespace Odin.Workshop
                                     DataRow drser = dataserials.NewRow();
                                     drser["serial"] = rdr1.GetString(1).ToString();
                                     drser["tablename"] = _tablename;
+                                    drser["group"] = rdr1.GetString(1).ToString();
                                     dataserials.Rows.Add(drser);
                                     //MessageBox.Show(rdr.GetString(0).ToString());
                                 }
@@ -583,15 +587,21 @@ namespace Odin.Workshop
                             {
                                 con.Open();
                                 //Block table
-                                sql = "select \"BlockID\" from public.\"" + _tablename + "\" where \"BlockID\" is not null";
+                                sql = "select \"BlockID\", \"BlockNo\" from public.\"" + _tablename + "\" where \"BlockID\" is not null ORDER BY \"ID\"";
                                 NpgsqlCommand cmd2 = new NpgsqlCommand(sql, con);
                                 NpgsqlDataReader rdr2 = cmd2.ExecuteReader();
-                                
+
                                 while (rdr2.Read())
                                 {
+                                    try { blockno = Convert.ToInt32(rdr2.GetString(1).ToString()); }
+                                    catch { blockno = 0; }
+                                    if (blockno == 1)
+                                        _group = rdr2.GetString(0).ToString();
+
                                     DataRow drser = dataserials.NewRow();
                                     drser["serial"] = rdr2.GetString(0).ToString();
                                     drser["tablename"] = _tablename;
+                                    drser["group"] = _group;
                                     dataserials.Rows.Add(drser);
                                 }
 
@@ -616,6 +626,7 @@ namespace Odin.Workshop
                                     DataRow drser = dataserials.NewRow();
                                     drser["serial"] = rdr2.GetString(1).ToString();
                                     drser["tablename"] = _tablename;
+                                    drser["group"] = "";
                                     dataserials.Rows.Add(drser);
                                 }
                             }
@@ -631,7 +642,7 @@ namespace Odin.Workshop
 
                         pb_Progress.ThreadSafeCall(delegate { pb_Progress.Value = pb_Progress.Value + 1; });
                     }
-                    
+
                 }
                 #endregion
 
@@ -642,7 +653,7 @@ namespace Odin.Workshop
                 DataTable dataresult = ProdBll.UploadSerialNumbers(dataserials, _machinename);
 
                 StringBuilder result = new StringBuilder();
-               
+
                 foreach (DataRow rowresult in dataresult.Rows)
                 {
                     result.Append(rowresult["result"].ToString());
@@ -663,6 +674,7 @@ namespace Odin.Workshop
 
             lbl_Progess.Text = "Done! " + succount.ToString() + " records added!";
             txt_Oper.Focus();
+
 
         }
 

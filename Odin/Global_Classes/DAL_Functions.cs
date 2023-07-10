@@ -880,7 +880,7 @@ namespace Odin.Global_Classes
             param.Value = ArtId;
             string strSQL = "declare @rmt int " +
                 " select top 1 @rmt = value from BAS_Defaults def where def.field = 'rmtype'" +
-                " SELECT iif(isnull(rmt.IdTY, 0) = 0, -99, isnull(msl, '0')) " +
+                " SELECT iif(isnull(rmt.IdTY, 0) = 0, '-99', isnull(msl, '0')) " +
 	            " from bas_articles a " +
                 " left join dbo.ifn_Types(@rmt)rmt on rmt.IdTY = a.TypeID " +
                 " where a.id = @artid";
