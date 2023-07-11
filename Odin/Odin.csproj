@@ -135,8 +135,9 @@
     <Reference Include="GanttChart">
       <HintPath>..\..\CSharpGanttChart\GanttChart\bin\Debug\GanttChart.dll</HintPath>
     </Reference>
-    <Reference Include="GanttChartV2">
-      <HintPath>D:\MyWork\Projects\ganttchart-master\GanttChart\bin\Debug\GanttChartV2.dll</HintPath>
+    <Reference Include="GanttChartV2, Version=1.3.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\GanttChart\bin\Debug\GanttChartV2.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>

@@ -614,8 +614,9 @@ namespace Odin.Warehouse.Corrections
 
                         foreach (DataGridViewRow row in this.gv_List.Rows)
                         {
-                            if (Convert.ToDouble(row.Cells["cn_qtydiff"].Value) != 0
-                                && Convert.ToDouble(row.Cells["cn_qtyrest"].Value) > 0
+                            if (//Convert.ToDouble(row.Cells["cn_qtydiff"].Value) != 0
+                                //&& 
+                                Convert.ToDouble(row.Cells["cn_qtyrest"].Value) > 0
                                 && DAL.CheckMSL(Convert.ToInt32(row.Cells["cn_artid"].Value)) != "0")
                             {
                                 var sqlparamsfields = new List<SqlParameter>()
