@@ -222,6 +222,18 @@ namespace Odin.Planning
             return NewPage("Batches ", 1, ctlBatches, ctlBatches.Width);
         }
 
+        private KryptonPage NewInputBatchCO(int _batchid)
+        {
+
+            ctlBatchOrders = new ctl_BatchOrders();
+            ctlBatchOrders.cmb_Batches1.BatchId = _batchid;
+
+            ControlWidth = ctlBatchOrders.Width;
+            ctlBatchOrdersWidth = ctlBatchOrders.Width;
+
+            return NewPage("Confirmation orders for batch", 1, ctlBatchOrders, ctlBatchOrders.Width);
+        }
+
         #endregion
 
         #region Methods
@@ -577,6 +589,19 @@ namespace Odin.Planning
             }
         }
 
+        public void FindBatchCOPages(int _batchid)
+        {
+            foreach (var page in kryptonDockingManager1.Pages)
+            {
+                ctl_BatchOrders ctlBatchCO1 = (ctl_BatchOrders)page.Controls.Find("ctl_BatchOrders", true).FirstOrDefault();
+
+                if (ctlBatchCO1 != null)
+                {
+                    ctlBatchCO1.cmb_Batches1.BatchId = _batchid;
+                }
+            }
+        }
+
         #endregion
 
         #region Controls
@@ -835,6 +860,7 @@ namespace Odin.Planning
 
             FindGenPages(_projectid);
             FindRMPages(_projectid);
+            FindBatchCOPages(_projectid);
             //FindBatchCOPages(_batchid);
             //FindBatchStockPages(_batchid);
             //FindQCPages(_batchid);
@@ -1088,5 +1114,23 @@ namespace Odin.Planning
                                              DockingEdge.Left,
                                              new KryptonPage[] { NewInputBatch(_coid) });
         }
+
+        private void btn_Orders_Click(object sender, EventArgs e)
+        {
+            int _batchid = 0;
+
+            try
+            {
+                _batchid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
+
+            }
+            catch { }
+
+
+            kryptonDockingManager1.AddDockspace("Control",
+                                             DockingEdge.Left,
+                                             new KryptonPage[] { NewInputBatchCO(_batchid) });
+        }
+
     }
 }

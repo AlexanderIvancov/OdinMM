@@ -29,21 +29,21 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_AddExInvoiceLine));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.lbl_TotalVat = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_TotalWithVat = new Owf.Controls.NumericTetxBox();
@@ -504,16 +504,16 @@
             // cn_inadvance
             // 
             this.cn_inadvance.DataPropertyName = "inadvance";
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.cn_inadvance.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.cn_inadvance.DefaultCellStyle = dataGridViewCellStyle1;
             this.cn_inadvance.HeaderText = "In advance";
             this.cn_inadvance.Name = "cn_inadvance";
             // 
             // cn_leftinadvance
             // 
             this.cn_leftinadvance.DataPropertyName = "leftinadvance";
-            dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.cn_leftinadvance.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.cn_leftinadvance.DefaultCellStyle = dataGridViewCellStyle2;
             this.cn_leftinadvance.HeaderText = "Left in advance";
             this.cn_leftinadvance.Name = "cn_leftinadvance";
             this.cn_leftinadvance.ReadOnly = true;
@@ -577,8 +577,8 @@
             // cn_orderprice
             // 
             this.cn_orderprice.DataPropertyName = "orderprice";
-            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.cn_orderprice.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.cn_orderprice.DefaultCellStyle = dataGridViewCellStyle3;
             this.cn_orderprice.HeaderText = "Order\'s unit price";
             this.cn_orderprice.Name = "cn_orderprice";
             this.cn_orderprice.ReadOnly = true;
@@ -586,8 +586,8 @@
             // cn_unitcostprice
             // 
             this.cn_unitcostprice.DataPropertyName = "unitcostprice";
-            dataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.cn_unitcostprice.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.cn_unitcostprice.DefaultCellStyle = dataGridViewCellStyle4;
             this.cn_unitcostprice.HeaderText = "Unit cost ";
             this.cn_unitcostprice.Name = "cn_unitcostprice";
             this.cn_unitcostprice.ReadOnly = true;
@@ -627,8 +627,8 @@
             // cn_coefconv
             // 
             this.cn_coefconv.DataPropertyName = "coefconv";
-            dataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.cn_coefconv.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.cn_coefconv.DefaultCellStyle = dataGridViewCellStyle5;
             this.cn_coefconv.HeaderText = "CoefConv";
             this.cn_coefconv.Name = "cn_coefconv";
             this.cn_coefconv.ReadOnly = true;
@@ -637,8 +637,8 @@
             // cn_totalcost
             // 
             this.cn_totalcost.DataPropertyName = "totalcost";
-            dataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.cn_totalcost.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.cn_totalcost.DefaultCellStyle = dataGridViewCellStyle6;
             this.cn_totalcost.HeaderText = "Total cost";
             this.cn_totalcost.Name = "cn_totalcost";
             this.cn_totalcost.ReadOnly = true;
@@ -646,8 +646,8 @@
             // cn_totalorderprice
             // 
             this.cn_totalorderprice.DataPropertyName = "totalorderprice";
-            dataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.cn_totalorderprice.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.cn_totalorderprice.DefaultCellStyle = dataGridViewCellStyle7;
             this.cn_totalorderprice.HeaderText = "Total order";
             this.cn_totalorderprice.Name = "cn_totalorderprice";
             this.cn_totalorderprice.ReadOnly = true;
@@ -748,7 +748,6 @@
             // 
             // mni_FilterFor
             // 
-            this.mni_FilterFor.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.mni_FilterFor.Name = "mni_FilterFor";
             this.mni_FilterFor.Size = new System.Drawing.Size(100, 23);
             this.mni_FilterFor.TextChanged += new System.EventHandler(this.mni_FilterFor_TextChanged);
@@ -869,7 +868,6 @@
             // 
             this.bindingNavigatorPositionItem.AccessibleName = "Position";
             this.bindingNavigatorPositionItem.AutoSize = false;
-            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
             this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
             this.bindingNavigatorPositionItem.Text = "0";
@@ -1130,7 +1128,7 @@
             // 
             // lbl_TotalPayPerc
             // 
-            this.lbl_TotalPayPerc.Location = new System.Drawing.Point(510, 194);
+            this.lbl_TotalPayPerc.Location = new System.Drawing.Point(578, 194);
             this.lbl_TotalPayPerc.Name = "lbl_TotalPayPerc";
             this.lbl_TotalPayPerc.Size = new System.Drawing.Size(86, 20);
             this.lbl_TotalPayPerc.TabIndex = 276;
@@ -1140,7 +1138,7 @@
             // 
             this.txt_TotalPayPerc.AllowDecimalSeparator = true;
             this.txt_TotalPayPerc.AllowSpace = false;
-            this.txt_TotalPayPerc.Location = new System.Drawing.Point(602, 194);
+            this.txt_TotalPayPerc.Location = new System.Drawing.Point(670, 194);
             this.txt_TotalPayPerc.Name = "txt_TotalPayPerc";
             this.txt_TotalPayPerc.Size = new System.Drawing.Size(52, 23);
             this.txt_TotalPayPerc.TabIndex = 275;
@@ -1149,7 +1147,7 @@
             // 
             // lbl_NotPaid
             // 
-            this.lbl_NotPaid.Location = new System.Drawing.Point(343, 220);
+            this.lbl_NotPaid.Location = new System.Drawing.Point(411, 220);
             this.lbl_NotPaid.Name = "lbl_NotPaid";
             this.lbl_NotPaid.Size = new System.Drawing.Size(122, 16);
             this.lbl_NotPaid.StateCommon.ShortText.Color1 = System.Drawing.Color.Red;
@@ -1160,7 +1158,7 @@
             // 
             // lbl_LeftinAdvance
             // 
-            this.lbl_LeftinAdvance.Location = new System.Drawing.Point(177, 216);
+            this.lbl_LeftinAdvance.Location = new System.Drawing.Point(210, 216);
             this.lbl_LeftinAdvance.Name = "lbl_LeftinAdvance";
             this.lbl_LeftinAdvance.Size = new System.Drawing.Size(95, 20);
             this.lbl_LeftinAdvance.TabIndex = 273;
@@ -1170,10 +1168,10 @@
             // 
             this.txt_LeftInAdvance.AllowDecimalSeparator = true;
             this.txt_LeftInAdvance.AllowSpace = false;
-            this.txt_LeftInAdvance.Location = new System.Drawing.Point(278, 217);
+            this.txt_LeftInAdvance.Location = new System.Drawing.Point(311, 217);
             this.txt_LeftInAdvance.Name = "txt_LeftInAdvance";
             this.txt_LeftInAdvance.ReadOnly = true;
-            this.txt_LeftInAdvance.Size = new System.Drawing.Size(59, 23);
+            this.txt_LeftInAdvance.Size = new System.Drawing.Size(94, 23);
             this.txt_LeftInAdvance.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.txt_LeftInAdvance.TabIndex = 272;
             this.txt_LeftInAdvance.Text = "0";
@@ -1192,7 +1190,7 @@
             this.txt_InAdvance.AllowSpace = false;
             this.txt_InAdvance.Location = new System.Drawing.Point(108, 217);
             this.txt_InAdvance.Name = "txt_InAdvance";
-            this.txt_InAdvance.Size = new System.Drawing.Size(63, 23);
+            this.txt_InAdvance.Size = new System.Drawing.Size(96, 23);
             this.txt_InAdvance.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.txt_InAdvance.TabIndex = 270;
             this.txt_InAdvance.Text = "0";
@@ -1229,7 +1227,7 @@
             // 
             // lbl_Discount
             // 
-            this.lbl_Discount.Location = new System.Drawing.Point(343, 192);
+            this.lbl_Discount.Location = new System.Drawing.Point(411, 192);
             this.lbl_Discount.Name = "lbl_Discount";
             this.lbl_Discount.Size = new System.Drawing.Size(82, 20);
             this.lbl_Discount.TabIndex = 266;
@@ -1239,7 +1237,7 @@
             // 
             this.txt_Discount.AllowDecimalSeparator = true;
             this.txt_Discount.AllowSpace = false;
-            this.txt_Discount.Location = new System.Drawing.Point(450, 192);
+            this.txt_Discount.Location = new System.Drawing.Point(518, 192);
             this.txt_Discount.Name = "txt_Discount";
             this.txt_Discount.Size = new System.Drawing.Size(52, 23);
             this.txt_Discount.TabIndex = 265;
@@ -1247,7 +1245,7 @@
             // 
             // kryptonLabel12
             // 
-            this.kryptonLabel12.Location = new System.Drawing.Point(343, 168);
+            this.kryptonLabel12.Location = new System.Drawing.Point(411, 168);
             this.kryptonLabel12.Name = "kryptonLabel12";
             this.kryptonLabel12.Size = new System.Drawing.Size(105, 20);
             this.kryptonLabel12.TabIndex = 264;
@@ -1257,7 +1255,7 @@
             // 
             this.txt_SellCoefSimple.AllowDecimalSeparator = true;
             this.txt_SellCoefSimple.AllowSpace = false;
-            this.txt_SellCoefSimple.Location = new System.Drawing.Point(450, 168);
+            this.txt_SellCoefSimple.Location = new System.Drawing.Point(518, 168);
             this.txt_SellCoefSimple.Name = "txt_SellCoefSimple";
             this.txt_SellCoefSimple.Size = new System.Drawing.Size(52, 23);
             this.txt_SellCoefSimple.TabIndex = 263;
@@ -1270,14 +1268,14 @@
             this.cmb_Currency1.CurrencyId = 0;
             this.cmb_Currency1.Enabled = false;
             this.cmb_Currency1.EnableSearchId = false;
-            this.cmb_Currency1.Location = new System.Drawing.Point(248, 192);
+            this.cmb_Currency1.Location = new System.Drawing.Point(281, 192);
             this.cmb_Currency1.Name = "cmb_Currency1";
-            this.cmb_Currency1.Size = new System.Drawing.Size(89, 20);
+            this.cmb_Currency1.Size = new System.Drawing.Size(124, 20);
             this.cmb_Currency1.TabIndex = 216;
             // 
             // kryptonLabel10
             // 
-            this.kryptonLabel10.Location = new System.Drawing.Point(177, 192);
+            this.kryptonLabel10.Location = new System.Drawing.Point(210, 192);
             this.kryptonLabel10.Name = "kryptonLabel10";
             this.kryptonLabel10.Size = new System.Drawing.Size(62, 20);
             this.kryptonLabel10.TabIndex = 215;
@@ -1387,14 +1385,14 @@
             this.txt_UnitPrice.AllowSpace = false;
             this.txt_UnitPrice.Location = new System.Drawing.Point(108, 192);
             this.txt_UnitPrice.Name = "txt_UnitPrice";
-            this.txt_UnitPrice.Size = new System.Drawing.Size(63, 23);
+            this.txt_UnitPrice.Size = new System.Drawing.Size(96, 23);
             this.txt_UnitPrice.TabIndex = 41;
             this.txt_UnitPrice.Text = "0";
             this.txt_UnitPrice.Validated += new System.EventHandler(this.txt_UnitPrice_Validated);
             // 
             // kryptonLabel8
             // 
-            this.kryptonLabel8.Location = new System.Drawing.Point(177, 168);
+            this.kryptonLabel8.Location = new System.Drawing.Point(210, 168);
             this.kryptonLabel8.Name = "kryptonLabel8";
             this.kryptonLabel8.Size = new System.Drawing.Size(36, 20);
             this.kryptonLabel8.TabIndex = 40;
@@ -1403,9 +1401,9 @@
             // cmb_Units1
             // 
             this.cmb_Units1.EnableSearchId = false;
-            this.cmb_Units1.Location = new System.Drawing.Point(248, 168);
+            this.cmb_Units1.Location = new System.Drawing.Point(281, 168);
             this.cmb_Units1.Name = "cmb_Units1";
-            this.cmb_Units1.Size = new System.Drawing.Size(89, 20);
+            this.cmb_Units1.Size = new System.Drawing.Size(124, 20);
             this.cmb_Units1.TabIndex = 39;
             this.cmb_Units1.Unit = "";
             this.cmb_Units1.UnitId = 0;
@@ -1424,7 +1422,7 @@
             this.txt_Qty.AllowSpace = false;
             this.txt_Qty.Location = new System.Drawing.Point(108, 168);
             this.txt_Qty.Name = "txt_Qty";
-            this.txt_Qty.Size = new System.Drawing.Size(63, 23);
+            this.txt_Qty.Size = new System.Drawing.Size(96, 23);
             this.txt_Qty.TabIndex = 37;
             this.txt_Qty.Text = "0";
             this.txt_Qty.Validated += new System.EventHandler(this.txt_Qty_Validated);
@@ -1455,6 +1453,7 @@
             // 
             // cmb_SalesOrdersWithLines1
             // 
+            this.cmb_SalesOrdersWithLines1.ArticleId = 0;
             this.cmb_SalesOrdersWithLines1.BatchId = 0;
             this.cmb_SalesOrdersWithLines1.Location = new System.Drawing.Point(158, 17);
             this.cmb_SalesOrdersWithLines1.Name = "cmb_SalesOrdersWithLines1";
@@ -1471,6 +1470,7 @@
             // 
             this.cmb_Articles1.Article = "";
             this.cmb_Articles1.ArticleId = 0;
+            this.cmb_Articles1.ArticleIdRec = 0;
             this.cmb_Articles1.ArtType = null;
             this.cmb_Articles1.BOMState = 0;
             this.cmb_Articles1.Comments = null;
@@ -1489,6 +1489,7 @@
             this.cmb_Articles1.ProjectId = 0;
             this.cmb_Articles1.QtyAvail = 0D;
             this.cmb_Articles1.QtyConsStock = 0D;
+            this.cmb_Articles1.RMId = 0;
             this.cmb_Articles1.SecName = null;
             this.cmb_Articles1.Size = new System.Drawing.Size(394, 20);
             this.cmb_Articles1.SMTType = 0;
@@ -1593,8 +1594,8 @@
             // dataGridViewTextBoxColumn11
             // 
             this.dataGridViewTextBoxColumn11.DataPropertyName = "unit";
-            dataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.dataGridViewTextBoxColumn11.DefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.dataGridViewTextBoxColumn11.DefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridViewTextBoxColumn11.FillWeight = 40F;
             this.dataGridViewTextBoxColumn11.HeaderText = "Unit";
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
@@ -1604,8 +1605,8 @@
             // dataGridViewTextBoxColumn12
             // 
             this.dataGridViewTextBoxColumn12.DataPropertyName = "unitprice";
-            dataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.dataGridViewTextBoxColumn12.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.dataGridViewTextBoxColumn12.DefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridViewTextBoxColumn12.FillWeight = 80F;
             this.dataGridViewTextBoxColumn12.HeaderText = "Unit price";
             this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
@@ -1657,8 +1658,8 @@
             // dataGridViewTextBoxColumn18
             // 
             this.dataGridViewTextBoxColumn18.DataPropertyName = "conforder";
-            dataGridViewCellStyle24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dataGridViewTextBoxColumn18.DefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dataGridViewTextBoxColumn18.DefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridViewTextBoxColumn18.HeaderText = "Conf.order";
             this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
             this.dataGridViewTextBoxColumn18.ReadOnly = true;
@@ -1666,8 +1667,8 @@
             // dataGridViewTextBoxColumn19
             // 
             this.dataGridViewTextBoxColumn19.DataPropertyName = "custorder";
-            dataGridViewCellStyle25.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dataGridViewTextBoxColumn19.DefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dataGridViewTextBoxColumn19.DefaultCellStyle = dataGridViewCellStyle11;
             this.dataGridViewTextBoxColumn19.HeaderText = "Cust. order";
             this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
             this.dataGridViewTextBoxColumn19.ReadOnly = true;
@@ -1708,8 +1709,8 @@
             // dataGridViewTextBoxColumn24
             // 
             this.dataGridViewTextBoxColumn24.DataPropertyName = "coefconv";
-            dataGridViewCellStyle26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dataGridViewTextBoxColumn24.DefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dataGridViewTextBoxColumn24.DefaultCellStyle = dataGridViewCellStyle12;
             this.dataGridViewTextBoxColumn24.HeaderText = "CoefConv";
             this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
             this.dataGridViewTextBoxColumn24.ReadOnly = true;
@@ -1718,8 +1719,8 @@
             // dataGridViewTextBoxColumn25
             // 
             this.dataGridViewTextBoxColumn25.DataPropertyName = "totalcost";
-            dataGridViewCellStyle27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dataGridViewTextBoxColumn25.DefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dataGridViewTextBoxColumn25.DefaultCellStyle = dataGridViewCellStyle13;
             this.dataGridViewTextBoxColumn25.HeaderText = "Total cost";
             this.dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
             this.dataGridViewTextBoxColumn25.ReadOnly = true;
@@ -1727,8 +1728,8 @@
             // dataGridViewTextBoxColumn26
             // 
             this.dataGridViewTextBoxColumn26.DataPropertyName = "totalorderprice";
-            dataGridViewCellStyle28.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dataGridViewTextBoxColumn26.DefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dataGridViewTextBoxColumn26.DefaultCellStyle = dataGridViewCellStyle14;
             this.dataGridViewTextBoxColumn26.HeaderText = "Total order";
             this.dataGridViewTextBoxColumn26.Name = "dataGridViewTextBoxColumn26";
             this.dataGridViewTextBoxColumn26.ReadOnly = true;

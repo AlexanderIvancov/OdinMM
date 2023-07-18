@@ -344,9 +344,9 @@ namespace Odin.Sales
                 foreach (DataGridViewRow row in grv.Rows)
                 {
                     if (Convert.ToInt32(row.Cells["chk_add"].Value) != 0
-                        && (Convert.ToInt32(row.Cells["cn_coid"].Value) != 0 ||
+                        /*&& (Convert.ToInt32(row.Cells["cn_coid"].Value) != 0 ||
                             Convert.ToInt32(row.Cells["cn_isresale"].Value) != 0 ||
-                            Convert.ToInt32(row.Cells["cn_isfinalproduct"].Value) != 0)
+                            Convert.ToInt32(row.Cells["cn_isfinalproduct"].Value) != 0)*/
                         )
                     {
                         if (Convert.ToInt32(row.Cells["cn_delivplaceid"].Value) == CmbBll.ExInvoiceReceiverId)

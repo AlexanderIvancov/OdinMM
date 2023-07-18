@@ -475,6 +475,7 @@ namespace Odin.Planning
                     frm.Stage = Bll.LaunchStage;
                     frm.MoveDate = Bll.LaunchStartDate;
                     frm.Serials = Bll.LaunchSerials;
+                    frm.Comments = Bll.LaunchComments;
                 }
                 else
                 {
