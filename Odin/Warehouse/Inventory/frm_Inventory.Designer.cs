@@ -48,6 +48,7 @@
             this.kryptonPalette1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.kryptonSplitContainer2 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
+            this.cmb_InvNumber = new Odin.CMB_Components.Common.cmb_Common();
             this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_Date = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
             this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -108,11 +109,11 @@
             this.btn_TrayTube = new System.Windows.Forms.ToolStripButton();
             this.kryptonDockableWorkspace1 = new ComponentFactory.Krypton.Docking.KryptonDockableWorkspace();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.btn_ClientRM = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Packing = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Tracing = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Rests = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_General = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.cmb_InvNumber = new Odin.CMB_Components.Common.cmb_Common();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).BeginInit();
             this.mnu_Lines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
@@ -308,6 +309,21 @@
             this.kryptonSplitContainer2.Size = new System.Drawing.Size(974, 385);
             this.kryptonSplitContainer2.SplitterDistance = 299;
             this.kryptonSplitContainer2.TabIndex = 0;
+            // 
+            // cmb_InvNumber
+            // 
+            this.cmb_InvNumber.IsEmptyColor = false;
+            this.cmb_InvNumber.Location = new System.Drawing.Point(89, 302);
+            this.cmb_InvNumber.Name = "cmb_InvNumber";
+            this.cmb_InvNumber.OrderBy = "invnumber";
+            this.cmb_InvNumber.sCurrentValue = "";
+            this.cmb_InvNumber.SelectedValue = 0;
+            this.cmb_InvNumber.sID_Filled = "id";
+            this.cmb_InvNumber.Size = new System.Drawing.Size(150, 20);
+            this.cmb_InvNumber.sTable = "vw_InvNumbers";
+            this.cmb_InvNumber.sText_Filled = "invnumber";
+            this.cmb_InvNumber.sTitle = "Inv. numbers";
+            this.cmb_InvNumber.TabIndex = 255;
             // 
             // kryptonLabel7
             // 
@@ -933,6 +949,7 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.btn_ClientRM);
             this.kryptonPanel1.Controls.Add(this.btn_Packing);
             this.kryptonPanel1.Controls.Add(this.btn_Tracing);
             this.kryptonPanel1.Controls.Add(this.btn_Rests);
@@ -942,6 +959,16 @@
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(974, 49);
             this.kryptonPanel1.TabIndex = 6;
+            // 
+            // btn_ClientRM
+            // 
+            this.btn_ClientRM.Location = new System.Drawing.Point(420, 5);
+            this.btn_ClientRM.Name = "btn_ClientRM";
+            this.btn_ClientRM.Size = new System.Drawing.Size(149, 39);
+            this.btn_ClientRM.TabIndex = 14;
+            this.btn_ClientRM.Values.Image = global::Odin.Global_Resourses.chart_column;
+            this.btn_ClientRM.Values.Text = "Client RM analysis";
+            this.btn_ClientRM.Click += new System.EventHandler(this.btn_ClientRM_Click);
             // 
             // btn_Packing
             // 
@@ -982,21 +1009,6 @@
             this.btn_General.Values.Image = global::Odin.Global_Resourses.Docs;
             this.btn_General.Values.Text = "Details";
             this.btn_General.Click += new System.EventHandler(this.btn_General_Click);
-            // 
-            // cmb_InvNumber
-            // 
-            this.cmb_InvNumber.IsEmptyColor = false;
-            this.cmb_InvNumber.Location = new System.Drawing.Point(89, 302);
-            this.cmb_InvNumber.Name = "cmb_InvNumber";
-            this.cmb_InvNumber.OrderBy = "invnumber";
-            this.cmb_InvNumber.sCurrentValue = "";
-            this.cmb_InvNumber.SelectedValue = 0;
-            this.cmb_InvNumber.sID_Filled = "id";
-            this.cmb_InvNumber.Size = new System.Drawing.Size(150, 20);
-            this.cmb_InvNumber.sTable = "vw_InvNumbers";
-            this.cmb_InvNumber.sText_Filled = "invnumber";
-            this.cmb_InvNumber.sTitle = "Inv. numbers";
-            this.cmb_InvNumber.TabIndex = 255;
             // 
             // frm_Inventory
             // 
@@ -1122,5 +1134,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_sn;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
         private CMB_Components.Common.cmb_Common cmb_InvNumber;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btn_ClientRM;
     }
 }

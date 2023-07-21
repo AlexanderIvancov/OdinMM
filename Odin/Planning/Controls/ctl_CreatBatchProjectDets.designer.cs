@@ -152,6 +152,7 @@
             this.txt_ResDate.NullValue = " ";
             this.txt_ResDate.Size = new System.Drawing.Size(88, 21);
             this.txt_ResDate.TabIndex = 281;
+            this.txt_ResDate.DropDown += new System.EventHandler<ComponentFactory.Krypton.Toolkit.DateTimePickerDropArgs>(this.txt_ResDate_DropDown);
             // 
             // kryptonLabel10
             // 

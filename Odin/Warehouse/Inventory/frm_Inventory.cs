@@ -829,6 +829,24 @@ namespace Odin.Warehouse.Inventory
             DialogResult result = frm.ShowDialog();
             frm.ThreadSafeCall(delegate { frm.SetCellsColor(); });
         }
-       
+
+        private void btn_ClientRM_Click(object sender, EventArgs e)
+        {
+            string strBeg = cmb_Articles1.Article;
+
+            var _query = "sp_SelectClientRMAnalysis";
+
+            var sqlparams = new List<SqlParameter>()
+                {
+                    new SqlParameter("@strBeg",SqlDbType.NVarChar) {Value = strBeg},
+                };
+
+            Template_DataGridView frm = new Template_DataGridView();
+
+            frm.Text = "Stock value ";
+            frm.Query = _query;
+            frm.SqlParams = sqlparams;
+            frm.Show();
+        }
     }
 }

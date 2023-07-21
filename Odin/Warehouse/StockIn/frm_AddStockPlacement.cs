@@ -697,7 +697,7 @@ namespace Odin.Warehouse.StockIn
                                     //IdIn,
                                       gv_List.CurrentRow.Cells["cn_artid"].Value,
                                       gv_List.CurrentRow.Cells["cn_article"].Value,
-                                      Label,
+                                      0,//Label,
                                       _qtyadd,
                                       txt_Unit.Text,
                                       cmb_Places1.PlaceId,

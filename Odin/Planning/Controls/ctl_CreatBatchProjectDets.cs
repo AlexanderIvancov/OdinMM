@@ -1216,5 +1216,10 @@ namespace Odin.Planning.Controls
                     row.Cells["cn_ndetisactive"].Value = 0;
                 }
         }
+
+        private void txt_ResDate_DropDown(object sender, ComponentFactory.Krypton.Toolkit.DateTimePickerDropArgs e)
+        {
+            txt_ResDate.Value = txt_ResDate.Value == null ? System.DateTime.Now : txt_ResDate.Value;
+        }
     }
 }

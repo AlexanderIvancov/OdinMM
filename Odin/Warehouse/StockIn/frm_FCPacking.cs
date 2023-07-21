@@ -262,7 +262,7 @@ namespace Odin.Warehouse.StockIn
 
             //_batchid = Convert.ToInt32(Helper.GetOneRecord("select top 1 isnull(nullif(bh.groupid, 0), st.batchid) as batchid from prod_serialtracing st left join PROD_BatchHead bh on bh.id = st.batchid where (st.serial = '" + _serial + "' or st.analog = '" + _serial + "') and st.stageid = 7 "));
 
-            _batchid = Convert.ToInt32(Helper.GetOneRecord("select top 1 batchid from prod_serialtracing where (serial = '" + _serial + "' or analog = '" + _serial + "') and stageid = 7 "));
+            //_batchid = Convert.ToInt32(Helper.GetOneRecord("select top 1 batchid from prod_serialtracing where (serial = '" + _serial + "' or analog = '" + _serial + "') and stageid = 7 "));
             //_batchid = _batchid == 0 ? Convert.ToInt32(Helper.GetOneRecord("select top 1 id from prod_batchhead where Batch = '" + _batchtry + "'")) : _batchid;
             _packid = Convert.ToInt32(Helper.GetOneRecord("select top 1 id from sto_packcontent where sn = '" + _serial + "'"));
 
@@ -272,6 +272,16 @@ namespace Odin.Warehouse.StockIn
                 if (row.Cells["cn_serial"].Value.ToString() == _serial)
                     _counttmp++;
             }
+
+            //Check for group
+            int isgroup = Convert.ToInt32(Helper.GetOneRecord("select top 1 isnull(groupid, 0) from prod_batchhead where id = " + _prevbatchid));
+            if (isgroup != 0)
+                _batchid = Convert.ToInt32(Helper.GetOneRecord("select top 1 batchid from prod_serialtracing where (serial = '" + _serial + "' or analog = '" + _serial + "') and stageid = 7 "));
+            else
+                _batchid = Convert.ToInt32(Helper.GetOneRecord("select top 1 ass.batchid from PROD_SerialAssembling ass inner join prod_serialtracing st on (st.serial = '" + _serial + "' or st.analog = '" + _serial + "') and st.stageid = 7  where ass.serial = '" + _serial + "' order by ass.id desc"));
+            if (_batchid == 0)
+                _batchid = Convert.ToInt32(Helper.GetOneRecord("select top 1 batchid from prod_serialtracing where (serial = '" + _serial + "' or analog = '" + _serial + "') and stageid = 7 "));
+
 
             if (_asprimary == -1
                 && _serial != _analog

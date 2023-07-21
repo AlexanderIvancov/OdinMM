@@ -598,7 +598,7 @@ namespace Odin.DataCollection
         {
             if (Analogue != "")
             {
-                AddSerialAnalogue(TmpSerial, Analogue, 0);
+                AddSerialAnalogue(TmpSerial, Analogue, -1);
                 frmSer.Close();
             }
             //else
