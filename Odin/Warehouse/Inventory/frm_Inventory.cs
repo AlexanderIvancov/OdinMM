@@ -819,6 +819,7 @@ namespace Odin.Warehouse.Inventory
             { }
         }
 
+
         private void btn_Packing_Click(object sender, EventArgs e)
         {
             if (glob_Class.IsFormAlreadyOpen("frm_DNPicking")) return;
