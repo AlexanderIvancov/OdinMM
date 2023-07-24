@@ -835,7 +835,7 @@ namespace Odin.Warehouse.Inventory
         {
             string strBeg = cmb_Articles1.Article;
 
-            var _query = "sp_SelectClientRMAnalysis";
+            var _query = "sp_SelectClientRMAnalyzis";
 
             var sqlparams = new List<SqlParameter>()
                 {
