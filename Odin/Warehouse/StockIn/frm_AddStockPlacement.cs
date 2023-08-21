@@ -684,12 +684,12 @@ namespace Odin.Warehouse.StockIn
                     {
                         if (_tempqty > Qty)
                         {
-                            _qtyadd = Qty;
-                            _tempqty = _tempqty - Qty;
+                            _qtyadd = Math.Round(Qty, 5);
+                            _tempqty = _tempqty - Math.Round(Qty, 5);
                         }
                         else
                         {
-                            _qtyadd = _tempqty;
+                            _qtyadd = Math.Round(_tempqty, 5);
                             _tempqty = 0;
                         }
                         gv_Placing.Rows.Add(

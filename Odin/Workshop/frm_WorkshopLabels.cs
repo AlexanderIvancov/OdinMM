@@ -109,6 +109,7 @@ namespace Odin.Workshop
                     string query = "INSERT INTO PROD_WorkshopLabels (batch, sn, counter, who, [when]) values (@batch, @sn, @counter, current_user, getdate())";
 
 
+
                     var datafields = Helper.QuerySP("sp_SelectLabelTemplateFields", sqlparamsfields.ToArray());
 
                     //Receiving template of text
@@ -123,7 +124,23 @@ namespace Odin.Workshop
                     TemplateLabelText = TemplateLabelText.Replace("[BATCH]", _TmpBatch);
                     TemplateLabelText = TemplateLabelText.Replace("[SN]", txt_From36.Text);
 
-                    int k = Convert.ToInt32(txt_From10.Text) + 1;
+                    //Print pervoj
+                    int k = Convert.ToInt32(txt_From10.Text);
+                    _tmpstr = globClass.Convert_10to36(k);
+                    while (Length - _tmpstr.Length > 0)
+                    {
+                        _tmpstr = "0" + _tmpstr;
+                    }
+                    List<SqlParameter> parameters1 = new List<SqlParameter>
+                            {
+                                new SqlParameter("@batch", SqlDbType.NVarChar) {Value = txt_Batch.Text},
+                                new SqlParameter("@sn", SqlDbType.NVarChar) {Value = _TmpBatch + "-" + _tmpstr},
+                                new SqlParameter("@counter", SqlDbType.Int) {Value = k}
+                            };
+
+                    Helper.ExecuteQuery(query, parameters1.ToArray());
+
+                    k++;
 
                     while (k <= Convert.ToInt32(txt_Till10.Text))
                     {
@@ -139,7 +156,7 @@ namespace Odin.Workshop
                         TemplateLabelText = TemplateLabelText + "\r\nA 1";
                         TemplateLabelText = TemplateLabelText + "\r\n";
 
-                        k++;
+
 
                         /*
                             R VAR1-1;<BATCH>
@@ -158,7 +175,10 @@ namespace Odin.Workshop
                             };
 
                         Helper.ExecuteQuery(query, parameters.ToArray());
+
+                        k++;
                     }
+                    //textBox1.Text = TemplateLabelText;
                     //MessageBox.Show(TemplateLabelText);
                     //Print label
                     PrintLabels.PrintLabel(TemplateLabelText, 1);
