@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctl_StockLabel));
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.chk_NoDate = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonHeaderGroup2 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.btn_AddReservation = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
             this.btn_DeleteReservation = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
@@ -95,7 +96,9 @@
             this.bs_List = new System.Windows.Forms.BindingSource(this.components);
             this.bs_InDocs = new System.Windows.Forms.BindingSource(this.components);
             this.bs_Reservations = new System.Windows.Forms.BindingSource(this.components);
-            this.chk_NoDate = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
+            this.txt_ManufBatch = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.buttonSpecAny1 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2)).BeginInit();
@@ -119,6 +122,8 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.txt_ManufBatch);
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel4);
             this.kryptonPanel1.Controls.Add(this.chk_NoDate);
             this.kryptonPanel1.Controls.Add(this.kryptonHeaderGroup2);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel30);
@@ -143,8 +148,16 @@
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonPanel1.Size = new System.Drawing.Size(684, 243);
+            this.kryptonPanel1.Size = new System.Drawing.Size(684, 246);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // chk_NoDate
+            // 
+            this.chk_NoDate.Location = new System.Drawing.Point(203, 138);
+            this.chk_NoDate.Name = "chk_NoDate";
+            this.chk_NoDate.Size = new System.Drawing.Size(104, 20);
+            this.chk_NoDate.TabIndex = 293;
+            this.chk_NoDate.Values.Text = "No expiry date";
             // 
             // kryptonHeaderGroup2
             // 
@@ -303,7 +316,7 @@
             // 
             // kryptonLabel30
             // 
-            this.kryptonLabel30.Location = new System.Drawing.Point(13, 208);
+            this.kryptonLabel30.Location = new System.Drawing.Point(13, 193);
             this.kryptonLabel30.Name = "kryptonLabel30";
             this.kryptonLabel30.Size = new System.Drawing.Size(69, 20);
             this.kryptonLabel30.TabIndex = 289;
@@ -313,7 +326,7 @@
             // 
             this.txt_DataCode.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
             this.buttonSpecAny3});
-            this.txt_DataCode.Location = new System.Drawing.Point(91, 208);
+            this.txt_DataCode.Location = new System.Drawing.Point(91, 193);
             this.txt_DataCode.Name = "txt_DataCode";
             this.txt_DataCode.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txt_DataCode.Size = new System.Drawing.Size(156, 23);
@@ -335,7 +348,7 @@
             // 
             // kryptonLabel5
             // 
-            this.kryptonLabel5.Location = new System.Drawing.Point(253, 208);
+            this.kryptonLabel5.Location = new System.Drawing.Point(253, 193);
             this.kryptonLabel5.Name = "kryptonLabel5";
             this.kryptonLabel5.Size = new System.Drawing.Size(78, 20);
             this.kryptonLabel5.TabIndex = 277;
@@ -345,7 +358,7 @@
             // 
             this.txt_ParentLabel.AllowDecimalSeparator = false;
             this.txt_ParentLabel.AllowSpace = false;
-            this.txt_ParentLabel.Location = new System.Drawing.Point(337, 208);
+            this.txt_ParentLabel.Location = new System.Drawing.Point(337, 193);
             this.txt_ParentLabel.Name = "txt_ParentLabel";
             this.txt_ParentLabel.Size = new System.Drawing.Size(79, 21);
             this.txt_ParentLabel.StateActive.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -405,10 +418,9 @@
             this.txt_Comments.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
             this.buttonSpecAny4});
             this.txt_Comments.Location = new System.Drawing.Point(91, 164);
-            this.txt_Comments.Multiline = true;
             this.txt_Comments.Name = "txt_Comments";
             this.txt_Comments.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txt_Comments.Size = new System.Drawing.Size(325, 38);
+            this.txt_Comments.Size = new System.Drawing.Size(325, 23);
             this.txt_Comments.TabIndex = 267;
             // 
             // buttonSpecAny4
@@ -477,6 +489,7 @@
             // 
             this.cmb_Articles1.Article = "";
             this.cmb_Articles1.ArticleId = 0;
+            this.cmb_Articles1.ArticleIdRec = 0;
             this.cmb_Articles1.ArtType = null;
             this.cmb_Articles1.BOMState = 0;
             this.cmb_Articles1.Comments = null;
@@ -495,6 +508,7 @@
             this.cmb_Articles1.ProjectId = 0;
             this.cmb_Articles1.QtyAvail = 0D;
             this.cmb_Articles1.QtyConsStock = 0D;
+            this.cmb_Articles1.RMId = 0;
             this.cmb_Articles1.SecName = null;
             this.cmb_Articles1.Size = new System.Drawing.Size(328, 20);
             this.cmb_Articles1.SMTType = 0;
@@ -631,13 +645,13 @@
             this.kryptonHeaderGroup1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonHeaderGroup1.HeaderStylePrimary = ComponentFactory.Krypton.Toolkit.HeaderStyle.Secondary;
             this.kryptonHeaderGroup1.HeaderVisibleSecondary = false;
-            this.kryptonHeaderGroup1.Location = new System.Drawing.Point(0, 243);
+            this.kryptonHeaderGroup1.Location = new System.Drawing.Point(0, 246);
             this.kryptonHeaderGroup1.Name = "kryptonHeaderGroup1";
             // 
             // kryptonHeaderGroup1.Panel
             // 
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.gv_List);
-            this.kryptonHeaderGroup1.Size = new System.Drawing.Size(684, 128);
+            this.kryptonHeaderGroup1.Size = new System.Drawing.Size(684, 125);
             this.kryptonHeaderGroup1.TabIndex = 1;
             this.kryptonHeaderGroup1.ValuesPrimary.Heading = "Specifications";
             this.kryptonHeaderGroup1.ValuesPrimary.Image = global::Odin.Global_Resourses.exec_6031;
@@ -684,7 +698,7 @@
             this.gv_List.Location = new System.Drawing.Point(0, 0);
             this.gv_List.Name = "gv_List";
             this.gv_List.RowHeadersWidth = 25;
-            this.gv_List.Size = new System.Drawing.Size(682, 101);
+            this.gv_List.Size = new System.Drawing.Size(682, 98);
             this.gv_List.TabIndex = 2;
             // 
             // cn_id
@@ -747,13 +761,29 @@
             this.cn_createdat.HeaderText = "Created at";
             this.cn_createdat.Name = "cn_createdat";
             // 
-            // chk_NoDate
+            // txt_ManufBatch
             // 
-            this.chk_NoDate.Location = new System.Drawing.Point(203, 138);
-            this.chk_NoDate.Name = "chk_NoDate";
-            this.chk_NoDate.Size = new System.Drawing.Size(104, 20);
-            this.chk_NoDate.TabIndex = 293;
-            this.chk_NoDate.Values.Text = "No expiry date";
+            this.txt_ManufBatch.AllowButtonSpecToolTips = true;
+            this.txt_ManufBatch.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
+            this.buttonSpecAny1});
+            this.txt_ManufBatch.Location = new System.Drawing.Point(104, 220);
+            this.txt_ManufBatch.Name = "txt_ManufBatch";
+            this.txt_ManufBatch.Size = new System.Drawing.Size(143, 23);
+            this.txt_ManufBatch.TabIndex = 301;
+            // 
+            // buttonSpecAny1
+            // 
+            this.buttonSpecAny1.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
+            this.buttonSpecAny1.UniqueName = "ECFB869BD7764A9C8F8EA2E658584FE7";
+            this.buttonSpecAny1.Click += new System.EventHandler(this.buttonSpecAny1_Click);
+            // 
+            // kryptonLabel4
+            // 
+            this.kryptonLabel4.Location = new System.Drawing.Point(13, 220);
+            this.kryptonLabel4.Name = "kryptonLabel4";
+            this.kryptonLabel4.Size = new System.Drawing.Size(85, 20);
+            this.kryptonLabel4.TabIndex = 300;
+            this.kryptonLabel4.Values.Text = "Manuf. batch:";
             // 
             // ctl_StockLabel
             // 
@@ -858,5 +888,8 @@
         private System.Windows.Forms.BindingSource bs_Reservations;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Separate;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_NoDate;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_ManufBatch;
+        private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny1;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
     }
 }

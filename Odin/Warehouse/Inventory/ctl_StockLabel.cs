@@ -185,6 +185,12 @@ namespace Odin.Warehouse.Inventory
             }
         }
 
+        public string ManufBatch
+        {
+            get { return txt_ManufBatch.Text; }
+            set { txt_ManufBatch.Text = value; }
+        }
+
 
         #endregion
 
@@ -270,6 +276,7 @@ namespace Odin.Warehouse.Inventory
                     //Reservation = dr["batch"].ToString();
                     DataCode = dr["datacode"].ToString();
                     NoExpDate = Convert.ToInt32(dr["nodate"]);
+                    ManufBatch = dr["manufbatch"].ToString();
                 }
             }
             else
@@ -291,6 +298,7 @@ namespace Odin.Warehouse.Inventory
             //Reservation = "";
             DataCode = "";
             NoExpDate = 0;
+            ManufBatch = "";
         }
         #endregion
 
@@ -313,7 +321,7 @@ namespace Odin.Warehouse.Inventory
 
         private void btn_OK_Click(object sender, EventArgs e)
         {
-            SIBll.EditStockLabel(Label, ExpDate, Available, ParentLabel, Comments, DataCode);
+            SIBll.EditStockLabel(Label, ExpDate, Available, ParentLabel, Comments, DataCode, ManufBatch);
             if (NoExpDate == -1)
                 SINBll.SetNoExpDate(Label);
             ShowDets(Label);
@@ -473,6 +481,11 @@ namespace Odin.Warehouse.Inventory
                         SaveLabel(this);
                 }
             }
+        }
+
+        private void buttonSpecAny1_Click(object sender, EventArgs e)
+        {
+            txt_ManufBatch.Text = string.Empty;
         }
     }
 }

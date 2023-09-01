@@ -914,8 +914,9 @@ namespace Odin.Purchase
 
         }
 
-        public void EditNeedDets(int id, double qty, string comments)
+        public int EditNeedDets(int id, double qty, string comments)
         {
+            int _state = 0;
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_EditPONeedsDet", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -924,11 +925,13 @@ namespace Odin.Purchase
             sqlComm.Parameters.AddWithValue("@id", id);
             sqlComm.Parameters.AddWithValue("@qty", qty);
             sqlComm.Parameters.AddWithValue("@comments", comments);
+            sqlComm.Parameters.Add("@state", SqlDbType.Int).Direction = ParameterDirection.Output;
 
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
+            _state = Convert.ToInt32(sqlComm.Parameters["@state"].Value);
             sqlConn.Close();
-
+            return _state;
         }
 
         public static DataTable getNeedsDetails(int _needid)

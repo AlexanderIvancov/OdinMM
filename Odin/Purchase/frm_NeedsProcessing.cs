@@ -1304,6 +1304,10 @@ namespace Odin.Purchase
             int _id = 0;
             double _qty = 0;
             string _comments = "";
+            TreeGridNode node = tv_Details.CurrentNode;
+            TreeGridNode parentnode = node.Parent;
+
+            tv_Details.EndEdit();
 
             int _hid = 0;
             try
@@ -1312,11 +1316,9 @@ namespace Odin.Purchase
             }
             catch { }
 
-            try {
-                TreeGridNode node = tv_Details.CurrentNode;
-                TreeGridNode parentnode = node.Parent;
+            try
+            {
 
-                tv_Details.EndEdit();
 
                 if (node.Level == 2) //Rabotaem s katalogom
                 {
@@ -1343,9 +1345,57 @@ namespace Odin.Purchase
                 if (result == DialogResult.OK
                     && (_qty != frm.Qty || _comments != frm.Comments))
                 {
-                    POBll.EditNeedDets(_id, frm.Qty, frm.Comments);
-                    FillGrid(_hid);
+                    int _state = POBll.EditNeedDets(_id, frm.Qty, frm.Comments);
+                    //FillGrid(_hid);
+                    //Update data
+                    if (node.Level == 2)
+                    {
+                        parentnode.Cells["cn_dqtyneed"].Value = frm.Qty;
+                        parentnode.Cells["cn_dcomments"].Value = frm.Comments;
+                        parentnode.Cells["cn_dstate"].Value = _state;
+                        foreach (TreeGridNode nodechild in parentnode.Nodes)
+                            nodechild.Cells["cn_dqtyneed"].Value = frm.Qty;
+                    }
+                    else
+                    {
+                        node.Cells["cn_dqtyneed"].Value = frm.Qty;
+                        node.Cells["cn_dcomments"].Value = frm.Comments;
+                        node.Cells["cn_dstate"].Value = _state;
+                        foreach (TreeGridNode nodechild in node.Nodes)
+                            nodechild.Cells["cn_dqtyneed"].Value = frm.Qty;
 
+                    }
+                    //Cells color
+                    if (node.Level == 2)
+                    {
+                        if (_state == 0)
+                        {
+                            parentnode.DefaultCellStyle.BackColor = Color.Gainsboro;
+                            foreach (TreeGridNode nodechild in parentnode.Nodes)
+                                nodechild.DefaultCellStyle.BackColor = Color.Gainsboro;
+                        }
+                        else
+                        {
+                            parentnode.DefaultCellStyle.BackColor = Color.White;
+                            foreach (TreeGridNode nodechild in parentnode.Nodes)
+                                nodechild.DefaultCellStyle.BackColor = Color.White;
+                        }
+                    }
+                    else
+                    {
+                        if (_state == 0)
+                        {
+                            node.DefaultCellStyle.BackColor = Color.Gainsboro;
+                            foreach (TreeGridNode nodechild in node.Nodes)
+                                nodechild.DefaultCellStyle.BackColor = Color.Gainsboro;
+                        }
+                        else
+                        {
+                            node.DefaultCellStyle.BackColor = Color.White;
+                            foreach (TreeGridNode nodechild in node.Nodes)
+                                nodechild.DefaultCellStyle.BackColor = Color.White;
+                        }
+                    }
                 }
 
             }

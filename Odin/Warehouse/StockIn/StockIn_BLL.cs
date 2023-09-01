@@ -90,7 +90,7 @@ namespace Odin.Warehouse.StockIn
         }
 
         public int AddStockDeallocation(int idin, int label, int artid, int placeid, double qty, string expdate,
-                            int suplabelid, int usage, string comments, string datacode)
+                            int suplabelid, int usage, string comments, string datacode, string manufbatch)
         {
             int _res = 0;
 
@@ -108,6 +108,7 @@ namespace Odin.Warehouse.StockIn
             sqlComm.Parameters.AddWithValue("@suplabelid", suplabelid);
             sqlComm.Parameters.AddWithValue("@comments", comments);
             sqlComm.Parameters.AddWithValue("@datacode", datacode);
+            sqlComm.Parameters.AddWithValue("@manufbatch", manufbatch);
 
             sqlComm.Parameters.Add("@insertedid", SqlDbType.Int).Direction = ParameterDirection.Output;
 

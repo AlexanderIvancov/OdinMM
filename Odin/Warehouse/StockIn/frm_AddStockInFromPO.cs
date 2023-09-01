@@ -531,7 +531,7 @@ namespace Odin.Warehouse.StockIn
                         {
                             SIBll.AddStockDeallocation(_NewInwardId, 0, Convert.ToInt32(row.Cells["cn_artid"].Value),
                                                            PlaceId, Convert.ToDouble(row.Cells["cn_qty"].Value),
-                                                           "", 0, -1, row.Cells["cn_comments"].Value.ToString(), "");
+                                                           "", 0, -1, row.Cells["cn_comments"].Value.ToString(), "", "");
                         }
 
 

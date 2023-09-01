@@ -276,11 +276,11 @@ namespace Odin.Warehouse.StockIn
             //Check for group
             int isgroup = Convert.ToInt32(Helper.GetOneRecord("select top 1 isnull(groupid, 0) from prod_batchhead where id = " + _prevbatchid));
             if (isgroup != 0)
-                _batchid = Convert.ToInt32(Helper.GetOneRecord("select top 1 batchid from prod_serialtracing where (serial = '" + _serial + "' or analog = '" + _serial + "') and stageid = 7 "));
+                _batchid = Convert.ToInt32(Helper.GetOneRecord("select top 1 batchid from prod_serialtracing where (serial = '" + _serial + "' or analog = '" + _serial + "') and stageid = 7 order by id desc"));
             else
                 _batchid = Convert.ToInt32(Helper.GetOneRecord("select top 1 ass.batchid from PROD_SerialAssembling ass inner join prod_serialtracing st on (st.serial = '" + _serial + "' or st.analog = '" + _serial + "') and st.stageid = 7  where ass.serial = '" + _serial + "' order by ass.id desc"));
             if (_batchid == 0)
-                _batchid = Convert.ToInt32(Helper.GetOneRecord("select top 1 batchid from prod_serialtracing where (serial = '" + _serial + "' or analog = '" + _serial + "') and stageid = 7 "));
+                _batchid = Convert.ToInt32(Helper.GetOneRecord("select top 1 batchid from prod_serialtracing where (serial = '" + _serial + "' or analog = '" + _serial + "') and stageid = 7 order by id desc "));
 
 
             if (_asprimary == -1
@@ -300,7 +300,7 @@ namespace Odin.Warehouse.StockIn
             else if (_batchid == 0)
             {
                 _res = false;
-                ErrorMessage = "There is no such serial on FQC stage!";
+                ErrorMessage = "There is no such serial: " + _serial + " on FQC stage!";
             }
             else if (_prevbatchid != 0 &&
                 _prevbatchid != _batchid)

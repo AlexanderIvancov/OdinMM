@@ -147,7 +147,11 @@ namespace Odin.Warehouse.StockIn
 
             }
         }
-
+        public string ManufBatch
+        {
+            get { return txt_ManufBatch.Text; }
+            set { txt_ManufBatch.Text = value; }
+        }
         #endregion
 
         #region Methods
@@ -704,7 +708,8 @@ namespace Odin.Warehouse.StockIn
                                       cmb_Places1.txt_Place.Text,
                                       Comments,
                                       DataCode,
-                                      ExpDate);
+                                      ExpDate,
+                                      ManufBatch);
                     }
 
                 }
@@ -720,7 +725,8 @@ namespace Odin.Warehouse.StockIn
                                         cmb_Places1.txt_Place.Text,
                                         Comments,
                                         DataCode,
-                                        ExpDate);
+                                        ExpDate,
+                                        ManufBatch);
 
                 }
                 RecalcLeftQty(IdIn);
@@ -794,7 +800,8 @@ namespace Odin.Warehouse.StockIn
                                                         0,
                                                         -1,
                                                         row.Cells["cn_comments"].Value.ToString(),
-                                                        row.Cells["cn_idatacode"].Value.ToString());
+                                                        row.Cells["cn_idatacode"].Value.ToString(),
+                                                        row.Cells["cn_manufbatch"].Value.ToString());
                             if (_res != 0
                                 && NoExpDate == -1)
                                 SIBll.SetNoExpDate(_res);
@@ -842,7 +849,8 @@ namespace Odin.Warehouse.StockIn
                                                     0,
                                                     -1,
                                                     row.Cells["cn_comments"].Value.ToString(),
-                                                    row.Cells["cn_idatacode"].Value.ToString());
+                                                    row.Cells["cn_idatacode"].Value.ToString(),
+                                                    row.Cells["cn_manufbatch"].Value.ToString());
                         if (_res != 0
                                 && NoExpDate == -1)
                             SIBll.SetNoExpDate(_res);
@@ -913,6 +921,11 @@ namespace Odin.Warehouse.StockIn
         private void gv_StockDets_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             SetCellsColor();
+        }
+
+        private void buttonSpecAny1_Click(object sender, EventArgs e)
+        {
+            txt_ManufBatch.Text = string.Empty;
         }
     }
 }

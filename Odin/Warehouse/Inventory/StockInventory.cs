@@ -140,7 +140,8 @@ namespace Odin.Warehouse.Inventory
 
         #region Label
 
-        public void EditStockLabel(int id, string expdate, int usage, int parentlabel, string comments, string datacode)
+
+        public void EditStockLabel(int id, string expdate, int usage, int parentlabel, string comments, string datacode, string manufbatch)
         {
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
@@ -153,6 +154,7 @@ namespace Odin.Warehouse.Inventory
             sqlComm.Parameters.AddWithValue("@parentlabel", parentlabel);
             sqlComm.Parameters.AddWithValue("@comments", comments);
             sqlComm.Parameters.AddWithValue("@datacode", datacode);
+            sqlComm.Parameters.AddWithValue("@manufbatch", manufbatch);
 
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();

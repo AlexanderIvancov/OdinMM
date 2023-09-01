@@ -369,7 +369,11 @@ namespace Odin.Warehouse.StockIn
 
             }
         }
-
+        public string ManufBatch
+        {
+            get { return txt_ManufBatch.Text; }
+            set { txt_ManufBatch.Text = value; }
+        }
         #endregion
 
         #region Methods
@@ -390,6 +394,7 @@ namespace Odin.Warehouse.StockIn
 
             ShowLineTots();
             NoExpDate = 0;
+            ManufBatch = "";
         }
 
         private void ShowLineTots()
@@ -699,7 +704,7 @@ namespace Odin.Warehouse.StockIn
                     {
                         TreeGridNode node1;
                         TreeGridNodeCollection nodes = node.Nodes;
-                        node1 = nodes.Add(null, cmb_Places1.txt_Place.Text, cmb_Places1.PlaceId.ToString(), "0", QtyToPlace, "0", txt_DataCode.Text, "");
+                        node1 = nodes.Add(null, cmb_Places1.txt_Place.Text, cmb_Places1.PlaceId.ToString(), "0", QtyToPlace, "0", txt_DataCode.Text, "", ManufBatch);
                         foundnode = true;
                         node.Expand();
                         break;
@@ -714,7 +719,7 @@ namespace Odin.Warehouse.StockIn
                     }
 
                     TreeGridNode node1;
-                    node1 = tv_Rests.Nodes.Add(null, cmb_Places1.txt_Place.Text, cmb_Places1.PlaceId.ToString(), "0", QtyToPlace, "0", txt_DataCode.Text, "");
+                    node1 = tv_Rests.Nodes.Add(null, cmb_Places1.txt_Place.Text, cmb_Places1.PlaceId.ToString(), "0", QtyToPlace, "0", txt_DataCode.Text, "", ManufBatch);
 
                     foreach (TreeGridNode node in tv_Rests.Nodes)
                     {
@@ -865,7 +870,8 @@ namespace Odin.Warehouse.StockIn
                             if (Convert.ToDouble(row.Cells["cn_qtyoper"].Value) > 0
                                 && StateId != 0)
                             _inslab = SIBll.AddStockDeallocation(_NewInwardId, 0, ArtId, Convert.ToInt32(row.Cells["cn_placeid"].Value), Convert.ToDouble(row.Cells["cn_qtyoper"].Value),
-                                                            ExpDate, 0, -1, row.Cells["cn_comments"].Value.ToString(), row.Cells["cn_datacode"].Value.ToString());
+                                                            ExpDate, 0, -1, row.Cells["cn_comments"].Value.ToString(), row.Cells["cn_datacode"].Value.ToString(),
+                                                            row.Cells["cn_manufbatch"].Value.ToString());
                             if (_inslab != 0
                                 && NoExpDate == -1)
                                 SIBll.SetNoExpDate(_inslab);
@@ -945,6 +951,11 @@ namespace Odin.Warehouse.StockIn
             //                           "You can't place directly to production!",
             //                           MessageBoxIcon.Warning,
             //                           TaskDialogButtons.OK);
+        }
+
+        private void buttonSpecAny5_Click(object sender, EventArgs e)
+        {
+            txt_ManufBatch.Text = string.Empty;
         }
     }
 }
