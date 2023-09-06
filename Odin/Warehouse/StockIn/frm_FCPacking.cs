@@ -264,7 +264,7 @@ namespace Odin.Warehouse.StockIn
 
             //_batchid = Convert.ToInt32(Helper.GetOneRecord("select top 1 batchid from prod_serialtracing where (serial = '" + _serial + "' or analog = '" + _serial + "') and stageid = 7 "));
             //_batchid = _batchid == 0 ? Convert.ToInt32(Helper.GetOneRecord("select top 1 id from prod_batchhead where Batch = '" + _batchtry + "'")) : _batchid;
-            _packid = Convert.ToInt32(Helper.GetOneRecord("select top 1 id from sto_packcontent where sn = '" + _serial + "'"));
+            //_packid = Convert.ToInt32(Helper.GetOneRecord("select top 1 id from sto_packcontent where sn = '" + _serial + "'"));
 
             foreach (DataGridViewRow row in gv_List.Rows)
             {
@@ -282,6 +282,8 @@ namespace Odin.Warehouse.StockIn
             if (_batchid == 0)
                 _batchid = Convert.ToInt32(Helper.GetOneRecord("select top 1 batchid from prod_serialtracing where (serial = '" + _serial + "' or analog = '" + _serial + "') and stageid = 7 order by id desc "));
 
+            _packid = Convert.ToInt32(Helper.GetOneRecord("select top 1 pc.id from sto_packcontent pc inner join sto_delivpackmapping pm on pm.packid = pc.packid " +
+                                       " where pc.sn = '" + _serial + "' and pm.batchid = " + _batchid));
 
             if (_asprimary == -1
                 && _serial != _analog

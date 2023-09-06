@@ -74,22 +74,26 @@ namespace Odin.Warehouse.StockIn
         {
             int _id = 0;
             string _pref = "S";
-           
-            try
-            {
-                _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
-                _pref = gv_List.CurrentRow.Cells["cn_pref"].Value.ToString();
-              
-            }
-            catch { }
 
-            if (_id != 0
-                && globClass.DeleteConfirm() == true)
+
+
+            if (globClass.DeleteConfirm() == true)
             {
-                if (_pref == "S")
-                    BLLIN.DeleteStockInBoxDets(_id);
-                else
-                    BLLIN.DeleteStockInBoxAddDets(_id);
+                foreach (DataGridViewRow row in gv_List.SelectedRows)
+                {
+                    try
+                    {
+                        _id = Convert.ToInt32(row.Cells["cn_id"].Value);
+                        _pref = row.Cells["cn_pref"].Value.ToString();
+
+                    }
+                    catch { }
+
+                    if (_pref == "S")
+                        BLLIN.DeleteStockInBoxDets(_id);
+                    else
+                        BLLIN.DeleteStockInBoxAddDets(_id);
+                }
                 gv_List.ThreadSafeCall(delegate { FillList(PackId); });
                 txt_Oper.Text = "";
                 txt_Oper.Focus();

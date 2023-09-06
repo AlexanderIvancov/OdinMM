@@ -2269,10 +2269,9 @@ namespace Odin.Planning
             return Helper.QueryDT("execute sp_SelectProjectPlanningFin @custid = " + custid + ", @perc = " + perc);
         }
 
-
-        public static DataTable getPlanningView(int custid)
+        public static DataTable getPlanningView(int custid, string dateon)
         {
-            return Helper.QueryDT("execute sp_PlanningView @custid = " + custid);
+            return Helper.QueryDT("execute sp_PlanningView @custid = " + custid + ", @dateon = '" + dateon + "'");
         }
 
         public void AddBatchPlanning(int batchid, double qty, string plandate, string comments)

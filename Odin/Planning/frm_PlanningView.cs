@@ -15,14 +15,14 @@ using Braincase.GanttChart;
 
 namespace Odin.Planning
 {
-   
+
 
     public partial class frm_PlanningView : BaseForm
     {
         OverlayPainter _mOverlay = new OverlayPainter();
 
         ProjectManager _mManager = null;
-        
+
         public frm_PlanningView()
         {
             InitializeComponent();
@@ -293,22 +293,22 @@ namespace Odin.Planning
 
         public void RefreshGrid()
         {
-            
+
             //_mManager = new ProjectManager();
-            
+
             double CompletePerc = 0;
             string _tmpname = "";
             //double _Separ = 1;
 
-            var data = Plan_BLL.getPlanningView(cmb_Firms1.FirmId);
+            var data = Plan_BLL.getPlanningView(cmb_Firms1.FirmId, txt_DocDate.Value.ToShortDateString());
 
             DataRow[] datacor = data.Select("ispre = -99");
-           
+
             DataTable dataco = null;
             if (datacor.Any())
             {
                 dataco = datacor.CopyToDataTable();
-                
+
                 _mManager = new ProjectManager();
                 _mManager.Start = txt_DocDate.Value;
                 //var work = new MyTask(_mManager) { Name = "Prepare for Work" };
@@ -361,9 +361,12 @@ namespace Odin.Planning
                         //var childtask = new MyTask(_mManager) { Name = row1["batch"].ToString() + " , qty: " + row1["qty"].ToString() };
 
                         //Projects
-                        var childtask = new MyTask(_mManager) { Name = row1["batch"].ToString() + ", article: " + row1["article"].ToString() + " , qty: " + row1["qty"].ToString() 
-                                                                    + (Convert.ToInt32(row1["ismisc"]) == 0 && Convert.ToInt32(row1["isold"]) == 0 ? " , planned: " : " , produced: ") 
-                                                                    + (Convert.ToInt32(row1["isold"]) == 0 ? row1["qtyplanned"].ToString() : row1["qtyin"].ToString()) };
+                        var childtask = new MyTask(_mManager)
+                        {
+                            Name = row1["batch"].ToString() + ", article: " + row1["article"].ToString() + " , qty: " + row1["qty"].ToString()
+                                                                    + (Convert.ToInt32(row1["ismisc"]) == 0 && Convert.ToInt32(row1["isold"]) == 0 ? " , planned: " : " , produced: ")
+                                                                    + (Convert.ToInt32(row1["isold"]) == 0 ? row1["qtyplanned"].ToString() : row1["qtyin"].ToString())
+                        };
                         _mManager.Add(childtask);
                         _mManager.SetStart(childtask, /*TimeSpan.FromDays(ts1.TotalDays)*/ts1);
                         _mManager.SetDuration(childtask, TimeSpan.FromDays(7));
@@ -371,7 +374,7 @@ namespace Odin.Planning
 
                         var _resourse = new MyResource()
                         {
-                            Name = row1["batch"].ToString() +", article: " + row1["article"].ToString() 
+                            Name = row1["batch"].ToString() + ", article: " + row1["article"].ToString()
                                                                    + " , qty: " + row1["qty"].ToString()
                                                                    + " , conf.order: " + row1["conforder"].ToString()
                                                                    + " , customer: " + row1["customer"].ToString(),
@@ -395,14 +398,14 @@ namespace Odin.Planning
                         else
                         {
                             if (Convert.ToInt32(row1["ismisc"]) == 0 && Convert.ToInt32(row1["isold"]) == 0)
-                                CompletePerc = Convert.ToDouble(row1["qty"]) / (Convert.ToDouble(row1["qty"]) + Convert.ToDouble(row1["qtyinbatch"])) ;
+                                CompletePerc = Convert.ToDouble(row1["qty"]) / (Convert.ToDouble(row1["qty"]) + Convert.ToDouble(row1["qtyinbatch"]));
                             //CompletePerc = (Convert.ToDouble(row["qty"]) - Convert.ToDouble(row1["qty"])) / Convert.ToDouble(row["qty"]);
                             else
                             {
                                 CompletePerc = 1 * Convert.ToDouble(row1["qtyin"]) / Convert.ToDouble(row1["qty"]);
                             }
                         }
-                            //100 * (Convert.ToDouble(row["qty"]) - Convert.ToDouble(row1["qty"])) / (Convert.ToDouble(row1["qty"]) == 0 ? 100 : Convert.ToDouble(row2["qtyin"]) : Convert.ToDouble(row2["qty"]));
+                        //100 * (Convert.ToDouble(row["qty"]) - Convert.ToDouble(row1["qty"])) / (Convert.ToDouble(row1["qty"]) == 0 ? 100 : Convert.ToDouble(row2["qtyin"]) : Convert.ToDouble(row2["qty"]));
 
                         childtask.Complete = class_Global.ToSingle(CompletePerc);
 
@@ -413,15 +416,15 @@ namespace Odin.Planning
                         foreach (DataRow row2 in databatch)
                         {
                             DateTime then2 = Convert.ToDateTime(row2["startdate"]);
-                            TimeSpan ts2 = (now - _mManager.Start) +  (then2 - now);
+                            TimeSpan ts2 = (now - _mManager.Start) + (then2 - now);
 
                             if (Convert.ToInt32(row2["ismisc"]) == 0)
                                 _tmpname = Name = row2["batch"].ToString() + " , qty: " + row2["qty"].ToString() + " , qty produced: " + row2["qtyin"].ToString();
                             else
-                                _tmpname = Name = row2["batch"].ToString() + " , qty: " + row2["qty"].ToString() + " , qty produced: " + row2["qtyin"].ToString()  + " , article: " + row2["article"].ToString();
+                                _tmpname = Name = row2["batch"].ToString() + " , qty: " + row2["qty"].ToString() + " , qty produced: " + row2["qtyin"].ToString() + " , article: " + row2["article"].ToString();
 
-                            _tmpname = _tmpname + System.Environment.NewLine + row2["comments"].ToString();
-                          
+                            //_tmpname = _tmpname + System.Environment.NewLine + row2["comments"].ToString();
+
                             var childtask1 = new MyTask(_mManager) { Name = _tmpname };
 
                             _mManager.Add(childtask1);
@@ -438,7 +441,7 @@ namespace Odin.Planning
                                 CompletePerc = 1 * Convert.ToDouble(row2["qtyin"]) / Convert.ToDouble(row2["qty"]);
 
                             childtask1.Complete = class_Global.ToSingle(CompletePerc);
-                            
+
 
                             //if (Convert.ToInt32(row2["isplan"]) != -1)
                             //    childtask1.Complete = 1f;
@@ -452,7 +455,7 @@ namespace Odin.Planning
                                 Name = row2["batch"].ToString()
                                                                     + " , qty: " + row2["qty"].ToString()
                                                                     + " , conf.order: " + row2["conforder"].ToString()
-                                                                    + " , customer: " + row2["customer"].ToString() + 
+                                                                    + " , customer: " + row2["customer"].ToString() +
                                                                     (Convert.ToInt32(row2["ismisc"]) == 0 ? "" : " , article: " + row2["article"].ToString()),
                                 BatchId = Convert.ToInt32(row2["batchid"]),
                                 IsPlan = Convert.ToInt32(row2["isplan"]),
@@ -544,11 +547,11 @@ namespace Odin.Planning
 
         public void RemoveTask(Braincase.GanttChart.Task task)
         {
-            
-            
+
+
             _mManager.Delete(task);
 
-            RefreshChart();      
+            RefreshChart();
         }
 
         public void bw_List(object sender, DoWorkEventArgs e)
@@ -596,7 +599,7 @@ namespace Odin.Planning
             int _isplan = 0;
             int _ispre = 0;
             int _ismisc = 0;
-           
+
             try
             {
                 _name = _mManager.ResourcesOf(tsk).Select(x => (x as MyResource).Name).FirstOrDefault();
@@ -627,7 +630,7 @@ namespace Odin.Planning
                 {
                     PlanBll.AddBatchPlanning(frm.BatchId, frm.Qty, frm.PlanDate, frm.Comments);
                     RefreshGrid();
-                                      
+
                     //var _resourse1 = new MyResource()
                     //{
                     //    Name = _name,
@@ -825,7 +828,7 @@ namespace Odin.Planning
                 {
                     PlanBll.AddBatchPlanning(frm.BatchId, frm.Qty, frm.PlanDate, frm.Comments);
                     RefreshGrid();
-                    
+
                     //var _resourse1 = new MyResource()
                     //{
                     //    Name = _name,
@@ -874,7 +877,7 @@ namespace Odin.Planning
         {
 
         }
-        
+
         private void chart1_TaskMouseClick(object sender, TaskMouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
@@ -921,7 +924,7 @@ namespace Odin.Planning
         }
 
         #endregion
-        
+
 
     }
     #region overlay painter
@@ -1000,7 +1003,7 @@ namespace Odin.Planning
         public string Week { get; set; }
         public double Qty { get; set; }
         public int PlanId { get; set; }
-        public double QtyPlanned { get; set;}
+        public double QtyPlanned { get; set; }
         public double QtyIn { get; set; }
         public int IsMisc { get; set; }
         public int IsOld { get; set; }
@@ -1017,16 +1020,16 @@ namespace Odin.Planning
         {
             Manager = manager;
         }
-               
+
 
         private ProjectManager Manager { get; set; }
-        
+
 
         public new TimeSpan Start { get { return base.Start; } set { Manager.SetStart(this, value); } }
         public new TimeSpan End { get { return base.End; } set { Manager.SetEnd(this, value); } }
         public new TimeSpan Duration { get { return base.Duration; } set { Manager.SetDuration(this, value); } }
         public new float Complete { get { return base.Complete; } set { Manager.SetComplete(this, value); } }
-       
+
     }
     #endregion custom task and resource
 }
