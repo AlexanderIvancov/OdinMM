@@ -87,6 +87,7 @@
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_Id = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.btn_Concidences = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.chk_MBLimit = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
@@ -141,6 +142,7 @@
             // 
             // kryptonPanel2
             // 
+            this.kryptonPanel2.Controls.Add(this.chk_MBLimit);
             this.kryptonPanel2.Controls.Add(this.cmb_Articles2);
             this.kryptonPanel2.Controls.Add(this.kryptonLabel19);
             this.kryptonPanel2.Controls.Add(this.kryptonLabel18);
@@ -254,7 +256,7 @@
             // 
             // chk_Warning
             // 
-            this.chk_Warning.Location = new System.Drawing.Point(298, 284);
+            this.chk_Warning.Location = new System.Drawing.Point(222, 284);
             this.chk_Warning.Name = "chk_Warning";
             this.chk_Warning.Size = new System.Drawing.Size(70, 20);
             this.chk_Warning.TabIndex = 55;
@@ -262,7 +264,7 @@
             // 
             // chk_Service
             // 
-            this.chk_Service.Location = new System.Drawing.Point(216, 284);
+            this.chk_Service.Location = new System.Drawing.Point(140, 284);
             this.chk_Service.Name = "chk_Service";
             this.chk_Service.Size = new System.Drawing.Size(62, 20);
             this.chk_Service.TabIndex = 45;
@@ -346,7 +348,7 @@
             // 
             // chk_SubBatch
             // 
-            this.chk_SubBatch.Location = new System.Drawing.Point(93, 284);
+            this.chk_SubBatch.Location = new System.Drawing.Point(17, 284);
             this.chk_SubBatch.Name = "chk_SubBatch";
             this.chk_SubBatch.Size = new System.Drawing.Size(117, 20);
             this.chk_SubBatch.TabIndex = 30;
@@ -691,6 +693,14 @@
             this.btn_Concidences.Values.Text = "";
             this.btn_Concidences.Click += new System.EventHandler(this.btn_Concidences_Click);
             // 
+            // chk_MBLimit
+            // 
+            this.chk_MBLimit.Location = new System.Drawing.Point(308, 284);
+            this.chk_MBLimit.Name = "chk_MBLimit";
+            this.chk_MBLimit.Size = new System.Drawing.Size(74, 20);
+            this.chk_MBLimit.TabIndex = 76;
+            this.chk_MBLimit.Values.Text = "M.B.Limit";
+            // 
             // frm_AddArticle
             // 
             this.AcceptButton = this.btn_OK;
@@ -778,5 +788,6 @@
         public CMB_Components.Articles.cmb_Articles cmb_Articles2;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel19;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_CreatePF;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_MBLimit;
     }
 }

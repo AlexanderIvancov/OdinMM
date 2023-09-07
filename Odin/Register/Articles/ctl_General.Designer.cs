@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctl_General));
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.cmb_Articles2 = new Odin.CMB_Components.Articles.cmb_Articles();
+            this.kryptonLabel18 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel17 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_SpoilConst = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.chk_Warning = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
@@ -78,8 +80,7 @@
             this.txt_2ndName = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.buttonSpecAny2 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.cmb_Articles2 = new Odin.CMB_Components.Articles.cmb_Articles();
-            this.kryptonLabel18 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.chk_MBLimit = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
             this.kryptonPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmb_MSL)).BeginInit();
@@ -90,6 +91,7 @@
             // 
             // kryptonPanel2
             // 
+            this.kryptonPanel2.Controls.Add(this.chk_MBLimit);
             this.kryptonPanel2.Controls.Add(this.cmb_Articles2);
             this.kryptonPanel2.Controls.Add(this.kryptonLabel18);
             this.kryptonPanel2.Controls.Add(this.kryptonLabel17);
@@ -140,6 +142,50 @@
             this.kryptonPanel2.Size = new System.Drawing.Size(658, 399);
             this.kryptonPanel2.TabIndex = 2;
             // 
+            // cmb_Articles2
+            // 
+            this.cmb_Articles2.Article = "";
+            this.cmb_Articles2.ArticleId = 0;
+            this.cmb_Articles2.ArticleIdRec = 0;
+            this.cmb_Articles2.ArtType = null;
+            this.cmb_Articles2.BOMState = 0;
+            this.cmb_Articles2.Comments = null;
+            this.cmb_Articles2.CustCode = null;
+            this.cmb_Articles2.CustCodeId = 0;
+            this.cmb_Articles2.Department = null;
+            this.cmb_Articles2.DeptId = 0;
+            this.cmb_Articles2.Description = null;
+            this.cmb_Articles2.IsActive = -1;
+            this.cmb_Articles2.IsPF = 0;
+            this.cmb_Articles2.Location = new System.Drawing.Point(93, 251);
+            this.cmb_Articles2.Manufacturer = "";
+            this.cmb_Articles2.Margin = new System.Windows.Forms.Padding(0);
+            this.cmb_Articles2.Name = "cmb_Articles2";
+            this.cmb_Articles2.Project = null;
+            this.cmb_Articles2.ProjectId = 0;
+            this.cmb_Articles2.QtyAvail = 0D;
+            this.cmb_Articles2.QtyConsStock = 0D;
+            this.cmb_Articles2.RMId = 0;
+            this.cmb_Articles2.SecName = null;
+            this.cmb_Articles2.Size = new System.Drawing.Size(275, 20);
+            this.cmb_Articles2.SMTType = 0;
+            this.cmb_Articles2.SpoilConst = 0D;
+            this.cmb_Articles2.Stage = "";
+            this.cmb_Articles2.StageID = 0;
+            this.cmb_Articles2.TabIndex = 71;
+            this.cmb_Articles2.TypeId = 0;
+            this.cmb_Articles2.Unit = null;
+            this.cmb_Articles2.UnitId = 0;
+            this.cmb_Articles2.Weight = 0D;
+            // 
+            // kryptonLabel18
+            // 
+            this.kryptonLabel18.Location = new System.Drawing.Point(13, 251);
+            this.kryptonLabel18.Name = "kryptonLabel18";
+            this.kryptonLabel18.Size = new System.Drawing.Size(43, 20);
+            this.kryptonLabel18.TabIndex = 72;
+            this.kryptonLabel18.Values.Text = "As PF:";
+            // 
             // kryptonLabel17
             // 
             this.kryptonLabel17.Location = new System.Drawing.Point(128, 309);
@@ -158,7 +204,7 @@
             // 
             // chk_Warning
             // 
-            this.chk_Warning.Location = new System.Drawing.Point(283, 285);
+            this.chk_Warning.Location = new System.Drawing.Point(205, 285);
             this.chk_Warning.Name = "chk_Warning";
             this.chk_Warning.Size = new System.Drawing.Size(70, 20);
             this.chk_Warning.TabIndex = 50;
@@ -166,7 +212,7 @@
             // 
             // chk_Service
             // 
-            this.chk_Service.Location = new System.Drawing.Point(215, 285);
+            this.chk_Service.Location = new System.Drawing.Point(137, 285);
             this.chk_Service.Name = "chk_Service";
             this.chk_Service.Size = new System.Drawing.Size(62, 20);
             this.chk_Service.TabIndex = 43;
@@ -256,6 +302,7 @@
             this.cmb_Articles1.ProjectId = 0;
             this.cmb_Articles1.QtyAvail = 0D;
             this.cmb_Articles1.QtyConsStock = 0D;
+            this.cmb_Articles1.RMId = 0;
             this.cmb_Articles1.SecName = null;
             this.cmb_Articles1.Size = new System.Drawing.Size(275, 20);
             this.cmb_Articles1.SMTType = 0;
@@ -297,7 +344,7 @@
             // 
             // chk_SubBatch
             // 
-            this.chk_SubBatch.Location = new System.Drawing.Point(94, 285);
+            this.chk_SubBatch.Location = new System.Drawing.Point(16, 285);
             this.chk_SubBatch.Name = "chk_SubBatch";
             this.chk_SubBatch.Size = new System.Drawing.Size(117, 20);
             this.chk_SubBatch.TabIndex = 30;
@@ -591,48 +638,13 @@
             this.kryptonLabel2.TabIndex = 3;
             this.kryptonLabel2.Values.Text = "Article:";
             // 
-            // cmb_Articles2
+            // chk_MBLimit
             // 
-            this.cmb_Articles2.Article = "";
-            this.cmb_Articles2.ArticleId = 0;
-            this.cmb_Articles2.ArticleIdRec = 0;
-            this.cmb_Articles2.ArtType = null;
-            this.cmb_Articles2.BOMState = 0;
-            this.cmb_Articles2.Comments = null;
-            this.cmb_Articles2.CustCode = null;
-            this.cmb_Articles2.CustCodeId = 0;
-            this.cmb_Articles2.Department = null;
-            this.cmb_Articles2.DeptId = 0;
-            this.cmb_Articles2.Description = null;
-            this.cmb_Articles2.IsActive = -1;
-            this.cmb_Articles2.IsPF = 0;
-            this.cmb_Articles2.Location = new System.Drawing.Point(93, 251);
-            this.cmb_Articles2.Manufacturer = "";
-            this.cmb_Articles2.Margin = new System.Windows.Forms.Padding(0);
-            this.cmb_Articles2.Name = "cmb_Articles2";
-            this.cmb_Articles2.Project = null;
-            this.cmb_Articles2.ProjectId = 0;
-            this.cmb_Articles2.QtyAvail = 0D;
-            this.cmb_Articles2.QtyConsStock = 0D;
-            this.cmb_Articles2.SecName = null;
-            this.cmb_Articles2.Size = new System.Drawing.Size(275, 20);
-            this.cmb_Articles2.SMTType = 0;
-            this.cmb_Articles2.SpoilConst = 0D;
-            this.cmb_Articles2.Stage = "";
-            this.cmb_Articles2.StageID = 0;
-            this.cmb_Articles2.TabIndex = 71;
-            this.cmb_Articles2.TypeId = 0;
-            this.cmb_Articles2.Unit = null;
-            this.cmb_Articles2.UnitId = 0;
-            this.cmb_Articles2.Weight = 0D;
-            // 
-            // kryptonLabel18
-            // 
-            this.kryptonLabel18.Location = new System.Drawing.Point(13, 251);
-            this.kryptonLabel18.Name = "kryptonLabel18";
-            this.kryptonLabel18.Size = new System.Drawing.Size(43, 20);
-            this.kryptonLabel18.TabIndex = 72;
-            this.kryptonLabel18.Values.Text = "As PF:";
+            this.chk_MBLimit.Location = new System.Drawing.Point(281, 285);
+            this.chk_MBLimit.Name = "chk_MBLimit";
+            this.chk_MBLimit.Size = new System.Drawing.Size(74, 20);
+            this.chk_MBLimit.TabIndex = 77;
+            this.chk_MBLimit.Values.Text = "M.B.Limit";
             // 
             // ctl_General
             // 
@@ -706,5 +718,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_SpoilConst;
         public CMB_Components.Articles.cmb_Articles cmb_Articles2;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel18;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_MBLimit;
     }
 }

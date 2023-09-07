@@ -280,7 +280,23 @@ namespace Odin.Register.Articles
                     chk_Warning.CheckState = CheckState.Unchecked;
             }
         }
-
+        public int MBLimit
+        {
+            get
+            {
+                if (chk_MBLimit.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
+            }
+            set
+            {
+                if (value == -1)
+                    chk_MBLimit.CheckState = CheckState.Checked;
+                else
+                    chk_MBLimit.CheckState = CheckState.Unchecked;
+            }
+        }
         int _artid = 0;
 
         public int ArtId
@@ -418,7 +434,8 @@ namespace Odin.Register.Articles
         {
             int _res = Reg.SaveArticle(Id, Regex.Replace(Article, @"\p{C}+", string.Empty), SecName, Description, TypeId, UnitId, ImagePath, Comments,
                                     CustCodeId, QtyReserve, DeptId, CreateSubBatch, Weight, IsActive,
-                                    Revision, StoreRules, SpoilNorm, StageId, MSL, Service, /*LabelsQty, StencilRequired, StencilID*/0, 0, 0, Warning, SpoilConst, AsPF);
+                                    Revision, StoreRules, SpoilNorm, StageId, MSL, Service, /*LabelsQty, StencilRequired, StencilID*/
+                                    0, 0, 0, Warning, SpoilConst, AsPF, MBLimit);
             //Event
             //if (SendArtId != null)
             //{

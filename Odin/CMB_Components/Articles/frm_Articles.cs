@@ -101,7 +101,7 @@ namespace Odin.CMB_Components.Articles
                 int _res = Reg.SaveArticle(frm.Id, frm.Article, frm.SecName, frm.Description, frm.TypeId, frm.UnitId, frm.ImagePath, frm.Comments,
                                     frm.CustCodeId, frm.QtyReserve, frm.DeptId, frm.CreateSubBatch, frm.Weight, frm.IsActive,
                                     frm.Revision, frm.StoreRules, frm.SpoilNorm, frm.StageId, frm.MSL, frm.Service, 
-                                    /*frm.LabelsQty, frm.StencilRequired, frm.StencilID*/0, 0, 0, frm.Warning, frm.SpoilConst, frm.AsPF);
+                                    /*frm.LabelsQty, frm.StencilRequired, frm.StencilID*/0, 0, 0, frm.Warning, frm.SpoilConst, frm.AsPF, frm.MBLimit);
                 if (_res != 0)
                 {
                     FillData(frm.Article);
@@ -157,6 +157,7 @@ namespace Odin.CMB_Components.Articles
                 frm.Warning = Reg.Warning;
                 frm.SpoilConst = Reg.SpoilConst;
                 frm.AsPF = Reg.AsPF;
+                frm.MBLimit = Reg.MBLimit;
                 DialogResult result = frm.ShowDialog();
 
                 if (result == DialogResult.OK)
@@ -166,7 +167,7 @@ namespace Odin.CMB_Components.Articles
                     int _res = Reg.SaveArticle(frm.Id, frm.Article, frm.SecName, frm.Description, frm.TypeId, frm.UnitId, frm.ImagePath, frm.Comments,
                                         frm.CustCodeId, frm.QtyReserve, frm.DeptId, frm.CreateSubBatch, frm.Weight, frm.IsActive,
                                         frm.Revision, frm.StoreRules, frm.SpoilNorm, frm.StageId, frm.MSL, frm.Service, /*frm.LabelsQty, frm.StencilRequired, 
-                                        frm.StencilID*/0, 0, 0, frm.Warning, frm.SpoilConst, frm.AsPF);
+                                        frm.StencilID*/0, 0, 0, frm.Warning, frm.SpoilConst, frm.AsPF, frm.MBLimit);
                     if (_res != 0)
                     {                        
                         Reg.ArtId = _res;

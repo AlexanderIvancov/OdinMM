@@ -923,9 +923,39 @@ namespace Odin.Planning
             EditItem(PubTask);
         }
 
+
         #endregion
 
+        private void chart1_TaskMouseOver(object sender, TaskMouseEventArgs e)
+        {
+            string _comments = "";
 
+            try
+            {
+                _comments = _mManager.ResourcesOf(e.Task).Select(x => (x as MyResource).Comments).FirstOrDefault();
+            }
+            catch { }
+
+            ShowToolTip(_comments);
+        }
+        public void ShowToolTip(string text)
+        {
+            toolTip1.Show(text, chart1);
+        }
+
+        public ToolTip toolTip1;
+
+        private void frm_PlanningView_Load(object sender, EventArgs e)
+        {
+            toolTip1 = new ToolTip();
+            toolTip1.RemoveAll();
+            // Set up the delays for the ToolTip.
+            toolTip1.AutoPopDelay = 3000;
+            toolTip1.InitialDelay = 1000;
+            toolTip1.ReshowDelay = 0;
+            // Force the ToolTip text to be displayed whether or not the form is active.
+            toolTip1.ShowAlways = true;
+        }
     }
     #region overlay painter
     /// <summary>

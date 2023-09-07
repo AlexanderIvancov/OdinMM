@@ -109,7 +109,7 @@ namespace Odin.Register
                                 double qtyreserve, int deptid, int createsubbatch, double weight, int isactive,
                                 string revision, string storagerules, double spoilnorm, int stageid, string msl,
                                 int service, int qtylabels, int stencilrequired, int stencilid, int warning,
-                                double spoilconst, int aspf)
+                                double spoilconst, int aspf, int mblimit)
         {
             int _res = 0;
 
@@ -144,6 +144,7 @@ namespace Odin.Register
             sqlComm.Parameters.AddWithValue("@warning", warning);
             sqlComm.Parameters.AddWithValue("@spoilconst", spoilconst);
             sqlComm.Parameters.AddWithValue("@aspf", aspf);
+            sqlComm.Parameters.AddWithValue("@mblimit", mblimit);
             sqlComm.Parameters.Add("@insertedid", SqlDbType.Int).Direction = ParameterDirection.Output;
 
             sqlConn.Open();
@@ -249,6 +250,8 @@ namespace Odin.Register
         { get; set; }
         public int AsPF
         { get; set; }
+        public int MBLimit
+        { get; set; }
         public int ArtId
         {
             get { return _artid; }
@@ -303,6 +306,7 @@ namespace Odin.Register
                         Warning = Convert.ToInt32(dr["warning"]);
                         SpoilConst = Convert.ToDouble(dr["spoilconst"]);
                         AsPF = Convert.ToInt32(dr["AsPF"]);
+                        MBLimit = Convert.ToInt32(dr["MBLimit"]);
                     }
                 }
                 else
@@ -346,6 +350,7 @@ namespace Odin.Register
             Warning = 0;
             SpoilConst = 0;
             AsPF = 0;
+            MBLimit = 0;
         }
 
         public int SaveAlias(int id, int artid, string alias)

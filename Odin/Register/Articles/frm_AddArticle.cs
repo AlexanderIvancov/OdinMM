@@ -273,6 +273,24 @@ namespace Odin.Register.Articles
             }
         }
 
+        public int MBLimit
+        {
+            get
+            {
+                if (chk_MBLimit.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
+            }
+            set
+            {
+                if (value == -1)
+                    chk_MBLimit.CheckState = CheckState.Checked;
+                else
+                    chk_MBLimit.CheckState = CheckState.Unchecked;
+            }
+        }
+
 
         #endregion
 

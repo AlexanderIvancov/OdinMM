@@ -88,6 +88,8 @@
             this.kryptonPanel5 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.btn_Add = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonLabel31 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.txt_DocDate = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
             this.txt_Capa = new Owf.Controls.NumericTetxBox();
             this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.btn_Refresh1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -112,8 +114,6 @@
             this.mni_Copy = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.mni_Admin = new System.Windows.Forms.ToolStripMenuItem();
-            this.kryptonLabel31 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.txt_DocDate = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel4)).BeginInit();
             this.kryptonPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel14)).BeginInit();
@@ -746,6 +746,23 @@
             this.kryptonPanel2.Size = new System.Drawing.Size(1176, 92);
             this.kryptonPanel2.TabIndex = 25;
             // 
+            // kryptonLabel31
+            // 
+            this.kryptonLabel31.Location = new System.Drawing.Point(6, 40);
+            this.kryptonLabel31.Name = "kryptonLabel31";
+            this.kryptonLabel31.Size = new System.Drawing.Size(66, 20);
+            this.kryptonLabel31.TabIndex = 279;
+            this.kryptonLabel31.Values.Text = "Start date:";
+            // 
+            // txt_DocDate
+            // 
+            this.txt_DocDate.CalendarShowWeekNumbers = true;
+            this.txt_DocDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.txt_DocDate.Location = new System.Drawing.Point(78, 40);
+            this.txt_DocDate.Name = "txt_DocDate";
+            this.txt_DocDate.Size = new System.Drawing.Size(92, 21);
+            this.txt_DocDate.TabIndex = 278;
+            // 
             // txt_Capa
             // 
             this.txt_Capa.AllowDecimalSeparator = false;
@@ -873,6 +890,7 @@
             this.chart1.Size = new System.Drawing.Size(982, 583);
             this.chart1.TabIndex = 27;
             this.chart1.TimeResolution = Braincase.GanttChart.TimeResolution.Week;
+            this.chart1.TaskMouseOver += new System.EventHandler<Braincase.GanttChart.TaskMouseEventArgs>(this.chart1_TaskMouseOver);
             this.chart1.TaskMouseClick += new System.EventHandler<Braincase.GanttChart.TaskMouseEventArgs>(this.chart1_TaskMouseClick);
             this.chart1.TaskMouseDoubleClick += new System.EventHandler<Braincase.GanttChart.TaskMouseEventArgs>(this.chart1_TaskMouseDoubleClick);
             this.chart1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.chart1_MouseClick);
@@ -978,23 +996,6 @@
             this.mni_Admin.Size = new System.Drawing.Size(210, 22);
             this.mni_Admin.Text = "List settings";
             // 
-            // kryptonLabel31
-            // 
-            this.kryptonLabel31.Location = new System.Drawing.Point(6, 40);
-            this.kryptonLabel31.Name = "kryptonLabel31";
-            this.kryptonLabel31.Size = new System.Drawing.Size(66, 20);
-            this.kryptonLabel31.TabIndex = 279;
-            this.kryptonLabel31.Values.Text = "Start date:";
-            // 
-            // txt_DocDate
-            // 
-            this.txt_DocDate.CalendarShowWeekNumbers = true;
-            this.txt_DocDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.txt_DocDate.Location = new System.Drawing.Point(78, 40);
-            this.txt_DocDate.Name = "txt_DocDate";
-            this.txt_DocDate.Size = new System.Drawing.Size(92, 21);
-            this.txt_DocDate.TabIndex = 278;
-            // 
             // frm_PlanningView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1008,6 +1009,7 @@
             this.Name = "frm_PlanningView";
             this.TabText = "Planning view";
             this.Text = "Planning view";
+            this.Load += new System.EventHandler(this.frm_PlanningView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel4)).EndInit();
             this.kryptonPanel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel14)).EndInit();
