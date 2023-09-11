@@ -405,6 +405,7 @@ namespace Odin.Warehouse.StockIn
                 || (PlaceId == 0 && Label == 0)
                 || DAL.CheckProduction(cmb_Places1.PlaceId) == true
                 || IdIn == 0
+                || (DAL.CheckMBLimit(Convert.ToInt32(gv_List.CurrentRow.Cells["cn_artid"].Value)) == true && ManufBatch.Trim() == "")
                 || (Convert.ToInt32(gv_List.CurrentRow.Cells["cn_incomecontrol"].Value) == -1) && cmb_Places1.IsQuarantine != -1)
                 return false;
             else
@@ -737,7 +738,7 @@ namespace Odin.Warehouse.StockIn
             }
             else
             {
-                MessageBox.Show("Some cells are empty or quarantine check-in is false!");
+                MessageBox.Show("Some cells are empty or quarantine check-in is false or manufacturing batch is emmpty!");
             }
         }
 

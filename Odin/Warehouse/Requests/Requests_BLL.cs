@@ -50,7 +50,8 @@ namespace Odin.Warehouse.Requests
 
 
         public int AddRequestDetail(int HeadId, int ArtId, string Article, int BatchDetId, double Qty, int UnitId,
-                                string ReqDate, int Urgent, string Comments, int CatId, int Reserve, int CauseId, int PlaceId)
+                                 string ReqDate, int Urgent, string Comments, int CatId, int Reserve, int CauseId,
+                                 int PlaceId, string Serials)
         {
             int _res = 0;
             SqlConnection sqlConn = new SqlConnection(sConnStr);
@@ -72,6 +73,7 @@ namespace Odin.Warehouse.Requests
             sqlComm.Parameters.AddWithValue("@reserve", Reserve);
             sqlComm.Parameters.AddWithValue("@causeid", CauseId);
             sqlComm.Parameters.AddWithValue("@placeid", PlaceId);
+            sqlComm.Parameters.AddWithValue("@serials", Serials);
 
             sqlComm.Parameters.Add("@insertedid", SqlDbType.Int).Direction = ParameterDirection.Output;
             sqlComm.Parameters.Add("@insertedheadid", SqlDbType.Int).Direction = ParameterDirection.Output;
@@ -90,7 +92,8 @@ namespace Odin.Warehouse.Requests
         }
 
         public void EditRequestDetail(int Id, int ArtId, string Article, int BatchDetId, double Qty, int UnitId,
-                                        string ReqDate, int Urgent, string Comments, int CatId, int State, int CauseId)
+                                        string ReqDate, int Urgent, string Comments, int CatId, int State, 
+                                        int CauseId, string Serials)
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_EditRequestDet", sqlConn);
@@ -110,6 +113,7 @@ namespace Odin.Warehouse.Requests
             sqlComm.Parameters.AddWithValue("@catid", CatId);
             sqlComm.Parameters.AddWithValue("@state", State);
             sqlComm.Parameters.AddWithValue("@causeid", CauseId);
+            sqlComm.Parameters.AddWithValue("@serials", Serials);
 
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
@@ -191,6 +195,7 @@ namespace Odin.Warehouse.Requests
                         RDCauseId = Convert.ToInt32(dr["causeid"]);
                         RDBatchStateId = Convert.ToInt32(dr["batchisactive"]);
                         RDReqName = dr["reqname"].ToString();
+                        RDSerials = dr["serials"].ToString();
                     }
                 }
                 else
@@ -218,6 +223,7 @@ namespace Odin.Warehouse.Requests
             RDCauseId = 0;
             RDBatchStateId = 0;
             RDReqName = "";
+            RDSerials = "";
         }
         public int RDBatchDetId
         { get; set; }
@@ -251,6 +257,9 @@ namespace Odin.Warehouse.Requests
         { get; set; }
         public string RDReqName
         { get; set; }
+        public string RDSerials
+        { get; set; }
+
 
         public static DataTable getRequestRMDets(int _requestid)
         {

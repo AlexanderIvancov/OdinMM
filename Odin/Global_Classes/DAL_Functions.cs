@@ -840,6 +840,30 @@ namespace Odin.Global_Classes
             catch { return 0; }
         }
 
+        public bool CheckMBLimit(int artid)
+        {
+            bool _res = false;
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            string strSQL = "select distinct isnull(MBLimit, 0) as mblimit from bas_articles where id = @id";
+            SqlCommand sqlComm = new SqlCommand(strSQL, sqlConn);
+            sqlComm.Parameters.AddWithValue("@id", artid);
+            sqlConn.Open();
+            SqlDataReader reader = sqlComm.ExecuteReader();
+            if (reader.HasRows)
+            {
+                reader.Read();
+                _res = Convert.ToInt32(reader["mblimit"]) == 0 ? false : true;
+                reader.Close();
+            }
+            else
+            {
+                _res = false;
+            }
+            sqlConn.Close();
+            return _res;
+        }
+
         public int CheckArticleSameName(int ArtId, string Article)
         {
             var sqlparams = new List<SqlParameter>

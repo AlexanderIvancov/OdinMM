@@ -150,7 +150,7 @@ namespace Odin.Global_Classes
             ICell cell1 = HSSFCellUtil.CreateCell(headerRow, /*column.DisplayIndex*/j, column.HeaderText);
 
             IFont font1 = hssfworkbook.CreateFont();
-            font1.Boldweight = (short)FontBoldWeight.BOLD;
+            font1.Boldweight = (short)FontBoldWeight.Bold;
 
             ICellStyle style2 = hssfworkbook.CreateCellStyle();
             style2.SetFont(font1);
@@ -164,7 +164,7 @@ namespace Odin.Global_Classes
             ICell cell1 = HSSFCellUtil.CreateCell(headerRow, j, column.ColumnName);
 
             IFont font1 = hssfworkbook.CreateFont();
-            font1.Boldweight = (short)FontBoldWeight.BOLD;
+            font1.Boldweight = (short)FontBoldWeight.Bold;
 
             ICellStyle style2 = hssfworkbook.CreateCellStyle();
             style2.SetFont(font1);

@@ -46,7 +46,7 @@ namespace Odin.Warehouse.Requests
             set { cmb_Common2.SelectedValue = value; }
 
         }
-
+        
         #endregion
 
         #region Methods
@@ -71,7 +71,8 @@ namespace Odin.Warehouse.Requests
                                 qty,
                                 unit,
                                 comments,
-                                unitid);
+                                unitid,
+                                "");
         }
 
         public bool CheckEmpty()
@@ -79,6 +80,23 @@ namespace Odin.Warehouse.Requests
             bool _res = true;
             if (cmb_Common1.SelectedValue == 0)
                 _res = false;
+
+            return _res;
+
+        }
+
+        public bool CheckMB()
+        {
+            bool _res = true;
+
+            foreach (DataGridViewRow row in this.gv_List.Rows)
+            {
+                if (Fun.CheckMBLimit(Convert.ToInt32(row.Cells["cn_artid"].Value)) == true && row.Cells["cn_serials"].Value.ToString().Trim() == "")
+                {
+                    _res = false;
+                    break;
+                }
+            }
 
             return _res;
 
@@ -99,82 +117,88 @@ namespace Odin.Warehouse.Requests
 
         private void btn_OK_Click(object sender, EventArgs e)
         {
-            if (CheckEmpty() == true)
+            if (CheckMB() == true)
             {
-                gv_List.EndEdit();
-
-                int _res = 0;
-
-                foreach (DataGridViewRow row in this.gv_List.Rows)
+                if (CheckEmpty() == true)
                 {
-                    if (Convert.ToDouble(row.Cells["cn_qty"].Value) > 0)
+                    gv_List.EndEdit();
+
+                    int _res = 0;
+
+                    foreach (DataGridViewRow row in this.gv_List.Rows)
                     {
-                        _res = ReqBLL.AddRequestDetail(ReqBLL.RequestHeadId,
-                                                    Convert.ToInt32(row.Cells["cn_artid"].Value),
-                                                    row.Cells["cn_article"].Value.ToString(),
-                                                    Convert.ToInt32(row.Cells["cn_id"].Value),
-                                                    Convert.ToDouble(row.Cells["cn_qty"].Value.ToString().Trim()),
-                                                    Convert.ToInt32(row.Cells["cn_unitid"].Value),
-                                                    System.DateTime.Now.ToShortDateString(),
-                                                    chk_urgent.CheckState == CheckState.Checked ? -1 : 0,
-                                                    row.Cells["cn_comments"].Value.ToString(),
-                                                    0,
-                                                    0,
-                                                    cmb_Common1.SelectedValue,
-                                                    ProdPlaceId);
-                    }
-                }
-
-                Bll.RequestId = ReqBLL.RequestHeadId;
-
-                if (ReqBLL.RequestHeadId != 0)
-                {
-                    if (chk_urgent.CheckState == CheckState.Checked)
-                    {
-                        //Send letter
-                        string emailaddresses = "";
-                        emailaddresses = Fun.EmailAddressesByType(4);
-
-                        if (emailaddresses != "")
+                        if (Convert.ToDouble(row.Cells["cn_qty"].Value) > 0)
                         {
+                            _res = ReqBLL.AddRequestDetail(ReqBLL.RequestHeadId,
+                                                        Convert.ToInt32(row.Cells["cn_artid"].Value),
+                                                        row.Cells["cn_article"].Value.ToString(),
+                                                        Convert.ToInt32(row.Cells["cn_id"].Value),
+                                                        Convert.ToDouble(row.Cells["cn_qty"].Value.ToString().Trim()),
+                                                        Convert.ToInt32(row.Cells["cn_unitid"].Value),
+                                                        System.DateTime.Now.ToShortDateString(),
+                                                        chk_urgent.CheckState == CheckState.Checked ? -1 : 0,
+                                                        row.Cells["cn_comments"].Value.ToString(),
+                                                        0,
+                                                        0,
+                                                        cmb_Common1.SelectedValue,
+                                                        ProdPlaceId,
+                                                        row.Cells["cn_serials"].Value.ToString());
+                        }
+                    }
 
-                            string strMessage = "Request number: " + Bll.RequestName;
-                            strMessage = strMessage + "\r\nBatch: " + cmb_Batches1.Batch.ToString();
-                            MyHelper.SendMessage(glob_Class.ReplaceChar(emailaddresses, ";", ","), "Urgent request NR : " + Bll.RequestName + " was created!", strMessage);
+                    Bll.RequestId = ReqBLL.RequestHeadId;
+
+                    if (ReqBLL.RequestHeadId != 0)
+                    {
+                        if (chk_urgent.CheckState == CheckState.Checked)
+                        {
+                            //Send letter
+                            string emailaddresses = "";
+                            emailaddresses = Fun.EmailAddressesByType(4);
+
+                            if (emailaddresses != "")
+                            {
+
+                                string strMessage = "Request number: " + Bll.RequestName;
+                                strMessage = strMessage + "\r\nBatch: " + cmb_Batches1.Batch.ToString();
+                                MyHelper.SendMessage(glob_Class.ReplaceChar(emailaddresses, ";", ","), "Urgent request NR : " + Bll.RequestName + " was created!", strMessage);
+                            }
+
                         }
 
+                        Clipboard.SetText(Bll.RequestName);
+                        KryptonTaskDialog.Show("Creation was successful!",
+                                                   "Request NR: " + Bll.RequestName + " was created!",
+                                                    "",
+                                                    MessageBoxIcon.Information,
+                                                    TaskDialogButtons.OK);
+
+
+                        if (RequestDetsSaved != null)
+                            RequestDetsSaved(this);
+                        ClearRows();
+
                     }
-
-                    Clipboard.SetText(Bll.RequestName);
-                    KryptonTaskDialog.Show("Creation was successful!",
-                                               "Request NR: " + Bll.RequestName + " was created!",
-                                                "",
-                                                MessageBoxIcon.Information,
-                                                TaskDialogButtons.OK);
-
-
-                    if (RequestDetsSaved != null)
-                        RequestDetsSaved(this);
-                    ClearRows();
-                    
+                    else
+                    {
+                        KryptonTaskDialog.Show("Mistake during request creation!",
+                                              "Request was not created!",
+                                               "Something wrong! Please check lines!",
+                                               MessageBoxIcon.Warning,
+                                               TaskDialogButtons.OK);
+                    }
                 }
                 else
                 {
                     KryptonTaskDialog.Show("Mistake during request creation!",
-                                          "Request was not created!",
-                                           "Something wrong! Please check lines!",
-                                           MessageBoxIcon.Warning,
-                                           TaskDialogButtons.OK);
+                                               "Request was not created!",
+                                                "Please check cause code!",
+                                                MessageBoxIcon.Warning,
+                                                TaskDialogButtons.OK);
                 }
             }
             else
-            {
-                KryptonTaskDialog.Show("Mistake during request creation!",
-                                           "Request was not created!",
-                                            "Please check cause code!",
-                                            MessageBoxIcon.Warning,
-                                            TaskDialogButtons.OK);
-            }
+                glob_Class.ShowMessage("You have empty serial numbers fields!", "Enter serial numbers!", "Serial numbers warning!");
         }
 
         private void btn_AddPlaces_Click(object sender, EventArgs e)

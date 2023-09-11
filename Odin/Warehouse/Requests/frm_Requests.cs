@@ -631,57 +631,63 @@ namespace Odin.Warehouse.Requests
                 frm.Comments = ReqBll.RDComments;
                 frm.Batch = ReqBll.RDBatch;
                 frm.CauseId = ReqBll.RDCauseId;
-
+                frm.Serials = ReqBll.RDSerials;
                 frm.EnableArticle();
                 frm.CheckEmpty();
 
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    ReqBll.EditRequestDetail(_reqid, frm.ArticleId, frm.cmb_Articles1.Article, frm.BatchDetId, frm.Qty,
-                                             frm.cmb_Articles1.UnitId, frm.ReqDate, frm.Urgent, frm.Comments, ReqBll.RDCatId,
-                                             frm.State, frm.CauseId);
-
-                    int _oldurgent = ReqBll.RDUrgent;
-                    int _oldstate = ReqBll.RDState;
-
-                    ReqBll.RequestDetId = _reqid;
-
-                    if (ReqBll.RDUrgent == -1 
-                        && _oldstate != -1
-                        && _oldstate != ReqBll.RDState
-                        && ReqBll.RDState == -1)
+                    if (!(DAL.CheckMBLimit(frm.ArticleId) == true && frm.Serials.Trim() == ""))
                     {
-                        if (DAL.QtyStock(ReqBll.RDArtId) <= 0)
+
+                        ReqBll.EditRequestDetail(_reqid, frm.ArticleId, frm.cmb_Articles1.Article, frm.BatchDetId, frm.Qty,
+                                             frm.cmb_Articles1.UnitId, frm.ReqDate, frm.Urgent, frm.Comments, ReqBll.RDCatId,
+                                             frm.State, frm.CauseId, frm.Serials);
+
+                        int _oldurgent = ReqBll.RDUrgent;
+                        int _oldstate = ReqBll.RDState;
+
+                        ReqBll.RequestDetId = _reqid;
+
+                        if (ReqBll.RDUrgent == -1
+                            && _oldstate != -1
+                            && _oldstate != ReqBll.RDState
+                            && ReqBll.RDState == -1)
                         {
-                            cmbBll.RequestId = ReqBll.RDHeadId;
-                            string emailaddresses = "";
-                            emailaddresses = DAL.EmailAddressesByType(5);
+                            if (DAL.QtyStock(ReqBll.RDArtId) <= 0)
+                            {
+                                cmbBll.RequestId = ReqBll.RDHeadId;
+                                string emailaddresses = "";
+                                emailaddresses = DAL.EmailAddressesByType(5);
 
-                            string strMessage = "Request number: " + cmbBll.RequestName;
-                            strMessage = strMessage + "\r\nBatch: " + ReqBll.RDBatch;
-                            strMessage = strMessage + "\r\nQty in request: " + ReqBll.RDQty;
+                                string strMessage = "Request number: " + cmbBll.RequestName;
+                                strMessage = strMessage + "\r\nBatch: " + ReqBll.RDBatch;
+                                strMessage = strMessage + "\r\nQty in request: " + ReqBll.RDQty;
 
-                            MyHelper.SendMessage(glob_Class.ReplaceChar(emailaddresses, ";", ","), "Urgent request NR : " + cmbBll.RequestName + " has no stock!", strMessage);
+                                MyHelper.SendMessage(glob_Class.ReplaceChar(emailaddresses, ";", ","), "Urgent request NR : " + cmbBll.RequestName + " has no stock!", strMessage);
+                            }
                         }
+
+                        if (frm.Batch == string.Empty
+                            || frm.Batch == "")
+                            KryptonTaskDialog.Show("Request edition warning!",
+                                                    "Warning!",
+                                                    "This request have no batch!",
+                                                    MessageBoxIcon.Warning,
+                                                    TaskDialogButtons.OK);
+
+
+                        DataGridViewColumn oldColumn = gv_List.SortedColumn;
+                        var dir = Helper.SaveDirection(gv_List);
+
+                        bwStart(bw_List);
+
+                        Helper.RestoreDirection(gv_List, oldColumn, dir);
                     }
-
-                    if (frm.Batch == string.Empty
-                        || frm.Batch == "")
-                        KryptonTaskDialog.Show("Request edition warning!",
-                                                "Warning!",
-                                                "This request have no batch!",
-                                                MessageBoxIcon.Warning,
-                                                TaskDialogButtons.OK);
-
-
-                    DataGridViewColumn oldColumn = gv_List.SortedColumn;
-                    var dir = Helper.SaveDirection(gv_List);
-
-                    bwStart(bw_List);
-
-                    Helper.RestoreDirection(gv_List, oldColumn, dir);
-                }
+                    else
+                        glob_Class.ShowMessage("You have empty serial numbers fields!", "Enter serial numbers!", "Serial numbers warning!");
+                }                
             }
         }
 

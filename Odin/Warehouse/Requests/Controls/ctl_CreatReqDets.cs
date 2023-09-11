@@ -154,6 +154,23 @@ namespace Odin.Warehouse.Requests.Controls
                 return true;
 
         }
+        public bool CheckMB()
+        {
+            bool _res = true;
+
+            foreach (DataGridViewRow row in this.gv_List.Rows)
+            {
+                if (DAL.CheckMBLimit(Convert.ToInt32(row.Cells["cn_ArtId"].Value)) == true && row.Cells["cn_serials"].Value.ToString().Trim() == "")
+                {
+                    _res = false;
+                    break;
+                }
+            }
+
+            return _res;
+
+        }
+
         public void AddDetLine(int BatchDetId, int ArtId, string Article, int UnitId, string Unit, double QtyInBatch, double QtyAvail,
                                 double QtyRequested, double QtyToRequest, int Urgent, string Comments, string ReqDate, string Batch, 
                                 double Reserved, double Given)
@@ -176,6 +193,7 @@ namespace Odin.Warehouse.Requests.Controls
             row["Given"] = Given;
             row["QtyReserved"] = Reserved;
             row["Reserve"] = 0;
+            row["Serials"] = "";
             dt_Dets.Rows.Add(row);
         }
 
@@ -414,7 +432,10 @@ namespace Odin.Warehouse.Requests.Controls
             DateTime reqdate;
             //check for header
             gv_List.EndEdit();
-            if (ReqBLL.RequestHeadId == 0)
+            if (CheckMB() == true)
+            {
+
+                if (ReqBLL.RequestHeadId == 0)
             {
                 DialogResult result = KryptonTaskDialog.Show("Request header warning!",
                                                                      "Are you want to save changes?",
@@ -467,7 +488,8 @@ namespace Odin.Warehouse.Requests.Controls
                                                     0,
                                                     Convert.ToInt32(row.Cells["chk_Reserve"].Value),
                                                     0,
-                                                    ProdPlaceId);
+                                                    ProdPlaceId,
+                                                    row.Cells["cn_Serials"].Value.ToString());
                         if (Convert.ToInt32(row.Cells["chk_Urgent"].Value) == -1)
                             _testurgent = true;
                     }
@@ -493,6 +515,10 @@ namespace Odin.Warehouse.Requests.Controls
             {
                 SaveRequest(this);
             }
+            }
+            else
+                glob_Class.ShowMessage("You have empty serial numbers fields!", "Enter serial numbers!", "Serial numbers warning!");
+
 
         }
 

@@ -695,6 +695,7 @@ namespace Odin.Warehouse.StockIn
                 QtyToPlace != 0
                 && cmb_Places1.PlaceId != 0
                 && Fun.CheckProduction(cmb_Places1.PlaceId) != true
+                && !(Fun.CheckMBLimit(ArtId) == true && ManufBatch.Trim() == "")
                 && !(IncomeControl == -1 && cmb_Places1.IsQuarantine != -1)
                 )
             {

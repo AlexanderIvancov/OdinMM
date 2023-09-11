@@ -52,6 +52,8 @@
             this.cmb_Articles1 = new Odin.CMB_Components.Articles.cmb_Articles();
             this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Cancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.txt_Serials = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).BeginInit();
@@ -62,6 +64,8 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel8);
+            this.kryptonPanel1.Controls.Add(this.txt_Serials);
             this.kryptonPanel1.Controls.Add(this.kryptonGroupBox1);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel7);
             this.kryptonPanel1.Controls.Add(this.cmb_Common1);
@@ -86,7 +90,7 @@
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonPanel1.Size = new System.Drawing.Size(384, 320);
+            this.kryptonPanel1.Size = new System.Drawing.Size(384, 366);
             this.kryptonPanel1.TabIndex = 0;
             // 
             // kryptonGroupBox1
@@ -141,6 +145,7 @@
             // cmb_Common1
             // 
             this.cmb_Common1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cmb_Common1.IsEmptyColor = false;
             this.cmb_Common1.Location = new System.Drawing.Point(215, 128);
             this.cmb_Common1.Name = "cmb_Common1";
             this.cmb_Common1.OrderBy = "id";
@@ -165,7 +170,7 @@
             // 
             this.txt_Batch.Location = new System.Drawing.Point(82, 128);
             this.txt_Batch.Name = "txt_Batch";
-            this.txt_Batch.Size = new System.Drawing.Size(75, 20);
+            this.txt_Batch.Size = new System.Drawing.Size(75, 23);
             this.txt_Batch.TabIndex = 230;
             // 
             // chk_Urgent
@@ -224,7 +229,7 @@
             this.txt_QtyOut.AllowSpace = false;
             this.txt_QtyOut.Location = new System.Drawing.Point(307, 154);
             this.txt_QtyOut.Name = "txt_QtyOut";
-            this.txt_QtyOut.Size = new System.Drawing.Size(65, 20);
+            this.txt_QtyOut.Size = new System.Drawing.Size(65, 23);
             this.txt_QtyOut.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_QtyOut.TabIndex = 11;
             this.txt_QtyOut.Text = "0";
@@ -241,7 +246,7 @@
             // 
             this.txt_Unit.Location = new System.Drawing.Point(215, 154);
             this.txt_Unit.Name = "txt_Unit";
-            this.txt_Unit.Size = new System.Drawing.Size(26, 20);
+            this.txt_Unit.Size = new System.Drawing.Size(26, 23);
             this.txt_Unit.TabIndex = 9;
             // 
             // kryptonLabel2
@@ -258,7 +263,7 @@
             this.txt_Qty.AllowSpace = false;
             this.txt_Qty.Location = new System.Drawing.Point(82, 154);
             this.txt_Qty.Name = "txt_Qty";
-            this.txt_Qty.Size = new System.Drawing.Size(75, 20);
+            this.txt_Qty.Size = new System.Drawing.Size(75, 23);
             this.txt_Qty.TabIndex = 7;
             this.txt_Qty.Text = "0";
             this.txt_Qty.TextChanged += new System.EventHandler(this.txt_Qty_TextChanged);
@@ -275,6 +280,7 @@
             // 
             this.cmb_Articles1.Article = "";
             this.cmb_Articles1.ArticleId = 0;
+            this.cmb_Articles1.ArticleIdRec = 0;
             this.cmb_Articles1.ArtType = null;
             this.cmb_Articles1.BOMState = 0;
             this.cmb_Articles1.Comments = null;
@@ -283,16 +289,21 @@
             this.cmb_Articles1.Department = null;
             this.cmb_Articles1.DeptId = 0;
             this.cmb_Articles1.Description = null;
+            this.cmb_Articles1.IsActive = -1;
+            this.cmb_Articles1.IsPF = 0;
             this.cmb_Articles1.Location = new System.Drawing.Point(82, 102);
+            this.cmb_Articles1.Manufacturer = "";
             this.cmb_Articles1.Margin = new System.Windows.Forms.Padding(0);
             this.cmb_Articles1.Name = "cmb_Articles1";
             this.cmb_Articles1.Project = null;
             this.cmb_Articles1.ProjectId = 0;
             this.cmb_Articles1.QtyAvail = 0D;
             this.cmb_Articles1.QtyConsStock = 0D;
+            this.cmb_Articles1.RMId = 0;
             this.cmb_Articles1.SecName = null;
             this.cmb_Articles1.Size = new System.Drawing.Size(290, 20);
             this.cmb_Articles1.SMTType = 0;
+            this.cmb_Articles1.SpoilConst = 0D;
             this.cmb_Articles1.Stage = "";
             this.cmb_Articles1.StageID = 0;
             this.cmb_Articles1.TabIndex = 5;
@@ -322,12 +333,28 @@
             this.btn_Cancel.Values.Image = global::Odin.Global_Resourses.Cancel;
             this.btn_Cancel.Values.Text = "Cancel";
             // 
+            // kryptonLabel8
+            // 
+            this.kryptonLabel8.Location = new System.Drawing.Point(4, 313);
+            this.kryptonLabel8.Name = "kryptonLabel8";
+            this.kryptonLabel8.Size = new System.Drawing.Size(48, 20);
+            this.kryptonLabel8.TabIndex = 296;
+            this.kryptonLabel8.Values.Text = "Serials:";
+            // 
+            // txt_Serials
+            // 
+            this.txt_Serials.Location = new System.Drawing.Point(82, 313);
+            this.txt_Serials.Multiline = true;
+            this.txt_Serials.Name = "txt_Serials";
+            this.txt_Serials.Size = new System.Drawing.Size(290, 40);
+            this.txt_Serials.TabIndex = 295;
+            // 
             // frm_EditRequestDet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(384, 320);
+            this.ClientSize = new System.Drawing.Size(384, 366);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "frm_EditRequestDet";
@@ -371,5 +398,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonRadioButton rb_Closed;
         private ComponentFactory.Krypton.Toolkit.KryptonRadioButton rb_Enabled;
         private ComponentFactory.Krypton.Toolkit.KryptonRadioButton rb_New;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel8;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_Serials;
     }
 }

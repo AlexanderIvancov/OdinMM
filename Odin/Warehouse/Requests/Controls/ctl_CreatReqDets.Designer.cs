@@ -30,8 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctl_CreatReqDets));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.cmb_Common1 = new Odin.CMB_Components.Common.cmb_Common();
             this.chk_AddToBatch = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_SecName = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
@@ -83,6 +85,16 @@
             this.btn_Save = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.mnu_Lines = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mni_FilterFor = new System.Windows.Forms.ToolStripTextBox();
+            this.mni_Search = new System.Windows.Forms.ToolStripMenuItem();
+            this.mni_FilterBy = new System.Windows.Forms.ToolStripMenuItem();
+            this.mni_FilterExcludingSel = new System.Windows.Forms.ToolStripMenuItem();
+            this.mni_RemoveFilter = new System.Windows.Forms.ToolStripMenuItem();
+            this.mni_Copy = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.mni_Admin = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataColumn17 = new System.Data.DataColumn();
             this.cn_BDId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_ArtId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_Article = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -100,17 +112,7 @@
             this.chk_Urgent = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.cn_Comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_ReqDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mnu_Lines = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mni_FilterFor = new System.Windows.Forms.ToolStripTextBox();
-            this.mni_Search = new System.Windows.Forms.ToolStripMenuItem();
-            this.mni_FilterBy = new System.Windows.Forms.ToolStripMenuItem();
-            this.mni_FilterExcludingSel = new System.Windows.Forms.ToolStripMenuItem();
-            this.mni_RemoveFilter = new System.Windows.Forms.ToolStripMenuItem();
-            this.mni_Copy = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.mni_Admin = new System.Windows.Forms.ToolStripMenuItem();
-            this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.cmb_Common1 = new Odin.CMB_Components.Common.cmb_Common();
+            this.cn_Serials = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bn_List)).BeginInit();
@@ -146,6 +148,29 @@
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
             this.kryptonPanel1.Size = new System.Drawing.Size(913, 102);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // kryptonLabel7
+            // 
+            this.kryptonLabel7.Location = new System.Drawing.Point(529, 71);
+            this.kryptonLabel7.Name = "kryptonLabel7";
+            this.kryptonLabel7.Size = new System.Drawing.Size(105, 20);
+            this.kryptonLabel7.TabIndex = 231;
+            this.kryptonLabel7.Values.Text = "Production place:";
+            // 
+            // cmb_Common1
+            // 
+            this.cmb_Common1.IsEmptyColor = false;
+            this.cmb_Common1.Location = new System.Drawing.Point(640, 71);
+            this.cmb_Common1.Name = "cmb_Common1";
+            this.cmb_Common1.OrderBy = "id";
+            this.cmb_Common1.sCurrentValue = "";
+            this.cmb_Common1.SelectedValue = 0;
+            this.cmb_Common1.sID_Filled = "id";
+            this.cmb_Common1.Size = new System.Drawing.Size(148, 20);
+            this.cmb_Common1.sTable = "PROD_ProdPlaces";
+            this.cmb_Common1.sText_Filled = "place";
+            this.cmb_Common1.sTitle = "Production places";
+            this.cmb_Common1.TabIndex = 230;
             // 
             // chk_AddToBatch
             // 
@@ -314,6 +339,7 @@
             this.cmb_Articles1.ProjectId = 0;
             this.cmb_Articles1.QtyAvail = 0D;
             this.cmb_Articles1.QtyConsStock = 0D;
+            this.cmb_Articles1.RMId = 0;
             this.cmb_Articles1.SecName = null;
             this.cmb_Articles1.Size = new System.Drawing.Size(265, 20);
             this.cmb_Articles1.SMTType = 0;
@@ -390,7 +416,8 @@
             this.dataColumn13,
             this.dataColumn14,
             this.dataColumn15,
-            this.dataColumn16});
+            this.dataColumn16,
+            this.dataColumn17});
             this.dt_Dets.TableName = "dt_Dets";
             // 
             // dataColumn1
@@ -616,7 +643,8 @@
             this.chk_Reserve,
             this.chk_Urgent,
             this.cn_Comments,
-            this.cn_ReqDate});
+            this.cn_ReqDate,
+            this.cn_Serials});
             this.gv_List.ContextMenuStrip = this.mnu_Lines;
             this.gv_List.DataSource = this.bs_Dets;
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -628,6 +656,85 @@
             this.gv_List.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_List_CellClick);
             this.gv_List.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.gv_List_CellPainting);
             this.gv_List.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_List_CellValidated);
+            // 
+            // mnu_Lines
+            // 
+            this.mnu_Lines.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.mnu_Lines.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mni_FilterFor,
+            this.mni_Search,
+            this.mni_FilterBy,
+            this.mni_FilterExcludingSel,
+            this.mni_RemoveFilter,
+            this.mni_Copy,
+            this.toolStripSeparator2,
+            this.mni_Admin});
+            this.mnu_Lines.Name = "mnu_Requests";
+            this.mnu_Lines.Size = new System.Drawing.Size(206, 167);
+            this.mnu_Lines.Opening += new System.ComponentModel.CancelEventHandler(this.mnu_Lines_Opening);
+            // 
+            // mni_FilterFor
+            // 
+            this.mni_FilterFor.Name = "mni_FilterFor";
+            this.mni_FilterFor.Size = new System.Drawing.Size(100, 23);
+            this.mni_FilterFor.TextChanged += new System.EventHandler(this.mni_FilterFor_TextChanged);
+            // 
+            // mni_Search
+            // 
+            this.mni_Search.Image = global::Odin.Global_Resourses.binoculars_8090;
+            this.mni_Search.Name = "mni_Search";
+            this.mni_Search.Size = new System.Drawing.Size(205, 22);
+            this.mni_Search.Text = "Search for record";
+            this.mni_Search.Click += new System.EventHandler(this.mni_Search_Click);
+            // 
+            // mni_FilterBy
+            // 
+            this.mni_FilterBy.Image = global::Odin.Global_Resourses.FilterBySel;
+            this.mni_FilterBy.Name = "mni_FilterBy";
+            this.mni_FilterBy.Size = new System.Drawing.Size(205, 22);
+            this.mni_FilterBy.Text = "Filter by selection";
+            this.mni_FilterBy.Click += new System.EventHandler(this.mni_FilterBy_Click);
+            // 
+            // mni_FilterExcludingSel
+            // 
+            this.mni_FilterExcludingSel.Image = global::Odin.Global_Resourses.scissors_3838;
+            this.mni_FilterExcludingSel.Name = "mni_FilterExcludingSel";
+            this.mni_FilterExcludingSel.Size = new System.Drawing.Size(205, 22);
+            this.mni_FilterExcludingSel.Text = "Filter excluding selection";
+            this.mni_FilterExcludingSel.Click += new System.EventHandler(this.mni_FilterExcludingSel_Click);
+            // 
+            // mni_RemoveFilter
+            // 
+            this.mni_RemoveFilter.Image = global::Odin.Global_Resourses.RemoveFilter;
+            this.mni_RemoveFilter.Name = "mni_RemoveFilter";
+            this.mni_RemoveFilter.Size = new System.Drawing.Size(205, 22);
+            this.mni_RemoveFilter.Text = "Remove filter";
+            this.mni_RemoveFilter.Click += new System.EventHandler(this.mni_RemoveFilter_Click);
+            // 
+            // mni_Copy
+            // 
+            this.mni_Copy.Image = global::Odin.Global_Resourses.Copy_16x16;
+            this.mni_Copy.Name = "mni_Copy";
+            this.mni_Copy.Size = new System.Drawing.Size(205, 22);
+            this.mni_Copy.Text = "Copy";
+            this.mni_Copy.Click += new System.EventHandler(this.mni_Copy_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(202, 6);
+            // 
+            // mni_Admin
+            // 
+            this.mni_Admin.Image = global::Odin.Global_Resourses.Settings_24x24;
+            this.mni_Admin.Name = "mni_Admin";
+            this.mni_Admin.Size = new System.Drawing.Size(205, 22);
+            this.mni_Admin.Text = "List settings";
+            this.mni_Admin.Click += new System.EventHandler(this.mni_Admin_Click);
+            // 
+            // dataColumn17
+            // 
+            this.dataColumn17.ColumnName = "Serials";
             // 
             // cn_BDId
             // 
@@ -776,109 +883,17 @@
             // cn_ReqDate
             // 
             this.cn_ReqDate.DataPropertyName = "ReqDate";
-            dataGridViewCellStyle2.Format = "d";
-            dataGridViewCellStyle2.NullValue = null;
-            this.cn_ReqDate.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Format = "d";
+            dataGridViewCellStyle1.NullValue = null;
+            this.cn_ReqDate.DefaultCellStyle = dataGridViewCellStyle1;
             this.cn_ReqDate.HeaderText = "Req. date";
             this.cn_ReqDate.Name = "cn_ReqDate";
             // 
-            // mnu_Lines
+            // cn_Serials
             // 
-            this.mnu_Lines.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.mnu_Lines.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mni_FilterFor,
-            this.mni_Search,
-            this.mni_FilterBy,
-            this.mni_FilterExcludingSel,
-            this.mni_RemoveFilter,
-            this.mni_Copy,
-            this.toolStripSeparator2,
-            this.mni_Admin});
-            this.mnu_Lines.Name = "mnu_Requests";
-            this.mnu_Lines.Size = new System.Drawing.Size(206, 167);
-            this.mnu_Lines.Opening += new System.ComponentModel.CancelEventHandler(this.mnu_Lines_Opening);
-            // 
-            // mni_FilterFor
-            // 
-            this.mni_FilterFor.Name = "mni_FilterFor";
-            this.mni_FilterFor.Size = new System.Drawing.Size(100, 23);
-            this.mni_FilterFor.TextChanged += new System.EventHandler(this.mni_FilterFor_TextChanged);
-            // 
-            // mni_Search
-            // 
-            this.mni_Search.Image = global::Odin.Global_Resourses.binoculars_8090;
-            this.mni_Search.Name = "mni_Search";
-            this.mni_Search.Size = new System.Drawing.Size(205, 22);
-            this.mni_Search.Text = "Search for record";
-            this.mni_Search.Click += new System.EventHandler(this.mni_Search_Click);
-            // 
-            // mni_FilterBy
-            // 
-            this.mni_FilterBy.Image = global::Odin.Global_Resourses.FilterBySel;
-            this.mni_FilterBy.Name = "mni_FilterBy";
-            this.mni_FilterBy.Size = new System.Drawing.Size(205, 22);
-            this.mni_FilterBy.Text = "Filter by selection";
-            this.mni_FilterBy.Click += new System.EventHandler(this.mni_FilterBy_Click);
-            // 
-            // mni_FilterExcludingSel
-            // 
-            this.mni_FilterExcludingSel.Image = global::Odin.Global_Resourses.scissors_3838;
-            this.mni_FilterExcludingSel.Name = "mni_FilterExcludingSel";
-            this.mni_FilterExcludingSel.Size = new System.Drawing.Size(205, 22);
-            this.mni_FilterExcludingSel.Text = "Filter excluding selection";
-            this.mni_FilterExcludingSel.Click += new System.EventHandler(this.mni_FilterExcludingSel_Click);
-            // 
-            // mni_RemoveFilter
-            // 
-            this.mni_RemoveFilter.Image = global::Odin.Global_Resourses.RemoveFilter;
-            this.mni_RemoveFilter.Name = "mni_RemoveFilter";
-            this.mni_RemoveFilter.Size = new System.Drawing.Size(205, 22);
-            this.mni_RemoveFilter.Text = "Remove filter";
-            this.mni_RemoveFilter.Click += new System.EventHandler(this.mni_RemoveFilter_Click);
-            // 
-            // mni_Copy
-            // 
-            this.mni_Copy.Image = global::Odin.Global_Resourses.Copy_16x16;
-            this.mni_Copy.Name = "mni_Copy";
-            this.mni_Copy.Size = new System.Drawing.Size(205, 22);
-            this.mni_Copy.Text = "Copy";
-            this.mni_Copy.Click += new System.EventHandler(this.mni_Copy_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(202, 6);
-            // 
-            // mni_Admin
-            // 
-            this.mni_Admin.Image = global::Odin.Global_Resourses.Settings_24x24;
-            this.mni_Admin.Name = "mni_Admin";
-            this.mni_Admin.Size = new System.Drawing.Size(205, 22);
-            this.mni_Admin.Text = "List settings";
-            this.mni_Admin.Click += new System.EventHandler(this.mni_Admin_Click);
-            // 
-            // kryptonLabel7
-            // 
-            this.kryptonLabel7.Location = new System.Drawing.Point(529, 71);
-            this.kryptonLabel7.Name = "kryptonLabel7";
-            this.kryptonLabel7.Size = new System.Drawing.Size(105, 20);
-            this.kryptonLabel7.TabIndex = 231;
-            this.kryptonLabel7.Values.Text = "Production place:";
-            // 
-            // cmb_Common1
-            // 
-            this.cmb_Common1.IsEmptyColor = false;
-            this.cmb_Common1.Location = new System.Drawing.Point(640, 71);
-            this.cmb_Common1.Name = "cmb_Common1";
-            this.cmb_Common1.OrderBy = "id";
-            this.cmb_Common1.sCurrentValue = "";
-            this.cmb_Common1.SelectedValue = 0;
-            this.cmb_Common1.sID_Filled = "id";
-            this.cmb_Common1.Size = new System.Drawing.Size(148, 20);
-            this.cmb_Common1.sTable = "PROD_ProdPlaces";
-            this.cmb_Common1.sText_Filled = "place";
-            this.cmb_Common1.sTitle = "Production places";
-            this.cmb_Common1.TabIndex = 230;
+            this.cn_Serials.DataPropertyName = "Serials";
+            this.cn_Serials.HeaderText = "Serials";
+            this.cn_Serials.Name = "cn_Serials";
             // 
             // ctl_CreatReqDets
             // 
@@ -966,6 +981,13 @@
         private Owf.Controls.NumericTetxBox txt_QtyInBatch;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
         private System.Data.DataColumn dataColumn16;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel6;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_SecName;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_AddToBatch;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
+        private CMB_Components.Common.cmb_Common cmb_Common1;
+        private System.Data.DataColumn dataColumn17;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_BDId;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_ArtId;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_Article;
@@ -983,11 +1005,6 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn chk_Urgent;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_Comments;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_ReqDate;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel6;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_SecName;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_AddToBatch;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
-        private CMB_Components.Common.cmb_Common cmb_Common1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_Serials;
     }
 }

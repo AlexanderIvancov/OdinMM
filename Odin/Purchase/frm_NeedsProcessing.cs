@@ -1289,7 +1289,7 @@ namespace Odin.Purchase
             ICell cell1 = HSSFCellUtil.CreateCell(headerRow, j, column.HeaderText);
 
             IFont font1 = hssfworkbook.CreateFont();
-            font1.Boldweight = (short)FontBoldWeight.BOLD;
+            font1.Boldweight = (short)FontBoldWeight.Bold;
 
             ICellStyle style2 = hssfworkbook.CreateCellStyle();
             style2.SetFont(font1);
@@ -1450,13 +1450,13 @@ namespace Odin.Purchase
             ISheet sheet1 = hssfworkbook.CreateSheet("Sheet1");
 
             IFont font1 = hssfworkbook.CreateFont();
-            font1.Boldweight = (short)FontBoldWeight.BOLD;
+            font1.Boldweight = (short)FontBoldWeight.Bold;
 
             ICellStyle style1 = hssfworkbook.CreateCellStyle();
             style1.SetFont(font1);
             
-            style1.FillForegroundColor = NPOI.HSSF.Util.HSSFColor.GREY_25_PERCENT.index;
-            style1.FillPattern = FillPatternType.SOLID_FOREGROUND;
+            style1.FillForegroundColor = NPOI.HSSF.Util.HSSFColor.Grey25Percent.Index;
+            //style1.FillPattern = FillPatternType.SOLID_FOREGROUND;
 
             ICellStyle style2 = hssfworkbook.CreateCellStyle();
             style2.SetFont(font1);

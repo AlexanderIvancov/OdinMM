@@ -134,6 +134,12 @@ namespace Odin.Warehouse.Requests
             get { return cmb_Common1.SelectedValue; }
             set { cmb_Common1.SelectedValue = value;}
         }
+        public string Serials
+        {
+            get { return txt_Serials.Text; }
+            set { txt_Serials.Text = value; }
+        }
+
         #endregion
 
         #region Methods
