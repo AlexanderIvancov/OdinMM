@@ -245,7 +245,9 @@ namespace Odin.Sales
         public int COId
         {
             get { return _coid; }
-            set { _coid = value;
+            set
+            {
+                _coid = value;
 
                 SqlConnection conn = new SqlConnection(sConnStr);
                 conn.Open();
@@ -308,6 +310,7 @@ namespace Odin.Sales
                         COPaid = Convert.ToDouble(dr["paid"]);
                         COSalesComments = dr["salescomments"].ToString();
                         COQtyIn = Convert.ToDouble(dr["qtyin"]);
+                        COPrimary = Convert.ToInt32(dr["isprimary"]);
                     }
                 }
                 else
@@ -458,6 +461,8 @@ namespace Odin.Sales
         { get; set; }
         public double COQtyIn
         { get; set; }
+        public int COPrimary
+        { get; set; }
         public void ClearCODets()
         {
             COArtId = 0;
@@ -503,12 +508,14 @@ namespace Odin.Sales
             COPaid = 0;
             COSalesComments = "";
             COQtyIn = 0;
+            COPrimary = 0;
         }
 
         public int SaveCOLine(int id, int headid, int line, string corder, string coline, string porder, string poline, int artid, string custarticle,
                             int service, double qty, int unitid, string reqdate, int stateid, double unitprice, double vat,
                             string comments, string comments1, string logcomments, int delivplaceid, int delivaddressid, int endcustid, string endcustorder,
-                            string endcustref, string endcustreqdate, DataTable stages, int _internal, int _resale, double _spoilage, int _blocked, string _salescomments)
+                            string endcustref, string endcustreqdate, DataTable stages, int _internal, int _resale, double _spoilage, int _blocked,
+                            string _salescomments, int _isprimary)
         {
             int _res = 0;
 
@@ -551,6 +558,8 @@ namespace Odin.Sales
             sqlComm.Parameters.AddWithValue("@internal", _internal);
             sqlComm.Parameters.AddWithValue("@resale", _resale);
             sqlComm.Parameters.AddWithValue("@salescomments", _salescomments);
+            sqlComm.Parameters.AddWithValue("@isprimary", _isprimary);
+
 
             sqlComm.Parameters.Add("@insertedid", SqlDbType.Int).Direction = ParameterDirection.Output;
 
@@ -558,8 +567,7 @@ namespace Odin.Sales
             sqlComm.ExecuteNonQuery();
             _res = Convert.ToInt32(sqlComm.Parameters["@insertedid"].Value);
             sqlConn.Close();
-
-
+            
 
             return _res;
         }
@@ -918,6 +926,7 @@ namespace Odin.Sales
                         QIsProject = Convert.ToInt32(dr["isproject"]);
                         QValidBOM = Convert.ToInt32(dr["isvalid"]);
                         QCheckRMQP = Convert.ToInt32(dr["checkrmqp"]);
+                        QPrimary = Convert.ToInt32(dr["isprimary"]);
                     }
                 }
                 else
@@ -1010,7 +1019,7 @@ namespace Odin.Sales
 
         public double QQtyInvoiced
         { get; set; }
-        
+
         public int QNotPaidAdvance
         { get; set; }
         public int QEndCustomerId
@@ -1028,6 +1037,8 @@ namespace Odin.Sales
         public int QValidBOM
         { get; set; }
         public int QCheckRMQP
+        { get; set; }
+        public int QPrimary
         { get; set; }
         public void ClearQuotDets()
         {
@@ -1062,11 +1073,13 @@ namespace Odin.Sales
             QIsProject = 0;
             QValidBOM = 0;
             QCheckRMQP = 0;
+            QPrimary = 0;
         }
         public int SaveQuotation(int id, int artid, string revision, string custarticle, double qty, int unitid, string reqdate,
                                 string expdate, string week, int stateid, double unitprice, string comments, int custid,
-                                int pcb, DataTable stages, int CurId, string corder, string coline, int issent, string sentdate, 
-                                int endcustomerid, int _internal, double _spoilage, int _resale, int _blockdelivery, int _isproject)
+                                int pcb, DataTable stages, int CurId, string corder, string coline, int issent, string sentdate,
+                                int endcustomerid, int _internal, double _spoilage, int _resale, int _blockdelivery, int _isproject,
+                                int _isprimary)
         {
             int _res = 0;
 
@@ -1100,6 +1113,7 @@ namespace Odin.Sales
             sqlComm.Parameters.AddWithValue("@resale", _resale);
             sqlComm.Parameters.AddWithValue("@blockdelivery", _blockdelivery);
             sqlComm.Parameters.AddWithValue("@isproject", _isproject);
+            sqlComm.Parameters.AddWithValue("@isprimary", _isprimary);
 
             sqlComm.Parameters.Add("@tablestages", SqlDbType.Structured);
             sqlComm.Parameters["@tablestages"].TypeName = "UT_COStages";
@@ -1119,6 +1133,7 @@ namespace Odin.Sales
 
             return _res;
         }
+
 
         bool _createorder = false;
         public bool CreateOrder

@@ -257,6 +257,24 @@ namespace Odin.Sales
             }
         }
 
+        public int COPrimary
+        {
+            get
+            {
+                if (chk_primary.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
+            }
+            set
+            {
+                if (value == -1)
+                    chk_primary.Checked = true;
+                else
+                    chk_primary.Checked = false;
+            }
+        }
+
         public double COQtyInBatch
         {
             get;set;
@@ -377,6 +395,7 @@ namespace Odin.Sales
                 COQtyInBatch = COBll.COQtyInBatch;
                 COBlocked = COBll.COBlocked;
                 COSalesComments = COBll.COSalesComments;
+                COPrimary = COBll.COPrimary;
 
                 FillStages(_coid);
 
@@ -463,7 +482,7 @@ namespace Odin.Sales
                 NewLineId = COBll.SaveCOLine(COId, COHeadId, COLine, COCustOrder, COCustLine, "", "", COArtId, COCustArticle, COService, COQty,
                                             COUnitId, COReqDate, COStateId, COUnitPrice, COVat, COComments, COComments1,
                                             COLogComments, CODelivPlaceId, CODelivAddressId, COEndCustId, "", "", "", datastages, COInternal, 
-                                            COResale, COSpoilage, COBlocked, COSalesComments);
+                                            COResale, COSpoilage, COBlocked, COSalesComments, COPrimary);
 
                
             }

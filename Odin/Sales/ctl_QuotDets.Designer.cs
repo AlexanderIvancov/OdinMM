@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.lbl_invalidbom = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.lbl_validbom = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.chk_project = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.cmb_EndCustomer1 = new Odin.CMB_Components.Companies.cmb_Firms();
@@ -96,7 +97,7 @@
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bs_List = new Odin.Global_Classes.SyncBindingSource();
-            this.lbl_invalidbom = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.chk_primary = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_List)).BeginInit();
@@ -105,6 +106,7 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.chk_primary);
             this.kryptonPanel1.Controls.Add(this.lbl_invalidbom);
             this.kryptonPanel1.Controls.Add(this.lbl_validbom);
             this.kryptonPanel1.Controls.Add(this.chk_project);
@@ -165,6 +167,17 @@
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
             this.kryptonPanel1.Size = new System.Drawing.Size(551, 410);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // lbl_invalidbom
+            // 
+            this.lbl_invalidbom.Location = new System.Drawing.Point(441, 208);
+            this.lbl_invalidbom.Name = "lbl_invalidbom";
+            this.lbl_invalidbom.Size = new System.Drawing.Size(98, 16);
+            this.lbl_invalidbom.StateCommon.ShortText.Color1 = System.Drawing.Color.Red;
+            this.lbl_invalidbom.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbl_invalidbom.TabIndex = 335;
+            this.lbl_invalidbom.Values.Text = "Bom is INVALID!";
+            this.lbl_invalidbom.Visible = false;
             // 
             // lbl_validbom
             // 
@@ -617,6 +630,7 @@
             // 
             this.cmb_Articles1.Article = "";
             this.cmb_Articles1.ArticleId = 0;
+            this.cmb_Articles1.ArticleIdRec = 0;
             this.cmb_Articles1.ArtType = null;
             this.cmb_Articles1.BOMState = 0;
             this.cmb_Articles1.Comments = null;
@@ -635,6 +649,7 @@
             this.cmb_Articles1.ProjectId = 0;
             this.cmb_Articles1.QtyAvail = 0D;
             this.cmb_Articles1.QtyConsStock = 0D;
+            this.cmb_Articles1.RMId = 0;
             this.cmb_Articles1.SecName = null;
             this.cmb_Articles1.Size = new System.Drawing.Size(272, 20);
             this.cmb_Articles1.SMTType = 0;
@@ -689,7 +704,7 @@
             // 
             this.txt_Revision.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
             this.buttonSpecAny2});
-            this.txt_Revision.Location = new System.Drawing.Point(345, 23);
+            this.txt_Revision.Location = new System.Drawing.Point(348, 20);
             this.txt_Revision.Name = "txt_Revision";
             this.txt_Revision.Size = new System.Drawing.Size(95, 23);
             this.txt_Revision.TabIndex = 283;
@@ -804,16 +819,14 @@
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.Visible = false;
             // 
-            // lbl_invalidbom
+            // chk_primary
             // 
-            this.lbl_invalidbom.Location = new System.Drawing.Point(441, 208);
-            this.lbl_invalidbom.Name = "lbl_invalidbom";
-            this.lbl_invalidbom.Size = new System.Drawing.Size(98, 16);
-            this.lbl_invalidbom.StateCommon.ShortText.Color1 = System.Drawing.Color.Red;
-            this.lbl_invalidbom.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbl_invalidbom.TabIndex = 335;
-            this.lbl_invalidbom.Values.Text = "Bom is INVALID!";
-            this.lbl_invalidbom.Visible = false;
+            this.chk_primary.Location = new System.Drawing.Point(250, 231);
+            this.chk_primary.Name = "chk_primary";
+            this.chk_primary.Size = new System.Drawing.Size(65, 20);
+            this.chk_primary.TabIndex = 337;
+            this.chk_primary.ThreeState = true;
+            this.chk_primary.Values.Text = "Primary";
             // 
             // ctl_QuotDets
             // 
@@ -902,5 +915,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_project;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lbl_validbom;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lbl_invalidbom;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_primary;
     }
 }

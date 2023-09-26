@@ -363,7 +363,23 @@ namespace Odin.Sales
                     chk_blockdelivery.Checked = false;
             }
         }
-
+        public int Primary
+        {
+            get
+            {
+                if (chk_primary.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
+            }
+            set
+            {
+                if (value == -1)
+                    chk_primary.Checked = true;
+                else
+                    chk_primary.Checked = false;
+            }
+        }
         public int CheckRMQP
         { get; set; }
         public void ClearCODets()
@@ -387,6 +403,7 @@ namespace Odin.Sales
             Blocked = 0;
             ValidBOM = 0;
             CheckRMQP = 0;
+            Primary = 0;
         }
 
         public string CustOrder
@@ -482,6 +499,7 @@ namespace Odin.Sales
                 IsProject = COBll.QIsProject;
                 ValidBOM = COBll.QValidBOM;
                 CheckRMQP = COBll.QCheckRMQP;
+                Primary = COBll.QPrimary;
                 
                 FillStages(_quotid);
 
@@ -570,7 +588,7 @@ namespace Odin.Sales
 
                     NewLineId = COBll.SaveQuotation(QuotId, DLL.CheckArtId(ArtId), Revision, CustArticle, Qty, UnitId, ReqDate, ExpDate, Week, StateId,
                                                 UnitPrice, Comments, CustId, PCB, datastages, CurId, CustOrder, CustLine, IsSent, SentDate, EndCustomerId,
-                                                Internal, Spoilage, Resale, Blocked, IsProject);
+                                                Internal, Spoilage, Resale, Blocked, IsProject, Primary);
                     QuotId = NewLineId;
                     COBll.QuotId = QuotId;
 

@@ -94,6 +94,7 @@
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bs_List = new Odin.Global_Classes.SyncBindingSource();
+            this.chk_primary = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_List)).BeginInit();
@@ -102,6 +103,7 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.chk_primary);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel22);
             this.kryptonPanel1.Controls.Add(this.txt_SalesComments);
             this.kryptonPanel1.Controls.Add(this.cmb_EndCustomer1);
@@ -238,7 +240,7 @@
             // 
             // chk_resale
             // 
-            this.chk_resale.Location = new System.Drawing.Point(455, 308);
+            this.chk_resale.Location = new System.Drawing.Point(415, 308);
             this.chk_resale.Name = "chk_resale";
             this.chk_resale.Size = new System.Drawing.Size(58, 20);
             this.chk_resale.TabIndex = 285;
@@ -254,11 +256,11 @@
             // 
             // chk_internal
             // 
-            this.chk_internal.Location = new System.Drawing.Point(351, 308);
+            this.chk_internal.Location = new System.Drawing.Point(344, 334);
             this.chk_internal.Name = "chk_internal";
-            this.chk_internal.Size = new System.Drawing.Size(98, 20);
+            this.chk_internal.Size = new System.Drawing.Size(65, 20);
             this.chk_internal.TabIndex = 282;
-            this.chk_internal.Values.Text = "Internal order";
+            this.chk_internal.Values.Text = "Internal";
             // 
             // gv_List
             // 
@@ -361,7 +363,7 @@
             this.cmb_Address1.LegalAddress = 0;
             this.cmb_Address1.Location = new System.Drawing.Point(120, 334);
             this.cmb_Address1.Name = "cmb_Address1";
-            this.cmb_Address1.Size = new System.Drawing.Size(272, 20);
+            this.cmb_Address1.Size = new System.Drawing.Size(204, 20);
             this.cmb_Address1.TabIndex = 46;
             // 
             // kryptonLabel17
@@ -426,7 +428,7 @@
             this.txt_LogComments.Multiline = true;
             this.txt_LogComments.Name = "txt_LogComments";
             this.txt_LogComments.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txt_LogComments.Size = new System.Drawing.Size(395, 30);
+            this.txt_LogComments.Size = new System.Drawing.Size(220, 30);
             this.txt_LogComments.TabIndex = 40;
             this.txt_LogComments.Visible = false;
             // 
@@ -666,6 +668,7 @@
             // 
             this.cmb_Articles1.Article = "";
             this.cmb_Articles1.ArticleId = 0;
+            this.cmb_Articles1.ArticleIdRec = 0;
             this.cmb_Articles1.ArtType = null;
             this.cmb_Articles1.BOMState = 0;
             this.cmb_Articles1.Comments = null;
@@ -684,6 +687,7 @@
             this.cmb_Articles1.ProjectId = 0;
             this.cmb_Articles1.QtyAvail = 0D;
             this.cmb_Articles1.QtyConsStock = 0D;
+            this.cmb_Articles1.RMId = 0;
             this.cmb_Articles1.SecName = null;
             this.cmb_Articles1.Size = new System.Drawing.Size(272, 20);
             this.cmb_Articles1.SMTType = 0;
@@ -782,6 +786,15 @@
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.Visible = false;
             // 
+            // chk_primary
+            // 
+            this.chk_primary.Location = new System.Drawing.Point(344, 308);
+            this.chk_primary.Name = "chk_primary";
+            this.chk_primary.Size = new System.Drawing.Size(65, 20);
+            this.chk_primary.TabIndex = 338;
+            this.chk_primary.ThreeState = true;
+            this.chk_primary.Values.Text = "Primary";
+            // 
             // ctl_CODets
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -866,5 +879,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel22;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_SalesComments;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny7;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_primary;
     }
 }
