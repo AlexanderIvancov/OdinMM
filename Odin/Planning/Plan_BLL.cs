@@ -22,19 +22,19 @@ namespace Odin.Planning
         public string BatchName
         {
             get { return _BatchName; }
-            set { _BatchName = value; }
+            set { _BatchName = value;}
         }
 
-        public static DataTable getBatches(int _batchid, int _coid, int _artid, int _isactive, int _typeid, int _deptid,
+        public static DataTable getBatches(int _batchid, int _coid, int _artid, int _isactive, int _typeid, int _deptid, 
                             string _startdatefrom, string _startdatetill, string _enddatefrom, string _enddatetill)
         {
-            string query = "EXECUTE sp_BatchesList @batchid = " + _batchid + ", @coid = " + _coid + ", @artid = " + _artid + ",@isactive = " + _isactive +
+            string query = "EXECUTE sp_BatchesList @batchid = " +_batchid + ", @coid = " + _coid + ", @artid = " + _artid + ",@isactive = " + _isactive + 
                             ", @typeid = " + _typeid + ", @deptid = " + _deptid + ", @startdatefrom = '" + _startdatefrom + "', @startdatetill = '" + _startdatetill +
                             "', @enddatefrom = '" + _enddatefrom + "', @enddatetill = '" + _enddatetill + "'";
 
             return Helper.QueryDT(query);
         }
-
+                
         public static DataTable getOrdersForBatches(int _typeid)
         {
             string query = "EXECUTE sp_SelectSalesOrdersForBatch @typeid = " + _typeid;
@@ -76,7 +76,7 @@ namespace Odin.Planning
 
             sqlComm.CommandTimeout = 3000;
 
-            sqlComm.Parameters.AddWithValue("@Name", BatchName1);
+            sqlComm.Parameters.AddWithValue("@Name", BatchName1);             
             sqlComm.Parameters.AddWithValue("@ArtId", ArtId);
             sqlComm.Parameters.AddWithValue("@Qty", Qty);
             sqlComm.Parameters.AddWithValue("@ResDate", ResDate);
@@ -254,11 +254,11 @@ namespace Odin.Planning
             sqlComm.Parameters.AddWithValue("@batchid", IdBatch);
             sqlComm.Parameters.AddWithValue("@subprod", -1);
 
-
+           
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
+            
 
         }
 
@@ -340,10 +340,11 @@ namespace Odin.Planning
 
             return _Res;
         }
+            
 
         public void CloseBatch(int IdBatch)
         {
-
+            
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_CloseBatch", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -463,7 +464,7 @@ namespace Odin.Planning
         }
 
         int _batchid = 0;
-
+        
         public int BatchArtId
         { get; set; }
         public string BatchArticle
@@ -514,9 +515,7 @@ namespace Odin.Planning
         public int BatchId
         {
             get { return _batchid; }
-            set
-            {
-                _batchid = value;
+            set { _batchid = value;
                 SqlConnection conn = new SqlConnection(sConnStr);
                 conn.Open();
                 DataSet ds = new DataSet();
@@ -614,7 +613,7 @@ namespace Odin.Planning
 
             return Helper.QueryDT(query);
         }
-
+        
         public static DataTable getBatchCO(int _batchid)
         {
             string query = "EXECUTE sp_SelectBatchCODets @batchid = " + _batchid;
@@ -637,7 +636,7 @@ namespace Odin.Planning
 
             sqlComm.Parameters.AddWithValue("@bdid", bdid);
             sqlComm.Parameters.AddWithValue("@qty", qty);
-
+            
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
@@ -671,7 +670,7 @@ namespace Odin.Planning
             };
 
             return Helper.QuerySP(query, sqlparams.ToArray());
-
+            
         }
 
         #endregion
@@ -705,7 +704,7 @@ namespace Odin.Planning
                 {
                     foreach (DataRow dr in dt.Rows)
                     {
-                        QtyReserved = Math.Round(Convert.ToDouble(dr["qtyreserved"]), 5);
+                        QtyReserved = Math.Round(Convert.ToDouble(dr["qtyreserved"]), 5) ;
                         QtyRest = Math.Round(Convert.ToDouble(dr["qtyrest"]), 5);
                         QtyNeeds = Math.Round(Convert.ToDouble(dr["qtyneeds"]), 5);
                         QtyPurchased = Math.Round(Convert.ToDouble(dr["qtypurchased"]), 5);
@@ -776,7 +775,7 @@ namespace Odin.Planning
 
             sqlComm.Parameters.AddWithValue("@poid", poid);
             sqlComm.Parameters.AddWithValue("@id", id);
-
+            
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
@@ -1086,7 +1085,7 @@ namespace Odin.Planning
 
         #region Serial numbers
 
-        public static DataTable getSerialNumbers(int _serialnumber, int _usagestate, int _batchid, int _coid, int _artid, int _isactive, int _typeid,
+        public static DataTable getSerialNumbers(int _serialnumber, int _usagestate, int _batchid, int _coid, int _artid, int _isactive, int _typeid, 
                             string _usedatefrom, string _usedatetill)
         {
             string query = "EXECUTE sp_SerialNumbersList @serial = " + _serialnumber + ", @usestate = " + _usagestate + ", @batchid = " + _batchid + ", @coid = " + _coid + ", @artid = " + _artid + ", @isactive = " + _isactive +
@@ -1138,9 +1137,7 @@ namespace Odin.Planning
         public int LaunchId
         {
             get { return _launchid; }
-            set
-            {
-                _launchid = value;
+            set { _launchid = value;
                 SqlConnection conn = new SqlConnection(sConnStr);
                 conn.Open();
                 DataSet ds = new DataSet();
@@ -1257,7 +1254,7 @@ namespace Odin.Planning
         public string LaunchSerials
         { get; set; }
 
-        public static DataTable getLaunches(int _batchid, int _coid, int _artid, int _isactive, int _typeid,
+        public static DataTable getLaunches(int _batchid, int _coid, int _artid, int _isactive, int _typeid, 
                            string _startdatefrom, string _startdatetill)
         {
             string query = "EXECUTE sp_LaunchesList @batchid = " + _batchid + ", @coid = " + _coid + ", @artid = " + _artid + ",@isactive = " + _isactive +
@@ -1314,7 +1311,7 @@ namespace Odin.Planning
             {
 
                 new SqlParameter("@launchid",SqlDbType.Int){Value = _launchid },
-
+                
             };
 
             return Helper.QuerySP(query, sqlparams.ToArray());
@@ -1337,6 +1334,22 @@ namespace Odin.Planning
 
         }
 
+        public static DataTable getLaunchesCreatDetMB(int _batchid, int _stageid)
+        {
+            string query = "sp_SelectCreatLaunchDetsForMB";
+
+            var sqlparams = new List<SqlParameter>
+            {
+
+                new SqlParameter("@batchid",SqlDbType.Int){Value = _batchid },
+                new SqlParameter("@stageid",SqlDbType.Int){Value = _stageid }
+
+            };
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
+
+        }
+
         public static DataTable getLaunchesEditDet(int _launchid)
         {
             string query = "sp_SelectLaunchEditDets";
@@ -1345,7 +1358,7 @@ namespace Odin.Planning
             {
 
                 new SqlParameter("@launchid",SqlDbType.Int){Value = _launchid }
-
+               
 
             };
 
@@ -1492,6 +1505,7 @@ namespace Odin.Planning
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
         }
+
         public void ReleaseLaunchLabels(int launchid)
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);
@@ -1614,7 +1628,7 @@ namespace Odin.Planning
                 sqlComm.ExecuteNonQuery();
                 _res = "Visa comment added successfully!";
                 sqlConn.Close();
-
+                
             }
             catch { _res = "Something wrong! Maybe you have no permission to make operation!"; }
 
@@ -1634,7 +1648,7 @@ namespace Odin.Planning
 
             sqlComm.Parameters.AddWithValue("@launchid", launchid);
             sqlComm.Parameters.AddWithValue("@comments", comments);
-
+            
 
             try
             {
@@ -1671,7 +1685,7 @@ namespace Odin.Planning
                 _res = sqlComm.Parameters["@success"].Value.ToString();
             }
             catch { _res = "Something wrong! Maybe you have no permission to make operation!"; }
-
+            
             return _res;
         }
 
@@ -1746,7 +1760,7 @@ namespace Odin.Planning
                 sqlConn.Close();
             }
             catch { }
-
+            
         }
 
         public int AddLaunch(int batchid, int stageid, double qty, string comments, string startdate, string enddate, DataTable launchdets, string prodstartdate)
@@ -1781,7 +1795,7 @@ namespace Odin.Planning
 
         public void AddLaunchDets(int launchid, DataTable launchdets)
         {
-
+            
             //UT_Launches
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_AddLaunchDets", sqlConn);
@@ -1791,6 +1805,25 @@ namespace Odin.Planning
             sqlComm.Parameters.Add("@tabledets", SqlDbType.Structured);
             sqlComm.Parameters["@tabledets"].TypeName = "UT_Launches";
             sqlComm.Parameters["@tabledets"].Value = launchdets;
+                        
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+                       
+        }
+
+        public void AddLaunchDetsMBReserve(int launchid, DataTable launchdetsmb)
+        {
+
+            //UT_Launches
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_AddLaunchDetsMBReserve", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@launchid", launchid);
+            sqlComm.Parameters.Add("@tabledets", SqlDbType.Structured);
+            sqlComm.Parameters["@tabledets"].TypeName = "UT_LaunchMBReserve";
+            sqlComm.Parameters["@tabledets"].Value = launchdetsmb;
 
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
@@ -1813,7 +1846,7 @@ namespace Odin.Planning
 
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
-            _res = sqlComm.Parameters["@success"].Value.ToString();
+            _res =sqlComm.Parameters["@success"].Value.ToString();
             sqlConn.Close();
 
             return _res;
@@ -1846,7 +1879,7 @@ namespace Odin.Planning
 
         public void AddAdditComments(int id, string addcomments)
         {
-
+            
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_EditLaunchComments", sqlConn);
@@ -1854,7 +1887,7 @@ namespace Odin.Planning
 
             sqlComm.Parameters.AddWithValue("@id", id);
             sqlComm.Parameters.AddWithValue("@additcomments", addcomments);
-
+                       
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
@@ -1869,13 +1902,13 @@ namespace Odin.Planning
 
             sqlComm.Parameters.AddWithValue("@id", id);
             sqlComm.Parameters.AddWithValue("@qty", qty);
-
+                      
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
-
+           
             sqlConn.Close();
 
-
+          
         }
 
         public void DeleteLaunchDet(int id)
@@ -1885,7 +1918,7 @@ namespace Odin.Planning
             sqlComm.CommandType = CommandType.StoredProcedure;
 
             sqlComm.Parameters.AddWithValue("@id", id);
-
+           
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
 
@@ -1985,7 +2018,7 @@ namespace Odin.Planning
         {
             string query = "EXECUTE sp_BatchProjectsList @batchid = " + _batchid + ", @coid = " + _coid + ", @artid = " + _artid + ",@isactive = " + _isactive +
                             ", @typeid = " + _typeid + ", @deptid = " + _deptid + ", @startdatefrom = '" + _startdatefrom + "', @startdatetill = '" + _startdatetill +
-                            "', @enddatefrom = '" + _enddatefrom + "', @enddatetill = '" + _enddatetill + "', @showbatches = " + _showbatches + ", @custid = " + _custid;
+                            "', @enddatefrom = '" + _enddatefrom + "', @enddatetill = '" + _enddatetill + "', @showbatches = " + _showbatches + ", @custid = " + _custid; 
 
             return Helper.QueryDT(query);
         }
@@ -2006,7 +2039,7 @@ namespace Odin.Planning
             sqlComm.CommandType = CommandType.StoredProcedure;
 
             sqlComm.CommandTimeout = 3000;
-
+                       
             sqlComm.Parameters.AddWithValue("@ArtId", ArtId);
             sqlComm.Parameters.AddWithValue("@Qty", Qty);
             sqlComm.Parameters.AddWithValue("@Comments", Comments);
@@ -2116,24 +2149,24 @@ namespace Odin.Planning
 
         public void AddBatchDetFromProject(int batchid, DataTable launchdets)
         {
-
+            
             //UT_Launches
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_AddBatchDetFromProject", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
 
             sqlComm.Parameters.AddWithValue("@batchid", batchid);
-
+           
             sqlComm.Parameters.Add("@tabledets", SqlDbType.Structured);
             sqlComm.Parameters["@tabledets"].TypeName = "UT_Launches";
             sqlComm.Parameters["@tabledets"].Value = launchdets;
 
-
+            
 
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
+            
         }
 
         public int AddBatchProjectDetail(int BatchId, int ArtId, double Qty, string Comments, int IsActive, int DNP)
@@ -2263,11 +2296,11 @@ namespace Odin.Planning
 
         #region Project planning
 
-
         public static DataTable getProjectPlanning(int custid, int perc)
         {
             return Helper.QueryDT("execute sp_SelectProjectPlanningFin @custid = " + custid + ", @perc = " + perc);
         }
+
 
         public static DataTable getPlanningView(int custid, string dateon)
         {
@@ -2349,7 +2382,7 @@ namespace Odin.Planning
 
             var sqlparams = new List<SqlParameter>
             {
-                new SqlParameter("@weekscount",SqlDbType.Int){Value = weekscount }
+                new SqlParameter("@weekscount",SqlDbType.Int){Value = weekscount }                
             };
 
 
@@ -2368,12 +2401,12 @@ namespace Odin.Planning
             {
                 new SqlParameter("@days",SqlDbType.Int){Value = _days },
                 new SqlParameter("@tablescos", SqlDbType.Structured) { TypeName = "UT_IDs", Value = _coids}
-
+               
             };
 
 
             return Helper.QuerySP(query, sqlparams.ToArray());
-
+            
         }
 
         #endregion

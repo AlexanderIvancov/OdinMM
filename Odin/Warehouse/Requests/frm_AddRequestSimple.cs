@@ -46,7 +46,7 @@ namespace Odin.Warehouse.Requests
             set { cmb_Common2.SelectedValue = value; }
 
         }
-        
+
         #endregion
 
         #region Methods
@@ -55,12 +55,12 @@ namespace Odin.Warehouse.Requests
         {
             int _countbdid = 0;
 
-            foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
-                if (Convert.ToInt32(row.Cells["cn_id"].Value) == batchdetid
-                    || Convert.ToInt32(row.Cells["cn_artid"].Value) == artid)
-                    _countbdid++;
-            }
+            //foreach (DataGridViewRow row in this.gv_List.Rows)
+            //{
+            //    if (Convert.ToInt32(row.Cells["cn_id"].Value) == batchdetid
+            //        || Convert.ToInt32(row.Cells["cn_artid"].Value) == artid)
+            //        _countbdid++;
+            //}
 
             if (_countbdid == 0
                 || batchdetid == 0)
@@ -71,7 +71,7 @@ namespace Odin.Warehouse.Requests
                                 qty,
                                 unit,
                                 comments,
-                                unitid,
+                                unitid, 
                                 "");
         }
 
@@ -91,7 +91,8 @@ namespace Odin.Warehouse.Requests
 
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
-                if (Fun.CheckMBLimit(Convert.ToInt32(row.Cells["cn_artid"].Value)) == true && row.Cells["cn_serials"].Value.ToString().Trim() == "")
+                if (Fun.CheckMBLimit(Convert.ToInt32(row.Cells["cn_artid"].Value)) == true 
+                    && (row.Cells["cn_serials"].Value.ToString()).Trim() == "")
                 {
                     _res = false;
                     break;
@@ -102,13 +103,14 @@ namespace Odin.Warehouse.Requests
 
         }
 
+
         public void ClearRows()
         {
-            foreach (DataGridViewRow row in gv_List.Rows)
-            {
-                gv_List.Rows.Remove(row);
-            }
-            
+            //foreach (DataGridViewRow row in gv_List.Rows)
+            //{
+            //    gv_List.Rows.Remove(row);
+            //}
+            gv_List.Rows.Clear();
         }
 
         #endregion
@@ -177,7 +179,7 @@ namespace Odin.Warehouse.Requests
                         if (RequestDetsSaved != null)
                             RequestDetsSaved(this);
                         ClearRows();
-
+                        ReqBLL.RequestHeadId = 0;
                     }
                     else
                     {
@@ -204,7 +206,8 @@ namespace Odin.Warehouse.Requests
         private void btn_AddPlaces_Click(object sender, EventArgs e)
         {
             if (cmb_Batches1.BatchId == 0
-                && cmb_Articles1.ArticleId != 0)
+                && cmb_Articles1.ArticleId != 0
+                )
             {
                 AddGridRow(0, cmb_Articles1.ArticleId, cmb_Articles1.Article, 0, cmb_Articles1.Unit, "", cmb_Articles1.UnitId);
             }
@@ -256,6 +259,42 @@ namespace Odin.Warehouse.Requests
                 btn_AddPlaces.Enabled = true;
             else
                 btn_AddPlaces.Enabled = false;
+        }
+
+        private void gv_List_CellValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            try {
+                if (gv_List.CurrentRow.Cells["cn_qty"].Selected == true)
+                {
+                    if (Convert.ToDouble(gv_List.CurrentRow.Cells["cn_qty"].Value) < 0)
+                        gv_List.CurrentRow.Cells["cn_qty"].Value = 0;
+                    
+                    if (Fun.CheckMBLimit(Convert.ToInt32(gv_List.CurrentRow.Cells["cn_artid"].Value)) == true && Convert.ToDouble(gv_List.CurrentRow.Cells["cn_qty"].Value) > 1)
+                    {
+                        glob_Class.ShowMessage("Qty can't be more than 1!", "Qty can't be more than 1!", "Serial numbers warning!");
+                        gv_List.CurrentRow.Cells["cn_qty"].Value = 1;
+                    }
+                }
+
+            }
+            catch { }
+        }
+
+        private void btn_CopyRow_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow row = gv_List.CurrentRow;
+
+            gv_List.Rows.Add(row.Cells[0].Value,
+                                row.Cells[1].Value,
+                                row.Cells[2].Value,
+                                row.Cells[3].Value,
+                                row.Cells[4].Value,
+                                row.Cells[5].Value,
+                                row.Cells[6].Value,
+                                row.Cells[7].Value,
+                                row.Cells[8].Value);
+
+            //v_List.Rows.CopyTo()
         }
     }
 }

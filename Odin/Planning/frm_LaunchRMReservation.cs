@@ -47,6 +47,12 @@ namespace Odin.Planning
             get { return _launchgroup; }
             set { _launchgroup = value; }
         }
+
+        public bool IsMB
+        {
+            get;
+            set;
+        }
         #endregion
 
         #region Methods
@@ -314,7 +320,7 @@ namespace Odin.Planning
                         dr["reserve"] = Convert.ToInt32(row.Cells["chk_rchecked"].Value);
                         dr["qty"] = Convert.ToDouble(row.Cells["cn_toreserve"].Value);
                         datastages.Rows.Add(dr);
-
+                        
                         if (Convert.ToInt32(row.Cells["chk_rchecked"].Value) == -1)
                             _qtytmp = _qtytmp + Convert.ToDouble(row.Cells["cn_rqty"].Value);
                     }
@@ -324,10 +330,10 @@ namespace Odin.Planning
                     gv_List.CurrentRow.Cells["cn_reserved"].Value = _qtytmp;
                     SetCellsColor();
                     //gv_List.ThreadSafeCall(delegate { FillList(LaunchId); }) ;
-                    gv_Labels.ThreadSafeCall(delegate { FillLabels(_launchdetid); });
+                    gv_Labels.ThreadSafeCall(delegate { FillLabels(_launchdetid); }) ;
                 }
             }
-
+           
         }
         
         private void frm_LaunchRMReservation_Load(object sender, EventArgs e)
@@ -338,10 +344,16 @@ namespace Odin.Planning
         private void gv_List_SelectionChanged(object sender, EventArgs e)
         {
             int _launchdetid = 0;
+            int _artid = 0;
 
-            try { _launchdetid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value); }
-            catch { _launchdetid = -99; }
+            try { _launchdetid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
+                _artid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_artid"].Value);
+            }
+            catch { _launchdetid = -99;
+                _artid = 0;
+            }
 
+            IsMB = DAL.CheckMBLimit(_artid);
             if (_launchdetid != 0)
                 FillLabels(_launchdetid);
         }
@@ -350,27 +362,71 @@ namespace Odin.Planning
 
         private void gv_Labels_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            string _manufbatch = "";
+            string _tmpmanufbatch = "";
+            int _tmpchecked = 0;
+            bool _testmb = true;
             if (gv_Labels.CurrentRow.Cells["chk_rchecked"].Selected == true)
             {
                 gv_Labels.EndEdit();
 
                 if (Convert.ToInt32(gv_Labels.CurrentRow.Cells["chk_rchecked"].Value) == -1)
-                    gv_Labels.CurrentRow.Cells["cn_toreserve"].Value = Convert.ToDouble(gv_Labels.CurrentRow.Cells["cn_rqty"].Value);
+                {
+                    if (IsMB == true)
+                    {
+                        try { _manufbatch = gv_Labels.CurrentRow.Cells["cn_manufbatch"].Value.ToString(); }
+                        catch { _manufbatch = ""; }
+                        foreach (DataGridViewRow rowt in gv_Labels.Rows)
+                        {
+                            try { _tmpmanufbatch = rowt.Cells["cn_manufbatch"].Value.ToString();
+                                _tmpchecked = Convert.ToInt32(rowt.Cells["chk_rchecked"].Value);
+                            }
+                            catch { _tmpmanufbatch = "";
+                                _tmpchecked = 0;
+                            }
+
+                            if (_tmpmanufbatch.Trim() != ""
+                                    && _tmpmanufbatch != _manufbatch
+                                    && _tmpchecked == -1
+                                    && _manufbatch == "")
+                                {
+                                    _testmb = false;
+                                    break;
+                                }                                
+                         }
+                        
+
+                        if (_testmb == false)
+                        {
+                            glob_Class.ShowMessage("You can't reserve different manufacturing batches for this article!", "Please check manufacturing batches!", "Labels check-in error");
+                            gv_Labels.CurrentRow.Cells["chk_rchecked"].Value = 0;
+                            gv_Labels.CurrentRow.Cells["cn_toreserve"].Value = 0;
+                        }
+                        else
+                        {
+                            gv_Labels.CurrentRow.Cells["cn_toreserve"].Value = Convert.ToDouble(gv_Labels.CurrentRow.Cells["cn_rqty"].Value);
+                        }
+                    }
+                    else
+                        gv_Labels.CurrentRow.Cells["cn_toreserve"].Value = Convert.ToDouble(gv_Labels.CurrentRow.Cells["cn_rqty"].Value);
+                }
                 else
+                {
                     gv_Labels.CurrentRow.Cells["cn_toreserve"].Value = 0;
+                }
 
                 bs_Labels.ResetBindings(true);
             }
         }
 
-        private void btn_ReleaseLabels_Click(object sender, EventArgs e)
+        private void btn_ReleaseLaunch_Click(object sender, EventArgs e)
         {
             if (glob_Class.MessageConfirm("Are you sure you want to release all labels from launch?", "Labels releasing") == true)
             {
                 BLL.ReleaseLaunchLabels(LaunchId);
 
                 gv_List.ThreadSafeCall(delegate { FillList(LaunchId); });
-
+                
             }
         }
 

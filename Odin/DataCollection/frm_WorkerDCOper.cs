@@ -505,26 +505,40 @@ namespace Odin.DataCollection
         {
             int _id = 0;
             string _serial = "";
-            try
-            {
-                _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
-                _serial = gv_List.CurrentRow.Cells["cn_serial"].Value.ToString();
-            }
-            catch { }
 
-            if (_id != 0
-                && globClass.DeleteConfirm() == true)
+
+
+            //try
+            //{
+            //    _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
+            //    _serial = gv_List.CurrentRow.Cells["cn_serial"].Value.ToString();
+            //}
+            //catch { }
+
+            if (/*_id != 0
+                &&*/ globClass.DeleteConfirm() == true)
             {
-                string _res = DCBll.DeleteDataCollectionSerial(_id, _serial);
-                if (DCBll.SuccessId == -1)
-                    FillList(WorkerId, LaunchId);
-                else
+                foreach (DataGridViewRow row in this.gv_List.SelectedRows)
                 {
-                    System.Media.SystemSounds.Exclamation.Play();
-                    frm_Error frm1 = new frm_Error();
-                    frm1.HeaderText = "Something wrong! " + _res;
-                    DialogResult result1 = frm1.ShowDialog();
+                    try
+                    {
+                        _id = Convert.ToInt32(row.Cells["cn_id"].Value);
+                        _serial = row.Cells["cn_serial"].Value.ToString();
+                    }
+                    catch { }
+                    DCBll.DeleteDataCollectionSerial(_id, _serial);
+                    //string _res = DCBll.DeleteDataCollectionSerial(_id, _serial);
+                    //if (DCBll.SuccessId == -1)
+                    //    FillList(WorkerId, LaunchId);
+                    //else
+                    //{
+                    //    System.Media.SystemSounds.Exclamation.Play();
+                    //    frm_Error frm1 = new frm_Error();
+                    //    frm1.HeaderText = "Something wrong! " + _res;
+                    //    DialogResult result1 = frm1.ShowDialog();
+                    //}
                 }
+                FillList(WorkerId, LaunchId);
                 txt_Oper.Text = "";
                 txt_Oper.Focus();
             }

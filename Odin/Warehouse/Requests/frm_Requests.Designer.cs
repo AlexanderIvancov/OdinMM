@@ -136,6 +136,7 @@
             this.cn_available = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_batchdetid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_prodarticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_serials = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mnu_Lines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
@@ -732,7 +733,8 @@
             this.cn_cause,
             this.cn_available,
             this.cn_batchdetid,
-            this.cn_prodarticle});
+            this.cn_prodarticle,
+            this.cn_serials});
             this.gv_List.ContextMenuStrip = this.mnu_Lines;
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_List.Location = new System.Drawing.Point(0, 0);
@@ -1247,6 +1249,12 @@
             this.cn_prodarticle.HeaderText = "Prod. article";
             this.cn_prodarticle.Name = "cn_prodarticle";
             // 
+            // cn_serials
+            // 
+            this.cn_serials.DataPropertyName = "serials";
+            this.cn_serials.HeaderText = "Serials";
+            this.cn_serials.Name = "cn_serials";
+            // 
             // frm_Requests
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1399,5 +1407,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_available;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_batchdetid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_prodarticle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_serials;
     }
 }

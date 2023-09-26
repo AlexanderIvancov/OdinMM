@@ -32,11 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_LaunchRMReservation));
             this.kryptonHeaderGroup2 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.gv_Labels = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.cn_rlabel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_rqty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_toreserve = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_rplace = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chk_rchecked = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.bn_Labels = new System.Windows.Forms.BindingNavigator(this.components);
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
@@ -49,7 +44,7 @@
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.btn_Save = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
-            this.btn_ReleaseLabels = new System.Windows.Forms.ToolStripButton();
+            this.btn_ReleaseLaunch = new System.Windows.Forms.ToolStripButton();
             this.kryptonSeparator1 = new ComponentFactory.Krypton.Toolkit.KryptonSeparator();
             this.bn_List = new System.Windows.Forms.BindingNavigator(this.components);
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
@@ -82,6 +77,12 @@
             this.mni_Admin = new System.Windows.Forms.ToolStripMenuItem();
             this.bs_List = new Odin.Global_Classes.SyncBindingSource();
             this.bs_Labels = new Odin.Global_Classes.SyncBindingSource();
+            this.cn_rlabel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rqty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_toreserve = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rplace = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chk_rchecked = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.cn_manufbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2.Panel)).BeginInit();
             this.kryptonHeaderGroup2.Panel.SuspendLayout();
@@ -105,14 +106,14 @@
             // kryptonHeaderGroup2
             // 
             this.kryptonHeaderGroup2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.kryptonHeaderGroup2.Location = new System.Drawing.Point(561, 0);
+            this.kryptonHeaderGroup2.Location = new System.Drawing.Point(539, 0);
             this.kryptonHeaderGroup2.Name = "kryptonHeaderGroup2";
             // 
             // kryptonHeaderGroup2.Panel
             // 
             this.kryptonHeaderGroup2.Panel.Controls.Add(this.gv_Labels);
             this.kryptonHeaderGroup2.Panel.Controls.Add(this.bn_Labels);
-            this.kryptonHeaderGroup2.Size = new System.Drawing.Size(480, 518);
+            this.kryptonHeaderGroup2.Size = new System.Drawing.Size(597, 518);
             this.kryptonHeaderGroup2.TabIndex = 3;
             this.kryptonHeaderGroup2.ValuesPrimary.Heading = "Labels";
             this.kryptonHeaderGroup2.ValuesPrimary.Image = global::Odin.Global_Resourses.barcode_2d;
@@ -127,56 +128,15 @@
             this.cn_rqty,
             this.cn_toreserve,
             this.cn_rplace,
-            this.chk_rchecked});
+            this.chk_rchecked,
+            this.cn_manufbatch});
             this.gv_Labels.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_Labels.Location = new System.Drawing.Point(0, 0);
             this.gv_Labels.Name = "gv_Labels";
             this.gv_Labels.RowHeadersWidth = 25;
-            this.gv_Labels.Size = new System.Drawing.Size(478, 440);
+            this.gv_Labels.Size = new System.Drawing.Size(595, 440);
             this.gv_Labels.TabIndex = 36;
             this.gv_Labels.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_Labels_CellContentClick);
-            // 
-            // cn_rlabel
-            // 
-            this.cn_rlabel.DataPropertyName = "label";
-            this.cn_rlabel.HeaderText = "Label";
-            this.cn_rlabel.MinimumWidth = 100;
-            this.cn_rlabel.Name = "cn_rlabel";
-            this.cn_rlabel.ReadOnly = true;
-            // 
-            // cn_rqty
-            // 
-            this.cn_rqty.DataPropertyName = "qty";
-            this.cn_rqty.FillWeight = 80F;
-            this.cn_rqty.HeaderText = "Qty on label";
-            this.cn_rqty.Name = "cn_rqty";
-            this.cn_rqty.ReadOnly = true;
-            this.cn_rqty.Width = 80;
-            // 
-            // cn_toreserve
-            // 
-            this.cn_toreserve.DataPropertyName = "qtytoreserve";
-            this.cn_toreserve.FillWeight = 80F;
-            this.cn_toreserve.HeaderText = "To reserve";
-            this.cn_toreserve.Name = "cn_toreserve";
-            this.cn_toreserve.Width = 80;
-            // 
-            // cn_rplace
-            // 
-            this.cn_rplace.DataPropertyName = "place";
-            this.cn_rplace.HeaderText = "Place";
-            this.cn_rplace.Name = "cn_rplace";
-            // 
-            // chk_rchecked
-            // 
-            this.chk_rchecked.DataPropertyName = "checked";
-            this.chk_rchecked.FalseValue = "0";
-            this.chk_rchecked.FillWeight = 60F;
-            this.chk_rchecked.HeaderText = "Reserve";
-            this.chk_rchecked.IndeterminateValue = "1";
-            this.chk_rchecked.Name = "chk_rchecked";
-            this.chk_rchecked.TrueValue = "-1";
-            this.chk_rchecked.Width = 60;
             // 
             // bn_Labels
             // 
@@ -197,7 +157,7 @@
             this.toolStripSeparator6,
             this.btn_Save,
             this.toolStripLabel3,
-            this.btn_ReleaseLabels});
+            this.btn_ReleaseLaunch});
             this.bn_Labels.Location = new System.Drawing.Point(0, 440);
             this.bn_Labels.MoveFirstItem = this.toolStripButton5;
             this.bn_Labels.MoveLastItem = this.toolStripButton8;
@@ -205,7 +165,7 @@
             this.bn_Labels.MovePreviousItem = this.toolStripButton6;
             this.bn_Labels.Name = "bn_Labels";
             this.bn_Labels.PositionItem = this.toolStripTextBox2;
-            this.bn_Labels.Size = new System.Drawing.Size(478, 25);
+            this.bn_Labels.Size = new System.Drawing.Size(595, 25);
             this.bn_Labels.TabIndex = 35;
             this.bn_Labels.Text = "bindingNavigator1";
             // 
@@ -289,23 +249,24 @@
             // toolStripLabel3
             // 
             this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(73, 22);
-            this.toolStripLabel3.Text = "                      ";
+            this.toolStripLabel3.Size = new System.Drawing.Size(70, 22);
+            this.toolStripLabel3.Text = "                     ";
             // 
-            // btn_ReleaseLabels
+            // btn_ReleaseLaunch
             // 
-            this.btn_ReleaseLabels.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btn_ReleaseLabels.Image = global::Odin.Global_Resourses.Cancel;
-            this.btn_ReleaseLabels.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_ReleaseLabels.Name = "btn_ReleaseLabels";
-            this.btn_ReleaseLabels.Size = new System.Drawing.Size(23, 22);
-            this.btn_ReleaseLabels.Text = "Release labels";
-            this.btn_ReleaseLabels.Click += new System.EventHandler(this.btn_ReleaseLabels_Click);
+            this.btn_ReleaseLaunch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_ReleaseLaunch.Image = global::Odin.Global_Resourses.Cancel;
+            this.btn_ReleaseLaunch.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_ReleaseLaunch.Name = "btn_ReleaseLaunch";
+            this.btn_ReleaseLaunch.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btn_ReleaseLaunch.Size = new System.Drawing.Size(23, 22);
+            this.btn_ReleaseLaunch.Text = "Release all labels";
+            this.btn_ReleaseLaunch.Click += new System.EventHandler(this.btn_ReleaseLaunch_Click);
             // 
             // kryptonSeparator1
             // 
             this.kryptonSeparator1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.kryptonSeparator1.Location = new System.Drawing.Point(556, 0);
+            this.kryptonSeparator1.Location = new System.Drawing.Point(534, 0);
             this.kryptonSeparator1.Name = "kryptonSeparator1";
             this.kryptonSeparator1.Size = new System.Drawing.Size(5, 518);
             this.kryptonSeparator1.SplitterWidth = 3;
@@ -335,7 +296,7 @@
             this.bn_List.MovePreviousItem = this.toolStripButton2;
             this.bn_List.Name = "bn_List";
             this.bn_List.PositionItem = this.toolStripTextBox1;
-            this.bn_List.Size = new System.Drawing.Size(554, 25);
+            this.bn_List.Size = new System.Drawing.Size(532, 25);
             this.bn_List.TabIndex = 34;
             this.bn_List.Text = "bindingNavigator1";
             // 
@@ -417,7 +378,7 @@
             // 
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.gv_List);
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.bn_List);
-            this.kryptonHeaderGroup1.Size = new System.Drawing.Size(556, 518);
+            this.kryptonHeaderGroup1.Size = new System.Drawing.Size(534, 518);
             this.kryptonHeaderGroup1.TabIndex = 5;
             this.kryptonHeaderGroup1.ValuesPrimary.Heading = "RM list";
             this.kryptonHeaderGroup1.ValuesPrimary.Image = global::Odin.Global_Resourses.ksirtet_24x24;
@@ -442,7 +403,7 @@
             this.gv_List.MultiSelect = false;
             this.gv_List.Name = "gv_List";
             this.gv_List.RowHeadersWidth = 25;
-            this.gv_List.Size = new System.Drawing.Size(554, 440);
+            this.gv_List.Size = new System.Drawing.Size(532, 440);
             this.gv_List.TabIndex = 35;
             this.gv_List.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_List_ColumnHeaderMouseClick);
             this.gv_List.SelectionChanged += new System.EventHandler(this.gv_List_SelectionChanged);
@@ -587,11 +548,59 @@
             this.mni_Admin.Text = "List settings";
             this.mni_Admin.Click += new System.EventHandler(this.mni_Admin_Click);
             // 
+            // cn_rlabel
+            // 
+            this.cn_rlabel.DataPropertyName = "label";
+            this.cn_rlabel.HeaderText = "Label";
+            this.cn_rlabel.MinimumWidth = 100;
+            this.cn_rlabel.Name = "cn_rlabel";
+            this.cn_rlabel.ReadOnly = true;
+            // 
+            // cn_rqty
+            // 
+            this.cn_rqty.DataPropertyName = "qty";
+            this.cn_rqty.FillWeight = 80F;
+            this.cn_rqty.HeaderText = "Qty on label";
+            this.cn_rqty.Name = "cn_rqty";
+            this.cn_rqty.ReadOnly = true;
+            this.cn_rqty.Width = 80;
+            // 
+            // cn_toreserve
+            // 
+            this.cn_toreserve.DataPropertyName = "qtytoreserve";
+            this.cn_toreserve.FillWeight = 80F;
+            this.cn_toreserve.HeaderText = "To reserve";
+            this.cn_toreserve.Name = "cn_toreserve";
+            this.cn_toreserve.Width = 80;
+            // 
+            // cn_rplace
+            // 
+            this.cn_rplace.DataPropertyName = "place";
+            this.cn_rplace.HeaderText = "Place";
+            this.cn_rplace.Name = "cn_rplace";
+            // 
+            // chk_rchecked
+            // 
+            this.chk_rchecked.DataPropertyName = "checked";
+            this.chk_rchecked.FalseValue = "0";
+            this.chk_rchecked.FillWeight = 60F;
+            this.chk_rchecked.HeaderText = "Reserve";
+            this.chk_rchecked.IndeterminateValue = "1";
+            this.chk_rchecked.Name = "chk_rchecked";
+            this.chk_rchecked.TrueValue = "-1";
+            this.chk_rchecked.Width = 60;
+            // 
+            // cn_manufbatch
+            // 
+            this.cn_manufbatch.DataPropertyName = "manufbatch";
+            this.cn_manufbatch.HeaderText = "Manuf. batch";
+            this.cn_manufbatch.Name = "cn_manufbatch";
+            // 
             // frm_LaunchRMReservation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1041, 518);
+            this.ClientSize = new System.Drawing.Size(1136, 518);
             this.Controls.Add(this.kryptonHeaderGroup1);
             this.Controls.Add(this.kryptonSeparator1);
             this.Controls.Add(this.kryptonHeaderGroup2);
@@ -675,12 +684,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_reserved;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_given;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_unit;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel3;
+        private System.Windows.Forms.ToolStripButton btn_ReleaseLaunch;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_rlabel;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_rqty;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_toreserve;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_rplace;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chk_rchecked;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel3;
-        private System.Windows.Forms.ToolStripButton btn_ReleaseLabels;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_manufbatch;
     }
 }

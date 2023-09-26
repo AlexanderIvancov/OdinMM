@@ -207,6 +207,22 @@ namespace Odin.Planning.Controls
 
         #region Methods
 
+        public bool CheckMBLimit()
+        {
+            bool _res = false;
+
+            foreach (DataGridViewRow row in this.gv_List.Rows)
+            {
+                if (DAL.CheckMBLimit(Convert.ToInt32(row.Cells["cn_artid"].Value)) == true)
+                {
+                    _res = true;
+                    break;
+                }
+            }
+            
+            return _res;
+        }
+
         public void ShowLaunchHead(int id)
         {
 
@@ -475,8 +491,16 @@ namespace Odin.Planning.Controls
 
             QtyInLaunch = 0;
             FillBatchUnits();
-            RecalcQtyCanBeLaunched(BatchId, StageId);
-            RecalcQtyCanBeLaunchedTotal(BatchId, StageId);
+            if (CheckMBLimit() == false)
+            {
+                RecalcQtyCanBeLaunched(BatchId, StageId);
+                RecalcQtyCanBeLaunchedTotal(BatchId, StageId);
+            }
+            else
+            {
+                RecalcQtyCanBeLaunchedMB(BatchId, StageId);
+                RecalcQtyCanBeLaunchedTotalMB(BatchId, StageId);
+            }
 
         }
 
@@ -519,6 +543,98 @@ namespace Odin.Planning.Controls
         }
 
         public void RecalcQtyCanBeLaunchedTotal(int _batchid, int _stageid)
+        {
+            if (Mode == "new")
+            {
+                if (_batchid != 0)
+                {
+                    if (gv_List.Rows.Count > 0)
+                    {
+                        double maxq = (Convert.ToDouble(gv_List.Rows[0].Cells["cn_onstock"].Value) + Convert.ToDouble(gv_List.Rows[0].Cells["cn_available"].Value)) / (Convert.ToDouble(gv_List.Rows[0].Cells["cn_qtyinbatch"].Value) / cmb_Batches1.Qty);
+
+                        foreach (DataGridViewRow row in this.gv_List.Rows)
+                        {
+                            try
+                            {
+                                if ((Convert.ToDouble(row.Cells["cn_onstock"].Value) + Convert.ToDouble(row.Cells["cn_available"].Value)) / (Convert.ToDouble(row.Cells["cn_qtyinbatch"].Value) / cmb_Batches1.Qty) < maxq)
+                                {
+                                    maxq = (Convert.ToDouble(row.Cells["cn_onstock"].Value) + Convert.ToDouble(row.Cells["cn_available"].Value)) / (Convert.ToDouble(row.Cells["cn_qtyinbatch"].Value) / cmb_Batches1.Qty);
+                                }
+                            }
+                            catch { maxq = 0; }
+                        }
+                        try
+                        {
+                            QtyCanBeLaunchedTotal = Convert.ToInt32(maxq) > QtyCanBeLaunched ? QtyCanBeLaunched : Convert.ToInt32(maxq);
+                        }
+                        catch { QtyCanBeLaunchedTotal = 0; }
+                    }
+                    else
+                        QtyCanBeLaunchedTotal = 0;
+                }
+                else
+                { QtyCanBeLaunchedTotal = 0; }
+            }
+            //QtyNotLaunched = Convert.ToDouble(Helper.GetOneRecord("select isnull(dbo.fn_NotLaunchedBatchQty(" + _batchid + "," + _stageid + "), 0)"));
+        }
+
+        public void RecalcQtyCanBeLaunchedMB(int _batchid, int _stageid)
+        {
+            if (Mode == "new")
+            {
+                double _minqtymb = 0;
+                if (_batchid != 0)
+                {
+                    //Manufacturing batch analyzis
+                    var data = Plan_BLL.getLaunchesCreatDetMB(BatchId, StageId);
+                    ds_MB.Clear();
+                    
+                    foreach (DataRow row in data.Rows)
+                    {
+                        DataRow row1 = dt_MB.NewRow();
+                        row1["batchdetid"] = row["batchdetid"];
+                        row1["artid"] = row["artid"];
+                        row1["maxqtycse"] = row["maxqtycse"];
+                        row1["manufbatch"] = row["manufbatch"];
+
+                        dt_MB.Rows.Add(row1);
+                    }
+
+                    //DataRow results = from myRow in dt_MB.AsEnumerable()
+                    //                               orderby double.Parse(myRow["maxqtycse"].ToString())
+                    //                               //where myRow["maxqtycse"] != null && myRow["maxqtycse"] != 0
+                    //                               select myRow;
+
+                    _minqtymb = (double)dt_MB.Compute("Min(maxqtycse)", "");
+
+                    if (gv_List.Rows.Count > 0)
+                    {
+                        double maxq = Convert.ToDouble(gv_List.Rows[0].Cells["cn_onstock"].Value) / (Convert.ToDouble(gv_List.Rows[0].Cells["cn_qtyinbatch"].Value) / cmb_Batches1.Qty);
+
+                        foreach (DataGridViewRow row in this.gv_List.Rows)
+                        {
+                            try
+                            {
+                                if (Convert.ToDouble(row.Cells["cn_onstock"].Value) / (Convert.ToDouble(row.Cells["cn_qtyinbatch"].Value) / cmb_Batches1.Qty) < maxq)
+                                {
+                                    maxq = Convert.ToDouble(row.Cells["cn_onstock"].Value) / (Convert.ToDouble(row.Cells["cn_qtyinbatch"].Value) / cmb_Batches1.Qty);
+                                }
+                            }
+                            catch { maxq = 0; }
+                        }
+
+                        QtyCanBeLaunched = (Convert.ToInt32(maxq) > Convert.ToInt32(_minqtymb) ? Convert.ToInt32(_minqtymb) : Convert.ToInt32(maxq));
+                    }
+                    else
+                        QtyCanBeLaunched = 0;
+                }
+                else
+                { QtyCanBeLaunched = 0; }
+            }
+            //QtyNotLaunched = Convert.ToDouble(Helper.GetOneRecord("select isnull(dbo.fn_NotLaunchedBatchQty(" + _batchid + "," + _stageid + "), 0)"));
+        }
+
+        public void RecalcQtyCanBeLaunchedTotalMB(int _batchid, int _stageid)
         {
             if (Mode == "new")
             {
@@ -717,6 +833,8 @@ namespace Odin.Planning.Controls
         {
             cmb_BatchStages1.BatchId = BatchId;
             txt_BatchComments.Text = cmb_Batches1.Comments;
+            Comments = cmb_Batches1.Comments;
+
             //ShowBatchHead(BatchId, StageId);
             //if (Mode == "new")
             //{
@@ -787,6 +905,25 @@ namespace Odin.Planning.Controls
                 }
 
                 int _result = BLL.AddLaunch(BatchId, StageId, QtyInLaunch, Comments, StartDate, EndDate, datadets, ProdStartDate);
+                if (CheckMBLimit() == true)
+                {
+                    DataTable datadetsmb = new DataTable();
+                    datadetsmb.Columns.Add("artid", typeof(int));
+                    datadetsmb.Columns.Add("manufbatch", typeof(string));
+
+                    foreach (DataRow row in dt_MB.Rows)
+                    {
+                        DataRow row1 = datadetsmb.NewRow();
+                       
+                        row1["artid"] = row["artid"];
+                        row1["manufbatch"] = row["manufbatch"];
+
+                        datadetsmb.Rows.Add(row1);
+                    }
+
+                    //Reservation of labels
+                    BLL.AddLaunchDetsMBReserve(_result, datadetsmb);
+                }
 
                 if (_result != 0
                     && SaveLaunch != null)

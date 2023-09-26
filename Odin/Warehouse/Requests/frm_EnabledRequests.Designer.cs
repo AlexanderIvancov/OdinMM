@@ -82,6 +82,7 @@
             this.cn_custarticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_cause = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_place = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_serials = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).BeginInit();
             this.kryptonHeaderGroup1.Panel.SuspendLayout();
@@ -151,7 +152,8 @@
             this.cn_creatby,
             this.cn_custarticle,
             this.cn_cause,
-            this.cn_place});
+            this.cn_place,
+            this.cn_serials});
             this.gv_List.ContextMenuStrip = this.mnu_Lines;
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_List.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
@@ -531,6 +533,12 @@
             this.cn_place.HeaderText = "Place";
             this.cn_place.Name = "cn_place";
             // 
+            // cn_serials
+            // 
+            this.cn_serials.DataPropertyName = "serials";
+            this.cn_serials.HeaderText = "Serials";
+            this.cn_serials.Name = "cn_serials";
+            // 
             // frm_EnabledRequests
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -608,5 +616,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_custarticle;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_cause;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_place;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_serials;
     }
 }

@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctl_CreatLaunchDets));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonLabel16 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_BatchComments = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
@@ -78,6 +78,27 @@
             this.btn_Clear = new System.Windows.Forms.ToolStripButton();
             this.btn_Save = new System.Windows.Forms.ToolStripButton();
             this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_batchdetid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_bomnum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_stage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_artid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_article = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_analog = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_qtyinbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_totallaunched = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_onstock = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_reserved = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_notplaced = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_qtypo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_porder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_confdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_inbom = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_available = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_theorstock = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_numdecimals = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mnu_Lines = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mni_FilterFor = new System.Windows.Forms.ToolStripTextBox();
             this.mni_Search = new System.Windows.Forms.ToolStripMenuItem();
@@ -107,27 +128,12 @@
             this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bs_List = new Odin.Global_Classes.SyncBindingSource();
-            this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_batchdetid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_bomnum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_stage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_artid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_article = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_analog = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_qtyinbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_totallaunched = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_onstock = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_reserved = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_notplaced = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_qtypo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_porder = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_confdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_inbom = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_available = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_theorstock = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_numdecimals = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ds_MB = new System.Data.DataSet();
+            this.dt_MB = new System.Data.DataTable();
+            this.dataColumn1 = new System.Data.DataColumn();
+            this.dataColumn2 = new System.Data.DataColumn();
+            this.dataColumn3 = new System.Data.DataColumn();
+            this.dataColumn4 = new System.Data.DataColumn();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bn_List)).BeginInit();
@@ -135,6 +141,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gv_List)).BeginInit();
             this.mnu_Lines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ds_MB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dt_MB)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonPanel1
@@ -328,9 +336,11 @@
             // 
             // cmb_SalesOrdersWithLines1
             // 
+            this.cmb_SalesOrdersWithLines1.ArticleId = 0;
             this.cmb_SalesOrdersWithLines1.BatchId = 0;
             this.cmb_SalesOrdersWithLines1.Location = new System.Drawing.Point(131, 67);
             this.cmb_SalesOrdersWithLines1.Name = "cmb_SalesOrdersWithLines1";
+            this.cmb_SalesOrdersWithLines1.QtyInCO = 0D;
             this.cmb_SalesOrdersWithLines1.SalesOrder = "";
             this.cmb_SalesOrdersWithLines1.SalesOrderId = 0;
             this.cmb_SalesOrdersWithLines1.SalesOrderLine = "";
@@ -450,6 +460,7 @@
             // 
             this.cmb_Articles1.Article = "";
             this.cmb_Articles1.ArticleId = 0;
+            this.cmb_Articles1.ArticleIdRec = 0;
             this.cmb_Articles1.ArtType = null;
             this.cmb_Articles1.BOMState = 0;
             this.cmb_Articles1.Comments = null;
@@ -469,6 +480,7 @@
             this.cmb_Articles1.ProjectId = 0;
             this.cmb_Articles1.QtyAvail = 0D;
             this.cmb_Articles1.QtyConsStock = 0D;
+            this.cmb_Articles1.RMId = 0;
             this.cmb_Articles1.SecName = null;
             this.cmb_Articles1.Size = new System.Drawing.Size(282, 20);
             this.cmb_Articles1.SMTType = 0;
@@ -566,6 +578,9 @@
             this.cmb_Batches1.CustArticle = "";
             this.cmb_Batches1.Customer = null;
             this.cmb_Batches1.IsActive = 0;
+            this.cmb_Batches1.IsGroup = 0;
+            this.cmb_Batches1.IsProject = 0;
+            this.cmb_Batches1.IsQuote = 0;
             this.cmb_Batches1.Location = new System.Drawing.Point(95, 14);
             this.cmb_Batches1.Name = "cmb_Batches1";
             this.cmb_Batches1.ParentBatchId = 0;
@@ -703,6 +718,169 @@
             this.gv_List.Size = new System.Drawing.Size(1107, 359);
             this.gv_List.TabIndex = 44;
             this.gv_List.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_List_ColumnHeaderMouseClick);
+            // 
+            // cn_id
+            // 
+            this.cn_id.DataPropertyName = "id";
+            this.cn_id.HeaderText = "id";
+            this.cn_id.Name = "cn_id";
+            this.cn_id.ReadOnly = true;
+            this.cn_id.Visible = false;
+            // 
+            // cn_batchdetid
+            // 
+            this.cn_batchdetid.DataPropertyName = "batchdetid";
+            this.cn_batchdetid.HeaderText = "bdid";
+            this.cn_batchdetid.Name = "cn_batchdetid";
+            this.cn_batchdetid.Visible = false;
+            // 
+            // cn_bomnum
+            // 
+            this.cn_bomnum.DataPropertyName = "bomnum";
+            this.cn_bomnum.FillWeight = 40F;
+            this.cn_bomnum.HeaderText = "BOM №";
+            this.cn_bomnum.Name = "cn_bomnum";
+            this.cn_bomnum.Width = 40;
+            // 
+            // cn_stage
+            // 
+            this.cn_stage.DataPropertyName = "stage";
+            this.cn_stage.FillWeight = 70F;
+            this.cn_stage.HeaderText = "Stage";
+            this.cn_stage.Name = "cn_stage";
+            this.cn_stage.Width = 70;
+            // 
+            // cn_artid
+            // 
+            this.cn_artid.DataPropertyName = "artid";
+            this.cn_artid.FillWeight = 70F;
+            this.cn_artid.HeaderText = "Art. id";
+            this.cn_artid.Name = "cn_artid";
+            this.cn_artid.ReadOnly = true;
+            this.cn_artid.Width = 70;
+            // 
+            // cn_article
+            // 
+            this.cn_article.DataPropertyName = "article";
+            this.cn_article.FillWeight = 150F;
+            this.cn_article.HeaderText = "Article";
+            this.cn_article.Name = "cn_article";
+            this.cn_article.ReadOnly = true;
+            this.cn_article.Width = 150;
+            // 
+            // cn_analog
+            // 
+            this.cn_analog.DataPropertyName = "analogs";
+            this.cn_analog.HeaderText = "Analogs";
+            this.cn_analog.Name = "cn_analog";
+            // 
+            // cn_unit
+            // 
+            this.cn_unit.DataPropertyName = "unit";
+            this.cn_unit.FillWeight = 40F;
+            this.cn_unit.HeaderText = "Unit";
+            this.cn_unit.Name = "cn_unit";
+            this.cn_unit.ReadOnly = true;
+            this.cn_unit.Width = 40;
+            // 
+            // cn_qty
+            // 
+            this.cn_qty.DataPropertyName = "qty";
+            this.cn_qty.FillWeight = 70F;
+            this.cn_qty.HeaderText = "Qty in launch";
+            this.cn_qty.Name = "cn_qty";
+            this.cn_qty.Width = 85;
+            // 
+            // cn_qtyinbatch
+            // 
+            this.cn_qtyinbatch.DataPropertyName = "qtyinbatch";
+            this.cn_qtyinbatch.HeaderText = "Qty in batch";
+            this.cn_qtyinbatch.Name = "cn_qtyinbatch";
+            // 
+            // cn_totallaunched
+            // 
+            this.cn_totallaunched.DataPropertyName = "launched";
+            this.cn_totallaunched.HeaderText = "Total launched";
+            this.cn_totallaunched.Name = "cn_totallaunched";
+            this.cn_totallaunched.Visible = false;
+            // 
+            // cn_onstock
+            // 
+            this.cn_onstock.DataPropertyName = "qtystock";
+            this.cn_onstock.FillWeight = 70F;
+            this.cn_onstock.HeaderText = "On stock";
+            this.cn_onstock.Name = "cn_onstock";
+            this.cn_onstock.ReadOnly = true;
+            this.cn_onstock.Width = 70;
+            // 
+            // cn_reserved
+            // 
+            this.cn_reserved.DataPropertyName = "reserved";
+            this.cn_reserved.FillWeight = 70F;
+            this.cn_reserved.HeaderText = "Reserved";
+            this.cn_reserved.Name = "cn_reserved";
+            this.cn_reserved.ReadOnly = true;
+            this.cn_reserved.Width = 70;
+            // 
+            // cn_notplaced
+            // 
+            this.cn_notplaced.DataPropertyName = "notplaced";
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Red;
+            this.cn_notplaced.DefaultCellStyle = dataGridViewCellStyle1;
+            this.cn_notplaced.FillWeight = 70F;
+            this.cn_notplaced.HeaderText = "Not placed";
+            this.cn_notplaced.Name = "cn_notplaced";
+            this.cn_notplaced.Width = 70;
+            // 
+            // cn_qtypo
+            // 
+            this.cn_qtypo.DataPropertyName = "purchased";
+            this.cn_qtypo.FillWeight = 70F;
+            this.cn_qtypo.HeaderText = "Purchased";
+            this.cn_qtypo.Name = "cn_qtypo";
+            this.cn_qtypo.Width = 70;
+            // 
+            // cn_porder
+            // 
+            this.cn_porder.DataPropertyName = "porder";
+            this.cn_porder.HeaderText = "Pur. order";
+            this.cn_porder.Name = "cn_porder";
+            // 
+            // cn_confdate
+            // 
+            this.cn_confdate.DataPropertyName = "confdate";
+            this.cn_confdate.HeaderText = "Conf. deliv. date";
+            this.cn_confdate.Name = "cn_confdate";
+            // 
+            // cn_inbom
+            // 
+            this.cn_inbom.DataPropertyName = "qtybom";
+            this.cn_inbom.FillWeight = 70F;
+            this.cn_inbom.HeaderText = "In BOM.";
+            this.cn_inbom.Name = "cn_inbom";
+            this.cn_inbom.ReadOnly = true;
+            this.cn_inbom.Width = 70;
+            // 
+            // cn_available
+            // 
+            this.cn_available.DataPropertyName = "qtyavailable";
+            this.cn_available.HeaderText = "Available";
+            this.cn_available.Name = "cn_available";
+            this.cn_available.Visible = false;
+            // 
+            // cn_theorstock
+            // 
+            this.cn_theorstock.DataPropertyName = "theorstock";
+            this.cn_theorstock.HeaderText = "Theor. stock";
+            this.cn_theorstock.Name = "cn_theorstock";
+            // 
+            // cn_numdecimals
+            // 
+            this.cn_numdecimals.DataPropertyName = "numdecimals";
+            this.cn_numdecimals.HeaderText = "numdecimals";
+            this.cn_numdecimals.Name = "cn_numdecimals";
+            this.cn_numdecimals.Visible = false;
             // 
             // mnu_Lines
             // 
@@ -951,168 +1129,39 @@
             this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
             this.dataGridViewTextBoxColumn19.Visible = false;
             // 
-            // cn_id
+            // ds_MB
             // 
-            this.cn_id.DataPropertyName = "id";
-            this.cn_id.HeaderText = "id";
-            this.cn_id.Name = "cn_id";
-            this.cn_id.ReadOnly = true;
-            this.cn_id.Visible = false;
+            this.ds_MB.DataSetName = "NewDataSet";
+            this.ds_MB.Tables.AddRange(new System.Data.DataTable[] {
+            this.dt_MB});
             // 
-            // cn_batchdetid
+            // dt_MB
             // 
-            this.cn_batchdetid.DataPropertyName = "batchdetid";
-            this.cn_batchdetid.HeaderText = "bdid";
-            this.cn_batchdetid.Name = "cn_batchdetid";
-            this.cn_batchdetid.Visible = false;
+            this.dt_MB.Columns.AddRange(new System.Data.DataColumn[] {
+            this.dataColumn1,
+            this.dataColumn2,
+            this.dataColumn3,
+            this.dataColumn4});
+            this.dt_MB.TableName = "dt_MB";
             // 
-            // cn_bomnum
+            // dataColumn1
             // 
-            this.cn_bomnum.DataPropertyName = "bomnum";
-            this.cn_bomnum.FillWeight = 40F;
-            this.cn_bomnum.HeaderText = "BOM №";
-            this.cn_bomnum.Name = "cn_bomnum";
-            this.cn_bomnum.Width = 40;
+            this.dataColumn1.ColumnName = "batchdetid";
+            this.dataColumn1.DataType = typeof(int);
             // 
-            // cn_stage
+            // dataColumn2
             // 
-            this.cn_stage.DataPropertyName = "stage";
-            this.cn_stage.FillWeight = 70F;
-            this.cn_stage.HeaderText = "Stage";
-            this.cn_stage.Name = "cn_stage";
-            this.cn_stage.Width = 70;
+            this.dataColumn2.ColumnName = "artid";
+            this.dataColumn2.DataType = typeof(int);
             // 
-            // cn_artid
+            // dataColumn3
             // 
-            this.cn_artid.DataPropertyName = "artid";
-            this.cn_artid.FillWeight = 70F;
-            this.cn_artid.HeaderText = "Art. id";
-            this.cn_artid.Name = "cn_artid";
-            this.cn_artid.ReadOnly = true;
-            this.cn_artid.Width = 70;
+            this.dataColumn3.ColumnName = "maxqtycse";
+            this.dataColumn3.DataType = typeof(double);
             // 
-            // cn_article
+            // dataColumn4
             // 
-            this.cn_article.DataPropertyName = "article";
-            this.cn_article.FillWeight = 150F;
-            this.cn_article.HeaderText = "Article";
-            this.cn_article.Name = "cn_article";
-            this.cn_article.ReadOnly = true;
-            this.cn_article.Width = 150;
-            // 
-            // cn_analog
-            // 
-            this.cn_analog.DataPropertyName = "analogs";
-            this.cn_analog.HeaderText = "Analogs";
-            this.cn_analog.Name = "cn_analog";
-            // 
-            // cn_unit
-            // 
-            this.cn_unit.DataPropertyName = "unit";
-            this.cn_unit.FillWeight = 40F;
-            this.cn_unit.HeaderText = "Unit";
-            this.cn_unit.Name = "cn_unit";
-            this.cn_unit.ReadOnly = true;
-            this.cn_unit.Width = 40;
-            // 
-            // cn_qty
-            // 
-            this.cn_qty.DataPropertyName = "qty";
-            this.cn_qty.FillWeight = 70F;
-            this.cn_qty.HeaderText = "Qty in launch";
-            this.cn_qty.Name = "cn_qty";
-            this.cn_qty.Width = 85;
-            // 
-            // cn_qtyinbatch
-            // 
-            this.cn_qtyinbatch.DataPropertyName = "qtyinbatch";
-            this.cn_qtyinbatch.HeaderText = "Qty in batch";
-            this.cn_qtyinbatch.Name = "cn_qtyinbatch";
-            // 
-            // cn_totallaunched
-            // 
-            this.cn_totallaunched.DataPropertyName = "launched";
-            this.cn_totallaunched.HeaderText = "Total launched";
-            this.cn_totallaunched.Name = "cn_totallaunched";
-            this.cn_totallaunched.Visible = false;
-            // 
-            // cn_onstock
-            // 
-            this.cn_onstock.DataPropertyName = "qtystock";
-            this.cn_onstock.FillWeight = 70F;
-            this.cn_onstock.HeaderText = "On stock";
-            this.cn_onstock.Name = "cn_onstock";
-            this.cn_onstock.ReadOnly = true;
-            this.cn_onstock.Width = 70;
-            // 
-            // cn_reserved
-            // 
-            this.cn_reserved.DataPropertyName = "reserved";
-            this.cn_reserved.FillWeight = 70F;
-            this.cn_reserved.HeaderText = "Reserved";
-            this.cn_reserved.Name = "cn_reserved";
-            this.cn_reserved.ReadOnly = true;
-            this.cn_reserved.Width = 70;
-            // 
-            // cn_notplaced
-            // 
-            this.cn_notplaced.DataPropertyName = "notplaced";
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Red;
-            this.cn_notplaced.DefaultCellStyle = dataGridViewCellStyle1;
-            this.cn_notplaced.FillWeight = 70F;
-            this.cn_notplaced.HeaderText = "Not placed";
-            this.cn_notplaced.Name = "cn_notplaced";
-            this.cn_notplaced.Width = 70;
-            // 
-            // cn_qtypo
-            // 
-            this.cn_qtypo.DataPropertyName = "purchased";
-            this.cn_qtypo.FillWeight = 70F;
-            this.cn_qtypo.HeaderText = "Purchased";
-            this.cn_qtypo.Name = "cn_qtypo";
-            this.cn_qtypo.Width = 70;
-            // 
-            // cn_porder
-            // 
-            this.cn_porder.DataPropertyName = "porder";
-            this.cn_porder.HeaderText = "Pur. order";
-            this.cn_porder.Name = "cn_porder";
-            // 
-            // cn_confdate
-            // 
-            this.cn_confdate.DataPropertyName = "confdate";
-            this.cn_confdate.HeaderText = "Conf. deliv. date";
-            this.cn_confdate.Name = "cn_confdate";
-            // 
-            // cn_inbom
-            // 
-            this.cn_inbom.DataPropertyName = "qtybom";
-            this.cn_inbom.FillWeight = 70F;
-            this.cn_inbom.HeaderText = "In BOM.";
-            this.cn_inbom.Name = "cn_inbom";
-            this.cn_inbom.ReadOnly = true;
-            this.cn_inbom.Width = 70;
-            // 
-            // cn_available
-            // 
-            this.cn_available.DataPropertyName = "qtyavailable";
-            this.cn_available.HeaderText = "Available";
-            this.cn_available.Name = "cn_available";
-            this.cn_available.Visible = false;
-            // 
-            // cn_theorstock
-            // 
-            this.cn_theorstock.DataPropertyName = "theorstock";
-            this.cn_theorstock.HeaderText = "Theor. stock";
-            this.cn_theorstock.Name = "cn_theorstock";
-            // 
-            // cn_numdecimals
-            // 
-            this.cn_numdecimals.DataPropertyName = "numdecimals";
-            this.cn_numdecimals.HeaderText = "numdecimals";
-            this.cn_numdecimals.Name = "cn_numdecimals";
-            this.cn_numdecimals.Visible = false;
+            this.dataColumn4.ColumnName = "manufbatch";
             // 
             // ctl_CreatLaunchDets
             // 
@@ -1134,6 +1183,8 @@
             this.mnu_Lines.ResumeLayout(false);
             this.mnu_Lines.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ds_MB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dt_MB)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1237,5 +1288,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_available;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_theorstock;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_numdecimals;
+        private System.Data.DataSet ds_MB;
+        private System.Data.DataTable dt_MB;
+        private System.Data.DataColumn dataColumn1;
+        private System.Data.DataColumn dataColumn2;
+        private System.Data.DataColumn dataColumn3;
+        private System.Data.DataColumn dataColumn4;
     }
 }
