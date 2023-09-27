@@ -511,11 +511,14 @@ namespace Odin.Planning
         { get; set; }
         public string BatchResDate
         { get; set; }
-
+        public int BatchToFollow
+        { get; set; }
         public int BatchId
         {
             get { return _batchid; }
-            set { _batchid = value;
+            set
+            {
+                _batchid = value;
                 SqlConnection conn = new SqlConnection(sConnStr);
                 conn.Open();
                 DataSet ds = new DataSet();
@@ -559,6 +562,7 @@ namespace Odin.Planning
                         BatchSerials = dr["serialnumbers"].ToString();
                         BatchQuotId = Convert.ToInt32(dr["quotid"]);
                         BatchResDate = dr["resdate"].ToString();
+                        BatchToFollow = Convert.ToInt32(dr["tofollow"]);
                     }
                 }
                 else
@@ -594,7 +598,9 @@ namespace Odin.Planning
             BatchQuotId = 0;
             BatchSerials = "";
             BatchResDate = "";
+            BatchToFollow = 0;
         }
+
 
         public static DataTable getBatchRMDets(int _batchid)
         {
@@ -2091,6 +2097,22 @@ namespace Odin.Planning
             sqlComm.CommandType = CommandType.StoredProcedure;
 
             sqlComm.Parameters.AddWithValue("@Id", IdBatch);
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+
+        }
+
+        public void FollowBatchProject(int IdBatch, int ToFollow)
+        {
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_FollowBatchProject", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@Id", IdBatch);
+            sqlComm.Parameters.AddWithValue("@ToFollow", ToFollow);
 
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();

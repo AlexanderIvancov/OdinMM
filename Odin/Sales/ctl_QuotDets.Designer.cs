@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.chk_primary = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.lbl_invalidbom = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.lbl_validbom = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.chk_project = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
@@ -97,7 +98,6 @@
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bs_List = new Odin.Global_Classes.SyncBindingSource();
-            this.chk_primary = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_List)).BeginInit();
@@ -167,6 +167,14 @@
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
             this.kryptonPanel1.Size = new System.Drawing.Size(551, 410);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // chk_primary
+            // 
+            this.chk_primary.Location = new System.Drawing.Point(250, 231);
+            this.chk_primary.Name = "chk_primary";
+            this.chk_primary.Size = new System.Drawing.Size(65, 20);
+            this.chk_primary.TabIndex = 337;
+            this.chk_primary.Values.Text = "Primary";
             // 
             // lbl_invalidbom
             // 
@@ -818,15 +826,6 @@
             this.dataGridViewTextBoxColumn3.HeaderText = "osid";
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.Visible = false;
-            // 
-            // chk_primary
-            // 
-            this.chk_primary.Location = new System.Drawing.Point(250, 231);
-            this.chk_primary.Name = "chk_primary";
-            this.chk_primary.Size = new System.Drawing.Size(65, 20);
-            this.chk_primary.TabIndex = 337;
-            this.chk_primary.ThreeState = true;
-            this.chk_primary.Values.Text = "Primary";
             // 
             // ctl_QuotDets
             // 

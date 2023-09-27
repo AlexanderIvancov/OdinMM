@@ -1132,5 +1132,33 @@ namespace Odin.Planning
                                              new KryptonPage[] { NewInputBatchCO(_batchid) });
         }
 
+        private void btn_ToFollow_Click(object sender, EventArgs e)
+        {
+            int _batchid = 0;
+
+            try
+            {
+                _batchid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
+
+            }
+            catch { }
+
+            if (_batchid != 0)
+            {
+                PlanBll.BatchId = _batchid;
+                string strMessage = "";
+                if (PlanBll.BatchToFollow == 0)
+                    strMessage = "You want to follow up the project?";
+                else
+                    strMessage = "You want to unfollow up the project?";
+
+                if (glob_Class.MessageConfirm("Following project warning", strMessage) == true)
+                {
+                    PlanBll.FollowBatchProject(_batchid, (PlanBll.BatchToFollow == 0 ? -1 : 0));
+                    bwStart(bw_List);
+                }
+
+            }
+        }
     }
 }
