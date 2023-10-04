@@ -866,6 +866,11 @@ namespace Odin.Planning.Controls
             //    QtyInLaunch = QtyCanBeLaunched;
             if (QtyInLaunch > QtyNotLaunched)
                 QtyInLaunch = QtyNotLaunched;
+            if (CheckMBLimit() == true)
+            {
+                if (QtyInLaunch > QtyCanBeLaunched)
+                    QtyInLaunch = QtyCanBeLaunched;
+            }
 
             RecalcLaunchRMQty();           
         }
@@ -994,6 +999,26 @@ namespace Odin.Planning.Controls
                 FillAutoLaunch(BatchId, StageId);
             }
             ShowBatchDets(BatchId, StageId);
+        }
+
+        private void btn_CBLMB_Click(object sender, EventArgs e)
+        {
+            var _query = "";
+            //_query = "sp_SelectNetUnitCostForBatchDets";
+            _query = "sp_SelectCreatLaunchDetsForMB";
+
+            var sqlparams = new List<SqlParameter>
+                {
+                 new SqlParameter("@batchid",SqlDbType.Int){Value = BatchId},
+                 new SqlParameter("@stageid",SqlDbType.Int){Value = StageId}
+                };
+
+            Template_DataGridView frm = new Template_DataGridView();
+
+            frm.Text = "Manufacturing batches limitation for " + cmb_Batches1.Batch;
+            frm.Query = _query;
+            frm.SqlParams = sqlparams;
+            frm.Show();
         }
     }
 }

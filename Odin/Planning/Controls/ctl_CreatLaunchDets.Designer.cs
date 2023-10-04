@@ -134,6 +134,7 @@
             this.dataColumn2 = new System.Data.DataColumn();
             this.dataColumn3 = new System.Data.DataColumn();
             this.dataColumn4 = new System.Data.DataColumn();
+            this.btn_CBLMB = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bn_List)).BeginInit();
@@ -147,6 +148,7 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.btn_CBLMB);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel16);
             this.kryptonPanel1.Controls.Add(this.txt_BatchComments);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel15);
@@ -353,18 +355,18 @@
             // 
             this.kryptonLabel9.Location = new System.Drawing.Point(226, 94);
             this.kryptonLabel9.Name = "kryptonLabel9";
-            this.kryptonLabel9.Size = new System.Drawing.Size(152, 20);
+            this.kryptonLabel9.Size = new System.Drawing.Size(125, 20);
             this.kryptonLabel9.TabIndex = 281;
-            this.kryptonLabel9.Values.Text = "Qty can be launched now:";
+            this.kryptonLabel9.Values.Text = "Qty can be launched:";
             // 
             // txt_QtyCanBeLaunched
             // 
             this.txt_QtyCanBeLaunched.AllowDecimalSeparator = true;
             this.txt_QtyCanBeLaunched.AllowSpace = false;
             this.txt_QtyCanBeLaunched.Enabled = false;
-            this.txt_QtyCanBeLaunched.Location = new System.Drawing.Point(384, 94);
+            this.txt_QtyCanBeLaunched.Location = new System.Drawing.Point(355, 93);
             this.txt_QtyCanBeLaunched.Name = "txt_QtyCanBeLaunched";
-            this.txt_QtyCanBeLaunched.Size = new System.Drawing.Size(88, 21);
+            this.txt_QtyCanBeLaunched.Size = new System.Drawing.Size(73, 21);
             this.txt_QtyCanBeLaunched.StateActive.Content.Color1 = System.Drawing.Color.Blue;
             this.txt_QtyCanBeLaunched.StateActive.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txt_QtyCanBeLaunched.StateActive.Content.Padding = new System.Windows.Forms.Padding(3);
@@ -1163,6 +1165,16 @@
             // 
             this.dataColumn4.ColumnName = "manufbatch";
             // 
+            // btn_CBLMB
+            // 
+            this.btn_CBLMB.Location = new System.Drawing.Point(434, 91);
+            this.btn_CBLMB.Name = "btn_CBLMB";
+            this.btn_CBLMB.Size = new System.Drawing.Size(41, 27);
+            this.btn_CBLMB.TabIndex = 299;
+            this.btn_CBLMB.Values.Image = global::Odin.Global_Resourses.Question_point16x16;
+            this.btn_CBLMB.Values.Text = "";
+            this.btn_CBLMB.Click += new System.EventHandler(this.btn_CBLMB_Click);
+            // 
             // ctl_CreatLaunchDets
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1294,5 +1306,6 @@
         private System.Data.DataColumn dataColumn2;
         private System.Data.DataColumn dataColumn3;
         private System.Data.DataColumn dataColumn4;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btn_CBLMB;
     }
 }

@@ -651,6 +651,8 @@ namespace Odin
 
         private void btn_RestCorrection_Click(object sender, EventArgs e)
         {
+            if (glob_Class.IsFormAlreadyOpen("frm_RestCorrection")) return;
+
             frm_RestCorrection frm = new frm_RestCorrection();
             frm.Show();
         }

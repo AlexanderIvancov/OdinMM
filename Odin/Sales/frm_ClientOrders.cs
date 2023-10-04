@@ -256,6 +256,10 @@ namespace Odin.Sales
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
+                if (Convert.ToInt32(row.Cells["chk_isprimary"].Value) == -1)
+                    foreach (DataGridViewCell cell in row.Cells)
+                        cell.Style.BackColor = Color.Orange;
+
                 if (Convert.ToInt32(row.Cells["cn_stateid"].Value) == 4
                     || Convert.ToInt32(row.Cells["cn_stateid"].Value) == 3)
                     foreach (DataGridViewCell cell in row.Cells)

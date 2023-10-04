@@ -50,6 +50,7 @@
             this.cn_dcomments = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_dcoid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_did = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_resale = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
             this.kryptonPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
@@ -119,7 +120,8 @@
             this.cn_custarticle,
             this.cn_dcomments,
             this.cn_dcoid,
-            this.cn_did});
+            this.cn_did,
+            this.cn_resale});
             this.gv_Delivery.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_Delivery.Location = new System.Drawing.Point(0, 0);
             this.gv_Delivery.Name = "gv_Delivery";
@@ -247,6 +249,13 @@
             this.cn_did.Visible = false;
             this.cn_did.Width = 5;
             // 
+            // cn_resale
+            // 
+            this.cn_resale.DataPropertyName = "resale";
+            this.cn_resale.HeaderText = "resale";
+            this.cn_resale.Name = "cn_resale";
+            this.cn_resale.Visible = false;
+            // 
             // frm_AddArticleForDelivery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -292,5 +301,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_dcomments;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_dcoid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_did;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_resale;
     }
 }

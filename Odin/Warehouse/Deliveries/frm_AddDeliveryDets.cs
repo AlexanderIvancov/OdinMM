@@ -402,6 +402,7 @@ namespace Odin.Warehouse.Deliveries
                                 newrow["delivaddress"] = row.Cells["cn_daddress"].Value.ToString();
                                 newrow["custarticle"] = row.Cells["cn_custarticle"].Value.ToString();
                                 newrow["comments"] = row.Cells["cn_dcomments"].Value.ToString();
+                                newrow["resale"] = Convert.ToInt32(row.Cells["cn_resale"].Value);
 
                                 data1.Rows.Add(newrow);
                             }
@@ -558,6 +559,9 @@ namespace Odin.Warehouse.Deliveries
                 if (Convert.ToInt32(row.Cells["cn_did"].Value) == 0)
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Yellow;
+                if (Convert.ToInt32(row.Cells["cn_resale"].Value) == -1)
+                    foreach (DataGridViewCell cell in row.Cells)
+                        cell.Style.BackColor = Color.Orange;
 
             }
         }

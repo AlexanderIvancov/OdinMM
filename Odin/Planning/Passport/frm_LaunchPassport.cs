@@ -127,7 +127,7 @@ namespace Odin.Planning.Passport
             {
                 if (Convert.ToInt32(row.Cells["cn_ordertypeid"].Value) == 2) //New
                     foreach (DataGridViewCell cell in row.Cells)
-                        cell.Style.BackColor = Color.Yellow;
+                        cell.Style.BackColor = Color.Orange;
                 if (Convert.ToInt32(row.Cells["cn_ordertypeid"].Value) == 1) // Serviss
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.LightCoral;
