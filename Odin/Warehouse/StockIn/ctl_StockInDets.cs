@@ -483,7 +483,7 @@ namespace Odin.Warehouse.StockIn
             CoefConv = POBll.POCoefConv;
             CoefConvInOrder = POBll.POCoefConv;
             Vat = POBll.POVat;
-            Comments = POBll.POComments;
+            Comments = POBll.POInternalComments;
             Discount = 0;
             strField = "UP";
             CalcPriceVat();
