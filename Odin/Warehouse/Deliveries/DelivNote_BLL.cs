@@ -341,6 +341,8 @@ namespace Odin.Warehouse.Deliveries
         { get; set; }
         public string CreditAccount
         { get; set; }
+        public string BuyerCountryShort
+        { get; set; }
         public void ClearDelivNoteHead()
         {
             DelivNote = "";
@@ -374,6 +376,7 @@ namespace Odin.Warehouse.Deliveries
             DeliveryInvoices = "";
             IsReturn = 0;
             CreditAccount = "";
+            BuyerCountryShort = "";
         }
 
         int _delivnoteheadid = 0;
@@ -421,8 +424,8 @@ namespace Odin.Warehouse.Deliveries
                         TransportId = Convert.ToInt32(dr["transportid"]);
                         Incoterms = dr["incoterms"].ToString();
                         Transport = dr["transport"].ToString();
-                        Seller = dr["seller"].ToString(); 
-                        SellerAddress = dr["selleraddress"].ToString(); 
+                        Seller = dr["seller"].ToString();
+                        SellerAddress = dr["selleraddress"].ToString();
                         SellerMail = dr["selleremail"].ToString();
                         SellerFax = dr["sellerfax"].ToString();
                         SellerPhone = dr["sellerphone"].ToString();
@@ -434,6 +437,7 @@ namespace Odin.Warehouse.Deliveries
                         DeliveryInvoices = dr["invoices"].ToString();
                         IsReturn = Convert.ToInt32(dr["isreturn"]);
                         CreditAccount = dr["creditaccount"].ToString();
+                        BuyerCountryShort = dr["buyercountryshort"].ToString();
                     }
                 }
                 else
@@ -442,6 +446,7 @@ namespace Odin.Warehouse.Deliveries
                 }
             }
         }
+
 
         public static DataTable getDeliveryDets(int _id)
         {

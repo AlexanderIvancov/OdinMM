@@ -74,7 +74,27 @@ namespace Odin.Warehouse.Deliveries
                 data = DelivNote_BLL.getDeliveryDetsPrintMov(HeadId);
 
 
-            datalab = DAL_Functions.getReportLabels("DelivNote", BLL.BuyerCountryId == 1 ? "LAT" : "ENG");
+            string short_name = "";
+
+
+            switch (BLL.BuyerCountryShort)
+            {
+                case "RU":
+                    short_name = "RUS";
+                    break;
+                case "BY":
+                    short_name = "RUS";
+                    break;
+                case "LV":
+                    short_name = "LAT";
+                    break;
+                default:
+                    short_name = "ENG";
+                    break;
+            }
+
+
+            datalab = DAL_Functions.getReportLabels("DelivNote", short_name);
 
             //data source
             report.Database.Tables[0].SetDataSource(dt);
