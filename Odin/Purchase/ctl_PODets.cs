@@ -82,7 +82,7 @@ namespace Odin.Purchase
                
 
                 UnitFNPrice = POBll.POUnitPrice;
-                UnitPriceBeg = POBll.POUnitPrice;
+                UnitPriceBeg = Discount == 100 ? 0 : (POBll.POUnitPrice * 100 / (100 - Discount));
 
                 CoefConv = POBll.POCoefConv;
 
@@ -519,7 +519,7 @@ namespace Odin.Purchase
             {
                 //Discount Absolute (show)
                 DiscFix = Math.Round((vUnitPrice * vDiscount / 100), 5);
-                UnitFNPrice = Math.Round((vUnitPrice * (100 - vDiscount) / 100), 5);
+                UnitFNPrice = vDiscount == 100 ? 0 : Math.Round((vUnitPrice * (100 - vDiscount) / 100), 5);
                 CalcPriceFields(2, UnitPrice, Discount, DiscFix, UnitFNPrice, Vat, PriceWVat);
             }
             else if (sender == 3)
@@ -539,7 +539,7 @@ namespace Odin.Purchase
             }
             else if (sender == 4)
             {
-                UnitPrice = Math.Round(UnitFNPrice * 100 / (100 - vDiscount), 5);
+                UnitPrice = vDiscount == 100 ? 0 : Math.Round(UnitFNPrice * 100 / (100 - vDiscount), 5);
                 CalcPriceFields(2, UnitPrice, Discount, DiscFix, UnitFNPrice, Vat, PriceWVat);
             }
             else

@@ -219,6 +219,11 @@ namespace Odin.Workshop
                     || Convert.ToInt32(row.Cells["chk_isactive"].Value) == 0)
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Gainsboro;//Color.FromArgb(192, 255, 192);
+                if (Convert.ToInt32(row.Cells["cn_isprimary"].Value) == -1) //New
+                {
+                    row.Cells["cn_conforder"].Style.BackColor = Color.Orange;
+                    row.Cells["cn_batch"].Style.BackColor = Color.Orange;
+                }
             }
                         
         }

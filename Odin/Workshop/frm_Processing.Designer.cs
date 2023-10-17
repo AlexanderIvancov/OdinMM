@@ -143,6 +143,7 @@
             this.cn_Rest = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_firsmovedate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_isprimary = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mnu_Lines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
@@ -811,7 +812,8 @@
             this.cn_Freezed,
             this.cn_Rest,
             this.cn_customer,
-            this.cn_firsmovedate});
+            this.cn_firsmovedate,
+            this.cn_isprimary});
             this.gv_List.ContextMenuStrip = this.mnu_Lines;
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_List.Location = new System.Drawing.Point(0, 0);
@@ -1310,6 +1312,14 @@
             this.cn_firsmovedate.Name = "cn_firsmovedate";
             this.cn_firsmovedate.ReadOnly = true;
             // 
+            // cn_isprimary
+            // 
+            this.cn_isprimary.DataPropertyName = "isprimary";
+            this.cn_isprimary.HeaderText = "isprimary";
+            this.cn_isprimary.Name = "cn_isprimary";
+            this.cn_isprimary.ReadOnly = true;
+            this.cn_isprimary.Visible = false;
+            // 
             // frm_Processing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1463,5 +1473,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_Rest;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_customer;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_firsmovedate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_isprimary;
     }
 }
