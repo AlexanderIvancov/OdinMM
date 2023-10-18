@@ -260,6 +260,7 @@ namespace Odin.Register.Articles
                 frm.Operation = _operation;
                 frm.Formula = _formula;
                 frm.UsingOnce = _useonce;
+                frm.OperNO = _operno;
                 frm.CheckEmpty();
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
