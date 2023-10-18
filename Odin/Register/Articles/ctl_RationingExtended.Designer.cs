@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.btn_CopyRatio = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_Prepa = new Owf.Controls.NumericTetxBox();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -47,12 +48,6 @@
             this.kryptonHeaderGroup2 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.gv_Opers = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.cn_operation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_formula = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_operid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_ostageid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chk_useonetime = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.cn_opertime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bn_Opers = new System.Windows.Forms.BindingNavigator(this.components);
             this.btn_AddOper = new System.Windows.Forms.ToolStripButton();
             this.btn_EditOper = new System.Windows.Forms.ToolStripButton();
@@ -79,7 +74,13 @@
             this.bs_List = new Odin.Global_Classes.SyncBindingSource();
             this.bs_Opers = new Odin.Global_Classes.SyncBindingSource();
             this.bs_Params = new Odin.Global_Classes.SyncBindingSource();
-            this.btn_CopyRatio = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.cn_operation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_formula = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_operid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_ostageid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chk_useonetime = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.cn_opertime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_operno = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
@@ -126,6 +127,17 @@
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
             this.kryptonPanel1.Size = new System.Drawing.Size(900, 51);
             this.kryptonPanel1.TabIndex = 3;
+            // 
+            // btn_CopyRatio
+            // 
+            this.btn_CopyRatio.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.LowProfile;
+            this.btn_CopyRatio.Location = new System.Drawing.Point(730, 5);
+            this.btn_CopyRatio.Name = "btn_CopyRatio";
+            this.btn_CopyRatio.Size = new System.Drawing.Size(45, 42);
+            this.btn_CopyRatio.TabIndex = 46;
+            this.btn_CopyRatio.Values.Image = global::Odin.Global_Resourses.Copy_32x32;
+            this.btn_CopyRatio.Values.Text = "";
+            this.btn_CopyRatio.Click += new System.EventHandler(this.btn_CopyRatio_Click);
             // 
             // kryptonLabel3
             // 
@@ -177,6 +189,7 @@
             // 
             this.cmb_Articles1.Article = "";
             this.cmb_Articles1.ArticleId = 0;
+            this.cmb_Articles1.ArticleIdRec = 0;
             this.cmb_Articles1.ArtType = null;
             this.cmb_Articles1.BOMState = 0;
             this.cmb_Articles1.Comments = null;
@@ -195,6 +208,7 @@
             this.cmb_Articles1.ProjectId = 0;
             this.cmb_Articles1.QtyAvail = 0D;
             this.cmb_Articles1.QtyConsStock = 0D;
+            this.cmb_Articles1.RMId = 0;
             this.cmb_Articles1.SecName = null;
             this.cmb_Articles1.Size = new System.Drawing.Size(265, 20);
             this.cmb_Articles1.SMTType = 0;
@@ -341,7 +355,8 @@
             this.cn_operid,
             this.cn_ostageid,
             this.chk_useonetime,
-            this.cn_opertime});
+            this.cn_opertime,
+            this.cn_operno});
             this.gv_Opers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_Opers.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.gv_Opers.Location = new System.Drawing.Point(0, 25);
@@ -354,60 +369,6 @@
             this.gv_Opers.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_Opers_ColumnHeaderMouseClick);
             this.gv_Opers.SelectionChanged += new System.EventHandler(this.gv_Opers_SelectionChanged);
             this.gv_Opers.DoubleClick += new System.EventHandler(this.gv_Opers_DoubleClick);
-            // 
-            // cn_operation
-            // 
-            this.cn_operation.DataPropertyName = "operation";
-            this.cn_operation.FillWeight = 150F;
-            this.cn_operation.HeaderText = "Operation";
-            this.cn_operation.Name = "cn_operation";
-            this.cn_operation.ReadOnly = true;
-            this.cn_operation.Width = 150;
-            // 
-            // cn_formula
-            // 
-            this.cn_formula.DataPropertyName = "formula";
-            this.cn_formula.FillWeight = 300F;
-            this.cn_formula.HeaderText = "Formula";
-            this.cn_formula.Name = "cn_formula";
-            this.cn_formula.ReadOnly = true;
-            this.cn_formula.Width = 300;
-            // 
-            // cn_operid
-            // 
-            this.cn_operid.DataPropertyName = "ID";
-            this.cn_operid.FillWeight = 5F;
-            this.cn_operid.HeaderText = "id";
-            this.cn_operid.Name = "cn_operid";
-            this.cn_operid.ReadOnly = true;
-            this.cn_operid.Visible = false;
-            this.cn_operid.Width = 5;
-            // 
-            // cn_ostageid
-            // 
-            this.cn_ostageid.DataPropertyName = "stageid";
-            this.cn_ostageid.HeaderText = "stageid";
-            this.cn_ostageid.Name = "cn_ostageid";
-            this.cn_ostageid.ReadOnly = true;
-            this.cn_ostageid.Visible = false;
-            // 
-            // chk_useonetime
-            // 
-            this.chk_useonetime.DataPropertyName = "useonetime";
-            this.chk_useonetime.FalseValue = "0";
-            this.chk_useonetime.FillWeight = 60F;
-            this.chk_useonetime.HeaderText = "Use once";
-            this.chk_useonetime.IndeterminateValue = "1";
-            this.chk_useonetime.Name = "chk_useonetime";
-            this.chk_useonetime.TrueValue = "-1";
-            this.chk_useonetime.Width = 60;
-            // 
-            // cn_opertime
-            // 
-            this.cn_opertime.DataPropertyName = "opertime";
-            this.cn_opertime.HeaderText = "Time (min)";
-            this.cn_opertime.Name = "cn_opertime";
-            this.cn_opertime.ReadOnly = true;
             // 
             // bn_Opers
             // 
@@ -657,16 +618,67 @@
             this.btn_deleteparameter.UniqueName = "2400F097EFB04B6E468862B9DE560148";
             this.btn_deleteparameter.Visible = false;
             // 
-            // btn_CopyRatio
+            // cn_operation
             // 
-            this.btn_CopyRatio.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.LowProfile;
-            this.btn_CopyRatio.Location = new System.Drawing.Point(730, 5);
-            this.btn_CopyRatio.Name = "btn_CopyRatio";
-            this.btn_CopyRatio.Size = new System.Drawing.Size(45, 42);
-            this.btn_CopyRatio.TabIndex = 46;
-            this.btn_CopyRatio.Values.Image = global::Odin.Global_Resourses.Copy_32x32;
-            this.btn_CopyRatio.Values.Text = "";
-            this.btn_CopyRatio.Click += new System.EventHandler(this.btn_CopyRatio_Click);
+            this.cn_operation.DataPropertyName = "operation";
+            this.cn_operation.FillWeight = 150F;
+            this.cn_operation.HeaderText = "Operation";
+            this.cn_operation.Name = "cn_operation";
+            this.cn_operation.ReadOnly = true;
+            this.cn_operation.Width = 150;
+            // 
+            // cn_formula
+            // 
+            this.cn_formula.DataPropertyName = "formula";
+            this.cn_formula.FillWeight = 300F;
+            this.cn_formula.HeaderText = "Formula";
+            this.cn_formula.Name = "cn_formula";
+            this.cn_formula.ReadOnly = true;
+            this.cn_formula.Width = 300;
+            // 
+            // cn_operid
+            // 
+            this.cn_operid.DataPropertyName = "ID";
+            this.cn_operid.FillWeight = 5F;
+            this.cn_operid.HeaderText = "id";
+            this.cn_operid.Name = "cn_operid";
+            this.cn_operid.ReadOnly = true;
+            this.cn_operid.Visible = false;
+            this.cn_operid.Width = 5;
+            // 
+            // cn_ostageid
+            // 
+            this.cn_ostageid.DataPropertyName = "stageid";
+            this.cn_ostageid.HeaderText = "stageid";
+            this.cn_ostageid.Name = "cn_ostageid";
+            this.cn_ostageid.ReadOnly = true;
+            this.cn_ostageid.Visible = false;
+            // 
+            // chk_useonetime
+            // 
+            this.chk_useonetime.DataPropertyName = "useonetime";
+            this.chk_useonetime.FalseValue = "0";
+            this.chk_useonetime.FillWeight = 60F;
+            this.chk_useonetime.HeaderText = "Use once";
+            this.chk_useonetime.IndeterminateValue = "1";
+            this.chk_useonetime.Name = "chk_useonetime";
+            this.chk_useonetime.TrueValue = "-1";
+            this.chk_useonetime.Width = 60;
+            // 
+            // cn_opertime
+            // 
+            this.cn_opertime.DataPropertyName = "opertime";
+            this.cn_opertime.HeaderText = "Time (min)";
+            this.cn_opertime.Name = "cn_opertime";
+            this.cn_opertime.ReadOnly = true;
+            // 
+            // cn_operno
+            // 
+            this.cn_operno.DataPropertyName = "operno";
+            this.cn_operno.FillWeight = 60F;
+            this.cn_operno.HeaderText = "Oper N.";
+            this.cn_operno.Name = "cn_operno";
+            this.cn_operno.Width = 60;
             // 
             // ctl_RationingExtended
             // 
@@ -740,12 +752,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_stageid;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel2;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridView gv_Opers;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_operation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_formula;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_operid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_ostageid;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn chk_useonetime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_opertime;
         private System.Windows.Forms.BindingNavigator bn_Opers;
         private System.Windows.Forms.ToolStripButton btn_AddOper;
         private System.Windows.Forms.ToolStripButton btn_EditOper;
@@ -770,5 +776,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_paramid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_paramoperid;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_CopyRatio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_operation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_formula;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_operid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_ostageid;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn chk_useonetime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_opertime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_operno;
     }
 }

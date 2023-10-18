@@ -42,12 +42,16 @@
             this.buttonSpecAny1 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.btn_Cancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.txt_OperNO = new Owf.Controls.NumericTetxBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel3);
+            this.kryptonPanel1.Controls.Add(this.txt_OperNO);
             this.kryptonPanel1.Controls.Add(this.btn_AddFromTemplate);
             this.kryptonPanel1.Controls.Add(this.cmb_Operations1);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel2);
@@ -174,6 +178,24 @@
             this.btn_OK.Values.Image = global::Odin.Global_Resourses.Ok;
             this.btn_OK.Values.Text = "OK";
             // 
+            // kryptonLabel3
+            // 
+            this.kryptonLabel3.Location = new System.Drawing.Point(3, 72);
+            this.kryptonLabel3.Name = "kryptonLabel3";
+            this.kryptonLabel3.Size = new System.Drawing.Size(65, 20);
+            this.kryptonLabel3.TabIndex = 28;
+            this.kryptonLabel3.Values.Text = "Oper NO.:";
+            // 
+            // txt_OperNO
+            // 
+            this.txt_OperNO.AllowDecimalSeparator = false;
+            this.txt_OperNO.AllowSpace = false;
+            this.txt_OperNO.Location = new System.Drawing.Point(84, 71);
+            this.txt_OperNO.Name = "txt_OperNO";
+            this.txt_OperNO.Size = new System.Drawing.Size(42, 23);
+            this.txt_OperNO.TabIndex = 27;
+            this.txt_OperNO.Text = "0";
+            // 
             // frm_AddOperation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -208,5 +230,7 @@
         private CMB_Components.Operations.cmb_Operations cmb_Operations1;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_AddFromTemplate;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
+        private Owf.Controls.NumericTetxBox txt_OperNO;
     }
 }

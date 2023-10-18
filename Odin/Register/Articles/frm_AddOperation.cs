@@ -56,7 +56,18 @@ namespace Odin.Register.Articles
             get { return txt_Formula.Text; }
             set { txt_Formula.Text = value; }
         }
-
+        public int OperNO
+        {
+            get
+            {
+                try
+                {
+                    return Convert.ToInt32(txt_OperNO.Text);
+                }
+                catch { return 0; }
+            }
+            set { txt_OperNO.Text = value.ToString(); }
+        }
         public void CheckEmpty()
         {
             if (txt_Formula.Text == ""
