@@ -282,8 +282,8 @@ namespace Odin.Warehouse.StockIn
 
         private void gv_List_SelectionChanged(object sender, EventArgs e)
         {
-            txt_Oper.Text = string.Empty;
-            txt_Oper.Focus();
+            //txt_Oper.Text = string.Empty;
+            //txt_Oper.Focus();
         }
 
         private void gv_List_Click(object sender, EventArgs e)
@@ -483,7 +483,13 @@ namespace Odin.Warehouse.StockIn
                 LoadColumns(gv_List);
             }
         }
-      
+
         #endregion
+
+        private void gv_List_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            txt_Oper.Text = "";
+            txt_Oper.Focus();
+        }
     }
 }

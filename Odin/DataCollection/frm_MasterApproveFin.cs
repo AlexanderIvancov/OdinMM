@@ -926,5 +926,10 @@ namespace Odin.DataCollection
         {
             FillList();
         }
+
+        private void btn_Start_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

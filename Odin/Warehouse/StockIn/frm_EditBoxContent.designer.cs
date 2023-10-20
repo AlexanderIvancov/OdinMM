@@ -244,6 +244,7 @@
             this.gv_List.StateCommon.HeaderColumn.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.gv_List.TabIndex = 248;
             this.gv_List.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_List_CellClick);
+            this.gv_List.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_List_CellContentClick);
             this.gv_List.SelectionChanged += new System.EventHandler(this.gv_List_SelectionChanged);
             this.gv_List.Click += new System.EventHandler(this.gv_List_Click);
             // 
@@ -284,7 +285,7 @@
             this.toolStripSeparator2,
             this.mni_Admin});
             this.mnu_Lines.Name = "mnu_Requests";
-            this.mnu_Lines.Size = new System.Drawing.Size(211, 189);
+            this.mnu_Lines.Size = new System.Drawing.Size(211, 167);
             this.mnu_Lines.Opening += new System.ComponentModel.CancelEventHandler(this.mnu_Lines_Opening);
             // 
             // mni_FilterFor

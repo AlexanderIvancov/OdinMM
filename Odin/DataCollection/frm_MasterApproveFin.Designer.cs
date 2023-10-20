@@ -80,6 +80,7 @@
             this.cn_issn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_opernum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bs_Serials = new Odin.Global_Classes.SyncBindingSource();
+            this.btn_Start = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
             ((System.ComponentModel.ISupportInitialize)(this.gv_List)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
@@ -103,6 +104,7 @@
             // 
             this.btn_DeleteSN.Image = global::Odin.Global_Resourses.delete2;
             this.btn_DeleteSN.UniqueName = "DA1C7802EB9D4E471E915DBE7CFB126B";
+            this.btn_DeleteSN.Visible = false;
             // 
             // gv_List
             // 
@@ -223,7 +225,8 @@
             this.kryptonHeaderGroup1.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup[] {
             this.btn_DeleteSN,
             this.btn_CheckAll,
-            this.btn_Refresh});
+            this.btn_Refresh,
+            this.btn_Start});
             this.kryptonHeaderGroup1.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonHeaderGroup1.Location = new System.Drawing.Point(0, 0);
             this.kryptonHeaderGroup1.Name = "kryptonHeaderGroup1";
@@ -638,6 +641,12 @@
             this.cn_opernum.HeaderText = "Oper. №";
             this.cn_opernum.Name = "cn_opernum";
             // 
+            // btn_Start
+            // 
+            this.btn_Start.Image = global::Odin.Global_Resourses.player_play;
+            this.btn_Start.UniqueName = "5E6DFDFAA93C49A74C8DD0CB881B9237";
+            this.btn_Start.Click += new System.EventHandler(this.btn_Start_Click);
+            // 
             // frm_MasterApproveFin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -724,5 +733,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_opernum;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_SetPlace;
         private CMB_Components.Common.cmb_CommonPDA cmb_CommonPDA1;
+        private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup btn_Start;
     }
 }
