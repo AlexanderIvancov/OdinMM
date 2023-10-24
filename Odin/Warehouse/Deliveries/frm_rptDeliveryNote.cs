@@ -131,7 +131,11 @@ namespace Odin.Warehouse.Deliveries
             foreach (DataRow row in datalab.Rows)
             {
                 //MessageBox.Show(row["paramvalue"].ToString());
-                 report.SetParameterValue(row["paramname"].ToString(), row["paramvalue"].ToString()); 
+                try
+                {
+                    report.SetParameterValue(row["paramname"].ToString(), row["paramvalue"].ToString());
+                }
+                catch { }
             }
 
             report.SetParameterValue("UserName", System.Environment.UserName);
