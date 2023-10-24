@@ -45,8 +45,9 @@ namespace Odin.Warehouse.Reports
         {
             get { if (rb_Lat.Checked == true)
                     return "LAT";
-                else
-                    return "ENG";
+                else if(rb_Rus.Checked == true)
+                    return "RUS";
+                return "ENG";
             }
             set { }
         }
