@@ -90,7 +90,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section DetailSection3 {
+        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection1 {
             get {
                 return this.ReportDefinition.Sections[5];
             }
@@ -98,7 +98,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection1 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
             get {
                 return this.ReportDefinition.Sections[6];
             }
@@ -106,17 +106,9 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
-            get {
-                return this.ReportDefinition.Sections[7];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public CrystalDecisions.CrystalReports.Engine.Section Section5 {
             get {
-                return this.ReportDefinition.Sections[8];
+                return this.ReportDefinition.Sections[7];
             }
         }
         
@@ -130,7 +122,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_DocDateLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_SellerLab {
             get {
                 return this.DataDefinition.ParameterFields[1];
             }
@@ -138,7 +130,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_SellerLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_BuyerLab {
             get {
                 return this.DataDefinition.ParameterFields[2];
             }
@@ -146,7 +138,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_BuyerLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_SelAddressLab {
             get {
                 return this.DataDefinition.ParameterFields[3];
             }
@@ -154,7 +146,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_SelAddressLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_BuyAddressLab {
             get {
                 return this.DataDefinition.ParameterFields[4];
             }
@@ -162,7 +154,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_BuyAddressLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_SelBankLab {
             get {
                 return this.DataDefinition.ParameterFields[5];
             }
@@ -170,7 +162,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_SelBankLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_SelContLab {
             get {
                 return this.DataDefinition.ParameterFields[6];
             }
@@ -178,7 +170,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_SelContLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_BuyContLab {
             get {
                 return this.DataDefinition.ParameterFields[7];
             }
@@ -186,7 +178,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_BuyContLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_SellerVATLab {
             get {
                 return this.DataDefinition.ParameterFields[8];
             }
@@ -194,7 +186,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_IncotermsLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_BuyerVATLab {
             get {
                 return this.DataDefinition.ParameterFields[9];
             }
@@ -202,7 +194,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_SellerVATLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_PalletLab {
             get {
                 return this.DataDefinition.ParameterFields[10];
             }
@@ -210,7 +202,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_BuyerVATLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_PalletWeightLab {
             get {
                 return this.DataDefinition.ParameterFields[11];
             }
@@ -218,7 +210,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_CarrierLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_HeadCommentsLab {
             get {
                 return this.DataDefinition.ParameterFields[12];
             }
@@ -226,7 +218,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_PalletLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_SellerPhoneLab {
             get {
                 return this.DataDefinition.ParameterFields[13];
             }
@@ -234,7 +226,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_PalletWeightLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_SellerMailLab {
             get {
                 return this.DataDefinition.ParameterFields[14];
             }
@@ -242,7 +234,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_HeadCommentsLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_ArticleLab {
             get {
                 return this.DataDefinition.ParameterFields[15];
             }
@@ -250,7 +242,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_SellerPhoneLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_CustArticleLab {
             get {
                 return this.DataDefinition.ParameterFields[16];
             }
@@ -258,7 +250,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_SellerFaxLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_QtyLab {
             get {
                 return this.DataDefinition.ParameterFields[17];
             }
@@ -266,7 +258,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_SellerMailLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_CustOrderLab {
             get {
                 return this.DataDefinition.ParameterFields[18];
             }
@@ -274,7 +266,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ArticleLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_PackageLab {
             get {
                 return this.DataDefinition.ParameterFields[19];
             }
@@ -282,7 +274,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_CustArticleLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_CustCodeLab {
             get {
                 return this.DataDefinition.ParameterFields[20];
             }
@@ -290,7 +282,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_QtyLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_DeliveryDate {
             get {
                 return this.DataDefinition.ParameterFields[21];
             }
@@ -298,7 +290,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_UnitLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_DeliveryNote {
             get {
                 return this.DataDefinition.ParameterFields[22];
             }
@@ -306,7 +298,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_CustOrderLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_SellerAddress {
             get {
                 return this.DataDefinition.ParameterFields[23];
             }
@@ -314,7 +306,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_PackageLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_SellerVAT {
             get {
                 return this.DataDefinition.ParameterFields[24];
             }
@@ -322,7 +314,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_CustCodeLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_SellerPhone {
             get {
                 return this.DataDefinition.ParameterFields[25];
             }
@@ -330,7 +322,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_CommentsLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_SellerMail {
             get {
                 return this.DataDefinition.ParameterFields[26];
             }
@@ -338,7 +330,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_DeliveryDate {
+        public CrystalDecisions.Shared.IParameterField Parameter_SellerContPers {
             get {
                 return this.DataDefinition.ParameterFields[27];
             }
@@ -346,7 +338,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_DeliveryNote {
+        public CrystalDecisions.Shared.IParameterField Parameter_Seller {
             get {
                 return this.DataDefinition.ParameterFields[28];
             }
@@ -354,7 +346,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_SellerAddress {
+        public CrystalDecisions.Shared.IParameterField Parameter_HeadComments {
             get {
                 return this.DataDefinition.ParameterFields[29];
             }
@@ -362,7 +354,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_SellerVAT {
+        public CrystalDecisions.Shared.IParameterField Parameter_BuyerAddress {
             get {
                 return this.DataDefinition.ParameterFields[30];
             }
@@ -370,7 +362,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_SellerPhone {
+        public CrystalDecisions.Shared.IParameterField Parameter_BuyerVAT {
             get {
                 return this.DataDefinition.ParameterFields[31];
             }
@@ -378,7 +370,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_SellerFax {
+        public CrystalDecisions.Shared.IParameterField Parameter_Buyer {
             get {
                 return this.DataDefinition.ParameterFields[32];
             }
@@ -386,7 +378,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_SellerMail {
+        public CrystalDecisions.Shared.IParameterField Parameter_BuyerContPers {
             get {
                 return this.DataDefinition.ParameterFields[33];
             }
@@ -394,7 +386,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_SellerContPers {
+        public CrystalDecisions.Shared.IParameterField Parameter_Pallete {
             get {
                 return this.DataDefinition.ParameterFields[34];
             }
@@ -402,7 +394,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Seller {
+        public CrystalDecisions.Shared.IParameterField Parameter_PalWeight {
             get {
                 return this.DataDefinition.ParameterFields[35];
             }
@@ -410,7 +402,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_HeadComments {
+        public CrystalDecisions.Shared.IParameterField Parameter_WeightNetLab {
             get {
                 return this.DataDefinition.ParameterFields[36];
             }
@@ -418,7 +410,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_BuyerAddress {
+        public CrystalDecisions.Shared.IParameterField Parameter_WeightBrutLab {
             get {
                 return this.DataDefinition.ParameterFields[37];
             }
@@ -426,7 +418,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_BuyerVAT {
+        public CrystalDecisions.Shared.IParameterField Parameter_UserName {
             get {
                 return this.DataDefinition.ParameterFields[38];
             }
@@ -434,7 +426,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Buyer {
+        public CrystalDecisions.Shared.IParameterField Parameter_PrintedAt {
             get {
                 return this.DataDefinition.ParameterFields[39];
             }
@@ -442,7 +434,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_BuyerContPers {
+        public CrystalDecisions.Shared.IParameterField Parameter_PrintedBy {
             get {
                 return this.DataDefinition.ParameterFields[40];
             }
@@ -450,7 +442,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Transport {
+        public CrystalDecisions.Shared.IParameterField Parameter_TotBoxesLab {
             get {
                 return this.DataDefinition.ParameterFields[41];
             }
@@ -458,7 +450,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Pallete {
+        public CrystalDecisions.Shared.IParameterField Parameter_TotNetLab {
             get {
                 return this.DataDefinition.ParameterFields[42];
             }
@@ -466,7 +458,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_PalWeight {
+        public CrystalDecisions.Shared.IParameterField Parameter_TotBrutLab {
             get {
                 return this.DataDefinition.ParameterFields[43];
             }
@@ -474,7 +466,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Incoterms {
+        public CrystalDecisions.Shared.IParameterField Parameter_SubmittedLab {
             get {
                 return this.DataDefinition.ParameterFields[44];
             }
@@ -482,7 +474,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_WeightNetLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_RecepientLab {
             get {
                 return this.DataDefinition.ParameterFields[45];
             }
@@ -490,7 +482,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_WeightBrutLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_JobTitleLab {
             get {
                 return this.DataDefinition.ParameterFields[46];
             }
@@ -498,7 +490,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_UserName {
+        public CrystalDecisions.Shared.IParameterField Parameter_SignatureLab {
             get {
                 return this.DataDefinition.ParameterFields[47];
             }
@@ -506,7 +498,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_PrintedAt {
+        public CrystalDecisions.Shared.IParameterField Parameter_BatchLab {
             get {
                 return this.DataDefinition.ParameterFields[48];
             }
@@ -514,7 +506,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_PrintedBy {
+        public CrystalDecisions.Shared.IParameterField Parameter_Invoices {
             get {
                 return this.DataDefinition.ParameterFields[49];
             }
@@ -522,7 +514,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_TotBoxesLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_DelivNoteType {
             get {
                 return this.DataDefinition.ParameterFields[50];
             }
@@ -530,7 +522,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_TotNetLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_IsReturn {
             get {
                 return this.DataDefinition.ParameterFields[51];
             }
@@ -538,7 +530,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_TotBrutLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_CreditAccount {
             get {
                 return this.DataDefinition.ParameterFields[52];
             }
@@ -546,7 +538,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_SubmittedLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_CreditAccountLab {
             get {
                 return this.DataDefinition.ParameterFields[53];
             }
@@ -554,7 +546,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_RecepientLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_SellerAddressLab {
             get {
                 return this.DataDefinition.ParameterFields[54];
             }
@@ -562,7 +554,7 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_JobTitleLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_BuyerAddressLab {
             get {
                 return this.DataDefinition.ParameterFields[55];
             }
@@ -570,57 +562,9 @@ namespace Odin.Warehouse.Deliveries {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_SignatureLab {
+        public CrystalDecisions.Shared.IParameterField Parameter_InvoicesLab {
             get {
                 return this.DataDefinition.ParameterFields[56];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_BatchLab {
-            get {
-                return this.DataDefinition.ParameterFields[57];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Invoices {
-            get {
-                return this.DataDefinition.ParameterFields[58];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_DelivNoteType {
-            get {
-                return this.DataDefinition.ParameterFields[59];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_IsReturn {
-            get {
-                return this.DataDefinition.ParameterFields[60];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_CreditAccount {
-            get {
-                return this.DataDefinition.ParameterFields[61];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_CreditAccountLab {
-            get {
-                return this.DataDefinition.ParameterFields[62];
             }
         }
     }

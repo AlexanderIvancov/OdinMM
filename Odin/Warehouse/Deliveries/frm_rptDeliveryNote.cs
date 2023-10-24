@@ -110,15 +110,12 @@ namespace Odin.Warehouse.Deliveries
             report.SetParameterValue("DeliveryDate", BLL.DelivDate);
             report.SetParameterValue("DeliveryNote", BLL.DelivNote);
             report.SetParameterValue("SellerPhone", BLL.SellerPhone);
-            report.SetParameterValue("SellerFax", BLL.SellerFax);
             report.SetParameterValue("SellerContPers", BLL.SellerContPers);
             report.SetParameterValue("HeadComments", BLL.HeadComments);
             report.SetParameterValue("Buyer", BLL.DelivPlace);
             report.SetParameterValue("BuyerVAT", BLL.BuyerVAT);
             report.SetParameterValue("BuyerAddress", BLL.FinalDelivAddress);
             report.SetParameterValue("BuyerContPers", BLL.BuyerContPerson);
-            report.SetParameterValue("Incoterms", BLL.Incoterms);
-            report.SetParameterValue("Transport", BLL.Transport);
             report.SetParameterValue("Pallete", BLL.PalQty);
             report.SetParameterValue("PalWeight", BLL.PalWeight);
             report.SetParameterValue("Invoices", BLL.DeliveryInvoices);
