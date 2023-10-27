@@ -456,7 +456,7 @@ namespace Odin.Warehouse.Deliveries
             double _total = 0;
             //double _totalvat = 0;
             //double _totalwithvat = 0;
-            string _cur = "€";
+            string _cur = "BYN";
             //double _vat = 0;
 
             foreach (DataGridViewRow row in this.gv_List.Rows)
@@ -465,14 +465,14 @@ namespace Odin.Warehouse.Deliveries
                 {
                     if (row.Cells["cn_name"].Value.ToString() == _document)
                     {
-                        _total = _total + Math.Round(Convert.ToDouble(row.Cells["cn_totalcosteur"].Value), 2, MidpointRounding.AwayFromZero);
-                       
+                        _total = _total + Convert.ToDouble(row.Cells["cn_costpricebr"].Value) * Convert.ToDouble(row.Cells["cn_qty"].Value);
+
                     }
                 }
                 catch { }
             }
-
-            Total = _total;
+            
+            Total = Math.Round(_total, 2, MidpointRounding.AwayFromZero);
 
             lbl_Total.Invoke(new MethodInvoker(delegate { lbl_Total.Text = "Total for document (" + _cur + "):"; }));
             
