@@ -465,8 +465,7 @@ namespace Odin.Warehouse.Deliveries
                 {
                     if (row.Cells["cn_name"].Value.ToString() == _document)
                     {
-                        _total = _total + Math.Round(Convert.ToDouble(row.Cells["cn_totalcosteur"].Value), 2, MidpointRounding.AwayFromZero);
-                       
+                        _total = _total + Math.Round(Convert.ToDouble(row.Cells["cn_costpricebr"].Value) * Convert.ToDouble(row.Cells["cn_qty"].Value), 2, MidpointRounding.AwayFromZero);
                     }
                 }
                 catch { }
