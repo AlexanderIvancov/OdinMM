@@ -325,6 +325,8 @@ namespace Odin.Warehouse.Deliveries
         { get; set; }
         public string SellerPhone
         { get; set; }
+        public string BuyerPhone
+        { get; set; }
         public string SellerFax
         { get; set; }
         public string SellerVAT
@@ -367,6 +369,7 @@ namespace Odin.Warehouse.Deliveries
             SellerAddress = "";
             SellerMail = "";
             SellerFax = "";
+            BuyerPhone = "";
             SellerPhone = "";
             SellerVAT = "";
             SellerContPers = "";
@@ -428,6 +431,7 @@ namespace Odin.Warehouse.Deliveries
                         SellerAddress = dr["selleraddress"].ToString();
                         SellerMail = dr["selleremail"].ToString();
                         SellerFax = dr["sellerfax"].ToString();
+                        BuyerPhone = dr["buyerphone"].ToString();
                         SellerPhone = dr["sellerphone"].ToString();
                         SellerVAT = dr["sellervat"].ToString();
                         SellerContPers = dr["sellercontpers"].ToString();
