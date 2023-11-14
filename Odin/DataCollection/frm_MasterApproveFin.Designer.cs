@@ -46,6 +46,7 @@
             this.bs_List = new Odin.Global_Classes.SyncBindingSource();
             this.kryptonHeaderGroup1 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.btn_Refresh = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
+            this.btn_Start = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
             this.kryptonHeaderGroup2 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.rb_Valkas2B = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
             this.btn_Clean = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -80,7 +81,9 @@
             this.cn_issn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_opernum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bs_Serials = new Odin.Global_Classes.SyncBindingSource();
-            this.btn_Start = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
+            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.txt_QtyToStart = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.btn_Start1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.gv_List)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
@@ -247,6 +250,12 @@
             this.btn_Refresh.UniqueName = "FD381D0D561B4DA5DB9A876899A04899";
             this.btn_Refresh.Click += new System.EventHandler(this.btn_Refresh_Click);
             // 
+            // btn_Start
+            // 
+            this.btn_Start.Image = global::Odin.Global_Resourses.player_play;
+            this.btn_Start.UniqueName = "5E6DFDFAA93C49A74C8DD0CB881B9237";
+            this.btn_Start.Click += new System.EventHandler(this.btn_Start_Click);
+            // 
             // kryptonHeaderGroup2
             // 
             this.kryptonHeaderGroup2.Dock = System.Windows.Forms.DockStyle.Right;
@@ -255,6 +264,9 @@
             // 
             // kryptonHeaderGroup2.Panel
             // 
+            this.kryptonHeaderGroup2.Panel.Controls.Add(this.kryptonLabel1);
+            this.kryptonHeaderGroup2.Panel.Controls.Add(this.txt_QtyToStart);
+            this.kryptonHeaderGroup2.Panel.Controls.Add(this.btn_Start1);
             this.kryptonHeaderGroup2.Panel.Controls.Add(this.rb_Valkas2B);
             this.kryptonHeaderGroup2.Panel.Controls.Add(this.btn_Clean);
             this.kryptonHeaderGroup2.Panel.Controls.Add(this.rb_Valkas2);
@@ -641,11 +653,50 @@
             this.cn_opernum.HeaderText = "Oper. №";
             this.cn_opernum.Name = "cn_opernum";
             // 
-            // btn_Start
+            // kryptonLabel1
             // 
-            this.btn_Start.Image = global::Odin.Global_Resourses.player_play;
-            this.btn_Start.UniqueName = "5E6DFDFAA93C49A74C8DD0CB881B9237";
-            this.btn_Start.Click += new System.EventHandler(this.btn_Start_Click);
+            this.kryptonLabel1.Location = new System.Drawing.Point(17, 303);
+            this.kryptonLabel1.Name = "kryptonLabel1";
+            this.kryptonLabel1.Size = new System.Drawing.Size(218, 26);
+            this.kryptonLabel1.StateCommon.LongText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.kryptonLabel1.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.kryptonLabel1.TabIndex = 261;
+            this.kryptonLabel1.Values.Text = "Qty need to be started:";
+            // 
+            // txt_QtyToStart
+            // 
+            this.txt_QtyToStart.Enabled = false;
+            this.txt_QtyToStart.Location = new System.Drawing.Point(17, 334);
+            this.txt_QtyToStart.Margin = new System.Windows.Forms.Padding(2);
+            this.txt_QtyToStart.Multiline = true;
+            this.txt_QtyToStart.Name = "txt_QtyToStart";
+            this.txt_QtyToStart.ReadOnly = true;
+            this.txt_QtyToStart.Size = new System.Drawing.Size(231, 45);
+            this.txt_QtyToStart.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txt_QtyToStart.StateCommon.Content.Padding = new System.Windows.Forms.Padding(2);
+            this.txt_QtyToStart.StateDisabled.Back.Color1 = System.Drawing.Color.Yellow;
+            this.txt_QtyToStart.StateDisabled.Border.Color1 = System.Drawing.Color.White;
+            this.txt_QtyToStart.StateDisabled.Border.Color2 = System.Drawing.Color.White;
+            this.txt_QtyToStart.StateDisabled.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.txt_QtyToStart.StateDisabled.Content.Color1 = System.Drawing.Color.Black;
+            this.txt_QtyToStart.StateDisabled.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txt_QtyToStart.StateNormal.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txt_QtyToStart.TabIndex = 260;
+            this.txt_QtyToStart.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // btn_Start1
+            // 
+            this.btn_Start1.Location = new System.Drawing.Point(252, 308);
+            this.btn_Start1.Name = "btn_Start1";
+            this.btn_Start1.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Silver;
+            this.btn_Start1.Size = new System.Drawing.Size(71, 70);
+            this.btn_Start1.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btn_Start1.TabIndex = 259;
+            this.btn_Start1.Values.Image = global::Odin.Global_Resourses.play_big;
+            this.btn_Start1.Values.Text = "";
+            this.btn_Start1.Click += new System.EventHandler(this.btn_Start1_Click);
             // 
             // frm_MasterApproveFin
             // 
@@ -734,5 +785,8 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_SetPlace;
         private CMB_Components.Common.cmb_CommonPDA cmb_CommonPDA1;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup btn_Start;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_QtyToStart;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Start1;
     }
 }
