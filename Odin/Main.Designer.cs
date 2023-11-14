@@ -265,6 +265,7 @@
             this.tab_DataCollection,
             this.tab_ReadOnly,
             this.tab_Settings});
+            this.kryptonRibbon1.SelectedContext = null;
             this.kryptonRibbon1.SelectedTab = this.tab_Register;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1660, 115);
             this.kryptonRibbon1.TabIndex = 0;

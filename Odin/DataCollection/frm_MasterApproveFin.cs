@@ -671,7 +671,7 @@ namespace Odin.DataCollection
 
         private void frm_MasterApproveTot_Load(object sender, EventArgs e)
         {
-            FillList();
+            //FillList();
         }
 
         private void btn_EditContent_Click(object sender, EventArgs e)

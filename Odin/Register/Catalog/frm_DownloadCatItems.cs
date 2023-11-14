@@ -161,8 +161,8 @@ namespace Odin.Register.Catalog
                             _Comments = glob_Class.NES(myExcel.GetValue("M" + k.ToString()).Trim());
                             _Supplier = glob_Class.NES(myExcel.GetValue("N" + k.ToString()).Trim());
 
-                            if (Math.Round(_UnitPrice, 5) > 0
-                                || glob_Class.NES(myExcel.GetValue("D" + k.ToString()).Trim().ToUpper()) == "Q")
+                            //if (Math.Round(_UnitPrice, 5) > 0
+                            //    || glob_Class.NES(myExcel.GetValue("D" + k.ToString()).Trim().ToUpper()) == "Q")
                             {
                                 DataRow drser = data.NewRow();
                                 drser["article"] = _Article;
