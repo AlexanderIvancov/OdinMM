@@ -16,10 +16,11 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using Odin.CustomControls;
 using Odin.Workshop;
+using Odin.Planning;
 
 namespace Odin.DataCollection
 {
-   
+
     public partial class frm_MasterApproveFin : BaseForm
     {
         public frm_MasterApproveFin()
@@ -42,6 +43,7 @@ namespace Odin.DataCollection
         AdmMenu mMenu = new AdmMenu();
         DAL_Functions DAL = new DAL_Functions();
         DC_BLL DCBll = new DC_BLL();
+        Plan_BLL PlanBll = new Plan_BLL();
         Processing_BLL PBLL = new Processing_BLL();
         public DataTable datadetails;
         frm_ScreenNumKeyboard popup;
@@ -89,7 +91,7 @@ namespace Odin.DataCollection
         }
 
         string _launch = "";
-                
+
 
         public int NextStageId
         { get; set; }
@@ -105,36 +107,36 @@ namespace Odin.DataCollection
 
         public int ProdPlace
         {
-            get { return  cmb_CommonPDA1.SelectedValue; }
+            get { return cmb_CommonPDA1.SelectedValue; }
             set { cmb_CommonPDA1.SelectedValue = value; }
 
-        //    get
-        //    {
-        //        if (rb_Valkas2.Checked == true)
-        //            return 1;
-        //        else if (rb_Valkas2B.Checked == true)
-        //            return 2;
-        //        else
-        //            return 0;
-        //    }
-        //    set
-        //    {
-        //        if (value == 1)
-        //        {
-        //            rb_Valkas2.Checked = true;
-        //            rb_Valkas2B.Checked = false;
-        //        }
-        //        else if (value == 2)
-        //        {
-        //            rb_Valkas2.Checked = false;
-        //            rb_Valkas2B.Checked = true;
-        //        }
-        //        else
-        //        {
-        //            rb_Valkas2.Checked = false;
-        //            rb_Valkas2B.Checked = false;
-        //        }
-        //    }
+            //    get
+            //    {
+            //        if (rb_Valkas2.Checked == true)
+            //            return 1;
+            //        else if (rb_Valkas2B.Checked == true)
+            //            return 2;
+            //        else
+            //            return 0;
+            //    }
+            //    set
+            //    {
+            //        if (value == 1)
+            //        {
+            //            rb_Valkas2.Checked = true;
+            //            rb_Valkas2B.Checked = false;
+            //        }
+            //        else if (value == 2)
+            //        {
+            //            rb_Valkas2.Checked = false;
+            //            rb_Valkas2B.Checked = true;
+            //        }
+            //        else
+            //        {
+            //            rb_Valkas2.Checked = false;
+            //            rb_Valkas2B.Checked = false;
+            //        }
+            //    }
         }
 
         public int StageId
@@ -142,25 +144,35 @@ namespace Odin.DataCollection
             get; set;
         }
 
-        
+
         public int BatchId
         { get; set; }
 
-        
+
         public double Freezed
         {
             get; set;
         }
         public double OldFreezed
         { get; set; }
+
         public double QtyStarted
         {
-            get;set;
+            get; set;
+        }
+        public double QtyTotalStarted
+        {
+            get; set;
         }
         public double Qty
         {
             get { return Convert.ToDouble(txt_Qty.Text); }
             set { txt_Qty.Text = value.ToString(); }
+        }
+        public double QtyToStart
+        {
+            get { return Convert.ToDouble(txt_QtyToStart.Text); }
+            set { txt_QtyToStart.Text = value.ToString(); }
         }
 
         private float _measCellValue;
@@ -168,6 +180,17 @@ namespace Odin.DataCollection
         {
             get { return _measCellValue; }
             set { _measCellValue = value; }
+        }
+
+        public double PrevQty
+        { get; set; }
+
+        int _tmplaunchid = 0;
+
+        public int TmpLaunchId
+        {
+            get { return _tmplaunchid; }
+            set { _tmplaunchid = value; }
         }
 
         #endregion
@@ -192,11 +215,11 @@ namespace Odin.DataCollection
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
-                
+
                 //SetCellsColor();
             });
 
-          
+
         }
 
         public void FillListLaunch(int _launchid)
@@ -229,15 +252,81 @@ namespace Odin.DataCollection
             foreach (DataGridViewRow row in this.gv_Serials.Rows)
             {
                 if (Convert.ToInt32(row.Cells["cn_select"].Value) == -1)
-                try
-                {
-                    _qty = _qty + Convert.ToDouble(row.Cells["cn_rtoapprove"].Value);
-                }
-                catch { _qty = _qty + 0; }
+                    try
+                    {
+                        _qty = _qty + Convert.ToDouble(row.Cells["cn_rtoapprove"].Value);
+                    }
+                    catch { _qty = _qty + 0; }
             }
             Qty = _qty;
         }
 
+        public void RecalcQtyToStart()
+        {
+            gv_Serials.EndEdit();
+            //double _qty = 0;
+
+            //foreach (DataGridViewRow row in this.gv_Serials.Rows)
+            //{
+            //    if (Convert.ToInt32(row.Cells["cn_select"].Value) == -1)
+            //        try
+            //        {
+            //            _qty = _qty + Convert.ToDouble(row.Cells["cn_rtoapprove"].Value);
+            //        }
+            //        catch { _qty = _qty + 0; }
+            //}
+            if (Qty > QtyStarted)
+            {
+                if (QtyStarted + (PrevQty - QtyTotalStarted) > Qty)
+                    QtyToStart = Qty - QtyStarted;
+                else
+                    QtyToStart = (PrevQty - QtyTotalStarted);
+            }
+            else
+                QtyToStart = 0;
+        }
+
+        public void RecalcData(int _launchid)
+        {
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            sqlConn.Open();
+            DataSet ds1 = new DataSet();
+
+            SqlDataAdapter adapter1 =
+                       new SqlDataAdapter(
+                           "select lh.id, lh.name, lh.stageid, lh.batchid, " +
+                                       " convert(float, isnull(fb.qty, 0)) as freezed, convert(float, isnull(sta.qtystarted, 0)) as started, " +
+                                       " convert(float, isnull(totsta.qtystarted, 0)) as totalstarted " +
+                                       " from prod_launchhead lh " +
+                                       " left join PROD_FreezedLaunchStages fb on fb.launchid = lh.id and fb.stageid = lh.stageid" +
+                                       " left join (select lsh.launchid, sum(lsh.qty) as qtystarted from PROD_LaunchStagesHis lsh " +
+                                       "                   inner join PROD_LaunchHead lh1 on lh1.id = lsh.launchid and lsh.stageid = lh1.stageid" +
+                                       "                    where lh1.id = " + _launchid + "" +
+                                       "                    group by lh1.batchid, lsh.stageid, lsh.launchid) sta on sta.launchid = lh.id" +
+                                       " left join (select lsh.launchid, sum(lsh.qty) as qtystarted from PROD_LaunchStagesHis lsh " +
+                                       "                   inner join PROD_LaunchHead lh1 on lh1.id = lsh.launchid and lsh.stageid = lh1.stageid" +
+                                       "                    where lh1.id = " + _launchid + " and lh1.qty > 0 " +
+                                       "                    group by lh1.batchid, lsh.stageid, lsh.launchid) totsta on totsta.launchid = lh.id" +
+                                       " where lh.id = " + _launchid + "", sqlConn);
+
+            adapter1.Fill(ds1);
+
+            DataTable dt1 = ds1.Tables[0];
+
+            if (dt1.Rows.Count > 0)
+            {
+                foreach (DataRow dr1 in dt1.Rows)
+                {
+
+                    QtyStarted = Convert.ToDouble(dr1["started"].ToString()) - Convert.ToDouble(dr1["freezed"].ToString());
+                    QtyTotalStarted = Convert.ToDouble(dr1["totalstarted"].ToString()) - Convert.ToDouble(dr1["freezed"].ToString());
+                    //MessageBox.Show(QtyStarted.ToString());
+
+                }
+            }
+
+            sqlConn.Close();
+        }
         public void FillData(int _batchid, int _stageid)
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);
@@ -265,6 +354,7 @@ namespace Odin.DataCollection
             }
             else
                 ClearFields();
+
             sqlConn.Close();
 
         }
@@ -286,14 +376,14 @@ namespace Odin.DataCollection
         public void RecalcQty()
         {
             gv_List.EndEdit();
-           
+
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
                 if (Convert.ToInt32(row.Cells["chk_check"].Value) == -1)
                     row.Cells["cn_toapprove"].Value = Convert.ToDouble(row.Cells["cn_qty"].Value);
                 else
                     row.Cells["cn_toapprove"].Value = 0;
-                
+
             }
         }
         #region ScreenKeyboard
@@ -416,7 +506,7 @@ namespace Odin.DataCollection
                     MasterId = 0;
                 }
                 sqlConn.Close();
-                
+
             }
 
         }
@@ -580,25 +670,25 @@ namespace Odin.DataCollection
             //gv_List.EndEdit();
             //if (gv_List.CurrentRow.Cells["chk_check"].Selected == true)
             //{
-                //int _launchid = 0;
-                //double _qty = 0;
-                //try {
-                    
-                //    if (Convert.ToInt32(gv_List.CurrentRow.Cells["chk_check"].Value) == -1)
-                //    {
-                //        _launchid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_launchid"].Value);
-                //        _qty = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_toapprove"].Value);
-                //    }
-                //    else
-                //        _launchid = 0;
-                //    foreach (DataGridViewRow row in this.gv_List.Rows)
-                //    {
-                //        if (Convert.ToInt32(gv_List.CurrentRow.Cells["cn_launchid"].Value) != Convert.ToInt32(row.Cells["cn_launchid"].Value))
-                //            row.Cells["chk_check"].Value = 0;
-                //    }
+            //int _launchid = 0;
+            //double _qty = 0;
+            //try {
 
-                //}
-                //catch { }
+            //    if (Convert.ToInt32(gv_List.CurrentRow.Cells["chk_check"].Value) == -1)
+            //    {
+            //        _launchid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_launchid"].Value);
+            //        _qty = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_toapprove"].Value);
+            //    }
+            //    else
+            //        _launchid = 0;
+            //    foreach (DataGridViewRow row in this.gv_List.Rows)
+            //    {
+            //        if (Convert.ToInt32(gv_List.CurrentRow.Cells["cn_launchid"].Value) != Convert.ToInt32(row.Cells["cn_launchid"].Value))
+            //            row.Cells["chk_check"].Value = 0;
+            //    }
+
+            //}
+            //catch { }
 
 
 
@@ -664,14 +754,14 @@ namespace Odin.DataCollection
             //    }
             //    RecalcQty();
             //    FillListLaunch(LaunchId);
-                
+
             //    FillData(BatchId, StageId);
             //}
         }
 
         private void frm_MasterApproveTot_Load(object sender, EventArgs e)
         {
-            FillList();
+            //FillList();
         }
 
         private void btn_EditContent_Click(object sender, EventArgs e)
@@ -707,48 +797,91 @@ namespace Odin.DataCollection
         private void gv_List_SelectionChanged(object sender, EventArgs e)
         {
             int _launchid = 0;
-            try { _launchid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_launchid"].Value);  }
+            try { _launchid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_launchid"].Value); }
             catch { }
-
-            if (_launchid != 0)
+            if (TmpLaunchId != _launchid)
             {
-                SqlConnection sqlConn = new SqlConnection(sConnStr);
-                sqlConn.Open();
-                DataSet ds1 = new DataSet();
-
-                SqlDataAdapter adapter1 =
-                    new SqlDataAdapter(
-                        "select lh.id, lh.name, lh.stageid, lh.batchid, isnull(dbo.fn_PrevQualityStage(lh.id), 0) as prevstageid, " +
-                                    " convert(float, isnull(fb.qty, 0)) as freezed, convert(float, isnull(sta.qtystarted, 0)) as started " +
-                                    " from prod_launchhead lh " +
-                                    " left join PROD_FreezedLaunchStages fb on fb.launchid = lh.id and fb.stageid = lh.stageid" +
-                                    " left join (select lsh.launchid, sum(lsh.qty) as qtystarted from PROD_LaunchStagesHis lsh " +
-                                    "                   inner join PROD_LaunchHead lh1 on lh1.id = lsh.launchid and lsh.stageid = lh1.stageid" +
-                                    "                    where lh1.id = " + _launchid + "" +
-                                    "                    group by lh1.batchid, lsh.stageid, lsh.launchid) sta on sta.launchid = lh.id" +
-                                    " where lh.id = " + _launchid + "", sqlConn);
-
-                adapter1.Fill(ds1);
-
-                DataTable dt1 = ds1.Tables[0];
-
-                if (dt1.Rows.Count > 0)
+                if (_launchid != 0)
                 {
-                    foreach (DataRow dr1 in dt1.Rows)
+                    SqlConnection sqlConn = new SqlConnection(sConnStr);
+                    sqlConn.Open();
+                    DataSet ds1 = new DataSet();
+
+                    //SqlDataAdapter adapter1 =
+                    //    new SqlDataAdapter(
+                    //        "select lh.id, lh.name, lh.stageid, lh.batchid, isnull(dbo.fn_PrevQualityStage(lh.id), 0) as prevstageid, " +
+                    //                    " convert(float, isnull(fb.qty, 0)) as freezed, convert(float, isnull(sta.qtystarted, 0)) as started " +
+                    //                    " from prod_launchhead lh " +
+                    //                    " left join PROD_FreezedLaunchStages fb on fb.launchid = lh.id and fb.stageid = lh.stageid" +
+                    //                    " left join (select lsh.launchid, sum(lsh.qty) as qtystarted from PROD_LaunchStagesHis lsh " +
+                    //                    "                   inner join PROD_LaunchHead lh1 on lh1.id = lsh.launchid and lsh.stageid = lh1.stageid" +
+                    //                    "                    where lh1.id = " + _launchid + "" +
+                    //                    "                    group by lh1.batchid, lsh.stageid, lsh.launchid) sta on sta.launchid = lh.id" +
+                    //                    " where lh.id = " + _launchid + "", sqlConn);
+                    SqlDataAdapter adapter1 =
+                        new SqlDataAdapter(
+                            "select lh.id, lh.name, lh.stageid, lh.batchid, isnull(dbo.fn_PrevQualityStage(lh.id), 0) as prevstageid, " +
+                                        " convert(float, isnull(fb.qty, 0)) as freezed, convert(float, isnull(sta.qtystarted, 0)) as started, " +
+                                        " convert(float, isnull(totsta.qtystarted, 0)) as totalstarted " +
+                                        " from prod_launchhead lh " +
+                                        " left join PROD_FreezedLaunchStages fb on fb.launchid = lh.id and fb.stageid = lh.stageid" +
+                                        " left join (select lsh.launchid, sum(lsh.qty) as qtystarted from PROD_LaunchStagesHis lsh " +
+                                        "                   inner join PROD_LaunchHead lh1 on lh1.id = lsh.launchid and lsh.stageid = lh1.stageid" +
+                                        "                    where lh1.id = " + _launchid + "" +
+                                        "                    group by lh1.batchid, lsh.stageid, lsh.launchid) sta on sta.launchid = lh.id" +
+                                        " left join (select lsh.launchid, sum(lsh.qty) as qtystarted from PROD_LaunchStagesHis lsh " +
+                                        "                   inner join PROD_LaunchHead lh1 on lh1.id = lsh.launchid and lsh.stageid = lh1.stageid" +
+                                        "                    where lh1.id = " + _launchid + " and lh1.qty > 0 " +
+                                        "                    group by lh1.batchid, lsh.stageid, lsh.launchid) totsta on totsta.launchid = lh.id" +
+                                        " where lh.id = " + _launchid + "", sqlConn);
+
+                    adapter1.Fill(ds1);
+
+                    DataTable dt1 = ds1.Tables[0];
+
+                    if (dt1.Rows.Count > 0)
                     {
-                        LaunchId = Convert.ToInt32(dr1["id"].ToString());
-                        PrevStageId = Convert.ToInt32(dr1["prevstageid"].ToString());
-                        StageId = Convert.ToInt32(dr1["stageid"].ToString());
-                        BatchId = Convert.ToInt32(dr1["batchid"].ToString());
-                        Freezed = Convert.ToDouble(dr1["freezed"].ToString());
-                        OldFreezed = Convert.ToDouble(dr1["freezed"].ToString());
-                        QtyStarted = Convert.ToDouble(dr1["started"].ToString()) - Convert.ToDouble(dr1["freezed"].ToString());
-                        //MessageBox.Show(QtyStarted.ToString());
+                        foreach (DataRow dr1 in dt1.Rows)
+                        {
+                            LaunchId = Convert.ToInt32(dr1["id"].ToString());
+                            PrevStageId = Convert.ToInt32(dr1["prevstageid"].ToString());
+                            StageId = Convert.ToInt32(dr1["stageid"].ToString());
+                            BatchId = Convert.ToInt32(dr1["batchid"].ToString());
+                            Freezed = Convert.ToDouble(dr1["freezed"].ToString());
+                            OldFreezed = Convert.ToDouble(dr1["freezed"].ToString());
+                            QtyStarted = Convert.ToDouble(dr1["started"].ToString()) - Convert.ToDouble(dr1["freezed"].ToString());
+                            QtyTotalStarted = Convert.ToDouble(dr1["totalstarted"].ToString()) - Convert.ToDouble(dr1["freezed"].ToString());
+                            //MessageBox.Show(QtyStarted.ToString());
+                            //string tmpstr = "select -1 * sum(lsh.qty) as qtyprev from PROD_LaunchStagesHis lsh " +
+                            //    " inner join PROD_LaunchHead lh1 on lh1.id = lsh.launchid " +
+                            //    " where lh1.batchid = " + BatchId +
+                            //    " and lsh.stageid = " + PrevStageId +
+                            //    " and lsh.qty < 0";
+                            PrevQty = Convert.ToDouble(Helper.GetOneRecord("select isnull(-1 * sum(isnull(lsh.qty, 0)), 0) as qtyprev from PROD_LaunchStagesHis lsh " +
+                                " inner join PROD_LaunchHead lh1 on lh1.id = lsh.launchid " +
+                                " where lh1.batchid = " + BatchId +
+                                " and lsh.stageid = " + PrevStageId +
+                                " and lsh.qty < 0"));
+                            //MessageBox.Show(PrevQty.ToString());
+                        }
                     }
+                    else
+                    {
+                        //globClass.ShowMessage("Wrong launch scanning", "Please contact your master", "Your launch is not correct!");
+                        LaunchId = 0;
+                        PrevStageId = 0;
+                        StageId = 0;
+                        Freezed = 0;
+                        OldFreezed = 0;
+                        BatchId = 0;
+                        QtyStarted = 0;
+                        QtyTotalStarted = 0;
+                        PrevQty = 0;
+                    }
+                    sqlConn.Close();
                 }
                 else
                 {
-                    //globClass.ShowMessage("Wrong launch scanning", "Please contact your master", "Your launch is not correct!");
                     LaunchId = 0;
                     PrevStageId = 0;
                     StageId = 0;
@@ -756,22 +889,14 @@ namespace Odin.DataCollection
                     OldFreezed = 0;
                     BatchId = 0;
                     QtyStarted = 0;
-
+                    PrevQty = 0;
+                    QtyTotalStarted = 0;
                 }
-                sqlConn.Close();
+                FillListLaunch(_launchid);
+                FillData(BatchId, StageId);
+                TmpLaunchId = _launchid;
+                RecalcQtyToStart();
             }
-            else
-            {
-                LaunchId = 0;
-                PrevStageId = 0;
-                StageId = 0;
-                Freezed = 0;
-                OldFreezed = 0;
-                BatchId = 0;
-                QtyStarted = 0;
-            }
-            FillListLaunch(_launchid);
-            FillData(BatchId, StageId);
         }
 
         private void btn_Clean_Click_1(object sender, EventArgs e)
@@ -929,7 +1054,95 @@ namespace Odin.DataCollection
 
         private void btn_Start_Click(object sender, EventArgs e)
         {
+            //int _id = 0;
+            //try
+            //{
+            //    _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_launchid"].Value);
+            //}
+            //catch { _id = 0; }
 
+            //PlanBll.LaunchId = _id;
+
+            //if (PlanBll.LaunchIsStarted != -1)
+            //{
+            //    if (_id != 0
+            //        && globClass.StartLaunchConfirm() == true)
+            //    {
+            //        DataTable datasource = Plan_BLL.StartLaunch(_id);
+            //        if (datasource.Rows.Count > 0)
+            //        {
+            //            DialogResult result = KryptonTaskDialog.Show("Launch starting warning!",
+            //                                               "Start is impossible!",
+            //                                               "Launch have missing RM quantities!",
+            //                                               MessageBoxIcon.Warning,
+            //                                               TaskDialogButtons.OK);
+            //            frm_LaunchStartMissings frm = new frm_LaunchStartMissings();
+            //            frm.data = datasource.Clone();
+            //            foreach (DataRow dr in datasource.Rows)
+            //            {
+            //                frm.data.ImportRow(dr);
+            //            }
+
+            //            frm.FillData();
+
+            //            frm.Show();
+            //        }
+            //        else
+            //        {
+            //            DialogResult result = KryptonTaskDialog.Show("Launch started successfully!",
+            //                                               "You can print route list for batch!",
+            //                                               "Launch started!",
+            //                                               MessageBoxIcon.Information,
+            //                                               TaskDialogButtons.OK);
+            //        }
+
+            //        //FillData(cmb_Week1.FirstDateOfWeek.ToShortDateString(), cmb_Week1.LastDateOfWeek.AddDays(12).ToShortDateString());
+
+            //    }
+            //}
+            //else
+            //{
+            //    DialogResult result = KryptonTaskDialog.Show("Launch starting warning!",
+            //                                                    "Start is impossible!",
+            //                                                    "Launch already started!",
+            //                                                    MessageBoxIcon.Warning,
+            //                                                    TaskDialogButtons.OK);
+            //}
+        }
+
+        private void btn_DeleteSN_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_Start1_Click(object sender, EventArgs e)
+        {
+            int _res = 0;
+
+            int _id = 0;
+            try
+            {
+                _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_launchid"].Value);
+            }
+            catch { _id = 0; }
+
+            PlanBll.LaunchId = _id;
+            if (QtyToStart > 0)
+            {
+                _res = PBLL.SaveLaunchStageProcess(_id,
+                                  PrevStageId,
+                                  StageId,
+                                  NextStageId,
+                                  QtyToStart,
+                                  //Convert.ToDouble(row.Cells["cn_tostart"].Value),
+                                  0,
+                                  Freezed,
+                                  0);
+
+                RecalcData(_id);
+                gv_List.CurrentRow.Cells["cn_qtystarrted"].Value = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_qtystarrted"].Value) + QtyToStart;
+                RecalcQtyToStart();
+            }
         }
     }
 }
