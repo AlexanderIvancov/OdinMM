@@ -348,7 +348,7 @@ namespace Odin.Warehouse.StockIn
             foreach (DataGridViewRow row in gv_Placing.Rows)
             {
                 if (Convert.ToInt32(row.Cells["cn_inid"].Value) == idin)
-                    _tempqty = _tempqty + Convert.ToDouble(row.Cells["cn_iqty"].Value);
+                    _tempqty = Math.Round(_tempqty + Convert.ToDouble(row.Cells["cn_iqty"].Value), 5);
             }
 
             foreach (DataGridViewRow row1 in gv_List.Rows)
@@ -732,7 +732,7 @@ namespace Odin.Warehouse.StockIn
 
                 }
                 RecalcLeftQty(IdIn);
-                Qty = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_qty"].Value);
+                Qty = Math.Round(Convert.ToDouble(gv_List.CurrentRow.Cells["cn_qty"].Value), 5);
 
                 SetCellsColor();
             }
