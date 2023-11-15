@@ -277,7 +277,9 @@ namespace Odin.Planning.Controls
                         }
                     }
                     FillGrid(ArtId);
+                    //Notifications for flags
 
+                    POBLL.AddPONotificationBatch(_poid);
                     if (SendBatchId != null)
                         SendBatchId(ArtId, true, true, true, true, false);
                 }
