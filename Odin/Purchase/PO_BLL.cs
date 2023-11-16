@@ -575,6 +575,20 @@ namespace Odin.Purchase
             sqlConn.Close();
         }
 
+        public void AddPONotificationBatch(int poid)
+        {
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_AddBatchNotificationPO", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@poid", poid);
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+        }
+
+
         public void DeletePONeedsMaps(int poid)
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);
