@@ -585,7 +585,8 @@ namespace Odin.Warehouse.StockIn
                                 - Convert.ToDouble(node.Cells["cn_qtygiven"].Value), Convert.ToInt32(node.Cells["cn_roundnum"].Value));
 
 
-                if (qtytogive > 0)
+                if (qtytogive > 0
+                    && node.HasChildren)
                 {
                     foreach (TreeGridNode childnode in node.Nodes)
                     {
