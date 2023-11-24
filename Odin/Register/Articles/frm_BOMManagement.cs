@@ -202,8 +202,13 @@ namespace Odin.Register.Articles
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Tomato;//LightCoral;
                 else if (Convert.ToInt32(row.Cells["cn_bomstate"].Value) == -1)
+                {
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.GreenYellow;//Color.FromArgb(192, 255, 192);
+                    if (Convert.ToString(row.Cells["cn_stencil"].Value) == "")
+                        foreach (DataGridViewCell cell in row.Cells)
+                            cell.Style.BackColor = Color.FromArgb(135, 206, 250);
+                }
                 else
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Gold;
@@ -211,7 +216,6 @@ namespace Odin.Register.Articles
                 if (Convert.ToInt32(row.Cells["cn_isactive"].Value) == 0)
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Silver;
-               
             }
         }
 
