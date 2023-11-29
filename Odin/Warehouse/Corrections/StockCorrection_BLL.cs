@@ -1,7 +1,13 @@
-﻿using Odin.Global_Classes;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Odin.Global_Classes;
+using Odin.CMB_Components.BLL;
+using ComponentFactory.Krypton.Toolkit;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace Odin.Warehouse.Corrections
 {
@@ -24,7 +30,7 @@ namespace Odin.Warehouse.Corrections
 
         public void ReturnRMFromProduction(int bdid, int label, double qty)
         {
-
+           
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_AddStockReturnLine", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -33,7 +39,7 @@ namespace Odin.Warehouse.Corrections
             sqlComm.Parameters.AddWithValue("@bdid", bdid);
             sqlComm.Parameters.AddWithValue("@label", label);
             sqlComm.Parameters.AddWithValue("@qty", qty);
-
+                      
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();

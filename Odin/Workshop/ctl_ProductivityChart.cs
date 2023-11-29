@@ -1,6 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
 using System.Data;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -22,7 +27,7 @@ namespace Odin.Workshop
             series.XValueMember = "Id";
             series.YValueMembers = "Percentage";
             series.ChartType = SeriesChartType.Column;
-
+            
             this.chart1.DataSource = dt;
             this.chart1.DataBind();
             // custom labels 
@@ -46,7 +51,7 @@ namespace Odin.Workshop
             foreach (var g in dt.AsEnumerable().GroupBy(x => x.Field<string>("Stage")))
             {
                 string stage = g.Key;
-
+                
                 var weeks = g.Select(r => new { Id = r.Field<int>("Id"), Week = r.Field<string>("Week"), legend = r.Field<string>("legend"), percentage = r.Field<int>("Percentage") });
                 // find min-max
                 int min = weeks.Min(y => y.Id);
@@ -56,15 +61,15 @@ namespace Odin.Workshop
                 {
                     var label = new CustomLabel(week.Id - 1, week.Id + 1, week.Week.Substring(0, 3), 0, LabelMarkStyle.None);
                     this.chart1.ChartAreas[0].AxisX.CustomLabels.Add(label);
-
+                    
                 }
                 // stage weeks.
 
-                var stagelabel = new CustomLabel(min == max ? min - 1 : min, min == max ? max + 1 : max, stage, 2, min == max ? LabelMarkStyle.None : LabelMarkStyle.LineSideMark);
+                var stagelabel = new CustomLabel(min == max ? min - 1 : min, min == max ? max + 1 : max , stage, 2, min == max ? LabelMarkStyle.None : LabelMarkStyle.LineSideMark);
                 this.chart1.ChartAreas[0].AxisX.CustomLabels.Add(stagelabel);
 
                 //chart1.ChartAreas[0].AxisX.LabelStyle.Angle = 270;
-
+                
             }
             series.IsValueShownAsLabel = false;
             for (var idx = 0; idx < series.Points.Count; idx++)
@@ -97,6 +102,6 @@ namespace Odin.Workshop
                     }
                 }
             }
-        }
+        }        
     }
 }

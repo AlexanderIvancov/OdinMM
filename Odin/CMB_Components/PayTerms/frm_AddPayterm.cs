@@ -1,5 +1,14 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
 
 namespace Odin.CMB_Components.PayTerms
 {
@@ -31,7 +40,7 @@ namespace Odin.CMB_Components.PayTerms
             get { return txt_Description.Text; }
             set { txt_Description.Text = value; }
         }
-
+             
 
         #endregion
 

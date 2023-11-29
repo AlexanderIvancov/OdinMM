@@ -1,12 +1,16 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using Odin.Warehouse.Movements;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
+using System.ComponentModel;
 using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
+using System.Data.SqlClient;
+using ComponentFactory.Krypton.Toolkit;
+using Odin.Warehouse.Movements;
 namespace Odin.Warehouse.Inventory
 {
     public delegate void LabelSendingEventHandler(object sender);
@@ -32,7 +36,7 @@ namespace Odin.Warehouse.Inventory
 
         public int Label
         {
-            get; set;
+            get;set;
         }
 
         public int _PrevId = 0;
@@ -44,8 +48,7 @@ namespace Odin.Warehouse.Inventory
 
         public double QtyStock
         {
-            get
-            {
+            get {
                 try { return Convert.ToDouble(txt_QtyStock.Text); }
                 catch { return 0; }
             }
@@ -111,7 +114,7 @@ namespace Odin.Warehouse.Inventory
             }
             set { txt_Quarantine.Text = value.ToString(); }
         }
-
+        
         public string Unit
         {
             get { return txt_Unit.Text; }
@@ -138,8 +141,7 @@ namespace Odin.Warehouse.Inventory
         public int ArticleId
         {
             get { return cmb_Articles1.ArticleId; }
-            set
-            {
+            set {
                 cmb_Articles1.ArticleId = value;
                 _ArticleId = value;
                 FillLabels(_ArticleId);
@@ -247,7 +249,7 @@ namespace Odin.Warehouse.Inventory
             {
                 Label = 0;
             }
-
+                       
             if (_PrevId == Label)
             {
                 return true;
@@ -322,7 +324,7 @@ namespace Odin.Warehouse.Inventory
             TestValidating();
 
             bool _test = false;
-
+            
             DataTable datalabels = new DataTable();
             datalabels.Columns.Add("label", typeof(int));
 
@@ -376,7 +378,7 @@ namespace Odin.Warehouse.Inventory
 
         private void gv_List_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-
+           
         }
 
         private void gv_List_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -386,7 +388,7 @@ namespace Odin.Warehouse.Inventory
 
         private void gv_List_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
+           
         }
 
         private void btn_Print_Click(object sender, EventArgs e)
@@ -404,14 +406,10 @@ namespace Odin.Warehouse.Inventory
 
                 foreach (DataGridViewRow row in this.gv_List.SelectedRows)
                 {
-                    try
-                    {
-                        _label = Convert.ToInt32(row.Cells["cn_label"].Value);
+                    try { _label = Convert.ToInt32(row.Cells["cn_label"].Value);
                         _qty = Convert.ToDouble(row.Cells["cn_qtyrest"].Value);
                     }
-                    catch
-                    {
-                        _label = 0;
+                    catch { _label = 0;
                         _qty = 0;
                     }
                     var sqlparamsfields = new List<SqlParameter>()

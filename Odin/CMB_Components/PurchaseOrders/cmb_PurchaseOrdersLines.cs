@@ -1,9 +1,14 @@
-﻿using Odin.Global_Classes;
-using System;
-using System.Data;
-using System.Data.SqlClient;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
+using System.Data.SqlClient;
 
 namespace Odin.CMB_Components.PurchaseOrders
 {
@@ -18,7 +23,7 @@ namespace Odin.CMB_Components.PurchaseOrders
         }
 
         public event PurchaseOrdersLinesEventHandler PurchaseOrderChanged;
-
+       
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
         PopupWindowHelper PopupHelper = null;
 
@@ -60,15 +65,14 @@ namespace Odin.CMB_Components.PurchaseOrders
                         PurchaseOrderId = Convert.ToInt32(dt.Rows[0]["id"].ToString());
                     }
                 }
-                else
-                {
+                else {
                     _PurchaseOrderId = 0;
                     _PurchaseOrderLineId = 0;
                     PurchaseOrderLine = 0;
                     //if (PurchaseOrderChanged != null)
                     //    PurchaseOrderChanged(this);
                 }
-
+                
             }
         }
 
@@ -231,7 +235,7 @@ namespace Odin.CMB_Components.PurchaseOrders
 
             frm_PurchaseOrdersLines popup = new frm_PurchaseOrdersLines();
             popup.cmb_PurchaseOrderLinesOne = this;
-
+            
             PopupHelper.ClosePopup();
 
             PopupHelper.ShowPopup(f, popup, _location);
@@ -254,34 +258,34 @@ namespace Odin.CMB_Components.PurchaseOrders
         {
             //try {
 
-            SqlConnection conn = new SqlConnection(sConnStr);
-            conn.Open();
+                SqlConnection conn = new SqlConnection(sConnStr);
+                conn.Open();
 
-            DataSet ds = new DataSet();
+                DataSet ds = new DataSet();
 
-            SqlDataAdapter adapter =
-                new SqlDataAdapter("SELECT top 1 id FROM PUR_Dets WHERE headid = " + _PurchaseOrderId.ToString() + " and line = " + PurchaseOrderLine, conn);
-            adapter.Fill(ds);
+                SqlDataAdapter adapter =
+                    new SqlDataAdapter("SELECT top 1 id FROM PUR_Dets WHERE headid = " + _PurchaseOrderId.ToString() + " and line = " + PurchaseOrderLine, conn);
+                adapter.Fill(ds);
 
-            conn.Close();
+                conn.Close();
 
-            DataTable dt = ds.Tables[0];
+                DataTable dt = ds.Tables[0];
 
-            if (dt.Rows.Count > 0)
-            {
-                foreach (DataRow dr in dt.Rows)
+                if (dt.Rows.Count > 0)
                 {
-                    PurchaseOrderLineId = Convert.ToInt32(dr["id"]);
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        PurchaseOrderLineId = Convert.ToInt32(dr["id"]);
+                    }
                 }
-            }
-            else
-            {
-                _PrevLineId = 0;
-                _PurchaseOrderLineId = 0;
-                if (PurchaseOrderChanged != null)
-                    PurchaseOrderChanged(this);
-
-            }
+                else
+                {
+                    _PrevLineId = 0;
+                    _PurchaseOrderLineId = 0;
+                    if (PurchaseOrderChanged != null)
+                        PurchaseOrderChanged(this);
+                        
+                 }
 
             //}
             //catch { }

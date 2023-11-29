@@ -1,7 +1,11 @@
-﻿using Odin.Global_Classes;
-using System;
-using System.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Odin.Global_Classes;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace Odin.Tools
 {
@@ -112,10 +116,8 @@ namespace Odin.Tools
         public int TempLabelId
         {
             get { return _templabelid; }
-            set
-            {
-                _templabelid = value;
-
+            set { _templabelid = value;
+                
                 SqlConnection conn = new SqlConnection(sConnStr);
                 conn.Open();
 
@@ -197,7 +199,7 @@ namespace Odin.Tools
             sqlComm.Parameters.Add("@tablestates", SqlDbType.Structured);
             sqlComm.Parameters["@tablestates"].TypeName = "UT_IDs";
             sqlComm.Parameters["@tablestates"].Value = tabids;
-
+           
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();

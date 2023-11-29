@@ -1,17 +1,24 @@
-﻿using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using Odin.Tools;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
-using System.Text.RegularExpressions;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using WeifenLuo.WinFormsUI.Docking;
+using Odin.Global_Classes;
+using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using ComponentFactory.Krypton.Workspace;
+using ComponentFactory.Krypton.Toolkit;
+using Odin.Planning.Controls;
+using System.Threading;
+using System.Data.SqlClient;
+using Odin.Tools;
+using Odin.Register.Catalog;
+using System.Text.RegularExpressions;
 
 
 namespace Odin.Register.Articles
@@ -90,7 +97,7 @@ namespace Odin.Register.Articles
             ctlHis.ArtId = ArtId;
             ctlHis.HeaderText = "History for BOM changes for: " + Article;
             ctlHis.gv_HistoryList.ThreadSafeCall(delegate { ctlHis.SetCellsHistoryColor(); });
-
+                       
 
             return NewPage("History ", 1, ctlHis, ctlHis.Width);
 
@@ -114,7 +121,7 @@ namespace Odin.Register.Articles
             p.Text = name;
             p.TextTitle = name;
             p.TextDescription = name;
-
+           
             //p.Width = _Width;
 
             // Add the control for display inside the page
@@ -260,12 +267,12 @@ namespace Odin.Register.Articles
 
         public void ShowDetails(int artid)
         {
-            Reg.ArtId = artid;
-            ctl_BOMSimple1.ThreadSafeCall(delegate
-            {
-                ctl_BOMSimple1.SetFont();
-                ctl_BOMSimple1.cmb_Articles1.ArticleId = artid;
-            });
+           Reg.ArtId = artid;
+           ctl_BOMSimple1.ThreadSafeCall(delegate
+           {
+               ctl_BOMSimple1.SetFont();
+               ctl_BOMSimple1.cmb_Articles1.ArticleId = artid;
+           });
             //ShowHistory(artid);
         }
 
@@ -313,7 +320,7 @@ namespace Odin.Register.Articles
                 //MessageBox.Show(cmb_Articles1.Article);
                 //bs_List.DataSource = null;
 
-
+                
 
                 gv_List.ThreadSafeCall(delegate
                 {
@@ -336,7 +343,7 @@ namespace Odin.Register.Articles
                     bn_List.BindingSource = bs_List;
                 });
 
-
+               
             }
             catch { }
         }
@@ -353,16 +360,16 @@ namespace Odin.Register.Articles
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
-
+                
                 SetCellsColor();
             });
             bn_List.ThreadSafeCall(delegate
-
+        
             {
                 bn_List.BindingSource = bs_List;
             });
 
-
+          
         }
 
         public void FindHistoryPages(int artid)
@@ -525,13 +532,20 @@ namespace Odin.Register.Articles
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? String.IsNullOrEmpty(CellValue) == true
-                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
-                    : String.IsNullOrEmpty(CellValue) == true
-                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -544,9 +558,10 @@ namespace Odin.Register.Articles
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
-                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
+                else
+                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
@@ -602,9 +617,15 @@ namespace Odin.Register.Articles
             {
                 _bomstate = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_bomstate"].Value);
 
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? "bomstate = '" + glob_Class.NES(_bomstate.ToString()) + "'"
-                    : bs_List.Filter + " AND bomstate = '" + glob_Class.NES(_bomstate.ToString()) + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                {
+                    bs_List.Filter = "bomstate = '" + glob_Class.NES(_bomstate.ToString()) + "'";
+                }
+                else
+                {
+                    bs_List.Filter = bs_List.Filter + " AND bomstate = '" + glob_Class.NES(_bomstate.ToString()) + "'";
+
+                }
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -740,8 +761,8 @@ namespace Odin.Register.Articles
             kryptonDockingManager1.ManageControl(kryptonSplitContainer1.Panel2, w);
             kryptonDockingManager1.ManageFloating(this);
             LoadColumns(gv_List);
-            kryptonDockingManager1.AddToWorkspace("Workspace", new KryptonPage[] { NewInputHistory("", 0) });
-
+            kryptonDockingManager1.AddToWorkspace("Workspace", new KryptonPage[] { NewInputHistory("",0) });
+            
             //foreach (var page in kryptonDockingManager1.Pages)
             //{
             //    ctl_BOMHistory ctlHis1 = (ctl_BOMHistory)page.Controls.Find("ctl_BOMHistory", true).FirstOrDefault();
@@ -771,7 +792,7 @@ namespace Odin.Register.Articles
                 });
             }
             catch { }
-
+            
         }
 
         private void btn_Clear_Click(object sender, EventArgs e)
@@ -976,7 +997,7 @@ namespace Odin.Register.Articles
 
         private void kryptonDockingManager1_DockableWorkspaceAdded(object sender, DockableWorkspaceEventArgs e)
         {
-
+            
         }
 
         private void btn_AddNew_Click(object sender, EventArgs e)
@@ -985,10 +1006,18 @@ namespace Odin.Register.Articles
             frm.CheckEmpty();
             frm.Id = 0;
 
+            int number;
 
-            bool success = Int32.TryParse(DAL.DefaultValue("unit"), out int number);
+            bool success = Int32.TryParse(DAL.DefaultValue("unit"), out number);
 
-            frm.UnitId = success ? number : 0;
+            if (success)
+            {
+                frm.UnitId = number;
+            }
+            else
+            {
+                frm.UnitId = 0;
+            }
 
             DialogResult result = frm.ShowDialog();
 
@@ -1069,7 +1098,7 @@ namespace Odin.Register.Articles
             frm.AsPF = 0;
             frm.MBLimit = Reg.MBLimit;
             DialogResult result = frm.ShowDialog();
-
+            
 
             if (result == DialogResult.OK)
             {
@@ -1101,12 +1130,12 @@ namespace Odin.Register.Articles
 
         private void frm_BOMManagement_Paint(object sender, PaintEventArgs e)
         {
-
+            
         }
 
         private void kryptonDockableWorkspace1_Paint(object sender, PaintEventArgs e)
         {
-
+            
         }
 
         private void btn_Rationing_Click(object sender, EventArgs e)
@@ -1120,7 +1149,7 @@ namespace Odin.Register.Articles
 
             var sqlparams = new List<SqlParameter>
             {
-
+            
             };
 
             frm_RatioTab frm = new frm_RatioTab();

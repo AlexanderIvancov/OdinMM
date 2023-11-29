@@ -1,5 +1,13 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
 
 
 namespace Odin.Register.Companies
@@ -93,7 +101,10 @@ namespace Odin.Register.Companies
 
         public void CheckEmpty()
         {
-            btn_OK.Enabled = String.IsNullOrEmpty(FullName) != true;
+            if (String.IsNullOrEmpty(FullName) == true)
+                btn_OK.Enabled = false;
+            else
+                btn_OK.Enabled = true;
         }
 
         private void txt_FullName_TextChanged(object sender, EventArgs e)

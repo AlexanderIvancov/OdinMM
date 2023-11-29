@@ -1,9 +1,15 @@
-﻿using Odin.Global_Classes;
-using System;
-using System.Data;
-using System.Data.SqlClient;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.CMB_Components.BLL;
+using Odin.Global_Classes;
+using System.Data.SqlClient;
 
 namespace Odin.CMB_Components.Batches
 {
@@ -44,13 +50,11 @@ namespace Odin.CMB_Components.Batches
         int _IsProject = 0;
         int _IsQuote = 0;
         int _IsGroup = 0;
-
+       
         public string Batch
         {
             get { return txt_Batch.Text; }
-            set
-            {
-                _Batch = value;
+            set { _Batch = value;
                 SqlConnection conn = new SqlConnection(sConnStr);
                 conn.Open();
 
@@ -77,7 +81,7 @@ namespace Odin.CMB_Components.Batches
 
                     ClearFields();
 
-
+                    
                     if (PrevId != BatchId)
                     {
                         if (BatchChanged != null)
@@ -121,7 +125,7 @@ namespace Odin.CMB_Components.Batches
 
         public int QtyLabels
         { get; set; }
-
+        
         public int ConfOrderId
         { get; set; }
 
@@ -140,7 +144,7 @@ namespace Odin.CMB_Components.Batches
         {
             get { return _IsQuote; }
             set { _IsQuote = value; }
-        }
+        }       
         public string Stages
         { get; set; }
         public string CustArticle
@@ -155,8 +159,7 @@ namespace Odin.CMB_Components.Batches
         public int BatchId
         {
             get { return _BatchId; }
-            set
-            {
+            set {
                 _BatchId = value;
 
                 //if (PrevId != BatchId)
@@ -169,9 +172,9 @@ namespace Odin.CMB_Components.Batches
                 DataSet ds = new DataSet();
 
                 SqlDataAdapter adapter =
-                    new SqlDataAdapter("set dateformat dmy SELECT top 1 bh.id, bh.batch, bh.artid, bh.qty, " +
-                                                        " convert(nvarchar(10), bh.resdate, 103) as resdate, " +
-                                                        " isnull(bh.parentbatchid, 0) as parentbatchid, a.article, " +
+                    new SqlDataAdapter("set dateformat dmy SELECT top 1 bh.id, bh.batch, bh.artid, bh.qty, " + 
+                                                        " convert(nvarchar(10), bh.resdate, 103) as resdate, " + 
+                                                        " isnull(bh.parentbatchid, 0) as parentbatchid, a.article, " + 
                                                         " isnull(a.secname, '') as secname, isnull(ch.name, '') as conforder, isnull(cd.id, 0) as conforderid, " +
                                                         " isnull(c.company, '') as customer, isnull(bh.isactive, 0) as isactive, isnull(cd.custarticle, '') as custarticle, " +
                                                         " dbo.fn_BatchLabels(bh.id) as qtylabels, " +
@@ -179,7 +182,7 @@ namespace Odin.CMB_Components.Batches
                                                         " isnull(dbo.fn_ConcBatchStages(bh.id), '') as stages, " +
                                                         " isnull(bh.comments, '') as comments," +
                                                         " iif(isnull(cb.coid, 0) = 0 and isnull(cb.quotid, 0) != 0, -1, 0) as isquote  " +
-                                                        " FROM PROD_BatchHead bh " +
+                                                        " FROM PROD_BatchHead bh " + 
                                                         " INNER JOIN BAS_Articles a on a.id = bh.artid " +
                                                         " LEFT JOIN PROD_COBatch cb on cb.batchid = bh.id " +
                                                         " LEFT JOIN SAL_ClientOrdersDets cd on cd.id = cb.coid " +
@@ -217,8 +220,8 @@ namespace Odin.CMB_Components.Batches
                     }
 
 
-                    if (PrevId != BatchId)
-                    {
+                   if (PrevId != BatchId)
+                   {
                         if (BatchChanged != null)
                             BatchChanged(this);
                         PrevId = BatchId;
@@ -286,7 +289,7 @@ namespace Odin.CMB_Components.Batches
         //        ClearFields();
         //    }
         //    //return _BatchId;
-
+            
         //}
 
 

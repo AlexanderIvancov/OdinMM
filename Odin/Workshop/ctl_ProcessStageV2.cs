@@ -1,10 +1,15 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using System;
-using System.Data;
-using System.Data.SqlClient;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
 
 namespace Odin.Workshop
 {
@@ -219,7 +224,7 @@ namespace Odin.Workshop
                 txt_Ret.Visible = true;
                 txt_Proc.Visible = true;
                 btn_AddProcess.Visible = true;
-
+                
                 //btn_DeleteProcess.Visible = true;
                 txt_Freezed.Visible = true;
                 btn_Freeze.Visible = true;
@@ -260,7 +265,7 @@ namespace Odin.Workshop
             ProcQty = 0;
             tProcQty = 0;
             PrevQty = 0;
-
+            
             Id = 0;
             PrevFreezedQty = 0;
             tFreezedQty = 0;
@@ -300,12 +305,12 @@ namespace Odin.Workshop
                         //    _test = false;
                         //}
                         //else
-                        _test = true;
+                            _test = true;
                     }
                     else
                         _test = false;
                 }
-
+                
                 if (_test == true)
                 {
                     //MessageBox.Show(StageId.ToString());

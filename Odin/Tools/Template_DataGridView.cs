@@ -1,12 +1,16 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
+using Odin.Tools;
+using ComponentFactory.Krypton.Toolkit;
+using System.Data.SqlClient;
 
 
 namespace Odin.Tools
@@ -28,7 +32,7 @@ namespace Odin.Tools
         AdmMenu mMenu = new AdmMenu();
         DAL_Functions DAL = new DAL_Functions();
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
-
+       
 
         ExportData ED;
 
@@ -63,7 +67,7 @@ namespace Odin.Tools
                 column.Width = 150;
                 column.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             }
-
+            
         }
 
         private void Template_DataGridView_Load(object sender, EventArgs e)
@@ -118,7 +122,7 @@ namespace Odin.Tools
             }
             catch
             { }
-
+         
         }
 
         private void mni_Search_Click(object sender, EventArgs e)
@@ -135,13 +139,20 @@ namespace Odin.Tools
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? String.IsNullOrEmpty(CellValue) == true
-                        ? "([" + ColumnName + "] is null OR Convert([" + ColumnName + "], 'System.String') = '')"
-                        : "Convert([" + ColumnName + "] , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
-                    : String.IsNullOrEmpty(CellValue) == true
-                        ? bs_List.Filter + "AND ([" + ColumnName + "] is null OR Convert([" + ColumnName + "], 'System.String') = '')"
-                        : bs_List.Filter + " AND Convert([" + ColumnName + "] , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = "([" + ColumnName + "] is null OR Convert([" + ColumnName + "], 'System.String') = '')";
+                    else
+                        bs_List.Filter = "Convert([" + ColumnName + "] , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = bs_List.Filter + "AND ([" + ColumnName + "] is null OR Convert([" + ColumnName + "], 'System.String') = '')";
+                    else
+                        bs_List.Filter = bs_List.Filter + " AND Convert([" + ColumnName + "] , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -152,9 +163,10 @@ namespace Odin.Tools
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? "Convert([" + ColumnName + "] , 'System.String') <> '" + CellValue + "'"
-                    : bs_List.Filter + " AND [" + ColumnName + "] <> '" + CellValue + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                    bs_List.Filter = "Convert([" + ColumnName + "] , 'System.String') <> '" + CellValue + "'";
+                else
+                    bs_List.Filter = bs_List.Filter + " AND [" + ColumnName + "] <> '" + CellValue + "'";
             }
             catch { }
 
@@ -274,14 +286,21 @@ namespace Odin.Tools
                 if (gv_List.SelectedCells[counter].FormattedValueType ==
                     Type.GetType("System.String"))
                 {
-                    string value = gv_List.IsCurrentCellDirty == true
-                        ? gv_List.SelectedCells[counter]
-                            .EditedFormattedValue.ToString()
-                        : gv_List.SelectedCells[counter]
-                            .FormattedValue.ToString();
+                    string value = null;
 
                     // If the cell contains a value that has not been commited,
                     // use the modified value.
+                    if (gv_List.IsCurrentCellDirty == true)
+                    {
+
+                        value = gv_List.SelectedCells[counter]
+                            .EditedFormattedValue.ToString();
+                    }
+                    else
+                    {
+                        value = gv_List.SelectedCells[counter]
+                            .FormattedValue.ToString();
+                    }
                     if (value != null)
                     {
                         try

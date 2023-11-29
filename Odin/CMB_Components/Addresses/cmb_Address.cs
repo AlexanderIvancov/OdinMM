@@ -1,9 +1,14 @@
-﻿using Odin.Global_Classes;
-using System;
-using System.Data;
-using System.Data.SqlClient;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
+using System.Data.SqlClient;
 
 
 namespace Odin.CMB_Components.Addresses
@@ -42,7 +47,7 @@ namespace Odin.CMB_Components.Addresses
         public int LegalAddress
         {
             get { return _legal; }
-            set { _legal = value; }
+                set{ _legal = value; }
         }
 
         public int DefaultDelivPlace
@@ -60,7 +65,10 @@ namespace Odin.CMB_Components.Addresses
             set
             {
                 _isemptycolor = value;
-                txt_Address.StateCommon.Back.Color1 = value == true ? Color.LightPink : Color.White;
+                if (value == true)
+                    txt_Address.StateCommon.Back.Color1 = Color.LightPink;
+                else
+                    txt_Address.StateCommon.Back.Color1 = Color.White;
             }
         }
 

@@ -1,12 +1,17 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using Odin.Tools;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
+using Odin.Tools;
+using System.Data.SqlClient;
 
 namespace Odin.Warehouse.Deliveries
 {
@@ -46,13 +51,13 @@ namespace Odin.Warehouse.Deliveries
                 {
                     chk_scan.CheckState = CheckState.Checked;
                     chk_scan.BackColor = Color.LightPink;
-
+                 
                 }
                 else
                 {
                     chk_scan.CheckState = CheckState.Unchecked;
                     chk_scan.BackColor = Color.LightGreen;
-
+                   
                 }
             }
         }
@@ -212,7 +217,7 @@ namespace Odin.Warehouse.Deliveries
                 bs_List.Filter = ("Convert(" + ColumnName + " , 'System.String') like '%" + mni_FilterFor.Text + "%'");//ColumnName + " like '%" + mni_FilterFor.Text + "%'";
             }
             catch
-            { }
+            { }           
 
         }
 
@@ -230,18 +235,25 @@ namespace Odin.Warehouse.Deliveries
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? String.IsNullOrEmpty(CellValue) == true
-                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
-                    : String.IsNullOrEmpty(CellValue) == true
-                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
                 //MessageBox.Show(bs_List.Filter);
 
             }
             catch { }
-
+           
 
         }
 
@@ -249,12 +261,13 @@ namespace Odin.Warehouse.Deliveries
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
-                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
+                else
+                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
-
+           
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -348,9 +361,7 @@ namespace Odin.Warehouse.Deliveries
             string _batch = "";
             int _id = 0;
 
-            try
-            {
-                _batchid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_batchid"].Value);
+            try { _batchid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_batchid"].Value);
                 _coid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_coid"].Value);
                 _batch = gv_List.CurrentRow.Cells["cn_batch"].Value.ToString();
                 _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);

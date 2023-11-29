@@ -1,15 +1,20 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using Odin.Tools;
-using Odin.Warehouse.Movements;
-using Odin.Warehouse.StockOut;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
+using Odin.Tools;
+using System.Data.SqlClient;
+using System.Threading;
+using Odin.Warehouse.StockOut;
+using Odin.Warehouse.Movements;
 
 namespace Odin.Warehouse.Corrections
 {
@@ -301,7 +306,10 @@ namespace Odin.Warehouse.Corrections
 
         public void CheckEmpty()
         {
-            btn_OK.Enabled = cmb_Batches1.IsActive != 0;
+            if (cmb_Batches1.IsActive == 0)
+                btn_OK.Enabled = false;
+            else
+                btn_OK.Enabled = true;
         }
 
         #region Context menu
@@ -360,13 +368,20 @@ namespace Odin.Warehouse.Corrections
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? String.IsNullOrEmpty(CellValue) == true
-                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
-                    : String.IsNullOrEmpty(CellValue) == true
-                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -380,9 +395,10 @@ namespace Odin.Warehouse.Corrections
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
-                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
+                else
+                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
@@ -455,22 +471,23 @@ namespace Odin.Warehouse.Corrections
             int _res = 0;
             int _removereservation = 0;
             int _resmove = 0;
-
+           
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
                 #region diff
                 if (Convert.ToDouble(row.Cells["cn_qtydiff"].Value) != 0)
                 {
-                    _removereservation = cmb_Places1.PlaceId != 0
+                    if (cmb_Places1.PlaceId != 0
                                && Convert.ToInt32(row.Cells["chk_removeres"].Value) == -1//chk_RemoveReservation.Checked == true
-                               && Convert.ToDouble(row.Cells["cn_qtyrest"].Value) > 0
-                        ? -1
-                        : 0;
+                               && Convert.ToDouble(row.Cells["cn_qtyrest"].Value) > 0)
+                        _removereservation = -1;
+                    else
+                        _removereservation = 0;
 
                     if (Convert.ToDouble(row.Cells["cn_qtydiff"].Value) < 0)
                     {
                         //Check for remove reservation
-
+                       
 
                         //Additional outcome
                         //Add stock out
@@ -480,23 +497,23 @@ namespace Odin.Warehouse.Corrections
                                                         Convert.ToInt32(row.Cells["cn_id"].Value), 0,
                                                         Convert.ToInt32(row.Cells["cn_iscounter"].Value) == 0 ? "Rest correction for " + cmb_Batches1.Batch : "Rest correction for " + cmb_Batches1.Batch + " (X-Ray counter)");
 
-                        if (_removereservation == -1)
-                            _resmove = SMBll.AddStockMoveLineCorrection(_resmove,
-                                                        Convert.ToInt32(row.Cells["cn_label"].Value),
-                                                        Convert.ToDouble(row.Cells["cn_qtyrest"].Value),
-                                                        cmb_Places1.PlaceId,
-                                                        Convert.ToInt32(row.Cells["cn_id"].Value),
-                                                        0,
-                                                        Convert.ToInt32(row.Cells["cn_batchid"].Value),
-                                                        0,
-                                                        0,
-                                                        "Removing of reservation of " + cmb_Batches1.Batch);
+                            if (_removereservation == -1)
+                                _resmove = SMBll.AddStockMoveLineCorrection(_resmove,
+                                                            Convert.ToInt32(row.Cells["cn_label"].Value),
+                                                            Convert.ToDouble(row.Cells["cn_qtyrest"].Value),
+                                                            cmb_Places1.PlaceId,
+                                                            Convert.ToInt32(row.Cells["cn_id"].Value),
+                                                            0,
+                                                            Convert.ToInt32(row.Cells["cn_batchid"].Value),
+                                                            0,
+                                                            0,
+                                                            "Removing of reservation of " + cmb_Batches1.Batch);
 
 
-                        //Remove reservation if qty to return > 0
-                        if (Convert.ToDouble(row.Cells["cn_qtyrest"].Value) == 0)
-                            SOBll.RemoveLabelReservationCorrection(Convert.ToInt32(row.Cells["cn_label"].Value), Convert.ToInt32(row.Cells["cn_batchid"].Value));
-                    }
+                            //Remove reservation if qty to return > 0
+                            if (Convert.ToDouble(row.Cells["cn_qtyrest"].Value) == 0)
+                                SOBll.RemoveLabelReservationCorrection(Convert.ToInt32(row.Cells["cn_label"].Value), Convert.ToInt32(row.Cells["cn_batchid"].Value));
+                        }
                     else
                     {
                         //Return
@@ -518,11 +535,12 @@ namespace Odin.Warehouse.Corrections
                 else // Correct quantities, but remove reservation
                 {
                     //Remove reservation if checked
-                    _removereservation = cmb_Places1.PlaceId != 0
+                    if (cmb_Places1.PlaceId != 0
                             && Convert.ToInt32(row.Cells["chk_removeres"].Value) == -1
-                            && Convert.ToDouble(row.Cells["cn_qtyrest"].Value) > 0
-                        ? -1
-                        : 0;
+                            && Convert.ToDouble(row.Cells["cn_qtyrest"].Value) > 0)
+                        _removereservation = -1;
+                    else
+                        _removereservation = 0;
 
                     if (_removereservation == -1)
                         _resmove = SMBll.AddStockMoveLineCorrection(_resmove,
@@ -587,21 +605,21 @@ namespace Odin.Warehouse.Corrections
             {
                 frm_Print frm = new frm_Print();
                 frm.cmb_LabPrinter1.ShowDefaults();
-                DialogResult result = frm.ShowDialog();
+                    DialogResult result = frm.ShowDialog();
 
-                if (result == DialogResult.OK)
-                {
-                    PrintLabels.PrinterIp = frm.IP_Address;
-                    PrintLabels.PrinterDPI = frm.Printer_DPI;
-
-                    foreach (DataGridViewRow row in this.gv_List.Rows)
+                    if (result == DialogResult.OK)
                     {
-                        if (//Convert.ToDouble(row.Cells["cn_qtydiff"].Value) != 0
-                            //&& 
-                            Convert.ToDouble(row.Cells["cn_qtyrest"].Value) > 0
-                            && DAL.CheckMSL(Convert.ToInt32(row.Cells["cn_artid"].Value)) != "0")
+                    PrintLabels.PrinterIp = frm.IP_Address;
+                        PrintLabels.PrinterDPI = frm.Printer_DPI;
+
+                        foreach (DataGridViewRow row in this.gv_List.Rows)
                         {
-                            var sqlparamsfields = new List<SqlParameter>()
+                            if (//Convert.ToDouble(row.Cells["cn_qtydiff"].Value) != 0
+                                //&& 
+                                Convert.ToDouble(row.Cells["cn_qtyrest"].Value) > 0
+                                && DAL.CheckMSL(Convert.ToInt32(row.Cells["cn_artid"].Value)) != "0")
+                            {
+                                var sqlparamsfields = new List<SqlParameter>()
                             {
                                 new SqlParameter("@id",SqlDbType.Int) {Value = Convert.ToInt32(row.Cells["cn_label"].Value)},
                                 new SqlParameter("@qty",SqlDbType.Float) {Value = Convert.ToDouble(row.Cells["cn_qtyrest"].Value)},
@@ -637,9 +655,10 @@ namespace Odin.Warehouse.Corrections
             if (gv_List.CurrentRow.Cells["cn_qtyrest"].Selected == true
                 || gv_List.CurrentRow.Cells["cn_qtyout"].Selected == true)
             {
+                double number;
                 try
                 {
-                    bool success = Double.TryParse(gv_List.CurrentCell.Value.ToString(), out double number);
+                    bool success = Double.TryParse(gv_List.CurrentCell.Value.ToString(), out number);
                     if (success)
                     {
                         //Console.WriteLine("Converted '{0}' to {1}.", value, number);
@@ -697,10 +716,10 @@ namespace Odin.Warehouse.Corrections
                 //int begindex = ReadValue.IndexOf(strLabelMark);
                 //int endindex = 0;
 
-                //if (begindex > -1)
-                //{
-                //    endindex = ReadValue.Substring(begindex + 4, ReadValue.Length - (begindex + 4)).IndexOf(strNextMark);
-                //    Result = ReadValue.Substring(begindex + 4, endindex);
+                    //if (begindex > -1)
+                    //{
+                    //    endindex = ReadValue.Substring(begindex + 4, ReadValue.Length - (begindex + 4)).IndexOf(strNextMark);
+                    //    Result = ReadValue.Substring(begindex + 4, endindex);
 
                 foreach (DataGridViewRow row in this.gv_List.Rows)
                 {
@@ -723,7 +742,7 @@ namespace Odin.Warehouse.Corrections
                     frm.QtyInDB = _qtyonlabel;
                     frm.QtyOnLabel = _qtyrest;
                     frm.Unit = _unit;
-
+                    
                     frm.SendLabelQty += new SendLabelQtyEventHandler(AddQtyForLabel);
                     frm.Show();
 
@@ -741,10 +760,10 @@ namespace Odin.Warehouse.Corrections
                 }
                 //Clear temp field
                 txt_Oper.Text = "";
-                //}
-                //}
-                //txt_Oper.Focus();
-                //_PrevChar = (char)Keys.Enter;
+                    //}
+                    //}
+                    //txt_Oper.Focus();
+                    //_PrevChar = (char)Keys.Enter;
                 //}
                 //else
                 //    _PrevChar = (char)Keys.Space;
@@ -753,7 +772,7 @@ namespace Odin.Warehouse.Corrections
 
         private void txt_Oper_Validated(object sender, EventArgs e)
         {
-
+            
             //MessageBox.Show(Result);
         }
 
@@ -763,7 +782,7 @@ namespace Odin.Warehouse.Corrections
             //string strNextMark = "\n";
 
             //ReadValue = txt_Oper.Text;
-
+            
             ////if (ReadValue != strNextMark)
             ////{
             //int begindex = ReadValue.IndexOf(strLabelMark) + 4;
@@ -780,7 +799,7 @@ namespace Odin.Warehouse.Corrections
             //    frm.Label = Result.ToString();
 
             //    frm.Show();
-
+                
             //    //Clear temp field
             //    //txt_Oper.Text = "";
             //}
@@ -848,7 +867,7 @@ namespace Odin.Warehouse.Corrections
 
 
             CheckEmpty();
-
+            
         }
 
         private void chk_SelectAll_CheckedChanged(object sender, EventArgs e)

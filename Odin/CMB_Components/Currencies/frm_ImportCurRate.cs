@@ -1,15 +1,21 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Newtonsoft.Json;
-using Odin.Global_Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.IO;
+using System.Drawing;
 using System.Linq;
-using System.Net;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
+using Odin.CMB_Components.BLL;
 using System.Xml.Linq;
+using System.Net;
+using System.IO;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace Odin.CMB_Components.Currencies
 {
@@ -26,7 +32,7 @@ namespace Odin.CMB_Components.Currencies
         //}
         //public class Root
         //{
-
+            
         //    //public List<Rate> rate { get; set; }
         //}
 
@@ -243,7 +249,7 @@ namespace Odin.CMB_Components.Currencies
             // Set the Method property of the request to POST. 
 
             request.Method = "GET";
-
+           
             request.Accept = "*/*";
 
             request.ContentType = "application/x-www-form-urlencoded";
@@ -319,7 +325,7 @@ namespace Odin.CMB_Components.Currencies
             int curid = 0;
             string str = "";
 
-
+            
             str = searchCurrency(onDate, 0);
 
 

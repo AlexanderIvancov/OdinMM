@@ -1,6 +1,13 @@
-﻿using Odin.Global_Classes;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
 
 
 namespace Odin.Register.Articles
@@ -34,21 +41,21 @@ namespace Odin.Register.Articles
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
-                if (row.Cells["cn_typechange"].Value.ToString() == "deleted")
-                {
+               if (row.Cells["cn_typechange"].Value.ToString() == "deleted")
+               {
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.LightCoral;
-                }
-                else if (row.Cells["cn_typechange"].Value.ToString() == "inserted")
-                {
-                    foreach (DataGridViewCell cell in row.Cells)
-                        cell.Style.BackColor = Color.FromArgb(192, 255, 192);
-                }
-                else
-                {
+               }
+               else if (row.Cells["cn_typechange"].Value.ToString() == "inserted")
+               {
+                  foreach (DataGridViewCell cell in row.Cells)
+                       cell.Style.BackColor = Color.FromArgb(192, 255, 192);
+               }
+               else
+               {
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Plum;
-                }
+               }
 
             }
         }

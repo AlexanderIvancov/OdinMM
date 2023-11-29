@@ -1,8 +1,12 @@
-﻿using Odin.Global_Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.Sql;
 using System.Data.SqlClient;
+using System.Data;
+using Odin.Global_Classes;
 
 namespace Odin.Purchase
 {
@@ -11,7 +15,7 @@ namespace Odin.Purchase
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
 
         public static DataTable getPurchaseOrders(int _headid, int _typeid, int _supid, int _stateid, int _artid, string _article,
-                                                    string _datefrom, string _datetill, string _suporder, string _comments,
+                                                    string _datefrom, string _datetill, string _suporder, string _comments, 
                                                     string _reqdatefrom, string _reqdatetill, string _confbefore)
         {
             string query = "sp_PurchasePortfolio";
@@ -182,7 +186,7 @@ namespace Odin.Purchase
         public int POHeadProcessing
         {
             get;
-            set;
+            set; 
         }
         public string POHeadSupplierCountryISO
         { get; set; }
@@ -225,7 +229,7 @@ namespace Odin.Purchase
                         POHeadSupplierCountry = Convert.ToInt32(dr["supcountryid"]);
                         POHeadSupplier = dr["supplier"].ToString();
                         POHeadSupplierVAT = dr["suppliervat"].ToString();
-                        POHeadSupAddress = dr["supaddress"].ToString();
+                        POHeadSupAddress = dr["supaddress"].ToString(); 
                         POHeadSupContPerson = dr["supcontperson"].ToString();
                         POHeadSupContPersPhone = dr["supcontpersphone"].ToString();
                         POHeadSupContPersFax = dr["supcontpersfax"].ToString();
@@ -402,7 +406,7 @@ namespace Odin.Purchase
         public double POQty
         { get; set; }
         public double POQtyLeft
-        { get; set; }
+        { get; set; }    
         public string POReqDate
         { get; set; }
         public string POMinExpDate
@@ -461,7 +465,7 @@ namespace Odin.Purchase
             POEndCustomer = "";
         }
 
-        public int SavePOLine(int id, int headid, int line, int artid, double qty, int unitid, double unitprice, double vat,
+        public int SavePOLine(int id, int headid, int line, int artid, double qty, int unitid, double unitprice, double vat, 
                             double discount, string reqdate, string comments, int stateid, int catalogid, double coefconv,
                             string bestbefore, string suporder, string suparticle, int resale, int projectid, string internalcomments)
         {
@@ -507,7 +511,7 @@ namespace Odin.Purchase
 
         public void SavePOLineFromNeeds(int needid, double qty, int catalogid)
         {
-
+           
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SavePODetsFromNeeds", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -515,7 +519,7 @@ namespace Odin.Purchase
             sqlComm.Parameters.AddWithValue("@needid", needid);
             sqlComm.Parameters.AddWithValue("@qty", qty);
             sqlComm.Parameters.AddWithValue("@catalogid", catalogid);
-
+           
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
@@ -547,7 +551,7 @@ namespace Odin.Purchase
             sqlComm.CommandType = CommandType.StoredProcedure;
 
             sqlComm.Parameters.AddWithValue("@headid", headid);
-
+            
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
@@ -592,7 +596,7 @@ namespace Odin.Purchase
             sqlComm.CommandType = CommandType.StoredProcedure;
 
             sqlComm.Parameters.AddWithValue("@poid", poid);
-
+            
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
@@ -686,7 +690,7 @@ namespace Odin.Purchase
         { get; set; }
         public string ConfType
         { get; set; }
-
+       
 
         public void ClearConfDets()
         {
@@ -727,7 +731,7 @@ namespace Odin.Purchase
 
         public void AddPOConfirmationAll(int poid, string confdate, string conftype)
         {
-
+            
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_AddPOConfirmAll", sqlConn);
@@ -740,7 +744,7 @@ namespace Odin.Purchase
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
+          
         }
 
         public void EditPOConfirmation(int id, int poid, double qty, string confdate, string comments, string conftype)
@@ -860,7 +864,7 @@ namespace Odin.Purchase
 
             var sqlparams = new List<SqlParameter>
             {
-
+             
             };
 
             return Helper.QuerySP(query, sqlparams.ToArray());
@@ -1067,16 +1071,16 @@ namespace Odin.Purchase
 
         public void EditPONeedComments(int id, string comments)
         {
-
+            
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("update pur_needsheader set comments = @comments where id = @id ", sqlConn);
             sqlComm.Parameters.AddWithValue("@id", id);
             sqlComm.Parameters.AddWithValue("@comments", comments);
-
+          
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
+            
         }
 
         #endregion

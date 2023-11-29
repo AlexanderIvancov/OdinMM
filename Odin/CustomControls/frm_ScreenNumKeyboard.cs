@@ -1,13 +1,18 @@
-﻿using Odin.Global_Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
 
 namespace Odin.CustomControls
 {
     public delegate void DisplayKeyboardSymbolEventHandler(string symbol, bool symremove);
-
+    
 
     public partial class frm_ScreenNumKeyboard : Template_CMB
     {
@@ -44,12 +49,12 @@ namespace Odin.CustomControls
 
         }
 
-
+        
 
         private void frm_ScreenNumKeyboard_Load(object sender, EventArgs e)
         {
             int count = 1;
-
+            
             #region old
             //for (int row = 0; row < 4; row++)
             //{
@@ -141,7 +146,7 @@ namespace Odin.CustomControls
             newbutton.Height = h;
             newbutton.Text = count;
             boldFont = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold);
-
+           
             newbutton.Font = boldFont;
             newbutton.Left = count == "," ? newbutton.Width * (j * 2) : newbutton.Width * j;
             //newbutton.Top = newbutton.Height == 100 ? (newbutton.Height / 2) * i : newbutton.Height * i;
@@ -191,7 +196,7 @@ namespace Odin.CustomControls
 
                                 else if (string.IsNullOrEmpty(tempString))
                                 {
-                                    DisplayKeyboardSymbol("-", false);//
+                                     DisplayKeyboardSymbol("-", false);//
                                 }
 
                                 break;

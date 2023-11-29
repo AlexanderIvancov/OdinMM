@@ -1,9 +1,14 @@
-﻿using Odin.Global_Classes;
-using System;
-using System.Data;
-using System.Data.SqlClient;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
+using System.Data.SqlClient;
 
 namespace Odin.CMB_Components.Bargains
 {
@@ -24,9 +29,9 @@ namespace Odin.CMB_Components.Bargains
         PopupWindowHelper PopupHelper = null;
 
         string _BargainCode = "";
-
+       
         bool _EnableSearchId = false;
-        string _Bargain = "";
+        string _Bargain= "";
         bool _isemptycolor = false;
 
         public bool IsEmptyColor
@@ -35,7 +40,10 @@ namespace Odin.CMB_Components.Bargains
             set
             {
                 _isemptycolor = value;
-                txt_Bargain.StateCommon.Back.Color1 = value == true ? Color.LightPink : Color.White;
+                if (value == true)
+                    txt_Bargain.StateCommon.Back.Color1 = Color.LightPink;
+                else
+                    txt_Bargain.StateCommon.Back.Color1 = Color.White;
             }
         }
         public string Bargain
@@ -94,28 +102,28 @@ namespace Odin.CMB_Components.Bargains
 
                 SqlDataAdapter adapter =
                     new SqlDataAdapter("SELECT top 1 * FROM BAS_Bargain WHERE code = '" + _BargainCode.ToString() + "'", conn);
-                adapter.Fill(ds);
+                    adapter.Fill(ds);
 
-                conn.Close();
+                    conn.Close();
 
-                DataTable dt = ds.Tables[0];
+                    DataTable dt = ds.Tables[0];
 
-                if (dt.Rows.Count > 0)
-                {
-                    foreach (DataRow dr in dt.Rows)
+                    if (dt.Rows.Count > 0)
                     {
-                        txt_Bargain.Text = dr["description"].ToString();
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            txt_Bargain.Text = dr["description"].ToString();
+                        }
                     }
-                }
-                else
-                {
-                    txt_Bargain.Text = string.Empty;
-                }
+                    else
+                    {
+                        txt_Bargain.Text = string.Empty;
+                    }
 
-                if (BargainChanged != null)
-                {
-                    BargainChanged(this);
-                }
+                    if (BargainChanged != null)
+                    {
+                        BargainChanged(this);
+                    }
 
             }
         }

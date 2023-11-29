@@ -1,13 +1,23 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.CMB_Components.BLL;
-using Odin.Global_Classes;
-using Odin.Purchase;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using ComponentFactory.Krypton.Workspace;
+using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using Odin.CMB_Components.BLL;
+using Odin.Purchase;
 
 namespace Odin.CMB_Components.PurchaseOrders
 {
-
+   
 
     public partial class frm_PurchaseOrders : KryptonForm
     {
@@ -15,7 +25,7 @@ namespace Odin.CMB_Components.PurchaseOrders
         {
             InitializeComponent();
         }
-
+        
         public frm_PurchaseOrders(cmb_PurchaseOrders cmb)
         {
             InitializeComponent();
@@ -106,7 +116,7 @@ namespace Odin.CMB_Components.PurchaseOrders
             if (result == DialogResult.OK)
             {
                 _showingModal = false;
-                int _res = POBll.AddPurchaseOrderHead(frm.SupId, frm.ContPersId, frm.Comments, frm.Contract, frm.CurId,
+                int _res = POBll.AddPurchaseOrderHead(frm.SupId, frm.ContPersId, frm.Comments, frm.Contract, frm.CurId, 
                                                     frm.IncotermsId, frm.DelivPlaceId, frm.DelivAddressId, frm.InProcess);
                 FillData(frm.PurchaseOrder);
                 ((cmb_PurchaseOrders)cmb_PurchaseOrderOne).PurchaseOrdersSendSave();
@@ -119,7 +129,7 @@ namespace Odin.CMB_Components.PurchaseOrders
 
         private void btn_Edit_Click(object sender, EventArgs e)
         {
-
+           
 
             int _id = 0;
 
@@ -150,7 +160,7 @@ namespace Odin.CMB_Components.PurchaseOrders
                 if (result == DialogResult.OK)
                 {
                     _showingModal = false;
-                    POBll.EditPurchaseOrderHead(_id, frm.SupId, frm.ContPersId, frm.Comments, frm.Contract,
+                    POBll.EditPurchaseOrderHead(_id, frm.SupId, frm.ContPersId, frm.Comments, frm.Contract, 
                                                 frm.CurId, frm.IncotermsId, frm.DelivPlaceId, frm.DelivAddressId,
                                                 frm.InProcess);
                     FillData(frm.PurchaseOrder);
@@ -164,7 +174,7 @@ namespace Odin.CMB_Components.PurchaseOrders
 
         private void btn_Delete_Click(object sender, EventArgs e)
         {
-
+            
             int _id = 0;
 
             try { _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value); }

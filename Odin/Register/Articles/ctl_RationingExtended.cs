@@ -1,10 +1,15 @@
-﻿using Odin.Global_Classes;
-using Odin.Tools;
-using System;
-using System.Data;
-using System.Data.SqlClient;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
+using Odin.Tools;
+using System.Data.SqlClient;
 
 namespace Odin.Register.Articles
 {
@@ -64,16 +69,13 @@ namespace Odin.Register.Articles
 
         public double ParamValue
         {
-            get
-            {
+            get {
                 try { return Convert.ToDouble(txt_value.Text); }
-                catch { return 0; }
-            }
-            set
-            {
+                catch { return 0; } }
+            set {
                 txt_value.Text = value.ToString();
             }
-
+            
         }
 
         public string ParamDesc
@@ -119,7 +121,7 @@ namespace Odin.Register.Articles
 
         public void FillStages(int artid)
         {
-
+       
             var data = Reg.getArticleStagesRationings(artid);
 
             gv_List.ThreadSafeCall(delegate
@@ -158,7 +160,7 @@ namespace Odin.Register.Articles
                 bs_Opers.DataSource = data;
                 gv_Opers.DataSource = bs_Opers;
 
-                // Helper.RestoreDirection(gv_List, oldColumn, dir);
+               // Helper.RestoreDirection(gv_List, oldColumn, dir);
 
             });
 
@@ -175,7 +177,7 @@ namespace Odin.Register.Articles
         public void FillParams(int operid)
         {
 
-            var data = Reg.getArticleStagesOperParams(operid);
+            var data = Reg.getArticleStagesOperParams (operid);
 
             gv_Params.ThreadSafeCall(delegate
             {
@@ -189,7 +191,7 @@ namespace Odin.Register.Articles
                 //Helper.RestoreDirection(gv_Params, oldColumn, dir);
 
             });
-
+            
         }
 
         public void ShowTotals(int artid)
@@ -283,7 +285,7 @@ namespace Odin.Register.Articles
         #endregion
 
         #region Controls
-
+                
         private void btn_saveparameter_Click(object sender, EventArgs e)
         {
             //foreach (DataGridViewRow row in this.gv_Params.Rows)
@@ -312,12 +314,12 @@ namespace Odin.Register.Articles
                 dr["param"] = row.Cells["cn_param"].Value.ToString();
                 dr["paramdesc"] = row.Cells["cn_paramdesc"].Value.ToString();
                 dr["value"] = row.Cells["cn_paramvalue"].Value.ToString().Trim() == "" ? 0 : Convert.ToDouble(row.Cells["cn_paramvalue"].Value);
-
+               
                 dataparams.Rows.Add(dr);
             }
 
             if (OperId != 0)
-                Reg.SaveFormulaParams(dataparams, OperId);
+            Reg.SaveFormulaParams(dataparams, OperId);
             //Select formula results
             double FormulaRes = Reg.SelectFormulaRes(OperId);
             //Update formula results
@@ -378,7 +380,7 @@ namespace Odin.Register.Articles
                 }
 
                 Reg.SaveArticleRatioStages(ArtId, dataratios);
-
+              
                 cmb_Articles1.ArticleId = ArtId;
 
                 FillStages(ArtId);
@@ -388,21 +390,19 @@ namespace Odin.Register.Articles
 
         private void gv_Params_SelectionChanged(object sender, EventArgs e)
         {
-
+            
             string _param = "";
             string _paramdesc = "";
             double _value = 0;
             int _id = 0;
-            try
-            {
+            try {
                 OperId = Convert.ToInt32(gv_Params.CurrentRow.Cells["cn_paramoperid"].Value);
                 _param = gv_Params.CurrentRow.Cells["cn_param"].Value.ToString();
                 _paramdesc = gv_Params.CurrentRow.Cells["cn_paramdesc"].Value.ToString();
                 _id = Convert.ToInt32(gv_Params.CurrentRow.Cells["cn_paramid"].Value);
                 _value = Convert.ToDouble(gv_Params.CurrentRow.Cells["cn_paramvalue"].Value);
             }
-            catch
-            {
+            catch {
                 OperId = 0;
             }
 
@@ -480,13 +480,13 @@ namespace Odin.Register.Articles
 
         private void gv_Opers_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            
         }
 
         private void btn_CopyOper_Click(object sender, EventArgs e)
         {
             if (//glob_Class.MessageConfirm("Are you sure you want to copy ratio?", "Copy ratio?") == true
-                //&& 
+               //&& 
                ArtId != 0)
             {
                 frm_cmbArt frm = new frm_cmbArt();

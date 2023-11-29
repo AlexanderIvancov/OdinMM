@@ -1,9 +1,16 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
+using System.Data.SqlClient;
 namespace Odin.Tools
 {
     public partial class frm_GridViewAdm : KryptonForm
@@ -51,9 +58,9 @@ namespace Odin.Tools
                 row1["cColumnOrder"] = column.DisplayIndex;
                 row1["cColumnId"] = 0;
                 row1["cColumnWidth"] = column.Width;
-                row1["cColumnExport"] = Convert.ToInt32(Helper.GetOneRecord("select isnull(columnexport, 0) as cex from mnu_colvis where formname = '" + formname
-                                        + "' and gridname = '" + grid.Name + "' and columnname = '" + column.Name + "' and userid = " + UserId + ""));//globClass.BoolToCheck(column.Visible);
-
+                row1["cColumnExport"] = Convert.ToInt32(Helper.GetOneRecord("select isnull(columnexport, 0) as cex from mnu_colvis where formname = '" + formname 
+                                        + "' and gridname = '" + grid.Name + "' and columnname = '" + column.Name + "' and userid = " + UserId  + ""));//globClass.BoolToCheck(column.Visible);
+               
                 dtColumns.Rows.Add(row1);
 
 
@@ -186,7 +193,10 @@ namespace Odin.Tools
         {
             try
             {
-                btn_Up.Enabled = Convert.ToInt32(gvList.CurrentRow.Cells["cn_ColumnOrder"].Value) != 0;
+                if (Convert.ToInt32(gvList.CurrentRow.Cells["cn_ColumnOrder"].Value) == 0)
+                    btn_Up.Enabled = false;
+                else
+                    btn_Up.Enabled = true;
             }
             catch { }
 

@@ -1,22 +1,28 @@
-﻿using Odin.Global_Classes;
-using System;
-using System.Data;
-using System.Data.SqlClient;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.CMB_Components.BLL;
+using Odin.Global_Classes;
+using System.Data.SqlClient;
 
 namespace Odin.CMB_Components.Batches
 {
     public delegate void BatchHeadPDAEventHandler(object sender);
     public delegate void BatchHeadPDAKeyPressedEventHandler(object sender);
-
+   
     public partial class cmb_BatchPDA : UserControl
     {
         public event BatchHeadPDAEventHandler BatchChanged;
-
+       
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
         public event BatchHeadPDAKeyPressedEventHandler BatchKeyPressed;
-
+       
 
         PopupWindowHelper PopupHelper = null;
 
@@ -29,10 +35,11 @@ namespace Odin.CMB_Components.Batches
         public int TextBoxEnabled
         {
             get { return _enabled; }
-            set
-            {
-                _enabled = value;
-                txt_Batch.Enabled = _enabled == -1;
+            set { _enabled = value;
+                if (_enabled == -1)
+                    txt_Batch.Enabled = true;
+                else
+                    txt_Batch.Enabled = false;
             }
         }
 
@@ -44,7 +51,10 @@ namespace Odin.CMB_Components.Batches
             set
             {
                 _clearbutton = value;
-                buttonSpecAny1.Visible = _clearbutton == -1;
+                if (_clearbutton == -1)
+                    buttonSpecAny1.Visible = true;
+                else
+                    buttonSpecAny1.Visible = false;
             }
         }
 
@@ -143,7 +153,7 @@ namespace Odin.CMB_Components.Batches
 
         public int COId
         { get; set; }
-
+        
         public int CountID
         { get; set; }
 
@@ -181,7 +191,7 @@ namespace Odin.CMB_Components.Batches
                                                         " LEFT JOIN SAL_ClientOrdersDets cd on cd.id = cb.coid " +
                                                         " LEFT JOIN SAL_ClientOrdersHead ch on ch.id = cd.headid " +
                                                         " LEFT JOIN BAS_Companies c on c.id = ch.clientid " +
-                                                        " outer apply (select count(id) as countid from PROD_COBatch where Batchid= bh.id) ap " +
+                                                        " outer apply (select count(id) as countid from PROD_COBatch where Batchid= bh.id) ap " + 
                                                         " WHERE bh.id = " + _BatchId.ToString(), conn);
                 adapter.Fill(ds);
 

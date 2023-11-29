@@ -1,14 +1,21 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.CustomControls;
-using Odin.Global_Classes;
-using Odin.Tools;
-using Odin.Workshop;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
+using Odin.Tools;
+using System.Data.SqlClient;
+using System.Runtime.InteropServices;
+using System.Threading;
+using Odin.CustomControls;
+using Odin.Workshop;
 
 namespace Odin.DataCollection
 {
@@ -39,7 +46,7 @@ namespace Odin.DataCollection
         DC_BLL DCBll = new DC_BLL();
         frm_cmbTextPDA_NC frmSer = null;
 
-        string _worker = "";
+       string _worker = "";
         int _workerid = 0;
         public string Worker
         {
@@ -109,11 +116,17 @@ namespace Odin.DataCollection
         {
             get
             {
-                return chk_IsLast.Checked == true ? -1 : 0;
+                if (chk_IsLast.Checked == true)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {
-                chk_IsLast.Checked = value == -1;
+                if (value == -1)
+                    chk_IsLast.Checked = true;
+                else
+                    chk_IsLast.Checked = false;
             }
         }
         Processing_BLL ProdBll = new Processing_BLL();
@@ -252,10 +265,12 @@ namespace Odin.DataCollection
                 e.KeyChar = System.Threading.Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
                 e.Handled = s.Text.Contains(e.KeyChar);
             }
-            else
+            else if (e.KeyChar == '-')
             {
-                e.Handled = e.KeyChar == '-' ? s.Text.Contains(e.KeyChar) : !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar);
+                e.Handled = s.Text.Contains(e.KeyChar);
             }
+            else
+                e.Handled = !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar);
         }
 
         private void ShowScreenNumKeyboard(KryptonTextBox _focusedtextbox)
@@ -389,8 +404,11 @@ namespace Odin.DataCollection
         {
             int _res = Convert.ToInt32(Helper.GetOneRecord("select lh.id from PROD_LaunchHead lh where lh.id = " + LaunchId + " and isnull(lh.qualvisaby, '') != '' and isnull(lh.ingenvisaby, '') != ''"));
             int _res1 = Convert.ToInt32(Helper.GetOneRecord("select lh.id from PROD_LaunchAdditVisas lh where lh.launchid = " + LaunchId + " and isnull(lh.qualvisaby, '') != '' and isnull(lh.ingenvisaby, '') != ''"));
-            lbl_Viza.Visible = _res == 0
-                && _res1 == 0;
+            if (_res == 0
+                && _res1 == 0)
+                lbl_Viza.Visible = true;
+            else
+                lbl_Viza.Visible = false;
         }
 
         private void btn_ChangeLaunch_Click(object sender, EventArgs e)
@@ -587,7 +605,7 @@ namespace Odin.DataCollection
         }
         public void AddSerialAnalogue(string serial, string analogue, int asprimary)
         {
-            string _res = ProdBll.AddSerialNumberAnalogue(serial, analogue, asprimary);
+            string _res = ProdBll.AddSerialNumberAnalogue(serial, analogue, asprimary);            
         }
 
         public void AddSerialAnalog(string Analogue)
@@ -633,7 +651,7 @@ namespace Odin.DataCollection
                 else
                 {
                     string _serial = txt_Oper.Text.Trim();
-                    string _res = DCBll.AddDataCollectionSerialOper(WorkerId, _serial, LaunchId, PrevStageId, OperNO, OperNO == 0 ? -1 : IsLast, cmb_CommonPDA1.SelectedValue);
+                    string _res = DCBll.AddDataCollectionSerialOper(WorkerId, _serial, LaunchId, PrevStageId, OperNO, OperNO == 0 ? -1 :IsLast, cmb_CommonPDA1.SelectedValue);
                     //MessageBox.Show(DCBll.SuccessId.ToString());
                     if (DCBll.SuccessId == -1)
                         FillList(WorkerId, LaunchId);
@@ -642,7 +660,7 @@ namespace Odin.DataCollection
                     else if (DCBll.SuccessId == -2)
                     {
                         TmpSerial = _serial;
-                        ShowFrmAnalog();
+                        ShowFrmAnalog();                       
                     }
                     else
                     {
@@ -747,7 +765,7 @@ namespace Odin.DataCollection
                 frm.FormClosing += new FormClosingEventHandler(FocusOn);
 
                 frm.Show();
-
+                
             }
             //txt_Oper.Text = "";
             //txt_Oper.Focus();
@@ -758,7 +776,7 @@ namespace Odin.DataCollection
             int _id = 0;
             try
             {
-                _id = Convert.ToInt32(Helper.GetOneRecord("select placeid from SYS_PCPlaces where pcname = '" + System.Environment.MachineName + "'"));
+               _id = Convert.ToInt32(Helper.GetOneRecord("select placeid from SYS_PCPlaces where pcname = '" + System.Environment.MachineName + "'"));
             }
             catch { }
             cmb_CommonPDA1.SelectedValue = _id;

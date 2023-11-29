@@ -1,7 +1,13 @@
-﻿using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
 namespace Odin.Register.Articles
 {
     public delegate void AnalogChangesEventHandler(object sender);
@@ -31,7 +37,7 @@ namespace Odin.Register.Articles
             get { return _showingModal; }
             set { _showingModal = value; }
         }
-
+        
         class_Global glob_Class = new class_Global();
         DAL_Functions DAL = new DAL_Functions();
         Helper MyHelper = new Helper();
@@ -91,17 +97,17 @@ namespace Odin.Register.Articles
 
         private void btn_OK_Click(object sender, EventArgs e)
         {
-
+           
             int _analogid = 0;
-
+           
             try
             {
                 _analogid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_analogid"].Value);
-
+               
             }
             catch { }
 
-            if (_analogid != 0
+            if (_analogid != 0 
                 && ArtCSEId != 0
                 && ArtId != 0)
             {

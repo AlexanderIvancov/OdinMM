@@ -1,10 +1,14 @@
-﻿using Odin.Global_Classes;
-using System;
-using System.Data;
-using System.Data.SqlClient;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
+using System.Data;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
+using System.Data.SqlClient;
 
 namespace Odin.CMB_Components.Common
 {
@@ -34,7 +38,10 @@ namespace Odin.CMB_Components.Common
             set
             {
                 _isemptycolor = value;
-                txt_Common.StateCommon.Back.Color1 = value == true ? Color.LightPink : Color.White;
+                if (value == true)
+                    txt_Common.StateCommon.Back.Color1 = Color.LightPink;
+                else
+                    txt_Common.StateCommon.Back.Color1 = Color.White;
             }
         }
 
@@ -63,17 +70,20 @@ namespace Odin.CMB_Components.Common
             set;
         }
 
-
+        
         public string OrderBy
         {
-            get; set;
+            get;set;
         }
 
         public string sCurrentValue
         {
             get
             {
-                return String.IsNullOrEmpty(txt_Common.Text) == true ? "" : txt_Common.Text;
+                if (String.IsNullOrEmpty(txt_Common.Text) == true)
+                    return "";
+                else
+                    return txt_Common.Text;
             }
             set
             {
@@ -117,7 +127,7 @@ namespace Odin.CMB_Components.Common
                             var cmdCommand = new SqlCommand(sb.ToString(), connection);
                             cmdCommand.Parameters.Add("@" + sID_Filled, SqlDbType.Int);
                             cmdCommand.Parameters["@" + sID_Filled].Value = _id;
-
+                            
                             connection.Open();
                             txt_Common.Text = cmdCommand.ExecuteScalar().ToString();
                             connection.Close();
@@ -152,7 +162,7 @@ namespace Odin.CMB_Components.Common
             var cmdCommand = new SqlCommand(sb.ToString(), connection);
             cmdCommand.Parameters.Add("@" + sText_Filled, SqlDbType.NVarChar);
             cmdCommand.Parameters["@" + sText_Filled].Value = strBeg;
-
+            
             connection.Open();
             try
             {
@@ -171,9 +181,9 @@ namespace Odin.CMB_Components.Common
             if (SelectedValueChanged != null)
             {
                 SelectedValueChanged(this);
-
+                
             }
-
+    
         }
 
         private void buttonSpecAny1_Click(object sender, EventArgs e)

@@ -1,7 +1,17 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
+using Odin.Tools;
+using System.Data.SqlClient;
 
 namespace Odin.Tools
 {
@@ -79,9 +89,7 @@ namespace Odin.Tools
         {
             int _id = 0;
             string _description = "";
-            try
-            {
-                _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
+            try { _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
                 _description = gv_List.CurrentRow.Cells["cn_description"].Value.ToString();
             }
             catch { }
@@ -100,7 +108,7 @@ namespace Odin.Tools
 
         }
 
-
+       
         private void btn_EditEmails_Click(object sender, EventArgs e)
         {
             int _id = 0;
@@ -176,8 +184,8 @@ namespace Odin.Tools
 
                 FillMailList(_typeid);
             }
-        }
-
+         }
+        
 
         private void gv_List_SelectionChanged(object sender, EventArgs e)
         {

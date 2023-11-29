@@ -1,7 +1,17 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using Odin.CMB_Components.BLL;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Tools;
 using System.Data.SqlClient;
 
 namespace Odin.CMB_Components.OutcomeDocs
@@ -21,8 +31,7 @@ namespace Odin.CMB_Components.OutcomeDocs
 
         public int ReasonId
         {
-            get
-            {
+            get {
                 try { return Convert.ToInt32(cmb_Reason.SelectedValue); }
                 catch { return 0; }
             }
@@ -31,9 +40,10 @@ namespace Odin.CMB_Components.OutcomeDocs
 
         public int TypeOff
         {
-            get
-            {
-                return rb_Production.Checked == true ? 5 : 17;
+            get { if (rb_Production.Checked == true)
+                    return 5;
+                else
+                    return 17;
             }
             set
             {
@@ -64,7 +74,7 @@ namespace Odin.CMB_Components.OutcomeDocs
             get { return txt_Comments.Text; }
             set { txt_Comments.Text = value; }
         }
-
+        
         public string DocDate
         {
             get { return txt_DocDate.Value.ToShortDateString(); }
@@ -147,8 +157,11 @@ namespace Odin.CMB_Components.OutcomeDocs
 
         public void CheckReason()
         {
-            btn_OK.Enabled = TypeOff != 17
-                || ReasonId != 0;
+            if (TypeOff == 17
+                && ReasonId == 0)
+                btn_OK.Enabled = false;
+            else
+                btn_OK.Enabled = true;
         }
         #endregion
 
@@ -164,7 +177,7 @@ namespace Odin.CMB_Components.OutcomeDocs
 
         private void cmb_Reason_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         private void cmb_Reason_SelectedValueChanged(object sender, EventArgs e)

@@ -1,9 +1,14 @@
-﻿using Odin.Global_Classes;
-using System;
-using System.Data;
-using System.Data.SqlClient;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
+using System.Data.SqlClient;
 
 
 namespace Odin.CMB_Components.StockInTypes
@@ -26,7 +31,7 @@ namespace Odin.CMB_Components.StockInTypes
         int _TypeId = 0;
         int _PrevId = 0;
 
-
+       
         string _Type = "";
         string _Lang = "ENG";
 
@@ -83,7 +88,7 @@ namespace Odin.CMB_Components.StockInTypes
                 }
             }
         }
-
+        
         public int StockMovTypeId
         {
             get

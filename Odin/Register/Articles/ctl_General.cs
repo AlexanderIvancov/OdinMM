@@ -1,11 +1,17 @@
-﻿using Odin.Global_Classes;
-using System;
-using System.Data;
-using System.Data.SqlClient;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
-using System.IO;
-using System.Text.RegularExpressions;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+using System.Text.RegularExpressions;
+using Odin.Tools;
+using Odin.Global_Classes;
+using System.IO;
 
 namespace Odin.Register.Articles
 {
@@ -145,11 +151,17 @@ namespace Odin.Register.Articles
         {
             get
             {
-                return chk_SubBatch.CheckState == CheckState.Checked ? -1 : 0;
+                if (chk_SubBatch.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {
-                chk_SubBatch.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+                if (value == -1)
+                    chk_SubBatch.CheckState = CheckState.Checked;
+                else
+                    chk_SubBatch.CheckState = CheckState.Unchecked;
             }
         }
 
@@ -157,11 +169,17 @@ namespace Odin.Register.Articles
         {
             get
             {
-                return chk_Service.CheckState == CheckState.Checked ? -1 : 0;
+                if (chk_Service.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {
-                chk_Service.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+                if (value == -1)
+                    chk_Service.CheckState = CheckState.Checked;
+                else
+                    chk_Service.CheckState = CheckState.Unchecked;
             }
         }
 
@@ -175,11 +193,17 @@ namespace Odin.Register.Articles
         {
             get
             {
-                return chk_IsActive.CheckState == CheckState.Checked ? -1 : 0;
+                if (chk_IsActive.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {
-                chk_IsActive.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+                if (value == -1)
+                    chk_IsActive.CheckState = CheckState.Checked;
+                else
+                    chk_IsActive.CheckState = CheckState.Unchecked;
             }
         }
 
@@ -243,22 +267,34 @@ namespace Odin.Register.Articles
         {
             get
             {
-                return chk_Warning.CheckState == CheckState.Checked ? -1 : 0;
+                if (chk_Warning.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {
-                chk_Warning.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+                if (value == -1)
+                    chk_Warning.CheckState = CheckState.Checked;
+                else
+                    chk_Warning.CheckState = CheckState.Unchecked;
             }
         }
         public int MBLimit
         {
             get
             {
-                return chk_MBLimit.CheckState == CheckState.Checked ? -1 : 0;
+                if (chk_MBLimit.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {
-                chk_MBLimit.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+                if (value == -1)
+                    chk_MBLimit.CheckState = CheckState.Checked;
+                else
+                    chk_MBLimit.CheckState = CheckState.Unchecked;
             }
         }
         int _artid = 0;
@@ -269,7 +305,7 @@ namespace Odin.Register.Articles
             set
             {
                 _artid = value;
-
+                
                 SqlConnection conn = new SqlConnection(sConnStr);
                 conn.Open();
                 DataSet ds = new DataSet();
@@ -464,5 +500,5 @@ namespace Odin.Register.Articles
 
             //DialogResult result = frm.ShowDialog();
         }
-    }
+    }    
 }

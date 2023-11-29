@@ -1,6 +1,15 @@
-﻿using ComponentFactory.Krypton.Toolkit;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
-using System;
+using Odin.CMB_Components.BLL;
 
 namespace Odin.CMB_Components.MoveDocs
 {
@@ -68,7 +77,7 @@ namespace Odin.CMB_Components.MoveDocs
             get { return cmb_Incoterms1.IncotermId; }
             set { cmb_Incoterms1.IncotermId = value; }
         }
-
+        
         public string DocDate
         {
             get { return txt_DocDate.Value.ToShortDateString(); }
@@ -78,7 +87,7 @@ namespace Odin.CMB_Components.MoveDocs
                 catch { }
             }
         }
-
+                
         public int TransportId
         {
             get { return cmb_Transport1.TransportId; }
@@ -87,9 +96,7 @@ namespace Odin.CMB_Components.MoveDocs
 
         public int PalettesQty
         {
-            get
-            {
-                try { return Convert.ToInt32(txt_PalettesQty.Text); }
+            get { try { return Convert.ToInt32(txt_PalettesQty.Text); }
                 catch { return 0; }
             }
             set { txt_PalettesQty.Text = value.ToString(); }
@@ -131,7 +138,10 @@ namespace Odin.CMB_Components.MoveDocs
         {
             get
             {
-                return txt_DelivDate.Value == null ? "" : txt_DelivDate.Value.ToString();
+                if (txt_DelivDate.Value == null)
+                    return "";
+                else
+                    return txt_DelivDate.Value.ToString();
             }
             set
             {
@@ -203,6 +213,8 @@ namespace Odin.CMB_Components.MoveDocs
 
         private void cmb_Batches1_BatchChanged(object sender)
         {
+            bool _test = true;
+
             string _r = "";
 
             try
@@ -242,7 +254,7 @@ namespace Odin.CMB_Components.MoveDocs
             //    cmb_BatchStages1.BatchId = BatchId;
             //else
             //    cmb_Batches1.BatchId = 0;
-
+           
         }
 
 
@@ -253,6 +265,6 @@ namespace Odin.CMB_Components.MoveDocs
 
         #endregion
 
-
+       
     }
 }

@@ -1,5 +1,17 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
+using Odin.Tools;
+using System.Data.SqlClient;
 
 namespace Odin.Warehouse.Deliveries
 {
@@ -35,8 +47,7 @@ namespace Odin.Warehouse.Deliveries
         }
 
         public string Article
-        {
-            get { return txt_Article.Text; }
+        { get { return txt_Article.Text; }
             set { txt_Article.Text = value; }
         }
 

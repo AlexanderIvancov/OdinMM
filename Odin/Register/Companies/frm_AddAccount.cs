@@ -1,6 +1,13 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
 
 namespace Odin.Register.Companies
 {
@@ -47,14 +54,18 @@ namespace Odin.Register.Companies
             get { return txt_Comments.Text; }
             set { txt_Comments.Text = value; }
         }
-
+            
         public int AsDefault
         {
-            get
-            {
-                return chk_Default.CheckState == CheckState.Checked ? -1 : 0;
+            get { if (chk_Default.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
-            set { chk_Default.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked; }
+            set { if (value == -1)
+                    chk_Default.CheckState = CheckState.Checked;
+                else
+                    chk_Default.CheckState = CheckState.Unchecked; }
         }
         #endregion
 

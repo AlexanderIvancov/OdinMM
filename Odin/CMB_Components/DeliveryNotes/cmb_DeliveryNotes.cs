@@ -1,11 +1,16 @@
-﻿using Odin.CMB_Components.BLL;
-using Odin.Global_Classes;
-using Odin.Warehouse.Deliveries;
-using System;
-using System.Data;
-using System.Data.SqlClient;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
+using System.Data.SqlClient;
+using Odin.Warehouse.Deliveries;
+using Odin.CMB_Components.BLL;
 
 namespace Odin.CMB_Components.DeliveryNotes
 {
@@ -47,32 +52,32 @@ namespace Odin.CMB_Components.DeliveryNotes
                 //if (_PrevId != _DelivNoteId)
                 //{
 
-                DataSet ds = new DataSet();
+                    DataSet ds = new DataSet();
 
-                SqlDataAdapter adapter =
-                    new SqlDataAdapter(
-                        "SELECT DISTINCT TOP 1 id FROM STO_StockOutHead WHERE name = '" + _DelivNote.ToString() + "'", sConnStr);
+                    SqlDataAdapter adapter =
+                        new SqlDataAdapter(
+                            "SELECT DISTINCT TOP 1 id FROM STO_StockOutHead WHERE name = '" + _DelivNote.ToString() + "'", sConnStr);
 
-                adapter.Fill(ds);
+                    adapter.Fill(ds);
 
-                DataTable dt = ds.Tables[0];
+                    DataTable dt = ds.Tables[0];
 
-                if (dt.Rows.Count > 0)
-                {
-                    foreach (DataRow dr in dt.Rows)
+                    if (dt.Rows.Count > 0)
                     {
-                        DelivNoteId = Convert.ToInt32(dt.Rows[0]["id"].ToString());
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            DelivNoteId = Convert.ToInt32(dt.Rows[0]["id"].ToString());
+                        }
                     }
-                }
-                else
-                {
-                    _DelivNoteId = 0;
-
-                    if (DelivNoteChanged != null)
+                    else
                     {
-                        DelivNoteChanged(this);
-                    }
-                    //return;
+                        _DelivNoteId = 0;
+
+                        if (DelivNoteChanged != null)
+                        {
+                            DelivNoteChanged(this);
+                        }
+                        //return;
                     //}
 
                     //_PrevId = _DelivNoteId;
@@ -123,9 +128,9 @@ namespace Odin.CMB_Components.DeliveryNotes
                     }
                     else
                     {
-                        //DelivNote = string.Empty;
+                         //DelivNote = string.Empty;
                         txt_DeliveryNote.Text = string.Empty;
-                    }
+                    }                  
 
                     _PrevId = _DelivNoteId;
 
@@ -181,8 +186,8 @@ namespace Odin.CMB_Components.DeliveryNotes
         private void txt_DeliveryNote_TextChanged(object sender, EventArgs e)
         {
             //try {
-            DelivNote = txt_DeliveryNote.Text;
-            // }
+                DelivNote = txt_DeliveryNote.Text;
+           // }
             //catch { }
         }
 

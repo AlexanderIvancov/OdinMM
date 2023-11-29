@@ -1,11 +1,15 @@
-﻿using AdvancedDataGridView;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using AdvancedDataGridView;
 using Odin.Global_Classes;
 using Odin.Sales;
-using System;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace Odin.Planning.Controls
 {
@@ -23,7 +27,7 @@ namespace Odin.Planning.Controls
         class_Global glob_Class = new class_Global();
         Plan_BLL PlanBll = new Plan_BLL();
         DAL_Functions DLL = new DAL_Functions();
-
+        
 
         public bool tmpValidated = false;
 
@@ -37,11 +41,8 @@ namespace Odin.Planning.Controls
         }
         public double QtyInBatch
         {
-            get
-            {
-                try { return Convert.ToDouble(txt_Qty.Text); }
-                catch { return 0; }
-            }
+            get { try { return Convert.ToDouble(txt_Qty.Text); }
+                catch { return 0; } }
             set { txt_Qty.Text = value.ToString(); }
 
         }
@@ -62,7 +63,10 @@ namespace Odin.Planning.Controls
         {
             get
             {
-                return txt_StartDate.Value == null ? "" : txt_StartDate.Value.ToString();
+                if (txt_StartDate.Value == null)
+                    return "";
+                else
+                    return txt_StartDate.Value.ToString();
             }
             set
             {
@@ -77,7 +81,10 @@ namespace Odin.Planning.Controls
         {
             get
             {
-                return txt_EndDate.Value == null ? "" : txt_EndDate.Value.ToString();
+                if (txt_EndDate.Value == null)
+                    return "";
+                else
+                    return txt_EndDate.Value.ToString();
             }
             set
             {
@@ -88,7 +95,7 @@ namespace Odin.Planning.Controls
                 catch { txt_EndDate.Value = null; }
             }
         }
-
+        
         public string Serials
         { get; set; }
         /*public string StartDate
@@ -125,13 +132,16 @@ namespace Odin.Planning.Controls
         { get; set; }
         public int Urgent
         {
-            get
-            {
-                return chk_Urgent.CheckState == CheckState.Checked ? -1 : 0;
+            get { if (chk_Urgent.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
-            set
-            {
-                chk_Urgent.Checked = value == -1;
+            set {
+                if (value == -1)
+                    chk_Urgent.Checked = true;
+                else
+                    chk_Urgent.Checked = false;
             }
         }
 
@@ -191,7 +201,7 @@ namespace Odin.Planning.Controls
 
             }
         }
-
+       
         string _tmpBatchName = "";
 
         #endregion
@@ -205,9 +215,15 @@ namespace Odin.Planning.Controls
 
         public bool CheckEmpty()
         {
-            return ArticleId != 0
-                && QtyInBatch != 0
-                && StartDate != "";
+            if (ArticleId == 0
+                || QtyInBatch == 0
+                || StartDate == ""
+                //|| EndDate == ""
+                //|| (Convert.ToDateTime(StartDate) > Convert.ToDateTime(EndDate))
+                )
+                return false;
+            else
+                return true;
 
         }
 
@@ -296,7 +312,7 @@ namespace Odin.Planning.Controls
                             Convert.ToDouble(dr["QtyOnStock"]), Convert.ToDouble(dr["QtyAvailable"]),
                             Convert.ToDouble(dr["WaitingPOQty"]), dr["WaitingPODate"].ToString(), dr["POrder"].ToString(),
                             dr["Supplier"].ToString(), Convert.ToDouble(dr["QtyForSubBatch"]),
-                            Convert.ToDouble(dr["QtyNom"]), Convert.ToDouble(dr["SpoilNorm"]),
+                            Convert.ToDouble(dr["QtyNom"]), Convert.ToDouble(dr["SpoilNorm"]), 
                             Convert.ToInt32(dr["NumDecimals"]), Convert.ToDouble(dr["SpoilConst"]), "", dr["Stage"], "", -1, 0, 0);
 
             if (isAddingImage)
@@ -336,7 +352,7 @@ namespace Odin.Planning.Controls
                 node.Collapse();
             }
         }
-
+        
         public void FillGridBatch(int BatchId)
         {
             tv_BOM.Nodes.Clear();
@@ -363,12 +379,12 @@ namespace Odin.Planning.Controls
             TreeGridNode node;
             node = nodes.Add(null, dr["Article"], -1, dr["artid"], dr["Unit"],
                              Math.Round(Convert.ToDouble(dr["QtyInNomenclature"]), 5), Convert.ToDouble(dr["QtyInBatch"]),
-                             Convert.ToDouble(dr["QtyForSubBatch"]), 0,
+                             Convert.ToDouble(dr["QtyForSubBatch"]), 0, 
                              Convert.ToDouble(dr["QtyInBatch"]), dr["bdid"], 0, dr["CSEArtId"], Convert.ToInt32(dr["ParentBatchId"]),
                              Convert.ToInt32(dr["BatchHeadId"]), Convert.ToDouble(dr["QtyOnStock"]), Convert.ToDouble(dr["QtyAvailable"]),
-                            Convert.ToDouble(dr["WaitingPOQty"]), dr["WaitingPODate"].ToString(), dr["POrder"].ToString(),
+                            Convert.ToDouble(dr["WaitingPOQty"]), dr["WaitingPODate"].ToString(), dr["POrder"].ToString(), 
                             dr["Supplier"].ToString(), Convert.ToDouble(dr["QtyForSubBatch"]),
-                            Convert.ToDouble(dr["QtyNom"]), Convert.ToDouble(dr["SpoilNorm"]),
+                            Convert.ToDouble(dr["QtyNom"]), Convert.ToDouble(dr["SpoilNorm"]), 
                             Convert.ToInt32(dr["NumDecimals"]), Convert.ToDouble(dr["SpoilConst"]),
                             dr["SubBatch"], dr["Stage"], dr["Comments"], Convert.ToInt32(dr["IsActive"]), Convert.ToDouble(dr["QtyGiven"])
                             , Convert.ToInt32(dr["DNP"]));
@@ -478,23 +494,25 @@ namespace Odin.Planning.Controls
                 //Recalc CSE QTY
                 if (Spoilage == -1)
                 {
-                    _tmpQtyCSE = _tmpQtyWithSpoil > Convert.ToDouble(node.Cells["cn_nQtyAvailable"].Value)
-                        ? _tmpQtyWithSpoil - Convert.ToDouble(node.Cells["cn_nQtyAvailable"].Value)
-                        : 0;
+                    if (_tmpQtyWithSpoil > Convert.ToDouble(node.Cells["cn_nQtyAvailable"].Value))
+                        _tmpQtyCSE = _tmpQtyWithSpoil - Convert.ToDouble(node.Cells["cn_nQtyAvailable"].Value);
+                    else
+                         _tmpQtyCSE = 0;
                     _tmpQtyRM = _tmpQtyWithSpoil - _tmpQtyCSE;
                 }
                 else
                 {
-                    _tmpQtyCSE = _tmpQtyWOSpoil > Convert.ToDouble(node.Cells["cn_nQtyAvailable"].Value)
-                        ? _tmpQtyWOSpoil - Convert.ToDouble(node.Cells["cn_nQtyAvailable"].Value)
-                        : 0;
+                    if (_tmpQtyWOSpoil > Convert.ToDouble(node.Cells["cn_nQtyAvailable"].Value))
+                        _tmpQtyCSE = _tmpQtyWOSpoil - Convert.ToDouble(node.Cells["cn_nQtyAvailable"].Value);
+                    else
+                        _tmpQtyCSE = 0;
                     _tmpQtyRM = _tmpQtyWOSpoil - _tmpQtyCSE;
                 }
 
                 node.Cells["cn_nSubProdQty"].Value = _tmpQtyCSE;
                 node.Cells["cn_nQtyInBatch"].Value = _tmpQtyRM;
 
-
+               
 
                 //Recalc children qty 
                 foreach (TreeGridNode node1 in node.Nodes)
@@ -505,7 +523,13 @@ namespace Odin.Planning.Controls
             }
             else
             {
-                node.Cells["cn_nQtyInBatch"].Value = Spoilage == -1 ? _tmpQtyWithSpoil : (object)_tmpQtyWOSpoil;
+                if (Spoilage == -1)
+                {
+
+                    node.Cells["cn_nQtyInBatch"].Value = _tmpQtyWithSpoil;
+                }
+                else
+                    node.Cells["cn_nQtyInBatch"].Value = _tmpQtyWOSpoil;
             }
             SetCellsColor();
         }
@@ -525,8 +549,8 @@ namespace Odin.Planning.Controls
                     //Convert.ToDouble(row.Cells["cn_nSpoilConst"].Value)) / fOldQtyInBatch * QtyInBatch 
                     //                                    + Convert.ToDouble(row.Cells["cn_nSpoilConst"].Value), 3);
                     //else
-                    //row.Cells["cn_nQtyInBatch"].Value = Math.Round(Convert.ToDouble(row.Cells["cn_nQtyDefOldB"].Value) * QtyInBatch + Convert.ToDouble(row.Cells["cn_nSpoilConst"].Value), 3);
-
+                        //row.Cells["cn_nQtyInBatch"].Value = Math.Round(Convert.ToDouble(row.Cells["cn_nQtyDefOldB"].Value) * QtyInBatch + Convert.ToDouble(row.Cells["cn_nSpoilConst"].Value), 3);
+                    
                     if (QtyInBatch == 0)
                         row.Cells["cn_nQtyInBatch"].Value = 0;
                 }
@@ -537,7 +561,7 @@ namespace Odin.Planning.Controls
             }
         }
 
-        public void FillNewOrderLine(int id, int coid, string order, string line, string article, int artid,
+        public void FillNewOrderLine(int id, int coid, string order, string line, string article, int artid, 
                                 double qty, string reqdate, string customer, double qtyinbatch)
         {
             DataRow row = dt_Orders.NewRow();
@@ -565,8 +589,8 @@ namespace Odin.Planning.Controls
 
             foreach (DataRow row1 in data.Rows)
             {
-                FillNewOrderLine(Convert.ToInt32(row1["id"]), Convert.ToInt32(row1["coid"]), row1["corder"].ToString(), row1["orderline"].ToString(),
-                                row1["article"].ToString(), Convert.ToInt32(row1["artid"]), Convert.ToDouble(row1["qty"]), row1["reqdate"].ToString(),
+                FillNewOrderLine(Convert.ToInt32(row1["id"]), Convert.ToInt32(row1["coid"]), row1["corder"].ToString(), row1["orderline"].ToString(), 
+                                row1["article"].ToString(), Convert.ToInt32(row1["artid"]),  Convert.ToDouble(row1["qty"]), row1["reqdate"].ToString(),
                                 row1["customer"].ToString(), Convert.ToDouble(row1["qtylinked"]));
             }
 
@@ -605,7 +629,7 @@ namespace Odin.Planning.Controls
         public void RecalcQtyInGrid()
         {
             double _tmpqty = QtyInBatch;
-
+            
             foreach (DataGridViewRow row in this.gv_Orders.Rows)
             {
                 if (_tmpqty > Convert.ToDouble(row.Cells["cn_qtyforbatch"].Value))
@@ -619,7 +643,7 @@ namespace Odin.Planning.Controls
                     row.Cells["cn_oqty"].Value = _tmpqty;
                     _tmpqty = 0;
                 }
-
+                
             }
 
         }
@@ -642,10 +666,17 @@ namespace Odin.Planning.Controls
             if (tv_BOM.CurrentRow.Cells["cn_nWithSpoil"].Selected == true)
             {
                 tv_BOM.EndEdit();
-                _tmpSpoil = Convert.ToInt16(tv_BOM.CurrentRow.Cells["cn_nWithSpoil"].Value) == -1 ? -1 : 0;
+                if (Convert.ToInt16(tv_BOM.CurrentRow.Cells["cn_nWithSpoil"].Value) == -1)
+                    _tmpSpoil = -1;
+                else
+                    _tmpSpoil = 0;
 
-                double _tmpQtyCSE = node.Level == 1 ? QtyInBatch : Convert.ToDouble(node.Parent.Cells["cn_nSubProdQty"].Value);
-                //Recalc RM QTY
+                double _tmpQtyCSE = 0;
+                    //Recalc RM QTY
+                if (node.Level == 1)
+                    _tmpQtyCSE = QtyInBatch;
+                else
+                    _tmpQtyCSE = Convert.ToDouble(node.Parent.Cells["cn_nSubProdQty"].Value);
 
 
                 double _tmpPerc = 0;
@@ -661,9 +692,10 @@ namespace Odin.Planning.Controls
                 if (Convert.ToDouble(node.Cells["cn_nSubProdQty"].Value) > 0
                             && node.HasChildren == true)
                 {
-                    node.Cells["cn_nQtyInBatch"].Value = _tmpSpoil == 0
-                        ? _tmpQtyWOSpoil - Convert.ToDouble(node.Cells["cn_nSubProdQty"].Value)
-                        : (object)(_tmpQtyWithSpoil - Convert.ToDouble(node.Cells["cn_nSubProdQty"].Value));
+                    if (_tmpSpoil == 0)
+                        node.Cells["cn_nQtyInBatch"].Value = _tmpQtyWOSpoil - Convert.ToDouble(node.Cells["cn_nSubProdQty"].Value);
+                    else
+                        node.Cells["cn_nQtyInBatch"].Value = _tmpQtyWithSpoil - Convert.ToDouble(node.Cells["cn_nSubProdQty"].Value);
                     //Recalc children
                     foreach (TreeGridNode node1 in node.Nodes)
                     {
@@ -672,18 +704,24 @@ namespace Odin.Planning.Controls
                 }
                 else
                 {
-                    node.Cells["cn_nQtyInBatch"].Value = _tmpSpoil == 0 ? _tmpQtyWOSpoil : (object)_tmpQtyWithSpoil;
+                    if (_tmpSpoil == 0)
+                        node.Cells["cn_nQtyInBatch"].Value = _tmpQtyWOSpoil;
+                    else
+                        node.Cells["cn_nQtyInBatch"].Value = _tmpQtyWithSpoil;
                 }
 
             }
         }
-
+        
         private void btn_Spoilage_Click(object sender, EventArgs e)
         {
             if (_EditMode == 0)
             {
 
-                AllSpoil = AllSpoil == 0 ? -1 : 0;
+                if (AllSpoil == 0)
+                    AllSpoil = -1;
+                else
+                    AllSpoil = 0;
 
                 if (AllSpoil == -1)
                 {
@@ -701,7 +739,7 @@ namespace Odin.Planning.Controls
                 }
             }
         }
-
+        
         private void btn_AddSubProduct_Click(object sender, EventArgs e)
         {
             if (_EditMode == 0)
@@ -860,9 +898,9 @@ namespace Odin.Planning.Controls
                         {
                             if (Convert.ToDouble(row["qty"]) > 0
                                 && Convert.ToInt32(row["artid"]) == cmb_Articles1.ArticleId)
-                                PlanBll.AddBatchCOPOLink(_id, Convert.ToInt32(row["coid"]), 0, Convert.ToDouble(row["qty"]), 0, 0);
+                            PlanBll.AddBatchCOPOLink(_id, Convert.ToInt32(row["coid"]), 0, Convert.ToDouble(row["qty"]), 0, 0);
                         }
-
+                        
                         _tmpBatchName = PlanBll.BatchName;
                         //Adding the details
 
@@ -908,64 +946,64 @@ namespace Odin.Planning.Controls
                         PlanBll.EditBatchHeader(BatchId, ArticleId, QtyInBatch, StartDate, Comments, EndDate, Urgent, "");
 
                     }
-                    //Delete temporary deleted links
-                    var data = CO_BLL.getBatchMappings(BatchId);
-                    int k = 0;
-                    int tmpid = 0;
-                    foreach (DataRow row1 in data.Rows)
-                    {
-                        k = 0;
-                        tmpid = Convert.ToInt32(row1["id"]);
+                        //Delete temporary deleted links
+                        var data = CO_BLL.getBatchMappings(BatchId);
+                        int k = 0;
+                        int tmpid = 0;
+                        foreach (DataRow row1 in data.Rows)
+                        {
+                            k = 0;
+                            tmpid = Convert.ToInt32(row1["id"]);
+                            foreach (DataRow row in dt_Orders.Rows)
+                            {
+                                if (Convert.ToInt32(row["id"]) == tmpid)
+                                    k++;
+                            }
+                            if (k == 0)
+                                PlanBll.DeleteBatchCOPOLink(tmpid);
+                        }
+
+
+                        //Edit links
                         foreach (DataRow row in dt_Orders.Rows)
                         {
-                            if (Convert.ToInt32(row["id"]) == tmpid)
-                                k++;
+                            if (Convert.ToDouble(row["qty"]) > 0
+                                    && Convert.ToInt32(row["artid"]) == cmb_Articles1.ArticleId)
+                                PlanBll.EditBatchCOPOLink(BatchId, Convert.ToInt32(row["coid"]), 0, Convert.ToDouble(row["qty"]), 0, 0);
                         }
-                        if (k == 0)
-                            PlanBll.DeleteBatchCOPOLink(tmpid);
-                    }
-
-
-                    //Edit links
-                    foreach (DataRow row in dt_Orders.Rows)
-                    {
-                        if (Convert.ToDouble(row["qty"]) > 0
-                                && Convert.ToInt32(row["artid"]) == cmb_Articles1.ArticleId)
-                            PlanBll.EditBatchCOPOLink(BatchId, Convert.ToInt32(row["coid"]), 0, Convert.ToDouble(row["qty"]), 0, 0);
-                    }
-
-                    //Details
-                    foreach (DataGridViewRow row in this.tv_BOM.Rows)
-                    {
-                        //Check for header
-                        if (Convert.ToInt32(row.Cells["cn_nChildBatchId"].Value) != 0
-                            && Convert.ToDouble(row.Cells["cn_nQtyInBatch"].Value) != Convert.ToDouble(row.Cells["cn_nQtyDefOldB"].Value))
+                        
+                        //Details
+                        foreach (DataGridViewRow row in this.tv_BOM.Rows)
                         {
-                            PlanBll.EditBatchHeader(Convert.ToInt32(row.Cells["cn_nChildBatchId"].Value), Convert.ToInt32(row.Cells["cn_nArtId"].Value), Convert.ToInt32(row.Cells["cn_nQtyInBatch"].Value), StartDate, "", EndDate, Urgent, Serials);
+                            //Check for header
+                            if (Convert.ToInt32(row.Cells["cn_nChildBatchId"].Value) != 0
+                                && Convert.ToDouble(row.Cells["cn_nQtyInBatch"].Value) != Convert.ToDouble(row.Cells["cn_nQtyDefOldB"].Value))
+                            {
+                                PlanBll.EditBatchHeader(Convert.ToInt32(row.Cells["cn_nChildBatchId"].Value), Convert.ToInt32(row.Cells["cn_nArtId"].Value), Convert.ToInt32(row.Cells["cn_nQtyInBatch"].Value), StartDate, "", EndDate, Urgent, Serials);
+                            }
+
+                            //if (Convert.ToDouble(row.Cells["cn_nQtyInBatch"].Value) != Convert.ToDouble(row.Cells["cn_nQtyDefOldB"].Value))
+                            PlanBll.EditBatchDetail(Convert.ToInt32(row.Cells["cn_nBatchId"].Value), Convert.ToDouble(row.Cells["cn_nQtyInBatch"].Value), row.Cells["cn_Comments"].Value.ToString(), Convert.ToInt32(row.Cells["cn_ndetisactive"].Value), Convert.ToInt32(row.Cells["cn_dnp"].Value));
+
+                            if (Convert.ToInt32(row.Cells["cn_nBatchId"].Value) == 0
+                                && Convert.ToDouble(row.Cells["cn_nQtyInBatch"].Value) > 0)
+                                
+                                _tmp = PlanBll.AddBatchDetail(Convert.ToInt32(row.Cells["cn_nBatchHeadId"].Value), Convert.ToInt32(row.Cells["cn_nArtId"].Value), Convert.ToDouble(row.Cells["cn_nQtyInBatch"].Value), row.Cells["cn_Comments"].Value.ToString());
+
                         }
 
-                        //if (Convert.ToDouble(row.Cells["cn_nQtyInBatch"].Value) != Convert.ToDouble(row.Cells["cn_nQtyDefOldB"].Value))
-                        PlanBll.EditBatchDetail(Convert.ToInt32(row.Cells["cn_nBatchId"].Value), Convert.ToDouble(row.Cells["cn_nQtyInBatch"].Value), row.Cells["cn_Comments"].Value.ToString(), Convert.ToInt32(row.Cells["cn_ndetisactive"].Value), Convert.ToInt32(row.Cells["cn_dnp"].Value));
-
-                        if (Convert.ToInt32(row.Cells["cn_nBatchId"].Value) == 0
-                            && Convert.ToDouble(row.Cells["cn_nQtyInBatch"].Value) > 0)
-
-                            _tmp = PlanBll.AddBatchDetail(Convert.ToInt32(row.Cells["cn_nBatchHeadId"].Value), Convert.ToInt32(row.Cells["cn_nArtId"].Value), Convert.ToDouble(row.Cells["cn_nQtyInBatch"].Value), row.Cells["cn_Comments"].Value.ToString());
-
-                    }
-
-                    if (SaveBatch != null)
-                    {
-                        SaveBatch(this);
-                    }
-
+                        if (SaveBatch != null)
+                        {
+                            SaveBatch(this);
+                        }
+                   
                 }
             }
         }
 
         public void AddBatchDet(int _BatchId, TreeGridNodeCollection nodes)
         {
-            int _BatchDetId = 0;
+            int _BatchDetId = 0;   
             int _IdSB = 0;//Future id of subbatch
 
             //select temporary stage
@@ -993,7 +1031,7 @@ namespace Odin.Planning.Controls
                     node.Cells["cn_nBatchId"].Value = _BatchDetId;
                 }
                 if (
-                        //Qty of sub-product more than 0!
+                    //Qty of sub-product more than 0!
                         glob_Class.NEN_Double(node.Cells[7].Value.ToString()) > 0
                         && node.HasChildren == true)
                 {
@@ -1025,12 +1063,16 @@ namespace Odin.Planning.Controls
             if (node.Cells["cn_nSubProdQty"].Selected == true
                 && node.HasChildren == true)
             {
-                double _tmpQtyCSE = node.Level == 1 ? QtyInBatch : Convert.ToDouble(node.Parent.Cells["cn_nSubProdQty"].Value);
+                double _tmpQtyCSE = 0;
                 //Recalc RM QTY
+                if (node.Level == 1)
+                    _tmpQtyCSE = QtyInBatch;
+                else
+                    _tmpQtyCSE = Convert.ToDouble(node.Parent.Cells["cn_nSubProdQty"].Value);
 
 
                 double _tmpPerc = 0;
-
+                                
                 double _tmpQtyWOSpoil = 0;
                 double _tmpQtyWithSpoil = 0;
                 _tmpPerc = (100 + Convert.ToDouble(node.Cells["cn_nSpoilNorm"].Value)) / 100;
@@ -1040,15 +1082,16 @@ namespace Odin.Planning.Controls
                                                                                 * _tmpPerc + Convert.ToDouble(node.Cells["cn_nSpoilConst"].Value)
                                                                                 , Convert.ToInt32(node.Cells["cn_nNumDecimals"].Value));
 
-                node.Cells["cn_nQtyInBatch"].Value = AllSpoil == 0
-                    ? _tmpQtyWOSpoil - Convert.ToDouble(node.Cells["cn_nSubProdQty"].Value)
-                    : (object)(_tmpQtyWithSpoil - Convert.ToDouble(node.Cells["cn_nSubProdQty"].Value));
+                if (AllSpoil == 0) 
+                    node.Cells["cn_nQtyInBatch"].Value = _tmpQtyWOSpoil - Convert.ToDouble(node.Cells["cn_nSubProdQty"].Value);
+                else
+                    node.Cells["cn_nQtyInBatch"].Value = _tmpQtyWithSpoil - Convert.ToDouble(node.Cells["cn_nSubProdQty"].Value);
                 //Recalc children
                 foreach (TreeGridNode node1 in node.Nodes)
                 {
                     RecalcQtyBatch(node1, AllSpoil, Convert.ToDouble(node.Cells["cn_nSubProdQty"].Value));
                 }
-
+                
             }
 
 
@@ -1056,10 +1099,17 @@ namespace Odin.Planning.Controls
             {
                 int _tmpSpoil = 0;
                 tv_BOM.EndEdit();
-                _tmpSpoil = Convert.ToInt16(tv_BOM.CurrentRow.Cells["cn_nWithSpoil"].Value) == -1 ? -1 : 0;
+                if (Convert.ToInt16(tv_BOM.CurrentRow.Cells["cn_nWithSpoil"].Value) == -1)
+                    _tmpSpoil = -1;
+                else
+                    _tmpSpoil = 0;
 
-                double _tmpQtyCSE = node.Level == 1 ? QtyInBatch : Convert.ToDouble(node.Parent.Cells["cn_nSubProdQty"].Value);
+                double _tmpQtyCSE = 0;
                 //Recalc RM QTY
+                if (node.Level == 1)
+                    _tmpQtyCSE = QtyInBatch;
+                else
+                    _tmpQtyCSE = Convert.ToDouble(node.Parent.Cells["cn_nSubProdQty"].Value);
 
 
                 double _tmpPerc = 0;
@@ -1075,9 +1125,10 @@ namespace Odin.Planning.Controls
                 if (Convert.ToDouble(node.Cells["cn_nSubProdQty"].Value) > 0
                             && node.HasChildren == true)
                 {
-                    node.Cells["cn_nQtyInBatch"].Value = _tmpSpoil == 0
-                        ? _tmpQtyWOSpoil - Convert.ToDouble(node.Cells["cn_nSubProdQty"].Value)
-                        : (object)(_tmpQtyWithSpoil - Convert.ToDouble(node.Cells["cn_nSubProdQty"].Value));
+                    if (_tmpSpoil == 0)
+                        node.Cells["cn_nQtyInBatch"].Value = _tmpQtyWOSpoil - Convert.ToDouble(node.Cells["cn_nSubProdQty"].Value);
+                    else
+                        node.Cells["cn_nQtyInBatch"].Value = _tmpQtyWithSpoil - Convert.ToDouble(node.Cells["cn_nSubProdQty"].Value);
                     //Recalc children
                     foreach (TreeGridNode node1 in node.Nodes)
                     {
@@ -1086,7 +1137,10 @@ namespace Odin.Planning.Controls
                 }
                 else
                 {
-                    node.Cells["cn_nQtyInBatch"].Value = _tmpSpoil == 0 ? _tmpQtyWOSpoil : (object)_tmpQtyWithSpoil;
+                    if (_tmpSpoil == 0)
+                        node.Cells["cn_nQtyInBatch"].Value = _tmpQtyWOSpoil;
+                    else
+                        node.Cells["cn_nQtyInBatch"].Value = _tmpQtyWithSpoil;
                 }
             }
 
@@ -1097,7 +1151,7 @@ namespace Odin.Planning.Controls
         {
             lbl_Unit.Text = cmb_Articles1.Unit;
 
-
+           
         }
 
         private void txt_Qty_Validated(object sender, EventArgs e)
@@ -1149,13 +1203,13 @@ namespace Odin.Planning.Controls
                 {
                     RecalcQtyInNomenclature();
                 }
-                //MessageBox.Show("KeyPressed!");
-                //        tmpValidated = true;
-                //    }
-                //    else
-                //    {
-                //        tmpValidated = false;    
-                //    }
+                    //MessageBox.Show("KeyPressed!");
+            //        tmpValidated = true;
+            //    }
+            //    else
+            //    {
+            //        tmpValidated = false;    
+            //    }
             }
         }
 
@@ -1185,7 +1239,7 @@ namespace Odin.Planning.Controls
                         && Convert.ToInt16(row.Cells["chk_add"].Value) != 0)
                         {
                             FillNewOrderLine(0, Convert.ToInt32(row.Cells["cn_id"].Value), row.Cells["cn_order"].Value.ToString(), row.Cells["cn_orderline"].Value.ToString(),
-                                row.Cells["cn_article"].Value.ToString(), Convert.ToInt32(row.Cells["cn_artid"].Value), Convert.ToDouble(row.Cells["cn_qtyforbatch"].Value),
+                                row.Cells["cn_article"].Value.ToString(), Convert.ToInt32(row.Cells["cn_artid"].Value), Convert.ToDouble(row.Cells["cn_qtyforbatch"].Value), 
                                 row.Cells["cn_reqdate"].Value.ToString(), row.Cells["cn_customer"].Value.ToString(), Convert.ToDouble(row.Cells["cn_qtyforbatch"].Value));
 
                             _artid = Convert.ToInt32(row.Cells["cn_artid"].Value);
@@ -1230,7 +1284,7 @@ namespace Odin.Planning.Controls
                 }
                 //MessageBox.Show("OK!");
             }
-
+                
         }
 
         private void btn_DeleteOrder_Click(object sender, EventArgs e)
@@ -1239,8 +1293,8 @@ namespace Odin.Planning.Controls
 
             try { _id = Convert.ToInt32(gv_Orders.CurrentRow.Cells["cn_coid"].Value); }
             catch { }
-
-            foreach (DataRow row in dt_Orders.Rows)
+            
+            foreach(DataRow row in dt_Orders.Rows)
             {
                 if (Convert.ToInt32(row["coid"]) == _id)
                 {
@@ -1264,7 +1318,7 @@ namespace Odin.Planning.Controls
         private void gv_Orders_CellValidated(object sender, DataGridViewCellEventArgs e)
         {
             gv_Orders.EndEdit();
-
+            
             if (gv_Orders.CurrentRow.Cells["cn_oqty"].Selected == true)
             {
                 if (Convert.ToDouble(gv_Orders.CurrentRow.Cells["cn_oqty"].Value) > Convert.ToDouble(gv_Orders.CurrentRow.Cells["cn_qtyforbatch"].Value))
@@ -1318,7 +1372,7 @@ namespace Odin.Planning.Controls
         {
             //foreach (TreeGridNode node1 in e.Node.Nodes)
             //{
-            //ExpandNodes(e.Node);
+                //ExpandNodes(e.Node);
             //}
         }
 

@@ -1,18 +1,23 @@
-﻿using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.CMB_Components.BLL;
-using Odin.Global_Classes;
-using Odin.Register;
-using Odin.Tools;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using WeifenLuo.WinFormsUI.Docking;
+using Odin.Global_Classes;
+using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using ComponentFactory.Krypton.Workspace;
+using ComponentFactory.Krypton.Toolkit;
+using System.Threading;
+using System.Data.SqlClient;
+using Odin.Tools;
+using Odin.Register;
+using Odin.CMB_Components.BLL;
 
 namespace Odin.Warehouse.Deliveries
 {
@@ -44,7 +49,7 @@ namespace Odin.Warehouse.Deliveries
             get { return Convert.ToDouble(txt_Total.Text); }
             set { txt_Total.Text = value.ToString(); }
         }
-
+        
         private frm_EditDelivDets frm = null;
 
         public int ControlWidth = 250;
@@ -103,11 +108,11 @@ namespace Odin.Warehouse.Deliveries
             ControlWidth = ctlPack.Width;
 
             ctlPack.DelivNoteId = DelivNoteId;
-
+            
             ctlPack.HeaderText = "Not packed delivery note lines for: " + DelivNote;
             //ctlGen.cmb_Articles1.ArticleId = ArtId;
             //ctlGen.SendArtId += new ArtIdSendingEventHandler(ChangeArtIdSelection);
-
+            
             return NewPage("Packing", 1, ctlPack, ctlPack.Width);
         }
 
@@ -203,7 +208,7 @@ namespace Odin.Warehouse.Deliveries
                 gv_List.DataSource = bs_List;
 
                 SetCellsColor();
-
+               
             });
 
 
@@ -291,28 +296,28 @@ namespace Odin.Warehouse.Deliveries
         public void ShowDetails(int ddid)
         {
             //gv_List.Invoke(new MethodInvoker(delegate {
-            DNBll.DelivNoteId = ddid;
+                DNBll.DelivNoteId = ddid;
 
-            if (ddid != 0)
-                cmb_DeliveryNotes1.DelivNoteId = DNBll.DHeadId;
+                if (ddid != 0)
+                    cmb_DeliveryNotes1.DelivNoteId = DNBll.DHeadId;
 
 
-            int _headid = 0;
-            string _docname = "";
+                int _headid = 0;
+                string _docname = "";
 
-            try
-            {
-                _headid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_headid"].Value);
-                _docname = gv_List.CurrentRow.Cells["cn_name"].Value.ToString();
+                try
+                {
+                    _headid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_headid"].Value);
+                    _docname = gv_List.CurrentRow.Cells["cn_name"].Value.ToString();
 
-            }
-            catch { }
+                }
+                catch { }
 
-            RecalcTotals(_docname, _headid);
+                RecalcTotals(_docname, _headid);
 
-            FindPackPages(DNBll.DHeadId, cmb_DeliveryNotes1.DelivNote);
-            FindInvoicesPages(DNId);
-            FindIncomesPages(DNId);
+                FindPackPages(DNBll.DHeadId, cmb_DeliveryNotes1.DelivNote);
+                FindInvoicesPages(DNId);
+                FindIncomesPages(DNId);
             //}));
 
         }
@@ -343,8 +348,7 @@ namespace Odin.Warehouse.Deliveries
         public void ShowEdit()
         {
             //if (globClass.IsFormAlreadyOpen("frm_EditDelivDets")) return;
-            gv_List.Invoke(new MethodInvoker(delegate
-            {
+            gv_List.Invoke(new MethodInvoker(delegate {
                 int _id = 0;
                 try
                 {
@@ -381,7 +385,7 @@ namespace Odin.Warehouse.Deliveries
                     frm.Show();
                 }
             }));
-
+           
         }
 
         public void EditDelivNoteDets(int id)
@@ -397,8 +401,8 @@ namespace Odin.Warehouse.Deliveries
                     _coid = Convert.ToInt32(row.Cells["cn_dcoid"].Value);
                     break;
                 }
-
-
+                
+                
             }
             //MessageBox.Show(id.ToString());
             DNBll.EditDeliveryLine(id, frm.CustArticle, frm.Comments, frm.NetWeight, frm.BrutWeight, frm.CustCode, frm.QtyPack, frm.Package, frm.Return, _coid);
@@ -467,11 +471,11 @@ namespace Odin.Warehouse.Deliveries
                 }
                 catch { }
             }
-
+            
             Total = Math.Round(_total, 2, MidpointRounding.AwayFromZero);
 
             lbl_Total.Invoke(new MethodInvoker(delegate { lbl_Total.Text = "Total for document (" + _cur + "):"; }));
-
+            
         }
 
         #endregion
@@ -518,7 +522,7 @@ namespace Odin.Warehouse.Deliveries
             catch
             { }
             SetCellsColor();
-
+            
         }
 
         private void mni_Search_Click(object sender, EventArgs e)
@@ -535,19 +539,26 @@ namespace Odin.Warehouse.Deliveries
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? String.IsNullOrEmpty(CellValue) == true
-                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
-                    : String.IsNullOrEmpty(CellValue) == true
-                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
                 //MessageBox.Show(bs_List.Filter);
 
             }
             catch { }
             SetCellsColor();
-
+           
 
         }
 
@@ -555,13 +566,14 @@ namespace Odin.Warehouse.Deliveries
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
-                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
+                else
+                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
-
+            
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -572,7 +584,7 @@ namespace Odin.Warehouse.Deliveries
             }
             catch { }
             SetCellsColor();
-
+            
 
         }
 
@@ -667,7 +679,7 @@ namespace Odin.Warehouse.Deliveries
         {
             txt_FirmArt.Text = string.Empty;
         }
-
+        
         private void buttonSpecAny6_Click(object sender, EventArgs e)
         {
             txt_CustOrder.Text = string.Empty;
@@ -725,7 +737,7 @@ namespace Odin.Warehouse.Deliveries
             frm.DelivNoteType = 1;
             frm.HeadId = cmb_DeliveryNotes1.DelivNoteId;
             frm.HeaderText = "Print delivery note: " + cmb_DeliveryNotes1.DelivNote;
-            frm.FillReport();
+            frm.FillReport();          
 
             frm.Show();
         }
@@ -776,7 +788,7 @@ namespace Odin.Warehouse.Deliveries
         {
             ShowEdit();
         }
-
+       
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
             kryptonDockingManager1.AddDockspace("Control",
@@ -803,10 +815,8 @@ namespace Odin.Warehouse.Deliveries
             string _custart = "";
             string _batch = "";
             string _order = "";
-
-            try
-            {
-                _article = gv_List.CurrentRow.Cells["cn_article"].Value.ToString();
+            
+            try { _article = gv_List.CurrentRow.Cells["cn_article"].Value.ToString();
                 _customer = gv_List.CurrentRow.Cells["cn_findestination"].Value.ToString();
                 _custart = gv_List.CurrentRow.Cells["cn_custart"].Value.ToString();
                 _batch = gv_List.CurrentRow.Cells["cn_batch"].Value.ToString();
@@ -821,7 +831,7 @@ namespace Odin.Warehouse.Deliveries
             frmprint.Order = _order;
             frmprint.PackingLabelTemplate = 4;
             frmprint.cmb_LabPrinter1.ShowDefaults();
-
+            
             frmprint.SendPrint += new SendPrintEventHandler(SendToPrint);
 
             frmprint.Show();
@@ -829,7 +839,7 @@ namespace Odin.Warehouse.Deliveries
         }
         private void SendToPrint(object sender)
         {
-
+           
             PrintLabels.PrinterIp = frmprint.IP_Address;
             PrintLabels.PrinterDPI = frmprint.Printer_DPI;
 
@@ -919,8 +929,7 @@ namespace Odin.Warehouse.Deliveries
             int _id = 0;
             string _package = "";
 
-            try
-            {
+            try {
                 _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
                 _package = gv_List.CurrentRow.Cells["cn_package"].Value.ToString();
             }

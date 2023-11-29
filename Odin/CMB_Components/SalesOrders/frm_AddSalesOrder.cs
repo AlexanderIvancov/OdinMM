@@ -1,6 +1,15 @@
-﻿using ComponentFactory.Krypton.Toolkit;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
-using System;
+using Odin.CMB_Components.BLL;
 
 namespace Odin.CMB_Components.SalesOrders
 {
@@ -51,8 +60,8 @@ namespace Odin.CMB_Components.SalesOrders
         public string Contract
         {
             get { return txt_Contract.Text; }
-            set { txt_Contract.Text = value; }
-
+            set{ txt_Contract.Text = value; }
+            
         }
 
         public int CurId
@@ -78,7 +87,10 @@ namespace Odin.CMB_Components.SalesOrders
 
         public void CheckEmpty()
         {
-            btn_OK.Enabled = cmb_Firms1.FirmId != 0;
+            if (cmb_Firms1.FirmId == 0)
+                btn_OK.Enabled = false;
+            else
+                btn_OK.Enabled = true;
         }
         #endregion
 

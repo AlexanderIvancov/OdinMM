@@ -1,9 +1,16 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.CMB_Components.BLL;
-using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
+using Odin.CMB_Components.BLL;
 
 namespace Odin.CMB_Components.Batches
 {
@@ -19,7 +26,7 @@ namespace Odin.CMB_Components.Batches
             InitializeComponent();
             f = new cmb_Batches();
             cmb = f;
-
+            
         }
 
         class_Global glob_Class = new class_Global();
@@ -29,7 +36,7 @@ namespace Odin.CMB_Components.Batches
 
         public void FillHeading(int _IsProject)
         {
-            kryptonHeaderGroup1.ValuesPrimary.Heading = _IsProject == -1 ? "Batch projects" : "Batches";
+            kryptonHeaderGroup1.ValuesPrimary.Heading = _IsProject == -1? "Batch projects" : "Batches";
         }
 
         public bool ShowingModal
@@ -52,11 +59,19 @@ namespace Odin.CMB_Components.Batches
         {
             gv_List.ThreadSafeCall(delegate
             {
-                DataTable data = IsGroup == -1
-                    ? ActiveOnly == 0 ? CMB_BLL.getBatchesGroups(Beg) : CMB_BLL.getBatchesGroupsActiveOnly(Beg)
-                    : IsProject == 0
-                        ? ActiveOnly == 0 ? CMB_BLL.getBatches(Beg) : CMB_BLL.getBatchesActiveOnly(Beg)
-                        : ActiveOnly == 0 ? CMB_BLL.getBatchesProject(Beg) : CMB_BLL.getBatchesProjectActiveOnly(Beg);
+                DataTable data;
+                if (IsGroup == -1)
+                {
+                    data = ActiveOnly == 0 ? CMB_BLL.getBatchesGroups(Beg) : CMB_BLL.getBatchesGroupsActiveOnly(Beg);
+                }
+                else
+                {
+                    if (IsProject == 0)
+                        data = ActiveOnly == 0 ? CMB_BLL.getBatches(Beg) : CMB_BLL.getBatchesActiveOnly(Beg);
+                    else
+                        data = ActiveOnly == 0 ? CMB_BLL.getBatchesProject(Beg) : CMB_BLL.getBatchesProjectActiveOnly(Beg);
+                }
+
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;

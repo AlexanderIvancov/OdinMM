@@ -1,22 +1,27 @@
-﻿using AdvancedDataGridView;
-using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.CMB_Components.BLL;
-using Odin.Global_Classes;
-using Odin.Tools;
-using Odin.Warehouse.Inventory;
-using Odin.Warehouse.Movements;
-using Odin.Warehouse.Requests;
-using Odin.Warehouse.StockOut.Reports;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using WeifenLuo.WinFormsUI.Docking;
+using Odin.Global_Classes;
+using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using ComponentFactory.Krypton.Workspace;
+using ComponentFactory.Krypton.Toolkit;
+using System.Threading;
+using System.Data.SqlClient;
+using Odin.Tools;
+using Odin.CMB_Components.BLL;
+using AdvancedDataGridView;
+using Odin.Warehouse.Inventory;
+using Odin.Warehouse.StockOut.Reports;
+using Odin.Warehouse.Movements;
+using Odin.Warehouse.Requests;
 namespace Odin.Warehouse.StockOut
 {
     public partial class frm_StockOut : BaseForm
@@ -76,24 +81,35 @@ namespace Odin.Warehouse.StockOut
         public int Reserved
         {
             get
-            {
-                return chk_Reserved.CheckState == CheckState.Checked ? -1 : 0;
+            { if (chk_Reserved.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {
-                chk_Reserved.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
-            }
+                if (value == -1)
+                    chk_Reserved.CheckState = CheckState.Checked;
+                else
+                    chk_Reserved.CheckState = CheckState.Unchecked;
+            }            
         }
 
         public int LeftOnly
         {
             get
             {
-                return chk_Left.CheckState == CheckState.Checked ? -1 : 0;
+                if (chk_Left.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {
-                chk_Left.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+                if (value == -1)
+                    chk_Left.CheckState = CheckState.Checked;
+                else
+                    chk_Left.CheckState = CheckState.Unchecked;
             }
         }
 
@@ -208,65 +224,68 @@ namespace Odin.Warehouse.StockOut
             //header
             tgv_List.ThreadSafeCall(delegate
             {
-                this.cn_Reserved.HeaderText = cmb_Requests1.RequestId != 0 ? "Requested" : "Reserved";
-                tgv_List.Nodes.Clear();
-                TreeGridNode node;
-                Font boldFont = new Font(tgv_List.DefaultCellStyle.Font, FontStyle.Bold);
+            if (cmb_Requests1.RequestId != 0)
+                this.cn_Reserved.HeaderText = "Requested";
+            else
+                this.cn_Reserved.HeaderText = "Reserved";
+            tgv_List.Nodes.Clear();
+            TreeGridNode node;
+            Font boldFont = new Font(tgv_List.DefaultCellStyle.Font, FontStyle.Bold);
+                 
+            var data = StockOut_BLL.getStockOutProceedHead(cmb_Articles1.ArticleId, cmb_Batches1.BatchId, cmb_Requests1.RequestId, cmb_Common1.SelectedValue, LeftOnly);
 
-                var data = StockOut_BLL.getStockOutProceedHead(cmb_Articles1.ArticleId, cmb_Batches1.BatchId, cmb_Requests1.RequestId, cmb_Common1.SelectedValue, LeftOnly);
+            foreach (System.Data.DataRow dr in data.AsEnumerable().OrderBy(d => d.Field<string>("unit")).ThenBy(a => a.Field<int>("artid")))
+            {
 
-                foreach (System.Data.DataRow dr in data.AsEnumerable().OrderBy(d => d.Field<string>("unit")).ThenBy(a => a.Field<int>("artid")))
+
+
+                node = tgv_List.Nodes.Add(null, dr["artid"], dr["artid"], dr["article"], dr["batch"], dr["batchid"], dr["request"],
+                                                dr["requestid"], dr["leftinbatch"], dr["reserved"], dr["available"],
+                                                dr["unit"], 0, dr["qtystock"], "->", 0, 0, "", "", "", -1, 0);
+
+                foreach (DataGridViewCell cell in node.Cells)
                 {
+                    cell.Style.BackColor = Color.Azure;//Color.FromArgb(192, 255, 192);
+                }
 
-
-
-                    node = tgv_List.Nodes.Add(null, dr["artid"], dr["artid"], dr["article"], dr["batch"], dr["batchid"], dr["request"],
-                                                    dr["requestid"], dr["leftinbatch"], dr["reserved"], dr["available"],
-                                                    dr["unit"], 0, dr["qtystock"], "->", 0, 0, "", "", "", -1, 0);
-
-                    foreach (DataGridViewCell cell in node.Cells)
-                    {
-                        cell.Style.BackColor = Color.Azure;//Color.FromArgb(192, 255, 192);
-                    }
-
-                    node.ImageIndex = 1;
-                    //Add details nodes
-                    var datad = StockOut_BLL.getStockOutProceedDets(Convert.ToInt32(dr["artid"]), cmb_Batches1.BatchId, Reserved);
-                    foreach (System.Data.DataRow dr1 in datad.AsEnumerable().OrderBy(a => a.Field<DateTime>("expdate"))
-                                                                            .ThenBy(a => a.Field<int>("label")))
-                    {
+                node.ImageIndex = 1;
+                //Add details nodes
+                var datad = StockOut_BLL.getStockOutProceedDets(Convert.ToInt32(dr["artid"]), cmb_Batches1.BatchId, Reserved);
+                foreach (System.Data.DataRow dr1 in datad.AsEnumerable().OrderBy(a => a.Field<DateTime>("expdate"))
+                                                                        .ThenBy(a => a.Field<int>("label")))
+                {
                         if (Convert.ToInt32(dr["requestid"]) == 0
                             || (Convert.ToInt32(dr["requestid"]) != 0
                                 && Convert.ToInt32(dr1["batchdetid"]) == 0))
                             AddNode(dr1, boldFont, node.Nodes, true);
-                    }
-
                 }
 
-                foreach (TreeGridNode node1 in tgv_List.Nodes)
-                {
-                    ExpandNodes(node1);
-                }
+            }
+
+            foreach (TreeGridNode node1 in tgv_List.Nodes)
+            {
+                ExpandNodes(node1);
+            }
 
                 //foreach (DataGridViewRow row in this.tgv_List.Rows)
                 //{
 
-                //if ((Convert.ToDouble(row.Cells["cn_Available"].Value) + Convert.ToDouble(row.Cells["cn_Reserved"].Value) <= 0
-                //    && Convert.ToInt32(row.Cells["cn_BatchId"].Value) != 0)
-                //    || (Convert.ToInt32(row.Cells["cn_Usage"].Value) == 0 && Convert.ToInt32(row.Cells["cn_BatchId"].Value) == 0))
-                //{
-                //    foreach (DataGridViewCell cell in row.Cells)
-                //    {
-                //        cell.Style.BackColor = Color.LightGray;
-                //    }
-                //}
-                //else
-                //{
-                //    foreach (DataGridViewCell cell in row.Cells)
-                //    {
-                //        cell.Style.BackColor = Color.FromArgb(192, 255, 192);
-                //    }
-                //}
+                    //if ((Convert.ToDouble(row.Cells["cn_Available"].Value) + Convert.ToDouble(row.Cells["cn_Reserved"].Value) <= 0
+                    //    && Convert.ToInt32(row.Cells["cn_BatchId"].Value) != 0)
+                    //    || (Convert.ToInt32(row.Cells["cn_Usage"].Value) == 0 && Convert.ToInt32(row.Cells["cn_BatchId"].Value) == 0))
+                    //{
+                    //    foreach (DataGridViewCell cell in row.Cells)
+                    //    {
+                    //        cell.Style.BackColor = Color.LightGray;
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    foreach (DataGridViewCell cell in row.Cells)
+                    //    {
+                    //        cell.Style.BackColor = Color.FromArgb(192, 255, 192);
+                    //    }
+                    //}
                 //}
             });
         }
@@ -283,9 +302,13 @@ namespace Odin.Warehouse.StockOut
         private void AddNode(DataRow dr, Font boldFont, TreeGridNodeCollection nodes, bool isAddingImage)
         {
             TreeGridNode node;
-            string _tempexpdate = Convert.ToDateTime(dr["expdate"]) != Convert.ToDateTime("01/01/2199")
-                ? Convert.ToDateTime(dr["expdate"]).ToShortDateString()
-                : "";
+            string _tempexpdate = "";
+
+            if (Convert.ToDateTime(dr["expdate"]) != Convert.ToDateTime("01/01/2199"))
+                _tempexpdate = Convert.ToDateTime(dr["expdate"]).ToShortDateString();
+            else
+                _tempexpdate = "";
+
             node = nodes.Add(null, dr["artid"], dr["artid"], dr["article"], dr["batch"], dr["batchdetid"], "", "0",
                              0, 0, 0, dr["unit"], dr["label"], dr["qtystock"], "->", 0, dr["qtystock"],
                              dr["place"], _tempexpdate, "", dr["usage"], dr["placeid"]);
@@ -325,7 +348,7 @@ namespace Odin.Warehouse.StockOut
             }
 
         }
-
+               
         #endregion
 
         #region Controls
@@ -524,13 +547,20 @@ namespace Odin.Warehouse.StockOut
         {
             try
             {
-                bs_Dets.Filter = String.IsNullOrEmpty(bs_Dets.Filter) == true
-                    ? String.IsNullOrEmpty(CellValue) == true
-                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
-                    : String.IsNullOrEmpty(CellValue) == true
-                        ? bs_Dets.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : bs_Dets.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                if (String.IsNullOrEmpty(bs_Dets.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_Dets.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_Dets.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_Dets.Filter = bs_Dets.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_Dets.Filter = bs_Dets.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -542,9 +572,10 @@ namespace Odin.Warehouse.StockOut
         {
             try
             {
-                bs_Dets.Filter = String.IsNullOrEmpty(bs_Dets.Filter) == true
-                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
-                    : bs_Dets.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                if (String.IsNullOrEmpty(bs_Dets.Filter) == true)
+                    bs_Dets.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
+                else
+                    bs_Dets.Filter = bs_Dets.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColorDets();
@@ -590,7 +621,7 @@ namespace Odin.Warehouse.StockOut
             ED1.DgvIntoExcel();
         }
 
-
+       
         #endregion
 
 
@@ -634,7 +665,7 @@ namespace Odin.Warehouse.StockOut
             {
                 DataGridViewColumn oldColumn = gv_Dets.SortedColumn;
                 var dir = Helper.SaveDirection(gv_Dets);
-
+                              
 
                 gv_Dets.AutoGenerateColumns = false;
                 bs_Dets.DataSource = data;
@@ -696,11 +727,12 @@ namespace Odin.Warehouse.StockOut
         private void btn_Refresh_Click(object sender, EventArgs e)
         {
             bwStart(bw_List);
-
-            Mode = cmb_Batches1.BatchId != 0
-                || cmb_Requests1.RequestId != 0
-                ? 1
-                : 2;
+            
+            if (cmb_Batches1.BatchId != 0
+                || cmb_Requests1.RequestId != 0)
+                Mode = 1;
+            else
+                Mode = 2;
         }
 
         private void cmb_OutcomeDocs1_OutDocChanged(object sender)
@@ -766,9 +798,13 @@ namespace Odin.Warehouse.StockOut
                         double _QtyLeft = Convert.ToDouble(node.Cells["cn_LeftInBatch"].Value);
                         double _QtyAvailable = Convert.ToDouble(node.Cells["cn_Available"].Value);
 
-                        double _ForOut = cmb_Requests1.RequestId != 0
-                            ? _QtyReserved < _QtyAvailable ? _QtyReserved : _QtyAvailable
-                            : _QtyAvailable + _QtyReserved < _QtyLeft ? _QtyAvailable + _QtyReserved : _QtyLeft;
+                        double _ForOut = 0;
+                        if (cmb_Requests1.RequestId != 0)
+                            _ForOut = _QtyReserved < _QtyAvailable ? _QtyReserved : _QtyAvailable;
+                        else
+                            _ForOut = _QtyAvailable + _QtyReserved < _QtyLeft ? _QtyAvailable + _QtyReserved : _QtyLeft;
+                        
+
                         int _BatchDetId = Convert.ToInt32(node.Cells["cn_BatchId"].Value);
 
                         foreach (TreeGridNode node1 in node.Nodes)
@@ -807,18 +843,29 @@ namespace Odin.Warehouse.StockOut
                     else
                     {
                         //MANUAL
-                        double _Diff = cmb_Requests1.RequestId != 0
-                            ? Convert.ToDouble(parentnode.Cells["cn_Available"].Value) - Convert.ToDouble(parentnode.Cells["cn_QtyToGive"].Value)
-                            : Convert.ToDouble(parentnode.Cells["cn_Reserved"].Value) - Convert.ToDouble(parentnode.Cells["cn_QtyToGive"].Value);
+                        double _Diff = 0;
 
                         //MessageBox.Show(Convert.ToDateTime(DocDate).ToString() + "/" + Convert.ToDateTime(parentnode.Cells["cn_InDate"].Value.ToString()).ToString());
+                        if (cmb_Requests1.RequestId != 0)
+                            _Diff = Convert.ToDouble(parentnode.Cells["cn_Available"].Value) - Convert.ToDouble(parentnode.Cells["cn_QtyToGive"].Value);
+                        else
+                            _Diff = Convert.ToDouble(parentnode.Cells["cn_Reserved"].Value) - Convert.ToDouble(parentnode.Cells["cn_QtyToGive"].Value);
 
                         if (_Diff > 0)
                         {
                             //if (Convert.ToDateTime(DocDate) >= Convert.ToDateTime(node.Cells["cn_InDate"].Value.ToString()))
                             //{
 
-                            node.Cells["cn_QtyToGive"].Value = _Diff < Convert.ToDouble(node.Cells["cn_QtyOnLabel"].Value) ? _Diff : (object)Convert.ToDouble(node.Cells["cn_QtyOnLabel"].Value);
+                            if (_Diff < Convert.ToDouble(node.Cells["cn_QtyOnLabel"].Value))
+                            {
+                                node.Cells["cn_QtyToGive"].Value = _Diff;
+                                
+
+                            }
+                            else
+                            {
+                                node.Cells["cn_QtyToGive"].Value = Convert.ToDouble(node.Cells["cn_QtyOnLabel"].Value);
+                            }
                             node.Cells["cn_QtyRest"].Value = Convert.ToDouble(node.Cells["cn_QtyOnLabel"].Value) - Convert.ToDouble(node.Cells["cn_QtyToGive"].Value);
                             //}
                             //else
@@ -897,14 +944,14 @@ namespace Odin.Warehouse.StockOut
 
                         //if (_Diff > 0)
                         //{
-                        //if (Convert.ToDateTime(DocDate) >= Convert.ToDateTime(node.Cells["cn_InDate"].Value.ToString()))
-                        //{
+                            //if (Convert.ToDateTime(DocDate) >= Convert.ToDateTime(node.Cells["cn_InDate"].Value.ToString()))
+                            //{
 
                         //    if (_Diff < Convert.ToDouble(node.Cells["cn_QtyOnLabel"].Value))
                         //        node.Cells["cn_QtyToGive"].Value = _Diff;
                         //    else
-                        node.Cells["cn_QtyToGive"].Value = Convert.ToDouble(node.Cells["cn_QtyOnLabel"].Value);
-                        node.Cells["cn_QtyRest"].Value = Convert.ToDouble(node.Cells["cn_QtyOnLabel"].Value) - Convert.ToDouble(node.Cells["cn_QtyToGive"].Value);
+                                node.Cells["cn_QtyToGive"].Value = Convert.ToDouble(node.Cells["cn_QtyOnLabel"].Value);
+                                node.Cells["cn_QtyRest"].Value = Convert.ToDouble(node.Cells["cn_QtyOnLabel"].Value) - Convert.ToDouble(node.Cells["cn_QtyToGive"].Value);
 
                         //}
                         //else
@@ -949,7 +996,7 @@ namespace Odin.Warehouse.StockOut
 
                         break;
                     }
-                }
+                }                
             }
 
         }
@@ -994,7 +1041,10 @@ namespace Odin.Warehouse.StockOut
                         _QtyLeft = Convert.ToDouble(node.Cells["cn_LeftInBatch"].Value);
                         _QtyAvailable = Convert.ToDouble(node.Cells["cn_Available"].Value);
 
-                        _ForOut = cmb_Requests1.RequestId != 0 ? _QtyAvailable : _QtyAvailable + _QtyReserved;
+                        if (cmb_Requests1.RequestId != 0)
+                            _ForOut = _QtyAvailable;
+                        else
+                            _ForOut = _QtyAvailable + _QtyReserved;
                         if (_ForOut < Convert.ToDouble(node.Cells["cn_QtyToGive"].Value))
                         {
                             node.Cells["cn_QtyToGive"].Value = _ForOut;
@@ -1010,7 +1060,10 @@ namespace Odin.Warehouse.StockOut
                         _QtyLeft = Convert.ToDouble(parentnode.Cells["cn_LeftInBatch"].Value);
                         _QtyAvailable = Convert.ToDouble(parentnode.Cells["cn_Available"].Value);
 
-                        _ForOut = cmb_Requests1.RequestId != 0 ? _QtyAvailable : _QtyAvailable + _QtyReserved;
+                        if (cmb_Requests1.RequestId != 0)
+                            _ForOut = _QtyAvailable;
+                        else
+                            _ForOut = _QtyAvailable + _QtyReserved;
 
                         if (_ForOut < Convert.ToDouble(parentnode.Cells["cn_QtyToGive"].Value))
                         {
@@ -1058,7 +1111,10 @@ namespace Odin.Warehouse.StockOut
                         _QtyLeft = Convert.ToDouble(node.Cells["cn_LeftInBatch"].Value);
                         _QtyAvailable = Convert.ToDouble(node.Cells["cn_Available"].Value);
 
-                        _ForOut = cmb_Requests1.RequestId != 0 ? _QtyAvailable : _QtyAvailable + _QtyReserved;
+                        if (cmb_Requests1.RequestId != 0)
+                            _ForOut = _QtyAvailable;
+                        else
+                            _ForOut = _QtyAvailable + _QtyReserved;
                         if (_ForOut < Convert.ToDouble(node.Cells["cn_QtyToGive"].Value))
                         {
                             node.Cells["cn_QtyToGive"].Value = _ForOut;
@@ -1074,7 +1130,10 @@ namespace Odin.Warehouse.StockOut
                         _QtyLeft = Convert.ToDouble(parentnode.Cells["cn_LeftInBatch"].Value);
                         _QtyAvailable = Convert.ToDouble(parentnode.Cells["cn_Available"].Value);
 
-                        _ForOut = cmb_Requests1.RequestId != 0 ? _QtyAvailable : _QtyAvailable + _QtyReserved;
+                        if (cmb_Requests1.RequestId != 0)
+                            _ForOut = _QtyAvailable;
+                        else
+                            _ForOut = _QtyAvailable + _QtyReserved;
 
                         if (_ForOut < Convert.ToDouble(parentnode.Cells["cn_QtyToGive"].Value))
                         {
@@ -1126,7 +1185,7 @@ namespace Odin.Warehouse.StockOut
 
         private void btn_OK_Click(object sender, EventArgs e)
         {
-
+            
             int _res = cmb_OutcomeDocs1.OutcomeDocId;
             int _resmove = 0;
             if (cmb_OutcomeDocs1.OutcomeDocId != 0)
@@ -1136,7 +1195,7 @@ namespace Odin.Warehouse.StockOut
                 foreach (TreeGridNode node in this.tgv_List.Nodes)
                 {
                     ExpandNodes(node);
-
+                
                     int _batchdetid = Convert.ToInt32(node.Cells["cn_BatchId"].Value);
                     int _requestid = Convert.ToInt32(node.Cells["cn_RequestId"].Value);
                     int _artid = Convert.ToInt32(node.Cells["cn_ArtId"].Value);
@@ -1147,12 +1206,12 @@ namespace Odin.Warehouse.StockOut
                     //            && _qtytogive >= _qtyrest)
                     //    _removereservation = -1;
 
-                    //Labels
+                        //Labels
                     foreach (TreeGridNode node1 in node.Nodes)
                     {
                         if (Convert.ToDouble(node1.Cells["cn_QtyToGive"].Value) > 0)
                         {
-                            //Remove reservation
+                                //Remove reservation
                             if (Convert.ToInt32(node1.Cells["cn_PlaceId"].Value) != cmb_Places1.PlaceId
                                 && cmb_Places1.PlaceId != 0
                                 && Convert.ToInt32(node1.Cells["cn_BatchId"].Value) == _batchdetid
@@ -1174,20 +1233,20 @@ namespace Odin.Warehouse.StockOut
                                                         node1.Cells["cn_Comments"].Value.ToString());
                             //Free labels
                             if (_removereservation == -1)
-                                _resmove = SMBll.AddStockMoveLine(_resmove,
+                                _resmove =  SMBll.AddStockMoveLine(_resmove,
                                                             Convert.ToInt32(node1.Cells["cn_Label"].Value),
                                                             Convert.ToDouble(node1.Cells["cn_QtyRest"].Value),
                                                             cmb_Places1.PlaceId,
                                                             _batchdetid,
                                                             0,
-                                                            cmb_Batches1.BatchId,
-                                                            0,
+                                                            cmb_Batches1.BatchId, 
+                                                            0, 
                                                             0,
                                                             "Removing of reservation of " + node1.Cells["cn_Batch"].Value.ToString());
                             //Remove reservation if qty to return > 0
                             if (Convert.ToDouble(node1.Cells["cn_QtyRest"].Value) == 0)
                                 SOBll.RemoveLabelReservation(Convert.ToInt32(node1.Cells["cn_Label"].Value));
-                        }
+                        }                       
                     }
                 }
                 if (_res != 0)
@@ -1230,22 +1289,22 @@ namespace Odin.Warehouse.StockOut
                     sqlConn.Close();
                 }
                 SOBll.UpdateSetPrice(_res);
+            
 
+            if (cmb_OutcomeDocs1.OutcomeDocId != _res)
+                cmb_OutcomeDocs1.OutcomeDocId = _res;
+            else
+                ShowDets(cmb_OutcomeDocs1.OutcomeDocId);
 
-                if (cmb_OutcomeDocs1.OutcomeDocId != _res)
-                    cmb_OutcomeDocs1.OutcomeDocId = _res;
-                else
-                    ShowDets(cmb_OutcomeDocs1.OutcomeDocId);
-
-                bwStart(bw_List);
-                //}
-                //else
-                //{
-                //    DialogResult result = KryptonTaskDialog.Show("Quantity counsumption warning!",
-                //                                                    "Saving impossible!",
-                //                                                    "Outcome document is not selected.",
-                //                                                    MessageBoxIcon.Warning,
-                //                                                    TaskDialogButtons.OK);
+            bwStart(bw_List);
+            //}
+            //else
+            //{
+            //    DialogResult result = KryptonTaskDialog.Show("Quantity counsumption warning!",
+            //                                                    "Saving impossible!",
+            //                                                    "Outcome document is not selected.",
+            //                                                    MessageBoxIcon.Warning,
+            //                                                    TaskDialogButtons.OK);
 
             }
         }
@@ -1384,7 +1443,7 @@ namespace Odin.Warehouse.StockOut
 
             frm_EnabledRequests popup = new frm_EnabledRequests();
             popup.frmStockOut = this;
-
+            
             PopupHelper.ClosePopup();
 
             PopupHelper.ShowPopup(f, popup, _location);
@@ -1398,7 +1457,7 @@ namespace Odin.Warehouse.StockOut
             };
 
             popup.FillList();
-
+            
         }
 
         private void mnu_MapBatch_Click(object sender, EventArgs e)
@@ -1423,8 +1482,11 @@ namespace Odin.Warehouse.StockOut
 
         private void cmb_Batches1_BatchChanged(object sender)
         {
-            btn_OK.Enabled = cmb_Batches1.BatchId == 0
-                || cmb_Batches1.IsActive != 0;
+            if (cmb_Batches1.BatchId != 0
+                && cmb_Batches1.IsActive == 0)
+                btn_OK.Enabled = false;
+            else
+                btn_OK.Enabled = true;
             if (cmb_Batches1.BatchId == 0)
                 tgv_List.Nodes.Clear();
 

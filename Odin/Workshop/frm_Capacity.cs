@@ -1,11 +1,16 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using Odin.Tools;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
+using ComponentFactory.Krypton.Workspace;
+using ComponentFactory.Krypton.Toolkit;
+using Odin.Tools;
 
 namespace Odin.Workshop
 {
@@ -31,19 +36,20 @@ namespace Odin.Workshop
 
         public double TotalByDate
         {
-            get
-            {
-                try { return Convert.ToDouble(txt_Total.Text); }
-                catch { return 0; }
-            }
+            get { try { return Convert.ToDouble(txt_Total.Text); }
+                catch { return 0; } }
             set { txt_Total.Text = value.ToString(); }
         }
 
         public int TypeSelection
         {
-            get
-            {
-                return rb_all.Checked == true ? 1 : rb_production.Checked == true ? 0 : -1;
+            get {
+                if (rb_all.Checked == true)
+                    return 1;
+                else if (rb_production.Checked == true)
+                    return 0;
+                else
+                    return -1;             
             }
         }
         #endregion
@@ -104,7 +110,7 @@ namespace Odin.Workshop
             }
 
             //var data1 = Processing_BLL.getCapacity(cmb_Common1.SelectedValue, Convert.ToDateTime(txt_From.Value).ToShortDateString(), Convert.ToDateTime(txt_Till.Value).ToShortDateString());
-            var data1 = Processing_BLL.getCapacityShifts(cmb_Common1.SelectedValue, Convert.ToDateTime(txt_From.Value).ToShortDateString(),
+            var data1 = Processing_BLL.getCapacityShifts(cmb_Common1.SelectedValue, Convert.ToDateTime(txt_From.Value).ToShortDateString(), 
                                             Convert.ToDateTime(txt_Till.Value).ToShortDateString(), cmb_Common2.SelectedValue, cmb_Common3.SelectedValue);
 
 
@@ -125,7 +131,7 @@ namespace Odin.Workshop
         {
             gv_List.ThreadSafeCall(delegate
             {
-                FillDates();
+                FillDates();  
             });
         }
 
@@ -183,9 +189,10 @@ namespace Odin.Workshop
 
             if (gv_List.CurrentCell.ColumnIndex > 1)
             {
+                double number;
                 try
                 {
-                    bool success = Double.TryParse(gv_List.CurrentCell.Value.ToString(), out double number);
+                    bool success = Double.TryParse(gv_List.CurrentCell.Value.ToString(), out number);
                     if (success)
                     {
                         //Console.WriteLine("Converted '{0}' to {1}.", value, number);
@@ -198,9 +205,9 @@ namespace Odin.Workshop
                     RecalcTotal();
                 }
                 catch { }
-
+                
             }
-
+            
             //if (gv_List.CurrentCell.Value)
         }
 
@@ -244,7 +251,7 @@ namespace Odin.Workshop
                         catch { }
                     }
                 }
-
+                
             }
 
             //ProcBll.SaveCapacity(Convert.ToDateTime(txt_From.Value).ToShortDateString(), Convert.ToDateTime(txt_Till.Value).ToShortDateString(), datastages);

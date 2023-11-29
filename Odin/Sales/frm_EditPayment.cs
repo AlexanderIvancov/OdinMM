@@ -1,7 +1,18 @@
-﻿using ComponentFactory.Krypton.Toolkit;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
 using Odin.Tools;
-using System;
+using Odin.Warehouse.Deliveries;
+using System.Data.SqlClient;
+using Odin.Sales;
 
 namespace Odin.Sales
 {
@@ -30,14 +41,14 @@ namespace Odin.Sales
             get { return _id; }
             set { _id = value; }
         }
-
+               
 
         public string Payment
         {
             get { return txt_Payment.Text; }
             set { txt_Payment.Text = value; }
         }
-
+        
         public double Summa
         {
             get { return Convert.ToDouble(txt_Summa.Text); }
@@ -89,7 +100,10 @@ namespace Odin.Sales
         {
             get
             {
-                return txt_PayDate.Value == null ? "" : txt_PayDate.Value.ToString();
+                if (txt_PayDate.Value == null)
+                    return "";
+                else
+                    return txt_PayDate.Value.ToString();
             }
             set
             {
@@ -130,9 +144,16 @@ namespace Odin.Sales
 
         public bool CheckEmpty()
         {
-            bool _res = cmb_Currency1.CurrencyId != 0
-                && cmb_Firms2.FirmId != 0
-                && Summa >= TotalMapped;
+            bool _res = false;
+
+            if (cmb_Currency1.CurrencyId == 0
+                || cmb_Firms2.FirmId == 0
+                || Summa < TotalMapped
+                )
+                _res = false;
+            else
+                _res = true;
+
             return _res;
         }
 

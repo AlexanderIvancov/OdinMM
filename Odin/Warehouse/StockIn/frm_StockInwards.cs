@@ -1,16 +1,23 @@
-﻿using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using Odin.Register;
-using Odin.Tools;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using WeifenLuo.WinFormsUI.Docking;
+using Odin.Global_Classes;
+using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using ComponentFactory.Krypton.Workspace;
+using ComponentFactory.Krypton.Toolkit;
+using System.Threading;
+using System.Data.SqlClient;
+using Odin.Tools;
+using Odin.Register;
+using Odin.Warehouse.History;
 
 namespace Odin.Warehouse.StockIn
 {
@@ -157,9 +164,9 @@ namespace Odin.Warehouse.StockIn
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
                 if (Convert.ToInt32(row.Cells["cn_state"].Value) == -1)
-                    foreach (DataGridViewCell cell in row.Cells)
-                        cell.Style.BackColor = Color.FromArgb(192, 255, 192);
-
+                foreach (DataGridViewCell cell in row.Cells)
+                    cell.Style.BackColor = Color.FromArgb(192, 255, 192);
+                
             }
         }
 
@@ -232,7 +239,7 @@ namespace Odin.Warehouse.StockIn
         }
         public void bw_List(object sender, DoWorkEventArgs e)
         {
-
+                      
             //MessageBox.Show(txt_CreatDateFrom.Value.ToShortDateString());
             var data = StockIn_BLL.getStockIncomes(cmb_IncomeDoc1.IncomeDocId, cmb_Types1.TypeId, cmb_Firms1.FirmId, chk_State.Checked == true ? -1 : 0,
                                             cmb_Articles1.ArticleId, cmb_Articles1.Article, txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
@@ -300,7 +307,7 @@ namespace Odin.Warehouse.StockIn
             ctlPO.IdIn = InId;
             ctlPO.FillPOs(InId);
             ctlPO.ArtId = ArtId;
-
+           
             //MessageBox.Show(ctl.Width.ToString());
             return NewPage("PO's details ", 1, ctlPO, ctlPO.Width);
         }
@@ -312,7 +319,7 @@ namespace Odin.Warehouse.StockIn
 
             ctlComponents.IdIn = InId;
             ctlComponents.FillComponents(InId);
-
+          
             //MessageBox.Show(ctl.Width.ToString());
             return NewPage("Components details ", 1, ctlComponents, ctlComponents.Width);
         }
@@ -333,7 +340,7 @@ namespace Odin.Warehouse.StockIn
         {
             ctlTracing = new Odin.Warehouse.History.ctl_IncomeTracing();
             ControlWidth = ctlTracing.Width;
-
+            
             ctlTracing.IdIn = idin;
             //MessageBox.Show(ctl.Width.ToString());
 
@@ -369,10 +376,8 @@ namespace Odin.Warehouse.StockIn
             int _headid = 0;
             string _docname = "";
 
-            try
-            {
-                _artid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_artid"].Value);
-                _headid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_headid"].Value);
+            try { _artid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_artid"].Value);
+            _headid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_headid"].Value);
                 _docname = gv_List.CurrentRow.Cells["cn_name"].Value.ToString();
             }
             catch { }
@@ -395,7 +400,7 @@ namespace Odin.Warehouse.StockIn
                 {
                     ctlPO1.IdIn = idin;
                     ctlPO1.ArtId = artid;
-                    ctlPO1.FillPOs(idin);
+                    ctlPO1.FillPOs(idin);                   
                 }
                 //break;
             }
@@ -487,7 +492,7 @@ namespace Odin.Warehouse.StockIn
             }
             catch
             { }
-
+           
             SetCellsColor();
             try
             {
@@ -503,20 +508,27 @@ namespace Odin.Warehouse.StockIn
             frm.ColumnNumber = gv_List.CurrentCell.ColumnIndex;
             frm.ColumnText = gv_List.Columns[frm.ColumnNumber].HeaderText;
             frm.ShowDialog();
-
+            
         }
 
         private void mni_FilterBy_Click(object sender, EventArgs e)
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? String.IsNullOrEmpty(CellValue) == true
-                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
-                    : String.IsNullOrEmpty(CellValue) == true
-                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -533,9 +545,10 @@ namespace Odin.Warehouse.StockIn
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
-                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
+                else
+                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
@@ -590,7 +603,7 @@ namespace Odin.Warehouse.StockIn
         {
             ED.DgvIntoExcel();
         }
-
+        
         #endregion
 
         private void btn_Refresh_Click(object sender, EventArgs e)
@@ -638,7 +651,7 @@ namespace Odin.Warehouse.StockIn
             LoadColumns(gv_List);
             txt_CreatDateFrom.Value = null;// Convert.ToDateTime("01/01/2000");
             txt_CreatDateTill.Value = null; //Convert.ToDateTime("01/01/2100");
-
+            
         }
 
 
@@ -744,7 +757,7 @@ namespace Odin.Warehouse.StockIn
                 int _res = SIBll.DeleteStockInLine(_id);
                 if (_res == -1)
                     MessageBox.Show("Delete was successful!");
-                else if (_res == 0 - 1)
+                else if (_res == 0-1)
                     MessageBox.Show("Delete was not successful! There are movements on this line!");
                 else
                     MessageBox.Show("Delete was not successful! Error during operation!");
@@ -803,8 +816,7 @@ namespace Odin.Warehouse.StockIn
         {
             int _id = 0;
 
-            try
-            {
+            try {
                 _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
             }
             catch { }

@@ -1,12 +1,17 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using Odin.Tools;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
+using Odin.Tools;
+using System.Data.SqlClient;
 
 namespace Odin.Sales
 {
@@ -16,7 +21,7 @@ namespace Odin.Sales
         public frm_RelinkPaymentOrders()
         {
             InitializeComponent();
-
+           
         }
 
         #region Variables
@@ -88,7 +93,12 @@ namespace Odin.Sales
         {
             get
             {
-                return rb_Invoice.Checked == true ? 3 : rb_Proforma.Checked == true ? 13 : 0;
+                if (rb_Invoice.Checked == true)
+                    return 3;
+                else if (rb_Proforma.Checked == true)
+                    return 13;
+                else
+                    return 0;
             }
             set
             {
@@ -117,7 +127,10 @@ namespace Odin.Sales
         {
             get
             {
-                return txt_PayDate.Value == null ? "" : txt_PayDate.Value.ToString();
+                if (txt_PayDate.Value == null)
+                    return "";
+                else
+                    return txt_PayDate.Value.ToString();
             }
             set
             {
@@ -204,7 +217,7 @@ namespace Odin.Sales
             ds_List.Clear();
 
             var data = CO_BLL.getPaymentDets(_paymentid, _coid);
-
+           
             foreach (DataRow row in data.Rows)
             {
                 DataRow row1 = dt_List.NewRow();
@@ -273,7 +286,10 @@ namespace Odin.Sales
 
         public bool CheckMapped()
         {
-            return Mapped <= InPayment;
+            if (Mapped > InPayment)
+                return false;
+            else
+                return true;
         }
         public void FillDates()
         {
@@ -385,7 +401,7 @@ namespace Odin.Sales
                 }
             }
         }
-
+        
         private void btn_RemoveAll_Click(object sender, EventArgs e)
         {
             int _k = 0;
@@ -443,6 +459,7 @@ namespace Odin.Sales
 
             int _id = 0;
             int _k = 0;
+            double _tmpqty = 0;
 
             try { _id = Convert.ToInt32(gv_Orders.CurrentRow.Cells["cn_oinvoiceid"].Value); }
             catch { }
@@ -577,13 +594,20 @@ namespace Odin.Sales
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? String.IsNullOrEmpty(CellValue) == true
-                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
-                    : String.IsNullOrEmpty(CellValue) == true
-                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -596,9 +620,10 @@ namespace Odin.Sales
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
-                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
+                else
+                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             //SetCellsColor();
@@ -706,13 +731,20 @@ namespace Odin.Sales
         {
             try
             {
-                bs_Orders.Filter = String.IsNullOrEmpty(bs_Orders.Filter) == true
-                    ? String.IsNullOrEmpty(oCellValue) == true
-                        ? "(" + oColumnName + " is null OR Convert(" + oColumnName + ", 'System.String') = '')"
-                        : "Convert(" + oColumnName + " , 'System.String') = '" + glob_Class.NES(oCellValue) + "'"
-                    : String.IsNullOrEmpty(oCellValue) == true
-                        ? bs_Orders.Filter + "AND (" + oColumnName + " is null OR Convert(" + oColumnName + ", 'System.String') = '')"
-                        : bs_Orders.Filter + " AND Convert(" + oColumnName + " , 'System.String') = '" + glob_Class.NES(oCellValue) + "'";
+                if (String.IsNullOrEmpty(bs_Orders.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(oCellValue) == true)
+                        bs_Orders.Filter = "(" + oColumnName + " is null OR Convert(" + oColumnName + ", 'System.String') = '')";
+                    else
+                        bs_Orders.Filter = "Convert(" + oColumnName + " , 'System.String') = '" + glob_Class.NES(oCellValue) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(oCellValue) == true)
+                        bs_Orders.Filter = bs_Orders.Filter + "AND (" + oColumnName + " is null OR Convert(" + oColumnName + ", 'System.String') = '')";
+                    else
+                        bs_Orders.Filter = bs_Orders.Filter + " AND Convert(" + oColumnName + " , 'System.String') = '" + glob_Class.NES(oCellValue) + "'";
+                }
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -725,9 +757,10 @@ namespace Odin.Sales
         {
             try
             {
-                bs_Orders.Filter = String.IsNullOrEmpty(bs_Orders.Filter) == true
-                    ? "Convert(" + oColumnName + " , 'System.String') <> '" + oCellValue + "'"
-                    : bs_Orders.Filter + " AND " + oColumnName + " <> '" + oCellValue + "'";
+                if (String.IsNullOrEmpty(bs_Orders.Filter) == true)
+                    bs_Orders.Filter = "Convert(" + oColumnName + " , 'System.String') <> '" + oCellValue + "'";
+                else
+                    bs_Orders.Filter = bs_Orders.Filter + " AND " + oColumnName + " <> '" + oCellValue + "'";
             }
             catch { }
             //SetCellsColor();
@@ -897,7 +930,7 @@ namespace Odin.Sales
 
         private void btn_Add_MouseDown(object sender, MouseEventArgs e)
         {
-
+            
         }
     }
 }

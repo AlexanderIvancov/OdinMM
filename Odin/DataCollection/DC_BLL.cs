@@ -1,8 +1,11 @@
-﻿using Odin.Global_Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Data;
+using Odin.Global_Classes;
 
 
 namespace Odin.DataCollection
@@ -169,7 +172,7 @@ namespace Odin.DataCollection
             //catch { }
             return _res;
         }
-        public string AddDataCollectionSerialOper(int WorkerId, string Serial, int LaunchId, int PrevStageId, int OperId, int IsLast, int PlaceId)
+        public string AddDataCollectionSerialOper(int WorkerId, string Serial, int LaunchId, int PrevStageId, int OperId, int IsLast,int PlaceId)
         {
             string _res = "";
 
@@ -256,7 +259,7 @@ namespace Odin.DataCollection
             //catch { }
             return _res;
         }
-
+       
         public string DeleteDataCollectionSerial(int Id, string Serial)
         {
             string _res = "";
@@ -318,7 +321,7 @@ namespace Odin.DataCollection
             sqlComm.CommandType = CommandType.StoredProcedure;
             sqlComm.CommandTimeout = 3000;
 
-
+           
             sqlComm.Parameters.Add("@tabledc", SqlDbType.Structured);
             sqlComm.Parameters["@tabledc"].TypeName = "UT_DCApprove";
             sqlComm.Parameters["@tabledc"].Value = data;
@@ -336,7 +339,7 @@ namespace Odin.DataCollection
 
         public void DeleteDataCollection(int id, int issn)
         {
-
+           
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_DeleteDataCollection", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -344,7 +347,7 @@ namespace Odin.DataCollection
 
             sqlComm.Parameters.AddWithValue("@id", id);
             sqlComm.Parameters.AddWithValue("@issn", issn);
-
+           
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();

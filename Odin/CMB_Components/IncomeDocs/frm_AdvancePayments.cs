@@ -1,8 +1,15 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.CMB_Components.BLL;
-using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using Odin.CMB_Components.BLL;
 
 namespace Odin.CMB_Components.IncomeDocs
 {
@@ -49,14 +56,12 @@ namespace Odin.CMB_Components.IncomeDocs
 
         private void btn_Edit_Click(object sender, EventArgs e)
         {
-            int _id = 0;
+            int _id  = 0;
             double _amount = 0;
             int _curid = 0;
             string _curdate = "";
             double _rate = 0;
-            try
-            {
-                _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
+            try { _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
                 _amount = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_amount"].Value);
                 _curid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_curid"].Value);
                 _curdate = gv_List.CurrentRow.Cells["cn_paydate"].Value.ToString();
@@ -83,12 +88,12 @@ namespace Odin.CMB_Components.IncomeDocs
         private void btn_Delete_Click(object sender, EventArgs e)
         {
             int _id = 0;
-
+           
 
             try
             {
                 _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
-
+                
             }
             catch { }
             if (_id != 0 && glob_Class.DeleteConfirm() == true)

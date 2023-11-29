@@ -1,6 +1,13 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
 
 namespace Odin.Global_Classes
 {
@@ -46,7 +53,7 @@ namespace Odin.Global_Classes
         }
 
         private void txt_Text_KeyPress(object sender, KeyPressEventArgs e)
-        {
+        {            
             if (e.KeyChar == (char)Keys.Enter)
             {
                 if (TextEntering != null)

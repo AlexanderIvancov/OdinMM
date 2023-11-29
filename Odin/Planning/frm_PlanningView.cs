@@ -1,12 +1,17 @@
-﻿using Braincase.GanttChart;
-using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using Odin.Tools;
+using System.Data.SqlClient;
+using Braincase.GanttChart;
 
 namespace Odin.Planning
 {
@@ -387,12 +392,19 @@ namespace Odin.Planning
                         };
                         _mManager.Assign(childtask, _resourse);
 
-                        CompletePerc = Convert.ToDouble(row1["qty"]) == 0
-                            || Convert.ToDouble(row["qty"]) == 0
-                            ? 1
-                            : Convert.ToInt32(row1["ismisc"]) == 0 && Convert.ToInt32(row1["isold"]) == 0
-                                ? Convert.ToDouble(row1["qty"]) / (Convert.ToDouble(row1["qty"]) + Convert.ToDouble(row1["qtyinbatch"]))
-                                : 1 * Convert.ToDouble(row1["qtyin"]) / Convert.ToDouble(row1["qty"]);
+                        if (Convert.ToDouble(row1["qty"]) == 0
+                            || Convert.ToDouble(row["qty"]) == 0)
+                            CompletePerc = 1;
+                        else
+                        {
+                            if (Convert.ToInt32(row1["ismisc"]) == 0 && Convert.ToInt32(row1["isold"]) == 0)
+                                CompletePerc = Convert.ToDouble(row1["qty"]) / (Convert.ToDouble(row1["qty"]) + Convert.ToDouble(row1["qtyinbatch"]));
+                            //CompletePerc = (Convert.ToDouble(row["qty"]) - Convert.ToDouble(row1["qty"])) / Convert.ToDouble(row["qty"]);
+                            else
+                            {
+                                CompletePerc = 1 * Convert.ToDouble(row1["qtyin"]) / Convert.ToDouble(row1["qty"]);
+                            }
+                        }
                         //100 * (Convert.ToDouble(row["qty"]) - Convert.ToDouble(row1["qty"])) / (Convert.ToDouble(row1["qty"]) == 0 ? 100 : Convert.ToDouble(row2["qtyin"]) : Convert.ToDouble(row2["qty"]));
 
                         childtask.Complete = class_Global.ToSingle(CompletePerc);
@@ -406,9 +418,10 @@ namespace Odin.Planning
                             DateTime then2 = Convert.ToDateTime(row2["startdate"]);
                             TimeSpan ts2 = (now - _mManager.Start) + (then2 - now);
 
-                            _tmpname = Convert.ToInt32(row2["ismisc"]) == 0
-                                ? (Name = row2["batch"].ToString() + " , qty: " + row2["qty"].ToString() + " , qty produced: " + row2["qtyin"].ToString())
-                                : (Name = row2["batch"].ToString() + " , qty: " + row2["qty"].ToString() + " , qty produced: " + row2["qtyin"].ToString() + " , article: " + row2["article"].ToString());
+                            if (Convert.ToInt32(row2["ismisc"]) == 0)
+                                _tmpname = Name = row2["batch"].ToString() + " , qty: " + row2["qty"].ToString() + " , qty produced: " + row2["qtyin"].ToString();
+                            else
+                                _tmpname = Name = row2["batch"].ToString() + " , qty: " + row2["qty"].ToString() + " , qty produced: " + row2["qtyin"].ToString() + " , article: " + row2["article"].ToString();
 
                             //_tmpname = _tmpname + System.Environment.NewLine + row2["comments"].ToString();
 
@@ -421,10 +434,11 @@ namespace Odin.Planning
                             _mManager.Relate(childtask, childtask1);
 
 
-                            CompletePerc = Convert.ToDouble(row2["qty"]) == 0
-                                || Convert.ToInt32(row2["ismisc"]) == -1
-                                ? 1
-                                : 1 * Convert.ToDouble(row2["qtyin"]) / Convert.ToDouble(row2["qty"]);
+                            if (Convert.ToDouble(row2["qty"]) == 0
+                                || Convert.ToInt32(row2["ismisc"]) == -1)
+                                CompletePerc = 1;
+                            else
+                                CompletePerc = 1 * Convert.ToDouble(row2["qtyin"]) / Convert.ToDouble(row2["qty"]);
 
                             childtask1.Complete = class_Global.ToSingle(CompletePerc);
 

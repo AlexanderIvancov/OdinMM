@@ -1,15 +1,18 @@
-﻿using AegisImplicitMail;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Collections;
+using System.Linq;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Drawing.Printing;
-using System.Linq;
 using System.Text;
 //using AdvancedDataGridView;
 //using EmailHandler;
 using System.Windows.Forms;
+using System.Drawing;
+using System.Drawing.Printing;
+using AegisImplicitMail;
+using System.IO;
 
 namespace Odin.Global_Classes
 {
@@ -154,8 +157,8 @@ namespace Odin.Global_Classes
                 dc.AutoIncrement = true;
                 dt.Columns["autoincrement"].AutoIncrementSeed = 1;
                 dt.Columns["autoincrement"].AutoIncrementStep = 1;
-
-
+                
+                
 
                 da.Fill(dt);
 
@@ -230,7 +233,9 @@ namespace Odin.Global_Classes
                 var isRowsAffected = cmd.ExecuteNonQuery();
 
                 var outParam = list.Where(item => item.Direction == ParameterDirection.Output).SingleOrDefault();
-                return outParam != null ? outParam.Value : isRowsAffected == 1;
+                if (outParam != null) return outParam.Value;
+
+                return isRowsAffected == 1;
             }
         }
 
@@ -282,22 +287,25 @@ namespace Odin.Global_Classes
         #region Mail Helper
 
         frm_EmailNew frmMail = null;
-
+        
         public void SendMessage(string To, string Subject, string Message)
         {
 
             frmMail = new frm_EmailNew();
 
             frmMail.From = DAL.MyMailAdress();
-            frmMail.To = GlobClass.NES(To) != "" ? frmMail.From + ", " + To : frmMail.From;
-
+            if (GlobClass.NES(To) != "")
+                frmMail.To = frmMail.From + ", " + To;
+            else
+                frmMail.To = frmMail.From;
+            
             frmMail.Subject = Subject;
             frmMail.Message = Message;
-
+            
             frmMail.SendMail += new MailSendingEventHandler(SendEMail);
 
             frmMail.Show();
-
+            
         }
         public void SendMessageWS(string To, string Subject, string Message)
         {
@@ -305,7 +313,7 @@ namespace Odin.Global_Classes
 
             frmMail.From = DAL.MyMailAdress();
             frmMail.To = To;
-
+           
             frmMail.Subject = Subject;
             frmMail.Message = Message;
 
@@ -375,7 +383,7 @@ namespace Odin.Global_Classes
             //mymessage.Body = frmMail.Message;
 
 
-
+           
             string[] arr = frmMail.Message.Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
             string _tmpmessage = arr.FirstOrDefault();
 
@@ -389,11 +397,11 @@ namespace Odin.Global_Classes
             //}
 
 
-            mymessage.Body = "<html>" +
-                        "<body>" +
-                        _tmpmessage +
-                        "</body>" +
-                        "</html>";
+                mymessage.Body = "<html>" +
+                            "<body>" +
+                            _tmpmessage +
+                            "</body>" +
+                            "</html>"; 
 
 
             MimeAttachment attachment;
@@ -411,12 +419,12 @@ namespace Odin.Global_Classes
 
             //Create Smtp Client
             var mailer = new MimeMailer(host, 465);
-
+            
             mailer.User = user;
             mailer.Password = pass;
             mailer.SslType = SslMode.Ssl;
             mailer.AuthenticationMode = AuthenticationType.Base64;
-
+            
             //Set a delegate function for call back
             mailer.SendCompleted += compEvent;
             mailer.SendMailAsync(mymessage);
@@ -482,7 +490,7 @@ namespace Odin.Global_Classes
             {
                 _tmpmessage = _tmpmessage + "<br>" + arr[i].ToString();
             }
-
+           
             mymessage.Body = "<html>" +
                         "<body>" +
                         _tmpmessage +
@@ -864,15 +872,15 @@ namespace Odin.Global_Classes
             {
                 //try
                 //{
-                gv_List.ThreadSafeCall(delegate
-                {
-                    DataGridViewColumn newColumn = gv_List.Columns[oldColumn.Name];
-                    gv_List.Sort(newColumn, sortDir);
-                    newColumn.HeaderCell.SortGlyphDirection =
-                        sortDir == ListSortDirection.Ascending
-                            ? System.Windows.Forms.SortOrder.Ascending
-                            : System.Windows.Forms.SortOrder.Descending;
-                });
+               gv_List.ThreadSafeCall(delegate
+               {
+                   DataGridViewColumn newColumn = gv_List.Columns[oldColumn.Name];
+                   gv_List.Sort(newColumn, sortDir);
+                   newColumn.HeaderCell.SortGlyphDirection =
+                       sortDir == ListSortDirection.Ascending
+                           ? System.Windows.Forms.SortOrder.Ascending
+                           : System.Windows.Forms.SortOrder.Descending;
+               });
                 //}
                 //catch { }
             }

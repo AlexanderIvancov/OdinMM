@@ -1,7 +1,13 @@
-﻿using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
 
 namespace Odin.Planning.Controls
 {
@@ -50,18 +56,16 @@ namespace Odin.Planning.Controls
 
         public double QtyStock
         {
-            get
-            {
+            get {
                 try { return Convert.ToDouble(txt_QtyStock1.Text); }
                 catch { return 0; }
             }
-            set
-            {
+            set {
                 //Invoke(new Action(() =>
                 //{
-                txt_QtyStock1.Text = value.ToString();
+                    txt_QtyStock1.Text = value.ToString();
                 //}));
-
+                
             }
         }
 
@@ -82,11 +86,10 @@ namespace Odin.Planning.Controls
                 try { return Convert.ToDouble(txt_QtyAvailable1.Text); }
                 catch { return 0; }
             }
-            set
-            {
+            set {
                 //Invoke(new Action(() =>
                 //{
-                txt_QtyAvailable1.Text = value.ToString();
+                    txt_QtyAvailable1.Text = value.ToString();
                 //}));
             }
         }
@@ -98,11 +101,10 @@ namespace Odin.Planning.Controls
                 try { return Convert.ToDouble(txt_QtyNeeds1.Text); }
                 catch { return 0; }
             }
-            set
-            {
+            set {
                 //Invoke(new Action(() =>
                 //{
-                txt_QtyNeeds1.Text = value.ToString();
+                    txt_QtyNeeds1.Text = value.ToString();
                 //}));
             }
         }
@@ -114,12 +116,10 @@ namespace Odin.Planning.Controls
                 try { return Convert.ToDouble(txt_QtyPurchased1.Text); }
                 catch { return 0; }
             }
-            set
-            {
+            set {
                 //Invoke(new Action(() =>
                 //{
-                txt_QtyPurchased1.Text = value.ToString();
-            }
+                    txt_QtyPurchased1.Text = value.ToString(); }
             //)); }
         }
 
@@ -130,12 +130,10 @@ namespace Odin.Planning.Controls
                 try { return Convert.ToDouble(txt_QtyAwaiting1.Text); }
                 catch { return 0; }
             }
-            set
-            {
+            set {
                 //Invoke(new Action(() =>
                 //{ 
-                txt_QtyAwaiting1.Text = value.ToString();
-            }
+                txt_QtyAwaiting1.Text = value.ToString();}
             //)); }
         }
 
@@ -150,7 +148,7 @@ namespace Odin.Planning.Controls
             {
                 txt_QtyFreePO.Text = value.ToString();
             }
-
+           
         }
 
         public double QtyNeedsCO

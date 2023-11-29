@@ -1,6 +1,13 @@
-﻿using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
 namespace Odin.Sales
 {
     public partial class ctl_COConfirmations : UserControl
@@ -19,13 +26,12 @@ namespace Odin.Sales
         public int COId
         {
             get { return cmb_SalesOrdersWithLines1.SalesOrderLineId; }
-            set
-            {
+            set {
 
                 _coid = value;
                 FillConfirmations(_coid);
                 COBll.COId = _coid;
-
+                
             }
         }
 
@@ -34,9 +40,7 @@ namespace Odin.Sales
         public int ConfId
         {
             get { return _confid; }
-            set
-            {
-                _confid = value;
+            set { _confid = value;
                 COBll.ConfId = _confid;
             }
         }
@@ -75,7 +79,7 @@ namespace Odin.Sales
         private void btn_Add_Click(object sender, EventArgs e)
         {
             frm_AddCOConfirmation frm = new frm_AddCOConfirmation();
-
+                        
 
             frm.Qty = COBll.COQty - _ConfBefore();
             frm.ConfDate = System.DateTime.Now.ToShortDateString();//COBll.COReqDate;
@@ -129,7 +133,7 @@ namespace Odin.Sales
         private void cmb_SalesOrdersWithLines1_SalesOrderChanged(object sender)
         {
             if (_prevcoid != cmb_SalesOrdersWithLines1.SalesOrderLineId)
-
+            
             {
                 //MessageBox.Show(cmb_SalesOrdersWithLines1.SalesOrderLineId.ToString());
                 COId = cmb_SalesOrdersWithLines1.SalesOrderLineId;

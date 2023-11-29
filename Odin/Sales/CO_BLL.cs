@@ -1,8 +1,12 @@
-﻿using Odin.Global_Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.Sql;
 using System.Data.SqlClient;
+using System.Data;
+using Odin.Global_Classes;
 
 
 namespace Odin.Sales
@@ -80,9 +84,9 @@ namespace Odin.Sales
 
             //try
             //{
-            sqlConn.Open();
-            sqlComm.ExecuteNonQuery();
-            sqlConn.Close();
+                sqlConn.Open();
+                sqlComm.ExecuteNonQuery();
+                sqlConn.Close();
             //}
             //catch { }
         }
@@ -110,9 +114,7 @@ namespace Odin.Sales
         public int COHeadId
         {
             get { return _coheadid; }
-            set
-            {
-                _coheadid = value;
+            set { _coheadid = value;
                 SqlConnection conn = new SqlConnection(sConnStr);
                 conn.Open();
                 DataSet ds = new DataSet();
@@ -228,7 +230,14 @@ namespace Odin.Sales
 
             DataTable dt = ds.Tables[0];
 
-            _test = dt.Rows.Count <= 0;
+            if (dt.Rows.Count > 0)
+            {
+                _test = false;
+            }
+            else
+            {
+                _test = true;
+            }
 
             return _test;
         }
@@ -558,7 +567,7 @@ namespace Odin.Sales
             sqlComm.ExecuteNonQuery();
             _res = Convert.ToInt32(sqlComm.Parameters["@insertedid"].Value);
             sqlConn.Close();
-
+            
 
             return _res;
         }
@@ -666,9 +675,7 @@ namespace Odin.Sales
         public int ConfId
         {
             get { return _confid; }
-            set
-            {
-                _confid = value;
+            set { _confid = value;
 
                 SqlConnection conn = new SqlConnection(sConnStr);
                 conn.Open();
@@ -1118,7 +1125,10 @@ namespace Odin.Sales
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             _res = Convert.ToInt32(sqlComm.Parameters["@insertedid"].Value);
-            CreateOrder = Convert.ToInt32(sqlComm.Parameters["@isneworder"].Value) == -1;
+            if (Convert.ToInt32(sqlComm.Parameters["@isneworder"].Value) == -1)
+                CreateOrder = true;
+            else
+                CreateOrder = false;
             sqlConn.Close();
 
             return _res;
@@ -1228,7 +1238,7 @@ namespace Odin.Sales
         }
 
         public void AddExInvoiceDets(int delivid, int headid, int artid, string payment, double qty, int unitid, double unitprice, double vat,
-                                    double discount, string custcode, string comments, int coid, int isservice, int additexpences,
+                                    double discount, string custcode, string comments, int coid, int isservice, int additexpences, 
                                     int quotid, int ispaid, double paidinadvance, string salescomments)
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);
@@ -1264,7 +1274,7 @@ namespace Odin.Sales
         }
 
         public void EditExInvoiceDets(int id, int artid, string payment, double qty, int unitid, double unitprice, double vat,
-                                   double discount, string custcode, string comments, int coid, int isservice, int additexpences,
+                                   double discount, string custcode, string comments, int coid, int isservice, int additexpences, 
                                    int quotid, int ispaid, double paidinadvance, int isactive, string salescomments)
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);
@@ -1293,10 +1303,10 @@ namespace Odin.Sales
             //try
             //{
             sqlConn.Open();
-            sqlComm.ExecuteNonQuery();
-            sqlConn.Close();
-            // }
-            // catch { }
+                sqlComm.ExecuteNonQuery();
+                sqlConn.Close();
+           // }
+           // catch { }
         }
 
         public void DeleteExInvoiceDets(int id)
@@ -1358,9 +1368,7 @@ namespace Odin.Sales
         public int InvoiceDetId
         {
             get { return _invdetid; }
-            set
-            {
-                _invdetid = value;
+            set { _invdetid = value;
 
                 SqlConnection conn = new SqlConnection(sConnStr);
                 conn.Open();
@@ -1473,8 +1481,8 @@ namespace Odin.Sales
             InvDelivId = 0;
             InvDelivNote = "";
             InvVAT = 0;
-            InvCustCode = "";
-            InvCurId = 0;
+            InvCustCode ="";
+            InvCurId =0;
             InvIsAdditExpences = 0;
             InvIsService = 0;
             InvDiscount = 0;
@@ -1504,7 +1512,7 @@ namespace Odin.Sales
             sqlComm.Parameters.AddWithValue("@invoiceid", invoiceid);
             sqlComm.Parameters.AddWithValue("@paymentsum", paymentsum);
             sqlComm.Parameters.AddWithValue("@paymentdate", paymentdate);
-
+            
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
 
@@ -1556,7 +1564,7 @@ namespace Odin.Sales
             sqlComm.CommandType = CommandType.StoredProcedure;
 
             sqlComm.Parameters.AddWithValue("@id", id);
-
+           
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
 
@@ -1568,8 +1576,8 @@ namespace Odin.Sales
 
         #region Reports
 
-        public static DataTable getSellingReports(int _custid, int _typeid,
-                                                    string _datefrom, string _datetill,
+        public static DataTable getSellingReports(int _custid, int _typeid, 
+                                                    string _datefrom, string _datetill, 
                                                     int _countries, int _invtype)
         {
             string query = "sp_StockReportsSelling";
@@ -1587,8 +1595,8 @@ namespace Odin.Sales
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
 
-        public static DataTable getSellingReportsSum(int _custid, int _typeid,
-                                                    string _datefrom, string _datetill,
+        public static DataTable getSellingReportsSum(int _custid, int _typeid, 
+                                                    string _datefrom, string _datetill, 
                                                     int _countries, int _invtype)
         {
             string query = "sp_StockReportsSellingSum";
@@ -1622,7 +1630,7 @@ namespace Odin.Sales
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
 
-
+      
 
         #endregion
 
@@ -1644,7 +1652,7 @@ namespace Odin.Sales
             sqlComm.Parameters.AddWithValue("@curid", curid);
             sqlComm.Parameters.AddWithValue("@currate", currate);
             sqlComm.Parameters.AddWithValue("@comments", comments);
-
+          
             sqlComm.Parameters.Add("@insertedid", SqlDbType.Int).Direction = ParameterDirection.Output;
 
             sqlConn.Open();
@@ -1699,11 +1707,11 @@ namespace Odin.Sales
             sqlComm.Parameters.AddWithValue("@paydate", paydate);
             sqlComm.Parameters.AddWithValue("@invoicedetid", invoicedetid);
             sqlComm.Parameters.AddWithValue("@amount", amount);
-
+           
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
+            
         }
 
         public void DeletePayment(int headid)
@@ -1713,7 +1721,7 @@ namespace Odin.Sales
             sqlComm.CommandType = CommandType.StoredProcedure;
 
             sqlComm.Parameters.AddWithValue("@headid", headid);
-
+            
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
@@ -1816,7 +1824,7 @@ namespace Odin.Sales
             sqlComm.Parameters.AddWithValue("@quotid", quotid);
             sqlComm.Parameters.AddWithValue("@curid", curid);
             sqlComm.Parameters.AddWithValue("@amount", amount);
-
+           
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();

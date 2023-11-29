@@ -1,10 +1,17 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.CustomControls;
-using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using Odin.Purchase;
+using Odin.Global_Classes;
+using Odin.CustomControls;
+using Owf.Controls;
 
 namespace Odin.Warehouse.StockIn
 {
@@ -92,7 +99,7 @@ namespace Odin.Warehouse.StockIn
 
         public int COId
         {
-            get; set;
+            get;set;
         }
         private float _measCellValue;
         public float MeasCellValue
@@ -103,13 +110,17 @@ namespace Odin.Warehouse.StockIn
 
         public int IsClosed
         {
-            get
-            {
-                return chk_Closed.Checked == true ? -1 : 0;
+            get { if (chk_Closed.Checked == true)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {
-                chk_Closed.Checked = value == -1;
+                if (value == -1)
+                    chk_Closed.Checked = true;
+                else
+                    chk_Closed.Checked = false;
             }
         }
         #region Controls
@@ -121,11 +132,14 @@ namespace Odin.Warehouse.StockIn
 
         public void CheckEmpty()
         {
-            btn_OK.Enabled = BatchId != 0
-                && ArtId != 0
-                && Package != ""
-                && String.IsNullOrEmpty(Package) != true
-                && Qty > 0;
+            if (BatchId == 0
+                || ArtId == 0
+                || Package == ""
+                || String.IsNullOrEmpty(Package) == true
+                || Qty <= 0)
+                btn_OK.Enabled = false;
+            else
+                btn_OK.Enabled = true;
         }
 
         private void txt_Package_TextChanged(object sender, EventArgs e)
@@ -186,7 +200,7 @@ namespace Odin.Warehouse.StockIn
                 txt_Weight.SelectionStart = txt_Weight.Text.Length;
             }
             catch { }
-
+            
         }
 
         private void insertKeyboardSymbol(string symbol, bool symremove)
@@ -211,10 +225,12 @@ namespace Odin.Warehouse.StockIn
                 e.KeyChar = System.Threading.Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
                 e.Handled = s.Text.Contains(e.KeyChar);
             }
-            else
+            else if (e.KeyChar == '-')
             {
-                e.Handled = e.KeyChar == '-' ? s.Text.Contains(e.KeyChar) : !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar);
+                e.Handled = s.Text.Contains(e.KeyChar);
             }
+            else
+                e.Handled = !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar);
         }
 
         private void ShowScreenNumKeyboard(TextBox _focusedtextbox)
@@ -227,7 +243,7 @@ namespace Odin.Warehouse.StockIn
 
             Form f;
             f = this.FindForm();
-
+            
             Point LocationPoint = _focusedtextbox.PointToScreen(Point.Empty);
             int xpos = LocationPoint.X + _focusedtextbox.Width;
             int ypos = LocationPoint.Y;
@@ -259,8 +275,13 @@ namespace Odin.Warehouse.StockIn
         {
             get
             {
-                return rb_Valkas2.Checked == true ? 1 : rb_Valkas2B.Checked == true ? 2 : 0;
-
+                if (rb_Valkas2.Checked == true)
+                    return 1;
+                else if (rb_Valkas2B.Checked == true)
+                    return 2;
+                else
+                    return 0;
+             
             }
             set
             {
@@ -279,7 +300,7 @@ namespace Odin.Warehouse.StockIn
                     rb_Valkas2.Checked = false;
                     rb_Valkas2B.Checked = false;
                 }
-
+            
             }
         }
 
@@ -291,14 +312,14 @@ namespace Odin.Warehouse.StockIn
         }
 
         private void frm_FCPackHeader_Load(object sender, EventArgs e)
-        {
+        {            
             //txt_Qty.KeyPress += NumericCheckHandler;
             //txt_Weight.KeyPress += NumericCheckHandler;
         }
 
         private void txt_Qty_Leave(object sender, EventArgs e)
         {
-            // Qty = Convert.ToDouble(txt_Qty.Text);
+           // Qty = Convert.ToDouble(txt_Qty.Text);
         }
 
         private void txt_Weight_Leave(object sender, EventArgs e)
@@ -320,10 +341,9 @@ namespace Odin.Warehouse.StockIn
 
         private void txt_BoxNO_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-                popup.CellText = txt_BoxNO.Text.ToString();
-                txt_BoxNO.SelectionStart = txt_BoxNO.Text.Length;
+            try { 
+            popup.CellText = txt_BoxNO.Text.ToString();
+            txt_BoxNO.SelectionStart = txt_BoxNO.Text.Length;
             }
             catch { }
         }

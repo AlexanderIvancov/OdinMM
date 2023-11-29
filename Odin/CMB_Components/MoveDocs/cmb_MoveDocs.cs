@@ -1,11 +1,16 @@
-﻿using Odin.CMB_Components.BLL;
-using Odin.Global_Classes;
-using Odin.Warehouse.Movements;
-using System;
-using System.Data;
-using System.Data.SqlClient;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
+using System.Data.SqlClient;
+using Odin.Warehouse.Movements;
+using Odin.CMB_Components.BLL;
 
 namespace Odin.CMB_Components.MoveDocs
 {
@@ -61,7 +66,7 @@ namespace Odin.CMB_Components.MoveDocs
                 }
                 else
                 {
-
+                    
 
                     _MoveDocId = 0;
                     //return;
@@ -176,7 +181,7 @@ namespace Odin.CMB_Components.MoveDocs
 
             if (result == DialogResult.OK)
             {
-
+                
                 int _res = Bll.AddMoveDocHead(frm.DocDate, frm.DelivDate, frm.Comments, frm.DestPlaceId, frm.DelivAddressId, frm.FinDestPlaceId, frm.FinDelivAddressId,
                                                 frm.TransportId, frm.IncotermsId, frm.PalettesQty, frm.PalettesWeight, frm.BatchId, frm.StageId, frm.QtyToProduce);
                 MoveDocId = _res;
@@ -218,7 +223,7 @@ namespace Odin.CMB_Components.MoveDocs
                 frm.BatchId = Bll.MoveDocBatchId;
                 frm.StageId = Bll.MoveStageId;
                 frm.QtyToProduce = Bll.MoveQtyOnStage;
-
+                
                 DialogResult result = frm.ShowDialog();
 
                 if (result == DialogResult.OK)
@@ -280,7 +285,7 @@ namespace Odin.CMB_Components.MoveDocs
         private void txt_MoveDoc_TextChanged(object sender, EventArgs e)
         {
             //try {
-            MoveDoc = txt_MoveDoc.Text; //}
+                MoveDoc = txt_MoveDoc.Text; //}
             //catch { }
             //if (ControlClick != null)
             //    ControlClick(this);

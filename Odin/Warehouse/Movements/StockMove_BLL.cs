@@ -1,8 +1,11 @@
-﻿using Odin.Global_Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+using Odin.Global_Classes;
 
 namespace Odin.Warehouse.Movements
 {
@@ -172,7 +175,7 @@ namespace Odin.Warehouse.Movements
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
 
-        public int AddStockMoveLine(int _headid, int _label, double _qty, int _placeid, int _batchdetid, int _reserve,
+        public int AddStockMoveLine(int _headid, int _label, double _qty, int _placeid, int _batchdetid, int _reserve, 
                                     int _batchid, int _stageid, double _qtyonstage, string _comments)
         {
             int _res = 0;
@@ -250,7 +253,7 @@ namespace Odin.Warehouse.Movements
             sqlComm.Parameters.AddWithValue("@qty", _qty);
             sqlComm.Parameters.AddWithValue("@typemove", _typemove);
             sqlComm.Parameters.AddWithValue("@groupname", _groupname);
-
+           
             sqlComm.Parameters.Add("@insertedname", SqlDbType.NVarChar, 25).Direction = ParameterDirection.Output;
             sqlComm.Parameters.Add("@insertedheadid", SqlDbType.Int).Direction = ParameterDirection.Output;
             sqlConn.Open();
@@ -322,7 +325,7 @@ namespace Odin.Warehouse.Movements
             sqlComm.Parameters.Add("@tablelabels", SqlDbType.Structured);
             sqlComm.Parameters["@tablelabels"].TypeName = "UT_Labels";
             sqlComm.Parameters["@tablelabels"].Value = tablelabels;
-
+           
             sqlComm.Parameters.Add("@success", SqlDbType.Int).Direction = ParameterDirection.Output;
 
             sqlConn.Open();
@@ -335,7 +338,7 @@ namespace Odin.Warehouse.Movements
 
         public void SeparateLabel(int label, double qty)
         {
-
+          
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SeparateStockLabels", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -346,7 +349,7 @@ namespace Odin.Warehouse.Movements
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
+            
         }
 
         public void ReserveLabels(DataTable labels)
@@ -355,7 +358,7 @@ namespace Odin.Warehouse.Movements
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_ReserveLabelsForBatch", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
-
+                     
             sqlComm.Parameters.Add("@tablelabels", SqlDbType.Structured);
             sqlComm.Parameters["@tablelabels"].TypeName = "UT_LabelReservation";
             sqlComm.Parameters["@tablelabels"].Value = labels;

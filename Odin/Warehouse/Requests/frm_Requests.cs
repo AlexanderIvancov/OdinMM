@@ -1,18 +1,24 @@
-﻿using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.CMB_Components.BLL;
-using Odin.Global_Classes;
-using Odin.Planning;
-using Odin.Tools;
-using Odin.Warehouse.Requests.Controls;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using WeifenLuo.WinFormsUI.Docking;
+using Odin.Global_Classes;
+using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using ComponentFactory.Krypton.Workspace;
+using ComponentFactory.Krypton.Toolkit;
+using Odin.Planning.Controls;
+using System.Data.SqlClient;
+using Odin.Tools;
+using Odin.Warehouse.Requests.Controls;
+using Odin.Planning;
+using Odin.CMB_Components.BLL;
 
 namespace Odin.Warehouse.Requests
 {
@@ -53,7 +59,7 @@ namespace Odin.Warehouse.Requests
             set;
         }
 
-
+              
 
         public int State
         {
@@ -61,7 +67,12 @@ namespace Odin.Warehouse.Requests
             {
                 if (rb_New.Checked == true)
                     return 1;
-                else return rb_Enabled.Checked == true ? -1 : rb_Closed.Checked == true ? 0 : 99;
+                else if (rb_Enabled.Checked == true)
+                    return -1;
+                else if (rb_Closed.Checked == true)
+                    return 0;
+                else
+                    return 99;
             }
             set
             {
@@ -80,8 +91,7 @@ namespace Odin.Warehouse.Requests
         public bool EnabledButtons
         {
             get { return _enabledbuttons; }
-            set
-            {
+            set {
                 _enabledbuttons = value;
                 if (_enabledbuttons == true)
                 {
@@ -114,7 +124,7 @@ namespace Odin.Warehouse.Requests
 
                     foreach (DataGridViewColumn column in gv_List.Columns)
                     {
-                        if (column.Name == "cn_qtystock"
+                        if (column.Name == "cn_qtystock" 
                             || column.Name == "cn_available")
                         {
                             column.Visible = false;
@@ -234,7 +244,7 @@ namespace Odin.Warehouse.Requests
                 { }
             }
 
-        }
+       }
 
         private void AddRequest(object sender)
         {
@@ -466,13 +476,20 @@ namespace Odin.Warehouse.Requests
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? String.IsNullOrEmpty(CellValue) == true
-                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
-                    : String.IsNullOrEmpty(CellValue) == true
-                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -485,9 +502,10 @@ namespace Odin.Warehouse.Requests
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
-                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
+                else
+                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
@@ -669,7 +687,7 @@ namespace Odin.Warehouse.Requests
                     }
                     else
                         glob_Class.ShowMessage("You have empty serial numbers fields!", "Enter serial numbers!", "Serial numbers warning!");
-                }
+                }                
             }
         }
 
@@ -679,7 +697,7 @@ namespace Odin.Warehouse.Requests
 
             try { _reqid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value); }
             catch { }
-
+                      
 
             if (_reqid != 0)
             {
@@ -782,7 +800,7 @@ namespace Odin.Warehouse.Requests
             frm.FillReport();
 
             frm.Show();
-
+            
 
         }
 
@@ -809,8 +827,7 @@ namespace Odin.Warehouse.Requests
             int _batchdetid = 0;
             int _oldbatchdetid = 0;
 
-            try
-            {
+            try {
                 _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
                 _batch = gv_List.CurrentRow.Cells["cn_batch"].Value.ToString();
                 _artid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_artid"].Value);
@@ -836,12 +853,12 @@ namespace Odin.Warehouse.Requests
                 {
 
                     //Check for existed batch detail
-                    _batchdetid = Convert.ToInt32(Helper.GetOneRecord("select top 1 isnull(id, 0) as id from prod_batchdet where bhid = " + frm.BatchId + " and artcstid = " + _artid));
+                    _batchdetid = Convert.ToInt32(Helper.GetOneRecord("select top 1 isnull(id, 0) as id from prod_batchdet where bhid = " + frm.BatchId + " and artcstid = " +  _artid));
 
                     if (_batchdetid == 0)
                         //Add detail
                         _batchdetid = PlanBLL.AddBatchDetail(frm.BatchId, _artid, 0/*_qty*/, "");
-
+                    
                     //Edit request, state - enabled
 
                     if (_batchdetid != 0
@@ -852,10 +869,10 @@ namespace Odin.Warehouse.Requests
 
                         if (_batchdetid != _oldbatchdetid)
                         {
-                            var query1 = "update STO_StockOutDets set batchdetid = rd.batchdetid " +
-                                            "from STO_StockOutReq orq " +
+                            var query1 = "update STO_StockOutDets set batchdetid = rd.batchdetid " + 
+                                            "from STO_StockOutReq orq " + 
                                             "inner join STO_StockOutDets so on so.id = orq.soid " +
-                                            "inner join REQ_Dets rd on rd.id = orq.reqid " +
+                                            "inner join REQ_Dets rd on rd.id = orq.reqid " + 
                                             "where orq.reqid = " + _id;
                             Helper.ExecuteQuery(query1);
                             //Update given
@@ -889,7 +906,7 @@ namespace Odin.Warehouse.Requests
                 }
 
             }
-
+            
         }
 
         private void btn_Replace_Click(object sender, EventArgs e)
@@ -913,7 +930,7 @@ namespace Odin.Warehouse.Requests
             {
                 frm_cmbArt frm = new frm_cmbArt();
                 frm.HeaderText = "Replace line in batch: " + ReqBll.RDBatch;
-
+                
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK
                     && frm.ArticleId != ReqBll.RDArtId
@@ -961,7 +978,7 @@ namespace Odin.Warehouse.Requests
             if (result == DialogResult.Yes)
             {
                 int _id = 0;
-
+             
 
                 foreach (DataGridViewRow row in this.gv_List.Rows)
                 {
@@ -994,7 +1011,7 @@ namespace Odin.Warehouse.Requests
                 {
                     ctl_RequestConsumptions ctlHis1 = (ctl_RequestConsumptions)page.Controls.Find("ctl_RequestConsumptions", true).FirstOrDefault();
                     if (ctlHis1 != null)
-                    {
+                    {                        
                         ControlWidth = ControlHistoryOutWith;
                     }
 

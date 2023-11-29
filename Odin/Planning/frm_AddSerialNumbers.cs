@@ -1,8 +1,15 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
 
 namespace Odin.Planning
 {
@@ -43,12 +50,18 @@ namespace Odin.Planning
 
         public bool CheckQty()
         {
-            return Convert.ToInt32(txt_SerialTill.Text) - Convert.ToInt32(txt_SerialFrom.Text) <= Convert.ToInt32(txt_QtyInBatch.Text);
+            if (Convert.ToInt32(txt_SerialTill.Text) - Convert.ToInt32(txt_SerialFrom.Text) > Convert.ToInt32(txt_QtyInBatch.Text))
+                return false;
+            else
+                return true;
         }
 
         public void SetQtyColor()
         {
-            txt_QtyInBatch.StateCommon.Back.Color1 = CheckQty() == false ? Color.LightCoral : Color.White;
+            if (CheckQty() == false)
+                txt_QtyInBatch.StateCommon.Back.Color1 = Color.LightCoral;
+            else
+                txt_QtyInBatch.StateCommon.Back.Color1 = Color.White;
         }
 
         #endregion
@@ -59,7 +72,7 @@ namespace Odin.Planning
 
         private void btn_Check_Click(object sender, EventArgs e)
         {
-            CheckSerialNumbers();
+            CheckSerialNumbers();            
         }
 
         public void CheckSerialNumbers()

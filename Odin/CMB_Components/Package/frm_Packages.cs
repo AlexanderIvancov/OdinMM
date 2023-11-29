@@ -1,8 +1,16 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.CMB_Components.BLL;
-using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
+using Odin.CMB_Components.BLL;
 
 namespace Odin.CMB_Components.Package
 {
@@ -75,7 +83,7 @@ namespace Odin.CMB_Components.Package
             _showingModal = true;
 
             int _id = 0;
-
+            
             try { _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value); }
             catch { }
 

@@ -1,18 +1,23 @@
-﻿using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using Odin.Planning.Controls;
-using Odin.Register;
-using Odin.Tools;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using WeifenLuo.WinFormsUI.Docking;
+using Odin.Global_Classes;
+using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using ComponentFactory.Krypton.Workspace;
+using ComponentFactory.Krypton.Toolkit;
+using System.Threading;
+using System.Data.SqlClient;
+using Odin.Tools;
+using Odin.Register;
+using Odin.Planning.Controls;
 
 namespace Odin.Workshop
 {
@@ -21,7 +26,7 @@ namespace Odin.Workshop
         public frm_Processing()
         {
             InitializeComponent();
-            ED = new ExportData(this.gv_List, "ProcessingDets.xls", this.Name);
+            ED = new ExportData(this.gv_List, "ProcessingDets.xls",this.Name);
         }
 
         #region Variables
@@ -47,11 +52,21 @@ namespace Odin.Workshop
         {
             get
             {
-                return chk_Active.CheckState == CheckState.Checked ? -1 : chk_Active.CheckState == CheckState.Unchecked ? 0 : 1;
+                if (chk_Active.CheckState == CheckState.Checked)
+                    return -1;
+                else if (chk_Active.CheckState == CheckState.Unchecked)
+                    return 0;
+                else
+                    return 1;
             }
             set
             {
-                chk_Active.CheckState = value == -1 ? CheckState.Checked : value == 0 ? CheckState.Unchecked : CheckState.Indeterminate;
+                if (value == -1)
+                    chk_Active.CheckState = CheckState.Checked;
+                else if (value == 0)
+                    chk_Active.CheckState = CheckState.Unchecked;
+                else
+                    chk_Active.CheckState = CheckState.Indeterminate;
             }
         }
 
@@ -59,11 +74,21 @@ namespace Odin.Workshop
         {
             get
             {
-                return chk_Processing.CheckState == CheckState.Checked ? -1 : chk_Processing.CheckState == CheckState.Unchecked ? 0 : 1;
+                if (chk_Processing.CheckState == CheckState.Checked)
+                    return -1;
+                else if (chk_Processing.CheckState == CheckState.Unchecked)
+                    return 0;
+                else
+                    return 1;
             }
             set
             {
-                chk_Processing.CheckState = value == -1 ? CheckState.Checked : value == 0 ? CheckState.Unchecked : CheckState.Indeterminate;
+                if (value == -1)
+                    chk_Processing.CheckState = CheckState.Checked;
+                else if (value == 0)
+                    chk_Processing.CheckState = CheckState.Unchecked;
+                else
+                    chk_Processing.CheckState = CheckState.Indeterminate;
             }
         }
 
@@ -71,7 +96,7 @@ namespace Odin.Workshop
         public int BatchId
         {
             get { return _batchid; }
-            set { _batchid = value; }
+            set { _batchid = value;}
         }
 
         public int _PrevId = 0;
@@ -91,27 +116,28 @@ namespace Odin.Workshop
 
         public string FilterProcessing
         {
-            get
-            {
-                return Processing == -1
-                    ? "(Convert(SMT, 'System.String') <> '0' OR " +
+            get {
+                if (Processing == -1)
+                    return "(Convert(SMT, 'System.String') <> '0' OR " +
                             "Convert(QC_SMT, 'System.String') <> '0' OR " +
                             "Convert(THT, 'System.String') <> '0' OR " +
                             "Convert(QC_THT, 'System.String') <> '0' OR " +
                             "Convert(FTA, 'System.String') <> '0' OR " +
                             "Convert(FQC, 'System.String') <> '0' OR " +
                             "Convert(IPA, 'System.String') <> '0' OR " +
-                            "Convert(FCS, 'System.String') <> '0')"
-                    : Processing == 0
-                    ? "NOT(Convert(SMT, 'System.String') <> '0' OR " +
+                            "Convert(FCS, 'System.String') <> '0')";
+                else if
+                   (Processing == 0)
+                    return "NOT(Convert(SMT, 'System.String') <> '0' OR " +
                             "Convert(QC_SMT, 'System.String') <> '0' OR " +
                             "Convert(THT, 'System.String') <> '0' OR " +
                             "Convert(QC_THT, 'System.String') <> '0' OR " +
                             "Convert(FTA, 'System.String') <> '0' OR " +
                             "Convert(FQC, 'System.String') <> '0' OR " +
                             "Convert(IPA, 'System.String') <> '0' OR " +
-                            "Convert(FCS, 'System.String') <> '0')"
-                    : "'A' = 'A'";
+                            "Convert(FCS, 'System.String') <> '0')";
+                else
+                    return "'A' = 'A'";
             }
         }
 
@@ -165,9 +191,9 @@ namespace Odin.Workshop
             cmb_Articles1.ArticleId = 0;
             cmb_Articles1.Article = "";
             txt_FirmArt.Text = string.Empty;
-            txt_StartFrom.Value = null;
-            txt_StartTill.Value = null;
-            txt_EndFrom.Value = null;
+            txt_StartFrom.Value = null; 
+            txt_StartTill.Value = null; 
+            txt_EndFrom.Value = null; 
             txt_EndTill.Value = null;
             txt_CustOrder.Text = string.Empty;
             StageId = 0;
@@ -188,7 +214,7 @@ namespace Odin.Workshop
                     || Convert.ToDouble(row.Cells["cn_IPA"].Value) > 0
                     || Convert.ToDouble(row.Cells["cn_FCS"].Value) > 0)
                     foreach (DataGridViewCell cell in row.Cells)
-                        cell.Style.BackColor = Color.FromArgb(192, 255, 192);
+                        cell.Style.BackColor = Color.FromArgb(192, 255, 192);    
                 if (Convert.ToDouble(row.Cells["cn_FCS"].Value) >= Convert.ToDouble(row.Cells["cn_qty"].Value)
                     || Convert.ToInt32(row.Cells["chk_isactive"].Value) == 0)
                     foreach (DataGridViewCell cell in row.Cells)
@@ -199,7 +225,7 @@ namespace Odin.Workshop
                     row.Cells["cn_batch"].Style.BackColor = Color.Orange;
                 }
             }
-
+                        
         }
 
         private bool CheckOldRow()
@@ -274,7 +300,7 @@ namespace Odin.Workshop
 
             ctlProcHis.cmb_Batches1.BatchId = _batchid;
             ControlWidth = ctlProcHis.Width;
-
+          
             //ctlGen.CheckEmpty();
 
 
@@ -309,7 +335,7 @@ namespace Odin.Workshop
             bs_List.RemoveFilter();
 
             var data = Processing_BLL.getStages(cmb_Batches1.BatchId, cmb_Articles1.ArticleId, StageId, cmb_SalesOrdersWithLines1.SalesOrderLineId, IsActive,
-                                            cmb_Types1.TypeId, cmb_Department1.DeptId, txt_FirmArt.Text, txt_CustOrder.Text,
+                                            cmb_Types1.TypeId, cmb_Department1.DeptId, txt_FirmArt.Text, txt_CustOrder.Text, 
                                             txt_StartFrom.Value == null ? "" : txt_StartFrom.Value.ToString().Trim(),
                                             txt_StartTill.Value == null ? "" : txt_StartTill.Value.ToString().Trim(),
                                             txt_EndFrom.Value == null ? "" : txt_EndFrom.Value.ToString().Trim(),
@@ -457,13 +483,20 @@ namespace Odin.Workshop
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? String.IsNullOrEmpty(CellValue) == true
-                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
-                    : String.IsNullOrEmpty(CellValue) == true
-                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -477,9 +510,10 @@ namespace Odin.Workshop
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
-                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
+                else
+                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
@@ -561,7 +595,7 @@ namespace Odin.Workshop
 
         private void frm_Processing_Resize(object sender, EventArgs e)
         {
-
+           
             if (_Main.WindowState == FormWindowState.Maximized
                 /*|| _Main.WindowState == FormWindowState.Normal*/)
             {
@@ -719,11 +753,9 @@ namespace Odin.Workshop
         {
             int _batchid = 0;
             string _batch = "";
-            try
-            {
-                _batchid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
+            try { _batchid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
                 _batch = gv_List.CurrentRow.Cells["cn_batch"].Value.ToString();
-            }
+           }
             catch { }
 
             if (_batchid != 0)

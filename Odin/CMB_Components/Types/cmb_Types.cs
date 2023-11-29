@@ -1,22 +1,26 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
+using System.ComponentModel;
 using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
+using System.Data.SqlClient;
+using ComponentFactory.Krypton.Toolkit;
 
 namespace Odin.CMB_Components.Types
 {
     public delegate void TypesEventHandler(object sender);
     public delegate void TypesPathEventHandler(object sender);
-
+    
     public partial class cmb_Types : UserControl
     {
         public event TypesEventHandler SelectedValueChanged;
         public event TypesPathEventHandler PathChanged;
-
+        
 
         #region Variables
 
@@ -35,7 +39,7 @@ namespace Odin.CMB_Components.Types
         public string Path
         {
             get { return _Path; }
-            set { _Path = value; }
+            set{ _Path = value; }
         }
 
         public string TypeLat
@@ -62,8 +66,7 @@ namespace Odin.CMB_Components.Types
         public int TypeId
         {
             get { return _TypeId; }
-            set
-            {
+            set {
                 _TypeId = value;
                 SqlConnection conn = new SqlConnection(sConnStr);
                 conn.Open();
@@ -94,7 +97,7 @@ namespace Odin.CMB_Components.Types
                 }
                 else
                 {
-                    Type = string.Empty;
+                    Type= string.Empty;
                     Path = string.Empty;
                     TypeLat = string.Empty;
                 }
@@ -140,7 +143,7 @@ namespace Odin.CMB_Components.Types
                 //    TypeLat = string.Empty;
                 //}
 
-            }
+            } 
         }
 
         private void buttonSpecAny1_Click(object sender, EventArgs e)
@@ -161,7 +164,7 @@ namespace Odin.CMB_Components.Types
 
             frm_TypesTree popup = new frm_TypesTree();
             popup.cmb_TypeOne = this;
-
+          
 
             PopupHelper.ClosePopup();
 
@@ -193,7 +196,7 @@ namespace Odin.CMB_Components.Types
             PopupHelper.ClosePopup();
 
             PopupHelper.ShowPopup(f, popup, _location);
-
+                       
             PopupHelper.PopupCancel += delegate (object _sender, PopupCancelEventArgs _e)
             {
                 if (popup.ShowingModal)
@@ -201,7 +204,7 @@ namespace Odin.CMB_Components.Types
                     _e.Cancel = true;
                 }
             };
-
+            
             popup.FillData(Type);
         }
 
@@ -249,7 +252,7 @@ namespace Odin.CMB_Components.Types
 
         private void cmb_Types_Load(object sender, EventArgs e)
         {
-            LoadTypeIDS();
+            LoadTypeIDS();  
         }
 
         public void LoadTypeIDS()
@@ -287,9 +290,9 @@ namespace Odin.CMB_Components.Types
             //tt.AutoPopDelay = 0;
             //tt.InitialDelay = 0;
             //tt.ReshowDelay = 0;
-
+           
             //tt.Show(Path, TB, 0, TB.Location.Y + 25, VisibleTime);
-
+            
         }
     }
     public class TypesEventArgs : EventArgs

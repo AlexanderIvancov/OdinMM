@@ -1,7 +1,14 @@
-﻿using Odin.Global_Classes;
-using Odin.Tools;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
+using Odin.Tools;
 
 namespace Odin.Register.Articles
 {
@@ -36,10 +43,8 @@ namespace Odin.Register.Articles
         int _artcseid = 0;
 
         public int ArtCseId
-        {
-            get { return _artcseid; }
-            set { _artcseid = value; }
-        }
+        { get { return _artcseid; }
+            set { _artcseid = value; } }
         #endregion
 
         #region Methods
@@ -76,7 +81,7 @@ namespace Odin.Register.Articles
         {
             ArtId = cmb_Articles1.ArticleId;
         }
-
+              
 
         private void btn_Add_Click(object sender, EventArgs e)
         {
@@ -119,7 +124,7 @@ namespace Odin.Register.Articles
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    Reg.EditAnalog(_id, frm.AnalogId, frm.CustomerId, frm.Comments, frm.ProductId);
+                    Reg.EditAnalog (_id, frm.AnalogId, frm.CustomerId, frm.Comments, frm.ProductId);
                     ShowDets();
                 }
             }

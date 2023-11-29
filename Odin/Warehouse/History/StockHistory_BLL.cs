@@ -1,7 +1,11 @@
-﻿using Odin.Global_Classes;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+using Odin.Global_Classes;
 
 namespace Odin.Warehouse.History
 {
@@ -80,7 +84,7 @@ namespace Odin.Warehouse.History
 
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
-
+                
         public static DataTable getStockIncomeTracing(int _idin)
         {
             string query = "sp_StockIncomeTracing";

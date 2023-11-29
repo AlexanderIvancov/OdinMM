@@ -1,12 +1,17 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using Odin.Tools;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using Odin.Tools;
+using System.Data.SqlClient;
+using Odin.Sales;
 
 namespace Odin.Sales
 {
@@ -29,7 +34,7 @@ namespace Odin.Sales
         ExportData ED;
         Helper MyHelper = new Helper();
         CO_BLL COBll = new CO_BLL();
-
+       
         public event SavePaymentEventHandler SavePayment;
 
         int _id = 0;
@@ -47,10 +52,10 @@ namespace Odin.Sales
             set
             {
                 _mode = value;
-
+              
             }
         }
-
+        
         public string Payment
         {
             get { return txt_Payment.Text; }
@@ -61,7 +66,12 @@ namespace Odin.Sales
         {
             get
             {
-                return rb_Invoice.Checked == true ? 3 : rb_Proforma.Checked == true ? 13 : 0;
+                if (rb_Invoice.Checked == true)
+                    return 3;
+                else if (rb_Proforma.Checked == true)
+                    return 13;
+                else
+                    return 0;
             }
             set
             {
@@ -142,7 +152,10 @@ namespace Odin.Sales
         {
             get
             {
-                return txt_PayDate.Value == null ? "" : txt_PayDate.Value.ToString();
+                if (txt_PayDate.Value == null)
+                    return "";
+                else
+                    return txt_PayDate.Value.ToString();
             }
             set
             {
@@ -262,7 +275,7 @@ namespace Odin.Sales
         {
             Vat = Math.Round(Summa * VatPerc / (100 + VatPerc), 2);
             SummaWVat = Math.Round(Summa - Vat, 2, MidpointRounding.AwayFromZero);
-
+            
         }
 
         private void CalcPrice()
@@ -291,8 +304,16 @@ namespace Odin.Sales
 
         public bool CheckEmpty()
         {
-            bool _res = cmb_Currency1.CurrencyId != 0
-                && cmb_Firms2.FirmId != 0;
+            bool _res = false;
+
+            if (cmb_Currency1.CurrencyId == 0
+                || cmb_Firms2.FirmId == 0
+                //|| Summa > AlreadyMapped()
+                )
+                _res = false;
+            else
+                _res = true;
+
             return _res;
         }
 
@@ -365,13 +386,20 @@ namespace Odin.Sales
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? String.IsNullOrEmpty(CellValue) == true
-                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
-                    : String.IsNullOrEmpty(CellValue) == true
-                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -384,9 +412,10 @@ namespace Odin.Sales
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
-                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
+                else
+                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
@@ -457,13 +486,13 @@ namespace Odin.Sales
             {
                 if (tmppay > 0)
                 {
-                    cocurrate = Convert.ToDouble(Helper.GetOneRecord("set dateformat dmy select dbo.fn_CurRate(" + Convert.ToInt32(row.Cells["cn_curid"].Value) + ", "
+                    cocurrate = Convert.ToDouble(Helper.GetOneRecord("set dateformat dmy select dbo.fn_CurRate(" + Convert.ToInt32(row.Cells["cn_curid"].Value) + ", " 
                         + "convert(datetime, '" + (PayDate.Trim() == "" ? System.DateTime.Now.ToShortDateString() : PayDate.Trim()) + "'))"));
 
-
+                    
                     tmpdiff = (CurId == Convert.ToInt32(row.Cells["cn_curid"].Value) ? Convert.ToDouble(row.Cells["cn_diff"].Value) :
                                         (Convert.ToInt32(row.Cells["cn_curid"].Value) != 1 ? Math.Round(Convert.ToDouble(row.Cells["cn_diff"].Value) / cocurrate, 2) :
-                                        Math.Round(CurRate == 0 ? 0 : (Convert.ToDouble(row.Cells["cn_diff"].Value) * CurRate), 2)));
+                                        Math.Round(CurRate == 0 ? 0 : (Convert.ToDouble(row.Cells["cn_diff"].Value) * CurRate), 2))) ;
 
                     if (tmpdiff > tmppay)
                     {
@@ -613,7 +642,7 @@ namespace Odin.Sales
                 ClearHeader();
 
                 gv_List.ThreadSafeCall(delegate { FillList(); });
-
+               
                 CalcPriceVat();
                 FillAutoDoc();
                 if (SavePayment != null)
@@ -633,8 +662,7 @@ namespace Odin.Sales
 
             double _alreadymapped = AlreadyMapped();
 
-            try
-            {
+            try {
 
                 cocurrate = Convert.ToDouble(Helper.GetOneRecord("set dateformat dmy select dbo.fn_CurRate(" + Convert.ToInt32(gv_List.CurrentRow.Cells["cn_curid"].Value) + ", "
                         + "convert(datetime, '" + (PayDate.Trim() == "" ? System.DateTime.Now.ToShortDateString() : PayDate.Trim()) + "'))"));
@@ -650,11 +678,12 @@ namespace Odin.Sales
                     //    gv_List.CurrentRow.Cells["cn_topay"].Value = Summa - AlreadyMapped() + Convert.ToDouble(gv_List.CurrentRow.Cells["cn_topay"].Value);
                     //else
                     //    gv_List.CurrentRow.Cells["cn_topay"].Value = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_diff"].Value);
-                    gv_List.CurrentRow.Cells["cn_topay"].Value = tmpdiff - Convert.ToDouble(gv_List.CurrentRow.Cells["cn_topay"].Value) > Summa - AlreadyMapped()
-                        ? Summa - AlreadyMapped() + Convert.ToDouble(gv_List.CurrentRow.Cells["cn_topay"].Value)
-                        : (object)tmpdiff;
+                    if (tmpdiff - Convert.ToDouble(gv_List.CurrentRow.Cells["cn_topay"].Value) > Summa - AlreadyMapped())
+                        gv_List.CurrentRow.Cells["cn_topay"].Value = Summa - AlreadyMapped() + Convert.ToDouble(gv_List.CurrentRow.Cells["cn_topay"].Value);
+                    else
+                        gv_List.CurrentRow.Cells["cn_topay"].Value = tmpdiff;
                 }
-
+                
 
             }
             catch { }
@@ -680,9 +709,10 @@ namespace Odin.Sales
                                                 (Convert.ToInt32(row.Cells["cn_curid"].Value) != 1 ? Math.Round(Convert.ToDouble(row.Cells["cn_diff"].Value) / cocurrate, 2) :
                                                 Math.Round(CurRate == 0 ? 0 : (Convert.ToDouble(row.Cells["cn_diff"].Value) * CurRate), 2)));
 
-                            row.Cells["cn_topay"].Value = tmpdiff - Convert.ToDouble(row.Cells["cn_topay"].Value) > Summa - AlreadyMapped()
-                                ? Summa - AlreadyMapped() + Convert.ToDouble(row.Cells["cn_topay"].Value)
-                                : (object)tmpdiff;
+                            if (tmpdiff - Convert.ToDouble(row.Cells["cn_topay"].Value) > Summa - AlreadyMapped())
+                                row.Cells["cn_topay"].Value = Summa - AlreadyMapped() + Convert.ToDouble(row.Cells["cn_topay"].Value);
+                            else
+                                row.Cells["cn_topay"].Value = tmpdiff;
 
                             //if (Convert.ToDouble(row.Cells["cn_diff"].Value) - Convert.ToDouble(row.Cells["cn_topay"].Value) > Summa - AlreadyMapped())
                             //   row.Cells["cn_topay"].Value = Summa - AlreadyMapped() + Convert.ToDouble(row.Cells["cn_topay"].Value);
@@ -694,7 +724,7 @@ namespace Odin.Sales
 
                     TotalMapped = AlreadyMapped();
                     //Summa = AlreadyMapped();
-
+              
                 }
 
             }
@@ -734,7 +764,10 @@ namespace Odin.Sales
             {
                 DAL.ShowCurRate(CurId, PayDate.Trim() == "" ? System.DateTime.Now.ToShortDateString() : PayDate.Trim());
                 CurRate = DAL.CurRate;
-                txt_CurRate.StateCommon.Back.Color1 = CurRate == 0 ? Color.Red : Color.White;
+                if (CurRate == 0)
+                    txt_CurRate.StateCommon.Back.Color1 = Color.Red;
+                else
+                    txt_CurRate.StateCommon.Back.Color1 = Color.White;
             });
 
             CheckEmpty();
@@ -765,13 +798,18 @@ namespace Odin.Sales
                                     Math.Round(CurRate == 0 ? 0 : (Convert.ToDouble(gv_List.CurrentRow.Cells["cn_diff"].Value) * CurRate), 2)));
                 //if (gv_List.CurrentRow.Cells["cn_topay"].Selected == true)
                 //{
-                gv_List.CurrentRow.Cells["cn_topay"].Value = Summa - AlreadyMapped() < 0
-                    ? Summa - (AlreadyMapped() - Convert.ToDouble(gv_List.CurrentRow.Cells["cn_topay"].Value)) > tmpdiff ?
+                if (Summa - AlreadyMapped() < 0)
+                {
+                    gv_List.CurrentRow.Cells["cn_topay"].Value = Summa - (AlreadyMapped() - Convert.ToDouble(gv_List.CurrentRow.Cells["cn_topay"].Value)) > tmpdiff ?
                                          tmpdiff :
-                                         Summa - (AlreadyMapped() - Convert.ToDouble(gv_List.CurrentRow.Cells["cn_topay"].Value))
-                    : (object)(Convert.ToDouble(gv_List.CurrentRow.Cells["cn_topay"].Value) > tmpdiff ?
+                                         Summa - (AlreadyMapped() - Convert.ToDouble(gv_List.CurrentRow.Cells["cn_topay"].Value));
+                }
+                else
+                { 
+                    gv_List.CurrentRow.Cells["cn_topay"].Value = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_topay"].Value) > tmpdiff ?
                                         tmpdiff :
-                                        Convert.ToDouble(gv_List.CurrentRow.Cells["cn_topay"].Value));
+                                        Convert.ToDouble( gv_List.CurrentRow.Cells["cn_topay"].Value);
+                }
 
             }
             catch { }
@@ -780,7 +818,7 @@ namespace Odin.Sales
 
         private void gv_List_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-
+            
         }
 
         private void buttonSpecAny1_Click(object sender, EventArgs e)

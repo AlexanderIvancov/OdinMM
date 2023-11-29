@@ -1,13 +1,21 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.CMB_Components.BLL;
-using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
+using Odin.CMB_Components.BLL;
 namespace Odin.CMB_Components.Units
 {
     public partial class frm_Units : KryptonForm
     {
-
+        
 
 
         public frm_Units()
@@ -24,7 +32,7 @@ namespace Odin.CMB_Components.Units
             cmb = f;
         }
 
-
+        
 
         class_Global glob_Class = new class_Global();
         CMB_BLL Bll = new CMB_BLL();
@@ -36,8 +44,8 @@ namespace Odin.CMB_Components.Units
             get { return _showingModal; }
             set { _showingModal = value; }
         }
-
-
+       
+                
         public void ChangeCMBElements()
         {
             try
@@ -135,5 +143,5 @@ namespace Odin.CMB_Components.Units
             this.Close();
         }
     }
-
+   
 }

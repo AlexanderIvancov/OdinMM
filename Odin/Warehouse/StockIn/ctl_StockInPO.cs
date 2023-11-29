@@ -1,6 +1,13 @@
-﻿using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
 
 
 namespace Odin.Warehouse.StockIn
@@ -20,7 +27,7 @@ namespace Odin.Warehouse.StockIn
 
         public int IdIn
         {
-            get; set;
+            get;set;
         }
 
         public int ArtId
@@ -71,17 +78,15 @@ namespace Odin.Warehouse.StockIn
                 SIBll.AddStockPOLink(frm.PurchaseOrderLineId, IdIn, frm.Qty);
                 FillPOs(IdIn);
             }
-
+            
         }
-
+        
         private void btn_Delete_Click(object sender, EventArgs e)
         {
             int _id = 0;
             int _poid = 0;
 
-            try
-            {
-                _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
+            try { _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
                 _poid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_poid"].Value);
             }
             catch { }

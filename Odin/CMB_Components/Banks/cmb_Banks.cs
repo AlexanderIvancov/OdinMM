@@ -1,15 +1,20 @@
-﻿using Odin.Global_Classes;
-using System;
-using System.Data;
-using System.Data.SqlClient;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
+using System.Data.SqlClient;
 
 
 namespace Odin.CMB_Components.Banks
 {
     public delegate void BankEventHandler(object sender);
-
+    
     public partial class cmb_Banks : UserControl
     {
         public event BankEventHandler BankChanged;
@@ -31,7 +36,10 @@ namespace Odin.CMB_Components.Banks
             set
             {
                 _isemptycolor = value;
-                txt_Bank.StateCommon.Back.Color1 = value == true ? Color.LightPink : Color.White;
+                if (value == true)
+                    txt_Bank.StateCommon.Back.Color1 = Color.LightPink;
+                else
+                    txt_Bank.StateCommon.Back.Color1 = Color.White;
             }
         }
 

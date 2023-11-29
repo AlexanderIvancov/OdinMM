@@ -1,14 +1,18 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using Odin.Tools;
-using Odin.Warehouse.StockOut.Reports;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
+using Odin.Tools;
+using System.Data.SqlClient;
+using Odin.Warehouse.StockOut.Reports;
 
 namespace Odin.Planning
 {
@@ -31,7 +35,7 @@ namespace Odin.Planning
         AdmMenu mMenu = new AdmMenu();
         DAL_Functions DAL = new DAL_Functions();
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
-
+       
         int _id = 0;
         public int LaunchId
         {
@@ -85,13 +89,13 @@ namespace Odin.Planning
 
         }
 
-
+        
         public void FillList(int _stageid)
         {
             ds_List.Clear();
 
             var data = Plan_BLL.getGroupLaunchesTot(_stageid);
-
+                                    
             foreach (DataRow row in data.Rows)
             {
                 DataRow row1 = dt_List.NewRow();
@@ -237,13 +241,20 @@ namespace Odin.Planning
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? String.IsNullOrEmpty(CellValue) == true
-                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
-                    : String.IsNullOrEmpty(CellValue) == true
-                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -254,9 +265,10 @@ namespace Odin.Planning
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
-                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
+                else
+                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
 
@@ -300,15 +312,15 @@ namespace Odin.Planning
 
         private void btn_Save_Click(object sender, EventArgs e)
         {
-
-
+            
+           
         }
-
+        
         private void frm_LaunchRMReservation_Load(object sender, EventArgs e)
         {
             LoadColumns(gv_List);
         }
-
+        
         private void gv_List_SelectionChanged(object sender, EventArgs e)
         {
             //int _launchdetid = 0;
@@ -321,7 +333,7 @@ namespace Odin.Planning
         }
 
         #endregion
-
+               
         private void btn_Refresh_Click(object sender, EventArgs e)
         {
             FillList(1);
@@ -333,7 +345,7 @@ namespace Odin.Planning
             gv_List.EndEdit();
 
             int _id = 0;
-
+                    
             try { _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value); }
             catch { }
 
@@ -364,7 +376,7 @@ namespace Odin.Planning
             gv_Group.EndEdit();
 
             int _id = 0;
-
+            
             try { _id = Convert.ToInt32(gv_Group.CurrentRow.Cells["cn_gid"].Value); }
             catch { }
 
@@ -401,7 +413,7 @@ namespace Odin.Planning
 
                 DataTable datalaunches = new DataTable();
                 datalaunches.Columns.Add("id", typeof(int));
-
+                
                 foreach (DataRow row in dt_List.Rows)
                 {
                     if (row["groupname"].ToString().Trim() != "")
@@ -428,8 +440,8 @@ namespace Odin.Planning
                 LaunchGroupName = res;
 
                 gv_List.ThreadSafeCall(delegate { FillList(1); });
-                gv_Group.ThreadSafeCall(delegate { FillGroup(cmb_LaunchGroups1.LaunchGroup); });
-
+                gv_Group.ThreadSafeCall(delegate { FillGroup(cmb_LaunchGroups1.LaunchGroup); }) ;
+            
             }
         }
 
@@ -446,7 +458,7 @@ namespace Odin.Planning
             frm.RepType = 6;
             frm.MoveDate = System.DateTime.Today.ToShortDateString();
             frm.GroupName = LaunchGroupName;
-
+           
             frm.Show();
         }
 
@@ -464,7 +476,7 @@ namespace Odin.Planning
         {
 
             string _groupname = LaunchGroupName;
-
+            
 
             if (_groupname != "")
             {

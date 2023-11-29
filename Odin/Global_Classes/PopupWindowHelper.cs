@@ -1,7 +1,10 @@
 ﻿using System;
-using System.Drawing;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Diagnostics;
 using System.Windows.Forms;
+using System.Drawing;
+using System.Text;
 
 namespace Odin.Global_Classes
 {
@@ -130,17 +133,17 @@ namespace Odin.Global_Classes
     {
         #region Unmanaged Code
         [DllImport("user32", CharSet = CharSet.Auto)]
-        private static extern int SendMessage(IntPtr handle, int msg, int wParam, IntPtr lParam);
+        private extern static int SendMessage(IntPtr handle, int msg, int wParam, IntPtr lParam);
 
         [DllImport("user32", CharSet = CharSet.Auto)]
-        private static extern int PostMessage(IntPtr handle, int msg, int wParam, IntPtr lParam);
+        private extern static int PostMessage(IntPtr handle, int msg, int wParam, IntPtr lParam);
 
         private const int WM_ACTIVATE = 0x006;
         private const int WM_ACTIVATEAPP = 0x01C;
         private const int WM_NCACTIVATE = 0x086;
 
         [DllImport("user32")]
-        private static extern void keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);
+        private extern static void keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);
 
         private const int KEYEVENTF_KEYUP = 0x0002;
         #endregion

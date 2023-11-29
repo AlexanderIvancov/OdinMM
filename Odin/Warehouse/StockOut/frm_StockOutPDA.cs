@@ -1,19 +1,24 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using CrystalDecisions.CrystalReports.Engine;
-using Odin.CMB_Components.BLL;
-using Odin.CustomControls;
-using Odin.Global_Classes;
-using Odin.Warehouse.Requests;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
-using System.Threading;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
+using Odin.Tools;
+using System.Data.SqlClient;
+using System.Threading;
+using Odin.Warehouse.Requests;
+using Odin.Warehouse.Movements;
+using Odin.CustomControls;
+using Odin.Planning;
+using CrystalDecisions.CrystalReports.Engine;
+using Odin.CMB_Components.BLL;
 
 namespace Odin.Warehouse.StockOut
 {
@@ -102,10 +107,12 @@ namespace Odin.Warehouse.StockOut
                 e.KeyChar = System.Threading.Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
                 e.Handled = s.Text.Contains(e.KeyChar);
             }
-            else
+            else if (e.KeyChar == '-')
             {
-                e.Handled = e.KeyChar == '-' ? s.Text.Contains(e.KeyChar) : !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar);
+                e.Handled = s.Text.Contains(e.KeyChar);
             }
+            else
+                e.Handled = !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar);
         }
 
         public bool CheckSave()
@@ -131,7 +138,7 @@ namespace Odin.Warehouse.StockOut
         }
 
         public void InsertRow(int artid, string article, int label, double qty, string unit, string labelbatch, int labelbdetid,
-                            int placeid, string place, string comments, string datacode, string expdate, int reqbdetid, string reqbatch,
+                            int placeid, string place, string comments, string datacode, string expdate, int reqbdetid, string reqbatch, 
                             int reqid, double qtyreq)
         {
             //dobavlaem index
@@ -142,7 +149,7 @@ namespace Odin.Warehouse.StockOut
             }
             catch { }
             _tmpindex++;
-
+                       
 
             gv_List.Rows.Add(_tmpindex,
                              artid,
@@ -178,9 +185,10 @@ namespace Odin.Warehouse.StockOut
                 _label = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_label"].Value);
             }
             catch { }
-            txt_Documents.Text = _artid == labelcontent
-                ? "Check result for label " + _label.ToString() + " is OK! " + System.Environment.NewLine + txt_Documents.Text
-                : "Check result for label " + _label.ToString() + " not OK! Content is: " + labelcontent + "!" + System.Environment.NewLine + txt_Documents.Text;
+            if (_artid == labelcontent)
+                txt_Documents.Text = "Check result for label " + _label.ToString() + " is OK! " + System.Environment.NewLine + txt_Documents.Text;
+            else
+                txt_Documents.Text = "Check result for label " + _label.ToString() + " not OK! Content is: " + labelcontent + "!" + System.Environment.NewLine + txt_Documents.Text;
             chk_CheckLabel.CheckState = CheckState.Unchecked;
             chk_CheckLabel.BackColor = Color.LightGreen;
         }
@@ -209,7 +217,7 @@ namespace Odin.Warehouse.StockOut
             {
                 if (//Net rekvesta
                     Convert.ToInt32(row.Cells["cn_reqid"].Value) == 0
-                    ||
+                    || 
                     (Convert.ToInt32(row.Cells["cn_reqid"].Value) != 0
                         && Convert.ToInt32(row.Cells["cn_reqbdetid"].Value) != Convert.ToInt32(row.Cells["cn_labelbdetid"].Value)
                         && Convert.ToInt32(row.Cells["cn_labelbdetid"].Value) != 0))
@@ -330,7 +338,10 @@ namespace Odin.Warehouse.StockOut
                 }
             }
 
-            _res = _qtytemp <= qty;
+            if (_qtytemp > qty)
+                _res = false;
+            else
+                _res = true;
 
             return _res;
         }
@@ -382,9 +393,13 @@ namespace Odin.Warehouse.StockOut
                     btn_OK.PerformClick();
                     e.Cancel = false;
                 }
+                else if (result1 == DialogResult.No)
+                {
+                    e.Cancel = false;
+                }
                 else
                 {
-                    e.Cancel = result1 != DialogResult.No;
+                    e.Cancel = true;
                 }
             }
         }
@@ -577,7 +592,7 @@ namespace Odin.Warehouse.StockOut
                                 {
                                     InsertRow(Convert.ToInt32(dr["artid"]), dr["article"].ToString(), ReadValue, Convert.ToDouble(dr["qty"]), dr["unit"].ToString(),
                                                 dr["labelbatch"].ToString(), Convert.ToInt32(dr["labelbdetid"]), Convert.ToInt32(dr["placeid"]), dr["place"].ToString(), dr["comments"].ToString(),
-                                                dr["datacode"].ToString(), dr["expdate"].ToString(), Convert.ToInt32(dr["reqbdetid"]), dr["requestbatch"].ToString(), Convert.ToInt32(dr["reqid"]),
+                                                dr["datacode"].ToString(), dr["expdate"].ToString(), Convert.ToInt32(dr["reqbdetid"]), dr["requestbatch"].ToString(), Convert.ToInt32(dr["reqid"]), 
                                                 Convert.ToDouble(dr["qtyreq"]));
                                 }
                                 SetCellsColor();
@@ -647,7 +662,7 @@ namespace Odin.Warehouse.StockOut
                 }
 
                 OutHeaderId = _res;
-
+               
                 string _resdoc = Helper.GetOneRecord("select name from sto_stockouthead where id = " + _res).ToString();
 
                 OutHeader = _resdoc;
@@ -655,7 +670,7 @@ namespace Odin.Warehouse.StockOut
 
                 txt_Documents.Text = _resdoc + " at " + System.DateTime.Now.ToString() + System.Environment.NewLine + txt_Documents.Text;
 
-
+                
                 //if (chk_PrintDoc.Checked == true)
                 //{
                 //    SendToPrinter(_resmove, 1);
@@ -783,7 +798,8 @@ namespace Odin.Warehouse.StockOut
 
         private void PrintMoveDoc(int outdocid, int count)
         {
-            void print()
+            Action print =
+            () =>
             {
                 using (ReportDocument rd = OpenReport())
                 {
@@ -796,7 +812,7 @@ namespace Odin.Warehouse.StockOut
                     //_report.ReportClientDocument.PrintOutputController.PrintReport(popt);
 
                 }
-            }
+            };
 
             PrintReport(count, print);
 

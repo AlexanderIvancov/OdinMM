@@ -1,7 +1,11 @@
-﻿using Odin.Global_Classes;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+using Odin.Global_Classes;
 namespace Odin.Personnel
 {
     public class Personnel_BLL
@@ -15,7 +19,7 @@ namespace Odin.Personnel
             var sqlparams = new List<SqlParameter>
             {
                 new SqlParameter("@datefrom",SqlDbType.NVarChar){Value = datefrom },
-                new SqlParameter("@datetill",SqlDbType.NVarChar){Value = datetill}
+                new SqlParameter("@datetill",SqlDbType.NVarChar){Value = datetill}                
             };
 
             return Helper.QuerySP(query, sqlparams.ToArray());

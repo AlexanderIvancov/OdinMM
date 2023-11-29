@@ -1,12 +1,16 @@
-﻿using AdvancedDataGridView;
-using Odin.Global_Classes;
-using Odin.Purchase;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Data;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
+using AdvancedDataGridView;
+using Odin.Purchase;
+using ComponentFactory.Krypton.Toolkit;
 
 namespace Odin.Planning.Controls
 {
@@ -32,11 +36,11 @@ namespace Odin.Planning.Controls
         Plan_BLL BLL = new Plan_BLL();
         DAL_Functions DLL = new DAL_Functions();
         PO_BLL POBLL = new PO_BLL();
-
+        
 
         int _articleid = 0;
-
-
+        
+        
 
         public int ArtId
         {
@@ -47,7 +51,7 @@ namespace Odin.Planning.Controls
                 FillGrid(_articleid);
                 //bwStart(bw_List);
                 //AvailableQty = DLL.AvailQty(cmb_Articles1.ArticleId);
-
+               
             }
         }
 
@@ -89,7 +93,7 @@ namespace Odin.Planning.Controls
 
             foreach (System.Data.DataRow dr in data.AsEnumerable().OrderBy(d => d.Field<string>("name")))
             {
-                AddNode(dr, boldFont, tv_POS.Nodes, true);
+               AddNode(dr, boldFont, tv_POS.Nodes, true); 
             }
 
             //tv_POS.Focus();
@@ -100,8 +104,8 @@ namespace Odin.Planning.Controls
 
                 foreach (System.Data.DataRow dr in data1.AsEnumerable().OrderBy(d => d.Field<string>("name")))
                 {
-                    AddNode(dr, boldFont, node1.Nodes, true);
-
+                   AddNode(dr, boldFont, node1.Nodes, true);
+                       
                 }
             }
 
@@ -109,7 +113,7 @@ namespace Odin.Planning.Controls
             {
                 ExpandNodes(node1);
             }
-
+            
             SetCellsColor();
         }
 
@@ -126,7 +130,7 @@ namespace Odin.Planning.Controls
         {
             TreeGridNode node;
 
-            node = nodes.Add(null, dr["name"], dr["id"], dr["article"], Convert.ToDouble(dr["qty"]), dr["unit"],
+            node = nodes.Add(null, dr["name"], dr["id"], dr["article"], Convert.ToDouble(dr["qty"]), dr["unit"], 
                             Convert.ToDouble(dr["reserved"]), Convert.ToDouble(dr["qtydelivered"]),
                             Convert.ToDouble(dr["freeqty"]), Convert.ToDateTime(dr["reqdate"]), dr["confdate"], dr["supplier"]);
 
@@ -134,7 +138,7 @@ namespace Odin.Planning.Controls
             {
                 node.ImageIndex = 1;
             }
-
+                        
         }
 
         public void bwStart(DoWorkEventHandler doWork)
@@ -182,7 +186,7 @@ namespace Odin.Planning.Controls
             }
 
         }
-
+        
         #endregion
 
         #region Controls
@@ -243,7 +247,7 @@ namespace Odin.Planning.Controls
                 frm.ctl_RMNeeds1.cmb_Articles1.ArticleId = ArtId;
                 frm.ctl_RMNeeds1.EnableSave(false);
 
-                frm.HeaderText = "Add PO resevation for: " + _porder;
+                frm.HeaderText = "Add PO resevation for: " + _porder; 
                 frm.ctl_RMNeeds1.Mode = 1;
                 frm.ctl_RMNeeds1.QtyFreeInPO = _QtyFreeInPO;
 

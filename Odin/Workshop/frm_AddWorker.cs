@@ -1,6 +1,15 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
 
 namespace Odin.Workshop
 {
@@ -26,7 +35,7 @@ namespace Odin.Workshop
             get { return txt_RFID.Text; }
             set { txt_RFID.Text = value; }
         }
-
+        
         public string Comments
         {
             get { return txt_Comments.Text; }
@@ -37,11 +46,17 @@ namespace Odin.Workshop
         {
             get
             {
-                return chk_IsActive.CheckState == CheckState.Checked ? -1 : 0;
+                if (chk_IsActive.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {
-                chk_IsActive.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+                if (value == -1)
+                    chk_IsActive.CheckState = CheckState.Checked;
+                else
+                    chk_IsActive.CheckState = CheckState.Unchecked;
             }
         }
 
@@ -49,11 +64,17 @@ namespace Odin.Workshop
         {
             get
             {
-                return chk_ismaster.CheckState == CheckState.Checked ? -1 : 0;
+                if (chk_ismaster.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {
-                chk_ismaster.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+                if (value == -1)
+                    chk_ismaster.CheckState = CheckState.Checked;
+                else
+                    chk_ismaster.CheckState = CheckState.Unchecked;
             }
         }
         public string UserTabNR
@@ -64,9 +85,12 @@ namespace Odin.Workshop
 
         public void CheckEmpty()
         {
-            btn_OK.Enabled = (String.IsNullOrEmpty(UserName) != true
-                || String.IsNullOrEmpty(UserSurName) != true)
-                && String.IsNullOrEmpty(UserTabNR) != true;
+            if ((String.IsNullOrEmpty(UserName) == true
+                && String.IsNullOrEmpty(UserSurName) == true)
+                || String.IsNullOrEmpty(UserTabNR) == true)
+                btn_OK.Enabled = false;
+            else
+                btn_OK.Enabled = true;
         }
 
         private void buttonSpecAny7_Click(object sender, EventArgs e)

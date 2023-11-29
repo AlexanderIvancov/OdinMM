@@ -1,8 +1,16 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.CMB_Components.BLL;
-using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
+using Odin.CMB_Components.BLL;
 
 namespace Odin.CMB_Components.CustCodes
 {
@@ -74,7 +82,7 @@ namespace Odin.CMB_Components.CustCodes
                 frm.Id = _id;
                 frm.CustCode = gv_List.CurrentRow.Cells["cn_custcodes"].Value.ToString();
                 frm.Description = gv_List.CurrentRow.Cells["cn_description"].Value.ToString();
-
+               
                 DialogResult result = frm.ShowDialog();
 
                 if (result == DialogResult.OK)

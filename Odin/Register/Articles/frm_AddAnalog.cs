@@ -1,5 +1,13 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
 
 namespace Odin.Register.Articles
 {
@@ -22,21 +30,17 @@ namespace Odin.Register.Articles
         { get; set; }
 
         public int AnalogId
-        {
-            get { return cmb_Articles1.ArticleId; }
-            set { cmb_Articles1.ArticleId = value; }
-        }
+        { get { return cmb_Articles1.ArticleId; }
+        set { cmb_Articles1.ArticleId = value; } }
 
         public string Comments
-        {
-            get { return txt_Comments.Text; }
-            set { txt_Comments.Text = value; }
+        { get { return txt_Comments.Text; }
+        set { txt_Comments.Text = value; }
         }
 
         public int CustomerId
-        {
-            get { return cmb_Firms1.FirmId; }
-            set { cmb_Firms1.FirmId = value; }
+        { get { return cmb_Firms1.FirmId; }
+        set { cmb_Firms1.FirmId = value; }
         }
 
         public int ProductId

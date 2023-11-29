@@ -1,10 +1,17 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.CMB_Components.BLL;
-using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
+using Odin.CMB_Components.BLL;
+using System.Data.SqlClient;
+
+using ComponentFactory.Krypton.Toolkit;
 
 namespace Odin.CMB_Components.Departments
 {
@@ -74,8 +81,7 @@ namespace Odin.CMB_Components.Departments
         public int DeptId
         {
             get { return _DeptId; }
-            set
-            {
+            set {
                 _DeptId = value;
                 SqlConnection conn = new SqlConnection(sConnStr);
                 conn.Open();
@@ -117,8 +123,7 @@ namespace Odin.CMB_Components.Departments
                 frm.ParentId = Convert.ToInt32(tv_Depts.SelectedNode.Tag);
                 frm.HeaderText = "Add department for: " + tv_Depts.SelectedNode.Text;
             }
-            catch
-            {
+            catch {
                 frm.ParentId = 0;
                 frm.HeaderText = "Add department for root";
             }
@@ -131,7 +136,7 @@ namespace Odin.CMB_Components.Departments
                 int _res = Bll.AddDepartment(frm.Department, frm.Description, frm.ParentId, frm.RespPerson);
                 Load_tree();
                 cmb_DepartmentOne.DeptId = _res;
-
+                
             }
             if (result == DialogResult.Cancel)
             {

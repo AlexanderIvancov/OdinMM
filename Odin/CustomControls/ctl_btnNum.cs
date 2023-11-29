@@ -1,10 +1,15 @@
-﻿using Odin.Global_Classes;
-using Odin.Tools;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+using Odin.Tools;
+using Odin.Global_Classes;
 namespace Odin.CustomControls
 {
     public partial class ctl_btnNum : UserControl
@@ -19,7 +24,7 @@ namespace Odin.CustomControls
         Image _IconPath = global::Odin.Global_Resourses.Decline_32;
         public string strRunQuery
         {
-            get; set;
+            get;set;
         }
         public string FormText
         { get; set; }
@@ -48,7 +53,7 @@ namespace Odin.CustomControls
         //string _GetCountQuery = "select 0";
         public string GetCountQuery
         {
-            get; set;
+            get;set;
         }
         #endregion
 

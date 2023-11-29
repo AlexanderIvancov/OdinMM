@@ -1,12 +1,16 @@
-﻿using Odin.Global_Classes;
-using Odin.Tools;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using Odin.Tools;
+using System.Data.SqlClient;
 
 namespace Odin.Planning
 {
@@ -48,7 +52,7 @@ namespace Odin.Planning
 
         public double _NSMT
         {
-            get; set;
+            get;set;        
         }
         public double _NTHT
         {
@@ -85,8 +89,7 @@ namespace Odin.Planning
 
         public double NSMT
         {
-            get
-            {
+            get {
                 try { return Convert.ToDouble(txt_NSMT.Text); }
                 catch { return 0; }
             }
@@ -257,7 +260,7 @@ namespace Odin.Planning
             {
                 if (Convert.ToDouble(row.Cells["cn_diff"].Value) < 0)
                     foreach (DataGridViewCell cell in row.Cells)
-                        cell.Style.BackColor = Color.LightCoral;
+                        cell.Style.BackColor = Color.LightCoral;              
             }
 
             //foreach (DataGridViewRow row in this.gv_List.Rows)
@@ -340,7 +343,7 @@ namespace Odin.Planning
             {
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
-
+                
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = datapr;
                 gv_List.DataSource = bs_List;
@@ -411,7 +414,7 @@ namespace Odin.Planning
                     case 1:
                         NSMT = Convert.ToDouble(row["stagetime"]);
                         _NSMT = Convert.ToDouble(row["stagetime"]);
-                        break;
+                        break;    
                     case 2:
                         NTHT = Convert.ToDouble(row["stagetime"]);
                         _NTHT = Convert.ToDouble(row["stagetime"]);
@@ -550,9 +553,30 @@ namespace Odin.Planning
             {
                 _missed = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_missed"].Value);
 
-                bs_List.Filter = _missed > 0
-                    ? String.IsNullOrEmpty(bs_List.Filter) == true ? "missed > 0 " : bs_List.Filter + " AND missed > 0"
-                    : String.IsNullOrEmpty(bs_List.Filter) == true ? "missed <= 0 " : bs_List.Filter + " AND missed <= 0";
+                if (_missed > 0)
+                {
+
+                    if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                    {
+                        bs_List.Filter = "missed > 0 ";
+                    }
+                    else
+                    {
+                        bs_List.Filter = bs_List.Filter + " AND missed > 0";
+
+                    }
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                    {
+                        bs_List.Filter = "missed <= 0 ";
+                    }
+                    else
+                    {
+                        bs_List.Filter = bs_List.Filter + " AND missed <= 0";
+                    }
+                }
 
             }
             catch { }
@@ -584,13 +608,20 @@ namespace Odin.Planning
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? String.IsNullOrEmpty(CellValue) == true
-                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
-                    : String.IsNullOrEmpty(CellValue) == true
-                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -603,9 +634,10 @@ namespace Odin.Planning
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
-                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
+                else
+                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
@@ -677,7 +709,7 @@ namespace Odin.Planning
                 return;
             }
         }
-
+                
 
         private void mni_FilterForP_TextChanged(object sender, EventArgs e)
         {
@@ -704,13 +736,20 @@ namespace Odin.Planning
         {
             try
             {
-                bs_Planned.Filter = String.IsNullOrEmpty(bs_Planned.Filter) == true
-                    ? String.IsNullOrEmpty(CellValueP) == true
-                        ? "(" + ColumnNameP + " is null OR Convert(" + ColumnNameP + ", 'System.String') = '')"
-                        : "Convert(" + ColumnNameP + " , 'System.String') = '" + glob_Class.NES(CellValueP) + "'"
-                    : String.IsNullOrEmpty(CellValue) == true
-                        ? bs_Planned.Filter + "AND (" + ColumnNameP + " is null OR Convert(" + ColumnNameP + ", 'System.String') = '')"
-                        : bs_Planned.Filter + " AND Convert(" + ColumnNameP + " , 'System.String') = '" + glob_Class.NES(CellValueP) + "'";
+                if (String.IsNullOrEmpty(bs_Planned.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(CellValueP) == true)
+                        bs_Planned.Filter = "(" + ColumnNameP + " is null OR Convert(" + ColumnNameP + ", 'System.String') = '')";
+                    else
+                        bs_Planned.Filter = "Convert(" + ColumnNameP + " , 'System.String') = '" + glob_Class.NES(CellValueP) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_Planned.Filter = bs_Planned.Filter + "AND (" + ColumnNameP + " is null OR Convert(" + ColumnNameP + ", 'System.String') = '')";
+                    else
+                        bs_Planned.Filter = bs_Planned.Filter + " AND Convert(" + ColumnNameP + " , 'System.String') = '" + glob_Class.NES(CellValueP) + "'";
+                }
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -723,9 +762,10 @@ namespace Odin.Planning
         {
             try
             {
-                bs_Planned.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? "Convert(" + ColumnNameP + " , 'System.String') <> '" + CellValueP + "'"
-                    : bs_Planned.Filter + " AND " + ColumnNameP + " <> '" + CellValueP + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                    bs_Planned.Filter = "Convert(" + ColumnNameP + " , 'System.String') <> '" + CellValueP + "'";
+                else
+                    bs_Planned.Filter = bs_Planned.Filter + " AND " + ColumnNameP + " <> '" + CellValueP + "'";
             }
             catch { }
             SetCellsColor();
@@ -787,8 +827,7 @@ namespace Odin.Planning
             int _batchid = 0;
             string _week = "";
             double _qty = 0;
-            try
-            {
+            try {
                 _batchid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_batchid"].Value);
                 _week = gv_List.CurrentRow.Cells["cn_week"].Value.ToString();
                 _qty = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_canproduce"].Value);
@@ -818,11 +857,11 @@ namespace Odin.Planning
         {
             int _batchid = 0;
             string _week = "";
-
+           
             try
             {
                 _batchid = Convert.ToInt32(gv_Planned.CurrentRow.Cells["cn_pbatchid"].Value);
-                _week = gv_Planned.CurrentRow.Cells["cn_pweekoper"].Value.ToString();
+                _week = gv_Planned.CurrentRow.Cells["cn_pweekoper"].Value.ToString();                
             }
             catch { }
 
@@ -830,10 +869,10 @@ namespace Odin.Planning
                 && glob_Class.MessageConfirm("Deleting confirmation", "Are you sure you want to delete planned qty?") == true
                 )
             {
-
-                PlanBll.DeleteBatchPlanning(_batchid, _week);
-                bwStart(bw_List);
-
+                
+                    PlanBll.DeleteBatchPlanning(_batchid, _week);
+                    bwStart(bw_List);
+                
             }
         }
 

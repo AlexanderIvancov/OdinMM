@@ -1,7 +1,15 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using Odin.CMB_Components.BLL;
 
 namespace Odin.CMB_Components.IncomeDocs
 {
@@ -18,10 +26,8 @@ namespace Odin.CMB_Components.IncomeDocs
         #region Variables
         int _id = 0;
         public int Id
-        {
-            get { return _id; }
-            set { _id = value; }
-        }
+        { get { return _id; }
+            set { _id = value; } }
 
         public string HeaderText
         {
@@ -46,7 +52,7 @@ namespace Odin.CMB_Components.IncomeDocs
             get { return cmb_Firms1.FirmId; }
             set { cmb_Firms1.FirmId = value; }
         }
-
+              
         public string Serie
         {
             get { return txt_Serie.Text; }
@@ -68,11 +74,8 @@ namespace Odin.CMB_Components.IncomeDocs
 
         public double CurRate
         {
-            get
-            {
-                try { return Convert.ToDouble(txt_CurRate.Text); }
-                catch { return 1; }
-            }
+            get { try { return Convert.ToDouble(txt_CurRate.Text); }
+                catch { return 1; } }
             set { txt_CurRate.Text = value.ToString(); }
         }
 
@@ -80,7 +83,10 @@ namespace Odin.CMB_Components.IncomeDocs
         {
             get
             {
-                return txt_RegDate.Value == null ? "" : txt_RegDate.Value.ToString();
+                if (txt_RegDate.Value == null)
+                    return "";
+                else
+                    return txt_RegDate.Value.ToString();
             }
             set
             {
@@ -128,13 +134,12 @@ namespace Odin.CMB_Components.IncomeDocs
 
         public double AdditCost
         {
-            get
-            {
+            get {
                 try { return Convert.ToDouble(txt_AdditCost.Text); }
                 catch { return 0; }
             }
-            set { txt_AdditCost.Text = value.ToString(); }
-
+            set{ txt_AdditCost.Text = value.ToString(); }
+            
         }
 
         public double Advance
@@ -152,7 +157,10 @@ namespace Odin.CMB_Components.IncomeDocs
         {
             get
             {
-                return txt_AdvanceDate.Value == null ? "" : txt_AdvanceDate.Value.ToString();
+                if (txt_AdvanceDate.Value == null)
+                    return "";
+                else
+                    return txt_AdvanceDate.Value.ToString();
             }
             set
             {
@@ -167,7 +175,10 @@ namespace Odin.CMB_Components.IncomeDocs
         {
             get
             {
-                return txt_PayDate.Value == null ? "" : txt_PayDate.Value.ToString();
+                if (txt_PayDate.Value == null)
+                    return "";
+                else
+                    return txt_PayDate.Value.ToString();
             }
             set
             {
@@ -187,13 +198,16 @@ namespace Odin.CMB_Components.IncomeDocs
 
         public int NoReversePVN
         {
-            get
-            {
-                return chk_noreversepvn.Checked == true ? -1 : 0;
+            get {
+                if (chk_noreversepvn.Checked == true)
+                    return -1;
+                else
+                    return 0;
             }
-            set
-            {
-                chk_noreversepvn.Checked = value == -1;
+            set { if (value == -1)
+                    chk_noreversepvn.Checked = true;
+                else
+                    chk_noreversepvn.Checked = false;
             }
         }
         public double MediatedCost
@@ -211,11 +225,17 @@ namespace Odin.CMB_Components.IncomeDocs
         {
             get
             {
-                return chk_Check.Checked == true ? -1 : 0;
+                if (chk_Check.Checked == true)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {
-                chk_Check.Checked = value == -1;
+                if (value == -1)
+                    chk_Check.Checked = true;
+                else
+                    chk_Check.Checked = false;
             }
         }
 
@@ -248,14 +268,23 @@ namespace Odin.CMB_Components.IncomeDocs
 
         public void CheckEmpty()
         {
-            btn_OK.ThreadSafeCall(delegate
-            {
-                btn_OK.Enabled = IncomeDoc != ""
-                    && string.IsNullOrEmpty(IncomeDoc) != true
-                    && SupId != 0
-                    && CurId != 0
-                    && CurRate != 0;
-                txt_IncomeDoc.StateCommon.Back.Color1 = DLL.CheckIncomeDocSameName(Id, IncomeDoc) != 0 ? Color.LightPink : Color.White;
+            btn_OK.ThreadSafeCall(delegate {
+                if (IncomeDoc == ""
+                    || string.IsNullOrEmpty(IncomeDoc) == true
+                    || SupId == 0
+                    || CurId == 0
+                    || CurRate == 0)
+                {
+                    btn_OK.Enabled = false;
+                }
+                else
+                {
+                    btn_OK.Enabled = true;
+                }
+                if (DLL.CheckIncomeDocSameName(Id, IncomeDoc) != 0)
+                    txt_IncomeDoc.StateCommon.Back.Color1 = Color.LightPink;
+                else
+                    txt_IncomeDoc.StateCommon.Back.Color1 = Color.White;
             });
         }
 
@@ -300,7 +329,10 @@ namespace Odin.CMB_Components.IncomeDocs
             {
                 DLL.ShowCurRate(CurId, RegDate.Trim() == "" ? System.DateTime.Now.ToShortDateString() : RegDate.Trim());
                 CurRate = DLL.CurRate;
-                txt_CurRate.StateCommon.Back.Color1 = CurRate == 0 ? Color.Red : Color.White;
+                if (CurRate == 0)
+                    txt_CurRate.StateCommon.Back.Color1 = Color.Red;
+                else
+                    txt_CurRate.StateCommon.Back.Color1 = Color.White;
             });
 
             CheckEmpty();
@@ -334,7 +366,7 @@ namespace Odin.CMB_Components.IncomeDocs
 
         private void frm_AddIncomeDoc_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void buttonSpecAny7_Click(object sender, EventArgs e)
@@ -357,7 +389,7 @@ namespace Odin.CMB_Components.IncomeDocs
 
         private void txt_DocDate_ValueChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         private void txt_RegDate_ValueChanged(object sender, EventArgs e)

@@ -1,8 +1,14 @@
-﻿using Odin.CMB_Components.BLL;
-using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
+using Odin.CMB_Components.BLL;
 
 namespace Odin.CMB_Components.LabPrinters
 {
@@ -102,7 +108,7 @@ namespace Odin.CMB_Components.LabPrinters
 
         private void cmb_LabPrinter_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         public void ShowDefaults()

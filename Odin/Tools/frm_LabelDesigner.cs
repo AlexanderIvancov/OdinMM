@@ -1,7 +1,15 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
 
 namespace Odin.Tools
 {
@@ -90,7 +98,7 @@ namespace Odin.Tools
         {
             txt_LabelText.Text = string.Empty;
         }
-
+        
         private void btn_Print_Click(object sender, EventArgs e)
         {
             frm_Print popup = new frm_Print();

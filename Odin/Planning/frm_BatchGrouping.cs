@@ -1,12 +1,18 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using Odin.Tools;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
+using Odin.Tools;
+using System.Data.SqlClient;
+using Odin.Warehouse.StockOut.Reports;
 
 namespace Odin.Planning
 {
@@ -22,9 +28,9 @@ namespace Odin.Planning
 
         int _EditMode = 0;
         public int EditMode
-        {
+        { 
             get { return _EditMode; }
-            set { _EditMode = value; }
+            set { _EditMode = value; } 
         }
 
         public event BatchGroupingEventHandler BatchGrouped;
@@ -39,7 +45,7 @@ namespace Odin.Planning
         AdmMenu mMenu = new AdmMenu();
         DAL_Functions DAL = new DAL_Functions();
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
-
+       
         int _id = 0;
         public int BatchId
         {
@@ -93,14 +99,14 @@ namespace Odin.Planning
 
         }
 
-
+        
         public void FillList(DataTable datastages)
         {
-
+ 
             ds_List.Clear();
 
             var data = Plan_BLL.getGroupBatchesTot(datastages);
-
+                                    
             foreach (DataRow row in data.Rows)
             {
                 var selectedid = dt_Group.Select("id = " + Convert.ToInt32(row["id"]));
@@ -221,7 +227,7 @@ namespace Odin.Planning
         }
         public void SetCellsColor()
         {
-
+            
             foreach (DataGridViewRow row in gv_Group.Rows)
             {
                 if (Convert.ToInt16(row.Cells["cn_gismain"].Value) != 0)
@@ -288,13 +294,20 @@ namespace Odin.Planning
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? String.IsNullOrEmpty(CellValue) == true
-                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
-                    : String.IsNullOrEmpty(CellValue) == true
-                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -305,9 +318,10 @@ namespace Odin.Planning
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
-                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
+                else
+                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
 
@@ -351,15 +365,15 @@ namespace Odin.Planning
 
         private void btn_Save_Click(object sender, EventArgs e)
         {
-
-
+            
+           
         }
-
+        
         private void frm_LaunchRMReservation_Load(object sender, EventArgs e)
         {
             LoadColumns(gv_List);
         }
-
+        
         private void gv_List_SelectionChanged(object sender, EventArgs e)
         {
             //int _launchdetid = 0;
@@ -372,12 +386,12 @@ namespace Odin.Planning
         }
 
         #endregion
-
+               
         private void btn_Refresh_Click(object sender, EventArgs e)
         {
             DataTable datastages = new DataTable();
             datastages.Columns.Add("id", typeof(int));
-
+           
             if (cmb_Batches1.BatchId != 0)
             {
                 var data = Plan_BLL.getBatchStages(BatchId);
@@ -403,7 +417,7 @@ namespace Odin.Planning
             gv_List.EndEdit();
 
             int _id = 0;
-
+                    
             try { _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value); }
             catch { }
 
@@ -426,9 +440,9 @@ namespace Odin.Planning
                     dt_Group.Rows.Add(row1);
                     this.bs_Group.ResetBindings(false);
                     SetCellsColor();
-
+                                       
                     row.Delete();
-
+                                       
                     DataTable datastages = new DataTable();
                     datastages.Columns.Add("id", typeof(int));
 
@@ -452,8 +466,8 @@ namespace Odin.Planning
                                 datastages.Rows.Add(dr);
                             }
                         }
-                    }
-
+                    }   
+                    
                     FillList(datastages);
 
                     break;
@@ -467,7 +481,7 @@ namespace Odin.Planning
             gv_Group.EndEdit();
 
             int _id = 0;
-
+            
             try { _id = Convert.ToInt32(gv_Group.CurrentRow.Cells["cn_gid"].Value); }
             catch { }
 
@@ -496,7 +510,7 @@ namespace Odin.Planning
                 DataTable datastages = new DataTable();
                 datastages.Columns.Add("id", typeof(int));
                 FillList(datastages);
-            }
+            }               
         }
 
         private void btn_OK_Click(object sender, EventArgs e)
@@ -528,7 +542,7 @@ namespace Odin.Planning
                             BLL.AddBatchesToGroup(cmb_Batches1.BatchId, Convert.ToInt32(row["id"]), Convert.ToInt32(row["ismain"]));
                         }
                     }
-
+                   
                     ResetEditMode(cmb_Batches1.BatchId);
                 }
             }
@@ -547,7 +561,10 @@ namespace Odin.Planning
             {
                 try
                 {
-                    btn_Remove.Enabled = Convert.ToInt32(gv_Group.CurrentRow.Cells["cn_ggroupid"].Value) == 0;
+                    if (Convert.ToInt32(gv_Group.CurrentRow.Cells["cn_ggroupid"].Value) == 0)
+                        btn_Remove.Enabled = true;
+                    else
+                        btn_Remove.Enabled = false;
                 }
                 catch { }
             }

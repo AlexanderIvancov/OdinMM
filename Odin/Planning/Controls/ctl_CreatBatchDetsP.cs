@@ -1,13 +1,16 @@
-﻿using AdvancedDataGridView;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using Odin.Global_Classes;
 using Odin.Tools;
-using System;
-using System.ComponentModel;
-using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
+using AdvancedDataGridView;
 
 namespace Odin.Planning.Controls
 {
@@ -94,7 +97,10 @@ namespace Odin.Planning.Controls
         {
             get
             {
-                return txt_StartDate.Value == null ? "" : txt_StartDate.Value.ToString();
+                if (txt_StartDate.Value == null)
+                    return "";
+                else
+                    return txt_StartDate.Value.ToString();
             }
             set
             {
@@ -105,7 +111,7 @@ namespace Odin.Planning.Controls
                 catch { txt_StartDate.Value = null; }
             }
         }
-
+        
         public double fOldQtyInBatch
         { get; set; }
         public int fOldArticleId
@@ -172,11 +178,17 @@ namespace Odin.Planning.Controls
         {
             get
             {
-                return chk_Urgent.CheckState == CheckState.Checked ? -1 : 0;
+                if (chk_Urgent.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {
-                chk_Urgent.Checked = value == -1;
+                if (value == -1)
+                    chk_Urgent.Checked = true;
+                else
+                    chk_Urgent.Checked = false;
             }
         }
 
@@ -267,11 +279,15 @@ namespace Odin.Planning.Controls
 
         public bool CheckEmpty()
         {
-            return ArticleId != 0
-                && QtyInBatch != 0
-                && StartDate != ""
-                && cmb_Batches1.IsQuote != -1
-                && (CheckSerialNeeds(cmb_Articles1.ArticleId) != true || Serials != "");
+            if (ArticleId == 0
+                || QtyInBatch == 0
+                || StartDate == ""
+                || cmb_Batches1.IsQuote == -1
+                || (CheckSerialNeeds(cmb_Articles1.ArticleId) == true && Serials == "")
+                )
+                return false;
+            else
+                return true;
 
         }
 
@@ -311,7 +327,7 @@ namespace Odin.Planning.Controls
         //}
 
         public void FillDates()
-        {
+        {            
             txt_StartDate.Value = System.DateTime.Now;
             txt_StartDate.Value = null;
         }
@@ -372,7 +388,10 @@ namespace Odin.Planning.Controls
             bool _res = false;
 
             int _r1 = Convert.ToInt32(Helper.GetOneRecord("select dbo.fn_CheckSerialNeeds(" + ArtId + ")"));
-            _res = _r1 == -1;
+            if (_r1 == -1)
+                _res = true;
+            else
+                _res = false;
             return _res;
         }
         public double RecalcMaxQtyCanBeLaunched()
@@ -478,7 +497,10 @@ namespace Odin.Planning.Controls
                                 //    _qtymax = _tmpqty < _tmpqtystock ? _qtymax : (Math.Round(_tmpqtystock / (_tmpqty / QtyInProject), 0));
                                 //else
                                 //    _qtymax = _tmpqty < _tmpqtystock ? _qtymax : (Math.Round(_tmpqtystock / (_qtyinbom), 0));
-                                _qtymax = _qtyinbom == 0 ? Math.Round(_tmpqtystock / (_tmpqty / QtyInProject), 0) : Math.Round(_tmpqtystock / (_qtyinbom), 0);
+                                if (_qtyinbom == 0)
+                                    _qtymax = Math.Round(_tmpqtystock / (_tmpqty / QtyInProject), 0);
+                                else
+                                    _qtymax = Math.Round(_tmpqtystock / (_qtyinbom), 0);
                             }
                             else
                             {
@@ -487,9 +509,10 @@ namespace Odin.Planning.Controls
                                 //    _qtymax = _tmpqty < (_tmpqtystock + _tmpqtypo) ? _qtymax : (Math.Round((_tmpqtystock + _tmpqtypo) / (_tmpqty / QtyInProject), 0));
                                 //else
                                 //    _qtymax = _tmpqty < (_tmpqtystock + _tmpqtypo) ? _qtymax : (Math.Round((_tmpqtystock + _tmpqtypo) / (_qtyinbom), 0));
-                                _qtymax = _qtyinbom == 0
-                                    ? Math.Round((_tmpqtystock + _tmpqtypo) / (_tmpqty / QtyInProject), 0)
-                                    : Math.Round((_tmpqtystock + _tmpqtypo) / (_qtyinbom), 0);
+                                if (_qtyinbom == 0)
+                                    _qtymax = Math.Round((_tmpqtystock + _tmpqtypo) / (_tmpqty / QtyInProject), 0);
+                                else
+                                    _qtymax = Math.Round((_tmpqtystock + _tmpqtypo) / (_qtyinbom), 0);
 
                             }
                             if (_prevmax > _qtymax)
@@ -518,11 +541,30 @@ namespace Odin.Planning.Controls
 
                                     if (_tmpqty != 0)
                                     {
-                                        _qtymax = _stage == -1
-                                            ? _qtyinbom == 0 ? Math.Round(_tmpqtystock / (_tmpqty / QtyInProject), 0) : Math.Round(_tmpqtystock / (_qtyinbom), 0)
-                                            : _qtyinbom == 0
-                                                ? Math.Round((_tmpqtystock + _tmpqtypo) / (_tmpqty / QtyInProject), 0)
-                                                : Math.Round((_tmpqtystock + _tmpqtypo) / _qtyinbom, 0);
+                                        if (_stage == -1)
+                                        //if (_qtyinbom == 0
+                                        //    || (_qtyinbom == 0 && Math.Round(_tmpqty / QtyInProject, 2) != _qtyinbom))
+                                        //    _qtymax = _tmpqty < _tmpqtystock ? _qtymax : (Math.Round(_tmpqtystock / (_tmpqty / QtyInProject), 0));
+                                        //else
+                                        //    _qtymax = _tmpqty < _tmpqtystock ? _qtymax : (Math.Round(_tmpqtystock / (_qtyinbom), 0));
+                                        {
+                                            if (_qtyinbom == 0)
+                                                _qtymax = Math.Round(_tmpqtystock / (_tmpqty / QtyInProject), 0);
+                                            else
+                                                _qtymax = Math.Round(_tmpqtystock / (_qtyinbom), 0);
+                                        }
+                                        else
+                                        //if (_qtyinbom == 0
+                                        //|| (_qtyinbom == 0 && Math.Round(_tmpqty / QtyInProject, 2) != _qtyinbom))
+                                        //_qtymax = _tmpqty < (_tmpqtystock + _tmpqtypo) ? _qtymax : (Math.Round((_tmpqtystock + _tmpqtypo) / (_tmpqty / QtyInProject), 0));
+                                        //else
+                                        //    _qtymax = _tmpqty < (_tmpqtystock + _tmpqtypo) ? _qtymax : (Math.Round((_tmpqtystock + _tmpqtypo) / _qtyinbom, 0));
+                                        {
+                                            if (_qtyinbom == 0)
+                                                _qtymax = Math.Round((_tmpqtystock + _tmpqtypo) / (_tmpqty / QtyInProject), 0);
+                                            else
+                                                _qtymax = Math.Round((_tmpqtystock + _tmpqtypo) / _qtyinbom, 0);
+                                        }
 
                                         if (_prevmax > _qtymax)
                                             _prevmax = _qtymax;
@@ -588,7 +630,7 @@ namespace Odin.Planning.Controls
                             {
                                 double _tmpBOM = 0;
                                 foreach (TreeGridNode node2 in node.Nodes)
-                                {
+                                { 
                                     _tmpBOM = _tmpBOM + Convert.ToDouble(node2.Cells["cn_nQtyInProject"].Value);
                                 }
                                 _qtyinbom = Math.Round(_tmpBOM / QtyInProject, 5);
@@ -604,9 +646,14 @@ namespace Odin.Planning.Controls
 
                         _stage = Convert.ToInt32(node.Cells["cn_nstockforbatch"].Value);
 
-                        _qtytodist = _stage == -1
-                            ? Convert.ToDouble(node.Cells["cn_nAvailable"].Value) < _qtylefttodist ? Convert.ToDouble(node.Cells["cn_nAvailable"].Value) : _qtylefttodist
-                            : (Convert.ToDouble(node.Cells["cn_nAvailable"].Value) + Convert.ToDouble(node.Cells["cn_nWaitingQtyPO"].Value)) < _qtylefttodist ? (Convert.ToDouble(node.Cells["cn_nAvailable"].Value) + Convert.ToDouble(node.Cells["cn_nWaitingQtyPO"].Value)) : _qtylefttodist;
+                        if (_stage == -1)
+                        {
+                            _qtytodist = Convert.ToDouble(node.Cells["cn_nAvailable"].Value) < _qtylefttodist ? Convert.ToDouble(node.Cells["cn_nAvailable"].Value) : _qtylefttodist;
+                        }
+                        else
+                        {
+                            _qtytodist = (Convert.ToDouble(node.Cells["cn_nAvailable"].Value) + Convert.ToDouble(node.Cells["cn_nWaitingQtyPO"].Value)) < _qtylefttodist ? (Convert.ToDouble(node.Cells["cn_nAvailable"].Value) + Convert.ToDouble(node.Cells["cn_nWaitingQtyPO"].Value)) : _qtylefttodist;
+                        }
 
                         node.Cells["cn_nQtyInBatch"].Value = _qtytodist;
                         //_qtylefttodist = _qtylefttodist - _qtytodist;
@@ -650,16 +697,21 @@ namespace Odin.Planning.Controls
                                     {
                                         if (_qtyinbom == 0)
                                             _qtyinbom = Math.Round(_tmpTotal / QtyInProject, 5);
-                                        //  || (_qtyinbom == 0 && Math.Round(Convert.ToDouble(nodec.Cells["cn_nQtyInProject"].Value) / _qtymax, 5) != _qtyinbom))
-                                        //_qtyinbom = Math.Round(Convert.ToDouble(nodec.Cells["cn_nQtyInProject"].Value) / _qtymax, 5);
+                                            //  || (_qtyinbom == 0 && Math.Round(Convert.ToDouble(nodec.Cells["cn_nQtyInProject"].Value) / _qtymax, 5) != _qtyinbom))
+                                            //_qtyinbom = Math.Round(Convert.ToDouble(nodec.Cells["cn_nQtyInProject"].Value) / _qtymax, 5);
                                     }
 
                                     _qtylefttodist = Math.Round(_qtyinbom * _qtymax, 5);
                                     _stage = Convert.ToInt32(nodec.Cells["cn_nstockforbatch"].Value);
 
-                                    _qtytodist = _stage == -1
-                                        ? Convert.ToDouble(nodec.Cells["cn_nAvailable"].Value) < _qtylefttodist ? Convert.ToDouble(nodec.Cells["cn_nAvailable"].Value) : _qtylefttodist
-                                        : (Convert.ToDouble(nodec.Cells["cn_nAvailable"].Value) + Convert.ToDouble(nodec.Cells["cn_nWaitingQtyPO"].Value)) < _qtylefttodist ? (Convert.ToDouble(nodec.Cells["cn_nAvailable"].Value) + Convert.ToDouble(nodec.Cells["cn_nWaitingQtyPO"].Value)) : _qtylefttodist;
+                                    if (_stage == -1)
+                                    {
+                                        _qtytodist = Convert.ToDouble(nodec.Cells["cn_nAvailable"].Value) < _qtylefttodist ? Convert.ToDouble(nodec.Cells["cn_nAvailable"].Value) : _qtylefttodist;
+                                    }
+                                    else
+                                    {
+                                        _qtytodist = (Convert.ToDouble(nodec.Cells["cn_nAvailable"].Value) + Convert.ToDouble(nodec.Cells["cn_nWaitingQtyPO"].Value)) < _qtylefttodist ? (Convert.ToDouble(nodec.Cells["cn_nAvailable"].Value) + Convert.ToDouble(nodec.Cells["cn_nWaitingQtyPO"].Value)) : _qtylefttodist;
+                                    }
                                     nodec.Cells["cn_nQtyInBatch"].Value = _qtytodist;
                                     //        _qtylefttodist = _qtylefttodist - _qtytodist;
 
@@ -685,7 +737,7 @@ namespace Odin.Planning.Controls
         public void FillHeader(int _projectid, int _salesorderid)
         {
             if (_salesorderid != 0)
-                ProjectId = Convert.ToInt32(Helper.GetOneRecord("select top 1 cb.batchid from prod_cobatch cb " +
+                ProjectId = Convert.ToInt32(Helper.GetOneRecord("select top 1 cb.batchid from prod_cobatch cb "+
                     " inner join prod_batchhead bh on cb.batchid = bh.id " +
                     " where coid = " + _salesorderid + " and isnull(bh.ispre, 0) = -1"));
             Customer = cmb_Batches1.Customer;
@@ -702,7 +754,7 @@ namespace Odin.Planning.Controls
             {
                 //DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 //var dir = Helper.SaveDirection(gv_List);
-
+                
                 data = Plan_BLL.getCreateBatchRM(ProjectId);
 
 
@@ -755,12 +807,12 @@ namespace Odin.Planning.Controls
             //New node
             node = nodes.Add(null, dr["Article"], _Use, dr["ArtId"], dr["bomnum"], dr["Unit"],
                             Convert.ToDouble(dr["QtyInProject"]), 0/*Convert.ToDouble(dr["QtyInBatch"])*/,
-                            Convert.ToDouble(dr["QtyAvailable"]), Convert.ToDouble(dr["QtyOnStock"]),
+                            Convert.ToDouble(dr["QtyAvailable"]), Convert.ToDouble(dr["QtyOnStock"]), 
                             Convert.ToDouble(dr["WaitingPOQty"]), Convert.ToDouble(dr["QtyBom"]),
                             dr["Stage"], Convert.ToDouble(dr["MaxQty"]), dr["origartid"],
                             dr["WaitingPODate"].ToString(), dr["POrder"].ToString(),
-                            dr["Supplier"].ToString(), Convert.ToInt32(dr["Id"]),
-                            Convert.ToInt32(dr["stockforbatch"]), dr["FullPOInfo"].ToString(),
+                            dr["Supplier"].ToString(), Convert.ToInt32(dr["Id"]), 
+                            Convert.ToInt32(dr["stockforbatch"]), dr["FullPOInfo"].ToString(), 
                             Convert.ToInt32(dr["dnp"]));
             if (isAddingImage)
             {
@@ -911,12 +963,12 @@ namespace Odin.Planning.Controls
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
         {
-            //    try
-            //    {
-            //        bs_List.RemoveFilter();
-            //    }
-            //    catch { }
-            //    SetCellsColor();
+        //    try
+        //    {
+        //        bs_List.RemoveFilter();
+        //    }
+        //    catch { }
+        //    SetCellsColor();
 
         }
 
@@ -970,8 +1022,7 @@ namespace Odin.Planning.Controls
             //QtyCanBeInBatch = QtyInBatch;
             RecalcQtyCanBeLaunched(QtyInBatch);
             if (CheckSerialNeeds(cmb_Articles1.ArticleId) == false)
-            {
-                lbl_Serial.Visible = false;
+            { lbl_Serial.Visible = false;
                 txt_Serial.Visible = false;
             }
             else
@@ -983,7 +1034,7 @@ namespace Odin.Planning.Controls
         }
 
         private void cmb_SalesOrdersWithLines1_SalesOrderChanged(object sender)
-        {
+        {           
         }
 
         private void cmb_Batches1_BatchChanged(object sender)
@@ -1019,7 +1070,7 @@ namespace Odin.Planning.Controls
 
                 RecalcQtyCanBeLaunched(QtyInBatch);
             }
-            catch { RecalcQtyCanBeLaunched(0); }
+            catch { RecalcQtyCanBeLaunched(0);  }
         }
 
         private void txt_Qty_Validated(object sender, EventArgs e)
@@ -1041,7 +1092,7 @@ namespace Odin.Planning.Controls
                     foreach (TreeGridNode node1 in tv_BOM.Nodes)
                     {
                         node1.Expand();
-                    }
+                    }                
                     //MessageBox.Show(COrderId.ToString());
                     if (CheckEmpty() == false)
                         MessageBox.Show("Please check quantity and article and date and serial numbers state of the batch!");
@@ -1109,7 +1160,7 @@ namespace Odin.Planning.Controls
 
                 }
                 #endregion
-
+          
             }
             else
             #region Modificaton
@@ -1137,7 +1188,7 @@ namespace Odin.Planning.Controls
                     }
 
                 }
-                #endregion
+            #endregion
             }
         }
 
@@ -1207,7 +1258,7 @@ namespace Odin.Planning.Controls
 
         private void cmb_Articles1_ArticleChanged(object sender)
         {
-            PCBPerPanel = Convert.ToInt32(Helper.GetOneRecord("select isnull(dbo.fn_PCBPerPanel( " + ArticleId + "), 0)"));
+            PCBPerPanel = Convert.ToInt32(Helper.GetOneRecord("select isnull(dbo.fn_PCBPerPanel( " + ArticleId +  "), 0)"));
         }
 
         private void txt_Serial_TextChanged(object sender, EventArgs e)
@@ -1217,7 +1268,7 @@ namespace Odin.Planning.Controls
 
         private void txt_Qty_Leave(object sender, EventArgs e)
         {
-
+            
         }
     }
 }

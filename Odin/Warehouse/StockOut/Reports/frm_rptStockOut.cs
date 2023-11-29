@@ -1,8 +1,14 @@
-﻿using CrystalDecisions.CrystalReports.Engine;
-using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using CrystalDecisions.CrystalReports.Engine;
+using Odin.Global_Classes;
 namespace Odin.Warehouse.StockOut.Reports
 {
     public partial class frm_rptStockOut : Form
@@ -44,14 +50,14 @@ namespace Odin.Warehouse.StockOut.Reports
             data = StockOut_BLL.getStockOutDets(OutcomeDocId);
 
             //parameters
-
+            
             report.Database.Tables[0].SetDataSource(dt);
             report.Database.Tables[1].SetDataSource(data);
             report.SetParameterValue("DocDate", DocDate);
             report.SetParameterValue("DocName", DocName);
             report.SetParameterValue("Reason", DocReason);
             report.SetParameterValue("UserName", System.Environment.UserName);
-
+            
             return report;
 
         }
@@ -65,7 +71,7 @@ namespace Odin.Warehouse.StockOut.Reports
             crystalReportViewer1.ReportSource = rd;
 
             // TODO: This line of code loads data into the 'common.sp_Articles' table. You can move, or remove it, as needed.
-
+        
         }
 
         public void FillDataSet()

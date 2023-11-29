@@ -1,13 +1,22 @@
-﻿using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using Odin.Tools;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using WeifenLuo.WinFormsUI.Docking;
+using Odin.Global_Classes;
+using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using ComponentFactory.Krypton.Workspace;
+using ComponentFactory.Krypton.Toolkit;
+using Odin.Planning.Controls;
+using System.Data.SqlClient;
+using Odin.Tools;
+using Odin.Planning;
 
 namespace Odin.Planning.Passport
 {
@@ -62,11 +71,21 @@ namespace Odin.Planning.Passport
         {
             get
             {
-                return chk_Active.CheckState == CheckState.Checked ? -1 : chk_Active.CheckState == CheckState.Unchecked ? 0 : 1;
+                if (chk_Active.CheckState == CheckState.Checked)
+                    return -1;
+                else if (chk_Active.CheckState == CheckState.Unchecked)
+                    return 0;
+                else
+                    return 1;
             }
             set
             {
-                chk_Active.CheckState = value == -1 ? CheckState.Checked : value == 0 ? CheckState.Unchecked : CheckState.Indeterminate;
+                if (value == -1)
+                    chk_Active.CheckState = CheckState.Checked;
+                else if (value == 0)
+                    chk_Active.CheckState = CheckState.Unchecked;
+                else
+                    chk_Active.CheckState = CheckState.Indeterminate;
             }
         }
 
@@ -289,9 +308,15 @@ namespace Odin.Planning.Passport
             }
             else
             {
-                pn_Quality.BackColor = _qualityby == "" ? Color.LightYellow : Color.FromArgb(192, 255, 192);
+                if (_qualityby == "")
+                    pn_Quality.BackColor = Color.LightYellow;
+                else
+                    pn_Quality.BackColor = Color.FromArgb(192, 255, 192);
 
-                pn_Ingeneering.BackColor = _techby == "" ? Color.LightYellow : Color.FromArgb(192, 255, 192);
+                if (_techby == "")
+                    pn_Ingeneering.BackColor = Color.LightYellow;
+                else
+                    pn_Ingeneering.BackColor = Color.FromArgb(192, 255, 192);
             }
         }
         #endregion
@@ -358,13 +383,20 @@ namespace Odin.Planning.Passport
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? String.IsNullOrEmpty(CellValue) == true
-                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
-                    : String.IsNullOrEmpty(CellValue) == true
-                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -377,9 +409,10 @@ namespace Odin.Planning.Passport
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
-                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
+                else
+                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
@@ -488,13 +521,20 @@ namespace Odin.Planning.Passport
         {
             try
             {
-                bs_Comments.Filter = String.IsNullOrEmpty(bs_Comments.Filter) == true
-                    ? String.IsNullOrEmpty(CellValueC) == true
-                        ? "(" + ColumnNameC + " is null OR Convert(" + ColumnNameC + ", 'System.String') = '')"
-                        : "Convert(" + ColumnNameC + " , 'System.String') = '" + glob_Class.NES(CellValueC) + "'"
-                    : String.IsNullOrEmpty(CellValueC) == true
-                        ? bs_Comments.Filter + "AND (" + ColumnNameC + " is null OR Convert(" + ColumnNameC + ", 'System.String') = '')"
-                        : bs_Comments.Filter + " AND Convert(" + ColumnNameC + " , 'System.String') = '" + glob_Class.NES(CellValueC) + "'";
+                if (String.IsNullOrEmpty(bs_Comments.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(CellValueC) == true)
+                        bs_Comments.Filter = "(" + ColumnNameC + " is null OR Convert(" + ColumnNameC + ", 'System.String') = '')";
+                    else
+                        bs_Comments.Filter = "Convert(" + ColumnNameC + " , 'System.String') = '" + glob_Class.NES(CellValueC) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(CellValueC) == true)
+                        bs_Comments.Filter = bs_Comments.Filter + "AND (" + ColumnNameC + " is null OR Convert(" + ColumnNameC + ", 'System.String') = '')";
+                    else
+                        bs_Comments.Filter = bs_Comments.Filter + " AND Convert(" + ColumnNameC + " , 'System.String') = '" + glob_Class.NES(CellValueC) + "'";
+                }
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -507,9 +547,10 @@ namespace Odin.Planning.Passport
         {
             try
             {
-                bs_Comments.Filter = String.IsNullOrEmpty(bs_Comments.Filter) == true
-                    ? "Convert(" + ColumnNameC + " , 'System.String') <> '" + CellValueC + "'"
-                    : bs_Comments.Filter + " AND " + ColumnNameC + " <> '" + CellValueC + "'";
+                if (String.IsNullOrEmpty(bs_Comments.Filter) == true)
+                    bs_Comments.Filter = "Convert(" + ColumnNameC + " , 'System.String') <> '" + CellValueC + "'";
+                else
+                    bs_Comments.Filter = bs_Comments.Filter + " AND " + ColumnNameC + " <> '" + CellValueC + "'";
             }
             catch { }
 
@@ -617,13 +658,20 @@ namespace Odin.Planning.Passport
         {
             try
             {
-                bs_Visas.Filter = String.IsNullOrEmpty(bs_Visas.Filter) == true
-                    ? String.IsNullOrEmpty(CellValueV) == true
-                        ? "(" + ColumnNameV + " is null OR Convert(" + ColumnNameV + ", 'System.String') = '')"
-                        : "Convert(" + ColumnNameV + " , 'System.String') = '" + glob_Class.NES(CellValueV) + "'"
-                    : String.IsNullOrEmpty(CellValueV) == true
-                        ? bs_Visas.Filter + "AND (" + ColumnNameV + " is null OR Convert(" + ColumnNameV + ", 'System.String') = '')"
-                        : bs_Visas.Filter + " AND Convert(" + ColumnNameV + " , 'System.String') = '" + glob_Class.NES(CellValueV) + "'";
+                if (String.IsNullOrEmpty(bs_Visas.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(CellValueV) == true)
+                        bs_Visas.Filter = "(" + ColumnNameV + " is null OR Convert(" + ColumnNameV + ", 'System.String') = '')";
+                    else
+                        bs_Visas.Filter = "Convert(" + ColumnNameV + " , 'System.String') = '" + glob_Class.NES(CellValueV) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(CellValueV) == true)
+                        bs_Visas.Filter = bs_Visas.Filter + "AND (" + ColumnNameV + " is null OR Convert(" + ColumnNameV + ", 'System.String') = '')";
+                    else
+                        bs_Visas.Filter = bs_Visas.Filter + " AND Convert(" + ColumnNameV + " , 'System.String') = '" + glob_Class.NES(CellValueV) + "'";
+                }
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -636,9 +684,10 @@ namespace Odin.Planning.Passport
         {
             try
             {
-                bs_Visas.Filter = String.IsNullOrEmpty(bs_Visas.Filter) == true
-                    ? "Convert(" + ColumnNameV + " , 'System.String') <> '" + CellValueV + "'"
-                    : bs_Visas.Filter + " AND " + ColumnNameV + " <> '" + CellValueV + "'";
+                if (String.IsNullOrEmpty(bs_Visas.Filter) == true)
+                    bs_Visas.Filter = "Convert(" + ColumnNameV + " , 'System.String') <> '" + CellValueV + "'";
+                else
+                    bs_Visas.Filter = bs_Visas.Filter + " AND " + ColumnNameV + " <> '" + CellValueV + "'";
             }
             catch { }
 
@@ -844,13 +893,13 @@ namespace Odin.Planning.Passport
                     if (frm.SendEmail == -1)
                     {
                         string emailaddresses = DAL.EmailAddressesByType(14);
-
-
+                       
+                        
                         string strMessage = "Launch: " + _launch;
                         strMessage = strMessage + "\r\nComments: " + frm.Comments;
                         strMessage = strMessage + "\r\nState: " + (frm.StateId == -1 ? "New" : (frm.StateId == 0 ? "Closed" : "Cancelled"));
                         strMessage = strMessage + "\r\nUser: " + System.Environment.UserName;
-
+                        
                         //strMessage = strMessage + "\r\nArticle: " + dr["custarticle"].ToString();
                         MyHelper.SendDirectEMail(glob_Class.ReplaceChar(emailaddresses, ";", ","), "Additional info for " + _launch + " is added!", strMessage);
 

@@ -1,7 +1,16 @@
-﻿using Odin.CMB_Components.BLL;
-using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
+using Odin.CMB_Components.BLL;
+using System.Data.SqlClient;
+using Odin.Tools;
 
 namespace Odin.CMB_Components.LabPrinters
 {
@@ -13,7 +22,7 @@ namespace Odin.CMB_Components.LabPrinters
         class_Global glob_Class = new class_Global();
         CMB_BLL Bll = new CMB_BLL();
         DAL_Functions DAL = new DAL_Functions();
-
+        
         bool _showingModal = false;
 
         public bool ShowingModal

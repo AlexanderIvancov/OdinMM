@@ -1,15 +1,22 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.CustomControls;
-using Odin.Global_Classes;
-using Odin.Planning;
-using Odin.Tools;
-using Odin.Workshop;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
+using Odin.Tools;
+using System.Data.SqlClient;
+using System.Runtime.InteropServices;
+using System.Threading;
+using Odin.CustomControls;
+using Odin.Workshop;
+using Odin.Planning;
 
 namespace Odin.DataCollection
 {
@@ -268,7 +275,15 @@ namespace Odin.DataCollection
             //        }
             //        catch { _qty = _qty + 0; }
             //}
-            QtyToStart = Qty > QtyStarted ? QtyStarted + (PrevQty - QtyTotalStarted) > Qty ? Qty - QtyStarted : PrevQty - QtyTotalStarted : 0;
+            if (Qty > QtyStarted)
+            {
+                if (QtyStarted + (PrevQty - QtyTotalStarted) > Qty)
+                    QtyToStart = Qty - QtyStarted;
+                else
+                    QtyToStart = (PrevQty - QtyTotalStarted);
+            }
+            else
+                QtyToStart = 0;
         }
 
         public void RecalcData(int _launchid)
@@ -364,7 +379,10 @@ namespace Odin.DataCollection
 
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
-                row.Cells["cn_toapprove"].Value = Convert.ToInt32(row.Cells["chk_check"].Value) == -1 ? Convert.ToDouble(row.Cells["cn_qty"].Value) : (object)0;
+                if (Convert.ToInt32(row.Cells["chk_check"].Value) == -1)
+                    row.Cells["cn_toapprove"].Value = Convert.ToDouble(row.Cells["cn_qty"].Value);
+                else
+                    row.Cells["cn_toapprove"].Value = 0;
 
             }
         }
@@ -421,10 +439,12 @@ namespace Odin.DataCollection
                 e.KeyChar = System.Threading.Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
                 e.Handled = s.Text.Contains(e.KeyChar);
             }
-            else
+            else if (e.KeyChar == '-')
             {
-                e.Handled = e.KeyChar == '-' ? s.Text.Contains(e.KeyChar) : !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar);
+                e.Handled = s.Text.Contains(e.KeyChar);
             }
+            else
+                e.Handled = !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar);
 
         }
 

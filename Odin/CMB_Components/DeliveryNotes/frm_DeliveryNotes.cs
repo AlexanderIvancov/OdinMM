@@ -1,8 +1,15 @@
-﻿using Odin.CMB_Components.BLL;
-using Odin.Global_Classes;
-using Odin.Warehouse.Deliveries;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
+using Odin.CMB_Components.BLL;
+using Odin.Warehouse.Deliveries;
 
 namespace Odin.CMB_Components.DeliveryNotes
 {
@@ -105,10 +112,10 @@ namespace Odin.CMB_Components.DeliveryNotes
 
                 frm_AddDeliveryNote frm = new frm_AddDeliveryNote();
 
-
+                
                 frm.Id = _id;
-
-
+                
+                
                 Bll.DelivNoteHeadId = _id;
 
                 frm.HeaderText = "Edit delivery note: " + Bll.DelivNote;

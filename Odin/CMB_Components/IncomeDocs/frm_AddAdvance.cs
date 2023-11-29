@@ -1,7 +1,15 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
 
 namespace Odin.CMB_Components.IncomeDocs
 {
@@ -22,7 +30,7 @@ namespace Odin.CMB_Components.IncomeDocs
         }
         public int Id
         { get; set; }
-
+        
         public string CurDate
         {
             get { return txt_Date.Value.ToShortDateString(); }
@@ -32,14 +40,12 @@ namespace Odin.CMB_Components.IncomeDocs
         public int CurId
         {
             get { return cmb_Currency1.CurrencyId; }
-            set { cmb_Currency1.CurrencyId = value; }
+            set { cmb_Currency1.CurrencyId = value; } 
         }
 
         public double Rate
         {
-            get
-            {
-                try { return Convert.ToDouble(txt_Rate.Text); }
+            get { try { return Convert.ToDouble(txt_Rate.Text); }
                 catch { return 0; }
             }
             set { txt_Rate.Text = value.ToString(); }
@@ -57,10 +63,13 @@ namespace Odin.CMB_Components.IncomeDocs
 
         public void CheckEmpty()
         {
-            btn_OK.Enabled = cmb_Currency1.CurrencyId != 0
-                && UnitCoef != 0
-                && Rate != 0
-                && Amount != 0;
+            if (cmb_Currency1.CurrencyId == 0
+                || UnitCoef == 0
+                || Rate == 0
+                || Amount == 0)
+                btn_OK.Enabled = false;
+            else
+                btn_OK.Enabled = true;
         }
 
         private void cmb_Currency1_CurrencyChanged(object sender)
@@ -99,7 +108,10 @@ namespace Odin.CMB_Components.IncomeDocs
             {
                 DLL.ShowCurRate(CurId, CurDate.Trim() == "" ? System.DateTime.Now.ToShortDateString() : CurDate.Trim());
                 Rate = DLL.CurRate;
-                txt_Rate.StateCommon.Back.Color1 = Rate == 0 ? Color.Red : Color.White;
+                if (Rate == 0)
+                    txt_Rate.StateCommon.Back.Color1 = Color.Red;
+                else
+                    txt_Rate.StateCommon.Back.Color1 = Color.White;
             });
 
             CheckEmpty();

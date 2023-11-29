@@ -1,9 +1,16 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using CrystalDecisions.CrystalReports.Engine;
-using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Workspace;
+using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using CrystalDecisions.CrystalReports.Engine;
 
 
 namespace Odin.Purchase.Reports
@@ -54,13 +61,13 @@ namespace Odin.Purchase.Reports
             dt.Rows.Add(drow);
 
             BLL.POHeadId = HeadId;
-
+            
             ////
             //DataTable data = new DataTable();
             DataTable datalab = new DataTable();
             //data = PO_BLL.getPODets(HeadId);
 
-
+            
             switch (BLL.POHeadSupplierCountryISO.Trim())
             {
                 case "BY":

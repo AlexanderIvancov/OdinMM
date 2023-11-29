@@ -1,17 +1,23 @@
-﻿using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using Odin.Purchase.Reports;
-using Odin.Register;
-using Odin.Tools;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using WeifenLuo.WinFormsUI.Docking;
+using Odin.Global_Classes;
+using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using ComponentFactory.Krypton.Workspace;
+using ComponentFactory.Krypton.Toolkit;
+using System.Threading;
+using System.Data.SqlClient;
+using Odin.Tools;
+using Odin.Register;
+using Odin.Purchase.Reports;
 namespace Odin.Purchase
 {
     public delegate int ReceivePOId();
@@ -148,7 +154,7 @@ namespace Odin.Purchase
             data = PO_BLL.getPurchaseOrders(cmb_PurchaseOrders1.PurchaseOrderId, cmb_Types1.TypeId, cmb_Firms1.FirmId, cmb_Common1.SelectedValue,
                                             cmb_Articles1.ArticleId, cmb_Articles1.Article.Trim(), txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
                                             txt_CreatDateTill.Value == null ? "" : txt_CreatDateTill.Value.ToString().Trim(), txt_SupOrder.Text, txt_Comments.Text,
-                                            txt_ReqDateFrom.Value == null ? "" : txt_ReqDateFrom.Value.ToString().Trim(),
+                                            txt_ReqDateFrom.Value == null ? "" : txt_ReqDateFrom.Value.ToString().Trim(), 
                                             txt_ReqDateTill.Value == null ? "" : txt_ReqDateTill.Value.ToString().Trim(),
                                             txt_ConfBefore.Value == null ? "" : txt_ConfBefore.Value.ToString().Trim());
 
@@ -185,7 +191,7 @@ namespace Odin.Purchase
         private KryptonPage NewInputNeeds()
         {
             ctlNeeds = new ctl_AddFromNeeds();
-
+                        
             ctlNeeds.POHeadId = POBll.POHeadId1;
             ctlNeeds.RefreshData();
             ctlNeeds.SetCellsColor();
@@ -204,7 +210,7 @@ namespace Odin.Purchase
             ctlConf.cmb_PurchaseOrdersLines1.PurchaseOrderLineId = _POId;
             //ctlConf.ShowSaveButton(true);
             //ctlConf.SendCOId += new COIdSendingEventHandler(ChangeCOIdSelection);
-
+            
             return NewPage("Confirmations ", 1, ctlConf, ctlConf.Width);
         }
 
@@ -214,7 +220,7 @@ namespace Odin.Purchase
 
             ControlWidth = ctlHistory.Width;
             ctlHistory.POId = _COId;
-
+           
             return NewPage("History ", 1, ctlHistory, ctlHistory.Width);
         }
 
@@ -232,7 +238,7 @@ namespace Odin.Purchase
             // Add the control for display inside the page
             content.Dock = DockStyle.Fill;
             p.Controls.Add(content);
-
+            
             return p;
         }
 
@@ -280,7 +286,7 @@ namespace Odin.Purchase
             POBll.POId = poid;
 
             cmb_PurchaseOrders1.PurchaseOrderId = POBll.POHeadId1;
-
+            
             FindGenPages(poid);
             FindConfPages(poid);
             FindDeliveriesPages(poid);
@@ -465,13 +471,20 @@ namespace Odin.Purchase
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? String.IsNullOrEmpty(CellValue) == true
-                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
-                    : String.IsNullOrEmpty(CellValue) == true
-                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -484,9 +497,10 @@ namespace Odin.Purchase
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
-                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
+                else
+                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
@@ -540,7 +554,7 @@ namespace Odin.Purchase
 
         private void AddPO(object sender)
         {
-
+           
             if (frm.ctl_PODets1.POId != 0)
                 frm.Close();
 
@@ -615,7 +629,7 @@ namespace Odin.Purchase
                 bool _globtest = true;
 
                 frm = new frm_AddPODets();
-
+                
                 frm.ctl_PODets1.cmb_PurchaseOrders1.PurchaseOrderId = cmb_PurchaseOrders1.PurchaseOrderId;
                 frm.ctl_PODets1.Line = POBll.LastPOLine(cmb_PurchaseOrders1.PurchaseOrderId) + 1;
                 frm.ctl_PODets1.StateId = 1;
@@ -641,7 +655,14 @@ namespace Odin.Purchase
                                                                              MessageBoxIcon.Warning,
                                                                              TaskDialogButtons.Yes |
                                                                              TaskDialogButtons.No);
-                            _test = result1 != DialogResult.No;
+                            if (result1 == DialogResult.No)
+                            {
+                                _test = false;
+                            }
+                            else
+                            {
+                                _test = true;
+                            }
                         }
 
                         if (_test == true)
@@ -800,10 +821,10 @@ namespace Odin.Purchase
             if (_countcontrols > 0)
                 MessageBox.Show("You can't open more than one needs page!");
             else
-                kryptonDockingManager1.AddDockspace("Control",
-                                                 DockingEdge.Left,
-                                                 new KryptonPage[] { NewInputNeeds() });
-
+            kryptonDockingManager1.AddDockspace("Control",
+                                             DockingEdge.Left,
+                                             new KryptonPage[] { NewInputNeeds() });
+         
         }
 
         private void kryptonDockingManager1_DockspaceAdding(object sender, DockspaceEventArgs e)
@@ -914,26 +935,27 @@ namespace Odin.Purchase
                     if (Convert.ToInt32(row["resale"]) == -1)
                     {
                         c++;
-                        strMessage = c == 1
-                            ? "Line N: " + row["line"] + ", Art.Id: " + row["artid"]
+                        if (c == 1)
+                            strMessage = "Line N: " + row["line"] + ", Art.Id: " + row["artid"]
                                                     + ", Suppliers article: " + row["article"]
-                                                    + ", Qty: " + row["qty"] + " " + row["unit"]
-                            : strMessage + "\r\nLine N: " + row["line"] + ", Art.Id: " + row["artid"]
+                                                    + ", Qty: " + row["qty"] + " " + row["unit"];
+                        else
+                            strMessage = strMessage + "\r\nLine N: " + row["line"] + ", Art.Id: " + row["artid"] 
                                                     + ", Suppliers article: " + row["article"]
                                                     + ", Qty: " + row["qty"] + " " + row["unit"];
                         //strMessage = strMessage + "Art.Id: " + row["artid"];
                         //strMessage = strMessage + "\r\nSuppliers article: " + row["article"];
                         //strMessage = strMessage + "\r\nQty: " + row["qty"] + " " + row["unit"];
 
-
+                       
                     }
-
+                
                 }
                 MyHelper.SendMessage(globClass.ReplaceChar(emailaddresses, ";", ","),
                                    "Purchase order for resale NR : " + cmb_PurchaseOrders1.PurchaseOrder + ", supplier: " + POBll.POHeadSupplier + " was created!",
                                    strMessage);
             }
-
+          
         }
 
         private void txt_ConfBefore_DropDown(object sender, DateTimePickerDropArgs e)

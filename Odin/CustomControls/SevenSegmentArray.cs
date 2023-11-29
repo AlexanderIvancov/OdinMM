@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Forms;
+using System.Drawing;
 
 /*
  * Seven-segment LED array control for .NET

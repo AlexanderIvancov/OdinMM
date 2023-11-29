@@ -1,15 +1,19 @@
-﻿using Odin.CMB_Components.BLL;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using Odin.Global_Classes;
-using Odin.Register;
+using Odin.CMB_Components.BLL;
 using Odin.Register.Articles;
+using Odin.Register;
+using System.Data.SqlClient;
 using Odin.Tools;
 using Odin.Warehouse.Inventory;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Windows.Forms;
 namespace Odin.CMB_Components.Articles
 {
     public partial class frm_Articles : Form
@@ -29,7 +33,7 @@ namespace Odin.CMB_Components.Articles
             get { return _showingModal; }
             set { _showingModal = value; }
         }
-
+        
         public frm_Articles()
         {
             InitializeComponent();
@@ -75,10 +79,18 @@ namespace Odin.CMB_Components.Articles
             frm.CheckEmpty();
             frm.Id = 0;
 
+            int number;
 
-            bool success = Int32.TryParse(DAL.DefaultValue("unit"), out int number);
+            bool success = Int32.TryParse(DAL.DefaultValue("unit"), out number);
 
-            frm.UnitId = success ? number : 0;
+            if (success)
+            {
+                frm.UnitId = number;
+            }
+            else
+            {
+                frm.UnitId = 0;
+            }
 
             DialogResult result = frm.ShowDialog();
 
@@ -88,7 +100,7 @@ namespace Odin.CMB_Components.Articles
                 //Add new 
                 int _res = Reg.SaveArticle(frm.Id, frm.Article, frm.SecName, frm.Description, frm.TypeId, frm.UnitId, frm.ImagePath, frm.Comments,
                                     frm.CustCodeId, frm.QtyReserve, frm.DeptId, frm.CreateSubBatch, frm.Weight, frm.IsActive,
-                                    frm.Revision, frm.StoreRules, frm.SpoilNorm, frm.StageId, frm.MSL, frm.Service,
+                                    frm.Revision, frm.StoreRules, frm.SpoilNorm, frm.StageId, frm.MSL, frm.Service, 
                                     /*frm.LabelsQty, frm.StencilRequired, frm.StencilID*/0, 0, 0, frm.Warning, frm.SpoilConst, frm.AsPF, frm.MBLimit);
                 if (_res != 0)
                 {
@@ -157,7 +169,7 @@ namespace Odin.CMB_Components.Articles
                                         frm.Revision, frm.StoreRules, frm.SpoilNorm, frm.StageId, frm.MSL, frm.Service, /*frm.LabelsQty, frm.StencilRequired, 
                                         frm.StencilID*/0, 0, 0, frm.Warning, frm.SpoilConst, frm.AsPF, frm.MBLimit);
                     if (_res != 0)
-                    {
+                    {                        
                         Reg.ArtId = _res;
                         FillData(frm.Article);
                         ((cmb_Articles)cmb_ArticleOne).ArticleId = _res;
@@ -229,7 +241,7 @@ namespace Odin.CMB_Components.Articles
 
         private void frm_Articles_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            
         }
 
         private void frm_Articles_KeyDown(object sender, KeyEventArgs e)
@@ -302,7 +314,7 @@ namespace Odin.CMB_Components.Articles
 
                 frm_ArtSetup popup = new frm_ArtSetup();
 
-
+                
                 popup.Show();
                 popup.Location = _location;
                 //PopupHelper.ClosePopup();
@@ -348,11 +360,8 @@ namespace Odin.CMB_Components.Articles
             int _artid = 0;
             string _article = "";
 
-            try
-            {
-                _artid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
-                _article = gv_List.CurrentRow.Cells["cn_article"].Value.ToString();
-            }
+            try { _artid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
+                _article = gv_List.CurrentRow.Cells["cn_article"].Value.ToString(); }
             catch { }
 
             if (_artid != 0)
@@ -430,9 +439,7 @@ namespace Odin.CMB_Components.Articles
             int _id = 0;
             int _artid = 0;
 
-            try
-            {
-                _id = Convert.ToInt32(gv_AliasList.CurrentRow.Cells["cn_aliasid"].Value);
+            try { _id = Convert.ToInt32(gv_AliasList.CurrentRow.Cells["cn_aliasid"].Value);
                 _artid = Convert.ToInt32(gv_AliasList.CurrentRow.Cells["cn_artid"].Value);
             }
             catch { }
@@ -458,7 +465,7 @@ namespace Odin.CMB_Components.Articles
                 DAL.UserLogin = System.Environment.UserName;
 
                 frm_rptProductCard frm = new frm_rptProductCard();
-
+               
                 Reg.ArtId = _id;
 
                 frm.ArtId = Reg.ArtId.ToString();
@@ -469,9 +476,9 @@ namespace Odin.CMB_Components.Articles
                 frm.Date = System.DateTime.Now.ToShortDateString();
 
                 frm.Show();
-
+               
             }
-
+            
         }
 
         private void btn_Coincidences_Click(object sender, EventArgs e)

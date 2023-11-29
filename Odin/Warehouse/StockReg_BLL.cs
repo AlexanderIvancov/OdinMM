@@ -1,7 +1,13 @@
-﻿using Odin.Global_Classes;
-using System;
-using System.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Odin.Global_Classes;
+using Odin.CMB_Components.BLL;
+using ComponentFactory.Krypton.Toolkit;
 using System.Data.SqlClient;
+using System.Data;
 namespace Odin.Warehouse
 {
     public class StockReg_BLL
@@ -152,7 +158,7 @@ namespace Odin.Warehouse
 
         public int DeleteStockPlace(int id)
         {
-
+            
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_DeleteStockPlace", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;

@@ -1,6 +1,13 @@
-﻿using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
 
 namespace Odin.Purchase
 {
@@ -102,7 +109,7 @@ namespace Odin.Purchase
             frm.ConfDate = POBll.ConfDate;
             frm.Comments = POBll.ConfComments;
             frm.ConfType = POBll.ConfType;
-
+           
 
             DialogResult result = frm.ShowDialog();
 
@@ -125,12 +132,11 @@ namespace Odin.Purchase
             if (glob_Class.DeleteConfirm() == true)
                 POBll.DeletePOConfirmation(_confid);
         }
-
+              
 
         private void gv_List_SelectionChanged(object sender, EventArgs e)
         {
-            try
-            {
+            try {
                 ConfId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
             }
             catch { ConfId = 0; }
@@ -138,7 +144,7 @@ namespace Odin.Purchase
 
         private void cmb_PurchaseOrdersLines1_Load(object sender, EventArgs e)
         {
-
+           
         }
 
         private void cmb_PurchaseOrdersLines1_PurchaseOrderChanged(object sender)
@@ -146,9 +152,9 @@ namespace Odin.Purchase
             //if (_prevpoid != cmb_PurchaseOrdersLines1.PurchaseOrderLineId)
 
             //{
-            //MessageBox.Show(cmb_PurchaseOrdersLines1.PurchaseOrderLineId.ToString());
-            POId = cmb_PurchaseOrdersLines1.PurchaseOrderLineId;
-            //_prevpoid = POId;
+                //MessageBox.Show(cmb_PurchaseOrdersLines1.PurchaseOrderLineId.ToString());
+                POId = cmb_PurchaseOrdersLines1.PurchaseOrderLineId;
+                //_prevpoid = POId;
             //}
         }
 

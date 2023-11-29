@@ -1,12 +1,22 @@
-﻿using ComponentFactory.Krypton.Docking;
-using Odin.Global_Classes;
-using Odin.Tools;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using WeifenLuo.WinFormsUI.Docking;
+using Odin.Global_Classes;
+using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using ComponentFactory.Krypton.Workspace;
+using ComponentFactory.Krypton.Toolkit;
+using Odin.Planning.Controls;
+using System.Data.SqlClient;
+using Odin.Tools;
+using Odin.Planning;
 
 namespace Odin.Planning.Passport
 {
@@ -46,11 +56,21 @@ namespace Odin.Planning.Passport
         {
             get
             {
-                return chk_Active.CheckState == CheckState.Checked ? -1 : chk_Active.CheckState == CheckState.Unchecked ? 0 : 1;
+                if (chk_Active.CheckState == CheckState.Checked)
+                    return -1;
+                else if (chk_Active.CheckState == CheckState.Unchecked)
+                    return 0;
+                else
+                    return 1;
             }
             set
             {
-                chk_Active.CheckState = value == -1 ? CheckState.Checked : value == 0 ? CheckState.Unchecked : CheckState.Indeterminate;
+                if (value == -1)
+                    chk_Active.CheckState = CheckState.Checked;
+                else if (value == 0)
+                    chk_Active.CheckState = CheckState.Unchecked;
+                else
+                    chk_Active.CheckState = CheckState.Indeterminate;
             }
         }
 
@@ -60,7 +80,12 @@ namespace Odin.Planning.Passport
             {
                 if (rb_All.Checked == true)
                     return -99;
-                else return rb_New.Checked == true ? -1 : rb_Closed.Checked == true ? 0 : 1;
+                else if (rb_New.Checked == true)
+                    return -1;
+                else if (rb_Closed.Checked == true)
+                    return 0;
+                else
+                    return 1;
             }
 
         }
@@ -266,13 +291,20 @@ namespace Odin.Planning.Passport
         {
             try
             {
-                bs_Comments.Filter = String.IsNullOrEmpty(bs_Comments.Filter) == true
-                    ? String.IsNullOrEmpty(CellValueC) == true
-                        ? "(" + ColumnNameC + " is null OR Convert(" + ColumnNameC + ", 'System.String') = '')"
-                        : "Convert(" + ColumnNameC + " , 'System.String') = '" + glob_Class.NES(CellValueC) + "'"
-                    : String.IsNullOrEmpty(CellValueC) == true
-                        ? bs_Comments.Filter + "AND (" + ColumnNameC + " is null OR Convert(" + ColumnNameC + ", 'System.String') = '')"
-                        : bs_Comments.Filter + " AND Convert(" + ColumnNameC + " , 'System.String') = '" + glob_Class.NES(CellValueC) + "'";
+                if (String.IsNullOrEmpty(bs_Comments.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(CellValueC) == true)
+                        bs_Comments.Filter = "(" + ColumnNameC + " is null OR Convert(" + ColumnNameC + ", 'System.String') = '')";
+                    else
+                        bs_Comments.Filter = "Convert(" + ColumnNameC + " , 'System.String') = '" + glob_Class.NES(CellValueC) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(CellValueC) == true)
+                        bs_Comments.Filter = bs_Comments.Filter + "AND (" + ColumnNameC + " is null OR Convert(" + ColumnNameC + ", 'System.String') = '')";
+                    else
+                        bs_Comments.Filter = bs_Comments.Filter + " AND Convert(" + ColumnNameC + " , 'System.String') = '" + glob_Class.NES(CellValueC) + "'";
+                }
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -285,9 +317,10 @@ namespace Odin.Planning.Passport
         {
             try
             {
-                bs_Comments.Filter = String.IsNullOrEmpty(bs_Comments.Filter) == true
-                    ? "Convert(" + ColumnNameC + " , 'System.String') <> '" + CellValueC + "'"
-                    : bs_Comments.Filter + " AND " + ColumnNameC + " <> '" + CellValueC + "'";
+                if (String.IsNullOrEmpty(bs_Comments.Filter) == true)
+                    bs_Comments.Filter = "Convert(" + ColumnNameC + " , 'System.String') <> '" + CellValueC + "'";
+                else
+                    bs_Comments.Filter = bs_Comments.Filter + " AND " + ColumnNameC + " <> '" + CellValueC + "'";
             }
             catch { }
 
@@ -376,7 +409,7 @@ namespace Odin.Planning.Passport
             if (_id != 0)
             {
                 frm_AddLaunchPassportComment frm = new frm_AddLaunchPassportComment();
-                frm.HeaderText = "Edit launch comments for: " + _launch;
+                frm.HeaderText = "Edit launch comments for: " + _launch; 
                 frm.Comments = _comments;
                 frm.TechComments = _techcomments;
                 frm.StateId = _stateid;

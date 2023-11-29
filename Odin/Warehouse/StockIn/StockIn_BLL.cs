@@ -1,8 +1,11 @@
-﻿using Odin.Global_Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+using Odin.Global_Classes;
 
 namespace Odin.Warehouse.StockIn
 {
@@ -47,7 +50,7 @@ namespace Odin.Warehouse.StockIn
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
 
-        public int AddStockIn(int headid, int artid, string suparticle, int type, double qty, int unitid, string comments,
+        public int AddStockIn(int headid, int artid, string suparticle, int type, double qty, int unitid, string comments, 
                             double unitprice, double discount, double vat, double coefconv, double weight, int custcodeid,
                             int batchid, int state, int poid, int producer, string datacode)
         {
@@ -119,14 +122,14 @@ namespace Odin.Warehouse.StockIn
 
         public void SetNoExpDate(int label)
         {
-
+           
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SetNoExpDate", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
 
             sqlComm.Parameters.AddWithValue("@label", label);
-
+          
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
@@ -184,7 +187,7 @@ namespace Odin.Warehouse.StockIn
             sqlComm.Parameters.AddWithValue("@poid", poid);
             sqlComm.Parameters.AddWithValue("@idin", idin);
             sqlComm.Parameters.AddWithValue("@qty", qty);
-
+            
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
@@ -237,7 +240,7 @@ namespace Odin.Warehouse.StockIn
             {
                 new SqlParameter("@artid",SqlDbType.Int){Value = _artid },
                 new SqlParameter("@headid",SqlDbType.Int){Value = _headid }
-
+                
 
             };
 
@@ -347,9 +350,7 @@ namespace Odin.Warehouse.StockIn
         public int IdIn
         {
             get { return _idin; }
-            set
-            {
-                _idin = value;
+            set { _idin = value;
                 SqlConnection conn = new SqlConnection(sConnStr);
                 conn.Open();
                 DataSet ds = new DataSet();
@@ -621,7 +622,7 @@ namespace Odin.Warehouse.StockIn
         public int AddStockInBoxHeader(int batchid, int coid, string package, double qty, double weightbrut, string comments, int boxno, int closed, int place)
         {
             int _res = 0;
-
+            
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_AddStockInBoxHeader", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -639,10 +640,13 @@ namespace Odin.Warehouse.StockIn
 
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
-
+                       
             _res = Convert.ToInt32(sqlComm.Parameters["@insertedid"].Value);
 
-            AddedBox = _res != 0 ? package : "";
+            if (_res != 0)
+                AddedBox = package;
+            else
+                AddedBox = "";
 
             sqlConn.Close();
 
@@ -666,7 +670,7 @@ namespace Odin.Warehouse.StockIn
 
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
-            sqlConn.Close();
+            sqlConn.Close();            
         }
 
         public void AddStockInBoxAdditContent(int id, string label, double qty)
@@ -678,7 +682,7 @@ namespace Odin.Warehouse.StockIn
             sqlComm.Parameters.AddWithValue("@id", id);
             sqlComm.Parameters.AddWithValue("@label", label);
             sqlComm.Parameters.AddWithValue("@qty", qty);
-
+            
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
@@ -710,7 +714,7 @@ namespace Odin.Warehouse.StockIn
             sqlComm.CommandTimeout = 3000;
 
             sqlComm.Parameters.AddWithValue("@id", id);
-
+            
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
@@ -740,7 +744,7 @@ namespace Odin.Warehouse.StockIn
             sqlComm.CommandTimeout = 3000;
 
             sqlComm.Parameters.AddWithValue("@packid", packid);
-
+           
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
@@ -753,7 +757,7 @@ namespace Odin.Warehouse.StockIn
 
             var sqlparams = new List<SqlParameter>
             {
-
+                
             };
 
             return Helper.QuerySP(query, sqlparams.ToArray());
@@ -796,7 +800,7 @@ namespace Odin.Warehouse.StockIn
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
+            
         }
 
         public static DataTable getBatchCONotIn(int _batchid)

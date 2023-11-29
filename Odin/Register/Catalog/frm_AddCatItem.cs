@@ -1,7 +1,17 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using ComponentFactory.Krypton.Workspace;
+using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
 namespace Odin.Register.Catalog
 {
     public delegate void CatSavedEventHandler(object sender);
@@ -31,12 +41,14 @@ namespace Odin.Register.Catalog
 
         public int BargType
         {
-            get
-            {
-                return rb_Supplier.Checked == true ? -1 : rb_Customer.Checked == true ? 1 : 0;
+            get { if (rb_Supplier.Checked == true)
+                    return -1;
+                else if (rb_Customer.Checked == true)
+                    return 1;
+                else
+                    return 0;
             }
-            set
-            {
+            set {
                 if (value == -1)
                 {
                     rb_Supplier.Checked = true;
@@ -76,16 +88,12 @@ namespace Odin.Register.Catalog
         }
 
         public int UnitId
-        {
-            get { return cmb_Units1.UnitId; }
-            set { cmb_Units1.UnitId = value; }
-        }
+        { get { return cmb_Units1.UnitId; }
+        set { cmb_Units1.UnitId = value; } }
 
         public double CoefConv
         {
-            get
-            {
-                try { return Convert.ToDouble(txt_CoefConv.Text); }
+            get { try { return Convert.ToDouble(txt_CoefConv.Text); }
                 catch { return 1; }
             }
             set { txt_CoefConv.Text = value.ToString(); }
@@ -100,7 +108,7 @@ namespace Odin.Register.Catalog
             }
             set { txt_UnitPrice.Text = value.ToString(); }
         }
-
+        
         public int CurId
         {
             get { return cmb_Currency1.CurrencyId; }
@@ -160,14 +168,15 @@ namespace Odin.Register.Catalog
         public string Manufacturer
         {
             get { return txt_Manufacturer.Text; }
-            set { txt_Manufacturer.Text = value; }
+            set { txt_Manufacturer.Text = value;  }
         }
 
         public int AsDefault
         {
-            get
-            {
-                return chk_Default.CheckState == CheckState.Checked ? -1 : 0;
+            get { if (chk_Default.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {
@@ -183,7 +192,10 @@ namespace Odin.Register.Catalog
         {
             get
             {
-                return chk_Quoted.CheckState == CheckState.Checked ? -1 : 0;
+                if (chk_Quoted.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {

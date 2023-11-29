@@ -1,14 +1,22 @@
-﻿using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using Odin.Tools;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using WeifenLuo.WinFormsUI.Docking;
+using Odin.Global_Classes;
+using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using ComponentFactory.Krypton.Workspace;
+using ComponentFactory.Krypton.Toolkit;
+using Odin.Planning.Controls;
+using System.Data.SqlClient;
+using Odin.Tools;
+using Odin.Planning.Passport;
 
 namespace Odin.Planning
 {
@@ -38,11 +46,21 @@ namespace Odin.Planning
         {
             get
             {
-                return chk_Active.CheckState == CheckState.Checked ? -1 : chk_Active.CheckState == CheckState.Unchecked ? 0 : 1;
+                if (chk_Active.CheckState == CheckState.Checked)
+                    return -1;
+                else if (chk_Active.CheckState == CheckState.Unchecked)
+                    return 0;
+                else
+                    return 1;
             }
             set
             {
-                chk_Active.CheckState = value == -1 ? CheckState.Checked : value == 0 ? CheckState.Unchecked : CheckState.Indeterminate;
+                if (value == -1)
+                    chk_Active.CheckState = CheckState.Checked;
+                else if (value == 0)
+                    chk_Active.CheckState = CheckState.Unchecked;
+                else
+                    chk_Active.CheckState = CheckState.Indeterminate;
             }
         }
 
@@ -123,7 +141,7 @@ namespace Odin.Planning
         public void bw_List(object sender, DoWorkEventArgs e)
         {
             //MessageBox.Show(cmb_SalesOrdersWithLines1.SalesOrderLineId.ToString());
-            var data = Plan_BLL.getSerialNumbers(Convert.ToInt32(txt_Serial.Text), rb_All.Checked == true ? 1 : (rb_Used.Checked == true ? -1 : 0),
+            var data = Plan_BLL.getSerialNumbers(Convert.ToInt32(txt_Serial.Text), rb_All.Checked == true ? 1 : (rb_Used.Checked == true ? -1 : 0), 
                                             cmb_Batches1.BatchId, cmb_SalesOrdersWithLines1.SalesOrderLineId, cmb_Articles1.ArticleId, IsActive,
                                             cmb_Types1.TypeId, txt_UseFrom.Value == null ? "" : txt_UseFrom.Value.ToString().Trim(),
                                             txt_UseTill.Value == null ? "" : txt_UseTill.Value.ToString().Trim());
@@ -197,7 +215,7 @@ namespace Odin.Planning
             SetCellsColor();
         }
 
-
+        
         #region Context menu
 
 
@@ -253,13 +271,20 @@ namespace Odin.Planning
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? String.IsNullOrEmpty(CellValue) == true
-                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
-                    : String.IsNullOrEmpty(CellValue) == true
-                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -272,9 +297,10 @@ namespace Odin.Planning
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
-                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
+                else
+                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
@@ -319,9 +345,9 @@ namespace Odin.Planning
         {
             ED.DgvIntoExcel();
         }
-
+        
         #endregion
-
+        
         private void frm_SerialNumbers_Load(object sender, EventArgs e)
         {
             KryptonDockingWorkspace w = kryptonDockingManager1.ManageWorkspace(kryptonDockableWorkspace1);
@@ -382,7 +408,7 @@ namespace Odin.Planning
 
             frm.Show();
         }
-
+        
         private void btn_Edit_Click(object sender, EventArgs e)
         {
 

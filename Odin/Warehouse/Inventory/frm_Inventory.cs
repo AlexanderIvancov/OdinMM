@@ -1,16 +1,22 @@
-﻿using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using Odin.Global_Classes;
-using Odin.Tools;
-using Odin.Warehouse.Deliveries;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using WeifenLuo.WinFormsUI.Docking;
+using Odin.Global_Classes;
+using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using ComponentFactory.Krypton.Workspace;
+using ComponentFactory.Krypton.Toolkit;
+using System.Threading;
+using System.Data.SqlClient;
+using Odin.Tools;
+using Odin.Warehouse.Deliveries;
 
 namespace Odin.Warehouse.Inventory
 {
@@ -319,7 +325,7 @@ namespace Odin.Warehouse.Inventory
             bwStart(bw_List);
 
             FindGenPages(_artid);
-
+            
         }
 
         public void UpdatingList(object sender)
@@ -494,13 +500,20 @@ namespace Odin.Warehouse.Inventory
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? String.IsNullOrEmpty(CellValue) == true
-                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
-                    : String.IsNullOrEmpty(CellValue) == true
-                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -514,9 +527,10 @@ namespace Odin.Warehouse.Inventory
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
-                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
+                else
+                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
@@ -693,8 +707,8 @@ namespace Odin.Warehouse.Inventory
                             new SqlParameter("@qty",SqlDbType.Float) {Value = Convert.ToDouble(row.Cells["cn_qtyrest"].Value)},
                             new SqlParameter("@labelqty",SqlDbType.Int) {Value = frm.LabelQty}
                         };
-                            if (frm.LabelQty != 0)
-                                PrintLabels.PrintLabel(PrintLabels.LabelConstructor(1, "sp_SelectStockLabelDetsPrint", sqlparamsfields.ToArray()), 1/*frm.LabelQty*/);
+                        if (frm.LabelQty != 0)
+                            PrintLabels.PrintLabel(PrintLabels.LabelConstructor(1, "sp_SelectStockLabelDetsPrint", sqlparamsfields.ToArray()), 1/*frm.LabelQty*/);
                             //Thread.Sleep(2000);
                         }
                     }
@@ -716,7 +730,7 @@ namespace Odin.Warehouse.Inventory
                         //Thread.Sleep(2000);
                     }
                 }
-
+                
             }
             else
             { }
@@ -763,13 +777,13 @@ namespace Odin.Warehouse.Inventory
             {
                 frm.cmb_LabPrinter1.ShowDefaults();
             }
-
+                        
             DialogResult result = frm.ShowDialog();
-
+           
 
             if (result == DialogResult.OK)
             {
-
+                
                 PrintLabels.PrinterIp = frm.IP_Address;
                 PrintLabels.PrinterDPI = frm.Printer_DPI;
 
@@ -791,14 +805,14 @@ namespace Odin.Warehouse.Inventory
                 }
                 else
                 {
-                    var sqlparamsfields = new List<SqlParameter>()
+                   var sqlparamsfields = new List<SqlParameter>()
                         {
                             new SqlParameter("@artid",SqlDbType.Int) {Value = _artid},
                             new SqlParameter("@labelqty",SqlDbType.Int) {Value = frm.LabelQty}
                         };
                     if (frm.LabelQty != 0)
                         PrintLabels.PrintLabel(PrintLabels.LabelConstructor(6, "sp_SelectStockLabelTrayTube", sqlparamsfields.ToArray()), 1/*frm.LabelQty*/);
-
+    
                 }
             }
             else

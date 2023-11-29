@@ -1,5 +1,14 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
 
 namespace Odin.CMB_Components.Departments
 {
@@ -12,12 +21,12 @@ namespace Odin.CMB_Components.Departments
 
         public int Id
         {
-            get; set;
+            get;set;
         }
 
         public int ParentId
         {
-            get; set;
+            get;set;
         }
 
         public string HeaderText

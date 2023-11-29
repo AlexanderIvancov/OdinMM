@@ -1,13 +1,16 @@
-﻿using AdvancedDataGridView;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using Odin.Purchase;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
+using System.ComponentModel;
 using System.Drawing;
+using System.Data;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
+using AdvancedDataGridView;
+using Odin.Purchase;
+using ComponentFactory.Krypton.Toolkit;
 namespace Odin.Warehouse.StockIn
 {
     public delegate void StockInIdSendingEventHandler(object sender);
@@ -101,7 +104,7 @@ namespace Odin.Warehouse.StockIn
             get { return cmb_Units1.UnitId; }
             set { cmb_Units1.UnitId = value; }
         }
-
+        
         public string SupArticle
         {
             get { return txt_SupArticle.Text; }
@@ -157,7 +160,7 @@ namespace Odin.Warehouse.StockIn
             }
             set { txt_QtyAfter.Text = value.ToString(); }
         }
-
+        
         public double CoefConv
         {
             get
@@ -165,10 +168,11 @@ namespace Odin.Warehouse.StockIn
                 try { return Convert.ToDouble(txt_CoefConv.Text); }
                 catch { return 1; }
             }
-            set
-            {
-                txt_CoefConv.Text = value.ToString();
-                txt_CoefConv.StateCommon.Back.Color1 = txt_CoefConv.Text == "0" ? Color.Tomato : Color.White;
+            set { txt_CoefConv.Text = value.ToString();
+                if (txt_CoefConv.Text == "0")
+                    txt_CoefConv.StateCommon.Back.Color1 = Color.Tomato;
+                else
+                    txt_CoefConv.StateCommon.Back.Color1 = Color.White;
             }
         }
 
@@ -204,7 +208,7 @@ namespace Odin.Warehouse.StockIn
 
         public double CoefConvInOrder
         {
-            get; set;
+            get;set;
         }
 
         public double Vat
@@ -267,7 +271,10 @@ namespace Odin.Warehouse.StockIn
         {
             get
             {
-                return txt_ExpDate.Value == null ? "" : txt_ExpDate.Value.ToString();
+                if (txt_ExpDate.Value == null)
+                    return "";
+                else
+                    return txt_ExpDate.Value.ToString();
             }
             set
             {
@@ -284,7 +291,7 @@ namespace Odin.Warehouse.StockIn
             get { return txt_Comments.Text; }
             set { txt_Comments.Text = value; }
         }
-
+        
         public double Multiplicity
         {
             get { return Convert.ToDouble(txt_Multiplicity.Text); }
@@ -305,11 +312,8 @@ namespace Odin.Warehouse.StockIn
 
         public double Weight
         {
-            get
-            {
-                try { return Convert.ToDouble(txt_Weight.Text); }
-                catch { return 0; }
-            }
+            get { try { return Convert.ToDouble(txt_Weight.Text); }
+                catch { return 0; } }
             set { txt_Weight.Text = value.ToString(); }
         }
 
@@ -321,10 +325,11 @@ namespace Odin.Warehouse.StockIn
 
         public int StateId
         {
-            get
-            {
-                return StockMoveTypeId == 25 ? 0 : -1;
-            }
+            get { if (StockMoveTypeId == 25)
+                    return 0;
+                else
+                    return -1;  
+                        }
         }
 
         public int Producer
@@ -341,7 +346,7 @@ namespace Odin.Warehouse.StockIn
 
         public int SupId
         {
-            get; set;
+            get;set;
         }
         int _incomecontrol = 0;
         public int IncomeControl
@@ -349,13 +354,18 @@ namespace Odin.Warehouse.StockIn
 
         public int NoExpDate
         {
-            get
-            {
-                return chk_NoDate.Checked == true ? -1 : 0;
+            get { if (chk_NoDate.Checked == true)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {
-                chk_NoDate.Checked = value == -1;
+                if (value == -1)
+                    chk_NoDate.Checked = true;
+
+                else
+                    chk_NoDate.Checked = false;
 
             }
         }
@@ -408,25 +418,37 @@ namespace Odin.Warehouse.StockIn
 
         private void CheckUnitPrice()
         {
-            txt_UnitPrice.BackColor = UnitPrice != UnitPriceInOrder ? Color.Pink : Color.White;
+            if (UnitPrice != UnitPriceInOrder)
+                txt_UnitPrice.BackColor = Color.Pink;
+            else
+                txt_UnitPrice.BackColor = Color.White;
         }
 
         private void CheckQty()
         {
-            txt_Qty.BackColor = Qty != QtyInOrder ? Color.Pink : Color.White;
+            if (Qty != QtyInOrder)
+                txt_Qty.BackColor = Color.Pink;
+            else
+                txt_Qty.BackColor = Color.White;
         }
 
         public void CheckUnit()
         {
-            txt_Unit.BackColor = cmb_Articles1.UnitId != cmb_Units1.UnitId ? Color.Pink : Color.White;
+            if (cmb_Articles1.UnitId != cmb_Units1.UnitId)
+                txt_Unit.BackColor = Color.Pink;
+            else
+                txt_Unit.BackColor = Color.White;
         }
 
         public void CheckEmpty()
         {
-            btn_OK.Enabled = Qty > 0
-                && ArtId != 0
-                && UnitId != 0
-                && StockMoveTypeId != 0;
+            if (Qty <= 0
+                || ArtId == 0
+                || UnitId == 0
+                || StockMoveTypeId == 0)
+                btn_OK.Enabled = false;
+            else
+                btn_OK.Enabled = true;
         }
 
         public void CheckResale()
@@ -434,7 +456,14 @@ namespace Odin.Warehouse.StockIn
             PO_BLL POB = new PO_BLL();
             POB.POId = PurchaseOrderLineId;
 
-            lbl_Resale.Visible = POB.POResale == -1;
+            if (POB.POResale == -1)
+            {
+                lbl_Resale.Visible = true;
+            }
+            else
+            {
+                lbl_Resale.Visible = false;
+            }
         }
 
 
@@ -482,7 +511,10 @@ namespace Odin.Warehouse.StockIn
         public void CheckIncomeControl(int _ArtId, int _SupId, int _POId)
         {
             IncomeControl = Convert.ToInt32(Helper.GetOneRecord("select dbo.fn_CheckIncomeControl(" + _ArtId + ", " + _SupId + ", " + _POId + ")"));
-            lbl_Quarantine.Visible = IncomeControl == -1;
+            if (IncomeControl == -1)
+                lbl_Quarantine.Visible = true;
+            else
+                lbl_Quarantine.Visible = false;
         }
 
         private void AddNode(DataRow dr, Font boldFont, TreeGridNodeCollection nodes,
@@ -496,7 +528,7 @@ namespace Odin.Warehouse.StockIn
             {
                 node.ImageIndex = 1;
             }
-
+            
         }
 
         private void RecalcQtyInNodes()
@@ -506,7 +538,7 @@ namespace Odin.Warehouse.StockIn
                 double _tmpqty = 0;
                 double _qtybefore = Convert.ToDouble(node.Cells["cn_qtyonplace"].Value);
                 double _qtyoper = Convert.ToDouble(node.Cells["cn_qtyoper"].Value);
-
+                
                 if (node.HasChildren == true)
                 {
                     foreach (TreeGridNode node1 in node.Nodes)
@@ -521,7 +553,12 @@ namespace Odin.Warehouse.StockIn
 
         private void RecalcQtyLeft()
         {
-            double _coefconv = CoefConv == 0 ? 1 : CoefConv;
+            double _coefconv = 1;
+            if (CoefConv == 0)
+                _coefconv = 1;
+            else
+                _coefconv = CoefConv;
+
             double _tmp = 0;
 
             foreach (DataGridViewRow row in tv_Rests.Rows)
@@ -557,7 +594,7 @@ namespace Odin.Warehouse.StockIn
 
             TempQty = _tmp;
         }
-
+        
         #endregion
 
         #region Controls
@@ -600,7 +637,7 @@ namespace Odin.Warehouse.StockIn
             CalcPriceVat();
             CheckUnitPrice();
         }
-
+        
         private void txt_PriceWVat_TextChanged(object sender, EventArgs e)
         {
             CalcPrice();
@@ -700,8 +737,7 @@ namespace Odin.Warehouse.StockIn
 
         private void btn_DeleteLine_Click(object sender, EventArgs e)
         {
-            try
-            {
+            try {
 
                 TreeGridNode node = tv_Rests.CurrentNode;
                 if (node.HasChildren == true)
@@ -716,19 +752,18 @@ namespace Odin.Warehouse.StockIn
                         if (node.Parent.HasChildren == true)
                         {
                             TreeGridNode node1 = node.Parent;
-                            node1.Nodes.Remove(node);
+                           node1.Nodes.Remove(node);
 
                         }
+                              
+                    }
+                    catch {
 
                     }
-                    catch
-                    {
 
-                    }
-
-
+                    
                 }
-
+              
                 RecalcQtyInNodes();
                 RecalcQtyLeft();
                 RecalcTotal();
@@ -812,7 +847,14 @@ namespace Odin.Warehouse.StockIn
                                                                  MessageBoxIcon.Warning,
                                                                  TaskDialogButtons.Yes |
                                                                  TaskDialogButtons.No);
-                    _test = result == DialogResult.Yes;
+                    if (result == DialogResult.Yes)
+                    {
+                        _test = true;
+                    }
+                    else
+                    {
+                        _test = false;
+                    }
                 }
 
                 if (_test == true)
@@ -828,9 +870,9 @@ namespace Odin.Warehouse.StockIn
                         {
                             if (Convert.ToDouble(row.Cells["cn_qtyoper"].Value) > 0
                                 && StateId != 0)
-                                _inslab = SIBll.AddStockDeallocation(_NewInwardId, 0, ArtId, Convert.ToInt32(row.Cells["cn_placeid"].Value), Convert.ToDouble(row.Cells["cn_qtyoper"].Value),
-                                                                ExpDate, 0, -1, row.Cells["cn_comments"].Value.ToString(), row.Cells["cn_datacode"].Value.ToString(),
-                                                                row.Cells["cn_manufbatch"].Value.ToString());
+                            _inslab = SIBll.AddStockDeallocation(_NewInwardId, 0, ArtId, Convert.ToInt32(row.Cells["cn_placeid"].Value), Convert.ToDouble(row.Cells["cn_qtyoper"].Value),
+                                                            ExpDate, 0, -1, row.Cells["cn_comments"].Value.ToString(), row.Cells["cn_datacode"].Value.ToString(),
+                                                            row.Cells["cn_manufbatch"].Value.ToString());
                             if (_inslab != 0
                                 && NoExpDate == -1)
                                 SIBll.SetNoExpDate(_inslab);
@@ -874,7 +916,10 @@ namespace Odin.Warehouse.StockIn
 
         private void cmb_StockInTypes1_TypesChanged(object sender)
         {
-            cmb_Batches1.Enabled = StockMoveTypeId == 2;
+            if (StockMoveTypeId == 2)
+                cmb_Batches1.Enabled = true;
+            else
+                cmb_Batches1.Enabled = false;
         }
 
 

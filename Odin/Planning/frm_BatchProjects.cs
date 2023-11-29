@@ -1,17 +1,24 @@
-﻿using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using Odin.Planning.Controls;
-using Odin.Sales;
-using Odin.Tools;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using WeifenLuo.WinFormsUI.Docking;
+using Odin.Global_Classes;
+using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using ComponentFactory.Krypton.Workspace;
+using ComponentFactory.Krypton.Toolkit;
+using Odin.Planning.Controls;
+using System.Data.SqlClient;
+using Odin.Tools;
+using Odin.Planning.Passport;
+using Odin.Warehouse.StockOut.Reports;
+using Odin.Sales;
 
 namespace Odin.Planning
 {
@@ -64,7 +71,7 @@ namespace Odin.Planning
         public int ctlBatchLaunchesWidth = 0;
 
         public int ControlWidth = 250;
-
+        
         public int ProjectId
         { get; set; }
 
@@ -74,11 +81,21 @@ namespace Odin.Planning
         {
             get
             {
-                return chk_Active.CheckState == CheckState.Checked ? -1 : chk_Active.CheckState == CheckState.Unchecked ? 0 : 1;
+                if (chk_Active.CheckState == CheckState.Checked)
+                    return -1;
+                else if (chk_Active.CheckState == CheckState.Unchecked)
+                    return 0;
+                else
+                    return 1;
             }
             set
             {
-                chk_Active.CheckState = value == -1 ? CheckState.Checked : value == 0 ? CheckState.Unchecked : CheckState.Indeterminate;
+                if (value == -1)
+                    chk_Active.CheckState = CheckState.Checked;
+                else if (value == 0)
+                    chk_Active.CheckState = CheckState.Unchecked;
+                else
+                    chk_Active.CheckState = CheckState.Indeterminate;
             }
         }
 
@@ -176,7 +193,7 @@ namespace Odin.Planning
             ctlCreatBatch.fOldStartDate = PlanBll.BatchStartDate;
             ctlCreatBatch.fOldEndDate = PlanBll.EndDate;
             ctlCreatBatch.fOldUrgent = PlanBll.Urgent;
-
+            
             ctlCreatBatch.FillDecNum();
             ctlCreatBatch.FillGridBatch(_projectid);
 
@@ -331,7 +348,7 @@ namespace Odin.Planning
                                             txt_StartTill.Value == null ? "" : txt_StartTill.Value.ToString().Trim(),
                                             txt_EndFrom.Value == null ? "" : txt_EndFrom.Value.ToString().Trim(),
                                             txt_EndTill.Value == null ? "" : txt_EndTill.Value.ToString().Trim(),
-                                            chk_ShowBatches.Checked == true ? -1 : 0, cmb_Firms1.FirmId);
+                                            chk_ShowBatches.Checked == true? -1:0, cmb_Firms1.FirmId);
 
 
             gv_List.ThreadSafeCall(delegate
@@ -361,7 +378,7 @@ namespace Odin.Planning
             frm.Close();
             bwStart(bw_List);
 
-            if (BatchProjectSaved != null)
+            if (BatchProjectSaved!= null)
             {
                 BatchProjectSaved(this);
             }
@@ -535,11 +552,11 @@ namespace Odin.Planning
                     ctlGen1.fOldQtyInBatch = PlanBll.BatchQty;
                     ctlGen1.fOldComments = PlanBll.BatchComments;
                     ctlGen1.Comments = PlanBll.BatchComments;
-
+                    
                     ctlGen1.fOldStartDate = PlanBll.BatchStartDate;
                     ctlGen1.fOldEndDate = PlanBll.EndDate;
                     ctlGen1.fOldUrgent = PlanBll.Urgent;
-
+                    
                     ctlGen1.FillDecNum();
                     ctlGen1.FillGridBatch(_batchid);
 
@@ -649,13 +666,20 @@ namespace Odin.Planning
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? String.IsNullOrEmpty(CellValue) == true
-                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
-                    : String.IsNullOrEmpty(CellValue) == true
-                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -668,9 +692,10 @@ namespace Odin.Planning
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
-                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
+                else
+                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
@@ -1121,7 +1146,12 @@ namespace Odin.Planning
             if (_batchid != 0)
             {
                 PlanBll.BatchId = _batchid;
-                string strMessage = PlanBll.BatchToFollow == 0 ? "You want to follow up the project?" : "You want to unfollow up the project?";
+                string strMessage = "";
+                if (PlanBll.BatchToFollow == 0)
+                    strMessage = "You want to follow up the project?";
+                else
+                    strMessage = "You want to unfollow up the project?";
+
                 if (glob_Class.MessageConfirm("Following project warning", strMessage) == true)
                 {
                     PlanBll.FollowBatchProject(_batchid, (PlanBll.BatchToFollow == 0 ? -1 : 0));

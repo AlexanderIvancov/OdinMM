@@ -1,13 +1,15 @@
-﻿using AdvancedDataGridView;
-using Odin.Global_Classes;
-using Odin.Tools;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Data;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using AdvancedDataGridView;
+using Odin.Global_Classes;
+using Odin.Tools;
 
 namespace Odin.Register.Articles
 {
@@ -53,8 +55,7 @@ namespace Odin.Register.Articles
         public int ArtId
         {
             get { return cmb_Articles1.ArticleId; }
-            set
-            {
+            set {
                 _ArtId = value;
                 FillGrid(_ArtId);
             }
@@ -63,8 +64,7 @@ namespace Odin.Register.Articles
         int _lock = 0;
         public int Lock
         {
-            get
-            {
+            get {
                 return _lock;
             }
             set { _lock = value; }
@@ -116,7 +116,7 @@ namespace Odin.Register.Articles
         {
             TreeGridNode node;
             node = nodes.Add(null, dr["Article"], dr["IdCst"], dr["LineNumber"], dr["SecName"], Convert.ToDouble(dr["Quantity"]), dr["Unit"],
-                                             dr["SpoilNorm"], dr["SpoilConst"], dr["Comments"], dr["DateCreation"], dr["CreatedBy"],
+                                             dr["SpoilNorm"], dr["SpoilConst"], dr["Comments"], dr["DateCreation"], dr["CreatedBy"], 
                                              dr["ID"], dr["Using"], dr["UniqueRow"], dr["StageID"]);
 
 
@@ -192,7 +192,7 @@ namespace Odin.Register.Articles
         {
             var frm = new frm_AddBOM();
             var numId = 0;
-
+            
             try
             {
                 frm.HeaderText = string.Format(headerText, Convert.ToString(cmb_Articles1.Article));
@@ -266,7 +266,7 @@ namespace Odin.Register.Articles
                     currentNode.Nodes.Add(newNode);
 
                     SetNodeByFormValues(frm, newNode, insertedId, isUsing);
-
+                    
                     //if found child nodes
                     if (BLL.BOMChildCount(frm.IdCST) > 0)
                     {
@@ -339,7 +339,7 @@ namespace Odin.Register.Articles
                     HelperTreeGrid.UpdateNodeValues(ancestorNode, ancestorArticle, ref foundNodes,
                         tv_BOM);
                 }
-
+                
             }
         }
 
@@ -437,7 +437,7 @@ namespace Odin.Register.Articles
                     var parentId = BLL.FindParent(_id);
                     //BLL.DecreaseBOMNumbers(Convert.ToInt32(parentId.Rows[0]["IdCSE"]), Convert.ToInt32(tv_BOM.CurrentRow.Cells["cn_num"].Value));
                     BLL.DeleteBOMLine(_id);
-
+                    
                 }
 
 
@@ -503,7 +503,7 @@ namespace Odin.Register.Articles
 
         private void ctl_Nomenclatures_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void tv_BOM_SelectionChanged(object sender, EventArgs e)
@@ -534,7 +534,7 @@ namespace Odin.Register.Articles
             {
                 igvArtId = 0;
             }
-
+                      
 
 
             if (OldigvArtId == igvArtId)

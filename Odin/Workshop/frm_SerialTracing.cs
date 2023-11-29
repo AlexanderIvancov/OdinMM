@@ -1,14 +1,23 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Npgsql;
-using Odin.CMB_Components.BLL;
-using Odin.Global_Classes;
-using System;
-using System.Configuration;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
+using Odin.Tools;
+using System.Data.SqlClient;
+using System.Threading;
+using Odin.CustomControls;
+using Odin.Planning;
+using Odin.CMB_Components.BLL;
+using System.Configuration;
+using Npgsql;
 
 namespace Odin.Workshop
 {
@@ -27,18 +36,16 @@ namespace Odin.Workshop
         DAL_Functions DAL = new DAL_Functions();
         Processing_BLL ProdBll = new Processing_BLL();
         CMB_BLL CmbBll = new CMB_BLL();
-
+       
 
 
         public int ReadValue = 0;
         public string Result = "";
         int _counter = 0;
         public int Counter
-        {
-            get { return _counter; }
-            set { _counter = value; }
-        }
-
+        { get { return _counter; }
+        set { _counter = value; } }
+               
         int _RegMode = -1;
 
         public int RegMode
@@ -51,13 +58,19 @@ namespace Odin.Workshop
                 {
                     chk_Replace.CheckState = CheckState.Unchecked;
                     chk_Replace.BackColor = Color.LightGreen;
-                    ScanOrder = BatchId != 0 ? 2 : 1;
+                    if (BatchId != 0)
+                        ScanOrder = 2;
+                    else
+                        ScanOrder = 1;
                 }
                 else
                 {
                     chk_Replace.CheckState = CheckState.Checked;
                     chk_Replace.BackColor = Color.LightPink;
-                    ScanOrder = BatchId != 0 ? 3 : 1;
+                    if (BatchId != 0)
+                        ScanOrder = 3;
+                    else
+                        ScanOrder = 1;
                 }
             }
         }
@@ -68,8 +81,18 @@ namespace Odin.Workshop
             set
             {
                 cmb_BatchPDA1.BatchId = value;
-                ScanOrder = value != 0 ? RegMode == -1 ? 2 : 3 : 1;
-
+                if (value != 0)
+                {
+                    if (RegMode == -1)
+                        ScanOrder = 2;
+                    else
+                        ScanOrder = 3;
+                }
+                else
+                {
+                    ScanOrder = 1;
+                }
+               
             }
 
         }
@@ -122,7 +145,7 @@ namespace Odin.Workshop
                     chk_QCTHT.BackColor = Color.LightGreen;
                     chk_FQC.BackColor = Color.LightGreen;
                 }
-
+            
             }
         }
 
@@ -134,7 +157,7 @@ namespace Odin.Workshop
         public void AddSerialTracing(int stageid, int batchid, string serial)
         {
             string _res = ProdBll.AddSerialNumberTracing(stageid, batchid, serial);
-
+            
             if (_res.IndexOf("success!") >= 0)
             {
                 Counter++;
@@ -163,13 +186,15 @@ namespace Odin.Workshop
         {
             get { return _scanorder; }
             set
-            {
-                _scanorder = value;
+            { _scanorder = value;
                 if (_scanorder == 1)
                     lbl_Order.Text = "SCAN BATCH LABEL!";
-                else lbl_Order.Text = _scanorder == 2
-                    ? "SCAN SERIAL LABEL!"
-                    : _scanorder == 3 ? "SCAN SERIAL LABEL YOU WANT TO REPLACE!" : "SCAN REPLACEMENT LABEL!";
+                else if (_scanorder == 2)
+                    lbl_Order.Text = "SCAN SERIAL LABEL!";
+                else if (_scanorder == 3)
+                    lbl_Order.Text = "SCAN SERIAL LABEL YOU WANT TO REPLACE!";
+                else
+                    lbl_Order.Text = "SCAN REPLACEMENT LABEL!";
             }
         }
 
@@ -194,7 +219,7 @@ namespace Odin.Workshop
         {
             txt_Oper.Focus();
         }
-
+        
         private void chk_Replace_CheckedChanged(object sender, EventArgs e)
         {
             if (chk_Replace.CheckState == CheckState.Checked)
@@ -245,9 +270,17 @@ namespace Odin.Workshop
 
         private void cmb_BatchPDA1_BatchChanged(object sender)
         {
-
-            ScanOrder = BatchId == 0 ? 1 : RegMode == -1 ? 2 : 3;
-            txt_Oper.Focus();
+            
+            if (BatchId == 0)
+                ScanOrder = 1;
+            else
+            {
+                if (RegMode == -1)
+                    ScanOrder = 2;
+                else
+                    ScanOrder = 3;
+            }
+                txt_Oper.Focus();
         }
 
         private void txt_Oper_KeyPress(object sender, KeyPressEventArgs e)
@@ -258,7 +291,7 @@ namespace Odin.Workshop
             if (e.KeyChar == (char)Keys.Enter)
             {
                 //ReadValue = 0;
-                //Check for batchstring _r = "";
+                    //Check for batchstring _r = "";
 
                 string _batch = txt_Oper.Text.Trim();
                 int _batchid = 0;
@@ -340,7 +373,7 @@ namespace Odin.Workshop
                         }
                     }
                 }
-
+                
                 //else
                 //{
                 //        SqlConnection conn = new SqlConnection(sConnStr);
@@ -380,7 +413,7 @@ namespace Odin.Workshop
                 //                                                     TaskDialogButtons.OK);
                 //        }
                 //}
-
+                
                 //Clear temp field
                 txt_Oper.Text = "";
                 txt_Oper.Focus();
@@ -661,7 +694,7 @@ namespace Odin.Workshop
             txt_Oper.Text = string.Empty;
             txt_Oper.Focus();
         }
-
+               
 
         private void btn_AddAnalog_Click(object sender, EventArgs e)
         {

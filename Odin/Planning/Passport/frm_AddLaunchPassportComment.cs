@@ -1,5 +1,17 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
+using Odin.Tools;
+using System.Data.SqlClient;
 
 namespace Odin.Planning.Passport
 {
@@ -30,18 +42,20 @@ namespace Odin.Planning.Passport
 
         public int StateId
         {
-            get
-            {
-                return rb_New.Checked == true ? -1 : rb_Closed.Checked == true ? 0 : 1;
+            get { if (rb_New.Checked == true)
+                    return -1;
+                else if (rb_Closed.Checked == true)
+                    return 0;
+                else
+                    return 1;
             }
-            set
-            {
+            set {
                 if (value == -1)
                 {
                     rb_New.Checked = true;
                     rb_Closed.Checked = false;
                     rb_Cancelled.Checked = false;
-                }
+                } 
                 else if (value == 0)
                 {
                     rb_New.Checked = false;
@@ -56,7 +70,7 @@ namespace Odin.Planning.Passport
                 }
 
             }
-        }
+        }       
         private void buttonSpecAny3_Click(object sender, EventArgs e)
         {
             txt_Comments.Text = "";
@@ -80,7 +94,10 @@ namespace Odin.Planning.Passport
 
         public void CheckEmpty()
         {
-            btn_OK.Enabled = txt_Comments.Text != "";
+            if (txt_Comments.Text == "")
+                btn_OK.Enabled = false;
+            else
+                btn_OK.Enabled = true;
         }
 
         private void txt_Comments_TextChanged(object sender, EventArgs e)
@@ -95,15 +112,18 @@ namespace Odin.Planning.Passport
 
         public int SendEmail
         {
-            get
-            {
-                return chk_SendEmail.Checked == true ? -1 : 0;
+            get { if (chk_SendEmail.Checked == true)
+                    return -1;
+                else
+                    return 0; 
             }
-            set
-            {
-                chk_SendEmail.Checked = value != 0;
+            set{
+                if (value == 0)
+                    chk_SendEmail.Checked = false;
+                else
+                    chk_SendEmail.Checked = true;
             }
-
+            
         }
     }
 }

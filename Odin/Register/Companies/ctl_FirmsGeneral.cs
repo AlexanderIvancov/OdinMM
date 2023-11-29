@@ -1,4 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Odin.Register.Companies
@@ -68,11 +75,17 @@ namespace Odin.Register.Companies
         {
             get
             {
-                return chk_IsActive.CheckState == CheckState.Checked ? -1 : 0;
+                if (chk_IsActive.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {
-                chk_IsActive.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+                if (value == -1)
+                    chk_IsActive.CheckState = CheckState.Checked;
+                else
+                    chk_IsActive.CheckState = CheckState.Unchecked;
             }
         }
 
@@ -143,11 +156,17 @@ namespace Odin.Register.Companies
         {
             get
             {
-                return chk_Supplier.CheckState == CheckState.Checked ? -1 : 0;
+                if (chk_Supplier.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {
-                chk_Supplier.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+                if (value == -1)
+                    chk_Supplier.CheckState = CheckState.Checked;
+                else
+                    chk_Supplier.CheckState = CheckState.Unchecked;
             }
         }
 
@@ -155,11 +174,17 @@ namespace Odin.Register.Companies
         {
             get
             {
-                return chk_Customer.CheckState == CheckState.Checked ? -1 : 0;
+                if (chk_Customer.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {
-                chk_Customer.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+                if (value == -1)
+                    chk_Customer.CheckState = CheckState.Checked;
+                else
+                    chk_Customer.CheckState = CheckState.Unchecked;
             }
         }
 
@@ -264,9 +289,12 @@ namespace Odin.Register.Companies
 
         public void CheckEmpty()
         {
-            btn_OK.Enabled = FirmName != ""
-                && RegNR != ""
-                && VAT != "";
+            if (FirmName == ""
+                || RegNR == ""
+                || VAT == "")
+                btn_OK.Enabled = false;
+            else
+                btn_OK.Enabled = true;
         }
 
         #endregion

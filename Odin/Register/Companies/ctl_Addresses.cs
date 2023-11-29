@@ -1,7 +1,14 @@
-﻿using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
+using System.Data.SqlClient;
 namespace Odin.Register.Companies
 {
     public partial class ctl_Addresses : UserControl
@@ -25,9 +32,7 @@ namespace Odin.Register.Companies
         public int FirmId
         {
             get { return cmb_Firms1.FirmId; }
-            set
-            {
-                _FirmId = value;
+            set { _FirmId = value;
                 FillAddresses(_FirmId);
             }
         }
@@ -111,7 +116,7 @@ namespace Odin.Register.Companies
                 frm.ActualAddress = BLL.AddActualAddress;
                 frm.DefaultDelivPlace = BLL.AddDefaultDelivPlace;
                 frm.Comments = BLL.AddComments;
-
+                
                 DialogResult result = frm.ShowDialog();
 
                 if (result == DialogResult.OK)

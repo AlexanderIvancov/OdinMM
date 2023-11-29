@@ -1,10 +1,16 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.CMB_Components.BLL;
-using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
+using Odin.CMB_Components.BLL;
 
 namespace Odin.CMB_Components.BatchStages
 {
@@ -37,7 +43,14 @@ namespace Odin.CMB_Components.BatchStages
         {
             foreach (DataGridViewRow row in gv_List.Rows)
             {
-                row.Cells["cn_name"].Style.BackColor = Convert.ToInt32(row.Cells["cn_checked"].Value) == -1 ? Color.FromArgb(192, 255, 192) : Color.PapayaWhip;
+                if (Convert.ToInt32(row.Cells["cn_checked"].Value) == -1)
+                {
+                    row.Cells["cn_name"].Style.BackColor = Color.FromArgb(192, 255, 192);
+                }
+                else
+                {
+                    row.Cells["cn_name"].Style.BackColor = Color.PapayaWhip;
+                }
             }
         }
 
@@ -53,7 +66,12 @@ namespace Odin.CMB_Components.BatchStages
 
         public void FillData(int BatchId, int IsLaunches)
         {
-            DataTable data = IsLaunches == 0 ? CMB_BLL.getBatchStages(BatchId) : CMB_BLL.getBatchLaunchesStages(BatchId);
+            DataTable data;
+            if (IsLaunches == 0)
+                data = CMB_BLL.getBatchStages(BatchId);
+            else
+                data = CMB_BLL.getBatchLaunchesStages(BatchId);
+
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
             gv_List.DataSource = bs_List;

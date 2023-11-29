@@ -1,8 +1,11 @@
-﻿using Odin.Global_Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Odin.Global_Classes;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace Odin.Warehouse.Requests
 {
@@ -89,7 +92,7 @@ namespace Odin.Warehouse.Requests
         }
 
         public void EditRequestDetail(int Id, int ArtId, string Article, int BatchDetId, double Qty, int UnitId,
-                                        string ReqDate, int Urgent, string Comments, int CatId, int State,
+                                        string ReqDate, int Urgent, string Comments, int CatId, int State, 
                                         int CauseId, string Serials)
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);
@@ -126,7 +129,7 @@ namespace Odin.Warehouse.Requests
             sqlComm.CommandTimeout = 3000;
 
             sqlComm.Parameters.AddWithValue("@id", Id);
-
+           
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
@@ -155,8 +158,7 @@ namespace Odin.Warehouse.Requests
         public int RequestDetId
         {
             get { return _RequestDetId; }
-            set
-            {
+            set {
                 _RequestDetId = value;
                 SqlConnection conn = new SqlConnection(sConnStr);
                 conn.Open();

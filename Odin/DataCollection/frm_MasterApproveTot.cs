@@ -1,20 +1,30 @@
-﻿using ComponentFactory.Krypton.Toolkit;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
 using Odin.Global_Classes;
 using Odin.Tools;
-using Odin.Workshop;
-using System;
-using System.Data;
 using System.Data.SqlClient;
-using System.Windows.Forms;
+using System.Runtime.InteropServices;
+using System.Threading;
+using Odin.CustomControls;
+using Odin.Workshop;
 
 namespace Odin.DataCollection
 {
-
+   
     public partial class frm_MasterApproveTot : BaseForm
     {
         public frm_MasterApproveTot()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
         #region Variables
@@ -72,7 +82,7 @@ namespace Odin.DataCollection
         }
 
         string _launch = "";
-
+                
 
         public int NextStageId
         { get; set; }
@@ -90,7 +100,12 @@ namespace Odin.DataCollection
         {
             get
             {
-                return rb_Valkas2.Checked == true ? 1 : rb_Valkas2B.Checked == true ? 2 : 0;
+                if (rb_Valkas2.Checked == true)
+                    return 1;
+                else if (rb_Valkas2B.Checked == true)
+                    return 2;
+                else
+                    return 0;
             }
             set
             {
@@ -117,11 +132,11 @@ namespace Odin.DataCollection
             get; set;
         }
 
-
+        
         public int BatchId
         { get; set; }
 
-
+        
         public double Freezed
         {
             get; set;
@@ -130,7 +145,7 @@ namespace Odin.DataCollection
         { get; set; }
         public double QtyStarted
         {
-            get; set;
+            get;set;
         }
 
         public double Qty
@@ -144,7 +159,7 @@ namespace Odin.DataCollection
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
-
+               
             }
         }
         public void FillList()
@@ -157,11 +172,11 @@ namespace Odin.DataCollection
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
-
+                
                 SetCellsColor();
             });
 
-
+          
         }
 
         public void FillPlace()
@@ -229,11 +244,14 @@ namespace Odin.DataCollection
         public void RecalcQty()
         {
             gv_List.EndEdit();
-
+           
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
-                row.Cells["cn_toapprove"].Value = Convert.ToInt32(row.Cells["chk_check"].Value) == -1 ? Convert.ToDouble(row.Cells["cn_qty"].Value) : (object)0;
-
+                if (Convert.ToInt32(row.Cells["chk_check"].Value) == -1)
+                    row.Cells["cn_toapprove"].Value = Convert.ToDouble(row.Cells["cn_qty"].Value);
+                else
+                    row.Cells["cn_toapprove"].Value = 0;
+                
             }
         }
         #endregion
@@ -292,7 +310,7 @@ namespace Odin.DataCollection
                     MasterId = 0;
                 }
                 sqlConn.Close();
-
+                
             }
 
         }
@@ -307,9 +325,9 @@ namespace Odin.DataCollection
                 Qty = 0;
                 foreach (DataRow row in datadetails.Rows)
                 {
-
+                    
                     Qty = Qty + Convert.ToDouble(row["qty"]);
-
+                    
                 }
 
                 if (Qty <= QtyStarted)
@@ -322,16 +340,16 @@ namespace Odin.DataCollection
 
                     foreach (DataRow row in datadetails.Rows)
                     {
-                        DataRow drser = data.NewRow();
-                        drser["id"] = Convert.ToInt32(row["id"]);
-                        drser["issn"] = Convert.ToInt32(row["issn"]);
-                        drser["qty"] = Convert.ToDouble(row["qty"]);
-                        data.Rows.Add(drser);
+                            DataRow drser = data.NewRow();
+                            drser["id"] = Convert.ToInt32(row["id"]);
+                            drser["issn"] = Convert.ToInt32(row["issn"]);
+                            drser["qty"] = Convert.ToDouble(row["qty"]);
+                            data.Rows.Add(drser);
                     }
 
-                    double _qty = 0;
+                        double _qty = 0;
 
-                    _qty = DCBll.ApproveDataCollection(data, MasterId);
+                        _qty = DCBll.ApproveDataCollection(data, MasterId);
 
                     if (_qty > 0 || Freezed != OldFreezed)
                     {
@@ -400,9 +418,8 @@ namespace Odin.DataCollection
             {
                 int _launchid = 0;
                 double _qty = 0;
-                try
-                {
-
+                try {
+                    
                     if (Convert.ToInt32(gv_List.CurrentRow.Cells["chk_check"].Value) == -1)
                     {
                         _launchid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_launchid"].Value);
@@ -483,7 +500,7 @@ namespace Odin.DataCollection
                 }
                 RecalcQty();
                 FillListLaunch(LaunchId);
-
+                
                 FillData(BatchId, StageId);
             }
         }

@@ -1,17 +1,22 @@
-﻿using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using Odin.Planning.Controls;
-using Odin.Tools;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using WeifenLuo.WinFormsUI.Docking;
+using Odin.Global_Classes;
+using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using ComponentFactory.Krypton.Workspace;
+using ComponentFactory.Krypton.Toolkit;
+using System.Threading;
+using System.Data.SqlClient;
+using Odin.Tools;
+using Odin.Planning.Controls;
 
 namespace Odin.Sales
 {
@@ -348,8 +353,8 @@ namespace Odin.Sales
                 _coid = frm.ctl_CODets1.COId;
 
             if (frm.ctl_CODets1.COArtId != 0
-                   /*&& frm.ctl_CODets1.COQty != 0
-                    *&& frm.ctl_CODets1.COUnitPrice != 0*/)
+                 /*&& frm.ctl_CODets1.COQty != 0
+                  *&& frm.ctl_CODets1.COUnitPrice != 0*/)
             {
                 DataTable datastages = new DataTable();
                 datastages.Columns.Add("id", typeof(int));
@@ -361,7 +366,10 @@ namespace Odin.Sales
                     DataRow dr = datastages.NewRow();
                     dr["id"] = Convert.ToInt32(row.Cells["cn_id"].Value);
                     //dr["osid"] = Convert.ToInt32(row.Cells["cn_osid"].Value);
-                    dr["osid"] = _iscopy == true ? 0 : (object)Convert.ToInt32(row.Cells["cn_osid"].Value);
+                    if (_iscopy == true)
+                        dr["osid"] = 0;
+                    else
+                        dr["osid"] = Convert.ToInt32(row.Cells["cn_osid"].Value);
 
 
                     dr["checked"] = Convert.ToInt32(row.Cells["chk_checked"].Value);
@@ -375,7 +383,7 @@ namespace Odin.Sales
                                             frm.ctl_CODets1.COUnitId, frm.ctl_CODets1.COReqDate, frm.ctl_CODets1.COStateId, frm.ctl_CODets1.COUnitPrice,
                                             frm.ctl_CODets1.COVat, frm.ctl_CODets1.COComments, frm.ctl_CODets1.COComments1,
                                             frm.ctl_CODets1.COLogComments, frm.ctl_CODets1.CODelivPlaceId, frm.ctl_CODets1.CODelivAddressId, frm.ctl_CODets1.COEndCustId, "", "", "",
-                                            datastages, frm.ctl_CODets1.COInternal, frm.ctl_CODets1.COResale, frm.ctl_CODets1.COSpoilage, frm.ctl_CODets1.COBlocked,
+                                            datastages, frm.ctl_CODets1.COInternal, frm.ctl_CODets1.COResale, frm.ctl_CODets1.COSpoilage, frm.ctl_CODets1.COBlocked, 
                                             frm.ctl_CODets1.COSalesComments, frm.ctl_CODets1.COPrimary);
 
 
@@ -636,13 +644,20 @@ namespace Odin.Sales
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? String.IsNullOrEmpty(CellValue) == true
-                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
-                    : String.IsNullOrEmpty(CellValue) == true
-                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -655,9 +670,10 @@ namespace Odin.Sales
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
-                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
+                else
+                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
@@ -938,7 +954,7 @@ namespace Odin.Sales
         {
             COBll.COId = COId;
             COBll.COHeadId = COBll.COHeadId1;
-
+           
             if (COId != 0)
             {
                 string emailaddresses = "";

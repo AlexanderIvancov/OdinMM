@@ -1,6 +1,15 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
 
 namespace Odin.CMB_Components.Users
 {
@@ -14,7 +23,7 @@ namespace Odin.CMB_Components.Users
         public string HeaderText
         {
             get { return this.Text; }
-            set { this.Text = value; }
+            set{ this.Text = value; }
         }
 
         public int Id
@@ -36,14 +45,16 @@ namespace Odin.CMB_Components.Users
         }
         public int IsDBUser
         {
-            get
-            {
-                return chk_IsDBUser.CheckState == CheckState.Checked ? -1 : 0;
+            get { if (chk_IsDBUser.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
-            set
-            {
-                chk_IsDBUser.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
-            }
+            set { if (value == -1)
+                    chk_IsDBUser.CheckState = CheckState.Checked;
+                else
+                    chk_IsDBUser.CheckState = CheckState.Unchecked;
+                }
         }
         public string UserEmail
         {
@@ -83,11 +94,17 @@ namespace Odin.CMB_Components.Users
         {
             get
             {
-                return chk_IsActive.CheckState == CheckState.Checked ? -1 : 0;
+                if (chk_IsActive.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {
-                chk_IsActive.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+                if (value == -1)
+                    chk_IsActive.CheckState = CheckState.Checked;
+                else
+                    chk_IsActive.CheckState = CheckState.Unchecked;
             }
         }
 
@@ -154,8 +171,11 @@ namespace Odin.CMB_Components.Users
 
         public void CheckEmpty()
         {
-            btn_OK.Enabled = String.IsNullOrEmpty(UserName) != true
-                || String.IsNullOrEmpty(UserSurName) != true;
+            if (String.IsNullOrEmpty(UserName) == true
+                && String.IsNullOrEmpty(UserSurName) == true)
+                btn_OK.Enabled = false;
+            else
+                btn_OK.Enabled = true;
         }
 
         private void txt_Name_TextChanged(object sender, EventArgs e)

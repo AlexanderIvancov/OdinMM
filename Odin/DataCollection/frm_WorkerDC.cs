@@ -1,10 +1,19 @@
-﻿using Odin.Global_Classes;
-using Odin.Tools;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
+using Odin.Tools;
+using System.Data.SqlClient;
+using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace Odin.DataCollection
 {
@@ -67,7 +76,7 @@ namespace Odin.DataCollection
             get { return _stateid; }
             set { _stateid = value; }
         }
-
+        
         string _launch = "";
 
         public string Launch
@@ -246,7 +255,7 @@ namespace Odin.DataCollection
 
         private void frm_WorkerDC_FormClosing(object sender, FormClosingEventArgs e)
         {
-
+           
             timer.Dispose();
         }
 
@@ -257,7 +266,7 @@ namespace Odin.DataCollection
             txt_Oper.Focus();
         }
 
-
+      
 
         private void btn_Close_Click(object sender, EventArgs e)
         {
@@ -322,9 +331,9 @@ namespace Odin.DataCollection
                             Worker = "";
                             WorkerId = 0;
                         }
-                    }
+                    }                  
                 }
-
+                
                 else
                 {
                     System.Media.SystemSounds.Exclamation.Play();

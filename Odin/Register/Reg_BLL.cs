@@ -1,9 +1,12 @@
-﻿using Odin.Global_Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.Sql;
+using System.Data.SqlClient;
+using System.Data;
+using Odin.Global_Classes;
 
 namespace Odin.Register
 {
@@ -390,7 +393,7 @@ namespace Odin.Register
 
         #region Nomenclatures
 
-        public static DataTable getBOMs(int _artid, string _artbeg, string _secarticle, string _description, int _typeid,
+        public static DataTable getBOMs(int _artid, string _artbeg, string _secarticle, string _description, int _typeid, 
                                             string _comments, int _firmid, string _reffirm, int _isactive, int _bomstate, int _orderexists)
         {
             string query = "sp_BOMList";
@@ -421,7 +424,7 @@ namespace Odin.Register
             var sqlparams = new List<SqlParameter>
             {
                 new SqlParameter("@artid",SqlDbType.Int){Value = _artid }
-
+            
             };
 
             return Helper.QuerySP(query, sqlparams.ToArray());
@@ -696,7 +699,7 @@ namespace Odin.Register
 
         public string OneC
         {
-            get; set;
+            get;set;
         }
         public string SupComments
         {
@@ -959,8 +962,7 @@ namespace Odin.Register
         public int AddressId
         {
             get { return _addressid; }
-            set
-            {
+            set {
                 _addressid = value;
 
                 SqlConnection conn = new SqlConnection(sConnStr);
@@ -1094,9 +1096,7 @@ namespace Odin.Register
         public int ContactId
         {
             get { return _contactid; }
-            set
-            {
-                _contactid = value;
+            set { _contactid = value;
 
                 SqlConnection conn = new SqlConnection(sConnStr);
                 conn.Open();
@@ -1172,7 +1172,7 @@ namespace Odin.Register
 
         public void EditContact(int id, int firmid, string fullname, string jobtitle, string email, string phone, string fax, string comments)
         {
-
+           
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_EditContact", sqlConn);
@@ -1186,7 +1186,7 @@ namespace Odin.Register
             sqlComm.Parameters.AddWithValue("@phone", phone);
             sqlComm.Parameters.AddWithValue("@fax", fax);
             sqlComm.Parameters.AddWithValue("@comments", comments);
-
+            
 
             try
             {
@@ -1195,17 +1195,17 @@ namespace Odin.Register
                 sqlConn.Close();
             }
             catch { }
-
+            
         }
 
         public void DeleteContact(int id)
         {
-
+           
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_DeleteContact", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
             sqlComm.Parameters.AddWithValue("@id", id);
-
+           
 
             try
             {
@@ -1214,7 +1214,7 @@ namespace Odin.Register
                 sqlConn.Close();
             }
             catch { }
-
+            
         }
 
 
@@ -1268,9 +1268,9 @@ namespace Odin.Register
 
             //try
             //{
-            sqlConn.Open();
-            sqlComm.ExecuteNonQuery();
-            sqlConn.Close();
+                sqlConn.Open();
+                sqlComm.ExecuteNonQuery();
+                sqlConn.Close();
             //}
             //catch { }
 
@@ -1329,7 +1329,7 @@ namespace Odin.Register
                 SqlDataAdapter adapter =
                     new SqlDataAdapter(
                         "execute sp_SelectAccountDets @id = " + _accountid, conn);
-
+                
                 conn.Close();
 
                 adapter.Fill(ds);
@@ -1389,7 +1389,7 @@ namespace Odin.Register
             return Helper.QueryDT(query);
         }
 
-        public static DataTable getCatalogList(int _bargtype, int _typeid, int _firmid, int _artid, string _article, string _firmart, string _datefrom,
+        public static DataTable getCatalogList(int _bargtype, int _typeid, int _firmid, int _artid, string _article, string _firmart, string _datefrom, 
                                                 string _datetill, string _comments)
         {
             string query = "sp_CatalogList";
@@ -1416,8 +1416,7 @@ namespace Odin.Register
         public int CatId
         {
             get { return _catid; }
-            set
-            {
+            set {
                 _catid = value;
 
                 SqlConnection conn = new SqlConnection(sConnStr);
@@ -1443,7 +1442,7 @@ namespace Odin.Register
                         CatFirmArt = dr["firmart"].ToString();
                         CatFirmId = Convert.ToInt32(dr["firmid"]);
                         CatUnitId = Convert.ToInt32(dr["unitid"]);
-                        CatUnitPrice = Convert.ToDouble(dr["unitprice"]);
+                        CatUnitPrice = Convert.ToDouble(dr["unitprice"]); 
                         CatCurId = Convert.ToInt32(dr["curid"]);
                         CatManufacturer = dr["manufacturer"].ToString();
                         CatDelivDerm = Convert.ToInt32(dr["delivterm"]);
@@ -1503,7 +1502,7 @@ namespace Odin.Register
         { get; set; }
         public int CatFirmId
         {
-            get; set;
+            get;set;
         }
         public string CatFirmArt
         { get; set; }
@@ -1643,7 +1642,7 @@ namespace Odin.Register
             sqlComm.CommandType = CommandType.StoredProcedure;
 
             sqlComm.Parameters.AddWithValue("@id", id);
-
+            
 
             try
             {
@@ -1699,10 +1698,10 @@ namespace Odin.Register
 
             //try
             //{
-            sqlConn.Open();
-            sqlComm.ExecuteNonQuery();
-            _res = Convert.ToInt32(sqlComm.Parameters["@insertedid"].Value);
-            sqlConn.Close();
+                sqlConn.Open();
+                sqlComm.ExecuteNonQuery();
+                _res = Convert.ToInt32(sqlComm.Parameters["@insertedid"].Value);
+                sqlConn.Close();
             //}
             //catch { }
             return _res;
@@ -1720,7 +1719,7 @@ namespace Odin.Register
             sqlComm.Parameters.AddWithValue("@categoryid", categoryid);
             sqlComm.Parameters.AddWithValue("@value", value);
             sqlComm.Parameters.AddWithValue("@comments", comments);
-
+           
             try
             {
                 sqlConn.Open();
@@ -1785,11 +1784,11 @@ namespace Odin.Register
             sqlComm.Parameters.Add("@tableratios", SqlDbType.Structured);
             sqlComm.Parameters["@tableratios"].TypeName = "UT_ArtRatioStages";
             sqlComm.Parameters["@tableratios"].Value = ratios;
-
+                       
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
+            
             return _res;
         }
 
@@ -1877,7 +1876,7 @@ namespace Odin.Register
             sqlComm.CommandType = CommandType.StoredProcedure;
 
             sqlComm.Parameters.AddWithValue("@id", id);
-
+            
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
@@ -1949,7 +1948,7 @@ namespace Odin.Register
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_AddBOMSetup", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
-
+            
             sqlComm.Parameters.AddWithValue("@artid", artid);
             sqlComm.Parameters.AddWithValue("@tooltypeid", tooltypeid);
             sqlComm.Parameters.AddWithValue("@toolid", toolid);
@@ -1987,7 +1986,7 @@ namespace Odin.Register
             sqlComm.CommandType = CommandType.StoredProcedure;
 
             sqlComm.Parameters.AddWithValue("@id", id);
-
+           
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
@@ -2086,7 +2085,7 @@ namespace Odin.Register
             sqlComm.Parameters.AddWithValue("@artcseid", artcseid);
             sqlComm.Parameters.AddWithValue("@artcstid", artcstid);
             sqlComm.Parameters.AddWithValue("@analogid", analogid);
-
+           
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();

@@ -1,9 +1,20 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.CMB_Components.BLL;
-using Odin.Global_Classes;
-using Odin.Sales;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using ComponentFactory.Krypton.Workspace;
+using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using Odin.CMB_Components.BLL;
+using Odin.Sales;
 
 namespace Odin.CMB_Components.Quotations
 {
@@ -41,7 +52,7 @@ namespace Odin.CMB_Components.Quotations
             {
                 ((cmb_Quotations)cmb_QuotationOne).txt_Quotation.Text = gv_List.CurrentRow.Cells["cn_name"].Value.ToString();
                 ((cmb_Quotations)cmb_QuotationOne).QuotationId = (Int32)gv_List.CurrentRow.Cells["cn_id"].Value;
-            }
+             }
             catch { }
         }
 
@@ -92,7 +103,7 @@ namespace Odin.CMB_Components.Quotations
                 ((cmb_Quotations)cmb_QuotationOne).QuotationId = frm.ctl_QuotDets1.QuotId;
                 ((cmb_Quotations)cmb_QuotationOne).QuotationSendSave();
                 frm.Close();
-
+                
             }
         }
 

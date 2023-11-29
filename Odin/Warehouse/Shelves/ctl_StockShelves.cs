@@ -1,10 +1,16 @@
-﻿using Odin.Global_Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
+using System.ComponentModel;
 using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
+using Odin.CMB_Components.BLL;
+using ComponentFactory.Krypton.Toolkit;
+using System.Data.SqlClient;
 
 
 namespace Odin.Warehouse.Shelves
@@ -76,8 +82,7 @@ namespace Odin.Warehouse.Shelves
         public int PlaceId
         {
             get { return _placeid; }
-            set
-            {
+            set {
                 _placeid = value;
                 BLL.PlaceId = _placeid;
                 PlaceName = BLL.PlaceName;
@@ -170,7 +175,7 @@ namespace Odin.Warehouse.Shelves
                 yield return returnNode;
             }
         }
-
+        
         public string TwoNodes(int Id)
         {
             string _res = "";
@@ -199,13 +204,13 @@ namespace Odin.Warehouse.Shelves
             return _res;
         }
 
-
+       
 
         #endregion
 
 
         #region Controls
-
+           
 
         private void btn_Add_Click(object sender, EventArgs e)
         {
@@ -241,8 +246,8 @@ namespace Odin.Warehouse.Shelves
             DialogResult result = frm.ShowDialog();
             if (result == DialogResult.OK)
             {
-                BLL.EditStockPlace(BLL.PlaceId, frm.Place, frm.Description, BLL.PlaceParentId, frm.DeptId,
-                                frm.FirmId, frm.AddressId, frm.RespPersonId, frm.IsProduction, frm.Quarantine,
+                BLL.EditStockPlace(BLL.PlaceId, frm.Place, frm.Description, BLL.PlaceParentId, frm.DeptId, 
+                                frm.FirmId, frm.AddressId, frm.RespPersonId, frm.IsProduction, frm.Quarantine, 
                                 frm.OwnerId);
                 SelectedNode.Text = frm.Place;
                 BLL.PlaceId = Convert.ToInt32(SelectedNode.Tag);

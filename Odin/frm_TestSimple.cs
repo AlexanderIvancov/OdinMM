@@ -1,9 +1,21 @@
-﻿using AegisImplicitMail;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
+using System.IO;
+using System.Diagnostics;
+using System.Net.Mail;
+using System.Net.Mime;
+using System.Text.RegularExpressions;
+using System.Web;
+using System.Net;
+using AegisImplicitMail;
 
 namespace Odin
 {
@@ -24,7 +36,7 @@ namespace Odin
 
             FileInfo fileInf = new FileInfo(path);
             if (fileInf.Exists == false
-               || myFileVersionInfo != myFileVersionInfo1)
+               || myFileVersionInfo != myFileVersionInfo1 )
             {
                 CopyDir("c:/Odin1", "c:/Odin");
 
@@ -136,7 +148,7 @@ namespace Odin
             var mailer = new MimeMailer(host, 465);
             if (chk_UseDefault.CheckState == CheckState.Unchecked)
             {
-
+                
                 mailer.User = user;
                 mailer.Password = pass;
                 mailer.SslType = SslMode.Ssl;

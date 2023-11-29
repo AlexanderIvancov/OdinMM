@@ -1,10 +1,15 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.Globalization;
-using System.Runtime.InteropServices;
-using System.Threading;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using System.Globalization;
+using System.Threading;
+using System.Runtime.InteropServices;
 namespace Odin.CustomControls
 {
     public partial class NullableDateTimePicker : KryptonDateTimePicker
@@ -83,7 +88,10 @@ namespace Odin.CustomControls
         {
             get
             {
-                return _isNull ? null : (DateTime?)base.Value;
+                if (_isNull)
+                    return null;
+                else
+                    return base.Value;
             }
             set
             {

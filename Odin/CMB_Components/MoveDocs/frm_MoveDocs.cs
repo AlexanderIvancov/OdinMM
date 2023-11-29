@@ -1,9 +1,19 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.CMB_Components.BLL;
-using Odin.Global_Classes;
-using Odin.Warehouse.Movements;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using ComponentFactory.Krypton.Workspace;
+using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using Odin.CMB_Components.BLL;
+using Odin.Warehouse.Movements;
 
 
 namespace Odin.CMB_Components.MoveDocs
@@ -64,7 +74,7 @@ namespace Odin.CMB_Components.MoveDocs
             frm_AddMoveDoc frm = new frm_AddMoveDoc();
 
             frm.FillAutoDoc(6);
-
+            
             DialogResult result = frm.ShowDialog();
 
             if (result == DialogResult.OK)
@@ -112,7 +122,7 @@ namespace Odin.CMB_Components.MoveDocs
                 frm.BatchId = Bll.MoveDocBatchId;
                 frm.QtyToProduce = Bll.MoveQtyOnStage;
                 frm.StageId = Bll.MoveStageId;
-
+               
                 DialogResult result = frm.ShowDialog();
 
                 if (result == DialogResult.OK)

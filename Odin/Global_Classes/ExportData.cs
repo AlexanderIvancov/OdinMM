@@ -1,16 +1,16 @@
-﻿using NPOI.HPSF;
-using NPOI.HSSF.UserModel;
-using NPOI.HSSF.Util;
-using NPOI.SS.UserModel;
-using Odin.Tools;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
+using NPOI.HSSF.UserModel;
+using NPOI.HPSF;
+using NPOI.HSSF.Util;
+using NPOI.SS.UserModel;
+using System.Linq;
+using Odin.Tools;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace Odin.Global_Classes
 {
@@ -129,18 +129,18 @@ namespace Odin.Global_Classes
                 fileName = savefiledialog1.FileName;
                 if (!string.IsNullOrEmpty(fileName))
                 {
-                    dgv.Enabled = false;
-                    BackgroundWorker bw = new BackgroundWorker();
-                    bw.DoWork += ImportQueryData;
+                        dgv.Enabled = false;
+                        BackgroundWorker bw = new BackgroundWorker();
+                        bw.DoWork += ImportQueryData;
 
-                    bw.RunWorkerCompleted += ImportCompleted;
+                        bw.RunWorkerCompleted += ImportCompleted;
 
-                    fmWait = new frm_Wait();
+                        fmWait = new frm_Wait();
 
-                    bw.RunWorkerAsync();
-                    fmWait.Start();
-                    fmWait.Show();
-
+                        bw.RunWorkerAsync();
+                        fmWait.Start();
+                        fmWait.Show();
+                    
                 }
             }
         }
@@ -263,14 +263,14 @@ namespace Odin.Global_Classes
 
         private void ImportQueryData(object sender, DoWorkEventArgs e)
         {
-
+            
             InitializeWorkbook();
 
             ISheet sheet1 = hssfworkbook.CreateSheet("Sheet1");
-
+           
 
             var data = Helper.QuerySP(Query, SqlParams.ToArray());
-
+            
             int columnNumber = 0;
             //MessageBox.Show(dgv.Rows.Count.ToString());
             for (int i = 0; i < data.Rows.Count; i++)
@@ -306,8 +306,8 @@ namespace Odin.Global_Classes
             int j = 0;
             foreach (DataColumn column in data.Columns)
             {
-                SetHeaderQueryValue(sheet1, column, headerRow, j);
-                j++;
+               SetHeaderQueryValue(sheet1, column, headerRow, j);
+               j++;
             }
 
 

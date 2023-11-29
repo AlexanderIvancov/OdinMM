@@ -1,9 +1,16 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
+using System.Data.SqlClient;
 
 namespace Odin.Planning
 {
@@ -82,16 +89,22 @@ namespace Odin.Planning
             }
             set { txt_QtyPO.Text = value.ToString(); }
         }
-
+        
         public int SubBatch
         {
             get
             {
-                return chk_SubBatch.CheckState == CheckState.Checked ? -1 : 0;
+                if (chk_SubBatch.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {
-                chk_SubBatch.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+                if (value == -1)
+                    chk_SubBatch.CheckState = CheckState.Checked;
+                else
+                    chk_SubBatch.CheckState = CheckState.Unchecked;
             }
         }
 
@@ -99,11 +112,17 @@ namespace Odin.Planning
         {
             get
             {
-                return chk_Active.CheckState == CheckState.Checked ? -1 : 0;
+                if (chk_Active.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {
-                chk_Active.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+                if (value == -1)
+                    chk_Active.CheckState = CheckState.Checked;
+                else
+                    chk_Active.CheckState = CheckState.Unchecked;
             }
         }
 
@@ -111,18 +130,24 @@ namespace Odin.Planning
         {
             get
             {
-                return chk_dnp.CheckState == CheckState.Checked ? -1 : 0;
+                if (chk_dnp.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {
-                chk_dnp.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+                if (value == -1)
+                    chk_dnp.CheckState = CheckState.Checked;
+                else
+                    chk_dnp.CheckState = CheckState.Unchecked;
             }
         }
 
         public string Stage
         {
             get { return txt_Stage.Text; }
-            set { txt_Stage.Text = value; }
+            set { txt_Stage.Text = value;}
 
         }
 
@@ -168,8 +193,11 @@ namespace Odin.Planning
         }
         public void CheckEmpty()
         {
-            btn_OK.Enabled = (BatchDetId != 0 || Qty != 0)
-                && ArtId != 0;
+            if ((BatchDetId == 0 && Qty == 0)
+                || ArtId == 0)
+                btn_OK.Enabled = false;
+            else
+                btn_OK.Enabled = true;
 
         }
 
@@ -208,7 +236,7 @@ namespace Odin.Planning
             {
                 foreach (DataRow dr in dt.Rows)
                 {
-
+                   
                     QtyStock = Convert.ToDouble(dr["QtyOnStock"]);
                     QtyAvailable = Convert.ToDouble(dr["QtyAvailable"]);
                     WaitingPO = Convert.ToDouble(dr["WaitingPOQty"]);

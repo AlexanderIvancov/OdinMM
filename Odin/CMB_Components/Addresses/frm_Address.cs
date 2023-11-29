@@ -1,8 +1,17 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using Odin.Register;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
+using Odin.CMB_Components.BLL;
+using Odin.Register;
 
 
 namespace Odin.CMB_Components.Addresses
@@ -33,7 +42,7 @@ namespace Odin.CMB_Components.Addresses
 
         class_Global glob_Class = new class_Global();
         Reg_BLL Bll = new Reg_BLL();
-
+        
         bool _showingModal = false;
         cmb_Address f;
 

@@ -1,14 +1,21 @@
-﻿using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using WeifenLuo.WinFormsUI.Docking;
+using Odin.Global_Classes;
+using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using ComponentFactory.Krypton.Workspace;
+using ComponentFactory.Krypton.Toolkit;
+using Odin.Planning.Controls;
+using System.Data.SqlClient;
+using Odin.Tools;
 
 namespace Odin.Workshop
 {
@@ -53,7 +60,7 @@ namespace Odin.Workshop
             p.TextTitle = name;
             p.TextDescription = name;
             p.ImageSmall = imageListSmall.Images[image];
-
+            
             //p.Width = _Width;
 
             // Add the control for display inside the page
@@ -64,14 +71,14 @@ namespace Odin.Workshop
         }
 
         private KryptonPage NewInputChart(/*DataTable datasource*/)
-        {
+        {            
 
             ctlChart = new ctl_ProductivityChart();
 
             ctlChart.FillData(productivity1.ProductivityDataTable);
             ctlChart.Refresh();
             ControlWidth = ctlChart.Width;
-
+            
             return NewPage("Charting", 1, ctlChart, ctlChart.Width);
         }
 
@@ -83,9 +90,9 @@ namespace Odin.Workshop
                 if (ctlChart1 != null)
                 {
 
-                    ctlChart1.ThreadSafeCall(delegate { ctlChart1.FillData(productivity1.ProductivityDataTable); });
+                    ctlChart1.ThreadSafeCall(delegate { ctlChart1.FillData(productivity1.ProductivityDataTable); }) ;
                 }
-
+                
             }
         }
 
@@ -140,7 +147,7 @@ namespace Odin.Workshop
             gv_List.Columns.Add(col);
 
             //Weeks
-            var dataweeks = DAL_Functions.getWeeks(txt_From.Text.Trim() == "" ? System.DateTime.Now.AddYears(-1).ToShortDateString() : txt_From.Text,
+            var dataweeks = DAL_Functions.getWeeks(txt_From.Text.Trim() == "" ? System.DateTime.Now.AddYears(-1).ToShortDateString() : txt_From.Text, 
                                                 txt_Till.Text.Trim() == "" ? System.DateTime.Now.AddYears(1).ToShortDateString() : txt_Till.Text);
 
             foreach (DataRow row in dataweeks.Rows)
@@ -225,7 +232,7 @@ namespace Odin.Workshop
             col.Width = 100;
 
             gv_List.Columns.Add(col);
-
+            
             col = new DataGridViewTextBoxColumn();
 
             col.Name = "cn_total";
@@ -235,7 +242,7 @@ namespace Odin.Workshop
             col.Width = 80;
 
             gv_List.Columns.Add(col);
-
+            
             col = new DataGridViewTextBoxColumn();
 
             col.Name = "cn_stageid";
@@ -379,26 +386,26 @@ namespace Odin.Workshop
             //return dt;
             //try
             //{
-            if (dgv.ColumnCount == 0) return null;
-            DataTable dtSource = new DataTable();
-            foreach (DataGridViewColumn col in dgv.Columns)
-            {
-                if (IgnoreHideColumns & !col.Visible) continue;
-                if (col.Name == string.Empty) continue;
-                dtSource.Columns.Add(col.Name);
-                dtSource.Columns[col.Name].Caption = col.HeaderText;
-            }
-            if (dtSource.Columns.Count == 0) return null;
-            foreach (DataGridViewRow row in dgv.Rows)
-            {
-                DataRow drNewRow = dtSource.NewRow();
-                foreach (DataColumn col in dtSource.Columns)
+                if (dgv.ColumnCount == 0) return null;
+                DataTable dtSource = new DataTable();
+                foreach (DataGridViewColumn col in dgv.Columns)
                 {
-                    drNewRow[col.ColumnName] = row.Cells[col.ColumnName].Value;
+                    if (IgnoreHideColumns & !col.Visible) continue;
+                    if (col.Name == string.Empty) continue;
+                    dtSource.Columns.Add(col.Name);
+                    dtSource.Columns[col.Name].Caption = col.HeaderText;
                 }
-                dtSource.Rows.Add(drNewRow);
-            }
-            return dtSource;
+                if (dtSource.Columns.Count == 0) return null;
+                foreach (DataGridViewRow row in dgv.Rows)
+                {
+                    DataRow drNewRow = dtSource.NewRow();
+                    foreach (DataColumn col in dtSource.Columns)
+                    {
+                        drNewRow[col.ColumnName] = row.Cells[col.ColumnName].Value;
+                    }
+                    dtSource.Rows.Add(drNewRow);
+                }
+                return dtSource;
             //}
             //catch { return null; }
         }
@@ -421,7 +428,7 @@ namespace Odin.Workshop
 
 
             txt_From.Value = mondayDate;//DateTime.Now.AddDays(-14);
-
+            
 
 
 
@@ -528,7 +535,7 @@ namespace Odin.Workshop
 
         private void btn_Chart_Click(object sender, EventArgs e)
         {
-
+          
             //kryptonDockingManager1.AddDockspace("Control",
             //                                 DockingEdge.Left,
             //                                 new KryptonPage[] { NewInputChart(/*GetDataTableFromDGV(gv_List)*/) });

@@ -1,9 +1,17 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using CrystalDecisions.CrystalReports.Engine;
-using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Workspace;
+using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using CrystalDecisions.CrystalReports.Engine;
+using Odin.CMB_Components.BLL;
 
 namespace Odin.Planning.Passport
 {
@@ -39,9 +47,9 @@ namespace Odin.Planning.Passport
 
         public string CreatedBy
         { get; set; }
-
+        
         public string ValidatedBy
-        { get; set; }
+        { get; set;}
 
         public string CreatedAt
         { get; set; }
@@ -56,7 +64,7 @@ namespace Odin.Planning.Passport
         { get; set; }
 
         public string BatchComments
-        { get; set; }
+        { get;set;}
 
         public string OrderComments
         { get; set; }
@@ -96,7 +104,7 @@ namespace Odin.Planning.Passport
             ReportDocument report = new ReportDocument();
 
             report.FileName = Application.StartupPath + "\\Planning\\Passport\\" + "rpt_PassportTitle.rpt";
-
+            
             //DataMatrix
             DataTable dt = new DataTable();
             //StockPrint_DataSet.dt_DataMatrixFieldDataTable dt = new StockPrint_DataSet.dt_DataMatrixFieldDataTable();
@@ -134,7 +142,7 @@ namespace Odin.Planning.Passport
             report.Database.Tables[3].SetDataSource(datalaba);
 
             report.Subreports["rsub_PassportTitle"].SetDataSource(datawarnings);
-
+           
 
             ////parameters
             report.SetParameterValue("Creator", CreatedBy);
@@ -155,7 +163,7 @@ namespace Odin.Planning.Passport
             report.SetParameterValue("OrderType", OrderType);
             report.SetParameterValue("BatchQty", Quantity);
             report.SetParameterValue("OrderTypeId", OrderTypeId);
-            report.SetParameterValue("BoxLabel1", Article + " (" + Batch + ")");
+            report.SetParameterValue("BoxLabel1", Article + " (" + Batch + ")" );
             report.SetParameterValue("BoxLabel2", Article + " (" + Batch + ")");
             report.SetParameterValue("BoxLabel3", Article + " (" + Batch + ")");
             report.SetParameterValue("BoxLabel4", Article + " (" + Batch + ")");
@@ -267,7 +275,7 @@ namespace Odin.Planning.Passport
 
             DataTable data = new DataTable();
             data = Plan_BLL.getLaunchVizas(LaunchId);
-
+            
             //data source
             report.Database.Tables[0].SetDataSource(datalab);
             report.Database.Tables[1].SetDataSource(dt);
@@ -306,7 +314,15 @@ namespace Odin.Planning.Passport
         }
         public void FillReport()
         {
-            ReportDocument rd = RepType == 1 ? OpenReport() : RepType == 2 ? OpenReportLaunch() : OpenReportLaunchVizas();
+            ReportDocument rd;
+
+            if (RepType == 1)
+                rd = OpenReport();
+            else if (RepType == 2)
+                rd = OpenReportLaunch();
+            else
+                rd = OpenReportLaunchVizas();
+
             crystalReportViewer1.ReportSource = rd;
 
         }

@@ -1,14 +1,23 @@
-﻿using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
 using Odin.Tools;
-using System;
-using System.ComponentModel;
-using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Windows.Forms;
+using WeifenLuo.WinFormsUI.Docking;
+using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using ComponentFactory.Krypton.Workspace;
+using System.Threading;
+using Odin.Register;
+using Odin.CMB_Components.BLL;
 
 namespace Odin.Sales
 {
@@ -22,7 +31,7 @@ namespace Odin.Sales
 
         }
         #region Variables
-
+       
         ExportData ED;
         ExportData ED1;
 
@@ -103,12 +112,12 @@ namespace Odin.Sales
             {
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
-
+                
 
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
-
+                              
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
                 SetCellsColor();
 
@@ -171,7 +180,7 @@ namespace Odin.Sales
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
 
-
+               
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
                 SetCellsColor();
 
@@ -191,7 +200,10 @@ namespace Odin.Sales
 
         public void FillPagesDets()
         {
-            khg_Dets.Visible = dn_Pages.SelectedPage != pg_Payments;
+            if (dn_Pages.SelectedPage == pg_Payments)
+                khg_Dets.Visible = false;
+            else
+                khg_Dets.Visible = true;
 
         }
 
@@ -279,13 +291,20 @@ namespace Odin.Sales
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? String.IsNullOrEmpty(CellValue) == true
-                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
-                    : String.IsNullOrEmpty(CellValue) == true
-                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -298,9 +317,10 @@ namespace Odin.Sales
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
-                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
+                else
+                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             //SetCellsColor();
@@ -406,13 +426,20 @@ namespace Odin.Sales
         {
             try
             {
-                bs_Orders.Filter = String.IsNullOrEmpty(bs_Orders.Filter) == true
-                    ? String.IsNullOrEmpty(oCellValue) == true
-                        ? "(" + oColumnName + " is null OR Convert(" + oColumnName + ", 'System.String') = '')"
-                        : "Convert(" + oColumnName + " , 'System.String') = '" + glob_Class.NES(oCellValue) + "'"
-                    : String.IsNullOrEmpty(oCellValue) == true
-                        ? bs_Orders.Filter + "AND (" + oColumnName + " is null OR Convert(" + oColumnName + ", 'System.String') = '')"
-                        : bs_Orders.Filter + " AND Convert(" + oColumnName + " , 'System.String') = '" + glob_Class.NES(oCellValue) + "'";
+                if (String.IsNullOrEmpty(bs_Orders.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(oCellValue) == true)
+                        bs_Orders.Filter = "(" + oColumnName + " is null OR Convert(" + oColumnName + ", 'System.String') = '')";
+                    else
+                        bs_Orders.Filter = "Convert(" + oColumnName + " , 'System.String') = '" + glob_Class.NES(oCellValue) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(oCellValue) == true)
+                        bs_Orders.Filter = bs_Orders.Filter + "AND (" + oColumnName + " is null OR Convert(" + oColumnName + ", 'System.String') = '')";
+                    else
+                        bs_Orders.Filter = bs_Orders.Filter + " AND Convert(" + oColumnName + " , 'System.String') = '" + glob_Class.NES(oCellValue) + "'";
+                }
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -425,9 +452,10 @@ namespace Odin.Sales
         {
             try
             {
-                bs_Orders.Filter = String.IsNullOrEmpty(bs_Orders.Filter) == true
-                    ? "Convert(" + oColumnName + " , 'System.String') <> '" + oCellValue + "'"
-                    : bs_Orders.Filter + " AND " + oColumnName + " <> '" + oCellValue + "'";
+                if (String.IsNullOrEmpty(bs_Orders.Filter) == true)
+                    bs_Orders.Filter = "Convert(" + oColumnName + " , 'System.String') <> '" + oCellValue + "'";
+                else
+                    bs_Orders.Filter = bs_Orders.Filter + " AND " + oColumnName + " <> '" + oCellValue + "'";
             }
             catch { }
             //SetCellsColor();
@@ -489,16 +517,16 @@ namespace Odin.Sales
             }
             else if (dn_Pages.SelectedPage == pg_Invoices)
             {
-
+               
             }
             else
             {
                 bwStart(bw_OrdersList);
             }
-
+            
         }
 
-
+       
 
         private void txt_CreatDateFrom_DropDown(object sender, DateTimePickerDropArgs e)
         {
@@ -528,7 +556,7 @@ namespace Odin.Sales
         private void btn_AddNew_Click(object sender, EventArgs e)
         {
             if (glob_Class.IsFormAlreadyOpen("frm_AddPayment")) return;
-
+            
             frm_AddPayment frm = new frm_AddPayment();
             frm.FillAutoDoc();
             frm.SavePayment += new SavePaymentEventHandler(PaymentAdded);
@@ -547,8 +575,7 @@ namespace Odin.Sales
             string _comments = "";
             int _curid = 0;
             double _currate = 0;
-            try
-            {
+            try {
                 _payment = gv_List.CurrentRow.Cells["cn_payment"].Value.ToString();
                 _headid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
                 _amount = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_amount"].Value);
@@ -587,7 +614,7 @@ namespace Odin.Sales
                         bwStart(bw_List);
 
                 }
-
+               
             }
 
         }
@@ -624,10 +651,8 @@ namespace Odin.Sales
         {
             int _coid = 0;
             int _quotid = 0;
-
-            try
-            {
-                _coid = Convert.ToInt32(gv_Orders.CurrentRow.Cells["cn_oid"].Value);
+            
+            try { _coid = Convert.ToInt32(gv_Orders.CurrentRow.Cells["cn_oid"].Value);
                 _quotid = Convert.ToInt32(gv_Orders.CurrentRow.Cells["cn_oquotid"].Value);
             }
             catch { }
@@ -640,7 +665,7 @@ namespace Odin.Sales
                 {
                     DataGridViewColumn oldColumn = gv_PayDetails.SortedColumn;
                     var dir = Helper.SaveDirection(gv_PayDetails);
-
+                    
                     gv_PayDetails.AutoGenerateColumns = false;
                     bs_PayDetails.DataSource = data;
                     gv_PayDetails.DataSource = bs_PayDetails;
@@ -655,7 +680,7 @@ namespace Odin.Sales
 
                 });
 
-
+                
             }
         }
 
@@ -667,10 +692,8 @@ namespace Odin.Sales
             int _custid = 0;
             string _paydate = "";
 
-            try
-            {
-                _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
-                _amount = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_amount"].Value);
+            try { _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
+                _amount = Convert.ToDouble (gv_List.CurrentRow.Cells["cn_amount"].Value);
                 _payment = gv_List.CurrentRow.Cells["cn_payment"].Value.ToString();
                 _custid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_buyerid"].Value);
                 _paydate = gv_List.CurrentRow.Cells["cn_regdate"].Value.ToString();

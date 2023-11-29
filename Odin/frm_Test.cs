@@ -1,20 +1,34 @@
-﻿using AegisImplicitMail;
-using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Odin.Global_Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data.SqlClient;
-using System.IO;
+using System.Data;
+using System.Drawing;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using ComponentFactory.Krypton.Workspace;
+
+using System.Runtime.InteropServices;
+using System.Diagnostics;
+using Odin.Global_Classes;
+using Odin.Register.Articles;
+
+using Newtonsoft.Json;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Web;
+using System.Net;
+using System.IO;
+using RestSharp;
+using Newtonsoft.Json.Linq;
+using AegisImplicitMail;
+using System.Data;
+using System.Data.SqlClient;
 namespace Odin
 {
     public partial class frm_Test : BaseForm
@@ -86,11 +100,11 @@ namespace Odin
                 //cell.ResetPalette();
             }
 
-
-
+            
+           
 
             kryptonDockingManager1.ShowAllPages();
-
+            
             //kryptonDockingManager1.RemoveAllPages(true);
             //this.Close();
         }
@@ -103,7 +117,7 @@ namespace Odin
         private void btn_General_Click(object sender, EventArgs e)
         {
             //kryptonDockingManager1.AddDockspace("Control",
-            //                                    DockingEdge.Left,
+           //                                    DockingEdge.Left,
             //                                   new KryptonPage[] { NewInputGeneral("Article", 4) });
         }
 
@@ -118,14 +132,14 @@ namespace Odin
         {
             if (this.WindowState == FormWindowState.Maximized)
             {
-
+                
             }
-
-            //{ kryptonDockableWorkspace1.; }
+                    
+                    //{ kryptonDockableWorkspace1.; }
         }
 
         //static readonly HttpClient _client = new HttpClient();
-
+        
 
         private static async Task<Token> GetElibilityToken(/*HttpClient client*/)
         {
@@ -388,8 +402,12 @@ namespace Odin
         private String getCPNURL(String cpn, int pageNumber, int pageSize, String currency, String endCustomer, String version)
         {
 
-            string url = endCustomer != null
-                ? string.Format(
+            String url = "";
+
+            if (endCustomer != null)
+            {
+
+                url = string.Format(
 
                 "https://my.arrow.com/api/priceandavail/cpns/{0}/parts/?currency={1}&pageNumber={2}&pageSize={3}&version={4}&endCustomer={5}",
 
@@ -405,8 +423,15 @@ namespace Odin
 
                 Uri.EscapeDataString(endCustomer)
 
-                )
-                : string.Format(
+                );
+
+            }
+            else
+            {
+
+
+
+                url = string.Format(
 
                 "https://my.arrow.com/api/priceandavail/cpns/{0}/parts/?currency={1}&pageNumber={2}&pageSize={3}&version={4}",
 
@@ -419,6 +444,9 @@ namespace Odin
                 Uri.EscapeDataString(pageSize + ""),
 
                 Uri.EscapeDataString(version));
+
+            }
+
             return url;
 
 
@@ -622,7 +650,7 @@ namespace Odin
             return responseString;
 
         }
-
+        
         public String searchPartByDocId(String accessToken, String docId, String currency)
         {
 
@@ -747,7 +775,7 @@ namespace Odin
                 MessageBox.Show("Missing recipient address.", "Email Error");
                 return;
             }
-
+           
             if (String.IsNullOrEmpty(From))
             {
                 MessageBox.Show("Missing sender address.", "Email Error");
@@ -848,7 +876,7 @@ namespace Odin
         {
             if (e.UserState != null)
                 MessageBox.Show(e.UserState.ToString());
-            //Console.Out.WriteLine(e.UserState.ToString());
+                //Console.Out.WriteLine(e.UserState.ToString());
             //Console.Out.WriteLine("is it canceled? " + e.Cancelled);
             if (e.Error != null)
                 MessageBox.Show("Error : " + e.Error.Message + ", UserState = " + e.UserState.ToString());
@@ -866,7 +894,7 @@ namespace Odin
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             string strSQL = "select distinct email from bas_users where isactive = -1 and isnull(email, '') != '' order by surname ";
             SqlCommand sqlComm = new SqlCommand(strSQL, sqlConn);
-
+            
             sqlConn.Open();
             SqlDataReader reader = sqlComm.ExecuteReader();
             if (reader.HasRows == true)
@@ -883,7 +911,7 @@ namespace Odin
 
         public void TestConnection()
         {
-
+                                
             var host = txt_SMTP.Text;
             var user = txt_email.Text;
             var pass = txt_PWD.Text;
@@ -900,11 +928,15 @@ namespace Odin
 
         AegisImplicitMail.SslMode _mode
         {
-            get
-            {
+            get {
                 if (rb_Auto.Checked == true)
                     return SslMode.Auto;
-                else return rb_Ssl.Checked == true ? SslMode.Ssl : rb_Tls.Checked == true ? SslMode.Tls : SslMode.None;
+                else if (rb_Ssl.Checked == true)
+                    return SslMode.Ssl;
+                else if (rb_Tls.Checked == true)
+                    return SslMode.Tls;
+                else
+                    return SslMode.None;
 
             }
         }

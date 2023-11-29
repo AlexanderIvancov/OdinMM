@@ -1,7 +1,15 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
 
 namespace Odin.CMB_Components.LabPrinters
 {
@@ -33,19 +41,26 @@ namespace Odin.CMB_Components.LabPrinters
         }
         public int Default
         {
-            get
-            {
-                return chk_Default.CheckState == CheckState.Checked ? -1 : 0;
+            get { if (chk_Default.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
-            set { chk_Default.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked; }
+            set { if (value == -1)
+                    chk_Default.CheckState = CheckState.Checked;
+                else
+                    chk_Default.CheckState = CheckState.Unchecked; }
         }
 
         private void CheckEmpty()
         {
-            btn_OK.Enabled = PrinterName != ""
-                && IP_Address != "";
+            if (PrinterName == ""
+                || IP_Address == "")
+                btn_OK.Enabled = false;
+            else
+                btn_OK.Enabled = true;
         }
-
+        
         #endregion
 
         private void buttonSpecAny1_Click(object sender, EventArgs e)

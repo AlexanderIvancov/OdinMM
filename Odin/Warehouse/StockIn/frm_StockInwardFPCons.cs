@@ -1,16 +1,20 @@
-﻿using AdvancedDataGridView;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using Odin.Tools;
-using Odin.Warehouse.StockOut;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
+using Odin.Tools;
+using System.Data.SqlClient;
+using AdvancedDataGridView;
+using Odin.Warehouse.StockOut;
+using Odin.Warehouse.Deliveries;
 namespace Odin.Warehouse.StockIn
 {
     public partial class frm_StockInwardFPCons : KryptonForm
@@ -240,7 +244,7 @@ namespace Odin.Warehouse.StockIn
                 UnitPrice = SIBll.BUnitPrice;
                 ConfOrder = _FromBox == false ? SIBll.BConfOrder : bConfOrder;
                 ConfOrderId = _FromBox == false ? SIBll.BCOid : bConfOrderId;
-
+                
             }
             else
             {
@@ -657,11 +661,13 @@ namespace Odin.Warehouse.StockIn
         private void AddNode(DataRow dr, Font boldFont, TreeGridNodeCollection nodes, bool isAddingImage)
         {
             TreeGridNode node;
-            string _tempexpdate = Convert.ToDateTime(dr["expdate"]) != Convert.ToDateTime("01/01/2199")
-                ? Convert.ToDateTime(dr["expdate"]).ToShortDateString()
-                : Convert.ToDateTime(dr["regdate"]).ToShortDateString();
+            string _tempexpdate = "";
             //DataGridViewCell cell;
 
+            if (Convert.ToDateTime(dr["expdate"]) != Convert.ToDateTime("01/01/2199"))
+                _tempexpdate = Convert.ToDateTime(dr["expdate"]).ToShortDateString();
+            else
+                _tempexpdate = Convert.ToDateTime(dr["regdate"]).ToShortDateString();
 
             node = nodes.Add(null, dr["artid"], dr["artid"], dr["article"], dr["label"], dr["qtyreserved"],
                                                    dr["unit"], "0", dr["id"], "0", "0", "0", "", _tempexpdate,

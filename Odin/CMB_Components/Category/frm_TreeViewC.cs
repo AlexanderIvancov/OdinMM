@@ -1,10 +1,16 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.CMB_Components.BLL;
-using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
+using Odin.CMB_Components.BLL;
+using System.Data.SqlClient;
+using ComponentFactory.Krypton.Toolkit;
 
 
 namespace Odin.CMB_Components.Category
@@ -68,7 +74,7 @@ namespace Odin.CMB_Components.Category
 
         public string Description
         { get; set; }
-
+       
         public int CategoryId
         {
             get { return _CategoryId; }
@@ -93,7 +99,7 @@ namespace Odin.CMB_Components.Category
                     foreach (DataRow dr in dt.Rows)
                     {
                         Description = dr["description"].ToString();
-
+                        
                     }
                 }
                 else
@@ -251,7 +257,7 @@ namespace Odin.CMB_Components.Category
             frm.Category = tv_Cats.SelectedNode.Text;
             frm.Id = Convert.ToInt32(tv_Cats.SelectedNode.Tag);
             frm.Description = Description;
-
+           
             DialogResult result = frm.ShowDialog();
 
             if (result == DialogResult.OK)

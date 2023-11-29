@@ -1,9 +1,14 @@
-﻿using Odin.Global_Classes;
-using System;
-using System.Data;
-using System.Data.SqlClient;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
+using System.Data.SqlClient;
 
 namespace Odin.CMB_Components.ContactPersons
 {
@@ -29,7 +34,7 @@ namespace Odin.CMB_Components.ContactPersons
         string _ContPers = "";
 
         int _firmid = 0;
-
+        
         public int FirmId
         {
             get { return _firmid; }
@@ -73,7 +78,7 @@ namespace Odin.CMB_Components.ContactPersons
             }
         }
 
-
+        
 
         public int ContPersId
         {

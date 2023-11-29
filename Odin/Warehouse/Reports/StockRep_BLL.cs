@@ -1,8 +1,13 @@
-﻿using Odin.Global_Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Odin.CMB_Components.BLL;
+using ComponentFactory.Krypton.Toolkit;
 using System.Data.SqlClient;
+using System.Data;
+using Odin.Global_Classes;
 
 namespace Odin.Warehouse.Reports
 {
@@ -10,14 +15,14 @@ namespace Odin.Warehouse.Reports
     {
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
 
-        public static DataTable getIncomesReports(int _supid, int _typeid, int _operid,
-                                                    string _datefrom, string _datetill,
+        public static DataTable getIncomesReports(int _supid, int _typeid,  int _operid, 
+                                                    string _datefrom, string _datetill, 
                                                     int _countries, int _includena)
         {
             string query = "sp_StockReportsIncomes";
 
             var sqlparams = new List<SqlParameter>
-            {
+            {   
                 new SqlParameter("@typeid",SqlDbType.Int){Value = _typeid },
                 new SqlParameter("@opertypeid",SqlDbType.Int){Value = _operid },
                 new SqlParameter("@supid",SqlDbType.Int){Value = _supid },
@@ -31,7 +36,7 @@ namespace Odin.Warehouse.Reports
         }
 
         public static DataTable getIncomesReportsSum(int _supid, int _typeid, int _operid,
-                                                    string _datefrom, string _datetill,
+                                                    string _datefrom, string _datetill, 
                                                     int _countries, int _includena)
         {
             string query = "sp_StockReportsIncomesSum";
@@ -50,12 +55,19 @@ namespace Odin.Warehouse.Reports
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
 
-        public static DataTable getInventoryReports(int _artid, string _date, int _placeid, int _typeid,
+        public static DataTable getInventoryReports(int _artid, string _date, int _placeid, int _typeid, 
                                                      int _groupbyplaces, int _groupbydoc, int _groupbylabel,
-                                                     int _movtypeid, int _showintransit, int _showwip,
+                                                     int _movtypeid, int _showintransit, int _showwip, 
                                                      int _groupbyprices, int _resppersid)
         {
-            string query = Convert.ToDateTime(_date) <= Convert.ToDateTime("31.12.2019") ? "sp_SelectStockRestsOnDate1706" : "sp_SelectStockRestsOnDate";
+            string query = "";
+
+
+            if (Convert.ToDateTime(_date) <= Convert.ToDateTime("31.12.2019"))
+                query = "sp_SelectStockRestsOnDate1706";
+            else
+                query = "sp_SelectStockRestsOnDate";
+
             var sqlparams = new List<SqlParameter>
             {
                 new SqlParameter("@artid",SqlDbType.Int){Value = _artid },
@@ -102,13 +114,16 @@ namespace Odin.Warehouse.Reports
         }
 
 
-        public static DataTable getInventoryReportsAccount(string _date, string _account,
-                                                     int _groupbyplaces, int _groupbydoc,
+        public static DataTable getInventoryReportsAccount(string _date, string _account, 
+                                                     int _groupbyplaces, int _groupbydoc, 
                                                      int _groupbylabel, int _groupbyprices)
         {
-            string query = Convert.ToDateTime(_date) <= Convert.ToDateTime("31.12.2019")
-                ? "sp_SelectStockRestsOnDateAccount1706"
-                : "sp_SelectStockRestsOnDateAccount";
+            string query = "";
+            if (Convert.ToDateTime(_date) <= Convert.ToDateTime("31.12.2019"))
+                query = "sp_SelectStockRestsOnDateAccount1706";
+            else
+                query = "sp_SelectStockRestsOnDateAccount";
+            
             var sqlparams = new List<SqlParameter>
             {
                 new SqlParameter("@date",SqlDbType.NVarChar){Value = _date},

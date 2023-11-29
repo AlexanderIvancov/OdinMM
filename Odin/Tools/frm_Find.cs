@@ -1,9 +1,15 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
 
 namespace Odin.Tools
 {
@@ -62,7 +68,7 @@ namespace Odin.Tools
         }
 
         private string search = string.Empty;
-
+        
 
         private void frm_Find_Load(object sender, EventArgs e)
         {
@@ -89,7 +95,14 @@ namespace Odin.Tools
 
                 if (!string.IsNullOrEmpty(txt_Search.Text))
                 {
-                    isEnitreTable = Convert.ToInt32(cmb_LookIn.SelectedValue) == -1;
+                    if (Convert.ToInt32(cmb_LookIn.SelectedValue) == -1)
+                    {
+                        isEnitreTable = true;
+                    }
+                    else
+                    {
+                        isEnitreTable = false;
+                    }
 
                     bw_Find.RunWorkerAsync();
                 }
@@ -181,7 +194,15 @@ namespace Odin.Tools
         {
             grid.CurrentCell = grid[ColumnNumber, i];
             // if reached last row in the datagridview
-            rowByColumn = i == grid.RowCount - 1 ? 0 : i + 1;
+            if (i == grid.RowCount - 1)
+            {
+                rowByColumn = 0;
+            }
+            else
+            {
+
+                rowByColumn = i + 1;
+            }
         }
 
         private void SearchEntireTable(DoWorkEventArgs e)
@@ -317,7 +338,7 @@ namespace Odin.Tools
             btn_Find.Text = findNext;
             btn_Find.Enabled = true;
             toolStripProgressBar.Visible = false;
-
+                   
 
             if (e.Error != null)
             {

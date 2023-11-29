@@ -1,12 +1,19 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.OleDb;
 using System.IO;
+using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using Odin.CMB_Components.BLL;
+using System.Data.SqlClient;
+using System.Data.Odbc;
 
 namespace Odin.Finances
 {
@@ -59,7 +66,7 @@ namespace Odin.Finances
                                       "DOC Char(255), SUMMA_POST Double) ";
 
             string clearTableQueryProv = "delete from " + import1cProvodki;
-
+                       
             using (var dBaseConnection = new OleDbConnection(
                 @"Provider=Microsoft.ACE.OLEDB.12.0;" +
                 @" Data Source=" + _import1cPath + "; " +
@@ -75,7 +82,7 @@ namespace Odin.Finances
 
                     var data = Finances_BLL.getProvodkiIncomes(txt_DateFrom.Value == null ? "" : txt_DateFrom.Value.ToString().Trim(),
                                                                txt_DateTill.Value == null ? "" : txt_DateTill.Value.ToString().Trim());
-
+                  
                     pb_Progress.ThreadSafeCall(delegate
                     {
                         pb_Progress.Value = 0;
@@ -137,8 +144,8 @@ namespace Odin.Finances
 
                         cmdi.ExecuteNonQuery();
 
-                        pb_Progress.ThreadSafeCall(delegate { pb_Progress.Value = pb_Progress.Value + 1; });
-
+                        pb_Progress.ThreadSafeCall(delegate { pb_Progress.Value = pb_Progress.Value + 1;  });
+                       
                     }
 
 
@@ -201,14 +208,14 @@ namespace Odin.Finances
 
 
             }
-            //string createTablequerySubconto = "Create Table " + import1cSubkonto + " (SKLADKOD Int, GOD Int, " +
-            //                         "MES Int, DEN Int, DATA DateTime, TTNNUM Char(50), SERIJA Char(50)," +
-            //                         "DOKUMNUM Char(50), OPERACKOD Char(50), VALKOD Char(50), " +
-            //                         "VALKURS Char(50), KLIENTKOD Char(50), KLIENTNAI Char(75), " +
-            //                         "OPLATDATA DateTime, POLUCDATA DateTime, " +
-            //                         " SUMTOVAR Double, SUMNALOG Double, " +
-            //                         "SUMSEBES Double, SUMTTN Double, SUMSKID Double, SUMTARA Double," +
-            //                         "PRIM Char(50), POLUCKOD Char(50), KLIENTGRINSKOD Int, POLUCGRINSKOD Int, POLUCNAI Char(75)) ";
+                    //string createTablequerySubconto = "Create Table " + import1cSubkonto + " (SKLADKOD Int, GOD Int, " +
+                    //                         "MES Int, DEN Int, DATA DateTime, TTNNUM Char(50), SERIJA Char(50)," +
+                    //                         "DOKUMNUM Char(50), OPERACKOD Char(50), VALKOD Char(50), " +
+                    //                         "VALKURS Char(50), KLIENTKOD Char(50), KLIENTNAI Char(75), " +
+                    //                         "OPLATDATA DateTime, POLUCDATA DateTime, " +
+                    //                         " SUMTOVAR Double, SUMNALOG Double, " +
+                    //                         "SUMSEBES Double, SUMTTN Double, SUMSKID Double, SUMTARA Double," +
+                    //                         "PRIM Char(50), POLUCKOD Char(50), KLIENTGRINSKOD Int, POLUCGRINSKOD Int, POLUCNAI Char(75)) ";
 
 
             string clearTableQuerySubconto = "delete from " + import1cSubkonto;
@@ -231,7 +238,7 @@ namespace Odin.Finances
                     var data = Finances_BLL.getProvodkiSubconto(txt_DateFrom.Value == null ? "" : txt_DateFrom.Value.ToString().Trim(),
                                                                txt_DateTill.Value == null ? "" : txt_DateTill.Value.ToString().Trim());
 
-
+                   
 
                     pb_Progress.ThreadSafeCall(delegate
                     {
@@ -271,7 +278,7 @@ namespace Odin.Finances
                         cmdi1.Parameters.AddWithValue("CODE_KL", r.Field<string>("codekl"));
                         cmdi1.Parameters.AddWithValue("JUR_FIZ", r.Field<int>("jurfiz"));
                         cmdi1.Parameters.AddWithValue("VID_DOC", r.Field<string>("viddoc"));
-
+                       
                         cmdi1.ExecuteNonQuery();
 
                         pb_Progress.ThreadSafeCall(delegate { pb_Progress.Value = pb_Progress.Value + 1; });
@@ -295,17 +302,17 @@ namespace Odin.Finances
             }
 
             if (_result != true)
-                KryptonTaskDialog.Show("Mistakes during exporting!",
-                                           "Some files was not created was not created!",
-                                            "Please check file in selected folder! If there is no such file, restore it's original!",
-                                            MessageBoxIcon.Warning,
-                                            TaskDialogButtons.OK);
+            KryptonTaskDialog.Show("Mistakes during exporting!",
+                                       "Some files was not created was not created!",
+                                        "Please check file in selected folder! If there is no such file, restore it's original!",
+                                        MessageBoxIcon.Warning,
+                                        TaskDialogButtons.OK);
             else
-                KryptonTaskDialog.Show("Exporting was successful!",
-                                          "Files was created!",
-                                          "",
-                                           MessageBoxIcon.Information,
-                                           TaskDialogButtons.OK);
+            KryptonTaskDialog.Show("Exporting was successful!",
+                                      "Files was created!",
+                                      "",
+                                       MessageBoxIcon.Information,
+                                       TaskDialogButtons.OK);
 
         }
 

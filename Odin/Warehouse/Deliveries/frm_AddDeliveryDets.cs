@@ -1,12 +1,18 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using Odin.Tools;
-using Odin.Warehouse.StockIn;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
+using Odin.Tools;
+using System.Data.SqlClient;
+using Odin.Warehouse.StockIn;
 namespace Odin.Warehouse.Deliveries
 {
     public delegate void StockDeliverySavedEventHandler(object sender);
@@ -206,11 +212,17 @@ namespace Odin.Warehouse.Deliveries
         {
             get
             {
-                return chk_Return.CheckState == CheckState.Checked ? -1 : 0;
+                if (chk_Return.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {
-                chk_Return.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+                if (value == -1)
+                    chk_Return.CheckState = CheckState.Checked;
+                else
+                    chk_Return.CheckState = CheckState.Unchecked;
             }
         }
         public int Internal
@@ -478,7 +490,12 @@ namespace Odin.Warehouse.Deliveries
 
         private void txt_CoefConv_TextChanged(object sender, EventArgs e)
         {
-            double _CC = CoefConv == 0 ? 1 : CoefConv;
+            double _CC = 1;
+            if (CoefConv == 0)
+                _CC = 1;
+            else
+                _CC = CoefConv;
+
             UnitPrice = Math.Round(OrigUnitPrice / _CC, 5);
         }
 
@@ -660,7 +677,10 @@ namespace Odin.Warehouse.Deliveries
 
         public void CheckUnitPrice()
         {
-            txt_UnitPrice.StateDisabled.Back.Color1 = OrigUnitPrice < CostUnitPrice ? Color.Tomato : Color.Gainsboro;
+            if (OrigUnitPrice < CostUnitPrice)
+                txt_UnitPrice.StateDisabled.Back.Color1 = Color.Tomato;
+            else
+                txt_UnitPrice.StateDisabled.Back.Color1 = Color.Gainsboro;
         }
 
         public void RecalcLeftToSend()
@@ -755,7 +775,14 @@ namespace Odin.Warehouse.Deliveries
                                                                   MessageBoxIcon.Warning,
                                                                   TaskDialogButtons.Yes |
                                                                   TaskDialogButtons.No);
-                        _test = result1 == DialogResult.Yes;
+                        if (result1 == DialogResult.Yes)
+                        {
+                            _test = true;
+                        }
+                        else
+                        {
+                            _test = false;
+                        }
                     }
 
                     if (_test == true)

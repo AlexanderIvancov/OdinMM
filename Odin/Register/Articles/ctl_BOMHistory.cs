@@ -1,11 +1,18 @@
-﻿using Odin.Global_Classes;
-using Odin.Tools;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
+using Odin.Planning.Controls;
+using System.Threading;
+using System.Data.SqlClient;
+using Odin.Tools;
+using Odin.Register.Catalog;
 
 
 namespace Odin.Register.Articles
@@ -36,8 +43,7 @@ namespace Odin.Register.Articles
         public int ArtId
         {
             get { return _artid; }
-            set
-            {
+            set {
                 _artid = value;
                 ShowHistory(_artid);
             }
@@ -198,13 +204,20 @@ namespace Odin.Register.Articles
         {
             try
             {
-                bs_HistoryList.Filter = String.IsNullOrEmpty(bs_HistoryList.Filter) == true
-                    ? String.IsNullOrEmpty(CellValueH) == true
-                        ? "(" + ColumnNameH + " is null OR Convert(" + ColumnNameH + ", 'System.String') = '')"
-                        : "Convert(" + ColumnNameH + " , 'System.String') = '" + glob_Class.NES(CellValueH) + "'"
-                    : String.IsNullOrEmpty(CellValueH) == true
-                        ? bs_HistoryList.Filter + "AND (" + ColumnNameH + " is null OR Convert(" + ColumnNameH + ", 'System.String') = '')"
-                        : bs_HistoryList.Filter + " AND Convert(" + ColumnNameH + " , 'System.String') = '" + glob_Class.NES(CellValueH) + "'";
+                if (String.IsNullOrEmpty(bs_HistoryList.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(CellValueH) == true)
+                        bs_HistoryList.Filter = "(" + ColumnNameH + " is null OR Convert(" + ColumnNameH + ", 'System.String') = '')";
+                    else
+                        bs_HistoryList.Filter = "Convert(" + ColumnNameH + " , 'System.String') = '" + glob_Class.NES(CellValueH) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(CellValueH) == true)
+                        bs_HistoryList.Filter = bs_HistoryList.Filter + "AND (" + ColumnNameH + " is null OR Convert(" + ColumnNameH + ", 'System.String') = '')";
+                    else
+                        bs_HistoryList.Filter = bs_HistoryList.Filter + " AND Convert(" + ColumnNameH + " , 'System.String') = '" + glob_Class.NES(CellValueH) + "'";
+                }
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -216,9 +229,10 @@ namespace Odin.Register.Articles
         {
             try
             {
-                bs_HistoryList.Filter = String.IsNullOrEmpty(bs_HistoryList.Filter) == true
-                    ? "Convert(" + ColumnNameH + " , 'System.String') <> '" + CellValueH + "'"
-                    : bs_HistoryList.Filter + " AND " + ColumnNameH + " <> '" + CellValueH + "'";
+                if (String.IsNullOrEmpty(bs_HistoryList.Filter) == true)
+                    bs_HistoryList.Filter = "Convert(" + ColumnNameH + " , 'System.String') <> '" + CellValueH + "'";
+                else
+                    bs_HistoryList.Filter = bs_HistoryList.Filter + " AND " + ColumnNameH + " <> '" + CellValueH + "'";
             }
             catch { }
             SetCellsHistoryColor();

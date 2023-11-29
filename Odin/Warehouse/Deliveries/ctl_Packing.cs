@@ -1,12 +1,17 @@
-﻿using Odin.Global_Classes;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Threading;
+using Odin.Global_Classes;
+using System.Data.SqlClient;
 using Odin.Tools;
 using Odin.Warehouse.StockIn;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Windows.Forms;
 namespace Odin.Warehouse.Deliveries
 {
     public partial class ctl_Packing : UserControl
@@ -31,13 +36,11 @@ namespace Odin.Warehouse.Deliveries
         }
 
         int _delivenoteid = 0;
-
+        
         public int DelivNoteId
         {
             get { return _delivenoteid; }
-            set
-            {
-                _delivenoteid = value;
+            set { _delivenoteid = value;
 
                 ShowNotPackedDets(_delivenoteid);
                 ShowPacking(_delivenoteid);
@@ -152,13 +155,13 @@ namespace Odin.Warehouse.Deliveries
                 {
                     if (Convert.ToDouble(row.Cells["cn_topack"].Value) > 0)
                     {
-                        BLL.AddPackageContent(Convert.ToInt32(row.Cells["cn_id"].Value), _packid,
-                                                Convert.ToDouble(row.Cells["cn_topack"].Value),
+                        BLL.AddPackageContent(Convert.ToInt32(row.Cells["cn_id"].Value), _packid, 
+                                                Convert.ToDouble(row.Cells["cn_topack"].Value), 
                                                 Convert.ToDouble(row.Cells["cn_weightnet"].Value));
                     }
                 }
             }
-
+            
             ShowNotPackedDets(DelivNoteId);
             ShowPackingDets(PackId);
         }
@@ -262,7 +265,7 @@ namespace Odin.Warehouse.Deliveries
             {
 
                 BLL.DeletePackage(_id);
-
+               
                 ShowPacking(DelivNoteId);
 
             }
@@ -296,7 +299,7 @@ namespace Odin.Warehouse.Deliveries
                 if (gv_List.CurrentRow.Cells["btn_addpack"].Selected == true)
                 {
                     gv_List.CurrentRow.Cells["cn_topack"].Value = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_notpacked"].Value);
-                    gv_List.CurrentRow.Cells["cn_weightnet"].Value = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_topack"].Value)
+                    gv_List.CurrentRow.Cells["cn_weightnet"].Value = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_topack"].Value) 
                                                                     * Convert.ToDouble(gv_List.CurrentRow.Cells["cn_netweight"].Value);
                     //MessageBox.Show((Convert.ToDouble(gv_List.CurrentRow.Cells["cn_topack"].Value)
                     //                                           * Convert.ToDouble(gv_List.CurrentRow.Cells["cn_netweight"].Value)).ToString());
@@ -312,7 +315,7 @@ namespace Odin.Warehouse.Deliveries
             {
                 if (Convert.ToDouble(gv_List.CurrentRow.Cells["cn_topack"].Value) > Convert.ToDouble(gv_List.CurrentRow.Cells["cn_notpacked"].Value))
                     gv_List.CurrentRow.Cells["cn_topack"].Value = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_notpacked"].Value);
-                gv_List.CurrentRow.Cells["cn_weightnet"].Value = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_topack"].Value)
+                gv_List.CurrentRow.Cells["cn_weightnet"].Value = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_topack"].Value) 
                                                                 * Convert.ToDouble(gv_List.CurrentRow.Cells["cn_netweight"].Value);
                 //MessageBox.Show((Convert.ToDouble(gv_List.CurrentRow.Cells["cn_topack"].Value)
                 //                                                * Convert.ToDouble(gv_List.CurrentRow.Cells["cn_netweight"].Value)).ToString());
@@ -411,9 +414,9 @@ namespace Odin.Warehouse.Deliveries
                 frm_cmbText frm = new frm_cmbText();
                 frm.HeaderText = "Add serial number";
                 frm.LabelText = "Serial number:";
-
+               
                 DialogResult result = frm.ShowDialog();
-
+               
                 if (result == DialogResult.OK
                     && frm.FormText != "")
                 {
@@ -423,7 +426,7 @@ namespace Odin.Warehouse.Deliveries
 
                     if (_batchid == 0)
                     {
-                        globClass.ShowMessage("There is no such serial on FQC stage!", "Check FQC!", "Adding of serial impossible!");
+                       globClass.ShowMessage("There is no such serial on FQC stage!", "Check FQC!", "Adding of serial impossible!");
                     }
                     else
                     {
@@ -476,6 +479,6 @@ namespace Odin.Warehouse.Deliveries
         {
 
         }
-
+    
     }
 }

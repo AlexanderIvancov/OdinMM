@@ -1,8 +1,19 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.CMB_Components.BLL;
-using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using ComponentFactory.Krypton.Workspace;
+using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using Odin.CMB_Components.BLL;
+using Odin.Warehouse.StockIn;
 
 namespace Odin.CMB_Components.IncomeDocs
 {
@@ -37,10 +48,10 @@ namespace Odin.CMB_Components.IncomeDocs
         {
             try
             {
-
-                ((cmb_IncomeDoc)cmb_IncomeDocOne).txt_IncomeDoc.Text = gv_List.CurrentRow.Cells["cn_name"].Value.ToString();
-                ((cmb_IncomeDoc)cmb_IncomeDocOne).IncomeDocId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
-
+                
+                    ((cmb_IncomeDoc)cmb_IncomeDocOne).txt_IncomeDoc.Text = gv_List.CurrentRow.Cells["cn_name"].Value.ToString();
+                    ((cmb_IncomeDoc)cmb_IncomeDocOne).IncomeDocId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
+                
             }
             catch { }
         }

@@ -1,18 +1,24 @@
-﻿using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.CMB_Components.BLL;
-using Odin.Global_Classes;
-using Odin.Register;
-using Odin.Sales.Reports;
-using Odin.Tools;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using WeifenLuo.WinFormsUI.Docking;
+using Odin.Global_Classes;
+using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using ComponentFactory.Krypton.Workspace;
+using ComponentFactory.Krypton.Toolkit;
+using System.Threading;
+using System.Data.SqlClient;
+using Odin.Tools;
+using Odin.Register;
+using Odin.CMB_Components.BLL;
+using Odin.Sales.Reports;
 namespace Odin.Sales
 {
     public partial class frm_ExpInvoices : BaseForm
@@ -42,7 +48,7 @@ namespace Odin.Sales
         frm_AddExInvoiceLine frm = null;
 
         public int ControlWidth = 250;
-
+              
 
         public int RowIndex = 0;
         public int ColumnIndex = 0;
@@ -88,18 +94,28 @@ namespace Odin.Sales
         {
             get
             {
-                return rb_PaidAll.Checked == true ? 1 : rb_Paid.Checked == true ? -1 : 0;
+                if (rb_PaidAll.Checked == true)
+                    return 1;
+                else if (rb_Paid.Checked == true)
+                    return -1;
+                else
+                    return 0;
             }
-
+           
         }
 
         public int IsActive
         {
             get
             {
-                return rb_Active.Checked == true ? -1 : rb_Inactive.Checked == true ? 0 : 1;
+                if (rb_Active.Checked == true)
+                    return -1;
+                else if (rb_Inactive.Checked == true)
+                    return 0;
+                else
+                    return 1;
             }
-
+           
         }
 
         #endregion
@@ -163,7 +179,7 @@ namespace Odin.Sales
             cmb_Articles1.Article = "";
             txt_CustArticle.Text = string.Empty;
             txt_Comments.Text = string.Empty;
-            txt_CreatDateFrom.Value = null;
+            txt_CreatDateFrom.Value = null; 
             txt_CreatDateTill.Value = null;
             mni_FilterFor.Text = string.Empty;
             bs_List.RemoveFilter();
@@ -175,12 +191,12 @@ namespace Odin.Sales
 
         public void bw_List(object sender, DoWorkEventArgs e)
         {
-            // MessageBox.Show(cmb_Common1.SelectedValue.ToString());
+           // MessageBox.Show(cmb_Common1.SelectedValue.ToString());
             var data = CO_BLL.getExInvoices(cmb_ExpInvoice1.InvoiceId,
                                             cmb_Common1.SelectedValue,
-                                            cmb_Types1.TypeId,
-                                            cmb_Department1.DeptId,
-                                            cmb_Firms1.FirmId,
+                                            cmb_Types1.TypeId, 
+                                            cmb_Department1.DeptId, 
+                                            cmb_Firms1.FirmId, 
                                             cmb_Firms2.FirmId,
                                             cmb_SalesOrders1.SalesOrderId,
                                             cmb_Articles1.ArticleId,
@@ -213,7 +229,7 @@ namespace Odin.Sales
                 bn_List.BindingSource = bs_List;
             });
         }
-
+        
         private bool CheckOldRow()
         {
 
@@ -312,7 +328,7 @@ namespace Odin.Sales
 
             Total = _total;
             TotalVat = Math.Round(_total / 100 * _vat, 2);//_totalvat;
-            TotalWithVat = _total + Math.Round(_total / 100 * _vat, 2);
+            TotalWithVat =_total + Math.Round(_total / 100 * _vat, 2);
             TotalByProforma = _byproforma;
 
             lbl_Total.Text = "Total for document (" + _cur + "):";
@@ -334,24 +350,24 @@ namespace Odin.Sales
                         )
                     {
                         if (Convert.ToInt32(row.Cells["cn_delivplaceid"].Value) == CmbBll.ExInvoiceReceiverId)
-                            Bll.AddExInvoiceDets(Convert.ToInt32(row.Cells["cn_id"].Value),
-                                                cmb_ExpInvoice1.InvoiceId,
-                                                Convert.ToInt32(row.Cells["cn_artid"].Value),
-                                                row.Cells["cn_custart"].Value.ToString(),
-                                                Convert.ToDouble(row.Cells["cn_qty"].Value),
-                                                Convert.ToInt32(row.Cells["cn_unitid"].Value),
-                                                Convert.ToDouble(row.Cells["cn_unitprice"].Value),
-                                                frm.FirmVAT,
-                                                Convert.ToDouble(row.Cells["cn_discount"].Value),
-                                                row.Cells["cn_custcode"].Value.ToString(),
-                                                row.Cells["cn_comments"].Value == null ? "" : row.Cells["cn_comments"].Value.ToString(),
-                                                Convert.ToInt32(row.Cells["cn_coid"].Value),
-                                                Convert.ToInt32(row.Cells["chk_Service"].Value == null ? 0 : row.Cells["chk_Service"].Value),
-                                                Convert.ToInt32(row.Cells["chk_AddExp"].Value == null ? 0 : row.Cells["chk_AddExp"].Value),
-                                                0,
-                                                0,
-                                                Convert.ToDouble(row.Cells["cn_inadvance"].Value),
-                                                row.Cells["cn_salescomments"].Value.ToString());
+                        Bll.AddExInvoiceDets(Convert.ToInt32(row.Cells["cn_id"].Value),
+                                            cmb_ExpInvoice1.InvoiceId,
+                                            Convert.ToInt32(row.Cells["cn_artid"].Value),
+                                            row.Cells["cn_custart"].Value.ToString(),
+                                            Convert.ToDouble(row.Cells["cn_qty"].Value),
+                                            Convert.ToInt32(row.Cells["cn_unitid"].Value),
+                                            Convert.ToDouble(row.Cells["cn_unitprice"].Value),
+                                            frm.FirmVAT,
+                                            Convert.ToDouble(row.Cells["cn_discount"].Value),
+                                            row.Cells["cn_custcode"].Value.ToString(),
+                                            row.Cells["cn_comments"].Value == null ? "" : row.Cells["cn_comments"].Value.ToString(),
+                                            Convert.ToInt32(row.Cells["cn_coid"].Value),
+                                            Convert.ToInt32(row.Cells["chk_Service"].Value == null ? 0 : row.Cells["chk_Service"].Value),
+                                            Convert.ToInt32(row.Cells["chk_AddExp"].Value == null ? 0 : row.Cells["chk_AddExp"].Value),
+                                            0,
+                                            0,
+                                            Convert.ToDouble(row.Cells["cn_inadvance"].Value),
+                                            row.Cells["cn_salescomments"].Value.ToString());
                         else
                             KryptonTaskDialog.Show("Recepient place warning!",
                                 "",
@@ -374,28 +390,28 @@ namespace Odin.Sales
                 }
                 //else
                 //{
-                if (frm.Qty != 0
-                    && String.IsNullOrEmpty(frm.Product) != true
-                    /*&& frm.AllowToinvoice == -1*/)
-                {
-                    Bll.AddExInvoiceDets(0, cmb_ExpInvoice1.InvoiceId, frm.ArtId, frm.Product, frm.cmb_Quotations1.QuotationId == 0 ? frm.Qty : 1, frm.UnitId, frm.UnitPrice,
-                                        frm.FirmVAT, frm.Discount, frm.CustCode, frm.Comments, frm.COId, frm.IsService, frm.AdditExpenses,
-                                        frm.QuotId, frm.IsPaid, frm.InAdvance, frm.SalesComments);
-                    frm.Close();
-                }
-                else
-                {
-                    KryptonTaskDialog.Show("Empty fields warning!",
-                            "",
-                           "Some cells are empty!",
-                           MessageBoxIcon.Warning,
-                           TaskDialogButtons.OK);
-                }
+                    if (frm.Qty != 0
+                        && String.IsNullOrEmpty(frm.Product) != true
+                        /*&& frm.AllowToinvoice == -1*/)
+                    {
+                        Bll.AddExInvoiceDets(0, cmb_ExpInvoice1.InvoiceId, frm.ArtId, frm.Product, frm.cmb_Quotations1.QuotationId == 0 ? frm.Qty : 1, frm.UnitId, frm.UnitPrice,
+                                            frm.FirmVAT, frm.Discount, frm.CustCode, frm.Comments, frm.COId, frm.IsService, frm.AdditExpenses, 
+                                            frm.QuotId, frm.IsPaid, frm.InAdvance, frm.SalesComments);
+                        frm.Close();
+                    }
+                    else
+                    {
+                        KryptonTaskDialog.Show("Empty fields warning!",
+                                "",
+                               "Some cells are empty!",
+                               MessageBoxIcon.Warning,
+                               TaskDialogButtons.OK);
+                    }
                 //}
-
+               
             }
 
-
+           
 
             bwStart(bw_List);
         }
@@ -496,13 +512,20 @@ namespace Odin.Sales
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? String.IsNullOrEmpty(CellValue) == true
-                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
-                    : String.IsNullOrEmpty(CellValue) == true
-                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(CellValue) == true)
+                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
+                    else
+                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
+                }
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -515,9 +538,10 @@ namespace Odin.Sales
         {
             try
             {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
-                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
+                else
+                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
@@ -661,17 +685,17 @@ namespace Odin.Sales
                 {
                     //if (frm.AllowToinvoice == -1)
                     //{
-                    //Edit line
-                    Bll.EditExInvoiceDets(_id, frm.ArtId, frm.Product, frm.Qty, frm.UnitId, frm.UnitPrice,
-                                           frm.FirmVAT, 0, frm.CustCode, frm.Comments, frm.COId, frm.IsService,
-                                           frm.AdditExpenses, frm.QuotId, frm.IsPaid, frm.InAdvance, frm.IsActive, frm.SalesComments);
+                        //Edit line
+                        Bll.EditExInvoiceDets(_id, frm.ArtId, frm.Product, frm.Qty, frm.UnitId, frm.UnitPrice,
+                                               frm.FirmVAT, 0, frm.CustCode, frm.Comments, frm.COId, frm.IsService,
+                                               frm.AdditExpenses, frm.QuotId, frm.IsPaid, frm.InAdvance, frm.IsActive, frm.SalesComments);
 
-                    DataGridViewColumn oldColumn = gv_List.SortedColumn;
-                    var dir = Helper.SaveDirection(gv_List);
+                        DataGridViewColumn oldColumn = gv_List.SortedColumn;
+                        var dir = Helper.SaveDirection(gv_List);
 
-                    bwStart(bw_List);
+                        bwStart(bw_List);
 
-                    Helper.RestoreDirection(gv_List, oldColumn, dir);
+                        Helper.RestoreDirection(gv_List, oldColumn, dir);
                     //}
                     //else
                     //{
@@ -730,7 +754,7 @@ namespace Odin.Sales
 
         private void btn_Print_Click(object sender, EventArgs e)
         {
-
+           
         }
 
         private void mni_LangLat_Click(object sender, EventArgs e)
@@ -776,7 +800,7 @@ namespace Odin.Sales
         {
             kryptonDockingManager1.AddDockspace("Control",
                                               DockingEdge.Left,
-                                              new KryptonPage[] { NewInputPayments(cmb_ExpInvoice1.InvoiceId, InvoiceLineId, Billed) });
+                                              new KryptonPage[] { NewInputPayments(cmb_ExpInvoice1.InvoiceId ,InvoiceLineId, Billed) });
         }
 
         private void kryptonDockingManager1_DockspaceAdding(object sender, DockspaceEventArgs e)

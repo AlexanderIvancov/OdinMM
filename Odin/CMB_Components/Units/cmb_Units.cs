@@ -1,9 +1,14 @@
-﻿using Odin.Global_Classes;
-using System;
-using System.Data;
-using System.Data.SqlClient;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
+using System.Data.SqlClient;
 namespace Odin.CMB_Components.Units
 {
     public delegate void UnitEventHandler(object sender);
@@ -17,10 +22,10 @@ namespace Odin.CMB_Components.Units
         UnitEventArgs args = new UnitEventArgs();
         int _UnitId = 0;
         int _PrevId = 0;
-
+                
         bool _EnableSearchId = false;
         string _Unit = "";
-
+                
         public cmb_Units()
         {
             InitializeComponent();
@@ -30,8 +35,7 @@ namespace Odin.CMB_Components.Units
         public string Unit
         {
             get { return txt_Unit.Text; }
-            set
-            {
+            set {
 
                 _Unit = value;
                 txt_Unit.Text = value;
@@ -51,7 +55,7 @@ namespace Odin.CMB_Components.Units
                 }
                 catch
                 {
-
+                    
                     _UnitId = 0;
                     return;
                 }
@@ -65,15 +69,13 @@ namespace Odin.CMB_Components.Units
 
         public int UnitId
         {
-            get
-            {
+            get {
                 try { return _UnitId; }
                 catch { return 0; }
             }
-            set
-            {
+            set {
 
-
+                
                 _UnitId = value;
 
                 if (_PrevId != _UnitId)
@@ -129,17 +131,17 @@ namespace Odin.CMB_Components.Units
         {
             Form f;
             f = this.FindForm();
-
+                 
             Point LocationPoint = this.PointToScreen(Point.Empty);
             int xpos = LocationPoint.X;
             int ypos = LocationPoint.Y + this.Height;
             Point _location = new Point(xpos, ypos);
-
+            
             frm_Units popup = new frm_Units();
             popup.cmb_UnitOne = this;
 
             PopupHelper.ClosePopup();
-
+           
             PopupHelper.ShowPopup(f, popup, _location);
 
             PopupHelper.PopupCancel += delegate (object _sender, PopupCancelEventArgs _e)
@@ -150,7 +152,7 @@ namespace Odin.CMB_Components.Units
                 }
             };
 
-            popup.FillData(Unit);
+            popup.FillData(Unit);          
         }
 
         private void buttonSpecAny1_Click(object sender, EventArgs e)

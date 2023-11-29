@@ -1,13 +1,19 @@
-﻿using ComponentFactory.Krypton.Toolkit;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Windows.Forms;
 using Odin.Global_Classes;
 using Odin.Warehouse.Movements;
-using System;
-using System.Collections.Generic;
-using System.Data;
+using ComponentFactory.Krypton.Workspace;
+using ComponentFactory.Krypton.Toolkit;
 using System.Data.SqlClient;
-using System.Windows.Forms;
 
 namespace Odin.Warehouse.StockOut.Reports
 {
@@ -21,7 +27,7 @@ namespace Odin.Warehouse.StockOut.Reports
         #region Variables
 
         public int HeadId
-        { get; set; }
+        { get; set; }    
         public string Batch
         { get; set; }
         public string ConfOrder
@@ -31,7 +37,7 @@ namespace Odin.Warehouse.StockOut.Reports
         public string AssPerson
         { get; set; }
         public string Article
-        { get; set; }
+        { get; set;}
         public string SecArticle
         { get; set; }
         public string DocDate
@@ -79,7 +85,7 @@ namespace Odin.Warehouse.StockOut.Reports
 
             report.FileName = Application.StartupPath + "\\Warehouse\\StockOut\\Reports\\" + "rpt_StockMove.rpt";
 
-
+            
             //DataMatrix
             DataTable dt = new DataTable();
             //StockPrint_DataSet.dt_DataMatrixFieldDataTable dt = new StockPrint_DataSet.dt_DataMatrixFieldDataTable();
@@ -93,7 +99,7 @@ namespace Odin.Warehouse.StockOut.Reports
 
             //
             DataTable data = new DataTable();
-            data = StockMove_BLL.getStockMoveDetsPrint(HeadId, StageId);
+            data = StockMove_BLL.getStockMoveDetsPrint(HeadId ,StageId);
 
             //data source
             report.Database.Tables[0].SetDataSource(dt);
@@ -211,7 +217,7 @@ namespace Odin.Warehouse.StockOut.Reports
                 if (Convert.ToInt32(row["warning"]) != 0
                     && row["artcomments"].ToString() != "")
                 {
-                    _warnings = _warnings + System.Environment.NewLine + row["article"].ToString() + ": " + row["artcomments"].ToString();
+                    _warnings = _warnings + System.Environment.NewLine  +  row["article"].ToString() + ": " + row["artcomments"].ToString();
                     _warqty++;
                 }
             }
@@ -303,7 +309,7 @@ namespace Odin.Warehouse.StockOut.Reports
             dt.Rows.Add(drow);
 
             datagroup = StockMove_BLL.getStockMoveBatchGroupHead(BatchId);
-
+            
             //
             dataroute = StockMove_BLL.getStockMoveBatchGroup(LaunchId);
             //data source for subreport
@@ -395,7 +401,7 @@ namespace Odin.Warehouse.StockOut.Reports
             report.Database.Tables[1].SetDataSource(dataroute);
 
             //parameters
-
+            
             report.SetParameterValue("AssPerson", AssPerson);
             report.SetParameterValue("UserName", System.Environment.UserName);
             report.SetParameterValue("MoveDate", MoveDate);
@@ -413,7 +419,7 @@ namespace Odin.Warehouse.StockOut.Reports
             string _warnings = "";
 
             report.FileName = Application.StartupPath + "\\Warehouse\\StockOut\\Reports\\" + "rpt_LaunchGroupReservation.rpt";
-
+            
             //DataMatrix
             DataTable dt = new DataTable();
             //StockPrint_DataSet.dt_DataMatrixFieldDataTable dt = new StockPrint_DataSet.dt_DataMatrixFieldDataTable();
@@ -530,7 +536,12 @@ namespace Odin.Warehouse.StockOut.Reports
                 rd = OpenReportLaunchProd();
             else if (RepType == 6)
                 rd = OpenReportLaunchGroup();
-            else rd = RepType == 7 ? OpenReportLaunchRouteList() : RepType == 8 ? OpenReportBatchList() : OpenReportBatchGroupReservation();
+            else if (RepType == 7)
+                rd = OpenReportLaunchRouteList();
+            else if (RepType == 8)
+                rd = OpenReportBatchList();
+            else
+                rd = OpenReportBatchGroupReservation();
 
             crystalReportViewer1.ReportSource = rd;
         }

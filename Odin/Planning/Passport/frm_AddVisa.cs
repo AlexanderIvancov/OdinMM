@@ -1,5 +1,17 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
+using Odin.Tools;
+using System.Data.SqlClient;
 
 namespace Odin.Planning.Passport
 {
@@ -29,7 +41,10 @@ namespace Odin.Planning.Passport
 
         public void CheckEmpty()
         {
-            btn_OK.Enabled = txt_Comments.Text != "";
+            if (txt_Comments.Text == "")
+                btn_OK.Enabled = false;
+            else
+                btn_OK.Enabled = true;
         }
 
         private void txt_Comments_TextChanged(object sender, EventArgs e)

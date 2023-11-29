@@ -1,8 +1,12 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using System;
-using System.Data;
-using System.Data.SqlClient;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+using System.Data;
+using System.Text.RegularExpressions;
+using ComponentFactory.Krypton.Toolkit;
 
 namespace Odin.Global_Classes
 {
@@ -13,12 +17,26 @@ namespace Odin.Global_Classes
 
         public int NEN_Int(string Fld)
         {
-            return String.IsNullOrEmpty(Fld) || Fld == "(None)" ? 0 : Convert.ToInt32(Fld);
+            if (String.IsNullOrEmpty(Fld) || Fld == "(None)")
+            {
+                return 0;
+            }
+            else
+            {
+                return Convert.ToInt32(Fld);
+            }
         }
 
         public long NEN_LongInt(string Fld)
         {
-            return String.IsNullOrEmpty(Fld) || Fld == "(None)" ? 0 : Convert.ToInt64(Fld);
+            if (String.IsNullOrEmpty(Fld) || Fld == "(None)")
+            {
+                return 0;
+            }
+            else
+            {
+                return Convert.ToInt64(Fld);
+            }
         }
 
         public float NEN_Float(string Fld)
@@ -35,29 +53,47 @@ namespace Odin.Global_Classes
 
         public double NEN_Double(string Fld)
         {
-            return String.IsNullOrEmpty(Fld) || Fld == "(None)" ? 0 : Convert.ToDouble(Fld);
+            if (String.IsNullOrEmpty(Fld) || Fld == "(None)")
+            {
+                return 0;
+            }
+            else
+            {
+                return Convert.ToDouble(Fld);
+            }
         }
 
         public string NES(string Fld)
         {
-            return String.IsNullOrEmpty(Fld)
+            if (String.IsNullOrEmpty(Fld)
                 || Fld == "  /  /"
                 || Fld == "  .  ."
                 || Fld == "(None)"
-                || Fld == null
-                ? ""
-                : Fld;
+                || Fld == null)
+            {
+                return "";
+            }
+            else
+            {
+                return Fld;
+            }
         }
 
         public bool NumToBool(string Fld)
         {
-            return Fld == "-1";
-
+            if (Fld == "-1")
+            { return true; }
+            else
+            { return false; }
+        
         }
 
         public bool IntToBool(int Fld)
         {
-            return Fld == -1;
+            if (Fld == -1)
+            { return true; }
+            else
+            { return false; }
 
         }
         /*public bool CheckToBool(string Fld)
@@ -70,12 +106,18 @@ namespace Odin.Global_Classes
 
         public int BoolToCheck(bool Fld)
         {
-            return Fld == true ? -1 : 0;
+            if (Fld == true)
+            { return -1; }
+            else
+            { return 0; }
         }
 
         public int BitToInt(int Fld)
         {
-            return Fld == 1 ? -1 : 0;
+            if (Fld == 1)
+            { return -1; }
+            else
+            { return 0; }
         }
         public bool ConfirmDeliveries()
         {
@@ -85,9 +127,14 @@ namespace Odin.Global_Classes
             MessageBoxIcon icon = MessageBoxIcon.Question;
             DialogResult result;
             result = MessageBox.Show(message, caption, buttons, icon);
-            return result == DialogResult.Yes;
+            if (result == DialogResult.Yes)
+            {
+                return true;
+            }
+            else
+                return false;
         }
-
+        
         /// <summary>
         /// Displays delete confirm message box
         /// </summary>
@@ -98,7 +145,10 @@ namespace Odin.Global_Classes
                                global::Odin.Global_Resourses.Delete_Confirm.ToString(),
                                MessageBoxIcon.Warning,
                                TaskDialogButtons.Yes | TaskDialogButtons.No);
-            return result == DialogResult.Yes;
+            if (result == DialogResult.Yes)
+                return true;
+            else
+                return false;
 
 
             //return MessageConfirm(global::Odin.Global_Resourses.Delete_Caption.ToString(),
@@ -112,8 +162,11 @@ namespace Odin.Global_Classes
                                "Are you sure you want to clear list?",
                                MessageBoxIcon.Warning,
                                TaskDialogButtons.Yes | TaskDialogButtons.No);
-            return result == DialogResult.Yes;
-
+            if (result == DialogResult.Yes)
+                return true;
+            else
+                return false;
+            
         }
 
         public bool ConfirmMessage(string Title, string Instruction, string MainContent)
@@ -123,7 +176,10 @@ namespace Odin.Global_Classes
                                MainContent,
                                MessageBoxIcon.Warning,
                                TaskDialogButtons.Yes | TaskDialogButtons.No);
-            return result == DialogResult.Yes;
+            if (result == DialogResult.Yes)
+                return true;
+            else
+                return false;
 
         }
 
@@ -142,7 +198,10 @@ namespace Odin.Global_Classes
                                "Are you sure you want to close batch?",
                                MessageBoxIcon.Warning,
                                TaskDialogButtons.Yes | TaskDialogButtons.No);
-            return result == DialogResult.Yes;
+            if (result == DialogResult.Yes)
+                return true;
+            else
+                return false;
         }
 
         public bool CancelConfirm()
@@ -152,7 +211,10 @@ namespace Odin.Global_Classes
                                "Are you sure you want to cancel?",
                                MessageBoxIcon.Warning,
                                TaskDialogButtons.Yes | TaskDialogButtons.No);
-            return result == DialogResult.Yes;
+            if (result == DialogResult.Yes)
+                return true;
+            else
+                return false;
         }
 
         public bool CloseConfirmProject()
@@ -162,7 +224,10 @@ namespace Odin.Global_Classes
                                "Are you sure you want to close project?",
                                MessageBoxIcon.Warning,
                                TaskDialogButtons.Yes | TaskDialogButtons.No);
-            return result == DialogResult.Yes;
+            if (result == DialogResult.Yes)
+                return true;
+            else
+                return false;
         }
 
         public bool CloseConfirmInvoice()
@@ -172,7 +237,10 @@ namespace Odin.Global_Classes
                                "Are you sure you want to make inactive line?",
                                MessageBoxIcon.Warning,
                                TaskDialogButtons.Yes | TaskDialogButtons.No);
-            return result == DialogResult.Yes;
+            if (result == DialogResult.Yes)
+                return true;
+            else
+                return false;
         }
 
         public bool CloseProjectConfirm()
@@ -182,7 +250,10 @@ namespace Odin.Global_Classes
                                "Are you sure you want to close whole project?",
                                MessageBoxIcon.Warning,
                                TaskDialogButtons.Yes | TaskDialogButtons.No);
-            return result == DialogResult.Yes;
+            if (result == DialogResult.Yes)
+                return true;
+            else
+                return false;
         }
 
         public bool RemoveReservationConfirm()
@@ -192,7 +263,10 @@ namespace Odin.Global_Classes
                                "Are you sure you want to remove label reservation for batch?",
                                MessageBoxIcon.Warning,
                                TaskDialogButtons.Yes | TaskDialogButtons.No);
-            return result == DialogResult.Yes;
+            if (result == DialogResult.Yes)
+                return true;
+            else
+                return false;
         }
 
         public bool OpenConfirm()
@@ -202,7 +276,10 @@ namespace Odin.Global_Classes
                                "Are you sure you want to re-open batch?",
                                MessageBoxIcon.Warning,
                                TaskDialogButtons.Yes | TaskDialogButtons.No);
-            return result == DialogResult.Yes;
+            if (result == DialogResult.Yes)
+                return true;
+            else
+                return false;
         }
         /// <summary>
         /// Displays confirm message box
@@ -216,7 +293,11 @@ namespace Odin.Global_Classes
             MessageBoxIcon icon = MessageBoxIcon.Question;
             DialogResult result;
             result = MessageBox.Show(message, caption, buttons, icon);
-            return result == DialogResult.Yes;
+            if (result == DialogResult.Yes)
+            {
+                return true;
+            }
+            return false;
         }
         public bool CloseLine()
         {
@@ -226,7 +307,12 @@ namespace Odin.Global_Classes
             MessageBoxIcon icon = MessageBoxIcon.Question;
             DialogResult result;
             result = MessageBox.Show(message, caption, buttons, icon);
-            return result == DialogResult.Yes;
+            if (result == DialogResult.Yes)
+            {
+                return true;
+            }
+            else
+                return false;
         }
         public bool SaveConfirm()
         {
@@ -236,7 +322,12 @@ namespace Odin.Global_Classes
             MessageBoxIcon icon = MessageBoxIcon.Question;
             DialogResult result;
             result = MessageBox.Show(message, caption, buttons, icon);
-            return result == DialogResult.Yes;
+            if (result == DialogResult.Yes)
+            {
+                return true;
+            }
+            else
+                return false;
         }
 
         public bool MoveConfirm(string MsgFrom, string MsgDest)
@@ -247,7 +338,12 @@ namespace Odin.Global_Classes
             MessageBoxIcon icon = MessageBoxIcon.Question;
             DialogResult result;
             result = MessageBox.Show(message, caption, buttons, icon);
-            return result == DialogResult.Yes;
+            if (result == DialogResult.Yes)
+            {
+                return true;
+            }
+            else
+                return false;
         }
         public bool DeleteApproveConfirm(int ReqId)
         {
@@ -257,7 +353,12 @@ namespace Odin.Global_Classes
             MessageBoxIcon icon = MessageBoxIcon.Question;
             DialogResult result;
             result = MessageBox.Show(message, caption, buttons, icon);
-            return result == DialogResult.Yes;
+            if (result == DialogResult.Yes)
+            {
+                return true;
+            }
+            else
+                return false;
         }
         public bool DeleteApproveInvoice(string Invoice)
         {
@@ -267,7 +368,12 @@ namespace Odin.Global_Classes
             MessageBoxIcon icon = MessageBoxIcon.Question;
             DialogResult result;
             result = MessageBox.Show(message, caption, buttons, icon);
-            return result == DialogResult.Yes;
+            if (result == DialogResult.Yes)
+            {
+                return true;
+            }
+            else
+                return false;
         }
         public bool ApprovePOMOQ()
         {
@@ -277,7 +383,12 @@ namespace Odin.Global_Classes
             MessageBoxIcon icon = MessageBoxIcon.Question;
             DialogResult result;
             result = MessageBox.Show(message, caption, buttons, icon);
-            return result == DialogResult.Yes;
+            if (result == DialogResult.Yes)
+            {
+                return true;
+            }
+            else
+                return false;
         }
         public bool ApproveBlockClientOrder()
         {
@@ -287,7 +398,12 @@ namespace Odin.Global_Classes
             MessageBoxIcon icon = MessageBoxIcon.Question;
             DialogResult result;
             result = MessageBox.Show(message, caption, buttons, icon);
-            return result == DialogResult.Yes;
+            if (result == DialogResult.Yes)
+            {
+                return true;
+            }
+            else
+                return false;
         }
 
         public bool CopyConfirm()
@@ -298,7 +414,12 @@ namespace Odin.Global_Classes
             MessageBoxIcon icon = MessageBoxIcon.Question;
             DialogResult result;
             result = MessageBox.Show(message, caption, buttons, icon);
-            return result == DialogResult.Yes;
+            if (result == DialogResult.Yes)
+            {
+                return true;
+            }
+            else
+                return false;
         }
 
         public bool CopyConfirmRatio()
@@ -309,7 +430,12 @@ namespace Odin.Global_Classes
             MessageBoxIcon icon = MessageBoxIcon.Question;
             DialogResult result;
             result = MessageBox.Show(message, caption, buttons, icon);
-            return result == DialogResult.Yes;
+            if (result == DialogResult.Yes)
+            {
+                return true;
+            }
+            else
+                return false;
         }
 
         public bool CopyConfirmSetup()
@@ -320,7 +446,12 @@ namespace Odin.Global_Classes
             MessageBoxIcon icon = MessageBoxIcon.Question;
             DialogResult result;
             result = MessageBox.Show(message, caption, buttons, icon);
-            return result == DialogResult.Yes;
+            if (result == DialogResult.Yes)
+            {
+                return true;
+            }
+            else
+                return false;
         }
 
         public bool ApprovePOtoCOcreation()
@@ -331,7 +462,12 @@ namespace Odin.Global_Classes
             MessageBoxIcon icon = MessageBoxIcon.Question;
             DialogResult result;
             result = MessageBox.Show(message, caption, buttons, icon);
-            return result == DialogResult.Yes;
+            if (result == DialogResult.Yes)
+            {
+                return true;
+            }
+            else
+                return false;
         }
         public bool ConfirmReqClose(string str)
         {
@@ -341,7 +477,12 @@ namespace Odin.Global_Classes
             MessageBoxIcon icon = MessageBoxIcon.Question;
             DialogResult result;
             result = MessageBox.Show(message, caption, buttons, icon);
-            return result == DialogResult.Yes;
+            if (result == DialogResult.Yes)
+            {
+                return true;
+            }
+            else
+                return false;
         }
         public bool ConfirmUpdateForAllLines(string str)
         {
@@ -351,7 +492,12 @@ namespace Odin.Global_Classes
             MessageBoxIcon icon = MessageBoxIcon.Question;
             DialogResult result;
             result = MessageBox.Show(message, caption, buttons, icon);
-            return result == DialogResult.Yes;
+            if (result == DialogResult.Yes)
+            {
+                return true;
+            }
+            else
+                return false;
         }
 
         public bool ConfirmUpdateRespPersonTech(string oldresppers, string newresppers)
@@ -362,7 +508,12 @@ namespace Odin.Global_Classes
             MessageBoxIcon icon = MessageBoxIcon.Question;
             DialogResult result;
             result = MessageBox.Show(message, caption, buttons, icon);
-            return result == DialogResult.Yes;
+            if (result == DialogResult.Yes)
+            {
+                return true;
+            }
+            else
+                return false;
         }
 
         public bool StartLaunchConfirm()
@@ -372,7 +523,10 @@ namespace Odin.Global_Classes
                               "Are you sure to start selected launch?",
                                MessageBoxIcon.Question,
                                TaskDialogButtons.Yes | TaskDialogButtons.No);
-            return result == DialogResult.Yes;
+            if (result == DialogResult.Yes)
+                return true;
+            else
+                return false;
 
 
             //return MessageConfirm(global::Odin.Global_Resourses.Delete_Caption.ToString(),
@@ -386,7 +540,10 @@ namespace Odin.Global_Classes
                               "Are you sure to reserve RM for selected launch?",
                                MessageBoxIcon.Question,
                                TaskDialogButtons.Yes | TaskDialogButtons.No);
-            return result == DialogResult.Yes;
+            if (result == DialogResult.Yes)
+                return true;
+            else
+                return false;
 
 
             //return MessageConfirm(global::Odin.Global_Resourses.Delete_Caption.ToString(),
@@ -395,21 +552,34 @@ namespace Odin.Global_Classes
 
         public double TryCatchDouble(string Value)
         {
+            double DoubleVal;
 
-            bool result = Double.TryParse(Value, out double DoubleVal);
-            return result == false || DoubleVal < 0 ? 0 : DoubleVal;
+            bool result = Double.TryParse(Value, out DoubleVal);
+            if (result == false || DoubleVal < 0)
+            { return 0; }
+            else
+            {
+                return DoubleVal;
+            }
         }
         public int TryCatchInt(string Value)
         {
+            int Int32Val;
 
-            bool result = int.TryParse(Value, out int Int32Val);
-            return result == false || Int32Val < 0 ? 0 : Int32Val;
+            bool result = int.TryParse(Value, out Int32Val);
+            if (result == false || Int32Val < 0)
+            { return 0; }
+            else
+            {
+                return Int32Val;
+            }
         }
         public string IsDateTime(string Value)
         {
+            DateTime IsDT;
             try
             {
-                bool result = DateTime.TryParse(Value, out DateTime IsDT);
+                bool result = DateTime.TryParse(Value, out IsDT);
                 if (result == false)
                 { return ""; }
                 else
@@ -420,7 +590,7 @@ namespace Odin.Global_Classes
                 return "";
             }
         }
-
+       
         public static DataTable GlobalDT(string sQueryString)
         {
             //string sConnStr = Properties.Settings.Default.DBAxonConnectionString;
@@ -432,7 +602,7 @@ namespace Odin.Global_Classes
                 DataSet ds = new DataSet();
 
                 sda.Fill(ds);
-
+                                
                 return ds.Tables[0];
 
             }
@@ -442,7 +612,10 @@ namespace Odin.Global_Classes
         public string BeforeChar(string Fld, string chr)
         {
             int k = Fld.IndexOf(chr);
-            return k == -1 ? Fld : Fld.Substring(0, k);
+            if (k == -1)
+                return Fld;
+            else
+                return Fld.Substring(0, k);
         }
         public string ReplaceChar(string Fld, string Pattern, string Replacement)
         {
@@ -500,7 +673,7 @@ namespace Odin.Global_Classes
             return false;
         }
 
-
+        
         public double RoundUp(double Num, int Dec)
         {
             switch (Dec)

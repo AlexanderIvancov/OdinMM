@@ -1,7 +1,18 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using Odin.Tools;
+using Odin.Warehouse.Deliveries;
+using System.Data.SqlClient;
+using Odin.Sales;
 
 
 namespace Odin.Sales
@@ -183,11 +194,17 @@ namespace Odin.Sales
         {
             get
             {
-                return chk_IsService.CheckState == CheckState.Checked ? -1 : 0;
+                if (chk_IsService.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {
-                chk_IsService.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+                if (value == -1)
+                    chk_IsService.CheckState = CheckState.Checked;
+                else
+                    chk_IsService.CheckState = CheckState.Unchecked;
             }
         }
 
@@ -195,11 +212,17 @@ namespace Odin.Sales
         {
             get
             {
-                return chk_AdditCost.CheckState == CheckState.Checked ? -1 : 0;
+                if (chk_AdditCost.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {
-                chk_AdditCost.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+                if (value == -1)
+                    chk_AdditCost.CheckState = CheckState.Checked;
+                else
+                    chk_AdditCost.CheckState = CheckState.Unchecked;
             }
         }
 
@@ -208,7 +231,7 @@ namespace Odin.Sales
             get { return cmb_SalesOrdersWithLines1.SalesOrderLineId; }
             set { cmb_SalesOrdersWithLines1.SalesOrderLineId = value; }
         }
-
+       
         public string DelivNote
         {
             get { return txt_DelivNote.Text; }
@@ -235,11 +258,17 @@ namespace Odin.Sales
         {
             get
             {
-                return chk_ispaid.CheckState == CheckState.Checked ? -1 : 0;
+                if (chk_ispaid.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {
-                chk_ispaid.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+                if (value == -1)
+                    chk_ispaid.CheckState = CheckState.Checked;
+                else
+                    chk_ispaid.CheckState = CheckState.Unchecked;
             }
         }
 
@@ -247,11 +276,17 @@ namespace Odin.Sales
         {
             get
             {
-                return chk_isactive.CheckState == CheckState.Checked ? -1 : 0;
+                if (chk_isactive.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {
-                chk_isactive.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+                if (value == -1)
+                    chk_isactive.CheckState = CheckState.Checked;
+                else
+                    chk_isactive.CheckState = CheckState.Unchecked;
             }
         }
         public string SalesComments
@@ -264,9 +299,7 @@ namespace Odin.Sales
         public int InvId
         {
             get { return _InvId; }
-            set
-            {
-                _InvId = value;
+            set { _InvId = value;
                 COBll.InvoiceDetId = _InvId;
                 Line = COBll.InvLine;
                 COId = COBll.InvCOId;
@@ -274,7 +307,7 @@ namespace Odin.Sales
 
                 ArtId = COBll.InvArtId;
                 Product = COBll.InvProduct;
-
+                
                 UnitId = COBll.InvUnitId;
                 UnitPrice = COBll.InvUnitPrice;
                 CurId = COBll.InvCurId;
@@ -296,7 +329,7 @@ namespace Odin.Sales
                     cmb_Articles1.Enabled = true;
                     txt_Qty.Enabled = true;
                 }
-
+               
                 Qty = COBll.InvQty;
                 IsPaid = COBll.InvIsPaid;
                 InAdvance = COBll.InvInAdvance;
@@ -325,7 +358,7 @@ namespace Odin.Sales
             CurId = COBll.COHeadCurId;
             CustCodeId = cmb_Articles1.CustCodeId;
             IsService = COBll.COService;
-
+      
         }
 
         public void ShowQuotDets(int quotid)
@@ -353,12 +386,12 @@ namespace Odin.Sales
 
             string _cur = "€";
 
-
+            
             _total = Math.Round(Qty * UnitPrice, 2, MidpointRounding.AwayFromZero);
             _totalvat = Math.Round(Qty * UnitPrice / 100 * FirmVAT, 2, MidpointRounding.AwayFromZero);
             _totalwithvat = Math.Round((Qty * UnitPrice) + (Qty * UnitPrice / 100 * FirmVAT), 2, MidpointRounding.AwayFromZero);
             _cur = cmb_Currency1.Currency;
-
+            
             Total = _total;
             TotalVat = _totalvat;
             TotalWithVat = _totalwithvat;
@@ -389,7 +422,7 @@ namespace Odin.Sales
             RecalcTotals();
 
         }
-
+        
         private void txt_Qty_Validated(object sender, EventArgs e)
         {
             RecalcTotals();

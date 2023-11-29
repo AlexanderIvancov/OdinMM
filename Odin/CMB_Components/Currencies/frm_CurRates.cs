@@ -1,11 +1,22 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Ribbon;
+using Odin.Global_Classes;
+using Odin.CMB_Components.BLL;
+using System.Xml.Linq;
+using System.Net;
 
 namespace Odin.CMB_Components.Currencies
 {
-
+    
     public partial class frm_CurRates : KryptonForm
     {
         public frm_CurRates()
@@ -78,7 +89,7 @@ namespace Odin.CMB_Components.Currencies
             if (_id != 0)
             {
                 frm_AddCurRate frm = new frm_AddCurRate();
-                frm.HeaderText = "Edit rate for: " + gv_List.CurrentRow.Cells["cn_Currency"].Value.ToString();
+                frm.HeaderText = "Edit rate for: " + gv_List.CurrentRow.Cells["cn_Currency"].Value.ToString() ;
                 frm.Id = _id;
                 frm.CurId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_CurId"].Value);
                 frm.UnitCoef = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_Coef"].Value);

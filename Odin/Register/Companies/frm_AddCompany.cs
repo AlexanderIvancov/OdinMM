@@ -1,6 +1,17 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Odin.Global_Classes;
+using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using ComponentFactory.Krypton.Workspace;
+using ComponentFactory.Krypton.Toolkit;
 
 namespace Odin.Register.Companies
 {
@@ -51,12 +62,12 @@ namespace Odin.Register.Companies
             get { return txt_Email.Text; }
             set { txt_Email.Text = value; }
         }
-
+               
 
         public int ParentId
         {
             get { return cmb_Firms1.FirmId; }
-            set { cmb_Firms1.FirmId = value; }
+            set { cmb_Firms1.FirmId = value;}
         }
         public int CountryId
         {
@@ -78,13 +89,16 @@ namespace Odin.Register.Companies
 
         public int SupMark
         {
-            get
-            {
-                return chk_Supplier.CheckState == CheckState.Checked ? -1 : 0;
+            get {
+                if (chk_Supplier.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
-            set
-            {
-                chk_Supplier.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+            set { if (value == -1)
+                    chk_Supplier.CheckState = CheckState.Checked;
+                else
+                    chk_Supplier.CheckState = CheckState.Unchecked;
             }
         }
 
@@ -92,11 +106,17 @@ namespace Odin.Register.Companies
         {
             get
             {
-                return chk_Customer.CheckState == CheckState.Checked ? -1 : 0;
+                if (chk_Customer.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {
-                chk_Customer.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+                if (value == -1)
+                    chk_Customer.CheckState = CheckState.Checked;
+                else
+                    chk_Customer.CheckState = CheckState.Unchecked;
             }
         }
 
@@ -116,7 +136,7 @@ namespace Odin.Register.Companies
         {
             get { return cmb_IncotermsSup.IncotermId; }
             set { cmb_IncotermsSup.IncotermId = value; }
-
+            
         }
 
         public int CustIncoterms
@@ -130,11 +150,17 @@ namespace Odin.Register.Companies
         {
             get
             {
-                return chk_IsActive.CheckState == CheckState.Checked ? -1 : 0;
+                if (chk_IsActive.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {
-                chk_IsActive.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+                if (value == -1)
+                    chk_IsActive.CheckState = CheckState.Checked;
+                else
+                    chk_IsActive.CheckState = CheckState.Unchecked;
             }
         }
 
@@ -152,9 +178,7 @@ namespace Odin.Register.Companies
 
         public int CustPayTerms
         {
-            get
-            {
-                try { return Convert.ToInt32(txt_CustPayTerms.Text); }
+            get { try { return Convert.ToInt32(txt_CustPayTerms.Text); }
                 catch { return 0; }
             }
             set { txt_CustPayTerms.Text = value.ToString(); }
@@ -177,9 +201,12 @@ namespace Odin.Register.Companies
 
         public void CheckEmpty()
         {
-            btn_OK.Enabled = CompanyName != ""
-                && RegNR != ""
-                && VAT != "";
+            if (CompanyName == ""
+                || RegNR == ""
+                || VAT == "")
+                btn_OK.Enabled = false;
+            else
+                btn_OK.Enabled = true;
         }
 
         #endregion
