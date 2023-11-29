@@ -12,6 +12,7 @@ using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Workspace;
 using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
+using System.Text.RegularExpressions;
 
 namespace Odin.Register.Articles
 {
@@ -234,6 +235,42 @@ namespace Odin.Register.Articles
             catch { }
 
             Positions = _tmpposition;
+        }
+
+        private void buttonSpecAny4_Click(object sender, EventArgs e)
+        {
+            string _tmpposition = Positions;
+            try
+            {
+                _tmpposition = formatPosition(_tmpposition);
+            }
+            catch { }
+
+            Positions = _tmpposition;
+        }
+        private string formatPosition(string pos)
+        {
+            string res = "";
+            try
+            {
+                string[] separatingStrings = { ", " };
+                string[] startlet = { new Regex(@"^\D+").Matches(pos)[0].Value.ToString() };
+                string[] components = pos.Split(separatingStrings, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string component in components)
+                {
+                    MatchCollection matches = new Regex(@"\D+\d+\D+\d+").Matches(component);
+                    if (matches.Count > 0)
+                    {
+                        int left  = Int32.Parse(Regex.Replace(component.Split(startlet, StringSplitOptions.RemoveEmptyEntries)[0].ToString(), "\\p{P}", string.Empty));
+                        int right = Int32.Parse(Regex.Replace(component.Split(startlet, StringSplitOptions.RemoveEmptyEntries).Last().ToString(), "\\p{P}", string.Empty));
+                        int[] componentRange = Enumerable.Range(left, right-left+1).ToArray();
+                        foreach (int i in componentRange) res = res + startlet[0] + i.ToString() + separatingStrings[0];
+                    }
+                    else res = res + component + separatingStrings[0];
+                }
+            }
+            catch { }
+            return res.Substring(0, res.Length - 2);
         }
     }
 }

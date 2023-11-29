@@ -55,6 +55,7 @@
             this.cmb_Common1 = new Odin.CMB_Components.Common.cmb_Common();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.buttonSpecAny4 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -83,6 +84,7 @@
             // 
             this.cmb_Articles1.Article = "";
             this.cmb_Articles1.ArticleId = 0;
+            this.cmb_Articles1.ArticleIdRec = 0;
             this.cmb_Articles1.ArtType = null;
             this.cmb_Articles1.BOMState = 0;
             this.cmb_Articles1.Comments = null;
@@ -101,6 +103,7 @@
             this.cmb_Articles1.ProjectId = 0;
             this.cmb_Articles1.QtyAvail = 0D;
             this.cmb_Articles1.QtyConsStock = 0D;
+            this.cmb_Articles1.RMId = 0;
             this.cmb_Articles1.SecName = null;
             this.cmb_Articles1.Size = new System.Drawing.Size(347, 20);
             this.cmb_Articles1.SMTType = 0;
@@ -151,6 +154,8 @@
             // buttonSpecAny1
             // 
             this.buttonSpecAny1.Image = global::Odin.Global_Resourses.bindingNavigatorDeleteItem_Image;
+            this.buttonSpecAny1.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Inherit;
+            this.buttonSpecAny1.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny1.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny1.UniqueName = "4687129580114F1960B04C89E02869BE";
             this.buttonSpecAny1.Click += new System.EventHandler(this.buttonSpecAny1_Click);
@@ -274,6 +279,7 @@
             // txt_Positions
             // 
             this.txt_Positions.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
+            this.buttonSpecAny4,
             this.buttonSpecAny3,
             this.buttonSpecAny2});
             this.txt_Positions.Location = new System.Drawing.Point(90, 249);
@@ -285,12 +291,17 @@
             // buttonSpecAny3
             // 
             this.buttonSpecAny3.Image = global::Odin.Global_Resourses.DrawingCanvasSmall1;
+            this.buttonSpecAny3.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Inherit;
+            this.buttonSpecAny3.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
+            this.buttonSpecAny3.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Generic;
             this.buttonSpecAny3.UniqueName = "2EE667DBAB64498077A25E1C6306FE4D";
             this.buttonSpecAny3.Click += new System.EventHandler(this.buttonSpecAny3_Click);
             // 
             // buttonSpecAny2
             // 
             this.buttonSpecAny2.Image = global::Odin.Global_Resourses.bindingNavigatorDeleteItem_Image;
+            this.buttonSpecAny2.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Inherit;
+            this.buttonSpecAny2.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny2.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny2.UniqueName = "4687129580114F1960B04C89E02869BE";
             this.buttonSpecAny2.Click += new System.EventHandler(this.buttonSpecAny2_Click);
@@ -341,6 +352,15 @@
             this.kryptonLabel2.Size = new System.Drawing.Size(55, 20);
             this.kryptonLabel2.TabIndex = 0;
             this.kryptonLabel2.Values.Text = "Number";
+            // 
+            // buttonSpecAny4
+            // 
+            this.buttonSpecAny4.Image = global::Odin.Global_Resourses.ClipboardCut1;
+            this.buttonSpecAny4.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Inherit;
+            this.buttonSpecAny4.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
+            this.buttonSpecAny4.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Generic;
+            this.buttonSpecAny4.UniqueName = "8C354531EA6F4A93229FE463337B7B28";
+            this.buttonSpecAny4.Click += new System.EventHandler(this.buttonSpecAny4_Click);
             // 
             // frm_AddBOM
             // 
@@ -396,5 +416,6 @@
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny2;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel9;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny3;
+        private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny4;
     }
 }
