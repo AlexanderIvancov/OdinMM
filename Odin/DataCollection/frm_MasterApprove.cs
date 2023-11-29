@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
+﻿using ComponentFactory.Krypton.Toolkit;
+using Odin.CustomControls;
 using Odin.Global_Classes;
 using Odin.Tools;
-using System.Data.SqlClient;
-using System.Runtime.InteropServices;
-using System.Threading;
-using Odin.CustomControls;
 using Odin.Workshop;
+using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace Odin.DataCollection
 {
@@ -46,7 +39,7 @@ namespace Odin.DataCollection
         Processing_BLL PBLL = new Processing_BLL();
 
         private static KeyPressEventHandler NumericCheckHandler;
-        
+
         PopupWindowHelper PopupHelper = null;
         frm_ScreenNumKeyboard popup;
         TextBox focusedtextbox;
@@ -128,12 +121,7 @@ namespace Odin.DataCollection
         {
             get
             {
-                if (rb_Valkas2.Checked == true)
-                    return 1;
-                else if (rb_Valkas2B.Checked == true)
-                    return 2;
-                else
-                    return 0;
+                return rb_Valkas2.Checked == true ? 1 : rb_Valkas2B.Checked == true ? 2 : 0;
             }
             set
             {
@@ -157,12 +145,12 @@ namespace Odin.DataCollection
 
         public int StageId
         {
-            get;set;
+            get; set;
         }
 
         public double Freezed
         {
-            get;set;
+            get; set;
         }
         public double OldFreezed
         { get; set; }
@@ -171,9 +159,9 @@ namespace Odin.DataCollection
 
         public int FreezedHasFocus
         {
-            get;set;
+            get; set;
         }
-        
+
 
         #endregion
 
@@ -288,7 +276,7 @@ namespace Odin.DataCollection
             }
             RecalcQty();
         }
-                
+
         private void NumericCheck(object sender, KeyPressEventArgs e)
         {
             DataGridViewTextBoxEditingControl s = sender as DataGridViewTextBoxEditingControl;
@@ -297,15 +285,13 @@ namespace Odin.DataCollection
                 e.KeyChar = System.Threading.Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
                 e.Handled = s.Text.Contains(e.KeyChar);
             }
-            else if (e.KeyChar == '-')
-            {
-                e.Handled = s.Text.Contains(e.KeyChar);
-            }
             else
-                e.Handled = !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar);
-            
+            {
+                e.Handled = e.KeyChar == '-' ? s.Text.Contains(e.KeyChar) : !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar);
+            }
+
         }
-       
+
         private void gv_List_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             if (gv_List.CurrentCell.ColumnIndex == 9)
@@ -533,7 +519,7 @@ namespace Odin.DataCollection
         {
             gv_List.ThreadSafeCall(delegate
             {
-                
+
                 foreach (DataGridViewRow row in this.gv_List.Rows)
                 {
                     row.Cells["cn_toapprove"].Value = Convert.ToDouble(row.Cells["cn_qty"].Value);
@@ -546,7 +532,7 @@ namespace Odin.DataCollection
 
             });
 
-           
+
         }
 
         private void btn_Close_Click(object sender, EventArgs e)
@@ -569,14 +555,14 @@ namespace Odin.DataCollection
 
                 SqlDataAdapter adapter1 =
                     new SqlDataAdapter(
-                        "select lh.id, lh.name, lh.stageid, lh.batchid, isnull(dbo.fn_PrevQualityStage(lh.id), 0) as prevstageid, " + 
-                                    " convert(float, isnull(fb.qty, 0)) as freezed, convert(float, isnull(sta.qtystarted, 0)) as started " + 
+                        "select lh.id, lh.name, lh.stageid, lh.batchid, isnull(dbo.fn_PrevQualityStage(lh.id), 0) as prevstageid, " +
+                                    " convert(float, isnull(fb.qty, 0)) as freezed, convert(float, isnull(sta.qtystarted, 0)) as started " +
                                     " from prod_launchhead lh " +
                                     " left join PROD_FreezedLaunchStages fb on fb.launchid = lh.id and fb.stageid = lh.stageid" +
-                                    " left join (select lsh.launchid, sum(lsh.qty) as qtystarted from PROD_LaunchStagesHis lsh " + 
+                                    " left join (select lsh.launchid, sum(lsh.qty) as qtystarted from PROD_LaunchStagesHis lsh " +
                                     "                   inner join PROD_LaunchHead lh1 on lh1.id = lsh.launchid and lsh.stageid = lh1.stageid" +
-                                    "                    where lh1.name = '" + frm.FormText + "'" +                                    
-                                    "                    group by lh1.batchid, lsh.stageid, lsh.launchid) sta on sta.launchid = lh.id" + 
+                                    "                    where lh1.name = '" + frm.FormText + "'" +
+                                    "                    group by lh1.batchid, lsh.stageid, lsh.launchid) sta on sta.launchid = lh.id" +
                                     " where name = '" + frm.FormText + "'", sqlConn);
 
                 adapter1.Fill(ds1);
@@ -638,7 +624,7 @@ namespace Odin.DataCollection
         private void gv_List_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex != -1)
-            {                
+            {
                 if (e.ColumnIndex == 9
                     && Convert.ToInt32(gv_List.CurrentRow.Cells["cn_issn"].Value) == 0)
                 {
@@ -713,7 +699,8 @@ namespace Odin.DataCollection
         {
             int _id = 0;
             int _issn = 0;
-            try {
+            try
+            {
                 _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
                 _issn = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_issn"].Value);
             }
@@ -734,8 +721,8 @@ namespace Odin.DataCollection
                     DialogResult result1 = frm1.ShowDialog();
                 }
             }
-           
+
         }
     }
-    
+
 }

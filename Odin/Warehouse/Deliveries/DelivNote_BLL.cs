@@ -1,11 +1,8 @@
-﻿using System;
+﻿using Odin.Global_Classes;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
-using Odin.Global_Classes;
 
 namespace Odin.Warehouse.Deliveries
 {
@@ -14,7 +11,7 @@ namespace Odin.Warehouse.Deliveries
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
 
         public static DataTable getDeliveries(int _headid, int _typeid, int _custid, int _artid, string _article,
-                                                    string _datefrom, string _datetill, string _custart, 
+                                                    string _datefrom, string _datetill, string _custart,
                                                     string _comments, string _conforder, string _custorder, int _batchid)
         {
             string query = "sp_DeliveriesPortfolio";
@@ -143,7 +140,7 @@ namespace Odin.Warehouse.Deliveries
             sqlComm.CommandType = CommandType.StoredProcedure;
 
             sqlComm.Parameters.AddWithValue("@id", id);
-            
+
             //try
             // {
             sqlConn.Open();
@@ -158,7 +155,9 @@ namespace Odin.Warehouse.Deliveries
         public int DelivNoteId
         {
             get { return _ddid; }
-            set { _ddid = value;
+            set
+            {
+                _ddid = value;
 
                 SqlConnection conn = new SqlConnection(sConnStr);
                 conn.Open();
@@ -197,8 +196,8 @@ namespace Odin.Warehouse.Deliveries
                         DReturn = Convert.ToInt32(dr["isreturn"]);
                         DConfOrder = dr["conforder"].ToString();
                         DDelivDate = dr["delivdate"].ToString();
-                        DCustomer = dr["customer"].ToString();;
-                        DUnit = dr["unit"].ToString();;
+                        DCustomer = dr["customer"].ToString(); ;
+                        DUnit = dr["unit"].ToString(); ;
 
                     }
                 }
@@ -292,7 +291,7 @@ namespace Odin.Warehouse.Deliveries
         public string DelivPlace
         { get; set; }
         public int DelivAddressId
-        { get; set;}
+        { get; set; }
         public string DelivAddress
         { get; set; }
         public int FinalDelivPlaceId
@@ -527,7 +526,7 @@ namespace Odin.Warehouse.Deliveries
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
 
-        public int AddPackage(int headid, string package, int qtypack, 
+        public int AddPackage(int headid, string package, int qtypack,
                                     double brutweight, string comments, int boxno)
         {
             int _res = 0;
@@ -572,7 +571,7 @@ namespace Odin.Warehouse.Deliveries
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-            
+
         }
 
         public void DeletePackage(int id)
@@ -601,7 +600,7 @@ namespace Odin.Warehouse.Deliveries
             sqlComm.Parameters.AddWithValue("@packid", packageid);
             sqlComm.Parameters.AddWithValue("@weightnet", weightnet);
             sqlComm.Parameters.AddWithValue("@qty", qty);
-            
+
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
@@ -641,7 +640,7 @@ namespace Odin.Warehouse.Deliveries
 
             var sqlparams = new List<SqlParameter>
             {
-               
+
             };
 
             return Helper.QuerySP(query, sqlparams.ToArray());
@@ -720,7 +719,7 @@ namespace Odin.Warehouse.Deliveries
             sqlComm.Parameters.AddWithValue("@packid", packid);
             sqlComm.Parameters.AddWithValue("@batchid", batchid);
             sqlComm.Parameters.AddWithValue("@coid", coid);
-            
+
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();

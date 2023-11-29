@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 
 /*
  * Seven-segment LED control for .NET
@@ -193,8 +193,7 @@ namespace Odin.CustomControls
                     return;
                 }
                 //is it an integer?
-                int tempValue;
-                if (int.TryParse(value, out tempValue))
+                if (int.TryParse(value, out int tempValue))
                 {
                     if (tempValue > 9) tempValue = 9; if (tempValue < 0) tempValue = 0;
                     switch (tempValue)
@@ -280,7 +279,7 @@ namespace Odin.CustomControls
         /// Specifies if the colon LEDs are active.
         /// </summary>
         public bool ColonOn { get { return colonOn; } set { colonOn = value; Invalidate(); } }
-        
+
         private void SevenSegment_Paint(object sender, PaintEventArgs e)
         {
             int useValue = customPattern;
@@ -293,13 +292,9 @@ namespace Odin.CustomControls
 
             int colonWidth = gridWidth / 4;
 
-            if(showColon){
-                srcRect = new RectangleF(0.0F, 0.0F, gridWidth + colonWidth, gridHeight);
-            }else{
-                srcRect = new RectangleF(0.0F, 0.0F, gridWidth, gridHeight);
-            }
+            srcRect = showColon ? new RectangleF(0.0F, 0.0F, gridWidth + colonWidth, gridHeight) : new RectangleF(0.0F, 0.0F, gridWidth, gridHeight);
             RectangleF destRect = new RectangleF(Padding.Left, Padding.Top, Width - Padding.Left - Padding.Right, Height - Padding.Top - Padding.Bottom);
-            
+
             // Begin graphics container that remaps coordinates for our convenience
             GraphicsContainer containerState = e.Graphics.BeginContainer(destRect, srcRect, GraphicsUnit.Pixel);
 
@@ -330,6 +325,6 @@ namespace Odin.CustomControls
 
             e.Graphics.EndContainer(containerState);
         }
-        
+
     }
 }

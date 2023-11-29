@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
+﻿using Odin.Global_Classes;
+using System;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Odin.Global_Classes;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.SalesOrders
 {
@@ -37,12 +32,12 @@ namespace Odin.CMB_Components.SalesOrders
         int _SalesOrderLineId = 0;
         bool _keypress = false;
         int _articleid = 0;
-        
+
         public int BatchId
         { get; set; }
         public double QtyInCO
         {
-            get;set;
+            get; set;
         }
 
         public int ArticleId
@@ -124,13 +119,13 @@ namespace Odin.CMB_Components.SalesOrders
                         foreach (DataRow dr in dt.Rows)
                         {
                             txt_SalesOrder.Text = dr["name"].ToString();
-                           
+
                         }
                     }
                     else
                     {
                         _SalesOrder = string.Empty;
-                                              
+
                     }
 
                     _PrevId = _SalesOrderId;
@@ -148,17 +143,19 @@ namespace Odin.CMB_Components.SalesOrders
 
         public string SalesOrderLine
         {
-            get {
+            get
+            {
                 try { return cmb_Lines.Text; }
                 catch { return ""; }
             }
-            set {
-                
+            set
+            {
+
                 _SalesOrderLine = value;
                 cmb_Lines.Text = value;
-                         
 
-                
+
+
 
                 //SqlConnection conn = new SqlConnection(sConnStr);
                 //conn.Open();
@@ -186,7 +183,7 @@ namespace Odin.CMB_Components.SalesOrders
                 //{
                 //    SalesOrderLineId = 0;
                 //}
-                
+
                 //if (SalesOrderChanged != null)
                 //{
                 //    SalesOrderChanged(this);
@@ -197,12 +194,15 @@ namespace Odin.CMB_Components.SalesOrders
 
         public int SalesOrderLineId
         {
-            get {
+            get
+            {
                 return _SalesOrderLineId;
                 //try { return Convert.ToInt32(cmb_Lines.ValueMember); }
                 //catch { return 0; }
             }
-            set { _SalesOrderLineId = value;
+            set
+            {
+                _SalesOrderLineId = value;
 
                 if (_PrevLineId != _SalesOrderLineId)
                 {
@@ -212,7 +212,7 @@ namespace Odin.CMB_Components.SalesOrders
                     DataSet ds = new DataSet();
 
                     SqlDataAdapter adapter =
-                        new SqlDataAdapter("SELECT top 1 d.orderline, d.headid, isnull(cb.batchid, 0) as batchid, d.qty, d.artid FROM SAL_ClientOrdersDets d left join PROD_COBatch cb on cb.coid = d.id " + 
+                        new SqlDataAdapter("SELECT top 1 d.orderline, d.headid, isnull(cb.batchid, 0) as batchid, d.qty, d.artid FROM SAL_ClientOrdersDets d left join PROD_COBatch cb on cb.coid = d.id " +
                                                             " WHERE d.id = " + _SalesOrderLineId.ToString(), conn);
                     adapter.Fill(ds);
 
@@ -243,7 +243,7 @@ namespace Odin.CMB_Components.SalesOrders
 
                     _PrevLineId = _SalesOrderLineId;
 
-                    
+
 
                     if (SalesOrderChanged != null)
                     {
@@ -325,9 +325,9 @@ namespace Odin.CMB_Components.SalesOrders
             DataSet ds = new DataSet();
 
             SqlDataAdapter adapter =
-                new SqlDataAdapter("SELECT top 1 d.id FROM SAL_ClientOrdersDets d " + 
-                                    "inner join SAL_ClientOrdersHead h on d.headid = h.id  " + 
-                                    " WHERE h.name = '" + txt_SalesOrder.Text + "'" + 
+                new SqlDataAdapter("SELECT top 1 d.id FROM SAL_ClientOrdersDets d " +
+                                    "inner join SAL_ClientOrdersHead h on d.headid = h.id  " +
+                                    " WHERE h.name = '" + txt_SalesOrder.Text + "'" +
                                     " AND convert(nvarchar(4), d.orderline) = convert(nvarchar(4), '" + cmb_Lines.Text.Trim() + "')", conn);
             adapter.Fill(ds);
 
@@ -343,9 +343,9 @@ namespace Odin.CMB_Components.SalesOrders
 
                 }
             }
-                        
-           return k;
-           
+
+            return k;
+
         }
 
         public void ShowCODets(int id)
@@ -384,13 +384,13 @@ namespace Odin.CMB_Components.SalesOrders
         private void cmb_Lines_SelectedValueChanged(object sender, EventArgs e)
         {
 
-           _PrevLineId = _SalesOrderLineId;
-            
-           _SalesOrderLineId = SOLineSelectedValue();
+            _PrevLineId = _SalesOrderLineId;
+
+            _SalesOrderLineId = SOLineSelectedValue();
 
             ShowCODets(_SalesOrderLineId);
-            
-             if (SalesOrderChanged != null)
+
+            if (SalesOrderChanged != null)
             {
                 SalesOrderChanged(this);
             }

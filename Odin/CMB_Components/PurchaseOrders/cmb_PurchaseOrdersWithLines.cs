@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
+﻿using Odin.Global_Classes;
+using System;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Odin.Global_Classes;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.PurchaseOrders
 {
@@ -75,9 +70,9 @@ namespace Odin.CMB_Components.PurchaseOrders
                     }
                 }
                 else { _PurchaseOrderId = 0; }
-                    
-                    //return;
-                
+
+                //return;
+
             }
         }
 
@@ -163,7 +158,7 @@ namespace Odin.CMB_Components.PurchaseOrders
                 conn.Open();
 
                 DataSet ds = new DataSet();
-                
+
                 SqlDataAdapter adapter =
                     new SqlDataAdapter("SELECT top 1 d.line, d.headid FROM PUR_Dets d " +
                                                         " WHERE d.id = " + _PurchaseOrderLineId.ToString(), conn);
@@ -177,15 +172,15 @@ namespace Odin.CMB_Components.PurchaseOrders
                 {
                     foreach (DataRow dr in dt.Rows)
                     {
-                //        FillLines(Convert.ToInt32(dr["headid"]));
-                //        PurchaseOrderId = Convert.ToInt32(dr["headid"]);
-                //        PurchaseOrderLine = dr["line"].ToString();
+                        //        FillLines(Convert.ToInt32(dr["headid"]));
+                        //        PurchaseOrderId = Convert.ToInt32(dr["headid"]);
+                        //        PurchaseOrderLine = dr["line"].ToString();
                     }
                 }
                 else
                 {
-                //    PurchaseOrderId = 0;
-                //    PurchaseOrderLine = string.Empty;
+                    //    PurchaseOrderId = 0;
+                    //    PurchaseOrderLine = string.Empty;
                 }
 
                 //if (PurchaseOrderChanged != null)
@@ -225,8 +220,8 @@ namespace Odin.CMB_Components.PurchaseOrders
 
             SqlDataAdapter adapter =
                 new SqlDataAdapter(
-                    "SELECT DISTINCT id, line FROM PUR_Dets WHERE headid = " + _POId + 
-                    " and artid = isnull(nullif(" + _ArtId + ", 0), artid) and (stateid = 1) " , sConnStr);
+                    "SELECT DISTINCT id, line FROM PUR_Dets WHERE headid = " + _POId +
+                    " and artid = isnull(nullif(" + _ArtId + ", 0), artid) and (stateid = 1) ", sConnStr);
 
             adapter.Fill(ds);
 
@@ -244,7 +239,7 @@ namespace Odin.CMB_Components.PurchaseOrders
             {
                 //try
                 //{
-                    PurchaseOrder = txt_PurchaseOrder.Text;
+                PurchaseOrder = txt_PurchaseOrder.Text;
                 //}
                 //catch { }
             }

@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using Odin.Global_Classes;
+using Odin.Tools;
+using System;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using WeifenLuo.WinFormsUI.Docking;
-using Odin.Global_Classes;
-using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Workspace;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Tools;
-using System.Data.SqlClient;
 
 namespace Odin.Register.Companies
 {
@@ -28,7 +22,7 @@ namespace Odin.Register.Companies
             ED = new ExportData(this.gv_List, "CompaniesList.xls", this.Name);
         }
         public static event ReceiveFirmId ReceiveId;
-        
+
         #region Variables
 
         ExportData ED;
@@ -77,7 +71,7 @@ namespace Odin.Register.Companies
             // Add the control for display inside the page
             content.Dock = DockStyle.Fill;
             p.Controls.Add(content);
-            
+
             return p;
         }
 
@@ -95,7 +89,7 @@ namespace Odin.Register.Companies
             //MessageBox.Show(ctl.Width.ToString());
             return NewPage("General ", 1, ctlFirmsGeneral, ctlFirmsGeneral.Width);
         }
-        
+
 
         private KryptonPage NewInputAddress(string Firm, int FirmId)
         {
@@ -214,20 +208,13 @@ namespace Odin.Register.Companies
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? String.IsNullOrEmpty(CellValue) == true
+                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
+                    : String.IsNullOrEmpty(CellValue) == true
+                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -240,10 +227,9 @@ namespace Odin.Register.Companies
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
-                else
-                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
+                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
@@ -612,7 +598,7 @@ namespace Odin.Register.Companies
         {
             if (CheckOldRow() == false)
             {
-               ShowDetails(igvFirmId);
+                ShowDetails(igvFirmId);
             }
         }
 

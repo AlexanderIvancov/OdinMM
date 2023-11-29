@@ -1,14 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
+﻿using ComponentFactory.Krypton.Toolkit;
+using System;
 
 namespace Odin.CMB_Components.Types
 {
@@ -57,8 +48,9 @@ namespace Odin.CMB_Components.Types
         }
 
         public int CustCodeId
-        { get { return cmb_CustCodes1.CustCodeId; }
-        set { cmb_CustCodes1.CustCodeId = value; }
+        {
+            get { return cmb_CustCodes1.CustCodeId; }
+            set { cmb_CustCodes1.CustCodeId = value; }
         }
 
         #endregion

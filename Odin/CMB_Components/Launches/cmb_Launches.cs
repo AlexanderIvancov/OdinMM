@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
+﻿using Odin.Global_Classes;
+using System;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Odin.CMB_Components.BLL;
-using Odin.Global_Classes;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.Launches
 {
@@ -101,7 +95,7 @@ namespace Odin.CMB_Components.Launches
 
         public double Qty
         { get; set; }
-       
+
         public string Article
         { get; set; }
 
@@ -119,9 +113,9 @@ namespace Odin.CMB_Components.Launches
 
         public int IsActive
         { get; set; }
-              
+
         public int StageId
-        { get; set; } 
+        { get; set; }
 
         public string StartDate
         { get; set; }
@@ -187,7 +181,7 @@ namespace Odin.CMB_Components.Launches
                         EndDate = dr["enddate"].ToString();
 
                         ParentBatchId = Convert.ToInt32(dr["parentbatchid"]);
-                        
+
                     }
 
 
@@ -282,7 +276,7 @@ namespace Odin.CMB_Components.Launches
         private void buttonSpecAny1_Click(object sender, EventArgs e)
         {
             txt_Launch.Text = string.Empty;
-           
+
             if (ControlClick != null)
             {
                 ControlClick(this);

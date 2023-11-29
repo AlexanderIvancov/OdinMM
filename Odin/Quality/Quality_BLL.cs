@@ -1,11 +1,7 @@
-﻿using System;
+﻿using Odin.Global_Classes;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
-using Odin.Global_Classes;
 
 
 namespace Odin.Quality
@@ -31,7 +27,7 @@ namespace Odin.Quality
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
 
-        public void SaveIncomeControl(int id, int artid, int supid,   string comments)
+        public void SaveIncomeControl(int id, int artid, int supid, string comments)
         {
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
@@ -42,7 +38,7 @@ namespace Odin.Quality
             sqlComm.Parameters.AddWithValue("@artid", artid);
             sqlComm.Parameters.AddWithValue("@supid", supid);
             sqlComm.Parameters.AddWithValue("@comments", comments);
-            
+
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();

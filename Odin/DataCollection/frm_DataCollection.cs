@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Odin.Global_Classes;
+using Odin.Tools;
+using System;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
-using Odin.Global_Classes;
-using Odin.Tools;
 using System.Data.SqlClient;
-using System.Runtime.InteropServices;
+using System.Drawing;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace Odin.DataCollection
 {
@@ -45,7 +38,7 @@ namespace Odin.DataCollection
             MouseSimulator.MoveMouseAround();
         }
 
-        
+
 
         #region Variables
 
@@ -54,7 +47,7 @@ namespace Odin.DataCollection
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
         public int ReadValue = 0;
         public string Result = "";
-       
+
         class_Global globClass = new class_Global();
         PrinterLabels PrintLabels = new PrinterLabels();
         AdmMenu mMenu = new AdmMenu();
@@ -87,7 +80,7 @@ namespace Odin.DataCollection
         }
 
         string _launch = "";
-        
+
         public string Launch
         {
             get { return _launch; }
@@ -142,11 +135,11 @@ namespace Odin.DataCollection
         }
         #endregion
 
-        
+
         private void txt_Oper_KeyPress(object sender, KeyPressEventArgs e)
         {
             string _tempstr = "";
-            
+
             if (e.KeyChar == (char)Keys.Enter)
             {
                 _tempstr = txt_Oper.Text.Trim();
@@ -200,24 +193,24 @@ namespace Odin.DataCollection
                                     bw_WrongLaunch.RunWorkerAsync(null);
                             }
                         }
-                       
+
                     }
                 }
                 else
                 {
-                    
+
                     //Trying to read worker
                     SqlConnection sqlConn = new SqlConnection(sConnStr);
                     sqlConn.Open();
                     DataSet ds1 = new DataSet();
 
-                        SqlDataAdapter adapter1 =
-                            new SqlDataAdapter(
-                                "execute sp_SelectWorker @rfid = '" + _tempstr + "'", sqlConn);
+                    SqlDataAdapter adapter1 =
+                        new SqlDataAdapter(
+                            "execute sp_SelectWorker @rfid = '" + _tempstr + "'", sqlConn);
 
-                        adapter1.Fill(ds1);
+                    adapter1.Fill(ds1);
 
-                        DataTable dt1 = ds1.Tables[0];
+                    DataTable dt1 = ds1.Tables[0];
 
                     if (dt1.Rows.Count > 0)
                     {
@@ -250,7 +243,7 @@ namespace Odin.DataCollection
                     }
 
                 }
-                               
+
             }
         }
 
@@ -394,7 +387,7 @@ namespace Odin.DataCollection
         }
         public void HelloMessage()
         {
-            lbl_Worker.ThreadSafeCall(delegate 
+            lbl_Worker.ThreadSafeCall(delegate
             {
                 lbl_Worker.Text = ScanDataReceived.HelloMessageTitle;
             }
@@ -414,28 +407,29 @@ namespace Odin.DataCollection
             );
             lbl_Batch.ThreadSafeCall(delegate
             {
-                if (StateId == 0)
-                    lbl_Batch.Text = ScanDataReceived.scanLaunchLabel;
-                else if (StateId == 1)
-                    lbl_Batch.Text = ScanDataReceived.finishLaunch + Launch + ScanDataReceived.finishLaunch1;
-                else
-                    lbl_Batch.Text = ScanDataReceived.lunchBreak;
+                lbl_Batch.Text = StateId == 0
+                    ? ScanDataReceived.scanLaunchLabel
+                    : StateId == 1 ? ScanDataReceived.finishLaunch + Launch + ScanDataReceived.finishLaunch1 : ScanDataReceived.lunchBreak;
                 lbl_Batch.Visible = true;
             }
             );
-            btn_Resume.ThreadSafeCall(delegate {
+            btn_Resume.ThreadSafeCall(delegate
+            {
                 switch (StateId)
                 {
                     case 0:
                         btn_Resume.Enabled = false;
                         break;
-                    case 1: btn_Resume.Enabled = false;
+                    case 1:
+                        btn_Resume.Enabled = false;
                         break;
-                    default: btn_Resume.Enabled = true;
+                    default:
+                        btn_Resume.Enabled = true;
                         break;
                 }
             });
-            btn_Pause.ThreadSafeCall(delegate {
+            btn_Pause.ThreadSafeCall(delegate
+            {
                 switch (StateId)
                 {
                     case 0:
@@ -449,7 +443,8 @@ namespace Odin.DataCollection
                         break;
                 }
             });
-            btn_Finish.ThreadSafeCall(delegate {
+            btn_Finish.ThreadSafeCall(delegate
+            {
                 switch (StateId)
                 {
                     case 0:
@@ -463,17 +458,17 @@ namespace Odin.DataCollection
                         break;
                 }
             });
-            
+
         }
         public void WrongWorker()
         {
 
-            lbl_Worker.Invoke(new MethodInvoker (delegate
+            lbl_Worker.Invoke(new MethodInvoker(delegate
             {
                 lbl_Worker.Text = ScanDataReceived.wrongWorker;
             }
-            ));          
-            
+            ));
+
 
             lbl_Batch.ThreadSafeCall(delegate
             {
@@ -549,7 +544,7 @@ namespace Odin.DataCollection
             lbl_Worker.Invoke(new MethodInvoker(delegate
             {
                 lbl_Worker.Text = ScanDataReceived.helloWorker + Worker;
-                
+
             }
             ));
 
@@ -651,6 +646,6 @@ namespace Odin.DataCollection
 
         }
 
-        
+
     }
 }

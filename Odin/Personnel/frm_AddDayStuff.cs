@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
-using ComponentFactory.Krypton.Workspace;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Tools;
+using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 
 namespace Odin.Personnel
@@ -75,7 +69,7 @@ namespace Odin.Personnel
             }
 
             InsertRow();
-            
+
             var data1 = Personnel_BLL.getDayStaff(Convert.ToDateTime(txt_From.Value).ToShortDateString(), Convert.ToDateTime(txt_Till.Value).ToShortDateString());
 
             foreach (DataRow row in data1.Rows)
@@ -117,10 +111,7 @@ namespace Odin.Personnel
                                    " from prod_capacityshifts cs " +
                                    " where cs.date = convert(datetime, @date) ", param.ToArray()));
 
-                if (_qty != _capa)
-                    cell.Style.BackColor = Color.LightPink;
-                else
-                    cell.Style.BackColor = Color.White;
+                cell.Style.BackColor = _qty != _capa ? Color.LightPink : Color.White;
             }
         }
         #endregion
@@ -198,17 +189,14 @@ namespace Odin.Personnel
             var param = new List<SqlParameter>
             {
                 new SqlParameter("@date", SqlDbType.NVarChar) {Value = _date }
-             
+
             };
 
             _capa = Convert.ToDouble(Helper.GetOneRecord("set dateformat dmy select isnull(sum(cs.qty), 0) as qty " +
                                " from prod_capacityshifts cs " +
                                " where cs.date = convert(datetime, @date) ", param.ToArray()));
 
-            if (_qty != _capa)
-                cell.Style.BackColor = Color.LightPink;
-            else
-                cell.Style.BackColor = Color.White;
+            cell.Style.BackColor = _qty != _capa ? Color.LightPink : Color.White;
 
         }
     }

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Odin.Global_Classes;
+﻿using Odin.Global_Classes;
 using Odin.Tools;
+using System;
+using System.ComponentModel;
+using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 
 namespace Odin.Register.Articles
@@ -60,27 +56,28 @@ namespace Odin.Register.Articles
             {
                 _articleid = value;
                 ShowDets();
-                
+
             }
         }
 
         public double TotalTime
         {
-            get { try { return Convert.ToDouble(txt_Total.Text); }
-                catch { return 0; } }
+            get
+            {
+                try { return Convert.ToDouble(txt_Total.Text); }
+                catch { return 0; }
+            }
             set { txt_Total.Text = value.ToString(); }
         }
 
         public int SMTType
         {
-            get { if (rb_None.Checked == true)
-                    return 0;
-                else if (rb_TOP.Checked == true)
-                    return 1;
-                else
-                    return 2;
+            get
+            {
+                return rb_None.Checked == true ? 0 : rb_TOP.Checked == true ? 1 : 2;
             }
-            set {
+            set
+            {
                 if (value == 0)
                     rb_None.Checked = true;
                 else if (value == 1)
@@ -139,11 +136,11 @@ namespace Odin.Register.Articles
             {
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
-                
+
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
-               
+
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
 
             });
@@ -164,7 +161,7 @@ namespace Odin.Register.Articles
             double _res = 0;
 
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {               
+            {
                 _res = _res + Convert.ToDouble(row.Cells["cn_stagetime"].Value);
             }
 
@@ -214,7 +211,7 @@ namespace Odin.Register.Articles
             }
             catch
             { }
-          
+
 
         }
 
@@ -231,25 +228,18 @@ namespace Odin.Register.Articles
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? String.IsNullOrEmpty(CellValue) == true
+                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
+                    : String.IsNullOrEmpty(CellValue) == true
+                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
             catch { }
-           
+
 
         }
 
@@ -257,13 +247,12 @@ namespace Odin.Register.Articles
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
-                else
-                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
+                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
-           
+
 
         }
 
@@ -274,7 +263,7 @@ namespace Odin.Register.Articles
                 bs_List.RemoveFilter();
             }
             catch { }
-          
+
 
         }
 
@@ -330,7 +319,7 @@ namespace Odin.Register.Articles
                 Lock = -1;
             }
         }
-        
+
 
         private void cmb_Articles1_ArticleChanged(object sender)
         {
@@ -354,7 +343,7 @@ namespace Odin.Register.Articles
         {
             LoadColumns(gv_List);
         }
-        
+
         private void btn_Save_Click(object sender, EventArgs e)
         {
             gv_List.EndEdit();

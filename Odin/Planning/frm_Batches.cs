@@ -1,23 +1,19 @@
-﻿using System;
+﻿using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using Odin.Planning.Controls;
+using Odin.Planning.Passport;
+using Odin.Tools;
+using Odin.Warehouse.StockOut.Reports;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using WeifenLuo.WinFormsUI.Docking;
-using Odin.Global_Classes;
-using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Workspace;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Planning.Controls;
-using System.Data.SqlClient;
-using Odin.Tools;
-using Odin.Planning.Passport;
-using Odin.Warehouse.StockOut.Reports;
 namespace Odin.Planning
 {
     public delegate void BatchSaving1EventHandler(object sender);
@@ -59,21 +55,11 @@ namespace Odin.Planning
         {
             get
             {
-                if (chk_Active.CheckState == CheckState.Checked)
-                    return -1;
-                else if (chk_Active.CheckState == CheckState.Unchecked)
-                    return 0;
-                else
-                    return 1;
+                return chk_Active.CheckState == CheckState.Checked ? -1 : chk_Active.CheckState == CheckState.Unchecked ? 0 : 1;
             }
             set
             {
-                if (value == -1)
-                    chk_Active.CheckState = CheckState.Checked;
-                else if (value == 0)
-                    chk_Active.CheckState = CheckState.Unchecked;
-                else
-                    chk_Active.CheckState = CheckState.Indeterminate;
+                chk_Active.CheckState = value == -1 ? CheckState.Checked : value == 0 ? CheckState.Unchecked : CheckState.Indeterminate;
             }
         }
 
@@ -128,10 +114,10 @@ namespace Odin.Planning
         {
             cmb_Batches1.BatchId = 0;
             cmb_SalesOrdersWithLines1.SalesOrderLineId = 0;
-            
+
             cmb_Types1.TypeId = 0;
             cmb_Department1.DeptId = 0;
-            
+
             cmb_Articles1.ArticleId = 0;
 
             txt_StartFrom.Value = null;
@@ -211,7 +197,7 @@ namespace Odin.Planning
                                             txt_StartTill.Value == null ? "" : txt_StartTill.Value.ToString().Trim(),
                                             txt_EndFrom.Value == null ? "" : txt_EndFrom.Value.ToString().Trim(),
                                             txt_EndTill.Value == null ? "" : txt_EndTill.Value.ToString().Trim());
-                
+
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -252,9 +238,9 @@ namespace Odin.Planning
 
         private KryptonPage NewInputGeneral(int _batchid)
         {
-            
+
             PlanBll.BatchId = _batchid;
-            
+
             ctlCreatBatch = new ctl_CreatBatchDets();
             ctlCreatBatchWidth = ctlCreatBatch.Width;
 
@@ -283,13 +269,13 @@ namespace Odin.Planning
             ctlCreatBatch.FillGridBatch(_batchid);
 
             ctlCreatBatch.SaveBatch += new SaveBatchEventHandler(SavedBatch);
-            
+
             ControlWidth = ctlCreatBatch.Width;
             ctlCreatBatchWidth = ctlCreatBatch.Width;
 
             return NewPage("Batch dets", 1, ctlCreatBatch, ctlCreatBatch.Width);
         }
-        
+
         private KryptonPage NewInputBatchRM(int _batchid)
         {
 
@@ -297,7 +283,7 @@ namespace Odin.Planning
             ctlBatchRM.cmb_Batches1.BatchId = _batchid;
             //ctlCreatBatch.SaveBatch += new SaveBatchEventHandler(SavedBatch);
             ctlBatchRM.SendArtId += new RMIdSendingEventHandler(ShowPages);
-            
+
             ControlWidth = ctlBatchRM.Width;
             ctlBatchRMWidth = ctlBatchRM.Width;
 
@@ -309,7 +295,7 @@ namespace Odin.Planning
 
             ctlBatchRMCost = new ctl_RMTracing();
             ctlBatchRMCost.cmb_Batches1.BatchId = _batchid;
-            
+
             ControlWidth = ctlBatchRMCost.Width;
             ctlBatchRMCostWidth = ctlBatchRMCost.Width;
 
@@ -346,7 +332,7 @@ namespace Odin.Planning
 
             ctlBatchOrders = new ctl_BatchOrders();
             ctlBatchOrders.cmb_Batches1.BatchId = _batchid;
-          
+
             ControlWidth = ctlBatchOrders.Width;
             ctlBatchOrdersWidth = ctlBatchOrders.Width;
 
@@ -374,7 +360,7 @@ namespace Odin.Planning
             ctlArticlesRM.SendArtId += new ArtIdSendingEventHandler(ShowPages);
 
             ControlWidth = ctlArticlesRM.Width;
-            ctlArticlesRMWidth = ctlArticlesRM.Width; 
+            ctlArticlesRMWidth = ctlArticlesRM.Width;
 
             return NewPage("Articles reservation", 1, ctlArticlesRM, ctlArticlesRM.Width);
         }
@@ -386,7 +372,7 @@ namespace Odin.Planning
             ctlPOreserve.SendBatchId += new BatchIdPOSendingEventHandler(ShowPages);
 
             ControlWidth = ctlPOreserve.Width;
-            ctlPOreserveWidth = ctlPOreserve.Width; 
+            ctlPOreserveWidth = ctlPOreserve.Width;
 
             return NewPage("Purchase orders reservation", 1, ctlPOreserve, ctlPOreserve.Width);
         }
@@ -397,7 +383,7 @@ namespace Odin.Planning
             ctlArtTotals.cmb_Articles1.ArticleId = _artid;
 
             ControlWidth = ctlArtTotals.Width;
-            ctlArtTotalsWidth = ctlArtTotals.Width; 
+            ctlArtTotalsWidth = ctlArtTotals.Width;
 
             return NewPage("Articles totals", 1, ctlArtTotals, ctlArtTotals.Width);
         }
@@ -412,7 +398,7 @@ namespace Odin.Planning
 
                     PlanBll.BatchId = _batchid;
 
-                    
+
                     ctlGen1.COrderId = PlanBll.BatchCOId;
                     ctlGen1.cmb_SalesOrdersWithLines1.SalesOrderLineId = PlanBll.BatchCOId;
                     ctlGen1.ArticleId = PlanBll.BatchArtId;
@@ -547,7 +533,8 @@ namespace Odin.Planning
 
                 if (ctlBatchCO1 != null)
                 {
-                    ctlBatchCO1.cmb_Batches1.BatchId = _batchid;                 }
+                    ctlBatchCO1.cmb_Batches1.BatchId = _batchid;
+                }
             }
         }
 
@@ -718,7 +705,7 @@ namespace Odin.Planning
                 FindPORMPages(_artid);
             }
 
-            
+
         }
 
         #endregion
@@ -735,7 +722,7 @@ namespace Odin.Planning
             LoadColumns(gv_List);
 
             ClearFilter();
-                       
+
         }
 
         //kryptonDockingManager1.AddDockspace("Control",
@@ -852,7 +839,7 @@ namespace Odin.Planning
             try
             {
                 //if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') like '%" + mni_FilterFor.Text + "%'";
+                bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') like '%" + mni_FilterFor.Text + "%'";
                 //else
                 //    bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') like '%" + mni_FilterFor.Text + "%'";
                 //bs_List.Filter = ("Convert(" + ColumnName + " , 'System.String') like '%" + mni_FilterFor.Text + "%'");//ColumnName + " like '%" + mni_FilterFor.Text + "%'";
@@ -876,20 +863,13 @@ namespace Odin.Planning
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? String.IsNullOrEmpty(CellValue) == true
+                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
+                    : String.IsNullOrEmpty(CellValue) == true
+                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -902,10 +882,9 @@ namespace Odin.Planning
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
-                else
-                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
+                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
@@ -956,7 +935,7 @@ namespace Odin.Planning
         #endregion
 
         #endregion
-               
+
 
         private void btn_AddNew_Click(object sender, EventArgs e)
         {
@@ -1019,7 +998,7 @@ namespace Odin.Planning
                     if (PlanBll.DeleteBatch(_batchid) == -1)
                     {
                         MessageBox.Show("Deletion of batch was succesfull!");
-                        
+
                         bwStart(bw_List);
                     }
                     else
@@ -1034,8 +1013,9 @@ namespace Odin.Planning
         private void btn_Active_Click(object sender, EventArgs e)
         {
             int _id = 0;
-            try {
-            _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
+            try
+            {
+                _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
             }
             catch { }
 
@@ -1158,7 +1138,7 @@ namespace Odin.Planning
                 //}
             }
         }
-            
+
 
         private void buttonSpecAny5_Click(object sender, EventArgs e)
         {
@@ -1218,7 +1198,7 @@ namespace Odin.Planning
                 _artid = ReceiveRMArtId();
             }
             catch { }
-            
+
             kryptonDockingManager1.AddDockspace("Control",
                                              DockingEdge.Left,
                                              new KryptonPage[] { NewInputTotal(_artid) });
@@ -1232,7 +1212,7 @@ namespace Odin.Planning
                 _artid = ReceiveRMArtId();
             }
             catch { }
-            
+
             kryptonDockingManager1.AddDockspace("Control",
                                              DockingEdge.Left,
                                              new KryptonPage[] { NewInputPO(_artid) });
@@ -1260,7 +1240,7 @@ namespace Odin.Planning
             ShowEdit();
         }
 
-       
+
 
         private void btn_Orders_Click(object sender, EventArgs e)
         {
@@ -1409,7 +1389,7 @@ namespace Odin.Planning
 
             Template_DataGridView frm = new Template_DataGridView();
 
-            frm.Text = "RM deficite for " + _batch ;
+            frm.Text = "RM deficite for " + _batch;
             frm.Query = _query;
             frm.SqlParams = sqlparams;
             frm.Show();
@@ -1430,10 +1410,10 @@ namespace Odin.Planning
 
             KryptonPage page = NewInputBatchLaunches(_batchid);
 
-            
+
             kryptonDockingManager1.AddDockspace("Control",
                                              DockingEdge.Left,
-                                             new KryptonPage[] { /*NewInputBatchLaunches(_batchid) */page});
+                                             new KryptonPage[] { /*NewInputBatchLaunches(_batchid) */page });
 
             ctl_Launches ctlLaunches1 = (ctl_Launches)page.Controls.Find("ctl_Launches", true).FirstOrDefault();
         }

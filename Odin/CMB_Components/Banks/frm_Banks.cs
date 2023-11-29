@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Odin.Global_Classes;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.CMB_Components.BLL;
-using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using System;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.Banks
 {
@@ -26,7 +19,7 @@ namespace Odin.CMB_Components.Banks
         {
             InitializeComponent();
         }
-            class_Global glob_Class = new class_Global();
+        class_Global glob_Class = new class_Global();
         CMB_BLL Bll = new CMB_BLL();
         bool _showingModal = false;
         cmb_Banks f;
@@ -93,14 +86,14 @@ namespace Odin.CMB_Components.Banks
             {
                 frm_AddBank frm = new frm_AddBank();
 
-                
+
 
                 frm.Id = _id;
                 frm.Bank = gv_List.CurrentRow.Cells["cn_banks"].Value.ToString();
                 frm.HeaderText = "Edit bank: " + frm.Bank;
                 frm.Iban = gv_List.CurrentRow.Cells["cn_iban"].Value.ToString();
-                frm.Address= gv_List.CurrentRow.Cells["cn_address"].Value.ToString();
-                frm.Comments= gv_List.CurrentRow.Cells["cn_comments"].Value.ToString();
+                frm.Address = gv_List.CurrentRow.Cells["cn_address"].Value.ToString();
+                frm.Comments = gv_List.CurrentRow.Cells["cn_comments"].Value.ToString();
 
                 DialogResult result = frm.ShowDialog();
 

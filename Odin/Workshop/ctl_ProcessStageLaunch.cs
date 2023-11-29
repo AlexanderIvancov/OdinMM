@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Odin.Global_Classes;
-using System.Data.SqlClient;
+﻿using Odin.Global_Classes;
 using Odin.Tools;
-using ComponentFactory.Krypton.Toolkit;
+using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.Workshop
 {
@@ -62,7 +56,7 @@ namespace Odin.Workshop
 
         public int NextStageId
         { get; set; }
-        
+
         public string PrevStage
         { get; set; }
 
@@ -163,11 +157,11 @@ namespace Odin.Workshop
             if (reader.HasRows == true)
             {
                 reader.Read();
-                                
+
                 PrevStage = reader["prevname"].ToString();
                 PrevStageId = Convert.ToInt32(reader["previd"]);
                 NextStageId = Convert.ToInt32(reader["nextid"]);
-                               
+
                 AllowMoveBack = Convert.ToInt32(reader["allowmoveback"]);
                 IsNextStageLast = Convert.ToInt32(reader["isnextstagelast"]);
 
@@ -181,7 +175,7 @@ namespace Odin.Workshop
 
         public void ClearFields()
         {
-           
+
             PrevStage = "";
             PrevStageId = 0;
             NextStageId = 0;
@@ -235,7 +229,7 @@ namespace Odin.Workshop
             //    _test = false;
             //}
             //else
-                _test = true;
+            _test = true;
 
             if (_test == true)
             {
@@ -278,7 +272,7 @@ namespace Odin.Workshop
             double _tpmstart = 0;
             double _tmpstarted = 0;
             double _freezed = 0;
-            
+
             gv_List.EndEdit();
 
             if (gv_List.CurrentRow.Cells["cn_tostart"].Selected == true)
@@ -295,7 +289,7 @@ namespace Odin.Workshop
                     _inlaunch = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_inlaunch"].Value);
                     _tpmstart = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_tostart"].Value);
                     _tmpstarted = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_started"].Value);
-                    
+
 
                     gv_List.CurrentRow.Cells["cn_tostart"].Value = _tpmstart + _tmpstarted > _inlaunch ? _inlaunch - _tmpstarted : _tpmstart;
                     _tpmstart = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_tostart"].Value);
@@ -306,12 +300,12 @@ namespace Odin.Workshop
                         _sumstarted = _sumstarted + Convert.ToDouble(row.Cells["cn_started"].Value);
                     }
 
-                   
+
 
                     if (_sumstarted + _sumtostart > _prevsum)
                         gv_List.CurrentRow.Cells["cn_tostart"].Value = (_prevsum - _sumstarted - _sumtostart + _tpmstart) > _inlaunch - _tmpstarted ?
                                                                         _inlaunch - _tmpstarted :
-                                                                        (_prevsum - _sumstarted - _sumtostart + _tpmstart) ;
+                                                                        (_prevsum - _sumstarted - _sumtostart + _tpmstart);
 
                 }
                 if (Convert.ToDouble(gv_List.CurrentRow.Cells["cn_tostart"].Value) < 0)
@@ -335,7 +329,7 @@ namespace Odin.Workshop
                 _freezed = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_freezed"].Value);
                 //Check started
                 if (Convert.ToDouble(gv_List.CurrentRow.Cells["cn_finished"].Value) + Convert.ToDouble(gv_List.CurrentRow.Cells["cn_tofinish"].Value) + _freezed > Convert.ToDouble(gv_List.CurrentRow.Cells["cn_started"].Value))
-                   gv_List.CurrentRow.Cells["cn_freezed"].Value = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_started"].Value) - Convert.ToDouble(gv_List.CurrentRow.Cells["cn_finished"].Value) - Convert.ToDouble(gv_List.CurrentRow.Cells["cn_tofinish"].Value);
+                    gv_List.CurrentRow.Cells["cn_freezed"].Value = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_started"].Value) - Convert.ToDouble(gv_List.CurrentRow.Cells["cn_finished"].Value) - Convert.ToDouble(gv_List.CurrentRow.Cells["cn_tofinish"].Value);
                 if (Convert.ToDouble(gv_List.CurrentRow.Cells["cn_freezed"].Value) < 0)
                     gv_List.CurrentRow.Cells["cn_freezed"].Value = 0;
 
@@ -380,30 +374,30 @@ namespace Odin.Workshop
 
             //try
             //{
-                if (gv_List.CurrentRow.Cells["btn_add"].Selected == true)
+            if (gv_List.CurrentRow.Cells["btn_add"].Selected == true)
+            {
+                if (Convert.ToInt32(gv_List.CurrentRow.Cells["cn_prevstageid"].Value) == -99)
                 {
-                    if (Convert.ToInt32(gv_List.CurrentRow.Cells["cn_prevstageid"].Value) == -99)
-                    {
-                        gv_List.CurrentRow.Cells["cn_tostart"].Value = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_inlaunch"].Value) - Convert.ToDouble(gv_List.CurrentRow.Cells["cn_started"].Value);
-                    }
-                    else
-                    {
-                        _prevsum = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_prevsum"].Value);
-                        _inlaunch = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_inlaunch"].Value);
-                        _tmpstarted = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_started"].Value);
-                        _freezed = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_freezed"].Value);
-                        foreach (DataGridViewRow row in this.gv_List.Rows)
-                        {
-                            _sumtostart = _sumtostart + Convert.ToDouble(row.Cells["cn_tostart"].Value);
-                            _sumstarted = _sumstarted + Convert.ToDouble(row.Cells["cn_started"].Value);
-                        }
-                        gv_List.CurrentRow.Cells["cn_tostart"].Value = (_prevsum - _sumstarted - _sumtostart) > _inlaunch - _tmpstarted ?
-                                                                       _inlaunch - _tmpstarted :
-                                                                       (_prevsum - _sumstarted - _sumtostart);
-
-                    }
-                    
+                    gv_List.CurrentRow.Cells["cn_tostart"].Value = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_inlaunch"].Value) - Convert.ToDouble(gv_List.CurrentRow.Cells["cn_started"].Value);
                 }
+                else
+                {
+                    _prevsum = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_prevsum"].Value);
+                    _inlaunch = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_inlaunch"].Value);
+                    _tmpstarted = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_started"].Value);
+                    _freezed = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_freezed"].Value);
+                    foreach (DataGridViewRow row in this.gv_List.Rows)
+                    {
+                        _sumtostart = _sumtostart + Convert.ToDouble(row.Cells["cn_tostart"].Value);
+                        _sumstarted = _sumstarted + Convert.ToDouble(row.Cells["cn_started"].Value);
+                    }
+                    gv_List.CurrentRow.Cells["cn_tostart"].Value = (_prevsum - _sumstarted - _sumtostart) > _inlaunch - _tmpstarted ?
+                                                                   _inlaunch - _tmpstarted :
+                                                                   (_prevsum - _sumstarted - _sumtostart);
+
+                }
+
+            }
 
 
             //}

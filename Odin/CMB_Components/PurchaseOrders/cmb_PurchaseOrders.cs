@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Odin.Global_Classes;
-using System.Data.SqlClient;
+﻿using Odin.Global_Classes;
 using Odin.Purchase;
+using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.PurchaseOrders
 {
@@ -42,7 +37,7 @@ namespace Odin.CMB_Components.PurchaseOrders
         int _internal = 0;
         int _contactpersonid = 0;
         string _contract = "";
-        
+
         public int SupplierId
         {
             get { return _supplierid; }
@@ -238,18 +233,18 @@ namespace Odin.CMB_Components.PurchaseOrders
 
         private void btn_AddNew_Click(object sender, EventArgs e)
         {
-            
+
             frm_AddPurchaseOrder frm = new frm_AddPurchaseOrder();
 
             frm.FillAutoDoc(2);
             frm.CheckEmpty();
             frm.DelivPlaceId = Dll.CurrentCompanyId();
-            
+
             DialogResult result = frm.ShowDialog();
 
             if (result == DialogResult.OK)
             {
-                int _res = POBll.AddPurchaseOrderHead(frm.SupId, frm.ContPersId, frm.Comments, frm.Contract, frm.CurId, 
+                int _res = POBll.AddPurchaseOrderHead(frm.SupId, frm.ContPersId, frm.Comments, frm.Contract, frm.CurId,
                                                         frm.IncotermsId, frm.DelivPlaceId, frm.DelivAddressId, frm.InProcess);
 
                 PurchaseOrderId = _res;
@@ -258,11 +253,11 @@ namespace Odin.CMB_Components.PurchaseOrders
                 {
                     PurchaseOrderSaved(this);
                 }
-               
+
             }
             if (result == DialogResult.Cancel)
             {
-               
+
             }
         }
 
@@ -297,7 +292,7 @@ namespace Odin.CMB_Components.PurchaseOrders
 
                 if (result == DialogResult.OK)
                 {
-                    
+
                     POBll.EditPurchaseOrderHead(_id, frm.SupId, frm.ContPersId, frm.Comments, frm.Contract,
                                                 frm.CurId, frm.IncotermsId, frm.DelivPlaceId, frm.DelivAddressId,
                                                 frm.InProcess);
@@ -311,7 +306,7 @@ namespace Odin.CMB_Components.PurchaseOrders
                     }
 
                 }
-                
+
             }
         }
 

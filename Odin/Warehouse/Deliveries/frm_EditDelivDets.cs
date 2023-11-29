@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
-using Odin.Tools;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
 using Odin.Warehouse.StockIn;
-using System.Data.SqlClient;
+using System;
+using System.ComponentModel;
+using System.Data;
+using System.Windows.Forms;
 
 namespace Odin.Warehouse.Deliveries
 {
@@ -97,7 +89,8 @@ namespace Odin.Warehouse.Deliveries
 
         public double NetWeight
         {
-            get {
+            get
+            {
                 try { return Convert.ToDouble(txt_NetWeight.Text); }
                 catch { return 0; }
             }
@@ -150,15 +143,13 @@ namespace Odin.Warehouse.Deliveries
 
         public int Return
         {
-            get { if (chk_Return.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+            get
+            {
+                return chk_Return.CheckState == CheckState.Checked ? -1 : 0;
             }
-            set { if (value == -1)
-                    chk_Return.CheckState = CheckState.Checked;
-                else
-                    chk_Return.CheckState = CheckState.Unchecked;
+            set
+            {
+                chk_Return.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 
@@ -216,6 +207,6 @@ namespace Odin.Warehouse.Deliveries
                 }
             }
 
-         }
+        }
     }
 }

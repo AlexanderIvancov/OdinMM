@@ -1,22 +1,11 @@
-﻿using System;
+﻿using Odin.Global_Classes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using WeifenLuo.WinFormsUI.Docking;
-using Odin.Global_Classes;
-using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Workspace;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Planning.Controls;
-using Odin.Sales;
 using System.Data.SqlClient;
-using Odin.Tools;
+using System.Drawing;
+using System.Windows.Forms;
 using System.Windows.Forms.Calendar;
 
 namespace Odin.Sales.DeliveryPlanning
@@ -30,7 +19,7 @@ namespace Odin.Sales.DeliveryPlanning
             monthView1.ArrowsColor = CalendarColorTable.FromHex("#77A1D3");
             monthView1.DaySelectedBackgroundColor = CalendarColorTable.FromHex("#F4CC52");
             monthView1.DaySelectedTextColor = monthView1.ForeColor;
-            
+
             Week = "W" + (cmb_Week1.WeekNumber(System.DateTime.Now).ToString().Length == 1 ? "0" + cmb_Week1.WeekNumber(System.DateTime.Now).ToString() : cmb_Week1.WeekNumber(System.DateTime.Now).ToString()) + "." + System.DateTime.Now.Year.ToString();
 
             //monthView1.SelectionStart = cmb_Week1.FirstDateOfWeek;
@@ -44,7 +33,7 @@ namespace Odin.Sales.DeliveryPlanning
         #region Variables
         List<CalendarItem> _items = new List<CalendarItem>();
         CO_BLL Bll = new CO_BLL();
-                
+
         CalendarItem contextItem = null;
         int _SelItemId = 0;
         string _SelItemText = "";
@@ -86,20 +75,20 @@ namespace Odin.Sales.DeliveryPlanning
         {
             foreach (CalendarItem item in _items)
             {
-               
+
                 if (calendar1.ViewIntersects(item))
                 {
                     calendar1.Items.Add(item);
                 }
             }
-           
+
         }
 
-        public void FillData(string _datefrom,  string _datetill)
+        public void FillData(string _datefrom, string _datetill)
         {
             _items.Clear();
 
-            var data = CO_BLL.getCOConfirmationsPortfolio(cmb_Firms1.FirmId, cmb_Types1.TypeId, cmb_Articles1.ArticleId, 
+            var data = CO_BLL.getCOConfirmationsPortfolio(cmb_Firms1.FirmId, cmb_Types1.TypeId, cmb_Articles1.ArticleId,
                                                         _datefrom, _datetill);
 
             DateTime _starttime;
@@ -173,7 +162,7 @@ namespace Odin.Sales.DeliveryPlanning
             calendar1.SetViewRange(monthView1.SelectionStart, monthView1.SelectionEnd);
             //calendar1.DaysMode
         }
-        
+
         private void monthView1_MouseUp(object sender, MouseEventArgs e)
         {
             //MessageBox.Show("Go!");
@@ -208,7 +197,7 @@ namespace Odin.Sales.DeliveryPlanning
 
 
         private void cmb_Week1_SelectedValueChanged(object sender)
-        {           
+        {
             //monthView1.SelectionStart = cmb_Week1.FirstDateOfWeek;
             //monthView1.SelectionEnd = cmb_Week1.LastDateOfWeek;
 
@@ -255,11 +244,13 @@ namespace Odin.Sales.DeliveryPlanning
             string _beg;
             string _end;
 
-            try {
-                _beg = monthView1.SelectionStart.ToShortDateString() == "01/01/0001" || monthView1.SelectionStart.ToShortDateString() =="01.01.0001" ? cmb_Week1.FirstDateOfWeek.ToShortDateString() : monthView1.SelectionStart.ToShortDateString();
+            try
+            {
+                _beg = monthView1.SelectionStart.ToShortDateString() == "01/01/0001" || monthView1.SelectionStart.ToShortDateString() == "01.01.0001" ? cmb_Week1.FirstDateOfWeek.ToShortDateString() : monthView1.SelectionStart.ToShortDateString();
                 _end = monthView1.SelectionEnd.ToShortDateString() == "01/01/0001" || monthView1.SelectionEnd.ToShortDateString() == "01.01.0001" ? cmb_Week1.LastDateOfWeek.AddDays(-2).ToShortDateString() : monthView1.SelectionEnd.ToShortDateString();
             }
-            catch {
+            catch
+            {
                 _beg = System.DateTime.Now.ToShortDateString();
                 _end = System.DateTime.Now.AddDays(5).ToShortDateString();
             }

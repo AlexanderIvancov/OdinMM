@@ -1,18 +1,13 @@
-﻿using System;
+﻿using Odin.Tools;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Odin.Global_Classes;
-using System.Windows.Forms;
-using System.Net.Sockets;
-using System.IO;
-using System.Threading;
-using System.Xml.Linq;
-using System.Xml.XPath;
 using System.Data;
 using System.Data.SqlClient;
-using Odin.Tools;
+using System.IO;
+using System.Net.Sockets;
+using System.Text;
+using System.Threading;
+using System.Windows.Forms;
 
 
 namespace Odin.Global_Classes
@@ -146,7 +141,7 @@ namespace Odin.Global_Classes
                     if (column.ColumnName == _spname)
                     {
                         _value = data.Rows[0][_spname].ToString().Substring(0, data.Rows[0][_spname].ToString().Length < _symnum ? data.Rows[0][_spname].ToString().Length : _symnum);
-                        
+
 
                         TemplateLabelText = TemplateLabelText.Replace(_fieldname, _value);
                         break;

@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
-using Odin.Global_Classes;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.CMB_Components.BLL;
+using Odin.Global_Classes;
 using Odin.Tools;
+using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 
 namespace Odin.CMB_Components.Types
@@ -60,7 +54,8 @@ namespace Odin.CMB_Components.Types
             int _parentid = 0;
             string _typelat = "";
             int _custcodeid = 0;
-            try {
+            try
+            {
                 _id = (Int32)gv_List.CurrentRow.Cells["cn_id"].Value;
                 _type = gv_List.CurrentRow.Cells["cn_types"].Value.ToString();
                 _description = gv_List.CurrentRow.Cells["cn_description"].Value.ToString();
@@ -174,7 +169,7 @@ namespace Odin.CMB_Components.Types
             catch { }
 
             frm_TypeParameters frm = new frm_TypeParameters();
-            frm.HeaderText = "Type specification for: " +_type;
+            frm.HeaderText = "Type specification for: " + _type;
             frm.TypeId = _id;
             frm.FillList(_id);
 

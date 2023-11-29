@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Odin.Global_Classes;
+using System;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Odin.Global_Classes;
 
 
 namespace Odin.Register.Catalog
@@ -70,7 +64,7 @@ namespace Odin.Register.Catalog
             int NewLineId = 0;
 
             NewLineId = BLL.AddCatalogItem(frm.BargType, frm.ArticleId, frm.FirmId, frm.FirmArt, frm.UnitId, frm.UnitPrice, frm.CurId, frm.Manufacturer, frm.Comments,
-                                            frm.DelivTerms, frm.MOQ, frm.MPQ, frm.AsDefault, "", Convert.ToInt32(frm.Vat), frm.MinExpDays, frm.CoefConv, frm.DataCode, 
+                                            frm.DelivTerms, frm.MOQ, frm.MPQ, frm.AsDefault, "", Convert.ToInt32(frm.Vat), frm.MinExpDays, frm.CoefConv, frm.DataCode,
                                             frm.DelivTermTxt, frm.Quoted, frm.BarCode, frm.ForCustomer);
 
             FillCatalog(ArticleId);
@@ -85,7 +79,7 @@ namespace Odin.Register.Catalog
                                             frm.DelivTermTxt, frm.Quoted, frm.BarCode, frm.ForCustomer);
             BLL.CatId = frm.CatID;
             FillCatalog(ArticleId);
-            
+
 
             frm.Close();
         }
@@ -94,12 +88,9 @@ namespace Odin.Register.Catalog
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
-                if (Convert.ToInt32(row.Cells["cn_bargtype"].Value) == -1)
-                    row.Cells["cn_firmart"].Style.BackColor = Color.Yellow;
-                else if (Convert.ToInt32(row.Cells["cn_bargtype"].Value) == 1)
-                    row.Cells["cn_firmart"].Style.BackColor = Color.LightGreen;
-                else
-                    row.Cells["cn_firmart"].Style.BackColor = Color.Aqua;
+                row.Cells["cn_firmart"].Style.BackColor = Convert.ToInt32(row.Cells["cn_bargtype"].Value) == -1
+                    ? Color.Yellow
+                    : Convert.ToInt32(row.Cells["cn_bargtype"].Value) == 1 ? Color.LightGreen : Color.Aqua;
             }
         }
 
@@ -146,7 +137,7 @@ namespace Odin.Register.Catalog
                 frm.ForCustomer = BLL.CatForCust;
 
                 frm.CatSaved += new CatSavedEventHandler(CatEdited);
-                
+
 
                 frm.Show();
             }

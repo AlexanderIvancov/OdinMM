@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Odin.Global_Classes;
-using System.Data.SqlClient;
+﻿using Odin.Global_Classes;
 using Odin.Sales;
+using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.SalesOrders
 {
@@ -51,8 +46,8 @@ namespace Odin.CMB_Components.SalesOrders
         public int ContactPersonId
         {
             get { return _contactpersonid; }
-            set{ _contactpersonid = value; }
-            
+            set { _contactpersonid = value; }
+
         }
 
         public string Contract
@@ -69,7 +64,7 @@ namespace Odin.CMB_Components.SalesOrders
         private void buttonSpecAny1_Click(object sender, EventArgs e)
         {
             txt_SalesOrder.Text = string.Empty;
-            
+
         }
 
         public string SalesOrder
@@ -172,7 +167,8 @@ namespace Odin.CMB_Components.SalesOrders
         public int SalesOrderSavedId
         {
             get { return _SalesOrderSavedId; }
-            set {
+            set
+            {
                 _SalesOrderSavedId = value;
                 if (SalesOrderSaved != null)
                 {
@@ -236,7 +232,7 @@ namespace Odin.CMB_Components.SalesOrders
 
         private void btn_AddNew_Click(object sender, EventArgs e)
         {
-            
+
             frm_AddSalesOrder frm = new frm_AddSalesOrder();
 
             frm.FillAutoDoc(1);
@@ -255,7 +251,7 @@ namespace Odin.CMB_Components.SalesOrders
             }
             if (result == DialogResult.Cancel)
             {
-                
+
             }
         }
 
@@ -292,7 +288,7 @@ namespace Odin.CMB_Components.SalesOrders
                         SalesOrderSaved(this);
                     }
                 }
-                
+
             }
         }
     }

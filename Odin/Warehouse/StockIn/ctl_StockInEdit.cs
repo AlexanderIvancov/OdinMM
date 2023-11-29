@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ComponentFactory.Krypton.Toolkit;
+using System;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
 
 namespace Odin.Warehouse.StockIn
 {
@@ -29,14 +22,15 @@ namespace Odin.Warehouse.StockIn
 
         public int State
         {
-            get;set;
+            get; set;
         }
 
         int _id = 0;
         public int Id
         {
             get { return _id; }
-            set {
+            set
+            {
                 _id = value;
                 Bll.IdIn = _id;
                 IncomeDocId = Bll.HeadId;
@@ -60,7 +54,7 @@ namespace Odin.Warehouse.StockIn
                 Sender = Bll.SenderCountryId;
                 Producer = Bll.ProducerCountryId;
                 DataCode = Bll.DataCode;
-                
+
             }
 
         }
@@ -68,7 +62,7 @@ namespace Odin.Warehouse.StockIn
         public int IncomeDocId
         {
             get;
-            set; 
+            set;
         }
 
         public int IncomeDocIdCmb
@@ -135,7 +129,7 @@ namespace Odin.Warehouse.StockIn
             }
             set { txt_Qty.Text = value.ToString(); }
         }
-                
+
         public double CoefConv
         {
             get
@@ -145,7 +139,7 @@ namespace Odin.Warehouse.StockIn
             }
             set { txt_CoefConv.Text = value.ToString(); }
         }
-                
+
         public double UnitPrice
         {
             get
@@ -155,10 +149,10 @@ namespace Odin.Warehouse.StockIn
             }
             set { txt_UnitPrice.Text = value.ToString(); }
         }
-                      
+
         public double UnitPriceWoDisc
         {
-            get;set;
+            get; set;
         }
         public double Vat
         {
@@ -215,7 +209,7 @@ namespace Odin.Warehouse.StockIn
             }
             set { txt_TotalWVAT.Text = value.ToString(); }
         }
-                
+
 
         public string Comments
         {
@@ -286,7 +280,7 @@ namespace Odin.Warehouse.StockIn
         {
             if (CoefConv == 0)
                 CoefConv = 1;
-            
+
             Multiplicity = Math.Round(1 / (CoefConv == 0 ? 1 : CoefConv), 7);
         }
 
@@ -301,7 +295,7 @@ namespace Odin.Warehouse.StockIn
         {
 
             int _NewInwardId = Bll.EditStockIn(Id, IncomeDocId, ArtId, SupArticle, StockMoveTypeId, Qty, UnitId,
-                                                Comments, UnitPrice, Discount, Vat, CoefConv, Weight, CustCodeId, 
+                                                Comments, UnitPrice, Discount, Vat, CoefConv, Weight, CustCodeId,
                                                 BatchId, Producer, DataCode);
 
             //Deallocation
@@ -326,7 +320,7 @@ namespace Odin.Warehouse.StockIn
                 }
             }
 
-           
+
         }
 
         private void txt_Disc_TextChanged(object sender, EventArgs e)

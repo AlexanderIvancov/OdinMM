@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Odin.CMB_Components.BLL;
 using Odin.Global_Classes;
-using System.Data.SqlClient;
 using Odin.Warehouse.StockOut;
-using Odin.CMB_Components.BLL;
+using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.OutcomeDocs
 {
@@ -64,12 +59,9 @@ namespace Odin.CMB_Components.OutcomeDocs
                 txt_OutcomeDoc.Text = value;
                 DataSet ds = new DataSet();
 
-                string strSQL = "";
-                if (EnableDN == true)
-                    strSQL = "SELECT DISTINCT TOP 1 id FROM STO_StockOutHead WHERE name = '" + _OutcomeDoc.ToString() + "' and (typeout = 5 or typeout = 15 or typeout = 17 or typeout = 28 or typeout = 4)";
-                else
-                    strSQL = "SELECT DISTINCT TOP 1 id FROM STO_StockOutHead WHERE name = '" + _OutcomeDoc.ToString() + "' and (typeout = 5 or typeout = 15 or typeout = 17 or typeout = 28)";
-                
+                string strSQL = EnableDN == true
+                    ? "SELECT DISTINCT TOP 1 id FROM STO_StockOutHead WHERE name = '" + _OutcomeDoc.ToString() + "' and (typeout = 5 or typeout = 15 or typeout = 17 or typeout = 28 or typeout = 4)"
+                    : "SELECT DISTINCT TOP 1 id FROM STO_StockOutHead WHERE name = '" + _OutcomeDoc.ToString() + "' and (typeout = 5 or typeout = 15 or typeout = 17 or typeout = 28)";
                 SqlDataAdapter adapter =
                     new SqlDataAdapter(
                         strSQL, sConnStr);
@@ -96,12 +88,12 @@ namespace Odin.CMB_Components.OutcomeDocs
                         OutDocChanged(this);
                     }
 
-                    
+
 
                     //return;
                 }
 
-                
+
             }
         }
 
@@ -119,44 +111,44 @@ namespace Odin.CMB_Components.OutcomeDocs
                 _OutcomeDocId = value;
 
                 //if (_PrevId != _OutcomeDocId)
-               // {
-                    SqlConnection conn = new SqlConnection(sConnStr);
-                    conn.Open();
+                // {
+                SqlConnection conn = new SqlConnection(sConnStr);
+                conn.Open();
 
-                    DataSet ds = new DataSet();
+                DataSet ds = new DataSet();
 
-                    SqlDataAdapter adapter =
-                        new SqlDataAdapter("SELECT top 1 name, isnull(batchid, 0) as batchid FROM STO_StockOutHead WHERE id = " + _OutcomeDocId.ToString(), conn);
-                    adapter.Fill(ds);
+                SqlDataAdapter adapter =
+                    new SqlDataAdapter("SELECT top 1 name, isnull(batchid, 0) as batchid FROM STO_StockOutHead WHERE id = " + _OutcomeDocId.ToString(), conn);
+                adapter.Fill(ds);
 
-                    conn.Close();
+                conn.Close();
 
-                    DataTable dt = ds.Tables[0];
+                DataTable dt = ds.Tables[0];
 
-                    if (dt.Rows.Count > 0)
+                if (dt.Rows.Count > 0)
+                {
+                    foreach (DataRow dr in dt.Rows)
                     {
-                        foreach (DataRow dr in dt.Rows)
-                        {
-                            txt_OutcomeDoc.Text = dr["name"].ToString();
-                            BatchId = Convert.ToInt32(dr["batchid"]);
-                        }
-                        if (OutDocChanged != null)
-                        {
-                            OutDocChanged(this);
-                        }
+                        txt_OutcomeDoc.Text = dr["name"].ToString();
+                        BatchId = Convert.ToInt32(dr["batchid"]);
                     }
-                    else
+                    if (OutDocChanged != null)
                     {
-                        BatchId = 0;
-                        txt_OutcomeDoc.Text = string.Empty;
+                        OutDocChanged(this);
                     }
+                }
+                else
+                {
+                    BatchId = 0;
+                    txt_OutcomeDoc.Text = string.Empty;
+                }
 
-                   // _PrevId = _OutcomeDocId;
+                // _PrevId = _OutcomeDocId;
 
-                    //if (OutDocChanged != null)
-                    //{
-                    //    OutDocChanged(this);
-                    //}
+                //if (OutDocChanged != null)
+                //{
+                //    OutDocChanged(this);
+                //}
 
                 //}
             }
@@ -228,7 +220,7 @@ namespace Odin.CMB_Components.OutcomeDocs
                 if (OutDocSaved != null)
                     OutDocSaved(this);
             }
-            
+
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)

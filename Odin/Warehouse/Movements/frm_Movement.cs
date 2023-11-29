@@ -1,25 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using ComponentFactory.Krypton.Toolkit;
+using Odin.CMB_Components.BLL;
+using Odin.Global_Classes;
+using Odin.Planning;
+using Odin.Tools;
+using Odin.Warehouse.Deliveries;
+using Odin.Warehouse.StockOut.Reports;
+using System;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using WeifenLuo.WinFormsUI.Docking;
-using Odin.Global_Classes;
-using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Workspace;
-using ComponentFactory.Krypton.Toolkit;
-using System.Threading;
 using System.Data.SqlClient;
-using Odin.Tools;
-using Odin.CMB_Components.BLL;
-using Odin.Warehouse.StockOut.Reports;
-using Odin.Planning;
-using Odin.Warehouse.Deliveries;
+using System.Drawing;
+using System.Windows.Forms;
 namespace Odin.Warehouse.Movements
 {
     public partial class frm_Movement : BaseForm
@@ -73,7 +66,8 @@ namespace Odin.Warehouse.Movements
 
         public int Label
         {
-            get {
+            get
+            {
                 try { return Convert.ToInt32(txt_Label.Text); }
                 catch { return 0; }
             }
@@ -83,21 +77,20 @@ namespace Odin.Warehouse.Movements
         public int Reserve
         {
             get
-            { if (chk_Reserve.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+            {
+                return chk_Reserve.CheckState == CheckState.Checked ? -1 : 0;
             }
-            set { if (value == -1)
-                    chk_Reserve.CheckState = CheckState.Checked;
-                else
-                    chk_Reserve.CheckState = CheckState.Unchecked;
+            set
+            {
+                chk_Reserve.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 
         public double QtyToProduce
         {
-            get { try { return Convert.ToDouble(txt_QtyOfProduct.Text); }
+            get
+            {
+                try { return Convert.ToDouble(txt_QtyOfProduct.Text); }
                 catch { return 0; }
             }
             set { txt_QtyOfProduct.Text = value.ToString(); }
@@ -187,7 +180,7 @@ namespace Odin.Warehouse.Movements
 
         public void bw_List(object sender, DoWorkEventArgs e)
         {
-            
+
             //MessageBox.Show(txt_CreatDateFrom.Value.ToShortDateString());
             var data = StockMove_BLL.getStockMoveRests(Label, cmb_Articles1.ArticleId, cmb_Places2.PlaceId, cmb_Batches1.BatchId, StageId);
 
@@ -219,7 +212,7 @@ namespace Odin.Warehouse.Movements
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
-                              
+
 
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
 
@@ -247,9 +240,9 @@ namespace Odin.Warehouse.Movements
                 gv_Dets.AutoGenerateColumns = false;
                 bs_Dets.DataSource = data;
                 gv_Dets.DataSource = bs_Dets;
-                
+
                 Helper.RestoreDirection(gv_Dets, oldColumn, dir);
-                
+
                 SetCellsColorDets();
 
             });
@@ -279,7 +272,7 @@ namespace Odin.Warehouse.Movements
 
             //    _PrevBatchId = cmb_Batches2.BatchId;
             //}
-            
+
         }
 
         public void ShowDets(int id)
@@ -361,7 +354,7 @@ namespace Odin.Warehouse.Movements
             catch
             { }
             SetCellsColor();
-           
+
         }
 
         private void mni_Search_Click(object sender, EventArgs e)
@@ -378,26 +371,19 @@ namespace Odin.Warehouse.Movements
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? String.IsNullOrEmpty(CellValue) == true
+                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
+                    : String.IsNullOrEmpty(CellValue) == true
+                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
             catch { }
             SetCellsColor();
-            
+
 
         }
 
@@ -405,14 +391,13 @@ namespace Odin.Warehouse.Movements
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
-                else
-                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
+                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
-            
+
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -423,7 +408,7 @@ namespace Odin.Warehouse.Movements
             }
             catch { }
             SetCellsColor();
-            
+
 
         }
 
@@ -516,20 +501,13 @@ namespace Odin.Warehouse.Movements
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_Dets.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_Dets.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_Dets.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_Dets.Filter = bs_Dets.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_Dets.Filter = bs_Dets.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
+                bs_Dets.Filter = String.IsNullOrEmpty(bs_Dets.Filter) == true
+                    ? String.IsNullOrEmpty(CellValue) == true
+                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
+                    : String.IsNullOrEmpty(CellValue) == true
+                        ? bs_Dets.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : bs_Dets.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -541,15 +519,14 @@ namespace Odin.Warehouse.Movements
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_Dets.Filter) == true)
-                    bs_Dets.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
-                else
-                    bs_Dets.Filter = bs_Dets.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                bs_Dets.Filter = String.IsNullOrEmpty(bs_Dets.Filter) == true
+                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
+                    : bs_Dets.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColorDets();
         }
-        
+
         private void mni_RemoveFilterD_Click(object sender, EventArgs e)
         {
             try
@@ -559,12 +536,12 @@ namespace Odin.Warehouse.Movements
             catch { }
             SetCellsColorDets();
         }
-        
+
         private void mni_CopyD_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(CellValue.ToString());
         }
-        
+
         private void mni_AdminD_Click(object sender, EventArgs e)
         {
             frm_GridViewAdm frm = new frm_GridViewAdm();
@@ -584,7 +561,7 @@ namespace Odin.Warehouse.Movements
                 LoadColumns(gv_Dets);
             }
         }
-        
+
         private void btn_IntoExcelDets_Click(object sender, EventArgs e)
         {
             ED1.DgvIntoExcel();
@@ -631,7 +608,8 @@ namespace Odin.Warehouse.Movements
 
         private void gv_List_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try {
+            try
+            {
                 if (gv_List.CurrentRow.Cells["btn_Add"].Selected == true)
                 {
                     gv_List.CurrentRow.Cells["cn_qtytomove"].Value = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_qty"].Value);
@@ -683,7 +661,7 @@ namespace Odin.Warehouse.Movements
         private void btn_OK_Click(object sender, EventArgs e)
         {
             bool _test = true;
-           
+
             if (cmb_Batches1.BatchId != cmb_Batches2.BatchId)
             {
                 DialogResult result1 = KryptonTaskDialog.Show("Deallocation warning!",
@@ -692,14 +670,7 @@ namespace Odin.Warehouse.Movements
                                                                 MessageBoxIcon.Warning,
                                                                 TaskDialogButtons.Yes |
                                                                 TaskDialogButtons.No);
-                if (result1 == DialogResult.Yes)
-                {
-                    _test = true;
-                }
-                else
-                {
-                    _test = false;
-                }
+                _test = result1 == DialogResult.Yes;
 
             }
 
@@ -756,7 +727,7 @@ namespace Odin.Warehouse.Movements
                             string strMessage = "";
                             string emailaddresses = "";
                             emailaddresses = DAL.EmailAddressesByType(8);
-                           
+
                             while (reader.Read())
                             {
                                 strMessage = strMessage + "\r\nLabel: " + reader["labelid"].ToString();
@@ -853,7 +824,7 @@ namespace Odin.Warehouse.Movements
 
         private void btn_Print_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btn_Delete_Click(object sender, EventArgs e)
@@ -878,7 +849,7 @@ namespace Odin.Warehouse.Movements
                         }
                     }
                 }
-                
+
 
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
@@ -889,29 +860,29 @@ namespace Odin.Warehouse.Movements
 
                 ShowDets(cmb_MoveDocs1.MoveDocId);
             }
-                //int _id = 0;
+            //int _id = 0;
 
-                //try { _id = Convert.ToInt32(gv_Dets.CurrentRow.Cells["cn_id"].Value); }
-                //catch { }
+            //try { _id = Convert.ToInt32(gv_Dets.CurrentRow.Cells["cn_id"].Value); }
+            //catch { }
 
-                //if (_id != 0
-                //    && globClass.DeleteConfirm() == true)
-                //{
-                //    int _res =SMBll.DeleteStockMoveLine(_id);
-                //    if (_res != 0)
-                //    {
-                //        ShowDets(cmb_MoveDocs1.MoveDocId);
-                //        bwStart(bw_List);
-                //    }
-                //    else
-                //    {
-                //        DialogResult result = KryptonTaskDialog.Show("Deleting warning!",
-                //                                                   "Delete impossible!",
-                //                                                   "There are movement for this labels after selected line or mistake during operation!",
-                //                                                   MessageBoxIcon.Warning,
-                //                                                   TaskDialogButtons.OK);
-                //    }
-                //}
+            //if (_id != 0
+            //    && globClass.DeleteConfirm() == true)
+            //{
+            //    int _res =SMBll.DeleteStockMoveLine(_id);
+            //    if (_res != 0)
+            //    {
+            //        ShowDets(cmb_MoveDocs1.MoveDocId);
+            //        bwStart(bw_List);
+            //    }
+            //    else
+            //    {
+            //        DialogResult result = KryptonTaskDialog.Show("Deleting warning!",
+            //                                                   "Delete impossible!",
+            //                                                   "There are movement for this labels after selected line or mistake during operation!",
+            //                                                   MessageBoxIcon.Warning,
+            //                                                   TaskDialogButtons.OK);
+            //    }
+            //}
         }
 
         private void cmb_Batches2_BatchChanged(object sender)
@@ -922,20 +893,20 @@ namespace Odin.Warehouse.Movements
 
                 //if (_PrevBatchId != cmb_Batches2.BatchId)
                 //{
-                    //try
-                    //{
-                    //    _r = Convert.ToInt32(Helper.GetOneRecord("select top 1 id from sto_stockouthead where batchid = " + cmb_Batches2.BatchId + " and batchid != 0 and typeout = 7 order by id desc "));
-                    //}
-                    //catch { _r = 0; }
-                    //if (_r != 0)
-                    //    cmb_MoveDocs1.MoveDocId = _r;
-                    //else
-                    //    cmb_MoveDocs1.MoveDocId = 0;
+                //try
+                //{
+                //    _r = Convert.ToInt32(Helper.GetOneRecord("select top 1 id from sto_stockouthead where batchid = " + cmb_Batches2.BatchId + " and batchid != 0 and typeout = 7 order by id desc "));
+                //}
+                //catch { _r = 0; }
+                //if (_r != 0)
+                //    cmb_MoveDocs1.MoveDocId = _r;
+                //else
+                //    cmb_MoveDocs1.MoveDocId = 0;
 
-                    //ShowHead(_r);
+                //ShowHead(_r);
 
 
-                    //ShowDets(_r);
+                //ShowDets(_r);
 
                 cmb_Batches1.BatchId = cmb_Batches2.BatchId;
                 if (cmb_Batches1.BatchId != 0)
@@ -946,9 +917,9 @@ namespace Odin.Warehouse.Movements
                 //_PrevBatchId = cmb_Batches2.BatchId;
                 //}
             }
-           
+
         }
-               
+
         private void cmb_Batches2_ControlClick(object sender)
         {
             _sender = 1; //Focus on batch
@@ -1140,5 +1111,5 @@ namespace Odin.Warehouse.Movements
             SetCellsColor();
         }
     }
-    
+
 }

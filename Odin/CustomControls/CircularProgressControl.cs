@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Odin.CustomControls
@@ -62,14 +57,7 @@ namespace Odin.CustomControls
             }
             set
             {
-                if (value > 0)
-                {
-                    m_Interval = value;
-                }
-                else
-                {
-                    m_Interval = DEFAULT_INTERVAL;
-                }
+                m_Interval = value > 0 ? value : DEFAULT_INTERVAL;
             }
         }
 
@@ -124,7 +112,7 @@ namespace Odin.CustomControls
             // Default alpha value of the first spoke is 255
             m_AlphaStartValue = 255;
             // Calculate the angle between adjacent spokes
-            m_AngleIncrement = (int)(360/m_SpokesCount);
+            m_AngleIncrement = (int)(360 / m_SpokesCount);
             // Calculate the change in alpha between adjacent spokes
             m_AlphaDecrement = (int)((m_AlphaStartValue - 15) / m_SpokesCount);
 

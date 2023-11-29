@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
+using System;
+using System.Windows.Forms;
 
 namespace Odin.Register.Articles
 {
@@ -67,7 +59,7 @@ namespace Odin.Register.Articles
             {
                 bn_List.BindingSource = bs_List;
             });
-            
+
         }
 
         #endregion
@@ -123,11 +115,11 @@ namespace Odin.Register.Articles
         private void btn_Delete_Click(object sender, EventArgs e)
         {
             int _id = 0;
-           
+
             try
             {
                 _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
-              
+
             }
             catch { }
             if (_id != 0

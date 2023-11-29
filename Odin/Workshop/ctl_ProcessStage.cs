@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
+﻿using ComponentFactory.Krypton.Toolkit;
+using System;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Data.SqlClient;
-using ComponentFactory.Krypton.Toolkit;
+using System.Windows.Forms;
 
 namespace Odin.Workshop
 {
@@ -28,7 +22,7 @@ namespace Odin.Workshop
 
         public double PrevQty
         {
-            get;set;
+            get; set;
         }
 
         public double PrevFreezedQty
@@ -54,8 +48,11 @@ namespace Odin.Workshop
 
         public double tPrevQty
         {
-            get { try { return Convert.ToDouble(txt_Prev.Text); }
-                catch { return 0; } }
+            get
+            {
+                try { return Convert.ToDouble(txt_Prev.Text); }
+                catch { return 0; }
+            }
             set { txt_Prev.Text = value.ToString(); }
         }
 
@@ -72,8 +69,10 @@ namespace Odin.Workshop
         public string Stage
         {
             get { return lbl_Stage.Text; }
-            set { lbl_Stage.Text = value;
-                
+            set
+            {
+                lbl_Stage.Text = value;
+
             }
         }
 
@@ -119,8 +118,8 @@ namespace Odin.Workshop
                 PrevStageId = Convert.ToInt32(reader["previd"]);
                 InProcQty = Convert.ToDouble(reader["qtyonstage"]) - Convert.ToDouble(reader["freezedqty"]);
                 tInProcQty = Convert.ToDouble(reader["qtyonstage"]) - Convert.ToDouble(reader["freezedqty"]);
-                PrevQty = Convert.ToDouble(reader["prevqty"]) - Convert.ToDouble(reader["prevfreezedqty"]); 
-                tPrevQty = Convert.ToDouble(reader["prevqty"]) - Convert.ToDouble(reader["prevfreezedqty"]); 
+                PrevQty = Convert.ToDouble(reader["prevqty"]) - Convert.ToDouble(reader["prevfreezedqty"]);
+                tPrevQty = Convert.ToDouble(reader["prevqty"]) - Convert.ToDouble(reader["prevfreezedqty"]);
                 Id = Convert.ToInt32(reader["id"]);
                 PrevFreezedQty = Convert.ToDouble(reader["prevfreezedqty"]);
                 tFreezedQty = Convert.ToDouble(reader["freezedqty"]);
@@ -132,7 +131,7 @@ namespace Odin.Workshop
                 ClearFields();
             sqlConn.Close();
         }
-        
+
         public void ClearFields()
         {
             Stage = "";
@@ -198,14 +197,14 @@ namespace Odin.Workshop
             if (BatchStageSaving != null)
                 BatchStageSaving(this);
         }
-        
+
         private void btn_Freeze_Click(object sender, EventArgs e)
         {
             PBLL.FreezeStageProcess(BatchId, StageId, tFreezedQty);
             if (BatchStageSaving != null)
                 BatchStageSaving(this);
         }
-        
+
         #endregion
 
     }

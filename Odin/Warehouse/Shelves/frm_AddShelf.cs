@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ComponentFactory.Krypton.Toolkit;
+using System;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
-using Odin.Global_Classes;
 
 namespace Odin.Warehouse.Shelves
 {
@@ -24,9 +15,10 @@ namespace Odin.Warehouse.Shelves
         #region Variables
 
         public string HeaderText
-        { get 
-                { return this.Text; }
-                set{ this.Text = value; }
+        {
+            get
+            { return this.Text; }
+            set { this.Text = value; }
         }
 
         public int Id
@@ -62,21 +54,19 @@ namespace Odin.Warehouse.Shelves
         public int AddressId
         {
             get { return cmb_Address1.AddressId; }
-                set{ cmb_Address1.AddressId = value; }
-            
+            set { cmb_Address1.AddressId = value; }
+
         }
 
         public int IsProduction
         {
-            get { if (chk_IsProduction.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+            get
+            {
+                return chk_IsProduction.CheckState == CheckState.Checked ? -1 : 0;
             }
-            set { if (value == -1)
-                    chk_IsProduction.CheckState = CheckState.Checked;
-                else
-                    chk_IsProduction.CheckState = CheckState.Unchecked;
+            set
+            {
+                chk_IsProduction.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 
@@ -84,17 +74,11 @@ namespace Odin.Warehouse.Shelves
         {
             get
             {
-                if (chk_Quarantine.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_Quarantine.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_Quarantine.CheckState = CheckState.Checked;
-                else
-                    chk_Quarantine.CheckState = CheckState.Unchecked;
+                chk_Quarantine.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 

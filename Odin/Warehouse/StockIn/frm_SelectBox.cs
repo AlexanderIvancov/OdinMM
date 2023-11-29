@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
-using Odin.Tools;
-using System.Data.SqlClient;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.Warehouse.StockIn
 {
@@ -186,7 +177,7 @@ namespace Odin.Warehouse.StockIn
             //if (rowm.Cells["chk_add"].Selected == true
             //    && Convert.ToInt32(rowm.Cells["chk_add"].Value) == -1)
             //{
-                //FilterByBatch(Convert.ToInt32(rowm.Cells["cn_batchid"].Value));
+            //FilterByBatch(Convert.ToInt32(rowm.Cells["cn_batchid"].Value));
             //}
         }
 

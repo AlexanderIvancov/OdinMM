@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ComponentFactory.Krypton.Toolkit;
+using System;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
 
 namespace Odin.Warehouse.Requests
 {
@@ -39,7 +31,7 @@ namespace Odin.Warehouse.Requests
             get { return cmb_Articles1.ArticleId; }
             set { cmb_Articles1.ArticleId = value; }
         }
-        
+
         //public string Article
         //{
         //    get { }
@@ -48,7 +40,8 @@ namespace Odin.Warehouse.Requests
 
         public double Qty
         {
-            get {
+            get
+            {
                 try { return Convert.ToDouble(txt_Qty.Text); }
                 catch { return 0; }
             }
@@ -89,15 +82,13 @@ namespace Odin.Warehouse.Requests
 
         public int Urgent
         {
-            get { if (chk_Urgent.Checked == true)
-                    return -1;
-                else
-                    return 0;
+            get
+            {
+                return chk_Urgent.Checked == true ? -1 : 0;
             }
-            set { if (value == -1)
-                    chk_Urgent.CheckState = CheckState.Checked;
-                else
-                    chk_Urgent.CheckState = CheckState.Unchecked;
+            set
+            {
+                chk_Urgent.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 
@@ -105,12 +96,7 @@ namespace Odin.Warehouse.Requests
         {
             get
             {
-                if (rb_Enabled.Checked == true)
-                    return -1;
-                else if (rb_Closed.Checked == true)
-                    return 0;
-                else
-                    return 1;
+                return rb_Enabled.Checked == true ? -1 : rb_Closed.Checked == true ? 0 : 1;
             }
             set
             {
@@ -132,7 +118,7 @@ namespace Odin.Warehouse.Requests
         public int CauseId
         {
             get { return cmb_Common1.SelectedValue; }
-            set { cmb_Common1.SelectedValue = value;}
+            set { cmb_Common1.SelectedValue = value; }
         }
         public string Serials
         {
@@ -146,20 +132,14 @@ namespace Odin.Warehouse.Requests
 
         public void EnableArticle()
         {
-            if (BatchDetId != 0)
-                cmb_Articles1.Enabled = false;
-            else
-                cmb_Articles1.Enabled = true;
+            cmb_Articles1.Enabled = BatchDetId == 0;
 
         }
 
         public void CheckEmpty()
         {
-            if (cmb_Articles1.ArticleId == 0
-                || Qty <= 0)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = cmb_Articles1.ArticleId != 0
+                && Qty > 0;
         }
         #endregion
 

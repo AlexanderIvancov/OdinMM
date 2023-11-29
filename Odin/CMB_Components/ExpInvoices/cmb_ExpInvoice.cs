@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Odin.CMB_Components.BLL;
 using Odin.Global_Classes;
+using System;
+using System.Data;
 using System.Data.SqlClient;
-using Odin.CMB_Components.BLL;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.ExpInvoices
 {
@@ -35,7 +30,7 @@ namespace Odin.CMB_Components.ExpInvoices
         public bool _isedit = false;
 
         class_Global glob_Class = new class_Global();
-          
+
         CMB_BLL Bll = new CMB_BLL();
 
         bool _EnableSearchId = false;
@@ -229,12 +224,12 @@ namespace Odin.CMB_Components.ExpInvoices
             frm.FillSellerContPersons();
 
             frm.IsEdit = false;
-            
+
             frm.CheckEmpty();
 
             frm.ExportInvoiceSaving += new ExportInvoiceSavingEventHandler(AddingInvoice);
             frm.Show();
-                        
+
         }
 
         public void AddingInvoice(object sender)
@@ -333,7 +328,7 @@ namespace Odin.CMB_Components.ExpInvoices
                 frm.ExportInvoiceSaving += new ExportInvoiceSavingEventHandler(EditingInvoice);
 
                 frm.Show();
-                
+
             }
         }
 

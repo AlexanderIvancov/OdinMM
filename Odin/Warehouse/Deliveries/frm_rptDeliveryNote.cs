@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Workspace;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
+﻿using ComponentFactory.Krypton.Toolkit;
 using CrystalDecisions.CrystalReports.Engine;
+using Odin.Global_Classes;
+using System;
+using System.Data;
+using System.Windows.Forms;
 
 
 namespace Odin.Warehouse.Deliveries
@@ -68,10 +61,7 @@ namespace Odin.Warehouse.Deliveries
             ////
             DataTable data = new DataTable();
             DataTable datalab = new DataTable();
-            if (DelivNoteType == 1)
-                data = DelivNote_BLL.getDeliveryDetsPrint(HeadId);
-            else
-                data = DelivNote_BLL.getDeliveryDetsPrintMov(HeadId);
+            data = DelivNoteType == 1 ? DelivNote_BLL.getDeliveryDetsPrint(HeadId) : DelivNote_BLL.getDeliveryDetsPrintMov(HeadId);
 
 
             string short_name = "";
@@ -101,7 +91,7 @@ namespace Odin.Warehouse.Deliveries
             report.Database.Tables[1].SetDataSource(data);
 
             ////parameters
-                     
+
 
             report.SetParameterValue("Seller", BLL.Seller);
             report.SetParameterValue("SellerVAT", BLL.SellerVAT);
@@ -140,14 +130,14 @@ namespace Odin.Warehouse.Deliveries
             }
 
             report.SetParameterValue("UserName", System.Environment.UserName);
-            
+
             return report;
 
         }
 
         private void frm_rptDeliveryNote_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         public void FillReport()

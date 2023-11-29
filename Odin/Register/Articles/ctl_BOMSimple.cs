@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
 using Odin.Tools;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Data.SqlClient;
-using ComponentFactory.Krypton.Toolkit;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.Register.Articles
 {
-    public delegate void SendRMArtIdEventHandler (int artid);
+    public delegate void SendRMArtIdEventHandler(int artid);
     public delegate void SendBOMArtIdEventHandler(int artid);
 
     public partial class ctl_BOMSimple : UserControl
@@ -51,7 +48,7 @@ namespace Odin.Register.Articles
                 return _lock;
             }
             set { _lock = value; }
-           
+
         }
 
         public string fileName
@@ -103,7 +100,7 @@ namespace Odin.Register.Articles
             return igvArtId;
         }
         int _validid = 0;
-        public int ValidId 
+        public int ValidId
         {
             get { return _validid; }
             set { _validid = value; }
@@ -181,7 +178,7 @@ namespace Odin.Register.Articles
                 {
                     if (row.Cells["cn_lastchange"].Value.ToString() != ""
                         && Convert.ToDateTime(row.Cells["cn_lastchange"].Value).AddMinutes(1) >= Convert.ToDateTime(row.Cells["cn_validat"].Value))
-                    { 
+                    {
                         if (Convert.ToInt32(row.Cells["cn_typechange"].Value) != 0)
                             foreach (DataGridViewCell cell in row.Cells)
                                 cell.Style.BackColor = Color.Gold;
@@ -307,12 +304,12 @@ namespace Odin.Register.Articles
             gv_List.ThreadSafeCall(delegate
             {
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
-                var dir = Helper.SaveDirection(gv_List);                
+                var dir = Helper.SaveDirection(gv_List);
 
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
-             
+
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
 
                 SetCellsColor();
@@ -373,9 +370,9 @@ namespace Odin.Register.Articles
         {
             SqlConnection conn = new SqlConnection(sConnStr);
             string strSQL = "select distinct nv.id, " +
-                                " nv.validat, " + 
-	                            " nv.validby, " +
-	                            " case nv.state when -1 then 'valid' else 'invalid' end as validstate " +
+                                " nv.validat, " +
+                                " nv.validby, " +
+                                " case nv.state when -1 then 'valid' else 'invalid' end as validstate " +
                                 " from BAS_NomenclaturesValidation nv " +
                                 " where artid = " + ArtId.ToString();
 
@@ -437,7 +434,7 @@ namespace Odin.Register.Articles
 
                 Reg.EditBOMLine(Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value),
                     frm.IdCST, frm.Number, frm.Qty, frm.Using,
-                    frm.Comments, frm.SpoilConst, frm.SpoilPerc, 
+                    frm.Comments, frm.SpoilConst, frm.SpoilPerc,
                     frm.StageId, frm.Positions);
 
                 //DataGridViewColumn oldColumn = gv_List.SortedColumn;
@@ -527,20 +524,13 @@ namespace Odin.Register.Articles
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? String.IsNullOrEmpty(CellValue) == true
+                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
+                    : String.IsNullOrEmpty(CellValue) == true
+                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -553,10 +543,9 @@ namespace Odin.Register.Articles
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
-                else
-                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
+                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
@@ -611,7 +600,7 @@ namespace Odin.Register.Articles
         }
 
         #endregion
-        
+
         private void cmb_Articles1_ArticleChanged(object sender)
         {
             ArtId = cmb_Articles1.ArticleId;
@@ -647,7 +636,7 @@ namespace Odin.Register.Articles
             frm.Number = numId;
             frm.IdCSE = ArtId;
             frm.Tag = "Add";
-            
+
             DialogResult result = frm.ShowDialog();
 
             if (result == DialogResult.OK)
@@ -672,11 +661,11 @@ namespace Odin.Register.Articles
         {
             var frm = new frm_AddBOM();
             var numId = 0;
-          
+
             frm.IdCSE = Convert.ToInt32(cmb_Articles1.ArticleId);
             numId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_num"].Value);
             numId++;
-                       
+
             frm.HeaderText = string.Format("Insert new BOM line for ", Convert.ToString(cmb_Articles1.Article));
             frm.Number = numId;
 
@@ -686,7 +675,7 @@ namespace Odin.Register.Articles
             if (result == DialogResult.OK)
             {
                 //Reg.IncreaseBOMNumbers(cmb_Articles1.ArticleId,
-               //                             Convert.ToInt32(gv_List.CurrentRow.Cells["cn_num"].Value));
+                //                             Convert.ToInt32(gv_List.CurrentRow.Cells["cn_num"].Value));
 
                 var insertedId = Reg.AddBOMLine(frm.IdCSE, frm.IdCST, frm.Number, frm.Qty, frm.Using,
                                                  frm.Comments, frm.SpoilConst, frm.SpoilPerc, frm.StageId,
@@ -819,7 +808,7 @@ namespace Odin.Register.Articles
             {
                 frm_cmbText frm = new frm_cmbText();
                 frm.LabelText = "Comments:";
-                frm.HeaderText = "Add comments for validation deletion!" ;
+                frm.HeaderText = "Add comments for validation deletion!";
 
                 DialogResult result = frm.ShowDialog();
 
@@ -845,7 +834,7 @@ namespace Odin.Register.Articles
 
             {
                 frm_BOMAnalogs frm = new frm_BOMAnalogs();
-                frm.HeaderText = "Analogs list for: " + gv_List.CurrentRow.Cells["cn_art"].Value.ToString() ;
+                frm.HeaderText = "Analogs list for: " + gv_List.CurrentRow.Cells["cn_art"].Value.ToString();
                 frm.CSEId = cmb_Articles1.ArticleId;
                 frm.CSTId = _cstid;
                 frm.FillList();
@@ -907,8 +896,6 @@ namespace Odin.Register.Articles
 
         private void btn_ExportForQuote_Click(object sender, EventArgs e)
         {
-            int qty = 0;
-
             frm_cmbNumber frm = new frm_cmbNumber();
             frm.LabelText = "Qty of final product";
             frm.HeaderText = "Enter qty of final product";
@@ -1007,7 +994,7 @@ namespace Odin.Register.Articles
 
         private void gv_List_MouseClick(object sender, MouseEventArgs e)
         {
-            
+
         }
 
         private void gv_List_CellEnter(object sender, DataGridViewCellEventArgs e)
@@ -1015,7 +1002,7 @@ namespace Odin.Register.Articles
             Rectangle rect = gv_List.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
             xpos1 = rect.X;
             ypos1 = rect.Y;
-           
+
         }
 
         private void btn_Sort_Click(object sender, EventArgs e)

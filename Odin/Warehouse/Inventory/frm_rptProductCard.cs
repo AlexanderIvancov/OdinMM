@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using CrystalDecisions.CrystalReports.Engine;
+﻿using CrystalDecisions.CrystalReports.Engine;
 using Odin.Global_Classes;
+using System;
+using System.Data;
+using System.Windows.Forms;
 
 namespace Odin.Warehouse.Inventory
 {
@@ -51,18 +45,18 @@ namespace Odin.Warehouse.Inventory
             drow[0] = DAL.LogoToByte();
             dt.Rows.Add(drow);
 
-        
+
             //parameters
 
             report.Database.Tables[0].SetDataSource(dt);
-          
+
             report.SetParameterValue("Article", Article);
             report.SetParameterValue("Unit", Unit);
             report.SetParameterValue("ArtId", ArtId);
             report.SetParameterValue("Qty", Qty);
             report.SetParameterValue("Date", Date);
             report.SetParameterValue("Initials", Initials);
-            
+
             return report;
 
         }

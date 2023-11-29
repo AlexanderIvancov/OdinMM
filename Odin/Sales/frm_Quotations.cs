@@ -1,22 +1,15 @@
-﻿using System;
+﻿using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using Odin.Tools;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using WeifenLuo.WinFormsUI.Docking;
-using Odin.Global_Classes;
-using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Workspace;
-using ComponentFactory.Krypton.Toolkit;
-using System.Threading;
 using System.Data.SqlClient;
-using Odin.Tools;
-using Odin.Register;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.Sales
 {
@@ -38,7 +31,7 @@ namespace Odin.Sales
         class_Global globClass = new class_Global();
         ExportData ED;
         Helper MyHelper = new Helper();
-              
+
 
         public int RowIndex = 0;
         public int ColumnIndex = 0;
@@ -76,21 +69,11 @@ namespace Odin.Sales
         {
             get
             {
-                if (chk_PCB.CheckState == CheckState.Checked)
-                    return -1;
-                else if (chk_PCB.CheckState == CheckState.Unchecked)
-                    return 0;
-                else
-                    return 1;
+                return chk_PCB.CheckState == CheckState.Checked ? -1 : chk_PCB.CheckState == CheckState.Unchecked ? 0 : 1;
             }
             set
             {
-                if (value == -1)
-                    chk_PCB.CheckState = CheckState.Checked;
-                else if (value == 0)
-                    chk_PCB.CheckState = CheckState.Unchecked;
-                else
-                    chk_PCB.CheckState = CheckState.Indeterminate;
+                chk_PCB.CheckState = value == -1 ? CheckState.Checked : value == 0 ? CheckState.Unchecked : CheckState.Indeterminate;
             }
         }
 
@@ -159,11 +142,11 @@ namespace Odin.Sales
         {
             var data = CO_BLL.getQuotations(cmb_Quotations1.QuotationId, cmb_Types1.TypeId, cmb_Department1.DeptId, cmb_Firms1.FirmId, cmb_Common1.SelectedValue,
                                             cmb_Articles1.ArticleId,
-                                            txt_CustArticle.Text, 
+                                            txt_CustArticle.Text,
                                             txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
-                                            txt_CreatDateTill.Value == null ? "" : txt_CreatDateTill.Value.ToString().Trim(), 
+                                            txt_CreatDateTill.Value == null ? "" : txt_CreatDateTill.Value.ToString().Trim(),
                                             txt_Comments.Text,
-                                            txt_ReqDateFrom.Value == null ? "" : txt_ReqDateFrom.Value.ToString().Trim(), 
+                                            txt_ReqDateFrom.Value == null ? "" : txt_ReqDateFrom.Value.ToString().Trim(),
                                             txt_ReqDateTill.Value == null ? "" : txt_ReqDateTill.Value.ToString().Trim(),
                                             PCB);
 
@@ -191,15 +174,15 @@ namespace Odin.Sales
                 if (Convert.ToInt32(row.Cells["cn_stateid"].Value) == 1)
                 {
                     if (Convert.ToInt32(row.Cells["chk_issent"].Value) == 0)
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        cell.Style.BackColor = Color.FromArgb(255, 255, 192);
-                    }
+                        foreach (DataGridViewCell cell in row.Cells)
+                        {
+                            cell.Style.BackColor = Color.FromArgb(255, 255, 192);
+                        }
                     else
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        cell.Style.BackColor = Color.Yellow;
-                    }
+                        foreach (DataGridViewCell cell in row.Cells)
+                        {
+                            cell.Style.BackColor = Color.Yellow;
+                        }
                 }
                 //Green - Accepted
                 if (Convert.ToInt32(row.Cells["cn_stateid"].Value) == 3)
@@ -304,20 +287,13 @@ namespace Odin.Sales
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? String.IsNullOrEmpty(CellValue) == true
+                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
+                    : String.IsNullOrEmpty(CellValue) == true
+                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -330,10 +306,9 @@ namespace Odin.Sales
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
-                else
-                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
+                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
@@ -414,7 +389,7 @@ namespace Odin.Sales
             txt_CreatDateTill.Value = null;
             txt_ReqDateFrom.Value = null;
             txt_ReqDateTill.Value = null;
-                   
+
 
             cmb_Common1.SelectedValue = 0;
             //ctl_btnNum1.GetCountQuery = "exec sp_SelectInvalideBOMsCount";
@@ -483,12 +458,9 @@ namespace Odin.Sales
 
         private void chk_PCB_CheckStateChanged(object sender, EventArgs e)
         {
-            if (chk_PCB.CheckState == CheckState.Checked)
-                chk_PCB.Text = "PCB: Yes";
-            else if (chk_PCB.CheckState == CheckState.Unchecked)
-                chk_PCB.Text = "PCB: No";
-            else
-                chk_PCB.Text = "PCB: Undefined";
+            chk_PCB.Text = chk_PCB.CheckState == CheckState.Checked
+                ? "PCB: Yes"
+                : chk_PCB.CheckState == CheckState.Unchecked ? "PCB: No" : "PCB: Undefined";
         }
 
         private void btn_AddNew_Click(object sender, EventArgs e)
@@ -549,7 +521,7 @@ namespace Odin.Sales
                 frm = new frm_AddQuotation();
                 frm.ctl_QuotDets1.IsCopy = -1;
                 frm.ctl_QuotDets1.QuotId = _id;
-                
+
 
 
                 frm.QuotationSaved += new QuotationSavedEventHandler(AddQuotation);
@@ -595,10 +567,10 @@ namespace Odin.Sales
         #endregion
 
         private void toolStripButton1_Click(object sender, EventArgs e)
-        {          
+        {
 
             string emailaddresses = "";
-            
+
             string strMessage = "New CO number: " + COBll.COHeader;
             strMessage = strMessage + System.Environment.NewLine + "Customer: " + COBll.COCustomer;
             strMessage = strMessage + System.Environment.NewLine + "Qty: " + COBll.COQty;
@@ -650,9 +622,9 @@ namespace Odin.Sales
             var _query = "sp_SelectArtTotalsListPCB";
 
             var sqlparams = new List<SqlParameter>()
-                {
-                   
-                };
+            {
+
+            };
 
             Template_DataGridView frm = new Template_DataGridView();
 

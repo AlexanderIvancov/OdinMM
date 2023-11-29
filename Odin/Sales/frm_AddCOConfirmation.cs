@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
+﻿using ComponentFactory.Krypton.Toolkit;
+using System;
 
 
 namespace Odin.Sales
@@ -79,15 +71,8 @@ namespace Odin.Sales
 
         public void CheckEmpty()
         {
-            if (Qty <= 0
-                || ConfDate == "")
-            {
-                btn_OK.Enabled = false;
-            }
-            else
-            {
-                btn_OK.Enabled = true;
-            }
+            btn_OK.Enabled = Qty > 0
+                && ConfDate != "";
         }
 
         private void txt_Qty_TextChanged(object sender, EventArgs e)

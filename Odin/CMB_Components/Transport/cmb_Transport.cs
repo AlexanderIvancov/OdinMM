@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
+﻿using Odin.Global_Classes;
+using System;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Odin.Global_Classes;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.Transport
 {
@@ -20,7 +15,7 @@ namespace Odin.CMB_Components.Transport
 
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
         PopupWindowHelper PopupHelper = null;
-        
+
         int _TransportId = 0;
         int _PrevId = 0;
 

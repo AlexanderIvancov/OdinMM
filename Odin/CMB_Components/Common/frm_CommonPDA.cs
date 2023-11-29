@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
-using Odin.Global_Classes;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.CMB_Components.BLL;
+using Odin.Global_Classes;
+using System;
+using System.Text;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.Common
 {
@@ -73,10 +66,10 @@ namespace Odin.CMB_Components.Common
                 if (cmb_CommonPDAOne.OrderBy != "")
                     sb.Append(" ORDER BY " + cmb_CommonPDAOne.OrderBy);
                 //else
-               //     sb.Append(" ORDER BY name");
-                            
+                //     sb.Append(" ORDER BY name");
+
                 gv_List.DataSource = Helper.QueryDTstring(sb.ToString());
-                
+
                 gv_List.Columns[0].Visible = false;
                 gv_List.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 gv_List.Rows[0].Frozen = true;

@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Odin.CMB_Components.BLL;
 using Odin.Global_Classes;
-using System.Data.SqlClient;
 using Odin.Register;
-using Odin.CMB_Components.BLL;
+using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 namespace Odin.CMB_Components.Companies
 {
     public delegate void FirmsEventHandler(object sender);
@@ -61,27 +56,27 @@ namespace Odin.CMB_Components.Companies
                 _Firm = value;
                 //if (String.IsNullOrEmpty(_Firm) != true)
                 //{
-                    txt_Firm.Text = value;
-                    DataSet ds = new DataSet();
+                txt_Firm.Text = value;
+                DataSet ds = new DataSet();
 
-                    SqlDataAdapter adapter =
-                        new SqlDataAdapter(
-                            "SELECT DISTINCT TOP 1 id FROM BAS_Companies WHERE company = N'" + _Firm.ToString() + "'", sConnStr);
+                SqlDataAdapter adapter =
+                    new SqlDataAdapter(
+                        "SELECT DISTINCT TOP 1 id FROM BAS_Companies WHERE company = N'" + _Firm.ToString() + "'", sConnStr);
 
-                    adapter.Fill(ds);
+                adapter.Fill(ds);
 
-                    DataTable dt = ds.Tables[0];
+                DataTable dt = ds.Tables[0];
 
-                    try
-                    {
-                        FirmId = Convert.ToInt32(dt.Rows[0]["id"].ToString());
-                    }
-                    catch
-                    {
+                try
+                {
+                    FirmId = Convert.ToInt32(dt.Rows[0]["id"].ToString());
+                }
+                catch
+                {
 
-                        _FirmId = 0;
-                        return;
-                    }
+                    _FirmId = 0;
+                    return;
+                }
                 //
 
                 if (FirmsChanged != null)
@@ -166,12 +161,10 @@ namespace Odin.CMB_Components.Companies
         public bool IsEmptyColor
         {
             get { return _isemptycolor; }
-            set {
+            set
+            {
                 _isemptycolor = value;
-                if (value == true)
-                    txt_Firm.StateCommon.Back.Color1 = Color.LightPink;
-                else
-                    txt_Firm.StateCommon.Back.Color1 = Color.White;
+                txt_Firm.StateCommon.Back.Color1 = value == true ? Color.LightPink : Color.White;
             }
         }
 

@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
-using Odin.Tools;
-using System.Data.SqlClient;
+using System;
+using System.Data;
 
 namespace Odin.Planning
 {
@@ -36,7 +27,7 @@ namespace Odin.Planning
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
-                                
+
             });
 
 
@@ -58,7 +49,7 @@ namespace Odin.Planning
 
         private void btn_Excel_Click(object sender, EventArgs e)
         {
-            ED.DgvIntoExcel(); 
+            ED.DgvIntoExcel();
         }
     }
 }

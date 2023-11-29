@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
-using Odin.Global_Classes;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.CMB_Components.BLL;
+using Odin.Global_Classes;
+using System;
+using System.Windows.Forms;
 namespace Odin.CMB_Components.CharUnits
 {
     public partial class frm_CharUnits : KryptonForm
     {
-        
+
 
 
         public frm_CharUnits()
@@ -33,14 +25,14 @@ namespace Odin.CMB_Components.CharUnits
         }
         int _BaseUnitId = 0;
         int _BaseUnitOnly = 0;
-        
+
         public int BaseUnitId
-        { 
-            get { return _BaseUnitId; } 
+        {
+            get { return _BaseUnitId; }
             set { _BaseUnitId = value; }
 
         }
-        public int BaseUnitOnly 
+        public int BaseUnitOnly
         {
             get { return _BaseUnitOnly; }
             set { _BaseUnitOnly = value; }
@@ -55,8 +47,8 @@ namespace Odin.CMB_Components.CharUnits
             get { return _showingModal; }
             set { _showingModal = value; }
         }
-       
-                
+
+
         public void ChangeCMBElements()
         {
             try
@@ -154,5 +146,5 @@ namespace Odin.CMB_Components.CharUnits
             this.Close();
         }
     }
-   
+
 }

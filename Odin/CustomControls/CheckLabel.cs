@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
+﻿using Odin.Global_Classes;
+using System;
 using System.Windows.Forms;
-using Odin.Global_Classes;
 
 
 namespace Odin.CustomControls
@@ -26,12 +20,9 @@ namespace Odin.CustomControls
 
                 if (value != null)
                 {
-                    _txt_Name.TextChanged += delegate(object _sender, EventArgs _e)
+                    _txt_Name.TextChanged += delegate (object _sender, EventArgs _e)
                     {
-                        if (globClass.NES(_txt_Name.Text) != "")
-                            lbl_Check.Text = "";
-                        else
-                            lbl_Check.Text = "*";
+                        lbl_Check.Text = globClass.NES(_txt_Name.Text) != "" ? "" : "*";
                     };
 
                 }
@@ -47,12 +38,9 @@ namespace Odin.CustomControls
 
                 if (value != null)
                 {
-                    _txt_MaskName.TextChanged += delegate(object _sender, EventArgs _e)
+                    _txt_MaskName.TextChanged += delegate (object _sender, EventArgs _e)
                     {
-                        if (globClass.NES(_txt_MaskName.Text) != "")
-                            lbl_Check.Text = "";
-                        else
-                            lbl_Check.Text = "*";
+                        lbl_Check.Text = globClass.NES(_txt_MaskName.Text) != "" ? "" : "*";
                     };
 
                 }
@@ -67,19 +55,13 @@ namespace Odin.CustomControls
         {
             if (_txt_Name != null)
             {
-                if (globClass.NES(_txt_Name.Text) != "")
-                    lbl_Check.Text = "";
-                else
-                    lbl_Check.Text = "*";
+                lbl_Check.Text = globClass.NES(_txt_Name.Text) != "" ? "" : "*";
 
             }
 
             if (_txt_MaskName != null)
             {
-                if (globClass.NES(_txt_MaskName.Text) != "")
-                    lbl_Check.Text = "";
-                else
-                    lbl_Check.Text = "*";
+                lbl_Check.Text = globClass.NES(_txt_MaskName.Text) != "" ? "" : "*";
 
             }
         }

@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
-using ComponentFactory.Krypton.Toolkit;
 using Odin.Planning;
 using Odin.Register;
+using System;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Windows.Forms;
 namespace Odin.Purchase
 {
     public delegate void POIdSendingEventHandler(object sender);
@@ -48,7 +44,7 @@ namespace Odin.Purchase
         public bool IsCopy
         {
             get { return _IsCopy; }
-        set { _IsCopy = value; }
+            set { _IsCopy = value; }
         }
 
         int _poid = 0;
@@ -64,22 +60,22 @@ namespace Odin.Purchase
                 CatId = POBll.POCatalogId;
                 ArtId = POBll.POArtId;
                 Comments = POBll.POComments;
-               
+
 
                 StateId = POBll.POStateId;
                 SupArticle = POBll.POSupArticle;
                 SuppliersOrder = POBll.POSupOrder;
-               
+
                 Qty = POBll.POQty;
                 ReqDate = POBll.POReqDate;
                 MinExpDate = POBll.POMinExpDate;
                 UnitId = POBll.POUnitId;
                 DBUnitId = POBll.PODBUnitId;
-                
+
                 Vat = POBll.POVat;
                 Discount = POBll.PODiscount;
                 HeadId1 = POBll.POHeadId1;
-               
+
 
                 UnitFNPrice = POBll.POUnitPrice;
                 UnitPriceBeg = Discount == 100 ? 0 : (POBll.POUnitPrice * 100 / (100 - Discount));
@@ -96,13 +92,13 @@ namespace Odin.Purchase
                 EndCustomer = POBll.POEndCustomer;
 
                 strField = "txt_UnPrice";
-                
+
                 CalcPriceFields(4, UnitPrice, Discount, DiscFix, UnitFNPrice, Vat, PriceWVat);
                 ShowLineTots();
             }
         }
 
-       
+
 
         public int senderUnit
         { get; set; }
@@ -112,10 +108,10 @@ namespace Odin.Purchase
 
         public string strField = "";
 
-        
+
         int _CatId = 0;
         int _PrevArtId = 0;
-        
+
         public int PrevArtId
         {
             get { return _PrevArtId; }
@@ -142,13 +138,13 @@ namespace Odin.Purchase
             get { return cmb_PurchaseOrders1.SupplierId; }
             set { cmb_PurchaseOrders1.SupplierId = value; }
         }
-       
+
         public string HeaderText
         {
             get { return this.Text; }
             set { this.Text = value; }
         }
-        
+
 
         public int Line
         {
@@ -185,7 +181,7 @@ namespace Odin.Purchase
             get { return cmb_Units1.UnitId; }
             set { cmb_Units1.UnitId = value; }
         }
-        
+
         public int StateId
         {
             get { return cmb_Common1.SelectedValue; }
@@ -205,7 +201,7 @@ namespace Odin.Purchase
             }
             set { txt_Qty.Text = value.ToString(); }
         }
-        
+
         public double CoefConv
         {
             get
@@ -347,18 +343,17 @@ namespace Odin.Purchase
         }
         public string MinExpDate
         {
-            get {
-                if (txt_MinExpDate.Value == null)
-                    return "";
-                else
-                    return txt_MinExpDate.Value.ToString();
+            get
+            {
+                return txt_MinExpDate.Value == null ? "" : txt_MinExpDate.Value.ToString();
             }
             set
             {
-                try {
+                try
+                {
                     txt_MinExpDate.Value = Convert.ToDateTime(value);
                 }
-                catch { txt_MinExpDate.Value = null;}
+                catch { txt_MinExpDate.Value = null; }
             }
         }
         public string SuppliersOrder
@@ -402,7 +397,7 @@ namespace Odin.Purchase
         }
         public int PrimSup
         { get; set; }
-        
+
         public double Multiplicity
         {
             get { return Convert.ToDouble(txt_Multiplicity.Text); }
@@ -455,11 +450,8 @@ namespace Odin.Purchase
 
         public void EnableNeeds()
         {
-            if (IsCopy == false
-                && POId != 0)
-                btn_Needs.Enabled = false;
-            else
-                btn_Needs.Enabled = true;
+            btn_Needs.Enabled = IsCopy != false
+                || POId == 0;
         }
 
         public double MOQMPQ(double Qty, double MOQ, double MPQ)
@@ -468,22 +460,13 @@ namespace Odin.Purchase
 
             if (Qty < MOQ)
             {
-                if (globClass.ApprovePOMOQ() == true)
-                    Ret = MOQ;
-                else
-                    Ret = Qty;
+                Ret = globClass.ApprovePOMOQ() == true ? MOQ : Qty;
             }
             else
             {
                 if (MPQ > 0)
                 {
-                    if (Math.Round((Qty % MPQ), 5) == 0)
-                        Ret = Qty;
-                    else
-                        if (globClass.ApprovePOMOQ() == true)
-                        Ret = Qty - (Qty % MPQ) + MPQ;
-                    else
-                        Ret = Qty;
+                    Ret = Math.Round((Qty % MPQ), 5) == 0 ? Qty : globClass.ApprovePOMOQ() == true ? Qty - (Qty % MPQ) + MPQ : Qty;
                 }
                 else
                     Ret = Qty;
@@ -501,16 +484,13 @@ namespace Odin.Purchase
 
         public void CheckEmpty()
         {
-            if (Qty <= 0
-            || ArtId == 0
-            || UnitId == 0
-            || HeadId == 0
+            btn_OK.Enabled = Qty > 0
+            && ArtId != 0
+            && UnitId != 0
+            && HeadId != 0
             //|| CheckCatEx(cmb_Articles1.ArticleId, SupId) == false
-            || ReqDate.Trim() == ""
-            || String.IsNullOrEmpty(ReqDate.Trim()) == true)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            && ReqDate.Trim() != ""
+            && String.IsNullOrEmpty(ReqDate.Trim()) != true;
         }
 
         public void CalcPriceFields(int sender, double vUnitPrice, double vDiscount, double vDiscFix, double vUnitFNPrice, double vVat, double vPriceWVat)
@@ -525,10 +505,7 @@ namespace Odin.Purchase
             else if (sender == 3)
             {
                 //Discount percentage (show)
-                if (vUnitPrice == 0)
-                { Discount = 0; }
-                else
-                { Discount = Math.Round((DiscFix * 100 / vUnitPrice), 2); }
+                Discount = vUnitPrice == 0 ? 0 : Math.Round((DiscFix * 100 / vUnitPrice), 2);
                 UnitFNPrice = Math.Round((vUnitPrice - DiscFix), 5);
                 CalcPriceFields(2, UnitPrice, Discount, DiscFix, UnitFNPrice, Vat, PriceWVat);
             }
@@ -571,7 +548,7 @@ namespace Odin.Purchase
 
             StateId = 1;
             Line = POBll.LastPOLine(cmb_PurchaseOrders1.PurchaseOrderId) + 1;
-            
+
             CheckEmpty();
 
         }
@@ -646,14 +623,7 @@ namespace Odin.Purchase
                                                                      MessageBoxIcon.Warning,
                                                                      TaskDialogButtons.Yes |
                                                                      TaskDialogButtons.No);
-                    if (result1 == DialogResult.No)
-                    {
-                        _test = false;
-                    }
-                    else
-                    {
-                        _test = true;
-                    }
+                    _test = result1 != DialogResult.No;
                 }
 
                 if (_test == true)
@@ -672,8 +642,8 @@ namespace Odin.Purchase
 
                     DataNeeds = frm.ctl_RMNeeds1.data.Copy();
                     ArtFromNeeds = frm.ctl_RMNeeds1.cmb_Articles1.ArticleId;
-                }            
-                               
+                }
+
             }
         }
 
@@ -703,7 +673,7 @@ namespace Odin.Purchase
 
 
             //Clear needs
-            
+
             NeedsInPO = 0;
             //Qty = 0;
 
@@ -722,7 +692,7 @@ namespace Odin.Purchase
         private void txt_CoefConv_Validated(object sender, EventArgs e)
         {
             strField = "txt_UnPrice";
-            
+
             if (CoefConv == 0)
                 CoefConv = 1;
             UnitPrice = UnitPriceBeg / CoefConv;
@@ -759,7 +729,7 @@ namespace Odin.Purchase
                 Multiplicity = Math.Round(1 / CoefConv, 7);
             }
         }
-        
+
         private void txt_UnPrice_Click(object sender, EventArgs e)
         {
             strField = "txt_UnPrice";
@@ -885,12 +855,7 @@ namespace Odin.Purchase
         {
             if (strField == "txt_Vat")
             {
-                int send = 0;
-                if (UnitFNPrice == 0)
-                    send = 1;
-                else
-                    send = 2;
-
+                int send = UnitFNPrice == 0 ? 1 : 2;
                 CalcPriceFields(send, UnitPrice, Discount, DiscFix, UnitFNPrice, Vat, PriceWVat);
                 ShowLineTots();
             }
@@ -921,7 +886,7 @@ namespace Odin.Purchase
             catch { }
             CheckEmpty();
         }
-        
+
         private void txt_SuppliersOrder_TextChanged(object sender, EventArgs e)
         {
             CheckEmpty();
@@ -954,7 +919,7 @@ namespace Odin.Purchase
             #region If1
             if (DLL.CheckArtId(ArtId) != 0)
             {
-                NewLineId = POBll.SavePOLine(_POId, HeadId, Line, ArtId, Qty, UnitId, UnitFNPrice, Vat, Discount, ReqDate, Comments, StateId, 
+                NewLineId = POBll.SavePOLine(_POId, HeadId, Line, ArtId, Qty, UnitId, UnitFNPrice, Vat, Discount, ReqDate, Comments, StateId,
                                             CatId, CoefConv, MinExpDate, SuppliersOrder, SupArticle, Resale, ProjectId, InternalComments);
 
                 _QtyDistr = Math.Round(Qty / (CoefConv == 0 ? 1 : CoefConv), 5);
@@ -974,19 +939,19 @@ namespace Odin.Purchase
                             {
                                 POBll.MapPONeeds(NewLineId, Convert.ToInt32(row["id"]), Convert.ToInt32(row["typeneed"]), _QtyDistr, "");
                                 _QtyDistr = 0;
-                                
+
                                 break;
                             }
                             else
                             {
                                 POBll.MapPONeeds(NewLineId, Convert.ToInt32(row["id"]), Convert.ToInt32(row["typeneed"]), Convert.ToDouble(row["topurchase"]), "");
                                 _QtyDistr = _QtyDistr - Convert.ToDouble(row["topurchase"]);
-                               
+
                             }
 
                         }
                     }
-                    
+
                 }
                 #endregion
                 else //Existed line
@@ -1051,7 +1016,7 @@ namespace Odin.Purchase
 
             }
 
-         }
+        }
 
         private void cmb_Common1_SelectedValueChanged(object sender)
         {

@@ -1,26 +1,17 @@
-﻿using System;
+﻿using ComponentFactory.Krypton.Toolkit;
+using GanttChart;
+using Odin.Global_Classes;
+using Odin.Planning.Passport;
+using Odin.Tools;
+using Odin.Warehouse.StockOut.Reports;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using WeifenLuo.WinFormsUI.Docking;
-using Odin.Global_Classes;
-using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Workspace;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Planning.Controls;
-using Odin.Planning;
 using System.Data.SqlClient;
-using Odin.Tools;
+using System.Drawing;
+using System.Windows.Forms;
 using System.Windows.Forms.Calendar;
-using Odin.Warehouse.StockOut.Reports;
-using Odin.Planning.Passport;
-using GanttChart;
 namespace Odin.Planning
 {
     public partial class frm_LaunchesPlanningG : BaseForm
@@ -115,7 +106,7 @@ namespace Odin.Planning
             ganttChart1.FromDate = new DateTime(Convert.ToDateTime(_datefrom).Year, Convert.ToDateTime(_datefrom).Month, Convert.ToDateTime(_datefrom).Day, 0, 0, 0);
             ganttChart1.ToDate = new DateTime(Convert.ToDateTime(_datetill).Year, Convert.ToDateTime(_datetill).Month, Convert.ToDateTime(_datetill).Day, 23, 59, 59);
             tableLayoutPanel1.Controls.Add(ganttChart1, 0, 0);
-            
+
             ganttChart1.MouseMove += new MouseEventHandler(ganttChart1.GanttChart_MouseMove);
             ganttChart1.MouseMove += new MouseEventHandler(GanttChart1_MouseMove);
             ganttChart1.MouseDragged += new MouseEventHandler(ganttChart1.GanttChart_MouseDragged);
@@ -151,7 +142,7 @@ namespace Odin.Planning
                 _CalendarText = _CalendarText + System.Environment.NewLine + "End of production: " + Convert.ToDateTime(row["enddate"].ToString()).ToShortDateString();
                 _CalendarText = _CalendarText + System.Environment.NewLine + "Article: " + row["article"].ToString();
                 _CalendarText = _CalendarText + System.Environment.NewLine + "Cust. article: " + row["custarticle"].ToString();
-                
+
                 if (row["printedby"].ToString() != "")
                     _CalendarText = _CalendarText + System.Environment.NewLine + "Printed at: " + row["printedat"].ToString() + " by " + row["printedby"].ToString();
 
@@ -170,10 +161,7 @@ namespace Odin.Planning
                     else
                     {
                         //Printed
-                        if (row["printedby"].ToString() != "")
-                            color1 = Color.LightGreen;
-                        else
-                            color1 = Color.LightCoral;
+                        color1 = row["printedby"].ToString() != "" ? Color.LightGreen : Color.LightCoral;
                     }
                 }
                 //if (Convert.ToInt32(row["isstarted"]) == -1)
@@ -202,16 +190,16 @@ namespace Odin.Planning
                 //        else
                 //            color1 = Color.LightCoral;
                 //    }
-                    
+
                 //}
 
                 if (Convert.ToInt32(row["isactive"]) == 0)
                     color1 = Color.Gainsboro;
 
 
-                lst1.Add(new BarInformation(row["launch"].ToString(), new DateTime(_starttime.Year, _starttime.Month, _starttime.Day, 0, 0, 0), 
-                                                                        new DateTime(_endtime.Year, _endtime.Month, _endtime.Day, 23, 59, 59), 
-                                                                        color1, Color.White, _i++, _id, _CalendarText, 
+                lst1.Add(new BarInformation(row["launch"].ToString(), new DateTime(_starttime.Year, _starttime.Month, _starttime.Day, 0, 0, 0),
+                                                                        new DateTime(_endtime.Year, _endtime.Month, _endtime.Day, 23, 59, 59),
+                                                                        color1, Color.White, _i++, _id, _CalendarText,
                                                                         row["launch"].ToString() + "; " + row["article"].ToString() + "; " + row["custarticle"].ToString()));
             }
             foreach (BarInformation bar in lst1)
@@ -267,7 +255,7 @@ namespace Odin.Planning
                 _endtime = Convert.ToDateTime(row["enddate"]);
                 _id = Convert.ToInt32(row["launchid"]);
 
-                _CalendarText = "Launch: " + row["launch"].ToString() + ", group: " + row["groupname"].ToString(); 
+                _CalendarText = "Launch: " + row["launch"].ToString() + ", group: " + row["groupname"].ToString();
                 _CalendarText = _CalendarText + ", " + row["conforder"].ToString();// + ", Batch: " + row["batch"].ToString();
                 _CalendarText = _CalendarText + System.Environment.NewLine + "Qty: " + row["qty"].ToString() + " " + row["unit"].ToString()
                         + ", Stage: " + row["stage"].ToString();
@@ -293,10 +281,7 @@ namespace Odin.Planning
                     else
                     {
                         //Printed
-                        if (row["printedby"].ToString() != "")
-                            color1 = Color.LightGreen;
-                        else
-                            color1 = Color.LightCoral;
+                        color1 = row["printedby"].ToString() != "" ? Color.LightGreen : Color.LightCoral;
                     }
                 }
                 //if (Convert.ToInt32(row["isstarted"]) == -1)
@@ -333,7 +318,7 @@ namespace Odin.Planning
 
                 lst1.Add(new BarInformation(row["launch"].ToString(), new DateTime(_starttime.Year, _starttime.Month, _starttime.Day, 0, 0, 0),
                                                                       new DateTime(_endtime.Year, _endtime.Month, _endtime.Day, 23, 59, 59),
-                                                                      color1, Color.White, _i++, _id, _CalendarText, 
+                                                                      color1, Color.White, _i++, _id, _CalendarText,
                                                                       row["launch"].ToString() + "; " + row["article"].ToString() + "; " + row["custarticle"].ToString()));
             }
             foreach (BarInformation bar in lst1)
@@ -362,7 +347,7 @@ namespace Odin.Planning
                 else if (typ.ToLower() == "string")
                 {
                     toolTipText.Add(ganttChart1.MouseOverRowValue.ToString());
-                   
+
                 }
             }
             else
@@ -399,7 +384,7 @@ namespace Odin.Planning
             frm.Close();
             FillData(DateFrom.ToShortDateString(), DateTill.ToShortDateString());
             //FillData(cmb_Week1.FirstDateOfWeek.ToShortDateString(), cmb_Week1.LastDateOfWeek.AddDays(-2).ToShortDateString());
-           
+
         }
 
         public void EditClosing(object sender)
@@ -521,7 +506,7 @@ namespace Odin.Planning
             frm.ctl_CreatLaunchDets1.txt_StartDate.Value = dstart;
             frm.ctl_CreatLaunchDets1.txt_ProdStartDate.Value = dstart;
             frm.ctl_CreatLaunchDets1.txt_EndDate.Value = EndDate;
-            
+
 
 
 
@@ -575,7 +560,7 @@ namespace Odin.Planning
 
         private void btn_RMMissings_Click(object sender, EventArgs e)
         {
-            
+
             int _id = 0;
 
             try
@@ -681,13 +666,13 @@ namespace Odin.Planning
                                                                 MessageBoxIcon.Warning,
                                                                 TaskDialogButtons.OK);
             }
-                        
+
         }
 
         private void mni_AutoReserve_Click(object sender, EventArgs e)
         {
             int _id = 0;
-            
+
             try
             {
                 object obj = ganttChart1.MouseClickValue;
@@ -775,7 +760,7 @@ namespace Odin.Planning
             catch { _text = ""; }
 
             Clipboard.SetText(_text);
-            
+
         }
 
         private void btn_DeleteItem_Click(object sender, EventArgs e)
@@ -801,19 +786,19 @@ namespace Odin.Planning
 
             if (_id != 0
                 && glob_Class.DeleteConfirm() == true)
-             {
+            {
                 MessageBox.Show(Bll.DeleteLaunch(_id));
                 FillData(DateFrom.ToShortDateString(), DateTill.ToShortDateString());
                 //FillData(cmb_Week1.FirstDateOfWeek.ToShortDateString(), cmb_Week1.LastDateOfWeek.AddDays(-2).ToShortDateString());
 
             }
-        
+
         }
 
         private void btn_PrintItem_Click(object sender, EventArgs e)
         {
             int _id = 0;
-           
+
             try
             {
                 object obj = ganttChart1.MouseClickValue;
@@ -833,7 +818,7 @@ namespace Odin.Planning
 
             if (_id != 0)
             {
-                
+
                 Bll.LaunchId = _id;
 
                 frm_rptStockMove frm = new frm_rptStockMove();
@@ -910,39 +895,39 @@ namespace Odin.Planning
 
             if (_id != 0)
             {
-                    Bll.LaunchId = _id;
-                    Bll.PasLaunchId = _id;
+                Bll.LaunchId = _id;
+                Bll.PasLaunchId = _id;
 
 
-                    frm_rptPassportTitle frm = new frm_rptPassportTitle();
-                    frm.HeaderText = "Print pasport for: " + Bll.LaunchName;
-                    frm.LaunchId = _id;
-                    frm.Launch = Bll.LaunchName;
-                    frm.Batch = Bll.LPasBatch;
-                    frm.BatchId = Bll.LaunchBatchId;
-                    frm.Article = Bll.LPasArticle;
-                    frm.CreatedAt = Bll.LPasCreatedAt;
-                    frm.CreatedBy = System.Environment.UserName;//PlanBll.PasCreatedBy;
+                frm_rptPassportTitle frm = new frm_rptPassportTitle();
+                frm.HeaderText = "Print pasport for: " + Bll.LaunchName;
+                frm.LaunchId = _id;
+                frm.Launch = Bll.LaunchName;
+                frm.Batch = Bll.LPasBatch;
+                frm.BatchId = Bll.LaunchBatchId;
+                frm.Article = Bll.LPasArticle;
+                frm.CreatedAt = Bll.LPasCreatedAt;
+                frm.CreatedBy = System.Environment.UserName;//PlanBll.PasCreatedBy;
 
-                    frm.ValidatedBy = Bll.LPasValidatedBy;
-                    frm.BatchStages = Bll.LPasLaunchStages;
-                    frm.CompanyOwner = Bll.LPasCompany;
-                    frm.Address = Bll.LPasAddress;
-                    frm.CustArticle = Bll.LPasCustArticle;
-                    frm.COrder = Bll.LPasConfOrder;
-                    frm.BatchComments = Bll.LPasComments;
-                    frm.OrderComments = Bll.LPasOrderComments;
-                    frm.Internal = Bll.LPasInternal.ToString();
-                    frm.OrderType = Bll.LPasOrderType;
-                    frm.Quantity = Bll.LPasQty.ToString();
-                    frm.OrderTypeId = Bll.LPasOrderTypeId;
-                    frm.RepType = 2;
+                frm.ValidatedBy = Bll.LPasValidatedBy;
+                frm.BatchStages = Bll.LPasLaunchStages;
+                frm.CompanyOwner = Bll.LPasCompany;
+                frm.Address = Bll.LPasAddress;
+                frm.CustArticle = Bll.LPasCustArticle;
+                frm.COrder = Bll.LPasConfOrder;
+                frm.BatchComments = Bll.LPasComments;
+                frm.OrderComments = Bll.LPasOrderComments;
+                frm.Internal = Bll.LPasInternal.ToString();
+                frm.OrderType = Bll.LPasOrderType;
+                frm.Quantity = Bll.LPasQty.ToString();
+                frm.OrderTypeId = Bll.LPasOrderTypeId;
+                frm.RepType = 2;
 
-                    frm.FillReport();
+                frm.FillReport();
 
-                    frm.Show();
+                frm.Show();
             }
-                        
+
         }
 
         private void btn_NotStarted_Click(object sender, EventArgs e)
@@ -1015,8 +1000,8 @@ namespace Odin.Planning
 
                 if (result == DialogResult.OK)
                 {
-                   Bll.AddAdditComments(_id, frm.FormText);
-                   FillData(DateFrom.ToShortDateString(), DateTill.ToShortDateString());
+                    Bll.AddAdditComments(_id, frm.FormText);
+                    FillData(DateFrom.ToShortDateString(), DateTill.ToShortDateString());
                 }
             }
         }

@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
+﻿using ComponentFactory.Krypton.Toolkit;
+using System;
 
 namespace Odin.Global_Classes
 {
@@ -26,8 +18,11 @@ namespace Odin.Global_Classes
 
         public double FormNumber
         {
-            get { try { return  Convert.ToDouble(txt_Number.Text); }
-                catch { return 0; } }
+            get
+            {
+                try { return Convert.ToDouble(txt_Number.Text); }
+                catch { return 0; }
+            }
             set { txt_Number.Text = value.ToString(); }
         }
 

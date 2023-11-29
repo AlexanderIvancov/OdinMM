@@ -1,23 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
+﻿using Odin.Global_Classes;
 using Odin.Tools;
-using System.Data.SqlClient;
-using WeifenLuo.WinFormsUI.Docking;
-using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Workspace;
-using System.Threading;
-using Odin.Register;
-using Odin.CMB_Components.BLL;
+using System;
+using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace Odin.Finances
 {
@@ -54,7 +39,7 @@ namespace Odin.Finances
 
         public void bw_ListIncomes(object sender, DoWorkEventArgs e)
         {
-                 
+
             var data = Finances_BLL.getIntrastatIncome(txt_DateFrom.Value == null ? "" : txt_DateFrom.Value.ToString().Trim(),
                                             txt_DateTill.Value == null ? "" : txt_DateTill.Value.ToString().Trim());
 

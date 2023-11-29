@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Odin.Global_Classes;
+using System;
 using System.Windows.Forms;
-using Odin.Global_Classes;
 
 namespace Odin.Register.Articles
 {
@@ -29,9 +22,9 @@ namespace Odin.Register.Articles
             get { return cmb_Articles1.ArticleId; }
             set
             {
-                
+
                 _ArtId = value;
-                
+
             }
         }
 

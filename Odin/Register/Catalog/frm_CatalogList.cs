@@ -1,23 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using Odin.Global_Classes;
+using Odin.Purchase;
+using Odin.Tools;
+using System;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using WeifenLuo.WinFormsUI.Docking;
-using Odin.Global_Classes;
-using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Workspace;
-using ComponentFactory.Krypton.Toolkit;
-using System.Threading;
-using System.Data.SqlClient;
-using Odin.Tools;
-using Odin.Register;
-using Odin.Purchase;
 
 namespace Odin.Register.Catalog
 {
@@ -36,12 +28,7 @@ namespace Odin.Register.Catalog
         {
             get
             {
-                if (rb_Supplier.Checked == true)
-                    return -1;
-                else if (rb_Customer.Checked == true)
-                    return 1;
-                else
-                    return 0;
+                return rb_Supplier.Checked == true ? -1 : rb_Customer.Checked == true ? 1 : 0;
             }
         }
 
@@ -129,12 +116,9 @@ namespace Odin.Register.Catalog
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
-                if (Convert.ToInt32(row.Cells["cn_bargtype"].Value) == -1)
-                    row.Cells["cn_firmart"].Style.BackColor = Color.Yellow;
-                else if (Convert.ToInt32(row.Cells["cn_bargtype"].Value) == 1)
-                    row.Cells["cn_firmart"].Style.BackColor = Color.LightGreen;
-                else
-                    row.Cells["cn_firmart"].Style.BackColor = Color.Aqua;
+                row.Cells["cn_firmart"].Style.BackColor = Convert.ToInt32(row.Cells["cn_bargtype"].Value) == -1
+                    ? Color.Yellow
+                    : Convert.ToInt32(row.Cells["cn_bargtype"].Value) == 1 ? Color.LightGreen : Color.Aqua;
             }
         }
 
@@ -190,9 +174,9 @@ namespace Odin.Register.Catalog
         {
             RegBll.CatId = catid;
 
-           
+
             FindHistoryPages(igvArtId);
-            
+
         }
 
         public void LoadColumns(DataGridView grid)
@@ -249,7 +233,7 @@ namespace Odin.Register.Catalog
             int NewLineId = 0;
 
             NewLineId = RegBll.AddCatalogItem(frm.BargType, frm.ArticleId, frm.FirmId, frm.FirmArt, frm.UnitId, frm.UnitPrice, frm.CurId, frm.Manufacturer, frm.Comments,
-                                            frm.DelivTerms, frm.MOQ, frm.MPQ, frm.AsDefault, "", Convert.ToInt32(frm.Vat), frm.MinExpDays, frm.CoefConv, frm.DataCode, 
+                                            frm.DelivTerms, frm.MOQ, frm.MPQ, frm.AsDefault, "", Convert.ToInt32(frm.Vat), frm.MinExpDays, frm.CoefConv, frm.DataCode,
                                             frm.DelivTermTxt, frm.Quoted, frm.BarCode, frm.ForCustomer);
 
             cmb_Articles1.ArticleId = frm.ArticleId;
@@ -326,7 +310,7 @@ namespace Odin.Register.Catalog
             LoadColumns(gv_List);
             txt_CreatDateFrom.Value = null;
             txt_CreatDateTill.Value = null;
-            
+
         }
 
         #region Context menu
@@ -373,20 +357,13 @@ namespace Odin.Register.Catalog
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? String.IsNullOrEmpty(CellValue) == true
+                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
+                    : String.IsNullOrEmpty(CellValue) == true
+                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -399,10 +376,9 @@ namespace Odin.Register.Catalog
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
-                else
-                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
+                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
@@ -763,7 +739,7 @@ namespace Odin.Register.Catalog
 
         private void gv_List_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-           
+
         }
 
         private void gv_List_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -784,7 +760,7 @@ namespace Odin.Register.Catalog
 
         private void btn_Mouser_Click(object sender, EventArgs e)
         {
-            frm_FindOnSite frm= new frm_FindOnSite();
+            frm_FindOnSite frm = new frm_FindOnSite();
             frm.Show();
         }
 

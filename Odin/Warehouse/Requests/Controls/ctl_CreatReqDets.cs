@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
-using System.Data.SqlClient;
 using Odin.Planning;
-using ComponentFactory.Krypton.Toolkit;
 using Odin.Tools;
+using System;
+using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 
 namespace Odin.Warehouse.Requests.Controls
@@ -94,7 +90,9 @@ namespace Odin.Warehouse.Requests.Controls
 
         public double QtyInBatch
         {
-            get { try { return Convert.ToDouble(txt_QtyInBatch.Text); }
+            get
+            {
+                try { return Convert.ToDouble(txt_QtyInBatch.Text); }
                 catch { return 0; }
             }
             set { txt_QtyInBatch.Text = value.ToString(); }
@@ -148,10 +146,7 @@ namespace Odin.Warehouse.Requests.Controls
 
         public bool CheckEmpty()
         {
-            if (ReqDate == "")
-                return false;
-            else
-                return true;
+            return ReqDate != "";
 
         }
         public bool CheckMB()
@@ -172,7 +167,7 @@ namespace Odin.Warehouse.Requests.Controls
         }
 
         public void AddDetLine(int BatchDetId, int ArtId, string Article, int UnitId, string Unit, double QtyInBatch, double QtyAvail,
-                                double QtyRequested, double QtyToRequest, int Urgent, string Comments, string ReqDate, string Batch, 
+                                double QtyRequested, double QtyToRequest, int Urgent, string Comments, string ReqDate, string Batch,
                                 double Reserved, double Given)
         {
             DataRow row = dt_Dets.NewRow();
@@ -216,7 +211,7 @@ namespace Odin.Warehouse.Requests.Controls
 
                     AddDetLine(Convert.ToInt32(row["id"]), Convert.ToInt32(row["artid"]), row["article"].ToString(),
                             Convert.ToInt32(row["unitid"]), row["unit"].ToString(), Convert.ToDouble(row["qty"]),
-                            Convert.ToDouble(row["available"]) + Convert.ToDouble(row["reserved"]), Convert.ToDouble(row["requested"]), 
+                            Convert.ToDouble(row["available"]) + Convert.ToDouble(row["reserved"]), Convert.ToDouble(row["requested"]),
                             0, 0, "", ReqDate, cmb_Batches1.Batch, Convert.ToDouble(row["reserved"]), Convert.ToDouble(row["given"]));
             }
         }
@@ -297,20 +292,13 @@ namespace Odin.Warehouse.Requests.Controls
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_Dets.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_Dets.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_Dets.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_Dets.Filter = bs_Dets.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_Dets.Filter = bs_Dets.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
+                bs_Dets.Filter = String.IsNullOrEmpty(bs_Dets.Filter) == true
+                    ? String.IsNullOrEmpty(CellValue) == true
+                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
+                    : String.IsNullOrEmpty(CellValue) == true
+                        ? bs_Dets.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : bs_Dets.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -323,10 +311,9 @@ namespace Odin.Warehouse.Requests.Controls
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_Dets.Filter) == true)
-                    bs_Dets.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
-                else
-                    bs_Dets.Filter = bs_Dets.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                bs_Dets.Filter = String.IsNullOrEmpty(bs_Dets.Filter) == true
+                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
+                    : bs_Dets.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             //SetCellsColor();
@@ -368,7 +355,7 @@ namespace Odin.Warehouse.Requests.Controls
                 LoadColumns(gv_List);
             }
         }
-        
+
 
         #endregion
 
@@ -386,11 +373,8 @@ namespace Odin.Warehouse.Requests.Controls
             if (cmb_Batches1.BatchId != 0)
                 cmb_Articles1.ArticleId = 0;
 
-            if (cmb_Batches1.IsActive == -1
-               || cmb_Batches1.BatchId == 0)
-                btn_Add.Enabled = true;
-            else
-                btn_Add.Enabled = false;
+            btn_Add.Enabled = cmb_Batches1.IsActive == -1
+               || cmb_Batches1.BatchId == 0;
         }
 
         private void btn_Add_Click(object sender, EventArgs e)
@@ -399,8 +383,8 @@ namespace Odin.Warehouse.Requests.Controls
             {
                 if (Mode == 0) // Articles
                 {
-                   AddDetLine(0, cmb_Articles1.ArticleId, cmb_Articles1.Article, cmb_Articles1.UnitId, cmb_Articles1.Unit, 0,
-                                DAL.AvailQty(cmb_Articles1.ArticleId), 0, 0, 0, "", ReqDate, "", 0, 0);
+                    AddDetLine(0, cmb_Articles1.ArticleId, cmb_Articles1.Article, cmb_Articles1.UnitId, cmb_Articles1.Unit, 0,
+                                 DAL.AvailQty(cmb_Articles1.ArticleId), 0, 0, 0, "", ReqDate, "", 0, 0);
                 }
                 else // Batch
                 {
@@ -429,92 +413,84 @@ namespace Odin.Warehouse.Requests.Controls
             bool _test = true;
             bool _testurgent = false;
             bool _isreqdate = true;
-            DateTime reqdate;
             //check for header
             gv_List.EndEdit();
             if (CheckMB() == true)
             {
 
                 if (ReqBLL.RequestHeadId == 0)
-            {
-                DialogResult result = KryptonTaskDialog.Show("Request header warning!",
-                                                                     "Are you want to save changes?",
-                                                                     "Request header is not selected, do you want header to be created automatically?",
-                                                                     MessageBoxIcon.Warning,
-                                                                     TaskDialogButtons.Yes |
-                                                                     TaskDialogButtons.No);
-                if (result == DialogResult.Yes)
                 {
-                    _test = true;
+                    DialogResult result = KryptonTaskDialog.Show("Request header warning!",
+                                                                         "Are you want to save changes?",
+                                                                         "Request header is not selected, do you want header to be created automatically?",
+                                                                         MessageBoxIcon.Warning,
+                                                                         TaskDialogButtons.Yes |
+                                                                         TaskDialogButtons.No);
+                    _test = result == DialogResult.Yes;
                 }
-                else
+                if (_test == true)
                 {
-                    _test = false;
-                }
-            }
-            if (_test == true)
-            {
-                int _res = 0;
+                    int _res = 0;
 
-                foreach (DataGridViewRow row in this.gv_List.Rows)
-                {
-                    _isreqdate = DateTime.TryParse(row.Cells["cn_ReqDate"].Value.ToString(), out reqdate);
-                    if (Convert.ToDouble(row.Cells["cn_QtyToRequest"].Value) > 0
-                        && _isreqdate == true)
+                    foreach (DataGridViewRow row in this.gv_List.Rows)
                     {
-                        int _batchdetid = 0;
+                        _isreqdate = DateTime.TryParse(row.Cells["cn_ReqDate"].Value.ToString(), out DateTime reqdate);
+                        if (Convert.ToDouble(row.Cells["cn_QtyToRequest"].Value) > 0
+                            && _isreqdate == true)
+                        {
+                            int _batchdetid = 0;
 
-                        if (Convert.ToInt32(row.Cells["cn_BDId"].Value) == 0
-                            && chk_AddToBatch.CheckState == CheckState.Checked
-                            && cmb_Batches1.BatchId != 0)
-                        {
-                            //Dobavljaem liniju partii
-                            _batchdetid = PlanBLL.AddBatchDetail(cmb_Batches1.BatchId, Convert.ToInt32(row.Cells["cn_ArtId"].Value), 0/*Convert.ToDouble(row.Cells["cn_QtyToRequest"].Value)*/, "");
+                            if (Convert.ToInt32(row.Cells["cn_BDId"].Value) == 0
+                                && chk_AddToBatch.CheckState == CheckState.Checked
+                                && cmb_Batches1.BatchId != 0)
+                            {
+                                //Dobavljaem liniju partii
+                                _batchdetid = PlanBLL.AddBatchDetail(cmb_Batches1.BatchId, Convert.ToInt32(row.Cells["cn_ArtId"].Value), 0/*Convert.ToDouble(row.Cells["cn_QtyToRequest"].Value)*/, "");
+                            }
+                            else
+                            {
+                                _batchdetid = Convert.ToInt32(row.Cells["cn_BDId"].Value);
+                            }
+                            //MessageBox.Show(Convert.ToInt32(row.Cells["chk_Reserve"].Value).ToString());
+                            _res = ReqBLL.AddRequestDetail(ReqBLL.RequestHeadId,
+                                                        Convert.ToInt32(row.Cells["cn_ArtId"].Value),
+                                                        row.Cells["cn_Article"].Value.ToString(),
+                                                        _batchdetid,
+                                                        Convert.ToDouble(row.Cells["cn_QtyToRequest"].Value),
+                                                        Convert.ToInt32(row.Cells["cn_UnitId"].Value),
+                                                        row.Cells["cn_ReqDate"].Value.ToString(),
+                                                        Convert.ToInt32(row.Cells["chk_Urgent"].Value),
+                                                        row.Cells["cn_Comments"].Value.ToString(),
+                                                        0,
+                                                        Convert.ToInt32(row.Cells["chk_Reserve"].Value),
+                                                        0,
+                                                        ProdPlaceId,
+                                                        row.Cells["cn_Serials"].Value.ToString());
+                            if (Convert.ToInt32(row.Cells["chk_Urgent"].Value) == -1)
+                                _testurgent = true;
                         }
-                        else
+                    }
+                    if (_testurgent == true)
+                    {
+                        //Send letter
+                        string emailaddresses = "";
+                        emailaddresses = DAL.EmailAddressesByType(4);
+
+                        if (emailaddresses != "")
                         {
-                            _batchdetid = Convert.ToInt32(row.Cells["cn_BDId"].Value);
+
+                            string strMessage = "Request number: " + ReqBLL.RDReqName;
+                            strMessage = strMessage + "\r\nBatch: " + cmb_Batches1.Batch.ToString();
+                            MyHelper.SendMessage(glob_Class.ReplaceChar(emailaddresses, ";", ","), "Urgent request NR : " + ReqBLL.RDReqName + " was created!", strMessage);
                         }
-                        //MessageBox.Show(Convert.ToInt32(row.Cells["chk_Reserve"].Value).ToString());
-                        _res = ReqBLL.AddRequestDetail(ReqBLL.RequestHeadId,
-                                                    Convert.ToInt32(row.Cells["cn_ArtId"].Value),
-                                                    row.Cells["cn_Article"].Value.ToString(),
-                                                    _batchdetid,
-                                                    Convert.ToDouble(row.Cells["cn_QtyToRequest"].Value),
-                                                    Convert.ToInt32(row.Cells["cn_UnitId"].Value),
-                                                    row.Cells["cn_ReqDate"].Value.ToString(),
-                                                    Convert.ToInt32(row.Cells["chk_Urgent"].Value),
-                                                    row.Cells["cn_Comments"].Value.ToString(),
-                                                    0,
-                                                    Convert.ToInt32(row.Cells["chk_Reserve"].Value),
-                                                    0,
-                                                    ProdPlaceId,
-                                                    row.Cells["cn_Serials"].Value.ToString());
-                        if (Convert.ToInt32(row.Cells["chk_Urgent"].Value) == -1)
-                            _testurgent = true;
+
                     }
                 }
-                if (_testurgent == true)
+
+                if (SaveRequest != null)
                 {
-                    //Send letter
-                    string emailaddresses = "";
-                    emailaddresses = DAL.EmailAddressesByType(4);
-
-                    if (emailaddresses != "")
-                    {
-
-                        string strMessage = "Request number: " + ReqBLL.RDReqName;
-                        strMessage = strMessage + "\r\nBatch: " + cmb_Batches1.Batch.ToString();
-                        MyHelper.SendMessage(glob_Class.ReplaceChar(emailaddresses, ";", ","), "Urgent request NR : " + ReqBLL.RDReqName + " was created!", strMessage);
-                    }
-
+                    SaveRequest(this);
                 }
-            }
-
-            if (SaveRequest != null)
-            {
-                SaveRequest(this);
-            }
             }
             else
                 glob_Class.ShowMessage("You have empty serial numbers fields!", "Enter serial numbers!", "Serial numbers warning!");
@@ -558,16 +534,15 @@ namespace Odin.Warehouse.Requests.Controls
                                     - Convert.ToDouble(gv_List.CurrentRow.Cells["cn_QtyRequested"].Value)
                                     - Convert.ToDouble(gv_List.CurrentRow.Cells["cn_Reserved"].Value)
                                     - Convert.ToDouble(gv_List.CurrentRow.Cells["cn_Given"].Value);
-                                    
-                                       
+
+
                     gv_List.CurrentRow.Cells["cn_QtyToRequest"].Value = ToRequest;
                     //Color
                     if (Convert.ToDouble(gv_List.CurrentRow.Cells["cn_QtyToRequest"].Value) < 0)
                         gv_List.CurrentRow.Cells["cn_QtyToRequest"].Value = 0;
-                    if (Math.Round(Convert.ToDouble(gv_List.CurrentRow.Cells["cn_QtyToRequest"].Value), 5) > Math.Round(Convert.ToDouble(gv_List.CurrentRow.Cells["cn_QtyAvail"].Value), 5))
-                        gv_List.CurrentRow.Cells["cn_QtyAvail"].Style.BackColor = Color.Red;
-                    else
-                        gv_List.CurrentRow.Cells["cn_QtyAvail"].Style.BackColor = Color.White;
+                    gv_List.CurrentRow.Cells["cn_QtyAvail"].Style.BackColor = Math.Round(Convert.ToDouble(gv_List.CurrentRow.Cells["cn_QtyToRequest"].Value), 5) > Math.Round(Convert.ToDouble(gv_List.CurrentRow.Cells["cn_QtyAvail"].Value), 5)
+                        ? Color.Red
+                        : Color.White;
                 }
             }
             catch { }

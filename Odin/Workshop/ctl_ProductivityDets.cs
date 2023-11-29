@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Data.SqlClient;
-using Odin.Global_Classes;
+﻿using Odin.Global_Classes;
 using Odin.Tools;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 
 namespace Odin.Workshop
@@ -104,7 +100,8 @@ namespace Odin.Workshop
                 new SqlParameter("@date", SqlDbType.NVarChar) {Value = txt_Date.Value == null ? "''" : txt_Date.Value.ToString().Trim()}
             };
 
-            try {
+            try
+            {
                 _capa = Convert.ToDouble(Helper.GetOneRecord("set dateformat dmy select isnull(qty * 8, 0) as capahours from prod_capacity cp where cp.stageid = @stageid and cp.date = convert(datetime, nullif(@date, ''))", param.ToArray()));
             }
             catch { }
@@ -124,7 +121,7 @@ namespace Odin.Workshop
 
             try
             {
-                _capa = Convert.ToDouble(Helper.GetOneRecord("set dateformat dmy select sum(isnull(cp.qty * 8, 0)) as capahours " + 
+                _capa = Convert.ToDouble(Helper.GetOneRecord("set dateformat dmy select sum(isnull(cp.qty * 8, 0)) as capahours " +
                                 " from (select cs.stageid, " +
                                 "               cs.date, " +
                                 "               sum(cs.qty) as qty " +

@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Workspace;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.CMB_Components.BLL;
+using Odin.Global_Classes;
+using System;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.ExpInvoices
 {
@@ -29,7 +19,7 @@ namespace Odin.CMB_Components.ExpInvoices
             f = new cmb_ExpInvoice();
             cmb = f;
         }
-        
+
         DAL_Functions Dll = new DAL_Functions();
         class_Global glob_Class = new class_Global();
         CMB_BLL Bll = new CMB_BLL();
@@ -99,7 +89,7 @@ namespace Odin.CMB_Components.ExpInvoices
                                             frm.BuyerId, frm.ReceiverAddressId, frm.BuyerAddressId, frm.Comments, frm.CurId, frm.CurRate,
                                             frm.Bargain, frm.TransportId, frm.IncotermsId, frm.Payment, frm.BankContId, frm.AssetId,
                                             frm.SenderAddressId, "", 0, 0, frm.VAT, frm.PayBefore, frm.InAdvance,
-                                            frm.AdvanceDate, frm.ProformaNR, frm.PayDate, frm.PaymentId, frm.SellerContPersId, 
+                                            frm.AdvanceDate, frm.ProformaNR, frm.PayDate, frm.PaymentId, frm.SellerContPersId,
                                             frm.BuyerContPersId, frm.ValueForCustoms, frm.ESignature, frm.Recipient);
                 FillData(frm.Invoice);
                 ((cmb_ExpInvoice)cmb_ExpInvoiceOne).InvoiceSendSave();

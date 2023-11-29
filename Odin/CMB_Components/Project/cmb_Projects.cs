@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
+﻿using Odin.Global_Classes;
+using System;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Odin.Global_Classes;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.Project
 {
@@ -41,10 +36,7 @@ namespace Odin.CMB_Components.Project
             set
             {
                 _isemptycolor = value;
-                if (value == true)
-                    txt_Project.StateCommon.Back.Color1 = Color.LightPink;
-                else
-                    txt_Project.StateCommon.Back.Color1 = Color.White;
+                txt_Project.StateCommon.Back.Color1 = value == true ? Color.LightPink : Color.White;
             }
         }
 

@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Odin.Global_Classes;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.CMB_Components.BLL;
-using ComponentFactory.Krypton.Toolkit;
-using System.Data.SqlClient;
+using Odin.Global_Classes;
 using Odin.Tools;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Windows.Forms;
 
 
 namespace Odin.CMB_Components.Types
@@ -88,7 +83,7 @@ namespace Odin.CMB_Components.Types
             //dummy = new KryptonTreeNode("dummy node");
             //dummy.Tag = "dummy";
             //tnRoot.Nodes.Add(dummy);
-            
+
             //KryptonTreeNode tnParent;
             //var data = Helper.QueryDT("SELECT * FROM bas_type order by name");
 
@@ -114,8 +109,8 @@ namespace Odin.CMB_Components.Types
             tv_Types.SelectedNode = null;
         }
         public int FillChild(KryptonTreeNode parent, int _id)
-        {         
-            
+        {
+
             var data = Helper.QueryDT("select * from bas_type where parentid =" + _id + " order by name");
             if (data.Rows.Count > 0)
             {
@@ -272,7 +267,7 @@ namespace Odin.CMB_Components.Types
         {
             try
             {
-               
+
                 if (glob_Class.DeleteConfirm() == true)
                 {
                     //MessageBox.Show(TypeId.ToString());
@@ -297,7 +292,7 @@ namespace Odin.CMB_Components.Types
                 //cmb_TypeOne.Type = e.Node.Text;
                 cmb_TypeOne.SelectedNode = e.Node;
                 SelectedNode = e.Node;
-                
+
                 cmb_TypeOne.ValueChanged(tv_Types);
             }
             else
@@ -319,7 +314,7 @@ namespace Odin.CMB_Components.Types
             cmb_TypeOne.Type = e.Node.Text;
             cmb_TypeOne.SelectedNode = e.Node;
             SelectedNode = e.Node;
-            
+
             cmb_TypeOne.ValueChanged(tv_Types);
             isSelectedNode = true;
         }
@@ -404,7 +399,8 @@ namespace Odin.CMB_Components.Types
                 _type = tv_Types.SelectedNode.Text;
                 _id = Convert.ToInt32(tv_Types.SelectedNode.Tag);
             }
-            catch {
+            catch
+            {
                 _id = cmb_TypeOne.TypeId;
                 _type = cmb_TypeOne.Type;
             }

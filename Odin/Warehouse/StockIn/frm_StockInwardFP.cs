@@ -1,17 +1,12 @@
-﻿using System;
+﻿using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using Odin.Tools;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
-using Odin.Global_Classes;
-using Odin.Tools;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace Odin.Warehouse.StockIn
 {
@@ -55,7 +50,8 @@ namespace Odin.Warehouse.StockIn
         }
 
         public string SecArticle
-        { get { return txt_SecArticle.Text; }
+        {
+            get { return txt_SecArticle.Text; }
             set { txt_SecArticle.Text = value; }
         }
 
@@ -69,7 +65,7 @@ namespace Odin.Warehouse.StockIn
             get { return txt_Unit.Text; }
             set { txt_Unit.Text = value; }
         }
-        public string DelivPlace 
+        public string DelivPlace
         {
             get { return txt_DelivPlace.Text; }
             set { txt_DelivPlace.Text = value; }
@@ -91,10 +87,12 @@ namespace Odin.Warehouse.StockIn
             get { return cmb_Places1.PlaceId; }
             set { cmb_Places1.PlaceId = value; }
         }
-        
+
         public double QtyInBatch
         {
-            get { try { return Convert.ToDouble(txt_QtyInBatch.Text); }
+            get
+            {
+                try { return Convert.ToDouble(txt_QtyInBatch.Text); }
                 catch { return 0; }
             }
             set { txt_QtyInBatch.Text = value.ToString(); }
@@ -206,7 +204,7 @@ namespace Odin.Warehouse.StockIn
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
-                
+
             });
 
 
@@ -355,12 +353,12 @@ namespace Odin.Warehouse.StockIn
             ShowDets();
             ShowTots();
         }
-        
+
         private void txt_QtyIn_TextChanged(object sender, EventArgs e)
         {
             bool _res = CheckEmpty();
-            
-                        
+
+
 
             ShowTots();
         }

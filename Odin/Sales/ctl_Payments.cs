@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
+﻿using Odin.Global_Classes;
+using System;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Odin.Global_Classes;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace Odin.Sales
 {
@@ -25,7 +19,9 @@ namespace Odin.Sales
         public int InvoiceDetId
         {
             get { return _invoicedetid; }
-            set { _invoicedetid = value;
+            set
+            {
+                _invoicedetid = value;
                 FillPayments(_invoicedetid);
             }
         }
@@ -159,9 +155,9 @@ namespace Odin.Sales
                         && dr["quotation"].ToString() != "")
                     {
                         //Send letter to sales dept
-                       
+
                         string emailaddresses = DLL.EmailAddressesByType(6);
-                       
+
                         string strMessage = "Quotation " + dr["quotation"].ToString() + " is paid!";
                         MyHelper.SendMessage(glob_Class.ReplaceChar(emailaddresses, ";", ","), "Quotation: " + dr["quotation"].ToString() + " is paid!", strMessage);
 

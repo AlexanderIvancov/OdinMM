@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
-using Odin.Purchase;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
+using Odin.Purchase;
+using System;
 namespace Odin.Warehouse.StockIn
 {
     public partial class frm_AddPOLink : KryptonForm
@@ -24,7 +15,8 @@ namespace Odin.Warehouse.StockIn
         DAL_Functions Dll = new DAL_Functions();
         public double Qty
         {
-            get {
+            get
+            {
                 try { return Convert.ToDouble(txt_Qty.Text); }
                 catch { return 0; }
             }
@@ -33,7 +25,8 @@ namespace Odin.Warehouse.StockIn
 
         public double QtyLeft
         {
-            get {
+            get
+            {
                 try { return Convert.ToDouble(txt_LeftInPO.Text); }
                 catch { return 0; }
             }
@@ -67,11 +60,8 @@ namespace Odin.Warehouse.StockIn
 
         public void CheckEmpty()
         {
-            if (cmb_PurchaseOrdersWithLines1.PurchaseOrderLineId == 0
-                || Qty <= 0)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = cmb_PurchaseOrdersWithLines1.PurchaseOrderLineId != 0
+                && Qty > 0;
         }
     }
 }

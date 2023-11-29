@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Odin.Global_Classes;
+using System;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Odin.Global_Classes;
-using System.Data.SqlClient;
 
 namespace Odin.Warehouse.StockIn
 {
@@ -24,7 +17,9 @@ namespace Odin.Warehouse.StockIn
         public int Id
         {
             get { return _id; }
-            set { _id = value;
+            set
+            {
+                _id = value;
 
                 FillLabels(_id);
             }

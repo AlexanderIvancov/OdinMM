@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Workspace;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.CMB_Components.BLL;
+using Odin.Global_Classes;
 using Odin.Sales;
+using System;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.SalesOrders
 {
@@ -94,7 +84,7 @@ namespace Odin.CMB_Components.SalesOrders
             _showingModal = true;
 
             frm_AddSalesOrder frm = new frm_AddSalesOrder();
-            
+
             frm.FillAutoDoc(1);
             frm.CheckEmpty();
 
@@ -111,7 +101,7 @@ namespace Odin.CMB_Components.SalesOrders
             {
                 _showingModal = false;
             }
-            
+
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -137,7 +127,7 @@ namespace Odin.CMB_Components.SalesOrders
                 frm.CurId = COBll.COHeadCurId;
 
                 frm.CheckEmpty();
-                
+
                 DialogResult result = frm.ShowDialog();
 
                 if (result == DialogResult.OK)

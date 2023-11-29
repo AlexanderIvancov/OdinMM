@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data;
-using System.Windows.Forms;
+﻿using System.ComponentModel;
 using System.Threading;
-using System.ComponentModel;
+using System.Windows.Forms;
 namespace Odin.Global_Classes
 {
     public class SyncBindingSource : BindingSource

@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
 using Odin.Tools;
 using Odin.Warehouse.Deliveries;
+using System;
+using System.ComponentModel;
+using System.Data;
 using System.Data.SqlClient;
-using Odin.Sales;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.Sales
 {
@@ -80,13 +75,11 @@ namespace Odin.Sales
 
         public int Mode
         {
-            get {
-                if (cn_Type.SelectedPage == pg_DelivNote)
-                    return 1;
-                else
-                    return 2;
+            get
+            {
+                return cn_Type.SelectedPage == pg_DelivNote ? 1 : 2;
             }
-            set {  }
+            set { }
         }
 
         //int _allowtoinvoice = -1;
@@ -133,8 +126,9 @@ namespace Odin.Sales
         }
 
         public int UnitId
-        { get { return cmb_Units1.UnitId; }
-        set { cmb_Units1.UnitId = value; }
+        {
+            get { return cmb_Units1.UnitId; }
+            set { cmb_Units1.UnitId = value; }
         }
         public string Product
         {
@@ -158,7 +152,9 @@ namespace Odin.Sales
 
         public double Qty
         {
-            get { try { return Convert.ToDouble(txt_Qty.Text); }
+            get
+            {
+                try { return Convert.ToDouble(txt_Qty.Text); }
                 catch { return 0; }
             }
             set { txt_Qty.Text = value.ToString(); }
@@ -254,16 +250,13 @@ namespace Odin.Sales
 
         public int IsService
         {
-            get { if (chk_IsService.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+            get
+            {
+                return chk_IsService.CheckState == CheckState.Checked ? -1 : 0;
             }
-            set {
-                if (value == -1)
-                    chk_IsService.CheckState = CheckState.Checked;
-                else
-                    chk_IsService.CheckState = CheckState.Unchecked;
+            set
+            {
+                chk_IsService.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 
@@ -271,17 +264,11 @@ namespace Odin.Sales
         {
             get
             {
-                if (chk_ispaid.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_ispaid.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_ispaid.CheckState = CheckState.Checked;
-                else
-                    chk_ispaid.CheckState = CheckState.Unchecked;
+                chk_ispaid.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 
@@ -289,17 +276,11 @@ namespace Odin.Sales
         {
             get
             {
-                if (chk_AdditCost.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_AdditCost.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_AdditCost.CheckState = CheckState.Checked;
-                else
-                    chk_AdditCost.CheckState = CheckState.Unchecked;
+                chk_AdditCost.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 
@@ -317,7 +298,8 @@ namespace Odin.Sales
 
         public double SellCoef
         {
-            get {
+            get
+            {
                 try { return Convert.ToDouble(txt_SellCoef.Text); }
                 catch { return 1; }
             }
@@ -339,7 +321,7 @@ namespace Odin.Sales
 
         public double tmpQty
         {
-            get;set;
+            get; set;
         }
 
         public double TotalPayPerc
@@ -360,7 +342,7 @@ namespace Odin.Sales
 
         public double COCurRate
         {
-            get;set;
+            get; set;
         }
 
         public string SalesComments
@@ -426,7 +408,7 @@ namespace Odin.Sales
             sqlConn.Close();
 
         }
-        
+
         public void RecalcTotals()
         {
             double _total = 0;
@@ -495,7 +477,7 @@ namespace Odin.Sales
 
                 tmpUnitPrice = COBll.COUnitPrice;
             }
-            
+
             //VAT = COBll.COVat;
             COBll.COHeadId = COBll.COHeadId1;
             CurId = COBll.COHeadCurId;
@@ -551,20 +533,15 @@ namespace Odin.Sales
             {
                 if (Convert.ToInt32(row.Cells["cn_curid"].Value) != InvoiceCurId)
                 {
-                    if (InvoiceCurId == _nativecurid)
-                        _currate = CurrRate;
-                    else
-                    {
-                        _currate = Convert.ToDouble(row.Cells["cn_cocurrate"].Value) / (CurrRate == 0 ? 1 : CurrRate);
-                    }
+                    _currate = InvoiceCurId == _nativecurid ? CurrRate : Convert.ToDouble(row.Cells["cn_cocurrate"].Value) / (CurrRate == 0 ? 1 : CurrRate);
                     row.Cells["cn_unitprice"].Value = Math.Round(
                         (Convert.ToDouble(row.Cells["cn_unitpriceorig"].Value) * _currate) * sellcoef, 2);
                 }
                 else
-                row.Cells["cn_unitprice"].Value = Math.Round(
-                        (Convert.ToInt32(row.Cells["cn_curid"].Value) != InvoiceCurId ? Convert.ToDouble(row.Cells["cn_unitpriceorig"].Value) * (CurrRate/* / Convert.ToDouble(row.Cells["cn_cocurrate"].Value)*/) * sellcoef 
-                        : Convert.ToDouble(row.Cells["cn_unitpriceorig"].Value) * sellcoef), 
-                        2);
+                    row.Cells["cn_unitprice"].Value = Math.Round(
+                            (Convert.ToInt32(row.Cells["cn_curid"].Value) != InvoiceCurId ? Convert.ToDouble(row.Cells["cn_unitpriceorig"].Value) * (CurrRate/* / Convert.ToDouble(row.Cells["cn_cocurrate"].Value)*/) * sellcoef
+                            : Convert.ToDouble(row.Cells["cn_unitpriceorig"].Value) * sellcoef),
+                            2);
             }
             RecalcTotals();
         }
@@ -576,33 +553,26 @@ namespace Odin.Sales
             _nativecurid = Convert.ToInt32(Helper.GetOneRecord("select isnull(convert(int, value), -1) from BAS_Defaults where field = 'currency'"));
             if (CurId != InvoiceCurId)
             {
-                if (InvoiceCurId == _nativecurid)
-                    _currate = CurrRate;
-                else
-                {
-                    _currate = COCurRate / (CurrRate == 0 ? 1 : CurrRate);
-                }
-                if (InvoiceType != 13)
-                    UnitPrice = Math.Round(
+                _currate = InvoiceCurId == _nativecurid ? CurrRate : COCurRate / (CurrRate == 0 ? 1 : CurrRate);
+                UnitPrice = InvoiceType != 13
+                    ? Math.Round(
                             COBll.COUnitPrice * _currate * sellcoef,
-                            2);
-                else
-                    UnitPrice = Math.Round(
+                            2)
+                    : Math.Round(
                         COBll.COUnitPrice * COBll.COQty * _currate * sellcoef,
                         2);
             }
             else
             {
-                if (InvoiceType != 13)
-                    UnitPrice = Math.Round(
+                UnitPrice = InvoiceType != 13
+                    ? Math.Round(
                         COBll.COUnitPrice * sellcoef,
-                        2);
-                else
-                    UnitPrice = Math.Round(
+                        2)
+                    : Math.Round(
                         COBll.COUnitPrice * COBll.COQty * sellcoef,
                         2);
             }
-            
+
             //if (InvoiceType != 13)
             //    UnitPrice = Math.Round(
             //        CurId != COCurId ? COBll.COUnitPrice * (CurrRate / COCurRate) * sellcoef
@@ -688,20 +658,13 @@ namespace Odin.Sales
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? String.IsNullOrEmpty(CellValue) == true
+                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
+                    : String.IsNullOrEmpty(CellValue) == true
+                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -714,10 +677,9 @@ namespace Odin.Sales
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
-                else
-                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
+                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
@@ -797,7 +759,8 @@ namespace Odin.Sales
 
                 SetCellsColor();
 
-                try {
+                try
+                {
                     RecalcTotals();
                     RecalcUnitPrice(SellCoef);
                 }
@@ -818,12 +781,12 @@ namespace Odin.Sales
                 cmb_Quotations1.QuotationId = 0;
                 lbl_UnitPrice.Text = "Unit price";
             }
-                //cmb_Articles1.ArticleId = cmb_SalesOrdersWithLines1.
+            //cmb_Articles1.ArticleId = cmb_SalesOrdersWithLines1.
             ShowOrderDets(cmb_SalesOrdersWithLines1.SalesOrderLineId);
             RecalcTotals();
             CheckQtyVisible();
         }
-              
+
 
         private void frm_AddExInvoiceLine_Load(object sender, EventArgs e)
         {
@@ -836,10 +799,7 @@ namespace Odin.Sales
             {
                 foreach (DataGridViewRow row in gv_List.Rows)
                 {
-                    if (string.IsNullOrEmpty(row.Cells["cn_invoices"].Value.ToString().Trim()) == false)
-                        row.Cells["chk_add"].Value = 0;
-                    else
-                        row.Cells["chk_add"].Value = -1;
+                    row.Cells["chk_add"].Value = string.IsNullOrEmpty(row.Cells["cn_invoices"].Value.ToString().Trim()) == false ? 0 : (object)-1;
                 }
             }
             else
@@ -926,9 +886,9 @@ namespace Odin.Sales
 
         private void cn_Type_SelectedPageChanged(object sender, EventArgs e)
         {
-           // RecalcTotals();
+            // RecalcTotals();
         }
-               
+
 
         private void txt_SellCoef_TextChanged(object sender, EventArgs e)
         {

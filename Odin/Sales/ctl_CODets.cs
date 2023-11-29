@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
+﻿using Odin.Global_Classes;
+using System;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Odin.Global_Classes;
-using System.Globalization;
 namespace Odin.Sales
 {
     public delegate void COIdSendingEventHandler(object sender);
@@ -48,7 +41,7 @@ namespace Odin.Sales
                 try { return Convert.ToInt16(txt_Line.Text); }
                 catch { return 0; }
             }
-            set { txt_Line.Text = value.ToString();}
+            set { txt_Line.Text = value.ToString(); }
         }
         public int COArtId
         {
@@ -58,32 +51,24 @@ namespace Odin.Sales
         }
         public int COService
         {
-            get { if (chk_Service.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+            get
+            {
+                return chk_Service.CheckState == CheckState.Checked ? -1 : 0;
             }
-            set { if (value == -1)
-                    chk_Service.Checked = true;
-                else
-                    chk_Service.Checked = false;
+            set
+            {
+                chk_Service.Checked = value == -1;
             }
         }
         public int COBlocked
         {
             get
             {
-                if (chk_blockdelivery.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_blockdelivery.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_blockdelivery.Checked = true;
-                else
-                    chk_blockdelivery.Checked = false;
+                chk_blockdelivery.Checked = value == -1;
             }
         }
         public string COCustOrder
@@ -114,7 +99,9 @@ namespace Odin.Sales
 
         public double COQty
         {
-            get { try { return Convert.ToDouble(txt_Qty.Text); }
+            get
+            {
+                try { return Convert.ToDouble(txt_Qty.Text); }
                 catch { return 0; }
             }
             set { txt_Qty.Text = value.ToString(); }
@@ -143,7 +130,7 @@ namespace Odin.Sales
             }
             set { txt_UnitPrice.Text = value.ToString(); }
         }
-        
+
         public double COVat
         {
             get
@@ -161,7 +148,7 @@ namespace Odin.Sales
         public string COComments
         {
             get { return txt_Comments.Text; }
-            set { txt_Comments.Text = value;}
+            set { txt_Comments.Text = value; }
         }
         public string COComments1
         {
@@ -194,7 +181,8 @@ namespace Odin.Sales
         public string COReqDate
         {
             get { return txt_ReqDate.Value.ToShortDateString(); }
-            set {
+            set
+            {
                 try { txt_ReqDate.Value = Convert.ToDateTime(value); }
                 catch { }
             }
@@ -226,34 +214,22 @@ namespace Odin.Sales
         {
             get
             {
-                if (chk_internal.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_internal.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_internal.Checked = true;
-                else
-                    chk_internal.Checked = false;
+                chk_internal.Checked = value == -1;
             }
         }
         public int COResale
         {
             get
             {
-                if (chk_resale.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_resale.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_resale.Checked = true;
-                else
-                    chk_resale.Checked = false;
+                chk_resale.Checked = value == -1;
             }
         }
 
@@ -261,23 +237,17 @@ namespace Odin.Sales
         {
             get
             {
-                if (chk_primary.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_primary.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_primary.Checked = true;
-                else
-                    chk_primary.Checked = false;
+                chk_primary.Checked = value == -1;
             }
         }
 
         public double COQtyInBatch
         {
-            get;set;
+            get; set;
         }
         public int COEndCustId
         {
@@ -320,10 +290,7 @@ namespace Odin.Sales
 
         public void ShowSaveButton(bool _show)
         {
-            if (_show)
-                btn_OK.Visible = true;
-            else
-                btn_OK.Visible = false;
+            btn_OK.Visible = _show;
         }
 
         public void FillAddress(int id)
@@ -358,7 +325,9 @@ namespace Odin.Sales
         public int COId
         {
             get { return _coid; }
-            set { _coid = value;
+            set
+            {
+                _coid = value;
 
                 CO_BLL COBll = new CO_BLL();
 
@@ -366,7 +335,7 @@ namespace Odin.Sales
 
                 //COHeadId = COBll.COHeadId1;
                 COArtId = COBll.COArtId;
-                COComments =  COBll.COComments;
+                COComments = COBll.COComments;
                 COComments1 = COBll.COComments1;
                 COCreatAt = COBll.COCreatAt;
                 COCreatBy = COBll.COCreatBy;
@@ -455,8 +424,8 @@ namespace Odin.Sales
             int NewLineId = 0;
 
             if (DLL.CheckArtId(COArtId) != 0
-                 /*&& frm.ctl_CODets1.COQty != 0
-                  *&& frm.ctl_CODets1.COUnitPrice != 0*/)
+                   /*&& frm.ctl_CODets1.COQty != 0
+                    *&& frm.ctl_CODets1.COUnitPrice != 0*/)
             {
                 DataTable datastages = new DataTable();
                 datastages.Columns.Add("id", typeof(int));
@@ -468,23 +437,20 @@ namespace Odin.Sales
                     DataRow dr = datastages.NewRow();
                     dr["id"] = Convert.ToInt32(row.Cells["cn_id"].Value);
 
-                    if (IsCopy == -1)
-                        dr["osid"] = 0;
-                    else
-                        dr["osid"] = Convert.ToInt32(row.Cells["cn_osid"].Value);
-                    
+                    dr["osid"] = IsCopy == -1 ? 0 : (object)Convert.ToInt32(row.Cells["cn_osid"].Value);
+
                     dr["checked"] = Convert.ToInt32(row.Cells["chk_checked"].Value);
                     datastages.Rows.Add(dr);
-                    
+
                 }
 
 
                 NewLineId = COBll.SaveCOLine(COId, COHeadId, COLine, COCustOrder, COCustLine, "", "", COArtId, COCustArticle, COService, COQty,
                                             COUnitId, COReqDate, COStateId, COUnitPrice, COVat, COComments, COComments1,
-                                            COLogComments, CODelivPlaceId, CODelivAddressId, COEndCustId, "", "", "", datastages, COInternal, 
+                                            COLogComments, CODelivPlaceId, CODelivAddressId, COEndCustId, "", "", "", datastages, COInternal,
                                             COResale, COSpoilage, COBlocked, COSalesComments, COPrimary);
 
-               
+
             }
 
             //Event

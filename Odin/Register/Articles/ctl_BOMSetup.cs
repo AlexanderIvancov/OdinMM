@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Odin.Global_Classes;
+﻿using Odin.Global_Classes;
 using Odin.Tools;
+using System;
+using System.Windows.Forms;
 
 namespace Odin.Register.Articles
 {
@@ -70,7 +63,7 @@ namespace Odin.Register.Articles
                 gv_List.DataSource = bs_List;
 
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
-                
+
             });
 
 
@@ -78,7 +71,7 @@ namespace Odin.Register.Articles
             {
                 bn_List.BindingSource = bs_List;
             });
-            
+
         }
 
         #endregion
@@ -106,9 +99,10 @@ namespace Odin.Register.Articles
             int _required = 0;
             double _qty = 0;
             string _comments = "";
-            
 
-            try {
+
+            try
+            {
                 _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
                 _tooltypeid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_toolstypeid"].Value);
                 _toolid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_artid"].Value);
@@ -125,7 +119,7 @@ namespace Odin.Register.Articles
                 frm.ToolId = _toolid;
                 frm.Required = _required;
                 frm.Qty = _qty;
-                frm.Comments = _comments;   
+                frm.Comments = _comments;
 
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
@@ -139,7 +133,7 @@ namespace Odin.Register.Articles
         private void btn_Copy_Click(object sender, EventArgs e)
         {
             if (//glob_Class.MessageConfirm("Are you sure you want to copy setup?", "Copy setup?") == true
-                
+
                 //&& 
                 ArtId != 0)
             {
@@ -158,10 +152,10 @@ namespace Odin.Register.Articles
         private void btn_Delete_Click(object sender, EventArgs e)
         {
             int _id = 0;
-                        
+
             try
             {
-                _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);                
+                _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
             }
             catch { }
 

@@ -1,11 +1,8 @@
-﻿using System;
+﻿using Odin.Global_Classes;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
-using Odin.Global_Classes;
 namespace Odin.Workshop
 {
     public class Processing_BLL
@@ -14,7 +11,7 @@ namespace Odin.Workshop
 
         #region Processing
 
-        public void AddStageProcess(int _batchid , int _stageid , int _prevstageid, double _qty, int _prodplaceid)
+        public void AddStageProcess(int _batchid, int _stageid, int _prevstageid, double _qty, int _prodplaceid)
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_AddBatchStageProcess", sqlConn);
@@ -66,7 +63,7 @@ namespace Odin.Workshop
             sqlComm.CommandTimeout = 3000;
             sqlComm.Parameters.AddWithValue("@batchid", _batchid);
             sqlComm.Parameters.AddWithValue("@stageid", _stageid);
-           
+
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
@@ -88,7 +85,7 @@ namespace Odin.Workshop
         }
 
         public static DataTable getStages(int _batchid, int _artid, int _stageid, int _coid, int _isactive, int _typeid, int _deptid,
-                            string _custarticle, string _custorder, string _startdatefrom, string _startdatetill, string _enddatefrom, 
+                            string _custarticle, string _custorder, string _startdatefrom, string _startdatetill, string _enddatefrom,
                             string _enddatetill, int _custid)
         {
             string query = "sp_ProductionStagesList";
@@ -168,15 +165,13 @@ namespace Odin.Workshop
 
         public static DataTable getShifts(int stageid, int shiftid, int placeid, int typeselection)
         {
-            string query = "";
-            if (typeselection == 1) //All
-                query = "select id, name as stage from bas_shifts where stageid = isnull(nullif(" + stageid + ", 0), stageid) " + 
-                " and shiftid = isnull(nullif(" + shiftid + ", 0), shiftid) and placeid = isnull(nullif(" + placeid + ", 0), placeid) order by id";
-            else if (typeselection == 0) //Production
-                query = "select sh.id, sh.name as stage from bas_shifts sh inner join bas_stages s on s.id = sh.stageid where (isnull(s.quality, 0) = 0 and s.id != 4 and s.id != 9) and stageid = isnull(nullif(" + stageid + ", 0), stageid) " +
-                               " and shiftid = isnull(nullif(" + shiftid + ", 0), shiftid) and placeid = isnull(nullif(" + placeid + ", 0), placeid) order by sh.id";
-            else //Quality
-                query = "select sh.id, sh.name as stage from bas_shifts sh inner join bas_stages s on s.id = sh.stageid where (isnull(s.quality, 0) = -1 or s.id = 4 or s.id = 9) and stageid = isnull(nullif(" + stageid + ", 0), stageid) " +
+            string query = typeselection == 1
+                ? "select id, name as stage from bas_shifts where stageid = isnull(nullif(" + stageid + ", 0), stageid) " +
+                " and shiftid = isnull(nullif(" + shiftid + ", 0), shiftid) and placeid = isnull(nullif(" + placeid + ", 0), placeid) order by id"
+                : typeselection == 0
+                ? "select sh.id, sh.name as stage from bas_shifts sh inner join bas_stages s on s.id = sh.stageid where (isnull(s.quality, 0) = 0 and s.id != 4 and s.id != 9) and stageid = isnull(nullif(" + stageid + ", 0), stageid) " +
+                               " and shiftid = isnull(nullif(" + shiftid + ", 0), shiftid) and placeid = isnull(nullif(" + placeid + ", 0), placeid) order by sh.id"
+                : "select sh.id, sh.name as stage from bas_shifts sh inner join bas_stages s on s.id = sh.stageid where (isnull(s.quality, 0) = -1 or s.id = 4 or s.id = 9) and stageid = isnull(nullif(" + stageid + ", 0), stageid) " +
                                 " and shiftid = isnull(nullif(" + shiftid + ", 0), shiftid) and placeid = isnull(nullif(" + placeid + ", 0), placeid) order by sh.id";
             return Helper.QueryDT(query);
         }
@@ -223,7 +218,7 @@ namespace Odin.Workshop
             sqlComm.Parameters.Add("@tablestages", SqlDbType.Structured);
             sqlComm.Parameters["@tablestages"].TypeName = "UT_CapaStages";
             sqlComm.Parameters["@tablestages"].Value = stages;
-           
+
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
@@ -396,7 +391,7 @@ namespace Odin.Workshop
             da.Fill(dt);
             sqlConn.Close();
             return dt;
-            
+
         }
 
         #endregion
@@ -410,7 +405,7 @@ namespace Odin.Workshop
             return Helper.QueryDT(query);
         }
 
-        public int SaveWorker(int Id, string UserName, string UserSurname, 
+        public int SaveWorker(int Id, string UserName, string UserSurname,
                         string TabNum, int IsActive, string RFID, string Comments, int IsMaster)
         {
             int _res = 0;
@@ -488,7 +483,7 @@ namespace Odin.Workshop
 
             var sqlparams = new List<SqlParameter>
             {
-               
+
                 new SqlParameter("@launchid",SqlDbType.Int){Value = _launchid, },
                 new SqlParameter("@batchid",SqlDbType.Int){Value = _batchid },
                 new SqlParameter("@conforderid",SqlDbType.Int){Value = _conforderid },

@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
+﻿using Odin.Global_Classes;
+using System;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Odin.CMB_Components.BLL;
-using Odin.Global_Classes;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.Launches
 {
@@ -23,7 +17,7 @@ namespace Odin.CMB_Components.Launches
         }
 
         public event LaunchGroupEventHandler LaunchChanged;
-        
+
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
 
         PopupWindowHelper PopupHelper = null;
@@ -31,13 +25,13 @@ namespace Odin.CMB_Components.Launches
         class_Global glob_Class = new class_Global();
 
         #region Variables
-       
+
         string _Launches = "";
         string _LaunchGroup = "";
         public string Launches
-        { 
+        {
             get { return _Launches; }
-            set { _Launches = value; } 
+            set { _Launches = value; }
         }
         public string LaunchGroup
         {
@@ -68,7 +62,7 @@ namespace Odin.CMB_Components.Launches
                 }
                 else
                 {
-                   
+
                     ClearFields();
                     if (LaunchChanged != null)
                         LaunchChanged(this);
@@ -80,15 +74,15 @@ namespace Odin.CMB_Components.Launches
             }
         }
 
-       
-              
+
+
         public int StageId
-        { get; set; } 
+        { get; set; }
         #endregion
 
         public void ClearFields()
-        {           
-            StageId = 0;           
+        {
+            StageId = 0;
         }
 
         private void ShowLaunchFilter(string Beg)
@@ -138,7 +132,7 @@ namespace Odin.CMB_Components.Launches
 
         private void buttonSpecAny1_Click(object sender, EventArgs e)
         {
-            txt_LaunchGroup.Text = string.Empty;           
+            txt_LaunchGroup.Text = string.Empty;
 
         }
 

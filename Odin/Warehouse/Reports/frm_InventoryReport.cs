@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using Odin.Global_Classes;
+using Odin.Tools;
+using System;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using CrystalDecisions.CrystalReports.Engine;
-using Odin.Global_Classes;
-using ComponentFactory.Krypton.Workspace;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Tools;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 
 namespace Odin.Warehouse.Reports
@@ -43,15 +37,17 @@ namespace Odin.Warehouse.Reports
 
         public string Language
         {
-            get { if (rb_Lat.Checked == true)
+            get
+            {
+                if (rb_Lat.Checked == true)
                     return "LAT";
-                else if(rb_Rus.Checked == true)
+                else if (rb_Rus.Checked == true)
                     return "RUS";
                 return "ENG";
             }
             set { }
         }
-        
+
         #region Methods
 
         public void ClearDates()
@@ -246,7 +242,7 @@ namespace Odin.Warehouse.Reports
             });
 
         }
-        
+
         #endregion
 
         #region Controls
@@ -310,20 +306,13 @@ namespace Odin.Warehouse.Reports
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? String.IsNullOrEmpty(CellValue) == true
+                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
+                    : String.IsNullOrEmpty(CellValue) == true
+                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -337,10 +326,9 @@ namespace Odin.Warehouse.Reports
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
-                else
-                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
+                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             //SetCellsColor();
@@ -422,15 +410,14 @@ namespace Odin.Warehouse.Reports
             drow = dt.NewRow();
             drow[0] = DAL.LogoToByte();
             dt.Rows.Add(drow);
-                      
+
             DataTable datalab = new DataTable();
             datalab = DAL_Functions.getReportLabels("Inventory", Lang);
 
             //Check for currency
-            int number;
 
-            bool success = Int32.TryParse(DAL.DefaultValue("currency"), out number);
-            
+            bool success = Int32.TryParse(DAL.DefaultValue("currency"), out int number);
+
             //data source
             report.Database.Tables[0].SetDataSource(dt);
             report.Database.Tables[1].SetDataSource(data);
@@ -468,7 +455,7 @@ namespace Odin.Warehouse.Reports
             Account = "2110";
             bwStart(bw_ListAccount);
         }
-                
+
         private void btn_WIPRefresh_Click(object sender, EventArgs e)
         {
             Account = "2120";

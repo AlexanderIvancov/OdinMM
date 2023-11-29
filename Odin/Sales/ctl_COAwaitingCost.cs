@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Odin.Global_Classes;
+using System;
 using System.Windows.Forms;
-using Odin.Global_Classes;
 
 namespace Odin.Sales
 {
@@ -24,7 +17,8 @@ namespace Odin.Sales
 
         public double QtyOrdered
         {
-            get {
+            get
+            {
                 try { return Convert.ToDouble(txt_Ordered.Text); }
                 catch { return 0; }
             }
@@ -67,7 +61,7 @@ namespace Odin.Sales
                 COBll.ConfId = _confid;
             }
         }
-              
+
 
         public void FillDeliveries(int _COId)
         {

@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
+﻿using ComponentFactory.Krypton.Toolkit;
+using System;
 
 namespace Odin.Warehouse.Deliveries
 {
@@ -27,13 +19,15 @@ namespace Odin.Warehouse.Deliveries
         { get; set; }
 
         public string Package
-        { get { return cmb_Packages1.Package; }
+        {
+            get { return cmb_Packages1.Package; }
             set { cmb_Packages1.Package = value; }
         }
 
         public int QtyPack
         {
-            get {
+            get
+            {
                 try { return Convert.ToInt32(txt_QtyPack.Text); }
                 catch { return 0; }
             }
@@ -67,11 +61,8 @@ namespace Odin.Warehouse.Deliveries
         }
         public void CheckEmpty()
         {
-            if (Package == ""
-                || String.IsNullOrEmpty(Package) == true)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = Package != ""
+                && String.IsNullOrEmpty(Package) != true;
 
         }
 

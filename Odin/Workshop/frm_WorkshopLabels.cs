@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
-using System.Data.SqlClient;
 using Odin.Tools;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace Odin.Workshop
 {
@@ -55,12 +49,9 @@ namespace Odin.Workshop
 
         public bool CheckLabels()
         {
-            if (Convert.ToInt32(txt_Diff.Text) <= 0
-                || txt_From36.Text == "ERROR!"
-                || txt_From10.Text == "ERROR!")
-                return false;
-            else
-                return true;
+            return Convert.ToInt32(txt_Diff.Text) > 0
+                && txt_From36.Text != "ERROR!"
+                && txt_From10.Text != "ERROR!";
         }
         private void btn_OK_Click(object sender, EventArgs e)
         {
@@ -197,12 +188,13 @@ namespace Odin.Workshop
 
         private void txt_From10_Validated(object sender, EventArgs e)
         {
-            
+
         }
 
         private void txt_From36_Validated(object sender, EventArgs e)
         {
-            try {
+            try
+            {
                 txt_From10.Text = globClass.Convert_36to10(txt_From36.Text).ToString();
                 RecalcDiff();
             }
@@ -211,13 +203,13 @@ namespace Odin.Workshop
 
         public void RecalcDiff()
         {
-            txt_Diff.Text = (Convert.ToInt32(txt_Till10.Text) - Convert.ToInt32(txt_From10.Text) + 1).ToString() ;
+            txt_Diff.Text = (Convert.ToInt32(txt_Till10.Text) - Convert.ToInt32(txt_From10.Text) + 1).ToString();
         }
 
         private void txt_Till10_Validated(object sender, EventArgs e)
         {
 
-            
+
         }
 
         private void txt_Till36_Validated(object sender, EventArgs e)
@@ -281,7 +273,7 @@ namespace Odin.Workshop
                 PrintLabels.PrintLabel(TemplateLabelText, 1);
             }
             else
-            { }        
+            { }
         }
 
         private void frm_WorkshopLabels_Load(object sender, EventArgs e)

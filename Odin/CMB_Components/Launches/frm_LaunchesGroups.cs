@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
-using Odin.Global_Classes;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.CMB_Components.BLL;
+using Odin.Global_Classes;
+using System;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.Launches
 {
@@ -44,11 +36,11 @@ namespace Odin.CMB_Components.Launches
             try
             {
                 ((cmb_LaunchGroups)cmb_LaunchOne).txt_LaunchGroup.Text = gv_List.CurrentRow.Cells["cn_launchgroups"].Value.ToString();
-                
+
             }
             catch { }
         }
-        
+
         public void FillData(string Beg)
         {
             var data = CMB_BLL.getLaunchGroups(Beg);

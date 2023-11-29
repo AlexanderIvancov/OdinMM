@@ -1,25 +1,17 @@
-﻿using System;
+﻿using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using Odin.Planning.Passport;
+using Odin.Tools;
+using Odin.Warehouse.StockOut.Reports;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using WeifenLuo.WinFormsUI.Docking;
-using Odin.Global_Classes;
-using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Workspace;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Planning.Controls;
-using Odin.Planning;
-using System.Data.SqlClient;
-using Odin.Tools;
 using System.Windows.Forms.Calendar;
-using Odin.Warehouse.StockOut.Reports;
-using Odin.Planning.Passport;
 
 namespace Odin.Planning
 {
@@ -118,7 +110,7 @@ namespace Odin.Planning
                 _endtime = Convert.ToDateTime(row["enddate"]);
                 _id = Convert.ToInt32(row["launchid"]);
 
-                _CalendarText = "Launch: " + row["launch"].ToString() +", group: " + row["groupname"].ToString(); 
+                _CalendarText = "Launch: " + row["launch"].ToString() + ", group: " + row["groupname"].ToString();
                 _CalendarText = _CalendarText + ", " + row["conforder"].ToString();// + ", Batch: " + row["batch"].ToString();
                 _CalendarText = _CalendarText + System.Environment.NewLine + "Qty: " + row["qty"].ToString() + " " + row["unit"].ToString()
                         + ", Stage: " + row["stage"].ToString();
@@ -162,7 +154,7 @@ namespace Odin.Planning
                 //Not active
                 if (Convert.ToInt32(row["isactive"]) == 0)
                     cal.ApplyColor(Color.Gainsboro);
-                
+
 
                 _items.Add(cal);
             }
@@ -193,7 +185,7 @@ namespace Odin.Planning
                     _endtime = Convert.ToDateTime(_datetill).AddHours(23);
                     _id = Convert.ToInt32(row["launchid"]);
 
-                    _CalendarText = "Launch: " + row["launch"].ToString() + ", group: " + row["groupname"].ToString(); 
+                    _CalendarText = "Launch: " + row["launch"].ToString() + ", group: " + row["groupname"].ToString();
                     _CalendarText = _CalendarText + ", " + row["conforder"].ToString();// + ", Batch: " + row["batch"].ToString();
                     _CalendarText = _CalendarText + System.Environment.NewLine + "Qty: " + row["qty"].ToString() + " " + row["unit"].ToString()
                             + ", Stage: " + row["stage"].ToString();
@@ -231,7 +223,7 @@ namespace Odin.Planning
                                 cal.ApplyColor(Color.LightCoral);
                         }
                     }
-                   
+
                     //Not active
                     if (Convert.ToInt32(row["isactive"]) == 0)
                         cal.ApplyColor(Color.Gainsboro);
@@ -377,8 +369,8 @@ namespace Odin.Planning
 
             }
             else
-            { 
-           
+            {
+
                 CalendarTimeScaleUnit unitEnd = calendar1.SelectedElementEnd as CalendarTimeScaleUnit;
                 TimeSpan duration = unitEnd != null ? unitEnd.Duration : new TimeSpan(23, 59, 59);
 
@@ -394,29 +386,29 @@ namespace Odin.Planning
 
                 DateTime StartDate = dstart;
                 DateTime EndDate = dend.Add(duration);
-                
+
                 frm.ctl_CreatLaunchDets1.txt_StartDate.Value = dstart;
                 frm.ctl_CreatLaunchDets1.txt_ProdStartDate.Value = StartDate;
                 frm.ctl_CreatLaunchDets1.txt_EndDate.Value = EndDate;
             }
 
-           
+
 
             frm.LaunchSaved += new LaunchSavedEventHandler(AddLaunch);
 
             frm.Show();
 
 
-                //int IdNote = DSBLL.AddDSItem(frm.NoteText, StartDate, EndDate);
+            //int IdNote = DSBLL.AddDSItem(frm.NoteText, StartDate, EndDate);
 
-                ////MessageBox.Show(IdNote.ToString());
-                //if (IdNote != 0)
-                //{                    
-                //    CalendarItem cal = new CalendarItem(calendar1, StartDate, EndDate, frm.NoteText, IdNote);
-                //    _items.Add(cal);
-                //    calendar1.Items.Add(cal);
-                //}
-            
+            ////MessageBox.Show(IdNote.ToString());
+            //if (IdNote != 0)
+            //{                    
+            //    CalendarItem cal = new CalendarItem(calendar1, StartDate, EndDate, frm.NoteText, IdNote);
+            //    _items.Add(cal);
+            //    calendar1.Items.Add(cal);
+            //}
+
         }
 
         private void btn_DeleteItem_Click(object sender, EventArgs e)
@@ -765,7 +757,7 @@ namespace Odin.Planning
             string query = "sp_LaunchesPortfolioTab";
 
             var sqlparams = new List<SqlParameter>
-            {  
+            {
                 new SqlParameter("@datefrom",SqlDbType.NVarChar){Value = _beg},
                 new SqlParameter("@datetill",SqlDbType.NVarChar){Value = _end},
                 new SqlParameter("@launchid",SqlDbType.Int){Value = cmb_Launches1.LaunchId},
@@ -797,7 +789,7 @@ namespace Odin.Planning
 
                 frm.LaunchId = _id;
                 frm.FillList(_id);
-               
+
 
                 frm.ShowDialog();
 
@@ -840,7 +832,7 @@ namespace Odin.Planning
                     }
 
                 }
-            }                
+            }
         }
     }
 }

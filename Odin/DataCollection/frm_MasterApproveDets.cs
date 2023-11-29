@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using ComponentFactory.Krypton.Toolkit;
+using Odin.CustomControls;
+using Odin.Global_Classes;
+using Odin.Tools;
+using Odin.Workshop;
+using System;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
-using Odin.Global_Classes;
-using Odin.Tools;
-using System.Data.SqlClient;
-using System.Runtime.InteropServices;
-using System.Threading;
-using Odin.CustomControls;
-using Odin.Workshop;
 
 namespace Odin.DataCollection
 {
@@ -66,7 +58,7 @@ namespace Odin.DataCollection
             get { return _launchid; }
             set { _launchid = value; }
         }
-     
+
 
         public double Qty
         {
@@ -112,12 +104,7 @@ namespace Odin.DataCollection
         {
             get
             {
-                if (rb_Valkas2.Checked == true)
-                    return 1;
-                else if (rb_Valkas2B.Checked == true)
-                    return 2;
-                else
-                    return 0;
+                return rb_Valkas2.Checked == true ? 1 : rb_Valkas2B.Checked == true ? 2 : 0;
             }
             set
             {
@@ -185,7 +172,7 @@ namespace Odin.DataCollection
             });
 
             RecalcQty();
-           
+
         }
 
         public void RecalcQty()
@@ -229,12 +216,10 @@ namespace Odin.DataCollection
                 e.KeyChar = System.Threading.Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
                 e.Handled = s.Text.Contains(e.KeyChar);
             }
-            else if (e.KeyChar == '-')
-            {
-                e.Handled = s.Text.Contains(e.KeyChar);
-            }
             else
-                e.Handled = !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar);
+            {
+                e.Handled = e.KeyChar == '-' ? s.Text.Contains(e.KeyChar) : !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar);
+            }
 
         }
 
@@ -289,10 +274,10 @@ namespace Odin.DataCollection
 
         private void btn_Delete_Click(object sender, EventArgs e)
         {
-            
+
             int _id = 0;
             int _issn = 0;
-            
+
             if (globClass.DeleteConfirm() == true)
             {
                 if (MasterId != 0)
@@ -304,12 +289,12 @@ namespace Odin.DataCollection
                             _id = Convert.ToInt32(row.Cells["cn_id"].Value);
                             _issn = Convert.ToInt32(row.Cells["cn_issn"].Value);
                         }
-                        catch { _id = 0;}
+                        catch { _id = 0; }
                         if (_id != 0)
                         {
                             DCBll.DeleteDataCollection(_id, _issn);
                         }
-                    }                    
+                    }
                     FillList(LaunchId, ProdPlace);
                     if (ApplyApproveChanges != null)
                         ApplyApproveChanges(this);

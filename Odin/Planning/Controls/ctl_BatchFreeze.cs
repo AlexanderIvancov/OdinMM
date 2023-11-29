@@ -1,15 +1,12 @@
-﻿using System;
+﻿using Odin.Global_Classes;
+using Odin.Tools;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Odin.Global_Classes;
-using Odin.Tools;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.Planning.Controls
 {
@@ -59,7 +56,8 @@ namespace Odin.Planning.Controls
         public int BatchId
         {
             get { return cmb_Batches1.BatchId; }
-            set {
+            set
+            {
                 //MessageBox.Show(_batchid.ToString());
                 _batchid = value;
 
@@ -124,7 +122,7 @@ namespace Odin.Planning.Controls
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
 
-                
+
                 var data = Plan_BLL.getBatchRM(BatchId);
 
                 gv_List.ThreadSafeCall(delegate
@@ -134,7 +132,7 @@ namespace Odin.Planning.Controls
                     gv_List.DataSource = bs_List;
                     SetCellsColor();
                 });
-                
+
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
                 SetCellsColor();
 
@@ -154,12 +152,9 @@ namespace Odin.Planning.Controls
                 foreach (DataGridViewRow row in this.gv_List.Rows)
                 {
                     //Color of freezed qty
-                    if (Convert.ToDouble((row.Cells["cn_reserve"].Value)) < 0)
-                        row.Cells["cn_reserve"].Style.ForeColor = Color.Blue;
-                    else if (Convert.ToDouble((row.Cells["cn_reserve"].Value)) > 0)
-                        row.Cells["cn_reserve"].Style.ForeColor = Color.Green;
-                    else
-                        row.Cells["cn_reserve"].Style.ForeColor = Color.Black;
+                    row.Cells["cn_reserve"].Style.ForeColor = Convert.ToDouble((row.Cells["cn_reserve"].Value)) < 0
+                        ? Color.Blue
+                        : Convert.ToDouble((row.Cells["cn_reserve"].Value)) > 0 ? Color.Green : Color.Black;
 
                     ToFreeze = Convert.ToDouble(row.Cells["cn_qty"].Value)
                                 - Convert.ToDouble(row.Cells["cn_reserved"].Value)
@@ -221,16 +216,12 @@ namespace Odin.Planning.Controls
                                     + Convert.ToDouble(row.Cells["cn_returned"].Value);
 
 
-                    if (ToFreeze > 0
-                        && Convert.ToInt32(row.Cells["cn_detisactive"].Value) == -1)
-                    {
-                        if (Convert.ToDouble(row.Cells["cn_available"].Value) >= ToFreeze)
-                            row.Cells["cn_reserve"].Value = Math.Round(ToFreeze, 5);
-                        else
-                            row.Cells["cn_reserve"].Value = Math.Round(Convert.ToDouble(row.Cells["cn_available"].Value), 5);
-                    }
-                    else
-                    { row.Cells["cn_reserve"].Value = 0; }
+                    row.Cells["cn_reserve"].Value = ToFreeze > 0
+                        && Convert.ToInt32(row.Cells["cn_detisactive"].Value) == -1
+                        ? Convert.ToDouble(row.Cells["cn_available"].Value) >= ToFreeze
+                            ? Math.Round(ToFreeze, 5)
+                            : (object)Math.Round(Convert.ToDouble(row.Cells["cn_available"].Value), 5)
+                        : 0;
                 }
             }
             catch { }
@@ -367,20 +358,13 @@ namespace Odin.Planning.Controls
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? String.IsNullOrEmpty(CellValue) == true
+                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
+                    : String.IsNullOrEmpty(CellValue) == true
+                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -393,10 +377,9 @@ namespace Odin.Planning.Controls
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
-                else
-                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
+                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
@@ -438,7 +421,7 @@ namespace Odin.Planning.Controls
                 LoadColumns(gv_List);
             }
         }
-                
+
         #endregion
 
         private void cmb_Batches1_BatchChanged(object sender)
@@ -448,7 +431,7 @@ namespace Odin.Planning.Controls
 
         private void gv_List_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            
+
             if (e.RowIndex < 0)
                 return;
 
@@ -466,7 +449,7 @@ namespace Odin.Planning.Controls
                 e.Handled = true;
             }
 
-            if (e.ColumnIndex ==8)
+            if (e.ColumnIndex == 8)
             {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
 
@@ -479,7 +462,7 @@ namespace Odin.Planning.Controls
                 e.Handled = true;
             }
         }
-               
+
         private void gv_List_CellValidated(object sender, DataGridViewCellEventArgs e)
         {
             if (gv_List.CurrentRow.Cells["cn_reserve"].Selected == true)
@@ -488,20 +471,20 @@ namespace Odin.Planning.Controls
                 //bool outres = Double.TryParse(gv_List.CurrentRow.Cells["cn_reserve"].Value.ToString(), out k);
                 //if (!outres)
                 //{
-                    if (Convert.ToDouble(gv_List.CurrentRow.Cells["cn_reserve"].Value) < 0)
-                    {
-                        //proverka osvobozhdenija
-                        if (-1 * Convert.ToDouble(gv_List.CurrentRow.Cells["cn_reserve"].Value) > Convert.ToDouble(gv_List.CurrentRow.Cells["cn_reserved"].Value))
-                            gv_List.CurrentRow.Cells["cn_reserve"].Value = -1 * Convert.ToDouble(gv_List.CurrentRow.Cells["cn_reserved"].Value);
-                    }
-                    if (Convert.ToDouble(gv_List.CurrentRow.Cells["cn_reserve"].Value) > 0)
-                    {
-                        if (Convert.ToDouble(gv_List.CurrentRow.Cells["cn_reserve"].Value) > Convert.ToDouble(gv_List.CurrentRow.Cells["cn_available"].Value))
-                            gv_List.CurrentRow.Cells["cn_reserve"].Value = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_available"].Value);
-                    }
+                if (Convert.ToDouble(gv_List.CurrentRow.Cells["cn_reserve"].Value) < 0)
+                {
+                    //proverka osvobozhdenija
+                    if (-1 * Convert.ToDouble(gv_List.CurrentRow.Cells["cn_reserve"].Value) > Convert.ToDouble(gv_List.CurrentRow.Cells["cn_reserved"].Value))
+                        gv_List.CurrentRow.Cells["cn_reserve"].Value = -1 * Convert.ToDouble(gv_List.CurrentRow.Cells["cn_reserved"].Value);
+                }
+                if (Convert.ToDouble(gv_List.CurrentRow.Cells["cn_reserve"].Value) > 0)
+                {
+                    if (Convert.ToDouble(gv_List.CurrentRow.Cells["cn_reserve"].Value) > Convert.ToDouble(gv_List.CurrentRow.Cells["cn_available"].Value))
+                        gv_List.CurrentRow.Cells["cn_reserve"].Value = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_available"].Value);
+                }
                 //}
                 //else
-               // {
+                // {
                 //    gv_List.CurrentRow.Cells["cn_reserve"].Value = 0;
                 //}              
             }
@@ -515,7 +498,8 @@ namespace Odin.Planning.Controls
 
         private void gv_List_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try {
+            try
+            {
                 pro = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_reserve"].Value);
 
                 if (gv_List.CurrentRow.Cells["btn_free"].Selected == true
@@ -541,15 +525,11 @@ namespace Odin.Planning.Controls
                                 + Convert.ToDouble(gv_List.CurrentRow.Cells["cn_returned"].Value);
 
 
-                    if (ToFreeze > 0)
-                    {
-                        if (Convert.ToDouble(gv_List.CurrentRow.Cells["cn_available"].Value) >= ToFreeze)
-                            gv_List.CurrentRow.Cells["cn_reserve"].Value = ToFreeze;
-                        else
-                            gv_List.CurrentRow.Cells["cn_reserve"].Value = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_available"].Value);
-                    }
-                    else
-                    { gv_List.CurrentRow.Cells["cn_reserve"].Value = 0; }
+                    gv_List.CurrentRow.Cells["cn_reserve"].Value = ToFreeze > 0
+                        ? Convert.ToDouble(gv_List.CurrentRow.Cells["cn_available"].Value) >= ToFreeze
+                            ? ToFreeze
+                            : (object)Convert.ToDouble(gv_List.CurrentRow.Cells["cn_available"].Value)
+                        : 0;
 
                 }
             }
@@ -578,7 +558,7 @@ namespace Odin.Planning.Controls
             }
             SetCellsColor();
         }
-        
+
 
         private void btn_AddNew_Click(object sender, EventArgs e)
         {
@@ -728,8 +708,7 @@ namespace Odin.Planning.Controls
         {
             if (e.ColumnIndex == 8) // Проверка происходит в первом столбце
             {
-                double temp = 0;
-                if (!Double.TryParse((string)e.Value, out temp))
+                if (!Double.TryParse((string)e.Value, out double temp))
                 {
                     MessageBox.Show("Error during entering data, numbers allow only!");
                     //e.Value = 0;
@@ -828,7 +807,7 @@ namespace Odin.Planning.Controls
                 frm.BatchDetId = _bdid;
                 frm.ArtId = 0;
                 frm.Qty = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_qty"].Value);
-                
+
                 frm.HeaderText = "Replace RM in batch: " + cmb_Batches1.Batch + ", article: " + gv_List.CurrentRow.Cells["cn_article"].Value.ToString();
 
                 DialogResult result = frm.ShowDialog();

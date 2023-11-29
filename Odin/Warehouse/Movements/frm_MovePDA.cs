@@ -1,24 +1,19 @@
-﻿using System;
+﻿using ComponentFactory.Krypton.Toolkit;
+using CrystalDecisions.CrystalReports.Engine;
+using Odin.CMB_Components.BLL;
+using Odin.CustomControls;
+using Odin.Global_Classes;
+using Odin.Planning;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
-using Odin.Global_Classes;
-using Odin.Tools;
-using System.Data.SqlClient;
-using System.Threading;
-using Odin.Warehouse.StockOut;
-using Odin.Warehouse.Movements;
-using Odin.CustomControls;
-using Odin.Planning;
-using CrystalDecisions.CrystalReports.Engine;
-using Odin.CMB_Components.BLL;
 
 namespace Odin.Warehouse.Movements
 {
@@ -42,7 +37,7 @@ namespace Odin.Warehouse.Movements
         private CancellationToken printToken;
 
         private static KeyPressEventHandler NumericCheckHandler;
-        
+
         PopupWindowHelper PopupHelper = null;
         DAL_Functions DAL = new DAL_Functions();
         StockMove_BLL SMBll = new StockMove_BLL();
@@ -81,7 +76,8 @@ namespace Odin.Warehouse.Movements
         public int OutMode
         {
             get { return _OutMode; }
-            set {
+            set
+            {
 
                 _OutMode = value;
                 if (_OutMode == -1)
@@ -118,8 +114,10 @@ namespace Odin.Warehouse.Movements
         }
         bool _islg = false;
         public bool IsLaunchGroup
-        { get { return _islg; }
-            set { _islg = value; } }
+        {
+            get { return _islg; }
+            set { _islg = value; }
+        }
         #endregion
 
         #region Methods
@@ -139,7 +137,7 @@ namespace Odin.Warehouse.Movements
                         //&& 
                         row.Cells["cn_batch"].Value.ToString().ToUpper() != Batch.ToUpper()
                         //)
-                        
+
                         )
                         foreach (DataGridViewCell cell in row.Cells)
                             cell.Style.BackColor = Color.LightCoral;
@@ -165,7 +163,7 @@ namespace Odin.Warehouse.Movements
             }
 
         }
-        
+
         public void ClearFields()
         {
             Batch = "";
@@ -193,14 +191,14 @@ namespace Odin.Warehouse.Movements
                     if (Convert.ToInt32(row["artid"]) == Convert.ToInt32(rowgv.Cells["cn_artid"].Value))
                     {
                         rowgv.Cells["cn_bdid"].Value = Convert.ToInt32(row["id"]);
-                        
+
                     }
                 }
             }
 
             //SetCellsColor();
         }
-        
+
         public void InsertRow(int artid, string article, int label, double qty, string unit, string batch, int placeid, string place, string comments, string datacode, string expdate, int bdid)
         {
             //dobavlaem index
@@ -276,10 +274,9 @@ namespace Odin.Warehouse.Movements
                 _label = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_label"].Value);
             }
             catch { }
-            if (_artid == labelcontent)
-                txt_Documents.Text = "Check result for label " + _label.ToString() + " is OK! " + System.Environment.NewLine + txt_Documents.Text;
-            else
-                txt_Documents.Text = "Check result for label " + _label.ToString() + " not OK! Content is: " + labelcontent + "!" + System.Environment.NewLine + txt_Documents.Text;
+            txt_Documents.Text = _artid == labelcontent
+                ? "Check result for label " + _label.ToString() + " is OK! " + System.Environment.NewLine + txt_Documents.Text
+                : "Check result for label " + _label.ToString() + " not OK! Content is: " + labelcontent + "!" + System.Environment.NewLine + txt_Documents.Text;
             chk_CheckLabel.CheckState = CheckState.Unchecked;
             chk_CheckLabel.BackColor = Color.LightGreen;
         }
@@ -320,12 +317,10 @@ namespace Odin.Warehouse.Movements
                 e.KeyChar = System.Threading.Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
                 e.Handled = s.Text.Contains(e.KeyChar);
             }
-            else if (e.KeyChar == '-')
-            {
-                e.Handled = s.Text.Contains(e.KeyChar);
-            }
             else
-                e.Handled = !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar);
+            {
+                e.Handled = e.KeyChar == '-' ? s.Text.Contains(e.KeyChar) : !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar);
+            }
         }
 
         private void PrintReport(int count, Action printMethod)
@@ -362,21 +357,20 @@ namespace Odin.Warehouse.Movements
 
         private void PrintMoveDoc(int movdocid, int count)
         {
-            Action print =
-            () =>
+            void print()
             {
                 using (ReportDocument rd = OpenReport(movdocid))
                 {
 
                     rd.PrintOptions.PrinterName = DAL_Functions.GetDefaultPrinterName();
                     rd.PrintToPrinter(1, false, 0, 0);
-                                        
+
                     //CrystalDecisions.ReportAppServer.Controllers.PrintReportOptions popt = new CrystalDecisions.ReportAppServer.Controllers.PrintReportOptions();
                     //popt.PrinterName = printerSettings.PrinterName;
                     //_report.ReportClientDocument.PrintOutputController.PrintReport(popt);
 
                 }
-            };
+            }
 
             PrintReport(count, print);
 
@@ -387,7 +381,7 @@ namespace Odin.Warehouse.Movements
             ReportDocument report = new ReportDocument();
 
             report.FileName = Application.StartupPath + "\\Warehouse\\StockOut\\Reports\\" + "rpt_StockMove.rpt";
-            
+
             //DataMatrix
             DataTable dt = new DataTable();
             //StockPrint_DataSet.dt_DataMatrixFieldDataTable dt = new StockPrint_DataSet.dt_DataMatrixFieldDataTable();
@@ -484,7 +478,7 @@ namespace Odin.Warehouse.Movements
                         _batch = globClass.BeforeChar(_batch, "-");
                         txt_Oper.Text = _batch;
 
-                            //if (_batch.Substring(0, 2) == "LG")
+                        //if (_batch.Substring(0, 2) == "LG")
                         //{
                         //    IsLaunchGroup = true;
                         //    _batchid = 0;
@@ -492,9 +486,9 @@ namespace Odin.Warehouse.Movements
                         //else
                         //{
                         //    IsLaunchGroup = false;
-                            _batchid = Convert.ToInt32(Helper.GetOneRecord("select top 1 id from prod_batchhead where Batch = '" + _batch + "'"));
+                        _batchid = Convert.ToInt32(Helper.GetOneRecord("select top 1 id from prod_batchhead where Batch = '" + _batch + "'"));
                         //}
-                       
+
 
                         if (_batchid != 0)
                         {
@@ -571,7 +565,7 @@ namespace Odin.Warehouse.Movements
                 //Clear temp field
                 txt_Oper.Text = "";
                 txt_Oper.Focus();
-                
+
             }
         }
 
@@ -601,9 +595,9 @@ namespace Odin.Warehouse.Movements
                 }
             }
             else
-            this.Close();
+                this.Close();
         }
-        
+
         private void frm_MovePDA_Load(object sender, EventArgs e)
         {
 
@@ -620,9 +614,9 @@ namespace Odin.Warehouse.Movements
         {
             foreach (DataGridViewRow row in gv_List.SelectedRows)
             {
-               gv_List.Rows.Remove(row);
+                gv_List.Rows.Remove(row);
             }
-            
+
             gv_List.ClearSelection();
 
             txt_Oper.Focus();
@@ -656,7 +650,7 @@ namespace Odin.Warehouse.Movements
                 {
                     ShowScreenNumKeyboard(e, -1, -1);
                     popup.CellText = gv_List.CurrentRow.Cells["cn_qty"].FormattedValue.ToString();
-                    
+
                 }
             }
         }
@@ -670,7 +664,7 @@ namespace Odin.Warehouse.Movements
 
             int ColumnIndex = columnIndex != -1 ? columnIndex : e.ColumnIndex;
             int RowIndex = rowIndex != -1 ? rowIndex : e.RowIndex;
-            
+
             Rectangle cellRectangle = gv_List.GetCellDisplayRectangle(ColumnIndex, RowIndex, false);
 
             cellRectangle.X += gv_List.Left + columnWidth;
@@ -703,7 +697,7 @@ namespace Odin.Warehouse.Movements
 
         private void gv_List_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            
+
             if (e.ColumnIndex == 4)
             {
                 if (gv_List.CurrentCell.Value != null &&
@@ -715,14 +709,14 @@ namespace Odin.Warehouse.Movements
                 var cellValue = gv_List.CurrentCell.Value;
                 if (cellValue != null)
                 {
-                  
+
                     if (gv_List.Rows[e.RowIndex].Cells["cn_qty"].Value.ToString() != "")
                     {
                         MeasCellValue = float.Parse(gv_List.Rows[e.RowIndex].Cells["cn_qty"].Value.ToString());
                     }
-                    
+
                 }
-            } 
+            }
 
         }
 
@@ -768,7 +762,8 @@ namespace Odin.Warehouse.Movements
                             //                            Batch);
 
                         }
-                        catch {
+                        catch
+                        {
                             DialogResult result = KryptonTaskDialog.Show("Quantity deallocation line warning!",
                                                                  "Saving of line impossible!",
                                                                  "Please check line: " + row.Index.ToString(),
@@ -785,7 +780,7 @@ namespace Odin.Warehouse.Movements
                 {
                     SendToPrinter(_resmove, 1);
                 }
-                
+
                 ClearFields();
                 txt_Oper.Focus();
             }
@@ -834,15 +829,11 @@ namespace Odin.Warehouse.Movements
                     btn_OK.PerformClick();
                     e.Cancel = false;
                 }
-                else if (result1 == DialogResult.No)
-                {
-                    e.Cancel = false;
-                }
                 else
                 {
-                    e.Cancel = true;
+                    e.Cancel = result1 != DialogResult.No;
                 }
-            }            
+            }
         }
 
         private void chk_CheckLabel_CheckedChanged(object sender, EventArgs e)

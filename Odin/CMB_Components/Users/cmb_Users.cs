@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Odin.CMB_Components.BLL;
 using Odin.Global_Classes;
+using System;
+using System.Data;
 using System.Data.SqlClient;
-using Odin.CMB_Components.BLL;
-using Odin.Tools;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.Users
 {
@@ -36,16 +30,17 @@ namespace Odin.CMB_Components.Users
         DAL_Functions glob_Function = new DAL_Functions();
 
 
-        
+
         int _UserId = 0;
-                
+
         public int UserId
         {
             get { return _UserId; }
-            set {
-                    _UserId = value;
-                    UserDets(_UserId);
-                }
+            set
+            {
+                _UserId = value;
+                UserDets(_UserId);
+            }
         }
 
         public string User
@@ -65,12 +60,12 @@ namespace Odin.CMB_Components.Users
 
         public string UserLogin
         {
-            get;set;
+            get; set;
         }
 
         public string UserShortName
         {
-            get;set;
+            get; set;
         }
         #endregion
 
@@ -113,7 +108,7 @@ namespace Odin.CMB_Components.Users
             {
                 ClearFields();
             }
-       }
+        }
 
         public void UserDetsFromTN(string TN)
         {
@@ -146,7 +141,7 @@ namespace Odin.CMB_Components.Users
                 User = "";
                 UserLogin = "";
             }
-                    
+
         }
 
         public void ClearFields()
@@ -220,7 +215,7 @@ namespace Odin.CMB_Components.Users
             {
                 if (UserChanged != null)
                 {
-                   UserChanged(this);
+                    UserChanged(this);
                 }
             }
         }

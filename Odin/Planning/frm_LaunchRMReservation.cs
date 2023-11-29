@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
 using Odin.Tools;
+using System;
+using System.ComponentModel;
+using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.Planning
 {
@@ -34,7 +29,7 @@ namespace Odin.Planning
         AdmMenu mMenu = new AdmMenu();
         DAL_Functions DAL = new DAL_Functions();
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
-       
+
         int _id = 0;
         public int LaunchId
         {
@@ -94,7 +89,7 @@ namespace Odin.Planning
 
         }
 
-        
+
         public void FillList(int _launchid)
         {
             var data = Plan_BLL.getLaunchesDet(_launchid);
@@ -117,7 +112,7 @@ namespace Odin.Planning
 
         }
 
-        public void FillListGroup(string _launch )
+        public void FillListGroup(string _launch)
         {
             var data = Plan_BLL.getLaunchesGroupDet(_launch);
 
@@ -228,20 +223,13 @@ namespace Odin.Planning
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? String.IsNullOrEmpty(CellValue) == true
+                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
+                    : String.IsNullOrEmpty(CellValue) == true
+                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -252,10 +240,9 @@ namespace Odin.Planning
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
-                else
-                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
+                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
 
@@ -320,7 +307,7 @@ namespace Odin.Planning
                         dr["reserve"] = Convert.ToInt32(row.Cells["chk_rchecked"].Value);
                         dr["qty"] = Convert.ToDouble(row.Cells["cn_toreserve"].Value);
                         datastages.Rows.Add(dr);
-                        
+
                         if (Convert.ToInt32(row.Cells["chk_rchecked"].Value) == -1)
                             _qtytmp = _qtytmp + Convert.ToDouble(row.Cells["cn_rqty"].Value);
                     }
@@ -330,26 +317,30 @@ namespace Odin.Planning
                     gv_List.CurrentRow.Cells["cn_reserved"].Value = _qtytmp;
                     SetCellsColor();
                     //gv_List.ThreadSafeCall(delegate { FillList(LaunchId); }) ;
-                    gv_Labels.ThreadSafeCall(delegate { FillLabels(_launchdetid); }) ;
+                    gv_Labels.ThreadSafeCall(delegate { FillLabels(_launchdetid); });
                 }
             }
-           
+
         }
-        
+
         private void frm_LaunchRMReservation_Load(object sender, EventArgs e)
         {
             LoadColumns(gv_List);
         }
-        
+
         private void gv_List_SelectionChanged(object sender, EventArgs e)
         {
             int _launchdetid = 0;
             int _artid = 0;
 
-            try { _launchdetid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
+            try
+            {
+                _launchdetid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
                 _artid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_artid"].Value);
             }
-            catch { _launchdetid = -99;
+            catch
+            {
+                _launchdetid = -99;
                 _artid = 0;
             }
 
@@ -378,10 +369,14 @@ namespace Odin.Planning
                         catch { _manufbatch = ""; }
                         foreach (DataGridViewRow rowt in gv_Labels.Rows)
                         {
-                            try { _tmpmanufbatch = rowt.Cells["cn_manufbatch"].Value.ToString();
+                            try
+                            {
+                                _tmpmanufbatch = rowt.Cells["cn_manufbatch"].Value.ToString();
                                 _tmpchecked = Convert.ToInt32(rowt.Cells["chk_rchecked"].Value);
                             }
-                            catch { _tmpmanufbatch = "";
+                            catch
+                            {
+                                _tmpmanufbatch = "";
                                 _tmpchecked = 0;
                             }
 
@@ -389,12 +384,12 @@ namespace Odin.Planning
                                     && _tmpmanufbatch != _manufbatch
                                     && _tmpchecked == -1
                                     && _manufbatch == "")
-                                {
-                                    _testmb = false;
-                                    break;
-                                }                                
-                         }
-                        
+                            {
+                                _testmb = false;
+                                break;
+                            }
+                        }
+
 
                         if (_testmb == false)
                         {
@@ -426,7 +421,7 @@ namespace Odin.Planning
                 BLL.ReleaseLaunchLabels(LaunchId);
 
                 gv_List.ThreadSafeCall(delegate { FillList(LaunchId); });
-                
+
             }
         }
 

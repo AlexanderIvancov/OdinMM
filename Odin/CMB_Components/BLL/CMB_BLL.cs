@@ -1,12 +1,9 @@
-﻿using System;
+﻿using Odin.Global_Classes;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Sql;
-using System.Data.SqlClient;
 using System.Data;
-using Odin.Global_Classes;
+using System.Data.SqlClient;
+using System.Linq;
 namespace Odin.CMB_Components.BLL
 {
     public class CMB_BLL
@@ -247,7 +244,9 @@ namespace Odin.CMB_Components.BLL
         public int CountryId
         {
             get { return _CountryId; }
-            set { _CountryId = value;
+            set
+            {
+                _CountryId = value;
                 SqlConnection conn = new SqlConnection(sConnStr);
                 conn.Open();
                 DataSet ds = new DataSet();
@@ -507,9 +506,9 @@ namespace Odin.CMB_Components.BLL
 
             //try
             //{
-                sqlConn.Open();
-                sqlComm.ExecuteNonQuery();
-                sqlConn.Close();
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
             //}
             //catch { }
         }
@@ -543,7 +542,7 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-            
+
         }
 
         public void EditSpecification(int Id, string Specification, string TypeofData, string Comments, int CharUnitId)
@@ -563,7 +562,7 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Close();
 
         }
-        
+
         public void DeleteSpecification(int Id)
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);
@@ -965,7 +964,7 @@ namespace Odin.CMB_Components.BLL
 
             sqlComm.Parameters.AddWithValue("@id", Id);
             sqlComm.Parameters.AddWithValue("@endcustomer", EndCustomer);
-            
+
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
@@ -1478,7 +1477,7 @@ namespace Odin.CMB_Components.BLL
 
         public int AddIncomeDocHead(string _name, string _serie, string _regdate, string _docdate, int _supid, string _comments, int _curid,
                                     double _currate, int _sender, int _producer, string _bargain, int _transportid, int _incotermsid,
-                                    double _additcost, double _inadvance, string _advancedate, string _paydate, int _noreversepvn, 
+                                    double _additcost, double _inadvance, string _advancedate, string _paydate, int _noreversepvn,
                                     double _mediatedcost, int _check)
         {
             int _res = 0;
@@ -1711,7 +1710,7 @@ namespace Odin.CMB_Components.BLL
             SqlDataAdapter adapter =
                 new SqlDataAdapter(
                     "execute sp_SelectResalePurchaseOrders @headid = " + _headid, conn);
-            
+
             conn.Close();
 
             adapter.Fill(ds);
@@ -1766,7 +1765,7 @@ namespace Odin.CMB_Components.BLL
 
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
-           
+
             sqlConn.Close();
 
         }
@@ -1783,7 +1782,7 @@ namespace Odin.CMB_Components.BLL
             sqlComm.Parameters.AddWithValue("@curid", _curid);
             sqlComm.Parameters.AddWithValue("@curdate", _curdate);
             sqlComm.Parameters.AddWithValue("@currate", _currate);
-            
+
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
@@ -1877,7 +1876,7 @@ namespace Odin.CMB_Components.BLL
             sqlComm.Parameters.AddWithValue("@batchid", _batchid);
             sqlComm.Parameters.AddWithValue("@stageid", _stageid);
             sqlComm.Parameters.AddWithValue("@qtyonstage", _qtyonstage);
-          
+
 
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
@@ -2148,7 +2147,9 @@ namespace Odin.CMB_Components.BLL
         public int OutDocHeadId
         {
             get { return _outdocheadid; }
-            set { _outdocheadid = value; SqlConnection conn = new SqlConnection(sConnStr);
+            set
+            {
+                _outdocheadid = value; SqlConnection conn = new SqlConnection(sConnStr);
                 conn.Open();
                 DataSet ds = new DataSet();
 
@@ -2788,7 +2789,7 @@ namespace Odin.CMB_Components.BLL
                         ExInvoiceSenderVatNr = dr["sendervatnr"].ToString();
                         ExInvoiceReceiverVatNr = dr["receivervatnr"].ToString();
                         ExInvoiceBuyerVatNr = dr["buyervatnr"].ToString();
-                        ExInvoiceIssuedBy= dr["issuedby"].ToString();
+                        ExInvoiceIssuedBy = dr["issuedby"].ToString();
                         ExInvoiceReceiverLegalAddress = dr["receiverlegaladdress"].ToString();
                         ExInvoiceBuyerLegalAddress = dr["buyerlegaladdress"].ToString();
                         ExInvoiceTotalWord = dr["totalword"].ToString();
@@ -2967,7 +2968,7 @@ namespace Odin.CMB_Components.BLL
                                     double _vat, string _paybefore, double _inadvance, string _advancedate, string _proforma, string _paydate,
                                     int _paymentid, int _sellercontpersid, int _buyercontpersid, int _valueforcustoms, int _esignature, string _recipient)
         {
-           
+
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_EditExInvoiceHead", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -3010,7 +3011,7 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-           
+
         }
         public void DeleteExInvoice(int _id)
         {
@@ -3213,7 +3214,7 @@ namespace Odin.CMB_Components.BLL
             sqlComm.Parameters.AddWithValue("@ip", IP_Address);
             sqlComm.Parameters.AddWithValue("@default", Default);
             sqlComm.Parameters.AddWithValue("@pcname", System.Environment.MachineName);
-            
+
             try
             {
                 sqlConn.Open();
@@ -3222,7 +3223,7 @@ namespace Odin.CMB_Components.BLL
             }
             catch
             { }
-           
+
         }
 
         public void DeletePrinter(int id)
@@ -3242,7 +3243,7 @@ namespace Odin.CMB_Components.BLL
 
         public void EditPrinter(int Id, string PrinterName, string IP_Address, int Default)
         {
-           
+
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_EditPrinter", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -3253,13 +3254,13 @@ namespace Odin.CMB_Components.BLL
             sqlComm.Parameters.AddWithValue("@default", Default);
             sqlComm.Parameters.AddWithValue("@pcname", System.Environment.MachineName);
             //try
-           // {
-                sqlConn.Open();
-                sqlComm.ExecuteNonQuery();
-                sqlConn.Close();
+            // {
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
             //}
-           // catch
-           // { }
+            // catch
+            // { }
 
         }
 
@@ -3293,7 +3294,7 @@ namespace Odin.CMB_Components.BLL
                 DefPrinterDPI = 300;
             }
             sqlConn.Close();
-           
+
         }
         #endregion
 

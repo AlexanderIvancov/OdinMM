@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
 using Odin.Tools;
+using System;
+using System.ComponentModel;
+using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.Sales
 {
@@ -60,13 +55,13 @@ namespace Odin.Sales
             set { txt_Payment.Text = value; }
         }
 
-        
+
 
         public int RowIndex = 0;
         public int ColumnIndex = 0;
         public string ColumnName = "";
         public string CellValue = "";
-        
+
         public string Comments
         {
             get { return txt_Comments.Text; }
@@ -200,7 +195,7 @@ namespace Odin.Sales
             ToFree = 0;
             Mapped = 0;
             Rest = Convert.ToDouble(Helper.GetOneRecord("select dbo.fn_PaymentsFreeTotalsCur(" + _custid + ", " + _curid + ")"));
-            TotalRest = Rest; 
+            TotalRest = Rest;
             //CurId = Convert.ToInt32(Helper.GetOneRecord("select dbo.fn_PaymentsCurrencyTotals(" + _custid + ")"));
         }
 
@@ -218,10 +213,7 @@ namespace Odin.Sales
             ToFree = _totfree;
             Mapped = _totmap;
             TotalRest = Rest + ToFree;
-            if (ToFree + Rest < Mapped)
-                txt_TotalMapped.StateDisabled.Back.Color1 = Color.Red;
-            else
-                txt_TotalMapped.StateDisabled.Back.Color1 = Color.White;
+            txt_TotalMapped.StateDisabled.Back.Color1 = ToFree + Rest < Mapped ? Color.Red : Color.White;
         }
 
         public void ClearFields()
@@ -334,20 +326,13 @@ namespace Odin.Sales
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? String.IsNullOrEmpty(CellValue) == true
+                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
+                    : String.IsNullOrEmpty(CellValue) == true
+                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -360,10 +345,9 @@ namespace Odin.Sales
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
-                else
-                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
+                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
@@ -424,7 +408,7 @@ namespace Odin.Sales
             FillTotals(cmb_Firms2.FirmId, CurId);
         }
 
-        
+
 
 
         #endregion
@@ -512,9 +496,9 @@ namespace Odin.Sales
             if (gv_List.CurrentRow.Cells["cn_tofree"].Selected == true)
             {
                 if (Convert.ToDouble(gv_List.CurrentRow.Cells["cn_leftinadvance"].Value) < Convert.ToDouble(gv_List.CurrentRow.Cells["cn_tofree"].Value))
-                        gv_List.CurrentRow.Cells["cn_tofree"].Value = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_leftinadvance"].Value);
-                    if (Convert.ToDouble(gv_List.CurrentRow.Cells["cn_tofree"].Value) < 0)
-                        gv_List.CurrentRow.Cells["cn_tofree"].Value = 0;
+                    gv_List.CurrentRow.Cells["cn_tofree"].Value = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_leftinadvance"].Value);
+                if (Convert.ToDouble(gv_List.CurrentRow.Cells["cn_tofree"].Value) < 0)
+                    gv_List.CurrentRow.Cells["cn_tofree"].Value = 0;
             }
             if (gv_List.CurrentRow.Cells["cn_tomap"].Selected == true)
             {
@@ -522,14 +506,14 @@ namespace Odin.Sales
                     gv_List.CurrentRow.Cells["cn_tomap"].Value = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_tomap"].Value) - (AlreadyMapped() - (Rest + ToFree));
             }
 
-            
-            
+
+
             RecalcTotals();
         }
 
         private void cmb_Firms2_FirmsChanged(object sender)
         {
-            CurId = cmb_Firms2.CurId;            
+            CurId = cmb_Firms2.CurId;
         }
 
         private void gv_List_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
@@ -563,7 +547,7 @@ namespace Odin.Sales
                 e.Graphics.DrawImage(Global_Resourses.money_add, new Rectangle(x, y, w, h));
                 e.Handled = true;
             }
-                       
+
         }
 
         private void gv_List_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -579,7 +563,7 @@ namespace Odin.Sales
                 tmpdiff = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_lefttopay"].Value) > Rest + ToFree - _alreadymapped ?
                                         Rest + ToFree - _alreadymapped :
                                         (Convert.ToDouble(gv_List.CurrentRow.Cells["cn_lefttopay"].Value) < 0 ? 0 : Convert.ToDouble(gv_List.CurrentRow.Cells["cn_lefttopay"].Value));
-                
+
                 if (gv_List.CurrentRow.Cells["btn_add"].Selected == true)
                 {
                     gv_List.CurrentRow.Cells["cn_tomap"].Value = tmpdiff;
@@ -598,8 +582,8 @@ namespace Odin.Sales
                     //else
                     //    gv_List.CurrentRow.Cells["cn_topay"].Value = tmpdiff;
                 }
-                
-               
+
+
 
             }
             catch { }
@@ -626,7 +610,7 @@ namespace Odin.Sales
             //        if (gv_List.CurrentRow.Cells["chk_payall"].Selected == true)
             //        {
             //            gv_List.CurrentRow.Cells["cn_tomap"].Value = tmpdiff;
-                        
+
             //        }
             //    }
             //}
@@ -635,7 +619,7 @@ namespace Odin.Sales
 
         private void gv_List_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            
+
         }
     }
 }

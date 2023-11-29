@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
+﻿using Odin.Global_Classes;
+using System;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Odin.Global_Classes;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 namespace Odin.CMB_Components.Countries
 {
     public delegate void CountriesEventHandler(object sender);
@@ -22,10 +17,10 @@ namespace Odin.CMB_Components.Countries
         CountryEventArgs args = new CountryEventArgs();
         int _CountryId = 0;
         int _PrevId = 0;
-                
+
         bool _EnableSearchId = false;
         string _Country = "";
-                
+
         public cmb_Countries()
         {
             InitializeComponent();
@@ -35,7 +30,8 @@ namespace Odin.CMB_Components.Countries
         public string Country
         {
             get { return txt_Country.Text; }
-            set {
+            set
+            {
 
                 _Country = value;
                 txt_Country.Text = value;
@@ -55,7 +51,7 @@ namespace Odin.CMB_Components.Countries
                 }
                 catch
                 {
-                    
+
                     _CountryId = 0;
                     return;
                 }
@@ -69,13 +65,15 @@ namespace Odin.CMB_Components.Countries
 
         public int CountryId
         {
-            get {
+            get
+            {
                 try { return _CountryId; }
                 catch { return 0; }
             }
-            set {
+            set
+            {
 
-                
+
                 _CountryId = value;
 
                 if (_PrevId != _CountryId)
@@ -131,17 +129,17 @@ namespace Odin.CMB_Components.Countries
         {
             Form f;
             f = this.FindForm();
-                 
+
             Point LocationPoint = this.PointToScreen(Point.Empty);
             int xpos = LocationPoint.X;
             int ypos = LocationPoint.Y + this.Height;
             Point _location = new Point(xpos, ypos);
-            
+
             frm_Countries popup = new frm_Countries();
             popup.cmb_CountryOne = this;
 
             PopupHelper.ClosePopup();
-           
+
             PopupHelper.ShowPopup(f, popup, _location);
 
             PopupHelper.PopupCancel += delegate (object _sender, PopupCancelEventArgs _e)
@@ -152,7 +150,7 @@ namespace Odin.CMB_Components.Countries
                 }
             };
 
-            popup.FillData(Country);          
+            popup.FillData(Country);
         }
 
         private void buttonSpecAny1_Click(object sender, EventArgs e)

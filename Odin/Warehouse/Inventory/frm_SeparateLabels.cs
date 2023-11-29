@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ComponentFactory.Krypton.Toolkit;
+using System;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
 
 namespace Odin.Warehouse.Inventory
 {
@@ -24,10 +16,12 @@ namespace Odin.Warehouse.Inventory
 
         public double NewQty
         {
-            get { try { return Convert.ToDouble(txt_NewQty.Text); }
+            get
+            {
+                try { return Convert.ToDouble(txt_NewQty.Text); }
                 catch { return 0; }
-                }
-            set { txt_NewQty.Text = value.ToString();  }
+            }
+            set { txt_NewQty.Text = value.ToString(); }
         }
 
         public double QtyLabels
@@ -42,13 +36,12 @@ namespace Odin.Warehouse.Inventory
 
         public int SeparType
         {
-            get {
-                if (rb_Once.Checked == true)
-                    return 1;
-                else
-                    return 2;
+            get
+            {
+                return rb_Once.Checked == true ? 1 : 2;
             }
-            set {
+            set
+            {
                 if (value == 1)
                 {
                     rb_Once.Checked = true;
@@ -68,23 +61,17 @@ namespace Odin.Warehouse.Inventory
 
         private void rb_Once_CheckedChanged(object sender, EventArgs e)
         {
-            if (rb_Once.Checked == true)
-                SeparType = 1;
-            else
-                SeparType = 2;
+            SeparType = rb_Once.Checked == true ? 1 : 2;
         }
 
         private void rb_Multiple_CheckedChanged(object sender, EventArgs e)
         {
-            if (rb_Once.Checked == true)
-                SeparType = 1;
-            else
-                SeparType = 2;
+            SeparType = rb_Once.Checked == true ? 1 : 2;
         }
 
         private void txt_NewQty_Validated(object sender, EventArgs e)
         {
-           
+
             if (SeparType == 2)
             {
                 QtyLabels = (Int32)(QtyOnLabel / NewQty);

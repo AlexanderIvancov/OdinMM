@@ -1,13 +1,8 @@
-﻿using System;
+﻿using Odin.Global_Classes;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Odin.CMB_Components.BLL;
-using ComponentFactory.Krypton.Toolkit;
-using System.Data.SqlClient;
 using System.Data;
-using Odin.Global_Classes;
+using System.Data.SqlClient;
 
 namespace Odin.Warehouse.Inventory
 {
@@ -170,7 +165,7 @@ namespace Odin.Warehouse.Inventory
             sqlComm.CommandType = CommandType.StoredProcedure;
 
             sqlComm.Parameters.AddWithValue("@label", id);
-            
+
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();

@@ -1,15 +1,12 @@
-﻿using System;
+﻿using DataMatrix.net;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
-using System.Windows.Forms;
 using System.Drawing;
-using DataMatrix.net;
-using System.Threading.Tasks;
 using System.Drawing.Printing;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace Odin.Global_Classes
 {
@@ -128,7 +125,7 @@ namespace Odin.Global_Classes
             }
 
         }
-        
+
         public static DataTable CurrencyRates(int curId, string dateFrom, string dateTill)
         {
 
@@ -225,7 +222,8 @@ namespace Odin.Global_Classes
         string _currentuser = "";
         public string CurrentDBUser
         {
-            get {
+            get
+            {
                 SqlConnection sqlConn = new SqlConnection(sConnStr);
                 string strSQL = "select distinct current_user as currentuser ";
                 SqlCommand sqlComm = new SqlCommand(strSQL, sqlConn);
@@ -234,7 +232,7 @@ namespace Odin.Global_Classes
                 if (reader.HasRows == true)
                 {
                     reader.Read();
-                   _currentuser = reader["currentuser"].ToString();
+                    _currentuser = reader["currentuser"].ToString();
                     reader.Close();
                 }
                 else
@@ -243,7 +241,8 @@ namespace Odin.Global_Classes
                 }
                 sqlConn.Close();
 
-                return _currentuser; }
+                return _currentuser;
+            }
             set { _currentuser = value; }
         }
         public string UserLogin
@@ -253,42 +252,42 @@ namespace Odin.Global_Classes
             {
                 _UserLogin = value;
                 SqlConnection sqlConn = new SqlConnection(sConnStr);
-                string strSQL = "select distinct id, name, surname, isnull(email, '') as usermail, isnull(lang, '') as userlang, " + 
+                string strSQL = "select distinct id, name, surname, isnull(email, '') as usermail, isnull(lang, '') as userlang, " +
                                     " isnull(phone, '') as phone, isnull(fax, '') as fax, isnull(deptid, 0) as DeptId, isnull(initials, '') as initials, " +
-                                    " isnull(nullif(convert(nvarchar, DECRYPTBYPASSPHRASE(name + surname + userlogin, mailpwd, 1, CONVERT(varbinary, id))), ''), 'a') as usermailpwd " + 
+                                    " isnull(nullif(convert(nvarchar, DECRYPTBYPASSPHRASE(name + surname + userlogin, mailpwd, 1, CONVERT(varbinary, id))), ''), 'a') as usermailpwd " +
                                     " from bas_users where userlogin = @userlogin";
                 SqlCommand sqlComm = new SqlCommand(strSQL, sqlConn);
                 sqlComm.Parameters.AddWithValue("@userlogin", _UserLogin);
                 sqlConn.Open();
                 //try
                 //{
-                    SqlDataReader reader = sqlComm.ExecuteReader();
-                    if (reader.HasRows == true)
-                    {
-                        reader.Read();
-                        UserId = Convert.ToInt32(reader["id"]);
-                        UserName = reader["name"].ToString();
-                        UserSurname = reader["surname"].ToString();
-                        UserEmail = reader["usermail"].ToString();
-                        UserFax = reader["fax"].ToString();
-                        UserPhone = reader["phone"].ToString();
-                        UserDeptId = Convert.ToInt32(reader["DeptId"]);
-                        UserMailPWD = reader["usermailpwd"].ToString();
-                        UserInitials = reader["initials"].ToString();
-                        reader.Close();
-                    }
-                    else
-                    {
-                        UserId = 0;
-                        UserName = "";
-                        UserSurname = "";
-                        UserEmail = "";
-                        UserFax = "";
-                        UserPhone = "";
-                        UserDeptId = 0;
-                        UserMailPWD = "";
-                        UserInitials = "";
-                    }
+                SqlDataReader reader = sqlComm.ExecuteReader();
+                if (reader.HasRows == true)
+                {
+                    reader.Read();
+                    UserId = Convert.ToInt32(reader["id"]);
+                    UserName = reader["name"].ToString();
+                    UserSurname = reader["surname"].ToString();
+                    UserEmail = reader["usermail"].ToString();
+                    UserFax = reader["fax"].ToString();
+                    UserPhone = reader["phone"].ToString();
+                    UserDeptId = Convert.ToInt32(reader["DeptId"]);
+                    UserMailPWD = reader["usermailpwd"].ToString();
+                    UserInitials = reader["initials"].ToString();
+                    reader.Close();
+                }
+                else
+                {
+                    UserId = 0;
+                    UserName = "";
+                    UserSurname = "";
+                    UserEmail = "";
+                    UserFax = "";
+                    UserPhone = "";
+                    UserDeptId = 0;
+                    UserMailPWD = "";
+                    UserInitials = "";
+                }
                 //}
                 //catch
                 //{
@@ -372,9 +371,9 @@ namespace Odin.Global_Classes
             else
             {
                 SqlConnection sqlConn = new SqlConnection(sConnStr);
-                string strSQL = "select dbo.fn_CoefConv(" + UnitSource + ", " + UnitTarget+ ") as CoefConv";
+                string strSQL = "select dbo.fn_CoefConv(" + UnitSource + ", " + UnitTarget + ") as CoefConv";
                 SqlCommand sqlComm = new SqlCommand(strSQL, sqlConn);
-                
+
                 sqlConn.Open();
 
                 SqlDataReader sqlReader = sqlComm.ExecuteReader();
@@ -390,7 +389,7 @@ namespace Odin.Global_Classes
                 {
                     k = 1;
                 }
-                
+
                 sqlConn.Close();
                 return k;
 
@@ -685,10 +684,7 @@ namespace Odin.Global_Classes
                 _r = Convert.ToInt32(Helper.GetOneRecord("select distinct dbo.fn_CheckIncomeControlFin(" + IdIn + ")"));
             }
             catch { }
-            if (_r == 0)
-                _res = false;
-            else
-                _res = true;
+            _res = _r != 0;
 
             return _res;
         }
@@ -702,10 +698,7 @@ namespace Odin.Global_Classes
                 _r = Convert.ToInt32(Helper.GetOneRecord("select distinct dbo.fn_CheckCoC(" + POLineId + ", " + HeadId + ")"));
             }
             catch { }
-            if (_r == 0)
-                _res = false;
-            else
-                _res = true;
+            _res = _r != 0;
 
             //SqlConnection sqlConn = new SqlConnection(sConnStr);
             //string strSQL = "select distinct dbo.fn_CheckIncomeControl(" + POLineId + ") as res";
@@ -853,7 +846,7 @@ namespace Odin.Global_Classes
             if (reader.HasRows)
             {
                 reader.Read();
-                _res = Convert.ToInt32(reader["mblimit"]) == 0 ? false : true;
+                _res = Convert.ToInt32(reader["mblimit"]) != 0;
                 reader.Close();
             }
             else
@@ -872,7 +865,7 @@ namespace Odin.Global_Classes
                 new SqlParameter("@article",SqlDbType.NVarChar){Value = Article }
 
             };
-                        
+
             try
             {
                 return Convert.ToInt32(Helper.GetOneRecord("SELECT DISTINCT id from bas_articles where id != @artid and ltrim(rtrim(article)) = rtrim(ltrim(@article))", sqlparams.ToArray()));
@@ -905,7 +898,7 @@ namespace Odin.Global_Classes
             string strSQL = "declare @rmt int " +
                 " select top 1 @rmt = value from BAS_Defaults def where def.field = 'rmtype'" +
                 " SELECT iif(isnull(rmt.IdTY, 0) = 0, '-99', isnull(msl, '0')) " +
-	            " from bas_articles a " +
+                " from bas_articles a " +
                 " left join dbo.ifn_Types(@rmt)rmt on rmt.IdTY = a.TypeID " +
                 " where a.id = @artid";
             try
@@ -959,7 +952,7 @@ namespace Odin.Global_Classes
             sqlConn.Close();
             return Res;
         }
-        
+
         public string Firm(int FirmId)
         {
             string Res = "";
@@ -1098,7 +1091,7 @@ namespace Odin.Global_Classes
             {
                 foreach (DataRow dr in dt.Rows)
                 {
-                    _res = dr["AutoDoc"].ToString();                    
+                    _res = dr["AutoDoc"].ToString();
                 }
             }
 
@@ -1211,7 +1204,7 @@ namespace Odin.Global_Classes
         #endregion
 
         #region Current company
-        
+
         public int CurrentCompanyId()
         {
             int Res = 0;
@@ -1257,7 +1250,7 @@ namespace Odin.Global_Classes
         public static DataTable getCustomCodes()
         {
             DataTable data = Helper.QueryDT("select * from (SELECT id as cid, code from bas_custcodes union select 0 as cid, '' as code) tab order by tab.code");
-            
+
             return data;
         }
 
@@ -1311,20 +1304,14 @@ namespace Odin.Global_Classes
         public bool CheckProduction(int placeid)
         {
 
-            if ((Convert.ToInt32(Helper.GetOneRecord("select isnull(isproduction, 0) as isproduction from sto_shelves where id = " + placeid))) == -1)
-                return true;
-            else
-                return false;
+            return (Convert.ToInt32(Helper.GetOneRecord("select isnull(isproduction, 0) as isproduction from sto_shelves where id = " + placeid))) == -1;
 
         }
 
         public bool CheckCostPrice(int idin)
         {
 
-            if (Convert.ToInt32(Helper.GetOneRecord("select dbo.fn_CheckCostPrice(" + idin + ")")) == -1)
-                return true;
-            else
-                return false;
+            return Convert.ToInt32(Helper.GetOneRecord("select dbo.fn_CheckCostPrice(" + idin + ")")) == -1;
 
         }
 
@@ -1332,7 +1319,7 @@ namespace Odin.Global_Classes
         { get; set; }
         public double ccpCOPrice
         { get; set; }
-        
+
         public bool CheckCostPriceTab(int idin)
         {
             int res = 0;
@@ -1368,10 +1355,7 @@ namespace Odin.Global_Classes
                 res = -1;
             }
 
-            if (res == -1)
-                return true;
-            else
-                return false;
+            return res == -1;
 
         }
 

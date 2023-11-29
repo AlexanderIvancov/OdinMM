@@ -1,14 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
+﻿using ComponentFactory.Krypton.Toolkit;
+using System;
 
 namespace Odin.CMB_Components.Banks
 {
@@ -25,12 +16,14 @@ namespace Odin.CMB_Components.Banks
         { get; set; }
 
         public string HeaderText
-        { get { return this.Text; }
-        set { this.Text = value; }
+        {
+            get { return this.Text; }
+            set { this.Text = value; }
         }
         public string Bank
-        { get { return txt_Bank.Text; }
-        set { txt_Bank.Text = value; }
+        {
+            get { return txt_Bank.Text; }
+            set { txt_Bank.Text = value; }
         }
         public string Iban
         {

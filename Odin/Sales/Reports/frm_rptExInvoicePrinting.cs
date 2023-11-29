@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Workspace;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
+﻿using ComponentFactory.Krypton.Toolkit;
 using CrystalDecisions.CrystalReports.Engine;
 using Odin.CMB_Components.BLL;
+using Odin.Global_Classes;
+using System;
+using System.Data;
+using System.Windows.Forms;
 namespace Odin.Sales.Reports
 {
     public partial class frm_rptExInvoicePrinting : KryptonForm
@@ -68,9 +61,8 @@ namespace Odin.Sales.Reports
             datalab = DAL_Functions.getReportLabels("ExpInvoice", Lang/*BLL.ExInvoiceBuyerCountryId == 1 ? "LAT" : "ENG"*/);
 
             //Check for currency
-            int number;
 
-            bool success = Int32.TryParse(DAL.DefaultValue("currency"), out number);
+            bool success = Int32.TryParse(DAL.DefaultValue("currency"), out int number);
 
             if (success)
             {

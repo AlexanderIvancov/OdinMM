@@ -1,11 +1,8 @@
-﻿using System;
+﻿using Odin.Global_Classes;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
-using Odin.Global_Classes;
 
 namespace Odin.Warehouse.StockOut
 {
@@ -79,7 +76,7 @@ namespace Odin.Warehouse.StockOut
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
 
-        public int AddStockOutLine(int _headid, int _label, double _qty, int _artid, 
+        public int AddStockOutLine(int _headid, int _label, double _qty, int _artid,
                                     int _batchid, int _requestid, string _comments)
         {
             int _res = 0;
@@ -171,9 +168,9 @@ namespace Odin.Warehouse.StockOut
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_RemoveLabelReservation", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
-                        
+
             sqlComm.Parameters.AddWithValue("@label", _label);
-            
+
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
@@ -208,14 +205,14 @@ namespace Odin.Warehouse.StockOut
 
         public void DeleteStockOutLine(int id)
         {
-       
+
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_DeleteStockOutLine", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
 
 
             sqlComm.Parameters.AddWithValue("@id", id);
-            
+
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
@@ -259,7 +256,7 @@ namespace Odin.Warehouse.StockOut
 
             sqlComm.Parameters.Add("@insertedid", SqlDbType.Int).Direction = ParameterDirection.Output;
             sqlComm.Parameters.Add("@insertedname", SqlDbType.NVarChar, 25).Direction = ParameterDirection.Output;
-            
+
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             _res = Convert.ToInt32(sqlComm.Parameters["@insertedid"].Value);

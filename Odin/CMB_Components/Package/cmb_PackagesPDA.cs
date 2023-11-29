@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
+﻿using Odin.Global_Classes;
+using System;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Odin.Global_Classes;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 
 namespace Odin.CMB_Components.Package
@@ -143,7 +138,7 @@ namespace Odin.CMB_Components.Package
             Point _location = new Point(xpos, ypos);
 
             frm_PackagesPDA popup = new frm_PackagesPDA();
-            
+
             popup.cmb_PackageOne = this;
 
             PopupHelper.ClosePopup();
@@ -170,7 +165,7 @@ namespace Odin.CMB_Components.Package
 
         private void txt_Packages_TextChanged(object sender, EventArgs e)
         {
-             Package = txt_Packages.Text;            
+            Package = txt_Packages.Text;
         }
 
     }

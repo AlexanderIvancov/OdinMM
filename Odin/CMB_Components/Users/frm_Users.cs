@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Odin.CMB_Components.BLL;
 using Odin.Global_Classes;
-using Odin.CMB_Components.BLL;
+using System;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.Users
 {
@@ -69,7 +62,7 @@ namespace Odin.CMB_Components.Users
             {
                 _showingModal = false;
                 int _res = Bll.SaveUser(0, frm.UserName, frm.UserSurName, frm.UserLogin, frm.IsDBUser, frm.UserEmail, frm.UserLang,
-                                        frm.UserPhone, frm.UserFax, frm.UserJob, frm.UserInitials, frm.UserDeptId, frm.UserTabNR, 
+                                        frm.UserPhone, frm.UserFax, frm.UserJob, frm.UserInitials, frm.UserDeptId, frm.UserTabNR,
                                         frm.IsActive, frm.UserShortName);
                 FillData(frm.UserName + " " + frm.UserSurName);
             }
@@ -167,24 +160,24 @@ namespace Odin.CMB_Components.Users
                 //}
                 //else
                 //{
-                    frm_EmailPassword frm = new frm_EmailPassword();
+                frm_EmailPassword frm = new frm_EmailPassword();
 
-                    frm.HeaderText = "Edit email password for programm for:" + Bll.UserName + " " + Bll.UserSurName;
-                    frm.UserLogin = Bll.UserLogin;
-                   
-                    DialogResult result = frm.ShowDialog();
+                frm.HeaderText = "Edit email password for programm for:" + Bll.UserName + " " + Bll.UserSurName;
+                frm.UserLogin = Bll.UserLogin;
 
-                    if (result == DialogResult.OK)
-                    {
-                        _showingModal = false;
-                        Bll.EncryptMailPassword(_id, frm.Password);
-                        
-                        FillData(Bll.UserName + " " + Bll.UserSurName);
-                    }
-                    if (result == DialogResult.Cancel)
-                    {
-                        _showingModal = false;
-                    }
+                DialogResult result = frm.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    _showingModal = false;
+                    Bll.EncryptMailPassword(_id, frm.Password);
+
+                    FillData(Bll.UserName + " " + Bll.UserSurName);
+                }
+                if (result == DialogResult.Cancel)
+                {
+                    _showingModal = false;
+                }
                 //}
             }
         }

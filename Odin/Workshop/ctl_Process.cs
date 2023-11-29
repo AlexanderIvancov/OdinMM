@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.Workshop
 {
@@ -39,15 +35,12 @@ namespace Odin.Workshop
 
         public int ProdPlace
         {
-            get {
-                if (rb_Valkas2.Checked == true)
-                    return 1;
-                else if (rb_Valkas2B.Checked == true)
-                    return 2;
-                else
-                    return 0;
+            get
+            {
+                return rb_Valkas2.Checked == true ? 1 : rb_Valkas2B.Checked == true ? 2 : 0;
             }
-            set {
+            set
+            {
                 if (value == 1)
                 {
                     rb_Valkas2.Checked = true;
@@ -86,7 +79,7 @@ namespace Odin.Workshop
             sqlComm.CommandType = CommandType.StoredProcedure;
             sqlComm.CommandTimeout = 3000;
             sqlComm.Parameters.AddWithValue("@batchid", _batchid);
-           
+
             sqlConn.Open();
 
             SqlDataReader reader = sqlComm.ExecuteReader();
@@ -110,16 +103,16 @@ namespace Odin.Workshop
 
                     ctlProc.Location = new Point(_h, 55);
                     _h = _h + ctlProc.Width + _interval;
-                    
+
                     this.Controls.Add(ctlProc);
                 }
                 reader.Close();
             }
-                
+
             sqlConn.Close();
-            
+
         }
-        
+
         private void RemoveControls(Control control, Type type)
         {
             List<Control> controls = new List<Control>();
@@ -169,7 +162,7 @@ namespace Odin.Workshop
         private void cmb_Batches1_BatchChanged(object sender)
         {
             BatchId = cmb_Batches1.BatchId;
-            
+
         }
 
 
@@ -182,7 +175,7 @@ namespace Odin.Workshop
                     ctl_ProcessStageV2 ctl = control as ctl_ProcessStageV2;
                     ctl.ProdPlace = ProdPlace;//rb_Valkas2.Checked == true ? 1 : 2;
                 }
-               
+
             }
         }
 

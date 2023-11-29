@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.CMB_Components.BLL;
+using Odin.Global_Classes;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 namespace Odin.Warehouse.Requests
 {
     public delegate void RequestSimpleSavedEventHandler(object sender);
@@ -64,15 +58,15 @@ namespace Odin.Warehouse.Requests
 
             if (_countbdid == 0
                 || batchdetid == 0)
-            gv_List.Rows.Add(batchdetid,
-                                cmb_Batches1.Batch,
-                                artid,
-                                article,
-                                qty,
-                                unit,
-                                comments,
-                                unitid, 
-                                "");
+                gv_List.Rows.Add(batchdetid,
+                                    cmb_Batches1.Batch,
+                                    artid,
+                                    article,
+                                    qty,
+                                    unit,
+                                    comments,
+                                    unitid,
+                                    "");
         }
 
         public bool CheckEmpty()
@@ -91,7 +85,7 @@ namespace Odin.Warehouse.Requests
 
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
-                if (Fun.CheckMBLimit(Convert.ToInt32(row.Cells["cn_artid"].Value)) == true 
+                if (Fun.CheckMBLimit(Convert.ToInt32(row.Cells["cn_artid"].Value)) == true
                     && (row.Cells["cn_serials"].Value.ToString()).Trim() == "")
                 {
                     _res = false;
@@ -240,35 +234,33 @@ namespace Odin.Warehouse.Requests
                 popup.FillList(cmb_Batches1.BatchId);
             }
         }
-        
+
         private void btn_Delete_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow row in gv_List.SelectedRows)
             {
                 gv_List.Rows.Remove(row);
             }
-            
+
         }
 
         #endregion
 
         private void cmb_Batches1_BatchChanged(object sender)
         {
-            if (cmb_Batches1.IsActive == -1
-                || cmb_Batches1.BatchId == 0)
-                btn_AddPlaces.Enabled = true;
-            else
-                btn_AddPlaces.Enabled = false;
+            btn_AddPlaces.Enabled = cmb_Batches1.IsActive == -1
+                || cmb_Batches1.BatchId == 0;
         }
 
         private void gv_List_CellValidated(object sender, DataGridViewCellEventArgs e)
         {
-            try {
+            try
+            {
                 if (gv_List.CurrentRow.Cells["cn_qty"].Selected == true)
                 {
                     if (Convert.ToDouble(gv_List.CurrentRow.Cells["cn_qty"].Value) < 0)
                         gv_List.CurrentRow.Cells["cn_qty"].Value = 0;
-                    
+
                     if (Fun.CheckMBLimit(Convert.ToInt32(gv_List.CurrentRow.Cells["cn_artid"].Value)) == true && Convert.ToDouble(gv_List.CurrentRow.Cells["cn_qty"].Value) > 1)
                     {
                         glob_Class.ShowMessage("Qty can't be more than 1!", "Qty can't be more than 1!", "Serial numbers warning!");

@@ -1,55 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Reflection;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Workspace;
-using ComponentFactory.Krypton.Docking;
-using WeifenLuo.WinFormsUI.Docking;
+﻿using ComponentFactory.Krypton.Toolkit;
+using Microsoft.Win32;
+using Odin.CMB_Components.Currencies;
+using Odin.DataCollection;
+using Odin.Finances;
+using Odin.Global_Classes;
+using Odin.Personnel;
 using Odin.Planning;
-using Odin.Register;
-using Odin.Warehouse.Shelves;
-using Odin.Sales;
+using Odin.Planning.Passport;
 using Odin.Purchase;
-using Odin.Warehouse.StockIn;
-using Odin.Warehouse.Inventory;
-using Odin.Warehouse.Movements;
+using Odin.Quality;
 using Odin.Register.Articles;
 using Odin.Register.Catalog;
 using Odin.Register.Companies;
-using Odin.Warehouse.StockOut;
-using Odin.Warehouse.Requests;
-using Odin.Tools;
-using System.IO;
-using System.Diagnostics;
-using Odin.Warehouse.Deliveries;
-using Odin.Workshop;
-using Odin.Warehouse.History;
-using Odin.Warehouse.Reports;
-using Odin.Sales.Reports;
-using Odin.Finances;
-using Odin.Warehouse.Corrections;
+using Odin.Sales;
 using Odin.Sales.DeliveryPlanning;
-using Odin.Quality;
-using Odin.Global_Classes;
-using Odin.CMB_Components.Currencies;
-using System.Data.SqlClient;
-using Microsoft.Win32;
-using Odin.Personnel;
+using Odin.Sales.Reports;
+using Odin.Tools;
+using Odin.Warehouse.Corrections;
+using Odin.Warehouse.Deliveries;
+using Odin.Warehouse.History;
+using Odin.Warehouse.Inventory;
+using Odin.Warehouse.Movements;
 using Odin.Warehouse.Packing;
-using Odin.Planning.Passport;
-using Odin.DataCollection;
+using Odin.Warehouse.Reports;
+using Odin.Warehouse.Requests;
+using Odin.Warehouse.Shelves;
+using Odin.Warehouse.StockIn;
+using Odin.Warehouse.StockOut;
+using Odin.Workshop;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Windows.Forms;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace Odin
 {
-    public delegate void  InitiateMinimizeEventHandler(object sender);
+    public delegate void InitiateMinimizeEventHandler(object sender);
     public partial class Main : KryptonForm
     {
         public Main()
@@ -60,7 +51,7 @@ namespace Odin
             //mdiClientController1.BackColor = col.mainFormBackColor;
             //custom
             //ToolStripManager.Renderer = new Office2007Renderer();
-            
+
         }
 
         public event InitiateMinimizeEventHandler MinimizeForm;
@@ -78,7 +69,7 @@ namespace Odin
         frm_Inventory Inventory = null;
         frm_Movement StockMovement = null;
         frm_Batches Batches = null;
-       
+
         frm_BatchesRatioPortfolio BatchesRatio = null;
         frm_Companies Companies = null;
         frm_StockOut StockOut = null;
@@ -130,7 +121,7 @@ namespace Odin
         {
             string frmName = String.Empty;
             DockContent frm = new DockContent();
-            
+
 
             //if dock tab page found show it
             foreach (var f in MdiChildren.Where(f => f.Name == formName))
@@ -139,26 +130,26 @@ namespace Odin
                 return;
             }
 
-            
-                //finds full form name with namaspace by name and by DockType in the solution
-                frmName = (from t in Assembly.GetExecutingAssembly().GetTypes()
-                           where t.Name.Equals(formName) && (t.BaseType.Name == dockContent || t.BaseType.Name == baseForm)
-                           select t.FullName).SingleOrDefault();
+
+            //finds full form name with namaspace by name and by DockType in the solution
+            frmName = (from t in Assembly.GetExecutingAssembly().GetTypes()
+                       where t.Name.Equals(formName) && (t.BaseType.Name == dockContent || t.BaseType.Name == baseForm)
+                       select t.FullName).SingleOrDefault();
 
 
-                if (frmName != null)
+            if (frmName != null)
+            {
+
+                //shows found form by name
+                frm = (DockContent)Activator.CreateInstance(Type.GetType(frmName));
+                if (frm != null)
                 {
-
-                    //shows found form by name
-                    frm = (DockContent)Activator.CreateInstance(Type.GetType(frmName));
-                    if (frm != null)
-                    {
-                        pn_Main.Visible = true;
-                        frm.Show(pn_Main);
-                        frm.FormClosed += (sender, e) => SetBackPanelVisible();
-                    }
-
+                    pn_Main.Visible = true;
+                    frm.Show(pn_Main);
+                    frm.FormClosed += (sender, e) => SetBackPanelVisible();
                 }
+
+            }
 
             /*int c = 0;
                 foreach (Form form in MdiChildren)
@@ -193,14 +184,14 @@ namespace Odin
         {
             pn_Main.Visible = pn_Main.DocumentsCount != 1;
         }
-                       
-                
+
+
         private void btn_Exit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-       
+
 
         #region Controls
         private void btn_BatchManagement_Click(object sender, EventArgs e)
@@ -228,7 +219,7 @@ namespace Odin
             // public Main _Main;
             //Articles.InitiateResize();
             Articles.Show(pn_Main);
-           
+
         }
 
         private void btn_Contractors_Click(object sender, EventArgs e)
@@ -265,7 +256,7 @@ namespace Odin
             ClientOrders = new frm_ClientOrders();
             ClientOrders._Main = this;
             ClientOrders.Show(pn_Main);
-            
+
         }
 
         private void btn_PurchaseOrders_Click(object sender, EventArgs e)
@@ -354,7 +345,7 @@ namespace Odin
             StockMovement.Show(pn_Main);
         }
 
-        
+
         private void kryptonRibbonGroupButton8_Click(object sender, EventArgs e)
         {
             //OpenDockContentForm("frm_Test");
@@ -362,7 +353,7 @@ namespace Odin
 
         private void kryptonRibbonGroupButton20_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void cmb_Consumption_Click(object sender, EventArgs e)
@@ -398,7 +389,7 @@ namespace Odin
         {
             frm_UsersList frm = new frm_UsersList();
             frm.FillList();
-           
+
             frm.Show();
             frm.gv_List.ThreadSafeCall(delegate { frm.SetCellsColor(); });
         }
@@ -433,17 +424,17 @@ namespace Odin
         {
             //Permissions
             int _userid = Convert.ToInt32(Helper.GetOneRecord("select top 1 id from bas_users where userlogin = current_user"));
-            
+
 
             var data = Tools_BLL.getMenuItems(_userid);
 
 
             foreach (ComponentFactory.Krypton.Ribbon.KryptonRibbonTab tab in kryptonRibbon1.RibbonTabs)
-            {             
-               
+            {
+
                 tab.Visible = false;
                 foreach (DataRow row in data.Rows)
-                {                   
+                {
                     if (tab.Text == row["tabtext"].ToString()
                         && Convert.ToInt32(row["id"]) != 0)
                         tab.Visible = true;
@@ -618,7 +609,7 @@ namespace Odin
 
         private void btn_RptSelling_Click(object sender, EventArgs e)
         {
-            foreach(var f in MdiChildren.Where(f => f.Name == "frm_SellingReports"))
+            foreach (var f in MdiChildren.Where(f => f.Name == "frm_SellingReports"))
             {
                 f.BringToFront();
                 return;
@@ -776,7 +767,7 @@ namespace Odin
             }
             IncomeControlList = new frm_IncomeControl();
             IncomeControlList._Main = this;
-           // public Main _Main;
+            // public Main _Main;
             //Articles.InitiateResize();
             IncomeControlList.Show(pn_Main);
         }
@@ -812,7 +803,7 @@ namespace Odin
 
             var sqlparams = new List<SqlParameter>()
             {
-           
+
             };
 
             Template_DataGridView frm = new Template_DataGridView();
@@ -888,7 +879,7 @@ namespace Odin
         {
             frm_Test frm = new frm_Test();
             frm.Show();
-           
+
         }
 
         private void btn_MoveByScan_Click(object sender, EventArgs e)
@@ -1086,7 +1077,7 @@ namespace Odin
 
         private void Main_SizeChanged(object sender, EventArgs e)
         {
-            
+
             //if (this.WindowState == FormWindowState.Normal)
             //{
             //    this.WindowState = FormWindowState.Maximized;
@@ -1095,29 +1086,29 @@ namespace Odin
 
         private void Main_ResizeBegin(object sender, EventArgs e)
         {
-            
+
         }
 
         private void Main_ResizeEnd(object sender, EventArgs e)
         {
-           
+
         }
 
         private void Main_MinimumSizeChanged(object sender, EventArgs e)
         {
             MessageBox.Show("Minimized!");
         }
-                
+
         private void Main_Resize(object sender, EventArgs e)
         {
             this.Refresh();
             //if (WindowState != LastWindowState)
             //{
             //    LastWindowState = WindowState;
-                
+
             //    if (WindowState == FormWindowState.Maximized)
             //    {
-                                       
+
             //        // Maximized
             //    }
             //    if (WindowState == FormWindowState.Normal)

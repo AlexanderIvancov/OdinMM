@@ -1,30 +1,25 @@
-﻿using System;
+﻿using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using Odin.Register;
+using Odin.Register.Articles;
+using Odin.Tools;
+using Odin.Warehouse.Inventory;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
-using Odin.Global_Classes;
-using Odin.Tools;
 using System.Data.SqlClient;
-using System.Threading;
-using Odin.Register.Articles;
-using Odin.Warehouse.Inventory;
-using Odin.Register;
-using System.Text.RegularExpressions;
+using System.Drawing;
 using System.IO;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
 namespace Odin.Warehouse.StockIn
 {
     public partial class frm_AddStockPlacement : KryptonForm
     {
 
         ProgressForm wait;
-                
+
         public void bwStart(DoWorkEventHandler doWork)
         {
             wait.bwStart(doWork);
@@ -72,10 +67,7 @@ namespace Odin.Warehouse.StockIn
         {
             get
             {
-                if (txt_ExpDate.Value == null)
-                    return "";
-                else
-                    return Convert.ToDateTime(txt_ExpDate.Value).ToShortDateString();
+                return txt_ExpDate.Value == null ? "" : Convert.ToDateTime(txt_ExpDate.Value).ToShortDateString();
             }
             set
             {
@@ -92,7 +84,7 @@ namespace Odin.Warehouse.StockIn
             get { return txt_Comments.Text; }
             set { txt_Comments.Text = value; }
         }
-        
+
         public int PlaceId
         {
             get { return cmb_Places1.PlaceId; }
@@ -122,7 +114,9 @@ namespace Odin.Warehouse.StockIn
 
         public int Label
         {
-            get { try { return Convert.ToInt32(cmb_Label.Text); }
+            get
+            {
+                try { return Convert.ToInt32(cmb_Label.Text); }
                 catch { return 0; }
             }
             set { cmb_Label.Text = value.ToString(); }
@@ -132,18 +126,11 @@ namespace Odin.Warehouse.StockIn
         {
             get
             {
-                if (chk_NoDate.Checked == true)
-                    return -1;
-                else
-                    return 0;
+                return chk_NoDate.Checked == true ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_NoDate.Checked = true;
-
-                else
-                    chk_NoDate.Checked = false;
+                chk_NoDate.Checked = value == -1;
 
             }
         }
@@ -198,7 +185,7 @@ namespace Odin.Warehouse.StockIn
                 gv_StockDets.DataSource = bs_StockDets;
 
             });
-            
+
             SetCellsColorLabels();
         }
 
@@ -327,7 +314,7 @@ namespace Odin.Warehouse.StockIn
 
             BindLabels(_artid);
             ShowImage(_artid);
-           
+
 
             DataGridViewColumn oldColumn = gv_StockDets.SortedColumn;
             var dir = Helper.SaveDirection(gv_StockDets);
@@ -338,7 +325,7 @@ namespace Odin.Warehouse.StockIn
 
 
             ArticleDetsHeader = "Make placement for " + _article + ", income document: " + _incomedoc;
-            
+
             //Show image
         }
 
@@ -401,22 +388,19 @@ namespace Odin.Warehouse.StockIn
         }
         public bool CheckAddIn()
         {
-            if (Qty <= 0
-                || (PlaceId == 0 && Label == 0)
-                || DAL.CheckProduction(cmb_Places1.PlaceId) == true
-                || IdIn == 0
-                || (DAL.CheckMBLimit(Convert.ToInt32(gv_List.CurrentRow.Cells["cn_artid"].Value)) == true && ManufBatch.Trim() == "")
-                || (Convert.ToInt32(gv_List.CurrentRow.Cells["cn_incomecontrol"].Value) == -1) && cmb_Places1.IsQuarantine != -1)
-                return false;
-            else
-                return true;
+            return Qty > 0
+                && (PlaceId != 0 || Label != 0)
+                && DAL.CheckProduction(cmb_Places1.PlaceId) != true
+                && IdIn != 0
+                && (DAL.CheckMBLimit(Convert.ToInt32(gv_List.CurrentRow.Cells["cn_artid"].Value)) != true || ManufBatch.Trim() != "")
+                && (Convert.ToInt32(gv_List.CurrentRow.Cells["cn_incomecontrol"].Value) != -1 || cmb_Places1.IsQuarantine == -1);
 
         }
 
         public void BindLabels(int _artid)
         {
             cmb_Label.Text = "";
-            
+
             DataSet ds = new DataSet();
 
             SqlDataAdapter adapter =
@@ -489,16 +473,16 @@ namespace Odin.Warehouse.StockIn
                                         frm.StencilRequired, frm.StencilID*/0, 0, 0, frm.Warning, frm.SpoilConst, frm.AsPF, frm.MBLimit);
                     //if (_res != 0)
                     //{
-                        
-                        DataGridViewColumn oldColumn = gv_List.SortedColumn;
-                        var dir = Helper.SaveDirection(gv_List);
 
-                        bwStart(bw_List);
+                    DataGridViewColumn oldColumn = gv_List.SortedColumn;
+                    var dir = Helper.SaveDirection(gv_List);
 
-                        Helper.RestoreDirection(gv_List, oldColumn, dir);
+                    bwStart(bw_List);
 
-                        SetCellsColor();
-                        
+                    Helper.RestoreDirection(gv_List, oldColumn, dir);
+
+                    SetCellsColor();
+
                     //}
                 }
             }
@@ -563,26 +547,19 @@ namespace Odin.Warehouse.StockIn
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? String.IsNullOrEmpty(CellValue) == true
+                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
+                    : String.IsNullOrEmpty(CellValue) == true
+                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
             catch { }
             SetCellsColor();
-            
+
 
         }
 
@@ -590,14 +567,13 @@ namespace Odin.Warehouse.StockIn
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
-                else
-                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
+                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
-            
+
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -608,7 +584,7 @@ namespace Odin.Warehouse.StockIn
             }
             catch { }
             SetCellsColor();
-           
+
 
         }
 
@@ -700,7 +676,7 @@ namespace Odin.Warehouse.StockIn
                         }
                         gv_Placing.Rows.Add(
                                       Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value),
-                                    //IdIn,
+                                      //IdIn,
                                       gv_List.CurrentRow.Cells["cn_artid"].Value,
                                       gv_List.CurrentRow.Cells["cn_article"].Value,
                                       0,//Label,
@@ -755,7 +731,7 @@ namespace Odin.Warehouse.StockIn
             }
 
             if (Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value) == _inid)
-                    Qty = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_qty"].Value);
+                Qty = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_qty"].Value);
             SetCellsColor();
             //int _inid = 0;
             //try { _inid = Convert.ToInt32(gv_Placing.CurrentRow.Cells["cn_inid"].Value); }
@@ -777,7 +753,7 @@ namespace Odin.Warehouse.StockIn
         private void btn_OK_Click(object sender, EventArgs e)
         {
             int _res = 0;
-           
+
             if (chk_PrintLabels.CheckState == CheckState.Checked)
             {
                 frm_Print frm = new frm_Print();
@@ -833,7 +809,7 @@ namespace Odin.Warehouse.StockIn
 
                     SetCellsColor();
                 }
-                
+
             }
             else
             {
@@ -869,7 +845,8 @@ namespace Odin.Warehouse.StockIn
             }
 
             int _artid = 0;
-            try {
+            try
+            {
                 _artid = Convert.ToInt32(gv_StockDets.CurrentRow.Cells["cn_iartid"].Value);
                 DataGridViewColumn oldColumn1 = gv_StockDets.SortedColumn;
                 var dir1 = Helper.SaveDirection(gv_StockDets);
@@ -879,7 +856,7 @@ namespace Odin.Warehouse.StockIn
                 Helper.RestoreDirection(gv_StockDets, oldColumn1, dir1);
             }
             catch { }
-            
+
 
         }
 
@@ -897,7 +874,7 @@ namespace Odin.Warehouse.StockIn
             }
             catch { }
 
-            cmb_Places1.PlaceId = _placeid; 
+            cmb_Places1.PlaceId = _placeid;
         }
 
         private void buttonSpecAny3_Click(object sender, EventArgs e)

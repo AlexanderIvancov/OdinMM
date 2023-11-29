@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
-using Odin.Global_Classes;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.CMB_Components.BLL;
+using Odin.Global_Classes;
+using System;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.Bargains
 {
@@ -97,7 +89,8 @@ namespace Odin.CMB_Components.Bargains
             string _intrastatcode = "";
 
 
-            try {
+            try
+            {
                 _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
                 _bargain = gv_List.CurrentRow.Cells["cn_bargain"].Value.ToString();
                 _bargainlat = gv_List.CurrentRow.Cells["cn_bargainlat"].Value.ToString();
@@ -109,7 +102,7 @@ namespace Odin.CMB_Components.Bargains
             {
                 frm_AddBargain frm = new frm_AddBargain();
                 frm.Id = _id;
-                frm.Headertext = "Edit bargain: " + _bargain ;
+                frm.Headertext = "Edit bargain: " + _bargain;
                 frm.Bargain = _bargain;
                 frm.IntrastatCode = _intrastatcode;
                 frm.BargainLat = _bargainlat;
