@@ -180,6 +180,7 @@ namespace Odin.Warehouse.StockOut.Reports
             report.SetParameterValue("Warnings", _warnings.TrimStart());
             report.SetParameterValue("QtyLab", "Кол-во в партии:");
             report.SetParameterValue("Serials", Serials);
+            report.SetParameterValue("Stencil", StockMove_BLL.GetStencil(Article));
 
             return report;
 
@@ -240,7 +241,7 @@ namespace Odin.Warehouse.StockOut.Reports
             report.SetParameterValue("Warnings", _warnings.TrimStart());
             report.SetParameterValue("QtyLab", "Кол-во в зап.:");
             report.SetParameterValue("Serials", Serials);
-
+            report.SetParameterValue("Stencil", StockMove_BLL.GetStencil(Article));
             return report;
 
         }

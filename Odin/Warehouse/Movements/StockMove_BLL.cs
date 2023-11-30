@@ -238,6 +238,12 @@ namespace Odin.Warehouse.Movements
 
             return _res;
         }
+        public static string GetStencil(string Article)
+        {
+            string query = "EXECUTE sp_SelectBOMStencils @Article = " + Article;
+
+            return Helper.QueryDT(query).Rows[0].ItemArray[0].ToString();
+        }
 
         public int AddStockMoveLinePDAGroup(int _headid, int _label, double _qty, int _typemove, string _groupname)
         {
