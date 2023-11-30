@@ -254,13 +254,13 @@ namespace Odin.Register.Articles
             try
             {
                 string[] separatingStrings = { ", " };
-                string[] startlet = { new Regex(@"^\D+").Matches(pos)[0].Value.ToString() };
                 string[] components = pos.Split(separatingStrings, StringSplitOptions.RemoveEmptyEntries);
                 foreach (string component in components)
                 {
                     MatchCollection matches = new Regex(@"\D+\d+\D+\d+").Matches(component);
                     if (matches.Count > 0)
                     {
+                        string[] startlet = { new Regex(@"^\D+").Matches(pos)[0].Value.ToString(), new Regex(@"\p{P}").Matches(pos)[0].Value.ToString() };
                         int left  = Int32.Parse(Regex.Replace(component.Split(startlet, StringSplitOptions.RemoveEmptyEntries)[0].ToString(), "\\p{P}", string.Empty));
                         int right = Int32.Parse(Regex.Replace(component.Split(startlet, StringSplitOptions.RemoveEmptyEntries).Last().ToString(), "\\p{P}", string.Empty));
                         int[] componentRange = Enumerable.Range(left, right-left+1).ToArray();
