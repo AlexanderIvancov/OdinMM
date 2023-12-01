@@ -162,9 +162,9 @@ namespace Odin.Workshop
             get { return _scanorder; }
             set
             { _scanorder = value;
-                if (_scanorder == 1)
-                    lbl_Order.Text = "SCAN BATCH LABEL!";
-                else lbl_Order.Text = _scanorder == 2
+                lbl_Order.Text = _scanorder == 1
+                    ? "SCAN BATCH LABEL!"
+                    : _scanorder == 2
                     ? "SCAN SERIAL LABEL!"
                     : _scanorder == 3 ? "SCAN SERIAL LABEL YOU WANT TO REPLACE!" : "SCAN REPLACEMENT LABEL!";
             }

@@ -575,8 +575,7 @@ namespace Odin.Sales
 
 
                     //Event
-                    if (SendQuotId != null)
-                        SendQuotId(this);
+                    SendQuotId?.Invoke(this);
                 }
             }
         }

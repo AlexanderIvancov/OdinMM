@@ -95,10 +95,7 @@ namespace Odin.CMB_Components.Addresses
                 }
 
 
-                if (AddressChanged != null)
-                {
-                    AddressChanged(this);
-                }
+                AddressChanged?.Invoke(this);
             }
         }
 
@@ -144,10 +141,7 @@ namespace Odin.CMB_Components.Addresses
 
                     _PrevId = _AddressId;
 
-                    if (AddressChanged != null)
-                    {
-                        AddressChanged(this);
-                    }
+                    AddressChanged?.Invoke(this);
 
                 }
             }

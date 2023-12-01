@@ -67,10 +67,7 @@ namespace Odin.CMB_Components.Bargains
                     return;
                 }
 
-                if (BargainChanged != null)
-                {
-                    BargainChanged(this);
-                }
+                BargainChanged?.Invoke(this);
             }
         }
 
@@ -112,10 +109,7 @@ namespace Odin.CMB_Components.Bargains
                         txt_Bargain.Text = string.Empty;
                     }
 
-                    if (BargainChanged != null)
-                    {
-                        BargainChanged(this);
-                    }
+                BargainChanged?.Invoke(this);
 
             }
         }
@@ -134,10 +128,7 @@ namespace Odin.CMB_Components.Bargains
         private void buttonSpecAny1_Click(object sender, EventArgs e)
         {
             txt_Bargain.Text = string.Empty;
-            if (BargainChanged != null)
-            {
-                BargainChanged(this);
-            }
+            BargainChanged?.Invoke(this);
 
         }
 
@@ -172,10 +163,7 @@ namespace Odin.CMB_Components.Bargains
         private void txt_Bargain_TextChanged(object sender, EventArgs e)
         {
             Bargain = txt_Bargain.Text;
-            if (BargainChanged != null)
-            {
-                BargainChanged(this);
-            }
+            BargainChanged?.Invoke(this);
 
         }
     }

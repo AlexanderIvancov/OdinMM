@@ -86,10 +86,7 @@ namespace Odin.CMB_Components.Types
                         Path = dr["FullPath"].ToString();
                         TypeLat = dr["namelat"].ToString();
                     }
-                    if (SelectedValueChanged != null)
-                    {
-                        SelectedValueChanged(this);
-                    }
+                    SelectedValueChanged?.Invoke(this);
                 }
                 else
                 {
@@ -211,10 +208,7 @@ namespace Odin.CMB_Components.Types
                 //Shelf = txt_Shelf.Text;
                 if (glob_Class.NES(txt_Type.Text) == "")
                     TypeId = 0;
-                if (SelectedValueChanged != null)
-                {
-                    SelectedValueChanged(this);
-                }
+                SelectedValueChanged?.Invoke(this);
             }
             catch { return; }
         }
@@ -234,10 +228,7 @@ namespace Odin.CMB_Components.Types
                 }
             });
 
-            if (SelectedValueChanged != null)
-            {
-                SelectedValueChanged(this);
-            }
+            SelectedValueChanged?.Invoke(this);
         }
 
         private void txt_Type_KeyPress(object sender, KeyPressEventArgs e)

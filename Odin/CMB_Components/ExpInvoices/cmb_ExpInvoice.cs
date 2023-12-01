@@ -86,10 +86,7 @@ namespace Odin.CMB_Components.ExpInvoices
                     return;
                 }
 
-                if (ExpInvoiceChanged != null)
-                {
-                    ExpInvoiceChanged(this);
-                }
+                ExpInvoiceChanged?.Invoke(this);
             }
         }
 
@@ -141,10 +138,7 @@ namespace Odin.CMB_Components.ExpInvoices
 
                     _PrevId = _InvoiceId;
 
-                    if (ExpInvoiceChanged != null)
-                    {
-                        ExpInvoiceChanged(this);
-                    }
+                    ExpInvoiceChanged?.Invoke(this);
 
                 }
             }
@@ -158,19 +152,13 @@ namespace Odin.CMB_Components.ExpInvoices
             set
             {
                 _InvoiceSavedId = value;
-                if (ExpInvoiceSaved != null)
-                {
-                    ExpInvoiceSaved(this);
-                }
+                ExpInvoiceSaved?.Invoke(this);
             }
         }
 
         public void InvoiceSendSave()
         {
-            if (ExpInvoiceSaved != null)
-            {
-                ExpInvoiceSaved(this);
-            }
+            ExpInvoiceSaved?.Invoke(this);
         }
 
         public bool EnableSearchId
@@ -242,8 +230,7 @@ namespace Odin.CMB_Components.ExpInvoices
                                         frm.AdvanceDate, frm.ProformaNR, frm.PayDate, frm.PaymentId, frm.SellerContPersId,
                                         frm.BuyerContPersId, frm.ValueForCustoms, frm.ESignature, frm.Recipient);
             InvoiceId = _res;
-            if (ExpInvoiceChanged != null)
-                ExpInvoiceChanged(this);
+            ExpInvoiceChanged?.Invoke(this);
 
             frm.Close();
 

@@ -79,10 +79,7 @@ namespace Odin.CMB_Components.Quotations
                     //return;
                 }
 
-                if (QuotationChanged != null)
-                {
-                    QuotationChanged(this);
-                }
+                QuotationChanged?.Invoke(this);
             }
         }
 
@@ -130,10 +127,7 @@ namespace Odin.CMB_Components.Quotations
 
                     _PrevId = _QuotationId;
 
-                    if (QuotationChanged != null)
-                    {
-                        QuotationChanged(this);
-                    }
+                    QuotationChanged?.Invoke(this);
 
                 }
             }
@@ -146,19 +140,13 @@ namespace Odin.CMB_Components.Quotations
             set
             {
                 _QuotationSavedId = value;
-                if (QuotationSaved != null)
-                {
-                    QuotationSaved(this);
-                }
+                QuotationSaved?.Invoke(this);
             }
         }
 
         public void QuotationSendSave()
         {
-            if (QuotationSaved != null)
-            {
-                QuotationSaved(this);
-            }
+            QuotationSaved?.Invoke(this);
         }
         public bool EnableSearchId
         {

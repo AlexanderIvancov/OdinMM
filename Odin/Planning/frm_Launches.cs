@@ -152,10 +152,7 @@ namespace Odin.Planning
             frm.Close();
             bwStart(bw_List);
 
-            if (LaunchSaved != null)
-            {
-                LaunchSaved(this);
-            }
+            LaunchSaved?.Invoke(this);
         }
 
         #endregion

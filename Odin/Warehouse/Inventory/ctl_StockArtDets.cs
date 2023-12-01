@@ -227,10 +227,7 @@ namespace Odin.Warehouse.Inventory
         {
             if (CheckOldRow() == false)
             {
-                if (SendLabel != null)
-                {
-                    SendLabel(this);
-                }
+                SendLabel?.Invoke(this);
             }
         }
 

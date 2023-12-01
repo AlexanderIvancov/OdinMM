@@ -486,10 +486,7 @@ namespace Odin.Warehouse.Requests.Controls
                 }
             }
 
-            if (SaveRequest != null)
-            {
-                SaveRequest(this);
-            }
+                SaveRequest?.Invoke(this);
             }
             else
                 glob_Class.ShowMessage("You have empty serial numbers fields!", "Enter serial numbers!", "Serial numbers warning!");

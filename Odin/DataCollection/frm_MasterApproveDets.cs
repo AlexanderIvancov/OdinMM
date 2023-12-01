@@ -296,8 +296,7 @@ namespace Odin.DataCollection
                         }
                     }                    
                     FillList(LaunchId, ProdPlace);
-                    if (ApplyApproveChanges != null)
-                        ApplyApproveChanges(this);
+                    ApplyApproveChanges?.Invoke(this);
                 }
                 else
                 {
@@ -358,8 +357,7 @@ namespace Odin.DataCollection
                                                                     MessageBoxIcon.Information,
                                                                     TaskDialogButtons.OK);
 
-                    if (ApplyApproveChanges != null)
-                        ApplyApproveChanges(this);
+                    ApplyApproveChanges?.Invoke(this);
                     this.Close();
 
                 }

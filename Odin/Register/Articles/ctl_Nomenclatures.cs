@@ -515,10 +515,7 @@ namespace Odin.Register.Articles
         public void SendArticle(int artid)
         {
             //Event
-            if (SendArtId != null)
-            {
-                SendArtId(this);
-            }
+            SendArtId?.Invoke(this);
         }
 
         private bool CheckOldRow()

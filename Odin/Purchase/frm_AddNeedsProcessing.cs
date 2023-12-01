@@ -517,8 +517,7 @@ namespace Odin.Purchase
                 bwStart(bw_List);
 
 
-                if (NeedsAdded != null)
-                    NeedsAdded(this);
+                NeedsAdded?.Invoke(this);
 
             }
            

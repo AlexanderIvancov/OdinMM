@@ -66,10 +66,7 @@ namespace Odin.CMB_Components.ContactPersons
                     return;
                 }
 
-                if (ContPersChanged != null)
-                {
-                    ContPersChanged(this);
-                }
+                ContPersChanged?.Invoke(this);
             }
         }
 
@@ -117,10 +114,7 @@ namespace Odin.CMB_Components.ContactPersons
 
                     _PrevId = _ContPersId;
 
-                    if (ContPersChanged != null)
-                    {
-                        ContPersChanged(this);
-                    }
+                    ContPersChanged?.Invoke(this);
 
                 }
             }

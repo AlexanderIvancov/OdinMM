@@ -58,10 +58,7 @@ namespace Odin.CMB_Components.Package
                     //return;
                 }
 
-                if (PackagesChanged != null)
-                {
-                    PackagesChanged(this);
-                }
+                PackagesChanged?.Invoke(this);
             }
         }
 
@@ -107,10 +104,7 @@ namespace Odin.CMB_Components.Package
 
                     _PrevId = _PackageId;
 
-                    if (PackagesChanged != null)
-                    {
-                        PackagesChanged(this);
-                    }
+                    PackagesChanged?.Invoke(this);
 
                 }
             }

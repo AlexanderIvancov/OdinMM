@@ -446,10 +446,7 @@ namespace Odin.Sales
             }
 
             //Event
-            if (SendCOId != null)
-            {
-                SendCOId(this);
-            }
+            SendCOId?.Invoke(this);
 
         }
 

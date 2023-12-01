@@ -13,8 +13,7 @@ namespace Odin.Purchase
 
         private void ctl_PODets1_SendPOId(object sender)
         {
-            if (POLineSaved != null)
-                POLineSaved(this);
+            POLineSaved?.Invoke(this);
         }
     }
 }

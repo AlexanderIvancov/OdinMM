@@ -77,10 +77,7 @@ namespace Odin.CMB_Components.StockInTypes
                     return;
                 }
 
-                if (TypesChanged != null)
-                {
-                    TypesChanged(this);
-                }
+                TypesChanged?.Invoke(this);
             }
         }
         
@@ -126,10 +123,7 @@ namespace Odin.CMB_Components.StockInTypes
 
                     _PrevId = _TypeId;
 
-                    if (TypesChanged != null)
-                    {
-                        TypesChanged(this);
-                    }
+                    TypesChanged?.Invoke(this);
 
                 }
             }

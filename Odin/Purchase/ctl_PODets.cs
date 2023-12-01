@@ -454,22 +454,9 @@ namespace Odin.Purchase
 
         public double MOQMPQ(double Qty, double MOQ, double MPQ)
         {
-            double Ret = 0;
-
-            if (Qty < MOQ)
-            {
-                Ret = globClass.ApprovePOMOQ() == true ? MOQ : Qty;
-            }
-            else
-            {
-                if (MPQ > 0)
-                {
-                    Ret = Math.Round((Qty % MPQ), 5) == 0 ? Qty : globClass.ApprovePOMOQ() == true ? Qty - (Qty % MPQ) + MPQ : Qty;
-                }
-                else
-                    Ret = Qty;
-            }
-
+            double Ret = Qty < MOQ
+                ? globClass.ApprovePOMOQ() == true ? MOQ : Qty
+                : MPQ > 0 ? Math.Round((Qty % MPQ), 5) == 0 ? Qty : globClass.ApprovePOMOQ() == true ? Qty - (Qty % MPQ) + MPQ : Qty : Qty;
             return Ret;
         }
 
@@ -990,10 +977,7 @@ namespace Odin.Purchase
             }
 
             //Event
-            if (SendPOId != null)
-            {
-                SendPOId(this);
-            }
+            SendPOId?.Invoke(this);
         }
 
         private void txt_SupArticle_TextChanged(object sender, EventArgs e)

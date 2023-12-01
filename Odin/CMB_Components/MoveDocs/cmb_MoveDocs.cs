@@ -66,10 +66,7 @@ namespace Odin.CMB_Components.MoveDocs
                     _MoveDocId = 0;
                     //return;
                 }
-                if (MoveDocChanged != null)
-                {
-                    MoveDocChanged(this);
-                }
+                MoveDocChanged?.Invoke(this);
 
 
             }
@@ -110,10 +107,7 @@ namespace Odin.CMB_Components.MoveDocs
                         {
                             txt_MoveDoc.Text = dr["name"].ToString();
                         }
-                        if (MoveDocChanged != null)
-                        {
-                            MoveDocChanged(this);
-                        }
+                        MoveDocChanged?.Invoke(this);
                     }
                     else
                     {
@@ -139,19 +133,13 @@ namespace Odin.CMB_Components.MoveDocs
             set
             {
                 _MoveDocSavedId = value;
-                if (MoveDocSaved != null)
-                {
-                    MoveDocSaved(this);
-                }
+                MoveDocSaved?.Invoke(this);
             }
         }
 
         public void MoveDocSendSave()
         {
-            if (MoveDocSaved != null)
-            {
-                MoveDocSaved(this);
-            }
+            MoveDocSaved?.Invoke(this);
         }
 
         public bool EnableSearchId
@@ -180,10 +168,7 @@ namespace Odin.CMB_Components.MoveDocs
                 int _res = Bll.AddMoveDocHead(frm.DocDate, frm.DelivDate, frm.Comments, frm.DestPlaceId, frm.DelivAddressId, frm.FinDestPlaceId, frm.FinDelivAddressId,
                                                 frm.TransportId, frm.IncotermsId, frm.PalettesQty, frm.PalettesWeight, frm.BatchId, frm.StageId, frm.QtyToProduce);
                 MoveDocId = _res;
-                if (MoveDocChanged != null)
-                {
-                    MoveDocChanged(this);
-                }
+                MoveDocChanged?.Invoke(this);
             }
         }
 
@@ -229,17 +214,13 @@ namespace Odin.CMB_Components.MoveDocs
 
                     Bll.MoveDocHeadId = _id;
                     MoveDocId = _id;
-                    if (MoveDocChanged != null)
-                    {
-                        MoveDocChanged(this);
-                    }
+                    MoveDocChanged?.Invoke(this);
                 }
             }
         }
         private void btn_AdvView_Click(object sender, EventArgs e)
         {
-            if (ControlClick != null)
-                ControlClick(this);
+            ControlClick?.Invoke(this);
 
             Form f;
             f = this.FindForm();
@@ -273,8 +254,7 @@ namespace Odin.CMB_Components.MoveDocs
             try { MoveDoc = txt_MoveDoc.Text; }
             catch { }
 
-            if (ControlClick != null)
-                ControlClick(this);
+            ControlClick?.Invoke(this);
         }
 
         private void txt_MoveDoc_TextChanged(object sender, EventArgs e)
@@ -288,14 +268,12 @@ namespace Odin.CMB_Components.MoveDocs
 
         private void txt_MoveDoc_Click(object sender, EventArgs e)
         {
-            if (ControlClick != null)
-                ControlClick(this);
+            ControlClick?.Invoke(this);
         }
 
         private void txt_MoveDoc_Enter(object sender, EventArgs e)
         {
-            if (ControlClick != null)
-                ControlClick(this);
+            ControlClick?.Invoke(this);
         }
 
         private void txt_MoveDoc_KeyPress(object sender, KeyPressEventArgs e)

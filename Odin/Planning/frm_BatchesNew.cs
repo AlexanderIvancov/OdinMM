@@ -105,10 +105,7 @@ namespace Odin.Planning
 
         private void SavedBatch(object sender)
         {
-            if (BatchSaved != null)
-            {
-                BatchSaved(this);
-            }
+            BatchSaved?.Invoke(this);
         }
 
         public void ClearFilter()
@@ -590,10 +587,7 @@ namespace Odin.Planning
             frm.Close();
             bwStart(bw_List);
 
-            if (BatchSaved != null)
-            {
-                BatchSaved(this);
-            }
+            BatchSaved?.Invoke(this);
         }
 
         private void GroupBatch(object sender)
@@ -601,10 +595,7 @@ namespace Odin.Planning
             frmg.Close();
             bwStart(bw_List);
 
-            if (BatchSaved != null)
-            {
-                BatchSaved(this);
-            }
+            BatchSaved?.Invoke(this);
         }
 
         public void ShowEdit()

@@ -83,12 +83,9 @@ namespace Odin.CMB_Components.OutcomeDocs
                     _OutcomeDocId = 0;
                     _BatchId = 0;
 
-                    if (OutDocChanged != null)
-                    {
-                        OutDocChanged(this);
-                    }
+                    OutDocChanged?.Invoke(this);
 
-                    
+
 
                     //return;
                 }
@@ -132,11 +129,8 @@ namespace Odin.CMB_Components.OutcomeDocs
                             txt_OutcomeDoc.Text = dr["name"].ToString();
                             BatchId = Convert.ToInt32(dr["batchid"]);
                         }
-                        if (OutDocChanged != null)
-                        {
-                            OutDocChanged(this);
-                        }
-                    }
+                    OutDocChanged?.Invoke(this);
+                }
                     else
                     {
                         BatchId = 0;
@@ -162,19 +156,13 @@ namespace Odin.CMB_Components.OutcomeDocs
             set
             {
                 _OutcomeDocSavedId = value;
-                if (OutDocSaved != null)
-                {
-                    OutDocSaved(this);
-                }
+                OutDocSaved?.Invoke(this);
             }
         }
 
         public void OutcomeDocSendSave()
         {
-            if (OutDocSaved != null)
-            {
-                OutDocSaved(this);
-            }
+            OutDocSaved?.Invoke(this);
         }
 
         public bool EnableSearchId
@@ -213,12 +201,8 @@ namespace Odin.CMB_Components.OutcomeDocs
             {
                 int _res = Bll.AddOutcomeDocHead(frm.DocDate, frm.Comments, frm.TypeOff, frm.ReasonId, frm.BatchId);
                 OutcomeDocId = _res;
-                if (OutDocChanged != null)
-                {
-                    OutDocChanged(this);
-                }
-                if (OutDocSaved != null)
-                    OutDocSaved(this);
+                OutDocChanged?.Invoke(this);
+                OutDocSaved?.Invoke(this);
             }
             
         }
@@ -244,12 +228,8 @@ namespace Odin.CMB_Components.OutcomeDocs
                 {
                     Bll.EditOutcomeDocHead(frm.Id, frm.DocDate, frm.Comments, frm.TypeOff, frm.ReasonId, frm.BatchId);
 
-                    if (OutDocChanged != null)
-                    {
-                        OutDocChanged(this);
-                    }
-                    if (OutDocSaved != null)
-                        OutDocSaved(this);
+                    OutDocChanged?.Invoke(this);
+                    OutDocSaved?.Invoke(this);
                 }
             }
         }

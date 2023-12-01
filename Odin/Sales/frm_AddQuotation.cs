@@ -15,8 +15,7 @@ namespace Odin.Sales
 
         private void ctl_QuotDets1_SendQuotId(object sender)
         {
-            if (QuotationSaved != null)
-                QuotationSaved(this);
+            QuotationSaved?.Invoke(this);
         }
     }
 }

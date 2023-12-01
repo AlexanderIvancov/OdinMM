@@ -79,8 +79,7 @@ namespace Odin.CMB_Components.BatchStages
 
                     if (PrevId != StageId)
                     {
-                        if (StageChanged != null)
-                            StageChanged(this);
+                        StageChanged?.Invoke(this);
                         PrevId = StageId;
                     }
                 }
@@ -116,8 +115,7 @@ namespace Odin.CMB_Components.BatchStages
 
                     if (PrevId != StageId)
                     {
-                        if (StageChanged != null)
-                            StageChanged(this);
+                        StageChanged?.Invoke(this);
                         PrevId = StageId;
                     }
                     //if (BatchChanged != null)

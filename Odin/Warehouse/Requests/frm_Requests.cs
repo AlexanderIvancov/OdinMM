@@ -59,9 +59,7 @@ namespace Odin.Warehouse.Requests
         {
             get
             {
-                if (rb_New.Checked == true)
-                    return 1;
-                else return rb_Enabled.Checked == true ? -1 : rb_Closed.Checked == true ? 0 : 99;
+                return rb_New.Checked == true ? 1 : rb_Enabled.Checked == true ? -1 : rb_Closed.Checked == true ? 0 : 99;
             }
             set
             {
@@ -185,10 +183,7 @@ namespace Odin.Warehouse.Requests
 
         private void SavedBatch(object sender)
         {
-            if (RequestSaved != null)
-            {
-                RequestSaved(this);
-            }
+            RequestSaved?.Invoke(this);
         }
 
         public void ClearFilter()
@@ -240,10 +235,7 @@ namespace Odin.Warehouse.Requests
             frm.Close();
             bwStart(bw_List);
 
-            if (RequestSaved != null)
-            {
-                RequestSaved(this);
-            }
+            RequestSaved?.Invoke(this);
         }
 
         public void LoadColumns(DataGridView grid)

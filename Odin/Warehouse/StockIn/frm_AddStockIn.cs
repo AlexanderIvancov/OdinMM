@@ -21,8 +21,7 @@ namespace Odin.Warehouse.StockIn
         private void ctl_StockInDets1_SendStockInId(object sender)
         {
 
-            if (StockInLineSaved != null)
-                StockInLineSaved(this);
+            StockInLineSaved?.Invoke(this);
         }
     }
 }

@@ -62,10 +62,7 @@ namespace Odin.CMB_Components.Operations
                     return;
                 }
 
-                if (OperationChanged != null)
-                {
-                    OperationChanged(this);
-                }
+                OperationChanged?.Invoke(this);
             }
         }
         public int OperationId
@@ -112,10 +109,7 @@ namespace Odin.CMB_Components.Operations
 
                     _PrevId = _OperationId;
 
-                    if (OperationChanged != null)
-                    {
-                        OperationChanged(this);
-                    }
+                    OperationChanged?.Invoke(this);
 
                 }
             }

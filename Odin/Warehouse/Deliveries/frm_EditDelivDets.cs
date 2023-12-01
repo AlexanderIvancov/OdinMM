@@ -177,8 +177,7 @@ namespace Odin.Warehouse.Deliveries
 
         private void btn_OK_Click(object sender, EventArgs e)
         {
-            if (SaveChanges != null)
-                SaveChanges(Id);
+            SaveChanges?.Invoke(Id);
         }
 
         private void btn_Cancel_Click(object sender, EventArgs e)

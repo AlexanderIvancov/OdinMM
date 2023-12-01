@@ -165,8 +165,7 @@ namespace Odin.CMB_Components.Currencies
                     }
                 });
             }
-            if (RateSaving != null)
-                RateSaving(this);
+            RateSaving?.Invoke(this);
         }
 
         private void bw_OperationsBY(object sender, DoWorkEventArgs e)
@@ -196,14 +195,12 @@ namespace Odin.CMB_Components.Currencies
                 });
                 //MessageBox.Show(url);
             }
-            if (RateSaving != null)
-                RateSaving(this);
+            RateSaving?.Invoke(this);
         }
 
         private void frm_ImportCurRate_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (RateSaving != null)
-                RateSaving(this);
+            RateSaving?.Invoke(this);
         }
 
         private void dt_CurDateTill_ValueChanged(object sender, EventArgs e)

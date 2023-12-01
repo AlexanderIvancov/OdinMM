@@ -293,8 +293,7 @@ namespace Odin.Register.Articles
                 bn_List.BindingSource = bs_List;
             });
             //MessageBox.Show(cmb_Articles1.QtyAvail.ToString());
-            if (SendBOMArtId != null)
-                SendBOMArtId(ArtId);
+            SendBOMArtId?.Invoke(ArtId);
         }
 
         public void ShowDets()
@@ -322,8 +321,7 @@ namespace Odin.Register.Articles
                 bn_List.BindingSource = bs_List;
             });
 
-            if (SendBOMArtId != null)
-                SendBOMArtId(ArtId);
+            SendBOMArtId?.Invoke(ArtId);
 
         }
 
@@ -360,10 +358,7 @@ namespace Odin.Register.Articles
         public void SendArticle(int artid)
         {
             //Event
-            if (SendArtId != null)
-            {
-                SendArtId(this);
-            }
+            SendArtId?.Invoke(this);
         }
 
         public void ShowValidation(int artid)

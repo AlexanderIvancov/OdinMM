@@ -59,10 +59,7 @@ namespace Odin.CMB_Components.CustCodes
                     return;
                 }
 
-                if (CustCodeChanged != null)
-                {
-                    CustCodeChanged(this);
-                }
+                CustCodeChanged?.Invoke(this);
             }
         }
 
@@ -108,10 +105,7 @@ namespace Odin.CMB_Components.CustCodes
 
                     _PrevId = _CustCodeId;
 
-                    if (CustCodeChanged != null)
-                    {
-                        CustCodeChanged(this);
-                    }
+                    CustCodeChanged?.Invoke(this);
 
                 }
             }

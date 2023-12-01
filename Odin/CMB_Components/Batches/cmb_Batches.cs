@@ -78,8 +78,7 @@ namespace Odin.CMB_Components.Batches
                     
                     if (PrevId != BatchId)
                     {
-                        if (BatchChanged != null)
-                            BatchChanged(this);
+                        BatchChanged?.Invoke(this);
                         PrevId = BatchId;
                     }
                     //if (BatchChanged != null)
@@ -216,8 +215,7 @@ namespace Odin.CMB_Components.Batches
 
                    if (PrevId != BatchId)
                    {
-                        if (BatchChanged != null)
-                            BatchChanged(this);
+                        BatchChanged?.Invoke(this);
                         PrevId = BatchId;
                     }
                     //if (BatchChanged != null)
@@ -326,10 +324,7 @@ namespace Odin.CMB_Components.Batches
             //{
             //    BatchChanged(this);
             //}
-            if (ControlClick != null)
-            {
-                ControlClick(this);
-            }
+            ControlClick?.Invoke(this);
 
         }
 
@@ -347,18 +342,14 @@ namespace Odin.CMB_Components.Batches
 
         private void btn_AdvView_Click(object sender, EventArgs e)
         {
-            if (ControlClick != null)
-            {
-                ControlClick(this);
-            }
+            ControlClick?.Invoke(this);
 
             ShowBatchFilter(txt_Batch.Text);
         }
 
         private void txt_Batch_Click(object sender, EventArgs e)
         {
-            if (ControlClick != null)
-                ControlClick(this);
+            ControlClick?.Invoke(this);
         }
 
         private void txt_Batch_KeyPress(object sender, KeyPressEventArgs e)
@@ -369,18 +360,14 @@ namespace Odin.CMB_Components.Batches
 
         private void txt_Batch_Enter(object sender, EventArgs e)
         {
-            if (ControlClick != null)
-                ControlClick(this);
+            ControlClick?.Invoke(this);
         }
 
         private void txt_Batch_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (BatchKeyPressed != null)
-                {
-                    BatchKeyPressed(this);
-                }
+                BatchKeyPressed?.Invoke(this);
             }
         }
     }

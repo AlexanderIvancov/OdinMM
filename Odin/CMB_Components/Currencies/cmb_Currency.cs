@@ -57,19 +57,13 @@ namespace Odin.CMB_Components.Currencies
                     return;
                 }
 
-                if (CurrencyChanged != null)
-                {
-                    CurrencyChanged(this);
-                }
+                CurrencyChanged?.Invoke(this);
             }
         }
 
         public void UpdateCurRate()
         {
-            if (CurrencyChanged != null)
-            {
-                CurrencyChanged(this);
-            }
+            CurrencyChanged?.Invoke(this);
         }
 
         public int CurrencyId
@@ -114,10 +108,7 @@ namespace Odin.CMB_Components.Currencies
 
                     _PrevId = _CurrencyId;
 
-                    if (CurrencyChanged != null)
-                    {
-                        CurrencyChanged(this);
-                    }
+                    CurrencyChanged?.Invoke(this);
 
                 }
             }

@@ -730,8 +730,7 @@ namespace Odin.Sales
 
         private void btn_OK_Click(object sender, EventArgs e)
         {
-            if (SaveChanges != null)
-                SaveChanges(gv_List);
+            SaveChanges?.Invoke(gv_List);
         }
 
         private void btn_Cancel_Click(object sender, EventArgs e)

@@ -494,8 +494,7 @@ namespace Odin.Planning
 
         private void frm_EditLaunchHead_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (EditLaunch != null)
-                EditLaunch(this);
+            EditLaunch?.Invoke(this);
         }
 
         private void btn_Cancel_Click(object sender, EventArgs e)

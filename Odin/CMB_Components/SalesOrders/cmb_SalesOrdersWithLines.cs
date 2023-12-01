@@ -238,12 +238,9 @@ namespace Odin.CMB_Components.SalesOrders
 
                     _PrevLineId = _SalesOrderLineId;
 
-                    
 
-                    if (SalesOrderChanged != null)
-                    {
-                        SalesOrderChanged(this);
-                    }
+
+                    SalesOrderChanged?.Invoke(this);
 
                 }
 
@@ -384,19 +381,13 @@ namespace Odin.CMB_Components.SalesOrders
            _SalesOrderLineId = SOLineSelectedValue();
 
             ShowCODets(_SalesOrderLineId);
-            
-             if (SalesOrderChanged != null)
-            {
-                SalesOrderChanged(this);
-            }
+
+            SalesOrderChanged?.Invoke(this);
         }
 
         private void cmb_Lines_Click(object sender, EventArgs e)
         {
-            if (ControlClick != null)
-            {
-                ControlClick(this);
-            }
+            ControlClick?.Invoke(this);
         }
 
         private void txt_SalesOrder_Enter(object sender, EventArgs e)

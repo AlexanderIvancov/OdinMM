@@ -522,12 +522,10 @@ namespace Odin.CMB_Components.ExpInvoices
             {
                 DialogResult result = MessageBox.Show("Are you sure you want register invoice?", "You have empty fields!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (result == DialogResult.Yes)
-                if (ExportInvoiceSaving != null)
-                    ExportInvoiceSaving(this);
+                    ExportInvoiceSaving?.Invoke(this);
             }
             else
-            if (ExportInvoiceSaving != null)
-                ExportInvoiceSaving(this);
+                ExportInvoiceSaving?.Invoke(this);
         }
 
         private void buttonSpecAny10_Click(object sender, EventArgs e)

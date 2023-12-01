@@ -230,10 +230,7 @@ namespace Odin.Planning.Controls
         public void SendArticle(int artid)
         {
             //Event
-            if (SendArtId != null)
-            {
-                SendArtId(artid, false, false, true, true, true);
-            }
+            SendArtId?.Invoke(artid, false, false, true, true, true);
         }
 
         private bool CheckOldRow()

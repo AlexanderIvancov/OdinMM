@@ -171,10 +171,7 @@ namespace Odin.CMB_Components.PurchaseOrders
                 if (_PrevLineId != PurchaseOrderLineId
                     || _PrevLineId == 0)
                 {
-                    if (PurchaseOrderChanged != null)
-                    {
-                        PurchaseOrderChanged(this);
-                    }
+                    PurchaseOrderChanged?.Invoke(this);
                     _PrevLineId = PurchaseOrderLineId;
                 }
             }
@@ -277,10 +274,9 @@ namespace Odin.CMB_Components.PurchaseOrders
                 {
                     _PrevLineId = 0;
                     _PurchaseOrderLineId = 0;
-                    if (PurchaseOrderChanged != null)
-                        PurchaseOrderChanged(this);
-                        
-                 }
+                PurchaseOrderChanged?.Invoke(this);
+
+            }
 
             //}
             //catch { }

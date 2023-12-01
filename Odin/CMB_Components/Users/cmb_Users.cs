@@ -192,19 +192,13 @@ namespace Odin.CMB_Components.Users
         {
             txt_TN.Text = string.Empty;
             UserDetsFromTN(txt_TN.Text);
-            if (UserChanged != null)
-            {
-                UserChanged(this);
-            }
+            UserChanged?.Invoke(this);
         }
 
         private void txt_TN_Validated(object sender, EventArgs e)
         {
             UserDetsFromTN(txt_TN.Text);
-            if (UserChanged != null)
-            {
-                UserChanged(this);
-            }
+            UserChanged?.Invoke(this);
         }
 
         private void txt_TN_KeyPress(object sender, KeyPressEventArgs e)
@@ -212,10 +206,7 @@ namespace Odin.CMB_Components.Users
             UserDetsFromTN(txt_TN.Text);
             if (e.KeyChar == (char)Keys.Enter)
             {
-                if (UserChanged != null)
-                {
-                   UserChanged(this);
-                }
+                UserChanged?.Invoke(this);
             }
         }
 

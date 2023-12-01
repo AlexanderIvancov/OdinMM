@@ -15,10 +15,7 @@ namespace Odin.Planning
 
         private void ctl_CreatBatchDets1_SaveBatch(object sender)
         {
-            if (ProjectSaved != null)
-            {
-                ProjectSaved(this);
-            }
+            ProjectSaved?.Invoke(this);
         }
 
     }

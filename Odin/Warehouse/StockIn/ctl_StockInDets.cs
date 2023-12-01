@@ -854,10 +854,7 @@ namespace Odin.Warehouse.StockIn
                         cmb_PurchaseOrdersWithLines1.ArticleId = 0;
                         cmb_PurchaseOrdersWithLines1.PurchaseOrderId = 0;
 
-                        if (SendStockInId != null)
-                        {
-                            SendStockInId(this);
-                        }
+                        SendStockInId?.Invoke(this);
                     }
                 }
             }

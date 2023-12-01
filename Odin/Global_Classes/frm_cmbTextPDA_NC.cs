@@ -49,8 +49,7 @@ namespace Odin.Global_Classes
         {            
             if (e.KeyChar == (char)Keys.Enter)
             {
-                if (TextEntering != null)
-                    TextEntering(FormText);
+                TextEntering?.Invoke(FormText);
                 FormText = "";
                 txt_Text.Focus();
             }
@@ -63,8 +62,7 @@ namespace Odin.Global_Classes
 
         private void btn_OK_Click(object sender, EventArgs e)
         {
-            if (TextEntering != null)
-                TextEntering(FormText);
+            TextEntering?.Invoke(FormText);
             FormText = "";
             txt_Text.Focus();
         }

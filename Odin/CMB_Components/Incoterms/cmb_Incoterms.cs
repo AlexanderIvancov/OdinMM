@@ -72,10 +72,7 @@ namespace Odin.CMB_Components.Incoterms
                     return;
                 }
 
-                if (IncotermsChanged != null)
-                {
-                    IncotermsChanged(this);
-                }
+                IncotermsChanged?.Invoke(this);
             }
         }
         public int IncotermId
@@ -120,10 +117,7 @@ namespace Odin.CMB_Components.Incoterms
 
                     _PrevId = _IncotermsId;
 
-                    if (IncotermsChanged != null)
-                    {
-                        IncotermsChanged(this);
-                    }
+                    IncotermsChanged?.Invoke(this);
 
                 }
             }

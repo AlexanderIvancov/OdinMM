@@ -170,8 +170,7 @@ namespace Odin.Warehouse.Requests
                                                     TaskDialogButtons.OK);
 
 
-                        if (RequestDetsSaved != null)
-                            RequestDetsSaved(this);
+                        RequestDetsSaved?.Invoke(this);
                         ClearRows();
                         ReqBLL.RequestHeadId = 0;
                     }

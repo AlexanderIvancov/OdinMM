@@ -22,10 +22,7 @@ namespace Odin.Sales
 
         private void btn_OK_Click(object sender, EventArgs e)
         {
-            if (SaveChanges != null)
-            {
-                SaveChanges(this);
-            }
+            SaveChanges?.Invoke(this);
         }
 
         private void btn_Cancel_Click(object sender, EventArgs e)

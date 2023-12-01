@@ -56,8 +56,7 @@ namespace Odin.CMB_Components.LabPrinters
         {
             try
             {
-                if (PrinterNameChanged != null)
-                    PrinterNameChanged(this);
+                PrinterNameChanged?.Invoke(this);
             }
             catch { return; }
         }
@@ -66,8 +65,7 @@ namespace Odin.CMB_Components.LabPrinters
         {
             try
             {
-                if (PrinterIPChanged != null)
-                    PrinterIPChanged(this);
+                PrinterIPChanged?.Invoke(this);
             }
             catch { return; }
         }

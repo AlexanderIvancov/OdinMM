@@ -530,11 +530,11 @@ namespace Odin.Warehouse.StockOut.Reports
                 rd = OpenReportRouteList();
             else if (RepType == 4)
                 rd = OpenReportLaunch();
-            else if (RepType == 5)
-                rd = OpenReportLaunchProd();
-            else if (RepType == 6)
-                rd = OpenReportLaunchGroup();
-            else rd = RepType == 7 ? OpenReportLaunchRouteList() : RepType == 8 ? OpenReportBatchList() : OpenReportBatchGroupReservation();
+            else rd = RepType == 5
+                ? OpenReportLaunchProd()
+                : RepType == 6
+                ? OpenReportLaunchGroup()
+                : RepType == 7 ? OpenReportLaunchRouteList() : RepType == 8 ? OpenReportBatchList() : OpenReportBatchGroupReservation();
 
             crystalReportViewer1.ReportSource = rd;
         }

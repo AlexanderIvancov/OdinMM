@@ -68,11 +68,8 @@ namespace Odin.CMB_Components.DeliveryNotes
                     {
                         _DelivNoteId = 0;
 
-                        if (DelivNoteChanged != null)
-                        {
-                            DelivNoteChanged(this);
-                        }
-                        //return;
+                    DelivNoteChanged?.Invoke(this);
+                    //return;
                     //}
 
                     //_PrevId = _DelivNoteId;
@@ -116,10 +113,7 @@ namespace Odin.CMB_Components.DeliveryNotes
                             //DelivNote = dr["name"].ToString();
                             txt_DeliveryNote.Text = dr["name"].ToString();
                         }
-                        if (DelivNoteChanged != null)
-                        {
-                            DelivNoteChanged(this);
-                        }
+                        DelivNoteChanged?.Invoke(this);
                     }
                     else
                     {
@@ -146,19 +140,13 @@ namespace Odin.CMB_Components.DeliveryNotes
             set
             {
                 _DelivNoteSavedId = value;
-                if (DelivNoteSaved != null)
-                {
-                    DelivNoteSaved(this);
-                }
+                DelivNoteSaved?.Invoke(this);
             }
         }
 
         public void DelivNoteSendSave()
         {
-            if (DelivNoteSaved != null)
-            {
-                DelivNoteSaved(this);
-            }
+            DelivNoteSaved?.Invoke(this);
         }
 
         public bool EnableSearchId
@@ -202,8 +190,7 @@ namespace Odin.CMB_Components.DeliveryNotes
                                                 frm.QtyPalettes, frm.PalettesWeight, frm.CreditAccount, frm.IsReturn, frm.NoReversePVN,
                                                 frm.Internal);
                 DelivNoteId = _res;
-                if (DelivNoteChanged != null)
-                    DelivNoteChanged(this);
+                DelivNoteChanged?.Invoke(this);
             }
         }
 
@@ -245,8 +232,7 @@ namespace Odin.CMB_Components.DeliveryNotes
                                                 frm.FinalDelivPlaceId, frm.FinalDelivAddressId, frm.TransportId, frm.IncotermsId,
                                                 frm.QtyPalettes, frm.PalettesWeight, frm.CreditAccount, frm.IsReturn, frm.NoReversePVN,
                                                 frm.Internal);
-                    if (DelivNoteChanged != null)
-                        DelivNoteChanged(this);
+                    DelivNoteChanged?.Invoke(this);
 
                 }
             }

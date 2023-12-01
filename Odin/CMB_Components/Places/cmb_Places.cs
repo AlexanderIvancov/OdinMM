@@ -81,10 +81,7 @@ namespace Odin.CMB_Components.Places
                         IsQuarantine = 0;
                     }
 
-                    if (SelectedValueChanged != null)
-                    {
-                        SelectedValueChanged(this);
-                    }
+                    SelectedValueChanged?.Invoke(this);
                 }
             }
         }
@@ -127,10 +124,7 @@ namespace Odin.CMB_Components.Places
 
         public void ValueChanged()
         {
-            if (SelectedValueChanged != null)
-            {
-                SelectedValueChanged(this);
-            }
+            SelectedValueChanged?.Invoke(this);
         }
 
         private void btn_TreeView_Click(object sender, EventArgs e)

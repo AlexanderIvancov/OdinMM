@@ -64,8 +64,7 @@ namespace Odin.CMB_Components.Launches
                 {
                    
                     ClearFields();
-                    if (LaunchChanged != null)
-                        LaunchChanged(this);
+                    LaunchChanged?.Invoke(this);
                     //if (BatchChanged != null)
                     //{
                     //    BatchChanged(this);

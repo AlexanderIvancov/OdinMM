@@ -13,10 +13,7 @@ namespace Odin.Planning
                 
         private void ctl_CreatBatchDets1_SaveBatch(object sender)
         {
-            if (BatchSaved != null)
-            {
-                BatchSaved(this);
-            }
+            BatchSaved?.Invoke(this);
         }
         
     }

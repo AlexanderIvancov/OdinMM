@@ -1095,10 +1095,7 @@ namespace Odin.Planning.Controls
 
                             //}
 
-                            if (SaveBatch != null)
-                            {
-                                SaveBatch(this);
-                            }
+                            SaveBatch?.Invoke(this);
                         }
                         else
                         {
@@ -1130,10 +1127,7 @@ namespace Odin.Planning.Controls
 
                     }
 
-                    if (SaveBatch != null)
-                    {
-                        SaveBatch(this);
-                    }
+                    SaveBatch?.Invoke(this);
 
                 }
             #endregion

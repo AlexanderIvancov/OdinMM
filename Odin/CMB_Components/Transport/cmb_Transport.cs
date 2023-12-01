@@ -58,10 +58,7 @@ namespace Odin.CMB_Components.Transport
                     return;
                 }
 
-                if (TransportChanged != null)
-                {
-                    TransportChanged(this);
-                }
+                TransportChanged?.Invoke(this);
             }
         }
 
@@ -107,10 +104,7 @@ namespace Odin.CMB_Components.Transport
 
                     _PrevId = _TransportId;
 
-                    if (TransportChanged != null)
-                    {
-                        TransportChanged(this);
-                    }
+                    TransportChanged?.Invoke(this);
 
                 }
             }

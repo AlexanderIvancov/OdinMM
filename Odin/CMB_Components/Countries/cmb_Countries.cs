@@ -55,10 +55,7 @@ namespace Odin.CMB_Components.Countries
                     return;
                 }
 
-                if (CountryChanged != null)
-                {
-                    CountryChanged(this);
-                }
+                CountryChanged?.Invoke(this);
             }
         }
 
@@ -102,10 +99,7 @@ namespace Odin.CMB_Components.Countries
 
                     _PrevId = _CountryId;
 
-                    if (CountryChanged != null)
-                    {
-                        CountryChanged(this);
-                    }
+                    CountryChanged?.Invoke(this);
 
                 }
             }

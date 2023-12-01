@@ -58,9 +58,7 @@ namespace Odin.Planning.Passport
         {
             get
             {
-                if (rb_All.Checked == true)
-                    return -99;
-                else return rb_New.Checked == true ? -1 : rb_Closed.Checked == true ? 0 : 1;
+                return rb_All.Checked == true ? -99 : rb_New.Checked == true ? -1 : rb_Closed.Checked == true ? 0 : 1;
             }
 
         }

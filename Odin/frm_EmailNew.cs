@@ -83,8 +83,7 @@ namespace Odin
 
         private void btn_SendMail_Click(object sender, EventArgs e)
         {
-            if (SendMail != null)
-                SendMail(this);
+            SendMail?.Invoke(this);
             this.ThreadSafeCall(delegate { this.Close(); });
         }
 

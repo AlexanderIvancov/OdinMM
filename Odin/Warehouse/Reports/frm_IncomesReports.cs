@@ -41,9 +41,7 @@ namespace Odin.Warehouse.Reports
         public int Countries
         {
             get {
-                if (rb_LV.Checked == true)
-                    return 1;
-                else return rb_ES.Checked == true ? 2 : rb_3rd.Checked == true ? 3 : 99;
+                return rb_LV.Checked == true ? 1 : rb_ES.Checked == true ? 2 : rb_3rd.Checked == true ? 3 : 99;
             }
             set {
 

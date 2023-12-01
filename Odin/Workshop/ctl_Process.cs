@@ -149,8 +149,7 @@ namespace Odin.Workshop
 
         private void RefreshProcesses(object sender)
         {
-            if (StageUpdating != null)
-                StageUpdating(this);
+            StageUpdating?.Invoke(this);
         }
 
         #endregion

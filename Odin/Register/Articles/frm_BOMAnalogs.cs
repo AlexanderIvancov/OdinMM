@@ -133,8 +133,7 @@ namespace Odin.Register.Articles
 
         private void frm_BOMAnalogs_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (BOMAnalogClosing != null)
-                BOMAnalogClosing(this);
+            BOMAnalogClosing?.Invoke(this);
         }
 
         #endregion

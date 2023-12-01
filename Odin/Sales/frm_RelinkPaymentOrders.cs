@@ -825,8 +825,7 @@ namespace Odin.Sales
 
                 FillPayment(HeadId, COId);
                 FillNotPaid(CustId);
-                if (SaveRelink != null)
-                    SaveRelink(this);
+                SaveRelink?.Invoke(this);
             }
             else
                 glob_Class.ShowMessage("Error in check-in!", "Please check mapped sum!", "Mapped sum can not be more than in payment!");

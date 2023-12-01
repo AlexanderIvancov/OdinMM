@@ -71,10 +71,7 @@ namespace Odin.CMB_Components.Banks
                     return;
                 }
 
-                if (BankChanged != null)
-                {
-                    BankChanged(this);
-                }
+                BankChanged?.Invoke(this);
             }
         }
 
@@ -120,10 +117,7 @@ namespace Odin.CMB_Components.Banks
 
                     _PrevId = _BankId;
 
-                    if (BankChanged != null)
-                    {
-                        BankChanged(this);
-                    }
+                    BankChanged?.Invoke(this);
 
                 }
             }

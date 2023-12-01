@@ -125,10 +125,7 @@ namespace Odin.CMB_Components.Common
                         }
                         break;
                 }
-                if (SelectedValueChanged != null)
-                {
-                    SelectedValueChanged(this);
-                }
+                SelectedValueChanged?.Invoke(this);
             }
         }
 
@@ -168,12 +165,8 @@ namespace Odin.CMB_Components.Common
         {
             SelectId(txt_Common.Text);
 
-            if (SelectedValueChanged != null)
-            {
-                SelectedValueChanged(this);
-                
-            }
-    
+            SelectedValueChanged?.Invoke(this);
+
         }
 
         private void buttonSpecAny1_Click(object sender, EventArgs e)

@@ -255,10 +255,8 @@ namespace Odin.Workshop
                 else
                 {
                     FillList(BatchId, StageId);
-                    if (LaunchStageSaving != null)
-                        LaunchStageSaving(this, gv_List.HorizontalScrollingOffset, StageId);
-                    if (LaunchStageSending != null)
-                        LaunchStageSending(this);
+                    LaunchStageSaving?.Invoke(this, gv_List.HorizontalScrollingOffset, StageId);
+                    LaunchStageSending?.Invoke(this);
                 }
             }
         }

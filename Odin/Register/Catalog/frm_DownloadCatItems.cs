@@ -238,8 +238,7 @@ namespace Odin.Register.Catalog
                 myExcel.Dispose();
                 glob_Class.ShowMessage("Result for downloading", "", "Done!");
 
-                if (CatalogDownloaded != null)
-                    CatalogDownloaded(this);
+                CatalogDownloaded?.Invoke(this);
 
             }
 

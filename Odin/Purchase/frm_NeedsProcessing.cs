@@ -380,19 +380,9 @@ namespace Odin.Purchase
 
             if (Qty > 0)
             {
-                if (Qty < MOQ)
-                {
-                    Ret = globClass.ApprovePOMOQ() == true ? MOQ : Qty;
-                }
-                else
-                {
-                    if (MPQ > 0)
-                    {
-                        Ret = Math.Round((Qty % MPQ), 5) == 0 ? Qty : globClass.ApprovePOMOQ() == true ? Qty - (Qty % MPQ) + MPQ : Qty;
-                    }
-                    else
-                        Ret = Qty;
-                }
+                Ret = Qty < MOQ
+                    ? globClass.ApprovePOMOQ() == true ? MOQ : Qty
+                    : MPQ > 0 ? Math.Round((Qty % MPQ), 5) == 0 ? Qty : globClass.ApprovePOMOQ() == true ? Qty - (Qty % MPQ) + MPQ : Qty : Qty;
             }
 
             return Ret;

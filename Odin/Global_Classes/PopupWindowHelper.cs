@@ -352,10 +352,7 @@ namespace Odin.Global_Classes
         /// popup form that is being closed.</param>
         protected virtual void OnPopupClosed(PopupClosedEventArgs e)
         {
-            if (this.PopupClosed != null)
-            {
-                this.PopupClosed(this, e);
-            }
+            this.PopupClosed?.Invoke(this, e);
         }
 
         private void popup_Cancel(object sender, PopupCancelEventArgs e)
@@ -503,10 +500,7 @@ namespace Odin.Global_Classes
         /// with the cancel event.</param>
         protected virtual void OnCancelPopup(PopupCancelEventArgs e)
         {
-            if (this.PopupCancel != null)
-            {
-                this.PopupCancel(this, e);
-            }
+            this.PopupCancel?.Invoke(this, e);
             if (!e.Cancel)
             {
                 //IsModal = false;

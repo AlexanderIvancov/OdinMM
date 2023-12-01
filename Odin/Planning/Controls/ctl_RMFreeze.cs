@@ -552,8 +552,7 @@ namespace Odin.Planning.Controls
                 FreeQty = AvailableQty;
 
             }
-            if (SendArtId != null)
-                SendArtId(ArtId, true, true, false, true, true);
+            SendArtId?.Invoke(ArtId, true, true, false, true, true);
         }
 
         private void gv_List_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -760,9 +759,8 @@ namespace Odin.Planning.Controls
             Comments = cmb_Articles1.Comments;
             Description = cmb_Articles1.Description;
 
-            if (SendArtId != null)
 
-                SendArtId(ArtId, true, false, false, true, true);
+            SendArtId?.Invoke(ArtId, true, false, false, true, true);
         }
 
         private void cmb_Articles1_ArticleKeyPressed(object sender)
@@ -771,9 +769,8 @@ namespace Odin.Planning.Controls
             Comments = cmb_Articles1.Comments;
             Description = cmb_Articles1.Description;
 
-            if (SendArtId != null)
 
-                SendArtId(ArtId, true, false, false, true, true);
+            SendArtId?.Invoke(ArtId, true, false, false, true, true);
         }
 
         private void cmb_Articles1_ArticleIdReceiving(object sender)
@@ -782,9 +779,8 @@ namespace Odin.Planning.Controls
             Comments = cmb_Articles1.Comments;
             Description = cmb_Articles1.Description;
 
-            if (SendArtId != null)
 
-                SendArtId(ArtId, true, false, false, true, true);
+            SendArtId?.Invoke(ArtId, true, false, false, true, true);
         }
 
         private void cmb_Articles1_ArticleValidated(object sender)
@@ -793,9 +789,8 @@ namespace Odin.Planning.Controls
             Comments = cmb_Articles1.Comments;
             Description = cmb_Articles1.Description;
 
-            if (SendArtId != null)
 
-                SendArtId(ArtId, true, false, false, true, true);
+            SendArtId?.Invoke(ArtId, true, false, false, true, true);
         }
 
 

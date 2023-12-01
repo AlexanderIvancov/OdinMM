@@ -94,8 +94,7 @@ namespace Odin.CMB_Components.Batches
 
                     if (PrevId != BatchId)
                     {
-                        if (BatchChanged != null)
-                            BatchChanged(this);
+                        BatchChanged?.Invoke(this);
                         PrevId = BatchId;
                     }
                     //if (BatchChanged != null)
@@ -212,8 +211,7 @@ namespace Odin.CMB_Components.Batches
 
                     if (PrevId != BatchId)
                     {
-                        if (BatchChanged != null)
-                            BatchChanged(this);
+                        BatchChanged?.Invoke(this);
                         PrevId = BatchId;
                     }
                     //if (BatchChanged != null)
@@ -308,10 +306,7 @@ namespace Odin.CMB_Components.Batches
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (BatchKeyPressed != null)
-                {
-                    BatchKeyPressed(this);
-                }
+                BatchKeyPressed?.Invoke(this);
             }
         }
 

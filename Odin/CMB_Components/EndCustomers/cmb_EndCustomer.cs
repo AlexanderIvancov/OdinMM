@@ -57,10 +57,7 @@ namespace Odin.CMB_Components.EndCustomers
                     return;
                 }
 
-                if (EndCustomerChanged != null)
-                {
-                    EndCustomerChanged(this);
-                }
+                EndCustomerChanged?.Invoke(this);
             }
         }
         public int EndCustomerId
@@ -105,10 +102,7 @@ namespace Odin.CMB_Components.EndCustomers
 
                     _PrevId = _EndCustomerId;
 
-                    if (EndCustomerChanged != null)
-                    {
-                        EndCustomerChanged(this);
-                    }
+                    EndCustomerChanged?.Invoke(this);
 
                 }
             }

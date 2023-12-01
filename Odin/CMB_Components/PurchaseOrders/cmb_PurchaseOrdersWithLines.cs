@@ -320,26 +320,17 @@ namespace Odin.CMB_Components.PurchaseOrders
             _PurchaseOrderLineId = POLineSelectedValue();
 
 
-            if (PurchaseOrderChanged != null)
-            {
-                PurchaseOrderChanged(this);
-            }
+            PurchaseOrderChanged?.Invoke(this);
         }
 
         private void cmb_Lines_Click(object sender, EventArgs e)
         {
-            if (ControlClick != null)
-            {
-                ControlClick(this);
-            }
+            ControlClick?.Invoke(this);
         }
 
         private void txt_PurchaseOrder_Click(object sender, EventArgs e)
         {
-            if (ControlClick != null)
-            {
-                ControlClick(this);
-            }
+            ControlClick?.Invoke(this);
         }
 
         private void btn_AdvView_KeyDown(object sender, KeyEventArgs e)

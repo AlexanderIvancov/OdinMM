@@ -616,8 +616,7 @@ namespace Odin.Sales
                
                 CalcPriceVat();
                 FillAutoDoc();
-                if (SavePayment != null)
-                    SavePayment(this);
+                SavePayment?.Invoke(this);
             }
             else
             {

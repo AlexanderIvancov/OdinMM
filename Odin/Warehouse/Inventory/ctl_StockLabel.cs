@@ -303,8 +303,7 @@ namespace Odin.Warehouse.Inventory
             if (NoExpDate == -1)
                 SINBll.SetNoExpDate(Label);
             ShowDets(Label);
-            if (SaveLabel != null)
-                SaveLabel(this);
+            SaveLabel?.Invoke(this);
         }
 
         private void btn_Add_Click(object sender, EventArgs e)
@@ -387,8 +386,7 @@ namespace Odin.Warehouse.Inventory
             {
                 SIBll.RemoveLabelReservation(Label);
                 ShowDets(Label);
-                if (RemoveReservation != null)
-                    RemoveReservation(this);
+                RemoveReservation?.Invoke(this);
             }
         }
 
@@ -455,8 +453,7 @@ namespace Odin.Warehouse.Inventory
                         }
                     }
                     ShowDets(Label);
-                    if (SaveLabel != null)
-                        SaveLabel(this);
+                    SaveLabel?.Invoke(this);
                 }
             }
         }

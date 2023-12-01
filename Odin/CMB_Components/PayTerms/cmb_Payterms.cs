@@ -57,10 +57,7 @@ namespace Odin.CMB_Components.PayTerms
                     return;
                 }
 
-                if (PaytermsChanged != null)
-                {
-                    PaytermsChanged(this);
-                }
+                PaytermsChanged?.Invoke(this);
             }
         }
 
@@ -106,10 +103,7 @@ namespace Odin.CMB_Components.PayTerms
 
                     _PrevId = _PaytermsId;
 
-                    if (PaytermsChanged != null)
-                    {
-                        PaytermsChanged(this);
-                    }
+                    PaytermsChanged?.Invoke(this);
 
                 }
             }

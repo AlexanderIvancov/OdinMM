@@ -901,9 +901,9 @@ namespace Odin
         AegisImplicitMail.SslMode _mode
         {
             get {
-                if (rb_Auto.Checked == true)
-                    return SslMode.Auto;
-                else return rb_Ssl.Checked == true ? SslMode.Ssl : rb_Tls.Checked == true ? SslMode.Tls : SslMode.None;
+                return rb_Auto.Checked == true
+                    ? SslMode.Auto
+                    : rb_Ssl.Checked == true ? SslMode.Ssl : rb_Tls.Checked == true ? SslMode.Tls : SslMode.None;
 
             }
         }

@@ -107,8 +107,7 @@ namespace Odin.Register.Articles
             {
                 Reg.AddAnalogToBOM(ArtCSEId, ArtId, _analogid);
 
-                if (AnalogChanged != null)
-                    AnalogChanged(this);
+                AnalogChanged?.Invoke(this);
 
             }
         }

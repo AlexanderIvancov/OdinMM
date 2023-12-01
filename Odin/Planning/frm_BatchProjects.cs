@@ -361,18 +361,12 @@ namespace Odin.Planning
             frm.Close();
             bwStart(bw_List);
 
-            if (BatchProjectSaved!= null)
-            {
-                BatchProjectSaved(this);
-            }
+            BatchProjectSaved?.Invoke(this);
         }
 
         private void SaveProject(object sender)
         {
-            if (BatchProjectSaved != null)
-            {
-                BatchProjectSaved(this);
-            }
+            BatchProjectSaved?.Invoke(this);
         }
 
         public void ShowEdit()

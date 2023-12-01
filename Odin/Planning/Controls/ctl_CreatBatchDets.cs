@@ -878,10 +878,7 @@ namespace Odin.Planning.Controls
                         MessageBox.Show("Error during creation of batch header!");
                     }
 
-                    if (SaveBatch != null)
-                    {
-                        SaveBatch(this);
-                    }
+                    SaveBatch?.Invoke(this);
                 }
 
             }
@@ -949,11 +946,8 @@ namespace Odin.Planning.Controls
 
                         }
 
-                        if (SaveBatch != null)
-                        {
-                            SaveBatch(this);
-                        }
-                   
+                    SaveBatch?.Invoke(this);
+
                 }
             }
         }

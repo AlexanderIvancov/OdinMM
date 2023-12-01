@@ -96,10 +96,7 @@ namespace Odin.CMB_Components.SalesOrders
                     return;
                 }
 
-                if (SalesOrderChanged != null)
-                {
-                    SalesOrderChanged(this);
-                }
+                SalesOrderChanged?.Invoke(this);
             }
         }
 
@@ -154,10 +151,7 @@ namespace Odin.CMB_Components.SalesOrders
 
                     _PrevId = _SalesOrderId;
 
-                    if (SalesOrderChanged != null)
-                    {
-                        SalesOrderChanged(this);
-                    }
+                    SalesOrderChanged?.Invoke(this);
 
                 }
             }
@@ -169,19 +163,13 @@ namespace Odin.CMB_Components.SalesOrders
             get { return _SalesOrderSavedId; }
             set {
                 _SalesOrderSavedId = value;
-                if (SalesOrderSaved != null)
-                {
-                    SalesOrderSaved(this);
-                }
+                SalesOrderSaved?.Invoke(this);
             }
         }
 
         public void SalesOrdersSendSave()
         {
-            if (SalesOrderSaved != null)
-            {
-                SalesOrderSaved(this);
-            }
+            SalesOrderSaved?.Invoke(this);
         }
         public bool EnableSearchId
         {
@@ -243,10 +231,7 @@ namespace Odin.CMB_Components.SalesOrders
             {
                 int _res = COBll.AddSalesOrderHead(frm.CustId, frm.ContPersId, frm.Comments, frm.Contract, frm.CurId, frm.IncotermsId);
                 SalesOrderId = _res;
-                if (SalesOrderSaved != null)
-                {
-                    SalesOrderSaved(this);
-                }
+                SalesOrderSaved?.Invoke(this);
             }
             if (result == DialogResult.Cancel)
             {
@@ -282,10 +267,7 @@ namespace Odin.CMB_Components.SalesOrders
                 {
                     COBll.EditSalesOrderHead(_id, frm.CustId, frm.ContPersId, frm.Comments, frm.Contract, frm.CurId, frm.IncotermsId);
                     COBll.COHeadId = _id;
-                    if (SalesOrderSaved != null)
-                    {
-                        SalesOrderSaved(this);
-                    }
+                    SalesOrderSaved?.Invoke(this);
                 }
                 
             }

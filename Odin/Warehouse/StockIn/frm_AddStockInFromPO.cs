@@ -530,8 +530,7 @@ namespace Odin.Warehouse.StockIn
                 FillList(cmb_PurchaseOrders1.PurchaseOrderId);
                 _testresale = false;
 
-                if (StockLineSaved != null)
-                    StockLineSaved(this);
+                StockLineSaved?.Invoke(this);
             }
         }
 

@@ -141,20 +141,14 @@ namespace Odin.CMB_Components.Departments
                 //Shelf = txt_Shelf.Text;
                 if (glob_Class.NES(txt_Department.Text) == "")
                     DeptId = 0;
-                if (SelectedValueChanged != null)
-                {
-                    SelectedValueChanged(this);
-                }
+                SelectedValueChanged?.Invoke(this);
             }
             catch { return; }
         }
 
         public void ValueChanged()
         {
-            if (SelectedValueChanged != null)
-            {
-                SelectedValueChanged(this);
-            }
+            SelectedValueChanged?.Invoke(this);
         }
 
         private void txt_Department_KeyPress(object sender, KeyPressEventArgs e)

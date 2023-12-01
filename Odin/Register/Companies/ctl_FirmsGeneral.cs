@@ -277,10 +277,7 @@ namespace Odin.Register.Companies
                             Comments, SupMark, CustMark, SupPayment, CustPayment, SupIncoterms, CustIncoterms,
                             IsActive, OneC, SupComments, CustPayTerms, TransportId, BankContId);
 
-            if (SendFirmId != null)
-            {
-                SendFirmId(this);
-            }
+            SendFirmId?.Invoke(this);
         }
 
         private void txt_Name_TextChanged(object sender, EventArgs e)

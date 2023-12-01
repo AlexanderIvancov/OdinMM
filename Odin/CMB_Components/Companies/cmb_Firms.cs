@@ -79,10 +79,7 @@ namespace Odin.CMB_Components.Companies
                     }
                 //
 
-                if (FirmsChanged != null)
-                {
-                    FirmsChanged(this);
-                }
+                FirmsChanged?.Invoke(this);
             }
         }
 
@@ -136,10 +133,7 @@ namespace Odin.CMB_Components.Companies
                     VATNr = RegBll.VAT;
                     _PrevId = _FirmId;
 
-                    if (FirmsChanged != null)
-                    {
-                        FirmsChanged(this);
-                    }
+                    FirmsChanged?.Invoke(this);
 
                 }
             }
@@ -170,8 +164,7 @@ namespace Odin.CMB_Components.Companies
         private void buttonSpecAny1_Click(object sender, EventArgs e)
         {
             txt_Firm.Text = string.Empty;
-            if (FirmsChanged != null)
-                FirmsChanged(this);
+            FirmsChanged?.Invoke(this);
         }
 
         private void txt_Firm_TextChanged(object sender, EventArgs e)

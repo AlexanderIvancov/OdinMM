@@ -55,10 +55,7 @@ namespace Odin.CMB_Components.Units
                     return;
                 }
 
-                if (UnitChanged != null)
-                {
-                    UnitChanged(this);
-                }
+                UnitChanged?.Invoke(this);
             }
         }
 
@@ -102,10 +99,7 @@ namespace Odin.CMB_Components.Units
 
                     _PrevId = _UnitId;
 
-                    if (UnitChanged != null)
-                    {
-                        UnitChanged(this);
-                    }
+                    UnitChanged?.Invoke(this);
 
                 }
             }

@@ -63,10 +63,7 @@ namespace Odin.CMB_Components.Requests
                 {
 
                     _RequestId = 0;
-                    if (RequestChanged != null)
-                    {
-                        RequestChanged(this);
-                    }
+                    RequestChanged?.Invoke(this);
                     //return;
                 }
 
@@ -109,10 +106,7 @@ namespace Odin.CMB_Components.Requests
                             txt_Request.Text = dr["name"].ToString();
                         }
 
-                        if (RequestChanged != null)
-                        {
-                            RequestChanged(this);
-                        }
+                        RequestChanged?.Invoke(this);
                     }
                     else
                     {
@@ -138,19 +132,13 @@ namespace Odin.CMB_Components.Requests
             set
             {
                 _RequestSavedId = value;
-                if (RequestSaved != null)
-                {
-                    RequestSaved(this);
-                }
+                RequestSaved?.Invoke(this);
             }
         }
 
         public void OutcomeDocSendSave()
         {
-            if (RequestSaved != null)
-            {
-                RequestSaved(this);
-            }
+            RequestSaved?.Invoke(this);
         }
 
         public bool EnableSearchId
@@ -212,10 +200,7 @@ namespace Odin.CMB_Components.Requests
                 if (result == DialogResult.OK)
                 {
                     Bll.EditRequestHead(RequestId, frm.Comments, frm.ProdPlaceId);
-                    if (RequestChanged != null)
-                    {
-                        RequestChanged(this);
-                    }
+                    RequestChanged?.Invoke(this);
                 }
             }
         }

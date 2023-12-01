@@ -786,10 +786,7 @@ namespace Odin.Planning.Controls
                         MessageBox.Show("Error during creation of batch header!");
                     }
 
-                    if (SaveBatch != null)
-                    {
-                        SaveBatch(this);
-                    }
+                    SaveBatch?.Invoke(this);
                 }
 
             }
@@ -830,11 +827,8 @@ namespace Odin.Planning.Controls
                             _tmp = PlanBll.AddBatchDetail(BatchId, Convert.ToInt32(row.Cells["cn_nArtId"].Value), Convert.ToDouble(row.Cells["cn_nQtyInBatch"].Value), row.Cells["cn_Comments"].Value.ToString());
                     }
 
-                    if (SaveBatch != null)
-                    {
-                        SaveBatch(this);
-                    }
-                   
+                    SaveBatch?.Invoke(this);
+
                 }
             }
         }

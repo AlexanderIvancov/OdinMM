@@ -94,10 +94,7 @@ namespace Odin.CMB_Components.PurchaseOrders
                     return;
                 }
 
-                if (PurchaseOrderChanged != null)
-                {
-                    PurchaseOrderChanged(this);
-                }
+                PurchaseOrderChanged?.Invoke(this);
             }
         }
 
@@ -153,10 +150,7 @@ namespace Odin.CMB_Components.PurchaseOrders
 
                     _PrevId = _PurchaseOrderId;
 
-                    if (PurchaseOrderChanged != null)
-                    {
-                        PurchaseOrderChanged(this);
-                    }
+                    PurchaseOrderChanged?.Invoke(this);
 
                 }
             }
@@ -170,19 +164,13 @@ namespace Odin.CMB_Components.PurchaseOrders
             set
             {
                 _PurchaseOrderSavedId = value;
-                if (PurchaseOrderSaved != null)
-                {
-                    PurchaseOrderSaved(this);
-                }
+                PurchaseOrderSaved?.Invoke(this);
             }
         }
 
         public void PurchaseOrdersSendSave()
         {
-            if (PurchaseOrderSaved != null)
-            {
-                PurchaseOrderSaved(this);
-            }
+            PurchaseOrderSaved?.Invoke(this);
         }
 
         public bool EnableSearchId
@@ -249,11 +237,8 @@ namespace Odin.CMB_Components.PurchaseOrders
 
                 PurchaseOrderId = _res;
 
-                if (PurchaseOrderSaved != null)
-                {
-                    PurchaseOrderSaved(this);
-                }
-               
+                PurchaseOrderSaved?.Invoke(this);
+
             }
             if (result == DialogResult.Cancel)
             {
@@ -300,10 +285,7 @@ namespace Odin.CMB_Components.PurchaseOrders
                     POBll.POHeadId = _id;
                     _PrevId = 0;
                     PurchaseOrderId = _id;
-                    if (PurchaseOrderSaved != null)
-                    {
-                        PurchaseOrderSaved(this);
-                    }
+                    PurchaseOrderSaved?.Invoke(this);
 
                 }
                 

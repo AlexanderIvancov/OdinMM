@@ -14,8 +14,7 @@ namespace Odin.Warehouse.Requests
 
         private void ctl_CreatReqDets1_SaveRequest(object sender)
         {
-            if (RequestDetsSaved != null)
-                RequestDetsSaved(this);
+            RequestDetsSaved?.Invoke(this);
         }
     }
 }

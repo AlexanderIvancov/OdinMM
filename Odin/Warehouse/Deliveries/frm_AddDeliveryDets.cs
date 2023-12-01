@@ -768,8 +768,7 @@ namespace Odin.Warehouse.Deliveries
                             if (Internal == -1)
                                 DLBll.AddDeliveryLineInternal(_res);
 
-                            if (StockDeliveryLineSaved != null)
-                                StockDeliveryLineSaved(this);
+                            StockDeliveryLineSaved?.Invoke(this);
                             bwStart(bw_List);
                         }
                         else

@@ -258,21 +258,18 @@ namespace Odin.Register.Catalog
 
         private void btn_OK_Click(object sender, EventArgs e)
         {
-            if (CatSaved != null)
-                CatSaved(this);
+            CatSaved?.Invoke(this);
         }
 
         private void btn_Cancel_Click(object sender, EventArgs e)
         {
-            if (CatClosed != null)
-                CatClosed(this);
+            CatClosed?.Invoke(this);
             this.Close();
         }
 
         private void frm_AddCatItem_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (CatClosed != null)
-                CatClosed(this);
+            CatClosed?.Invoke(this);
         }
 
         private void buttonSpecAny4_Click(object sender, EventArgs e)

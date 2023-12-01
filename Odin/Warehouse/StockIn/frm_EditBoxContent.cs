@@ -117,8 +117,7 @@ namespace Odin.Warehouse.StockIn
 
         private void btn_Close_Click(object sender, EventArgs e)
         {
-            if (FormClosed1 != null)
-                FormClosed1(this);
+            FormClosed1?.Invoke(this);
             //this.Close();
         }
         public string ErrorMessage

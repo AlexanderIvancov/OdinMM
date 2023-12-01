@@ -306,8 +306,7 @@ namespace Odin.Warehouse.Deliveries
 
         private void btn_OK_Click(object sender, EventArgs e)
         {
-            if (AddBoxes != null)
-                AddBoxes(gv_List);
+            AddBoxes?.Invoke(gv_List);
         }
 
         private void txt_Oper_KeyPress(object sender, KeyPressEventArgs e)

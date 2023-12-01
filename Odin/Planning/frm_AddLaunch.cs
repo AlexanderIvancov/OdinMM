@@ -15,8 +15,7 @@ namespace Odin.Planning
 
         private void ctl_CreatLaunchDets1_SaveLaunch(object sender)
         {
-            if (LaunchSaved != null)
-                LaunchSaved(this);
+            LaunchSaved?.Invoke(this);
         }
     }
 }

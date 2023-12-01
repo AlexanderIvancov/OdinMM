@@ -300,10 +300,7 @@ namespace Odin.Warehouse.StockIn
             //Deallocation
             if (_NewInwardId != 0)
             {
-                if (EditSendStockInId != null)
-                {
-                    EditSendStockInId(this);
-                }
+                EditSendStockInId?.Invoke(this);
             }
             else
             {
@@ -313,10 +310,7 @@ namespace Odin.Warehouse.StockIn
                                                                 MessageBoxIcon.Warning,
                                                                 TaskDialogButtons.OK);
 
-                if (EditSendStockInId != null)
-                {
-                    EditSendStockInId(this);
-                }
+                EditSendStockInId?.Invoke(this);
             }
 
            

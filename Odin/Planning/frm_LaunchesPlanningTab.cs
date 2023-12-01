@@ -187,14 +187,11 @@ namespace Odin.Planning
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
-                if (Convert.ToInt32(row.Cells["cn_iscomplected"].Value) == -1)
-                    row.DefaultCellStyle.BackColor = Color.White;
-                else
-                {
-                    row.DefaultCellStyle.BackColor = Convert.ToInt32(row.Cells["cn_isstarted"].Value) == -1
+                row.DefaultCellStyle.BackColor = Convert.ToInt32(row.Cells["cn_iscomplected"].Value) == -1
+                    ? Color.White
+                    : Convert.ToInt32(row.Cells["cn_isstarted"].Value) == -1
                         ? Color.LightSkyBlue
                         : row.Cells["cn_printedby"].Value.ToString() != "" ? Color.LightGreen : Color.LightCoral;
-                }
                 if (Convert.ToInt32(row.Cells["cn_isactive"].Value) == 0)
                     row.DefaultCellStyle.BackColor = Color.Gainsboro;
             }

@@ -71,10 +71,7 @@ namespace Odin.Sales
             frm.Close();
             FillBatches(COId);
 
-            if (BatchChanged != null)
-            {
-                BatchChanged(this);
-            }
+            BatchChanged?.Invoke(this);
         }
 
         private double QtyInBatch()

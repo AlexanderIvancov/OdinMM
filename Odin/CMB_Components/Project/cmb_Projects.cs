@@ -69,10 +69,7 @@ namespace Odin.CMB_Components.Project
                     return;
                 }
 
-                if (ProjectsChanged != null)
-                {
-                    ProjectsChanged(this);
-                }
+                ProjectsChanged?.Invoke(this);
             }
         }
         public int ProjectId
@@ -117,10 +114,7 @@ namespace Odin.CMB_Components.Project
 
                     _PrevId = _ProjectId;
 
-                    if (ProjectsChanged != null)
-                    {
-                        ProjectsChanged(this);
-                    }
+                    ProjectsChanged?.Invoke(this);
 
                 }
             }

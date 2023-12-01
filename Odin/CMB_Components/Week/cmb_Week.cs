@@ -77,10 +77,7 @@ namespace Odin.CMB_Components.Week
 
         public void ValueChanged()
         {
-            if (SelectedValueChanged != null)
-            {
-                SelectedValueChanged(this);
-            }
+            SelectedValueChanged?.Invoke(this);
         }
 
         public void DatesOfWeek(DateTime date)
@@ -156,10 +153,7 @@ namespace Odin.CMB_Components.Week
 
             DatesOfWeek(_date);
 
-            if (SelectedValueChanged != null)
-            {
-                SelectedValueChanged(this);
-            }
+            SelectedValueChanged?.Invoke(this);
         }
 
         private void btn_Previous_Click(object sender, EventArgs e)
@@ -200,10 +194,7 @@ namespace Odin.CMB_Components.Week
 
             DatesOfWeek(_date);
 
-            if (SelectedValueChanged != null)
-            {
-                SelectedValueChanged(this);
-            }
+            SelectedValueChanged?.Invoke(this);
         }
 
         private void txt_Week_TextChanged(object sender, EventArgs e)
@@ -224,10 +215,7 @@ namespace Odin.CMB_Components.Week
                 DatesOfWeek(System.DateTime.Now);
             }
 
-            if (SelectedValueChanged != null)
-            {
-                SelectedValueChanged(this);
-            }
+            SelectedValueChanged?.Invoke(this);
         }
 
         #endregion

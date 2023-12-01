@@ -190,8 +190,7 @@ namespace Odin.Planning.Controls
         private void cmb_Articles1_ArticleChanged(object sender)
         {
             ArtId = cmb_Articles1.ArticleId;
-            if (SendBatchId != null)
-                SendBatchId(ArtId, true, false, false, true, false);
+            SendBatchId?.Invoke(ArtId, true, false, false, true, false);
         }
 
         private void btn_Release_Click(object sender, EventArgs e)
@@ -208,8 +207,7 @@ namespace Odin.Planning.Controls
 
             FillGrid(ArtId);
 
-            if (SendBatchId != null)
-                SendBatchId(ArtId, true, true, true, true, false);
+            SendBatchId?.Invoke(ArtId, true, true, true, true, false);
         }
 
         private void btn_Add_Click(object sender, EventArgs e)
@@ -276,8 +274,7 @@ namespace Odin.Planning.Controls
                     //Notifications for flags
 
                     POBLL.AddPONotificationBatch(_poid);
-                    if (SendBatchId != null)
-                        SendBatchId(ArtId, true, true, true, true, false);
+                    SendBatchId?.Invoke(ArtId, true, true, true, true, false);
                 }
             }
         }

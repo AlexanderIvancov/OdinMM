@@ -96,8 +96,7 @@ namespace Odin.Planning
 
                 CheckSerialNumbers();
 
-                if (SendChanges != null)
-                    SendChanges(this);
+                SendChanges?.Invoke(this);
             }
         }
 

@@ -172,8 +172,7 @@ namespace Odin.Workshop
         private void btn_AddProcess_Click(object sender, EventArgs e)
         {
             PBLL.AddStageProcess(BatchId, StageId, PrevStageId, tPrevQty, 1);
-            if (BatchStageSaving != null)
-                BatchStageSaving(this);
+            BatchStageSaving?.Invoke(this);
         }
 
         private void btn_DeleteProcess_Click(object sender, EventArgs e)
@@ -189,15 +188,13 @@ namespace Odin.Workshop
             {
                 PBLL.AddStageProcess(BatchId, PrevStageId, StageId, InProcQty - tInProcQty, 1);
             }
-            if (BatchStageSaving != null)
-                BatchStageSaving(this);
+            BatchStageSaving?.Invoke(this);
         }
         
         private void btn_Freeze_Click(object sender, EventArgs e)
         {
             PBLL.FreezeStageProcess(BatchId, StageId, tFreezedQty);
-            if (BatchStageSaving != null)
-                BatchStageSaving(this);
+            BatchStageSaving?.Invoke(this);
         }
         
         #endregion
