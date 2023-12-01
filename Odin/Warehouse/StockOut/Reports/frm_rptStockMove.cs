@@ -68,6 +68,9 @@ namespace Odin.Warehouse.StockOut.Reports
         { get; set; }
         public string GroupName
         { get; set; }
+        public string Stencil
+        { get; set; }
+
         Helper MyHelper = new Helper();
 
         #endregion
@@ -180,7 +183,7 @@ namespace Odin.Warehouse.StockOut.Reports
             report.SetParameterValue("Warnings", _warnings.TrimStart());
             report.SetParameterValue("QtyLab", "Кол-во в партии:");
             report.SetParameterValue("Serials", Serials);
-            report.SetParameterValue("Stencil", StockMove_BLL.GetStencil(Article));
+            report.SetParameterValue("Stencil", Stencil);
 
             return report;
 
@@ -241,7 +244,7 @@ namespace Odin.Warehouse.StockOut.Reports
             report.SetParameterValue("Warnings", _warnings.TrimStart());
             report.SetParameterValue("QtyLab", "Кол-во в зап.:");
             report.SetParameterValue("Serials", Serials);
-            report.SetParameterValue("Stencil", StockMove_BLL.GetStencil(Article));
+            report.SetParameterValue("Stencil", Stencil);
             return report;
 
         }
