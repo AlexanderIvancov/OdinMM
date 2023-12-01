@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using Odin.Tools;
+using System;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
-using Odin.CMB_Components.BLL;
 using System.Data.SqlClient;
-using Odin.Tools;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.Register.Catalog
 {

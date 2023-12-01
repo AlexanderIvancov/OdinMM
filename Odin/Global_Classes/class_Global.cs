@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.Data.SqlClient;
+﻿using ComponentFactory.Krypton.Toolkit;
+using System;
 using System.Data;
-using System.Text.RegularExpressions;
-using ComponentFactory.Krypton.Toolkit;
+using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace Odin.Global_Classes
 {

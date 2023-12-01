@@ -1,15 +1,12 @@
-﻿using System;
+﻿using DataMatrix.net;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
-using System.Windows.Forms;
 using System.Drawing;
-using DataMatrix.net;
-using System.Threading.Tasks;
 using System.Drawing.Printing;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace Odin.Global_Classes
 {
@@ -853,7 +850,7 @@ namespace Odin.Global_Classes
             if (reader.HasRows)
             {
                 reader.Read();
-                _res = Convert.ToInt32(reader["mblimit"]) == 0 ? false : true;
+                _res = Convert.ToInt32(reader["mblimit"]) != 0;
                 reader.Close();
             }
             else

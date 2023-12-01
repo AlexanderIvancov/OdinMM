@@ -1,23 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
-using Odin.Global_Classes;
-using Odin.Tools;
-using System.Data.SqlClient;
-using System.Threading;
-using Odin.CustomControls;
-using Odin.Planning;
-using Odin.CMB_Components.BLL;
-using System.Configuration;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Npgsql;
+using Odin.CMB_Components.BLL;
+using Odin.Global_Classes;
+using System;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
 
 namespace Odin.Workshop
 {

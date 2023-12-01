@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AegisImplicitMail;
+using System;
 using System.ComponentModel;
-using System.Collections;
-using System.Linq;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Drawing.Printing;
+using System.Linq;
 using System.Text;
 //using AdvancedDataGridView;
 //using EmailHandler;
 using System.Windows.Forms;
-using System.Drawing;
-using System.Drawing.Printing;
-using AegisImplicitMail;
-using System.IO;
 
 namespace Odin.Global_Classes
 {

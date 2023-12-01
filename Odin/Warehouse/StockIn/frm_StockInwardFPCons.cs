@@ -1,20 +1,16 @@
-﻿using System;
+﻿using AdvancedDataGridView;
+using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using Odin.Tools;
+using Odin.Warehouse.StockOut;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
-using Odin.Global_Classes;
-using Odin.Tools;
-using System.Data.SqlClient;
-using AdvancedDataGridView;
-using Odin.Warehouse.StockOut;
-using Odin.Warehouse.Deliveries;
 namespace Odin.Warehouse.StockIn
 {
     public partial class frm_StockInwardFPCons : KryptonForm

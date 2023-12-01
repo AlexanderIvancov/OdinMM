@@ -6,9 +6,10 @@
     {
     }
 }
-namespace Odin.Warehouse.DataSets {
-    
-    
+namespace Odin.Warehouse.DataSets
+{
+
+
     public partial class StockPrint_DataSet {
     }
 }

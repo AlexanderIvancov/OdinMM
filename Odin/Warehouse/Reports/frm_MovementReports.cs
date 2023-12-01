@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using ComponentFactory.Krypton.Toolkit;
 using CrystalDecisions.CrystalReports.Engine;
 using Odin.Global_Classes;
-using ComponentFactory.Krypton.Workspace;
-using ComponentFactory.Krypton.Toolkit;
 using Odin.Tools;
+using System;
+using System.ComponentModel;
+using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.Warehouse.Reports
 {
@@ -146,7 +141,7 @@ namespace Odin.Warehouse.Reports
             {
                 ReportDocument rd;
 
-                rd = OpenReport(data, chk_Summary.CheckState == CheckState.Checked ? true : false);
+                rd = OpenReport(data, chk_Summary.CheckState == CheckState.Checked);
 
                 crystalReportViewer1.ReportSource = rd;
             });

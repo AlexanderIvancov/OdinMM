@@ -1,18 +1,13 @@
-﻿using System;
+﻿using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using Odin.Tools;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using CrystalDecisions.CrystalReports.Engine;
-using Odin.Global_Classes;
-using ComponentFactory.Krypton.Workspace;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Tools;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.Sales.Reports
 {

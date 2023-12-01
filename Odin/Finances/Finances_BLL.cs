@@ -1,11 +1,7 @@
-﻿using System;
+﻿using Odin.Global_Classes;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
 using System.Data;
-using Odin.Global_Classes;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace Odin.Finances

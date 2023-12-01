@@ -1,23 +1,18 @@
-﻿using System;
+﻿using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using Odin.Register;
+using Odin.Register.Articles;
+using Odin.Tools;
+using Odin.Warehouse.Inventory;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
-using Odin.Global_Classes;
-using Odin.Tools;
 using System.Data.SqlClient;
-using System.Threading;
-using Odin.Register.Articles;
-using Odin.Warehouse.Inventory;
-using Odin.Register;
-using System.Text.RegularExpressions;
+using System.Drawing;
 using System.IO;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
 namespace Odin.Warehouse.StockIn
 {
     public partial class frm_AddStockPlacement : KryptonForm

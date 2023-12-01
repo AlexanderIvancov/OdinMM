@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using Odin.Tools;
+using Odin.Warehouse.StockOut;
+using System;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Odin.Global_Classes;
-using Odin.Warehouse.StockOut;
-using Odin.Tools;
 using System.Data.SqlClient;
-using ComponentFactory.Krypton.Toolkit;
+using System.Drawing;
+using System.Windows.Forms;
 namespace Odin.Warehouse.Requests
 {
     public partial class frm_EnabledRequests : KryptonForm
