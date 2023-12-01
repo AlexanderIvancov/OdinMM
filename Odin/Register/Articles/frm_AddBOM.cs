@@ -254,8 +254,11 @@ namespace Odin.Register.Articles
                     }
                     else res = res + component + separatingStrings[0];
                 }
+                res = res.Substring(0, res.Length - 2);
             }
             catch { }
+            Clipboard.Clear();
+            Clipboard.SetText(res.Replace(", ", "\n"));
             return res.Substring(0, res.Length - 2);
         }
     }
