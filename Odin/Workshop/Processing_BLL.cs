@@ -165,15 +165,13 @@ namespace Odin.Workshop
 
         public static DataTable getShifts(int stageid, int shiftid, int placeid, int typeselection)
         {
-            string query = "";
-            if (typeselection == 1) //All
-                query = "select id, name as stage from bas_shifts where stageid = isnull(nullif(" + stageid + ", 0), stageid) " + 
-                " and shiftid = isnull(nullif(" + shiftid + ", 0), shiftid) and placeid = isnull(nullif(" + placeid + ", 0), placeid) order by id";
-            else if (typeselection == 0) //Production
-                query = "select sh.id, sh.name as stage from bas_shifts sh inner join bas_stages s on s.id = sh.stageid where (isnull(s.quality, 0) = 0 and s.id != 4 and s.id != 9) and stageid = isnull(nullif(" + stageid + ", 0), stageid) " +
-                               " and shiftid = isnull(nullif(" + shiftid + ", 0), shiftid) and placeid = isnull(nullif(" + placeid + ", 0), placeid) order by sh.id";
-            else //Quality
-                query = "select sh.id, sh.name as stage from bas_shifts sh inner join bas_stages s on s.id = sh.stageid where (isnull(s.quality, 0) = -1 or s.id = 4 or s.id = 9) and stageid = isnull(nullif(" + stageid + ", 0), stageid) " +
+            string query = typeselection == 1
+                ? "select id, name as stage from bas_shifts where stageid = isnull(nullif(" + stageid + ", 0), stageid) " +
+                " and shiftid = isnull(nullif(" + shiftid + ", 0), shiftid) and placeid = isnull(nullif(" + placeid + ", 0), placeid) order by id"
+                : typeselection == 0
+                ? "select sh.id, sh.name as stage from bas_shifts sh inner join bas_stages s on s.id = sh.stageid where (isnull(s.quality, 0) = 0 and s.id != 4 and s.id != 9) and stageid = isnull(nullif(" + stageid + ", 0), stageid) " +
+                               " and shiftid = isnull(nullif(" + shiftid + ", 0), shiftid) and placeid = isnull(nullif(" + placeid + ", 0), placeid) order by sh.id"
+                : "select sh.id, sh.name as stage from bas_shifts sh inner join bas_stages s on s.id = sh.stageid where (isnull(s.quality, 0) = -1 or s.id = 4 or s.id = 9) and stageid = isnull(nullif(" + stageid + ", 0), stageid) " +
                                 " and shiftid = isnull(nullif(" + shiftid + ", 0), shiftid) and placeid = isnull(nullif(" + placeid + ", 0), placeid) order by sh.id";
             return Helper.QueryDT(query);
         }

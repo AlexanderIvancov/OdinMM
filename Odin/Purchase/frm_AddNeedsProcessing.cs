@@ -275,20 +275,13 @@ namespace Odin.Purchase
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? String.IsNullOrEmpty(CellValue) == true
+                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
+                    : String.IsNullOrEmpty(CellValue) == true
+                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -301,10 +294,9 @@ namespace Odin.Purchase
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
-                else
-                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
+                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             //SetCellsColor();
@@ -405,20 +397,13 @@ namespace Odin.Purchase
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_Batches.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValueB) == true)
-                        bs_Batches.Filter = "(" + ColumnNameB + " is null OR Convert(" + ColumnNameB + ", 'System.String') = '')";
-                    else
-                        bs_Batches.Filter = "Convert(" + ColumnNameB + " , 'System.String') = '" + glob_Class.NES(CellValueB) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValueB) == true)
-                        bs_Batches.Filter = bs_Batches.Filter + "AND (" + ColumnNameB + " is null OR Convert(" + ColumnNameB + ", 'System.String') = '')";
-                    else
-                        bs_Batches.Filter = bs_Batches.Filter + " AND Convert(" + ColumnNameB + " , 'System.String') = '" + glob_Class.NES(CellValueB) + "'";
-                }
+                bs_Batches.Filter = String.IsNullOrEmpty(bs_Batches.Filter) == true
+                    ? String.IsNullOrEmpty(CellValueB) == true
+                        ? "(" + ColumnNameB + " is null OR Convert(" + ColumnNameB + ", 'System.String') = '')"
+                        : "Convert(" + ColumnNameB + " , 'System.String') = '" + glob_Class.NES(CellValueB) + "'"
+                    : String.IsNullOrEmpty(CellValueB) == true
+                        ? bs_Batches.Filter + "AND (" + ColumnNameB + " is null OR Convert(" + ColumnNameB + ", 'System.String') = '')"
+                        : bs_Batches.Filter + " AND Convert(" + ColumnNameB + " , 'System.String') = '" + glob_Class.NES(CellValueB) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -431,10 +416,9 @@ namespace Odin.Purchase
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_Batches.Filter) == true)
-                    bs_Batches.Filter = "Convert(" + ColumnNameB + " , 'System.String') <> '" + CellValueB + "'";
-                else
-                    bs_Batches.Filter = bs_Batches.Filter + " AND " + ColumnNameB + " <> '" + CellValueB + "'";
+                bs_Batches.Filter = String.IsNullOrEmpty(bs_Batches.Filter) == true
+                    ? "Convert(" + ColumnNameB + " , 'System.String') <> '" + CellValueB + "'"
+                    : bs_Batches.Filter + " AND " + ColumnNameB + " <> '" + CellValueB + "'";
             }
             catch { }
             //SetCellsColor();

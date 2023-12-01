@@ -111,10 +111,7 @@ namespace Odin.Personnel
                                    " from prod_capacityshifts cs " +
                                    " where cs.date = convert(datetime, @date) ", param.ToArray()));
 
-                if (_qty != _capa)
-                    cell.Style.BackColor = Color.LightPink;
-                else
-                    cell.Style.BackColor = Color.White;
+                cell.Style.BackColor = _qty != _capa ? Color.LightPink : Color.White;
             }
         }
         #endregion
@@ -199,10 +196,7 @@ namespace Odin.Personnel
                                " from prod_capacityshifts cs " +
                                " where cs.date = convert(datetime, @date) ", param.ToArray()));
 
-            if (_qty != _capa)
-                cell.Style.BackColor = Color.LightPink;
-            else
-                cell.Style.BackColor = Color.White;
+            cell.Style.BackColor = _qty != _capa ? Color.LightPink : Color.White;
 
         }
     }

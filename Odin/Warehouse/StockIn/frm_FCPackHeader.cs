@@ -103,17 +103,12 @@ namespace Odin.Warehouse.StockIn
 
         public int IsClosed
         {
-            get { if (chk_Closed.Checked == true)
-                    return -1;
-                else
-                    return 0;
+            get {
+                return chk_Closed.Checked == true ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_Closed.Checked = true;
-                else
-                    chk_Closed.Checked = false;
+                chk_Closed.Checked = value == -1;
             }
         }
         #region Controls
@@ -125,14 +120,11 @@ namespace Odin.Warehouse.StockIn
 
         public void CheckEmpty()
         {
-            if (BatchId == 0
-                || ArtId == 0
-                || Package == ""
-                || String.IsNullOrEmpty(Package) == true
-                || Qty <= 0)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = BatchId != 0
+                && ArtId != 0
+                && Package != ""
+                && String.IsNullOrEmpty(Package) != true
+                && Qty > 0;
         }
 
         private void txt_Package_TextChanged(object sender, EventArgs e)
@@ -218,12 +210,10 @@ namespace Odin.Warehouse.StockIn
                 e.KeyChar = System.Threading.Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
                 e.Handled = s.Text.Contains(e.KeyChar);
             }
-            else if (e.KeyChar == '-')
-            {
-                e.Handled = s.Text.Contains(e.KeyChar);
-            }
             else
-                e.Handled = !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar);
+            {
+                e.Handled = e.KeyChar == '-' ? s.Text.Contains(e.KeyChar) : !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar);
+            }
         }
 
         private void ShowScreenNumKeyboard(TextBox _focusedtextbox)
@@ -268,13 +258,8 @@ namespace Odin.Warehouse.StockIn
         {
             get
             {
-                if (rb_Valkas2.Checked == true)
-                    return 1;
-                else if (rb_Valkas2B.Checked == true)
-                    return 2;
-                else
-                    return 0;
-             
+                return rb_Valkas2.Checked == true ? 1 : rb_Valkas2B.Checked == true ? 2 : 0;
+
             }
             set
             {

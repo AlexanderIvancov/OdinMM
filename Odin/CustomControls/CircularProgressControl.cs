@@ -57,14 +57,7 @@ namespace Odin.CustomControls
             }
             set
             {
-                if (value > 0)
-                {
-                    m_Interval = value;
-                }
-                else
-                {
-                    m_Interval = DEFAULT_INTERVAL;
-                }
+                m_Interval = value > 0 ? value : DEFAULT_INTERVAL;
             }
         }
 

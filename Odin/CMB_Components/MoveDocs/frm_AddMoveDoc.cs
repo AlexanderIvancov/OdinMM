@@ -129,10 +129,7 @@ namespace Odin.CMB_Components.MoveDocs
         {
             get
             {
-                if (txt_DelivDate.Value == null)
-                    return "";
-                else
-                    return txt_DelivDate.Value.ToString();
+                return txt_DelivDate.Value == null ? "" : txt_DelivDate.Value.ToString();
             }
             set
             {

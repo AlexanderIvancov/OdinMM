@@ -79,14 +79,7 @@ namespace Odin.CMB_Components.Articles
 
             bool success = Int32.TryParse(DAL.DefaultValue("unit"), out number);
 
-            if (success)
-            {
-                frm.UnitId = number;
-            }
-            else
-            {
-                frm.UnitId = 0;
-            }
+            frm.UnitId = success ? number : 0;
 
             DialogResult result = frm.ShowDialog();
 

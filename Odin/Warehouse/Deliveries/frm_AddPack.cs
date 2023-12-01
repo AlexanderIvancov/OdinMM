@@ -59,11 +59,8 @@ namespace Odin.Warehouse.Deliveries
         }
         public void CheckEmpty()
         {
-            if (Package == ""
-                || String.IsNullOrEmpty(Package) == true)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = Package != ""
+                && String.IsNullOrEmpty(Package) != true;
 
         }
 

@@ -75,10 +75,7 @@ namespace Odin.CMB_Components.IncomeDocs
         {
             get
             {
-                if (txt_RegDate.Value == null)
-                    return "";
-                else
-                    return txt_RegDate.Value.ToString();
+                return txt_RegDate.Value == null ? "" : txt_RegDate.Value.ToString();
             }
             set
             {
@@ -149,10 +146,7 @@ namespace Odin.CMB_Components.IncomeDocs
         {
             get
             {
-                if (txt_AdvanceDate.Value == null)
-                    return "";
-                else
-                    return txt_AdvanceDate.Value.ToString();
+                return txt_AdvanceDate.Value == null ? "" : txt_AdvanceDate.Value.ToString();
             }
             set
             {
@@ -167,10 +161,7 @@ namespace Odin.CMB_Components.IncomeDocs
         {
             get
             {
-                if (txt_PayDate.Value == null)
-                    return "";
-                else
-                    return txt_PayDate.Value.ToString();
+                return txt_PayDate.Value == null ? "" : txt_PayDate.Value.ToString();
             }
             set
             {
@@ -191,15 +182,9 @@ namespace Odin.CMB_Components.IncomeDocs
         public int NoReversePVN
         {
             get {
-                if (chk_noreversepvn.Checked == true)
-                    return -1;
-                else
-                    return 0;
+                return chk_noreversepvn.Checked == true ? -1 : 0;
             }
-            set { if (value == -1)
-                    chk_noreversepvn.Checked = true;
-                else
-                    chk_noreversepvn.Checked = false;
+            set { chk_noreversepvn.Checked = value == -1;
             }
         }
         public double MediatedCost
@@ -217,17 +202,11 @@ namespace Odin.CMB_Components.IncomeDocs
         {
             get
             {
-                if (chk_Check.Checked == true)
-                    return -1;
-                else
-                    return 0;
+                return chk_Check.Checked == true ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_Check.Checked = true;
-                else
-                    chk_Check.Checked = false;
+                chk_Check.Checked = value == -1;
             }
         }
 
@@ -261,22 +240,12 @@ namespace Odin.CMB_Components.IncomeDocs
         public void CheckEmpty()
         {
             btn_OK.ThreadSafeCall(delegate {
-                if (IncomeDoc == ""
-                    || string.IsNullOrEmpty(IncomeDoc) == true
-                    || SupId == 0
-                    || CurId == 0
-                    || CurRate == 0)
-                {
-                    btn_OK.Enabled = false;
-                }
-                else
-                {
-                    btn_OK.Enabled = true;
-                }
-                if (DLL.CheckIncomeDocSameName(Id, IncomeDoc) != 0)
-                    txt_IncomeDoc.StateCommon.Back.Color1 = Color.LightPink;
-                else
-                    txt_IncomeDoc.StateCommon.Back.Color1 = Color.White;
+                btn_OK.Enabled = IncomeDoc != ""
+                    && string.IsNullOrEmpty(IncomeDoc) != true
+                    && SupId != 0
+                    && CurId != 0
+                    && CurRate != 0;
+                txt_IncomeDoc.StateCommon.Back.Color1 = DLL.CheckIncomeDocSameName(Id, IncomeDoc) != 0 ? Color.LightPink : Color.White;
             });
         }
 
@@ -321,10 +290,7 @@ namespace Odin.CMB_Components.IncomeDocs
             {
                 DLL.ShowCurRate(CurId, RegDate.Trim() == "" ? System.DateTime.Now.ToShortDateString() : RegDate.Trim());
                 CurRate = DLL.CurRate;
-                if (CurRate == 0)
-                    txt_CurRate.StateCommon.Back.Color1 = Color.Red;
-                else
-                    txt_CurRate.StateCommon.Back.Color1 = Color.White;
+                txt_CurRate.StateCommon.Back.Color1 = CurRate == 0 ? Color.Red : Color.White;
             });
 
             CheckEmpty();

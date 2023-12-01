@@ -49,12 +49,9 @@ namespace Odin.CMB_Components.Currencies
 
         public void CheckEmpty()
         {
-            if (cmb_Currency1.CurrencyId == 0
-                || UnitCoef == 0
-                || Rate == 0)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = cmb_Currency1.CurrencyId != 0
+                && UnitCoef != 0
+                && Rate != 0;
         }
 
         private void cmb_Currency1_CurrencyChanged(object sender)

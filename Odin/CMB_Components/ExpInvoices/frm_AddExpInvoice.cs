@@ -29,21 +29,14 @@ namespace Odin.CMB_Components.ExpInvoices
             get { return _isedit; }
             set { _isedit = value;
 
-                if (_isedit == true)
-                { gp_Type.Enabled = false; }
-                else
-                { gp_Type.Enabled = true; }
+                gp_Type.Enabled = _isedit != true;
             }
         }
 
         public int InvoiceType
         {
-            get { if (rb_Invoice.Checked == true)
-                    return 3;
-                else if (rb_CreditNote.Checked == true)
-                    return 5;
-                else
-                    return 13;
+            get {
+                return rb_Invoice.Checked == true ? 3 : rb_CreditNote.Checked == true ? 5 : 13;
             }
 
             set { if (value == 3)
@@ -158,10 +151,7 @@ namespace Odin.CMB_Components.ExpInvoices
         {
             get
             {
-                if (txt_PayBefore.Value == null)
-                    return "";
-                else
-                    return txt_PayBefore.Value.ToString();
+                return txt_PayBefore.Value == null ? "" : txt_PayBefore.Value.ToString();
             }
             set
             {
@@ -177,10 +167,7 @@ namespace Odin.CMB_Components.ExpInvoices
         {
             get
             {
-                if (txt_PayDate.Value == null)
-                    return "";
-                else
-                    return txt_PayDate.Value.ToString();
+                return txt_PayDate.Value == null ? "" : txt_PayDate.Value.ToString();
             }
             set
             {
@@ -255,10 +242,7 @@ namespace Odin.CMB_Components.ExpInvoices
         {
             get
             {
-                if (txt_AdvanceDate.Value == null)
-                    return "";
-                else
-                    return txt_AdvanceDate.Value.ToString();
+                return txt_AdvanceDate.Value == null ? "" : txt_AdvanceDate.Value.ToString();
             }
             set
             {
@@ -290,16 +274,11 @@ namespace Odin.CMB_Components.ExpInvoices
 
         public int ValueForCustoms
         {
-            get { if (chk_ValueForCustoms.Checked == true)
-                    return -1;
-                else
-                    return 0;
+            get {
+                return chk_ValueForCustoms.Checked == true ? -1 : 0;
             }
             set {
-                if (value == -1)
-                    chk_ValueForCustoms.Checked = true;
-                else
-                    chk_ValueForCustoms.Checked = false;
+                chk_ValueForCustoms.Checked = value == -1;
             }
         }
 
@@ -307,17 +286,11 @@ namespace Odin.CMB_Components.ExpInvoices
         {
             get
             {
-                if (chk_esignature.Checked == true)
-                    return -1;
-                else
-                    return 0;
+                return chk_esignature.Checked == true ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_esignature.Checked = true;
-                else
-                    chk_esignature.Checked = false;
+                chk_esignature.Checked = value == -1;
             }
         }
 
@@ -333,54 +306,25 @@ namespace Odin.CMB_Components.ExpInvoices
 
         public void CheckEmpty()
         {
-            if (cmb_Firms1.FirmId == 0)
-                cmb_Firms1.IsEmptyColor = true;
-            else
-                cmb_Firms1.IsEmptyColor = false;
-            if (cmb_Firms2.FirmId == 0)
-                cmb_Firms2.IsEmptyColor = true;
-            else
-                cmb_Firms2.IsEmptyColor = false;
-            if (cmb_Address1.AddressId == 0)
-                cmb_Address1.IsEmptyColor = true;
-            else
-                cmb_Address1.IsEmptyColor = false;
-            if (cmb_Address2.AddressId == 0)
-                cmb_Address2.IsEmptyColor = true;
-            else
-                cmb_Address2.IsEmptyColor = false;
-            if (cmb_Incoterms1.IncotermId == 0)
-                cmb_Incoterms1.IsEmptyColor = true;
-            else
-                cmb_Incoterms1.IsEmptyColor = false;
-            if (cmb_Bargain1.BargainCode == ""
-                || String.IsNullOrEmpty(cmb_Bargain1.Bargain) == true)
-                cmb_Bargain1.IsEmptyColor = true;
-            else
-                cmb_Bargain1.IsEmptyColor = false;
-            if (cmb_BankCont.SelectedValue == 0)
-                cmb_BankCont.IsEmptyColor = true;
-            else
-                cmb_BankCont.IsEmptyColor = false;
-            if (cmb_Asset.SelectedValue == 0)
-                cmb_Asset.IsEmptyColor = true;
-            else
-                cmb_Asset.IsEmptyColor = false;
-            if (cmb_PlaceOfLoading.SelectedValue == 0)
-                cmb_PlaceOfLoading.IsEmptyColor = true;
-            else
-                cmb_PlaceOfLoading.IsEmptyColor = false;
+            cmb_Firms1.IsEmptyColor = cmb_Firms1.FirmId == 0;
+            cmb_Firms2.IsEmptyColor = cmb_Firms2.FirmId == 0;
+            cmb_Address1.IsEmptyColor = cmb_Address1.AddressId == 0;
+            cmb_Address2.IsEmptyColor = cmb_Address2.AddressId == 0;
+            cmb_Incoterms1.IsEmptyColor = cmb_Incoterms1.IncotermId == 0;
+            cmb_Bargain1.IsEmptyColor = cmb_Bargain1.BargainCode == ""
+                || String.IsNullOrEmpty(cmb_Bargain1.Bargain) == true;
+            cmb_BankCont.IsEmptyColor = cmb_BankCont.SelectedValue == 0;
+            cmb_Asset.IsEmptyColor = cmb_Asset.SelectedValue == 0;
+            cmb_PlaceOfLoading.IsEmptyColor = cmb_PlaceOfLoading.SelectedValue == 0;
 
 
             btn_OK.ThreadSafeCall(delegate {
-                if (ReceiverId == 0
-                    || CurId == 0
-                    || Invoice == ""
-                    || string.IsNullOrEmpty(Invoice) == true
-                    || BankContId == 0)
-                    btn_OK.Enabled = false;
-                else
-                    btn_OK.Enabled = true; });
+                btn_OK.Enabled = ReceiverId != 0
+                    && CurId != 0
+                    && Invoice != ""
+                    && string.IsNullOrEmpty(Invoice) != true
+                    && BankContId != 0;
+            });
         }
 
         public bool IsEmptyFields()
@@ -414,17 +358,9 @@ namespace Odin.CMB_Components.ExpInvoices
         public void FillDoc()
         {
             
-            if (InvoiceType == 3)
-                InvCode = 11;
-            else if (InvoiceType == 5)
-                InvCode = 12;
-            else
-                InvCode = 13;
+            InvCode = InvoiceType == 3 ? 11 : InvoiceType == 5 ? 12 : 13;
 
-            if (InvoiceType != 5)
-                Invoice = DLL.AutoDoc(InvCode, System.DateTime.Now.ToShortDateString());
-            else
-                Invoice = "";
+            Invoice = InvoiceType != 5 ? DLL.AutoDoc(InvCode, System.DateTime.Now.ToShortDateString()) : "";
         }
 
         public void FillSellerContPersons()

@@ -30,10 +30,7 @@ namespace Odin.CMB_Components.Batches
         {
             get { return _enabled; }
             set { _enabled = value;
-                if (_enabled == -1)
-                    txt_Batch.Enabled = true;
-                else
-                    txt_Batch.Enabled = false;
+                txt_Batch.Enabled = _enabled == -1;
             }
         }
 
@@ -45,10 +42,7 @@ namespace Odin.CMB_Components.Batches
             set
             {
                 _clearbutton = value;
-                if (_clearbutton == -1)
-                    buttonSpecAny1.Visible = true;
-                else
-                    buttonSpecAny1.Visible = false;
+                buttonSpecAny1.Visible = _clearbutton == -1;
             }
         }
 

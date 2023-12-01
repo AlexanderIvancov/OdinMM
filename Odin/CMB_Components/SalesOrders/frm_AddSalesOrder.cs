@@ -78,10 +78,7 @@ namespace Odin.CMB_Components.SalesOrders
 
         public void CheckEmpty()
         {
-            if (cmb_Firms1.FirmId == 0)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = cmb_Firms1.FirmId != 0;
         }
         #endregion
 

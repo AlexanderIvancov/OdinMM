@@ -31,10 +31,7 @@ namespace Odin.CMB_Components.Banks
             set
             {
                 _isemptycolor = value;
-                if (value == true)
-                    txt_Bank.StateCommon.Back.Color1 = Color.LightPink;
-                else
-                    txt_Bank.StateCommon.Back.Color1 = Color.White;
+                txt_Bank.StateCommon.Back.Color1 = value == true ? Color.LightPink : Color.White;
             }
         }
 

@@ -61,10 +61,7 @@ namespace Odin.Warehouse.Deliveries
             ////
             DataTable data = new DataTable();
             DataTable datalab = new DataTable();
-            if (DelivNoteType == 1)
-                data = DelivNote_BLL.getDeliveryDetsPrint(HeadId);
-            else
-                data = DelivNote_BLL.getDeliveryDetsPrintMov(HeadId);
+            data = DelivNoteType == 1 ? DelivNote_BLL.getDeliveryDetsPrint(HeadId) : DelivNote_BLL.getDeliveryDetsPrintMov(HeadId);
 
 
             string short_name = "";

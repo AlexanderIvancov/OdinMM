@@ -183,17 +183,11 @@ namespace Odin.Sales
         {
             get
             {
-                if (chk_IsService.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_IsService.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_IsService.CheckState = CheckState.Checked;
-                else
-                    chk_IsService.CheckState = CheckState.Unchecked;
+                chk_IsService.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 
@@ -201,17 +195,11 @@ namespace Odin.Sales
         {
             get
             {
-                if (chk_AdditCost.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_AdditCost.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_AdditCost.CheckState = CheckState.Checked;
-                else
-                    chk_AdditCost.CheckState = CheckState.Unchecked;
+                chk_AdditCost.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 
@@ -247,17 +235,11 @@ namespace Odin.Sales
         {
             get
             {
-                if (chk_ispaid.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_ispaid.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_ispaid.CheckState = CheckState.Checked;
-                else
-                    chk_ispaid.CheckState = CheckState.Unchecked;
+                chk_ispaid.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 
@@ -265,17 +247,11 @@ namespace Odin.Sales
         {
             get
             {
-                if (chk_isactive.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_isactive.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_isactive.CheckState = CheckState.Checked;
-                else
-                    chk_isactive.CheckState = CheckState.Unchecked;
+                chk_isactive.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
         public string SalesComments

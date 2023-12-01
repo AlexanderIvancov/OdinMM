@@ -682,10 +682,7 @@ namespace Odin.Global_Classes
                 _r = Convert.ToInt32(Helper.GetOneRecord("select distinct dbo.fn_CheckIncomeControlFin(" + IdIn + ")"));
             }
             catch { }
-            if (_r == 0)
-                _res = false;
-            else
-                _res = true;
+            _res = _r != 0;
 
             return _res;
         }
@@ -699,10 +696,7 @@ namespace Odin.Global_Classes
                 _r = Convert.ToInt32(Helper.GetOneRecord("select distinct dbo.fn_CheckCoC(" + POLineId + ", " + HeadId + ")"));
             }
             catch { }
-            if (_r == 0)
-                _res = false;
-            else
-                _res = true;
+            _res = _r != 0;
 
             //SqlConnection sqlConn = new SqlConnection(sConnStr);
             //string strSQL = "select distinct dbo.fn_CheckIncomeControl(" + POLineId + ") as res";
@@ -1308,20 +1302,14 @@ namespace Odin.Global_Classes
         public bool CheckProduction(int placeid)
         {
 
-            if ((Convert.ToInt32(Helper.GetOneRecord("select isnull(isproduction, 0) as isproduction from sto_shelves where id = " + placeid))) == -1)
-                return true;
-            else
-                return false;
+            return (Convert.ToInt32(Helper.GetOneRecord("select isnull(isproduction, 0) as isproduction from sto_shelves where id = " + placeid))) == -1;
 
         }
 
         public bool CheckCostPrice(int idin)
         {
 
-            if (Convert.ToInt32(Helper.GetOneRecord("select dbo.fn_CheckCostPrice(" + idin + ")")) == -1)
-                return true;
-            else
-                return false;
+            return Convert.ToInt32(Helper.GetOneRecord("select dbo.fn_CheckCostPrice(" + idin + ")")) == -1;
 
         }
 
@@ -1365,10 +1353,7 @@ namespace Odin.Global_Classes
                 res = -1;
             }
 
-            if (res == -1)
-                return true;
-            else
-                return false;
+            return res == -1;
 
         }
 

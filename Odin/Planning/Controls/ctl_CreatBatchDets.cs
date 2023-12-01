@@ -59,10 +59,7 @@ namespace Odin.Planning.Controls
         {
             get
             {
-                if (txt_StartDate.Value == null)
-                    return "";
-                else
-                    return txt_StartDate.Value.ToString();
+                return txt_StartDate.Value == null ? "" : txt_StartDate.Value.ToString();
             }
             set
             {
@@ -77,10 +74,7 @@ namespace Odin.Planning.Controls
         {
             get
             {
-                if (txt_EndDate.Value == null)
-                    return "";
-                else
-                    return txt_EndDate.Value.ToString();
+                return txt_EndDate.Value == null ? "" : txt_EndDate.Value.ToString();
             }
             set
             {
@@ -128,16 +122,11 @@ namespace Odin.Planning.Controls
         { get; set; }
         public int Urgent
         {
-            get { if (chk_Urgent.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+            get {
+                return chk_Urgent.CheckState == CheckState.Checked ? -1 : 0;
             }
             set {
-                if (value == -1)
-                    chk_Urgent.Checked = true;
-                else
-                    chk_Urgent.Checked = false;
+                chk_Urgent.Checked = value == -1;
             }
         }
 
@@ -211,15 +200,9 @@ namespace Odin.Planning.Controls
 
         public bool CheckEmpty()
         {
-            if (ArticleId == 0
-                || QtyInBatch == 0
-                || StartDate == ""
-                //|| EndDate == ""
-                //|| (Convert.ToDateTime(StartDate) > Convert.ToDateTime(EndDate))
-                )
-                return false;
-            else
-                return true;
+            return ArticleId != 0
+                && QtyInBatch != 0
+                && StartDate != "";
 
         }
 
@@ -490,18 +473,16 @@ namespace Odin.Planning.Controls
                 //Recalc CSE QTY
                 if (Spoilage == -1)
                 {
-                    if (_tmpQtyWithSpoil > Convert.ToDouble(node.Cells["cn_nQtyAvailable"].Value))
-                        _tmpQtyCSE = _tmpQtyWithSpoil - Convert.ToDouble(node.Cells["cn_nQtyAvailable"].Value);
-                    else
-                         _tmpQtyCSE = 0;
+                    _tmpQtyCSE = _tmpQtyWithSpoil > Convert.ToDouble(node.Cells["cn_nQtyAvailable"].Value)
+                        ? _tmpQtyWithSpoil - Convert.ToDouble(node.Cells["cn_nQtyAvailable"].Value)
+                        : 0;
                     _tmpQtyRM = _tmpQtyWithSpoil - _tmpQtyCSE;
                 }
                 else
                 {
-                    if (_tmpQtyWOSpoil > Convert.ToDouble(node.Cells["cn_nQtyAvailable"].Value))
-                        _tmpQtyCSE = _tmpQtyWOSpoil - Convert.ToDouble(node.Cells["cn_nQtyAvailable"].Value);
-                    else
-                        _tmpQtyCSE = 0;
+                    _tmpQtyCSE = _tmpQtyWOSpoil > Convert.ToDouble(node.Cells["cn_nQtyAvailable"].Value)
+                        ? _tmpQtyWOSpoil - Convert.ToDouble(node.Cells["cn_nQtyAvailable"].Value)
+                        : 0;
                     _tmpQtyRM = _tmpQtyWOSpoil - _tmpQtyCSE;
                 }
 
@@ -519,13 +500,7 @@ namespace Odin.Planning.Controls
             }
             else
             {
-                if (Spoilage == -1)
-                {
-
-                    node.Cells["cn_nQtyInBatch"].Value = _tmpQtyWithSpoil;
-                }
-                else
-                    node.Cells["cn_nQtyInBatch"].Value = _tmpQtyWOSpoil;
+                node.Cells["cn_nQtyInBatch"].Value = Spoilage == -1 ? _tmpQtyWithSpoil : (object)_tmpQtyWOSpoil;
             }
             SetCellsColor();
         }
@@ -662,17 +637,10 @@ namespace Odin.Planning.Controls
             if (tv_BOM.CurrentRow.Cells["cn_nWithSpoil"].Selected == true)
             {
                 tv_BOM.EndEdit();
-                if (Convert.ToInt16(tv_BOM.CurrentRow.Cells["cn_nWithSpoil"].Value) == -1)
-                    _tmpSpoil = -1;
-                else
-                    _tmpSpoil = 0;
+                _tmpSpoil = Convert.ToInt16(tv_BOM.CurrentRow.Cells["cn_nWithSpoil"].Value) == -1 ? -1 : 0;
 
-                double _tmpQtyCSE = 0;
-                    //Recalc RM QTY
-                if (node.Level == 1)
-                    _tmpQtyCSE = QtyInBatch;
-                else
-                    _tmpQtyCSE = Convert.ToDouble(node.Parent.Cells["cn_nSubProdQty"].Value);
+                double _tmpQtyCSE = node.Level == 1 ? QtyInBatch : Convert.ToDouble(node.Parent.Cells["cn_nSubProdQty"].Value);
+                //Recalc RM QTY
 
 
                 double _tmpPerc = 0;
@@ -688,10 +656,9 @@ namespace Odin.Planning.Controls
                 if (Convert.ToDouble(node.Cells["cn_nSubProdQty"].Value) > 0
                             && node.HasChildren == true)
                 {
-                    if (_tmpSpoil == 0)
-                        node.Cells["cn_nQtyInBatch"].Value = _tmpQtyWOSpoil - Convert.ToDouble(node.Cells["cn_nSubProdQty"].Value);
-                    else
-                        node.Cells["cn_nQtyInBatch"].Value = _tmpQtyWithSpoil - Convert.ToDouble(node.Cells["cn_nSubProdQty"].Value);
+                    node.Cells["cn_nQtyInBatch"].Value = _tmpSpoil == 0
+                        ? _tmpQtyWOSpoil - Convert.ToDouble(node.Cells["cn_nSubProdQty"].Value)
+                        : (object)(_tmpQtyWithSpoil - Convert.ToDouble(node.Cells["cn_nSubProdQty"].Value));
                     //Recalc children
                     foreach (TreeGridNode node1 in node.Nodes)
                     {
@@ -700,10 +667,7 @@ namespace Odin.Planning.Controls
                 }
                 else
                 {
-                    if (_tmpSpoil == 0)
-                        node.Cells["cn_nQtyInBatch"].Value = _tmpQtyWOSpoil;
-                    else
-                        node.Cells["cn_nQtyInBatch"].Value = _tmpQtyWithSpoil;
+                    node.Cells["cn_nQtyInBatch"].Value = _tmpSpoil == 0 ? _tmpQtyWOSpoil : (object)_tmpQtyWithSpoil;
                 }
 
             }
@@ -714,10 +678,7 @@ namespace Odin.Planning.Controls
             if (_EditMode == 0)
             {
 
-                if (AllSpoil == 0)
-                    AllSpoil = -1;
-                else
-                    AllSpoil = 0;
+                AllSpoil = AllSpoil == 0 ? -1 : 0;
 
                 if (AllSpoil == -1)
                 {
@@ -1059,12 +1020,8 @@ namespace Odin.Planning.Controls
             if (node.Cells["cn_nSubProdQty"].Selected == true
                 && node.HasChildren == true)
             {
-                double _tmpQtyCSE = 0;
+                double _tmpQtyCSE = node.Level == 1 ? QtyInBatch : Convert.ToDouble(node.Parent.Cells["cn_nSubProdQty"].Value);
                 //Recalc RM QTY
-                if (node.Level == 1)
-                    _tmpQtyCSE = QtyInBatch;
-                else
-                    _tmpQtyCSE = Convert.ToDouble(node.Parent.Cells["cn_nSubProdQty"].Value);
 
 
                 double _tmpPerc = 0;
@@ -1078,10 +1035,9 @@ namespace Odin.Planning.Controls
                                                                                 * _tmpPerc + Convert.ToDouble(node.Cells["cn_nSpoilConst"].Value)
                                                                                 , Convert.ToInt32(node.Cells["cn_nNumDecimals"].Value));
 
-                if (AllSpoil == 0) 
-                    node.Cells["cn_nQtyInBatch"].Value = _tmpQtyWOSpoil - Convert.ToDouble(node.Cells["cn_nSubProdQty"].Value);
-                else
-                    node.Cells["cn_nQtyInBatch"].Value = _tmpQtyWithSpoil - Convert.ToDouble(node.Cells["cn_nSubProdQty"].Value);
+                node.Cells["cn_nQtyInBatch"].Value = AllSpoil == 0
+                    ? _tmpQtyWOSpoil - Convert.ToDouble(node.Cells["cn_nSubProdQty"].Value)
+                    : (object)(_tmpQtyWithSpoil - Convert.ToDouble(node.Cells["cn_nSubProdQty"].Value));
                 //Recalc children
                 foreach (TreeGridNode node1 in node.Nodes)
                 {
@@ -1095,17 +1051,10 @@ namespace Odin.Planning.Controls
             {
                 int _tmpSpoil = 0;
                 tv_BOM.EndEdit();
-                if (Convert.ToInt16(tv_BOM.CurrentRow.Cells["cn_nWithSpoil"].Value) == -1)
-                    _tmpSpoil = -1;
-                else
-                    _tmpSpoil = 0;
+                _tmpSpoil = Convert.ToInt16(tv_BOM.CurrentRow.Cells["cn_nWithSpoil"].Value) == -1 ? -1 : 0;
 
-                double _tmpQtyCSE = 0;
+                double _tmpQtyCSE = node.Level == 1 ? QtyInBatch : Convert.ToDouble(node.Parent.Cells["cn_nSubProdQty"].Value);
                 //Recalc RM QTY
-                if (node.Level == 1)
-                    _tmpQtyCSE = QtyInBatch;
-                else
-                    _tmpQtyCSE = Convert.ToDouble(node.Parent.Cells["cn_nSubProdQty"].Value);
 
 
                 double _tmpPerc = 0;
@@ -1121,10 +1070,9 @@ namespace Odin.Planning.Controls
                 if (Convert.ToDouble(node.Cells["cn_nSubProdQty"].Value) > 0
                             && node.HasChildren == true)
                 {
-                    if (_tmpSpoil == 0)
-                        node.Cells["cn_nQtyInBatch"].Value = _tmpQtyWOSpoil - Convert.ToDouble(node.Cells["cn_nSubProdQty"].Value);
-                    else
-                        node.Cells["cn_nQtyInBatch"].Value = _tmpQtyWithSpoil - Convert.ToDouble(node.Cells["cn_nSubProdQty"].Value);
+                    node.Cells["cn_nQtyInBatch"].Value = _tmpSpoil == 0
+                        ? _tmpQtyWOSpoil - Convert.ToDouble(node.Cells["cn_nSubProdQty"].Value)
+                        : (object)(_tmpQtyWithSpoil - Convert.ToDouble(node.Cells["cn_nSubProdQty"].Value));
                     //Recalc children
                     foreach (TreeGridNode node1 in node.Nodes)
                     {
@@ -1133,10 +1081,7 @@ namespace Odin.Planning.Controls
                 }
                 else
                 {
-                    if (_tmpSpoil == 0)
-                        node.Cells["cn_nQtyInBatch"].Value = _tmpQtyWOSpoil;
-                    else
-                        node.Cells["cn_nQtyInBatch"].Value = _tmpQtyWithSpoil;
+                    node.Cells["cn_nQtyInBatch"].Value = _tmpSpoil == 0 ? _tmpQtyWOSpoil : (object)_tmpQtyWithSpoil;
                 }
             }
 

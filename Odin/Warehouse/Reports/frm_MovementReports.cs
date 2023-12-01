@@ -40,12 +40,7 @@ namespace Odin.Warehouse.Reports
         {
             get
             {
-                if (rb_InProduction.Checked == true)
-                    return 1;
-                else if (rb_FromProduction.Checked == true)
-                    return 2;
-                else 
-                    return 3;
+                return rb_InProduction.Checked == true ? 1 : rb_FromProduction.Checked == true ? 2 : 3;
             }
             set
             {
@@ -115,14 +110,11 @@ namespace Odin.Warehouse.Reports
         public void bw_List(object sender, DoWorkEventArgs e)
         {
             
-            DataTable data;
-            if (chk_Summary.CheckState == CheckState.Checked)
-                data = StockRep_BLL.getMovementReportsSum(cmb_Types1.TypeId, OperType, txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
+            DataTable data = chk_Summary.CheckState == CheckState.Checked
+                ? StockRep_BLL.getMovementReportsSum(cmb_Types1.TypeId, OperType, txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
+                                           txt_CreatDateTill.Value == null ? "" : txt_CreatDateTill.Value.ToString().Trim())
+                : StockRep_BLL.getMovementReports(cmb_Types1.TypeId, OperType, txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
                                            txt_CreatDateTill.Value == null ? "" : txt_CreatDateTill.Value.ToString().Trim());
-            else
-                data = StockRep_BLL.getMovementReports(cmb_Types1.TypeId, OperType, txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
-                                           txt_CreatDateTill.Value == null ? "" : txt_CreatDateTill.Value.ToString().Trim());
-
             gv_List.ThreadSafeCall(delegate
             {
                 gv_List.AutoGenerateColumns = false;
@@ -151,12 +143,7 @@ namespace Odin.Warehouse.Reports
         public ReportDocument OpenReport(DataTable data, bool isum)
         {
             ReportDocument report = new ReportDocument();
-            string repname = "";
-            if (isum == true)
-                repname = "rpt_MovementReportSum.rpt";
-            else
-                repname = "rpt_MovementReport.rpt";
-
+            string repname = isum == true ? "rpt_MovementReportSum.rpt" : "rpt_MovementReport.rpt";
             report.FileName = Application.StartupPath + "\\Warehouse\\Reports\\" + repname;
 
 
@@ -248,20 +235,13 @@ namespace Odin.Warehouse.Reports
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? String.IsNullOrEmpty(CellValue) == true
+                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
+                    : String.IsNullOrEmpty(CellValue) == true
+                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -275,10 +255,9 @@ namespace Odin.Warehouse.Reports
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
-                else
-                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
+                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             //SetCellsColor();

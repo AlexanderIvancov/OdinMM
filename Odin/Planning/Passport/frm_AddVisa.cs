@@ -29,10 +29,7 @@ namespace Odin.Planning.Passport
 
         public void CheckEmpty()
         {
-            if (txt_Comments.Text == "")
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = txt_Comments.Text != "";
         }
 
         private void txt_Comments_TextChanged(object sender, EventArgs e)

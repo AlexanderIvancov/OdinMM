@@ -109,17 +109,11 @@ namespace Odin.DataCollection
         {
             get
             {
-                if (chk_IsLast.Checked == true)
-                    return -1;
-                else
-                    return 0;
+                return chk_IsLast.Checked == true ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_IsLast.Checked = true;
-                else
-                    chk_IsLast.Checked = false;
+                chk_IsLast.Checked = value == -1;
             }
         }
         Processing_BLL ProdBll = new Processing_BLL();
@@ -258,12 +252,10 @@ namespace Odin.DataCollection
                 e.KeyChar = System.Threading.Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
                 e.Handled = s.Text.Contains(e.KeyChar);
             }
-            else if (e.KeyChar == '-')
-            {
-                e.Handled = s.Text.Contains(e.KeyChar);
-            }
             else
-                e.Handled = !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar);
+            {
+                e.Handled = e.KeyChar == '-' ? s.Text.Contains(e.KeyChar) : !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar);
+            }
         }
 
         private void ShowScreenNumKeyboard(KryptonTextBox _focusedtextbox)
@@ -397,11 +389,8 @@ namespace Odin.DataCollection
         {
             int _res = Convert.ToInt32(Helper.GetOneRecord("select lh.id from PROD_LaunchHead lh where lh.id = " + LaunchId + " and isnull(lh.qualvisaby, '') != '' and isnull(lh.ingenvisaby, '') != ''"));
             int _res1 = Convert.ToInt32(Helper.GetOneRecord("select lh.id from PROD_LaunchAdditVisas lh where lh.launchid = " + LaunchId + " and isnull(lh.qualvisaby, '') != '' and isnull(lh.ingenvisaby, '') != ''"));
-            if (_res == 0
-                && _res1 == 0)
-                lbl_Viza.Visible = true;
-            else
-                lbl_Viza.Visible = false;
+            lbl_Viza.Visible = _res == 0
+                && _res1 == 0;
         }
 
         private void btn_ChangeLaunch_Click(object sender, EventArgs e)

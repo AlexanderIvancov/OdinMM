@@ -407,12 +407,9 @@ namespace Odin.DataCollection
             );
             lbl_Batch.ThreadSafeCall(delegate
             {
-                if (StateId == 0)
-                    lbl_Batch.Text = ScanDataReceived.scanLaunchLabel;
-                else if (StateId == 1)
-                    lbl_Batch.Text = ScanDataReceived.finishLaunch + Launch + ScanDataReceived.finishLaunch1;
-                else
-                    lbl_Batch.Text = ScanDataReceived.lunchBreak;
+                lbl_Batch.Text = StateId == 0
+                    ? ScanDataReceived.scanLaunchLabel
+                    : StateId == 1 ? ScanDataReceived.finishLaunch + Launch + ScanDataReceived.finishLaunch1 : ScanDataReceived.lunchBreak;
                 lbl_Batch.Visible = true;
             }
             );

@@ -93,10 +93,7 @@ namespace Odin.Register.Companies
 
         public void CheckEmpty()
         {
-            if (String.IsNullOrEmpty(FullName) == true)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = String.IsNullOrEmpty(FullName) != true;
         }
 
         private void txt_FullName_TextChanged(object sender, EventArgs e)

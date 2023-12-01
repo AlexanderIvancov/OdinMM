@@ -388,12 +388,8 @@ namespace Odin
         private String getCPNURL(String cpn, int pageNumber, int pageSize, String currency, String endCustomer, String version)
         {
 
-            String url = "";
-
-            if (endCustomer != null)
-            {
-
-                url = string.Format(
+            string url = endCustomer != null
+                ? string.Format(
 
                 "https://my.arrow.com/api/priceandavail/cpns/{0}/parts/?currency={1}&pageNumber={2}&pageSize={3}&version={4}&endCustomer={5}",
 
@@ -409,15 +405,8 @@ namespace Odin
 
                 Uri.EscapeDataString(endCustomer)
 
-                );
-
-            }
-            else
-            {
-
-
-
-                url = string.Format(
+                )
+                : string.Format(
 
                 "https://my.arrow.com/api/priceandavail/cpns/{0}/parts/?currency={1}&pageNumber={2}&pageSize={3}&version={4}",
 
@@ -430,9 +419,6 @@ namespace Odin
                 Uri.EscapeDataString(pageSize + ""),
 
                 Uri.EscapeDataString(version));
-
-            }
-
             return url;
 
 
@@ -917,12 +903,7 @@ namespace Odin
             get {
                 if (rb_Auto.Checked == true)
                     return SslMode.Auto;
-                else if (rb_Ssl.Checked == true)
-                    return SslMode.Ssl;
-                else if (rb_Tls.Checked == true)
-                    return SslMode.Tls;
-                else
-                    return SslMode.None;
+                else return rb_Ssl.Checked == true ? SslMode.Ssl : rb_Tls.Checked == true ? SslMode.Tls : SslMode.None;
 
             }
         }

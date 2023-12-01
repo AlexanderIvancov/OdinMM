@@ -60,10 +60,7 @@ namespace Odin.CMB_Components.Addresses
             set
             {
                 _isemptycolor = value;
-                if (value == true)
-                    txt_Address.StateCommon.Back.Color1 = Color.LightPink;
-                else
-                    txt_Address.StateCommon.Back.Color1 = Color.White;
+                txt_Address.StateCommon.Back.Color1 = value == true ? Color.LightPink : Color.White;
             }
         }
 

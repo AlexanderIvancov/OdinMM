@@ -87,17 +87,11 @@ namespace Odin.Planning
         {
             get
             {
-                if (chk_SubBatch.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_SubBatch.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_SubBatch.CheckState = CheckState.Checked;
-                else
-                    chk_SubBatch.CheckState = CheckState.Unchecked;
+                chk_SubBatch.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 
@@ -105,17 +99,11 @@ namespace Odin.Planning
         {
             get
             {
-                if (chk_Active.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_Active.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_Active.CheckState = CheckState.Checked;
-                else
-                    chk_Active.CheckState = CheckState.Unchecked;
+                chk_Active.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 
@@ -123,17 +111,11 @@ namespace Odin.Planning
         {
             get
             {
-                if (chk_dnp.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_dnp.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_dnp.CheckState = CheckState.Checked;
-                else
-                    chk_dnp.CheckState = CheckState.Unchecked;
+                chk_dnp.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 
@@ -186,11 +168,8 @@ namespace Odin.Planning
         }
         public void CheckEmpty()
         {
-            if ((BatchDetId == 0 && Qty == 0)
-                || ArtId == 0)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = (BatchDetId != 0 || Qty != 0)
+                && ArtId != 0;
 
         }
 

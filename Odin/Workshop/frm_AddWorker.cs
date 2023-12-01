@@ -37,17 +37,11 @@ namespace Odin.Workshop
         {
             get
             {
-                if (chk_IsActive.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_IsActive.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_IsActive.CheckState = CheckState.Checked;
-                else
-                    chk_IsActive.CheckState = CheckState.Unchecked;
+                chk_IsActive.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 
@@ -55,17 +49,11 @@ namespace Odin.Workshop
         {
             get
             {
-                if (chk_ismaster.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_ismaster.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_ismaster.CheckState = CheckState.Checked;
-                else
-                    chk_ismaster.CheckState = CheckState.Unchecked;
+                chk_ismaster.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
         public string UserTabNR
@@ -76,12 +64,9 @@ namespace Odin.Workshop
 
         public void CheckEmpty()
         {
-            if ((String.IsNullOrEmpty(UserName) == true
-                && String.IsNullOrEmpty(UserSurName) == true)
-                || String.IsNullOrEmpty(UserTabNR) == true)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = (String.IsNullOrEmpty(UserName) != true
+                || String.IsNullOrEmpty(UserSurName) != true)
+                && String.IsNullOrEmpty(UserTabNR) != true;
         }
 
         private void buttonSpecAny7_Click(object sender, EventArgs e)

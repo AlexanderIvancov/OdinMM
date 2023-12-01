@@ -49,19 +49,13 @@ namespace Odin.Workshop
                 {
                     chk_Replace.CheckState = CheckState.Unchecked;
                     chk_Replace.BackColor = Color.LightGreen;
-                    if (BatchId != 0)
-                        ScanOrder = 2;
-                    else
-                        ScanOrder = 1;
+                    ScanOrder = BatchId != 0 ? 2 : 1;
                 }
                 else
                 {
                     chk_Replace.CheckState = CheckState.Checked;
                     chk_Replace.BackColor = Color.LightPink;
-                    if (BatchId != 0)
-                        ScanOrder = 3;
-                    else
-                        ScanOrder = 1;
+                    ScanOrder = BatchId != 0 ? 3 : 1;
                 }
             }
         }
@@ -72,18 +66,8 @@ namespace Odin.Workshop
             set
             {
                 cmb_BatchPDA1.BatchId = value;
-                if (value != 0)
-                {
-                    if (RegMode == -1)
-                        ScanOrder = 2;
-                    else
-                        ScanOrder = 3;
-                }
-                else
-                {
-                    ScanOrder = 1;
-                }
-               
+                ScanOrder = value != 0 ? RegMode == -1 ? 2 : 3 : 1;
+
             }
 
         }
@@ -180,12 +164,9 @@ namespace Odin.Workshop
             { _scanorder = value;
                 if (_scanorder == 1)
                     lbl_Order.Text = "SCAN BATCH LABEL!";
-                else if (_scanorder == 2)
-                    lbl_Order.Text = "SCAN SERIAL LABEL!";
-                else if (_scanorder == 3)
-                    lbl_Order.Text = "SCAN SERIAL LABEL YOU WANT TO REPLACE!";
-                else
-                    lbl_Order.Text = "SCAN REPLACEMENT LABEL!";
+                else lbl_Order.Text = _scanorder == 2
+                    ? "SCAN SERIAL LABEL!"
+                    : _scanorder == 3 ? "SCAN SERIAL LABEL YOU WANT TO REPLACE!" : "SCAN REPLACEMENT LABEL!";
             }
         }
 
@@ -262,16 +243,8 @@ namespace Odin.Workshop
         private void cmb_BatchPDA1_BatchChanged(object sender)
         {
             
-            if (BatchId == 0)
-                ScanOrder = 1;
-            else
-            {
-                if (RegMode == -1)
-                    ScanOrder = 2;
-                else
-                    ScanOrder = 3;
-            }
-                txt_Oper.Focus();
+            ScanOrder = BatchId == 0 ? 1 : RegMode == -1 ? 2 : 3;
+            txt_Oper.Focus();
         }
 
         private void txt_Oper_KeyPress(object sender, KeyPressEventArgs e)

@@ -37,14 +37,7 @@ namespace Odin.CMB_Components.BatchStages
         {
             foreach (DataGridViewRow row in gv_List.Rows)
             {
-                if (Convert.ToInt32(row.Cells["cn_checked"].Value) == -1)
-                {
-                    row.Cells["cn_name"].Style.BackColor = Color.FromArgb(192, 255, 192);
-                }
-                else
-                {
-                    row.Cells["cn_name"].Style.BackColor = Color.PapayaWhip;
-                }
+                row.Cells["cn_name"].Style.BackColor = Convert.ToInt32(row.Cells["cn_checked"].Value) == -1 ? Color.FromArgb(192, 255, 192) : Color.PapayaWhip;
             }
         }
 
@@ -60,12 +53,7 @@ namespace Odin.CMB_Components.BatchStages
 
         public void FillData(int BatchId, int IsLaunches)
         {
-            DataTable data;
-            if (IsLaunches == 0)
-                data = CMB_BLL.getBatchStages(BatchId);
-            else
-                data = CMB_BLL.getBatchLaunchesStages(BatchId);
-
+            DataTable data = IsLaunches == 0 ? CMB_BLL.getBatchStages(BatchId) : CMB_BLL.getBatchLaunchesStages(BatchId);
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
             gv_List.DataSource = bs_List;

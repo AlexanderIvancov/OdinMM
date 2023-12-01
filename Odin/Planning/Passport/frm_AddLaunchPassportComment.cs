@@ -30,12 +30,8 @@ namespace Odin.Planning.Passport
 
         public int StateId
         {
-            get { if (rb_New.Checked == true)
-                    return -1;
-                else if (rb_Closed.Checked == true)
-                    return 0;
-                else
-                    return 1;
+            get {
+                return rb_New.Checked == true ? -1 : rb_Closed.Checked == true ? 0 : 1;
             }
             set {
                 if (value == -1)
@@ -82,10 +78,7 @@ namespace Odin.Planning.Passport
 
         public void CheckEmpty()
         {
-            if (txt_Comments.Text == "")
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = txt_Comments.Text != "";
         }
 
         private void txt_Comments_TextChanged(object sender, EventArgs e)
@@ -100,16 +93,11 @@ namespace Odin.Planning.Passport
 
         public int SendEmail
         {
-            get { if (chk_SendEmail.Checked == true)
-                    return -1;
-                else
-                    return 0; 
+            get {
+                return chk_SendEmail.Checked == true ? -1 : 0;
             }
             set{
-                if (value == 0)
-                    chk_SendEmail.Checked = false;
-                else
-                    chk_SendEmail.Checked = true;
+                chk_SendEmail.Checked = value != 0;
             }
             
         }

@@ -44,11 +44,8 @@ namespace Odin.CMB_Components.Types
 
         public void CheckEmpty()
         {
-            if (txt_Specification.Text == String.Empty
-                || txt_Specification.Text == "")
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = txt_Specification.Text != String.Empty
+                && txt_Specification.Text != "";
 
         }
 

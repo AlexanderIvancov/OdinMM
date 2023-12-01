@@ -39,10 +39,7 @@ namespace Odin.CMB_Components.Incoterms
             set
             {
                 _isemptycolor = value;
-                if (value == true)
-                    txt_Incoterm.StateCommon.Back.Color1 = Color.LightPink;
-                else
-                    txt_Incoterm.StateCommon.Back.Color1 = Color.White;
+                txt_Incoterm.StateCommon.Back.Color1 = value == true ? Color.LightPink : Color.White;
             }
         }
 

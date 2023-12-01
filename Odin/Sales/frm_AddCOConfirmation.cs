@@ -71,15 +71,8 @@ namespace Odin.Sales
 
         public void CheckEmpty()
         {
-            if (Qty <= 0
-                || ConfDate == "")
-            {
-                btn_OK.Enabled = false;
-            }
-            else
-            {
-                btn_OK.Enabled = true;
-            }
+            btn_OK.Enabled = Qty > 0
+                && ConfDate != "";
         }
 
         private void txt_Qty_TextChanged(object sender, EventArgs e)

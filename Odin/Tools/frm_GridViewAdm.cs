@@ -186,10 +186,7 @@ namespace Odin.Tools
         {
             try
             {
-                if (Convert.ToInt32(gvList.CurrentRow.Cells["cn_ColumnOrder"].Value) == 0)
-                    btn_Up.Enabled = false;
-                else
-                    btn_Up.Enabled = true;
+                btn_Up.Enabled = Convert.ToInt32(gvList.CurrentRow.Cells["cn_ColumnOrder"].Value) != 0;
             }
             catch { }
 

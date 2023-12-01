@@ -42,13 +42,10 @@ namespace Odin.CMB_Components.Bargains
 
         public void CheckEmpty()
         {
-            if (txt_Bargain.Text == ""
-                || txt_BargainLat.Text == ""
-                || String.IsNullOrEmpty(Bargain) == true
-                || String.IsNullOrEmpty(BargainLat) == true)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = txt_Bargain.Text != ""
+                && txt_BargainLat.Text != ""
+                && String.IsNullOrEmpty(Bargain) != true
+                && String.IsNullOrEmpty(BargainLat) != true;
         }
 
 

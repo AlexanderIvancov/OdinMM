@@ -46,12 +46,7 @@ namespace Odin.Workshop
         {
             get
             {
-                if (rb_Valkas2.Checked == true)
-                    return 1;
-                else if (rb_Valkas2B.Checked == true)
-                    return 2;
-                else
-                    return 0;
+                return rb_Valkas2.Checked == true ? 1 : rb_Valkas2B.Checked == true ? 2 : 0;
             }
             set
             {
@@ -134,12 +129,7 @@ namespace Odin.Workshop
                         panel.Controls.Add(ctlProc);
                         ctlProc.gv_List.ThreadSafeCall(delegate { ctlProc.SetCellsColor(); });
                         var first = scrollbars.FirstOrDefault(c => c._StageId == ctlProc.StageId);
-                        if (first != null)
-                        {
-                            _controlscroll = first._ScrollPosition;
-                        }
-                        else
-                            _controlscroll = 0;
+                        _controlscroll = first != null ? first._ScrollPosition : 0;
                         //if (ctl.StageId == TmpStageId)
                         //ctl.gv_List.ThreadSafeCall(delegate { ctl.gv_List.HorizontalScrollingOffset = ControlScrollPosition; });
                         ctlProc.gv_List.ThreadSafeCall(delegate { ctlProc.gv_List.HorizontalScrollingOffset = _controlscroll; });
@@ -265,12 +255,7 @@ namespace Odin.Workshop
                     ctl_ProcessStageLaunch ctl = control as ctl_ProcessStageLaunch;
                     ctl.gv_List.ThreadSafeCall(delegate { ctl.SetCellsColor(); });
                     var first = scrollbars.FirstOrDefault(c => c._StageId == ctl.StageId);
-                    if (first != null)
-                    {
-                        _controlscroll = first._ScrollPosition;
-                    }
-                    else
-                        _controlscroll = 0;
+                    _controlscroll = first != null ? first._ScrollPosition : 0;
                     //if (ctl.StageId == TmpStageId)
                     //ctl.gv_List.ThreadSafeCall(delegate { ctl.gv_List.HorizontalScrollingOffset = ControlScrollPosition; });
                     ctl.gv_List.ThreadSafeCall(delegate { ctl.gv_List.HorizontalScrollingOffset = _controlscroll; });

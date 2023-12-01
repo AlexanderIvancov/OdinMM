@@ -237,12 +237,11 @@ namespace Odin.Warehouse.History
 
             cmb_Operation.SelectedValue = 0;
 
-            if (dn_Pages.SelectedPage == pg_Incomes)
-                strSQL = "EXECUTE sp_SelectStockOperations @type = 1";
-            else if (dn_Pages.SelectedPage == pg_Withdraw)
-                strSQL = "EXECUTE sp_SelectStockOperations @type = -1";
-            else
-                strSQL = "EXECUTE sp_SelectStockOperations @type = 0";
+            strSQL = dn_Pages.SelectedPage == pg_Incomes
+                ? "EXECUTE sp_SelectStockOperations @type = 1"
+                : dn_Pages.SelectedPage == pg_Withdraw
+                ? "EXECUTE sp_SelectStockOperations @type = -1"
+                : "EXECUTE sp_SelectStockOperations @type = 0";
 
 
             SqlDataAdapter adapter =
@@ -910,20 +909,13 @@ namespace Odin.Warehouse.History
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_IncomeList.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValueI) == true)
-                        bs_IncomeList.Filter = "(" + ColumnNameI + " is null OR Convert(" + ColumnNameI + ", 'System.String') = '')";
-                    else
-                        bs_IncomeList.Filter = "Convert(" + ColumnNameI + " , 'System.String') = '" + glob_Class.NES(CellValueI) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValueI) == true)
-                        bs_IncomeList.Filter = bs_IncomeList.Filter + "AND (" + ColumnNameI + " is null OR Convert(" + ColumnNameI + ", 'System.String') = '')";
-                    else
-                        bs_IncomeList.Filter = bs_IncomeList.Filter + " AND Convert(" + ColumnNameI + " , 'System.String') = '" + glob_Class.NES(CellValueI) + "'";
-                }
+                bs_IncomeList.Filter = String.IsNullOrEmpty(bs_IncomeList.Filter) == true
+                    ? String.IsNullOrEmpty(CellValueI) == true
+                        ? "(" + ColumnNameI + " is null OR Convert(" + ColumnNameI + ", 'System.String') = '')"
+                        : "Convert(" + ColumnNameI + " , 'System.String') = '" + glob_Class.NES(CellValueI) + "'"
+                    : String.IsNullOrEmpty(CellValueI) == true
+                        ? bs_IncomeList.Filter + "AND (" + ColumnNameI + " is null OR Convert(" + ColumnNameI + ", 'System.String') = '')"
+                        : bs_IncomeList.Filter + " AND Convert(" + ColumnNameI + " , 'System.String') = '" + glob_Class.NES(CellValueI) + "'";
                 //MessageBox.Show(bs_List.Filter);
                 RecalcTotalIncomes();
             }
@@ -936,10 +928,9 @@ namespace Odin.Warehouse.History
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_IncomeList.Filter) == true)
-                    bs_IncomeList.Filter = "Convert(" + ColumnNameI + " , 'System.String') <> '" + CellValueI + "'";
-                else
-                    bs_IncomeList.Filter = bs_IncomeList.Filter + " AND " + ColumnNameI + " <> '" + CellValueI + "'";
+                bs_IncomeList.Filter = String.IsNullOrEmpty(bs_IncomeList.Filter) == true
+                    ? "Convert(" + ColumnNameI + " , 'System.String') <> '" + CellValueI + "'"
+                    : bs_IncomeList.Filter + " AND " + ColumnNameI + " <> '" + CellValueI + "'";
                 RecalcTotalIncomes();
             }
             catch { }
@@ -1052,21 +1043,13 @@ namespace Odin.Warehouse.History
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_OutcomeList.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValueO) == true)
-                        bs_OutcomeList.Filter = "(" + ColumnNameO + " is null OR Convert(" + ColumnNameO + ", 'System.String') = '')";
-                    else
-                        bs_OutcomeList.Filter = "Convert(" + ColumnNameO + " , 'System.String') = '" + glob_Class.NES(CellValueO) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValueO) == true)
-                        bs_OutcomeList.Filter = bs_OutcomeList.Filter + "AND (" + ColumnNameO + " is null OR Convert(" + ColumnNameO + ", 'System.String') = '')";
-                    else
-                        bs_OutcomeList.Filter = bs_OutcomeList.Filter + " AND Convert(" + ColumnNameO + " , 'System.String') = '" + glob_Class.NES(CellValueO) + "'";
-                    
-                }
+                bs_OutcomeList.Filter = String.IsNullOrEmpty(bs_OutcomeList.Filter) == true
+                    ? String.IsNullOrEmpty(CellValueO) == true
+                        ? "(" + ColumnNameO + " is null OR Convert(" + ColumnNameO + ", 'System.String') = '')"
+                        : "Convert(" + ColumnNameO + " , 'System.String') = '" + glob_Class.NES(CellValueO) + "'"
+                    : String.IsNullOrEmpty(CellValueO) == true
+                        ? bs_OutcomeList.Filter + "AND (" + ColumnNameO + " is null OR Convert(" + ColumnNameO + ", 'System.String') = '')"
+                        : bs_OutcomeList.Filter + " AND Convert(" + ColumnNameO + " , 'System.String') = '" + glob_Class.NES(CellValueO) + "'";
                 //MessageBox.Show(bs_List.Filter);
                 RecalcTotalOutcomes();
             }
@@ -1080,10 +1063,9 @@ namespace Odin.Warehouse.History
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_OutcomeList.Filter) == true)
-                    bs_OutcomeList.Filter = "Convert(" + ColumnNameO + " , 'System.String') <> '" + CellValueO + "'";
-                else
-                    bs_OutcomeList.Filter = bs_OutcomeList.Filter + " AND " + ColumnNameO + " <> '" + CellValueO + "'";
+                bs_OutcomeList.Filter = String.IsNullOrEmpty(bs_OutcomeList.Filter) == true
+                    ? "Convert(" + ColumnNameO + " , 'System.String') <> '" + CellValueO + "'"
+                    : bs_OutcomeList.Filter + " AND " + ColumnNameO + " <> '" + CellValueO + "'";
                 RecalcTotalOutcomes();
             }
             catch { }
@@ -1193,20 +1175,13 @@ namespace Odin.Warehouse.History
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_MovementList.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValueM) == true)
-                        bs_MovementList.Filter = "(" + ColumnNameM + " is null OR Convert(" + ColumnNameM + ", 'System.String') = '')";
-                    else
-                        bs_MovementList.Filter = "Convert(" + ColumnNameM + " , 'System.String') = '" + glob_Class.NES(CellValueM) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValueM) == true)
-                        bs_MovementList.Filter = bs_MovementList.Filter + "AND (" + ColumnNameM + " is null OR Convert(" + ColumnNameM + ", 'System.String') = '')";
-                    else
-                        bs_MovementList.Filter = bs_MovementList.Filter + " AND Convert(" + ColumnNameM + " , 'System.String') = '" + glob_Class.NES(CellValueM) + "'";
-                }
+                bs_MovementList.Filter = String.IsNullOrEmpty(bs_MovementList.Filter) == true
+                    ? String.IsNullOrEmpty(CellValueM) == true
+                        ? "(" + ColumnNameM + " is null OR Convert(" + ColumnNameM + ", 'System.String') = '')"
+                        : "Convert(" + ColumnNameM + " , 'System.String') = '" + glob_Class.NES(CellValueM) + "'"
+                    : String.IsNullOrEmpty(CellValueM) == true
+                        ? bs_MovementList.Filter + "AND (" + ColumnNameM + " is null OR Convert(" + ColumnNameM + ", 'System.String') = '')"
+                        : bs_MovementList.Filter + " AND Convert(" + ColumnNameM + " , 'System.String') = '" + glob_Class.NES(CellValueM) + "'";
                 //MessageBox.Show(bs_List.Filter);
                 RecalcTotalMovements();
             }
@@ -1220,10 +1195,9 @@ namespace Odin.Warehouse.History
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_MovementList.Filter) == true)
-                    bs_MovementList.Filter = "Convert(" + ColumnNameM + " , 'System.String') <> '" + CellValueM + "'";
-                else
-                    bs_MovementList.Filter = bs_MovementList.Filter + " AND " + ColumnNameM + " <> '" + CellValueM + "'";
+                bs_MovementList.Filter = String.IsNullOrEmpty(bs_MovementList.Filter) == true
+                    ? "Convert(" + ColumnNameM + " , 'System.String') <> '" + CellValueM + "'"
+                    : bs_MovementList.Filter + " AND " + ColumnNameM + " <> '" + CellValueM + "'";
                 RecalcTotalMovements();
             }
             catch { }
@@ -1332,20 +1306,13 @@ namespace Odin.Warehouse.History
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_ReturnsList.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValueR) == true)
-                        bs_ReturnsList.Filter = "(" + ColumnNameR + " is null OR Convert(" + ColumnNameR + ", 'System.String') = '')";
-                    else
-                        bs_ReturnsList.Filter = "Convert(" + ColumnNameR + " , 'System.String') = '" + glob_Class.NES(CellValueR) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValueR) == true)
-                        bs_ReturnsList.Filter = bs_ReturnsList.Filter + "AND (" + ColumnNameR + " is null OR Convert(" + ColumnNameR + ", 'System.String') = '')";
-                    else
-                        bs_ReturnsList.Filter = bs_ReturnsList.Filter + " AND Convert(" + ColumnNameR + " , 'System.String') = '" + glob_Class.NES(CellValueR) + "'";
-                }
+                bs_ReturnsList.Filter = String.IsNullOrEmpty(bs_ReturnsList.Filter) == true
+                    ? String.IsNullOrEmpty(CellValueR) == true
+                        ? "(" + ColumnNameR + " is null OR Convert(" + ColumnNameR + ", 'System.String') = '')"
+                        : "Convert(" + ColumnNameR + " , 'System.String') = '" + glob_Class.NES(CellValueR) + "'"
+                    : String.IsNullOrEmpty(CellValueR) == true
+                        ? bs_ReturnsList.Filter + "AND (" + ColumnNameR + " is null OR Convert(" + ColumnNameR + ", 'System.String') = '')"
+                        : bs_ReturnsList.Filter + " AND Convert(" + ColumnNameR + " , 'System.String') = '" + glob_Class.NES(CellValueR) + "'";
                 //MessageBox.Show(bs_List.Filter);
                 RecalcTotalReturns();
             }
@@ -1356,10 +1323,9 @@ namespace Odin.Warehouse.History
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_ReturnsList.Filter) == true)
-                    bs_ReturnsList.Filter = "Convert(" + ColumnNameR + " , 'System.String') <> '" + CellValueR + "'";
-                else
-                    bs_ReturnsList.Filter = bs_ReturnsList.Filter + " AND " + ColumnNameR + " <> '" + CellValueR + "'";
+                bs_ReturnsList.Filter = String.IsNullOrEmpty(bs_ReturnsList.Filter) == true
+                    ? "Convert(" + ColumnNameR + " , 'System.String') <> '" + CellValueR + "'"
+                    : bs_ReturnsList.Filter + " AND " + ColumnNameR + " <> '" + CellValueR + "'";
                 RecalcTotalReturns();
             }
             catch { }
@@ -1463,20 +1429,13 @@ namespace Odin.Warehouse.History
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_TracingList.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValueT) == true)
-                        bs_TracingList.Filter = "(" + ColumnNameT + " is null OR Convert(" + ColumnNameT + ", 'System.String') = '')";
-                    else
-                        bs_TracingList.Filter = "Convert(" + ColumnNameT + " , 'System.String') = '" + glob_Class.NES(CellValueT) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValueT) == true)
-                        bs_TracingList.Filter = bs_TracingList.Filter + "AND (" + ColumnNameT + " is null OR Convert(" + ColumnNameT + ", 'System.String') = '')";
-                    else
-                        bs_TracingList.Filter = bs_TracingList.Filter + " AND Convert(" + ColumnNameT + " , 'System.String') = '" + glob_Class.NES(CellValueT) + "'";
-                }
+                bs_TracingList.Filter = String.IsNullOrEmpty(bs_TracingList.Filter) == true
+                    ? String.IsNullOrEmpty(CellValueT) == true
+                        ? "(" + ColumnNameT + " is null OR Convert(" + ColumnNameT + ", 'System.String') = '')"
+                        : "Convert(" + ColumnNameT + " , 'System.String') = '" + glob_Class.NES(CellValueT) + "'"
+                    : String.IsNullOrEmpty(CellValueT) == true
+                        ? bs_TracingList.Filter + "AND (" + ColumnNameT + " is null OR Convert(" + ColumnNameT + ", 'System.String') = '')"
+                        : bs_TracingList.Filter + " AND Convert(" + ColumnNameT + " , 'System.String') = '" + glob_Class.NES(CellValueT) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -1490,10 +1449,9 @@ namespace Odin.Warehouse.History
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_TracingList.Filter) == true)
-                    bs_TracingList.Filter = "Convert(" + ColumnNameT + " , 'System.String') <> '" + CellValueT + "'";
-                else
-                    bs_TracingList.Filter = bs_TracingList.Filter + " AND " + ColumnNameT + " <> '" + CellValueT + "'";
+                bs_TracingList.Filter = String.IsNullOrEmpty(bs_TracingList.Filter) == true
+                    ? "Convert(" + ColumnNameT + " , 'System.String') <> '" + CellValueT + "'"
+                    : bs_TracingList.Filter + " AND " + ColumnNameT + " <> '" + CellValueT + "'";
             }
             catch { }
             //SetCellsColor();
@@ -1730,18 +1688,16 @@ namespace Odin.Warehouse.History
             {
                 if (String.IsNullOrEmpty(bs_CostList.Filter) == true)
                 {
-                    if (String.IsNullOrEmpty(CellValueC) == true)
-                        bs_CostList.Filter = "(" + ColumnNameC + " is null OR Convert(" + ColumnNameC + ", 'System.String') = '')";
-                    else
-                        bs_CostList.Filter = "Convert(" + ColumnNameC + " , 'System.String') = '" + glob_Class.NES(CellValueC) + "'";
+                    bs_CostList.Filter = String.IsNullOrEmpty(CellValueC) == true
+                        ? "(" + ColumnNameC + " is null OR Convert(" + ColumnNameC + ", 'System.String') = '')"
+                        : "Convert(" + ColumnNameC + " , 'System.String') = '" + glob_Class.NES(CellValueC) + "'";
                     RecalcTotalsCost();
                 }
                 else
                 {
-                    if (String.IsNullOrEmpty(CellValueC) == true)
-                        bs_CostList.Filter = bs_CostList.Filter + "AND (" + ColumnNameC + " is null OR Convert(" + ColumnNameC + ", 'System.String') = '')";
-                    else
-                        bs_CostList.Filter = bs_CostList.Filter + " AND Convert(" + ColumnNameC + " , 'System.String') = '" + glob_Class.NES(CellValueC) + "'";
+                    bs_CostList.Filter = String.IsNullOrEmpty(CellValueC) == true
+                        ? bs_CostList.Filter + "AND (" + ColumnNameC + " is null OR Convert(" + ColumnNameC + ", 'System.String') = '')"
+                        : bs_CostList.Filter + " AND Convert(" + ColumnNameC + " , 'System.String') = '" + glob_Class.NES(CellValueC) + "'";
                     RecalcTotalsCost();
                 }
                 //MessageBox.Show(bs_List.Filter);
@@ -1754,10 +1710,9 @@ namespace Odin.Warehouse.History
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_CostList.Filter) == true)
-                    bs_CostList.Filter = "Convert(" + ColumnNameC + " , 'System.String') <> '" + CellValueC + "'";
-                else
-                    bs_CostList.Filter = bs_CostList.Filter + " AND " + ColumnNameC + " <> '" + CellValueC + "'";
+                bs_CostList.Filter = String.IsNullOrEmpty(bs_CostList.Filter) == true
+                    ? "Convert(" + ColumnNameC + " , 'System.String') <> '" + CellValueC + "'"
+                    : bs_CostList.Filter + " AND " + ColumnNameC + " <> '" + CellValueC + "'";
                 RecalcTotalsCost();
             }
             catch { }
@@ -1880,10 +1835,7 @@ namespace Odin.Warehouse.History
 
             Template_DataGridView frm = new Template_DataGridView();
 
-            if (cmb_Batches1.BatchId != 0)
-                frm.Text = "BOM cost details for: " + _tempbatch;
-            else
-                frm.Text = "BOM cost details for: " + cmb_SalesOrders1.SalesOrder;
+            frm.Text = cmb_Batches1.BatchId != 0 ? "BOM cost details for: " + _tempbatch : "BOM cost details for: " + cmb_SalesOrders1.SalesOrder;
             frm.Query = _query;
             frm.SqlParams = sqlparams;
             frm.Show();
@@ -1901,10 +1853,9 @@ namespace Odin.Warehouse.History
                 };
 
             Template_DataGridView frm = new Template_DataGridView();
-            if (cmb_Batches1.BatchId != 0)
-                frm.Text = "Awaiting cost details for: " + cmb_Batches1.Batch;
-            else
-                frm.Text = "Awaiting cost details for: " + cmb_SalesOrders1.SalesOrder;
+            frm.Text = cmb_Batches1.BatchId != 0
+                ? "Awaiting cost details for: " + cmb_Batches1.Batch
+                : "Awaiting cost details for: " + cmb_SalesOrders1.SalesOrder;
             frm.Query = _query;
             frm.SqlParams = sqlparams;
             frm.Show();

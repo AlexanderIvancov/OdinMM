@@ -51,10 +51,7 @@ namespace Odin.Tools
                 aspectRatioWidth = 707 / width;
                 aspectRatioHeight = 1000 / height;
 
-                if (width > height)
-                    aspectRatio = aspectRatioWidth;
-                else
-                    aspectRatio = aspectRatioHeight;
+                aspectRatio = width > height ? aspectRatioWidth : aspectRatioHeight;
 
 
 

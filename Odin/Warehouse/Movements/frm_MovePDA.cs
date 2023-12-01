@@ -271,10 +271,9 @@ namespace Odin.Warehouse.Movements
                 _label = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_label"].Value);
             }
             catch { }
-            if (_artid == labelcontent)
-                txt_Documents.Text = "Check result for label " + _label.ToString() + " is OK! " + System.Environment.NewLine + txt_Documents.Text;
-            else
-                txt_Documents.Text = "Check result for label " + _label.ToString() + " not OK! Content is: " + labelcontent + "!" + System.Environment.NewLine + txt_Documents.Text;
+            txt_Documents.Text = _artid == labelcontent
+                ? "Check result for label " + _label.ToString() + " is OK! " + System.Environment.NewLine + txt_Documents.Text
+                : "Check result for label " + _label.ToString() + " not OK! Content is: " + labelcontent + "!" + System.Environment.NewLine + txt_Documents.Text;
             chk_CheckLabel.CheckState = CheckState.Unchecked;
             chk_CheckLabel.BackColor = Color.LightGreen;
         }
@@ -315,12 +314,10 @@ namespace Odin.Warehouse.Movements
                 e.KeyChar = System.Threading.Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
                 e.Handled = s.Text.Contains(e.KeyChar);
             }
-            else if (e.KeyChar == '-')
-            {
-                e.Handled = s.Text.Contains(e.KeyChar);
-            }
             else
-                e.Handled = !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar);
+            {
+                e.Handled = e.KeyChar == '-' ? s.Text.Contains(e.KeyChar) : !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar);
+            }
         }
 
         private void PrintReport(int count, Action printMethod)
@@ -829,13 +826,9 @@ namespace Odin.Warehouse.Movements
                     btn_OK.PerformClick();
                     e.Cancel = false;
                 }
-                else if (result1 == DialogResult.No)
-                {
-                    e.Cancel = false;
-                }
                 else
                 {
-                    e.Cancel = true;
+                    e.Cancel = result1 != DialogResult.No;
                 }
             }            
         }

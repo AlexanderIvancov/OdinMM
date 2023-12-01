@@ -268,15 +268,7 @@ namespace Odin.DataCollection
             //        }
             //        catch { _qty = _qty + 0; }
             //}
-            if (Qty > QtyStarted)
-            {
-                if (QtyStarted + (PrevQty - QtyTotalStarted) > Qty)
-                    QtyToStart = Qty - QtyStarted;
-                else
-                    QtyToStart = (PrevQty - QtyTotalStarted);
-            }
-            else
-                QtyToStart = 0;
+            QtyToStart = Qty > QtyStarted ? QtyStarted + (PrevQty - QtyTotalStarted) > Qty ? Qty - QtyStarted : PrevQty - QtyTotalStarted : 0;
         }
 
         public void RecalcData(int _launchid)
@@ -372,10 +364,7 @@ namespace Odin.DataCollection
 
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
-                if (Convert.ToInt32(row.Cells["chk_check"].Value) == -1)
-                    row.Cells["cn_toapprove"].Value = Convert.ToDouble(row.Cells["cn_qty"].Value);
-                else
-                    row.Cells["cn_toapprove"].Value = 0;
+                row.Cells["cn_toapprove"].Value = Convert.ToInt32(row.Cells["chk_check"].Value) == -1 ? Convert.ToDouble(row.Cells["cn_qty"].Value) : (object)0;
 
             }
         }
@@ -432,12 +421,10 @@ namespace Odin.DataCollection
                 e.KeyChar = System.Threading.Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
                 e.Handled = s.Text.Contains(e.KeyChar);
             }
-            else if (e.KeyChar == '-')
-            {
-                e.Handled = s.Text.Contains(e.KeyChar);
-            }
             else
-                e.Handled = !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar);
+            {
+                e.Handled = e.KeyChar == '-' ? s.Text.Contains(e.KeyChar) : !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar);
+            }
 
         }
 

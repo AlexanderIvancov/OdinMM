@@ -74,17 +74,11 @@ namespace Odin.Register.Articles
         {
             get
             {
-                if (chk_Use.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_Use.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_Use.CheckState = CheckState.Checked;
-                else
-                    chk_Use.CheckState = CheckState.Unchecked;
+                chk_Use.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
         public string Comments

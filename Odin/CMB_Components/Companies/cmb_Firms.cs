@@ -163,10 +163,7 @@ namespace Odin.CMB_Components.Companies
             get { return _isemptycolor; }
             set {
                 _isemptycolor = value;
-                if (value == true)
-                    txt_Firm.StateCommon.Back.Color1 = Color.LightPink;
-                else
-                    txt_Firm.StateCommon.Back.Color1 = Color.White;
+                txt_Firm.StateCommon.Back.Color1 = value == true ? Color.LightPink : Color.White;
             }
         }
 

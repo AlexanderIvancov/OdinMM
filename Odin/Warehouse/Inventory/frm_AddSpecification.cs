@@ -49,12 +49,9 @@ namespace Odin.Warehouse.Inventory
 
         public void CheckEmpty()
         {
-            if (String.IsNullOrEmpty(Value) == true
-                || Value == ""
-                || CategoryId == 0)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = String.IsNullOrEmpty(Value) != true
+                && Value != ""
+                && CategoryId != 0;
         }
 
         private void cmb_Category1_SelectedValueChanged(object sender)

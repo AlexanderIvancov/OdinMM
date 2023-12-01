@@ -32,17 +32,12 @@ namespace Odin.Register.Articles
 
         public int Required
         {
-            get { if (chk_Required.Checked == true)
-                    return -1;
-                else
-                    return 0;
+            get {
+                return chk_Required.Checked == true ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_Required.Checked = true;
-                else
-                    chk_Required.Checked = false;
+                chk_Required.Checked = value == -1;
             }
         }
 

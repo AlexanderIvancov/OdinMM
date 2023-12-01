@@ -248,11 +248,8 @@ namespace Odin.Warehouse.Requests
 
         private void cmb_Batches1_BatchChanged(object sender)
         {
-            if (cmb_Batches1.IsActive == -1
-                || cmb_Batches1.BatchId == 0)
-                btn_AddPlaces.Enabled = true;
-            else
-                btn_AddPlaces.Enabled = false;
+            btn_AddPlaces.Enabled = cmb_Batches1.IsActive == -1
+                || cmb_Batches1.BatchId == 0;
         }
 
         private void gv_List_CellValidated(object sender, DataGridViewCellEventArgs e)

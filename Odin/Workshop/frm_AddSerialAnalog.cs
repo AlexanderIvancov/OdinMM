@@ -18,17 +18,12 @@ namespace Odin.Workshop
 
         public int AnalogAsPrimary
         {
-            get { if (chk_analogasprimary.Checked == true)
-                    return -1;
-                else
-                    return 0;
+            get {
+                return chk_analogasprimary.Checked == true ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_analogasprimary.Checked = true;
-                else
-                    chk_analogasprimary.Checked = false;
+                chk_analogasprimary.Checked = value == -1;
             }
         }
 

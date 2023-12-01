@@ -47,10 +47,7 @@ namespace Odin.Quality
 
         public void CheckEmpty()
         {
-            if (ArtId == 0 && SupId == 0)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = ArtId != 0 || SupId != 0;
         }
 
         private void cmb_Articles1_ArticleChanged(object sender)

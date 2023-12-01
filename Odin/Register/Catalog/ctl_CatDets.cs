@@ -88,12 +88,9 @@ namespace Odin.Register.Catalog
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
-                if (Convert.ToInt32(row.Cells["cn_bargtype"].Value) == -1)
-                    row.Cells["cn_firmart"].Style.BackColor = Color.Yellow;
-                else if (Convert.ToInt32(row.Cells["cn_bargtype"].Value) == 1)
-                    row.Cells["cn_firmart"].Style.BackColor = Color.LightGreen;
-                else
-                    row.Cells["cn_firmart"].Style.BackColor = Color.Aqua;
+                row.Cells["cn_firmart"].Style.BackColor = Convert.ToInt32(row.Cells["cn_bargtype"].Value) == -1
+                    ? Color.Yellow
+                    : Convert.ToInt32(row.Cells["cn_bargtype"].Value) == 1 ? Color.LightGreen : Color.Aqua;
             }
         }
 

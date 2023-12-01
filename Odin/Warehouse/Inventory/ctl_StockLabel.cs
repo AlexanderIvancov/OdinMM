@@ -99,10 +99,7 @@ namespace Odin.Warehouse.Inventory
         {
             get
             {
-                if (txt_ExpDate.Value == null)
-                    return "";
-                else
-                    return txt_ExpDate.Value.ToString();
+                return txt_ExpDate.Value == null ? "" : txt_ExpDate.Value.ToString();
             }
             set
             {
@@ -122,18 +119,12 @@ namespace Odin.Warehouse.Inventory
 
         public int Available
         {
-            get { if (chk_Available.Checked == true)
-                    return -1;
-                else
-                    return 0;
+            get {
+                return chk_Available.Checked == true ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_Available.Checked = true;
-
-                else
-                    chk_Available.Checked = false;
+                chk_Available.Checked = value == -1;
             }
         }
 
@@ -163,18 +154,11 @@ namespace Odin.Warehouse.Inventory
         {
             get
             {
-                if (chk_NoDate.Checked == true)
-                    return -1;
-                else
-                    return 0;
+                return chk_NoDate.Checked == true ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_NoDate.Checked = true;
-
-                else
-                    chk_NoDate.Checked = false;
+                chk_NoDate.Checked = value == -1;
 
             }
         }

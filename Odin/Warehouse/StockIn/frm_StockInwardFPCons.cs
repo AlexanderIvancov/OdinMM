@@ -657,13 +657,11 @@ namespace Odin.Warehouse.StockIn
         private void AddNode(DataRow dr, Font boldFont, TreeGridNodeCollection nodes, bool isAddingImage)
         {
             TreeGridNode node;
-            string _tempexpdate = "";
+            string _tempexpdate = Convert.ToDateTime(dr["expdate"]) != Convert.ToDateTime("01/01/2199")
+                ? Convert.ToDateTime(dr["expdate"]).ToShortDateString()
+                : Convert.ToDateTime(dr["regdate"]).ToShortDateString();
             //DataGridViewCell cell;
 
-            if (Convert.ToDateTime(dr["expdate"]) != Convert.ToDateTime("01/01/2199"))
-                _tempexpdate = Convert.ToDateTime(dr["expdate"]).ToShortDateString();
-            else
-                _tempexpdate = Convert.ToDateTime(dr["regdate"]).ToShortDateString();
 
             node = nodes.Add(null, dr["artid"], dr["artid"], dr["article"], dr["label"], dr["qtyreserved"],
                                                    dr["unit"], "0", dr["id"], "0", "0", "0", "", _tempexpdate,

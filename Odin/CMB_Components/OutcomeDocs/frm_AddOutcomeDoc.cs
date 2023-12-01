@@ -30,10 +30,8 @@ namespace Odin.CMB_Components.OutcomeDocs
 
         public int TypeOff
         {
-            get { if (rb_Production.Checked == true)
-                    return 5;
-                else
-                    return 17;
+            get {
+                return rb_Production.Checked == true ? 5 : 17;
             }
             set
             {
@@ -147,11 +145,8 @@ namespace Odin.CMB_Components.OutcomeDocs
 
         public void CheckReason()
         {
-            if (TypeOff == 17
-                && ReasonId == 0)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = TypeOff != 17
+                || ReasonId != 0;
         }
         #endregion
 

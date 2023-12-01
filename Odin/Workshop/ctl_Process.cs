@@ -36,12 +36,7 @@ namespace Odin.Workshop
         public int ProdPlace
         {
             get {
-                if (rb_Valkas2.Checked == true)
-                    return 1;
-                else if (rb_Valkas2B.Checked == true)
-                    return 2;
-                else
-                    return 0;
+                return rb_Valkas2.Checked == true ? 1 : rb_Valkas2B.Checked == true ? 2 : 0;
             }
             set {
                 if (value == 1)

@@ -35,10 +35,7 @@ namespace Odin.CMB_Components.Bargains
             set
             {
                 _isemptycolor = value;
-                if (value == true)
-                    txt_Bargain.StateCommon.Back.Color1 = Color.LightPink;
-                else
-                    txt_Bargain.StateCommon.Back.Color1 = Color.White;
+                txt_Bargain.StateCommon.Back.Color1 = value == true ? Color.LightPink : Color.White;
             }
         }
         public string Bargain

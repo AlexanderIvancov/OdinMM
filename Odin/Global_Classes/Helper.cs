@@ -230,9 +230,7 @@ namespace Odin.Global_Classes
                 var isRowsAffected = cmd.ExecuteNonQuery();
 
                 var outParam = list.Where(item => item.Direction == ParameterDirection.Output).SingleOrDefault();
-                if (outParam != null) return outParam.Value;
-
-                return isRowsAffected == 1;
+                return outParam != null ? outParam.Value : isRowsAffected == 1;
             }
         }
 
@@ -291,11 +289,8 @@ namespace Odin.Global_Classes
             frmMail = new frm_EmailNew();
 
             frmMail.From = DAL.MyMailAdress();
-            if (GlobClass.NES(To) != "")
-                frmMail.To = frmMail.From + ", " + To;
-            else
-                frmMail.To = frmMail.From;
-            
+            frmMail.To = GlobClass.NES(To) != "" ? frmMail.From + ", " + To : frmMail.From;
+
             frmMail.Subject = Subject;
             frmMail.Message = Message;
             

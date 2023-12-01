@@ -206,17 +206,11 @@ namespace Odin.Warehouse.Deliveries
         {
             get
             {
-                if (chk_Return.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_Return.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_Return.CheckState = CheckState.Checked;
-                else
-                    chk_Return.CheckState = CheckState.Unchecked;
+                chk_Return.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
         public int Internal
@@ -484,12 +478,7 @@ namespace Odin.Warehouse.Deliveries
 
         private void txt_CoefConv_TextChanged(object sender, EventArgs e)
         {
-            double _CC = 1;
-            if (CoefConv == 0)
-                _CC = 1;
-            else
-                _CC = CoefConv;
-
+            double _CC = CoefConv == 0 ? 1 : CoefConv;
             UnitPrice = Math.Round(OrigUnitPrice / _CC, 5);
         }
 
@@ -671,10 +660,7 @@ namespace Odin.Warehouse.Deliveries
 
         public void CheckUnitPrice()
         {
-            if (OrigUnitPrice < CostUnitPrice)
-                txt_UnitPrice.StateDisabled.Back.Color1 = Color.Tomato;
-            else
-                txt_UnitPrice.StateDisabled.Back.Color1 = Color.Gainsboro;
+            txt_UnitPrice.StateDisabled.Back.Color1 = OrigUnitPrice < CostUnitPrice ? Color.Tomato : Color.Gainsboro;
         }
 
         public void RecalcLeftToSend()
@@ -769,14 +755,7 @@ namespace Odin.Warehouse.Deliveries
                                                                   MessageBoxIcon.Warning,
                                                                   TaskDialogButtons.Yes |
                                                                   TaskDialogButtons.No);
-                        if (result1 == DialogResult.Yes)
-                        {
-                            _test = true;
-                        }
-                        else
-                        {
-                            _test = false;
-                        }
+                        _test = result1 == DialogResult.Yes;
                     }
 
                     if (_test == true)

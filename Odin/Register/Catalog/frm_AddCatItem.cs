@@ -31,12 +31,8 @@ namespace Odin.Register.Catalog
 
         public int BargType
         {
-            get { if (rb_Supplier.Checked == true)
-                    return -1;
-                else if (rb_Customer.Checked == true)
-                    return 1;
-                else
-                    return 0;
+            get {
+                return rb_Supplier.Checked == true ? -1 : rb_Customer.Checked == true ? 1 : 0;
             }
             set {
                 if (value == -1)
@@ -163,10 +159,8 @@ namespace Odin.Register.Catalog
 
         public int AsDefault
         {
-            get { if (chk_Default.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+            get {
+                return chk_Default.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
@@ -182,10 +176,7 @@ namespace Odin.Register.Catalog
         {
             get
             {
-                if (chk_Quoted.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_Quoted.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {

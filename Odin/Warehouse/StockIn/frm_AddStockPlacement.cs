@@ -67,10 +67,7 @@ namespace Odin.Warehouse.StockIn
         {
             get
             {
-                if (txt_ExpDate.Value == null)
-                    return "";
-                else
-                    return Convert.ToDateTime(txt_ExpDate.Value).ToShortDateString();
+                return txt_ExpDate.Value == null ? "" : Convert.ToDateTime(txt_ExpDate.Value).ToShortDateString();
             }
             set
             {
@@ -127,18 +124,11 @@ namespace Odin.Warehouse.StockIn
         {
             get
             {
-                if (chk_NoDate.Checked == true)
-                    return -1;
-                else
-                    return 0;
+                return chk_NoDate.Checked == true ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_NoDate.Checked = true;
-
-                else
-                    chk_NoDate.Checked = false;
+                chk_NoDate.Checked = value == -1;
 
             }
         }
@@ -396,15 +386,12 @@ namespace Odin.Warehouse.StockIn
         }
         public bool CheckAddIn()
         {
-            if (Qty <= 0
-                || (PlaceId == 0 && Label == 0)
-                || DAL.CheckProduction(cmb_Places1.PlaceId) == true
-                || IdIn == 0
-                || (DAL.CheckMBLimit(Convert.ToInt32(gv_List.CurrentRow.Cells["cn_artid"].Value)) == true && ManufBatch.Trim() == "")
-                || (Convert.ToInt32(gv_List.CurrentRow.Cells["cn_incomecontrol"].Value) == -1) && cmb_Places1.IsQuarantine != -1)
-                return false;
-            else
-                return true;
+            return Qty > 0
+                && (PlaceId != 0 || Label != 0)
+                && DAL.CheckProduction(cmb_Places1.PlaceId) != true
+                && IdIn != 0
+                && (DAL.CheckMBLimit(Convert.ToInt32(gv_List.CurrentRow.Cells["cn_artid"].Value)) != true || ManufBatch.Trim() != "")
+                && (Convert.ToInt32(gv_List.CurrentRow.Cells["cn_incomecontrol"].Value) != -1 || cmb_Places1.IsQuarantine == -1);
 
         }
 
@@ -558,20 +545,13 @@ namespace Odin.Warehouse.StockIn
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? String.IsNullOrEmpty(CellValue) == true
+                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
+                    : String.IsNullOrEmpty(CellValue) == true
+                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -585,10 +565,9 @@ namespace Odin.Warehouse.StockIn
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
-                else
-                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
+                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();

@@ -51,14 +51,7 @@ namespace Odin.Finances
 
         public static DataTable getCheckAccounts(string _datefrom, string _datetill, int _account)
         {
-            string query = "";
-            if (_account == 2110)
-                query = "sp_CheckDifference2110";
-            else if (_account == 2120)
-                query = "sp_CheckDifference2120";
-            else
-                query = "sp_CheckDifference2130";
-
+            string query = _account == 2110 ? "sp_CheckDifference2110" : _account == 2120 ? "sp_CheckDifference2120" : "sp_CheckDifference2130";
             var sqlparams = new List<SqlParameter>
             {
                 new SqlParameter("@datefrom",SqlDbType.NVarChar){Value = _datefrom},

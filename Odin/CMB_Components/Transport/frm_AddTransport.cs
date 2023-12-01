@@ -41,11 +41,8 @@ namespace Odin.CMB_Components.Transport
 
         public void CheckEmpty()
         {
-            if (txt_Transport.Text == ""
-                || String.IsNullOrEmpty(Transport) == true)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = txt_Transport.Text != ""
+                && String.IsNullOrEmpty(Transport) != true;
         }
         #endregion
 

@@ -640,10 +640,7 @@ namespace Odin.Warehouse.StockIn
                        
             _res = Convert.ToInt32(sqlComm.Parameters["@insertedid"].Value);
 
-            if (_res != 0)
-                AddedBox = package;
-            else
-                AddedBox = "";
+            AddedBox = _res != 0 ? package : "";
 
             sqlConn.Close();
 

@@ -142,15 +142,10 @@ namespace Odin.Warehouse.Deliveries
 
         public int Return
         {
-            get { if (chk_Return.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+            get {
+                return chk_Return.CheckState == CheckState.Checked ? -1 : 0;
             }
-            set { if (value == -1)
-                    chk_Return.CheckState = CheckState.Checked;
-                else
-                    chk_Return.CheckState = CheckState.Unchecked;
+            set { chk_Return.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 

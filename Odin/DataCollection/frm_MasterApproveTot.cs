@@ -90,12 +90,7 @@ namespace Odin.DataCollection
         {
             get
             {
-                if (rb_Valkas2.Checked == true)
-                    return 1;
-                else if (rb_Valkas2B.Checked == true)
-                    return 2;
-                else
-                    return 0;
+                return rb_Valkas2.Checked == true ? 1 : rb_Valkas2B.Checked == true ? 2 : 0;
             }
             set
             {
@@ -237,11 +232,8 @@ namespace Odin.DataCollection
            
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
-                if (Convert.ToInt32(row.Cells["chk_check"].Value) == -1)
-                    row.Cells["cn_toapprove"].Value = Convert.ToDouble(row.Cells["cn_qty"].Value);
-                else
-                    row.Cells["cn_toapprove"].Value = 0;
-                
+                row.Cells["cn_toapprove"].Value = Convert.ToInt32(row.Cells["chk_check"].Value) == -1 ? Convert.ToDouble(row.Cells["cn_qty"].Value) : (object)0;
+
             }
         }
         #endregion

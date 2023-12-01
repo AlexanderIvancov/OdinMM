@@ -106,10 +106,7 @@ namespace Odin.Planning.Controls
 
         public void EnableSave(bool _istrue)
         {
-            if (_istrue == true)
-                btn_Save.Enabled = true;
-            else
-                btn_Save.Enabled = false;
+            btn_Save.Enabled = _istrue == true;
         }
 
         int _mode = 0; //By default new order
@@ -211,20 +208,13 @@ namespace Odin.Planning.Controls
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? String.IsNullOrEmpty(CellValue) == true
+                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
+                    : String.IsNullOrEmpty(CellValue) == true
+                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -237,10 +227,9 @@ namespace Odin.Planning.Controls
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
-                else
-                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
+                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
@@ -525,10 +514,9 @@ namespace Odin.Planning.Controls
             {
                 gv_List.EndEdit();
 
-                if (Convert.ToInt32(gv_List.CurrentRow.Cells["chk_add"].Value) == -1)
-                    gv_List.CurrentRow.Cells["cn_purchase"].Value = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_missed"].Value);
-                else
-                    gv_List.CurrentRow.Cells["cn_purchase"].Value = 0;
+                gv_List.CurrentRow.Cells["cn_purchase"].Value = Convert.ToInt32(gv_List.CurrentRow.Cells["chk_add"].Value) == -1
+                    ? Convert.ToDouble(gv_List.CurrentRow.Cells["cn_missed"].Value)
+                    : (object)0;
 
                 bs_List.ResetBindings(true);
 
@@ -553,14 +541,7 @@ namespace Odin.Planning.Controls
                                                                      MessageBoxIcon.Warning,
                                                                      TaskDialogButtons.Yes |
                                                                      TaskDialogButtons.No);
-                    if (result == DialogResult.Yes)
-                    {
-                        _test = false;
-                    }
-                    else
-                    {
-                        _test = true;
-                    }
+                    _test = result != DialogResult.Yes;
                     if (_test == true)
                         gv_List.CurrentRow.Cells["cn_purchase"].Value = gv_List.CurrentRow.Cells["cn_missed"].Value;
                 }

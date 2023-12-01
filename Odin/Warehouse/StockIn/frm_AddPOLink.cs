@@ -58,11 +58,8 @@ namespace Odin.Warehouse.StockIn
 
         public void CheckEmpty()
         {
-            if (cmb_PurchaseOrdersWithLines1.PurchaseOrderLineId == 0
-                || Qty <= 0)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = cmb_PurchaseOrdersWithLines1.PurchaseOrderLineId != 0
+                && Qty > 0;
         }
     }
 }

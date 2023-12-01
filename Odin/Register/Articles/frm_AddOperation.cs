@@ -23,17 +23,11 @@ namespace Odin.Register.Articles
         {
             get
             {
-                if (chk_Use.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_Use.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_Use.CheckState = CheckState.Checked;
-                else
-                    chk_Use.CheckState = CheckState.Unchecked;
+                chk_Use.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
         public string Operation
@@ -60,13 +54,10 @@ namespace Odin.Register.Articles
         }
         public void CheckEmpty()
         {
-            if (txt_Formula.Text == ""
-                || txt_Operation.Text == ""
-                || txt_Operation.Text == string.Empty
-                || txt_Formula.Text == string.Empty)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = txt_Formula.Text != ""
+                && txt_Operation.Text != ""
+                && txt_Operation.Text != string.Empty
+                && txt_Formula.Text != string.Empty;
         }
 
         private void txt_Operation_TextChanged(object sender, EventArgs e)

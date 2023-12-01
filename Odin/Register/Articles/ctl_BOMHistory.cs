@@ -197,20 +197,13 @@ namespace Odin.Register.Articles
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_HistoryList.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValueH) == true)
-                        bs_HistoryList.Filter = "(" + ColumnNameH + " is null OR Convert(" + ColumnNameH + ", 'System.String') = '')";
-                    else
-                        bs_HistoryList.Filter = "Convert(" + ColumnNameH + " , 'System.String') = '" + glob_Class.NES(CellValueH) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValueH) == true)
-                        bs_HistoryList.Filter = bs_HistoryList.Filter + "AND (" + ColumnNameH + " is null OR Convert(" + ColumnNameH + ", 'System.String') = '')";
-                    else
-                        bs_HistoryList.Filter = bs_HistoryList.Filter + " AND Convert(" + ColumnNameH + " , 'System.String') = '" + glob_Class.NES(CellValueH) + "'";
-                }
+                bs_HistoryList.Filter = String.IsNullOrEmpty(bs_HistoryList.Filter) == true
+                    ? String.IsNullOrEmpty(CellValueH) == true
+                        ? "(" + ColumnNameH + " is null OR Convert(" + ColumnNameH + ", 'System.String') = '')"
+                        : "Convert(" + ColumnNameH + " , 'System.String') = '" + glob_Class.NES(CellValueH) + "'"
+                    : String.IsNullOrEmpty(CellValueH) == true
+                        ? bs_HistoryList.Filter + "AND (" + ColumnNameH + " is null OR Convert(" + ColumnNameH + ", 'System.String') = '')"
+                        : bs_HistoryList.Filter + " AND Convert(" + ColumnNameH + " , 'System.String') = '" + glob_Class.NES(CellValueH) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -222,10 +215,9 @@ namespace Odin.Register.Articles
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_HistoryList.Filter) == true)
-                    bs_HistoryList.Filter = "Convert(" + ColumnNameH + " , 'System.String') <> '" + CellValueH + "'";
-                else
-                    bs_HistoryList.Filter = bs_HistoryList.Filter + " AND " + ColumnNameH + " <> '" + CellValueH + "'";
+                bs_HistoryList.Filter = String.IsNullOrEmpty(bs_HistoryList.Filter) == true
+                    ? "Convert(" + ColumnNameH + " , 'System.String') <> '" + CellValueH + "'"
+                    : bs_HistoryList.Filter + " AND " + ColumnNameH + " <> '" + CellValueH + "'";
             }
             catch { }
             SetCellsHistoryColor();

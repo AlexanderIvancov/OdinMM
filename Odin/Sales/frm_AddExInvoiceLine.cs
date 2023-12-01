@@ -76,10 +76,7 @@ namespace Odin.Sales
         public int Mode
         {
             get {
-                if (cn_Type.SelectedPage == pg_DelivNote)
-                    return 1;
-                else
-                    return 2;
+                return cn_Type.SelectedPage == pg_DelivNote ? 1 : 2;
             }
             set {  }
         }
@@ -249,16 +246,11 @@ namespace Odin.Sales
 
         public int IsService
         {
-            get { if (chk_IsService.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+            get {
+                return chk_IsService.CheckState == CheckState.Checked ? -1 : 0;
             }
             set {
-                if (value == -1)
-                    chk_IsService.CheckState = CheckState.Checked;
-                else
-                    chk_IsService.CheckState = CheckState.Unchecked;
+                chk_IsService.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 
@@ -266,17 +258,11 @@ namespace Odin.Sales
         {
             get
             {
-                if (chk_ispaid.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_ispaid.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_ispaid.CheckState = CheckState.Checked;
-                else
-                    chk_ispaid.CheckState = CheckState.Unchecked;
+                chk_ispaid.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 
@@ -284,17 +270,11 @@ namespace Odin.Sales
         {
             get
             {
-                if (chk_AdditCost.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_AdditCost.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_AdditCost.CheckState = CheckState.Checked;
-                else
-                    chk_AdditCost.CheckState = CheckState.Unchecked;
+                chk_AdditCost.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 
@@ -546,12 +526,7 @@ namespace Odin.Sales
             {
                 if (Convert.ToInt32(row.Cells["cn_curid"].Value) != InvoiceCurId)
                 {
-                    if (InvoiceCurId == _nativecurid)
-                        _currate = CurrRate;
-                    else
-                    {
-                        _currate = Convert.ToDouble(row.Cells["cn_cocurrate"].Value) / (CurrRate == 0 ? 1 : CurrRate);
-                    }
+                    _currate = InvoiceCurId == _nativecurid ? CurrRate : Convert.ToDouble(row.Cells["cn_cocurrate"].Value) / (CurrRate == 0 ? 1 : CurrRate);
                     row.Cells["cn_unitprice"].Value = Math.Round(
                         (Convert.ToDouble(row.Cells["cn_unitpriceorig"].Value) * _currate) * sellcoef, 2);
                 }
@@ -571,29 +546,22 @@ namespace Odin.Sales
             _nativecurid = Convert.ToInt32(Helper.GetOneRecord("select isnull(convert(int, value), -1) from BAS_Defaults where field = 'currency'"));
             if (CurId != InvoiceCurId)
             {
-                if (InvoiceCurId == _nativecurid)
-                    _currate = CurrRate;
-                else
-                {
-                    _currate = COCurRate / (CurrRate == 0 ? 1 : CurrRate);
-                }
-                if (InvoiceType != 13)
-                    UnitPrice = Math.Round(
+                _currate = InvoiceCurId == _nativecurid ? CurrRate : COCurRate / (CurrRate == 0 ? 1 : CurrRate);
+                UnitPrice = InvoiceType != 13
+                    ? Math.Round(
                             COBll.COUnitPrice * _currate * sellcoef,
-                            2);
-                else
-                    UnitPrice = Math.Round(
+                            2)
+                    : Math.Round(
                         COBll.COUnitPrice * COBll.COQty * _currate * sellcoef,
                         2);
             }
             else
             {
-                if (InvoiceType != 13)
-                    UnitPrice = Math.Round(
+                UnitPrice = InvoiceType != 13
+                    ? Math.Round(
                         COBll.COUnitPrice * sellcoef,
-                        2);
-                else
-                    UnitPrice = Math.Round(
+                        2)
+                    : Math.Round(
                         COBll.COUnitPrice * COBll.COQty * sellcoef,
                         2);
             }
@@ -683,20 +651,13 @@ namespace Odin.Sales
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? String.IsNullOrEmpty(CellValue) == true
+                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
+                    : String.IsNullOrEmpty(CellValue) == true
+                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -709,10 +670,9 @@ namespace Odin.Sales
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
-                else
-                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
+                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
@@ -831,10 +791,7 @@ namespace Odin.Sales
             {
                 foreach (DataGridViewRow row in gv_List.Rows)
                 {
-                    if (string.IsNullOrEmpty(row.Cells["cn_invoices"].Value.ToString().Trim()) == false)
-                        row.Cells["chk_add"].Value = 0;
-                    else
-                        row.Cells["chk_add"].Value = -1;
+                    row.Cells["chk_add"].Value = string.IsNullOrEmpty(row.Cells["cn_invoices"].Value.ToString().Trim()) == false ? 0 : (object)-1;
                 }
             }
             else

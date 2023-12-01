@@ -59,15 +59,10 @@ namespace Odin.Warehouse.Shelves
 
         public int IsProduction
         {
-            get { if (chk_IsProduction.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+            get {
+                return chk_IsProduction.CheckState == CheckState.Checked ? -1 : 0;
             }
-            set { if (value == -1)
-                    chk_IsProduction.CheckState = CheckState.Checked;
-                else
-                    chk_IsProduction.CheckState = CheckState.Unchecked;
+            set { chk_IsProduction.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 
@@ -75,17 +70,11 @@ namespace Odin.Warehouse.Shelves
         {
             get
             {
-                if (chk_Quarantine.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_Quarantine.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_Quarantine.CheckState = CheckState.Checked;
-                else
-                    chk_Quarantine.CheckState = CheckState.Unchecked;
+                chk_Quarantine.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 

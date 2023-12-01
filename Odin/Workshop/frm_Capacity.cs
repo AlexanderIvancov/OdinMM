@@ -39,12 +39,7 @@ namespace Odin.Workshop
         public int TypeSelection
         {
             get {
-                if (rb_all.Checked == true)
-                    return 1;
-                else if (rb_production.Checked == true)
-                    return 0;
-                else
-                    return -1;             
+                return rb_all.Checked == true ? 1 : rb_production.Checked == true ? 0 : -1;
             }
         }
         #endregion

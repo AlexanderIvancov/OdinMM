@@ -116,10 +116,7 @@ namespace Odin.CMB_Components.Places
         {
             int _res = Convert.ToInt32(Helper.GetOneRecord("select id from (select * from STO_Shelves where id in " +
                 " (select idpl from dbo.ifn_StockPlaces(dbo.fn_DefaultValue('quarantine')))) tab where tab.id = " + placeid));
-            if (_res == 0)
-                IsQuarantine = 0;
-            else
-                IsQuarantine = -1;
+            IsQuarantine = _res == 0 ? 0 : -1;
         }
 
         private void buttonSpecAny1_Click(object sender, EventArgs e)

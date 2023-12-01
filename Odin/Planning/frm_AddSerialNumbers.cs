@@ -43,18 +43,12 @@ namespace Odin.Planning
 
         public bool CheckQty()
         {
-            if (Convert.ToInt32(txt_SerialTill.Text) - Convert.ToInt32(txt_SerialFrom.Text) > Convert.ToInt32(txt_QtyInBatch.Text))
-                return false;
-            else
-                return true;
+            return Convert.ToInt32(txt_SerialTill.Text) - Convert.ToInt32(txt_SerialFrom.Text) <= Convert.ToInt32(txt_QtyInBatch.Text);
         }
 
         public void SetQtyColor()
         {
-            if (CheckQty() == false)
-                txt_QtyInBatch.StateCommon.Back.Color1 = Color.LightCoral;
-            else
-                txt_QtyInBatch.StateCommon.Back.Color1 = Color.White;
+            txt_QtyInBatch.StateCommon.Back.Color1 = CheckQty() == false ? Color.LightCoral : Color.White;
         }
 
         #endregion

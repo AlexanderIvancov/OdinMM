@@ -72,10 +72,7 @@ namespace Odin.Planning.Controls
         {
             get
             {
-                if (txt_StartDate.Value == null)
-                    return "";
-                else
-                    return txt_StartDate.Value.ToString();
+                return txt_StartDate.Value == null ? "" : txt_StartDate.Value.ToString();
             }
             set
             {
@@ -90,10 +87,7 @@ namespace Odin.Planning.Controls
         {
             get
             {
-                if (txt_ResDate.Value == null)
-                    return "";
-                else
-                    return txt_ResDate.Value.ToString();
+                return txt_ResDate.Value == null ? "" : txt_ResDate.Value.ToString();
             }
             set
             {
@@ -219,22 +213,16 @@ namespace Odin.Planning.Controls
 
         public void FillAutoDoc()
         {
-            if (QuotId == 0)
-                Batch = DLL.AutoDoc(19, System.DateTime.Now.ToShortDateString());
-            else
-                Batch = DLL.AutoDoc(20, System.DateTime.Now.ToShortDateString());
+            Batch = QuotId == 0
+                ? DLL.AutoDoc(19, System.DateTime.Now.ToShortDateString())
+                : DLL.AutoDoc(20, System.DateTime.Now.ToShortDateString());
         }
 
         public bool CheckEmpty()
         {
-            if (ArticleId == 0
-                || QtyInBatch == 0
-                || StartDate.Trim() == ""
-                //|| (Convert.ToDateTime(StartDate) > Convert.ToDateTime(EndDate))
-                )
-                return false;
-            else
-                return true;
+            return ArticleId != 0
+                && QtyInBatch != 0
+                && StartDate.Trim() != "";
 
         }
 
@@ -511,13 +499,7 @@ namespace Odin.Planning.Controls
             //}
             //else
             //{
-                if (Spoilage == -1)
-                {
-
-                    node.Cells["cn_nQtyInBatch"].Value = _tmpQtyWithSpoil;
-                }
-                else
-                    node.Cells["cn_nQtyInBatch"].Value = _tmpQtyWOSpoil;
+                node.Cells["cn_nQtyInBatch"].Value = Spoilage == -1 ? _tmpQtyWithSpoil : (object)_tmpQtyWOSpoil;
             //}
             SetCellsColor();
         }
@@ -598,10 +580,7 @@ namespace Odin.Planning.Controls
             if (tv_BOM.CurrentRow.Cells["cn_nWithSpoil"].Selected == true)
             {
                 tv_BOM.EndEdit();
-                if (Convert.ToInt16(tv_BOM.CurrentRow.Cells["cn_nWithSpoil"].Value) == -1)
-                    _tmpSpoil = -1;
-                else
-                    _tmpSpoil = 0;
+                _tmpSpoil = Convert.ToInt16(tv_BOM.CurrentRow.Cells["cn_nWithSpoil"].Value) == -1 ? -1 : 0;
 
                 double _tmpQtyCSE = 0;
                     //Recalc RM QTY
@@ -618,11 +597,8 @@ namespace Odin.Planning.Controls
                                                                                 * _tmpPerc + Convert.ToDouble(node.Cells["cn_nSpoilConst"].Value)
                                                                                 , Convert.ToInt32(node.Cells["cn_nNumDecimals"].Value));
 
-                if (_tmpSpoil == 0)
-                    node.Cells["cn_nQtyInBatch"].Value = _tmpQtyWOSpoil;
-                else
-                    node.Cells["cn_nQtyInBatch"].Value = _tmpQtyWithSpoil;
-                
+                node.Cells["cn_nQtyInBatch"].Value = _tmpSpoil == 0 ? _tmpQtyWOSpoil : (object)_tmpQtyWithSpoil;
+
 
             }
         }
@@ -632,10 +608,7 @@ namespace Odin.Planning.Controls
             if (_EditMode == 0)
             {
 
-                if (AllSpoil == 0)
-                    AllSpoil = -1;
-                else
-                    AllSpoil = 0;
+                AllSpoil = AllSpoil == 0 ? -1 : 0;
 
                 if (AllSpoil == -1)
                 {
@@ -897,10 +870,7 @@ namespace Odin.Planning.Controls
             {
                 int _tmpSpoil = 0;
                 tv_BOM.EndEdit();
-                if (Convert.ToInt16(tv_BOM.CurrentRow.Cells["cn_nWithSpoil"].Value) == -1)
-                    _tmpSpoil = -1;
-                else
-                    _tmpSpoil = 0;
+                _tmpSpoil = Convert.ToInt16(tv_BOM.CurrentRow.Cells["cn_nWithSpoil"].Value) == -1 ? -1 : 0;
 
                 double _tmpQtyCSE = 0;
                 _tmpQtyCSE = QtyInBatch;
@@ -915,11 +885,8 @@ namespace Odin.Planning.Controls
                 _tmpQtyWithSpoil = Math.Round(_tmpQtyCSE * Convert.ToDouble(node.Cells["cn_nQtyNom"].Value)
                                                                                 * _tmpPerc + Convert.ToDouble(node.Cells["cn_nSpoilConst"].Value)
                                                                                 , Convert.ToInt32(node.Cells["cn_nNumDecimals"].Value));
-                if (_tmpSpoil == 0)
-                    node.Cells["cn_nQtyInBatch"].Value = _tmpQtyWOSpoil;
-                else
-                    node.Cells["cn_nQtyInBatch"].Value = _tmpQtyWithSpoil;
-                
+                node.Cells["cn_nQtyInBatch"].Value = _tmpSpoil == 0 ? _tmpQtyWOSpoil : (object)_tmpQtyWithSpoil;
+
             }
 
             SetCellsColor();

@@ -161,10 +161,7 @@ namespace Odin.Planning
                     else
                     {
                         //Printed
-                        if (row["printedby"].ToString() != "")
-                            color1 = Color.LightGreen;
-                        else
-                            color1 = Color.LightCoral;
+                        color1 = row["printedby"].ToString() != "" ? Color.LightGreen : Color.LightCoral;
                     }
                 }
                 //if (Convert.ToInt32(row["isstarted"]) == -1)
@@ -284,10 +281,7 @@ namespace Odin.Planning
                     else
                     {
                         //Printed
-                        if (row["printedby"].ToString() != "")
-                            color1 = Color.LightGreen;
-                        else
-                            color1 = Color.LightCoral;
+                        color1 = row["printedby"].ToString() != "" ? Color.LightGreen : Color.LightCoral;
                     }
                 }
                 //if (Convert.ToInt32(row["isstarted"]) == -1)

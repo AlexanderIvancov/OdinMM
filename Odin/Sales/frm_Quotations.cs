@@ -69,21 +69,11 @@ namespace Odin.Sales
         {
             get
             {
-                if (chk_PCB.CheckState == CheckState.Checked)
-                    return -1;
-                else if (chk_PCB.CheckState == CheckState.Unchecked)
-                    return 0;
-                else
-                    return 1;
+                return chk_PCB.CheckState == CheckState.Checked ? -1 : chk_PCB.CheckState == CheckState.Unchecked ? 0 : 1;
             }
             set
             {
-                if (value == -1)
-                    chk_PCB.CheckState = CheckState.Checked;
-                else if (value == 0)
-                    chk_PCB.CheckState = CheckState.Unchecked;
-                else
-                    chk_PCB.CheckState = CheckState.Indeterminate;
+                chk_PCB.CheckState = value == -1 ? CheckState.Checked : value == 0 ? CheckState.Unchecked : CheckState.Indeterminate;
             }
         }
 
@@ -297,20 +287,13 @@ namespace Odin.Sales
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? String.IsNullOrEmpty(CellValue) == true
+                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
+                    : String.IsNullOrEmpty(CellValue) == true
+                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -323,10 +306,9 @@ namespace Odin.Sales
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
-                else
-                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
+                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
@@ -476,12 +458,9 @@ namespace Odin.Sales
 
         private void chk_PCB_CheckStateChanged(object sender, EventArgs e)
         {
-            if (chk_PCB.CheckState == CheckState.Checked)
-                chk_PCB.Text = "PCB: Yes";
-            else if (chk_PCB.CheckState == CheckState.Unchecked)
-                chk_PCB.Text = "PCB: No";
-            else
-                chk_PCB.Text = "PCB: Undefined";
+            chk_PCB.Text = chk_PCB.CheckState == CheckState.Checked
+                ? "PCB: Yes"
+                : chk_PCB.CheckState == CheckState.Unchecked ? "PCB: No" : "PCB: Undefined";
         }
 
         private void btn_AddNew_Click(object sender, EventArgs e)

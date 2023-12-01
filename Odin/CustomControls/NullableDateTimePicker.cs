@@ -83,10 +83,7 @@ namespace Odin.CustomControls
         {
             get
             {
-                if (_isNull)
-                    return null;
-                else
-                    return base.Value;
+                return _isNull ? null : (DateTime?)base.Value;
             }
             set
             {

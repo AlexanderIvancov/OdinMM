@@ -49,12 +49,9 @@ namespace Odin.Workshop
 
         public bool CheckLabels()
         {
-            if (Convert.ToInt32(txt_Diff.Text) <= 0
-                || txt_From36.Text == "ERROR!"
-                || txt_From10.Text == "ERROR!")
-                return false;
-            else
-                return true;
+            return Convert.ToInt32(txt_Diff.Text) > 0
+                && txt_From36.Text != "ERROR!"
+                && txt_From10.Text != "ERROR!";
         }
         private void btn_OK_Click(object sender, EventArgs e)
         {

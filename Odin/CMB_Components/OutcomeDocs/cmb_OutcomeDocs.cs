@@ -59,12 +59,9 @@ namespace Odin.CMB_Components.OutcomeDocs
                 txt_OutcomeDoc.Text = value;
                 DataSet ds = new DataSet();
 
-                string strSQL = "";
-                if (EnableDN == true)
-                    strSQL = "SELECT DISTINCT TOP 1 id FROM STO_StockOutHead WHERE name = '" + _OutcomeDoc.ToString() + "' and (typeout = 5 or typeout = 15 or typeout = 17 or typeout = 28 or typeout = 4)";
-                else
-                    strSQL = "SELECT DISTINCT TOP 1 id FROM STO_StockOutHead WHERE name = '" + _OutcomeDoc.ToString() + "' and (typeout = 5 or typeout = 15 or typeout = 17 or typeout = 28)";
-                
+                string strSQL = EnableDN == true
+                    ? "SELECT DISTINCT TOP 1 id FROM STO_StockOutHead WHERE name = '" + _OutcomeDoc.ToString() + "' and (typeout = 5 or typeout = 15 or typeout = 17 or typeout = 28 or typeout = 4)"
+                    : "SELECT DISTINCT TOP 1 id FROM STO_StockOutHead WHERE name = '" + _OutcomeDoc.ToString() + "' and (typeout = 5 or typeout = 15 or typeout = 17 or typeout = 28)";
                 SqlDataAdapter adapter =
                     new SqlDataAdapter(
                         strSQL, sConnStr);

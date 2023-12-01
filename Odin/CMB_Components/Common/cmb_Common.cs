@@ -34,10 +34,7 @@ namespace Odin.CMB_Components.Common
             set
             {
                 _isemptycolor = value;
-                if (value == true)
-                    txt_Common.StateCommon.Back.Color1 = Color.LightPink;
-                else
-                    txt_Common.StateCommon.Back.Color1 = Color.White;
+                txt_Common.StateCommon.Back.Color1 = value == true ? Color.LightPink : Color.White;
             }
         }
 
@@ -76,10 +73,7 @@ namespace Odin.CMB_Components.Common
         {
             get
             {
-                if (String.IsNullOrEmpty(txt_Common.Text) == true)
-                    return "";
-                else
-                    return txt_Common.Text;
+                return String.IsNullOrEmpty(txt_Common.Text) == true ? "" : txt_Common.Text;
             }
             set
             {

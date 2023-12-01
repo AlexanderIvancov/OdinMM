@@ -119,17 +119,12 @@ namespace Odin.CMB_Components.DeliveryNotes
 
         public int IsReturn
         {
-            get { if (chk_return.Checked == true)
-                    return -1;
-                else
-                    return 0;
+            get {
+                return chk_return.Checked == true ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_return.Checked = true;
-                else
-                    chk_return.Checked = false;
+                chk_return.Checked = value == -1;
             }
         }
 
@@ -137,17 +132,11 @@ namespace Odin.CMB_Components.DeliveryNotes
         {
             get
             {
-                if (chk_noreversepvn.Checked == true)
-                    return -1;
-                else
-                    return 0;
+                return chk_noreversepvn.Checked == true ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_noreversepvn.Checked = true;
-                else
-                    chk_noreversepvn.Checked = false;
+                chk_noreversepvn.Checked = value == -1;
             }
         }
 
@@ -155,17 +144,11 @@ namespace Odin.CMB_Components.DeliveryNotes
         {
             get
             {
-                if (chk_Internal.Checked == true)
-                    return -1;
-                else
-                    return 0;
+                return chk_Internal.Checked == true ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_Internal.Checked = true;
-                else
-                    chk_Internal.Checked = false;
+                chk_Internal.Checked = value == -1;
             }
         }
 
@@ -180,10 +163,7 @@ namespace Odin.CMB_Components.DeliveryNotes
 
         public void CheckEmpty()
         {
-            if (cmb_Firms1.FirmId == 0)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = cmb_Firms1.FirmId != 0;
         }
 
         #endregion

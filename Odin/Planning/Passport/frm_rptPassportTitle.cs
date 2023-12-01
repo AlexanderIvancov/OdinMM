@@ -306,15 +306,7 @@ namespace Odin.Planning.Passport
         }
         public void FillReport()
         {
-            ReportDocument rd;
-
-            if (RepType == 1)
-                rd = OpenReport();
-            else if (RepType == 2)
-                rd = OpenReportLaunch();
-            else
-                rd = OpenReportLaunchVizas();
-
+            ReportDocument rd = RepType == 1 ? OpenReport() : RepType == 2 ? OpenReportLaunch() : OpenReportLaunchVizas();
             crystalReportViewer1.ReportSource = rd;
 
         }

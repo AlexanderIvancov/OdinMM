@@ -62,12 +62,9 @@ namespace Odin.Warehouse.StockOut
 
         public void CheckEmpty()
         {
-            if (cmb_Articles1.ArticleId == 0
-                || cmb_Places1.PlaceId == 0
-                || Qty <= 0)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = cmb_Articles1.ArticleId != 0
+                && cmb_Places1.PlaceId != 0
+                && Qty > 0;
         }
 
         #endregion

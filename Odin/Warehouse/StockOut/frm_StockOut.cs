@@ -76,17 +76,12 @@ namespace Odin.Warehouse.StockOut
         public int Reserved
         {
             get
-            { if (chk_Reserved.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+            {
+                return chk_Reserved.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_Reserved.CheckState = CheckState.Checked;
-                else
-                    chk_Reserved.CheckState = CheckState.Unchecked;
+                chk_Reserved.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }            
         }
 
@@ -94,17 +89,11 @@ namespace Odin.Warehouse.StockOut
         {
             get
             {
-                if (chk_Left.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_Left.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_Left.CheckState = CheckState.Checked;
-                else
-                    chk_Left.CheckState = CheckState.Unchecked;
+                chk_Left.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 
@@ -219,11 +208,8 @@ namespace Odin.Warehouse.StockOut
             //header
             tgv_List.ThreadSafeCall(delegate
             {
-            if (cmb_Requests1.RequestId != 0)
-                this.cn_Reserved.HeaderText = "Requested";
-            else
-                this.cn_Reserved.HeaderText = "Reserved";
-            tgv_List.Nodes.Clear();
+            this.cn_Reserved.HeaderText = cmb_Requests1.RequestId != 0 ? "Requested" : "Reserved";
+                tgv_List.Nodes.Clear();
             TreeGridNode node;
             Font boldFont = new Font(tgv_List.DefaultCellStyle.Font, FontStyle.Bold);
                  
@@ -297,13 +283,9 @@ namespace Odin.Warehouse.StockOut
         private void AddNode(DataRow dr, Font boldFont, TreeGridNodeCollection nodes, bool isAddingImage)
         {
             TreeGridNode node;
-            string _tempexpdate = "";
-
-            if (Convert.ToDateTime(dr["expdate"]) != Convert.ToDateTime("01/01/2199"))
-                _tempexpdate = Convert.ToDateTime(dr["expdate"]).ToShortDateString();
-            else
-                _tempexpdate = "";
-
+            string _tempexpdate = Convert.ToDateTime(dr["expdate"]) != Convert.ToDateTime("01/01/2199")
+                ? Convert.ToDateTime(dr["expdate"]).ToShortDateString()
+                : "";
             node = nodes.Add(null, dr["artid"], dr["artid"], dr["article"], dr["batch"], dr["batchdetid"], "", "0",
                              0, 0, 0, dr["unit"], dr["label"], dr["qtystock"], "->", 0, dr["qtystock"],
                              dr["place"], _tempexpdate, "", dr["usage"], dr["placeid"]);
@@ -542,20 +524,13 @@ namespace Odin.Warehouse.StockOut
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_Dets.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_Dets.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_Dets.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_Dets.Filter = bs_Dets.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_Dets.Filter = bs_Dets.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
+                bs_Dets.Filter = String.IsNullOrEmpty(bs_Dets.Filter) == true
+                    ? String.IsNullOrEmpty(CellValue) == true
+                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
+                    : String.IsNullOrEmpty(CellValue) == true
+                        ? bs_Dets.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : bs_Dets.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -567,10 +542,9 @@ namespace Odin.Warehouse.StockOut
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_Dets.Filter) == true)
-                    bs_Dets.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
-                else
-                    bs_Dets.Filter = bs_Dets.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                bs_Dets.Filter = String.IsNullOrEmpty(bs_Dets.Filter) == true
+                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
+                    : bs_Dets.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColorDets();
@@ -723,11 +697,10 @@ namespace Odin.Warehouse.StockOut
         {
             bwStart(bw_List);
             
-            if (cmb_Batches1.BatchId != 0
-                || cmb_Requests1.RequestId != 0)
-                Mode = 1;
-            else
-                Mode = 2;
+            Mode = cmb_Batches1.BatchId != 0
+                || cmb_Requests1.RequestId != 0
+                ? 1
+                : 2;
         }
 
         private void cmb_OutcomeDocs1_OutDocChanged(object sender)
@@ -793,13 +766,9 @@ namespace Odin.Warehouse.StockOut
                         double _QtyLeft = Convert.ToDouble(node.Cells["cn_LeftInBatch"].Value);
                         double _QtyAvailable = Convert.ToDouble(node.Cells["cn_Available"].Value);
 
-                        double _ForOut = 0;
-                        if (cmb_Requests1.RequestId != 0)
-                            _ForOut = _QtyReserved < _QtyAvailable ? _QtyReserved : _QtyAvailable;
-                        else
-                            _ForOut = _QtyAvailable + _QtyReserved < _QtyLeft ? _QtyAvailable + _QtyReserved : _QtyLeft;
-                        
-
+                        double _ForOut = cmb_Requests1.RequestId != 0
+                            ? _QtyReserved < _QtyAvailable ? _QtyReserved : _QtyAvailable
+                            : _QtyAvailable + _QtyReserved < _QtyLeft ? _QtyAvailable + _QtyReserved : _QtyLeft;
                         int _BatchDetId = Convert.ToInt32(node.Cells["cn_BatchId"].Value);
 
                         foreach (TreeGridNode node1 in node.Nodes)
@@ -838,29 +807,18 @@ namespace Odin.Warehouse.StockOut
                     else
                     {
                         //MANUAL
-                        double _Diff = 0;
+                        double _Diff = cmb_Requests1.RequestId != 0
+                            ? Convert.ToDouble(parentnode.Cells["cn_Available"].Value) - Convert.ToDouble(parentnode.Cells["cn_QtyToGive"].Value)
+                            : Convert.ToDouble(parentnode.Cells["cn_Reserved"].Value) - Convert.ToDouble(parentnode.Cells["cn_QtyToGive"].Value);
 
                         //MessageBox.Show(Convert.ToDateTime(DocDate).ToString() + "/" + Convert.ToDateTime(parentnode.Cells["cn_InDate"].Value.ToString()).ToString());
-                        if (cmb_Requests1.RequestId != 0)
-                            _Diff = Convert.ToDouble(parentnode.Cells["cn_Available"].Value) - Convert.ToDouble(parentnode.Cells["cn_QtyToGive"].Value);
-                        else
-                            _Diff = Convert.ToDouble(parentnode.Cells["cn_Reserved"].Value) - Convert.ToDouble(parentnode.Cells["cn_QtyToGive"].Value);
 
                         if (_Diff > 0)
                         {
                             //if (Convert.ToDateTime(DocDate) >= Convert.ToDateTime(node.Cells["cn_InDate"].Value.ToString()))
                             //{
 
-                            if (_Diff < Convert.ToDouble(node.Cells["cn_QtyOnLabel"].Value))
-                            {
-                                node.Cells["cn_QtyToGive"].Value = _Diff;
-                                
-
-                            }
-                            else
-                            {
-                                node.Cells["cn_QtyToGive"].Value = Convert.ToDouble(node.Cells["cn_QtyOnLabel"].Value);
-                            }
+                            node.Cells["cn_QtyToGive"].Value = _Diff < Convert.ToDouble(node.Cells["cn_QtyOnLabel"].Value) ? _Diff : (object)Convert.ToDouble(node.Cells["cn_QtyOnLabel"].Value);
                             node.Cells["cn_QtyRest"].Value = Convert.ToDouble(node.Cells["cn_QtyOnLabel"].Value) - Convert.ToDouble(node.Cells["cn_QtyToGive"].Value);
                             //}
                             //else
@@ -1036,10 +994,7 @@ namespace Odin.Warehouse.StockOut
                         _QtyLeft = Convert.ToDouble(node.Cells["cn_LeftInBatch"].Value);
                         _QtyAvailable = Convert.ToDouble(node.Cells["cn_Available"].Value);
 
-                        if (cmb_Requests1.RequestId != 0)
-                            _ForOut = _QtyAvailable;
-                        else
-                            _ForOut = _QtyAvailable + _QtyReserved;
+                        _ForOut = cmb_Requests1.RequestId != 0 ? _QtyAvailable : _QtyAvailable + _QtyReserved;
                         if (_ForOut < Convert.ToDouble(node.Cells["cn_QtyToGive"].Value))
                         {
                             node.Cells["cn_QtyToGive"].Value = _ForOut;
@@ -1055,10 +1010,7 @@ namespace Odin.Warehouse.StockOut
                         _QtyLeft = Convert.ToDouble(parentnode.Cells["cn_LeftInBatch"].Value);
                         _QtyAvailable = Convert.ToDouble(parentnode.Cells["cn_Available"].Value);
 
-                        if (cmb_Requests1.RequestId != 0)
-                            _ForOut = _QtyAvailable;
-                        else
-                            _ForOut = _QtyAvailable + _QtyReserved;
+                        _ForOut = cmb_Requests1.RequestId != 0 ? _QtyAvailable : _QtyAvailable + _QtyReserved;
 
                         if (_ForOut < Convert.ToDouble(parentnode.Cells["cn_QtyToGive"].Value))
                         {
@@ -1106,10 +1058,7 @@ namespace Odin.Warehouse.StockOut
                         _QtyLeft = Convert.ToDouble(node.Cells["cn_LeftInBatch"].Value);
                         _QtyAvailable = Convert.ToDouble(node.Cells["cn_Available"].Value);
 
-                        if (cmb_Requests1.RequestId != 0)
-                            _ForOut = _QtyAvailable;
-                        else
-                            _ForOut = _QtyAvailable + _QtyReserved;
+                        _ForOut = cmb_Requests1.RequestId != 0 ? _QtyAvailable : _QtyAvailable + _QtyReserved;
                         if (_ForOut < Convert.ToDouble(node.Cells["cn_QtyToGive"].Value))
                         {
                             node.Cells["cn_QtyToGive"].Value = _ForOut;
@@ -1125,10 +1074,7 @@ namespace Odin.Warehouse.StockOut
                         _QtyLeft = Convert.ToDouble(parentnode.Cells["cn_LeftInBatch"].Value);
                         _QtyAvailable = Convert.ToDouble(parentnode.Cells["cn_Available"].Value);
 
-                        if (cmb_Requests1.RequestId != 0)
-                            _ForOut = _QtyAvailable;
-                        else
-                            _ForOut = _QtyAvailable + _QtyReserved;
+                        _ForOut = cmb_Requests1.RequestId != 0 ? _QtyAvailable : _QtyAvailable + _QtyReserved;
 
                         if (_ForOut < Convert.ToDouble(parentnode.Cells["cn_QtyToGive"].Value))
                         {
@@ -1477,11 +1423,8 @@ namespace Odin.Warehouse.StockOut
 
         private void cmb_Batches1_BatchChanged(object sender)
         {
-            if (cmb_Batches1.BatchId != 0
-                && cmb_Batches1.IsActive == 0)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = cmb_Batches1.BatchId == 0
+                || cmb_Batches1.IsActive != 0;
             if (cmb_Batches1.BatchId == 0)
                 tgv_List.Nodes.Clear();
 

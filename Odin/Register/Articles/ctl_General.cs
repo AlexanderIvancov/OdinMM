@@ -145,17 +145,11 @@ namespace Odin.Register.Articles
         {
             get
             {
-                if (chk_SubBatch.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_SubBatch.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_SubBatch.CheckState = CheckState.Checked;
-                else
-                    chk_SubBatch.CheckState = CheckState.Unchecked;
+                chk_SubBatch.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 
@@ -163,17 +157,11 @@ namespace Odin.Register.Articles
         {
             get
             {
-                if (chk_Service.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_Service.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_Service.CheckState = CheckState.Checked;
-                else
-                    chk_Service.CheckState = CheckState.Unchecked;
+                chk_Service.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 
@@ -187,17 +175,11 @@ namespace Odin.Register.Articles
         {
             get
             {
-                if (chk_IsActive.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_IsActive.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_IsActive.CheckState = CheckState.Checked;
-                else
-                    chk_IsActive.CheckState = CheckState.Unchecked;
+                chk_IsActive.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 
@@ -261,34 +243,22 @@ namespace Odin.Register.Articles
         {
             get
             {
-                if (chk_Warning.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_Warning.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_Warning.CheckState = CheckState.Checked;
-                else
-                    chk_Warning.CheckState = CheckState.Unchecked;
+                chk_Warning.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
         public int MBLimit
         {
             get
             {
-                if (chk_MBLimit.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_MBLimit.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_MBLimit.CheckState = CheckState.Checked;
-                else
-                    chk_MBLimit.CheckState = CheckState.Unchecked;
+                chk_MBLimit.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
         int _artid = 0;
