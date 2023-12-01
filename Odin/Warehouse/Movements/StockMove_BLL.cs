@@ -163,7 +163,6 @@ namespace Odin.Warehouse.Movements
 
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
-
         public static DataTable getStockMoveBatchesPrint(int _groupid)
         {
             string query = "sp_SelectMoveDocPrintBatchesGroup";
@@ -207,7 +206,6 @@ namespace Odin.Warehouse.Movements
         }
 
         string _insertedmovdoc = "";
-
         public string InsertedMovDoc
         {
             get { return _insertedmovdoc; }
@@ -240,7 +238,6 @@ namespace Odin.Warehouse.Movements
 
             return _res;
         }
-
         public static string GetStencil(string Article)
         {
             string query = "EXECUTE sp_SelectBOMStencils @Article = " + Article;
@@ -273,7 +270,6 @@ namespace Odin.Warehouse.Movements
 
             return _res;
         }
-
         public int AddStockMoveLineCorrection(int _headid, int _label, double _qty, int _placeid, int _batchdetid, int _reserve,
                                     int _batchid, int _stageid, double _qtyonstage, string _comments)
         {

@@ -23,6 +23,61 @@ namespace Odin.Properties {
             }
         }
         
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=HOME\\SQLEXPRESS;Initial Catalog=OdinDB;Integrated Security=True;Conne" +
+            "ct Timeout=3000")]
+        public string OdinDBConnectionStringHome {
+            get {
+                return ((string)(this["OdinDBConnectionStringHome"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=HOME\\SQLEXPRESS;Initial Catalog=OdinDB;Persist Security Info=True;Use" +
+            "r ID=AISQL;Password=qwerty")]
+        public string OdinDBConnectionStringHomeNetwork {
+            get {
+                return ((string)(this["OdinDBConnectionStringHomeNetwork"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.10.5;Initial Catalog=OdinDB;Persist Security Info=True;User I" +
+            "D=AI_Remote;Password=Aisql18!")]
+        public string OdinDBConnectionStringRemote {
+            get {
+                return ((string)(this["OdinDBConnectionStringRemote"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=TCP:192.168.10.5, 1433;Initial Catalog=OdinDB;Integrated Security=Tru" +
+            "e;Connect Timeout=3000")]
+        public string OdinDBConnectionStringSMD {
+            get {
+                return ((string)(this["OdinDBConnectionStringSMD"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=HOME\\SQLEXPRESS;Initial Catalog=OdinDB;Integrated Security=True;Conne" +
+            "ct Timeout=3000")]
+        public string OdinDBConnectionString {
+            get {
+                return ((string)(this["OdinDBConnectionString"]));
+            }
+        }
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("mail.smd-baltic.lv")]
@@ -44,61 +99,6 @@ namespace Odin.Properties {
             }
             set {
                 this["Printer_Port"] = value;
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=TCP:192.168.10.5;Initial Catalog=OdinDB;Integrated Security=True;Conn" +
-            "ect Timeout=3000")]
-        public string OdinDBConnectionString {
-            get {
-                return ((string)(this["OdinDBConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=TCP:192.168.10.5;Initial Catalog=OdinDB;Integrated Security=True;Conn" +
-            "ect Timeout=3000")]
-        public string OdinDBConnectionStringHome {
-            get {
-                return ((string)(this["OdinDBConnectionStringHome"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=TCP:192.168.10.5, 1433;Initial Catalog=OdinDB;Integrated Security=Tru" +
-            "e;Connect Timeout=3000")]
-        public string OdinDBConnectionStringSMD {
-            get {
-                return ((string)(this["OdinDBConnectionStringSMD"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.10.5;Initial Catalog=OdinDB;Persist Security Info=True;User I" +
-            "D=AI_Remote;Password=Aisql18!")]
-        public string OdinDBConnectionStringRemote {
-            get {
-                return ((string)(this["OdinDBConnectionStringRemote"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=TCP:192.168.10.5;Initial Catalog=OdinDB;Persist Security Info=True;Us" +
-            "er ID=AISQL;Password=qwerty")]
-        public string OdinDBConnectionStringHomeNetwork {
-            get {
-                return ((string)(this["OdinDBConnectionStringHomeNetwork"]));
             }
         }
         
