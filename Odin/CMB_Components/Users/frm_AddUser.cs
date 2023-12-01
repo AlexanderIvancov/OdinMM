@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ComponentFactory.Krypton.Toolkit;
+using System;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
-using Odin.Global_Classes;
 
 namespace Odin.CMB_Components.Users
 {
@@ -45,16 +36,11 @@ namespace Odin.CMB_Components.Users
         }
         public int IsDBUser
         {
-            get { if (chk_IsDBUser.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+            get {
+                return chk_IsDBUser.CheckState == CheckState.Checked ? -1 : 0;
             }
-            set { if (value == -1)
-                    chk_IsDBUser.CheckState = CheckState.Checked;
-                else
-                    chk_IsDBUser.CheckState = CheckState.Unchecked;
-                }
+            set { chk_IsDBUser.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+            }
         }
         public string UserEmail
         {
@@ -94,17 +80,11 @@ namespace Odin.CMB_Components.Users
         {
             get
             {
-                if (chk_IsActive.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_IsActive.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_IsActive.CheckState = CheckState.Checked;
-                else
-                    chk_IsActive.CheckState = CheckState.Unchecked;
+                chk_IsActive.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 
@@ -171,11 +151,8 @@ namespace Odin.CMB_Components.Users
 
         public void CheckEmpty()
         {
-            if (String.IsNullOrEmpty(UserName) == true
-                && String.IsNullOrEmpty(UserSurName) == true)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = String.IsNullOrEmpty(UserName) != true
+                || String.IsNullOrEmpty(UserSurName) != true;
         }
 
         private void txt_Name_TextChanged(object sender, EventArgs e)

@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Odin.CMB_Components.BLL;
 using Odin.Global_Classes;
+using System;
+using System.Data;
 using System.Data.SqlClient;
-using Odin.CMB_Components.BLL;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.ExpInvoices
 {
@@ -91,10 +86,7 @@ namespace Odin.CMB_Components.ExpInvoices
                     return;
                 }
 
-                if (ExpInvoiceChanged != null)
-                {
-                    ExpInvoiceChanged(this);
-                }
+                ExpInvoiceChanged?.Invoke(this);
             }
         }
 
@@ -146,10 +138,7 @@ namespace Odin.CMB_Components.ExpInvoices
 
                     _PrevId = _InvoiceId;
 
-                    if (ExpInvoiceChanged != null)
-                    {
-                        ExpInvoiceChanged(this);
-                    }
+                    ExpInvoiceChanged?.Invoke(this);
 
                 }
             }
@@ -163,19 +152,13 @@ namespace Odin.CMB_Components.ExpInvoices
             set
             {
                 _InvoiceSavedId = value;
-                if (ExpInvoiceSaved != null)
-                {
-                    ExpInvoiceSaved(this);
-                }
+                ExpInvoiceSaved?.Invoke(this);
             }
         }
 
         public void InvoiceSendSave()
         {
-            if (ExpInvoiceSaved != null)
-            {
-                ExpInvoiceSaved(this);
-            }
+            ExpInvoiceSaved?.Invoke(this);
         }
 
         public bool EnableSearchId
@@ -247,8 +230,7 @@ namespace Odin.CMB_Components.ExpInvoices
                                         frm.AdvanceDate, frm.ProformaNR, frm.PayDate, frm.PaymentId, frm.SellerContPersId,
                                         frm.BuyerContPersId, frm.ValueForCustoms, frm.ESignature, frm.Recipient);
             InvoiceId = _res;
-            if (ExpInvoiceChanged != null)
-                ExpInvoiceChanged(this);
+            ExpInvoiceChanged?.Invoke(this);
 
             frm.Close();
 

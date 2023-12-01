@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
+﻿using Odin.Global_Classes;
+using System;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Odin.Global_Classes;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.PurchaseOrders
 {
@@ -325,26 +320,17 @@ namespace Odin.CMB_Components.PurchaseOrders
             _PurchaseOrderLineId = POLineSelectedValue();
 
 
-            if (PurchaseOrderChanged != null)
-            {
-                PurchaseOrderChanged(this);
-            }
+            PurchaseOrderChanged?.Invoke(this);
         }
 
         private void cmb_Lines_Click(object sender, EventArgs e)
         {
-            if (ControlClick != null)
-            {
-                ControlClick(this);
-            }
+            ControlClick?.Invoke(this);
         }
 
         private void txt_PurchaseOrder_Click(object sender, EventArgs e)
         {
-            if (ControlClick != null)
-            {
-                ControlClick(this);
-            }
+            ControlClick?.Invoke(this);
         }
 
         private void btn_AdvView_KeyDown(object sender, KeyEventArgs e)

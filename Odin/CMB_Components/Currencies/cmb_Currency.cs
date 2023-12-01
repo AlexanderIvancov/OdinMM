@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
+﻿using Odin.Global_Classes;
+using System;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Odin.Global_Classes;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.Currencies
 {
@@ -62,19 +57,13 @@ namespace Odin.CMB_Components.Currencies
                     return;
                 }
 
-                if (CurrencyChanged != null)
-                {
-                    CurrencyChanged(this);
-                }
+                CurrencyChanged?.Invoke(this);
             }
         }
 
         public void UpdateCurRate()
         {
-            if (CurrencyChanged != null)
-            {
-                CurrencyChanged(this);
-            }
+            CurrencyChanged?.Invoke(this);
         }
 
         public int CurrencyId
@@ -119,10 +108,7 @@ namespace Odin.CMB_Components.Currencies
 
                     _PrevId = _CurrencyId;
 
-                    if (CurrencyChanged != null)
-                    {
-                        CurrencyChanged(this);
-                    }
+                    CurrencyChanged?.Invoke(this);
 
                 }
             }

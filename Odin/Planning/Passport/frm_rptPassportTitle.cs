@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Workspace;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
+﻿using ComponentFactory.Krypton.Toolkit;
 using CrystalDecisions.CrystalReports.Engine;
-using Odin.CMB_Components.BLL;
+using Odin.Global_Classes;
+using System;
+using System.Data;
+using System.Windows.Forms;
 
 namespace Odin.Planning.Passport
 {
@@ -314,15 +306,7 @@ namespace Odin.Planning.Passport
         }
         public void FillReport()
         {
-            ReportDocument rd;
-
-            if (RepType == 1)
-                rd = OpenReport();
-            else if (RepType == 2)
-                rd = OpenReportLaunch();
-            else
-                rd = OpenReportLaunchVizas();
-
+            ReportDocument rd = RepType == 1 ? OpenReport() : RepType == 2 ? OpenReportLaunch() : OpenReportLaunchVizas();
             crystalReportViewer1.ReportSource = rd;
 
         }

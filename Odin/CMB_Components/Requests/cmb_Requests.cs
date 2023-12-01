@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Odin.CMB_Components.BLL;
 using Odin.Global_Classes;
-using System.Data.SqlClient;
 using Odin.Warehouse.Requests;
-using Odin.CMB_Components.BLL;
+using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 
 namespace Odin.CMB_Components.Requests
@@ -68,10 +63,7 @@ namespace Odin.CMB_Components.Requests
                 {
 
                     _RequestId = 0;
-                    if (RequestChanged != null)
-                    {
-                        RequestChanged(this);
-                    }
+                    RequestChanged?.Invoke(this);
                     //return;
                 }
 
@@ -114,10 +106,7 @@ namespace Odin.CMB_Components.Requests
                             txt_Request.Text = dr["name"].ToString();
                         }
 
-                        if (RequestChanged != null)
-                        {
-                            RequestChanged(this);
-                        }
+                        RequestChanged?.Invoke(this);
                     }
                     else
                     {
@@ -143,19 +132,13 @@ namespace Odin.CMB_Components.Requests
             set
             {
                 _RequestSavedId = value;
-                if (RequestSaved != null)
-                {
-                    RequestSaved(this);
-                }
+                RequestSaved?.Invoke(this);
             }
         }
 
         public void OutcomeDocSendSave()
         {
-            if (RequestSaved != null)
-            {
-                RequestSaved(this);
-            }
+            RequestSaved?.Invoke(this);
         }
 
         public bool EnableSearchId
@@ -217,10 +200,7 @@ namespace Odin.CMB_Components.Requests
                 if (result == DialogResult.OK)
                 {
                     Bll.EditRequestHead(RequestId, frm.Comments, frm.ProdPlaceId);
-                    if (RequestChanged != null)
-                    {
-                        RequestChanged(this);
-                    }
+                    RequestChanged?.Invoke(this);
                 }
             }
         }

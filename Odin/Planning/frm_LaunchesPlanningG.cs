@@ -1,26 +1,17 @@
-﻿using System;
+﻿using ComponentFactory.Krypton.Toolkit;
+using GanttChart;
+using Odin.Global_Classes;
+using Odin.Planning.Passport;
+using Odin.Tools;
+using Odin.Warehouse.StockOut.Reports;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using WeifenLuo.WinFormsUI.Docking;
-using Odin.Global_Classes;
-using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Workspace;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Planning.Controls;
-using Odin.Planning;
 using System.Data.SqlClient;
-using Odin.Tools;
+using System.Drawing;
+using System.Windows.Forms;
 using System.Windows.Forms.Calendar;
-using Odin.Warehouse.StockOut.Reports;
-using Odin.Planning.Passport;
-using GanttChart;
 namespace Odin.Planning
 {
     public partial class frm_LaunchesPlanningG : BaseForm
@@ -170,10 +161,7 @@ namespace Odin.Planning
                     else
                     {
                         //Printed
-                        if (row["printedby"].ToString() != "")
-                            color1 = Color.LightGreen;
-                        else
-                            color1 = Color.LightCoral;
+                        color1 = row["printedby"].ToString() != "" ? Color.LightGreen : Color.LightCoral;
                     }
                 }
                 //if (Convert.ToInt32(row["isstarted"]) == -1)
@@ -293,10 +281,7 @@ namespace Odin.Planning
                     else
                     {
                         //Printed
-                        if (row["printedby"].ToString() != "")
-                            color1 = Color.LightGreen;
-                        else
-                            color1 = Color.LightCoral;
+                        color1 = row["printedby"].ToString() != "" ? Color.LightGreen : Color.LightCoral;
                     }
                 }
                 //if (Convert.ToInt32(row["isstarted"]) == -1)

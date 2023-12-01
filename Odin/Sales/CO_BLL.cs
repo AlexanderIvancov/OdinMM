@@ -1,12 +1,8 @@
-﻿using System;
+﻿using Odin.Global_Classes;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Sql;
-using System.Data.SqlClient;
 using System.Data;
-using Odin.Global_Classes;
+using System.Data.SqlClient;
 
 
 namespace Odin.Sales
@@ -230,14 +226,7 @@ namespace Odin.Sales
 
             DataTable dt = ds.Tables[0];
 
-            if (dt.Rows.Count > 0)
-            {
-                _test = false;
-            }
-            else
-            {
-                _test = true;
-            }
+            _test = dt.Rows.Count <= 0;
 
             return _test;
         }
@@ -1125,10 +1114,7 @@ namespace Odin.Sales
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             _res = Convert.ToInt32(sqlComm.Parameters["@insertedid"].Value);
-            if (Convert.ToInt32(sqlComm.Parameters["@isneworder"].Value) == -1)
-                CreateOrder = true;
-            else
-                CreateOrder = false;
+            CreateOrder = Convert.ToInt32(sqlComm.Parameters["@isneworder"].Value) == -1;
             sqlConn.Close();
 
             return _res;

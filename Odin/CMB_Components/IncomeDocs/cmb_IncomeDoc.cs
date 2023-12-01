@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Odin.CMB_Components.BLL;
 using Odin.Global_Classes;
+using System;
+using System.Data;
 using System.Data.SqlClient;
-using Odin.Warehouse.StockIn;
-using Odin.CMB_Components.BLL;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.IncomeDocs
 {
@@ -84,10 +78,7 @@ namespace Odin.CMB_Components.IncomeDocs
                     return;
                 }
 
-                if (IncomeDocChanged != null)
-                {
-                   IncomeDocChanged(this);
-                }
+                IncomeDocChanged?.Invoke(this);
             }
         }
 
@@ -137,10 +128,7 @@ namespace Odin.CMB_Components.IncomeDocs
 
                     _PrevId = _IncomeDocId;
 
-                    if (IncomeDocChanged != null)
-                    {
-                        IncomeDocChanged(this);
-                    }
+                    IncomeDocChanged?.Invoke(this);
 
                 }
             }
@@ -154,19 +142,13 @@ namespace Odin.CMB_Components.IncomeDocs
             set
             {
                 _IncomeDocSavedId = value;
-                if (IncomeDocSaved != null)
-                {
-                    IncomeDocSaved(this);
-                }
+                IncomeDocSaved?.Invoke(this);
             }
         }
 
         public void IncomeDocSendSave()
         {
-            if (IncomeDocSaved != null)
-            {
-                IncomeDocSaved(this);
-            }
+            IncomeDocSaved?.Invoke(this);
         }
 
         public bool EnableSearchId
@@ -235,8 +217,7 @@ namespace Odin.CMB_Components.IncomeDocs
                                                 frm.ProducerCountryId, frm.Bargain, frm.TransportId, frm.IncotermsId, frm.AdditCost, frm.Advance, frm.AdvanceDate,
                                                 frm.PayDate, frm.NoReversePVN, frm.MediatedCost, frm.Check);
                 IncomeDocId = _res;
-                if (IncomeDocChanged != null)
-                    IncomeDocChanged(this);
+                IncomeDocChanged?.Invoke(this);
             }
         }
 
@@ -293,8 +274,7 @@ namespace Odin.CMB_Components.IncomeDocs
                     _PrevId = 0;
                     IncomeDocId = _id;
                     _isedit = true;
-                    if (IncomeDocChanged != null)
-                        IncomeDocChanged(this);
+                    IncomeDocChanged?.Invoke(this);
                     _isedit = false;
                 }
             }

@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AegisImplicitMail;
+using System;
 using System.ComponentModel;
-using System.Collections;
-using System.Linq;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Drawing.Printing;
+using System.Linq;
 using System.Text;
 //using AdvancedDataGridView;
 //using EmailHandler;
 using System.Windows.Forms;
-using System.Drawing;
-using System.Drawing.Printing;
-using AegisImplicitMail;
-using System.IO;
 
 namespace Odin.Global_Classes
 {
@@ -233,9 +230,7 @@ namespace Odin.Global_Classes
                 var isRowsAffected = cmd.ExecuteNonQuery();
 
                 var outParam = list.Where(item => item.Direction == ParameterDirection.Output).SingleOrDefault();
-                if (outParam != null) return outParam.Value;
-
-                return isRowsAffected == 1;
+                return outParam != null ? outParam.Value : isRowsAffected == 1;
             }
         }
 
@@ -294,11 +289,8 @@ namespace Odin.Global_Classes
             frmMail = new frm_EmailNew();
 
             frmMail.From = DAL.MyMailAdress();
-            if (GlobClass.NES(To) != "")
-                frmMail.To = frmMail.From + ", " + To;
-            else
-                frmMail.To = frmMail.From;
-            
+            frmMail.To = GlobClass.NES(To) != "" ? frmMail.From + ", " + To : frmMail.From;
+
             frmMail.Subject = Subject;
             frmMail.Message = Message;
             

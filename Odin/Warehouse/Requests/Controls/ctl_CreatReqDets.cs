@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
-using System.Data.SqlClient;
 using Odin.Planning;
-using ComponentFactory.Krypton.Toolkit;
 using Odin.Tools;
+using System;
+using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 
 namespace Odin.Warehouse.Requests.Controls
@@ -148,10 +144,7 @@ namespace Odin.Warehouse.Requests.Controls
 
         public bool CheckEmpty()
         {
-            if (ReqDate == "")
-                return false;
-            else
-                return true;
+            return ReqDate != "";
 
         }
         public bool CheckMB()
@@ -297,20 +290,13 @@ namespace Odin.Warehouse.Requests.Controls
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_Dets.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_Dets.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_Dets.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_Dets.Filter = bs_Dets.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_Dets.Filter = bs_Dets.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
+                bs_Dets.Filter = String.IsNullOrEmpty(bs_Dets.Filter) == true
+                    ? String.IsNullOrEmpty(CellValue) == true
+                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
+                    : String.IsNullOrEmpty(CellValue) == true
+                        ? bs_Dets.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : bs_Dets.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -323,10 +309,9 @@ namespace Odin.Warehouse.Requests.Controls
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_Dets.Filter) == true)
-                    bs_Dets.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
-                else
-                    bs_Dets.Filter = bs_Dets.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                bs_Dets.Filter = String.IsNullOrEmpty(bs_Dets.Filter) == true
+                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
+                    : bs_Dets.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             //SetCellsColor();
@@ -386,11 +371,8 @@ namespace Odin.Warehouse.Requests.Controls
             if (cmb_Batches1.BatchId != 0)
                 cmb_Articles1.ArticleId = 0;
 
-            if (cmb_Batches1.IsActive == -1
-               || cmb_Batches1.BatchId == 0)
-                btn_Add.Enabled = true;
-            else
-                btn_Add.Enabled = false;
+            btn_Add.Enabled = cmb_Batches1.IsActive == -1
+               || cmb_Batches1.BatchId == 0;
         }
 
         private void btn_Add_Click(object sender, EventArgs e)
@@ -443,15 +425,8 @@ namespace Odin.Warehouse.Requests.Controls
                                                                      MessageBoxIcon.Warning,
                                                                      TaskDialogButtons.Yes |
                                                                      TaskDialogButtons.No);
-                if (result == DialogResult.Yes)
-                {
-                    _test = true;
+                _test = result == DialogResult.Yes;
                 }
-                else
-                {
-                    _test = false;
-                }
-            }
             if (_test == true)
             {
                 int _res = 0;
@@ -511,10 +486,7 @@ namespace Odin.Warehouse.Requests.Controls
                 }
             }
 
-            if (SaveRequest != null)
-            {
-                SaveRequest(this);
-            }
+                SaveRequest?.Invoke(this);
             }
             else
                 glob_Class.ShowMessage("You have empty serial numbers fields!", "Enter serial numbers!", "Serial numbers warning!");
@@ -564,10 +536,9 @@ namespace Odin.Warehouse.Requests.Controls
                     //Color
                     if (Convert.ToDouble(gv_List.CurrentRow.Cells["cn_QtyToRequest"].Value) < 0)
                         gv_List.CurrentRow.Cells["cn_QtyToRequest"].Value = 0;
-                    if (Math.Round(Convert.ToDouble(gv_List.CurrentRow.Cells["cn_QtyToRequest"].Value), 5) > Math.Round(Convert.ToDouble(gv_List.CurrentRow.Cells["cn_QtyAvail"].Value), 5))
-                        gv_List.CurrentRow.Cells["cn_QtyAvail"].Style.BackColor = Color.Red;
-                    else
-                        gv_List.CurrentRow.Cells["cn_QtyAvail"].Style.BackColor = Color.White;
+                    gv_List.CurrentRow.Cells["cn_QtyAvail"].Style.BackColor = Math.Round(Convert.ToDouble(gv_List.CurrentRow.Cells["cn_QtyToRequest"].Value), 5) > Math.Round(Convert.ToDouble(gv_List.CurrentRow.Cells["cn_QtyAvail"].Value), 5)
+                        ? Color.Red
+                        : Color.White;
                 }
             }
             catch { }

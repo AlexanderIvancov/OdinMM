@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using ComponentFactory.Krypton.Toolkit;
+using Odin.CustomControls;
+using Odin.Global_Classes;
+using System;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Purchase;
-using Odin.Global_Classes;
-using Odin.CustomControls;
-using Owf.Controls;
 
 namespace Odin.Warehouse.StockIn
 {
@@ -66,13 +59,10 @@ namespace Odin.Warehouse.StockIn
        
         public void CheckEmpty()
         {
-            if (TextLabel == "0"
-                || String.IsNullOrEmpty(TextLabel)
-                || TextLabel == ""
-                || Qty <= 0)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = TextLabel != "0"
+                && !String.IsNullOrEmpty(TextLabel)
+                && TextLabel != ""
+                && Qty > 0;
         }
 
         private void txt_Package_TextChanged(object sender, EventArgs e)
@@ -116,12 +106,10 @@ namespace Odin.Warehouse.StockIn
                 e.KeyChar = System.Threading.Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
                 e.Handled = s.Text.Contains(e.KeyChar);
             }
-            else if (e.KeyChar == '-')
-            {
-                e.Handled = s.Text.Contains(e.KeyChar);
-            }
             else
-                e.Handled = !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar);
+            {
+                e.Handled = e.KeyChar == '-' ? s.Text.Contains(e.KeyChar) : !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar);
+            }
         }
 
         private void ShowScreenNumKeyboard(TextBox _focusedtextbox)
@@ -209,8 +197,7 @@ namespace Odin.Warehouse.StockIn
 
         private void btn_OK_Click(object sender, EventArgs e)
         {
-            if (FormClosed1 != null)
-                FormClosed1(this);
+            FormClosed1?.Invoke(this);
         }
     }
 }

@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using ComponentFactory.Krypton.Toolkit;
 using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Windows.Forms;
 using Odin.Global_Classes;
 using Odin.Warehouse.Movements;
-using ComponentFactory.Krypton.Workspace;
-using ComponentFactory.Krypton.Toolkit;
+using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace Odin.Warehouse.StockOut.Reports
 {
@@ -536,16 +530,11 @@ namespace Odin.Warehouse.StockOut.Reports
                 rd = OpenReportRouteList();
             else if (RepType == 4)
                 rd = OpenReportLaunch();
-            else if (RepType == 5)
-                rd = OpenReportLaunchProd();
-            else if (RepType == 6)
-                rd = OpenReportLaunchGroup();
-            else if (RepType == 7)
-                rd = OpenReportLaunchRouteList();
-            else if (RepType == 8)
-                rd = OpenReportBatchList();
-            else
-                rd = OpenReportBatchGroupReservation();
+            else rd = RepType == 5
+                ? OpenReportLaunchProd()
+                : RepType == 6
+                ? OpenReportLaunchGroup()
+                : RepType == 7 ? OpenReportLaunchRouteList() : RepType == 8 ? OpenReportBatchList() : OpenReportBatchGroupReservation();
 
             crystalReportViewer1.ReportSource = rd;
         }

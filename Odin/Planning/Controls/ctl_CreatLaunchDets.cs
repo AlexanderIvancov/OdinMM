@@ -1,15 +1,12 @@
-﻿using System;
+﻿using Odin.Global_Classes;
+using Odin.Tools;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Odin.Global_Classes;
-using Odin.Tools;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 
 namespace Odin.Planning.Controls
@@ -50,10 +47,7 @@ namespace Odin.Planning.Controls
         {
             get { return _mode; }
             set { _mode = value;
-                if (_mode == "new")
-                    cmb_Batches1.Enabled = true;
-                else
-                    cmb_Batches1.Enabled = false;
+                cmb_Batches1.Enabled = _mode == "new";
             }
         }
 
@@ -149,10 +143,7 @@ namespace Odin.Planning.Controls
         {
             get
             {
-                if (txt_StartDate.Value == null)
-                    return "";
-                else
-                    return txt_StartDate.Value.ToString();
+                return txt_StartDate.Value == null ? "" : txt_StartDate.Value.ToString();
             }
             set
             {
@@ -168,10 +159,7 @@ namespace Odin.Planning.Controls
         {
             get
             {
-                if (txt_ProdStartDate.Value == null)
-                    return "";
-                else
-                    return txt_StartDate.Value.ToString();
+                return txt_ProdStartDate.Value == null ? "" : txt_StartDate.Value.ToString();
             }
             set
             {
@@ -187,10 +175,7 @@ namespace Odin.Planning.Controls
         {
             get
             {
-                if (txt_EndDate.Value == null)
-                    return "";
-                else
-                    return txt_EndDate.Value.ToString();
+                return txt_EndDate.Value == null ? "" : txt_EndDate.Value.ToString();
             }
             set
             {
@@ -355,17 +340,13 @@ namespace Odin.Planning.Controls
 
         public bool CheckEmpty()
         {
-            if (BatchId == 0
-                || QtyInLaunch == 0
-                || StartDate == ""
-                || EndDate == ""
-                || ProdStartDate == ""
-                || (Convert.ToDateTime(StartDate) > Convert.ToDateTime(ProdStartDate))
-                || (Convert.ToDateTime(ProdStartDate) > Convert.ToDateTime(EndDate))
-                )
-                return false;
-            else
-                return true;
+            return BatchId != 0
+                && QtyInLaunch != 0
+                && StartDate != ""
+                && EndDate != ""
+                && ProdStartDate != ""
+                && Convert.ToDateTime(StartDate) <= Convert.ToDateTime(ProdStartDate)
+                && Convert.ToDateTime(ProdStartDate) <= Convert.ToDateTime(EndDate);
 
         }
 
@@ -681,10 +662,9 @@ namespace Odin.Planning.Controls
                     _numdecimals = Convert.ToInt32(row.Cells["cn_numdecimals"].Value);
                     //row.Cells["cn_qty"].Value = (Convert.ToDouble(row.Cells["cn_qtyinbatch"].Value) / cmb_Batches1.Qty) * QtyInLaunch > Convert.ToDouble(row.Cells["cn_onstock"].Value) ?
                     //                            Convert.ToDouble(row.Cells["cn_onstock"].Value) : Math.Round((Convert.ToDouble(row.Cells["cn_qtyinbatch"].Value) / cmb_Batches1.Qty) * QtyInLaunch, 5);
-                    if (_numdecimals == 0)
-                        row.Cells["cn_qty"].Value = Math.Round(((Convert.ToDouble(row.Cells["cn_qtyinbatch"].Value) / cmb_Batches1.Qty) * QtyInLaunch) + 0.49, 0);
-                    else
-                        row.Cells["cn_qty"].Value = Math.Round((Convert.ToDouble(row.Cells["cn_qtyinbatch"].Value) / cmb_Batches1.Qty) * QtyInLaunch, _numdecimals);
+                    row.Cells["cn_qty"].Value = _numdecimals == 0
+                        ? Math.Round(((Convert.ToDouble(row.Cells["cn_qtyinbatch"].Value) / cmb_Batches1.Qty) * QtyInLaunch) + 0.49, 0)
+                        : (object)Math.Round((Convert.ToDouble(row.Cells["cn_qtyinbatch"].Value) / cmb_Batches1.Qty) * QtyInLaunch, _numdecimals);
                 }
             }
 
@@ -752,20 +732,13 @@ namespace Odin.Planning.Controls
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? String.IsNullOrEmpty(CellValue) == true
+                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
+                    : String.IsNullOrEmpty(CellValue) == true
+                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -778,10 +751,9 @@ namespace Odin.Planning.Controls
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
-                else
-                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
+                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();

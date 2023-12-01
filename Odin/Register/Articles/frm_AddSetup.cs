@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
+﻿using ComponentFactory.Krypton.Toolkit;
+using System;
 
 namespace Odin.Register.Articles
 {
@@ -40,17 +32,12 @@ namespace Odin.Register.Articles
 
         public int Required
         {
-            get { if (chk_Required.Checked == true)
-                    return -1;
-                else
-                    return 0;
+            get {
+                return chk_Required.Checked == true ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_Required.Checked = true;
-                else
-                    chk_Required.Checked = false;
+                chk_Required.Checked = value == -1;
             }
         }
 

@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Odin.CMB_Components.BLL;
 using Odin.Global_Classes;
+using System;
+using System.Data;
 using System.Data.SqlClient;
-using Odin.CMB_Components.BLL;
-using Odin.Tools;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.Users
 {
@@ -198,19 +192,13 @@ namespace Odin.CMB_Components.Users
         {
             txt_TN.Text = string.Empty;
             UserDetsFromTN(txt_TN.Text);
-            if (UserChanged != null)
-            {
-                UserChanged(this);
-            }
+            UserChanged?.Invoke(this);
         }
 
         private void txt_TN_Validated(object sender, EventArgs e)
         {
             UserDetsFromTN(txt_TN.Text);
-            if (UserChanged != null)
-            {
-                UserChanged(this);
-            }
+            UserChanged?.Invoke(this);
         }
 
         private void txt_TN_KeyPress(object sender, KeyPressEventArgs e)
@@ -218,10 +206,7 @@ namespace Odin.CMB_Components.Users
             UserDetsFromTN(txt_TN.Text);
             if (e.KeyChar == (char)Keys.Enter)
             {
-                if (UserChanged != null)
-                {
-                   UserChanged(this);
-                }
+                UserChanged?.Invoke(this);
             }
         }
 

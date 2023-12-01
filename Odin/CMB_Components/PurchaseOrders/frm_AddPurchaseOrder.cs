@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
-using Odin.CMB_Components.BLL;
+using System;
+using System.Windows.Forms;
 
 
 namespace Odin.CMB_Components.PurchaseOrders
@@ -91,16 +83,11 @@ namespace Odin.CMB_Components.PurchaseOrders
 
         public int InProcess
         {
-            get { if (chk_processing.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+            get {
+                return chk_processing.CheckState == CheckState.Checked ? -1 : 0;
             }
             set {
-                if (value == -1)
-                    chk_processing.CheckState = CheckState.Checked;
-                else
-                    chk_processing.CheckState = CheckState.Unchecked;
+                chk_processing.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
         #endregion
@@ -114,10 +101,7 @@ namespace Odin.CMB_Components.PurchaseOrders
 
         public void CheckEmpty()
         {
-            if (cmb_Firms1.FirmId == 0)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = cmb_Firms1.FirmId != 0;
         }
 
         private void cmb_Firms2_FirmsChanged(object sender)

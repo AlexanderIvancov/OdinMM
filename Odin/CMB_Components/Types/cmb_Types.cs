@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
+using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
-using ComponentFactory.Krypton.Toolkit;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.Types
 {
@@ -90,10 +86,7 @@ namespace Odin.CMB_Components.Types
                         Path = dr["FullPath"].ToString();
                         TypeLat = dr["namelat"].ToString();
                     }
-                    if (SelectedValueChanged != null)
-                    {
-                        SelectedValueChanged(this);
-                    }
+                    SelectedValueChanged?.Invoke(this);
                 }
                 else
                 {
@@ -215,10 +208,7 @@ namespace Odin.CMB_Components.Types
                 //Shelf = txt_Shelf.Text;
                 if (glob_Class.NES(txt_Type.Text) == "")
                     TypeId = 0;
-                if (SelectedValueChanged != null)
-                {
-                    SelectedValueChanged(this);
-                }
+                SelectedValueChanged?.Invoke(this);
             }
             catch { return; }
         }
@@ -238,10 +228,7 @@ namespace Odin.CMB_Components.Types
                 }
             });
 
-            if (SelectedValueChanged != null)
-            {
-                SelectedValueChanged(this);
-            }
+            SelectedValueChanged?.Invoke(this);
         }
 
         private void txt_Type_KeyPress(object sender, KeyPressEventArgs e)

@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Odin.Global_Classes;
-using System.Data.SqlClient;
+﻿using Odin.Global_Classes;
 using Odin.Tools;
-using ComponentFactory.Krypton.Toolkit;
+using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.Workshop
 {
@@ -261,10 +255,8 @@ namespace Odin.Workshop
                 else
                 {
                     FillList(BatchId, StageId);
-                    if (LaunchStageSaving != null)
-                        LaunchStageSaving(this, gv_List.HorizontalScrollingOffset, StageId);
-                    if (LaunchStageSending != null)
-                        LaunchStageSending(this);
+                    LaunchStageSaving?.Invoke(this, gv_List.HorizontalScrollingOffset, StageId);
+                    LaunchStageSending?.Invoke(this);
                 }
             }
         }

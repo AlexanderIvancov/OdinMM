@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
 using Odin.Tools;
+using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.IO;
+using System.Windows.Forms;
 
 namespace Odin.Register.Articles
 {
@@ -137,34 +132,22 @@ namespace Odin.Register.Articles
         {
             get
             {
-                if (chk_SubBatch.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_SubBatch.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_SubBatch.CheckState = CheckState.Checked;
-                else
-                    chk_SubBatch.CheckState = CheckState.Unchecked;
+                chk_SubBatch.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
         public int Service
         {
             get
             {
-                if (chk_Service.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_Service.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_Service.CheckState = CheckState.Checked;
-                else
-                    chk_Service.CheckState = CheckState.Unchecked;
+                chk_Service.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
         public string ImagePath
@@ -177,17 +160,11 @@ namespace Odin.Register.Articles
         {
             get
             {
-                if (chk_IsActive.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_IsActive.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_IsActive.CheckState = CheckState.Checked;
-                else
-                    chk_IsActive.CheckState = CheckState.Unchecked;
+                chk_IsActive.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
         public double QtyReserve
@@ -259,17 +236,11 @@ namespace Odin.Register.Articles
         {
             get
             {
-                if (chk_Warning.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_Warning.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_Warning.CheckState = CheckState.Checked;
-                else
-                    chk_Warning.CheckState = CheckState.Unchecked;
+                chk_Warning.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 
@@ -277,17 +248,11 @@ namespace Odin.Register.Articles
         {
             get
             {
-                if (chk_MBLimit.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_MBLimit.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_MBLimit.CheckState = CheckState.Checked;
-                else
-                    chk_MBLimit.CheckState = CheckState.Unchecked;
+                chk_MBLimit.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 
@@ -306,10 +271,7 @@ namespace Odin.Register.Articles
                 || DAL.CheckArticleSameName(Id, Article) != 0)
             {
                 btn_OK.Enabled = false;
-                if (DAL.CheckArticleSameName(Id, Article) != 0)
-                    txt_Article.StateCommon.Back.Color1 = Color.LightPink;
-                else
-                    txt_Article.StateCommon.Back.Color1 = Color.White;
+                txt_Article.StateCommon.Back.Color1 = DAL.CheckArticleSameName(Id, Article) != 0 ? Color.LightPink : Color.White;
             }
             else
             {

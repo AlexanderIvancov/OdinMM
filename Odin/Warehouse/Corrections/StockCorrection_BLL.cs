@@ -1,13 +1,7 @@
-﻿using System;
+﻿using Odin.Global_Classes;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Odin.Global_Classes;
-using Odin.CMB_Components.BLL;
-using ComponentFactory.Krypton.Toolkit;
-using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace Odin.Warehouse.Corrections
 {

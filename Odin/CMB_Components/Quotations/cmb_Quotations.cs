@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Odin.Global_Classes;
-using System.Data.SqlClient;
+﻿using Odin.Global_Classes;
 using Odin.Sales;
+using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 
 namespace Odin.CMB_Components.Quotations
@@ -84,10 +79,7 @@ namespace Odin.CMB_Components.Quotations
                     //return;
                 }
 
-                if (QuotationChanged != null)
-                {
-                    QuotationChanged(this);
-                }
+                QuotationChanged?.Invoke(this);
             }
         }
 
@@ -135,10 +127,7 @@ namespace Odin.CMB_Components.Quotations
 
                     _PrevId = _QuotationId;
 
-                    if (QuotationChanged != null)
-                    {
-                        QuotationChanged(this);
-                    }
+                    QuotationChanged?.Invoke(this);
 
                 }
             }
@@ -151,19 +140,13 @@ namespace Odin.CMB_Components.Quotations
             set
             {
                 _QuotationSavedId = value;
-                if (QuotationSaved != null)
-                {
-                    QuotationSaved(this);
-                }
+                QuotationSaved?.Invoke(this);
             }
         }
 
         public void QuotationSendSave()
         {
-            if (QuotationSaved != null)
-            {
-                QuotationSaved(this);
-            }
+            QuotationSaved?.Invoke(this);
         }
         public bool EnableSearchId
         {

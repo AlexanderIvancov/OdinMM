@@ -1,11 +1,8 @@
-﻿using System;
+﻿using Odin.Global_Classes;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
-using Odin.Global_Classes;
 
 namespace Odin.Warehouse.StockIn
 {
@@ -643,10 +640,7 @@ namespace Odin.Warehouse.StockIn
                        
             _res = Convert.ToInt32(sqlComm.Parameters["@insertedid"].Value);
 
-            if (_res != 0)
-                AddedBox = package;
-            else
-                AddedBox = "";
+            AddedBox = _res != 0 ? package : "";
 
             sqlConn.Close();
 

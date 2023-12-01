@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
-using ComponentFactory.Krypton.Workspace;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Tools;
+using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 
 namespace Odin.Personnel
@@ -117,10 +111,7 @@ namespace Odin.Personnel
                                    " from prod_capacityshifts cs " +
                                    " where cs.date = convert(datetime, @date) ", param.ToArray()));
 
-                if (_qty != _capa)
-                    cell.Style.BackColor = Color.LightPink;
-                else
-                    cell.Style.BackColor = Color.White;
+                cell.Style.BackColor = _qty != _capa ? Color.LightPink : Color.White;
             }
         }
         #endregion
@@ -205,10 +196,7 @@ namespace Odin.Personnel
                                " from prod_capacityshifts cs " +
                                " where cs.date = convert(datetime, @date) ", param.ToArray()));
 
-            if (_qty != _capa)
-                cell.Style.BackColor = Color.LightPink;
-            else
-                cell.Style.BackColor = Color.White;
+            cell.Style.BackColor = _qty != _capa ? Color.LightPink : Color.White;
 
         }
     }

@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using AdvancedDataGridView;
 using Odin.Global_Classes;
-using AdvancedDataGridView;
 using Odin.Purchase;
-using ComponentFactory.Krypton.Toolkit;
+using System;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace Odin.Planning.Controls
 {
@@ -194,8 +190,7 @@ namespace Odin.Planning.Controls
         private void cmb_Articles1_ArticleChanged(object sender)
         {
             ArtId = cmb_Articles1.ArticleId;
-            if (SendBatchId != null)
-                SendBatchId(ArtId, true, false, false, true, false);
+            SendBatchId?.Invoke(ArtId, true, false, false, true, false);
         }
 
         private void btn_Release_Click(object sender, EventArgs e)
@@ -212,8 +207,7 @@ namespace Odin.Planning.Controls
 
             FillGrid(ArtId);
 
-            if (SendBatchId != null)
-                SendBatchId(ArtId, true, true, true, true, false);
+            SendBatchId?.Invoke(ArtId, true, true, true, true, false);
         }
 
         private void btn_Add_Click(object sender, EventArgs e)
@@ -280,8 +274,7 @@ namespace Odin.Planning.Controls
                     //Notifications for flags
 
                     POBLL.AddPONotificationBatch(_poid);
-                    if (SendBatchId != null)
-                        SendBatchId(ArtId, true, true, true, true, false);
+                    SendBatchId?.Invoke(ArtId, true, true, true, true, false);
                 }
             }
         }

@@ -1,34 +1,20 @@
-﻿using System;
+﻿using AegisImplicitMail;
+using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Odin.Global_Classes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
-using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Workspace;
-
-using System.Runtime.InteropServices;
-using System.Diagnostics;
-using Odin.Global_Classes;
-using Odin.Register.Articles;
-
-using Newtonsoft.Json;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Web;
-using System.Net;
-using System.IO;
-using RestSharp;
-using Newtonsoft.Json.Linq;
-using AegisImplicitMail;
-using System.Data;
-using System.Data.SqlClient;
 namespace Odin
 {
     public partial class frm_Test : BaseForm
@@ -402,12 +388,8 @@ namespace Odin
         private String getCPNURL(String cpn, int pageNumber, int pageSize, String currency, String endCustomer, String version)
         {
 
-            String url = "";
-
-            if (endCustomer != null)
-            {
-
-                url = string.Format(
+            string url = endCustomer != null
+                ? string.Format(
 
                 "https://my.arrow.com/api/priceandavail/cpns/{0}/parts/?currency={1}&pageNumber={2}&pageSize={3}&version={4}&endCustomer={5}",
 
@@ -423,15 +405,8 @@ namespace Odin
 
                 Uri.EscapeDataString(endCustomer)
 
-                );
-
-            }
-            else
-            {
-
-
-
-                url = string.Format(
+                )
+                : string.Format(
 
                 "https://my.arrow.com/api/priceandavail/cpns/{0}/parts/?currency={1}&pageNumber={2}&pageSize={3}&version={4}",
 
@@ -444,9 +419,6 @@ namespace Odin
                 Uri.EscapeDataString(pageSize + ""),
 
                 Uri.EscapeDataString(version));
-
-            }
-
             return url;
 
 
@@ -929,14 +901,9 @@ namespace Odin
         AegisImplicitMail.SslMode _mode
         {
             get {
-                if (rb_Auto.Checked == true)
-                    return SslMode.Auto;
-                else if (rb_Ssl.Checked == true)
-                    return SslMode.Ssl;
-                else if (rb_Tls.Checked == true)
-                    return SslMode.Tls;
-                else
-                    return SslMode.None;
+                return rb_Auto.Checked == true
+                    ? SslMode.Auto
+                    : rb_Ssl.Checked == true ? SslMode.Ssl : rb_Tls.Checked == true ? SslMode.Tls : SslMode.None;
 
             }
         }

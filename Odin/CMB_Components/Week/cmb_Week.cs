@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Globalization;
 
 namespace Odin.CMB_Components.Week
 {
@@ -77,10 +69,7 @@ namespace Odin.CMB_Components.Week
                     return WeekNumber(startOfYear.AddDays(-1));
                 case 53:
                     // Если 31 декабря выпадает до четверга 1 недели следующего года                    
-                    if (endOfYear.DayOfWeek < DayOfWeek.Thursday)
-                        return 1;
-                    else
-                        return wk;
+                    return endOfYear.DayOfWeek < DayOfWeek.Thursday ? 1 : wk;
                 default: return wk;
             }
         }
@@ -88,10 +77,7 @@ namespace Odin.CMB_Components.Week
 
         public void ValueChanged()
         {
-            if (SelectedValueChanged != null)
-            {
-                SelectedValueChanged(this);
-            }
+            SelectedValueChanged?.Invoke(this);
         }
 
         public void DatesOfWeek(DateTime date)
@@ -148,10 +134,7 @@ namespace Odin.CMB_Components.Week
             DateTime startOfYear = Convert.ToDateTime("01/01/" + _year.ToString());
             // Получение 31 декабря указанного нами года
             DateTime endOfYear = startOfYear.AddYears(1).AddDays(-1);
-            if (endOfYear.DayOfWeek < DayOfWeek.Thursday)
-                _weekinyear = 52;
-            else
-                _weekinyear = 53;
+            _weekinyear = endOfYear.DayOfWeek < DayOfWeek.Thursday ? 52 : 53;
             //Vichisljaem sledujuschuju nedelju
 
             if (_week < _weekinyear)
@@ -161,12 +144,7 @@ namespace Odin.CMB_Components.Week
                 _week = 1;
                 _year++;
             }
-            string _strweek;
-            if (_week < 10)
-                _strweek = "0" + _week.ToString();
-            else
-                _strweek = _week.ToString();
-
+            string _strweek = _week < 10 ? "0" + _week.ToString() : _week.ToString();
             Week = "W" + _strweek + "/" + _year.ToString();
 
             DateTime _date = DateOfWeek(_week, _year);
@@ -175,10 +153,7 @@ namespace Odin.CMB_Components.Week
 
             DatesOfWeek(_date);
 
-            if (SelectedValueChanged != null)
-            {
-                SelectedValueChanged(this);
-            }
+            SelectedValueChanged?.Invoke(this);
         }
 
         private void btn_Previous_Click(object sender, EventArgs e)
@@ -202,10 +177,7 @@ namespace Odin.CMB_Components.Week
             DateTime startOfYear = Convert.ToDateTime("01/01/" + (_year - 1).ToString());
             // Получение 31 декабря указанного нами года
             DateTime endOfYear = startOfYear.AddYears(1).AddDays(-1);
-            if (endOfYear.DayOfWeek < DayOfWeek.Thursday)
-                _weekinyear = 52;
-            else
-                _weekinyear = 53;
+            _weekinyear = endOfYear.DayOfWeek < DayOfWeek.Thursday ? 52 : 53;
 
             if (_week == 1)
             {
@@ -215,22 +187,14 @@ namespace Odin.CMB_Components.Week
             else
             { _week = _week - 1; }
 
-            string _strweek;
-            if (_week < 10)
-                _strweek = "0" + _week.ToString();
-            else
-                _strweek = _week.ToString();
-
+            string _strweek = _week < 10 ? "0" + _week.ToString() : _week.ToString();
             Week = "W" + _strweek + "/" + _year.ToString();
 
             DateTime _date = DateOfWeek(_week, _year);
 
             DatesOfWeek(_date);
 
-            if (SelectedValueChanged != null)
-            {
-                SelectedValueChanged(this);
-            }
+            SelectedValueChanged?.Invoke(this);
         }
 
         private void txt_Week_TextChanged(object sender, EventArgs e)
@@ -251,10 +215,7 @@ namespace Odin.CMB_Components.Week
                 DatesOfWeek(System.DateTime.Now);
             }
 
-            if (SelectedValueChanged != null)
-            {
-                SelectedValueChanged(this);
-            }
+            SelectedValueChanged?.Invoke(this);
         }
 
         #endregion

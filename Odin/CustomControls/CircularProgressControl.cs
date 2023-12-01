@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Odin.CustomControls
@@ -62,14 +57,7 @@ namespace Odin.CustomControls
             }
             set
             {
-                if (value > 0)
-                {
-                    m_Interval = value;
-                }
-                else
-                {
-                    m_Interval = DEFAULT_INTERVAL;
-                }
+                m_Interval = value > 0 ? value : DEFAULT_INTERVAL;
             }
         }
 

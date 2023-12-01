@@ -1,24 +1,19 @@
-﻿using System;
+﻿using ComponentFactory.Krypton.Toolkit;
+using CrystalDecisions.CrystalReports.Engine;
+using Odin.CMB_Components.BLL;
+using Odin.CustomControls;
+using Odin.Global_Classes;
+using Odin.Warehouse.Requests;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
-using Odin.Global_Classes;
-using Odin.Tools;
-using System.Data.SqlClient;
-using System.Threading;
-using Odin.Warehouse.Requests;
-using Odin.Warehouse.Movements;
-using Odin.CustomControls;
-using Odin.Planning;
-using CrystalDecisions.CrystalReports.Engine;
-using Odin.CMB_Components.BLL;
 
 namespace Odin.Warehouse.StockOut
 {
@@ -107,12 +102,10 @@ namespace Odin.Warehouse.StockOut
                 e.KeyChar = System.Threading.Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
                 e.Handled = s.Text.Contains(e.KeyChar);
             }
-            else if (e.KeyChar == '-')
-            {
-                e.Handled = s.Text.Contains(e.KeyChar);
-            }
             else
-                e.Handled = !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar);
+            {
+                e.Handled = e.KeyChar == '-' ? s.Text.Contains(e.KeyChar) : !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar);
+            }
         }
 
         public bool CheckSave()
@@ -185,10 +178,9 @@ namespace Odin.Warehouse.StockOut
                 _label = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_label"].Value);
             }
             catch { }
-            if (_artid == labelcontent)
-                txt_Documents.Text = "Check result for label " + _label.ToString() + " is OK! " + System.Environment.NewLine + txt_Documents.Text;
-            else
-                txt_Documents.Text = "Check result for label " + _label.ToString() + " not OK! Content is: " + labelcontent + "!" + System.Environment.NewLine + txt_Documents.Text;
+            txt_Documents.Text = _artid == labelcontent
+                ? "Check result for label " + _label.ToString() + " is OK! " + System.Environment.NewLine + txt_Documents.Text
+                : "Check result for label " + _label.ToString() + " not OK! Content is: " + labelcontent + "!" + System.Environment.NewLine + txt_Documents.Text;
             chk_CheckLabel.CheckState = CheckState.Unchecked;
             chk_CheckLabel.BackColor = Color.LightGreen;
         }
@@ -338,10 +330,7 @@ namespace Odin.Warehouse.StockOut
                 }
             }
 
-            if (_qtytemp > qty)
-                _res = false;
-            else
-                _res = true;
+            _res = _qtytemp <= qty;
 
             return _res;
         }
@@ -393,13 +382,9 @@ namespace Odin.Warehouse.StockOut
                     btn_OK.PerformClick();
                     e.Cancel = false;
                 }
-                else if (result1 == DialogResult.No)
-                {
-                    e.Cancel = false;
-                }
                 else
                 {
-                    e.Cancel = true;
+                    e.Cancel = result1 != DialogResult.No;
                 }
             }
         }

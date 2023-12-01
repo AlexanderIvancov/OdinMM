@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
+﻿using Odin.Global_Classes;
+using System;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Odin.Global_Classes;
 
 namespace Odin.Sales
 {
@@ -51,19 +45,11 @@ namespace Odin.Sales
 
         public int PCB
         {
-            get { if (chk_PCB.CheckState == CheckState.Checked)
-                    return -1;
-                else if (chk_PCB.CheckState == CheckState.Unchecked)
-                    return 0;
-                else
-                    return 1;
+            get {
+                return chk_PCB.CheckState == CheckState.Checked ? -1 : chk_PCB.CheckState == CheckState.Unchecked ? 0 : 1;
             }
             set {
-                if (value == -1)
-                    chk_PCB.CheckState = CheckState.Checked;
-                else if (value == 0)
-                    chk_PCB.CheckState = CheckState.Unchecked;
-                else chk_PCB.CheckState = CheckState.Indeterminate;
+                chk_PCB.CheckState = value == -1 ? CheckState.Checked : value == 0 ? CheckState.Unchecked : CheckState.Indeterminate;
             }
         }
 
@@ -71,37 +57,25 @@ namespace Odin.Sales
         {
             get
             {
-                if (chk_project.CheckState == CheckState.Checked)
-                    return -1;
-                else 
-                    return 0;
-               
+                return chk_project.CheckState == CheckState.Checked ? -1 : 0;
+
             }
             set
             {
-                if (value == -1)
-                    chk_project.CheckState = CheckState.Checked;
-                else 
-                    chk_project.CheckState = CheckState.Unchecked;
-               
+                chk_project.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+
             }
         }
         public int IsSent
         {
             get
             {
-                if (chk_IsSent.CheckState == CheckState.Checked)
-                    return -1;
-                else 
-                    return 0;
+                return chk_IsSent.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_IsSent.CheckState = CheckState.Checked;
-                else
-                    chk_IsSent.CheckState = CheckState.Unchecked;
-               
+                chk_IsSent.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+
             }
         }
 
@@ -193,10 +167,7 @@ namespace Odin.Sales
         {
             get
             {
-                if (txt_ExpDate.Value == null)
-                    return "";
-                else
-                    return txt_ExpDate.Value.ToString();
+                return txt_ExpDate.Value == null ? "" : txt_ExpDate.Value.ToString();
             }
             set
             {
@@ -212,10 +183,7 @@ namespace Odin.Sales
         {
             get
             {
-                if (txt_SentDate.Value == null)
-                    return "";
-                else
-                    return txt_SentDate.Value.ToString();
+                return txt_SentDate.Value == null ? "" : txt_SentDate.Value.ToString();
             }
             set
             {
@@ -267,17 +235,11 @@ namespace Odin.Sales
         {
             get
             {
-                if (chk_resale.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_resale.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_resale.Checked = true;
-                else
-                    chk_resale.Checked = false;
+                chk_resale.Checked = value == -1;
             }
         }
 
@@ -333,51 +295,33 @@ namespace Odin.Sales
         {
             get
             {
-                if (chk_internal.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_internal.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_internal.Checked = true;
-                else
-                    chk_internal.Checked = false;
+                chk_internal.Checked = value == -1;
             }
         }
         public int Blocked
         {
             get
             {
-                if (chk_blockdelivery.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_blockdelivery.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_blockdelivery.Checked = true;
-                else
-                    chk_blockdelivery.Checked = false;
+                chk_blockdelivery.Checked = value == -1;
             }
         }
         public int Primary
         {
             get
             {
-                if (chk_primary.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_primary.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_primary.Checked = true;
-                else
-                    chk_primary.Checked = false;
+                chk_primary.Checked = value == -1;
             }
         }
         public int CheckRMQP
@@ -468,10 +412,7 @@ namespace Odin.Sales
                 CreatBy = COBll.QCreatBy;
                 CustArticle = COBll.QCustArticle;
                 Qty = COBll.QQty;
-                if (IsCopy == -1)
-                    ReqDate = System.DateTime.Now.ToShortDateString();
-                else
-                    ReqDate = COBll.QReqDate;
+                ReqDate = IsCopy == -1 ? System.DateTime.Now.ToShortDateString() : COBll.QReqDate;
                 if (IsCopy == -1)
                     StateId = 1; //In process
                 else
@@ -480,10 +421,9 @@ namespace Odin.Sales
                 UnitPrice = COBll.QUnitPrice;
                 Revision = COBll.QRevision;
                 PCB = COBll.QPCB;
-                if (IsCopy == -1)
-                    Week = "W" + (cmb_Week1.WeekNumber(ReqDateD).ToString().Length == 1 ? "0" + cmb_Week1.WeekNumber(ReqDateD).ToString() : cmb_Week1.WeekNumber(ReqDateD).ToString()) + "." + ReqDateD.Year.ToString();
-                else
-                    Week = COBll.QWeek;
+                Week = IsCopy == -1
+                    ? "W" + (cmb_Week1.WeekNumber(ReqDateD).ToString().Length == 1 ? "0" + cmb_Week1.WeekNumber(ReqDateD).ToString() : cmb_Week1.WeekNumber(ReqDateD).ToString()) + "." + ReqDateD.Year.ToString()
+                    : COBll.QWeek;
                 CurId = COBll.QCurId;
                 CustOrder = COBll.QCOrder;
                 CustLine = COBll.QCOLine;
@@ -515,12 +455,9 @@ namespace Odin.Sales
 
         private void chk_PCB_CheckStateChanged(object sender, EventArgs e)
         {
-            if (chk_PCB.CheckState == CheckState.Checked)
-                chk_PCB.Text = "PCB: Yes";
-            else if (chk_PCB.CheckState == CheckState.Unchecked)
-                chk_PCB.Text = "PCB: No";
-            else
-                chk_PCB.Text = "PCB: Undefined";
+            chk_PCB.Text = chk_PCB.CheckState == CheckState.Checked
+                ? "PCB: Yes"
+                : chk_PCB.CheckState == CheckState.Unchecked ? "PCB: No" : "PCB: Undefined";
         }
 
         private void cmb_Week1_SelectedValueChanged(object sender)
@@ -576,10 +513,7 @@ namespace Odin.Sales
                         DataRow dr = datastages.NewRow();
                         dr["id"] = Convert.ToInt32(row.Cells["cn_id"].Value);
 
-                        if (IsCopy == -1)
-                            dr["osid"] = 0;
-                        else
-                            dr["osid"] = Convert.ToInt32(row.Cells["cn_osid"].Value);
+                        dr["osid"] = IsCopy == -1 ? 0 : (object)Convert.ToInt32(row.Cells["cn_osid"].Value);
 
                         dr["checked"] = Convert.ToInt32(row.Cells["chk_checked"].Value);
                         datastages.Rows.Add(dr);
@@ -641,8 +575,7 @@ namespace Odin.Sales
 
 
                     //Event
-                    if (SendQuotId != null)
-                        SendQuotId(this);
+                    SendQuotId?.Invoke(this);
                 }
             }
         }

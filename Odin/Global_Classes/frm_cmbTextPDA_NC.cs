@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ComponentFactory.Krypton.Toolkit;
+using System;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
 
 namespace Odin.Global_Classes
 {
@@ -56,8 +49,7 @@ namespace Odin.Global_Classes
         {            
             if (e.KeyChar == (char)Keys.Enter)
             {
-                if (TextEntering != null)
-                    TextEntering(FormText);
+                TextEntering?.Invoke(FormText);
                 FormText = "";
                 txt_Text.Focus();
             }
@@ -70,8 +62,7 @@ namespace Odin.Global_Classes
 
         private void btn_OK_Click(object sender, EventArgs e)
         {
-            if (TextEntering != null)
-                TextEntering(FormText);
+            TextEntering?.Invoke(FormText);
             FormText = "";
             txt_Text.Focus();
         }

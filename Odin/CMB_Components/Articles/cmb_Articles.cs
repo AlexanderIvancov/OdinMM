@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Odin.CMB_Components.BLL;
 using Odin.Global_Classes;
+using System;
+using System.Data;
 using System.Data.SqlClient;
-using Odin.Tools;
-using Odin.CMB_Components.BLL;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.Articles
 {
@@ -211,10 +205,7 @@ namespace Odin.CMB_Components.Articles
 
                     ArticleDets(_ArticleId);
 
-                    if (ArticleChanged != null)
-                    {
-                        ArticleChanged(this);
-                    }
+                    ArticleChanged?.Invoke(this);
                     //if (ArticleIdReceiving != null)
                     //    ArticleIdReceiving(this);
                     _PrevId = _ArticleId;
@@ -274,8 +265,7 @@ namespace Odin.CMB_Components.Articles
 
                 ArticleDets(_ArticleId);
 
-                if (ArticleIdReceiving != null)
-                    ArticleIdReceiving(this);
+                ArticleIdReceiving?.Invoke(this);
                 _PrevId = _ArticleId;
 
                 //}
@@ -322,10 +312,7 @@ namespace Odin.CMB_Components.Articles
                 if (_PrevId != _ArticleId)
 
                 {
-                    if (ArticleChanged != null)
-                    {
-                        ArticleChanged(this);
-                    }
+                    ArticleChanged?.Invoke(this);
 
                     _PrevId = _ArticleId;
                 }
@@ -469,10 +456,7 @@ namespace Odin.CMB_Components.Articles
             //{
             Article = txt_Article.Text;
 
-            if (ErrorChanged != null)
-            {
-                ErrorChanged();
-            }
+            ErrorChanged?.Invoke();
 
             //}
             //catch
@@ -487,10 +471,7 @@ namespace Odin.CMB_Components.Articles
             {
                 ArticleId = Convert.ToInt32(txt_Id.Text);
 
-                if (ErrorChanged != null)
-                {
-                    ErrorChanged();
-                }
+                ErrorChanged?.Invoke();
 
             }
             catch
@@ -503,10 +484,7 @@ namespace Odin.CMB_Components.Articles
         {
             //txt_Article.Text = string.Empty;
 
-            if (ArticleCleared != null)
-            {
-                ArticleCleared(this);
-            }
+            ArticleCleared?.Invoke(this);
 
             Article = string.Empty;
 
@@ -515,10 +493,7 @@ namespace Odin.CMB_Components.Articles
 
         private void buttonSpecAny1_Click(object sender, EventArgs e)
         {
-            if (ArticleCleared != null)
-            {
-                ArticleCleared(this);
-            }
+            ArticleCleared?.Invoke(this);
 
             txt_Id.Text = "0";
         }
@@ -547,18 +522,14 @@ namespace Odin.CMB_Components.Articles
         {
             try
             {
-                if (DoubleClickControl != null)
-                    DoubleClickControl(this);
+                DoubleClickControl?.Invoke(this);
             }
             catch { }
         }
 
         public void ArticleSendSave()
         {
-            if (ArticleChanged != null)
-            {
-                ArticleChanged(this);
-            }
+            ArticleChanged?.Invoke(this);
         }
 
 
@@ -594,8 +565,7 @@ namespace Odin.CMB_Components.Articles
 
         private void txt_Article_Validated(object sender, EventArgs e)
         {
-            if (ArticleValidated != null)
-                ArticleValidated(this);
+            ArticleValidated?.Invoke(this);
             //if (ArticleKeyPressed != null)
             //{
             //    ArticleKeyPressed(this);
@@ -604,8 +574,7 @@ namespace Odin.CMB_Components.Articles
 
         private void txt_Id_Validated(object sender, EventArgs e)
         {
-            if (ArticleValidated != null)
-                ArticleValidated(this);
+            ArticleValidated?.Invoke(this);
             //if (ArticleIdKeyPressed != null)
             //{
             //    ArticleIdKeyPressed(this);
@@ -618,10 +587,7 @@ namespace Odin.CMB_Components.Articles
             {
                 //txt_Article.Clear();
 
-                if (ArticleKeyPressed != null)
-                {
-                    ArticleKeyPressed(this);
-                }
+                ArticleKeyPressed?.Invoke(this);
             }
             if (e.KeyCode == Keys.Down)
             {
@@ -635,10 +601,7 @@ namespace Odin.CMB_Components.Articles
             if (e.KeyCode == Keys.Enter)
             {
                 e.SuppressKeyPress = true;
-                if (ArticleKeyPressed != null)
-                {
-                    ArticleKeyPressed(this);
-                }
+                ArticleKeyPressed?.Invoke(this);
             }
         }
     }

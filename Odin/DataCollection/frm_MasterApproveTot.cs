@@ -1,25 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
 using Odin.Tools;
-using System.Data.SqlClient;
-using System.Runtime.InteropServices;
-using System.Threading;
-using Odin.CustomControls;
 using Odin.Workshop;
+using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace Odin.DataCollection
 {
-   
+
     public partial class frm_MasterApproveTot : BaseForm
     {
         public frm_MasterApproveTot()
@@ -100,12 +90,7 @@ namespace Odin.DataCollection
         {
             get
             {
-                if (rb_Valkas2.Checked == true)
-                    return 1;
-                else if (rb_Valkas2B.Checked == true)
-                    return 2;
-                else
-                    return 0;
+                return rb_Valkas2.Checked == true ? 1 : rb_Valkas2B.Checked == true ? 2 : 0;
             }
             set
             {
@@ -247,11 +232,8 @@ namespace Odin.DataCollection
            
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
-                if (Convert.ToInt32(row.Cells["chk_check"].Value) == -1)
-                    row.Cells["cn_toapprove"].Value = Convert.ToDouble(row.Cells["cn_qty"].Value);
-                else
-                    row.Cells["cn_toapprove"].Value = 0;
-                
+                row.Cells["cn_toapprove"].Value = Convert.ToInt32(row.Cells["chk_check"].Value) == -1 ? Convert.ToDouble(row.Cells["cn_qty"].Value) : (object)0;
+
             }
         }
         #endregion

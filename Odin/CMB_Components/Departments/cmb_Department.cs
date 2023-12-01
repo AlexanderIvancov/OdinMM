@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
+﻿using Odin.Global_Classes;
+using System;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Odin.Global_Classes;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.Departments
 {
@@ -146,20 +141,14 @@ namespace Odin.CMB_Components.Departments
                 //Shelf = txt_Shelf.Text;
                 if (glob_Class.NES(txt_Department.Text) == "")
                     DeptId = 0;
-                if (SelectedValueChanged != null)
-                {
-                    SelectedValueChanged(this);
-                }
+                SelectedValueChanged?.Invoke(this);
             }
             catch { return; }
         }
 
         public void ValueChanged()
         {
-            if (SelectedValueChanged != null)
-            {
-                SelectedValueChanged(this);
-            }
+            SelectedValueChanged?.Invoke(this);
         }
 
         private void txt_Department_KeyPress(object sender, KeyPressEventArgs e)

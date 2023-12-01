@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
-using System.Data.SqlClient;
-using ComponentFactory.Krypton.Toolkit;
 using Odin.Warehouse.Movements;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 namespace Odin.Warehouse.Inventory
 {
     public delegate void LabelSendingEventHandler(object sender);
@@ -231,10 +227,7 @@ namespace Odin.Warehouse.Inventory
         {
             if (CheckOldRow() == false)
             {
-                if (SendLabel != null)
-                {
-                    SendLabel(this);
-                }
+                SendLabel?.Invoke(this);
             }
         }
 

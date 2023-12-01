@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
+﻿using ComponentFactory.Krypton.Toolkit;
+using System;
 
 namespace Odin.Warehouse.Deliveries
 {
@@ -67,11 +59,8 @@ namespace Odin.Warehouse.Deliveries
         }
         public void CheckEmpty()
         {
-            if (Package == ""
-                || String.IsNullOrEmpty(Package) == true)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = Package != ""
+                && String.IsNullOrEmpty(Package) != true;
 
         }
 

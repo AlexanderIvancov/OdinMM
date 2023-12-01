@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Odin.Global_Classes;
-using System.Data.SqlClient;
+﻿using Odin.Global_Classes;
 using Odin.Register;
-using System.Threading;
 using Odin.Warehouse.Movements;
 using Odin.Warehouse.StockIn;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Windows.Forms;
 namespace Odin.Warehouse.Inventory
 {
     public delegate void LabelSavingEventHandler(object sender);
@@ -105,10 +99,7 @@ namespace Odin.Warehouse.Inventory
         {
             get
             {
-                if (txt_ExpDate.Value == null)
-                    return "";
-                else
-                    return txt_ExpDate.Value.ToString();
+                return txt_ExpDate.Value == null ? "" : txt_ExpDate.Value.ToString();
             }
             set
             {
@@ -128,18 +119,12 @@ namespace Odin.Warehouse.Inventory
 
         public int Available
         {
-            get { if (chk_Available.Checked == true)
-                    return -1;
-                else
-                    return 0;
+            get {
+                return chk_Available.Checked == true ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_Available.Checked = true;
-
-                else
-                    chk_Available.Checked = false;
+                chk_Available.Checked = value == -1;
             }
         }
 
@@ -169,18 +154,11 @@ namespace Odin.Warehouse.Inventory
         {
             get
             {
-                if (chk_NoDate.Checked == true)
-                    return -1;
-                else
-                    return 0;
+                return chk_NoDate.Checked == true ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_NoDate.Checked = true;
-
-                else
-                    chk_NoDate.Checked = false;
+                chk_NoDate.Checked = value == -1;
 
             }
         }
@@ -325,8 +303,7 @@ namespace Odin.Warehouse.Inventory
             if (NoExpDate == -1)
                 SINBll.SetNoExpDate(Label);
             ShowDets(Label);
-            if (SaveLabel != null)
-                SaveLabel(this);
+            SaveLabel?.Invoke(this);
         }
 
         private void btn_Add_Click(object sender, EventArgs e)
@@ -409,8 +386,7 @@ namespace Odin.Warehouse.Inventory
             {
                 SIBll.RemoveLabelReservation(Label);
                 ShowDets(Label);
-                if (RemoveReservation != null)
-                    RemoveReservation(this);
+                RemoveReservation?.Invoke(this);
             }
         }
 
@@ -477,8 +453,7 @@ namespace Odin.Warehouse.Inventory
                         }
                     }
                     ShowDets(Label);
-                    if (SaveLabel != null)
-                        SaveLabel(this);
+                    SaveLabel?.Invoke(this);
                 }
             }
         }

@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using System;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
-using Odin.Global_Classes;
 
 namespace Odin.Tools
 {
@@ -95,14 +89,7 @@ namespace Odin.Tools
 
                 if (!string.IsNullOrEmpty(txt_Search.Text))
                 {
-                    if (Convert.ToInt32(cmb_LookIn.SelectedValue) == -1)
-                    {
-                        isEnitreTable = true;
-                    }
-                    else
-                    {
-                        isEnitreTable = false;
-                    }
+                    isEnitreTable = Convert.ToInt32(cmb_LookIn.SelectedValue) == -1;
 
                     bw_Find.RunWorkerAsync();
                 }
@@ -194,15 +181,7 @@ namespace Odin.Tools
         {
             grid.CurrentCell = grid[ColumnNumber, i];
             // if reached last row in the datagridview
-            if (i == grid.RowCount - 1)
-            {
-                rowByColumn = 0;
-            }
-            else
-            {
-
-                rowByColumn = i + 1;
-            }
+            rowByColumn = i == grid.RowCount - 1 ? 0 : i + 1;
         }
 
         private void SearchEntireTable(DoWorkEventArgs e)

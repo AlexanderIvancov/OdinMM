@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Odin.Global_Classes;
+using Odin.Tools;
+using System;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
-using Odin.Global_Classes;
-using Odin.Tools;
 using System.Data.SqlClient;
-using System.Runtime.InteropServices;
+using System.Drawing;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace Odin.DataCollection
 {
@@ -414,12 +407,9 @@ namespace Odin.DataCollection
             );
             lbl_Batch.ThreadSafeCall(delegate
             {
-                if (StateId == 0)
-                    lbl_Batch.Text = ScanDataReceived.scanLaunchLabel;
-                else if (StateId == 1)
-                    lbl_Batch.Text = ScanDataReceived.finishLaunch + Launch + ScanDataReceived.finishLaunch1;
-                else
-                    lbl_Batch.Text = ScanDataReceived.lunchBreak;
+                lbl_Batch.Text = StateId == 0
+                    ? ScanDataReceived.scanLaunchLabel
+                    : StateId == 1 ? ScanDataReceived.finishLaunch + Launch + ScanDataReceived.finishLaunch1 : ScanDataReceived.lunchBreak;
                 lbl_Batch.Visible = true;
             }
             );

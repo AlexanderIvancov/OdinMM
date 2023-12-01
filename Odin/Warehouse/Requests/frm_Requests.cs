@@ -1,24 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using WeifenLuo.WinFormsUI.Docking;
-using Odin.Global_Classes;
-using ComponentFactory.Krypton.Docking;
+﻿using ComponentFactory.Krypton.Docking;
 using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Workspace;
 using ComponentFactory.Krypton.Toolkit;
-using Odin.Planning.Controls;
-using System.Data.SqlClient;
+using Odin.CMB_Components.BLL;
+using Odin.Global_Classes;
+using Odin.Planning;
 using Odin.Tools;
 using Odin.Warehouse.Requests.Controls;
-using Odin.Planning;
-using Odin.CMB_Components.BLL;
+using System;
+using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace Odin.Warehouse.Requests
 {
@@ -65,14 +59,7 @@ namespace Odin.Warehouse.Requests
         {
             get
             {
-                if (rb_New.Checked == true)
-                    return 1;
-                else if (rb_Enabled.Checked == true)
-                    return -1;
-                else if (rb_Closed.Checked == true)
-                    return 0;
-                else
-                    return 99;
+                return rb_New.Checked == true ? 1 : rb_Enabled.Checked == true ? -1 : rb_Closed.Checked == true ? 0 : 99;
             }
             set
             {
@@ -196,10 +183,7 @@ namespace Odin.Warehouse.Requests
 
         private void SavedBatch(object sender)
         {
-            if (RequestSaved != null)
-            {
-                RequestSaved(this);
-            }
+            RequestSaved?.Invoke(this);
         }
 
         public void ClearFilter()
@@ -251,10 +235,7 @@ namespace Odin.Warehouse.Requests
             frm.Close();
             bwStart(bw_List);
 
-            if (RequestSaved != null)
-            {
-                RequestSaved(this);
-            }
+            RequestSaved?.Invoke(this);
         }
 
         public void LoadColumns(DataGridView grid)
@@ -476,20 +457,13 @@ namespace Odin.Warehouse.Requests
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? String.IsNullOrEmpty(CellValue) == true
+                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
+                    : String.IsNullOrEmpty(CellValue) == true
+                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -502,10 +476,9 @@ namespace Odin.Warehouse.Requests
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
-                else
-                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
+                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();

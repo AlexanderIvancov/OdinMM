@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ComponentFactory.Krypton.Toolkit;
+using System;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
 
 namespace Odin.Warehouse.StockIn
 {
@@ -307,10 +300,7 @@ namespace Odin.Warehouse.StockIn
             //Deallocation
             if (_NewInwardId != 0)
             {
-                if (EditSendStockInId != null)
-                {
-                    EditSendStockInId(this);
-                }
+                EditSendStockInId?.Invoke(this);
             }
             else
             {
@@ -320,10 +310,7 @@ namespace Odin.Warehouse.StockIn
                                                                 MessageBoxIcon.Warning,
                                                                 TaskDialogButtons.OK);
 
-                if (EditSendStockInId != null)
-                {
-                    EditSendStockInId(this);
-                }
+                EditSendStockInId?.Invoke(this);
             }
 
            

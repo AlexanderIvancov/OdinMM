@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Global_Classes;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.CMB_Components.BLL;
+using Odin.Global_Classes;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 namespace Odin.Warehouse.Requests
 {
     public delegate void RequestSimpleSavedEventHandler(object sender);
@@ -176,8 +170,7 @@ namespace Odin.Warehouse.Requests
                                                     TaskDialogButtons.OK);
 
 
-                        if (RequestDetsSaved != null)
-                            RequestDetsSaved(this);
+                        RequestDetsSaved?.Invoke(this);
                         ClearRows();
                         ReqBLL.RequestHeadId = 0;
                     }
@@ -254,11 +247,8 @@ namespace Odin.Warehouse.Requests
 
         private void cmb_Batches1_BatchChanged(object sender)
         {
-            if (cmb_Batches1.IsActive == -1
-                || cmb_Batches1.BatchId == 0)
-                btn_AddPlaces.Enabled = true;
-            else
-                btn_AddPlaces.Enabled = false;
+            btn_AddPlaces.Enabled = cmb_Batches1.IsActive == -1
+                || cmb_Batches1.BatchId == 0;
         }
 
         private void gv_List_CellValidated(object sender, DataGridViewCellEventArgs e)

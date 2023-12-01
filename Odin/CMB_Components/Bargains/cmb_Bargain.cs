@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
+﻿using Odin.Global_Classes;
+using System;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Odin.Global_Classes;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.Bargains
 {
@@ -40,10 +35,7 @@ namespace Odin.CMB_Components.Bargains
             set
             {
                 _isemptycolor = value;
-                if (value == true)
-                    txt_Bargain.StateCommon.Back.Color1 = Color.LightPink;
-                else
-                    txt_Bargain.StateCommon.Back.Color1 = Color.White;
+                txt_Bargain.StateCommon.Back.Color1 = value == true ? Color.LightPink : Color.White;
             }
         }
         public string Bargain
@@ -75,10 +67,7 @@ namespace Odin.CMB_Components.Bargains
                     return;
                 }
 
-                if (BargainChanged != null)
-                {
-                    BargainChanged(this);
-                }
+                BargainChanged?.Invoke(this);
             }
         }
 
@@ -120,10 +109,7 @@ namespace Odin.CMB_Components.Bargains
                         txt_Bargain.Text = string.Empty;
                     }
 
-                    if (BargainChanged != null)
-                    {
-                        BargainChanged(this);
-                    }
+                BargainChanged?.Invoke(this);
 
             }
         }
@@ -142,10 +128,7 @@ namespace Odin.CMB_Components.Bargains
         private void buttonSpecAny1_Click(object sender, EventArgs e)
         {
             txt_Bargain.Text = string.Empty;
-            if (BargainChanged != null)
-            {
-                BargainChanged(this);
-            }
+            BargainChanged?.Invoke(this);
 
         }
 
@@ -180,10 +163,7 @@ namespace Odin.CMB_Components.Bargains
         private void txt_Bargain_TextChanged(object sender, EventArgs e)
         {
             Bargain = txt_Bargain.Text;
-            if (BargainChanged != null)
-            {
-                BargainChanged(this);
-            }
+            BargainChanged?.Invoke(this);
 
         }
     }

@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ComponentFactory.Krypton.Toolkit;
+using System;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
 
 namespace Odin.CMB_Components.Countries
 {
@@ -47,15 +39,10 @@ namespace Odin.CMB_Components.Countries
             
         public int EU
         {
-            get { if (chk_Eur.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+            get {
+                return chk_Eur.CheckState == CheckState.Checked ? -1 : 0;
             }
-            set { if (value == 0)
-                    chk_Eur.CheckState = CheckState.Unchecked;
-                else
-                    chk_Eur.CheckState = CheckState.Checked;
+            set { chk_Eur.CheckState = value == 0 ? CheckState.Unchecked : CheckState.Checked;
             }    
         }
 

@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using ComponentFactory.Krypton.Toolkit;
+using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
 
 namespace Odin.Tools
 {
@@ -58,10 +51,7 @@ namespace Odin.Tools
                 aspectRatioWidth = 707 / width;
                 aspectRatioHeight = 1000 / height;
 
-                if (width > height)
-                    aspectRatio = aspectRatioWidth;
-                else
-                    aspectRatio = aspectRatioHeight;
+                aspectRatio = width > height ? aspectRatioWidth : aspectRatioHeight;
 
 
 

@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
-using ComponentFactory.Krypton.Toolkit;
 using Odin.Planning;
 using Odin.Register;
+using System;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Windows.Forms;
 namespace Odin.Purchase
 {
     public delegate void POIdSendingEventHandler(object sender);
@@ -348,10 +344,7 @@ namespace Odin.Purchase
         public string MinExpDate
         {
             get {
-                if (txt_MinExpDate.Value == null)
-                    return "";
-                else
-                    return txt_MinExpDate.Value.ToString();
+                return txt_MinExpDate.Value == null ? "" : txt_MinExpDate.Value.ToString();
             }
             set
             {
@@ -455,40 +448,15 @@ namespace Odin.Purchase
 
         public void EnableNeeds()
         {
-            if (IsCopy == false
-                && POId != 0)
-                btn_Needs.Enabled = false;
-            else
-                btn_Needs.Enabled = true;
+            btn_Needs.Enabled = IsCopy != false
+                || POId == 0;
         }
 
         public double MOQMPQ(double Qty, double MOQ, double MPQ)
         {
-            double Ret = 0;
-
-            if (Qty < MOQ)
-            {
-                if (globClass.ApprovePOMOQ() == true)
-                    Ret = MOQ;
-                else
-                    Ret = Qty;
-            }
-            else
-            {
-                if (MPQ > 0)
-                {
-                    if (Math.Round((Qty % MPQ), 5) == 0)
-                        Ret = Qty;
-                    else
-                        if (globClass.ApprovePOMOQ() == true)
-                        Ret = Qty - (Qty % MPQ) + MPQ;
-                    else
-                        Ret = Qty;
-                }
-                else
-                    Ret = Qty;
-            }
-
+            double Ret = Qty < MOQ
+                ? globClass.ApprovePOMOQ() == true ? MOQ : Qty
+                : MPQ > 0 ? Math.Round((Qty % MPQ), 5) == 0 ? Qty : globClass.ApprovePOMOQ() == true ? Qty - (Qty % MPQ) + MPQ : Qty : Qty;
             return Ret;
         }
 
@@ -501,16 +469,13 @@ namespace Odin.Purchase
 
         public void CheckEmpty()
         {
-            if (Qty <= 0
-            || ArtId == 0
-            || UnitId == 0
-            || HeadId == 0
+            btn_OK.Enabled = Qty > 0
+            && ArtId != 0
+            && UnitId != 0
+            && HeadId != 0
             //|| CheckCatEx(cmb_Articles1.ArticleId, SupId) == false
-            || ReqDate.Trim() == ""
-            || String.IsNullOrEmpty(ReqDate.Trim()) == true)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            && ReqDate.Trim() != ""
+            && String.IsNullOrEmpty(ReqDate.Trim()) != true;
         }
 
         public void CalcPriceFields(int sender, double vUnitPrice, double vDiscount, double vDiscFix, double vUnitFNPrice, double vVat, double vPriceWVat)
@@ -525,10 +490,7 @@ namespace Odin.Purchase
             else if (sender == 3)
             {
                 //Discount percentage (show)
-                if (vUnitPrice == 0)
-                { Discount = 0; }
-                else
-                { Discount = Math.Round((DiscFix * 100 / vUnitPrice), 2); }
+                Discount = vUnitPrice == 0 ? 0 : Math.Round((DiscFix * 100 / vUnitPrice), 2);
                 UnitFNPrice = Math.Round((vUnitPrice - DiscFix), 5);
                 CalcPriceFields(2, UnitPrice, Discount, DiscFix, UnitFNPrice, Vat, PriceWVat);
             }
@@ -646,14 +608,7 @@ namespace Odin.Purchase
                                                                      MessageBoxIcon.Warning,
                                                                      TaskDialogButtons.Yes |
                                                                      TaskDialogButtons.No);
-                    if (result1 == DialogResult.No)
-                    {
-                        _test = false;
-                    }
-                    else
-                    {
-                        _test = true;
-                    }
+                    _test = result1 != DialogResult.No;
                 }
 
                 if (_test == true)
@@ -885,12 +840,7 @@ namespace Odin.Purchase
         {
             if (strField == "txt_Vat")
             {
-                int send = 0;
-                if (UnitFNPrice == 0)
-                    send = 1;
-                else
-                    send = 2;
-
+                int send = UnitFNPrice == 0 ? 1 : 2;
                 CalcPriceFields(send, UnitPrice, Discount, DiscFix, UnitFNPrice, Vat, PriceWVat);
                 ShowLineTots();
             }
@@ -1027,10 +977,7 @@ namespace Odin.Purchase
             }
 
             //Event
-            if (SendPOId != null)
-            {
-                SendPOId(this);
-            }
+            SendPOId?.Invoke(this);
         }
 
         private void txt_SupArticle_TextChanged(object sender, EventArgs e)

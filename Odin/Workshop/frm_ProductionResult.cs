@@ -1,24 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using Odin.Tools;
+using System;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using WeifenLuo.WinFormsUI.Docking;
-using Odin.Global_Classes;
-using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Workspace;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Planning.Controls;
-using System.Threading;
 using System.Data.SqlClient;
-using Odin.Tools;
-using Odin.Register.Catalog;
-using System.Text.RegularExpressions;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.Workshop
 {
@@ -195,20 +183,13 @@ namespace Odin.Workshop
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? String.IsNullOrEmpty(CellValue) == true
+                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
+                    : String.IsNullOrEmpty(CellValue) == true
+                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -221,10 +202,9 @@ namespace Odin.Workshop
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
-                else
-                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
+                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
@@ -331,20 +311,13 @@ namespace Odin.Workshop
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_Materials.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_Materials.Filter = "(" + mColumnName + " is null OR Convert(" + mColumnName + ", 'System.String') = '')";
-                    else
-                        bs_Materials.Filter = "Convert(" + mColumnName + " , 'System.String') = '" + glob_Class.NES(mCellValue) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_Materials.Filter = bs_Materials.Filter + "AND (" + mColumnName + " is null OR Convert(" + mColumnName + ", 'System.String') = '')";
-                    else
-                        bs_Materials.Filter = bs_Materials.Filter + " AND Convert(" + mColumnName + " , 'System.String') = '" + glob_Class.NES(mCellValue) + "'";
-                }
+                bs_Materials.Filter = String.IsNullOrEmpty(bs_Materials.Filter) == true
+                    ? String.IsNullOrEmpty(CellValue) == true
+                        ? "(" + mColumnName + " is null OR Convert(" + mColumnName + ", 'System.String') = '')"
+                        : "Convert(" + mColumnName + " , 'System.String') = '" + glob_Class.NES(mCellValue) + "'"
+                    : String.IsNullOrEmpty(CellValue) == true
+                        ? bs_Materials.Filter + "AND (" + mColumnName + " is null OR Convert(" + mColumnName + ", 'System.String') = '')"
+                        : bs_Materials.Filter + " AND Convert(" + mColumnName + " , 'System.String') = '" + glob_Class.NES(mCellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -355,10 +328,9 @@ namespace Odin.Workshop
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_Materials.Filter) == true)
-                    bs_Materials.Filter = "Convert(" + mColumnName + " , 'System.String') <> '" + mCellValue + "'";
-                else
-                    bs_Materials.Filter = bs_Materials.Filter + " AND " + mColumnName + " <> '" + mCellValue + "'";
+                bs_Materials.Filter = String.IsNullOrEmpty(bs_Materials.Filter) == true
+                    ? "Convert(" + mColumnName + " , 'System.String') <> '" + mCellValue + "'"
+                    : bs_Materials.Filter + " AND " + mColumnName + " <> '" + mCellValue + "'";
             }
             catch { }
           
@@ -540,21 +512,14 @@ namespace Odin.Workshop
                 if (gv_List.SelectedCells[counter].FormattedValueType ==
                     Type.GetType("System.String"))
                 {
-                    string value = null;
+                    string value = gv_List.IsCurrentCellDirty == true
+                        ? gv_List.SelectedCells[counter]
+                            .EditedFormattedValue.ToString()
+                        : gv_List.SelectedCells[counter]
+                            .FormattedValue.ToString();
 
                     // If the cell contains a value that has not been commited,
                     // use the modified value.
-                    if (gv_List.IsCurrentCellDirty == true)
-                    {
-
-                        value = gv_List.SelectedCells[counter]
-                            .EditedFormattedValue.ToString();
-                    }
-                    else
-                    {
-                        value = gv_List.SelectedCells[counter]
-                            .FormattedValue.ToString();
-                    }
                     if (value != null)
                     {
                         try

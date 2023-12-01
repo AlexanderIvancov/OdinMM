@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 
 /*
  * Seven-segment LED control for .NET
@@ -293,11 +293,7 @@ namespace Odin.CustomControls
 
             int colonWidth = gridWidth / 4;
 
-            if(showColon){
-                srcRect = new RectangleF(0.0F, 0.0F, gridWidth + colonWidth, gridHeight);
-            }else{
-                srcRect = new RectangleF(0.0F, 0.0F, gridWidth, gridHeight);
-            }
+            srcRect = showColon ? new RectangleF(0.0F, 0.0F, gridWidth + colonWidth, gridHeight) : new RectangleF(0.0F, 0.0F, gridWidth, gridHeight);
             RectangleF destRect = new RectangleF(Padding.Left, Padding.Top, Width - Padding.Left - Padding.Right, Height - Padding.Top - Padding.Bottom);
             
             // Begin graphics container that remaps coordinates for our convenience

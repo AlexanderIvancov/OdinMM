@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
+﻿using Odin.Global_Classes;
+using System;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Odin.CMB_Components.BLL;
-using Odin.Global_Classes;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.Launches
 {
@@ -77,8 +71,7 @@ namespace Odin.CMB_Components.Launches
 
                     if (PrevId != LaunchId)
                     {
-                        if (LaunchChanged != null)
-                            LaunchChanged(this);
+                        LaunchChanged?.Invoke(this);
                         PrevId = LaunchId;
                     }
                     //if (BatchChanged != null)
@@ -193,8 +186,7 @@ namespace Odin.CMB_Components.Launches
 
                     if (PrevId != LaunchId)
                     {
-                        if (LaunchChanged != null)
-                            LaunchChanged(this);
+                        LaunchChanged?.Invoke(this);
                         PrevId = LaunchId;
                     }
                     //if (BatchChanged != null)
@@ -259,10 +251,7 @@ namespace Odin.CMB_Components.Launches
 
         private void btn_AdvView_Click(object sender, EventArgs e)
         {
-            if (ControlClick != null)
-            {
-                ControlClick(this);
-            }
+            ControlClick?.Invoke(this);
 
             ShowLaunchFilter(txt_Launch.Text);
         }
@@ -282,18 +271,14 @@ namespace Odin.CMB_Components.Launches
         private void buttonSpecAny1_Click(object sender, EventArgs e)
         {
             txt_Launch.Text = string.Empty;
-           
-            if (ControlClick != null)
-            {
-                ControlClick(this);
-            }
+
+            ControlClick?.Invoke(this);
 
         }
 
         private void txt_Launch_Click(object sender, EventArgs e)
         {
-            if (ControlClick != null)
-                ControlClick(this);
+            ControlClick?.Invoke(this);
         }
 
         private void txt_Launch_KeyPress(object sender, KeyPressEventArgs e)
@@ -306,10 +291,7 @@ namespace Odin.CMB_Components.Launches
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (LaunchKeyPressed != null)
-                {
-                    LaunchKeyPressed(this);
-                }
+                LaunchKeyPressed?.Invoke(this);
             }
         }
     }

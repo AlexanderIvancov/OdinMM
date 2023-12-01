@@ -1,13 +1,8 @@
-﻿using System;
+﻿using Odin.Global_Classes;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Odin.CMB_Components.BLL;
-using ComponentFactory.Krypton.Toolkit;
-using System.Data.SqlClient;
 using System.Data;
-using Odin.Global_Classes;
+using System.Data.SqlClient;
 
 namespace Odin.Warehouse.Reports
 {
@@ -60,14 +55,7 @@ namespace Odin.Warehouse.Reports
                                                      int _movtypeid, int _showintransit, int _showwip, 
                                                      int _groupbyprices, int _resppersid)
         {
-            string query = "";
-
-
-            if (Convert.ToDateTime(_date) <= Convert.ToDateTime("31.12.2019"))
-                query = "sp_SelectStockRestsOnDate1706";
-            else
-                query = "sp_SelectStockRestsOnDate";
-
+            string query = Convert.ToDateTime(_date) <= Convert.ToDateTime("31.12.2019") ? "sp_SelectStockRestsOnDate1706" : "sp_SelectStockRestsOnDate";
             var sqlparams = new List<SqlParameter>
             {
                 new SqlParameter("@artid",SqlDbType.Int){Value = _artid },
@@ -118,12 +106,9 @@ namespace Odin.Warehouse.Reports
                                                      int _groupbyplaces, int _groupbydoc, 
                                                      int _groupbylabel, int _groupbyprices)
         {
-            string query = "";
-            if (Convert.ToDateTime(_date) <= Convert.ToDateTime("31.12.2019"))
-                query = "sp_SelectStockRestsOnDateAccount1706";
-            else
-                query = "sp_SelectStockRestsOnDateAccount";
-            
+            string query = Convert.ToDateTime(_date) <= Convert.ToDateTime("31.12.2019")
+                ? "sp_SelectStockRestsOnDateAccount1706"
+                : "sp_SelectStockRestsOnDateAccount";
             var sqlparams = new List<SqlParameter>
             {
                 new SqlParameter("@date",SqlDbType.NVarChar){Value = _date},

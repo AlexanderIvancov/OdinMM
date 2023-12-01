@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ComponentFactory.Krypton.Toolkit;
+using System;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Workspace;
-using ComponentFactory.Krypton.Toolkit;
 
 namespace Odin.Register.Companies
 {
@@ -77,15 +67,10 @@ namespace Odin.Register.Companies
 
         public int LegalAddress
         {
-            get { if (chk_Legal.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+            get {
+                return chk_Legal.CheckState == CheckState.Checked ? -1 : 0;
             }
-            set { if (value == -1)
-                    chk_Legal.CheckState = CheckState.Checked;
-                else
-                    chk_Legal.CheckState = CheckState.Unchecked;
+            set { chk_Legal.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 
@@ -93,17 +78,11 @@ namespace Odin.Register.Companies
         {
             get
             {
-                if (chk_ActAddress.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_ActAddress.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_ActAddress.CheckState = CheckState.Checked;
-                else
-                    chk_ActAddress.CheckState = CheckState.Unchecked;
+                chk_ActAddress.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 
@@ -111,17 +90,11 @@ namespace Odin.Register.Companies
         {
             get
             {
-                if (chk_DelivPlace.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_DelivPlace.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_DelivPlace.CheckState = CheckState.Checked;
-                else
-                    chk_DelivPlace.CheckState = CheckState.Unchecked;
+                chk_DelivPlace.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 
@@ -129,17 +102,11 @@ namespace Odin.Register.Companies
         {
             get
             {
-                if (chk_IsActive.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_IsActive.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_IsActive.CheckState = CheckState.Checked;
-                else
-                    chk_IsActive.CheckState = CheckState.Unchecked;
+                chk_IsActive.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
 

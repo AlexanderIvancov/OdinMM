@@ -1,11 +1,8 @@
-﻿using System;
+﻿using Odin.Global_Classes;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
 using System.Data;
-using Odin.Global_Classes;
+using System.Data.SqlClient;
 
 namespace Odin.Planning
 {
@@ -441,10 +438,7 @@ namespace Odin.Planning
 
 
             int _res = Convert.ToInt32(Helper.GetOneRecord("select dbo.fn_CheckReplaceStages(" + _batchdetid + "," + _newartid + ")"));
-            if (_res == 0)
-                _test = false;
-            else
-                _test = true;
+            _test = _res != 0;
 
             return _test;
         }
@@ -455,10 +449,7 @@ namespace Odin.Planning
 
 
             int _res = Convert.ToInt32(Helper.GetOneRecord("select dbo.fn_CheckReplaceBatchArticles(" + _artid + "," + _oldartid + ", " + _batchid + ")"));
-            if (_res == 0)
-                _test = false;
-            else
-                _test = true;
+            _test = _res != 0;
 
             return _test;
         }

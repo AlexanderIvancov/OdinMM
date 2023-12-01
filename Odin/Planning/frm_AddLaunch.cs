@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
+﻿using ComponentFactory.Krypton.Toolkit;
 
 namespace Odin.Planning
 {
@@ -24,8 +15,7 @@ namespace Odin.Planning
 
         private void ctl_CreatLaunchDets1_SaveLaunch(object sender)
         {
-            if (LaunchSaved != null)
-                LaunchSaved(this);
+            LaunchSaved?.Invoke(this);
         }
     }
 }

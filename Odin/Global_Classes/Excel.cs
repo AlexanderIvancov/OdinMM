@@ -3,10 +3,6 @@ using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Globalization;
-using System.Threading;
-using System.Diagnostics;
-using Microsoft.Win32;
 
 namespace Odin.Global_Classes
 {

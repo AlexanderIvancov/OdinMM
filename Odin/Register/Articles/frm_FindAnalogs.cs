@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using Odin.Global_Classes;
+using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Odin.Global_Classes;
 namespace Odin.Register.Articles
 {
     public delegate void AnalogChangesEventHandler(object sender);
@@ -113,8 +107,7 @@ namespace Odin.Register.Articles
             {
                 Reg.AddAnalogToBOM(ArtCSEId, ArtId, _analogid);
 
-                if (AnalogChanged != null)
-                    AnalogChanged(this);
+                AnalogChanged?.Invoke(this);
 
             }
         }

@@ -1,14 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
+﻿using ComponentFactory.Krypton.Toolkit;
+using System;
 
 namespace Odin.CMB_Components.Transport
 {
@@ -50,11 +41,8 @@ namespace Odin.CMB_Components.Transport
 
         public void CheckEmpty()
         {
-            if (txt_Transport.Text == ""
-                || String.IsNullOrEmpty(Transport) == true)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = txt_Transport.Text != ""
+                && String.IsNullOrEmpty(Transport) != true;
         }
         #endregion
 

@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Diagnostics;
-using System.Windows.Forms;
 using System.Drawing;
-using System.Text;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace Odin.Global_Classes
 {
@@ -133,17 +130,17 @@ namespace Odin.Global_Classes
     {
         #region Unmanaged Code
         [DllImport("user32", CharSet = CharSet.Auto)]
-        private extern static int SendMessage(IntPtr handle, int msg, int wParam, IntPtr lParam);
+        private static extern int SendMessage(IntPtr handle, int msg, int wParam, IntPtr lParam);
 
         [DllImport("user32", CharSet = CharSet.Auto)]
-        private extern static int PostMessage(IntPtr handle, int msg, int wParam, IntPtr lParam);
+        private static extern int PostMessage(IntPtr handle, int msg, int wParam, IntPtr lParam);
 
         private const int WM_ACTIVATE = 0x006;
         private const int WM_ACTIVATEAPP = 0x01C;
         private const int WM_NCACTIVATE = 0x086;
 
         [DllImport("user32")]
-        private extern static void keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);
+        private static extern void keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);
 
         private const int KEYEVENTF_KEYUP = 0x0002;
         #endregion
@@ -355,10 +352,7 @@ namespace Odin.Global_Classes
         /// popup form that is being closed.</param>
         protected virtual void OnPopupClosed(PopupClosedEventArgs e)
         {
-            if (this.PopupClosed != null)
-            {
-                this.PopupClosed(this, e);
-            }
+            this.PopupClosed?.Invoke(this, e);
         }
 
         private void popup_Cancel(object sender, PopupCancelEventArgs e)
@@ -506,10 +500,7 @@ namespace Odin.Global_Classes
         /// with the cancel event.</param>
         protected virtual void OnCancelPopup(PopupCancelEventArgs e)
         {
-            if (this.PopupCancel != null)
-            {
-                this.PopupCancel(this, e);
-            }
+            this.PopupCancel?.Invoke(this, e);
             if (!e.Cancel)
             {
                 //IsModal = false;

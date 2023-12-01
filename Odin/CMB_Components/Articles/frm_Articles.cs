@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Odin.CMB_Components.BLL;
 using Odin.Global_Classes;
-using Odin.CMB_Components.BLL;
-using Odin.Register.Articles;
 using Odin.Register;
-using System.Data.SqlClient;
+using Odin.Register.Articles;
 using Odin.Tools;
 using Odin.Warehouse.Inventory;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 namespace Odin.CMB_Components.Articles
 {
     public partial class frm_Articles : Form
@@ -83,14 +79,7 @@ namespace Odin.CMB_Components.Articles
 
             bool success = Int32.TryParse(DAL.DefaultValue("unit"), out number);
 
-            if (success)
-            {
-                frm.UnitId = number;
-            }
-            else
-            {
-                frm.UnitId = 0;
-            }
+            frm.UnitId = success ? number : 0;
 
             DialogResult result = frm.ShowDialog();
 

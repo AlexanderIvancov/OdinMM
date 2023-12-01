@@ -1,14 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
+﻿using ComponentFactory.Krypton.Toolkit;
+using System;
 
 namespace Odin.CMB_Components.Currencies
 {
@@ -58,12 +49,9 @@ namespace Odin.CMB_Components.Currencies
 
         public void CheckEmpty()
         {
-            if (cmb_Currency1.CurrencyId == 0
-                || UnitCoef == 0
-                || Rate == 0)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = cmb_Currency1.CurrencyId != 0
+                && UnitCoef != 0
+                && Rate != 0;
         }
 
         private void cmb_Currency1_CurrencyChanged(object sender)

@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
 using Odin.Tools;
+using System;
+using System.ComponentModel;
+using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.Planning
 {
@@ -49,10 +44,7 @@ namespace Odin.Planning
         {
             get
             {
-                if (txt_StartDate.Value == null)
-                    return "";
-                else
-                    return txt_StartDate.Value.ToString();
+                return txt_StartDate.Value == null ? "" : txt_StartDate.Value.ToString();
             }
             set
             {
@@ -68,10 +60,7 @@ namespace Odin.Planning
         {
             get
             {
-                if (txt_ProdStartDate.Value == null)
-                    return "";
-                else
-                    return txt_StartDate.Value.ToString();
+                return txt_ProdStartDate.Value == null ? "" : txt_StartDate.Value.ToString();
             }
             set
             {
@@ -87,10 +76,7 @@ namespace Odin.Planning
         {
             get
             {
-                if (txt_EndDate.Value == null)
-                    return "";
-                else
-                    return txt_EndDate.Value.ToString();
+                return txt_EndDate.Value == null ? "" : txt_EndDate.Value.ToString();
             }
             set
             {
@@ -127,15 +113,11 @@ namespace Odin.Planning
         }
         public bool CheckEmpty()
         {
-            if (StartDate.Trim() == ""
-                || EndDate.Trim() == ""
-                || ProdStartDate.Trim() == ""
-                || (Convert.ToDateTime(StartDate) > Convert.ToDateTime(ProdStartDate))
-                || (Convert.ToDateTime(ProdStartDate) > Convert.ToDateTime(EndDate))
-                )
-                return false;
-            else
-                return true;
+            return StartDate.Trim() != ""
+                && EndDate.Trim() != ""
+                && ProdStartDate.Trim() != ""
+                && Convert.ToDateTime(StartDate) <= Convert.ToDateTime(ProdStartDate)
+                && Convert.ToDateTime(ProdStartDate) <= Convert.ToDateTime(EndDate);
 
         }
 
@@ -358,20 +340,13 @@ namespace Odin.Planning
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? String.IsNullOrEmpty(CellValue) == true
+                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
+                    : String.IsNullOrEmpty(CellValue) == true
+                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -384,10 +359,9 @@ namespace Odin.Planning
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
-                else
-                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
+                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
@@ -520,8 +494,7 @@ namespace Odin.Planning
 
         private void frm_EditLaunchHead_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (EditLaunch != null)
-                EditLaunch(this);
+            EditLaunch?.Invoke(this);
         }
 
         private void btn_Cancel_Click(object sender, EventArgs e)

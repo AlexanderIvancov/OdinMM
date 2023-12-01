@@ -1,30 +1,22 @@
-﻿using System;
+﻿using AdvancedDataGridView;
+using ComponentFactory.Krypton.Toolkit;
+using NPOI.HPSF;
+using NPOI.HSSF.UserModel;
+using NPOI.HSSF.Util;
+using NPOI.SS.UserModel;
+using Odin.Global_Classes;
+using Odin.Register;
+using Odin.Register.Catalog;
+using Odin.Tools;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using WeifenLuo.WinFormsUI.Docking;
-using Odin.Global_Classes;
-using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Workspace;
-using ComponentFactory.Krypton.Toolkit;
-using System.Threading;
 using System.Data.SqlClient;
-using Odin.Tools;
-using Odin.Register;
-using Odin.Purchase.Reports;
-using AdvancedDataGridView;
-using Odin.Register.Catalog;
-using NPOI.HSSF.UserModel;
-using NPOI.HPSF;
-using NPOI.HSSF.Util;
-using NPOI.SS.UserModel;
+using System.Drawing;
 using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace Odin.Purchase
 {
@@ -256,10 +248,7 @@ namespace Odin.Purchase
                 _headid = Convert.ToInt32(row1.Cells["cn_id"].Value);
                 var selectedid = data.Select("headid = " + _headid);
 
-                if (selectedid.Length > 0)
-                    row1.DefaultCellStyle.BackColor = Color.Gold;
-                else
-                    row1.DefaultCellStyle.BackColor = Color.White;
+                row1.DefaultCellStyle.BackColor = selectedid.Length > 0 ? Color.Gold : Color.White;
             }
 
         }
@@ -391,28 +380,9 @@ namespace Odin.Purchase
 
             if (Qty > 0)
             {
-                if (Qty < MOQ)
-                {
-                    if (globClass.ApprovePOMOQ() == true)
-                        Ret = MOQ;
-                    else
-                        Ret = Qty;
-                }
-                else
-                {
-                    if (MPQ > 0)
-                    {
-                        if (Math.Round((Qty % MPQ), 5) == 0)
-                            Ret = Qty;
-                        else
-                            if (globClass.ApprovePOMOQ() == true)
-                            Ret = Qty - (Qty % MPQ) + MPQ;
-                        else
-                            Ret = Qty;
-                    }
-                    else
-                        Ret = Qty;
-                }
+                Ret = Qty < MOQ
+                    ? globClass.ApprovePOMOQ() == true ? MOQ : Qty
+                    : MPQ > 0 ? Math.Round((Qty % MPQ), 5) == 0 ? Qty : globClass.ApprovePOMOQ() == true ? Qty - (Qty % MPQ) + MPQ : Qty : Qty;
             }
 
             return Ret;
@@ -483,20 +453,13 @@ namespace Odin.Purchase
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? String.IsNullOrEmpty(CellValue) == true
+                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
+                    : String.IsNullOrEmpty(CellValue) == true
+                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -509,10 +472,9 @@ namespace Odin.Purchase
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
-                else
-                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
+                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             //SetCellsColor();
@@ -613,20 +575,13 @@ namespace Odin.Purchase
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_POList.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValuePO) == true)
-                        bs_POList.Filter = "(" + ColumnNamePO + " is null OR Convert(" + ColumnNamePO + ", 'System.String') = '')";
-                    else
-                        bs_POList.Filter = "Convert(" + ColumnNamePO + " , 'System.String') = '" + glob_Class.NES(CellValuePO) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValuePO) == true)
-                        bs_POList.Filter = bs_POList.Filter + "AND (" + ColumnNamePO + " is null OR Convert(" + ColumnNamePO + ", 'System.String') = '')";
-                    else
-                        bs_POList.Filter = bs_POList.Filter + " AND Convert(" + ColumnNamePO + " , 'System.String') = '" + glob_Class.NES(CellValuePO) + "'";
-                }
+                bs_POList.Filter = String.IsNullOrEmpty(bs_POList.Filter) == true
+                    ? String.IsNullOrEmpty(CellValuePO) == true
+                        ? "(" + ColumnNamePO + " is null OR Convert(" + ColumnNamePO + ", 'System.String') = '')"
+                        : "Convert(" + ColumnNamePO + " , 'System.String') = '" + glob_Class.NES(CellValuePO) + "'"
+                    : String.IsNullOrEmpty(CellValuePO) == true
+                        ? bs_POList.Filter + "AND (" + ColumnNamePO + " is null OR Convert(" + ColumnNamePO + ", 'System.String') = '')"
+                        : bs_POList.Filter + " AND Convert(" + ColumnNamePO + " , 'System.String') = '" + glob_Class.NES(CellValuePO) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -639,10 +594,9 @@ namespace Odin.Purchase
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_POList.Filter) == true)
-                    bs_POList.Filter = "Convert(" + ColumnNamePO + " , 'System.String') <> '" + CellValuePO + "'";
-                else
-                    bs_POList.Filter = bs_POList.Filter + " AND " + ColumnNamePO + " <> '" + CellValuePO + "'";
+                bs_POList.Filter = String.IsNullOrEmpty(bs_POList.Filter) == true
+                    ? "Convert(" + ColumnNamePO + " , 'System.String') <> '" + CellValuePO + "'"
+                    : bs_POList.Filter + " AND " + ColumnNamePO + " <> '" + CellValuePO + "'";
             }
             catch { }
             //SetCellsColor();
@@ -915,12 +869,9 @@ namespace Odin.Purchase
                         { OutVal = Convert.ToDouble(node.Cells["cn_dqtyinpo"].Value); }
                         catch { OutVal = -1; }
 
-                        if (OutVal == -1)
-                            node.Cells["cn_dqtyinpo"].Value = 0;
-                        else
-                        {
-                            node.Cells["cn_dqtyinpo"].Value = MOQMPQ(OutVal, Convert.ToDouble(tv_Details.CurrentRow.Cells["cn_dmoq"].Value), Convert.ToDouble(tv_Details.CurrentRow.Cells["cn_dmpq"].Value));
-                        }
+                        node.Cells["cn_dqtyinpo"].Value = OutVal == -1
+                            ? 0
+                            : (object)MOQMPQ(OutVal, Convert.ToDouble(tv_Details.CurrentRow.Cells["cn_dmoq"].Value), Convert.ToDouble(tv_Details.CurrentRow.Cells["cn_dmpq"].Value));
 
                         RecalcTotalForParent(parentnode);
                         

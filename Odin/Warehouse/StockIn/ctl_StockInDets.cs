@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Odin.Global_Classes;
-using AdvancedDataGridView;
-using Odin.Purchase;
+﻿using AdvancedDataGridView;
 using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using Odin.Purchase;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
 namespace Odin.Warehouse.StockIn
 {
     public delegate void StockInIdSendingEventHandler(object sender);
@@ -169,10 +166,7 @@ namespace Odin.Warehouse.StockIn
                 catch { return 1; }
             }
             set { txt_CoefConv.Text = value.ToString();
-                if (txt_CoefConv.Text == "0")
-                    txt_CoefConv.StateCommon.Back.Color1 = Color.Tomato;
-                else
-                    txt_CoefConv.StateCommon.Back.Color1 = Color.White;
+                txt_CoefConv.StateCommon.Back.Color1 = txt_CoefConv.Text == "0" ? Color.Tomato : Color.White;
             }
         }
 
@@ -271,10 +265,7 @@ namespace Odin.Warehouse.StockIn
         {
             get
             {
-                if (txt_ExpDate.Value == null)
-                    return "";
-                else
-                    return txt_ExpDate.Value.ToString();
+                return txt_ExpDate.Value == null ? "" : txt_ExpDate.Value.ToString();
             }
             set
             {
@@ -325,11 +316,9 @@ namespace Odin.Warehouse.StockIn
 
         public int StateId
         {
-            get { if (StockMoveTypeId == 25)
-                    return 0;
-                else
-                    return -1;  
-                        }
+            get {
+                return StockMoveTypeId == 25 ? 0 : -1;
+            }
         }
 
         public int Producer
@@ -354,18 +343,12 @@ namespace Odin.Warehouse.StockIn
 
         public int NoExpDate
         {
-            get { if (chk_NoDate.Checked == true)
-                    return -1;
-                else
-                    return 0;
+            get {
+                return chk_NoDate.Checked == true ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_NoDate.Checked = true;
-
-                else
-                    chk_NoDate.Checked = false;
+                chk_NoDate.Checked = value == -1;
 
             }
         }
@@ -418,37 +401,25 @@ namespace Odin.Warehouse.StockIn
 
         private void CheckUnitPrice()
         {
-            if (UnitPrice != UnitPriceInOrder)
-                txt_UnitPrice.BackColor = Color.Pink;
-            else
-                txt_UnitPrice.BackColor = Color.White;
+            txt_UnitPrice.BackColor = UnitPrice != UnitPriceInOrder ? Color.Pink : Color.White;
         }
 
         private void CheckQty()
         {
-            if (Qty != QtyInOrder)
-                txt_Qty.BackColor = Color.Pink;
-            else
-                txt_Qty.BackColor = Color.White;
+            txt_Qty.BackColor = Qty != QtyInOrder ? Color.Pink : Color.White;
         }
 
         public void CheckUnit()
         {
-            if (cmb_Articles1.UnitId != cmb_Units1.UnitId)
-                txt_Unit.BackColor = Color.Pink;
-            else
-                txt_Unit.BackColor = Color.White;
+            txt_Unit.BackColor = cmb_Articles1.UnitId != cmb_Units1.UnitId ? Color.Pink : Color.White;
         }
 
         public void CheckEmpty()
         {
-            if (Qty <= 0
-                || ArtId == 0
-                || UnitId == 0
-                || StockMoveTypeId == 0)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = Qty > 0
+                && ArtId != 0
+                && UnitId != 0
+                && StockMoveTypeId != 0;
         }
 
         public void CheckResale()
@@ -456,14 +427,7 @@ namespace Odin.Warehouse.StockIn
             PO_BLL POB = new PO_BLL();
             POB.POId = PurchaseOrderLineId;
 
-            if (POB.POResale == -1)
-            {
-                lbl_Resale.Visible = true;
-            }
-            else
-            {
-                lbl_Resale.Visible = false;
-            }
+            lbl_Resale.Visible = POB.POResale == -1;
         }
 
 
@@ -511,10 +475,7 @@ namespace Odin.Warehouse.StockIn
         public void CheckIncomeControl(int _ArtId, int _SupId, int _POId)
         {
             IncomeControl = Convert.ToInt32(Helper.GetOneRecord("select dbo.fn_CheckIncomeControl(" + _ArtId + ", " + _SupId + ", " + _POId + ")"));
-            if (IncomeControl == -1)
-                lbl_Quarantine.Visible = true;
-            else
-                lbl_Quarantine.Visible = false;
+            lbl_Quarantine.Visible = IncomeControl == -1;
         }
 
         private void AddNode(DataRow dr, Font boldFont, TreeGridNodeCollection nodes,
@@ -553,12 +514,7 @@ namespace Odin.Warehouse.StockIn
 
         private void RecalcQtyLeft()
         {
-            double _coefconv = 1;
-            if (CoefConv == 0)
-                _coefconv = 1;
-            else
-                _coefconv = CoefConv;
-
+            double _coefconv = CoefConv == 0 ? 1 : CoefConv;
             double _tmp = 0;
 
             foreach (DataGridViewRow row in tv_Rests.Rows)
@@ -847,14 +803,7 @@ namespace Odin.Warehouse.StockIn
                                                                  MessageBoxIcon.Warning,
                                                                  TaskDialogButtons.Yes |
                                                                  TaskDialogButtons.No);
-                    if (result == DialogResult.Yes)
-                    {
-                        _test = true;
-                    }
-                    else
-                    {
-                        _test = false;
-                    }
+                    _test = result == DialogResult.Yes;
                 }
 
                 if (_test == true)
@@ -905,10 +854,7 @@ namespace Odin.Warehouse.StockIn
                         cmb_PurchaseOrdersWithLines1.ArticleId = 0;
                         cmb_PurchaseOrdersWithLines1.PurchaseOrderId = 0;
 
-                        if (SendStockInId != null)
-                        {
-                            SendStockInId(this);
-                        }
+                        SendStockInId?.Invoke(this);
                     }
                 }
             }
@@ -916,10 +862,7 @@ namespace Odin.Warehouse.StockIn
 
         private void cmb_StockInTypes1_TypesChanged(object sender)
         {
-            if (StockMoveTypeId == 2)
-                cmb_Batches1.Enabled = true;
-            else
-                cmb_Batches1.Enabled = false;
+            cmb_Batches1.Enabled = StockMoveTypeId == 2;
         }
 
 

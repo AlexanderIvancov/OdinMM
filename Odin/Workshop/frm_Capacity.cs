@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using Odin.Tools;
+using System;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Odin.Global_Classes;
-using ComponentFactory.Krypton.Workspace;
-using ComponentFactory.Krypton.Toolkit;
-using Odin.Tools;
 
 namespace Odin.Workshop
 {
@@ -44,12 +39,7 @@ namespace Odin.Workshop
         public int TypeSelection
         {
             get {
-                if (rb_all.Checked == true)
-                    return 1;
-                else if (rb_production.Checked == true)
-                    return 0;
-                else
-                    return -1;             
+                return rb_all.Checked == true ? 1 : rb_production.Checked == true ? 0 : -1;
             }
         }
         #endregion

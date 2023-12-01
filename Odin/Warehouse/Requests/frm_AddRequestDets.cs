@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
+﻿using ComponentFactory.Krypton.Toolkit;
 
 namespace Odin.Warehouse.Requests
 {
@@ -23,8 +14,7 @@ namespace Odin.Warehouse.Requests
 
         private void ctl_CreatReqDets1_SaveRequest(object sender)
         {
-            if (RequestDetsSaved != null)
-                RequestDetsSaved(this);
+            RequestDetsSaved?.Invoke(this);
         }
     }
 }

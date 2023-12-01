@@ -1,18 +1,14 @@
-﻿using System;
+﻿using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using Odin.Tools;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
-using Odin.Global_Classes;
-using Odin.Tools;
-using System.Data.SqlClient;
-using System.Runtime.InteropServices;
 
 
 namespace Odin.Warehouse.StockIn
@@ -217,10 +213,7 @@ namespace Odin.Warehouse.StockIn
             else
             {
                 _packid = Convert.ToInt32(Helper.GetOneRecord("select top 1 id from sto_packcontent where sn = '" + _serial + "'"));
-                if (_packid == 0)
-                    _res = true;
-                else
-                    _res = false;
+                _res = _packid == 0;
             }
             return _res;
         }
@@ -275,10 +268,9 @@ namespace Odin.Warehouse.StockIn
 
             //Check for group
             int isgroup = Convert.ToInt32(Helper.GetOneRecord("select top 1 isnull(groupid, 0) from prod_batchhead where id = " + _prevbatchid));
-            if (isgroup != 0)
-                _batchid = Convert.ToInt32(Helper.GetOneRecord("select top 1 batchid from prod_serialtracing where (serial = '" + _serial + "' or analog = '" + _serial + "') and stageid = 7 order by id desc"));
-            else
-                _batchid = Convert.ToInt32(Helper.GetOneRecord("select top 1 ass.batchid from PROD_SerialAssembling ass inner join prod_serialtracing st on (st.serial = '" + _serial + "' or st.analog = '" + _serial + "') and st.stageid = 7  where ass.serial = '" + _serial + "' order by ass.id desc"));
+            _batchid = isgroup != 0
+                ? Convert.ToInt32(Helper.GetOneRecord("select top 1 batchid from prod_serialtracing where (serial = '" + _serial + "' or analog = '" + _serial + "') and stageid = 7 order by id desc"))
+                : Convert.ToInt32(Helper.GetOneRecord("select top 1 ass.batchid from PROD_SerialAssembling ass inner join prod_serialtracing st on (st.serial = '" + _serial + "' or st.analog = '" + _serial + "') and st.stageid = 7  where ass.serial = '" + _serial + "' order by ass.id desc"));
             if (_batchid == 0)
                 _batchid = Convert.ToInt32(Helper.GetOneRecord("select top 1 batchid from prod_serialtracing where (serial = '" + _serial + "' or analog = '" + _serial + "') and stageid = 7 order by id desc "));
 
@@ -421,12 +413,7 @@ namespace Odin.Warehouse.StockIn
                     {
                         ProdPlace = frm.ProdPlace;
 
-                        string emailaddresses = "";
-
-                        if (ProdPlace == 1)
-                            emailaddresses = DAL.EmailAddressesByType(13);
-                        else
-                            emailaddresses = DAL.EmailAddressesByType(11);
+                        string emailaddresses = ProdPlace == 1 ? DAL.EmailAddressesByType(13) : DAL.EmailAddressesByType(11);
 
                         //MessageBox.Show(emailaddresses);
 
@@ -542,13 +529,7 @@ namespace Odin.Warehouse.StockIn
                         ProdPlace = frm.ProdPlace;
                         _isclosed = frm.IsClosed;
 
-                        string emailaddresses = "";
-
-                        if (ProdPlace == 1)
-                            emailaddresses = DAL.EmailAddressesByType(13);
-                        else
-                            emailaddresses = DAL.EmailAddressesByType(11);
-
+                        string emailaddresses = ProdPlace == 1 ? DAL.EmailAddressesByType(13) : DAL.EmailAddressesByType(11);
                         string strMessage = "Box for " + frm.Batch + " is closed!";
                         strMessage = strMessage + "\r\nBox NO: " + frm.BoxNO.ToString();
                         strMessage = strMessage + "\r\nQty: " + frm.Qty.ToString();
@@ -892,12 +873,7 @@ namespace Odin.Warehouse.StockIn
                     {
                         ProdPlace = frm.ProdPlace;
 
-                        string emailaddresses = "";
-                        if (ProdPlace == 1)
-                            emailaddresses = DAL.EmailAddressesByType(13);
-                        else
-                            emailaddresses = DAL.EmailAddressesByType(11);
-
+                        string emailaddresses = ProdPlace == 1 ? DAL.EmailAddressesByType(13) : DAL.EmailAddressesByType(11);
                         string strMessage = "Box for " + frm.Batch + " is closed!";
                         strMessage = strMessage + "\r\nBox NO: " + frm.BoxNO.ToString();
                         strMessage = strMessage + "\r\nQty: " + frm.Qty.ToString();

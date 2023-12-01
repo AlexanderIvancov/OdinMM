@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
+﻿using Odin.Global_Classes;
+using System;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Odin.Global_Classes;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.Places
 {
@@ -86,10 +81,7 @@ namespace Odin.CMB_Components.Places
                         IsQuarantine = 0;
                     }
 
-                    if (SelectedValueChanged != null)
-                    {
-                        SelectedValueChanged(this);
-                    }
+                    SelectedValueChanged?.Invoke(this);
                 }
             }
         }
@@ -121,10 +113,7 @@ namespace Odin.CMB_Components.Places
         {
             int _res = Convert.ToInt32(Helper.GetOneRecord("select id from (select * from STO_Shelves where id in " +
                 " (select idpl from dbo.ifn_StockPlaces(dbo.fn_DefaultValue('quarantine')))) tab where tab.id = " + placeid));
-            if (_res == 0)
-                IsQuarantine = 0;
-            else
-                IsQuarantine = -1;
+            IsQuarantine = _res == 0 ? 0 : -1;
         }
 
         private void buttonSpecAny1_Click(object sender, EventArgs e)
@@ -135,10 +124,7 @@ namespace Odin.CMB_Components.Places
 
         public void ValueChanged()
         {
-            if (SelectedValueChanged != null)
-            {
-                SelectedValueChanged(this);
-            }
+            SelectedValueChanged?.Invoke(this);
         }
 
         private void btn_TreeView_Click(object sender, EventArgs e)

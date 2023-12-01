@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Workspace;
-using ComponentFactory.Krypton.Toolkit;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
+using System;
+using System.Windows.Forms;
 namespace Odin.Register.Catalog
 {
     public delegate void CatSavedEventHandler(object sender);
@@ -41,12 +31,8 @@ namespace Odin.Register.Catalog
 
         public int BargType
         {
-            get { if (rb_Supplier.Checked == true)
-                    return -1;
-                else if (rb_Customer.Checked == true)
-                    return 1;
-                else
-                    return 0;
+            get {
+                return rb_Supplier.Checked == true ? -1 : rb_Customer.Checked == true ? 1 : 0;
             }
             set {
                 if (value == -1)
@@ -173,10 +159,8 @@ namespace Odin.Register.Catalog
 
         public int AsDefault
         {
-            get { if (chk_Default.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+            get {
+                return chk_Default.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
@@ -192,10 +176,7 @@ namespace Odin.Register.Catalog
         {
             get
             {
-                if (chk_Quoted.CheckState == CheckState.Checked)
-                    return -1;
-                else
-                    return 0;
+                return chk_Quoted.CheckState == CheckState.Checked ? -1 : 0;
             }
             set
             {
@@ -277,21 +258,18 @@ namespace Odin.Register.Catalog
 
         private void btn_OK_Click(object sender, EventArgs e)
         {
-            if (CatSaved != null)
-                CatSaved(this);
+            CatSaved?.Invoke(this);
         }
 
         private void btn_Cancel_Click(object sender, EventArgs e)
         {
-            if (CatClosed != null)
-                CatClosed(this);
+            CatClosed?.Invoke(this);
             this.Close();
         }
 
         private void frm_AddCatItem_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (CatClosed != null)
-                CatClosed(this);
+            CatClosed?.Invoke(this);
         }
 
         private void buttonSpecAny4_Click(object sender, EventArgs e)

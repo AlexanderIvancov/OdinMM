@@ -1,15 +1,12 @@
-﻿using System;
+﻿using DataMatrix.net;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
-using System.Windows.Forms;
 using System.Drawing;
-using DataMatrix.net;
-using System.Threading.Tasks;
 using System.Drawing.Printing;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace Odin.Global_Classes
 {
@@ -685,10 +682,7 @@ namespace Odin.Global_Classes
                 _r = Convert.ToInt32(Helper.GetOneRecord("select distinct dbo.fn_CheckIncomeControlFin(" + IdIn + ")"));
             }
             catch { }
-            if (_r == 0)
-                _res = false;
-            else
-                _res = true;
+            _res = _r != 0;
 
             return _res;
         }
@@ -702,10 +696,7 @@ namespace Odin.Global_Classes
                 _r = Convert.ToInt32(Helper.GetOneRecord("select distinct dbo.fn_CheckCoC(" + POLineId + ", " + HeadId + ")"));
             }
             catch { }
-            if (_r == 0)
-                _res = false;
-            else
-                _res = true;
+            _res = _r != 0;
 
             //SqlConnection sqlConn = new SqlConnection(sConnStr);
             //string strSQL = "select distinct dbo.fn_CheckIncomeControl(" + POLineId + ") as res";
@@ -853,7 +844,7 @@ namespace Odin.Global_Classes
             if (reader.HasRows)
             {
                 reader.Read();
-                _res = Convert.ToInt32(reader["mblimit"]) == 0 ? false : true;
+                _res = Convert.ToInt32(reader["mblimit"]) != 0;
                 reader.Close();
             }
             else
@@ -1311,20 +1302,14 @@ namespace Odin.Global_Classes
         public bool CheckProduction(int placeid)
         {
 
-            if ((Convert.ToInt32(Helper.GetOneRecord("select isnull(isproduction, 0) as isproduction from sto_shelves where id = " + placeid))) == -1)
-                return true;
-            else
-                return false;
+            return (Convert.ToInt32(Helper.GetOneRecord("select isnull(isproduction, 0) as isproduction from sto_shelves where id = " + placeid))) == -1;
 
         }
 
         public bool CheckCostPrice(int idin)
         {
 
-            if (Convert.ToInt32(Helper.GetOneRecord("select dbo.fn_CheckCostPrice(" + idin + ")")) == -1)
-                return true;
-            else
-                return false;
+            return Convert.ToInt32(Helper.GetOneRecord("select dbo.fn_CheckCostPrice(" + idin + ")")) == -1;
 
         }
 
@@ -1368,10 +1353,7 @@ namespace Odin.Global_Classes
                 res = -1;
             }
 
-            if (res == -1)
-                return true;
-            else
-                return false;
+            return res == -1;
 
         }
 

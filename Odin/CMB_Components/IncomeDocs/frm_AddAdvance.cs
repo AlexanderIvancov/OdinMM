@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
+﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
+using System;
+using System.Drawing;
 
 namespace Odin.CMB_Components.IncomeDocs
 {
@@ -63,13 +55,10 @@ namespace Odin.CMB_Components.IncomeDocs
 
         public void CheckEmpty()
         {
-            if (cmb_Currency1.CurrencyId == 0
-                || UnitCoef == 0
-                || Rate == 0
-                || Amount == 0)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = cmb_Currency1.CurrencyId != 0
+                && UnitCoef != 0
+                && Rate != 0
+                && Amount != 0;
         }
 
         private void cmb_Currency1_CurrencyChanged(object sender)
@@ -108,10 +97,7 @@ namespace Odin.CMB_Components.IncomeDocs
             {
                 DLL.ShowCurRate(CurId, CurDate.Trim() == "" ? System.DateTime.Now.ToShortDateString() : CurDate.Trim());
                 Rate = DLL.CurRate;
-                if (Rate == 0)
-                    txt_Rate.StateCommon.Back.Color1 = Color.Red;
-                else
-                    txt_Rate.StateCommon.Back.Color1 = Color.White;
+                txt_Rate.StateCommon.Back.Color1 = Rate == 0 ? Color.Red : Color.White;
             });
 
             CheckEmpty();

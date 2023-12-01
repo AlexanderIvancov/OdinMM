@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
+﻿using ComponentFactory.Krypton.Toolkit;
 namespace Odin.Purchase
 {
     public delegate void POSavedEventHandler(object sender);
@@ -22,8 +13,7 @@ namespace Odin.Purchase
 
         private void ctl_PODets1_SendPOId(object sender)
         {
-            if (POLineSaved != null)
-                POLineSaved(this);
+            POLineSaved?.Invoke(this);
         }
     }
 }

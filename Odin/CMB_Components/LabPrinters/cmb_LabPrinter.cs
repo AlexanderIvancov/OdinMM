@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Odin.CMB_Components.BLL;
 using Odin.Global_Classes;
-using Odin.CMB_Components.BLL;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.LabPrinters
 {
@@ -62,8 +56,7 @@ namespace Odin.CMB_Components.LabPrinters
         {
             try
             {
-                if (PrinterNameChanged != null)
-                    PrinterNameChanged(this);
+                PrinterNameChanged?.Invoke(this);
             }
             catch { return; }
         }
@@ -72,8 +65,7 @@ namespace Odin.CMB_Components.LabPrinters
         {
             try
             {
-                if (PrinterIPChanged != null)
-                    PrinterIPChanged(this);
+                PrinterIPChanged?.Invoke(this);
             }
             catch { return; }
         }

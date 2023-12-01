@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ComponentFactory.Krypton.Toolkit;
+using System;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
 
 namespace Odin.Workshop
 {
@@ -25,17 +18,12 @@ namespace Odin.Workshop
 
         public int AnalogAsPrimary
         {
-            get { if (chk_analogasprimary.Checked == true)
-                    return -1;
-                else
-                    return 0;
+            get {
+                return chk_analogasprimary.Checked == true ? -1 : 0;
             }
             set
             {
-                if (value == -1)
-                    chk_analogasprimary.Checked = true;
-                else
-                    chk_analogasprimary.Checked = false;
+                chk_analogasprimary.Checked = value == -1;
             }
         }
 

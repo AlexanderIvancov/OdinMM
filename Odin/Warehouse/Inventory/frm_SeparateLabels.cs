@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ComponentFactory.Krypton.Toolkit;
+using System;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
 
 namespace Odin.Warehouse.Inventory
 {
@@ -43,10 +35,7 @@ namespace Odin.Warehouse.Inventory
         public int SeparType
         {
             get {
-                if (rb_Once.Checked == true)
-                    return 1;
-                else
-                    return 2;
+                return rb_Once.Checked == true ? 1 : 2;
             }
             set {
                 if (value == 1)
@@ -68,18 +57,12 @@ namespace Odin.Warehouse.Inventory
 
         private void rb_Once_CheckedChanged(object sender, EventArgs e)
         {
-            if (rb_Once.Checked == true)
-                SeparType = 1;
-            else
-                SeparType = 2;
+            SeparType = rb_Once.Checked == true ? 1 : 2;
         }
 
         private void rb_Multiple_CheckedChanged(object sender, EventArgs e)
         {
-            if (rb_Once.Checked == true)
-                SeparType = 1;
-            else
-                SeparType = 2;
+            SeparType = rb_Once.Checked == true ? 1 : 2;
         }
 
         private void txt_NewQty_Validated(object sender, EventArgs e)

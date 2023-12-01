@@ -1,14 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
+﻿using ComponentFactory.Krypton.Toolkit;
+using System;
 
 namespace Odin.Warehouse.Inventory
 {
@@ -58,12 +49,9 @@ namespace Odin.Warehouse.Inventory
 
         public void CheckEmpty()
         {
-            if (String.IsNullOrEmpty(Value) == true
-                || Value == ""
-                || CategoryId == 0)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = String.IsNullOrEmpty(Value) != true
+                && Value != ""
+                && CategoryId != 0;
         }
 
         private void cmb_Category1_SelectedValueChanged(object sender)

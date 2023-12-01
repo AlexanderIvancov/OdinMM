@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
+﻿using Odin.Global_Classes;
+using System;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Odin.Global_Classes;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.CMB_Components.Category
 {
@@ -114,10 +109,7 @@ namespace Odin.CMB_Components.Category
 
         public void ValueChanged()
         {
-            if (SelectedValueChanged != null)
-            {
-                SelectedValueChanged(this);
-            }
+            SelectedValueChanged?.Invoke(this);
         }
 
         private void txt_Category_TextChanged(object sender, EventArgs e)
@@ -127,10 +119,7 @@ namespace Odin.CMB_Components.Category
                 //Shelf = txt_Shelf.Text;
                 if (glob_Class.NES(txt_Category.Text) == "")
                     CategoryId = 0;
-                if (SelectedValueChanged != null)
-                {
-                    SelectedValueChanged(this);
-                }
+                SelectedValueChanged?.Invoke(this);
             }
             catch { return; }
         }

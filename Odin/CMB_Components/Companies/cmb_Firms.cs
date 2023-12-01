@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Odin.CMB_Components.BLL;
 using Odin.Global_Classes;
-using System.Data.SqlClient;
 using Odin.Register;
-using Odin.CMB_Components.BLL;
+using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 namespace Odin.CMB_Components.Companies
 {
     public delegate void FirmsEventHandler(object sender);
@@ -84,10 +79,7 @@ namespace Odin.CMB_Components.Companies
                     }
                 //
 
-                if (FirmsChanged != null)
-                {
-                    FirmsChanged(this);
-                }
+                FirmsChanged?.Invoke(this);
             }
         }
 
@@ -141,10 +133,7 @@ namespace Odin.CMB_Components.Companies
                     VATNr = RegBll.VAT;
                     _PrevId = _FirmId;
 
-                    if (FirmsChanged != null)
-                    {
-                        FirmsChanged(this);
-                    }
+                    FirmsChanged?.Invoke(this);
 
                 }
             }
@@ -168,18 +157,14 @@ namespace Odin.CMB_Components.Companies
             get { return _isemptycolor; }
             set {
                 _isemptycolor = value;
-                if (value == true)
-                    txt_Firm.StateCommon.Back.Color1 = Color.LightPink;
-                else
-                    txt_Firm.StateCommon.Back.Color1 = Color.White;
+                txt_Firm.StateCommon.Back.Color1 = value == true ? Color.LightPink : Color.White;
             }
         }
 
         private void buttonSpecAny1_Click(object sender, EventArgs e)
         {
             txt_Firm.Text = string.Empty;
-            if (FirmsChanged != null)
-                FirmsChanged(this);
+            FirmsChanged?.Invoke(this);
         }
 
         private void txt_Firm_TextChanged(object sender, EventArgs e)

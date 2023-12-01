@@ -1,20 +1,15 @@
-﻿using System;
+﻿using ComponentFactory.Krypton.Toolkit;
+using Odin.Global_Classes;
+using Odin.Tools;
+using Odin.Warehouse.Movements;
+using Odin.Warehouse.StockOut;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
-using Odin.Global_Classes;
-using Odin.Tools;
 using System.Data.SqlClient;
-using System.Threading;
-using Odin.Warehouse.StockOut;
-using Odin.Warehouse.Movements;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Odin.Warehouse.Corrections
 {
@@ -306,10 +301,7 @@ namespace Odin.Warehouse.Corrections
 
         public void CheckEmpty()
         {
-            if (cmb_Batches1.IsActive == 0)
-                btn_OK.Enabled = false;
-            else
-                btn_OK.Enabled = true;
+            btn_OK.Enabled = cmb_Batches1.IsActive != 0;
         }
 
         #region Context menu
@@ -368,20 +360,13 @@ namespace Odin.Warehouse.Corrections
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
-                else
-                {
-                    if (String.IsNullOrEmpty(CellValue) == true)
-                        bs_List.Filter = bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')";
-                    else
-                        bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                }
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? String.IsNullOrEmpty(CellValue) == true
+                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
+                    : String.IsNullOrEmpty(CellValue) == true
+                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
 
             }
@@ -395,10 +380,9 @@ namespace Odin.Warehouse.Corrections
         {
             try
             {
-                if (String.IsNullOrEmpty(bs_List.Filter) == true)
-                    bs_List.Filter = "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'";
-                else
-                    bs_List.Filter = bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
+                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
+                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
             SetCellsColor();
@@ -477,12 +461,11 @@ namespace Odin.Warehouse.Corrections
                 #region diff
                 if (Convert.ToDouble(row.Cells["cn_qtydiff"].Value) != 0)
                 {
-                    if (cmb_Places1.PlaceId != 0
+                    _removereservation = cmb_Places1.PlaceId != 0
                                && Convert.ToInt32(row.Cells["chk_removeres"].Value) == -1//chk_RemoveReservation.Checked == true
-                               && Convert.ToDouble(row.Cells["cn_qtyrest"].Value) > 0)
-                        _removereservation = -1;
-                    else
-                        _removereservation = 0;
+                               && Convert.ToDouble(row.Cells["cn_qtyrest"].Value) > 0
+                        ? -1
+                        : 0;
 
                     if (Convert.ToDouble(row.Cells["cn_qtydiff"].Value) < 0)
                     {
@@ -535,12 +518,11 @@ namespace Odin.Warehouse.Corrections
                 else // Correct quantities, but remove reservation
                 {
                     //Remove reservation if checked
-                    if (cmb_Places1.PlaceId != 0
+                    _removereservation = cmb_Places1.PlaceId != 0
                             && Convert.ToInt32(row.Cells["chk_removeres"].Value) == -1
-                            && Convert.ToDouble(row.Cells["cn_qtyrest"].Value) > 0)
-                        _removereservation = -1;
-                    else
-                        _removereservation = 0;
+                            && Convert.ToDouble(row.Cells["cn_qtyrest"].Value) > 0
+                        ? -1
+                        : 0;
 
                     if (_removereservation == -1)
                         _resmove = SMBll.AddStockMoveLineCorrection(_resmove,
