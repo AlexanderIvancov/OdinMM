@@ -237,6 +237,7 @@ namespace Odin.Register.Articles
         private string formatPosition(string pos)
         {
             string res = "";
+            Clipboard.Clear();
             try
             {
                 string[] separatingStrings = { ", " };
@@ -247,19 +248,32 @@ namespace Odin.Register.Articles
                     if (matches.Count > 0)
                     {
                         string[] startlet = { new Regex(@"^\D+").Matches(pos)[0].Value.ToString(), new Regex(@"\p{P}").Matches(pos)[0].Value.ToString() };
-                        int left  = Int32.Parse(Regex.Replace(component.Split(startlet, StringSplitOptions.RemoveEmptyEntries)[0].ToString(), "\\p{P}", string.Empty));
+                        int left = Int32.Parse(Regex.Replace(component.Split(startlet, StringSplitOptions.RemoveEmptyEntries)[0].ToString(), "\\p{P}", string.Empty));
                         int right = Int32.Parse(Regex.Replace(component.Split(startlet, StringSplitOptions.RemoveEmptyEntries).Last().ToString(), "\\p{P}", string.Empty));
-                        int[] componentRange = Enumerable.Range(left, right-left+1).ToArray();
-                        foreach (int i in componentRange) res = res + startlet[0] + i.ToString() + separatingStrings[0];
+                        int[] componentRange = Enumerable.Range(left, right - left + 1).ToArray();
+                        foreach (int i in componentRange)
+                        {
+                            res = res + startlet[0] + i.ToString() + separatingStrings[0];
+                            Clipboard.SetText(Clipboard.GetText() + startlet[0] + i.ToString() + "\t");
+                            Clipboard.SetText(Clipboard.GetText() + Article + "\t");
+                            Clipboard.SetText(Clipboard.GetText() + "\n");
+                        }
                     }
-                    else res = res + component + separatingStrings[0];
+                    else
+                    {
+                        res = res + component + separatingStrings[0];
+                        Clipboard.SetText(Clipboard.GetText() + component + "\t");
+                        Clipboard.SetText(Clipboard.GetText() + Article + "\t");
+                        Clipboard.SetText(Clipboard.GetText() + "\n");
+                    }
                 }
                 res = res.Substring(0, res.Length - 2);
             }
             catch { }
-            Clipboard.Clear();
-            Clipboard.SetText(res.Replace(", ", "\n"));
-            return res.Substring(0, res.Length - 2);
+            //
+            //Clipboard.SetDataObject(ds.DefaultView);
+            //Clipboard.SetText(res.Replace(", ", "\t"));
+            return res.Substring(0, res.Length);
         }
     }
 }
