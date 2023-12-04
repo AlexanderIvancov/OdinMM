@@ -177,7 +177,7 @@ namespace Odin.Warehouse.StockOut.Reports
             report.SetParameterValue("Warnings", _warnings.TrimStart());
             report.SetParameterValue("QtyLab", "Кол-во в партии:");
             report.SetParameterValue("Serials", Serials);
-            report.SetParameterValue("Stencil", Stencil);
+            report.SetParameterValue("Stencil", Stencil ?? "");
 
             return report;
 

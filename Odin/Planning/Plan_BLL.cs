@@ -554,7 +554,7 @@ namespace Odin.Planning
                         BatchProject = dr["batchproject"].ToString();
                         BatchSerials = dr["serialnumbers"].ToString();
                         BatchQuotId = Convert.ToInt32(dr["quotid"]);
-                        Stencil = dr["Stencil"].ToString();
+                        Stencil = dr["stencil"].ToString();
                         BatchResDate = dr["resdate"].ToString();
                         BatchToFollow = Convert.ToInt32(dr["tofollow"]);
                     }
@@ -1178,6 +1178,7 @@ namespace Odin.Planning
                         LaunchAdditComments = dr["additcomments"].ToString();
                         LaunchVizaComments = dr["vizacomments"].ToString();
                         LaunchSerials = dr["serialnumbers"].ToString();
+                        Stencil = dr["stencil"].ToString();
                     }
                 }
                 else
