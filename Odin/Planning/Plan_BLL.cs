@@ -554,7 +554,6 @@ namespace Odin.Planning
                         BatchProject = dr["batchproject"].ToString();
                         BatchSerials = dr["serialnumbers"].ToString();
                         BatchQuotId = Convert.ToInt32(dr["quotid"]);
-                        Stencil = dr["stencil"].ToString();
                         BatchResDate = dr["resdate"].ToString();
                         BatchToFollow = Convert.ToInt32(dr["tofollow"]);
                     }
@@ -592,7 +591,6 @@ namespace Odin.Planning
             BatchQuotId = 0;
             BatchSerials = "";
             BatchResDate = "";
-            Stencil = "";
             BatchToFollow = 0;
         }
 
