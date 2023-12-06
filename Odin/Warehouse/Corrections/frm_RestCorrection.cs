@@ -560,7 +560,7 @@ namespace Odin.Warehouse.Corrections
                 {
                     string strMessage = "";
                     string emailaddresses = "";
-                    emailaddresses = DAL.EmailAddressesByType(9);
+                    emailaddresses = DAL.EmailAddressesByType(19);
                     strMessage = "Batch: " + cmb_Batches1.Batch;
 
                     while (reader.Read())
