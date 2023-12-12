@@ -1016,6 +1016,7 @@ namespace Odin.Warehouse.Movements
                 frm.QtyLabels = PlanBll.BatchQtyLabels;
                 frm.Serials = PlanBll.BatchSerials;
                 frm.Stencil = PlanBll.Stencil;
+                frm.Stencilplace = PlanBll.Stencilplace;
                 frm.RepType = 2;
             }
             else
@@ -1046,6 +1047,7 @@ namespace Odin.Warehouse.Movements
                     frm.QtyLabels = PlanBll.LaunchQtyLabels;
                     frm.MoveDate = PlanBll.LaunchStartDate;
                     frm.Serials = PlanBll.LaunchSerials;
+                    frm.Stencilplace = PlanBll.Stencilplace;
                     frm.Stencil = PlanBll.Stencil;
                     frm.RepType = 5;
                 }
@@ -1071,6 +1073,7 @@ namespace Odin.Warehouse.Movements
                     frm.MoveDate = PlanBll.LaunchStartDate;
                     frm.Serials = PlanBll.LaunchSerials;
                     frm.BatchId = PlanBll.LaunchBatchId;
+                    frm.Stencilplace = PlanBll.Stencilplace;
                     frm.Stencil = PlanBll.Stencil;
                     frm.RepType = 9;
                 }

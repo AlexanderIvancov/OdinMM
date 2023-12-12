@@ -64,6 +64,8 @@ namespace Odin.Warehouse.StockOut.Reports
         { get; set; }
         public string Stencil
         { get; set; }
+        public string Stencilplace
+        { get; set; }
 
         Helper MyHelper = new Helper();
 
@@ -178,6 +180,7 @@ namespace Odin.Warehouse.StockOut.Reports
             report.SetParameterValue("QtyLab", "Кол-во в партии:");
             report.SetParameterValue("Serials", Serials);
             report.SetParameterValue("Stencil", Stencil ?? "");
+            report.SetParameterValue("Stencilplace", Stencilplace ?? "");
 
             return report;
 
@@ -239,6 +242,8 @@ namespace Odin.Warehouse.StockOut.Reports
             report.SetParameterValue("QtyLab", "Кол-во в зап.:");
             report.SetParameterValue("Serials", Serials);
             report.SetParameterValue("Stencil", Stencil ?? "");
+            report.SetParameterValue("Stencilplace", Stencilplace ?? "");
+
             return report;
 
         }

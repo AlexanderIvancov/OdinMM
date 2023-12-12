@@ -463,7 +463,7 @@ namespace Odin.Warehouse.Deliveries
 
         public static DataTable getDeliveryDetsPrint(int _id)
         {
-            string query = "sp_SelectDelivNoteDetsPrint";
+            string query = "sp_SelectDelivNoteDetsPrintNew";
 
             var sqlparams = new List<SqlParameter>
             {

@@ -506,6 +506,8 @@ namespace Odin.Planning
         { get; set; }
         public string Stencil
         { get; set; }
+        public string Stencilplace
+        { get; set; }
         public int BatchId
         {
             get { return _batchid; }
@@ -1177,6 +1179,7 @@ namespace Odin.Planning
                         LaunchVizaComments = dr["vizacomments"].ToString();
                         LaunchSerials = dr["serialnumbers"].ToString();
                         Stencil = dr["stencil"].ToString();
+                        Stencilplace = dr["stencilplace"].ToString();
                     }
                 }
                 else
