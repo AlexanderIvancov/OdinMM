@@ -268,7 +268,15 @@ namespace Odin.DataCollection
             //        }
             //        catch { _qty = _qty + 0; }
             //}
-            QtyToStart = Qty > QtyStarted ? QtyStarted + (PrevQty - QtyTotalStarted) > Qty ? Qty - QtyStarted : PrevQty - QtyTotalStarted : 0;
+            if (Qty > QtyStarted)
+            {
+                if (QtyStarted + (PrevQty - QtyTotalStarted) > Qty)
+                    QtyToStart = (Qty - QtyStarted) < 0 ? 0 : (Qty - QtyStarted);
+                else
+                    QtyToStart = (PrevQty - QtyTotalStarted) < 0 ? 0 : (PrevQty - QtyTotalStarted);
+            }
+            else
+                QtyToStart = 0;
         }
 
         public void RecalcData(int _launchid)
@@ -290,7 +298,7 @@ namespace Odin.DataCollection
                                        "                    group by lh1.batchid, lsh.stageid, lsh.launchid) sta on sta.launchid = lh.id" +
                                        " left join (select lsh.launchid, sum(lsh.qty) as qtystarted from PROD_LaunchStagesHis lsh " +
                                        "                   inner join PROD_LaunchHead lh1 on lh1.id = lsh.launchid and lsh.stageid = lh1.stageid" +
-                                       "                    where lh1.id = " + _launchid + " and lh1.qty > 0 " +
+                                       "                    where lh1.id = " + _launchid + " and lsh.qty > 0 " +
                                        "                    group by lh1.batchid, lsh.stageid, lsh.launchid) totsta on totsta.launchid = lh.id" +
                                        " where lh.id = " + _launchid + "", sqlConn);
 
@@ -811,7 +819,7 @@ namespace Odin.DataCollection
                                         "                    group by lh1.batchid, lsh.stageid, lsh.launchid) sta on sta.launchid = lh.id" +
                                         " left join (select lsh.launchid, sum(lsh.qty) as qtystarted from PROD_LaunchStagesHis lsh " +
                                         "                   inner join PROD_LaunchHead lh1 on lh1.id = lsh.launchid and lsh.stageid = lh1.stageid" +
-                                        "                    where lh1.id = " + _launchid + " and lh1.qty > 0 " +
+                                        "                    where lh1.id = " + _launchid + " and lsh.qty > 0 " +
                                         "                    group by lh1.batchid, lsh.stageid, lsh.launchid) totsta on totsta.launchid = lh.id" +
                                         " where lh.id = " + _launchid + "", sqlConn);
 
