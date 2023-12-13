@@ -32,10 +32,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_StockHistory));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mnu_IncomeLines = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mni_FilterForI = new System.Windows.Forms.ToolStripTextBox();
             this.mni_SearchI = new System.Windows.Forms.ToolStripMenuItem();
@@ -386,6 +386,7 @@
             this.cn_incomedoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_incomedate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_datacode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_manufbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mnu_IncomeLines.SuspendLayout();
             this.mnu_OutcomeLines.SuspendLayout();
             this.mnu_MovementLines.SuspendLayout();
@@ -1711,9 +1712,9 @@
             // cn_createdat
             // 
             this.cn_createdat.DataPropertyName = "createdat";
-            dataGridViewCellStyle1.Format = "G";
-            dataGridViewCellStyle1.NullValue = null;
-            this.cn_createdat.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Format = "G";
+            dataGridViewCellStyle5.NullValue = null;
+            this.cn_createdat.DefaultCellStyle = dataGridViewCellStyle5;
             this.cn_createdat.FillWeight = 85F;
             this.cn_createdat.HeaderText = "Created at";
             this.cn_createdat.Name = "cn_createdat";
@@ -1942,7 +1943,8 @@
             this.cn_olaunch,
             this.cn_incomedoc,
             this.cn_incomedate,
-            this.cn_datacode});
+            this.cn_datacode,
+            this.cn_manufbatch});
             this.gv_OutcomeList.ContextMenuStrip = this.mnu_OutcomeLines;
             this.gv_OutcomeList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_OutcomeList.Location = new System.Drawing.Point(0, 49);
@@ -2281,9 +2283,9 @@
             // cn_mcreatedat
             // 
             this.cn_mcreatedat.DataPropertyName = "createdat";
-            dataGridViewCellStyle3.Format = "G";
-            dataGridViewCellStyle3.NullValue = null;
-            this.cn_mcreatedat.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Format = "G";
+            dataGridViewCellStyle7.NullValue = null;
+            this.cn_mcreatedat.DefaultCellStyle = dataGridViewCellStyle7;
             this.cn_mcreatedat.FillWeight = 85F;
             this.cn_mcreatedat.HeaderText = "Created at";
             this.cn_mcreatedat.Name = "cn_mcreatedat";
@@ -2584,9 +2586,9 @@
             // cn_rcreatedat
             // 
             this.cn_rcreatedat.DataPropertyName = "createdat";
-            dataGridViewCellStyle4.Format = "G";
-            dataGridViewCellStyle4.NullValue = null;
-            this.cn_rcreatedat.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Format = "G";
+            dataGridViewCellStyle8.NullValue = null;
+            this.cn_rcreatedat.DefaultCellStyle = dataGridViewCellStyle8;
             this.cn_rcreatedat.FillWeight = 115F;
             this.cn_rcreatedat.HeaderText = "Returned at";
             this.cn_rcreatedat.Name = "cn_rcreatedat";
@@ -3736,9 +3738,9 @@
             // cn_ocreatat
             // 
             this.cn_ocreatat.DataPropertyName = "createdat";
-            dataGridViewCellStyle2.Format = "G";
-            dataGridViewCellStyle2.NullValue = null;
-            this.cn_ocreatat.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Format = "G";
+            dataGridViewCellStyle6.NullValue = null;
+            this.cn_ocreatat.DefaultCellStyle = dataGridViewCellStyle6;
             this.cn_ocreatat.FillWeight = 85F;
             this.cn_ocreatat.HeaderText = "Created at";
             this.cn_ocreatat.Name = "cn_ocreatat";
@@ -3814,6 +3816,13 @@
             this.cn_datacode.HeaderText = "Datacode";
             this.cn_datacode.Name = "cn_datacode";
             this.cn_datacode.ReadOnly = true;
+            // 
+            // cn_manufbatch
+            // 
+            this.cn_manufbatch.DataPropertyName = "manufbatch";
+            this.cn_manufbatch.HeaderText = "Manuf. batch";
+            this.cn_manufbatch.Name = "cn_manufbatch";
+            this.cn_manufbatch.ReadOnly = true;
             // 
             // frm_StockHistory
             // 
@@ -4279,5 +4288,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_incomedoc;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_incomedate;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_datacode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_manufbatch;
     }
 }

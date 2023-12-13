@@ -75,25 +75,6 @@
             this.btn_OnDate = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.btn_Clear = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.cn_label = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_artid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_article = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_secname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_description = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_placeid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_place = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_qtyrest = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_dept = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_batch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_stockratio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_isactive = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_dbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_invnumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bn_List = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -114,6 +95,26 @@
             this.btn_Tracing = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Rests = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_General = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.cn_label = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_artid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_article = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_secname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_placeid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_place = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_qtyrest = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_dept = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_batch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_stockratio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_isactive = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_dbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_invnumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_manufbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).BeginInit();
             this.mnu_Lines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
@@ -636,7 +637,8 @@
             this.cn_dbatch,
             this.cn_customer,
             this.cn_invnumber,
-            this.cn_sn});
+            this.cn_sn,
+            this.cn_manufbatch});
             this.gv_List.ContextMenuStrip = this.mnu_Lines;
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_List.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
@@ -648,157 +650,6 @@
             this.gv_List.TabIndex = 3;
             this.gv_List.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_List_ColumnHeaderMouseClick);
             this.gv_List.SelectionChanged += new System.EventHandler(this.gv_List_SelectionChanged);
-            // 
-            // cn_label
-            // 
-            this.cn_label.DataPropertyName = "label";
-            this.cn_label.FillWeight = 80F;
-            this.cn_label.HeaderText = "Label";
-            this.cn_label.Name = "cn_label";
-            this.cn_label.ReadOnly = true;
-            this.cn_label.Width = 80;
-            // 
-            // cn_artid
-            // 
-            this.cn_artid.DataPropertyName = "artid";
-            this.cn_artid.FillWeight = 80F;
-            this.cn_artid.HeaderText = "Art. id";
-            this.cn_artid.Name = "cn_artid";
-            this.cn_artid.ReadOnly = true;
-            this.cn_artid.Width = 80;
-            // 
-            // cn_article
-            // 
-            this.cn_article.DataPropertyName = "article";
-            this.cn_article.FillWeight = 200F;
-            this.cn_article.HeaderText = "Article";
-            this.cn_article.Name = "cn_article";
-            this.cn_article.ReadOnly = true;
-            this.cn_article.Width = 200;
-            // 
-            // cn_secname
-            // 
-            this.cn_secname.DataPropertyName = "secname";
-            this.cn_secname.FillWeight = 150F;
-            this.cn_secname.HeaderText = "2nd name";
-            this.cn_secname.Name = "cn_secname";
-            this.cn_secname.ReadOnly = true;
-            this.cn_secname.Width = 150;
-            // 
-            // cn_description
-            // 
-            this.cn_description.DataPropertyName = "description";
-            this.cn_description.FillWeight = 150F;
-            this.cn_description.HeaderText = "Description";
-            this.cn_description.Name = "cn_description";
-            this.cn_description.ReadOnly = true;
-            this.cn_description.Width = 150;
-            // 
-            // cn_placeid
-            // 
-            this.cn_placeid.DataPropertyName = "placeid";
-            this.cn_placeid.FillWeight = 40F;
-            this.cn_placeid.HeaderText = "placeid";
-            this.cn_placeid.Name = "cn_placeid";
-            this.cn_placeid.ReadOnly = true;
-            this.cn_placeid.Visible = false;
-            this.cn_placeid.Width = 40;
-            // 
-            // cn_place
-            // 
-            this.cn_place.DataPropertyName = "place";
-            this.cn_place.FillWeight = 250F;
-            this.cn_place.HeaderText = "Place";
-            this.cn_place.Name = "cn_place";
-            this.cn_place.ReadOnly = true;
-            this.cn_place.Width = 250;
-            // 
-            // cn_qtyrest
-            // 
-            this.cn_qtyrest.DataPropertyName = "qtyrest";
-            this.cn_qtyrest.FillWeight = 80F;
-            this.cn_qtyrest.HeaderText = "Qty";
-            this.cn_qtyrest.Name = "cn_qtyrest";
-            this.cn_qtyrest.Width = 80;
-            // 
-            // cn_unit
-            // 
-            this.cn_unit.DataPropertyName = "unit";
-            this.cn_unit.FillWeight = 40F;
-            this.cn_unit.HeaderText = "Unit";
-            this.cn_unit.Name = "cn_unit";
-            this.cn_unit.ReadOnly = true;
-            this.cn_unit.Width = 40;
-            // 
-            // cn_comments
-            // 
-            this.cn_comments.DataPropertyName = "comments";
-            this.cn_comments.FillWeight = 150F;
-            this.cn_comments.HeaderText = "Comments";
-            this.cn_comments.Name = "cn_comments";
-            this.cn_comments.ReadOnly = true;
-            this.cn_comments.Width = 150;
-            // 
-            // cn_type
-            // 
-            this.cn_type.DataPropertyName = "fulltype";
-            this.cn_type.FillWeight = 150F;
-            this.cn_type.HeaderText = "Type";
-            this.cn_type.Name = "cn_type";
-            this.cn_type.ReadOnly = true;
-            this.cn_type.Width = 150;
-            // 
-            // cn_dept
-            // 
-            this.cn_dept.DataPropertyName = "department";
-            this.cn_dept.HeaderText = "Department";
-            this.cn_dept.Name = "cn_dept";
-            this.cn_dept.ReadOnly = true;
-            // 
-            // cn_batch
-            // 
-            this.cn_batch.DataPropertyName = "batch";
-            this.cn_batch.HeaderText = "Reservation";
-            this.cn_batch.Name = "cn_batch";
-            this.cn_batch.ReadOnly = true;
-            // 
-            // cn_stockratio
-            // 
-            this.cn_stockratio.DataPropertyName = "stockratio";
-            this.cn_stockratio.HeaderText = "Stock ratio";
-            this.cn_stockratio.Name = "cn_stockratio";
-            this.cn_stockratio.ReadOnly = true;
-            // 
-            // cn_isactive
-            // 
-            this.cn_isactive.DataPropertyName = "isactive";
-            this.cn_isactive.HeaderText = "isactive";
-            this.cn_isactive.Name = "cn_isactive";
-            this.cn_isactive.Visible = false;
-            // 
-            // cn_dbatch
-            // 
-            this.cn_dbatch.DataPropertyName = "prodbatch";
-            this.cn_dbatch.HeaderText = "Batch";
-            this.cn_dbatch.Name = "cn_dbatch";
-            // 
-            // cn_customer
-            // 
-            this.cn_customer.DataPropertyName = "customer";
-            this.cn_customer.HeaderText = "Customer";
-            this.cn_customer.Name = "cn_customer";
-            // 
-            // cn_invnumber
-            // 
-            this.cn_invnumber.DataPropertyName = "invnumber";
-            this.cn_invnumber.HeaderText = "Inv. number";
-            this.cn_invnumber.Name = "cn_invnumber";
-            // 
-            // cn_sn
-            // 
-            this.cn_sn.DataPropertyName = "sn";
-            this.cn_sn.HeaderText = "S/N";
-            this.cn_sn.Name = "cn_sn";
             // 
             // bn_List
             // 
@@ -1010,6 +861,163 @@
             this.btn_General.Values.Text = "Details";
             this.btn_General.Click += new System.EventHandler(this.btn_General_Click);
             // 
+            // cn_label
+            // 
+            this.cn_label.DataPropertyName = "label";
+            this.cn_label.FillWeight = 80F;
+            this.cn_label.HeaderText = "Label";
+            this.cn_label.Name = "cn_label";
+            this.cn_label.ReadOnly = true;
+            this.cn_label.Width = 80;
+            // 
+            // cn_artid
+            // 
+            this.cn_artid.DataPropertyName = "artid";
+            this.cn_artid.FillWeight = 80F;
+            this.cn_artid.HeaderText = "Art. id";
+            this.cn_artid.Name = "cn_artid";
+            this.cn_artid.ReadOnly = true;
+            this.cn_artid.Width = 80;
+            // 
+            // cn_article
+            // 
+            this.cn_article.DataPropertyName = "article";
+            this.cn_article.FillWeight = 200F;
+            this.cn_article.HeaderText = "Article";
+            this.cn_article.Name = "cn_article";
+            this.cn_article.ReadOnly = true;
+            this.cn_article.Width = 200;
+            // 
+            // cn_secname
+            // 
+            this.cn_secname.DataPropertyName = "secname";
+            this.cn_secname.FillWeight = 150F;
+            this.cn_secname.HeaderText = "2nd name";
+            this.cn_secname.Name = "cn_secname";
+            this.cn_secname.ReadOnly = true;
+            this.cn_secname.Width = 150;
+            // 
+            // cn_description
+            // 
+            this.cn_description.DataPropertyName = "description";
+            this.cn_description.FillWeight = 150F;
+            this.cn_description.HeaderText = "Description";
+            this.cn_description.Name = "cn_description";
+            this.cn_description.ReadOnly = true;
+            this.cn_description.Width = 150;
+            // 
+            // cn_placeid
+            // 
+            this.cn_placeid.DataPropertyName = "placeid";
+            this.cn_placeid.FillWeight = 40F;
+            this.cn_placeid.HeaderText = "placeid";
+            this.cn_placeid.Name = "cn_placeid";
+            this.cn_placeid.ReadOnly = true;
+            this.cn_placeid.Visible = false;
+            this.cn_placeid.Width = 40;
+            // 
+            // cn_place
+            // 
+            this.cn_place.DataPropertyName = "place";
+            this.cn_place.FillWeight = 250F;
+            this.cn_place.HeaderText = "Place";
+            this.cn_place.Name = "cn_place";
+            this.cn_place.ReadOnly = true;
+            this.cn_place.Width = 250;
+            // 
+            // cn_qtyrest
+            // 
+            this.cn_qtyrest.DataPropertyName = "qtyrest";
+            this.cn_qtyrest.FillWeight = 80F;
+            this.cn_qtyrest.HeaderText = "Qty";
+            this.cn_qtyrest.Name = "cn_qtyrest";
+            this.cn_qtyrest.Width = 80;
+            // 
+            // cn_unit
+            // 
+            this.cn_unit.DataPropertyName = "unit";
+            this.cn_unit.FillWeight = 40F;
+            this.cn_unit.HeaderText = "Unit";
+            this.cn_unit.Name = "cn_unit";
+            this.cn_unit.ReadOnly = true;
+            this.cn_unit.Width = 40;
+            // 
+            // cn_comments
+            // 
+            this.cn_comments.DataPropertyName = "comments";
+            this.cn_comments.FillWeight = 150F;
+            this.cn_comments.HeaderText = "Comments";
+            this.cn_comments.Name = "cn_comments";
+            this.cn_comments.ReadOnly = true;
+            this.cn_comments.Width = 150;
+            // 
+            // cn_type
+            // 
+            this.cn_type.DataPropertyName = "fulltype";
+            this.cn_type.FillWeight = 150F;
+            this.cn_type.HeaderText = "Type";
+            this.cn_type.Name = "cn_type";
+            this.cn_type.ReadOnly = true;
+            this.cn_type.Width = 150;
+            // 
+            // cn_dept
+            // 
+            this.cn_dept.DataPropertyName = "department";
+            this.cn_dept.HeaderText = "Department";
+            this.cn_dept.Name = "cn_dept";
+            this.cn_dept.ReadOnly = true;
+            // 
+            // cn_batch
+            // 
+            this.cn_batch.DataPropertyName = "batch";
+            this.cn_batch.HeaderText = "Reservation";
+            this.cn_batch.Name = "cn_batch";
+            this.cn_batch.ReadOnly = true;
+            // 
+            // cn_stockratio
+            // 
+            this.cn_stockratio.DataPropertyName = "stockratio";
+            this.cn_stockratio.HeaderText = "Stock ratio";
+            this.cn_stockratio.Name = "cn_stockratio";
+            this.cn_stockratio.ReadOnly = true;
+            // 
+            // cn_isactive
+            // 
+            this.cn_isactive.DataPropertyName = "isactive";
+            this.cn_isactive.HeaderText = "isactive";
+            this.cn_isactive.Name = "cn_isactive";
+            this.cn_isactive.Visible = false;
+            // 
+            // cn_dbatch
+            // 
+            this.cn_dbatch.DataPropertyName = "prodbatch";
+            this.cn_dbatch.HeaderText = "Batch";
+            this.cn_dbatch.Name = "cn_dbatch";
+            // 
+            // cn_customer
+            // 
+            this.cn_customer.DataPropertyName = "customer";
+            this.cn_customer.HeaderText = "Customer";
+            this.cn_customer.Name = "cn_customer";
+            // 
+            // cn_invnumber
+            // 
+            this.cn_invnumber.DataPropertyName = "invnumber";
+            this.cn_invnumber.HeaderText = "Inv. number";
+            this.cn_invnumber.Name = "cn_invnumber";
+            // 
+            // cn_sn
+            // 
+            this.cn_sn.DataPropertyName = "sn";
+            this.cn_sn.HeaderText = "S/N";
+            this.cn_sn.Name = "cn_sn";
+            // 
+            // cn_manufbatch
+            // 
+            this.cn_manufbatch.DataPropertyName = "manufbatch";
+            this.cn_manufbatch.HeaderText = "Manuf. batch";
+            this.cn_manufbatch.Name = "cn_manufbatch";
+            // 
             // frm_Inventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1113,6 +1121,9 @@
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny btn_OnDate;
         private System.Windows.Forms.ToolStripButton btn_TrayTube;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Packing;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
+        private CMB_Components.Common.cmb_Common cmb_InvNumber;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btn_ClientRM;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_label;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_artid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_article;
@@ -1132,8 +1143,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_customer;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_invnumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_sn;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
-        private CMB_Components.Common.cmb_Common cmb_InvNumber;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton btn_ClientRM;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_manufbatch;
     }
 }
