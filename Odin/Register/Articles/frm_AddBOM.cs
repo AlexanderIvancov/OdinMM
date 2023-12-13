@@ -244,7 +244,30 @@ namespace Odin.Register.Articles
                 string[] components = pos.Split(separatingStrings, StringSplitOptions.RemoveEmptyEntries);
                 foreach (string component in components)
                 {
-                    MatchCollection matches = new Regex(@"\D+\d+\D+\d+").Matches(component);
+                    string hleft = "";
+                    string hright = "";
+                    bool dotcheck = false;
+                    if (component.Count(f => f == '.') == 1 || component.Contains("_ESC_"))
+                    {
+                        Regex regex2 = new Regex(@"_ESC_\d+$");
+                        MatchCollection mat = new Regex(@"\.\d+$").Matches(component);
+                        if (mat.Count > 0)
+                            foreach (Match match in mat)
+                            {
+                                dotcheck = true;
+                                hright = match.Value;
+                                hleft = component.Substring(0, component.Length - hright.Length);
+                            }
+                        else mat = new Regex(@"_ESC_\d+$").Matches(component);
+                        if (mat.Count > 0)
+                            foreach (Match match in mat)
+                            {
+                                dotcheck = true;
+                                hright = match.Value;
+                                hleft = component.Substring(0, component.Length - hright.Length);
+                            }
+                    }
+                    MatchCollection matches = new Regex(@"\D+\d+\D+\d+").Matches(dotcheck ? hleft : component);
                     if (matches.Count > 0)
                     {
                         string[] startlet = { new Regex(@"^\D+").Matches(pos)[0].Value.ToString(), new Regex(@"\p{P}").Matches(pos)[0].Value.ToString() };
@@ -261,8 +284,8 @@ namespace Odin.Register.Articles
                     }
                     else
                     {
-                        res = res + component + separatingStrings[0];
-                        Clipboard.SetText(Clipboard.GetText() + component + "\t");
+                        res = res + (dotcheck ? hleft + hright : component) + separatingStrings[0];
+                        Clipboard.SetText(Clipboard.GetText() + (dotcheck ? hleft + hright : component) + "\t");
                         Clipboard.SetText(Clipboard.GetText() + Article + "\t");
                         Clipboard.SetText(Clipboard.GetText() + "\n");
                     }
