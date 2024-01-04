@@ -796,7 +796,7 @@
             this.bn_Dets.ResumeLayout(false);
             this.bn_Dets.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
-            this.ResumeLayout(false);
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
 
         }
 

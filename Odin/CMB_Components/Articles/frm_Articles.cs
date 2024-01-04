@@ -341,7 +341,7 @@ namespace Odin.CMB_Components.Articles
             frm.Text = "CO rm needs for: " + gv_List.CurrentRow.Cells["cn_article"].Value.ToString();
             frm.Query = _query;
             frm.SqlParams = sqlparams;
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_AddAlias_Click(object sender, EventArgs e)
@@ -464,7 +464,7 @@ namespace Odin.CMB_Components.Articles
                 frm.Initials = DAL.UserInitials;
                 frm.Date = System.DateTime.Now.ToShortDateString();
 
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
                
             }
             
@@ -489,7 +489,7 @@ namespace Odin.CMB_Components.Articles
             frm.Text = "Articles coincidences for: " + _article;
             frm.Query = _query;
             frm.SqlParams = sqlparams;
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_Setup_Click(object sender, EventArgs e)

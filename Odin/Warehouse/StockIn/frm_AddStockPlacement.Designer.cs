@@ -1759,7 +1759,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.miniToolStrip)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_StockDets)).EndInit();
-            this.ResumeLayout(false);
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
 
         }
 

@@ -1158,7 +1158,7 @@ namespace Odin.Planning.Passport
 
                 frm.FillReport();
 
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
             }
         }
     }

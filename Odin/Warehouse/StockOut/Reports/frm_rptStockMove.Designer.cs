@@ -55,7 +55,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Stock movement";
             this.Load += new System.EventHandler(this.frm_rptStockMove_Load);
-            this.ResumeLayout(false);
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
 
         }
 

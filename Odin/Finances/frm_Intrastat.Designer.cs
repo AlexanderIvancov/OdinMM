@@ -923,7 +923,7 @@
             this.kryptonPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_IncomeList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_OutcomeList)).EndInit();
-            this.ResumeLayout(false);
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
 
         }
 

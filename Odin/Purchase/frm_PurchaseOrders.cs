@@ -308,7 +308,7 @@ namespace Odin.Purchase
 
                 frm.POLineSaved += new POSavedEventHandler(AddPO);
 
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
             }
         }
         public void FindGenPages(int poid)
@@ -674,7 +674,7 @@ namespace Odin.Purchase
                 if (_globtest == true)
                 {
                     frm.POLineSaved += new POSavedEventHandler(AddPO);
-                    frm.Show();
+                    frm.Show(); frm.GetKryptonFormFields();
                 }
                 else
                 {
@@ -709,7 +709,7 @@ namespace Odin.Purchase
 
                 frm.POLineSaved += new POSavedEventHandler(AddPO);
 
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
             }
         }
 
@@ -843,7 +843,7 @@ namespace Odin.Purchase
 
                 frm.FillReport();
 
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
             }
         }
 

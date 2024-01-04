@@ -50,7 +50,7 @@
             this.Name = "frm_FindOnSite";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Find on vendor\'s site";
-            this.ResumeLayout(false);
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
 
         }
 

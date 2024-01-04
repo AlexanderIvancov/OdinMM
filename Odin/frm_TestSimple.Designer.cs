@@ -228,8 +228,8 @@
             this.Controls.Add(this.txt_From);
             this.Name = "frm_TestSimple";
             this.Text = "frm_TestSimple";
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.PerformLayout(); this.GetKryptonFormFields(this.GetType());
 
         }
 

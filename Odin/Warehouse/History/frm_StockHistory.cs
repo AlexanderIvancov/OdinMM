@@ -1838,7 +1838,7 @@ namespace Odin.Warehouse.History
             frm.Text = cmb_Batches1.BatchId != 0 ? "BOM cost details for: " + _tempbatch : "BOM cost details for: " + cmb_SalesOrders1.SalesOrder;
             frm.Query = _query;
             frm.SqlParams = sqlparams;
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_AwaitingCost_Click(object sender, EventArgs e)
@@ -1858,7 +1858,7 @@ namespace Odin.Warehouse.History
                 : "Awaiting cost details for: " + cmb_SalesOrders1.SalesOrder;
             frm.Query = _query;
             frm.SqlParams = sqlparams;
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
     }
 }

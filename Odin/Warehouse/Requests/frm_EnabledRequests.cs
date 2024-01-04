@@ -284,7 +284,7 @@ namespace Odin.Warehouse.Requests
 
             frm.FillReport();
 
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void chk_SelectAll_CheckedChanged(object sender, EventArgs e)

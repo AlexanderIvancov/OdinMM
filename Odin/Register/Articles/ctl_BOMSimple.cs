@@ -835,7 +835,7 @@ namespace Odin.Register.Articles
                 frm.FillList();
                 frm.BOMAnalogClosing += new BOMAnalogClosingEventHandler(RefreshList);
 
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
 
             }
         }
@@ -886,7 +886,7 @@ namespace Odin.Register.Articles
             frm.Text = "BOM validation history for: " + cmb_Articles1.Article;
             frm.Query = _query;
             frm.SqlParams = sqlparams;
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_ExportForQuote_Click(object sender, EventArgs e)

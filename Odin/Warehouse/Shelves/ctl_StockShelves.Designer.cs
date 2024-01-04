@@ -227,8 +227,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.PerformLayout(); this.GetKryptonFormFields(this.GetType());
 
         }
 

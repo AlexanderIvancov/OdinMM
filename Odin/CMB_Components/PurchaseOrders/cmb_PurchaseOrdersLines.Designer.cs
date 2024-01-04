@@ -102,8 +102,8 @@
             this.Controls.Add(this.btn_AdvViewLine);
             this.Name = "cmb_PurchaseOrdersLines";
             this.Size = new System.Drawing.Size(210, 20);
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.PerformLayout(); this.GetKryptonFormFields(this.GetType());
 
         }
 

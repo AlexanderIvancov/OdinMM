@@ -242,7 +242,7 @@ namespace Odin
         {
             frm_StockShelves frm = new frm_StockShelves();
             frm.FillTree();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_SalesOrders_Click(object sender, EventArgs e)
@@ -304,7 +304,7 @@ namespace Odin
         private void kryptonRibbonGroupButton29_Click(object sender, EventArgs e)
         {
             frm_Test frm = new frm_Test();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_Inventory_Click(object sender, EventArgs e)
@@ -326,7 +326,7 @@ namespace Odin
         private void btn_Placement_Click(object sender, EventArgs e)
         {
             frm_AddStockPlacement frm = new frm_AddStockPlacement();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_Movement_Click(object sender, EventArgs e)
@@ -390,7 +390,7 @@ namespace Odin
             frm_UsersList frm = new frm_UsersList();
             frm.FillList();
            
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
             frm.gv_List.ThreadSafeCall(delegate { frm.SetCellsColor(); });
         }
 
@@ -411,13 +411,13 @@ namespace Odin
         private void kryptonRibbonGroupButton38_Click(object sender, EventArgs e)
         {
             frm_TestKrypton frm = new frm_TestKrypton();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void kryptonRibbonGroupButton39_Click(object sender, EventArgs e)
         {
             //frm_TestSimple frm = new frm_TestSimple();
-            //frm.Show();
+            //frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -509,7 +509,7 @@ namespace Odin
         private void btn_StockInFC_Click(object sender, EventArgs e)
         {
             frm_StockInwardFPCons frm = new frm_StockInwardFPCons();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_Delivery_Click(object sender, EventArgs e)
@@ -574,7 +574,7 @@ namespace Odin
         private void btn_Notifications_Click(object sender, EventArgs e)
         {
             frm_Mailings frm = new frm_Mailings();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_Invoices_Click(object sender, EventArgs e)
@@ -625,19 +625,19 @@ namespace Odin
         private void btn_Deficite_Click(object sender, EventArgs e)
         {
             frm_ProdRMDeficite frm = new frm_ProdRMDeficite();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_Export1c_Click(object sender, EventArgs e)
         {
             frm_Export1C frm = new frm_Export1C();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_LabelDesigner_Click(object sender, EventArgs e)
         {
             frm_LabelDesigner frm = new frm_LabelDesigner();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_RestCorrection_Click(object sender, EventArgs e)
@@ -645,13 +645,13 @@ namespace Odin
             if (glob_Class.IsFormAlreadyOpen("frm_RestCorrection")) return;
 
             frm_RestCorrection frm = new frm_RestCorrection();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_AskRM_Click(object sender, EventArgs e)
         {
             frm_AddRequestSimple frm = new frm_AddRequestSimple();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_RequestFromLog_Click(object sender, EventArgs e)
@@ -776,25 +776,25 @@ namespace Odin
         {
             frm_MenuPermissions frm = new frm_MenuPermissions();
             frm.FillList();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_RMOverview_Click(object sender, EventArgs e)
         {
             frm_RMOverview frm = new frm_RMOverview();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_Currencies_Click(object sender, EventArgs e)
         {
             frm_CurRates frm = new frm_CurRates();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_Capacity_Click(object sender, EventArgs e)
         {
             frm_Capacity frm = new frm_Capacity();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_Debug_Click(object sender, EventArgs e)
@@ -811,14 +811,14 @@ namespace Odin
             frm.Text = "Debug results: ";
             frm.Query = _query;
             frm.SqlParams = sqlparams;
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_DocRegister_Click(object sender, EventArgs e)
         {
 
             frm_DocumentRegister frm = new frm_DocumentRegister();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_ProductCard_Click(object sender, EventArgs e)
@@ -878,7 +878,7 @@ namespace Odin
         private void btn_TestForm_Click(object sender, EventArgs e)
         {
             frm_Test frm = new frm_Test();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
            
         }
 
@@ -887,13 +887,13 @@ namespace Odin
             if (glob_Class.IsFormAlreadyOpen("frm_MovePDA")) return;
 
             frm_MovePDA frm = new frm_MovePDA();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_CheckAccounts_Click(object sender, EventArgs e)
         {
             frm_CheckAccounts frm = new frm_CheckAccounts();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_StockOutPDA_Click(object sender, EventArgs e)
@@ -902,7 +902,7 @@ namespace Odin
 
 
             frm_StockOutPDA frm = new frm_StockOutPDA();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_SerialTracing_Click(object sender, EventArgs e)
@@ -910,7 +910,7 @@ namespace Odin
             if (glob_Class.IsFormAlreadyOpen("frm_SerialTracing")) return;
 
             frm_SerialTracing frm = new frm_SerialTracing();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
@@ -923,7 +923,7 @@ namespace Odin
             if (glob_Class.IsFormAlreadyOpen("frm_QCTracingView")) return;
 
             frm_QCTracingView frm = new frm_QCTracingView();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_FCPacking_Click(object sender, EventArgs e)
@@ -931,7 +931,7 @@ namespace Odin
             if (glob_Class.IsFormAlreadyOpen("frm_FCPacking")) return;
 
             frm_FCPacking frm = new frm_FCPacking();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_ROInventory_Click(object sender, EventArgs e)
@@ -1022,7 +1022,7 @@ namespace Odin
             if (glob_Class.IsFormAlreadyOpen("frm_ImmidiateConsumption")) return;
 
             frm_ImmidiateConsumption frm = new frm_ImmidiateConsumption();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_BatchRatio_Click(object sender, EventArgs e)
@@ -1042,7 +1042,7 @@ namespace Odin
             if (glob_Class.IsFormAlreadyOpen("frm_DeadStock")) return;
 
             frm_DeadStock frm = new frm_DeadStock();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_NeedsProcessing_Click(object sender, EventArgs e)
@@ -1060,7 +1060,7 @@ namespace Odin
         private void btn_StaffPresence_Click(object sender, EventArgs e)
         {
             frm_AddDayStuff frm = new frm_AddDayStuff();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_Package_Click(object sender, EventArgs e)
@@ -1149,7 +1149,7 @@ namespace Odin
             if (glob_Class.IsFormAlreadyOpen("frm_Workers")) return;
 
             frm_Workers frm = new frm_Workers();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_WorkersData_Click(object sender, EventArgs e)
@@ -1314,7 +1314,7 @@ namespace Odin
             frm.Text = "Invalide BOM's list ";
             frm.Query = _query;
             frm.SqlParams = sqlparams;
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_LaunchGroup_Click(object sender, EventArgs e)
@@ -1322,7 +1322,7 @@ namespace Odin
             if (glob_Class.IsFormAlreadyOpen("frm_LaunchGrouping")) return;
 
             frm_LaunchGrouping frm = new frm_LaunchGrouping();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_BatchProject1_Click(object sender, EventArgs e)
@@ -1342,7 +1342,7 @@ namespace Odin
             if (glob_Class.IsFormAlreadyOpen("frm_WorkshopLabels")) return;
 
             frm_WorkshopLabels frm = new frm_WorkshopLabels();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_ProjectPlanning_Click(object sender, EventArgs e)
@@ -1351,7 +1351,7 @@ namespace Odin
 
 
             frm_ProjectPlanning frm = new frm_ProjectPlanning();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_PlanningView_Click(object sender, EventArgs e)

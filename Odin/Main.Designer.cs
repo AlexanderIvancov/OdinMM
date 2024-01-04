@@ -1715,8 +1715,8 @@
             this.SizeChanged += new System.EventHandler(this.Main_SizeChanged);
             this.Resize += new System.EventHandler(this.Main_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonRibbon1)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.PerformLayout(); this.GetKryptonFormFields(this.GetType());
 
         }
 

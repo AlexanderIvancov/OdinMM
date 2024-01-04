@@ -396,7 +396,7 @@ namespace Odin.Planning
 
             frm.LaunchSaved += new LaunchSavedEventHandler(AddLaunch);
 
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
 
 
                 //int IdNote = DSBLL.AddDSItem(frm.NoteText, StartDate, EndDate);
@@ -488,7 +488,7 @@ namespace Odin.Planning
                     frm.Serials = Bll.LaunchSerials;
                     frm.Comments = Bll.LaunchComments;
                 }
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
             }
         }
 
@@ -524,7 +524,7 @@ namespace Odin.Planning
 
                             frm.FillData();
 
-                            frm.Show();
+                            frm.Show(); frm.GetKryptonFormFields();
                         }
                         else
                         {
@@ -596,7 +596,7 @@ namespace Odin.Planning
                     frm.Text = "Launch RM missings ";
                     frm.Query = _query;
                     frm.SqlParams = sqlparams;
-                    frm.Show();
+                    frm.Show(); frm.GetKryptonFormFields();
                 }
             }
 
@@ -625,7 +625,7 @@ namespace Odin.Planning
                     frm.Text = "Launch RM missings ";
                     frm.Query = _query;
                     frm.SqlParams = sqlparams;
-                    frm.Show();
+                    frm.Show(); frm.GetKryptonFormFields();
                 }
             }
         }
@@ -673,7 +673,7 @@ namespace Odin.Planning
 
                 frm.EditLaunch += new EditLaunchEventHandler(EditClosing);
 
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
 
                 frm.ThreadSafeCall(delegate { frm.SetCellsColor(); });
 
@@ -733,7 +733,7 @@ namespace Odin.Planning
 
                     frm.FillReport();
 
-                    frm.Show();
+                    frm.Show(); frm.GetKryptonFormFields();
                 }
             }
         }
@@ -771,7 +771,7 @@ namespace Odin.Planning
             frm.Text = "Launches planning for: " + _beg /*monthView1.SelectionStart.ToShortDateString()*/ + " - " + _end/*monthView1.SelectionEnd.ToShortDateString()*/;
             frm.Query = query;
             frm.SqlParams = sqlparams;
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
             frm.ThreadSafeCall(delegate { frm.SetCellsColor(); });
         }
 

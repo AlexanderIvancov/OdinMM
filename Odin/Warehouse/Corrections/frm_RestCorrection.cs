@@ -270,7 +270,7 @@ namespace Odin.Warehouse.Corrections
                 OutMode = 2;
                 txt_Oper.Focus();
                 //frm_DirectStockOut frm = new frm_DirectStockOut();
-                //frm.Show();
+                //frm.Show(); frm.GetKryptonFormFields();
                 //txt_DC.Focus();
             }
             else
@@ -726,7 +726,7 @@ namespace Odin.Warehouse.Corrections
                     frm.Unit = _unit;
                     
                     frm.SendLabelQty += new SendLabelQtyEventHandler(AddQtyForLabel);
-                    frm.Show();
+                    frm.Show(); frm.GetKryptonFormFields();
 
                     frm.ReceiveFocus();
                 }
@@ -780,7 +780,7 @@ namespace Odin.Warehouse.Corrections
             //    frm_BCCorrection frm = new frm_BCCorrection();
             //    frm.Label = Result.ToString();
 
-            //    frm.Show();
+            //    frm.Show(); frm.GetKryptonFormFields();
                 
             //    //Clear temp field
             //    //txt_Oper.Text = "";

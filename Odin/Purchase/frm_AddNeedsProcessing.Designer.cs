@@ -802,8 +802,8 @@
             this.bn_List.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_Batches)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.PerformLayout(); this.GetKryptonFormFields(this.GetType());
 
         }
 

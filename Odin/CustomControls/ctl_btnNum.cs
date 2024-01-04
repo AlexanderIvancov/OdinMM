@@ -72,7 +72,7 @@ namespace Odin.CustomControls
             frm.Text = FormText;
             frm.Query = _query;
             frm.SqlParams = sqlparams;
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
 
             Qty = Helper.GetOneRecord(GetCountQuery).ToString();
         }

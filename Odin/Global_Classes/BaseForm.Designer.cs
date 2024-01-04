@@ -44,7 +44,7 @@
             this.Name = "BaseForm";
             this.TabText = "BaseForm";
             this.Text = "BaseForm";
-            this.ResumeLayout(false);
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
 
         }
 

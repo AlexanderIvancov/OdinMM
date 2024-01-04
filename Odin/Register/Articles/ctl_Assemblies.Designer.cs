@@ -600,7 +600,7 @@
             this.bn_ResList.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_ResList)).EndInit();
-            this.ResumeLayout(false);
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
 
         }
 

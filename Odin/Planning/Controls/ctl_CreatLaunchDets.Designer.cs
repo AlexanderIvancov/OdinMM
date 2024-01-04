@@ -1197,8 +1197,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ds_MB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dt_MB)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.PerformLayout(); this.GetKryptonFormFields(this.GetType());
 
         }
 

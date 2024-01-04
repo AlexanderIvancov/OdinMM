@@ -304,7 +304,7 @@ namespace Odin.Quality
                 frm.Text = "Tracing for serial: " + txt_Serial.Text;
                 frm.Query = _query;
                 frm.SqlParams = sqlparams;
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
             }
         }
 
@@ -327,7 +327,7 @@ namespace Odin.Quality
             frm.Text = "Current stages for serials for batch: " + cmb_Batches1.Batch;
             frm.Query = _query;
             frm.SqlParams = sqlparams;
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
     }
 }

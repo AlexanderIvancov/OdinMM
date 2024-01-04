@@ -729,7 +729,7 @@
             this.kryptonHeaderGroup3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gv_Serials)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_Serials)).EndInit();
-            this.ResumeLayout(false);
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
 
         }
 

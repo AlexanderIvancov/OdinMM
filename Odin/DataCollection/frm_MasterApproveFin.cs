@@ -772,7 +772,7 @@ namespace Odin.DataCollection
                 //frm.gv_List.ThreadSafeCall(delegate { frm.FillList(LaunchId); });
                 frm.ApplyApproveChanges += new ApplyApprovingChangesEventHandler(RefreshData);
 
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
                 frm.gv_List.ThreadSafeCall(delegate { frm.FillList(frm.LaunchId, frm.ProdPlace); });
             }
         }
@@ -1073,7 +1073,7 @@ namespace Odin.DataCollection
 
             //            frm.FillData();
 
-            //            frm.Show();
+            //            frm.Show(); frm.GetKryptonFormFields();
             //        }
             //        else
             //        {

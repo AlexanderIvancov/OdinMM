@@ -470,8 +470,8 @@
             this.mnu_Lines.ResumeLayout(false);
             this.mnu_Lines.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_List)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.PerformLayout(); this.GetKryptonFormFields(this.GetType());
 
         }
 

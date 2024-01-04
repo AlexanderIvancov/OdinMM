@@ -78,7 +78,7 @@
             this.Load += new System.EventHandler(this.ctl_btnNum_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.ResumeLayout(false);
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
 
         }
 

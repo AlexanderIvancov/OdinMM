@@ -86,8 +86,8 @@
             this.Text = "Error!!!";
             this.Activated += new System.EventHandler(this.frm_Error_Activated);
             this.Load += new System.EventHandler(this.frm_Error_Load);
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.PerformLayout(); this.GetKryptonFormFields(this.GetType());
 
         }
 

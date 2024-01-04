@@ -939,7 +939,7 @@
             this.gp_Type.Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gp_Type)).EndInit();
             this.gp_Type.ResumeLayout(false);
-            this.ResumeLayout(false);
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
 
         }
 

@@ -492,8 +492,8 @@
             this.bn_List.ResumeLayout(false);
             this.bn_List.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_List)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.PerformLayout(); this.GetKryptonFormFields(this.GetType());
 
         }
 

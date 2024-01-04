@@ -350,7 +350,7 @@ namespace Odin.Warehouse.Packing
                 frm.Text = "Box content: ";
                 frm.Query = _query;
                 frm.SqlParams = sqlparams;
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
             }
         }
 

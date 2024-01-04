@@ -377,7 +377,7 @@ namespace Odin.Warehouse.Deliveries
 
                     frm.SaveChanges += new SaveChangesDNEventHandler(EditDelivNoteDets);
 
-                    frm.Show();
+                    frm.Show(); frm.GetKryptonFormFields();
                 }
             }));
            
@@ -710,7 +710,7 @@ namespace Odin.Warehouse.Deliveries
 
                 frm.StockDeliveryLineSaved += new StockDeliverySavedEventHandler(AddLineIn);
 
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
             }
             else
             {
@@ -726,7 +726,7 @@ namespace Odin.Warehouse.Deliveries
             frm.HeaderText = "Print delivery note: " + cmb_DeliveryNotes1.DelivNote;
             frm.FillReport();          
 
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         #endregion
@@ -937,7 +937,7 @@ namespace Odin.Warehouse.Deliveries
                 frm.Text = "Package content for: " + _package;
                 frm.Query = _query;
                 frm.SqlParams = sqlparams;
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
             }
         }
 

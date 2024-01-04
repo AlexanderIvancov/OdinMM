@@ -410,7 +410,7 @@ namespace Odin.CMB_Components.IncomeDocs
             {
                 frm_AdvancePayments frm = new frm_AdvancePayments();
                 frm.HeadId = Id;
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
                 frm.gv_List.ThreadSafeCall(delegate { frm.FillAdvances(frm.HeadId); });
             }
             else

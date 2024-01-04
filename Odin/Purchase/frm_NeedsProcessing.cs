@@ -735,7 +735,7 @@ namespace Odin.Purchase
             frm_AddNeedsProcessing frm = new frm_AddNeedsProcessing();
             frm.NeedsAdded += new NeedsAddingEventHandler(NeedsAdded);
             
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
 
             frm.gv_Batches.ThreadSafeCall(delegate { frm.FillBatches(); });
 
@@ -1072,7 +1072,7 @@ namespace Odin.Purchase
             frm.Text = "Catalog history list for: " + _article; 
             frm.Query = _query;
             frm.SqlParams = sqlparams;
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
 
 
         }
@@ -1081,7 +1081,7 @@ namespace Odin.Purchase
         {
             frm = new frm_DownloadCatItems();
             frm.CatalogDownloaded += new DownloadCatalogEventHandler(CatalogAdded);
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_Upload_Click(object sender, EventArgs e)
@@ -1752,7 +1752,7 @@ namespace Odin.Purchase
             frm.Text = "Needs list";
             frm.Query = _query;
             frm.SqlParams = sqlparams;
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
     }
 }

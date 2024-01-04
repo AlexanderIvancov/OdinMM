@@ -216,7 +216,7 @@ namespace Odin.CMB_Components.ExpInvoices
             frm.CheckEmpty();
 
             frm.ExportInvoiceSaving += new ExportInvoiceSavingEventHandler(AddingInvoice);
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
                         
         }
 
@@ -314,7 +314,7 @@ namespace Odin.CMB_Components.ExpInvoices
 
                 frm.ExportInvoiceSaving += new ExportInvoiceSavingEventHandler(EditingInvoice);
 
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
                 
             }
         }

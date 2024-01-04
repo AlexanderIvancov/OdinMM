@@ -386,7 +386,7 @@ namespace Odin.CMB_Components.Types
             frm.Text = "Articles coincidences for type: " + _type;
             frm.Query = _query;
             frm.SqlParams = sqlparams;
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_Parameters_Click(object sender, EventArgs e)
@@ -409,7 +409,7 @@ namespace Odin.CMB_Components.Types
             frm.TypeId = _id;
             frm.FillList(_id);
 
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
     }
 }

@@ -51,8 +51,8 @@
             this.ForeColor = System.Drawing.Color.Red;
             this.Name = "CheckLabel";
             this.Size = new System.Drawing.Size(10, 20);
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.PerformLayout(); this.GetKryptonFormFields(this.GetType());
 
         }
 

@@ -280,7 +280,7 @@ namespace Odin.Warehouse.StockIn
                     frm.FillCO(BatchId);
                     frm.SetCellsColor();
 
-                    frm.Show();
+                    frm.Show(); frm.GetKryptonFormFields();
                     frm.ThreadSafeCall(delegate { frm.SetCellsColor(); });
                 }
                 databoxes.Clear();
@@ -1192,7 +1192,7 @@ namespace Odin.Warehouse.StockIn
             frm.FillBoxes();
             frm.SetCellsColor();
 
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
             frm.ThreadSafeCall(delegate { frm.SetCellsColor(); });
         }
 
@@ -1326,7 +1326,7 @@ namespace Odin.Warehouse.StockIn
                 frm.FillBoxesNotMapped(_id);
                 frm.SetCellsColor();
 
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
                 frm.ThreadSafeCall(delegate { frm.SetCellsColor(); });
             }
         }
@@ -1380,7 +1380,7 @@ namespace Odin.Warehouse.StockIn
             frm.FillCO(BatchId);
             frm.SetCellsColor();
 
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
             frm.ThreadSafeCall(delegate { frm.SetCellsColor(); });
         }
     }

@@ -816,7 +816,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_InDocs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_Reservations)).EndInit();
-            this.ResumeLayout(false);
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
 
         }
 

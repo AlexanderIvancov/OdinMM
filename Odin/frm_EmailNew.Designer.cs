@@ -285,8 +285,8 @@
             this.panelFill.PerformLayout();
             this.tableLayout.ResumeLayout(false);
             this.tableLayout.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.PerformLayout(); this.GetKryptonFormFields(this.GetType());
 
         }
 

@@ -38,7 +38,7 @@
             this.Name = "frm_ScreenNumKeyboard";
             this.Text = "frm_ScreenNumKeyboard";
             this.Load += new System.EventHandler(this.frm_ScreenNumKeyboard_Load);
-            this.ResumeLayout(false);
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
 
         }
 

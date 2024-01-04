@@ -100,7 +100,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.productivityBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productivity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
-            this.ResumeLayout(false);
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
 
         }
 

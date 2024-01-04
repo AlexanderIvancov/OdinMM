@@ -1152,7 +1152,7 @@ namespace Odin.Planning.Controls
             frm.Text = "Invalide BOM's list ";
             frm.Query = _query;
             frm.SqlParams = sqlparams;
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void ctl_CreatBatchProjectDets_Load(object sender, EventArgs e)

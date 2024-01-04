@@ -447,7 +447,7 @@ namespace Odin.Planning
             frm.MoveDate = System.DateTime.Today.ToShortDateString();
             frm.GroupName = LaunchGroupName;
            
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_Start_Click(object sender, EventArgs e)
@@ -480,7 +480,7 @@ namespace Odin.Planning
                 frm.Text = "Launch RM missings ";
                 frm.Query = _query;
                 frm.SqlParams = sqlparams;
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
             }
         }
 
@@ -493,7 +493,7 @@ namespace Odin.Planning
             frm.MoveDate = System.DateTime.Today.ToShortDateString();
             frm.GroupName = LaunchGroupName;
 
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
     }
 }

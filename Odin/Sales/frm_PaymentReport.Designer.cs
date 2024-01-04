@@ -1710,7 +1710,7 @@
             this.kryptonPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_Orders)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_PayDetails)).EndInit();
-            this.ResumeLayout(false);
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
 
         }
 

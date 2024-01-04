@@ -440,7 +440,7 @@ namespace Odin.Register.Articles
             frm.Text = "Articles coincidences for: " + _article;
             frm.Query = _query;
             frm.SqlParams = sqlparams;
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_CreatePF_Click(object sender, EventArgs e)

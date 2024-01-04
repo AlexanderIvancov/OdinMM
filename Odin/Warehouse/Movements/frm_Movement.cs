@@ -939,7 +939,7 @@ namespace Odin.Warehouse.Movements
             frm.HeaderText = "Print delivery note: " + cmb_MoveDocs1.MoveDocId;
             frm.FillReport();
 
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void mni_LabelDets_Click(object sender, EventArgs e)
@@ -1079,7 +1079,7 @@ namespace Odin.Warehouse.Movements
                 }
             }
 
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void mni_Movement_Click(object sender, EventArgs e)
@@ -1103,7 +1103,7 @@ namespace Odin.Warehouse.Movements
 
             frm.FillDataSet(cmb_MoveDocs1.MoveDocId);
 
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void gv_List_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)

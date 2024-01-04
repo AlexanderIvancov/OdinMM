@@ -566,7 +566,7 @@
             this.kryptonHeaderGroup1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gv_List)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
-            this.ResumeLayout(false);
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
 
         }
 

@@ -57,7 +57,7 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frm_ChooseColumns_FormClosed);
             this.Controls.SetChildIndex(this.panel1, 0);
             ((System.ComponentModel.ISupportInitialize)(this.panel1)).EndInit();
-            this.ResumeLayout(false);
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
 
         }
 

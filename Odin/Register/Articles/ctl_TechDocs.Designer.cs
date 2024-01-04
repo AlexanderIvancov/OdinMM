@@ -123,7 +123,7 @@
             this.kryptonWorkspaceCell1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).EndInit();
-            this.ResumeLayout(false);
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
 
         }
 

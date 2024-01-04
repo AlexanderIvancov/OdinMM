@@ -654,7 +654,7 @@ namespace Odin.Warehouse.StockIn
 
                 frm.StockInLineSaved += new StockInSavedEventHandler(AddStockIn);
 
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
             }
         }
 

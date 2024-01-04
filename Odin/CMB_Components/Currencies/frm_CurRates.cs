@@ -113,7 +113,7 @@ namespace Odin.CMB_Components.Currencies
         {
             frm_ImportCurRate frm = new frm_ImportCurRate();
             frm.RateSaving += new CurRateSavingEventHandler(ReBindData);
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         #endregion

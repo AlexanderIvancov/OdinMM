@@ -406,7 +406,7 @@ namespace Odin.Planning
 
                 frm.ProjectSaved += new BatchProjectSavedEventHandler(AddBatchProject);
 
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
             }
 
         }
@@ -885,7 +885,7 @@ namespace Odin.Planning
 
             frm.ProjectSaved += new BatchProjectSavedEventHandler(AddBatchProject);
 
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)

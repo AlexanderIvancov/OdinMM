@@ -1129,7 +1129,7 @@ namespace Odin.Register.Articles
             frm.Text = "Articles ratio list";
             frm.Query = query;
             frm.SqlParams = sqlparams;
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
             frm.ThreadSafeCall(delegate { frm.SetCellsColor(); });
         }
     }

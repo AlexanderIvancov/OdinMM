@@ -499,8 +499,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.tv_BOM)).EndInit();
             this.mnu_Lines.ResumeLayout(false);
             this.mnu_Lines.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.PerformLayout(); this.GetKryptonFormFields(this.GetType());
 
         }
 

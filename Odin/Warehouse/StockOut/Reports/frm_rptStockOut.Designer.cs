@@ -51,7 +51,7 @@
             this.Name = "frm_rptStockOut";
             this.Text = "frm_rptStockOut";
             this.Load += new System.EventHandler(this.frm_rptStockOut_Load);
-            this.ResumeLayout(false);
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
 
         }
 

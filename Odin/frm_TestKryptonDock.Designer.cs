@@ -48,8 +48,8 @@
             this.Name = "frm_TestKryptonDock";
             this.TabText = "frm_TestKryptonDock";
             this.Text = "frm_TestKryptonDock";
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.PerformLayout(); this.GetKryptonFormFields(this.GetType());
 
         }
 

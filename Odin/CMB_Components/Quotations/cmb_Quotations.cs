@@ -208,7 +208,7 @@ namespace Odin.CMB_Components.Quotations
 
             frm.QuotationSaved += new QuotationSavedEventHandler(AddQuotation);
 
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -226,7 +226,7 @@ namespace Odin.CMB_Components.Quotations
 
                 frm.QuotationSaved += new QuotationSavedEventHandler(AddQuotation);
 
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
 
             }
         }

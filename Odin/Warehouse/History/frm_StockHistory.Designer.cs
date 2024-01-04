@@ -3932,7 +3932,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bs_MovementList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_CostList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_ReturnsList)).EndInit();
-            this.ResumeLayout(false);
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
 
         }
 

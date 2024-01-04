@@ -976,7 +976,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_Package)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_Content)).EndInit();
-            this.ResumeLayout(false);
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
 
         }
 

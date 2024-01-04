@@ -47,8 +47,8 @@
             this.Controls.Add(this.kryptonTextBox1);
             this.Name = "frm_TestKrypton";
             this.Text = "frm_TestKrypton";
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.PerformLayout(); this.GetKryptonFormFields(this.GetType());
 
         }
 

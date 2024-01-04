@@ -630,7 +630,7 @@ namespace Odin.Planning
 
                 frm.BatchSaved += new BatchSavedEventHandler(AddBatch);
 
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
             }
 
         }
@@ -959,7 +959,7 @@ namespace Odin.Planning
 
             frm.BatchSaved += new BatchSavedEventHandler(AddBatch);
 
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -1313,7 +1313,7 @@ namespace Odin.Planning
 
                 frm.FillReport();
 
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
             }
 
         }
@@ -1339,7 +1339,7 @@ namespace Odin.Planning
             frm.RepType = 3;
             frm.Serials = PlanBll.BatchSerials;
 
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_QCTracing_Click(object sender, EventArgs e)
@@ -1384,7 +1384,7 @@ namespace Odin.Planning
             frm.Text = "RM deficite for " + _batch ;
             frm.Query = _query;
             frm.SqlParams = sqlparams;
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
 
 
         }

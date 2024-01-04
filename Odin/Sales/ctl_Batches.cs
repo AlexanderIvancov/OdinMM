@@ -166,7 +166,7 @@ namespace Odin.Sales
 
             //    frm.BatchSaved += new BatchSavedEventHandler(AddBatch);
 
-            //    frm.Show();
+            //    frm.Show(); frm.GetKryptonFormFields();
             //}
             //else
             //{
@@ -221,7 +221,7 @@ namespace Odin.Sales
 
                 frm.BatchSaved += new BatchSavedEventHandler(AddBatch);
 
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
             }
             else
             {

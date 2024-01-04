@@ -853,7 +853,7 @@ namespace Odin.Planning.Controls
                 frm.Text = "Batch RM history for: " + cmb_Batches1.Batch;
                 frm.Query = _query;
                 frm.SqlParams = sqlparams;
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
 
             }
         }

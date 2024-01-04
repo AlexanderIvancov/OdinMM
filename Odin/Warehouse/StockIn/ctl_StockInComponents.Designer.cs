@@ -414,7 +414,7 @@
             this.kryptonHeaderGroup1.ResumeLayout(false);
             this.mnu_Lines.ResumeLayout(false);
             this.mnu_Lines.PerformLayout();
-            this.ResumeLayout(false);
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
 
         }
 

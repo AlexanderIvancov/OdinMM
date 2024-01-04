@@ -833,7 +833,7 @@ namespace Odin.Warehouse.Inventory
             frm.Text = "Stock value ";
             frm.Query = _query;
             frm.SqlParams = sqlparams;
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
     }
 }

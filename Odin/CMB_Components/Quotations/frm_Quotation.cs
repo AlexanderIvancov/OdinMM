@@ -80,7 +80,7 @@ namespace Odin.CMB_Components.Quotations
 
             frm.QuotationSaved += new QuotationSavedEventHandler(AddQuotation);
 
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         public void AddQuotation(object sender)
@@ -113,7 +113,7 @@ namespace Odin.CMB_Components.Quotations
 
                 frm.QuotationSaved += new QuotationSavedEventHandler(AddQuotation);
 
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
 
             }
         }

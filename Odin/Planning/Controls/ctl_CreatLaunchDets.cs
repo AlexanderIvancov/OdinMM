@@ -990,7 +990,7 @@ namespace Odin.Planning.Controls
             frm.Text = "Manufacturing batches limitation for " + cmb_Batches1.Batch;
             frm.Query = _query;
             frm.SqlParams = sqlparams;
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
     }
 }

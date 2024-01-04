@@ -328,7 +328,7 @@ namespace Odin.Finances
                     frm.Text = _typedoc + "details for: " + gv_List.CurrentRow.Cells["cn_document"].Value.ToString();
                     frm.Query = _query;
                     frm.SqlParams = sqlparams;
-                    frm.Show();
+                    frm.Show(); frm.GetKryptonFormFields();
                 }
 
             }

@@ -292,7 +292,7 @@ namespace Odin.Purchase
             frm.CatSaved += new CatSavedEventHandler(CatAdded);
             frm.CatClosed += new CatClosedEventHandler(CatClosed);
 
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -332,7 +332,7 @@ namespace Odin.Purchase
                 frm.CatSaved += new CatSavedEventHandler(CatEdited);
                 frm.CatClosed += new CatClosedEventHandler(CatClosed);
 
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
             }
         }
     }

@@ -440,7 +440,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bn_HistoryList)).EndInit();
             this.bn_HistoryList.ResumeLayout(false);
             this.bn_HistoryList.PerformLayout();
-            this.ResumeLayout(false);
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
 
         }
 

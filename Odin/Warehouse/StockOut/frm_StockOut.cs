@@ -1259,7 +1259,7 @@ namespace Odin.Warehouse.StockOut
             frm.OutcomeDocId = cmb_OutcomeDocs1.OutcomeDocId;
             frm.DocReason = CmbBll.OutDocReason;
 
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void cmb_Places1_SelectedValueChanged(object sender)

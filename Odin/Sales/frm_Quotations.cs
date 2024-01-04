@@ -479,7 +479,7 @@ namespace Odin.Sales
 
             frm.QuotationSaved += new QuotationSavedEventHandler(AddQuotation);
 
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
 
         }
 
@@ -503,7 +503,7 @@ namespace Odin.Sales
 
                 frm.QuotationSaved += new QuotationSavedEventHandler(AddQuotation);
 
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
 
             }
         }
@@ -526,7 +526,7 @@ namespace Odin.Sales
 
                 frm.QuotationSaved += new QuotationSavedEventHandler(AddQuotation);
 
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
 
             }
         }
@@ -631,7 +631,7 @@ namespace Odin.Sales
             frm.Text = "PCB needs list ";
             frm.Query = _query;
             frm.SqlParams = sqlparams;
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
 
         }
 
@@ -649,7 +649,7 @@ namespace Odin.Sales
             frm.Text = "Invalide BOM's list ";
             frm.Query = _query;
             frm.SqlParams = sqlparams;
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
     }
 }

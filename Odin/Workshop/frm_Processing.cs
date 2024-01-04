@@ -737,7 +737,7 @@ namespace Odin.Workshop
                 frm.Text = "Freezing history for: " + _batch;
                 frm.Query = _query;
                 frm.SqlParams = sqlparams;
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
             }
         }
 

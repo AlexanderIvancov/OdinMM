@@ -746,7 +746,7 @@ namespace Odin.DataCollection
                 frm.TextEntering += new TextEnteringEventHandler(AddManualSerial);
                 frm.FormClosing += new FormClosingEventHandler(FocusOn);
 
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
                 
             }
             //txt_Oper.Text = "";

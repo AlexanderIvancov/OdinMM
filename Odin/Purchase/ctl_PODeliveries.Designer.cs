@@ -285,7 +285,7 @@
             this.khg_Header.Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.khg_Header)).EndInit();
             this.khg_Header.ResumeLayout(false);
-            this.ResumeLayout(false);
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
 
         }
 

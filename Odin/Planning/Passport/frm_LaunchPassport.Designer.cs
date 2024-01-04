@@ -2032,7 +2032,7 @@
             this.pn_Quality.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bs_Comments)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_Visas)).EndInit();
-            this.ResumeLayout(false);
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
 
         }
 

@@ -532,7 +532,7 @@ namespace Odin.Sales
             frm_AddPayment frm = new frm_AddPayment();
             frm.FillAutoDoc();
             frm.SavePayment += new SavePaymentEventHandler(PaymentAdded);
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -685,7 +685,7 @@ namespace Odin.Sales
                 frm.FillPayment(_id, 0);
                 frm.FillNotPaid(_custid);
                 frm.RecalcMapped();
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
 
                 frm.gv_List.ThreadSafeCall(delegate { frm.SetCellsColor(); });
                 frm.gv_Orders.ThreadSafeCall(delegate { frm.SetCellsColorNotPaid(); });
@@ -736,7 +736,7 @@ namespace Odin.Sales
                 frm.FillPayment(_id, _coid);
                 frm.FillNotPaid(_custid);
                 frm.RecalcMapped();
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
 
                 frm.gv_List.ThreadSafeCall(delegate { frm.SetCellsColor(); });
                 frm.gv_Orders.ThreadSafeCall(delegate { frm.SetCellsColorNotPaid(); });
@@ -750,7 +750,7 @@ namespace Odin.Sales
             frm.FillDates();
             frm.FillAutoDoc();
             frm.SavePayment += new SavePaymentEventHandler(SaveRelink);//+= new RelinkSavedEventHandler(SaveRelink);
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
     }
 }

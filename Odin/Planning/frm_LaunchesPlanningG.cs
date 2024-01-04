@@ -456,7 +456,7 @@ namespace Odin.Planning
             frm.Text = "Launches planning for: " + _beg /*monthView1.SelectionStart.ToShortDateString()*/ + " - " + _end/*monthView1.SelectionEnd.ToShortDateString()*/;
             frm.Query = query;
             frm.SqlParams = sqlparams;
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
             frm.ThreadSafeCall(delegate { frm.SetCellsColor(); });
         }
 
@@ -512,7 +512,7 @@ namespace Odin.Planning
 
             frm.LaunchSaved += new LaunchSavedEventHandler(AddLaunch);
 
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
 
         }
 
@@ -553,7 +553,7 @@ namespace Odin.Planning
 
                 frm.ShowLaunchDets(_id);
                 frm.EditLaunch += new EditLaunchEventHandler(EditClosing);
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
                 frm.ThreadSafeCall(delegate { frm.SetCellsColor(); });
             }
         }
@@ -595,7 +595,7 @@ namespace Odin.Planning
                 frm.Text = "Launch RM missings ";
                 frm.Query = _query;
                 frm.SqlParams = sqlparams;
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
             }
         }
 
@@ -643,7 +643,7 @@ namespace Odin.Planning
 
                         frm.FillData();
 
-                        frm.Show();
+                        frm.Show(); frm.GetKryptonFormFields();
                     }
                     else
                     {
@@ -868,7 +868,7 @@ namespace Odin.Planning
                     frm.Comments = Bll.LaunchComments;
                 }
 
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
             }
         }
 
@@ -925,7 +925,7 @@ namespace Odin.Planning
 
                     frm.FillReport();
 
-                    frm.Show();
+                    frm.Show(); frm.GetKryptonFormFields();
             }
                         
         }
@@ -962,7 +962,7 @@ namespace Odin.Planning
             frm.Text = "Not started launches ";
             frm.Query = query;
             frm.SqlParams = sqlparams;
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
             frm.ThreadSafeCall(delegate { frm.SetCellsColor(); });
         }
 
@@ -1010,7 +1010,7 @@ namespace Odin.Planning
         {
             frm_LaunchGrouping frm = new frm_LaunchGrouping();
 
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
     }
 }

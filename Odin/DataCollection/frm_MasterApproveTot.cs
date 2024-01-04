@@ -512,7 +512,7 @@ namespace Odin.DataCollection
                 //frm.gv_List.ThreadSafeCall(delegate { frm.FillList(LaunchId); });
                 frm.ApplyApproveChanges += new ApplyApprovingChangesEventHandler(RefreshData);
 
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
             }
         }
 

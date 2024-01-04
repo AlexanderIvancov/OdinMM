@@ -389,7 +389,7 @@ namespace Odin.Warehouse.Deliveries
                 frm.Text = "Box content";
                 frm.Query = _query;
                 frm.SqlParams = sqlparams;
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
             }
         }
 

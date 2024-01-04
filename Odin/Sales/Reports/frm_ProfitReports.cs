@@ -416,7 +416,7 @@ namespace Odin.Sales.Reports
             frm.Text = "Deliveries for sub-batch " + _batch;
             frm.Query = _query;
             frm.SqlParams = sqlparams;
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
 
         }
     }

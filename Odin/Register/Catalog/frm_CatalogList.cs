@@ -463,7 +463,7 @@ namespace Odin.Register.Catalog
             frm.ArticleId = cmb_Articles1.ArticleId;
             frm.CatSaved += new CatSavedEventHandler(CatAdded);
 
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
 
         }
 
@@ -502,7 +502,7 @@ namespace Odin.Register.Catalog
                 frm.CatSaved += new CatSavedEventHandler(CatEdited);
 
 
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
             }
         }
 
@@ -546,7 +546,7 @@ namespace Odin.Register.Catalog
                 frm.CatSaved += new CatSavedEventHandler(CatAdded);
 
 
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
             }
         }
 
@@ -597,7 +597,7 @@ namespace Odin.Register.Catalog
         private void btn_Search_Click(object sender, EventArgs e)
         {
             frm_FindOnSite frm = new frm_FindOnSite();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         public void CatalogAdded(object sender)
@@ -761,13 +761,13 @@ namespace Odin.Register.Catalog
         private void btn_Mouser_Click(object sender, EventArgs e)
         {
             frm_FindOnSite frm= new frm_FindOnSite();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_Mouser_Click_1(object sender, EventArgs e)
         {
             frm_FindOnSite frm = new frm_FindOnSite();
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
     }
 }

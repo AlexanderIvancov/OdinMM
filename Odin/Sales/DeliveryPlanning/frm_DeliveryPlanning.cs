@@ -275,7 +275,7 @@ namespace Odin.Sales.DeliveryPlanning
             frm.Text = "Delivery planning for: " + _beg /*monthView1.SelectionStart.ToShortDateString()*/ + " - " + _end/*monthView1.SelectionEnd.ToShortDateString()*/;
             frm.Query = query;
             frm.SqlParams = sqlparams;
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
     }
 }

@@ -66,8 +66,8 @@
             this.Controls.Add(this.txt_Week);
             this.Name = "cmb_Week";
             this.Size = new System.Drawing.Size(100, 20);
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.PerformLayout(); this.GetKryptonFormFields(this.GetType());
 
         }
 

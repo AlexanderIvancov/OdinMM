@@ -272,8 +272,8 @@
             this.Name = "frm_Email";
             this.Text = "frm_Email";
             this.gradientPanel1.ResumeLayout(false);
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.PerformLayout(); this.GetKryptonFormFields(this.GetType());
 
         }
 

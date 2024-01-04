@@ -380,7 +380,7 @@ namespace Odin.Planning
             frm.BatchId = cmb_Batches1.BatchId;
             frm.SendChanges += new SendSerialNumChangesEventHadler(RefreshData);
 
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
         
         private void btn_Edit_Click(object sender, EventArgs e)

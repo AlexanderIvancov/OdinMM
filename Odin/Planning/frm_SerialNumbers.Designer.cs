@@ -1039,7 +1039,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonDockableWorkspace1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
-            this.ResumeLayout(false);
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
 
         }
 

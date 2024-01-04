@@ -633,7 +633,7 @@ namespace Odin.Sales
 
                 frm.SaveChanges += new SaveExDetChangesEventHandler(AddInvoiceLine);
 
-                frm.Show();
+                frm.Show(); frm.GetKryptonFormFields();
             }
         }
 
@@ -744,7 +744,7 @@ namespace Odin.Sales
 
             frm.FillReport();
 
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void mni_LangEng_Click(object sender, EventArgs e)
@@ -759,7 +759,7 @@ namespace Odin.Sales
 
             frm.FillReport();
 
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void txt_CreatDateFrom_DropDown(object sender, DateTimePickerDropArgs e)

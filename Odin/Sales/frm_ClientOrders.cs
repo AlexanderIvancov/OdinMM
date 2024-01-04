@@ -440,7 +440,7 @@ namespace Odin.Sales
 
             frm.SaveChanges += new SaveChangesEventHandler(AddCOLine);
 
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
         public void FindGenPages(int coid)
         {
@@ -837,7 +837,7 @@ namespace Odin.Sales
 
             frm.SaveChanges += new SaveChangesEventHandler(AddCOLine);
 
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -861,7 +861,7 @@ namespace Odin.Sales
 
             frm.SaveChanges += new SaveChangesEventHandler(AddCOLine);
 
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_General_Click(object sender, EventArgs e)

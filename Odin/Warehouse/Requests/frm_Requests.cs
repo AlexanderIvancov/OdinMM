@@ -573,7 +573,7 @@ namespace Odin.Warehouse.Requests
             frm.RequestDetsSaved += new RequestDetsSavedEventHandler(AddRequest);
 
 
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
 
         }
 
@@ -772,7 +772,7 @@ namespace Odin.Warehouse.Requests
 
             frm.FillReport();
 
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
             
 
         }

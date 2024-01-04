@@ -153,14 +153,14 @@ namespace Odin.CMB_Components.Currencies
         {
             frm_CurRates frm = new frm_CurRates();
             frm.CurID = (Int32)gv_List.CurrentRow.Cells["cn_id"].Value;
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
 
         private void btn_Download_Click(object sender, EventArgs e)
         {
             frm_ImportCurRate frm = new frm_ImportCurRate();
             frm.RateSaving += new CurRateSavingEventHandler(UpdateCurRate);
-            frm.Show();
+            frm.Show(); frm.GetKryptonFormFields();
         }
     }
 

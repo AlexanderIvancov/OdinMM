@@ -1769,7 +1769,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bn_Dets)).EndInit();
             this.bn_Dets.ResumeLayout(false);
             this.bn_Dets.PerformLayout();
-            this.ResumeLayout(false);
+            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
 
         }
 
