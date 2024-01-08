@@ -154,7 +154,7 @@ namespace Odin
             //        }
             //    connection.Close();
             }
-        }
+        //}
         //public static Dictionary<string, string> SetKryptonFormFields(string form, SqlConnection connection)
         //{
         //    Dictionary<string, string> fields = new Dictionary<string, string>();
