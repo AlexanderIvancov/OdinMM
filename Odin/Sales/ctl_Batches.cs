@@ -3,6 +3,7 @@ using Odin.Global_Classes;
 using Odin.Planning;
 using System;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace Odin.Sales
 {
@@ -95,7 +96,7 @@ namespace Odin.Sales
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
-
+                SetCellsColor();
             });
 
 
@@ -104,6 +105,16 @@ namespace Odin.Sales
                 bn_List.BindingSource = bs_List;
             });
         }
+
+        public void SetCellsColor()
+        {
+            foreach (DataGridViewRow row in this.gv_List.Rows)
+            {
+                if (Convert.ToInt32(row.Cells["cn_isactive"].Value) == 0)
+                    row.DefaultCellStyle.BackColor = Color.Gainsboro;
+            }
+        }
+
 
         public void FillDetails(int _COId)
         {

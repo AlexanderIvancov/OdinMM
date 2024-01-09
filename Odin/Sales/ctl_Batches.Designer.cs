@@ -35,13 +35,6 @@
             this.cmb_SalesOrdersWithLines1 = new Odin.CMB_Components.SalesOrders.cmb_SalesOrdersWithLines();
             this.kryptonHeaderGroup1 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_batchid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_batch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_qtymapped = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_qtyinbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_porder = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bn_List = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -58,6 +51,15 @@
             this.btn_EditMapped = new System.Windows.Forms.ToolStripButton();
             this.btn_Relink = new System.Windows.Forms.ToolStripButton();
             this.bs_List = new Odin.Global_Classes.SyncBindingSource();
+            this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_batchid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_batch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_qtymapped = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_qtyinbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_porder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_parentbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_isactive = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
@@ -132,65 +134,15 @@
             this.cn_qtymapped,
             this.cn_qtyinbatch,
             this.cn_unit,
-            this.cn_porder});
+            this.cn_porder,
+            this.cn_parentbatch,
+            this.cn_isactive});
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_List.Location = new System.Drawing.Point(0, 25);
             this.gv_List.Name = "gv_List";
             this.gv_List.RowHeadersWidth = 25;
             this.gv_List.Size = new System.Drawing.Size(457, 157);
             this.gv_List.TabIndex = 1;
-            // 
-            // cn_id
-            // 
-            this.cn_id.DataPropertyName = "id";
-            this.cn_id.FillWeight = 5F;
-            this.cn_id.HeaderText = "id";
-            this.cn_id.Name = "cn_id";
-            this.cn_id.Visible = false;
-            this.cn_id.Width = 5;
-            // 
-            // cn_batchid
-            // 
-            this.cn_batchid.DataPropertyName = "batchid";
-            this.cn_batchid.HeaderText = "batchid";
-            this.cn_batchid.Name = "cn_batchid";
-            this.cn_batchid.Visible = false;
-            // 
-            // cn_batch
-            // 
-            this.cn_batch.DataPropertyName = "batch";
-            this.cn_batch.HeaderText = "Batch";
-            this.cn_batch.Name = "cn_batch";
-            // 
-            // cn_qtymapped
-            // 
-            this.cn_qtymapped.DataPropertyName = "qtymapped";
-            this.cn_qtymapped.FillWeight = 80F;
-            this.cn_qtymapped.HeaderText = "Qty mapped";
-            this.cn_qtymapped.Name = "cn_qtymapped";
-            this.cn_qtymapped.Width = 80;
-            // 
-            // cn_qtyinbatch
-            // 
-            this.cn_qtyinbatch.DataPropertyName = "qtyinbatch";
-            this.cn_qtyinbatch.FillWeight = 80F;
-            this.cn_qtyinbatch.HeaderText = "Qty in batch";
-            this.cn_qtyinbatch.Name = "cn_qtyinbatch";
-            this.cn_qtyinbatch.Width = 80;
-            // 
-            // cn_unit
-            // 
-            this.cn_unit.DataPropertyName = "unit";
-            this.cn_unit.FillWeight = 40F;
-            this.cn_unit.HeaderText = "Unit";
-            this.cn_unit.Name = "cn_unit";
-            this.cn_unit.Width = 40;
-            // 
-            // cn_porder
-            // 
-            this.cn_porder.DataPropertyName = "porder";
-            this.cn_porder.HeaderText = "Purchase order";
-            this.cn_porder.Name = "cn_porder";
             // 
             // bn_List
             // 
@@ -343,6 +295,71 @@
             this.btn_Relink.Text = "Relink batch";
             this.btn_Relink.Click += new System.EventHandler(this.btn_Relink_Click);
             // 
+            // cn_id
+            // 
+            this.cn_id.DataPropertyName = "id";
+            this.cn_id.FillWeight = 5F;
+            this.cn_id.HeaderText = "id";
+            this.cn_id.Name = "cn_id";
+            this.cn_id.Visible = false;
+            this.cn_id.Width = 5;
+            // 
+            // cn_batchid
+            // 
+            this.cn_batchid.DataPropertyName = "batchid";
+            this.cn_batchid.HeaderText = "batchid";
+            this.cn_batchid.Name = "cn_batchid";
+            this.cn_batchid.Visible = false;
+            // 
+            // cn_batch
+            // 
+            this.cn_batch.DataPropertyName = "batch";
+            this.cn_batch.HeaderText = "Batch";
+            this.cn_batch.Name = "cn_batch";
+            // 
+            // cn_qtymapped
+            // 
+            this.cn_qtymapped.DataPropertyName = "qtymapped";
+            this.cn_qtymapped.FillWeight = 80F;
+            this.cn_qtymapped.HeaderText = "Qty mapped";
+            this.cn_qtymapped.Name = "cn_qtymapped";
+            this.cn_qtymapped.Width = 80;
+            // 
+            // cn_qtyinbatch
+            // 
+            this.cn_qtyinbatch.DataPropertyName = "qtyinbatch";
+            this.cn_qtyinbatch.FillWeight = 80F;
+            this.cn_qtyinbatch.HeaderText = "Qty in batch";
+            this.cn_qtyinbatch.Name = "cn_qtyinbatch";
+            this.cn_qtyinbatch.Width = 80;
+            // 
+            // cn_unit
+            // 
+            this.cn_unit.DataPropertyName = "unit";
+            this.cn_unit.FillWeight = 40F;
+            this.cn_unit.HeaderText = "Unit";
+            this.cn_unit.Name = "cn_unit";
+            this.cn_unit.Width = 40;
+            // 
+            // cn_porder
+            // 
+            this.cn_porder.DataPropertyName = "porder";
+            this.cn_porder.HeaderText = "Purchase order";
+            this.cn_porder.Name = "cn_porder";
+            // 
+            // cn_parentbatch
+            // 
+            this.cn_parentbatch.DataPropertyName = "parentbatch";
+            this.cn_parentbatch.HeaderText = "Parent batch";
+            this.cn_parentbatch.Name = "cn_parentbatch";
+            // 
+            // cn_isactive
+            // 
+            this.cn_isactive.DataPropertyName = "isactive";
+            this.cn_isactive.HeaderText = "isactive";
+            this.cn_isactive.Name = "cn_isactive";
+            this.cn_isactive.Visible = false;
+            // 
             // ctl_Batches
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -364,7 +381,7 @@
             this.bn_List.ResumeLayout(false);
             this.bn_List.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
@@ -387,6 +404,10 @@
         private System.Windows.Forms.ToolStripButton btn_Add;
         private System.Windows.Forms.ToolStripButton btn_Edit;
         private System.Windows.Forms.ToolStripButton btn_Delete;
+        public CMB_Components.SalesOrders.cmb_SalesOrdersWithLines cmb_SalesOrdersWithLines1;
+        private Global_Classes.SyncBindingSource bs_List;
+        private System.Windows.Forms.ToolStripButton btn_EditMapped;
+        private System.Windows.Forms.ToolStripButton btn_Relink;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_batchid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_batch;
@@ -394,9 +415,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_qtyinbatch;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_unit;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_porder;
-        public CMB_Components.SalesOrders.cmb_SalesOrdersWithLines cmb_SalesOrdersWithLines1;
-        private Global_Classes.SyncBindingSource bs_List;
-        private System.Windows.Forms.ToolStripButton btn_EditMapped;
-        private System.Windows.Forms.ToolStripButton btn_Relink;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_parentbatch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_isactive;
     }
 }
