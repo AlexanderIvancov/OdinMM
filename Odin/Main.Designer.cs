@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.kryptonRibbon1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbon();
             this.btn_Exit = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
+            this.btn_Lang = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.tab_Register = new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab();
             this.kryptonRibbonGroup1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
             this.kryptonRibbonGroupTriple1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
@@ -249,7 +250,7 @@
             this.kryptonRibbon1.RibbonAppButton.AppButtonBaseColorLight = System.Drawing.Color.Black;
             this.kryptonRibbon1.RibbonAppButton.AppButtonImage = global::Odin.Global_Resourses.Valknut;
             this.kryptonRibbon1.RibbonAppButton.AppButtonMenuItems.AddRange(new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItemBase[] {
-            this.btn_Exit});
+            this.btn_Exit, this.btn_Lang});
             this.kryptonRibbon1.RibbonAppButton.AppButtonShowRecentDocs = false;
             this.kryptonRibbon1.RibbonTabs.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab[] {
             this.tab_Register,
@@ -275,6 +276,12 @@
             this.btn_Exit.Image = global::Odin.Global_Resourses.delete2__2_;
             this.btn_Exit.Text = "E&xit";
             this.btn_Exit.Click += new System.EventHandler(this.btn_Exit_Click);
+            // 
+            // btn_Lang
+            // 
+            this.btn_Lang.Image = global::Odin.Global_Resourses.eraser_pencil;
+            this.btn_Lang.Text = "E&xit";
+            this.btn_Lang.Click += new System.EventHandler(this.btn_Lang_Click);
             // 
             // tab_Register
             // 
@@ -1795,6 +1802,7 @@
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple13;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_Movement;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem btn_Exit;
+        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem btn_Lang;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple15;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_ReturnFromCustomer;
         public WeifenLuo.WinFormsUI.Docking.DockPanel pn_Main;

@@ -37,6 +37,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Odin
 {
@@ -190,8 +191,12 @@ namespace Odin
         {
             this.Close();
         }
+        private void btn_Lang_Click(object sender, EventArgs e)
+        {
+            frm_Lang frm = new frm_Lang();
+            DialogResult result = frm.ShowDialog();
+        }
 
-       
 
         #region Controls
         private void btn_BatchManagement_Click(object sender, EventArgs e)

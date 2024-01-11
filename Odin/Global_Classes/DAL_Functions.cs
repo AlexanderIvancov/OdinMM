@@ -201,6 +201,18 @@ namespace Odin.Global_Classes
         public double _UnitPrice;
         public int _Vat;
         public double _PriceWithVat;
+        public string UserLang
+        { get
+            {
+                var param = new SqlParameter("@userlogin", SqlDbType.VarChar);
+                param.Value = System.Environment.UserName;
+                try
+                {
+                    return Helper.GetOneRecord("SELECT DISTINCT isnull(lang, '') as userlang from bas_users where userlogin = @userlogin", param).ToString();
+                }
+                catch { return "ENG"; }
+            }
+            set { } }
         public int UserId
         { get; set; }
         public string UserName
@@ -272,6 +284,7 @@ namespace Odin.Global_Classes
                         UserDeptId = Convert.ToInt32(reader["DeptId"]);
                         UserMailPWD = reader["usermailpwd"].ToString();
                         UserInitials = reader["initials"].ToString();
+                        UserLang = reader["userlang"].ToString();
                         reader.Close();
                     }
                     else
@@ -285,6 +298,7 @@ namespace Odin.Global_Classes
                         UserDeptId = 0;
                         UserMailPWD = "";
                         UserInitials = "";
+                        UserLang = "ENG";
                     }
                 //}
                 //catch
@@ -771,6 +785,15 @@ namespace Odin.Global_Classes
 
             sqlConn.Close();
             return _Res;
+        }
+        public void ChangeUserLang(string lang)
+        {
+            SqlConnection sqlConn = new SqlConnection(Properties.Settings.Default.OdinDBConnectionString);
+            string strSQL = $@"update bas_users set lang = '{lang}' where userlogin = '{System.Environment.UserName}'";
+            SqlCommand sqlComm = new SqlCommand(strSQL, sqlConn);
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
         }
 
         public string Address
