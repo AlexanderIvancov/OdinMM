@@ -287,6 +287,22 @@ namespace Odin.Warehouse.StockOut.Reports {
                 return this.DataDefinition.ParameterFields[17];
             }
         }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_StencilLab {
+            get {
+                return this.DataDefinition.ParameterFields[18];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_StencilplaceLab {
+            get {
+                return this.DataDefinition.ParameterFields[19];
+            }
+        }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]

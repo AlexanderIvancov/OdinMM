@@ -179,9 +179,10 @@ namespace Odin.Warehouse.StockOut.Reports
             report.SetParameterValue("Warnings", _warnings.TrimStart());
             report.SetParameterValue("QtyLab", "Кол-во в партии:");
             report.SetParameterValue("Serials", Serials);
-            report.SetParameterValue("Stencil", Stencil ?? "");
-            report.SetParameterValue("Stencilplace", Stencilplace ?? "");
-
+            report.SetParameterValue("Stencil", Stage == "SMT" ? Stencil ?? " " : "  ");
+            report.SetParameterValue("Stencilplace", Stage == "SMT" ? Stencilplace ?? " " : "  ");
+            report.SetParameterValue("StencilLab", Stage == "SMT" ? "Трафарет" : "  ");
+            report.SetParameterValue("StencilplaceLab", Stage == "SMT" ? "Место" : "  ");
             return report;
 
         }
@@ -243,6 +244,10 @@ namespace Odin.Warehouse.StockOut.Reports
             report.SetParameterValue("Serials", Serials);
             report.SetParameterValue("Stencil", Stencil ?? "");
             report.SetParameterValue("Stencilplace", Stencilplace ?? "");
+            report.SetParameterValue("Stencil", Stage == "SMT" ? Stencil ?? " " : "  ");
+            report.SetParameterValue("Stencilplace", Stage == "SMT" ? Stencilplace ?? " " : "  ");
+            report.SetParameterValue("StencilLab", Stage == "SMT" ? "Трафарет" : "  ");
+            report.SetParameterValue("StencilplaceLab", Stage == "SMT" ? "Место" : "  ");
 
             return report;
 
