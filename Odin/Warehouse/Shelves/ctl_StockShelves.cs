@@ -70,13 +70,15 @@ namespace Odin.Warehouse.Shelves
         { get; set; }
         public int PlaceQuarantine
         { get; set; }
-
+        public int PlaceIsActive
+        { get; set; }
         int _placeid = 0;
 
         public int PlaceId
         {
             get { return _placeid; }
-            set {
+            set
+            {
                 _placeid = value;
                 BLL.PlaceId = _placeid;
                 PlaceName = BLL.PlaceName;
@@ -90,9 +92,9 @@ namespace Odin.Warehouse.Shelves
                 PlaceIsProduction = BLL.PlaceIsProduction;
                 PlaceRespPersonId = BLL.PlaceRespPersonId;
                 PlaceQuarantine = BLL.PlaceQuarantine;
+                PlaceIsActive = BLL.PlaceIsActive;
             }
         }
-
         #endregion
 
         #region Methods
@@ -236,13 +238,13 @@ namespace Odin.Warehouse.Shelves
             frm.IsProduction = BLL.PlaceIsProduction;
             frm.Quarantine = BLL.PlaceQuarantine;
             frm.OwnerId = BLL.PlaceOwnerId;
-
+            frm.IsActive = BLL.PlaceIsActive;
             DialogResult result = frm.ShowDialog();
             if (result == DialogResult.OK)
             {
-                BLL.EditStockPlace(BLL.PlaceId, frm.Place, frm.Description, BLL.PlaceParentId, frm.DeptId, 
-                                frm.FirmId, frm.AddressId, frm.RespPersonId, frm.IsProduction, frm.Quarantine, 
-                                frm.OwnerId);
+                BLL.EditStockPlace(BLL.PlaceId, frm.Place, frm.Description, BLL.PlaceParentId, frm.DeptId,
+                                frm.FirmId, frm.AddressId, frm.RespPersonId, frm.IsProduction, frm.Quarantine,
+                                frm.OwnerId, frm.IsActive);
                 SelectedNode.Text = frm.Place;
                 BLL.PlaceId = Convert.ToInt32(SelectedNode.Tag);
             }

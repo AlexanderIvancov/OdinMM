@@ -83,7 +83,23 @@ namespace Odin.Warehouse.Shelves
             get { return cmb_Firms2.FirmId; }
             set { cmb_Firms2.FirmId = value; }
         }
-
+        public int IsActive
+        {
+            get
+            {
+                if (chk_Active.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
+            }
+            set
+            {
+                if (value == -1)
+                    chk_Active.CheckState = CheckState.Checked;
+                else
+                    chk_Active.CheckState = CheckState.Unchecked;
+            }
+        }
         #endregion
         private void buttonSpecAny1_Click(object sender, EventArgs e)
         {

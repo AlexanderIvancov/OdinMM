@@ -1256,6 +1256,12 @@
     <Compile Include="Global_Classes\frm_cmbTextPDA.Designer.cs">
       <DependentUpon>frm_cmbTextPDA.cs</DependentUpon>
     </Compile>
+    <Compile Include="Global_Classes\frm_Lang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Global_Classes\frm_Lang.Designer.cs">
+      <DependentUpon>frm_Lang.cs</DependentUpon>
+    </Compile>
     <Compile Include="Global_Classes\frm_Print.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -3476,6 +3482,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Global_Classes\frm_cmbTextPDA.resx">
       <DependentUpon>frm_cmbTextPDA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Global_Classes\frm_Lang.resx">
+      <DependentUpon>frm_Lang.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Global_Classes\frm_Print.resx">
       <DependentUpon>frm_Print.cs</DependentUpon>

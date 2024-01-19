@@ -34,6 +34,8 @@ namespace Odin.Warehouse
         { get; set; }
         public int PlaceQuarantine
         { get; set; }
+        public int PlaceIsActive
+        { get; set; }
 
         public int PlaceOwnerId
         {
@@ -49,7 +51,8 @@ namespace Odin.Warehouse
                 _placeid = value;
 
                 var data = Helper.QueryDT("set dateformat dmy select distinct s.id, s.name, isnull(s.description, '') as description, s.parentid, convert(nvarchar(10), s.createdat, 103) as createdat, s.createdby, isnull(s.deptid, 0) as deptid, " +
-                     " isnull(s.firmid, 0) as firmid, isnull(s.isproduction, 0) as isproduction, isnull(s.resppersonid, 0) as resppersonid, isnull(s.addressid, 0) as addressid, isnull(s.quarantine, 0) as quarantine, isnull(s.ownerid, 0) as ownerid " +
+                     " isnull(s.firmid, 0) as firmid, isnull(s.isproduction, 0) as isproduction, isnull(s.resppersonid, 0) as resppersonid, " +
+                     "isnull(s.addressid, 0) as addressid, isnull(s.quarantine, 0) as quarantine, isnull(s.ownerid, 0) as ownerid, isnull(s.isactive, -1) as isactive  " +
                      " from sto_shelves s where s.id = " + PlaceId);
                 if (data.Rows.Count > 0)
                 {
@@ -68,7 +71,7 @@ namespace Odin.Warehouse
                         PlaceRespPersonId = Convert.ToInt32(dr["resppersonid"]);
                         PlaceQuarantine = Convert.ToInt32(dr["quarantine"]);
                         PlaceOwnerId = Convert.ToInt32(dr["ownerid"]);
-
+                        PlaceIsActive = Convert.ToInt32(dr["isactive"]);
                     }
                 }
                 else
@@ -92,6 +95,7 @@ namespace Odin.Warehouse
             PlaceRespPersonId = 0;
             PlaceQuarantine = 0;
             PlaceOwnerId = 0;
+            PlaceIsActive = -1;
         }
 
         public int AddStockPlace(string name, string description, int parentid, int deptid, int firmid, int addressid,
@@ -124,7 +128,7 @@ namespace Odin.Warehouse
 
 
         public void EditStockPlace(int id, string name, string description, int parentid, int deptid, int firmid,
-                    int addressid, int resppersid, int isproduction, int quarantine, int ownerid)
+                    int addressid, int resppersid, int isproduction, int quarantine, int ownerid, int isactive)
         {
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
@@ -142,6 +146,7 @@ namespace Odin.Warehouse
             sqlComm.Parameters.AddWithValue("@isproduction", isproduction);
             sqlComm.Parameters.AddWithValue("@quarantine", quarantine);
             sqlComm.Parameters.AddWithValue("@ownerid", ownerid);
+            sqlComm.Parameters.AddWithValue("@isactive", isactive);
 
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();

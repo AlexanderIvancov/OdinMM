@@ -68,7 +68,7 @@ namespace Odin.CMB_Components.Places
         public void Load_tree()
         {
             KryptonTreeNode tnParent;
-            var data = Helper.QueryDT("SELECT * FROM sto_shelves order by name ");
+            var data = Helper.QueryDT("SELECT * FROM sto_shelves where isnull(isactive, -1) = -1 order by name ");
 
             tv_Places.Nodes.Clear();
 
