@@ -91,8 +91,8 @@ namespace Odin
                             break;
                         case "KryptonButton":
                             property1 = property.FieldType.GetProperty("Values", BindingFlags.Public | BindingFlags.Instance);
-                            sizeproperty = property.FieldType.GetProperty("AutoSize", BindingFlags.Public | BindingFlags.Instance);
-                            sizeproperty.SetValue(property.GetValue(form), true);
+                            //sizeproperty = property.FieldType.GetProperty("AutoSize", BindingFlags.Public | BindingFlags.Instance);
+                            //sizeproperty.SetValue(property.GetValue(form), true);
                             //widthproperty = sizeproperty.PropertyType.GetProperty("Width");
                             secproperty1 = property1.PropertyType.GetProperty("Text");
                             //widthproperty.SetValue(sizeproperty.GetValue(property.GetValue(form)),
