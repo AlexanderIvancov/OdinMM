@@ -375,7 +375,8 @@ namespace Odin.Warehouse.StockIn
             }
             catch { }
 
-            cmb_IncomeDoc1.IncomeDocId = _headid;
+            if (_headid != 0)
+                cmb_IncomeDoc1.IncomeDocId = _headid;
             RecalcTotals(_docname, _headid);
 
             FindPOPages(idin, _artid);
