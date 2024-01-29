@@ -46,6 +46,7 @@ namespace Odin.Register.Articles
 
         public ctl_BOMHistory ctlHis = null;
         public ctl_BOMSetup ctlSetup = null;
+        public ctl_BOMSupplier ctlSupplier = null;
         public ctl_RationingExtended ctlRatio = null;
         public int ControlWidth = 250;
 
@@ -104,6 +105,14 @@ namespace Odin.Register.Articles
             ctlSetup.cmb_Articles1.ArticleId = ArtId;
 
             return NewPage("Setup ", 1, ctlSetup, ctlSetup.Width);
+
+        }
+        private KryptonPage NewSupplier(string Article, int ArtId)
+        {
+            ctlSupplier = new ctl_BOMSupplier();
+            ControlWidth = ctlSupplier.Width;
+
+            return NewPage("Supplier ", 1, ctlSupplier, ctlSupplier.Width);
 
         }
 
@@ -392,7 +401,6 @@ namespace Odin.Register.Articles
                 //break;
             }
         }
-
         public void FindRatioPages(int artid)
         {
             foreach (var page in kryptonDockingManager1.Pages)
@@ -402,6 +410,13 @@ namespace Odin.Register.Articles
                     && ctlRatio1.Lock == 0)
                     ctlRatio1.cmb_Articles1.ArticleId = artid;
 
+            }
+        }
+        public void FindSupplierPages(int artid)
+        {
+            foreach (var page in kryptonDockingManager1.Pages)
+            {
+                ctl_BOMSetup ctl_BOMSetup1 = (ctl_BOMSetup)page.Controls.Find("ctl_BOMSetup", true).FirstOrDefault();
             }
         }
         public void ShowEdit()
@@ -924,6 +939,7 @@ namespace Odin.Register.Articles
             FindHistoryPages(artid);
             FindSetupPages(artid);
             FindRatioPages(artid);
+            FindSupplierPages(artid);
         }
 
         private void gv_List_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -1098,6 +1114,13 @@ namespace Odin.Register.Articles
             //                                   DockingEdge.Left,
             //                                   new KryptonPage[] { NewSetup(Reg.Article, Reg.ArtId) });
             kryptonDockingManager1.AddToWorkspace("Workspace", new KryptonPage[] { NewSetup(Reg.Article, Reg.ArtId) });
+        }
+        private void btn_Supplier_Click(object sender, EventArgs e)
+        {
+            //kryptonDockingManager1.AddDockspace("Control",
+            //                                   DockingEdge.Left,
+            //                                   new KryptonPage[] { NewSetup(Reg.Article, Reg.ArtId) });
+            kryptonDockingManager1.AddToWorkspace("Workspace", new KryptonPage[] { NewSupplier(Reg.Article, Reg.ArtId) });
         }
 
         private void frm_BOMManagement_Paint(object sender, PaintEventArgs e)

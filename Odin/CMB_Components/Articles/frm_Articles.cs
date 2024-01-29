@@ -321,6 +321,41 @@ namespace Odin.CMB_Components.Articles
                 popup.ctl_BOMSetup1.cmb_Articles1.ArticleId = _id;
             }
         }
+        public void ShowSupplier()
+        {
+            int _id = 0;
+
+            try { _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value); }
+            catch { }
+
+            if (_id != 0)
+            {
+                Form f;
+                f = this.FindForm();
+
+                Point LocationPoint = this.PointToScreen(Point.Empty);
+                int xpos = LocationPoint.X + this.Width;
+                int ypos = LocationPoint.Y;
+                Point _location = new Point(xpos, ypos);
+
+                frm_ArtSetup popup = new frm_ArtSetup();
+
+
+                popup.Show();
+                popup.Location = _location;
+                //PopupHelper.ClosePopup();
+
+                //PopupHelper.ShowPopup(f, popup, _location);
+
+                //PopupHelper.PopupCancel += delegate (object _sender, PopupCancelEventArgs _e)
+                //{
+                //    if (popup.ShowingModal)
+                //    {
+                //        _e.Cancel = true;
+                //    }
+                //};
+            }
+        }
 
         private void btn_CONeeds_Click(object sender, EventArgs e)
         {
@@ -495,6 +530,10 @@ namespace Odin.CMB_Components.Articles
         private void btn_Setup_Click(object sender, EventArgs e)
         {
             ShowSetup();
+        }
+        private void btn_Supplier_Click(object sender, EventArgs e)
+        {
+            ShowSupplier();
         }
     }
 }

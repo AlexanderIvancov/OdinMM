@@ -63,6 +63,7 @@
             this.btn_Clear = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.btn_History = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.btn_Setup = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.btn_Supplier = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.btn_Rationing = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.btn_RatioList = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
@@ -481,6 +482,7 @@
             this.btn_Clear,
             this.btn_History,
             this.btn_Setup,
+            this.btn_Supplier,
             this.btn_Rationing,
             this.btn_RatioList});
             this.kryptonHeader1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -515,6 +517,11 @@
             this.btn_Setup.Image = global::Odin.Global_Resourses.setting_tools;
             this.btn_Setup.UniqueName = "FF1C913391914D498CB82BD60A85CED3";
             this.btn_Setup.Click += new System.EventHandler(this.btn_Setup_Click);
+
+            this.btn_Supplier.Image = global::Odin.Global_Resourses.Anketa;
+            this.btn_Supplier.UniqueName = "FF1C913391914D498CB82BD59A85CED3";
+            this.btn_Supplier.Click += new System.EventHandler(this.btn_Supplier_Click);
+
             // 
             // btn_Rationing
             // 
@@ -1267,6 +1274,7 @@
         private Global_Classes.SyncBindingSource bs_List;
         private Global_Classes.SyncBindingSource bs_HistoryList;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny btn_Setup;
+        private ComponentFactory.Krypton.Toolkit.ButtonSpecAny btn_Supplier;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny btn_Rationing;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny btn_RatioList;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_OrderExists;

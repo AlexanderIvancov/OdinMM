@@ -57,6 +57,7 @@
             this.bs_List = new System.Windows.Forms.BindingSource(this.components);
             this.bs_AliasesList = new System.Windows.Forms.BindingSource(this.components);
             this.btn_Setup = new System.Windows.Forms.ToolStripButton();
+            this.btn_Supplier = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).BeginInit();
             this.kryptonHeaderGroup1.Panel.SuspendLayout();
@@ -273,6 +274,7 @@
             this.btn_CONeeds,
             this.btn_Coincidences,
             this.btn_Setup,
+            this.btn_Supplier,
             this.btn_ProductCard});
             this.bindingNavigator1.Location = new System.Drawing.Point(0, 0);
             this.bindingNavigator1.MoveFirstItem = null;
@@ -369,6 +371,16 @@
             this.btn_Setup.Text = "Show setup";
             this.btn_Setup.Click += new System.EventHandler(this.btn_Setup_Click);
             // 
+            // btn_Supplier
+            // 
+            this.btn_Supplier.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_Supplier.Image = global::Odin.Global_Resourses.Anketa;
+            this.btn_Supplier.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_Supplier.Name = "btn_Supplier";
+            this.btn_Supplier.Size = new System.Drawing.Size(23, 22);
+            this.btn_Supplier.Text = "Show supplier";
+            this.btn_Supplier.Click += new System.EventHandler(this.btn_Supplier_Click);
+            // 
             // frm_Articles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -429,5 +441,6 @@
         private System.Windows.Forms.ToolStripButton btn_Coincidences;
         public CombBoxGridView.ComboBoxGrid gv_List;
         private System.Windows.Forms.ToolStripButton btn_Setup;
+        private System.Windows.Forms.ToolStripButton btn_Supplier;
     }
 }
