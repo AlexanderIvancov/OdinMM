@@ -1781,6 +1781,12 @@
     <Compile Include="Register\Articles\ctl_BOMSimple.Designer.cs">
       <DependentUpon>ctl_BOMSimple.cs</DependentUpon>
     </Compile>
+    <Compile Include="Register\Articles\ctl_BOMSupplier.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Register\Articles\ctl_BOMSupplier.designer.cs">
+      <DependentUpon>ctl_BOMSupplier.cs</DependentUpon>
+    </Compile>
     <Compile Include="Register\Articles\ctl_General.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -3747,6 +3753,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Register\Articles\ctl_BOMSimple.resx">
       <DependentUpon>ctl_BOMSimple.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Register\Articles\ctl_BOMSupplier.resx">
+      <DependentUpon>ctl_BOMSupplier.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Register\Articles\ctl_General.resx">
       <DependentUpon>ctl_General.cs</DependentUpon>
