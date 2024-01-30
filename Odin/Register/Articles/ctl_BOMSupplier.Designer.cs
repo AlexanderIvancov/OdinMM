@@ -249,6 +249,7 @@
             this.kryptonCheckBox1.Name = "kryptonCheckBox1";
             this.kryptonCheckBox1.Size = new System.Drawing.Size(186, 20);
             this.kryptonCheckBox1.TabIndex = 44;
+            this.kryptonCheckBox1.Click += new System.EventHandler(this.kryptonCheckBox1_CheckedChanged);
             this.kryptonCheckBox1.Values.Text = "Show items with supplier only";
             // 
             // cmb_Batches1
