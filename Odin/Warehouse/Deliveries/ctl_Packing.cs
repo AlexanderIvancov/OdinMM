@@ -451,6 +451,7 @@ namespace Odin.Warehouse.Deliveries
                 _weight = Convert.ToInt32(gv_Content.CurrentRow.Cells["cn_aweightnet"].Value);
             }
             catch { }
+            if (_weight <= 0) { MessageBox.Show("Error! Weight net of box is 0!"); return; }
 
             if (_id != 0)
             {
