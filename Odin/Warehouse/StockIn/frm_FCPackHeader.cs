@@ -2,6 +2,8 @@
 using Odin.CustomControls;
 using Odin.Global_Classes;
 using System;
+using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -84,7 +86,22 @@ namespace Odin.Warehouse.StockIn
         {
             get
             {
-                try { return Convert.ToDouble(txt_Weight.Text); }
+                try
+                {
+                    var data = Helper.QueryDT("SELECT DISTINCT TOP 1 Weight FROM BAS_Articles WHERE ID = '" + ArtId.ToString() + "'");
+
+                    double netw;
+                    try
+                    {
+                        netw = Convert.ToDouble(data.Rows[0]["Weight"].ToString());
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Error!"); return 0;
+                    }
+                    if (netw*Qty > Convert.ToDouble(txt_Weight.Text)) { MessageBox.Show("Error! Weight brutto of box is less than netto!"); return 0; }
+                    else return Convert.ToDouble(txt_Weight.Text);
+                }
                 catch { return 0; }
             }
             set { txt_Weight.Text = value.ToString(); }
