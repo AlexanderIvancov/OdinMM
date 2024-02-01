@@ -100,7 +100,7 @@ namespace Odin.Warehouse.StockIn
             int _packid = 0;
             try { _packid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value); }
             catch { }
-            if (Convert.ToInt32(gv_List.CurrentRow.Cells["cn_weight"].Value) <= 0) { MessageBox.Show("Error! Weight net of box is 0!"); this.Close(); }
+            if (Convert.ToDouble(gv_List.CurrentRow.Cells[10].Value) <= 0) { MessageBox.Show("Error! Weight net of box is 0!"); this.Close(); }
                 
             if (_packid != 0
                 && BoxSelected != null)
