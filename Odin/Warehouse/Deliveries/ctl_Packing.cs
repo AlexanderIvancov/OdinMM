@@ -147,14 +147,12 @@ namespace Odin.Warehouse.Deliveries
             if (_packid != 0)
             {
                 foreach (DataGridViewRow row in this.gv_List.Rows)
-                {
+                    if (Convert.ToDouble(row.Cells["cn_topack"].Value) > 0 && Convert.ToDouble(row.Cells["cn_weightnet"].Value) <= 0) { MessageBox.Show("Error! Weight net of box is 0!"); return; }
+                foreach (DataGridViewRow row in this.gv_List.Rows)
                     if (Convert.ToDouble(row.Cells["cn_topack"].Value) > 0)
-                    {
                         BLL.AddPackageContent(Convert.ToInt32(row.Cells["cn_id"].Value), _packid, 
                                                 Convert.ToDouble(row.Cells["cn_topack"].Value), 
                                                 Convert.ToDouble(row.Cells["cn_weightnet"].Value));
-                    }
-                }
             }
             
             ShowNotPackedDets(DelivNoteId);
