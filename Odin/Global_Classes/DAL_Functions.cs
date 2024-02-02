@@ -503,7 +503,25 @@ namespace Odin.Global_Classes
             sqlConn.Close();
             return Res;
         }
+        public int CheckArticleWandI(int BatchID)
+        {
+            int Res = 0;
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            string strSQL = "SELECT dbo.fn_CheckArticleWandI(" + BatchID + ") as Res";
+            //MessageBox.Show(strSQL);
+            SqlCommand sqlComm = new SqlCommand(strSQL, sqlConn);
 
+            sqlConn.Open();
+            SqlDataReader sqlReader = sqlComm.ExecuteReader();
+            if (sqlReader.HasRows)
+            {
+                sqlReader.Read();
+                Res = Convert.ToInt32(sqlReader["Res"]);
+            }
+            sqlReader.Close();
+            sqlConn.Close();
+            return Res;
+        }
 
         public string MyMailAdress()
         {

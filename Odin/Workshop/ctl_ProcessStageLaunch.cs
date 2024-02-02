@@ -210,7 +210,11 @@ namespace Odin.Workshop
             int _res = 0;
             bool _test = true;
             gv_List.EndEdit();
-
+            if (DAL.CheckArticleWandI(BatchId) == -1 && NextStageId == 10)
+            {
+                glob_Class.ShowMessage("Launch processing error!", "Check article Weight or Image!", "You can't move launch because of article Weight or Image are not valid!");
+                return;
+            }
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
                 _tofinish = _tofinish + Convert.ToDouble(row.Cells["cn_tofinish"].Value);
