@@ -506,8 +506,9 @@ namespace Odin.Global_Classes
         public int CheckArticleWandI(int BatchID)
         {
             int Res = 0;
+            string path = "";
             SqlConnection sqlConn = new SqlConnection(sConnStr);
-            string strSQL = "SELECT dbo.fn_CheckArticleWandI(" + BatchID + ") as Res";
+            string strSQL = "SELECT * from dbo.fn_CheckArticleWI(" + BatchID + ") as Res";
             //MessageBox.Show(strSQL);
             SqlCommand sqlComm = new SqlCommand(strSQL, sqlConn);
 
@@ -517,10 +518,16 @@ namespace Odin.Global_Classes
             {
                 sqlReader.Read();
                 Res = Convert.ToInt32(sqlReader["Res"]);
+                path = sqlReader["IPath"].ToString();
             }
             sqlReader.Close();
             sqlConn.Close();
-            return Res;
+            try
+            {
+                if (System.Diagnostics.Process.Start(path) == null) return -1;
+                else return Res;
+            }
+            catch { return -1; }
         }
 
         public string MyMailAdress()
