@@ -524,8 +524,7 @@ namespace Odin.Global_Classes
             sqlConn.Close();
             try
             {
-                if (System.Diagnostics.Process.Start(path) == null) return -1;
-                else return Res;
+                return System.IO.File.Exists(path) ? Res : -1;
             }
             catch { return -1; }
         }
