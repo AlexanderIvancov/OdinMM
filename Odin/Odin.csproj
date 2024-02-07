@@ -1275,6 +1275,7 @@
       <DependentUpon>frm_Wait.cs</DependentUpon>
     </Compile>
     <Compile Include="Global_Classes\GenerateCMBTree.cs" />
+    <Compile Include="Global_Classes\GetKryptonFormFields.cs" />
     <Compile Include="Global_Classes\Helper.cs" />
     <Compile Include="Global_Classes\HelperTreeGrid.cs" />
     <Compile Include="Global_Classes\MouseSimulator.cs" />
