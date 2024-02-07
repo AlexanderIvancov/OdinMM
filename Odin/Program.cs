@@ -163,7 +163,7 @@ namespace Odin
             using (SqlDataReader reader = new SqlCommand(sql, connection).ExecuteReader())
             {
                 while (reader.Read())
-                    fields.Add(reader.GetValue(0).ToString(), reader.GetValue(1).ToString() ?? "");
+                    fields.Add(reader.GetValue(0).ToString(), reader.GetValue(1).ToString().Replace("\\n", System.Environment.NewLine) ?? "");
                 return fields;
             }
         }
