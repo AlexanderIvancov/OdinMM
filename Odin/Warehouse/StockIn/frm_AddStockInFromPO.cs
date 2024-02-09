@@ -104,6 +104,19 @@ namespace Odin.Warehouse.StockIn
             set { cmb_StockInTypes1.StockMovTypeId = value; }
         }
 
+
+        public int StateId
+        {
+            get
+            {
+                if (StockMoveTypeId == 25)
+                    return 0;
+                else
+                    return -1;
+            }
+        }
+
+
         #endregion
 
         #region Methods
@@ -496,13 +509,14 @@ namespace Odin.Warehouse.StockIn
                                                             Convert.ToInt32(row.Cells["cn_custcodeid"].Value),
                                                             //Convert.ToInt32(setDGVCMBCell.Value),
                                                             0,
-                                                            -1,
+                                                            StateId,
                                                             Convert.ToInt32(row.Cells["cn_id"].Value),
                                                             Convert.ToInt32(setDGVCMBCell.Value),
                                                             "");
                         if (Convert.ToInt32(row.Cells["chk_place"].Value) != 0
                                              && PlaceId != 0
-                                             && _NewInwardId != 0)
+                                             && _NewInwardId != 0
+                                             && StateId != 0)
                         {
                             SIBll.AddStockDeallocation(_NewInwardId, 0, Convert.ToInt32(row.Cells["cn_artid"].Value),
                                                            PlaceId, Convert.ToDouble(row.Cells["cn_qty"].Value),
