@@ -133,6 +133,7 @@
             this.cn_costpricebr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_orderprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_currency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_invoice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_conforder = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_custorder = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -759,6 +760,7 @@
             this.cn_costpricebr,
             this.cn_orderprice,
             this.cn_currency,
+            this.cn_invoice,
             this.cn_conforder,
             this.cn_custorder,
             this.cn_comments,
@@ -1241,6 +1243,15 @@
             this.cn_currency.ReadOnly = true;
             this.cn_currency.Width = 40;
             // 
+            // cn_invoice
+            // 
+            this.cn_invoice.DataPropertyName = "invoice";
+            this.cn_invoice.FillWeight = 65F;
+            this.cn_invoice.HeaderText = "Invoice";
+            this.cn_invoice.Name = "cn_invoice";
+            this.cn_invoice.ReadOnly = true;
+            this.cn_invoice.Width = 65;
+            // 
             // cn_conforder
             // 
             this.cn_conforder.DataPropertyName = "conforder";
@@ -1516,6 +1527,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_costpricebr;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_orderprice;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_currency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_invoice;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_conforder;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_custorder;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_comments;

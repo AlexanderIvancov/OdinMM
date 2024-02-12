@@ -14,7 +14,7 @@ namespace Odin.Warehouse.Deliveries
                                                     string _datefrom, string _datetill, string _custart, 
                                                     string _comments, string _conforder, string _custorder, int _batchid)
         {
-            string query = "sp_DeliveriesPortfolio";
+            string query = "sp_DeliveriesPortfolioNew";
 
             var sqlparams = new List<SqlParameter>
             {
@@ -163,7 +163,7 @@ namespace Odin.Warehouse.Deliveries
 
                 SqlDataAdapter adapter =
                     new SqlDataAdapter(
-                        "execute sp_SelectDelivNoteDet @id = " + _ddid, conn);
+                        "execute sp_SelectDelivNoteDetTest @id = " + _ddid, conn);
 
 
                 conn.Close();
@@ -194,9 +194,9 @@ namespace Odin.Warehouse.Deliveries
                         DReturn = Convert.ToInt32(dr["isreturn"]);
                         DConfOrder = dr["conforder"].ToString();
                         DDelivDate = dr["delivdate"].ToString();
-                        DCustomer = dr["customer"].ToString();;
-                        DUnit = dr["unit"].ToString();;
-
+                        DCustomer = dr["customer"].ToString();
+                        DUnit = dr["unit"].ToString();
+                        DInvoice = dr["invoice"].ToString();
                     }
                 }
                 else
@@ -248,6 +248,8 @@ namespace Odin.Warehouse.Deliveries
         { get; set; }
         public string DUnit
         { get; set; }
+        public string DInvoice
+        { get; set; }
 
         public void ClearDets()
         {
@@ -271,6 +273,7 @@ namespace Odin.Warehouse.Deliveries
             DDelivDate = "";
             DCustomer = "";
             DUnit = "";
+            DInvoice = "";
         }
 
 
