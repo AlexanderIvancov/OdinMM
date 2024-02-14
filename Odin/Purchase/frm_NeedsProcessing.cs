@@ -1171,7 +1171,7 @@ namespace Odin.Purchase
                 rowExcel.CreateCell(0).SetCellValue(Convert.ToInt64(dr.ItemArray[1] ?? "0"));
                 rowExcel.CreateCell(1).SetCellValue((dr.ItemArray[2] ?? "").ToString());
                 rowExcel.CreateCell(2).SetCellValue(Convert.ToInt64(dr.ItemArray[3] ?? "0"));
-                if (dr.ItemArray[4].ToString() == "") rowExcel.CreateCell(3).SetCellValue(""); else rowExcel.CreateCell(3).SetCellValue(Convert.ToInt64(dr.ItemArray[4]));
+                if (dr.ItemArray[4].ToString() == "") rowExcel.CreateCell(3).SetCellValue(""); else rowExcel.CreateCell(3).SetCellValue(Convert.ToDouble(dr.ItemArray[4]));
                 rowExcel.CreateCell(4).SetCellValue((dr.ItemArray[5] ?? "").ToString());
                 rowExcel.CreateCell(5).SetCellValue((dr.ItemArray[6] ?? "").ToString());
                 rowExcel.CreateCell(6).SetCellValue((dr.ItemArray[7] ?? "").ToString());
