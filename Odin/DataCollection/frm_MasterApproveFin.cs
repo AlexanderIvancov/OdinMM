@@ -186,6 +186,11 @@ namespace Odin.DataCollection
             set { _tmplaunchid = value; }
         }
 
+        public double QtyInLaunch
+        {
+            get; set;
+        }
+
         #endregion
 
         #region Methods
@@ -277,6 +282,8 @@ namespace Odin.DataCollection
             }
             else
                 QtyToStart = 0;
+
+            QtyToStart = (QtyToStart + QtyTotalStarted) > QtyInLaunch ? (QtyInLaunch - QtyTotalStarted) : QtyToStart;
         }
 
         public void RecalcData(int _launchid)
@@ -808,7 +815,7 @@ namespace Odin.DataCollection
                     //                    " where lh.id = " + _launchid + "", sqlConn);
                     SqlDataAdapter adapter1 =
                         new SqlDataAdapter(
-                            "select lh.id, lh.name, lh.stageid, lh.batchid, isnull(dbo.fn_PrevQualityStage(lh.id), 0) as prevstageid, " +
+                            "select lh.id, lh.name, lh.qty, lh.stageid, lh.batchid, isnull(dbo.fn_PrevQualityStage(lh.id), 0) as prevstageid, " +
                                         " convert(float, isnull(fb.qty, 0)) as freezed, convert(float, isnull(sta.qtystarted, 0)) as started, " +
                                         " convert(float, isnull(totsta.qtystarted, 0)) as totalstarted " +
                                         " from prod_launchhead lh " +
@@ -851,6 +858,7 @@ namespace Odin.DataCollection
                                 " and lsh.stageid = " + PrevStageId +
                                 " and lsh.qty < 0"));
                             //MessageBox.Show(PrevQty.ToString());
+                            QtyInLaunch = Convert.ToDouble(dr1["qty"].ToString());
                         }
                     }
                     else
@@ -865,6 +873,7 @@ namespace Odin.DataCollection
                         QtyStarted = 0;
                         QtyTotalStarted = 0;
                         PrevQty = 0;
+                        QtyInLaunch = 0;
                     }
                     sqlConn.Close();
                 }
@@ -879,6 +888,7 @@ namespace Odin.DataCollection
                     QtyStarted = 0;
                     PrevQty = 0;
                     QtyTotalStarted = 0;
+                    QtyInLaunch = 0;
                 }
                 FillListLaunch(_launchid);
                 FillData(BatchId, StageId);
