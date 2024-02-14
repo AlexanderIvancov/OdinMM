@@ -997,7 +997,18 @@ namespace Odin.Purchase
             return Helper.QuerySP(query, sqlparams.ToArray());
 
         }
+        public static DataTable getNeedsPOsExcel(int _needid)
+        {
+            string query = "sp_SelectNeedsPOExcel";
 
+            var sqlparams = new List<SqlParameter>
+            {
+                new SqlParameter("@nid",SqlDbType.Int){Value = _needid }
+            };
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
+
+        }
         public static DataTable getNeedsForArticle(int _artid)
         {
             string query = "sp_SelectNeedsForArticle";

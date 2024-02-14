@@ -86,7 +86,7 @@ namespace Odin.Purchase
             set { _prevartid = value; }
         }
 
-
+        int _needid = 0;
         //Font FontOK = new Font(tv_Details.DefaultCellStyle.Font, FontStyle.Bold, );
 
         #endregion
@@ -169,6 +169,7 @@ namespace Odin.Purchase
             {
                 AddNode(dr, boldFont, tv_Details.Nodes, true, true);
             }
+            _needid = needid;
 
             //FillGridDets();
             FillGridDets1();
@@ -1160,72 +1161,30 @@ namespace Odin.Purchase
             InitializeWorkbook();
 
             ISheet sheet1 = hssfworkbook.CreateSheet("Sheet1");
-            var param = e.Argument as List<DataGridViewColumn>;
+            var param = e.Argument as List<DataGridViewColumn>; 
             //MessageBox.Show(dgv.Rows.Count.ToString());
-            for (int i = 0; i < tv_Details.Nodes.Count; i++)
+            var data = PO_BLL.getNeedsPOsExcel(_needid);
+            for (int i = 0; i < data.Rows.Count; i++)
             {
-                TreeGridNode row = tv_Details.Nodes[i]; // rows
-                IRow rowExcel = sheet1.CreateRow(i + 1);
-
-                fmWait.progressBar1.BeginInvoke(
-                (MethodInvoker)delegate
-                  {
-                      fmWait.progressBar1.Value = Convert.ToInt32(i * 10 * (100.0 / tv_Details.Nodes.Count));
-                  }
-                );
-
-
-                rowExcel.CreateCell(0).SetCellValue(row.Cells["cn_darticle"].Value.ToString());
-                rowExcel.CreateCell(1).SetCellValue(""/*row.Cells["cn_dsecname"].Value.ToString()*/);
-                rowExcel.CreateCell(2).SetCellValue(Convert.ToDouble(row.Cells["cn_dqtyneed"].Value));
-                rowExcel.CreateCell(3).SetCellValue("");
-                rowExcel.CreateCell(4).SetCellValue(row.Cells["cn_dunit"].Value.ToString());
-                rowExcel.CreateCell(5).SetCellValue("");
-                rowExcel.CreateCell(6).SetCellValue("");
-                rowExcel.CreateCell(7).SetCellValue("");
-                rowExcel.CreateCell(8).SetCellValue("");
-                rowExcel.CreateCell(9).SetCellValue("");
-                rowExcel.CreateCell(10).SetCellValue("");
-                rowExcel.CreateCell(11).SetCellValue(row.Cells["cn_dmanufacturer"].Value.ToString());
-                rowExcel.CreateCell(12).SetCellValue("");
-                rowExcel.CreateCell(13).SetCellValue("");
-
-                //// Rows adding
-                //foreach (DataGridViewColumn column in dgv.Columns)// columns
-                //{
-                //    if (param != null)
-                //    {
-                //        var col = param.Where(p => p.Name == column.Name).SingleOrDefault();
-                //        if (col != null)
-                //        {
-                //            try
-                //            {
-                //                rowExcel.CreateCell(columnNumber).SetCellValue(row.Cells[column.Index].Value.ToString());
-                //            }
-                //            catch { rowExcel.CreateCell(columnNumber).SetCellValue(""); }
-                //            columnNumber++;
-                //        }
-                //    }
-
-                //}
-
+                var dr = data.Rows[i];
+                IRow rowExcel = sheet1.CreateRow(i+1);
+                rowExcel.CreateCell(0).SetCellValue(Convert.ToInt64(dr.ItemArray[1] ?? "0"));
+                rowExcel.CreateCell(1).SetCellValue((dr.ItemArray[2] ?? "").ToString());
+                rowExcel.CreateCell(2).SetCellValue(Convert.ToInt64(dr.ItemArray[3] ?? "0"));
+                if (dr.ItemArray[4].ToString() == "") rowExcel.CreateCell(3).SetCellValue(""); else rowExcel.CreateCell(3).SetCellValue(Convert.ToInt64(dr.ItemArray[4]));
+                rowExcel.CreateCell(4).SetCellValue((dr.ItemArray[5] ?? "").ToString());
+                rowExcel.CreateCell(5).SetCellValue((dr.ItemArray[6] ?? "").ToString());
+                rowExcel.CreateCell(6).SetCellValue((dr.ItemArray[7] ?? "").ToString());
             }
 
             IRow rowExcel1 = sheet1.CreateRow(0);
-            rowExcel1.CreateCell(0).SetCellValue("Article");
-            rowExcel1.CreateCell(1).SetCellValue("Suppler's article");
-            rowExcel1.CreateCell(2).SetCellValue("Quantity");
+            rowExcel1.CreateCell(0).SetCellValue("Artid");
+            rowExcel1.CreateCell(1).SetCellValue("Article");
+            rowExcel1.CreateCell(2).SetCellValue("Qty");
             rowExcel1.CreateCell(3).SetCellValue("Unit price");
-            rowExcel1.CreateCell(4).SetCellValue("Unit");
-            rowExcel1.CreateCell(5).SetCellValue("Currency");
-            rowExcel1.CreateCell(6).SetCellValue("VAT");
-            rowExcel1.CreateCell(7).SetCellValue("MOQ");
-            rowExcel1.CreateCell(8).SetCellValue("MPQ");
-            rowExcel1.CreateCell(9).SetCellValue("DataCode");
-            rowExcel1.CreateCell(10).SetCellValue("Deliv. terms");
-            rowExcel1.CreateCell(11).SetCellValue("Manufacturer");
-            rowExcel1.CreateCell(12).SetCellValue("Comments");
-            rowExcel1.CreateCell(13).SetCellValue("Supplier");
+            rowExcel1.CreateCell(4).SetCellValue("Currency");
+            rowExcel1.CreateCell(5).SetCellValue("Comments");
+            rowExcel1.CreateCell(6).SetCellValue("Analogs");
 
 
             //Write the stream data of workbook to the root directory
