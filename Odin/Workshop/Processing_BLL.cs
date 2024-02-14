@@ -295,14 +295,13 @@ namespace Odin.Workshop
         {
             string _res = "";
 
-
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_AddSerialTracing", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
             sqlComm.CommandTimeout = 3000;
             sqlComm.Parameters.AddWithValue("@stageid", _stageid);
             sqlComm.Parameters.AddWithValue("@batchid", _batchid);
-            sqlComm.Parameters.AddWithValue("@serial", _serial);
+            sqlComm.Parameters.AddWithValue("@serial", rusToEngl(_serial));
             sqlComm.Parameters.Add("@result", SqlDbType.NVarChar, 150).Direction = ParameterDirection.Output;
 
             sqlConn.Open();
@@ -311,6 +310,16 @@ namespace Odin.Workshop
             sqlConn.Close();
 
             return _res;
+        }
+
+        string rusToEngl(string s)
+        {
+            const string rus = "ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ,йцукенгшщзхъфывапролджэячсмитьбю.ё!\"№;%:?*()_+";
+            const string eng = "QWERTYUIOP{}ASDFGHJKL:\"ZXCVBNM,./qwertyuiop[]asdfghjkl;'zxcvbnm,.~!@#$%^&*()_+";
+            string _res = "";
+            foreach (var l in s)
+                _res = _res + (rus.Contains(l.ToString()) ? eng[rus.IndexOf(l.ToString())].ToString() : l.ToString());
+            return (_res);
         }
 
         public string ReplaceSerialNumberTracing(string _serial, int _stageid, string _replacement)
