@@ -301,7 +301,7 @@ namespace Odin.Workshop
             sqlComm.CommandTimeout = 3000;
             sqlComm.Parameters.AddWithValue("@stageid", _stageid);
             sqlComm.Parameters.AddWithValue("@batchid", _batchid);
-            sqlComm.Parameters.AddWithValue("@serial", rusToEngl(_serial));
+            sqlComm.Parameters.AddWithValue("@serial", rusToEng(_serial));
             sqlComm.Parameters.Add("@result", SqlDbType.NVarChar, 150).Direction = ParameterDirection.Output;
 
             sqlConn.Open();
@@ -312,7 +312,7 @@ namespace Odin.Workshop
             return _res;
         }
 
-        string rusToEngl(string s)
+        string rusToEng(string s)
         {
             const string rus = "ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ,йцукенгшщзхъфывапролджэячсмитьбю.ё!\"№;%:?*()_+";
             const string eng = "QWERTYUIOP{}ASDFGHJKL:\"ZXCVBNM,./qwertyuiop[]asdfghjkl;'zxcvbnm,.~!@#$%^&*()_+";
@@ -355,7 +355,7 @@ namespace Odin.Workshop
             sqlComm.CommandType = CommandType.StoredProcedure;
             sqlComm.CommandTimeout = 3000;
             sqlComm.Parameters.AddWithValue("@serial", _serial);
-            sqlComm.Parameters.AddWithValue("@analogue", _analogue);
+            sqlComm.Parameters.AddWithValue("@analogue", rusToEng(_analogue));
             sqlComm.Parameters.AddWithValue("@asprimary", _asprimary);
 
             sqlComm.Parameters.Add("@result", SqlDbType.NVarChar, 150).Direction = ParameterDirection.Output;
