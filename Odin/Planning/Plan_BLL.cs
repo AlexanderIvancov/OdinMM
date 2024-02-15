@@ -765,7 +765,7 @@ namespace Odin.Planning
 
         public DataTable POReservations(int poid)
         {
-            return Helper.QueryDT("execute sp_SelectPOReservations @poid = " + poid);
+            return Helper.QueryDT("execute sp_SelectPOReservationsNew @poid = " + poid);
         }
 
         public void ReleaseRMFromPO(int poid, int id)
