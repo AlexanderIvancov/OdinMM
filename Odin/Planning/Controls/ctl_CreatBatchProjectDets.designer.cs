@@ -84,6 +84,7 @@
             this.cn_nWaitingPOQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_WPODelivDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_POrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_POComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_Supplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_nQtyNom = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_nSpoilNorm = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -571,6 +572,7 @@
             this.cn_nWaitingPOQty,
             this.cn_WPODelivDate,
             this.cn_POrder,
+            this.cn_POComment,
             this.cn_Supplier,
             this.cn_nQtyNom,
             this.cn_nSpoilNorm,
@@ -709,6 +711,15 @@
             this.cn_POrder.Name = "cn_POrder";
             this.cn_POrder.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.cn_POrder.Width = 80;
+            // 
+            // cn_POComment
+            // 
+            this.cn_POComment.DataPropertyName = "POComment";
+            this.cn_POComment.FillWeight = 80F;
+            this.cn_POComment.HeaderText = "Pur. comment";
+            this.cn_POComment.Name = "cn_POComment";
+            this.cn_POComment.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_POComment.Width = 80;
             // 
             // cn_Supplier
             // 
@@ -943,6 +954,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_nWaitingPOQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_WPODelivDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_POrder;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_POComment;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_Supplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_nQtyNom;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_nSpoilNorm;

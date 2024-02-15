@@ -61,7 +61,7 @@ namespace Odin.Planning
 
         public DataTable NomDetailsDataBatch(int batchid)
         {
-            return Helper.QueryDT("execute sp_SelectBatchNomenclature @batchid = " + batchid);
+            return Helper.QueryDT("execute sp_SelectBatchNomenclatureNew @batchid = " + batchid);
         }
 
         public int AddBatchHeader(string BatchName1, int ArtId, double Qty, string ResDate, string Comments, int ParentBatchId, int ChildBatchId, string EndDate, int Urgent)
@@ -760,7 +760,7 @@ namespace Odin.Planning
 
         public DataTable CurrentPOs(int artid)
         {
-            return Helper.QueryDT("execute sp_SelectPOCurrent @ArtId = " + artid);
+            return Helper.QueryDT("execute sp_SelectPOCurrentNew @ArtId = " + artid);
         }
 
         public DataTable POReservations(int poid)

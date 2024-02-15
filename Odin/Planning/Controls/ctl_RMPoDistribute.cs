@@ -128,7 +128,7 @@ namespace Odin.Planning.Controls
 
             node = nodes.Add(null, dr["name"], dr["id"], dr["article"], Convert.ToDouble(dr["qty"]), dr["unit"], 
                             Convert.ToDouble(dr["reserved"]), Convert.ToDouble(dr["qtydelivered"]),
-                            Convert.ToDouble(dr["freeqty"]), Convert.ToDateTime(dr["reqdate"]), dr["confdate"], dr["supplier"]);
+                            Convert.ToDouble(dr["freeqty"]), Convert.ToDateTime(dr["reqdate"]), dr["confdate"], dr["supplier"], dr["cn_POcomments"]);
 
             if (isAddingImage)
             {

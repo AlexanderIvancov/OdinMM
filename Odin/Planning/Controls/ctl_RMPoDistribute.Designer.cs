@@ -61,6 +61,7 @@
             this.cn_reqdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_confdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_supplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_POcomments = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bn_List)).BeginInit();
@@ -229,7 +230,8 @@
             this.cn_free,
             this.cn_reqdate,
             this.cn_confdate,
-            this.cn_supplier});
+            this.cn_supplier,
+            this.cn_POcomments});
             this.tv_POS.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tv_POS.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.tv_POS.ImageList = null;
@@ -376,6 +378,14 @@
             this.cn_supplier.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.cn_supplier.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // cn_POcomments
+            // 
+            this.cn_POcomments.HeaderText = "PO Comments";
+            this.cn_POcomments.Name = "cn_POcomments";
+            this.cn_POcomments.ReadOnly = true;
+            this.cn_POcomments.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.cn_POcomments.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // ctl_RMPoDistribute
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -428,5 +438,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_reqdate;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_confdate;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_supplier;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_POcomments;
     }
 }

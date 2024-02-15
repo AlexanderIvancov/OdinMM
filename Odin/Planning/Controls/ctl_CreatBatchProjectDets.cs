@@ -374,8 +374,8 @@ namespace Odin.Planning.Controls
                              Math.Round(Convert.ToDouble(dr["QtyInNomenclature"]), 5), Convert.ToDouble(dr["QtyInBatch"]),
                              0, Convert.ToDouble(dr["QtyInBatch"]), dr["bdid"], 
                              Convert.ToDouble(dr["QtyOnStock"]), Convert.ToDouble(dr["QtyAvailable"]),
-                             Convert.ToDouble(dr["WaitingPOQty"]), dr["WaitingPODate"].ToString(), dr["POrder"].ToString(), 
-                             dr["Supplier"].ToString(), Convert.ToDouble(dr["QtyNom"]), Convert.ToDouble(dr["SpoilNorm"]), 
+                             Convert.ToDouble(dr["WaitingPOQty"]), dr["WaitingPODate"].ToString(), dr["POrder"].ToString(),
+                             dr["POComment"].ToString(), dr["Supplier"].ToString(),  Convert.ToDouble(dr["QtyNom"]), Convert.ToDouble(dr["SpoilNorm"]), 
                              Convert.ToInt32(dr["NumDecimals"]), Convert.ToDouble(dr["SpoilConst"]),
                              dr["Stage"], dr["Comments"], Convert.ToInt32(dr["IsActive"]), Convert.ToDouble(dr["QtyGiven"]),
                              Convert.ToInt32(dr["DNP"]));
