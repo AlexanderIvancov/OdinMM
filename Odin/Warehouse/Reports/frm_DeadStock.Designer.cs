@@ -57,9 +57,18 @@
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.btn_Refresh = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.cmb_Types1 = new Odin.CMB_Components.Types.cmb_Types();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_Date = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
             this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.cn_artid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_article = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_supart = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_totaleur = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_lastout = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_lastin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -85,16 +94,8 @@
             this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_artid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_article = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_supart = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_totaleur = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_lastout = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_lastin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmb_Types1 = new Odin.CMB_Components.Types.cmb_Types();
             this.bs_List = new Odin.Global_Classes.SyncBindingSource();
+            this.chk_hidezero = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
             this.kryptonPanel2.SuspendLayout();
             this.mnu_Lines.SuspendLayout();
@@ -337,6 +338,7 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.chk_hidezero);
             this.kryptonPanel1.Controls.Add(this.btn_Refresh);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel2);
             this.kryptonPanel1.Controls.Add(this.cmb_Types1);
@@ -345,7 +347,7 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(932, 73);
+            this.kryptonPanel1.Size = new System.Drawing.Size(932, 97);
             this.kryptonPanel1.TabIndex = 41;
             // 
             // btn_Refresh
@@ -368,6 +370,19 @@
             this.kryptonLabel2.Size = new System.Drawing.Size(39, 20);
             this.kryptonLabel2.TabIndex = 3;
             this.kryptonLabel2.Values.Text = "Type:";
+            // 
+            // cmb_Types1
+            // 
+            this.cmb_Types1.Location = new System.Drawing.Point(82, 40);
+            this.cmb_Types1.Name = "cmb_Types1";
+            this.cmb_Types1.Path = "";
+            this.cmb_Types1.SelectedNode = null;
+            this.cmb_Types1.Size = new System.Drawing.Size(174, 20);
+            this.cmb_Types1.TabIndex = 2;
+            this.cmb_Types1.Type = "";
+            this.cmb_Types1.TypeId = 0;
+            this.cmb_Types1.TypeIDs = ((System.Collections.Generic.List<int>)(resources.GetObject("cmb_Types1.TypeIDs")));
+            this.cmb_Types1.TypeLat = null;
             // 
             // kryptonLabel1
             // 
@@ -404,13 +419,79 @@
             this.cn_lastin});
             this.gv_List.ContextMenuStrip = this.mnu_Lines;
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gv_List.Location = new System.Drawing.Point(0, 73);
+            this.gv_List.Location = new System.Drawing.Point(0, 97);
             this.gv_List.Name = "gv_List";
             this.gv_List.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Silver;
             this.gv_List.ReadOnly = true;
             this.gv_List.RowHeadersWidth = 20;
-            this.gv_List.Size = new System.Drawing.Size(932, 360);
+            this.gv_List.Size = new System.Drawing.Size(932, 336);
             this.gv_List.TabIndex = 42;
+            // 
+            // cn_artid
+            // 
+            this.cn_artid.DataPropertyName = "artid";
+            this.cn_artid.FillWeight = 80F;
+            this.cn_artid.HeaderText = "Art. id";
+            this.cn_artid.Name = "cn_artid";
+            this.cn_artid.ReadOnly = true;
+            this.cn_artid.Width = 80;
+            // 
+            // cn_article
+            // 
+            this.cn_article.DataPropertyName = "article";
+            this.cn_article.FillWeight = 200F;
+            this.cn_article.HeaderText = "Article";
+            this.cn_article.Name = "cn_article";
+            this.cn_article.ReadOnly = true;
+            this.cn_article.Width = 200;
+            // 
+            // cn_supart
+            // 
+            this.cn_supart.DataPropertyName = "suparticle";
+            this.cn_supart.FillWeight = 200F;
+            this.cn_supart.HeaderText = "Supplier\'s article";
+            this.cn_supart.Name = "cn_supart";
+            this.cn_supart.ReadOnly = true;
+            this.cn_supart.Width = 200;
+            // 
+            // cn_qty
+            // 
+            this.cn_qty.DataPropertyName = "qtyrest";
+            this.cn_qty.FillWeight = 80F;
+            this.cn_qty.HeaderText = "Qty";
+            this.cn_qty.Name = "cn_qty";
+            this.cn_qty.ReadOnly = true;
+            this.cn_qty.Width = 80;
+            // 
+            // cn_unit
+            // 
+            this.cn_unit.DataPropertyName = "unit";
+            this.cn_unit.FillWeight = 40F;
+            this.cn_unit.HeaderText = "Unit";
+            this.cn_unit.Name = "cn_unit";
+            this.cn_unit.ReadOnly = true;
+            this.cn_unit.Width = 40;
+            // 
+            // cn_totaleur
+            // 
+            this.cn_totaleur.DataPropertyName = "total";
+            this.cn_totaleur.HeaderText = "Total (€)";
+            this.cn_totaleur.Name = "cn_totaleur";
+            this.cn_totaleur.ReadOnly = true;
+            // 
+            // cn_lastout
+            // 
+            this.cn_lastout.DataPropertyName = "lastdateout";
+            this.cn_lastout.HeaderText = "Last out. date";
+            this.cn_lastout.Name = "cn_lastout";
+            this.cn_lastout.ReadOnly = true;
+            // 
+            // cn_lastin
+            // 
+            this.cn_lastin.DataPropertyName = "lastdatein";
+            this.cn_lastin.HeaderText = "Last in. date";
+            this.cn_lastin.Name = "cn_lastin";
+            this.cn_lastin.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -616,84 +697,13 @@
             this.dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
             this.dataGridViewTextBoxColumn25.ReadOnly = true;
             // 
-            // cn_artid
+            // chk_hidezero
             // 
-            this.cn_artid.DataPropertyName = "artid";
-            this.cn_artid.FillWeight = 80F;
-            this.cn_artid.HeaderText = "Art. id";
-            this.cn_artid.Name = "cn_artid";
-            this.cn_artid.ReadOnly = true;
-            this.cn_artid.Width = 80;
-            // 
-            // cn_article
-            // 
-            this.cn_article.DataPropertyName = "article";
-            this.cn_article.FillWeight = 200F;
-            this.cn_article.HeaderText = "Article";
-            this.cn_article.Name = "cn_article";
-            this.cn_article.ReadOnly = true;
-            this.cn_article.Width = 200;
-            // 
-            // cn_supart
-            // 
-            this.cn_supart.DataPropertyName = "suparticle";
-            this.cn_supart.FillWeight = 200F;
-            this.cn_supart.HeaderText = "Supplier\'s article";
-            this.cn_supart.Name = "cn_supart";
-            this.cn_supart.ReadOnly = true;
-            this.cn_supart.Width = 200;
-            // 
-            // cn_qty
-            // 
-            this.cn_qty.DataPropertyName = "qtyrest";
-            this.cn_qty.FillWeight = 80F;
-            this.cn_qty.HeaderText = "Qty";
-            this.cn_qty.Name = "cn_qty";
-            this.cn_qty.ReadOnly = true;
-            this.cn_qty.Width = 80;
-            // 
-            // cn_unit
-            // 
-            this.cn_unit.DataPropertyName = "unit";
-            this.cn_unit.FillWeight = 40F;
-            this.cn_unit.HeaderText = "Unit";
-            this.cn_unit.Name = "cn_unit";
-            this.cn_unit.ReadOnly = true;
-            this.cn_unit.Width = 40;
-            // 
-            // cn_totaleur
-            // 
-            this.cn_totaleur.DataPropertyName = "total";
-            this.cn_totaleur.HeaderText = "Total (€)";
-            this.cn_totaleur.Name = "cn_totaleur";
-            this.cn_totaleur.ReadOnly = true;
-            // 
-            // cn_lastout
-            // 
-            this.cn_lastout.DataPropertyName = "lastdateout";
-            this.cn_lastout.HeaderText = "Last out. date";
-            this.cn_lastout.Name = "cn_lastout";
-            this.cn_lastout.ReadOnly = true;
-            // 
-            // cn_lastin
-            // 
-            this.cn_lastin.DataPropertyName = "lastdatein";
-            this.cn_lastin.HeaderText = "Last in. date";
-            this.cn_lastin.Name = "cn_lastin";
-            this.cn_lastin.ReadOnly = true;
-            // 
-            // cmb_Types1
-            // 
-            this.cmb_Types1.Location = new System.Drawing.Point(82, 40);
-            this.cmb_Types1.Name = "cmb_Types1";
-            this.cmb_Types1.Path = "";
-            this.cmb_Types1.SelectedNode = null;
-            this.cmb_Types1.Size = new System.Drawing.Size(174, 20);
-            this.cmb_Types1.TabIndex = 2;
-            this.cmb_Types1.Type = "";
-            this.cmb_Types1.TypeId = 0;
-            this.cmb_Types1.TypeIDs = ((System.Collections.Generic.List<int>)(resources.GetObject("cmb_Types1.TypeIDs")));
-            this.cmb_Types1.TypeLat = null;
+            this.chk_hidezero.Location = new System.Drawing.Point(82, 66);
+            this.chk_hidezero.Name = "chk_hidezero";
+            this.chk_hidezero.Size = new System.Drawing.Size(111, 20);
+            this.chk_hidezero.TabIndex = 293;
+            this.chk_hidezero.Values.Text = "Hide zero prices";
             // 
             // frm_DeadStock
             // 
@@ -722,8 +732,8 @@
             this.kryptonPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_List)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
-            this.PerformLayout(); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -794,5 +804,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_totaleur;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_lastout;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_lastin;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_hidezero;
     }
 }
