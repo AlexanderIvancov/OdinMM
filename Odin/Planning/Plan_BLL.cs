@@ -56,7 +56,7 @@ namespace Odin.Planning
 
         public DataTable NomDetailsDataCB(int artid, double qty)
         {
-            return Helper.QueryDT("execute sp_SelectCreatBatchNomenclature @ArtId = " + artid + ", @Qty = " + qty);
+            return Helper.QueryDT("execute sp_SelectCreatBatchNomenclatureNew @ArtId = " + artid + ", @Qty = " + qty);
         }
 
         public DataTable NomDetailsDataBatch(int batchid)
