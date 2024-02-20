@@ -37,7 +37,7 @@ namespace Odin.Warehouse.Reports
 
         public void FillList()
         {
-            var data = StockRep_BLL.getDeadStock(cmb_Types1.TypeId, txt_Date.Value.ToShortDateString());
+            var data = StockRep_BLL.getDeadStock(cmb_Types1.TypeId, txt_Date.Value.ToShortDateString(), chk_hidezero.Checked == true ? -1 : 0);
 
 
             gv_List.ThreadSafeCall(delegate

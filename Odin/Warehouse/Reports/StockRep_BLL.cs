@@ -154,17 +154,19 @@ namespace Odin.Warehouse.Reports
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
 
-        public static DataTable getDeadStock(int _typeid, string _date)
+        public static DataTable getDeadStock(int _typeid, string _date, int _hidezero)
         {
             string query = "sp_SelectDeadStock";
 
             var sqlparams = new List<SqlParameter>
             {
                 new SqlParameter("@typeid",SqlDbType.Int){Value = _typeid },
-                new SqlParameter("@date",SqlDbType.NVarChar){Value = _date}
+                new SqlParameter("@date",SqlDbType.NVarChar){Value = _date},
+                 new SqlParameter("@hidezero",SqlDbType.Int){Value = _hidezero }
             };
 
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
+
     }
 }
