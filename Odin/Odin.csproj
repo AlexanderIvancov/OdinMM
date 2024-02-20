@@ -4005,6 +4005,7 @@
     <None Include="Resourses\batchview.png" />
     <None Include="Resourses\find.png" />
     <None Include="Resourses\chart_organisation.png" />
+    <Content Include="Resourses\sum.png" />
     <Content Include="Warehouse\StockOut\Reports\rpt_LaunchGroupList.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rpt_LaunchGroupList.cs</LastGenOutput>
