@@ -2119,7 +2119,7 @@ namespace Odin.Planning
 
         public DataTable NomDetailsDataProject(int artid, double qty)
         {
-            return Helper.QueryDT("execute sp_SelectCreatBatchProject @ArtId = " + artid + ", @Qty = " + qty);
+            return Helper.QueryDT("execute sp_SelectCreatBatchProjectNew @ArtId = " + artid + ", @Qty = " + qty);
         }
 
         //public static DataTable getProjectMappings(int _projectid)
