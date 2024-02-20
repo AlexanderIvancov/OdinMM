@@ -310,7 +310,7 @@ namespace Odin.Planning.Controls
                             0, 0, "0",
                             Convert.ToDouble(dr["QtyOnStock"]), Convert.ToDouble(dr["QtyAvailable"]),
                             Convert.ToDouble(dr["WaitingPOQty"]), dr["WaitingPODate"].ToString(), dr["POrder"].ToString(),
-                            dr["Supplier"].ToString(), Convert.ToDouble(dr["QtyNom"]), Convert.ToDouble(dr["SpoilNorm"]), 
+                            dr["POComment"].ToString(), dr["Supplier"].ToString(), Convert.ToDouble(dr["QtyNom"]), Convert.ToDouble(dr["SpoilNorm"]), 
                             Convert.ToInt32(dr["NumDecimals"]), Convert.ToDouble(dr["SpoilConst"]), dr["Stage"], "", QuotId == 0 ? -1 : 0, 0, 0);
 
             if (isAddingImage)
