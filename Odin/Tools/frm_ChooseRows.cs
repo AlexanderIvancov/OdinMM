@@ -8,15 +8,15 @@ using System.Windows.Forms;
 
 namespace Odin.Tools
 {
-    public unsafe partial class frm_ChooseRows : frm_TemplateExportDataDGV
+    public partial class frm_ChooseRows : frm_TemplateExportDataDGV
     {
         DAL_Functions DAL = new DAL_Functions();
 
-        public unsafe frm_ChooseRows()
+        public frm_ChooseRows()
         {
             InitializeComponent();
         }
-        public unsafe DataTable RowsList = new DataTable();
+        public DataTable RowsList = new DataTable();
 
         public void AddCheckRows(DataTable dgv)
         {
