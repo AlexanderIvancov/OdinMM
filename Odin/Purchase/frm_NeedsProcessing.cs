@@ -46,6 +46,7 @@ namespace Odin.Purchase
         ExportData ED1;
         Helper MyHelper = new Helper();
         frm_AddCatItem frmcat = null;
+        DataTable data;
         public string fileName
         {
             get;
@@ -1088,34 +1089,38 @@ namespace Odin.Purchase
         private void btn_Upload_Click(object sender, EventArgs e)
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            //MessageBox.Show(path);
             SaveFileDialog savefiledialog1 = new SaveFileDialog();
             savefiledialog1.InitialDirectory = path;
 
-            savefiledialog1.FileName = "Articles for quotation";
+            savefiledialog1.FileName = fileName;
             savefiledialog1.DefaultExt = "xls";
             savefiledialog1.Filter = "Excel Files (*.xls)|*.xls|All files (*.*)|*.*";
             savefiledialog1.FilterIndex = 1;
             savefiledialog1.RestoreDirectory = true;
 
-
+            data = PO_BLL.getNeedsPOsExcel(_needid);
             if (savefiledialog1.ShowDialog() == DialogResult.OK)
             {
                 fileName = savefiledialog1.FileName;
                 if (!string.IsNullOrEmpty(fileName))
                 {
-                    //dgv.Enabled = false;
-                    BackgroundWorker bw = new BackgroundWorker();
-                    bw.DoWork += ImportData;
+                    frm_ChooseRows frmColumns = new frm_ChooseRows();
+                    frmColumns.AddCheckRows(data);
+                    var dialogResult = frmColumns.ShowDialog();
 
-                    bw.RunWorkerCompleted += ImportCompleted;
+                    if (dialogResult == DialogResult.OK)
+                    {
+                        data = frmColumns.RowsList;
+                        BackgroundWorker bw = new BackgroundWorker();
+                        bw.DoWork += ImportData;
 
-                    fmWait = new frm_Wait();
+                        bw.RunWorkerCompleted += ImportCompleted;
 
-                    bw.RunWorkerAsync();
-                    fmWait.Start();
-                    fmWait.Show();
-
+                        fmWait = new frm_Wait();
+                        bw.RunWorkerAsync();
+                        fmWait.Start();
+                        fmWait.Show();
+                    }
                 }
             }
         }
@@ -1161,9 +1166,7 @@ namespace Odin.Purchase
             InitializeWorkbook();
 
             ISheet sheet1 = hssfworkbook.CreateSheet("Sheet1");
-            var param = e.Argument as List<DataGridViewColumn>; 
             //MessageBox.Show(dgv.Rows.Count.ToString());
-            var data = PO_BLL.getNeedsPOsExcel(_needid);
             for (int i = 0; i < data.Rows.Count; i++)
             {
                 var dr = data.Rows[i];
