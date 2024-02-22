@@ -859,6 +859,7 @@ namespace Odin.Warehouse.StockIn
 
         private void cmb_Places1_SelectedValueChanged(object sender)
         {
+            cmb_Places1.IsQuarantine = Int32.Parse(Helper.GetOneRecord($@"Select isnull(dbo.fn_CheckQuarantine({cmb_Places1.PlaceId}),0)").ToString());
             SetCellsColor();
         }
 
