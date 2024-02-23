@@ -58,7 +58,7 @@ namespace Odin.CMB_Components.Places
                     DataSet ds = new DataSet();
 
                     SqlDataAdapter adapter =
-                        new SqlDataAdapter("SELECT top 1 dbo.fn_FullPlaceTree(" + _PlaceId.ToString() + ") as Place", conn);
+                        new SqlDataAdapter("SELECT top 1 dbo.fn_FullPlaceTree(" + _PlaceId.ToString() + ") as Place, isnull(dbo.fn_CheckQuarantine(" + _PlaceId.ToString() + "),0) as IsQuarantine", conn);
                     adapter.Fill(ds);
 
                     conn.Close();
@@ -71,9 +71,9 @@ namespace Odin.CMB_Components.Places
                         {
                             txt_Place.Text = dr["Place"].ToString();
                             _Place = dr["Place"].ToString();
-
+                            IsQuarantine = _isquarantine = Convert.ToInt32(dr["IsQuarantine"]);
                         }
-                        CheckQuarantine(_PlaceId);
+                        //CheckQuarantine(_PlaceId);
                     }
                     else
                     {
@@ -109,12 +109,12 @@ namespace Odin.CMB_Components.Places
             }
         }
 
-        public void CheckQuarantine(int placeid)
-        {
-            int _res = Convert.ToInt32(Helper.GetOneRecord("select id from (select * from STO_Shelves where id in " +
-                " (select idpl from dbo.ifn_StockPlaces(dbo.fn_DefaultValue('quarantine')))) tab where tab.id = " + placeid));
-            IsQuarantine = _res == 0 ? 0 : -1;
-        }
+        //public void CheckQuarantine(int placeid)
+        //{
+        //    int _res = Convert.ToInt32(Helper.GetOneRecord("select id from (select * from STO_Shelves where id in " +
+        //        " (select idpl from dbo.ifn_StockPlaces(dbo.fn_DefaultValue('quarantine')))) tab where tab.id = " + placeid));
+        //    IsQuarantine = _res == 0 ? 0 : -1;
+        //}
 
         private void buttonSpecAny1_Click(object sender, EventArgs e)
         {
