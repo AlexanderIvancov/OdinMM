@@ -354,5 +354,10 @@ namespace Odin.Sales
                 //                        TaskDialogButtons.OK);
             }
         }
+
+        private void gv_List_SelectionChanged(object sender, EventArgs e)
+        {
+            SetCellsColor();
+        }
     }
 }
