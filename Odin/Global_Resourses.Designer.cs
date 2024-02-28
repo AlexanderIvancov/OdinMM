@@ -4473,6 +4473,16 @@ namespace Odin {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap up_small {
+            get {
+                object obj = ResourceManager.GetObject("up_small", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Upload_24x24 {
             get {
                 object obj = ResourceManager.GetObject("Upload_24x24", resourceCulture);
