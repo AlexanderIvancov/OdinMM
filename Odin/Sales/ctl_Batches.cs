@@ -111,7 +111,12 @@ namespace Odin.Sales
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
                 if (Convert.ToInt32(row.Cells["cn_isactive"].Value) == 0)
-                    row.DefaultCellStyle.BackColor = Color.Gainsboro;
+                    foreach (DataGridViewCell cell in row.Cells)
+                        cell.Style.BackColor = Color.Gainsboro;
+                else
+                    foreach (DataGridViewCell cell in row.Cells)
+                        cell.Style.BackColor = Color.White;
+                //row.DefaultCellStyle.BackColor = Color.Gainsboro;
             }
         }
 
@@ -353,6 +358,11 @@ namespace Odin.Sales
                 //                        MessageBoxIcon.Warning,
                 //                        TaskDialogButtons.OK);
             }
+        }
+
+        private void gv_List_SelectionChanged(object sender, EventArgs e)
+        {
+            SetCellsColor();
         }
     }
 }

@@ -4423,6 +4423,16 @@ namespace Odin {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap undo_small {
+            get {
+                object obj = ResourceManager.GetObject("undo_small", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Undo1 {
             get {
                 object obj = ResourceManager.GetObject("Undo1", resourceCulture);
@@ -4456,6 +4466,16 @@ namespace Odin {
         internal static System.Drawing.Bitmap unlocked {
             get {
                 object obj = ResourceManager.GetObject("unlocked", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap up_small {
+            get {
+                object obj = ResourceManager.GetObject("up_small", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
