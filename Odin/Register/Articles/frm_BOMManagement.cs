@@ -207,6 +207,9 @@ namespace Odin.Register.Articles
                 {
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.GreenYellow;//Color.FromArgb(192, 255, 192);
+                    if (Convert.ToString(row.Cells["cn_stencil"].Value) == "Not Required")
+                        foreach (DataGridViewCell cell in row.Cells)
+                            cell.Style.BackColor = Color.FromArgb(121, 178, 32);
                     if (Convert.ToString(row.Cells["cn_stencil"].Value) == "")
                         foreach (DataGridViewCell cell in row.Cells)
                             cell.Style.BackColor = Color.FromArgb(135, 206, 250);
