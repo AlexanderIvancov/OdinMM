@@ -478,7 +478,7 @@
             this.txt_Dutycost.Size = new System.Drawing.Size(44, 23);
             this.txt_Dutycost.TabIndex = 13;
             this.txt_Dutycost.Text = "0";
-            this.txt_Dutycost.TextChanged += new System.EventHandler(this.txt_Disc_TextChanged);
+            this.txt_Dutycost.TextChanged += new System.EventHandler(this.txt_Dutycost_TextChanged);
             // 
             // kryptonLabel12
             // 

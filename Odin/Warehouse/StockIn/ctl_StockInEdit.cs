@@ -329,7 +329,10 @@ namespace Odin.Warehouse.StockIn
         {
             UnitPrice = UnitPriceWoDisc - UnitPriceWoDisc / 100 * Discount;
         }
-
+        private void txt_Dutycost_TextChanged(object sender, EventArgs e)
+        {
+            //UnitPrice = UnitPriceWoDisc - UnitPriceWoDisc / 100 * Discount;
+        }
         private void buttonSpecAny3_Click(object sender, EventArgs e)
         {
             txt_DataCode.Text = string.Empty;
