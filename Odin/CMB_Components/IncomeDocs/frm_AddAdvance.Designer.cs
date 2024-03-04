@@ -158,6 +158,7 @@
             this.txt_Date.Name = "txt_Date";
             this.txt_Date.Size = new System.Drawing.Size(100, 20);
             this.txt_Date.TabIndex = 15;
+            this.txt_Date.ValueChanged += new System.EventHandler(this.txt_Date_ValueChanged);
             // 
             // kryptonLabel1
             // 
@@ -201,7 +202,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
