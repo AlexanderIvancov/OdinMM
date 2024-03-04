@@ -42,6 +42,7 @@
             this.ctl_StockInEdit1.Comments = "";
             this.ctl_StockInEdit1.CustCodeId = 0;
             this.ctl_StockInEdit1.Discount = 0D;
+            this.ctl_StockInEdit1.Dutycost = 0D;
             this.ctl_StockInEdit1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ctl_StockInEdit1.Id = 0;
             this.ctl_StockInEdit1.IncomeDocId = 0;

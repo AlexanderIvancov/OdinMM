@@ -180,6 +180,15 @@ namespace Odin.Warehouse.StockIn
             }
             set { txt_Disc.Text = value.ToString(); }
         }
+        public double Dutycost
+        {
+            get
+            {
+                try { return Convert.ToDouble(txt_Dutycost.Text); }
+                catch { return 0; }
+            }
+            set { txt_Dutycost.Text = value.ToString(); }
+        }
         public double Total
         {
             get
