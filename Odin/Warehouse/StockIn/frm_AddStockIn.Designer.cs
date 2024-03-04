@@ -40,6 +40,7 @@
             this.ctl_StockInDets1.CoefConv = 0D;
             this.ctl_StockInDets1.Comments = "";
             this.ctl_StockInDets1.Discount = 0D;
+            this.ctl_StockInDets1.Dutycost = 0D;
             this.ctl_StockInDets1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ctl_StockInDets1.ExpDate = "";
             this.ctl_StockInDets1.IsCopy = false;

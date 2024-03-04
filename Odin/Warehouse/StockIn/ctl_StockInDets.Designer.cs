@@ -109,6 +109,8 @@
             this.txt_UnitPrice = new Owf.Controls.NumericTetxBox();
             this.kryptonLabel11 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_Disc = new Owf.Controls.NumericTetxBox();
+            this.kryptonLabel32 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.txt_Dutycost = new Owf.Controls.NumericTetxBox();
             this.kryptonLabel12 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_Vat = new Owf.Controls.NumericTetxBox();
             this.txt_Multiplicity = new Owf.Controls.NumericTetxBox();
@@ -521,6 +523,8 @@
             this.kryptonPanel1.Controls.Add(this.txt_UnitPrice);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel11);
             this.kryptonPanel1.Controls.Add(this.txt_Disc);
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel32);
+            this.kryptonPanel1.Controls.Add(this.txt_Dutycost);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel12);
             this.kryptonPanel1.Controls.Add(this.txt_Vat);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel10);
@@ -1004,17 +1008,38 @@
             this.kryptonLabel11.Size = new System.Drawing.Size(79, 20);
             this.kryptonLabel11.TabIndex = 235;
             this.kryptonLabel11.Values.Text = "Discount(%):";
+            this.kryptonLabel11.Visible = false;
             // 
             // txt_Disc
             // 
             this.txt_Disc.AllowDecimalSeparator = true;
             this.txt_Disc.AllowSpace = false;
             this.txt_Disc.Location = new System.Drawing.Point(274, 173);
-            this.txt_Disc.Name = "txt_Disc";
+            this.txt_Disc.Name = "txt_Dutycost";
             this.txt_Disc.Size = new System.Drawing.Size(44, 23);
             this.txt_Disc.TabIndex = 13;
             this.txt_Disc.Text = "0";
-            this.txt_Disc.TextChanged += new System.EventHandler(this.txt_Disc_TextChanged);
+            this.txt_Disc.TextChanged += new System.EventHandler(this.txt_Dutycost_TextChanged);
+            this.txt_Disc.Visible = false;
+            // 
+            // kryptonLabel32
+            // 
+            this.kryptonLabel32.Location = new System.Drawing.Point(190, 173);
+            this.kryptonLabel32.Name = "kryptonLabel32";
+            this.kryptonLabel32.Size = new System.Drawing.Size(79, 20);
+            this.kryptonLabel32.TabIndex = 235;
+            this.kryptonLabel32.Values.Text = "DutyCost";
+            // 
+            // txt_Dutycost
+            // 
+            this.txt_Dutycost.AllowDecimalSeparator = true;
+            this.txt_Dutycost.AllowSpace = false;
+            this.txt_Dutycost.Location = new System.Drawing.Point(274, 173);
+            this.txt_Dutycost.Name = "txt_Disc";
+            this.txt_Dutycost.Size = new System.Drawing.Size(44, 23);
+            this.txt_Dutycost.TabIndex = 13;
+            this.txt_Dutycost.Text = "0";
+            this.txt_Dutycost.TextChanged += new System.EventHandler(this.txt_Disc_TextChanged);
             // 
             // kryptonLabel12
             // 
@@ -1304,6 +1329,8 @@
         private Owf.Controls.NumericTetxBox txt_UnitPrice;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel11;
         private Owf.Controls.NumericTetxBox txt_Disc;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel32;
+        private Owf.Controls.NumericTetxBox txt_Dutycost;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel12;
         private Owf.Controls.NumericTetxBox txt_Vat;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;

@@ -232,6 +232,16 @@ namespace Odin.Warehouse.StockIn
             }
             set { txt_Disc.Text = value.ToString(); }
         }
+        public double Dutycost
+        {
+            get
+            {
+                try { return Convert.ToDouble(txt_Dutycost.Text); }
+                catch { return 0; }
+            }
+            set { txt_Dutycost.Text = value.ToString(); }
+        }
+
         public double Total
         {
             get
@@ -875,6 +885,10 @@ namespace Odin.Warehouse.StockIn
             UnitPrice = Math.Round(_tmpunitprice - _tmpunitprice / 100 * Discount, 5);//Math.Round(_tmpunitprice * 100 / (100 - Discount), 5);
         }
 
+        private void txt_Dutycost_TextChanged(object sender, EventArgs e)
+        {
+
+        }
         #endregion
 
         private void txt_ExpDate_DoubleClick(object sender, EventArgs e)
