@@ -217,7 +217,9 @@ namespace Odin.Register.Articles
                 else
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Gold;
-
+                if (Convert.ToString(row.Cells["cn_description"].Value) == "!!! Cancelled !!!")
+                    foreach (DataGridViewCell cell in row.Cells)
+                        cell.Style.BackColor = Color.FromArgb(130, 137, 142);
                 if (Convert.ToInt32(row.Cells["cn_isactive"].Value) == 0)
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Silver;
