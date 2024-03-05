@@ -3,13 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics;
 
 namespace Odin.Warehouse.StockIn
 {
     public class StockIn_BLL
     {
-        public static string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
+        public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
 
         public static DataTable getStockIncomes(int _headid, int _typeid, int _supid, int _state, int _artid, string _article,
                                                     string _datefrom, string _datetill, string _firmart, string _comments,
@@ -31,29 +30,8 @@ namespace Odin.Warehouse.StockIn
                 new SqlParameter("@comments",SqlDbType.NVarChar){Value = _comments},
                 new SqlParameter("@opertypeid",SqlDbType.Int){Value = _opertypeid}
             };
-            return getSP("sp_StockIncomesPortfolio", _headid, _typeid, _supid, _state, _artid, _article,
-                                                    _datefrom, _datetill, _firmart, _comments, _opertypeid);
-        }
 
-        public static DataTable getSP(string sp, params object[] parameters)
-        {
-            var sqlparams = new List<SqlParameter>();
-            SqlConnection conn = new SqlConnection(sConnStr); 
-            conn.Open();
-            DataSet ds = new DataSet();
-
-            SqlDataAdapter adapter =
-                new SqlDataAdapter(
-                    $@"select PARAMETER_NAME from INFORMATION_SCHEMA.PARAMETERS
-                        where SPECIFIC_NAME = '{sp}'", conn);
-
-            conn.Close();
-            adapter.Fill(ds);
-            DataTable dt = ds.Tables[0];
-            if (dt.Rows.Count > 0)
-                for (int i = 0; i < dt.Rows.Count; i++ )
-                    sqlparams.Add(new SqlParameter(dt.Rows[i].ItemArray[0].ToString(), parameters[i]));
-            return Helper.QuerySP(sp, sqlparams.ToArray());
+            return Helper.QuerySP(query, sqlparams.ToArray());
         }
 
         public static DataTable getStockRests(int _artid)
