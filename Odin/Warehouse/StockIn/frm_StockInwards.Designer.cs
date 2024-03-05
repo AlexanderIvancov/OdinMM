@@ -127,6 +127,7 @@
             this.cn_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_unitprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_dutycost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_currency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_vat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_Batch = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -637,6 +638,7 @@
             this.cn_unit,
             this.cn_unitprice,
             this.cn_discount,
+            this.cn_dutycost,
             this.cn_currency,
             this.cn_vat,
             this.cn_Batch,
@@ -1184,6 +1186,15 @@
             this.cn_discount.ReadOnly = true;
             this.cn_discount.Width = 40;
             // 
+            // cn_discount
+            // 
+            this.cn_dutycost.DataPropertyName = "dutycost";
+            this.cn_dutycost.FillWeight = 40F;
+            this.cn_dutycost.HeaderText = "Dutycost.";
+            this.cn_dutycost.Name = "cn_dutycost";
+            this.cn_dutycost.ReadOnly = true;
+            this.cn_dutycost.Width = 40;
+            // 
             // cn_currency
             // 
             this.cn_currency.DataPropertyName = "currency";
@@ -1472,6 +1483,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_unit;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_unitprice;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_discount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_dutycost;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_currency;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_vat;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_Batch;

@@ -53,7 +53,7 @@ namespace Odin.Warehouse.StockIn
                 Sender = Bll.SenderCountryId;
                 Producer = Bll.ProducerCountryId;
                 DataCode = Bll.DataCode;
-                
+                Dutycost = Bll.Dutycost;
             }
 
         }
@@ -304,7 +304,7 @@ namespace Odin.Warehouse.StockIn
 
             int _NewInwardId = Bll.EditStockIn(Id, IncomeDocId, ArtId, SupArticle, StockMoveTypeId, Qty, UnitId,
                                                 Comments, UnitPrice, Discount, Vat, CoefConv, Weight, CustCodeId, 
-                                                BatchId, Producer, DataCode);
+                                                BatchId, Producer, DataCode, Dutycost);
 
             //Deallocation
             if (_NewInwardId != 0)
