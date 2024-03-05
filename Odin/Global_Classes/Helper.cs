@@ -82,7 +82,26 @@ namespace Odin.Global_Classes
                 return ds.Tables[0];
             }
         }
+        public static DataTable getSP(string sp, params object[] parameters)
+        {
+            var sqlparams = new System.Collections.Generic.List<SqlParameter>();
+            SqlConnection conn = new SqlConnection(sConnStr);
+            conn.Open();
+            DataSet ds = new DataSet();
 
+            SqlDataAdapter adapter =
+                new SqlDataAdapter(
+                    $@"select PARAMETER_NAME from INFORMATION_SCHEMA.PARAMETERS
+                        where SPECIFIC_NAME = '{sp}'", conn);
+
+            conn.Close();
+            adapter.Fill(ds);
+            DataTable dt = ds.Tables[0];
+            if (dt.Rows.Count > 0)
+                for (int i = 0; i < dt.Rows.Count; i++)
+                    sqlparams.Add(new SqlParameter(dt.Rows[i].ItemArray[0].ToString(), parameters[i]));
+            return QuerySP(sp, sqlparams.ToArray());
+        }
 
         /// <summary> 
         /// Converts String Query to DataTable
