@@ -1498,4 +1498,7 @@
   <data name="up_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resourses\up_small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="direction" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resourses\direction.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
