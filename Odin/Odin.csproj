@@ -4014,6 +4014,7 @@
     <None Include="Resourses\batchview.png" />
     <None Include="Resourses\find.png" />
     <None Include="Resourses\chart_organisation.png" />
+    <Content Include="Resourses\direction.png" />
     <Content Include="Resourses\sum.png" />
     <Content Include="Resourses\undo_small.png" />
     <Content Include="Resourses\up_small.png" />
