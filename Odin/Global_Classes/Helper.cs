@@ -1,5 +1,6 @@
 ﻿using AegisImplicitMail;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
@@ -42,8 +43,6 @@ namespace Odin.Global_Classes
             return transaction.ToString();
         }
 
-
-
         /// <summary> 
         /// Converts String Query to DataTable
         /// </summary> 
@@ -82,25 +81,50 @@ namespace Odin.Global_Classes
                 return ds.Tables[0];
             }
         }
-        public static DataTable getSP(string sp, params object[] parameters)
+
+        public static Dictionary<string, SqlDbType> typeMap = new Dictionary<string, SqlDbType>
         {
-            var sqlparams = new System.Collections.Generic.List<SqlParameter>();
-            SqlConnection conn = new SqlConnection(sConnStr);
-            conn.Open();
-            DataSet ds = new DataSet();
+            ["char"] = SqlDbType.NVarChar,
+            ["nchar"] = SqlDbType.NVarChar,
+            ["nvarchar"] = SqlDbType.NVarChar,
+            ["varchar"] = SqlDbType.NVarChar,
+            ["int"] = SqlDbType.Int,
+            ["smallint"] = SqlDbType.SmallInt,
+            ["bigint"] = SqlDbType.BigInt,
+            ["varbinary"] = SqlDbType.VarBinary,
+            ["bit"] = SqlDbType.Bit,
+            ["datetime"] = SqlDbType.DateTime2,
+            ["decimal"] = SqlDbType.Decimal,
+            ["float"] = SqlDbType.Float,
+            ["tinyint"] = SqlDbType.TinyInt,
+            ["table type"] = SqlDbType.Structured,
+            ["datetime"] = SqlDbType.Time
+        };
 
-            SqlDataAdapter adapter =
-                new SqlDataAdapter(
-                    $@"select PARAMETER_NAME from INFORMATION_SCHEMA.PARAMETERS
-                        where SPECIFIC_NAME = '{sp}'", conn);
-
-            conn.Close();
-            adapter.Fill(ds);
-            DataTable dt = ds.Tables[0];
+        public static object getSP(string sp, params object[] parameters)
+        {
+            var sqlparams = new List<SqlParameter>();
+            DataTable dt = QueryDT($@"select PARAMETER_NAME, PARAMETER_MODE, CHARACTER_MAXIMUM_LENGTH, DATA_TYPE from INFORMATION_SCHEMA.PARAMETERS
+                        where SPECIFIC_NAME = '{sp}'");
+            var res = true;
             if (dt.Rows.Count > 0)
                 for (int i = 0; i < dt.Rows.Count; i++)
-                    sqlparams.Add(new SqlParameter(dt.Rows[i].ItemArray[0].ToString(), parameters[i]));
-            return QuerySP(sp, sqlparams.ToArray());
+                {
+                    switch (dt.Rows[i].ItemArray[1].ToString())
+                    {
+                        case "IN":
+                            sqlparams.Add(new SqlParameter(dt.Rows[i].ItemArray[0].ToString(), parameters[i]));
+                            break;
+                        case "INOUT":
+                        case "OUT":
+                            sqlparams.Add(new SqlParameter(dt.Rows[i].ItemArray[0].ToString(), ""));
+                            sqlparams[i].Direction = ParameterDirection.Output;
+                            res = false;
+                            break;
+                    }
+                }
+                    
+            return res ? QuerySP(sp, sqlparams.ToArray()) : ExecuteSP(sp, sqlparams.ToArray());
         }
 
         /// <summary> 
@@ -113,7 +137,6 @@ namespace Odin.Global_Classes
         {
             return QueryDT(queryString, sConnStr, false, list);
         }
-
 
         /// <summary> 
         /// Converts String Query to DataTable
@@ -141,12 +164,10 @@ namespace Odin.Global_Classes
             }
         }
 
-
         public static DataTable QueryDTstring(string sQueryString)
         {
             return QueryDT(sQueryString);
         }
-
 
         /// <summary> 
         /// Converts String Query to DataTable with paramaters
@@ -190,8 +211,6 @@ namespace Odin.Global_Classes
             return QueryStorProc(sQueryString, sConnStr, list);
         }
 
-
-
         /// <summary> 
         /// Returns one record 
         /// </summary> 
@@ -220,8 +239,6 @@ namespace Odin.Global_Classes
             }
         }
 
-
-
         /// <summary> 
         /// Returns one record 
         /// </summary> 
@@ -229,7 +246,6 @@ namespace Odin.Global_Classes
         {
             return GetRecord(sQueryString, sConnStr, list);
         }
-
 
         /// <summary> 
         /// Executes stored procedure
@@ -252,9 +268,6 @@ namespace Odin.Global_Classes
                 return outParam != null ? outParam.Value : isRowsAffected == 1;
             }
         }
-
-
-
 
         /// <summary> 
         /// Executes stored procedure
@@ -285,7 +298,6 @@ namespace Odin.Global_Classes
             }
         }
 
-
         /// <summary> 
         /// Executes query string
         ///  "delete from table where id = @id ";
@@ -294,7 +306,6 @@ namespace Odin.Global_Classes
         {
             return ExecuteQueryString(sQueryString, sConnStr, list);
         }
-
 
         #endregion
 
@@ -593,15 +604,11 @@ namespace Odin.Global_Classes
             mymessage.Headers.Add("Content-type", "text/html; charset=utf-8");
             //mymessage.Body = frmMail.Message;
 
-
-
             string[] arr = Message.Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
             string _tmpmessage = arr.FirstOrDefault();
 
             for (int i = 1; i < arr.Length; i++)
-            {
                 _tmpmessage = _tmpmessage + "<br>" + arr[i].ToString();
-            }
 
             mymessage.Body = "<html>" +
                         "<body>" +
@@ -615,13 +622,11 @@ namespace Odin.Global_Classes
             string[] arr1 = Attachments.Split(';');
 
             for (int i = 0; i < arr1.Length; i++)
-            {
                 if (!String.IsNullOrEmpty(arr1[i].ToString().Trim()))
                 {
                     attachment = new MimeAttachment(arr1[i].ToString().Trim());
                     mymessage.Attachments.Add(attachment);
                 }
-            }
 
             //Create Smtp Client
             var mailer = new MimeMailer(host, 465);
@@ -635,8 +640,6 @@ namespace Odin.Global_Classes
             mailer.SendCompleted += compEvent;
             mailer.SendMailAsync(mymessage);
         }
-
-
 
         public void compEvent(object sender, AsyncCompletedEventArgs e)
         {
@@ -686,7 +689,6 @@ namespace Odin.Global_Classes
         //Converts the DataGridView to DataTable
         public static DataTable DataGridViewToDataTable(DataGridView dgv, String tblName, int minRow)
         {
-
             DataTable dt = new DataTable(tblName);
 
             // Header columns
@@ -702,9 +704,7 @@ namespace Odin.Global_Classes
                 DataGridViewRow row = dgv.Rows[i];
                 DataRow dr = dt.NewRow();
                 for (int j = 0; j < dgv.Columns.Count; j++)
-                {
                     dr[j] = (row.Cells[j].Value == null) ? "" : row.Cells[j].Value.ToString();
-                }
                 dt.Rows.Add(dr);
             }
 
@@ -713,9 +713,7 @@ namespace Odin.Global_Classes
             {
                 DataRow dr = dt.NewRow();
                 for (int j = 0; j < dt.Columns.Count; j++)
-                {
                     dr[j] = "  ";
-                }
                 dt.Rows.Add(dr);
             }
             return dt;
@@ -758,11 +756,7 @@ namespace Odin.Global_Classes
             //        }
             //    }
             //}
-
         }
-
-
-
 
         public static DialogResult InputBox(string title, string promptText, ref string value)
         {
@@ -841,7 +835,6 @@ namespace Odin.Global_Classes
             return newImage;
         }
 
-
         /// <summary>
         /// Aligns in the center required control
         /// </summary>
@@ -869,9 +862,7 @@ namespace Odin.Global_Classes
             return gv_List.SortOrder == System.Windows.Forms.SortOrder.Ascending
                 ? ListSortDirection.Ascending
                 : ListSortDirection.Descending;
-
         }
-
 
         /// <summary> 
         /// Restores DataGridView sort direction
@@ -880,7 +871,6 @@ namespace Odin.Global_Classes
             ListSortDirection sortDir)
         {
             if (oldColumn != null)
-            {
                 //try
                 //{
                gv_List.ThreadSafeCall(delegate
@@ -894,10 +884,8 @@ namespace Odin.Global_Classes
                });
                 //}
                 //catch { }
-            }
         }
 
         #endregion
-
     }
 }
