@@ -37,18 +37,17 @@
             this.SecName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Analog = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CpseMark = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SpoilNorm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SpoilConst = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Stage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UnigueRow = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Positions = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ArtType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Supplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SupArticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DN = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CustCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DateCreation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Indate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_Excel = new System.Windows.Forms.ToolStripButton();
             this.bs_List = new Odin.Global_Classes.SyncBindingSource();
             this.bn_List = new System.Windows.Forms.BindingNavigator(this.components);
@@ -93,17 +92,16 @@
             this.SecName,
             this.Analog,
             this.Qty,
-            this.CpseMark,
+            this.DateCreation,
             this.Comments,
-            this.SpoilNorm,
             this.SpoilConst,
             this.Stage,
-            this.UnigueRow,
             this.Positions,
             this.ArtType,
             this.Supplier,
             this.SupArticle,
             this.DN,
+            this.Indate,
             this.CustCode});
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_List.Location = new System.Drawing.Point(0, 77);
@@ -144,9 +142,9 @@
             // 
             // CpseMark
             // 
-            this.CpseMark.DataPropertyName = "CpseMark";
-            this.CpseMark.HeaderText = "CpseMark";
-            this.CpseMark.Name = "CpseMark";
+            this.DateCreation.DataPropertyName = "DateCreation";
+            this.DateCreation.HeaderText = "DateCreation";
+            this.DateCreation.Name = "DateCreation";
             // 
             // Comments
             // 
@@ -156,9 +154,9 @@
             // 
             // SpoilNorm
             // 
-            this.SpoilNorm.DataPropertyName = "SpoilNorm";
-            this.SpoilNorm.HeaderText = "SpoilNorm";
-            this.SpoilNorm.Name = "SpoilNorm";
+            this.Indate.DataPropertyName = "indate";
+            this.Indate.HeaderText = "Indate";
+            this.Indate.Name = "Indate";
             // 
             // SpoilConst
             // 
@@ -171,12 +169,6 @@
             this.Stage.DataPropertyName = "Stage";
             this.Stage.HeaderText = "Stage";
             this.Stage.Name = "Stage";
-            // 
-            // UnigueRow
-            // 
-            this.UnigueRow.DataPropertyName = "UnigueRow";
-            this.UnigueRow.HeaderText = "UnigueRow";
-            this.UnigueRow.Name = "UnigueRow";
             // 
             // Positions
             // 
@@ -317,12 +309,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn SecName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Analog;
         private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CpseMark;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DateCreation;
         private System.Windows.Forms.DataGridViewTextBoxColumn Comments;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SpoilNorm;
         private System.Windows.Forms.DataGridViewTextBoxColumn SpoilConst;
         private System.Windows.Forms.DataGridViewTextBoxColumn Stage;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UnigueRow;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Indate;
         private System.Windows.Forms.DataGridViewTextBoxColumn Positions;
         private System.Windows.Forms.DataGridViewTextBoxColumn ArtType;
         private System.Windows.Forms.DataGridViewTextBoxColumn Supplier;

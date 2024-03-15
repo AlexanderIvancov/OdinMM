@@ -22,6 +22,7 @@ namespace Odin.Register.Articles
             {
                 _batchid = value;
                 ShowDets(_batchid);
+                SetCellsColor();
             }
         }
 
@@ -36,6 +37,7 @@ namespace Odin.Register.Articles
             {
                 _lock = value;
                 ShowDets(_batchid);
+                SetCellsColor();
             }
 
         }
@@ -52,7 +54,7 @@ namespace Odin.Register.Articles
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
-
+                SetCellsColor();
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
             });
 
@@ -62,7 +64,18 @@ namespace Odin.Register.Articles
             });
 
         }
-
+        public void SetCellsColor()
+        {
+            foreach (DataGridViewRow row in this.gv_List.Rows)
+                if (row.Cells["Indate"].Value.ToString() != "") {
+                    if (Convert.ToDateTime(row.Cells["Indate"].Value) >= Convert.ToDateTime(row.Cells["DateCreation"].Value))
+                        foreach (DataGridViewCell cell in row.Cells)
+                            cell.Style.BackColor = System.Drawing.Color.Yellow;
+                }
+            else
+                foreach (DataGridViewCell cell in row.Cells)
+                    cell.Style.BackColor = System.Drawing.Color.Tomato;
+        }
         private void btn_Excel_Click(object sender, EventArgs e)
         {
             ExportData ED;
@@ -77,11 +90,13 @@ namespace Odin.Register.Articles
         private void cmb_Batches1_BatchesChanged(object sender)
         {
             BatchId = cmb_Batches1.BatchId;
+            SetCellsColor();
         }
 
         private void kryptonCheckBox1_CheckedChanged(object sender, EventArgs e)
         {
             Lock = Lock == -1 ? 0 : -1;
+            SetCellsColor();
         }
     }
 }

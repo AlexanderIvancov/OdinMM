@@ -1941,7 +1941,7 @@ namespace Odin.Register
         }
         public DataTable SelectBatchBOMData(int Id, int Check)
         {
-            return Helper.QueryDT("execute [sp_SelectBatchBOM] @batchid = " + Id + ", @nullcheck =" + Check);
+            return Helper.QueryDT("execute [sp_SelectBatchBOMNew] @batchid = " + Id + ", @nullcheck =" + Check);
         }
 
         public void AddBOMSetup(int artid, int tooltypeid, int toolid, int required, double qty, string comments)
