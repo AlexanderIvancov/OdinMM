@@ -65,7 +65,7 @@ namespace Odin.Register.Articles
 
         public void FillList()
         {
-            var data = Reg.ArticleAnaloguesData(ArtId, ArtCSEId);
+            var data = (System.Data.DataTable)Helper.getSP("sp_SelectArticleAnalogues", ArtId, ArtCSEId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -81,12 +81,10 @@ namespace Odin.Register.Articles
 
             });
 
-
             bn_List.ThreadSafeCall(delegate
             {
                 bn_List.BindingSource = bs_List;
             });
-
         }
 
         private void btn_OK_Click(object sender, EventArgs e)
@@ -97,7 +95,6 @@ namespace Odin.Register.Articles
             try
             {
                 _analogid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_analogid"].Value);
-               
             }
             catch { }
 
@@ -105,14 +102,10 @@ namespace Odin.Register.Articles
                 && ArtCSEId != 0
                 && ArtId != 0)
             {
-                Reg.AddAnalogToBOM(ArtCSEId, ArtId, _analogid);
-
+                Helper.getSP("sp_AddBOMAnalog", ArtCSEId, ArtId, _analogid);
                 AnalogChanged?.Invoke(this);
-
             }
         }
-
-
 
         #endregion
 
@@ -126,7 +119,7 @@ namespace Odin.Register.Articles
             if (result == DialogResult.OK
                   && ArtId != 0)
             {
-                Reg.AddAnalog(ArtId, frm.AnalogId, frm.CustomerId, frm.Comments, frm.ProductId);
+                Helper.getSP("sp_AddAnalog", ArtId, frm.AnalogId, frm.CustomerId, frm.Comments, frm.ProductId);
                 FillList();
             }
 
@@ -163,7 +156,7 @@ namespace Odin.Register.Articles
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    Reg.EditAnalog(_id, frm.AnalogId, frm.CustomerId, frm.Comments, frm.ProductId);
+                    Helper.getSP("sp_EditAnalog", _id, frm.AnalogId, frm.CustomerId, frm.Comments, frm.ProductId);
                     FillList();
                 }
             }
@@ -186,7 +179,7 @@ namespace Odin.Register.Articles
             if (_id != 0
                 && glob_Class.DeleteConfirm() == true)
             {
-                Reg.DeleteAnalog(_id);
+                Helper.getSP("sp_DeleteAnalog", _id);
                 FillList();
             }
 

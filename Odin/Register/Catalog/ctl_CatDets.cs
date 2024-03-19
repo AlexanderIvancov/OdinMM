@@ -41,7 +41,7 @@ namespace Odin.Register.Catalog
 
         public void FillCatalog(int ArtId)
         {
-            var data = Reg_BLL.getCatalogArticle(ArtId);
+            var data = (System.Data.DataTable)Helper.getSP("sp_CatalogArtList", ArtId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -51,7 +51,6 @@ namespace Odin.Register.Catalog
 
                 SetCellsColor();
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -63,9 +62,9 @@ namespace Odin.Register.Catalog
         {
             int NewLineId = 0;
 
-            NewLineId = BLL.AddCatalogItem(frm.BargType, frm.ArticleId, frm.FirmId, frm.FirmArt, frm.UnitId, frm.UnitPrice, frm.CurId, frm.Manufacturer, frm.Comments,
+            NewLineId = Convert.ToInt32(Helper.getSP("sp_AddCatalogItem", frm.BargType, frm.ArticleId, frm.FirmId, frm.FirmArt, frm.UnitId, frm.UnitPrice, frm.CurId, frm.Manufacturer, frm.Comments,
                                             frm.DelivTerms, frm.MOQ, frm.MPQ, frm.AsDefault, "", Convert.ToInt32(frm.Vat), frm.MinExpDays, frm.CoefConv, frm.DataCode, 
-                                            frm.DelivTermTxt, frm.Quoted, frm.BarCode, frm.ForCustomer);
+                                            frm.DelivTermTxt, frm.Quoted, frm.BarCode, frm.ForCustomer));
 
             FillCatalog(ArticleId);
 
@@ -74,24 +73,21 @@ namespace Odin.Register.Catalog
 
         public void CatEdited(object sender)
         {
-            BLL.EditCatalogItem(frm.CatID, frm.BargType, frm.ArticleId, frm.FirmId, frm.FirmArt, frm.UnitId, frm.UnitPrice, frm.CurId, frm.Manufacturer, frm.Comments,
+            Helper.getSP("sp_EditCatalogItem", frm.CatID, frm.BargType, frm.ArticleId, frm.FirmId, frm.FirmArt, frm.UnitId, frm.UnitPrice, frm.CurId, frm.Manufacturer, frm.Comments,
                                             frm.DelivTerms, frm.MOQ, frm.MPQ, frm.AsDefault, "", Convert.ToInt32(frm.Vat), frm.MinExpDays, frm.CoefConv, frm.DataCode,
                                             frm.DelivTermTxt, frm.Quoted, frm.BarCode, frm.ForCustomer);
             BLL.CatId = frm.CatID;
             FillCatalog(ArticleId);
             
-
             frm.Close();
         }
 
         public void SetCellsColor()
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 row.Cells["cn_firmart"].Style.BackColor = Convert.ToInt32(row.Cells["cn_bargtype"].Value) == -1
                     ? Color.Yellow
                     : Convert.ToInt32(row.Cells["cn_bargtype"].Value) == 1 ? Color.LightGreen : Color.Aqua;
-            }
         }
 
         private void btn_Add_Click(object sender, EventArgs e)
@@ -138,7 +134,6 @@ namespace Odin.Register.Catalog
 
                 frm.CatSaved += new CatSavedEventHandler(CatEdited);
                 
-
                 frm.Show(); frm.GetKryptonFormFields();
             }
         }
@@ -152,7 +147,7 @@ namespace Odin.Register.Catalog
             if (glob_Class.DeleteConfirm() == true
                 && _id != 0)
             {
-                BLL.DeleteCatalogItem(_id);
+                Helper.getSP("sp_DeleteCatalogItem", _id);
 
                 FillCatalog(ArticleId);
             }

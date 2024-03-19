@@ -1,9 +1,7 @@
 ﻿using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
-using Odin.Register;
 using System;
 using System.Windows.Forms;
-
 
 namespace Odin.CMB_Components.Addresses
 {
@@ -25,14 +23,13 @@ namespace Odin.CMB_Components.Addresses
         {
             try
             {
-                ((cmb_Address)cmb_AddressOne).txt_Address.Text = gv_List.CurrentRow.Cells["cn_address"].Value.ToString();
-                ((cmb_Address)cmb_AddressOne).AddressId = (Int32)gv_List.CurrentRow.Cells["cn_id"].Value;
+                (cmb_AddressOne).txt_Address.Text = gv_List.CurrentRow.Cells["cn_address"].Value.ToString();
+                (cmb_AddressOne).AddressId = (Int32)gv_List.CurrentRow.Cells["cn_id"].Value;
             }
             catch { }
         }
 
         class_Global glob_Class = new class_Global();
-        Reg_BLL Bll = new Reg_BLL();
         
         bool _showingModal = false;
         cmb_Address f;
@@ -45,12 +42,11 @@ namespace Odin.CMB_Components.Addresses
 
         public void FillData(int FirmId, int Legal, int DelivPlace)
         {
-            var data = Reg_BLL.getAddresses(FirmId, Legal, DelivPlace);
+            var data = (System.Data.DataTable)Helper.getSP("sp_AddressesList", FirmId, Legal, DelivPlace);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
             gv_List.DataSource = bs_List;
-
         }
 
         private void gv_List_SelectionChanged(object sender, EventArgs e)
@@ -60,7 +56,7 @@ namespace Odin.CMB_Components.Addresses
 
         private void gv_List_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

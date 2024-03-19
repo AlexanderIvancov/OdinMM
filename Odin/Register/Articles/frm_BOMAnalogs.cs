@@ -45,7 +45,7 @@ namespace Odin.Register.Articles
 
         public void FillList()
         {
-            var data = Reg.BOMAnalogs(CSEId, CSTId);
+            var data = (System.Data.DataTable)Helper.getSP("sp_SelectBOMAnalogs", CSEId, CSTId);
 
             gv_List.ThreadSafeCall(delegate
                 {
@@ -54,12 +54,10 @@ namespace Odin.Register.Articles
                     gv_List.DataSource = bs_List;
                 });
 
-
             bn_List.ThreadSafeCall(delegate
             {
                 bn_List.BindingSource = bs_List;
             });
-            
         }
 
         #endregion
@@ -75,10 +73,9 @@ namespace Odin.Register.Articles
             if (result == DialogResult.OK
                 && frm.ArticleId != 0)
             {
-                Reg.SaveBOMAnalog(0, CSEId, CSTId, frm.ArticleId, frm.Comments);
+                Helper.getSP("sp_SaveBOMAnalog", 0, CSEId, CSTId, frm.ArticleId, frm.Comments);
                 FillList();
             }
-
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -105,11 +102,10 @@ namespace Odin.Register.Articles
                 if (result == DialogResult.OK
                     && frm.ArticleId != 0)
                 {
-                    Reg.SaveBOMAnalog(_id, CSEId, CSTId, frm.ArticleId, frm.Comments);
+                    Helper.getSP("sp_SaveBOMAnalog", _id, CSEId, CSTId, frm.ArticleId, frm.Comments);
                     FillList();
                 }
             }
-
         }
 
         private void btn_Delete_Click(object sender, EventArgs e)
@@ -119,17 +115,15 @@ namespace Odin.Register.Articles
             try
             {
                 _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
-              
             }
             catch { }
             if (_id != 0
                 && glob_Class.DeleteConfirm())
             {
-                Reg.DeleteBOMAnalog(_id);
+                Helper.getSP("sp_DeleteBOMAnalog", _id);
                 FillList();
             }
         }
-
 
         private void frm_BOMAnalogs_FormClosing(object sender, FormClosingEventArgs e)
         {

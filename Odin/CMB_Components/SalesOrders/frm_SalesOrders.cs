@@ -93,15 +93,12 @@ namespace Odin.CMB_Components.SalesOrders
             if (result == DialogResult.OK)
             {
                 _showingModal = false;
-                int _res = COBll.AddSalesOrderHead(frm.CustId, frm.ContPersId, frm.Comments, frm.Contract, frm.CurId, frm.IncotermsId);
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddSalesOrderHead", frm.CustId, frm.ContPersId, frm.Comments, frm.Contract, frm.CurId, frm.IncotermsId));
                 FillData(frm.SalesOrder);
                 ((cmb_SalesOrders)cmb_SalesOrderOne).SalesOrdersSendSave();
             }
             if (result == DialogResult.Cancel)
-            {
                 _showingModal = false;
-            }
-            
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -137,9 +134,7 @@ namespace Odin.CMB_Components.SalesOrders
                     FillData(frm.SalesOrder);
                 }
                 if (result == DialogResult.Cancel)
-                {
                     _showingModal = false;
-                }
             }
         }
 

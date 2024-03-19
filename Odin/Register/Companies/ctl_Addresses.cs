@@ -37,7 +37,7 @@ namespace Odin.Register.Companies
 
         public void FillAddresses(int Id)
         {
-            var data = Reg_BLL.getAddressesFull(Id);
+            var data = (System.Data.DataTable)Helper.getSP("sp_AddressesListFull", Id);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -48,7 +48,6 @@ namespace Odin.Register.Companies
                 SetCellsColor();
             });
 
-
             bn_List.ThreadSafeCall(delegate
             {
                 bn_List.BindingSource = bs_List;
@@ -58,15 +57,9 @@ namespace Odin.Register.Companies
         public void SetCellsColor()
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 if (Convert.ToInt32(row.Cells["cn_isactive"].Value) == 0)
-                {
                     foreach (DataGridViewCell cell in row.Cells)
-                    {
                         cell.Style.BackColor = Color.Silver;
-                    }
-                }
-            }
         }
 
         private void btn_Add_Click(object sender, EventArgs e)
@@ -78,8 +71,8 @@ namespace Odin.Register.Companies
 
             if (result == DialogResult.OK)
             {
-                int _res = BLL.AddAddress(FirmId, frm.CountryId, frm.RegionState, frm.City, frm.ZIPcode, frm.Street, frm.House, frm.LegalAddress,
-                              frm.ActualAddress, frm.DefaultDelivPlace, frm.Comments, frm.IsActive);
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddAddress", FirmId, frm.CountryId, frm.RegionState, frm.City, frm.ZIPcode, frm.Street, frm.House, frm.LegalAddress,
+                              frm.ActualAddress, frm.DefaultDelivPlace, frm.Comments, frm.IsActive));
 
                 FillAddresses(FirmId);
             }
@@ -114,7 +107,7 @@ namespace Odin.Register.Companies
 
                 if (result == DialogResult.OK)
                 {
-                    BLL.EditAddress(frm.Id, FirmId, frm.CountryId, frm.RegionState, frm.City, frm.ZIPcode, frm.Street, frm.House, frm.LegalAddress,
+                    Helper.getSP("sp_EditAddress", frm.Id, FirmId, frm.CountryId, frm.RegionState, frm.City, frm.ZIPcode, frm.Street, frm.House, frm.LegalAddress,
                                   frm.ActualAddress, frm.DefaultDelivPlace, frm.Comments, frm.IsActive);
 
                     FillAddresses(FirmId);
@@ -132,7 +125,7 @@ namespace Odin.Register.Companies
             if (glob_Class.DeleteConfirm() == true
                 && _id != 0)
             {
-                BLL.DeleteAddress(_id);
+                Helper.getSP("sp_DeleteAddress", _id);
                 FillAddresses(FirmId);
             }
         }
@@ -152,9 +145,7 @@ namespace Odin.Register.Companies
             {
                 string Link = "https://www.google.com/maps/search/" + BLL.AddFullAddress;
                 if (glob_Class.NES(Link) != "")
-                {
                     System.Diagnostics.Process.Start(Link);
-                }
             }
         }
 

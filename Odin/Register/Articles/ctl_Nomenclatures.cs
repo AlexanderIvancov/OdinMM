@@ -97,7 +97,7 @@ namespace Odin.Register.Articles
         private void AddNodeByValue(int Id)
         {
 
-            var data = BLL.BOMDetailsData(Id);
+            var data = (DataTable)Helper.getSP("sp_BOMDetails", Id);
 
             foreach (DataRow dr in data.AsEnumerable().OrderBy(d => d.Field<int>("LineNumber")))
             {
@@ -214,8 +214,8 @@ namespace Odin.Register.Articles
 
             if (result == DialogResult.OK)
             {
-                var insertedId = BLL.AddBOMLine(frm.IdCSE, frm.IdCST, frm.Number, frm.Qty, frm.Using,
-                                                    frm.Comments, frm.SpoilConst, frm.SpoilPerc, frm.StageId, frm.Positions);
+                var insertedId = Convert.ToInt32(Helper.getSP("sp_AddBOMLine", frm.IdCSE, frm.IdCST, frm.Number, frm.Qty, frm.Using,
+                                                    frm.Comments, frm.SpoilConst, frm.SpoilPerc, frm.StageId, frm.Positions));
                 var id = BLL.IdCstById(insertedId);
                 AddNodeByValue(ArtId);
                 EnableDisableButtons();
@@ -240,8 +240,8 @@ namespace Odin.Register.Articles
 
             if (result == DialogResult.OK)
             {
-                var insertedId = BLL.AddBOMLine(frm.IdCSE, frm.IdCST, frm.Number, frm.Qty, frm.Using,
-                                                frm.Comments, frm.SpoilConst, frm.SpoilPerc, frm.StageId, frm.Positions);
+                var insertedId = Convert.ToInt32(Helper.getSP("sp_AddBOMLine", frm.IdCSE, frm.IdCST, frm.Number, frm.Qty, frm.Using,
+                                                frm.Comments, frm.SpoilConst, frm.SpoilPerc, frm.StageId, frm.Positions));
                 var currentNode = tv_BOM.CurrentNode;
 
 
@@ -306,8 +306,8 @@ namespace Odin.Register.Articles
                 BLL.IncreaseBOMNumbers(Convert.ToInt32(parentId.Rows[0]["IdCSE"]),
                                             Convert.ToInt32(tv_BOM.CurrentRow.Cells["cn_num"].Value));
 
-                var insertedId = BLL.AddBOMLine(frm.IdCSE, frm.IdCST, frm.Number, frm.Qty, frm.Using,
-                                                 frm.Comments, frm.SpoilConst, frm.SpoilPerc, frm.StageId, frm.Positions);
+                var insertedId = Convert.ToInt32(Helper.getSP("sp_AddBOMLine", frm.IdCSE, frm.IdCST, frm.Number, frm.Qty, frm.Using,
+                                                 frm.Comments, frm.SpoilConst, frm.SpoilPerc, frm.StageId, frm.Positions));
 
                 var currentNode = tv_BOM.CurrentNode;
                 int deleteNodeLevel = currentNode.Level;
@@ -368,7 +368,7 @@ namespace Odin.Register.Articles
                 var deleteNodeLevel = currentNode.Level;
                 var parentNode = tv_BOM.CurrentNode.Parent;
 
-                BLL.EditBOMLine(Convert.ToInt32(tv_BOM.CurrentRow.Cells["cn_id"].Value),
+                Helper.getSP("sp_EditBOMLine", Convert.ToInt32(tv_BOM.CurrentRow.Cells["cn_id"].Value),
                     frm.IdCST, frm.Number, frm.Qty, frm.Using,
                     frm.Comments, frm.SpoilConst, frm.SpoilPerc, frm.StageId, frm.Positions);
 
@@ -410,7 +410,7 @@ namespace Odin.Register.Articles
 
             if (result == DialogResult.OK)
             {
-                BLL.CopyBOM(ArtId, frm.ArticleId);
+                Helper.getSP("sp_CopyBOM", ArtId, frm.ArticleId);
                 cmb_Articles1.ArticleId = frm.ArticleId;
             }
         }
@@ -426,7 +426,6 @@ namespace Odin.Register.Articles
                 var ancestorNode = tv_BOM.CurrentNode.Parent;
                 var ancestorArticle = deleteNodeLevel == 1 ? string.Empty : Convert.ToString(ancestorNode.Cells["cn_article"].Value);
 
-
                 int _id = 0;
                 try { _id = Convert.ToInt32(tv_BOM.CurrentRow.Cells["cn_id"].Value); }
                 catch { _id = 0; }
@@ -434,7 +433,7 @@ namespace Odin.Register.Articles
                 {
                     var parentId = BLL.FindParent(_id);
                     //BLL.DecreaseBOMNumbers(Convert.ToInt32(parentId.Rows[0]["IdCSE"]), Convert.ToInt32(tv_BOM.CurrentRow.Cells["cn_num"].Value));
-                    BLL.DeleteBOMLine(_id);
+                    Helper.getSP("sp_DeleteBOMLineById", _id);
                     
                 }
 
@@ -466,7 +465,7 @@ namespace Odin.Register.Articles
                 HelperTreeGrid.RemoveExampleNode(node);
 
                 var Id = (int)node.Cells["cn_artid"].Value;
-                var data = BLL.BOMDetailsData(Id);
+                var data = (DataTable)Helper.getSP("sp_BOMDetails", Id);
 
 
                 foreach (System.Data.DataRow dr in data.AsEnumerable().OrderBy(d => d.Field<int>("LineNumber")))

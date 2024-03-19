@@ -125,7 +125,7 @@ namespace Odin.Register.Articles
 
         public void ShowDets()
         {
-            var data = Reg.getArticleRationings(ArtId);
+            var data = (DataTable)Helper.getSP("sp_SelectArticleRatios", ArtId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -362,7 +362,7 @@ namespace Odin.Register.Articles
                 }
 
                 Reg.SaveArticleRatio(ArtId, dataratios);
-                Reg.SaveArticleSMTType(ArtId, SMTType);
+                Helper.getSP("sp_SaveArticleSMTType", ArtId, SMTType);
 
                 cmb_Articles1.ArticleId = ArtId;
 

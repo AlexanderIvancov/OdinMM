@@ -109,7 +109,6 @@ namespace Odin.Global_Classes
             var res = true;
             if (dt.Rows.Count > 0)
                 for (int i = 0; i < dt.Rows.Count; i++)
-                {
                     switch (dt.Rows[i].ItemArray[1].ToString())
                     {
                         case "IN":
@@ -122,7 +121,6 @@ namespace Odin.Global_Classes
                             res = false;
                             break;
                     }
-                }
                     
             return res ? QuerySP(sp, sqlparams.ToArray()) : ExecuteSP(sp, sqlparams.ToArray());
         }

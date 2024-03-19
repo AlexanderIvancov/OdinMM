@@ -32,29 +32,20 @@ namespace Odin.Register.Catalog
         public void SetCellsColor()
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 if (row.Cells["cn_typechange"].Value.ToString() == "deleted")
-                {
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.LightCoral;
-                }
                 else if (row.Cells["cn_typechange"].Value.ToString() == "inserted")
-                {
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.FromArgb(192, 255, 192);
-                }
                 else
-                {
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Plum;
-                }
-
-            }
         }
 
         public void FillHistory(int ArtId)
         {
-            var data = Reg_BLL.getCatalogHistory(ArtId);
+            var data = (System.Data.DataTable)Helper.getSP("sp_SelectCatalogHistory", ArtId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -64,7 +55,6 @@ namespace Odin.Register.Catalog
 
                 //SetCellsColor();
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {

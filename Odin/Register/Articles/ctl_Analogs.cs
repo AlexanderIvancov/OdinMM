@@ -44,7 +44,7 @@ namespace Odin.Register.Articles
 
         public void ShowDets()
         {
-            var data = Reg.ArticleAnaloguesData(ArtId, ArtCseId);
+            var data = (System.Data.DataTable)Helper.getSP("sp_SelectArticleAnalogues", ArtId, ArtCseId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -84,7 +84,7 @@ namespace Odin.Register.Articles
             if (result == DialogResult.OK
                   && ArtId != 0)
             {
-                Reg.AddAnalog(ArtId, frm.AnalogId, frm.CustomerId, frm.Comments, frm.ProductId);
+                Helper.getSP("sp_AddAnalog", ArtId, frm.AnalogId, frm.CustomerId, frm.Comments, frm.ProductId);
                 ShowDets();
             }
         }
@@ -117,7 +117,7 @@ namespace Odin.Register.Articles
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    Reg.EditAnalog (_id, frm.AnalogId, frm.CustomerId, frm.Comments, frm.ProductId);
+                    Helper.getSP("sp_EditAnalog", _id, frm.AnalogId, frm.CustomerId, frm.Comments, frm.ProductId);
                     ShowDets();
                 }
             }
@@ -141,7 +141,7 @@ namespace Odin.Register.Articles
             if (_id != 0
                 && glob_Class.DeleteConfirm() == true)
             {
-                Reg.DeleteAnalog(_id);
+                Helper.getSP("sp_DeleteAnalog", _id);
                 ShowDets();
             }
         }

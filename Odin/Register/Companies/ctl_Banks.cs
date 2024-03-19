@@ -33,16 +33,14 @@ namespace Odin.Register.Companies
         }
         public void FillAccounts(int Firmid)
         {
-            var data = Reg_BLL.getAccounts(Firmid);
+            var data = (System.Data.DataTable)Helper.getSP("sp_AccountsList", Firmid);
 
             gv_List.ThreadSafeCall(delegate
             {
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
-
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -59,8 +57,7 @@ namespace Odin.Register.Companies
 
             if (result == DialogResult.OK)
             {
-                int _res = BLL.AddAccount(FirmId, frm.BankId, frm.CurrencyId, frm.Account, frm.AsDefault, frm.Comments);
-
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddAccount", FirmId, frm.BankId, frm.CurrencyId, frm.Account, frm.AsDefault, frm.Comments));
                 FillAccounts(FirmId);
             }
         }
@@ -89,8 +86,7 @@ namespace Odin.Register.Companies
 
                 if (result == DialogResult.OK)
                 {
-                    BLL.EditAccount(frm.Id, frm.FirmId, frm.BankId, frm.CurrencyId, frm.Account, frm.AsDefault, frm.Comments);
-
+                    Helper.getSP("sp_EditAccount", frm.Id, frm.FirmId, frm.BankId, frm.CurrencyId, frm.Account, frm.AsDefault, frm.Comments);
                     FillAccounts(FirmId);
                 }
             }
@@ -105,7 +101,7 @@ namespace Odin.Register.Companies
             if (glob_Class.DeleteConfirm() == true
                 && _id != 0)
             {
-                BLL.DeleteAccount(_id);
+                Helper.getSP("sp_DeleteAccount", _id);
                 FillAccounts(FirmId);
             }
         }

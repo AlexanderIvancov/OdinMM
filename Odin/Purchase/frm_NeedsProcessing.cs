@@ -348,11 +348,11 @@ namespace Odin.Purchase
 
             int NewLineId = 0;
 
-            NewLineId = RegBll.AddCatalogItem(frmcat.BargType, frmcat.ArticleId, frmcat.FirmId, frmcat.FirmArt, 
+            NewLineId = Convert.ToInt32(Helper.getSP("sp_AddCatalogItem", frmcat.BargType, frmcat.ArticleId, frmcat.FirmId, frmcat.FirmArt, 
                                             frmcat.UnitId, frmcat.UnitPrice, frmcat.CurId, frmcat.Manufacturer, frmcat.Comments,
                                             frmcat.DelivTerms, frmcat.MOQ, frmcat.MPQ, frmcat.AsDefault, "",
                                             Convert.ToInt32(frmcat.Vat), frmcat.MinExpDays, frmcat.CoefConv, frmcat.DataCode, frmcat.DelivTermTxt, 
-                                            frmcat.Quoted, frmcat.BarCode, frmcat.ForCustomer);
+                                            frmcat.Quoted, frmcat.BarCode, frmcat.ForCustomer));
 
             TreeGridNode node = tv_Details.CurrentNode;
             if (node.Level == 2)

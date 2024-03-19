@@ -79,7 +79,7 @@ namespace Odin.Register.Articles
 
         private void btn_Refresh_Click(object sender, EventArgs e)
         {
-            var data = Reg_BLL.getAssemblingAnalyzis();
+            var data = (System.Data.DataTable)Helper.getSP("sp_SelectAssemblies");
 
             gv_ResList.ThreadSafeCall(delegate
             {

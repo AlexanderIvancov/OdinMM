@@ -319,7 +319,7 @@ namespace Odin.Warehouse.Inventory
 
                 if (result == DialogResult.OK)
                 {
-                    RegBll.AddProperty(0, Label, frm.CategoryId, frm.Value, frm.Comments);
+                    Helper.getSP("sp_AddProperty", 0, Label, frm.CategoryId, frm.Value, frm.Comments);
 
                     FillSpecs(Label);
                 }
@@ -349,7 +349,7 @@ namespace Odin.Warehouse.Inventory
 
                 if (result == DialogResult.OK)
                 {
-                    RegBll.EditProperty(_id, 0, Label, frm.CategoryId, frm.Value, frm.Comments);
+                    Helper.getSP("sp_EditProperty", _id, 0, Label, frm.CategoryId, frm.Value, frm.Comments);
 
                     FillSpecs(Label);
                 }
@@ -365,7 +365,7 @@ namespace Odin.Warehouse.Inventory
 
             if (_id != 0 && globClass.DeleteConfirm() == true)
             {
-                RegBll.DeleteProperty(_id);
+                Helper.getSP("sp_DeleteProperty", _id);
                 FillSpecs(Label);
             }
         }

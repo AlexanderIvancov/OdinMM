@@ -33,23 +33,20 @@ namespace Odin.Register.Companies
         }
         public void FillContacts(int Firmid)
         {
-            var data = Reg_BLL.getContacts(FirmId);
+            var data = (System.Data.DataTable)Helper.getSP("sp_ContactsList", FirmId);
 
             gv_List.ThreadSafeCall(delegate
             {
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
-
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
                 bn_List.BindingSource = bs_List;
             });
         }
-
 
         private void cmb_Firms1_FirmsChanged(object sender)
         {
@@ -65,7 +62,7 @@ namespace Odin.Register.Companies
 
             if (result == DialogResult.OK)
             {
-                int _res = BLL.AddContact(FirmId, frm.FullName, frm.JobTitle, frm.Email, frm.Phone, frm.Fax, frm.Comments);
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddContact", FirmId, frm.FullName, frm.JobTitle, frm.Email, frm.Phone, frm.Fax, frm.Comments));
 
                 FillContacts(FirmId);
             }
@@ -96,7 +93,7 @@ namespace Odin.Register.Companies
 
                 if (result == DialogResult.OK)
                 {
-                    BLL.EditContact(frm.Id, FirmId, frm.FullName, frm.JobTitle, frm.Email, frm.Phone, frm.Fax, frm.Comments);
+                    Helper.getSP("sp_EditContact", frm.Id, FirmId, frm.FullName, frm.JobTitle, frm.Email, frm.Phone, frm.Fax, frm.Comments);
 
                     FillContacts(FirmId);
                 }
@@ -112,7 +109,7 @@ namespace Odin.Register.Companies
             if (glob_Class.DeleteConfirm() == true
                 && _id != 0)
             {
-                BLL.DeleteContact(_id);
+                Helper.getSP("sp_DeleteContact", _id);
                 FillContacts(FirmId);
             }
         }

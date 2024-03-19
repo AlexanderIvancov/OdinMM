@@ -43,12 +43,8 @@ namespace Odin.Register.Articles
         int _lock = 0;
         public int Lock
         {
-            get
-            {
-                return _lock;
-            }
+            get { return _lock; }
             set { _lock = value; }
-           
         }
 
         public string fileName
@@ -129,7 +125,7 @@ namespace Odin.Register.Articles
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -144,9 +140,7 @@ namespace Odin.Register.Articles
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -154,14 +148,11 @@ namespace Odin.Register.Articles
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
 
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
         public void SetCellsColor()
@@ -175,24 +166,17 @@ namespace Odin.Register.Articles
                 }
 
                 if (Convert.ToInt32(row.Cells["cn_isvalidated"].Value) == 0)
-                {
                     if (row.Cells["cn_lastchange"].Value.ToString() != ""
                         && Convert.ToDateTime(row.Cells["cn_lastchange"].Value).AddMinutes(1) >= Convert.ToDateTime(row.Cells["cn_validat"].Value))
-                    { 
                         if (Convert.ToInt32(row.Cells["cn_typechange"].Value) != 0)
                             foreach (DataGridViewCell cell in row.Cells)
                                 cell.Style.BackColor = Color.Gold;
                         else
                             foreach (DataGridViewCell cell in row.Cells)
                                 cell.Style.BackColor = Color.Plum;
-                    }
-                }
                 if (Convert.ToInt32(row.Cells["cn_isactive"].Value) == 0)
-                {
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Silver;
-                }
-
             }
         }
 
@@ -201,13 +185,11 @@ namespace Odin.Register.Articles
             bool _tests = true;
 
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 if (Convert.ToInt32(row.Cells["cn_StageID"].Value) == 0)
                 {
                     _tests = false;
                     break;
                 }
-            }
 
             return _tests;
         }
@@ -217,13 +199,11 @@ namespace Odin.Register.Articles
             bool _tests = true;
 
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 if (Convert.ToInt32(row.Cells["cn_using"].Value) == 0)
                 {
                     _tests = false;
                     break;
                 }
-            }
 
             return _tests;
         }
@@ -271,13 +251,11 @@ namespace Odin.Register.Articles
                 MessageBox.Show(processingCancelled);
                 return;
             }
-
         }
 
         public void bw_List(object sender, DoWorkEventArgs e)
         {
-
-            var data = Reg.BOMDetailsData(ArtId);
+            var data = (DataTable)Helper.getSP("sp_BOMDetails", ArtId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -286,7 +264,6 @@ namespace Odin.Register.Articles
                 gv_List.DataSource = bs_List;
                 SetCellsColor();
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -298,7 +275,7 @@ namespace Odin.Register.Articles
 
         public void ShowDets()
         {
-            var data = Reg.BOMDetailsData(ArtId);
+            var data = (DataTable)Helper.getSP("sp_BOMDetails", ArtId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -312,7 +289,6 @@ namespace Odin.Register.Articles
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
 
                 SetCellsColor();
-
             });
 
 
@@ -322,7 +298,6 @@ namespace Odin.Register.Articles
             });
 
             SendBOMArtId?.Invoke(ArtId);
-
         }
 
         public void SetFont()
@@ -342,12 +317,8 @@ namespace Odin.Register.Articles
                 igvArtId = 0;
             }
 
-
-
             if (OldigvArtId == igvArtId)
-            {
                 return true;
-            }
             else
             {
                 OldigvArtId = igvArtId;
@@ -384,7 +355,6 @@ namespace Odin.Register.Articles
             DataTable dt = ds.Tables[0];
 
             if (dt.Rows.Count > 0)
-            {
                 foreach (DataRow dr in dt.Rows)
                 {
                     ValidId = Convert.ToInt32(dr["id"]);
@@ -392,7 +362,6 @@ namespace Odin.Register.Articles
                     ValidBy = dr["validby"].ToString();
                     ValidState = dr["validstate"].ToString();
                 }
-            }
             else
             {
                 ValidId = 0;
@@ -427,7 +396,7 @@ namespace Odin.Register.Articles
             {
                 var _ID = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
 
-                Reg.EditBOMLine(Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value),
+                Helper.getSP("sp_EditBOMLine", Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value),
                     frm.IdCST, frm.Number, frm.Qty, frm.Using,
                     frm.Comments, frm.SpoilConst, frm.SpoilPerc, 
                     frm.StageId, frm.Positions);
@@ -456,7 +425,6 @@ namespace Odin.Register.Articles
                 Lock = 0;
             }
             else
-
             {
                 this.btn_Lock.Values.Image = global::Odin.Global_Resourses._lock;
                 Lock = -1;
@@ -604,9 +572,7 @@ namespace Odin.Register.Articles
         private void gv_List_SelectionChanged(object sender, EventArgs e)
         {
             if (CheckOldRow() == false)
-            {
                 SendArticle(igvArtId);
-            }
         }
 
         private void btn_AddNorm_Click(object sender, EventArgs e)
@@ -636,9 +602,9 @@ namespace Odin.Register.Articles
 
             if (result == DialogResult.OK)
             {
-                var insertedId = Reg.AddBOMLine(frm.IdCSE, frm.IdCST, frm.Number, frm.Qty, frm.Using,
+                var insertedId = Convert.ToInt32(Helper.getSP("sp_AddBOMLine", frm.IdCSE, frm.IdCST, frm.Number, frm.Qty, frm.Using,
                                                     frm.Comments, frm.SpoilConst, frm.SpoilPerc, frm.StageId,
-                                                    frm.Positions);
+                                                    frm.Positions));
                 //DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 //var dir = Helper.SaveDirection(gv_List);
 
@@ -672,9 +638,9 @@ namespace Odin.Register.Articles
                 //Reg.IncreaseBOMNumbers(cmb_Articles1.ArticleId,
                //                             Convert.ToInt32(gv_List.CurrentRow.Cells["cn_num"].Value));
 
-                var insertedId = Reg.AddBOMLine(frm.IdCSE, frm.IdCST, frm.Number, frm.Qty, frm.Using,
+                var insertedId = Convert.ToInt32(Helper.getSP("sp_AddBOMLine", frm.IdCSE, frm.IdCST, frm.Number, frm.Qty, frm.Using,
                                                  frm.Comments, frm.SpoilConst, frm.SpoilPerc, frm.StageId,
-                                                 frm.Positions);
+                                                 frm.Positions));
                 //DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 //var dir = Helper.SaveDirection(gv_List);
 
@@ -702,7 +668,7 @@ namespace Odin.Register.Articles
 
             if (result == DialogResult.OK)
             {
-                Reg.CopyBOM(ArtId, frm.ArticleId);
+                Helper.getSP("sp_CopyBOM", ArtId, frm.ArticleId);
                 cmb_Articles1.ArticleId = frm.ArticleId;
             }
         }
@@ -710,7 +676,6 @@ namespace Odin.Register.Articles
         private void btn_DeleteNorm_Click(object sender, EventArgs e)
         {
             if (gv_List.SelectedRows.Count > 0)
-            {
                 if (glob_Class.DeleteConfirm())
                 {
 
@@ -725,7 +690,6 @@ namespace Odin.Register.Articles
                     int _id = 0;
 
                     foreach (DataGridViewRow row in this.gv_List.Rows)
-                    {
                         if (row.Selected == true)
                         {
                             try
@@ -735,11 +699,8 @@ namespace Odin.Register.Articles
                             catch { _id = 0; }
 
                             if (_id != 0)
-                            {
-                                Reg.DeleteBOMLine(_id);
-                            }
+                                Helper.getSP("sp_DeleteBOMLineById", _id);
                         }
-                    }
 
                     //Reg.DeclineBOM(ArtId);
 
@@ -753,9 +714,7 @@ namespace Odin.Register.Articles
                     SetCellsColor();
 
                     ShowValidation(ArtId);
-
                 }
-            }
             else
                 glob_Class.ShowMessage("Warning!", "Please select rows", "You have no selected rows!");
         }
@@ -770,30 +729,26 @@ namespace Odin.Register.Articles
         {
             if (ArtId != 0
                 && CheckStages() == true)
-            {
                 if (CheckUse() == false)
                 {
                     if (glob_Class.ConfirmMessage("Validation warning!", "Dou you still want to valid BOM?", "You have not active lines!") == true)
                     {
-                        Reg.ValidateBOM(ArtId, "");
+                        Helper.getSP("sp_AddBOMValidation", ArtId, "");
                         ShowValidation(ArtId);
                     }
                 }
                 else
                 {
-                    Reg.ValidateBOM(ArtId, "");
+                    Helper.getSP("sp_AddBOMValidation", ArtId, "");
                     ShowValidation(ArtId);
                 }
 
-            }
             else
-            {
                 KryptonTaskDialog.Show("Validation warning!",
                                        "Some stages or article are empty!",
                                        "Some stages or article are empty!",
                                        MessageBoxIcon.Warning,
                                        TaskDialogButtons.OK);
-            }
         }
 
         private void btn_Decline_Click(object sender, EventArgs e)
@@ -808,9 +763,7 @@ namespace Odin.Register.Articles
                 DialogResult result = frm.ShowDialog();
 
                 if (result == DialogResult.OK)
-                {
-                    Reg.DeclineBOMCom(ArtId, frm.FormText);
-                }
+                    Helper.getSP("sp_DeleteBOMValidationCom", ArtId, frm.FormText);
             }
             ShowValidation(ArtId);
         }
@@ -836,10 +789,8 @@ namespace Odin.Register.Articles
                 frm.BOMAnalogClosing += new BOMAnalogClosingEventHandler(RefreshList);
 
                 frm.Show(); frm.GetKryptonFormFields();
-
             }
         }
-
 
         #endregion
 
@@ -863,7 +814,6 @@ namespace Odin.Register.Articles
             if (_cstid != 0
                 && SendRMArtId != null)
                 SendRMArtId(_cstid);
-
         }
 
         private void btn_Refresh_Click(object sender, EventArgs e)
@@ -891,8 +841,6 @@ namespace Odin.Register.Articles
 
         private void btn_ExportForQuote_Click(object sender, EventArgs e)
         {
-            int qty = 0;
-
             frm_cmbNumber frm = new frm_cmbNumber();
             frm.LabelText = "Qty of final product";
             frm.HeaderText = "Enter qty of final product";
@@ -920,7 +868,6 @@ namespace Odin.Register.Articles
 
                 ED.QueryIntoExcel();
             }
-
         }
 
         private void gv_List_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
@@ -989,24 +936,20 @@ namespace Odin.Register.Articles
             //}
         }
 
-        private void gv_List_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
+        private void gv_List_MouseClick(object sender, MouseEventArgs e) { }
 
         private void gv_List_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
             Rectangle rect = gv_List.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
             xpos1 = rect.X;
             ypos1 = rect.Y;
-           
         }
 
         private void btn_Sort_Click(object sender, EventArgs e)
         {
             if (glob_Class.MessageConfirm("Sorting confirmation", "Are you sure you to sort BOM by types?") == true)
             {
-                Reg.SortBOMByType(ArtId);
+                Helper.getSP("sp_SortBOMByType", ArtId);
 
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
@@ -1017,7 +960,6 @@ namespace Odin.Register.Articles
 
                 SetCellsColor();
             }
-
         }
 
 
@@ -1044,13 +986,11 @@ namespace Odin.Register.Articles
         private void gv_List_MouseMove(object sender, MouseEventArgs e)
         {
             //if (ModifierKeys.HasFlag(Keys.Control))
-            {
                 if (e.Button == MouseButtons.Left && dragLabel != null)
                 {
                     dragLabel.Location = e.Location;
                     gv_List.ClearSelection();
                 }
-            }
         }
 
         private void gv_List_MouseUp(object sender, MouseEventArgs e)
@@ -1073,7 +1013,7 @@ namespace Odin.Register.Articles
 
                             _LineNumber = Convert.ToInt32(row.Cells["cn_num"].Value);
 
-                            Reg.EditBOMLineNumber(DragId, _LineNumber);
+                            Helper.getSP("sp_EditBOMLineNumber", DragId, _LineNumber);
 
                             DataGridViewColumn oldColumn = gv_List.SortedColumn;
                             var dir = Helper.SaveDirection(gv_List);
@@ -1126,9 +1066,7 @@ namespace Odin.Register.Articles
                 PopupHelper.PopupCancel += delegate (object _sender, PopupCancelEventArgs _e)
                 {
                     if (popup.ShowingModal)
-                    {
                         _e.Cancel = true;
-                    }
                 };
 
                 popup.ArtId = _cstid;

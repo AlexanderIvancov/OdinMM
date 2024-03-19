@@ -285,7 +285,7 @@ namespace Odin.Register.Companies
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -300,9 +300,7 @@ namespace Odin.Register.Companies
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -310,30 +308,18 @@ namespace Odin.Register.Companies
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
-
             sqlConn.Close();
-
         }
 
         public void SetCellsColor()
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 if (Convert.ToInt32(row.Cells["cn_isactive"].Value) == 0)
-                {
                     foreach (DataGridViewCell cell in row.Cells)
-                    {
                         cell.Style.BackColor = Color.Silver;
-                    }
-                }
-            }
         }
-
 
         public void ClearFilter()
         {
@@ -345,7 +331,7 @@ namespace Odin.Register.Companies
 
         public void bw_List(object sender, DoWorkEventArgs e)
         {
-            var data = Reg_BLL.getCompanies(cmb_Firms1.FirmId, cmb_Firms1.Firm, txt_RegNR.Text, txt_VAT.Text,
+            var data = (DataTable)Helper.getSP("sp_CompanyList", cmb_Firms1.FirmId, cmb_Firms1.Firm, txt_RegNR.Text, txt_VAT.Text,
                                             cmb_Countries1.CountryId, chk_IsActive.CheckState == CheckState.Checked ? -1 : (chk_IsActive.CheckState == CheckState.Indeterminate ? 1 : 0));
 
             gv_List.ThreadSafeCall(delegate
@@ -356,7 +342,6 @@ namespace Odin.Register.Companies
 
                 SetCellsColor();
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -381,9 +366,7 @@ namespace Odin.Register.Companies
 
 
             if (OldigvFirmId == igvFirmId)
-            {
                 return true;
-            }
             else
             {
                 OldigvFirmId = igvFirmId;
@@ -485,10 +468,10 @@ namespace Odin.Register.Companies
             if (result == DialogResult.OK)
             {
                 //Add new 
-                int _res = Reg.SaveCompany(0, frm.FirmName, frm.RegNR, frm.VAT, frm.Phone, frm.Fax, frm.Email, frm.ParentId, frm.CountryId,
+                int _res = Convert.ToInt32(Helper.getSP("sp_SaveCompany", 0, frm.FirmName, frm.RegNR, frm.VAT, frm.Phone, frm.Fax, frm.Email, frm.ParentId, frm.CountryId,
                                             frm.WebLink, frm.Comments, frm.SupMark, frm.CustMark, frm.SupPayment, frm.CustPayment,
                                             frm.SupIncoterms, frm.CustIncoterms, frm.IsActive, frm.OneC, frm.SupComments, frm.CustPayTerms,
-                                            frm.TransportId, frm.BankContId);
+                                            frm.TransportId, frm.BankContId));
                 if (_res != 0)
                 {
                     cmb_Firms1.FirmId = _res;
@@ -538,10 +521,10 @@ namespace Odin.Register.Companies
             if (result == DialogResult.OK)
             {
                 //Edit-
-                int _res = Reg.SaveCompany(frm.Id, frm.FirmName, frm.RegNR, frm.VAT, frm.Phone, frm.Fax, frm.Email, frm.ParentId, frm.CountryId,
+                int _res = Convert.ToInt32(Helper.getSP("sp_SaveCompany", frm.Id, frm.FirmName, frm.RegNR, frm.VAT, frm.Phone, frm.Fax, frm.Email, frm.ParentId, frm.CountryId,
                                             frm.WebLink, frm.Comments, frm.SupMark, frm.CustMark, frm.SupPayment, frm.CustPayment,
                                             frm.SupIncoterms, frm.CustIncoterms, frm.IsActive, frm.OneC, frm.SupComments, frm.CustPayTerms,
-                                            frm.TransportId, frm.BankContId);
+                                            frm.TransportId, frm.BankContId));
                 if (_res != 0)
                 {
                     cmb_Firms1.FirmId = _res;
@@ -554,7 +537,6 @@ namespace Odin.Register.Companies
                     SetCellsColor();
                 }
             }
-
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -566,16 +548,13 @@ namespace Odin.Register.Companies
         {
             if (globClass.DeleteConfirm() == true)
             {
-                Reg.DeleteCompany(igvFirmId);
+                Helper.getSP("sp_DeleteCompany", igvFirmId);
                 cmb_Firms1.FirmId = 0;
                 bwStart(bw_List);
             }
         }
 
-        private void btn_Active_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void btn_Active_Click(object sender, EventArgs e) {}
 
         private void gv_List_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -588,7 +567,6 @@ namespace Odin.Register.Companies
                     if (glob_Class.NES(Link) != "")
                         System.Diagnostics.Process.Start(Link);
                 }
-
             }
             catch
             { }
@@ -597,9 +575,7 @@ namespace Odin.Register.Companies
         private void gv_List_SelectionChanged(object sender, EventArgs e)
         {
             if (CheckOldRow() == false)
-            {
                ShowDetails(igvFirmId);
-            }
         }
 
         private void btn_General_Click(object sender, EventArgs e)
@@ -649,7 +625,6 @@ namespace Odin.Register.Companies
         private void frm_Companies_Resize(object sender, EventArgs e)
         {
             if (_Main.WindowState == FormWindowState.Maximized)
-            {
                 foreach (var page in kryptonDockingManager1.PagesDocked)
                 {
                     kryptonDockingManager1.RemovePage(page, false);
@@ -658,7 +633,6 @@ namespace Odin.Register.Companies
                                                new KryptonPage[] { page });
 
                 }
-            }
         }
 
         private void gv_List_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -670,7 +644,10 @@ namespace Odin.Register.Companies
         {
             SetCellsColor();
         }
+
+        private void gv_List_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
-
-
 }

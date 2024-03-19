@@ -20,14 +20,11 @@ namespace Odin.CMB_Components.ContactPersons
             cmb = f;
         }
 
-
         class_Global glob_Class = new class_Global();
         Reg_BLL Bll = new Reg_BLL();
 
         bool _showingModal = false;
         cmb_ContactPersons f;
-
-
 
         public bool ShowingModal
         {
@@ -39,21 +36,19 @@ namespace Odin.CMB_Components.ContactPersons
         {
             try
             {
-                ((cmb_ContactPersons)cmb_ContactPersonOne).txt_ContPerson.Text = gv_List.CurrentRow.Cells["cn_fullname"].Value.ToString();
-                ((cmb_ContactPersons)cmb_ContactPersonOne).ContPersId = (Int32)gv_List.CurrentRow.Cells["cn_id"].Value;
+                (cmb_ContactPersonOne).txt_ContPerson.Text = gv_List.CurrentRow.Cells["cn_fullname"].Value.ToString();
+                (cmb_ContactPersonOne).ContPersId = (Int32)gv_List.CurrentRow.Cells["cn_id"].Value;
             }
             catch { }
         }
 
-
         public void FillData(int FirmId)
         {
-            var data = Reg_BLL.getContacts(FirmId);
+            var data = (System.Data.DataTable)Helper.getSP("sp_ContactsList", FirmId);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
             gv_List.DataSource = bs_List;
-
         }
 
         private void gv_List_SelectionChanged(object sender, EventArgs e)
@@ -63,7 +58,7 @@ namespace Odin.CMB_Components.ContactPersons
 
         private void gv_List_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

@@ -47,7 +47,6 @@ namespace Odin.CMB_Components.SalesOrders
         {
             get { return _contactpersonid; }
             set{ _contactpersonid = value; }
-            
         }
 
         public string Contract
@@ -64,7 +63,6 @@ namespace Odin.CMB_Components.SalesOrders
         private void buttonSpecAny1_Click(object sender, EventArgs e)
         {
             txt_SalesOrder.Text = string.Empty;
-            
         }
 
         public string SalesOrder
@@ -91,7 +89,6 @@ namespace Odin.CMB_Components.SalesOrders
                 }
                 catch
                 {
-
                     _SalesOrderId = 0;
                     return;
                 }
@@ -109,8 +106,6 @@ namespace Odin.CMB_Components.SalesOrders
             }
             set
             {
-
-
                 _SalesOrderId = value;
 
                 if (_PrevId != _SalesOrderId)
@@ -129,7 +124,6 @@ namespace Odin.CMB_Components.SalesOrders
                     DataTable dt = ds.Tables[0];
 
                     if (dt.Rows.Count > 0)
-                    {
                         foreach (DataRow dr in dt.Rows)
                         {
                             txt_SalesOrder.Text = dr["name"].ToString();
@@ -138,7 +132,6 @@ namespace Odin.CMB_Components.SalesOrders
                             ContactPersonId = Convert.ToInt32(dr["contpersonid"]);
                             Contract = dr["contract"].ToString();
                         }
-                    }
                     else
                     {
                         txt_SalesOrder.Text = string.Empty;
@@ -203,9 +196,7 @@ namespace Odin.CMB_Components.SalesOrders
             PopupHelper.PopupCancel += delegate (object _sender, PopupCancelEventArgs _e)
             {
                 if (popup.ShowingModal)
-                {
                     _e.Cancel = true;
-                }
             };
 
             popup.FillData(SalesOrder);
@@ -229,13 +220,9 @@ namespace Odin.CMB_Components.SalesOrders
 
             if (result == DialogResult.OK)
             {
-                int _res = COBll.AddSalesOrderHead(frm.CustId, frm.ContPersId, frm.Comments, frm.Contract, frm.CurId, frm.IncotermsId);
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddSalesOrderHead", frm.CustId, frm.ContPersId, frm.Comments, frm.Contract, frm.CurId, frm.IncotermsId));
                 SalesOrderId = _res;
                 SalesOrderSaved?.Invoke(this);
-            }
-            if (result == DialogResult.Cancel)
-            {
-                
             }
         }
 

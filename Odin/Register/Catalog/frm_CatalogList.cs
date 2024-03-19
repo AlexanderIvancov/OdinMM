@@ -115,17 +115,15 @@ namespace Odin.Register.Catalog
         public void SetCellsColor()
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 row.Cells["cn_firmart"].Style.BackColor = Convert.ToInt32(row.Cells["cn_bargtype"].Value) == -1
                     ? Color.Yellow
                     : Convert.ToInt32(row.Cells["cn_bargtype"].Value) == 1 ? Color.LightGreen : Color.Aqua;
-            }
         }
 
         public void bw_List(object sender, DoWorkEventArgs e)
         {
             //MessageBox.Show(txt_CreatDateFrom.Value.ToShortDateString());
-            var data = Reg_BLL.getCatalogList(BargType, cmb_Types1.TypeId, cmb_Firms1.FirmId, cmb_Articles1.ArticleId, cmb_Articles1.Article, txt_FirmArt.Text,
+            var data = (DataTable)Helper.getSP("sp_CatalogList", BargType, cmb_Types1.TypeId, cmb_Firms1.FirmId, cmb_Articles1.ArticleId, cmb_Articles1.Article, txt_FirmArt.Text,
                                             txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
                                             txt_CreatDateTill.Value == null ? "" : txt_CreatDateTill.Value.ToString().Trim(), txt_Comments.Text);
 
@@ -137,7 +135,6 @@ namespace Odin.Register.Catalog
 
                 SetCellsColor();
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -160,9 +157,7 @@ namespace Odin.Register.Catalog
             }
 
             if (_PrevId == CatId)
-            {
                 return true;
-            }
             else
             {
                 _PrevId = CatId;
@@ -173,15 +168,13 @@ namespace Odin.Register.Catalog
         public void ShowDetails(int catid)
         {
             RegBll.CatId = catid;
-
            
             FindHistoryPages(igvArtId);
-            
         }
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -196,9 +189,7 @@ namespace Odin.Register.Catalog
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -206,14 +197,10 @@ namespace Odin.Register.Catalog
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
         public void ClearFilter()
@@ -232,9 +219,9 @@ namespace Odin.Register.Catalog
         {
             int NewLineId = 0;
 
-            NewLineId = RegBll.AddCatalogItem(frm.BargType, frm.ArticleId, frm.FirmId, frm.FirmArt, frm.UnitId, frm.UnitPrice, frm.CurId, frm.Manufacturer, frm.Comments,
+            NewLineId = Convert.ToInt32(Helper.getSP("sp_AddCatalogItem", frm.BargType, frm.ArticleId, frm.FirmId, frm.FirmArt, frm.UnitId, frm.UnitPrice, frm.CurId, frm.Manufacturer, frm.Comments,
                                             frm.DelivTerms, frm.MOQ, frm.MPQ, frm.AsDefault, "", Convert.ToInt32(frm.Vat), frm.MinExpDays, frm.CoefConv, frm.DataCode, 
-                                            frm.DelivTermTxt, frm.Quoted, frm.BarCode, frm.ForCustomer);
+                                            frm.DelivTermTxt, frm.Quoted, frm.BarCode, frm.ForCustomer));
 
             cmb_Articles1.ArticleId = frm.ArticleId;
 
@@ -250,7 +237,7 @@ namespace Odin.Register.Catalog
 
         public void CatEdited(object sender)
         {
-            RegBll.EditCatalogItem(frm.CatID, frm.BargType, frm.ArticleId, frm.FirmId, frm.FirmArt, frm.UnitId, frm.UnitPrice, frm.CurId, frm.Manufacturer, frm.Comments,
+            Helper.getSP("sp_EditCatalogItem", frm.CatID, frm.BargType, frm.ArticleId, frm.FirmId, frm.FirmArt, frm.UnitId, frm.UnitPrice, frm.CurId, frm.Manufacturer, frm.Comments,
                                             frm.DelivTerms, frm.MOQ, frm.MPQ, frm.AsDefault, "", Convert.ToInt32(frm.Vat), frm.MinExpDays, frm.CoefConv, frm.DataCode,
                                             frm.DelivTermTxt, frm.Quoted, frm.BarCode, frm.ForCustomer);
             RegBll.CatId = frm.CatID;
@@ -275,7 +262,6 @@ namespace Odin.Register.Catalog
                 //break;
             }
         }
-
 
         #endregion
 
@@ -464,7 +450,6 @@ namespace Odin.Register.Catalog
             frm.CatSaved += new CatSavedEventHandler(CatAdded);
 
             frm.Show(); frm.GetKryptonFormFields();
-
         }
 
         public void ShowEdit()
@@ -500,8 +485,6 @@ namespace Odin.Register.Catalog
                 frm.ForCustomer = RegBll.CatForCust;
 
                 frm.CatSaved += new CatSavedEventHandler(CatEdited);
-
-
                 frm.Show(); frm.GetKryptonFormFields();
             }
         }
@@ -544,8 +527,6 @@ namespace Odin.Register.Catalog
                 frm.ForCustomer = RegBll.CatForCust;
 
                 frm.CatSaved += new CatSavedEventHandler(CatAdded);
-
-
                 frm.Show(); frm.GetKryptonFormFields();
             }
         }
@@ -559,7 +540,7 @@ namespace Odin.Register.Catalog
             if (glob_Class.DeleteConfirm() == true
                 && _id != 0)
             {
-                RegBll.DeleteCatalogItem(_id);
+                Helper.getSP("sp_DeleteCatalogItem", _id);
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
 
@@ -569,15 +550,11 @@ namespace Odin.Register.Catalog
             }
         }
 
-        private void btn_General_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void btn_General_Click(object sender, EventArgs e) { }
 
         private void frm_CatalogList_Resize(object sender, EventArgs e)
         {
             if (_Main.WindowState == FormWindowState.Maximized)
-            {
                 foreach (var page in kryptonDockingManager1.PagesDocked)
                 {
                     kryptonDockingManager1.RemovePage(page, false);
@@ -586,7 +563,6 @@ namespace Odin.Register.Catalog
                                                new KryptonPage[] { page });
 
                 }
-            }
         }
 
         private void gv_List_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -737,10 +713,7 @@ namespace Odin.Register.Catalog
             kryptonDockingManager1.AddToWorkspace("Workspace", new KryptonPage[] { NewInputHistory(igvArtId) });
         }
 
-        private void gv_List_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-           
-        }
+        private void gv_List_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e) { }
 
         private void gv_List_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {

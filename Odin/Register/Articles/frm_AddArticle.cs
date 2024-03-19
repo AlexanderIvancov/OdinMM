@@ -445,7 +445,7 @@ namespace Odin.Register.Articles
 
         private void btn_CreatePF_Click(object sender, EventArgs e)
         {
-            int _res = Reg.AddArticlePF();
+            int _res = Convert.ToInt32(Helper.getSP("sp_AddAutoArticlePF"));
 
             Reg.ArtId = _res;
 

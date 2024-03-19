@@ -7,7 +7,6 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 
-
 namespace Odin.Register.Articles
 {
     public partial class ctl_BOMHistory : UserControl
@@ -54,7 +53,7 @@ namespace Odin.Register.Articles
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -69,9 +68,7 @@ namespace Odin.Register.Articles
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -79,53 +76,37 @@ namespace Odin.Register.Articles
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
         public void SetCellsHistoryColor()
         {
             foreach (DataGridViewRow row in this.gv_HistoryList.Rows)
-            {
                 if (row.Cells["cn_typechange"].Value.ToString() == "deleted")
-                {
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Silver;
-                }
                 else if (row.Cells["cn_typechange"].Value.ToString() == "inserted")
-                {
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Gold;// Color.FromArgb(192, 255, 192);
-                }
                 else if (row.Cells["cn_typechange"].Value.ToString() == "valid")
-                {
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.GreenYellow;
-                }
                 else if (row.Cells["cn_typechange"].Value.ToString() == "invalid")
-                {
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Tomato;
-                }
                 else
-                {
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Plum;
-                }
-            }
         }
 
         public void ShowHistory(int artid)
         {
             bs_HistoryList.RemoveFilter();
 
-            var datah = Reg_BLL.getBOMHistory(artid);
+            var datah = (DataTable)Helper.getSP("sp_SelectBOMHistory", artid);
 
             gv_HistoryList.ThreadSafeCall(delegate
             {
@@ -135,7 +116,6 @@ namespace Odin.Register.Articles
 
                 SetCellsHistoryColor();
             });
-
 
             bn_HistoryList.ThreadSafeCall(delegate
             {

@@ -87,10 +87,10 @@ namespace Odin.CMB_Components.Articles
             {
                 _showingModal = false;
                 //Add new 
-                int _res = Reg.SaveArticle(frm.Id, frm.Article, frm.SecName, frm.Description, frm.TypeId, frm.UnitId, frm.ImagePath, frm.Comments,
+                int _res = Convert.ToInt32(Helper.getSP("sp_SaveArticle", frm.Id, frm.Article, frm.SecName, frm.Description, frm.TypeId, frm.UnitId, frm.ImagePath, frm.Comments,
                                     frm.CustCodeId, frm.QtyReserve, frm.DeptId, frm.CreateSubBatch, frm.Weight, frm.IsActive,
                                     frm.Revision, frm.StoreRules, frm.SpoilNorm, frm.StageId, frm.MSL, frm.Service, 
-                                    /*frm.LabelsQty, frm.StencilRequired, frm.StencilID*/0, 0, 0, frm.Warning, frm.SpoilConst, frm.AsPF, frm.MBLimit);
+                                    /*frm.LabelsQty, frm.StencilRequired, frm.StencilID*/0, 0, 0, frm.Warning, frm.SpoilConst, frm.AsPF, frm.MBLimit));
                 if (_res != 0)
                 {
                     FillData(frm.Article);
@@ -153,10 +153,10 @@ namespace Odin.CMB_Components.Articles
                 {
                     _showingModal = false;
                     //Edit
-                    int _res = Reg.SaveArticle(frm.Id, frm.Article, frm.SecName, frm.Description, frm.TypeId, frm.UnitId, frm.ImagePath, frm.Comments,
+                    int _res = Convert.ToInt32(Helper.getSP("sp_SaveArticle", frm.Id, frm.Article, frm.SecName, frm.Description, frm.TypeId, frm.UnitId, frm.ImagePath, frm.Comments,
                                         frm.CustCodeId, frm.QtyReserve, frm.DeptId, frm.CreateSubBatch, frm.Weight, frm.IsActive,
                                         frm.Revision, frm.StoreRules, frm.SpoilNorm, frm.StageId, frm.MSL, frm.Service, /*frm.LabelsQty, frm.StencilRequired, 
-                                        frm.StencilID*/0, 0, 0, frm.Warning, frm.SpoilConst, frm.AsPF, frm.MBLimit);
+                                        frm.StencilID*/0, 0, 0, frm.Warning, frm.SpoilConst, frm.AsPF, frm.MBLimit));
                     if (_res != 0)
                     {                        
                         Reg.ArtId = _res;
@@ -167,9 +167,7 @@ namespace Odin.CMB_Components.Articles
                     }
                 }
                 if (result == DialogResult.Cancel)
-                {
                     _showingModal = false;
-                }
             }
         }
 
@@ -180,15 +178,13 @@ namespace Odin.CMB_Components.Articles
             try { _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value); }
             catch { }
 
-
             if (_id != 0 &&
                 glob_Class.DeleteConfirm() == true)
             {
-                Reg.DeleteArticle(_id);
+                Helper.getSP("sp_DeleteArticle", _id);
                 FillData("");
                 ((cmb_Articles)cmb_ArticleOne).ArticleSendSave();
             }
-
         }
 
         private void txt_Stock_Click(object sender, EventArgs e)
@@ -205,7 +201,6 @@ namespace Odin.CMB_Components.Articles
             gv_List.DataSource = bs_List;
 
             SetCellsColor();
-
         }
 
         public void FillAliases(int ArtId)
@@ -215,7 +210,6 @@ namespace Odin.CMB_Components.Articles
             gv_AliasList.AutoGenerateColumns = false;
             bs_AliasesList.DataSource = data;
             gv_AliasList.DataSource = bs_AliasesList;
-
         }
 
         private void gv_List_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -228,25 +222,18 @@ namespace Odin.CMB_Components.Articles
             ChangeCMBElements();
         }
 
-        private void frm_Articles_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            
-        }
+        private void frm_Articles_KeyPress(object sender, KeyPressEventArgs e) {}
 
         private void frm_Articles_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Tab && e.Control)
-            {
                 ShowTotals();
-            }
         }
 
         private void gv_List_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Tab && e.Control)
-            {
                 ShowTotals();
-            }
         }
 
         public void ShowTotals()
@@ -275,9 +262,7 @@ namespace Odin.CMB_Components.Articles
                 PopupHelper.PopupCancel += delegate (object _sender, PopupCancelEventArgs _e)
                 {
                     if (popup.ShowingModal)
-                    {
                         _e.Cancel = true;
-                    }
                 };
 
                 popup.ctl_ArtTotals1.cmb_Articles1.ArticleId = _id;
@@ -317,7 +302,6 @@ namespace Odin.CMB_Components.Articles
                 //        _e.Cancel = true;
                 //    }
                 //};
-
                 popup.ctl_BOMSetup1.cmb_Articles1.ArticleId = _id;
             }
         }
@@ -339,7 +323,6 @@ namespace Odin.CMB_Components.Articles
                 Point _location = new Point(xpos, ypos);
 
                 frm_ArtSetup popup = new frm_ArtSetup();
-
 
                 popup.Show();
                 popup.Location = _location;
@@ -402,16 +385,12 @@ namespace Odin.CMB_Components.Articles
                 {
                     _showingModal = false;
                     //Add new 
-                    int _res = Reg.SaveAlias(0, _artid, frm.FormText);
+                    int _res = Convert.ToInt32(Helper.getSP("sp_SaveAlias", 0, _artid, frm.FormText));
                     if (_res != 0)
-                    {
                         FillAliases(_artid);
-                    }
                 }
                 if (result == DialogResult.Cancel)
-                {
                     _showingModal = false;
-                }
             }
         }
 
@@ -445,7 +424,7 @@ namespace Odin.CMB_Components.Articles
                 {
                     _showingModal = false;
                     //Add new 
-                    int _res = Reg.SaveAlias(_id, _artid, frm.FormText);
+                    int _res = Convert.ToInt32(Helper.getSP("sp_SaveAlias", _id, _artid, frm.FormText));
                     if (_res != 0)
                     {
                         FillAliases(_artid);
@@ -472,7 +451,7 @@ namespace Odin.CMB_Components.Articles
             if (_id != 0 &&
                 glob_Class.DeleteConfirm() == true)
             {
-                Reg.DeleteAlias(_id);
+                Helper.getSP("sp_DeleteAlias", _id);
                 FillAliases(_artid);
             }
         }
@@ -500,9 +479,7 @@ namespace Odin.CMB_Components.Articles
                 frm.Date = System.DateTime.Now.ToShortDateString();
 
                 frm.Show(); frm.GetKryptonFormFields();
-               
             }
-            
         }
 
         private void btn_Coincidences_Click(object sender, EventArgs e)

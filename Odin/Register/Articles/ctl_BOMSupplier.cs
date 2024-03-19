@@ -44,7 +44,7 @@ namespace Odin.Register.Articles
 
         public void ShowDets(int batchid)
         {
-            var data = Reg.SelectBatchBOMData(batchid, _lock);
+            var data = (System.Data.DataTable)Helper.getSP("sp_SelectBatchBOMNew", batchid, _lock);
 
             gv_List.ThreadSafeCall(delegate
             {

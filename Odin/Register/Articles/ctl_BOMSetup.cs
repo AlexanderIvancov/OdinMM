@@ -37,12 +37,8 @@ namespace Odin.Register.Articles
         int _lock = 0;
         public int Lock
         {
-            get
-            {
-                return _lock;
-            }
+            get { return _lock; }
             set { _lock = value; }
-
         }
 
         #endregion
@@ -51,7 +47,7 @@ namespace Odin.Register.Articles
 
         public void ShowDets()
         {
-            var data = Reg.BOMSetupData(ArtId);
+            var data = (System.Data.DataTable)Helper.getSP("sp_SelectBOMSetup", ArtId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -63,7 +59,6 @@ namespace Odin.Register.Articles
                 gv_List.DataSource = bs_List;
 
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
-                
             });
 
 
@@ -71,7 +66,6 @@ namespace Odin.Register.Articles
             {
                 bn_List.BindingSource = bs_List;
             });
-            
         }
 
         #endregion
@@ -86,7 +80,7 @@ namespace Odin.Register.Articles
             if (result == DialogResult.OK
                   && ArtId != 0)
             {
-                Reg.AddBOMSetup(ArtId, frm.ToolTypeId, frm.ToolId, frm.Required, frm.Qty, frm.Comments);
+                Helper.getSP("sp_AddBOMSetup", ArtId, frm.ToolTypeId, frm.ToolId, frm.Required, frm.Qty, frm.Comments);
                 ShowDets();
             }
         }
@@ -99,7 +93,6 @@ namespace Odin.Register.Articles
             int _required = 0;
             double _qty = 0;
             string _comments = "";
-            
 
             try {
                 _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
@@ -123,7 +116,7 @@ namespace Odin.Register.Articles
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    Reg.EditBOMSetup(_id, frm.ToolTypeId, frm.ToolId, frm.Required, frm.Qty, frm.Comments);
+                    Helper.getSP("sp_EditBOMSetup", _id, frm.ToolTypeId, frm.ToolId, frm.Required, frm.Qty, frm.Comments);
                     ShowDets();
                 }
             }
@@ -141,10 +134,9 @@ namespace Odin.Register.Articles
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    Reg.CopyBOMSetup(frm.ArticleId, ArtId);
+                    Helper.getSP("sp_CopyBOMSetup", frm.ArticleId, ArtId);
                     ShowDets();
                 }
-
             }
         }
 
@@ -161,7 +153,7 @@ namespace Odin.Register.Articles
             if (_id != 0
                 && glob_Class.DeleteConfirm() == true)
             {
-                Reg.DeleteBOMSetup(_id);
+                Helper.getSP("sp_DeleteBOMSetup", _id);
                 ShowDets();
             }
         }
@@ -207,7 +199,6 @@ namespace Odin.Register.Articles
             double _qty = 0;
             string _comments = "";
 
-
             try
             {
                 _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
@@ -231,7 +222,7 @@ namespace Odin.Register.Articles
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    Reg.EditBOMSetup(_id, frm.ToolTypeId, frm.ToolId, frm.Required, frm.Qty, frm.Comments);
+                    Helper.getSP("sp_EditBOMSetup", _id, frm.ToolTypeId, frm.ToolId, frm.Required, frm.Qty, frm.Comments);
                     ShowDets();
                 }
             }

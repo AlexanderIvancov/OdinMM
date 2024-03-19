@@ -273,9 +273,9 @@ namespace Odin.Register.Companies
 
         private void btn_OK_Click(object sender, EventArgs e)
         {
-            Reg.SaveCompany(FirmId, FirmName, RegNR, VAT, Phone, Fax, Email, ParentId, CountryId, WebLink,
+            Convert.ToInt32(Global_Classes.Helper.getSP("sp_SaveCompany", FirmId, FirmName, RegNR, VAT, Phone, Fax, Email, ParentId, CountryId, WebLink,
                             Comments, SupMark, CustMark, SupPayment, CustPayment, SupIncoterms, CustIncoterms,
-                            IsActive, OneC, SupComments, CustPayTerms, TransportId, BankContId);
+                            IsActive, OneC, SupComments, CustPayTerms, TransportId, BankContId));
 
             SendFirmId?.Invoke(this);
         }

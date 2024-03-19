@@ -55,7 +55,7 @@ namespace Odin.Register.Articles
 
         public void FillHistory(int ArtId)
         {
-            var data = Reg_BLL.getHistoryArticle(ArtId);
+            var data = (System.Data.DataTable)Helper.getSP("sp_SelectArticleHistory", ArtId);
 
             gv_List.ThreadSafeCall(delegate
             {

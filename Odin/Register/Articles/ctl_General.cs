@@ -396,10 +396,10 @@ namespace Odin.Register.Articles
 
         private void btn_OK_Click(object sender, EventArgs e)
         {
-            int _res = Reg.SaveArticle(Id, Regex.Replace(Article, @"\p{C}+", string.Empty), SecName, Description, TypeId, UnitId, ImagePath, Comments,
+            int _res = Convert.ToInt32(Helper.getSP("sp_SaveArticle", Id, Regex.Replace(Article, @"\p{C}+", string.Empty), SecName, Description, TypeId, UnitId, ImagePath, Comments,
                                     CustCodeId, QtyReserve, DeptId, CreateSubBatch, Weight, IsActive,
                                     Revision, StoreRules, SpoilNorm, StageId, MSL, Service, /*LabelsQty, StencilRequired, StencilID*/
-                                    0, 0, 0, Warning, SpoilConst, AsPF, MBLimit);
+                                    0, 0, 0, Warning, SpoilConst, AsPF, MBLimit));
             //Event
             //if (SendArtId != null)
             //{

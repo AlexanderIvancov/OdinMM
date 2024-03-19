@@ -116,8 +116,7 @@ namespace Odin.Register.Articles
 
         public void FillStages(int artid)
         {
-       
-            var data = Reg.getArticleStagesRationings(artid);
+            var data = (DataTable)Helper.getSP("sp_SelectArticleStageRatios", artid);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -129,9 +128,7 @@ namespace Odin.Register.Articles
                 gv_List.DataSource = bs_List;
 
                 //Helper.RestoreDirection(gv_List, oldColumn, dir);
-
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -143,8 +140,7 @@ namespace Odin.Register.Articles
 
         public void FillOpers(int artid, int stageid)
         {
-
-            var data = Reg.getArticleStagesOperations(artid, stageid);
+            var data = (DataTable)Helper.getSP("sp_SelectArticleStageOperations", artid, stageid);
 
             gv_Opers.ThreadSafeCall(delegate
             {
@@ -156,9 +152,7 @@ namespace Odin.Register.Articles
                 gv_Opers.DataSource = bs_Opers;
 
                // Helper.RestoreDirection(gv_List, oldColumn, dir);
-
             });
-
 
             bn_Opers.ThreadSafeCall(delegate
             {
@@ -166,13 +160,11 @@ namespace Odin.Register.Articles
             });
 
             SetCellsColor();
-
         }
 
         public void FillParams(int operid)
         {
-
-            var data = Reg.getArticleStagesOperParams (operid);
+            var data = (DataTable)Helper.getSP("sp_SelectArticleStageOperParams", operid);
 
             gv_Params.ThreadSafeCall(delegate
             {
@@ -184,9 +176,7 @@ namespace Odin.Register.Articles
                 gv_Params.DataSource = bs_Params;
 
                 //Helper.RestoreDirection(gv_Params, oldColumn, dir);
-
             });
-            
         }
 
         public void ShowTotals(int artid)
@@ -199,7 +189,6 @@ namespace Odin.Register.Articles
                 new SqlDataAdapter(
                     "execute sp_SelectArtRatioTotals @artid = " + artid, conn);
 
-
             conn.Close();
 
             adapter.Fill(ds);
@@ -207,13 +196,11 @@ namespace Odin.Register.Articles
             DataTable dt = ds.Tables[0];
 
             if (dt.Rows.Count > 0)
-            {
                 foreach (DataRow dr in dt.Rows)
                 {
                     Total = Convert.ToDouble(dr["total"]);
                     Prepa = Convert.ToDouble(dr["prepa"]);
                 }
-            }
             else
             {
                 Total = 0;
@@ -224,11 +211,8 @@ namespace Odin.Register.Articles
         public void SetCellsColor()
         {
             foreach (DataGridViewRow row in this.gv_Opers.Rows)
-            {
                 if (Convert.ToDouble(row.Cells["cn_opertime"].Value) == -999)
                     row.Cells["cn_opertime"].Style.BackColor = Color.Tomato;
-            }
-
         }
 
         public void EditOperation()
@@ -260,12 +244,12 @@ namespace Odin.Register.Articles
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    Reg.EditRatioOperation(frm.Id, frm.Operation, frm.Formula, frm.UsingOnce, frm.OperNO);
+                    Helper.getSP("sp_EditRatioOperation", frm.Id, frm.Operation, frm.Formula, frm.UsingOnce, frm.OperNO);
                     //Forumla result update
 
                     double FormulaRes = Reg.SelectFormulaRes(_operid);
                     //Update formula results
-                    Reg.UpdateFormulaRes(_operid, FormulaRes);
+                    Helper.getSP("sp_EditOperationFormulaRes", _operid, FormulaRes);
 
                     int _stageid = 0;
                     try { _stageid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_stageid"].Value); }
@@ -274,7 +258,6 @@ namespace Odin.Register.Articles
                     FillOpers(ArtId, _stageid);
                     ShowTotals(ArtId);
                 }
-
             }
         }
         #endregion
@@ -283,16 +266,6 @@ namespace Odin.Register.Articles
                 
         private void btn_saveparameter_Click(object sender, EventArgs e)
         {
-            //foreach (DataGridViewRow row in this.gv_Params.Rows)
-            //{
-            //    if (row.Cells["cn_param"].Value.ToString() == Param)
-            //    {
-            //        row.Cells["cn_paramvalue"].Value = ParamValue;
-            //        row.Cells["cn_paramdesc"].Value = ParamDesc;
-            //        break;
-            //    }
-            //}
-            //Save formula params
             gv_Params.EndEdit();
             DataTable dataparams = new DataTable();
             dataparams.Columns.Add("id", typeof(int));
@@ -318,7 +291,7 @@ namespace Odin.Register.Articles
             //Select formula results
             double FormulaRes = Reg.SelectFormulaRes(OperId);
             //Update formula results
-            Reg.UpdateFormulaRes(OperId, FormulaRes);
+            Helper.getSP("sp_EditOperationFormulaRes", OperId, FormulaRes);
 
             int _stageid = 0;
             try { _stageid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_stageid"].Value); }
@@ -379,13 +352,11 @@ namespace Odin.Register.Articles
                 cmb_Articles1.ArticleId = ArtId;
 
                 FillStages(ArtId);
-
             }
         }
 
         private void gv_Params_SelectionChanged(object sender, EventArgs e)
         {
-            
             string _param = "";
             string _paramdesc = "";
             double _value = 0;
@@ -404,7 +375,6 @@ namespace Odin.Register.Articles
             Param = _param;
             ParamDesc = _paramdesc;
             ParamValue = _value;
-
         }
 
         private void btn_AddOper_Click(object sender, EventArgs e)
@@ -421,7 +391,7 @@ namespace Odin.Register.Articles
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    Reg.AddRatioOperation(ArtId, _stageid, frm.Operation, frm.Formula, frm.UsingOnce, frm.OperNO);
+                    Helper.getSP("sp_AddRatioOperation", ArtId, _stageid, frm.Operation, frm.Formula, frm.UsingOnce, frm.OperNO);
                     FillOpers(ArtId, _stageid);
                     ShowTotals(ArtId);
                 }
@@ -442,7 +412,7 @@ namespace Odin.Register.Articles
             if (_operid != 0
                 && glob_Class.DeleteConfirm() == true)
             {
-                Reg.DeleteRatioOperation(_operid);
+                Helper.getSP("sp_DeleteRatioOperation", _operid);
                 FillParams(0);
 
                 int _stageid = 0;
@@ -453,8 +423,6 @@ namespace Odin.Register.Articles
                 ShowTotals(ArtId);
             }
         }
-
-
 
         #endregion
 
@@ -473,10 +441,7 @@ namespace Odin.Register.Articles
             EditOperation();//btn_EditOper.PerformClick();
         }
 
-        private void gv_Opers_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
-        }
+        private void gv_Opers_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e) { }
 
         private void btn_CopyOper_Click(object sender, EventArgs e)
         {
@@ -489,7 +454,7 @@ namespace Odin.Register.Articles
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    Reg.CopyBOMStages(frm.ArticleId, ArtId);
+                    Helper.getSP("sp_CopyBOMRatio", frm.ArticleId, ArtId);
                     FillStages(ArtId);
                     int _stageid = 0;
                     try { _stageid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_stageid"].Value); }
@@ -504,9 +469,7 @@ namespace Odin.Register.Articles
                     FillParams(_operid);
 
                     ShowTotals(ArtId);
-
                 }
-
             }
         }
 

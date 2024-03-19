@@ -179,30 +179,23 @@ namespace Odin.Register.Articles
                 var errorMsg = "Selected component could not be inserted!";
 
                 //checks for parent existence
-                foreach (System.Data.DataRow dr in dataParent.AsEnumerable())
-                {
+                foreach (DataRow dr in dataParent.AsEnumerable())
                     if (cmb_Articles1.ArticleId == dr.Field<int>("artid"))
                     {
                         MessageBox.Show(errorMsg, "Error", buttons, icon);
                         e.Cancel = true;
                         break;
                     }
-                }
 
                 if (!HeaderText.Contains("Edit"))
-                {
                     //checks for child existence
-                    foreach (System.Data.DataRow dr in dataChild.AsEnumerable())
-                    {
+                    foreach (DataRow dr in dataChild.AsEnumerable())
                         if (cmb_Articles1.ArticleId == dr.Field<int>("IdCST"))
                         {
                             MessageBox.Show(errorMsg, "Error", buttons, icon);
                             e.Cancel = true;
                             break;
                         }
-                    }
-                }
-                
             }
         }
 

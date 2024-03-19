@@ -327,11 +327,9 @@ namespace Odin.Register.Articles
                 //MessageBox.Show(cmb_Articles1.Article);
                 //bs_List.DataSource = null;
 
-                
-
                 gv_List.ThreadSafeCall(delegate
                 {
-                    var data = Reg_BLL.getBOMs(cmb_Articles1.ArticleId, cmb_Articles1.Article.Trim(), txt_SecArticle.Text, Description,
+                    var data = (DataTable)Helper.getSP("sp_BOMList", cmb_Articles1.ArticleId, cmb_Articles1.Article.Trim(), txt_SecArticle.Text, Description,
                                                 cmb_Types1.TypeId, txt_Comments.Text, cmb_Firms1.FirmId,
                                                 txt_ExtArt.Text, chk_IsActive.CheckState == CheckState.Checked ? -1 : (chk_IsActive.CheckState == CheckState.Indeterminate ? 1 : 0),
                                                 rb_All.Checked == true ? 1 : (rb_Valid.Checked == true ? -1 : 0),
@@ -349,15 +347,13 @@ namespace Odin.Register.Articles
                 {
                     bn_List.BindingSource = bs_List;
                 });
-
-               
             }
             catch { }
         }
 
         public void ShowDetails()
         {
-            var data = Reg_BLL.getBOMs(cmb_Articles1.ArticleId, cmb_Articles1.Article.Trim(), txt_SecArticle.Text, Description,
+            var data = (DataTable)Helper.getSP("sp_BOMList", cmb_Articles1.ArticleId, cmb_Articles1.Article.Trim(), txt_SecArticle.Text, Description,
                                                cmb_Types1.TypeId, txt_Comments.Text, cmb_Firms1.FirmId,
                                                txt_ExtArt.Text, chk_IsActive.CheckState == CheckState.Checked ? -1 : (chk_IsActive.CheckState == CheckState.Indeterminate ? 1 : 0),
                                                rb_All.Checked == true ? 1 : (rb_Valid.Checked == true ? -1 : 0),
@@ -375,8 +371,6 @@ namespace Odin.Register.Articles
             {
                 bn_List.BindingSource = bs_List;
             });
-
-          
         }
 
         public void FindHistoryPages(int artid)
@@ -400,9 +394,7 @@ namespace Odin.Register.Articles
                 ctl_BOMSetup ctlSetup1 = (ctl_BOMSetup)page.Controls.Find("ctl_BOMSetup", true).FirstOrDefault();
                 if (ctlSetup1 != null
                     && ctlSetup1.Lock == 0)
-                {
                     ctlSetup1.cmb_Articles1.ArticleId = artid;
-                }
                 //break;
             }
         }
@@ -465,10 +457,10 @@ namespace Odin.Register.Articles
             {
                 //MessageBox.Show(frm.MSL);
                 //Edit
-                int _res = Reg.SaveArticle(frm.Id, Regex.Replace(frm.Article, @"\p{C}+", string.Empty), frm.SecName, frm.Description, frm.TypeId, frm.UnitId, frm.ImagePath, frm.Comments,
+                int _res = Convert.ToInt32(Helper.getSP("sp_SaveArticle", frm.Id, Regex.Replace(frm.Article, @"\p{C}+", string.Empty), frm.SecName, frm.Description, frm.TypeId, frm.UnitId, frm.ImagePath, frm.Comments,
                                     frm.CustCodeId, frm.QtyReserve, frm.DeptId, frm.CreateSubBatch, frm.Weight, frm.IsActive,
                                     frm.Revision, frm.StoreRules, frm.SpoilNorm, frm.StageId, frm.MSL, frm.Service, /*frm.LabelsQty, frm.StencilRequired, 
-                                    frm.StencilID*/0, 0, 0, frm.Warning, frm.SpoilConst, frm.AsPF, frm.MBLimit);
+                                    frm.StencilID*/0, 0, 0, frm.Warning, frm.SpoilConst, frm.AsPF, frm.MBLimit));
                 if (_res != 0)
                 {
                     cmb_Articles1.ArticleId = _res;
@@ -1018,10 +1010,10 @@ namespace Odin.Register.Articles
             {
                 //s = Regex.Replace(s, @"\p{C}+", string.Empty);
                 //Add new 
-                int _res = Reg.SaveArticle(0, Regex.Replace(frm.Article, @"\p{C}+", string.Empty), frm.SecName, frm.Description, frm.TypeId, frm.UnitId, frm.ImagePath, frm.Comments,
+                int _res = Convert.ToInt32(Helper.getSP("sp_SaveArticle", 0, Regex.Replace(frm.Article, @"\p{C}+", string.Empty), frm.SecName, frm.Description, frm.TypeId, frm.UnitId, frm.ImagePath, frm.Comments,
                                     frm.CustCodeId, frm.QtyReserve, frm.DeptId, frm.CreateSubBatch, frm.Weight, frm.IsActive,
                                     frm.Revision, frm.StoreRules, frm.SpoilNorm, frm.StageId, frm.MSL, frm.Service, 0, 0, 0,/* frm.LabelsQty, 
-                                    frm.StencilRequired, frm.StencilID,*/ frm.Warning, frm.SpoilConst, frm.AsPF, frm.MBLimit);
+                                    frm.StencilRequired, frm.StencilID,*/ frm.Warning, frm.SpoilConst, frm.AsPF, frm.MBLimit));
                 if (_res != 0)
                 {
                     cmb_Articles1.ArticleId = _res;
@@ -1047,7 +1039,7 @@ namespace Odin.Register.Articles
         {
             if (globClass.DeleteConfirm() == true)
             {
-                Reg.DeleteArticle(igvArtId);
+                Helper.getSP("sp_DeleteArticle", igvArtId);
                 cmb_Articles1.ArticleId = 0;
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
@@ -1096,10 +1088,10 @@ namespace Odin.Register.Articles
             if (result == DialogResult.OK)
             {
                 //Edit
-                int _res = Reg.SaveArticle(0, Regex.Replace(frm.Article, @"\p{C}+", string.Empty), frm.SecName, frm.Description, frm.TypeId, frm.UnitId, frm.ImagePath, frm.Comments,
+                int _res = Convert.ToInt32(Helper.getSP("sp_SaveArticle", 0, Regex.Replace(frm.Article, @"\p{C}+", string.Empty), frm.SecName, frm.Description, frm.TypeId, frm.UnitId, frm.ImagePath, frm.Comments,
                                     frm.CustCodeId, frm.QtyReserve, frm.DeptId, frm.CreateSubBatch, frm.Weight, frm.IsActive,
                                     frm.Revision, frm.StoreRules, frm.SpoilNorm, frm.StageId, frm.MSL, frm.Service, /*frm.LabelsQty, 
-                                    frm.StencilRequired, frm.StencilID*/0, 0, 0, frm.Warning, frm.SpoilConst, frm.AsPF, frm.MBLimit);
+                                    frm.StencilRequired, frm.StencilID*/0, 0, 0, frm.Warning, frm.SpoilConst, frm.AsPF, frm.MBLimit));
                 if (_res != 0)
                 {
                     cmb_Articles1.ArticleId = _res;
