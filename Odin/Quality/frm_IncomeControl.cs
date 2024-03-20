@@ -7,7 +7,6 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 
-
 namespace Odin.Quality
 {
     public partial class frm_IncomeControl : BaseForm
@@ -27,8 +26,6 @@ namespace Odin.Quality
         AdmMenu mMenu = new AdmMenu();
         class_Global globClass = new class_Global();
         Helper MyHelper = new Helper();
-        Quality_BLL BLL = new Quality_BLL();
-
         public int RowIndex = 0;
         public int ColumnIndex = 0;
         public string ColumnName = "";
@@ -51,7 +48,7 @@ namespace Odin.Quality
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -66,9 +63,7 @@ namespace Odin.Quality
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -76,38 +71,30 @@ namespace Odin.Quality
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
 
         public void bw_List(object sender, DoWorkEventArgs e)
         {
             //MessageBox.Show(cmb_DeliveryNotes1.DelivNoteId.ToString());
-            var data = Quality_BLL.getIncomeControlList(cmb_Types1.TypeId, cmb_Firms1.FirmId, cmb_Articles1.ArticleId, cmb_Articles1.Article, txt_SecArticle.Text);
+            var data = (DataTable)Helper.getSP("sp_IncomeControlList", cmb_Types1.TypeId, cmb_Firms1.FirmId, cmb_Articles1.ArticleId, cmb_Articles1.Article, txt_SecArticle.Text);
 
             gv_List.ThreadSafeCall(delegate
             {
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
-
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
                 bn_List.BindingSource = bs_List;
             });
-
         }
-
 
         #endregion
 
@@ -134,7 +121,6 @@ namespace Odin.Quality
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -152,8 +138,6 @@ namespace Odin.Quality
             }
             catch
             { }
-          
-
         }
 
         private void mni_Search_Click(object sender, EventArgs e)
@@ -180,8 +164,6 @@ namespace Odin.Quality
 
             }
             catch { }
-           
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -193,8 +175,6 @@ namespace Odin.Quality
                     : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
-           
-
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -204,8 +184,6 @@ namespace Odin.Quality
                 bs_List.RemoveFilter();
             }
             catch { }
-          
-
         }
 
         private void mni_Copy_Click(object sender, EventArgs e)
@@ -266,8 +244,7 @@ namespace Odin.Quality
 
             if (result == DialogResult.OK)
             {
-                BLL.SaveIncomeControl(0, frm.ArtId, frm.SupId, frm.Comments);
-
+                Helper.getSP("sp_SaveIncomeControl", 0, frm.ArtId, frm.SupId, frm.Comments);
                 bwStart(bw_List);
             }
         }
@@ -283,7 +260,6 @@ namespace Odin.Quality
                 _artid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_artid"].Value);
                 _supid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_supid"].Value);
                 _comments = gv_List.CurrentRow.Cells["cn_comments"].Value.ToString();
-
             }
 
             catch { }
@@ -301,11 +277,9 @@ namespace Odin.Quality
 
                 if (result == DialogResult.OK)
                 {
-                    BLL.SaveIncomeControl(_id, frm.ArtId, frm.SupId, frm.Comments);
-
+                    Helper.getSP("sp_SaveIncomeControl", _id, frm.ArtId, frm.SupId, frm.Comments);
                     bwStart(bw_List);
                 }
-
             }
         }
 
@@ -323,16 +297,10 @@ namespace Odin.Quality
             if (_id != 0
                 && glob_Class.DeleteConfirm() == true)
             {
-
-                BLL.DeleteIncomeControl(_id);
+                Helper.getSP("sp_DeleteIncomeControl", _id);
                 bwStart(bw_List);
-
             }
         }
-
-
         #endregion
-
-
     }
 }
