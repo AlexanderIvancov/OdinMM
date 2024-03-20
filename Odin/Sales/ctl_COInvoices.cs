@@ -13,11 +13,9 @@ namespace Odin.Sales
 
         #region Variables
 
-
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
         class_Global glob_Class = new class_Global();
         CO_BLL COBll = new CO_BLL();
-
         public double QtyOrdered
         {
             get
@@ -27,7 +25,6 @@ namespace Odin.Sales
             }
             set { txt_Ordered.Text = value.ToString(); }
         }
-
         public double QtySold
         {
             get
@@ -37,7 +34,6 @@ namespace Odin.Sales
             }
             set { txt_Sold.Text = value.ToString(); }
         }
-
         public double Paid
         {
             get
@@ -47,7 +43,6 @@ namespace Odin.Sales
             }
             set { txt_Paid.Text = value.ToString(); }
         }
-
         public double Total
         {
             get
@@ -57,7 +52,6 @@ namespace Odin.Sales
             }
             set { txt_Total.Text = value.ToString(); }
         }
-
         int _prevcoid = 0;
         int _coid = 0;
         public int COId
@@ -65,16 +59,13 @@ namespace Odin.Sales
             get { return cmb_SalesOrdersWithLines1.SalesOrderLineId; }
             set
             {
-
                 _coid = value;
                 FillInvoices(_coid);
                 COBll.COId = _coid;
                 FillDets();
             }
         }
-
         int _confid = 0;
-
         public int ConfId
         {
             get { return _confid; }
@@ -84,7 +75,6 @@ namespace Odin.Sales
                 COBll.ConfId = _confid;
             }
         }
-
 
         #endregion
 
@@ -100,7 +90,7 @@ namespace Odin.Sales
 
         public void FillInvoices(int _COId)
         {
-            var data = CO_BLL.getCOInvoices(_COId);
+            var data = (System.Data.DataTable)Helper.getSP("sp_SelectCOInvoices", _COId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -109,7 +99,6 @@ namespace Odin.Sales
                 gv_List.DataSource = bs_List;
 
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {

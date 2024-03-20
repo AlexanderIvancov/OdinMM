@@ -252,11 +252,10 @@ namespace Odin.CMB_Components.SalesOrders
 
                 if (result == DialogResult.OK)
                 {
-                    COBll.EditSalesOrderHead(_id, frm.CustId, frm.ContPersId, frm.Comments, frm.Contract, frm.CurId, frm.IncotermsId);
+                    Helper.getSP("sp_EditSalesOrderHead", _id, frm.CustId, frm.ContPersId, frm.Comments, frm.Contract, frm.CurId, frm.IncotermsId);
                     COBll.COHeadId = _id;
                     SalesOrderSaved?.Invoke(this);
                 }
-                
             }
         }
     }

@@ -167,16 +167,14 @@ namespace Odin.Sales
             txt_CreatDateTill.Value = null;
             mni_FilterFor.Text = string.Empty;
             bs_List.RemoveFilter();
-
         }
 
-        public void SetCellsColor()
-        { }
+        public void SetCellsColor() { }
 
         public void bw_List(object sender, DoWorkEventArgs e)
         {
            // MessageBox.Show(cmb_Common1.SelectedValue.ToString());
-            var data = CO_BLL.getExInvoices(cmb_ExpInvoice1.InvoiceId,
+            var data = (DataTable)Helper.getSP("sp_ExportInvoicesPortfolio", cmb_ExpInvoice1.InvoiceId,
                                             cmb_Common1.SelectedValue,
                                             cmb_Types1.TypeId, 
                                             cmb_Department1.DeptId, 
@@ -204,9 +202,7 @@ namespace Odin.Sales
                     RecalcTotals(gv_List.CurrentRow.Cells["cn_name"].Value.ToString(), Convert.ToInt32(gv_List.CurrentRow.Cells["cn_headid"].Value));
                 }
                 catch { }
-
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -216,7 +212,6 @@ namespace Odin.Sales
         
         private bool CheckOldRow()
         {
-
             try
             {
                 InvoiceLineId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
@@ -229,9 +224,7 @@ namespace Odin.Sales
             }
 
             if (_PrevId == InvoiceLineId)
-            {
                 return true;
-            }
             else
             {
                 _PrevId = InvoiceLineId;
@@ -293,7 +286,6 @@ namespace Odin.Sales
             double _vat = 0;
 
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 try
                 {
                     if (row.Cells["cn_name"].Value.ToString() == _document)
@@ -308,7 +300,6 @@ namespace Odin.Sales
                     }
                 }
                 catch { }
-            }
 
             Total = _total;
             TotalVat = Math.Round(_total / 100 * _vat, 2);//_totalvat;
@@ -326,15 +317,13 @@ namespace Odin.Sales
             if (frm.Mode == 1)
             {
                 foreach (DataGridViewRow row in grv.Rows)
-                {
                     if (Convert.ToInt32(row.Cells["chk_add"].Value) != 0
                         /*&& (Convert.ToInt32(row.Cells["cn_coid"].Value) != 0 ||
                             Convert.ToInt32(row.Cells["cn_isresale"].Value) != 0 ||
                             Convert.ToInt32(row.Cells["cn_isfinalproduct"].Value) != 0)*/
                         )
-                    {
                         if (Convert.ToInt32(row.Cells["cn_delivplaceid"].Value) == CmbBll.ExInvoiceReceiverId)
-                        Bll.AddExInvoiceDets(Convert.ToInt32(row.Cells["cn_id"].Value),
+                            Helper.getSP("sp_AddExInvoiceDets", Convert.ToInt32(row.Cells["cn_id"].Value),
                                             cmb_ExpInvoice1.InvoiceId,
                                             Convert.ToInt32(row.Cells["cn_artid"].Value),
                                             row.Cells["cn_custart"].Value.ToString(),
@@ -358,45 +347,35 @@ namespace Odin.Sales
                                "Receivers of goods in invoice and in delivery note are different!",
                                MessageBoxIcon.Stop,
                                TaskDialogButtons.OK);
-                    }
-                }
                 frm.Close();
             }
             else //Simple
             {
                 if (frm.CurId != frm.InvoiceCurId)
-                {
                     KryptonTaskDialog.Show("Currency warning!",
                                  "",
                                 "Currencies in invoice and confirmation order are not the same!",
                                 MessageBoxIcon.Warning,
                                 TaskDialogButtons.OK);
-                }
                 //else
                 //{
                     if (frm.Qty != 0
                         && String.IsNullOrEmpty(frm.Product) != true
                         /*&& frm.AllowToinvoice == -1*/)
                     {
-                        Bll.AddExInvoiceDets(0, cmb_ExpInvoice1.InvoiceId, frm.ArtId, frm.Product, frm.cmb_Quotations1.QuotationId == 0 ? frm.Qty : 1, frm.UnitId, frm.UnitPrice,
+                        Helper.getSP("sp_AddExInvoiceDets", 0, cmb_ExpInvoice1.InvoiceId, frm.ArtId, frm.Product, frm.cmb_Quotations1.QuotationId == 0 ? frm.Qty : 1, frm.UnitId, frm.UnitPrice,
                                             frm.FirmVAT, frm.Discount, frm.CustCode, frm.Comments, frm.COId, frm.IsService, frm.AdditExpenses, 
                                             frm.QuotId, frm.IsPaid, frm.InAdvance, frm.SalesComments);
                         frm.Close();
                     }
                     else
-                    {
                         KryptonTaskDialog.Show("Empty fields warning!",
                                 "",
                                "Some cells are empty!",
                                MessageBoxIcon.Warning,
                                TaskDialogButtons.OK);
-                    }
                 //}
-               
             }
-
-           
-
             bwStart(bw_List);
         }
 
@@ -408,13 +387,11 @@ namespace Odin.Sales
             p.TextTitle = name;
             p.TextDescription = name;
             p.ImageSmall = imageListSmall.Images[image];
-
             //p.Width = _Width;
 
             // Add the control for display inside the page
             content.Dock = DockStyle.Fill;
             p.Controls.Add(content);
-
 
             return p;
         }
@@ -461,7 +438,6 @@ namespace Odin.Sales
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -508,7 +484,6 @@ namespace Odin.Sales
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -521,7 +496,6 @@ namespace Odin.Sales
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -532,7 +506,6 @@ namespace Odin.Sales
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_Copy_Click(object sender, EventArgs e)
@@ -565,8 +538,6 @@ namespace Odin.Sales
             ED.DgvIntoExcel();
         }
 
-
-
         #endregion
 
         private void frm_ExpInvoices_Load(object sender, EventArgs e)
@@ -584,7 +555,6 @@ namespace Odin.Sales
         private void frm_ExpInvoices_Resize(object sender, EventArgs e)
         {
             if (_Main.WindowState == FormWindowState.Maximized)
-            {
                 foreach (var page in kryptonDockingManager1.PagesDocked)
                 {
                     kryptonDockingManager1.RemovePage(page, false);
@@ -593,7 +563,6 @@ namespace Odin.Sales
                                                new KryptonPage[] { page });
 
                 }
-            }
         }
 
         private void btn_Refresh_Click(object sender, EventArgs e)
@@ -608,15 +577,12 @@ namespace Odin.Sales
             SetCellsColor();
         }
 
-
         #endregion
 
         private void gv_List_SelectionChanged(object sender, EventArgs e)
         {
             if (CheckOldRow() == false)
-            {
                 ShowDetails(InvoiceLineId);
-            }
         }
 
         private void btn_AddNew_Click(object sender, EventArgs e)
@@ -661,8 +627,8 @@ namespace Odin.Sales
                 {
                     //if (frm.AllowToinvoice == -1)
                     //{
-                        //Edit line
-                        Bll.EditExInvoiceDets(_id, frm.ArtId, frm.Product, frm.Qty, frm.UnitId, frm.UnitPrice,
+                    //Edit line
+                        Helper.getSP("sp_EditExInvoiceDets", _id, frm.ArtId, frm.Product, frm.Qty, frm.UnitId, frm.UnitPrice,
                                                frm.FirmVAT, 0, frm.CustCode, frm.Comments, frm.COId, frm.IsService,
                                                frm.AdditExpenses, frm.QuotId, frm.IsPaid, frm.InAdvance, frm.IsActive, frm.SalesComments);
 
@@ -704,7 +670,6 @@ namespace Odin.Sales
                 int _id = 0;
 
                 foreach (DataGridViewRow row in this.gv_List.Rows)
-                {
                     if (row.Selected == true)
                     {
                         try
@@ -714,11 +679,8 @@ namespace Odin.Sales
                         catch { _id = 0; }
 
                         if (_id != 0)
-                        {
-                            Bll.DeleteExInvoiceDets(_id);
-                        }
+                            Helper.getSP("sp_DeleteExInvoiceDets", _id);
                     }
-                }
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
 
@@ -728,10 +690,7 @@ namespace Odin.Sales
             }
         }
 
-        private void btn_Print_Click(object sender, EventArgs e)
-        {
-           
-        }
+        private void btn_Print_Click(object sender, EventArgs e) { }
 
         private void mni_LangLat_Click(object sender, EventArgs e)
         {
@@ -789,7 +748,7 @@ namespace Odin.Sales
             if (cmb_ExpInvoice1.InvoiceId != 0
                 && glob_Class.CloseConfirmInvoice() == true)
             {
-                Bll.CloseExInvoice(cmb_ExpInvoice1.InvoiceId);
+                Helper.getSP("sp_CloseExInvoice", cmb_ExpInvoice1.InvoiceId);
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
 

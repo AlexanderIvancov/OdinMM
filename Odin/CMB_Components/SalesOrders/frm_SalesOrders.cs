@@ -130,7 +130,7 @@ namespace Odin.CMB_Components.SalesOrders
                 if (result == DialogResult.OK)
                 {
                     _showingModal = false;
-                    COBll.EditSalesOrderHead(_id, frm.CustId, frm.ContPersId, frm.Comments, frm.Contract, frm.CurId, frm.IncotermsId);
+                    Helper.getSP("sp_EditSalesOrderHead", _id, frm.CustId, frm.ContPersId, frm.Comments, frm.Contract, frm.CurId, frm.IncotermsId);
                     FillData(frm.SalesOrder);
                 }
                 if (result == DialogResult.Cancel)
@@ -150,9 +150,9 @@ namespace Odin.CMB_Components.SalesOrders
             if (_id != 0
                 && glob_Class.DeleteConfirm() == true)
             {
-                COBll.DeleteSalesOrderHead(_id);
+                Helper.getSP("sp_DeleteSalesOrderHead", _id);
                 FillData(string.Empty);
-                ((cmb_SalesOrders)cmb_SalesOrderOne).SalesOrdersSendSave();
+                (cmb_SalesOrderOne).SalesOrdersSendSave();
             }
 
             _showingModal = false;

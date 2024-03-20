@@ -21,28 +21,22 @@ namespace Odin.Sales
         DAL_Functions DLL = new DAL_Functions();
         Helper MyHelper = new Helper();
         class_Global glob_Class = new class_Global();
-    
         int _iscopy = 0;
-
         public int IsCopy
         {
             get { return _iscopy; }
             set { _iscopy = value; }
         }
-
         public string Quotation
         {
             get { return txt_Quotation.Text; }
             set { txt_Quotation.Text = value; }
         }
-
         public string Revision
         {
             get { return txt_Revision.Text; }
             set{ txt_Revision.Text = value; }
-            
         }
-
         public int PCB
         {
             get {
@@ -52,18 +46,15 @@ namespace Odin.Sales
                 chk_PCB.CheckState = value == -1 ? CheckState.Checked : value == 0 ? CheckState.Unchecked : CheckState.Indeterminate;
             }
         }
-
         public int IsProject
         {
             get
             {
                 return chk_project.CheckState == CheckState.Checked ? -1 : 0;
-
             }
             set
             {
                 chk_project.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
-
             }
         }
         public int IsSent
@@ -75,21 +66,16 @@ namespace Odin.Sales
             set
             {
                 chk_IsSent.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
-
             }
         }
-
         class_Global globClass = new class_Global();
-
         CO_BLL COBll = new CO_BLL();
-
         public int ArtId
         {
             get { return cmb_Articles1.ArticleId; }
-
             set { cmb_Articles1.ArticleId = value; }
         }
-       public int CustId
+        public int CustId
         {
             get { return cmb_Firms1.FirmId; }
             set { cmb_Firms1.FirmId = value; }
@@ -99,7 +85,6 @@ namespace Odin.Sales
             get { return txt_CustArticle.Text; }
             set { txt_CustArticle.Text = value; }
         }
-
         public double Qty
         {
             get
@@ -109,7 +94,6 @@ namespace Odin.Sales
             }
             set { txt_Qty.Text = value.ToString(); }
         }
-
         public double Spoilage
         {
             get
@@ -119,7 +103,6 @@ namespace Odin.Sales
             }
             set { txt_Spoilage.Text = value.ToString(); }
         }
-
         public int UnitId
         {
             get { return cmb_Units1.UnitId; }
@@ -134,7 +117,6 @@ namespace Odin.Sales
             }
             set { txt_UnitPrice.Text = value.ToString(); }
         }
-        
         public int StateId
         {
             get { return cmb_Common1.SelectedValue; }
@@ -145,8 +127,6 @@ namespace Odin.Sales
             get { return txt_Comments.Text; }
             set { txt_Comments.Text = value; }
         }
-        
-        
         public string ReqDate
         {
             get { return txt_ReqDate.Value.ToShortDateString(); }
@@ -156,13 +136,11 @@ namespace Odin.Sales
                 catch { }
             }
         }
-
         public DateTime ReqDateD
         {
             get { return Convert.ToDateTime(txt_ReqDate.Value); }
             set { txt_ReqDate.Value = value; }
         }
-
         public string ExpDate
         {
             get
@@ -178,7 +156,6 @@ namespace Odin.Sales
                 catch { txt_ExpDate.Value = null; }
             }
         }
-
         public string SentDate
         {
             get
@@ -194,25 +171,21 @@ namespace Odin.Sales
                 catch { txt_SentDate.Value = null; }
             }
         }
-
         public DateTime ExpDateD
         {
             get { return Convert.ToDateTime(txt_ExpDate.Value); }
             set { txt_ExpDate.Value = value; }
         }
-
         public DateTime SentDateD
         {
             get { return Convert.ToDateTime(txt_SentDate.Value); }
             set { txt_SentDate.Value = value; }
         }
-
         public string Week
         {
             get { return cmb_Week1.Week; }
             set { cmb_Week1.Week = value; }
         }
-
         public string CreatAt
         {
             get { return txt_CreatAt.Text; }
@@ -228,9 +201,7 @@ namespace Odin.Sales
             get { return cmb_Currency1.CurrencyId; }
             set { cmb_Currency1.CurrencyId = value; }
         }
-
         int _notpaidadvance = 0;
-
         public int Resale
         {
             get
@@ -242,7 +213,6 @@ namespace Odin.Sales
                 chk_resale.Checked = value == -1;
             }
         }
-
         public int NotPaidAdvance
         {
             get
@@ -288,9 +258,8 @@ namespace Odin.Sales
                 }
         }
         public int EndCustomerId
-        { get { return cmb_EndCustomer1.FirmId; }
+        {   get { return cmb_EndCustomer1.FirmId; }
             set { cmb_EndCustomer1.FirmId = value; } }
-
         public int Internal
         {
             get
@@ -326,6 +295,17 @@ namespace Odin.Sales
         }
         public int CheckRMQP
         { get; set; }
+        public string CustOrder
+        {
+            get { return txt_CustOrder.Text; }
+            set { txt_CustOrder.Text = value; }
+        }
+        public string CustLine
+        {
+            get { return txt_CustLine.Text; }
+            set { txt_CustLine.Text = value; }
+        }
+
         public void ClearCODets()
         {
             ArtId = 0;
@@ -350,42 +330,30 @@ namespace Odin.Sales
             Primary = 0;
         }
 
-        public string CustOrder
-        {
-            get { return txt_CustOrder.Text; }
-            set { txt_CustOrder.Text = value; }
-        }
-        public string CustLine
-        {
-            get { return txt_CustLine.Text; }
-            set { txt_CustLine.Text = value; }
-        }
-
         #endregion
 
         #region Methods
 
         public void FillAutoDoc(int _code)
         {
-            Quotation = DLL.AutoDoc(_code, System.DateTime.Now.ToShortDateString());
+            Quotation = DLL.AutoDoc(_code, DateTime.Now.ToShortDateString());
         }
 
         public void FillStages(int id)
         {
-            var data = CO_BLL.getQuotStages(id);
+            var data = (DataTable)Helper.getSP("sp_SelectQuotationStages", id);
 
             gv_List.ThreadSafeCall(delegate
             {
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
-
             });
         }
 
         public void FillDates()
         {
-            txt_SentDate.Value = System.DateTime.Now;
+            txt_SentDate.Value = DateTime.Now;
             txt_SentDate.Value = null;
         }
 
@@ -445,7 +413,6 @@ namespace Odin.Sales
 
                 if (IsCopy == -1)
                     _quotid = 0;
-
             }
         }
 
@@ -485,7 +452,6 @@ namespace Odin.Sales
             txt_Comments.Text = string.Empty;
         }
 
-
         private void btn_OK_Click(object sender, EventArgs e)
         {
             gv_List.EndEdit();
@@ -512,12 +478,9 @@ namespace Odin.Sales
                     {
                         DataRow dr = datastages.NewRow();
                         dr["id"] = Convert.ToInt32(row.Cells["cn_id"].Value);
-
                         dr["osid"] = IsCopy == -1 ? 0 : (object)Convert.ToInt32(row.Cells["cn_osid"].Value);
-
                         dr["checked"] = Convert.ToInt32(row.Cells["chk_checked"].Value);
                         datastages.Rows.Add(dr);
-
                     }
 
                     NewLineId = COBll.SaveQuotation(QuotId, DLL.CheckArtId(ArtId), Revision, CustArticle, Qty, UnitId, ReqDate, ExpDate, Week, StateId,
@@ -530,7 +493,7 @@ namespace Odin.Sales
                     if (COBll.CreateOrder == true)
                     {
                         //MessageBox.Show("Create order!");
-                        int _newOrder = COBll.AddCOFromQuotation(NewLineId);
+                        int _newOrder = Convert.ToInt32(Helper.getSP("sp_AddCOFromQuotation", NewLineId));
 
                         COBll.CreateOrder = false;
                         COBll.COId = _newOrder;
@@ -573,7 +536,6 @@ namespace Odin.Sales
                         }
                     }
 
-
                     //Event
                     SendQuotId?.Invoke(this);
                 }
@@ -589,7 +551,7 @@ namespace Odin.Sales
 
         private void buttonSpecAny3_Click(object sender, EventArgs e)
         {
-            txt_ExpDate.Value = System.DateTime.Now;
+            txt_ExpDate.Value = DateTime.Now;
         }
 
         private void cmb_Firms1_FirmsChanged(object sender)
@@ -597,12 +559,11 @@ namespace Odin.Sales
             CurId = cmb_Firms1.CurId;
         }
 
-
         #endregion
 
         private void txt_ExpDate_DropDown(object sender, ComponentFactory.Krypton.Toolkit.DateTimePickerDropArgs e)
         {
-            txt_ExpDate.Value = txt_ExpDate.Value == null ? System.DateTime.Now : txt_ExpDate.Value;
+            txt_ExpDate.Value = txt_ExpDate.Value == null ? DateTime.Now : txt_ExpDate.Value;
         }
 
         private void buttonSpecAny5_Click(object sender, EventArgs e)
@@ -617,14 +578,12 @@ namespace Odin.Sales
 
         private void txt_SentDate_DropDown(object sender, ComponentFactory.Krypton.Toolkit.DateTimePickerDropArgs e)
         {
-            txt_SentDate.Value = txt_SentDate.Value == null ? System.DateTime.Now : txt_SentDate.Value;
+            txt_SentDate.Value = txt_SentDate.Value == null ? DateTime.Now : txt_SentDate.Value;
         }
 
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
             MessageBox.Show(txt_SentDate.Value.ToString());
         }
-        
     }
-    
 }

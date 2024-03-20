@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Windows.Forms;
+ 
 namespace Odin.Sales
 {
     public delegate void COIdSendingEventHandler(object sender);
@@ -51,11 +52,8 @@ namespace Odin.Sales
         }
         public int COService
         {
-            get {
-                return chk_Service.CheckState == CheckState.Checked ? -1 : 0;
-            }
-            set { chk_Service.Checked = value == -1;
-            }
+            get { return chk_Service.CheckState == CheckState.Checked ? -1 : 0; }
+            set { chk_Service.Checked = value == -1; }
         }
         public int COBlocked
         {
@@ -294,14 +292,13 @@ namespace Odin.Sales
 
         public void FillStages(int id)
         {
-            var data = CO_BLL.getCOStages(id);
+            var data = (DataTable)Helper.getSP("sp_SelectOrderStages", id);
 
             gv_List.ThreadSafeCall(delegate
             {
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
-
             });
         }
 
@@ -361,9 +358,7 @@ namespace Odin.Sales
                 FillStages(_coid);
 
                 if (IsCopy == -1)
-                {
                     _coid = 0;
-                }
             }
         }
 
@@ -433,30 +428,23 @@ namespace Odin.Sales
 
                     dr["checked"] = Convert.ToInt32(row.Cells["chk_checked"].Value);
                     datastages.Rows.Add(dr);
-                    
                 }
 
-
-                NewLineId = COBll.SaveCOLine(COId, COHeadId, COLine, COCustOrder, COCustLine, "", "", COArtId, COCustArticle, COService, COQty,
+                NewLineId = Convert.ToInt32(Helper.getSP("sp_SaveCODets", COId, COHeadId, COLine, COCustOrder, COCustLine, "", "", COArtId, COCustArticle, COService, COQty,
                                             COUnitId, COReqDate, COStateId, COUnitPrice, COVat, COComments, COComments1,
                                             COLogComments, CODelivPlaceId, CODelivAddressId, COEndCustId, "", "", "", datastages, COInternal, 
-                                            COResale, COSpoilage, COBlocked, COSalesComments, COPrimary);
-
-               
+                                            COResale, COSpoilage, COBlocked, COSalesComments, COPrimary));
             }
 
             //Event
             SendCOId?.Invoke(this);
-
         }
 
         private void txt_Qty_Validated(object sender, EventArgs e)
         {
-            if (COId != 0
-                && COQtyInBatch > COQty)
-            {
+            //if (COId != 0
+            //    && COQtyInBatch > COQty)
                 //COQty = COQtyInBatch;
-            }
         }
     }
 }

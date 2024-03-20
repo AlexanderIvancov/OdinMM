@@ -1,7 +1,6 @@
 ﻿using Odin.Global_Classes;
 using System;
 using System.Data;
-using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace Odin.Sales
@@ -23,15 +22,12 @@ namespace Odin.Sales
                 FillPayments(_invoicedetid);
             }
         }
-        public int InvoiceHeadId
-        { get; set; }
-
+        public int InvoiceHeadId { get; set; }
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
         class_Global glob_Class = new class_Global();
         CO_BLL COBll = new CO_BLL();
         DAL_Functions DLL = new DAL_Functions();
         Helper MyHelper = new Helper();
-
         public double Billed
         {
             get
@@ -41,7 +37,6 @@ namespace Odin.Sales
             }
             set { txt_Billed.Text = value.ToString(); }
         }
-
         public double Paid
         {
             get
@@ -51,7 +46,6 @@ namespace Odin.Sales
             }
             set { txt_Paid.Text = value.ToString(); }
         }
-
         public double InvoiceBilled
         {
             get
@@ -61,7 +55,6 @@ namespace Odin.Sales
             }
             set { txt_InvoiceBilled.Text = value.ToString(); }
         }
-
         public double InvoicePaid
         {
             get
@@ -78,7 +71,7 @@ namespace Odin.Sales
 
         public void FillPayments(int invoicedetid)
         {
-            var data = CO_BLL.getInvoicePayments(invoicedetid);
+            var data = (DataTable)Helper.getSP("sp_SelectExInvoicePayments", invoicedetid);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -88,7 +81,6 @@ namespace Odin.Sales
 
                 //SetCellsColor();
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -105,65 +97,31 @@ namespace Odin.Sales
                 _paid = _paid + Convert.ToDouble(row.Cells["cn_paymentsum"].Value);
             Paid = _paid;
 
-            //Total by invoice 
-            SqlConnection conn = new SqlConnection(sConnStr);
-            conn.Open();
-
-            DataSet ds = new DataSet();
-
-            SqlDataAdapter adapter =
-                new SqlDataAdapter("exec sp_SelectExInvoiceTotals " + InvoiceHeadId.ToString(), conn);
-            adapter.Fill(ds);
-
-            conn.Close();
-
-            DataTable dt = ds.Tables[0];
+            DataTable dt = (DataTable)Helper.getSP("sp_SelectExInvoiceTotals", InvoiceHeadId);
 
             if (dt.Rows.Count > 0)
-            {
                 foreach (DataRow dr in dt.Rows)
                 {
                     InvoiceBilled = Convert.ToDouble(dr["billed"]);
                     InvoicePaid = Convert.ToDouble(dr["paid"]);
                 }
-            }
-
         }
 
         public void SendPaymentNotification(int InvoiceDetId)
         {
-            SqlConnection conn = new SqlConnection(sConnStr);
-            conn.Open();
-
-            DataSet ds = new DataSet();
-
-            SqlDataAdapter adapter =
-                new SqlDataAdapter("SELECT top 1 isnull(d.ispaid, 0) as ispaid, isnull(q.name, '') as quotation FROM FIN_DocDets d INNER JOIN SAL_Quotations q on q.id = d.quotid WHERE d.id = " + InvoiceDetId.ToString(), conn);
-            adapter.Fill(ds);
-
-            conn.Close();
-
-            DataTable dt = ds.Tables[0];
+            DataTable dt = (DataTable)Helper.GetOneRecord("SELECT top 1 isnull(d.ispaid, 0) as ispaid, isnull(q.name, '') as quotation FROM FIN_DocDets d INNER JOIN SAL_Quotations q on q.id = d.quotid WHERE d.id = " + InvoiceDetId.ToString());
 
             if (dt.Rows.Count > 0)
-            {
                 foreach (DataRow dr in dt.Rows)
-                {
                     if (Convert.ToInt32(dr["ispaid"]) == -1
                         && dr["quotation"].ToString() != "")
                     {
                         //Send letter to sales dept
-                       
                         string emailaddresses = DLL.EmailAddressesByType(6);
                        
                         string strMessage = "Quotation " + dr["quotation"].ToString() + " is paid!";
                         MyHelper.SendMessage(glob_Class.ReplaceChar(emailaddresses, ";", ","), "Quotation: " + dr["quotation"].ToString() + " is paid!", strMessage);
-
                     }
-                }
-            }
-
-
         }
 
         public void SendPaymentNotificationAll(int InvoiceDetId)
@@ -174,43 +132,26 @@ namespace Odin.Sales
 
             _invoiceheadid = Convert.ToInt32(Helper.GetOneRecord("select top 1 d.headid from FIN_DocDets d WHERE d.id = " + InvoiceDetId.ToString()));
 
-            SqlConnection conn = new SqlConnection(sConnStr);
-            conn.Open();
-
-            DataSet ds = new DataSet();
-
-            SqlDataAdapter adapter =
-                new SqlDataAdapter("SELECT isnull(d.ispaid, 0) as ispaid, isnull(q.name, '') as quotation FROM FIN_DocDets d INNER JOIN SAL_Quotations q on q.id = d.quotid WHERE d.headid = " + _invoiceheadid.ToString(), conn);
-            adapter.Fill(ds);
-
-            conn.Close();
-
-            DataTable dt = ds.Tables[0];
+            DataTable dt = (DataTable)Helper.GetOneRecord("SELECT isnull(d.ispaid, 0) as ispaid, isnull(q.name, '') as quotation FROM FIN_DocDets d INNER JOIN SAL_Quotations q on q.id = d.quotid WHERE d.headid = " + _invoiceheadid.ToString());
 
             if (dt.Rows.Count > 0)
             {
                 emailaddresses = DLL.EmailAddressesByType(6);
 
                 foreach (DataRow dr in dt.Rows)
-                {
                     if (Convert.ToInt32(dr["ispaid"]) == -1
                         && dr["quotation"].ToString() != "")
                     {
                         //Send letter to sales dept
                         strMessage = "Quotation " + dr["quotation"].ToString() + " is paid!";
                         MyHelper.SendMessage(glob_Class.ReplaceChar(emailaddresses, ";", ","), "Quotation: " + dr["quotation"].ToString() + " is paid!", strMessage);
-
                     }
-                }
             }
-
-
         }
 
         #endregion
 
         #region Controls
-
 
         private void btn_Add_Click(object sender, EventArgs e)
         {
@@ -220,17 +161,14 @@ namespace Odin.Sales
             DialogResult result = frm.ShowDialog();
             if (result == DialogResult.OK)
             {
-                COBll.AddExInvoicePayment(InvoiceDetId, frm.PaidAmount, frm.PaymentDate);
-
+                Helper.getSP("sp_AddExInvoicePayments", InvoiceDetId, frm.PaidAmount, frm.PaymentDate);
                 FillPayments(InvoiceDetId);
-
                 SendPaymentNotification(InvoiceDetId);
             }
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
         {
-
             int _id = 0;
             try { _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value); }
             catch { }
@@ -244,10 +182,8 @@ namespace Odin.Sales
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    COBll.EditExInvoicePayment(_id, frm.PaidAmount, frm.PaymentDate);
-
+                    Helper.getSP("sp_EditExInvoicePayments", _id, frm.PaidAmount, frm.PaymentDate);
                     FillPayments(InvoiceDetId);
-
                     SendPaymentNotification(InvoiceDetId);
                 }
             }
@@ -262,7 +198,7 @@ namespace Odin.Sales
             if (_id != 0
                 && glob_Class.DeleteConfirm() == true)
             {
-                COBll.DeleteExInvoicePayment(_id);
+                Helper.getSP("sp_DeleteExInvoicePayments", _id);
                 FillPayments(InvoiceDetId);
             }
         }
@@ -270,28 +206,20 @@ namespace Odin.Sales
         private void btn_PayAll_Click(object sender, EventArgs e)
         {
             frm_AddExInvoicePayment frm = new frm_AddExInvoicePayment();
-            frm.PaymentDate = System.DateTime.Now.ToShortDateString();
+            frm.PaymentDate = DateTime.Now.ToShortDateString();
             frm.HeaderText = "ADD PAYMENT FOR ALL LINES BY FIFO";
             frm.lbl_Amount.Text = "Total paid amount:";
             frm.PaidAmount = Math.Round(InvoiceBilled - InvoicePaid, 5);
             //frm.txt_PaidAmount.Enabled = false;
             DialogResult result = frm.ShowDialog();
 
-
-
             if (result == DialogResult.OK)
             {
-                COBll.AddExInvoicePaymentAll(InvoiceDetId, frm.PaidAmount, frm.PaymentDate);
-
+                Helper.getSP("sp_AddExInvoicePaymentsAll", InvoiceDetId, frm.PaidAmount, frm.PaymentDate);
                 FillPayments(InvoiceDetId);
-
                 SendPaymentNotificationAll(InvoiceDetId);
             }
-
         }
-
         #endregion
-
-
     }
 }

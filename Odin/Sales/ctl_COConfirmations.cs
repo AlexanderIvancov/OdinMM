@@ -20,11 +20,9 @@ namespace Odin.Sales
         {
             get { return cmb_SalesOrdersWithLines1.SalesOrderLineId; }
             set {
-
                 _coid = value;
                 FillConfirmations(_coid);
                 COBll.COId = _coid;
-                
             }
         }
 
@@ -43,25 +41,21 @@ namespace Odin.Sales
             double _res = 0;
 
             foreach (DataGridViewRow row in gv_List.Rows)
-            {
                 _res = _res + Convert.ToDouble(row.Cells["cn_confirmqty"].Value);
-            }
 
             return _res;
         }
 
         public void FillConfirmations(int _COId)
         {
-            var data = CO_BLL.getCOConfirmations(_COId);
+            var data = (System.Data.DataTable)Helper.getSP("sp_SelectCOConfirmations", _COId);
 
             gv_List.ThreadSafeCall(delegate
             {
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
-
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -72,7 +66,6 @@ namespace Odin.Sales
         private void btn_Add_Click(object sender, EventArgs e)
         {
             frm_AddCOConfirmation frm = new frm_AddCOConfirmation();
-                        
 
             frm.Qty = COBll.COQty - _ConfBefore();
             frm.ConfDate = System.DateTime.Now.ToShortDateString();//COBll.COReqDate;
@@ -83,8 +76,7 @@ namespace Odin.Sales
 
             if (result == DialogResult.OK)
             {
-                int _res = COBll.AddCOConfirmation(COId, frm.Qty, frm.ConfDate, frm.Comments, frm.DelivPlaceId, frm.DelivAddressId);
-
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddCOConfirm", COId, frm.Qty, frm.ConfDate, frm.Comments, frm.DelivPlaceId, frm.DelivAddressId));
                 FillConfirmations(COId);
             }
         }
@@ -103,8 +95,7 @@ namespace Odin.Sales
 
             if (result == DialogResult.OK)
             {
-                COBll.EditCOConfirmation(COBll.ConfId, COId, frm.Qty, frm.ConfDate, frm.Comments, frm.DelivPlaceId, frm.DelivAddressId);
-
+                Convert.ToInt32(Helper.getSP("sp_EditCOConfirm", COBll.ConfId, COId, frm.Qty, frm.ConfDate, frm.Comments, frm.DelivPlaceId, frm.DelivAddressId));
                 FillConfirmations(COId);
             }
         }
@@ -118,7 +109,7 @@ namespace Odin.Sales
 
             if (glob_Class.DeleteConfirm() == true)
             {
-                COBll.DeleteCOConfirmation(_confid);
+                Helper.getSP("sp_DeleteCOConfirm", _confid);
                 FillConfirmations(COId);
             }
         }
@@ -126,7 +117,6 @@ namespace Odin.Sales
         private void cmb_SalesOrdersWithLines1_SalesOrderChanged(object sender)
         {
             if (_prevcoid != cmb_SalesOrdersWithLines1.SalesOrderLineId)
-            
             {
                 //MessageBox.Show(cmb_SalesOrdersWithLines1.SalesOrderLineId.ToString());
                 COId = cmb_SalesOrdersWithLines1.SalesOrderLineId;

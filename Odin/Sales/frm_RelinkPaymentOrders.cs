@@ -16,7 +16,6 @@ namespace Odin.Sales
         public frm_RelinkPaymentOrders()
         {
             InitializeComponent();
-           
         }
 
         #region Variables
@@ -43,13 +42,11 @@ namespace Odin.Sales
             get { return this.Text; }
             set { this.Text = value; }
         }
-
         public int CustId
         {
             get;
             set;
         }
-
         public int COId
         {
             get { return _coid; }
@@ -60,30 +57,25 @@ namespace Odin.Sales
         public string ColumnName = "";
         public string CellValue = "";
         public int ControlWidth = 250;
-
         public int oRowIndex = 0;
         public int oColumnIndex = 0;
         public string oColumnName = "";
         public string oCellValue = "";
-
         public double Mapped
         {
             get { return Convert.ToDouble(txt_TotalMapped.Text); }
             set { txt_TotalMapped.Text = value.ToString(); }
         }
-
         public double InPayment
         {
             get { return Convert.ToDouble(txt_TotalInPayment.Text); }
             set { txt_TotalInPayment.Text = value.ToString(); }
         }
-
         public double Rest
         {
             get { return Convert.ToDouble(txt_Rest.Text); }
             set { txt_Rest.Text = value.ToString(); }
         }
-
         public int InvoiceType
         {
             get
@@ -112,7 +104,6 @@ namespace Odin.Sales
                 }
             }
         }
-
         public string PayDate
         {
             get
@@ -129,14 +120,13 @@ namespace Odin.Sales
             }
         }
 
-
         #endregion
 
         #region Methods
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -151,9 +141,7 @@ namespace Odin.Sales
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -161,14 +149,10 @@ namespace Odin.Sales
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
         public void SetCellsColor()
@@ -182,7 +166,6 @@ namespace Odin.Sales
                 //    foreach (DataGridViewCell cell in row.Cells)
                 //    { cell.Style.BackColor = Color.Tomato; }
             }
-
         }
 
         public void SetCellsColorNotPaid()
@@ -203,7 +186,7 @@ namespace Odin.Sales
         {
             ds_List.Clear();
 
-            var data = CO_BLL.getPaymentDets(_paymentid, _coid);
+            var data = (DataTable)Helper.getSP("sp_SelectPaymentDets", _paymentid, _coid);
            
             foreach (DataRow row in data.Rows)
             {
@@ -223,7 +206,6 @@ namespace Odin.Sales
                 row1["oldamount"] = row["amount"];
 
                 dt_List.Rows.Add(row1);
-
             }
             this.bs_List.ResetBindings(false);
             SetCellsColor();
@@ -233,8 +215,7 @@ namespace Odin.Sales
         {
             ds_Orders.Clear();
 
-            var data = CO_BLL.getPaymentNotPaidDets(_custid, InvoiceType);
-
+            var data = (DataTable)Helper.getSP("sp_SelectPaymentNotPaidDets", _custid, InvoiceType);
 
             foreach (DataRow row in data.Rows)
             {
@@ -254,7 +235,6 @@ namespace Odin.Sales
                 row1["topay"] = row["amount"];
 
                 dt_Orders.Rows.Add(row1);
-
             }
             this.bs_Orders.ResetBindings(false);
             SetCellsColorNotPaid();
@@ -264,9 +244,7 @@ namespace Odin.Sales
         {
             double _mapped = 0;
             foreach (DataRow row in dt_List.Rows)
-            {
                 _mapped = _mapped + Convert.ToDouble(row["amount"]);
-            }
             Mapped = Math.Round(_mapped, 2);
             Rest = Math.Round(InPayment - Mapped, 2);
         }
@@ -277,7 +255,7 @@ namespace Odin.Sales
         }
         public void FillDates()
         {
-            txt_PayDate.Value = System.DateTime.Now;
+            txt_PayDate.Value = DateTime.Now;
         }
 
         public void SendPaymentNotification(int InvoiceDetId)
@@ -300,9 +278,7 @@ namespace Odin.Sales
             DataTable dt = ds.Tables[0];
 
             if (dt.Rows.Count > 0)
-            {
                 foreach (DataRow dr in dt.Rows)
-                {
                     if (Convert.ToInt32(dr["ispaid"]) == -1
                         && dr["quotation"].ToString() != "")
                     {
@@ -314,10 +290,7 @@ namespace Odin.Sales
                         strMessage = strMessage + "\r\nCustomer: " + dr["customer"].ToString();
                         strMessage = strMessage + "\r\nArticle: " + dr["custarticle"].ToString();
                         MyHelper.SendDirectEMail(glob_Class.ReplaceChar(emailaddresses, ";", ","), "Quotation: " + dr["quotation"].ToString() + " is paid!", strMessage);
-
                     }
-                }
-            }
         }
 
         #endregion
@@ -338,7 +311,6 @@ namespace Odin.Sales
                     //Add to not-paid or update existed
 
                     foreach (DataRow row2 in dt_Orders.Rows)
-                    {
                         if (Convert.ToInt32(row2["invoiceid"]) == Convert.ToInt32(row["invoiceid"]))
                         {
                             row2["amount"] = Convert.ToDouble(row2["amount"]) + Convert.ToDouble(row["amount"]);
@@ -348,8 +320,6 @@ namespace Odin.Sales
                             _k++;
                             break;
                         }
-
-                    }
 
                     if (_k == 0)
                     {
@@ -395,7 +365,6 @@ namespace Odin.Sales
                 //Add to not-paid or update existed
                 _k = 0;
                 foreach (DataRow row2 in dt_Orders.Rows)
-                {
                     if (Convert.ToInt32(row2["invoiceid"]) == Convert.ToInt32(row["invoiceid"]))
                     {
                         row2["amount"] = Convert.ToDouble(row2["amount"]) + Convert.ToDouble(row["amount"]);
@@ -405,7 +374,6 @@ namespace Odin.Sales
                         _k++;
                         break;
                     }
-                }
                 if (_k == 0)
                 {
                     DataRow row1 = dt_Orders.NewRow();
@@ -443,27 +411,21 @@ namespace Odin.Sales
 
             int _id = 0;
             int _k = 0;
-            double _tmpqty = 0;
 
             try { _id = Convert.ToInt32(gv_Orders.CurrentRow.Cells["cn_oinvoiceid"].Value); }
             catch { }
 
             foreach (DataRow row in dt_Orders.Rows)
-            {
                 if (Convert.ToInt32(row["invoiceid"]) == _id)
-                {
                     if (InPayment >= Mapped + Convert.ToDouble(row["topay"]))
                     {
                         foreach (DataRow row2 in dt_List.Rows)
-                        {
                             if (Convert.ToInt32(row2["invoiceid"]) == Convert.ToInt32(row["invoiceid"]))
                             {
                                 row2["amount"] = Convert.ToDouble(row2["amount"]) + Convert.ToDouble(row["topay"]);
                                 _k++;
                                 break;
                             }
-
-                        }
 
                         if (_k == 0)
                         {
@@ -483,21 +445,17 @@ namespace Odin.Sales
                             row1["oldamount"] = row["oldamount"];
 
                             dt_List.Rows.Add(row1);
-
                         }
 
                         if (Convert.ToDouble(row["topay"]) >= Convert.ToDouble(row["amount"]))
-                        {
                             //Add to not-paid
 
                             //Delete from existed
                             row.Delete();
-                        }
                         else
                         {
                             row["amount"] = Convert.ToDouble(row["amount"]) - Convert.ToDouble(row["topay"]);
                             row["topay"] = 0;
-
                         }
 
                         RecalcMapped();
@@ -510,20 +468,12 @@ namespace Odin.Sales
                         break;
                     }
                     else
-                    {
                         glob_Class.ShowMessage("Error in check-in!", "Please check mapped sum!", "Mapped sum can not be more than in payment!");
-                    }
-                }
-            }
         }
 
-        private void btn_Wizard_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void btn_Wizard_Click(object sender, EventArgs e) { }
 
         #region Context menu
-
 
         private void mnu_Lines_Opening(object sender, CancelEventArgs e)
         {
@@ -543,7 +493,6 @@ namespace Odin.Sales
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -562,7 +511,6 @@ namespace Odin.Sales
             catch
             { }
             //SetCellsColor();
-
         }
 
         private void mni_Search_Click(object sender, EventArgs e)
@@ -586,11 +534,9 @@ namespace Odin.Sales
                         ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
                         : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
-
             }
             catch { }
             //SetCellsColor();
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -603,7 +549,6 @@ namespace Odin.Sales
             }
             catch { }
             //SetCellsColor();
-
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -614,7 +559,6 @@ namespace Odin.Sales
             }
             catch { }
             //SetCellsColor();
-
         }
 
         private void mni_Copy_Click(object sender, EventArgs e)
@@ -647,12 +591,9 @@ namespace Odin.Sales
             //ED.DgvIntoExcel();
         }
 
-
-
         #endregion
 
         #region Context menu orders
-
 
         private void mnu_Orders_Opening(object sender, CancelEventArgs e)
         {
@@ -672,7 +613,6 @@ namespace Odin.Sales
                 oCellValue = gv_Orders.Rows[oRowIndex].Cells[oColumnIndex].Value.ToString();
                 oColumnName = gv_Orders.Columns[oColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -691,7 +631,6 @@ namespace Odin.Sales
             catch
             { }
             //SetCellsColor();
-
         }
 
         private void mni_oSearch_Click(object sender, EventArgs e)
@@ -715,11 +654,9 @@ namespace Odin.Sales
                         ? bs_Orders.Filter + "AND (" + oColumnName + " is null OR Convert(" + oColumnName + ", 'System.String') = '')"
                         : bs_Orders.Filter + " AND Convert(" + oColumnName + " , 'System.String') = '" + glob_Class.NES(oCellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
-
             }
             catch { }
             //SetCellsColor();
-
         }
 
         private void mni_oFilterExcludingSel_Click(object sender, EventArgs e)
@@ -732,7 +669,6 @@ namespace Odin.Sales
             }
             catch { }
             //SetCellsColor();
-
         }
 
         private void mni_oRemoveFilter_Click(object sender, EventArgs e)
@@ -743,7 +679,6 @@ namespace Odin.Sales
             }
             catch { }
             //SetCellsColor();
-
         }
 
         private void mni_oCopy_Click(object sender, EventArgs e)
@@ -758,7 +693,7 @@ namespace Odin.Sales
             frm.HeaderText = "Select view for order payments list";
             frm.grid = this.gv_Orders;
             frm.formname = this.Name;
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
             frm.UserId = DAL.UserId;
 
             frm.FillData(frm.grid);
@@ -776,8 +711,6 @@ namespace Odin.Sales
             //ED1.DgvIntoExcel();
         }
 
-
-
         #endregion
 
         private void btn_OK_Click(object sender, EventArgs e)
@@ -788,40 +721,32 @@ namespace Odin.Sales
                 DataRow[] foundRows;
 
                 foreach (DataRow row in dt_List.Rows)
-                {
                     if (Convert.ToInt32(row["id"]) == 0)
                     {
                         //Adding line
-                        Bll.AddPaymentDetails(HeadId, Convert.ToInt32(row["invoiceid"]),
+                        Helper.getSP("sp_AddPaymentDetails", HeadId, Convert.ToInt32(row["invoiceid"]),
                                                 Convert.ToDateTime(txt_PayDate.Value).ToShortDateString(),
                                                 Convert.ToDouble(row["amount"]));
                         SendPaymentNotification(Convert.ToInt32(row["invoiceid"]));
                     }
                     else
-                    {
                         if (Convert.ToDouble(row["amount"]) != Convert.ToDouble(row["oldamount"]))
                         //Updating line
                         {
-                            Bll.EditPaymentDetails(Convert.ToInt32(row["id"]), Convert.ToDouble(row["amount"]),
+                            Helper.getSP("sp_EditPaymentDetails", Convert.ToInt32(row["id"]), Convert.ToDouble(row["amount"]),
                                                     Convert.ToDateTime(txt_PayDate.Value).ToShortDateString());
                             SendPaymentNotification(Convert.ToInt32(row["invoiceid"]));
                         }
-                    }
-                }
 
                 foreach (DataRow row1 in dt_Orders.Rows)
-                {
                     if (Convert.ToInt32(row1["id"]) != 0)
                     {
                         _expr = "id = " + row1["id"].ToString();
                         foundRows = dt_List.Select(_expr);
                         if (foundRows.Length == 0)
-                        {
                             //Delete row from payment
-                            Bll.DeletePaymentDetails(Convert.ToInt32(row1["id"]));
-                        }
+                            Helper.getSP("sp_DeletePaymentDetails", Convert.ToInt32(row1["id"]));
                     }
-                }
 
                 FillPayment(HeadId, COId);
                 FillNotPaid(CustId);
@@ -844,10 +769,7 @@ namespace Odin.Sales
             this.Close();
         }
 
-        private void txt_TotalInPayment_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        private void txt_TotalInPayment_TextChanged(object sender, EventArgs e) { }
 
         private void gv_List_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -864,7 +786,6 @@ namespace Odin.Sales
             gv_Orders.EndEdit();
             if (Convert.ToDouble(gv_Orders.CurrentRow.Cells["cn_topay"].Value) > Convert.ToDouble(gv_Orders.CurrentRow.Cells["cn_oamount"].Value))
                 gv_Orders.CurrentRow.Cells["cn_topay"].Value = Convert.ToDouble(gv_Orders.CurrentRow.Cells["cn_oamount"].Value);
-
         }
 
         private void txt_PayDate_DropDown(object sender, DateTimePickerDropArgs e)
@@ -895,9 +816,6 @@ namespace Odin.Sales
             gv_Orders.EndEdit();
         }
 
-        private void btn_Add_MouseDown(object sender, MouseEventArgs e)
-        {
-            
-        }
+        private void btn_Add_MouseDown(object sender, MouseEventArgs e) { }
     }
 }

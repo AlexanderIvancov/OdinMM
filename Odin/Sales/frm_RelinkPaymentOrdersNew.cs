@@ -36,50 +36,36 @@ namespace Odin.Sales
             get { return _id; }
             set { _id = value; }
         }
-
         string _mode = "new";
-
         public string Mode
         {
             get { return _mode; }
-            set
-            {
-                _mode = value;
-
-            }
+            set { _mode = value; }
         }
-
         public string Payment
         {
             get { return txt_Payment.Text; }
             set { txt_Payment.Text = value; }
         }
-
-        
-
         public int RowIndex = 0;
         public int ColumnIndex = 0;
         public string ColumnName = "";
         public string CellValue = "";
-        
         public string Comments
         {
             get { return txt_Comments.Text; }
             set { txt_Comments.Text = value; }
         }
-
         public double Mapped
         {
             get { return Convert.ToDouble(txt_TotalMapped.Text); }
             set { txt_TotalMapped.Text = value.ToString(); }
         }
-
         public double ToFree
         {
             get { return Convert.ToDouble(txt_ToFree.Text); }
             set { txt_ToFree.Text = value.ToString(); }
         }
-
         public double Rest
         {
             get { return Convert.ToDouble(txt_Rest.Text); }
@@ -90,7 +76,6 @@ namespace Odin.Sales
             get { return Convert.ToDouble(txt_TotalFree.Text); }
             set { txt_TotalFree.Text = value.ToString(); }
         }
-
         public int CurId
         {
             get { return cmb_Currency1.CurrencyId; }
@@ -114,10 +99,9 @@ namespace Odin.Sales
             }
         }
 
-
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -132,9 +116,7 @@ namespace Odin.Sales
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -142,30 +124,25 @@ namespace Odin.Sales
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
         public void FillDates()
         {
-            txt_PayDate.Value = System.DateTime.Now;
+            txt_PayDate.Value = DateTime.Now;
         }
 
         public void FillAutoDoc()
         {
-            Payment = DAL.AutoDoc(18, System.DateTime.Now.ToShortDateString());
+            Payment = DAL.AutoDoc(18, DateTime.Now.ToShortDateString());
         }
 
         public void FillList()
         {
-            var data = CO_BLL.getPaidOrders(cmb_Firms2.FirmId);
-
+            var data = (DataTable)Helper.getSP("sp_PaymentsListByOrdersRelink", cmb_Firms2.FirmId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -182,7 +159,6 @@ namespace Odin.Sales
                 }
                 catch { }
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -231,14 +207,11 @@ namespace Odin.Sales
             bool _res = false;
 
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 if (Convert.ToInt32(row.Cells["chk_payall"].Value) != 0)
                 {
                     _res = true;
                     break;
                 }
-
-            }
 
             return _res;
         }
@@ -248,10 +221,7 @@ namespace Odin.Sales
             bool res = true;
 
             if (cmb_Currency1.CurrencyId == 0)
-            {
                 res = false;
-            }
-
             return res;
         }
 
@@ -259,9 +229,7 @@ namespace Odin.Sales
         {
             double _res = 0;
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 _res = _res + Convert.ToDouble(row.Cells["cn_tomap"].Value);
-            }
 
             return Math.Round(_res, 2);
         }
@@ -271,7 +239,6 @@ namespace Odin.Sales
         #region Controls
 
         #region Context menu
-
 
         private void mnu_Lines_Opening(object sender, CancelEventArgs e)
         {
@@ -291,7 +258,6 @@ namespace Odin.Sales
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -310,7 +276,6 @@ namespace Odin.Sales
             catch
             { }
             SetCellsColor();
-
         }
 
         private void mni_Search_Click(object sender, EventArgs e)
@@ -334,11 +299,9 @@ namespace Odin.Sales
                         ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
                         : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
-
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -351,7 +314,6 @@ namespace Odin.Sales
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -362,7 +324,6 @@ namespace Odin.Sales
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_Copy_Click(object sender, EventArgs e)
@@ -408,9 +369,6 @@ namespace Odin.Sales
             FillTotals(cmb_Firms2.FirmId);
         }
 
-        
-
-
         #endregion
 
         private void btn_Cancel_Click(object sender, EventArgs e)
@@ -427,7 +385,7 @@ namespace Odin.Sales
                     || ToFree > 0
                     || CheckPayAll() == true)
                 {
-                    int _headres = COBll.AddPaymentHeader(cmb_Firms2.FirmId, 18, Convert.ToDateTime(txt_PayDate.Value).ToShortDateString(), Mapped - ToFree, 0, CurId, 1, Comments);
+                    int _headres = Convert.ToInt32(Helper.getSP("sp_AddPaymentHeader", cmb_Firms2.FirmId, 18, Convert.ToDateTime(txt_PayDate.Value).ToShortDateString(), Mapped - ToFree, 0, CurId, 1, Comments));
 
                     //if (_headres != 0)
                     //{
@@ -449,31 +407,19 @@ namespace Odin.Sales
                     {
                         //1st - free
                         foreach (DataGridViewRow row in this.gv_List.Rows)
-                        {
                             if (Convert.ToDouble(row.Cells["cn_tofree"].Value) > 0)
-                            {
-                                COBll.ReleasePaymentDetails(_headres, Convert.ToInt32(row.Cells["cn_id"].Value), CurId,
+                                Helper.getSP("sp_ReleasePaymentDetails", _headres, Convert.ToInt32(row.Cells["cn_id"].Value), CurId,
                                                   Convert.ToDouble(row.Cells["cn_tofree"].Value), Convert.ToInt32(row.Cells["cn_quotid"].Value));
 
-                            }
-
-                        }
                         //2nd - add
                         foreach (DataGridViewRow row in this.gv_List.Rows)
-                        {
                             if (Convert.ToDouble(row.Cells["cn_tomap"].Value) > 0
                                 || Convert.ToInt32(row.Cells["chk_payall"].Value) != 0)
-                            {
-                                COBll.RelinkPaymentDetails(_headres, Convert.ToInt32(row.Cells["cn_id"].Value), CurId,
+                                Helper.getSP("sp_RelinkPaymentDetails", _headres, Convert.ToInt32(row.Cells["cn_id"].Value), CurId,
                                                   Convert.ToDouble(row.Cells["cn_tomap"].Value), Convert.ToInt32(row.Cells["chk_payall"].Value),
                                                   Convert.ToInt32(row.Cells["cn_quotid"].Value));
-
-                            }
-
-                        }
                     }
                 }
-
 
                 FillList();
                 FillTotals(cmb_Firms2.FirmId);
@@ -509,11 +455,8 @@ namespace Odin.Sales
                         gv_List.CurrentRow.Cells["cn_tofree"].Value = 0;
                 }
                 if (gv_List.CurrentRow.Cells["cn_tomap"].Selected == true)
-                {
                     if (AlreadyMapped() > Rest + ToFree)
                         gv_List.CurrentRow.Cells["cn_tomap"].Value = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_tomap"].Value) - (AlreadyMapped() - (Rest + ToFree));
-                }
-
             }
             else
             {
@@ -525,10 +468,8 @@ namespace Odin.Sales
                         gv_List.CurrentRow.Cells["cn_tofree"].Value = 0;
                 }
                 if (gv_List.CurrentRow.Cells["cn_tomap"].Selected == true)
-                {
                     if (AlreadyMapped() > Rest + ToFree)
                         gv_List.CurrentRow.Cells["cn_tomap"].Value = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_tomap"].Value) - (AlreadyMapped() - (Rest + ToFree));
-                }
             }
             RecalcTotals();
         }
@@ -569,7 +510,6 @@ namespace Odin.Sales
                 e.Graphics.DrawImage(Global_Resourses.money_add, new Rectangle(x, y, w, h));
                 e.Handled = true;
             }
-                       
         }
 
         private void gv_List_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -616,7 +556,6 @@ namespace Odin.Sales
                     }
                 }
                 else
-                {
                     if (gv_List.CurrentRow.Cells["btn_tofree"].Selected == true
                         && Convert.ToDouble(gv_List.CurrentRow.Cells["cn_lefttopay"].Value) < 0)
                     {
@@ -626,8 +565,6 @@ namespace Odin.Sales
                         //else
                         //    gv_List.CurrentRow.Cells["cn_topay"].Value = tmpdiff;
                     }
-                }
-
             }
             catch { }
             RecalcTotals();
@@ -640,7 +577,6 @@ namespace Odin.Sales
                && Convert.ToInt32(gv_List.CurrentRow.Cells["chk_payall"].Value) == -1)
             {
                 double tmpdiff = 0;
-
                 double _alreadymapped = AlreadyMapped();
 
                 if (cmb_Currency1.Currency == gv_List.CurrentRow.Cells["cn_curr"].Value.ToString())
@@ -663,9 +599,6 @@ namespace Odin.Sales
             RecalcTotals();
         }
 
-        private void gv_List_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            
-        }
+        private void gv_List_CellEndEdit(object sender, DataGridViewCellEventArgs e) { }
     }
 }

@@ -31,40 +31,29 @@ namespace Odin.Sales
         class_Global globClass = new class_Global();
         ExportData ED;
         Helper MyHelper = new Helper();
-              
-
         public int RowIndex = 0;
         public int ColumnIndex = 0;
         public string ColumnName = "";
         public string CellValue = "";
-
         frm_AddQuotation frm = null;
-
         public int QuotId
         {
             get;
             set;
         }
-
         public int _PrevId = 0;
-
         public bool _iscopy = false;
-
         public int ControlWidth = 250;
-
-
         public DateTime DateFromD
         {
             get { return Convert.ToDateTime(txt_ReqDateFrom.Value); }
             set { txt_ReqDateFrom.Value = value; }
         }
-
         public DateTime DateTillD
         {
             get { return Convert.ToDateTime(txt_ReqDateTill.Value); }
             set { txt_ReqDateTill.Value = value; }
         }
-
         public int PCB
         {
             get
@@ -83,7 +72,7 @@ namespace Odin.Sales
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -98,9 +87,7 @@ namespace Odin.Sales
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -108,14 +95,10 @@ namespace Odin.Sales
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
         public void ClearFilter()
@@ -140,7 +123,7 @@ namespace Odin.Sales
 
         public void bw_List(object sender, DoWorkEventArgs e)
         {
-            var data = CO_BLL.getQuotations(cmb_Quotations1.QuotationId, cmb_Types1.TypeId, cmb_Department1.DeptId, cmb_Firms1.FirmId, cmb_Common1.SelectedValue,
+            var data = (DataTable)Helper.getSP("sp_SalesQuotationsPortfolio", cmb_Quotations1.QuotationId, cmb_Types1.TypeId, cmb_Department1.DeptId, cmb_Firms1.FirmId, cmb_Common1.SelectedValue,
                                             cmb_Articles1.ArticleId,
                                             txt_CustArticle.Text, 
                                             txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
@@ -159,7 +142,6 @@ namespace Odin.Sales
                 SetCellsColor();
             });
 
-
             bn_List.ThreadSafeCall(delegate
             {
                 bn_List.BindingSource = bs_List;
@@ -172,45 +154,26 @@ namespace Odin.Sales
             {
                 //Yellow - in Progress
                 if (Convert.ToInt32(row.Cells["cn_stateid"].Value) == 1)
-                {
                     if (Convert.ToInt32(row.Cells["chk_issent"].Value) == 0)
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        cell.Style.BackColor = Color.FromArgb(255, 255, 192);
-                    }
+                        foreach (DataGridViewCell cell in row.Cells)
+                            cell.Style.BackColor = Color.FromArgb(255, 255, 192);
                     else
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        cell.Style.BackColor = Color.Yellow;
-                    }
-                }
+                        foreach (DataGridViewCell cell in row.Cells)
+                            cell.Style.BackColor = Color.Yellow;
                 //Green - Accepted
                 if (Convert.ToInt32(row.Cells["cn_stateid"].Value) == 3)
-                {
                     foreach (DataGridViewCell cell in row.Cells)
-                    {
                         cell.Style.BackColor = Color.FromArgb(192, 255, 192);
-                    }
-                }
                 //Declined - GREY
                 if (Convert.ToInt32(row.Cells["cn_stateid"].Value) == 5)
-                {
                     foreach (DataGridViewCell cell in row.Cells)
-                    {
                         cell.Style.BackColor = Color.FromArgb(224, 224, 224);
-                    }
-                }
                 //Red - no PCB
                 if (row.Cells["cn_pcbtext"].Value.ToString() == "No"
                     && Convert.ToInt32(row.Cells["cn_stateid"].Value) == 3)
-                {
                     foreach (DataGridViewCell cell in row.Cells)
-                    {
                         cell.Style.BackColor = Color.LightCoral;
-                    }
-                }
             }
-
         }
 
         public void AddQuotation(object sender)
@@ -233,7 +196,6 @@ namespace Odin.Sales
 
         #region Context menu
 
-
         private void mnu_Lines_Opening(object sender, CancelEventArgs e)
         {
             try
@@ -252,7 +214,6 @@ namespace Odin.Sales
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -271,7 +232,6 @@ namespace Odin.Sales
             catch
             { }
             SetCellsColor();
-
         }
 
         private void mni_Search_Click(object sender, EventArgs e)
@@ -295,11 +255,9 @@ namespace Odin.Sales
                         ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
                         : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
-
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -312,7 +270,6 @@ namespace Odin.Sales
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -323,7 +280,6 @@ namespace Odin.Sales
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_Copy_Click(object sender, EventArgs e)
@@ -338,7 +294,7 @@ namespace Odin.Sales
             frm.HeaderText = "Select view for confirmation orders list";
             frm.grid = this.gv_List;
             frm.formname = this.Name;
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
             frm.UserId = DAL.UserId;
 
             frm.FillData(frm.grid);
@@ -373,7 +329,6 @@ namespace Odin.Sales
                     kryptonDockingManager1.AddDockspace("Control",
                                                DockingEdge.Left,
                                                new KryptonPage[] { page });
-
                 }
             }
         }
@@ -476,11 +431,9 @@ namespace Odin.Sales
             frm.ctl_QuotDets1.ExpDateD = System.DateTime.Now.AddMonths(2);
             //frm.ctl_QuotDets1.SentDate = " ";
             frm.ctl_QuotDets1.FillDates();
-
             frm.QuotationSaved += new QuotationSavedEventHandler(AddQuotation);
 
             frm.Show(); frm.GetKryptonFormFields();
-
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -500,11 +453,9 @@ namespace Odin.Sales
                 COBll.QuotId = _id;
                 frm = new frm_AddQuotation();
                 frm.ctl_QuotDets1.QuotId = _id;
-
                 frm.QuotationSaved += new QuotationSavedEventHandler(AddQuotation);
 
                 frm.Show(); frm.GetKryptonFormFields();
-
             }
         }
         private void btn_Copy_Click(object sender, EventArgs e)
@@ -516,18 +467,13 @@ namespace Odin.Sales
             if (_id != 0)
             {
                 //if (globClass.IsFormAlreadyOpen("frm_AddQuotation")) return;
-
                 COBll.QuotId = _id;
                 frm = new frm_AddQuotation();
                 frm.ctl_QuotDets1.IsCopy = -1;
                 frm.ctl_QuotDets1.QuotId = _id;
-                
-
-
                 frm.QuotationSaved += new QuotationSavedEventHandler(AddQuotation);
 
                 frm.Show(); frm.GetKryptonFormFields();
-
             }
         }
 
@@ -540,8 +486,7 @@ namespace Odin.Sales
 
             if (_id != 0
                 && globClass.DeleteConfirm() == true)
-            {
-                if (COBll.DeleteQuotation(_id) == -1)
+                if (Convert.ToInt32(Helper.getSP("sp_DeleteQuotation", _id)) == -1)
                 {
                     DataGridViewColumn oldColumn = gv_List.SortedColumn;
                     var dir = Helper.SaveDirection(gv_List);
@@ -552,8 +497,6 @@ namespace Odin.Sales
                 }
                 else
                     MessageBox.Show("Selected qoutation can not be deleted!");
-            }
-
         }
 
         private void gv_List_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -561,31 +504,23 @@ namespace Odin.Sales
             SetCellsColor();
         }
 
-
-
-
         #endregion
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {          
-
             string emailaddresses = "";
             
             string strMessage = "New CO number: " + COBll.COHeader;
-            strMessage = strMessage + System.Environment.NewLine + "Customer: " + COBll.COCustomer;
-            strMessage = strMessage + System.Environment.NewLine + "Qty: " + COBll.COQty;
-            strMessage = strMessage + System.Environment.NewLine + "PCB: " + COBll.QPCBText;
-            strMessage = strMessage + System.Environment.NewLine + "Stages: " + COBll.COStages;
-            strMessage = strMessage + System.Environment.NewLine + "Lead week: " + COBll.QWeek;
+            strMessage = strMessage + Environment.NewLine + "Customer: " + COBll.COCustomer;
+            strMessage = strMessage + Environment.NewLine + "Qty: " + COBll.COQty;
+            strMessage = strMessage + Environment.NewLine + "PCB: " + COBll.QPCBText;
+            strMessage = strMessage + Environment.NewLine + "Stages: " + COBll.COStages;
+            strMessage = strMessage + Environment.NewLine + "Lead week: " + COBll.QWeek;
 
             MyHelper.SendMessage(glob_Class.ReplaceChar(emailaddresses, ";", ","), "New CO: " + COBll.COHeader + " creation", strMessage);
-
         }
 
-        private void btn_General_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void btn_General_Click(object sender, EventArgs e) { }
 
         private void gv_List_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -594,37 +529,31 @@ namespace Odin.Sales
 
         private void txt_CreatDateFrom_DropDown(object sender, DateTimePickerDropArgs e)
         {
-            txt_CreatDateFrom.Value = txt_CreatDateFrom.Value == null ? System.DateTime.Now : txt_CreatDateFrom.Value;
+            txt_CreatDateFrom.Value = txt_CreatDateFrom.Value == null ? DateTime.Now : txt_CreatDateFrom.Value;
         }
 
         private void txt_CreatDateTill_DropDown(object sender, DateTimePickerDropArgs e)
         {
-            txt_CreatDateTill.Value = txt_CreatDateTill.Value == null ? System.DateTime.Now : txt_CreatDateTill.Value;
+            txt_CreatDateTill.Value = txt_CreatDateTill.Value == null ? DateTime.Now : txt_CreatDateTill.Value;
         }
 
         private void txt_ReqDateFrom_DropDown(object sender, DateTimePickerDropArgs e)
         {
-            txt_ReqDateFrom.Value = txt_ReqDateFrom.Value == null ? System.DateTime.Now : txt_ReqDateFrom.Value;
+            txt_ReqDateFrom.Value = txt_ReqDateFrom.Value == null ? DateTime.Now : txt_ReqDateFrom.Value;
         }
 
         private void txt_ReqDateTill_DropDown(object sender, DateTimePickerDropArgs e)
         {
-            txt_ReqDateTill.Value = txt_ReqDateTill.Value == null ? System.DateTime.Now : txt_ReqDateTill.Value;
+            txt_ReqDateTill.Value = txt_ReqDateTill.Value == null ? DateTime.Now : txt_ReqDateTill.Value;
         }
 
-        private void btn_History_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void btn_History_Click(object sender, EventArgs e) { }
 
         private void btn_PCBNeeds_Click(object sender, EventArgs e)
         {
             var _query = "sp_SelectArtTotalsListPCB";
 
-            var sqlparams = new List<SqlParameter>()
-                {
-                   
-                };
+            var sqlparams = new List<SqlParameter>() { };
 
             Template_DataGridView frm = new Template_DataGridView();
 
@@ -632,17 +561,13 @@ namespace Odin.Sales
             frm.Query = _query;
             frm.SqlParams = sqlparams;
             frm.Show(); frm.GetKryptonFormFields();
-
         }
 
         private void btn_InvalideBOMs_Click(object sender, EventArgs e)
         {
             var _query = "sp_SelectInvalideBOMs";
 
-            var sqlparams = new List<SqlParameter>()
-            {
-
-            };
+            var sqlparams = new List<SqlParameter>() { };
 
             Template_DataGridView frm = new Template_DataGridView();
 

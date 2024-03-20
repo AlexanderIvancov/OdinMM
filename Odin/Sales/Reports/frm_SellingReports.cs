@@ -26,7 +26,6 @@ namespace Odin.Sales.Reports
         class_Global globClass = new class_Global();
         ExportData ED;
 
-
         public int RowIndex = 0;
         public int ColumnIndex = 0;
         public string ColumnName = "";
@@ -40,11 +39,7 @@ namespace Odin.Sales.Reports
             {
                 return rb_LV.Checked == true ? 1 : rb_ES.Checked == true ? 2 : rb_3rd.Checked == true ? 3 : 99;
             }
-            set
-            {
-
-
-            }
+            set { }
         }
 
         public int InvoiceType
@@ -69,8 +64,8 @@ namespace Odin.Sales.Reports
 
         public void ClearDates()
         {
-            txt_CreatDateFrom.Value = System.DateTime.Now;
-            txt_CreatDateTill.Value = System.DateTime.Now;
+            txt_CreatDateFrom.Value = DateTime.Now;
+            txt_CreatDateTill.Value = DateTime.Now;
         }
 
         public void ClearFilter()
@@ -81,12 +76,11 @@ namespace Odin.Sales.Reports
             txt_CreatDateTill.Value = null; //Convert.ToDateTime("01/01/2100");
             mni_FilterFor.Text = string.Empty;
             bs_List.RemoveFilter();
-
         }
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -101,9 +95,7 @@ namespace Odin.Sales.Reports
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -111,32 +103,26 @@ namespace Odin.Sales.Reports
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
         public void bw_List(object sender, DoWorkEventArgs e)
         {
             //MessageBox.Show(txt_CreatDateFrom.Value.ToShortDateString());
             DataTable data = chk_Summary.CheckState == CheckState.Checked
-                ? CO_BLL.getSellingReportsSum(cmb_Firms1.FirmId, cmb_Types1.TypeId, txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
+                ? (DataTable)Helper.getSP("sp_StockReportsSellingSum", cmb_Firms1.FirmId, cmb_Types1.TypeId, txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
                                            txt_CreatDateTill.Value == null ? "" : txt_CreatDateTill.Value.ToString().Trim(), Countries, InvoiceType)
-                : CO_BLL.getSellingReports(cmb_Firms1.FirmId, cmb_Types1.TypeId, txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
+                : (DataTable)Helper.getSP("sp_StockReportsSelling", cmb_Firms1.FirmId, cmb_Types1.TypeId, txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
                                             txt_CreatDateTill.Value == null ? "" : txt_CreatDateTill.Value.ToString().Trim(), Countries, InvoiceType);
             gv_List.ThreadSafeCall(delegate
             {
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
-
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -151,7 +137,6 @@ namespace Odin.Sales.Reports
 
                 crystalReportViewer1.ReportSource = rd;
             });
-
         }
 
         public ReportDocument OpenReport(DataTable data, bool isum)
@@ -183,16 +168,13 @@ namespace Odin.Sales.Reports
             report.SetParameterValue("Till", txt_CreatDateTill.Value == null ? "" : Convert.ToDateTime(txt_CreatDateTill.Value).ToShortDateString().Trim());
            
             return report;
-
         }
 
         #endregion
 
         #region Controls
 
-
         #region Context menu
-
 
         private void mnu_Lines_Opening(object sender, CancelEventArgs e)
         {
@@ -212,7 +194,6 @@ namespace Odin.Sales.Reports
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -243,7 +224,6 @@ namespace Odin.Sales.Reports
             frm.ColumnNumber = gv_List.CurrentCell.ColumnIndex;
             frm.ColumnText = gv_List.Columns[frm.ColumnNumber].HeaderText;
             frm.ShowDialog();
-
         }
 
         private void mni_FilterBy_Click(object sender, EventArgs e)
@@ -258,12 +238,10 @@ namespace Odin.Sales.Reports
                         ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
                         : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
-
             }
             catch { }
             //SetCellsColor();
             //RecalcTotals(gv_List.CurrentRow.Cells["cn_name"].Value.ToString(), Convert.ToInt32(gv_List.CurrentRow.Cells["cn_headid"].Value));
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -288,7 +266,6 @@ namespace Odin.Sales.Reports
             catch { }
             //SetCellsColor();
             //RecalcTotals(gv_List.CurrentRow.Cells["cn_name"].Value.ToString(), Convert.ToInt32(gv_List.CurrentRow.Cells["cn_headid"].Value));
-
         }
 
         private void mni_Copy_Click(object sender, EventArgs e)
@@ -327,7 +304,6 @@ namespace Odin.Sales.Reports
         {
             bwStart(bw_List);
         }
-        
 
         private void frm_SellingReports_Load(object sender, EventArgs e)
         {
@@ -361,7 +337,5 @@ namespace Odin.Sales.Reports
         {
             txt_CreatDateTill.Value = txt_CreatDateTill.Value == null ? System.DateTime.Now : txt_CreatDateTill.Value;
         }
-
-
     }
 }

@@ -19,28 +19,22 @@ namespace Odin.Sales
             InitializeComponent();
             ED = new ExportData(this.gv_List, "Payments.xls", this.Name);
             ED1 = new ExportData(this.gv_Orders, "Order payments.xls", this.Name);
-
         }
         #region Variables
        
         ExportData ED;
         ExportData ED1;
-
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
-
         class_Global glob_Class = new class_Global();
         DAL_Functions DAL = new DAL_Functions();
         AdmMenu mMenu = new AdmMenu();
         Helper MyHelper = new Helper();
         CO_BLL Bll = new CO_BLL();
-
-
         public int RowIndex = 0;
         public int ColumnIndex = 0;
         public string ColumnName = "";
         public string CellValue = "";
         public int ControlWidth = 250;
-
         public int oRowIndex = 0;
         public int oColumnIndex = 0;
         public string oColumnName = "";
@@ -52,7 +46,7 @@ namespace Odin.Sales
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -67,9 +61,7 @@ namespace Odin.Sales
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -77,14 +69,10 @@ namespace Odin.Sales
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
         public void bw_List(object sender, DoWorkEventArgs e)
@@ -95,7 +83,7 @@ namespace Odin.Sales
             }
             catch { }
 
-            var data = CO_BLL.getPayments(txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
+            var data = (DataTable)Helper.getSP("sp_PaymentsList", txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
                                             txt_CreatDateTill.Value == null ? "" : txt_CreatDateTill.Value.ToString().Trim(),
                                             cmb_Firms2.FirmId);
 
@@ -103,7 +91,6 @@ namespace Odin.Sales
             {
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
-                
 
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
@@ -111,9 +98,7 @@ namespace Odin.Sales
                               
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
                 SetCellsColor();
-
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -129,7 +114,7 @@ namespace Odin.Sales
             }
             catch { }
 
-            var data = CO_BLL.getPaymentsByOrders(txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
+            var data = (DataTable)Helper.getSP("sp_PaymentsListByOrders", txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
                                             txt_CreatDateTill.Value == null ? "" : txt_CreatDateTill.Value.ToString().Trim(),
                                             cmb_Firms2.FirmId);
 
@@ -144,9 +129,7 @@ namespace Odin.Sales
                 gv_Orders.DataSource = bs_Orders;
 
                 Helper.RestoreDirection(gv_Orders, oldColumn, dir);
-
             });
-
 
             bn_Orders.ThreadSafeCall(delegate
             {
@@ -156,7 +139,7 @@ namespace Odin.Sales
 
         public void FillPayments()
         {
-            var data = CO_BLL.getPayments(txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
+            var data = (DataTable)Helper.getSP("sp_PaymentsList", txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
                                             txt_CreatDateTill.Value == null ? "" : txt_CreatDateTill.Value.ToString().Trim(),
                                             cmb_Firms2.FirmId);
 
@@ -165,18 +148,13 @@ namespace Odin.Sales
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
 
-
-
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
-
                
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
                 SetCellsColor();
-
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -192,7 +170,6 @@ namespace Odin.Sales
         public void FillPagesDets()
         {
             khg_Dets.Visible = dn_Pages.SelectedPage != pg_Payments;
-
         }
 
         public void SaveRelink(object sender)
@@ -203,11 +180,9 @@ namespace Odin.Sales
         public void SetCellsColor()
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 if (Convert.ToDouble(row.Cells["cn_amount"].Value) > Convert.ToDouble(row.Cells["cn_mapped"].Value))
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Gold;
-            }
         }
         #endregion
 
@@ -224,7 +199,6 @@ namespace Odin.Sales
         }
 
         #region Context menu
-
 
         private void mnu_Lines_Opening(object sender, CancelEventArgs e)
         {
@@ -244,7 +218,6 @@ namespace Odin.Sales
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -263,7 +236,6 @@ namespace Odin.Sales
             catch
             { }
             //SetCellsColor();
-
         }
 
         private void mni_Search_Click(object sender, EventArgs e)
@@ -287,11 +259,9 @@ namespace Odin.Sales
                         ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
                         : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
-
             }
             catch { }
             //SetCellsColor();
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -304,7 +274,6 @@ namespace Odin.Sales
             }
             catch { }
             //SetCellsColor();
-
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -315,7 +284,6 @@ namespace Odin.Sales
             }
             catch { }
             //SetCellsColor();
-
         }
 
         private void mni_Copy_Click(object sender, EventArgs e)
@@ -348,12 +316,9 @@ namespace Odin.Sales
             ED.DgvIntoExcel();
         }
 
-
-
         #endregion
 
         #region Context menu orders
-
 
         private void mnu_Orders_Opening(object sender, CancelEventArgs e)
         {
@@ -373,7 +338,6 @@ namespace Odin.Sales
                 oCellValue = gv_Orders.Rows[oRowIndex].Cells[oColumnIndex].Value.ToString();
                 oColumnName = gv_Orders.Columns[oColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -418,7 +382,6 @@ namespace Odin.Sales
             }
             catch { }
             //SetCellsColor();
-
         }
 
         private void mni_oFilterExcludingSel_Click(object sender, EventArgs e)
@@ -431,7 +394,6 @@ namespace Odin.Sales
             }
             catch { }
             //SetCellsColor();
-
         }
 
         private void mni_oRemoveFilter_Click(object sender, EventArgs e)
@@ -442,7 +404,6 @@ namespace Odin.Sales
             }
             catch { }
             //SetCellsColor();
-
         }
 
         private void mni_oCopy_Click(object sender, EventArgs e)
@@ -475,8 +436,6 @@ namespace Odin.Sales
             ED1.DgvIntoExcel();
         }
 
-
-
         #endregion
 
         #endregion
@@ -484,21 +443,11 @@ namespace Odin.Sales
         private void btn_Refresh_Click(object sender, EventArgs e)
         {
             if (dn_Pages.SelectedPage == pg_Payments)
-            {
                 bwStart(bw_List);
-            }
-            else if (dn_Pages.SelectedPage == pg_Invoices)
-            {
-               
-            }
+            else if (dn_Pages.SelectedPage == pg_Invoices) { }
             else
-            {
                 bwStart(bw_OrdersList);
-            }
-            
         }
-
-       
 
         private void txt_CreatDateFrom_DropDown(object sender, DateTimePickerDropArgs e)
         {
@@ -513,7 +462,6 @@ namespace Odin.Sales
         private void frm_PaymentReport_Resize(object sender, EventArgs e)
         {
             if (_Main.WindowState == FormWindowState.Maximized)
-            {
                 foreach (var page in kryptonDockingManager1.PagesDocked)
                 {
                     kryptonDockingManager1.RemovePage(page, false);
@@ -522,7 +470,6 @@ namespace Odin.Sales
                                                new KryptonPage[] { page });
 
                 }
-            }
         }
 
         private void btn_AddNew_Click(object sender, EventArgs e)
@@ -584,11 +531,8 @@ namespace Odin.Sales
 
                     if (Bll.SuccessId == -1)
                         bwStart(bw_List);
-
                 }
-               
             }
-
         }
 
         private void btn_Delete_Click(object sender, EventArgs e)
@@ -599,7 +543,7 @@ namespace Odin.Sales
             if (_headid != 0
                 && glob_Class.DeleteConfirm() == true)
             {
-                Bll.DeletePayment(_headid);
+                Helper.getSP("sp_DeleteExInvoicePaymentsAll", _headid);
 
                 bwStart(bw_List);
             }
@@ -631,7 +575,7 @@ namespace Odin.Sales
 
             if (_coid != 0 || _quotid != 0)
             {
-                var data = CO_BLL.getCOPayments(_coid, _quotid);
+                var data = (DataTable)Helper.getSP("sp_SelectCOPayments", _coid, _quotid);
 
                 gv_PayDetails.ThreadSafeCall(delegate
                 {
@@ -649,10 +593,7 @@ namespace Odin.Sales
                     {
                         bn_PayDetails.BindingSource = bs_PayDetails;
                     });
-
                 });
-
-                
             }
         }
 

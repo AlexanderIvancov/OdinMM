@@ -5,6 +5,7 @@ using Odin.Global_Classes;
 using System;
 using System.Data;
 using System.Windows.Forms;
+
 namespace Odin.Sales.Reports
 {
     public partial class frm_rptExInvoicePrinting : KryptonForm
@@ -14,23 +15,15 @@ namespace Odin.Sales.Reports
             InitializeComponent();
         }
 
-        public int HeadId
-        { get; set; }
-
+        public int HeadId { get; set; }
         public string HeaderText
         {
             get { return this.Text; }
             set { this.Text = value; }
         }
-
-        public string Lang
-        { get; set; }
-
-        public string ValueForCustoms
-        { get; set; }
-
-        public string CurrencyString
-        { get; set; }
+        public string Lang { get; set; }
+        public string ValueForCustoms { get; set; }
+        public string CurrencyString { get; set; }
 
         DAL_Functions DAL = new DAL_Functions();
         CMB_BLL BLL = new CMB_BLL();
@@ -41,7 +34,6 @@ namespace Odin.Sales.Reports
             ReportDocument report = new ReportDocument();
 
             report.FileName = Application.StartupPath + "\\Sales\\Reports\\" + "rpt_ExInvoice.rpt";
-
 
             //DataMatrix
             DataTable dt = new DataTable();
@@ -57,7 +49,7 @@ namespace Odin.Sales.Reports
             ////
             DataTable data = new DataTable();
             DataTable datalab = new DataTable();
-            data = CO_BLL.getExInvoiceDets(HeadId);
+            data = (DataTable)Helper.getSP("sp_SelectExInvoiceDets", HeadId);
             datalab = DAL_Functions.getReportLabels("ExpInvoice", Lang/*BLL.ExInvoiceBuyerCountryId == 1 ? "LAT" : "ENG"*/);
 
             //Check for currency
@@ -66,7 +58,6 @@ namespace Odin.Sales.Reports
             bool success = Int32.TryParse(DAL.DefaultValue("currency"), out number);
 
             if (success)
-            {
                 //frm.UnitId = number;
                 if (BLL.ExInvoiceCurId != number)
                 {
@@ -74,16 +65,10 @@ namespace Odin.Sales.Reports
                     CurrencyString = DAL.DefaultValue("invcur") + DAL.CurRate + " " + BLL.ExInvoiceCurrency + " = 1 " + DAL.DefaultValue("currencyname");
                 }
                 else
-                {
                     CurrencyString = "";
-                }
-            }
             else
-            {
                 CurrencyString = "WARNING!!!";
                 //frm.UnitId = 0;
-            }
-
 
             //data source
             report.Database.Tables[0].SetDataSource(dt);
@@ -142,15 +127,12 @@ namespace Odin.Sales.Reports
             //Labels
 
             foreach (DataRow row in datalab.Rows)
-            {
                 //MessageBox.Show(row["paramvalue"].ToString());
                 report.SetParameterValue(row["paramname"].ToString(), row["paramvalue"].ToString());
-            }
 
             //report.SetParameterValue("UserName", System.Environment.UserName);
 
             return report;
-
         }
 
         public void FillReport()
@@ -160,7 +142,6 @@ namespace Odin.Sales.Reports
             rd = OpenReport();
 
             crystalReportViewer1.ReportSource = rd;
-
         }
 
     }

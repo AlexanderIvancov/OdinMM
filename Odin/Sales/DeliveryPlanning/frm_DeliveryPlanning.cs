@@ -20,7 +20,7 @@ namespace Odin.Sales.DeliveryPlanning
             monthView1.DaySelectedBackgroundColor = CalendarColorTable.FromHex("#F4CC52");
             monthView1.DaySelectedTextColor = monthView1.ForeColor;
             
-            Week = "W" + (cmb_Week1.WeekNumber(System.DateTime.Now).ToString().Length == 1 ? "0" + cmb_Week1.WeekNumber(System.DateTime.Now).ToString() : cmb_Week1.WeekNumber(System.DateTime.Now).ToString()) + "." + System.DateTime.Now.Year.ToString();
+            Week = "W" + (cmb_Week1.WeekNumber(DateTime.Now).ToString().Length == 1 ? "0" + cmb_Week1.WeekNumber(DateTime.Now).ToString() : cmb_Week1.WeekNumber(DateTime.Now).ToString()) + "." + DateTime.Now.Year.ToString();
 
             //monthView1.SelectionStart = cmb_Week1.FirstDateOfWeek;
             //monthView1.SelectionEnd = cmb_Week1.LastDateOfWeek;
@@ -74,21 +74,15 @@ namespace Odin.Sales.DeliveryPlanning
         private void PlaceItems()
         {
             foreach (CalendarItem item in _items)
-            {
-               
                 if (calendar1.ViewIntersects(item))
-                {
                     calendar1.Items.Add(item);
-                }
-            }
-           
         }
 
         public void FillData(string _datefrom,  string _datetill)
         {
             _items.Clear();
 
-            var data = CO_BLL.getCOConfirmationsPortfolio(cmb_Firms1.FirmId, cmb_Types1.TypeId, cmb_Articles1.ArticleId, 
+            var data = (DataTable)Helper.getSP("sp_COConfirmationsPortfolio", cmb_Firms1.FirmId, cmb_Types1.TypeId, cmb_Articles1.ArticleId, 
                                                         _datefrom, _datetill);
 
             DateTime _starttime;
@@ -103,43 +97,33 @@ namespace Odin.Sales.DeliveryPlanning
                 _endtime = Convert.ToDateTime(row["enddate"]);
                 _id = Convert.ToInt32(row["coid"]);
                 _CalendarText = row["conforder"].ToString() + ", batch: " + row["batch"].ToString();
-                _CalendarText = _CalendarText + System.Environment.NewLine + "Customer: " + row["client"].ToString();
-                _CalendarText = _CalendarText + System.Environment.NewLine + "Cust. article: " + row["custarticle"].ToString();
-                _CalendarText = _CalendarText + System.Environment.NewLine + "Article: " + row["article"].ToString();
-                _CalendarText = _CalendarText + System.Environment.NewLine + "Cust. order: " + row["custorder"].ToString();
-                _CalendarText = _CalendarText + System.Environment.NewLine + "Conf. qty: " + row["confqty"].ToString() + " " + row["unit"].ToString();
-                _CalendarText = _CalendarText + System.Environment.NewLine + "Deliv. qty: " + row["delivqty"].ToString() + " " + row["unit"].ToString();
+                _CalendarText = _CalendarText + Environment.NewLine + "Customer: " + row["client"].ToString();
+                _CalendarText = _CalendarText + Environment.NewLine + "Cust. article: " + row["custarticle"].ToString();
+                _CalendarText = _CalendarText + Environment.NewLine + "Article: " + row["article"].ToString();
+                _CalendarText = _CalendarText + Environment.NewLine + "Cust. order: " + row["custorder"].ToString();
+                _CalendarText = _CalendarText + Environment.NewLine + "Conf. qty: " + row["confqty"].ToString() + " " + row["unit"].ToString();
+                _CalendarText = _CalendarText + Environment.NewLine + "Deliv. qty: " + row["delivqty"].ToString() + " " + row["unit"].ToString();
 
                 _Value = row["conforder"].ToString() + ", batch: " + row["batch"].ToString();
-                _Value = _Value + System.Environment.NewLine + "Customer: " + row["client"].ToString();
-                _Value = _Value + System.Environment.NewLine + "Cust. article: " + row["custarticle"].ToString();
-                _Value = _Value + System.Environment.NewLine + "Conf. qty: " + row["confqty"].ToString() + " " + row["unit"].ToString();
-
-
+                _Value = _Value + Environment.NewLine + "Customer: " + row["client"].ToString();
+                _Value = _Value + Environment.NewLine + "Cust. article: " + row["custarticle"].ToString();
+                _Value = _Value + Environment.NewLine + "Conf. qty: " + row["confqty"].ToString() + " " + row["unit"].ToString();
 
                 CalendarItem cal = new CalendarItem(calendar1, _starttime, _endtime, _Value, _id, _CalendarText);
 
-
                 //Not confirmed
                 if (Convert.ToInt32(row["confirmed"]) == 0)
-                {
                     cal.ApplyColor(Color.Yellow);
-                }
 
                 //Delivered
                 if (Convert.ToDouble(row["confqty"]) <= Convert.ToDouble(row["delivqty"])
                     && Convert.ToInt32(row["confirmed"]) != 0)
-                {
                     cal.ApplyColor(Color.FromArgb(192, 255, 192));
-                }
 
                 //Delivered, but not confirmed
                 if (Convert.ToDouble(row["confqty"]) == 0
                     && Convert.ToDouble(row["delivqty"]) > 0)
-                {
                     cal.ApplyColor(Color.LightCoral);
-                }
-
 
                 _items.Add(cal);
             }
@@ -206,10 +190,7 @@ namespace Odin.Sales.DeliveryPlanning
             FillData(cmb_Week1.FirstDateOfWeek.ToShortDateString(), cmb_Week1.LastDateOfWeek.AddDays(-2).ToShortDateString());
         }
 
-        private void calendar1_ItemMouseHover(object sender, CalendarItemEventArgs e)
-        {
-
-        }
+        private void calendar1_ItemMouseHover(object sender, CalendarItemEventArgs e) { }
 
         private void calendar1_ItemDoubleClick(object sender, CalendarItemEventArgs e)
         {
@@ -249,8 +230,8 @@ namespace Odin.Sales.DeliveryPlanning
                 _end = monthView1.SelectionEnd.ToShortDateString() == "01/01/0001" || monthView1.SelectionEnd.ToShortDateString() == "01.01.0001" ? cmb_Week1.LastDateOfWeek.AddDays(-2).ToShortDateString() : monthView1.SelectionEnd.ToShortDateString();
             }
             catch {
-                _beg = System.DateTime.Now.ToShortDateString();
-                _end = System.DateTime.Now.AddDays(5).ToShortDateString();
+                _beg = DateTime.Now.ToShortDateString();
+                _end = DateTime.Now.AddDays(5).ToShortDateString();
             }
 
             //cmb_Week1.FirstDateOfWeek.ToShortDateString(), cmb_Week1.LastDateOfWeek.AddDays(-2).ToShortDateString()

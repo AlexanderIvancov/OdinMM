@@ -31,9 +31,7 @@ namespace Odin.Sales.Reports
         public int ColumnIndex = 0;
         public string ColumnName = "";
         public string CellValue = "";
-
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
-
         public double TotalProfit
         {
             get
@@ -43,7 +41,6 @@ namespace Odin.Sales.Reports
             }
             set { txt_TotalProfit.Text = value.ToString(); }
         }
-
         public double TradeMargin
         {
             get
@@ -53,7 +50,6 @@ namespace Odin.Sales.Reports
             }
             set { txt_TradeMargin.Text = value.ToString(); }
         }
-
         public double Profit
         {
             get
@@ -68,8 +64,8 @@ namespace Odin.Sales.Reports
 
         public void ClearDates()
         {
-            txt_CreatDateFrom.Value = System.DateTime.Now;
-            txt_CreatDateTill.Value = System.DateTime.Now;
+            txt_CreatDateFrom.Value = DateTime.Now;
+            txt_CreatDateTill.Value = DateTime.Now;
         }
 
         public void ClearFilter()
@@ -85,7 +81,7 @@ namespace Odin.Sales.Reports
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -100,9 +96,7 @@ namespace Odin.Sales.Reports
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -110,9 +104,6 @@ namespace Odin.Sales.Reports
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
@@ -123,13 +114,9 @@ namespace Odin.Sales.Reports
         public void SetCellsColor()
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 if (Convert.ToDouble(row.Cells["cn_totalqtysold"].Value) < Convert.ToDouble(row.Cells["cn_qtyinbatch"].Value))
-                {
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.LightCoral;
-                }
-            }
         }
 
         public void RecalcTotals()
@@ -156,7 +143,7 @@ namespace Odin.Sales.Reports
         {
             //MessageBox.Show(txt_CreatDateFrom.Value.ToShortDateString());
             //DataTable data;
-            var data = CO_BLL.getProfitReports(cmb_Firms1.FirmId, cmb_Types1.TypeId, txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
+            var data = (DataTable)Helper.getSP("sp_SelectProfitReport", cmb_Firms1.FirmId, cmb_Types1.TypeId, txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
                                               txt_CreatDateTill.Value == null ? "" : txt_CreatDateTill.Value.ToString().Trim());
             
             gv_List.ThreadSafeCall(delegate
@@ -166,9 +153,7 @@ namespace Odin.Sales.Reports
                 gv_List.DataSource = bs_List;
 
                 SetCellsColor();
-
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -184,13 +169,11 @@ namespace Odin.Sales.Reports
 
             //    crystalReportViewer1.ReportSource = rd;
             //});
-
         }
 
         public void ShowDets()
         {
-            DataTable data;
-            data = CO_BLL.getProfitReports(cmb_Firms1.FirmId, cmb_Types1.TypeId, txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
+            DataTable data = (DataTable)Helper.getSP("sp_SelectProfitReport", cmb_Firms1.FirmId, cmb_Types1.TypeId, txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
                                               txt_CreatDateTill.Value == null ? "" : txt_CreatDateTill.Value.ToString().Trim());
 
             gv_List.ThreadSafeCall(delegate
@@ -200,7 +183,6 @@ namespace Odin.Sales.Reports
                 gv_List.DataSource = bs_List;
 
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -215,7 +197,6 @@ namespace Odin.Sales.Reports
         #region Controls
 
         #region Context menu
-
 
         private void mnu_Lines_Opening(object sender, CancelEventArgs e)
         {
@@ -235,7 +216,6 @@ namespace Odin.Sales.Reports
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -257,7 +237,6 @@ namespace Odin.Sales.Reports
             { }
 
             SetCellsColor();
-           
             //RecalcTotals(gv_List.CurrentRow.Cells["cn_name"].Value.ToString(), Convert.ToInt32(gv_List.CurrentRow.Cells["cn_headid"].Value));
         }
 
@@ -268,7 +247,6 @@ namespace Odin.Sales.Reports
             frm.ColumnNumber = gv_List.CurrentCell.ColumnIndex;
             frm.ColumnText = gv_List.Columns[frm.ColumnNumber].HeaderText;
             frm.ShowDialog();
-
         }
 
         private void mni_FilterBy_Click(object sender, EventArgs e)
@@ -288,7 +266,6 @@ namespace Odin.Sales.Reports
             catch { }
             SetCellsColor();
             //RecalcTotals(gv_List.CurrentRow.Cells["cn_name"].Value.ToString(), Convert.ToInt32(gv_List.CurrentRow.Cells["cn_headid"].Value));
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -315,7 +292,6 @@ namespace Odin.Sales.Reports
             catch { }
             SetCellsColor();
             //RecalcTotals(gv_List.CurrentRow.Cells["cn_name"].Value.ToString(), Convert.ToInt32(gv_List.CurrentRow.Cells["cn_headid"].Value));
-
         }
 
         private void mni_Copy_Click(object sender, EventArgs e)
@@ -350,7 +326,6 @@ namespace Odin.Sales.Reports
 
         #endregion
 
-
         private void gv_List_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             SetCellsColor();
@@ -360,7 +335,6 @@ namespace Odin.Sales.Reports
         {
             ClearFilter();
         }
-
 
         private void txt_CreatDateFrom_DropDown(object sender, DateTimePickerDropArgs e)
         {
@@ -393,7 +367,6 @@ namespace Odin.Sales.Reports
             //ShowDets();
             bwStart(bw_List);
         }
-
 
         #endregion
 

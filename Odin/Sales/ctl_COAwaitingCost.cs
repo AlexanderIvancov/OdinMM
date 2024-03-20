@@ -41,7 +41,6 @@ namespace Odin.Sales
             get { return cmb_SalesOrdersWithLines1.SalesOrderLineId; }
             set
             {
-
                 _coid = value;
                 FillDeliveries(_coid);
                 COBll.COId = _coid;
@@ -61,19 +60,16 @@ namespace Odin.Sales
             }
         }
               
-
         public void FillDeliveries(int _COId)
         {
-            var data = CO_BLL.getCODeliveries(_COId);
+            var data = (System.Data.DataTable)Helper.getSP("sp_SelectCODeliveries", _COId);
 
             gv_List.ThreadSafeCall(delegate
             {
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
-
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {

@@ -29,34 +29,24 @@ namespace Odin.Sales
         ExportData ED;
         Helper MyHelper = new Helper();
         CO_BLL COBll = new CO_BLL();
-       
         public event SavePaymentEventHandler SavePayment;
-
         int _id = 0;
         public int Id
         {
             get { return _id; }
             set { _id = value; }
         }
-
         string _mode = "new";
-
         public string Mode
         {
             get { return _mode; }
-            set
-            {
-                _mode = value;
-              
-            }
+            set { _mode = value; }
         }
-        
         public string Payment
         {
             get { return txt_Payment.Text; }
             set { txt_Payment.Text = value; }
         }
-
         public int InvoiceType
         {
             get
@@ -85,12 +75,10 @@ namespace Odin.Sales
                 }
             }
         }
-
         public int RowIndex = 0;
         public int ColumnIndex = 0;
         public string ColumnName = "";
         public string CellValue = "";
-
         public double Summa
         {
             get { return Convert.ToDouble(txt_Summa.Text); }
@@ -101,43 +89,36 @@ namespace Odin.Sales
             get { return Convert.ToDouble(txt_SummaWVat.Text); }
             set { txt_SummaWVat.Text = value.ToString(); }
         }
-
         public double Vat
         {
             get { return Convert.ToDouble(txt_Vat.Text); }
             set { txt_Vat.Text = value.ToString(); }
         }
-
         public double VatPerc
         {
             get { return Convert.ToDouble(txt_VatPerc.Text); }
             set { txt_VatPerc.Text = value.ToString(); }
         }
-
         public double TotalMapped
         {
             get { return Convert.ToDouble(txt_TotalMapped.Text); }
             set { txt_TotalMapped.Text = value.ToString(); }
         }
-
         public int BuyerId
         {
             get { return cmb_Firms2.FirmId; }
             set { cmb_Firms2.FirmId = value; }
         }
-
         public int CurId
         {
             get { return cmb_Currency1.CurrencyId; }
             set { cmb_Currency1.CurrencyId = value; }
         }
-
         public double CurRate
         {
             get { return Convert.ToDouble(txt_CurRate.Text); }
             set { txt_CurRate.Text = value.ToString(); }
         }
-
         public string PayDate
         {
             get
@@ -153,13 +134,11 @@ namespace Odin.Sales
                 catch { txt_PayDate.Value = null; }
             }
         }
-
         public double Mapped
         {
             get { return Convert.ToDouble(txt_TotalMapped.Text); }
             set { txt_TotalMapped.Text = value.ToString(); }
         }
-
         public string Comments
         {
             get { return txt_Comments.Text; }
@@ -182,10 +161,9 @@ namespace Odin.Sales
             }
         }
 
-
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -200,9 +178,7 @@ namespace Odin.Sales
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -210,30 +186,25 @@ namespace Odin.Sales
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
         public void FillDates()
         {
-            txt_PayDate.Value = System.DateTime.Now;
+            txt_PayDate.Value = DateTime.Now;
         }
 
         public void FillAutoDoc()
         {
-            Payment = DAL.AutoDoc(15, System.DateTime.Now.ToShortDateString());
+            Payment = DAL.AutoDoc(15, DateTime.Now.ToShortDateString());
         }
 
         public void FillList()
         {
-            var data = CO_BLL.getNotPaidInvoice(cmb_Firms2.FirmId, InvoiceType);
-
+            var data = (DataTable)Helper.getSP("sp_PaymentsListNotPaidInvoices", cmb_Firms2.FirmId, InvoiceType);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -251,7 +222,6 @@ namespace Odin.Sales
                 catch { }
             });
 
-
             bn_List.ThreadSafeCall(delegate
             {
                 bn_List.BindingSource = bs_List;
@@ -262,7 +232,6 @@ namespace Odin.Sales
         {
             Vat = Math.Round(Summa * VatPerc / (100 + VatPerc), 2);
             SummaWVat = Math.Round(Summa - Vat, 2, MidpointRounding.AwayFromZero);
-            
         }
 
         private void CalcPrice()
@@ -273,18 +242,14 @@ namespace Odin.Sales
         public void ClearToPay()
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 row.Cells["cn_topay"].Value = 0;
-            }
         }
 
         public double AlreadyMapped()
         {
             double _res = 0;
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 _res = _res + Convert.ToDouble(row.Cells["cn_topay"].Value);
-            }
 
             return Math.Round(_res, 2);
         }
@@ -308,9 +273,7 @@ namespace Odin.Sales
 
         #region Controls
 
-
         #region Context menu
-
 
         private void mnu_Lines_Opening(object sender, CancelEventArgs e)
         {
@@ -330,7 +293,6 @@ namespace Odin.Sales
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -349,7 +311,6 @@ namespace Odin.Sales
             catch
             { }
             SetCellsColor();
-
         }
 
         private void mni_Search_Click(object sender, EventArgs e)
@@ -373,11 +334,9 @@ namespace Odin.Sales
                         ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
                         : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
-
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -390,7 +349,6 @@ namespace Odin.Sales
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -401,7 +359,6 @@ namespace Odin.Sales
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_Copy_Click(object sender, EventArgs e)
@@ -459,7 +416,6 @@ namespace Odin.Sales
                 {
                     cocurrate = Convert.ToDouble(Helper.GetOneRecord("set dateformat dmy select dbo.fn_CurRate(" + Convert.ToInt32(row.Cells["cn_curid"].Value) + ", " 
                         + "convert(datetime, '" + (PayDate.Trim() == "" ? System.DateTime.Now.ToShortDateString() : PayDate.Trim()) + "'))"));
-
                     
                     tmpdiff = (CurId == Convert.ToInt32(row.Cells["cn_curid"].Value) ? Convert.ToDouble(row.Cells["cn_diff"].Value) :
                                         (Convert.ToInt32(row.Cells["cn_curid"].Value) != 1 ? Math.Round(Convert.ToDouble(row.Cells["cn_diff"].Value) / cocurrate, 2) :
@@ -469,14 +425,12 @@ namespace Odin.Sales
                     {
                         row.Cells["cn_topay"].Value = tmppay;
                         tmppay = 0;
-
                     }
                     else
                     {
                         row.Cells["cn_topay"].Value = tmpdiff;
                         tmppay = tmppay - tmpdiff;
                     }
-
                 }
                 else
                     break;
@@ -591,24 +545,18 @@ namespace Odin.Sales
             if (AlreadyMapped() > 0
                 && CheckEmpty() == true)
             {
-                int _headres = COBll.AddPaymentHeader(BuyerId, 15, Convert.ToDateTime(txt_PayDate.Value).ToShortDateString(), Summa, VatPerc, CurId, CurRate, Comments);
+                int _headres = Convert.ToInt32(Helper.getSP("sp_AddPaymentHeader", BuyerId, 15, Convert.ToDateTime(txt_PayDate.Value).ToShortDateString(), Summa, VatPerc, CurId, CurRate, Comments));
 
                 if (_headres != 0)
-                {
                     foreach (DataGridViewRow row in this.gv_List.Rows)
-                    {
                         //Details
                         if (Convert.ToDouble(row.Cells["cn_topay"].Value) > 0)
                         {
-                            COBll.AddPaymentDetails(_headres, Convert.ToInt32(row.Cells["cn_id"].Value),
+                            Helper.getSP("sp_AddPaymentDetails", _headres, Convert.ToInt32(row.Cells["cn_id"].Value),
                                             Convert.ToDateTime(txt_PayDate.Value).ToShortDateString(),
                                             Convert.ToDouble(row.Cells["cn_topay"].Value));
                             SendPaymentNotification(Convert.ToInt32(row.Cells["cn_id"].Value));
                         }
-
-
-                    }
-                }
                 MessageBox.Show("Document added!");
                 ClearHeader();
 
@@ -619,9 +567,7 @@ namespace Odin.Sales
                 SavePayment?.Invoke(this);
             }
             else
-            {
                 MessageBox.Show("Please check empty fields and sum for payment!");
-            }
         }
 
         private void gv_List_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -652,8 +598,6 @@ namespace Odin.Sales
                         ? Summa - AlreadyMapped() + Convert.ToDouble(gv_List.CurrentRow.Cells["cn_topay"].Value)
                         : (object)tmpdiff;
                 }
-                
-
             }
             catch { }
 
@@ -667,7 +611,6 @@ namespace Odin.Sales
                     catch { }
 
                     foreach (DataGridViewRow row in gv_List.Rows)
-                    {
                         if (Convert.ToInt32(row.Cells["cn_headid"].Value) == _headid)
                         {
                             cocurrate = Convert.ToDouble(Helper.GetOneRecord("set dateformat dmy select dbo.fn_CurRate(" + Convert.ToInt32(row.Cells["cn_curid"].Value) + ", "
@@ -686,15 +629,11 @@ namespace Odin.Sales
                             //   row.Cells["cn_topay"].Value = Summa - AlreadyMapped() + Convert.ToDouble(row.Cells["cn_topay"].Value);
                             //else
                             //   row.Cells["cn_topay"].Value = Convert.ToDouble(row.Cells["cn_diff"].Value);
-
                         }
-                    }
 
                     TotalMapped = AlreadyMapped();
                     //Summa = AlreadyMapped();
-              
                 }
-
             }
             catch { }
 
@@ -708,18 +647,12 @@ namespace Odin.Sales
                     catch { }
 
                     foreach (DataGridViewRow row in gv_List.Rows)
-                    {
                         if (Convert.ToInt32(row.Cells["cn_headid"].Value) == _headid)
-                        {
                             row.Cells["cn_topay"].Value = 0;
-                        }
-                    }
 
                     TotalMapped = AlreadyMapped();
                     //Summa = AlreadyMapped();
-
                 }
-
             }
             catch { }
 
@@ -776,10 +709,7 @@ namespace Odin.Sales
             TotalMapped = AlreadyMapped();
         }
 
-        private void gv_List_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
-        {
-            
-        }
+        private void gv_List_CellValidating(object sender, DataGridViewCellValidatingEventArgs e) { }
 
         private void buttonSpecAny1_Click(object sender, EventArgs e)
         {
@@ -808,25 +738,21 @@ namespace Odin.Sales
                 cocurrate = Convert.ToDouble(Helper.GetOneRecord("set dateformat dmy select dbo.fn_CurRate(" + Convert.ToInt32(row.Cells["cn_curid"].Value) + ", "
                         + "convert(datetime, '" + (PayDate.Trim() == "" ? System.DateTime.Now.ToShortDateString() : PayDate.Trim()) + "'))"));
 
-
                 tmpdiff = (CurId == Convert.ToInt32(row.Cells["cn_curid"].Value) ? Convert.ToDouble(row.Cells["cn_diff"].Value) :
                                     (Convert.ToInt32(row.Cells["cn_curid"].Value) != 1 ? Math.Round(Convert.ToDouble(row.Cells["cn_diff"].Value) / cocurrate, 2) :
                                     Math.Round(CurRate == 0 ? 0 : (Convert.ToDouble(row.Cells["cn_diff"].Value) * CurRate), 2)));
 
                 if (tmppay > 0)
-                {
                     if (tmpdiff > tmppay)
                     {
                         row.Cells["cn_topay"].Value = tmppay;
                         tmppay = 0;
-
                     }
                     else
                     {
                         row.Cells["cn_topay"].Value = tmpdiff;
                         tmppay = tmppay - tmpdiff;
                     }
-                }
                 else
                     break;
             }
@@ -864,9 +790,7 @@ namespace Odin.Sales
             DataTable dt = ds.Tables[0];
 
             if (dt.Rows.Count > 0)
-            {
                 foreach (DataRow dr in dt.Rows)
-                {
                     if (Convert.ToInt32(dr["ispaid"]) == -1
                         && dr["quotation"].ToString() != "")
                     {
@@ -880,8 +804,6 @@ namespace Odin.Sales
                         MyHelper.SendDirectEMail(glob_Class.ReplaceChar(emailaddresses, ";", ","), "Quotation/conf.order: " + dr["quotation"].ToString() + " is paid!", strMessage);
 
                     }
-                }
-            }
         }
     }
 }

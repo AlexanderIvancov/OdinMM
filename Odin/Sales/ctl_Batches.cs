@@ -29,7 +29,6 @@ namespace Odin.Sales
             get { return cmb_SalesOrdersWithLines1.SalesOrderLineId; }
             set
             {
-
                 _coid = value;
                 FillBatches(_coid);
                 COBll.COId = _coid;
@@ -51,22 +50,13 @@ namespace Odin.Sales
             }
         }
 
-        public int ArticleId
-        {
-            get; set;
-        }
-        public double QtyInCO
-        { get; set; }
-        public string ResDate
-        { get; set; }
-        public string EndDate
-        { get; set; }
-        public string Customer
-        { get; set; }
-        public int BOMState
-        {
-            get; set;
-        }
+        public int ArticleId { get; set; }
+        public double QtyInCO { get; set; }
+        public string ResDate { get; set; }
+        public string EndDate { get; set; }
+        public string Customer { get; set; }
+        public int BOMState { get; set; }
+
         private void AddBatch(object sender)
         {
             frm.Close();
@@ -80,16 +70,14 @@ namespace Odin.Sales
             double _QtyInBatch = 0;
 
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 _QtyInBatch = _QtyInBatch + Convert.ToInt32(row.Cells["cn_qtymapped"].Value);
-            }
 
             return _QtyInBatch;
         }
 
         public void FillBatches(int _COId)
         {
-            var data = CO_BLL.getCOBatches(_COId);
+            var data = (System.Data.DataTable)Helper.getSP("sp_SelectCOBatches", _COId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -98,7 +86,6 @@ namespace Odin.Sales
                 gv_List.DataSource = bs_List;
                 SetCellsColor();
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -109,7 +96,6 @@ namespace Odin.Sales
         public void SetCellsColor()
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 if (Convert.ToInt32(row.Cells["cn_isactive"].Value) == 0)
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Gainsboro;
@@ -117,9 +103,7 @@ namespace Odin.Sales
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.White;
                 //row.DefaultCellStyle.BackColor = Color.Gainsboro;
-            }
         }
-
 
         public void FillDetails(int _COId)
         {
@@ -136,7 +120,6 @@ namespace Odin.Sales
         private void cmb_SalesOrdersWithLines1_SalesOrderChanged(object sender)
         {
             if (_prevcoid != cmb_SalesOrdersWithLines1.SalesOrderLineId)
-
             {
                 //MessageBox.Show(cmb_SalesOrdersWithLines1.SalesOrderLineId.ToString());
                 COId = cmb_SalesOrdersWithLines1.SalesOrderLineId;
@@ -157,7 +140,6 @@ namespace Odin.Sales
                 {
                     PlanBll.AddBatchCOPOLink(frm.BatchId, COId, 0, frm.Qty, 0, 0);
                     FillBatches(COId);
-
                 }
             }
 
@@ -201,7 +183,6 @@ namespace Odin.Sales
             try
             {
                 _batchid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_batchid"].Value);
-
             }
             catch { }
 
@@ -256,21 +237,17 @@ namespace Odin.Sales
             try
             {
                 _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
-
             }
             catch { }
 
             if (glob_Class.DeleteConfirm() == true
                 && _id != 0)
-            {
                 try
                 {
                     PlanBll.DeleteBatchCOPOLink(_id);
                     FillBatches(COId);
                 }
-
                 catch { }
-            }
         }
 
         private void btn_EditMapped_Click(object sender, EventArgs e)
