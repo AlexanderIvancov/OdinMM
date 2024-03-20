@@ -172,7 +172,7 @@ namespace Odin.Warehouse.Movements
 
         public void UpdateBatchDets(int _batchid)
         {
-            var data = Plan_BLL.getBatchRMDets(_batchid);
+            var data = (DataTable)Helper.getSP("sp_SelectBatchRMDets", _batchid);
 
             foreach (DataGridViewRow rowgv in this.gv_List.Rows)
             {

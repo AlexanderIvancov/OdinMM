@@ -48,7 +48,7 @@ namespace Odin.Warehouse.Requests
 
         public void FillList(int batchid)
         {
-            var data = Plan_BLL.getBatchRM(batchid);
+            var data = (System.Data.DataTable)Helper.getSP("sp_SelectBatchRMFreezedDets", batchid);
 
             gv_List.ThreadSafeCall(delegate
             {

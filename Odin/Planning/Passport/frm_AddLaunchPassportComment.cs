@@ -15,19 +15,16 @@ namespace Odin.Planning.Passport
             get { return this.Text; }
             set { this.Text = value; }
         }
-
         public string Comments
         {
             get { return txt_Comments.Text; }
             set { txt_Comments.Text = value; }
         }
-
         public string TechComments
         {
             get { return txt_TechComments.Text; }
             set { txt_TechComments.Text = value; }
         }
-
         public int StateId
         {
             get {
@@ -52,9 +49,9 @@ namespace Odin.Planning.Passport
                     rb_Closed.Checked = false;
                     rb_Cancelled.Checked = true;
                 }
-
             }
         }       
+
         private void buttonSpecAny3_Click(object sender, EventArgs e)
         {
             txt_Comments.Text = "";
@@ -93,13 +90,8 @@ namespace Odin.Planning.Passport
 
         public int SendEmail
         {
-            get {
-                return chk_SendEmail.Checked == true ? -1 : 0;
-            }
-            set{
-                chk_SendEmail.Checked = value != 0;
-            }
-            
+            get { return chk_SendEmail.Checked == true ? -1 : 0; }
+            set{ chk_SendEmail.Checked = value != 0; }
         }
     }
 }

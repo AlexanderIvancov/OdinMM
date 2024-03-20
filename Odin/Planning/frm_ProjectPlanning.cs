@@ -46,43 +46,15 @@ namespace Odin.Planning
         public string ColumnNameP = "";
         public string CellValueP = "";
 
-        public double _NSMT
-        {
-            get;set;        
-        }
-        public double _NTHT
-        {
-            get; set;
-        }
-        public double _NQSMT
-        {
-            get; set;
-        }
-        public double _NQTHT
-        {
-            get; set;
-        }
-        public double _NFTA
-        {
-            get; set;
-        }
-        public double _NFQC
-        {
-            get; set;
-        }
-        public double _NXRAY
-        {
-            get; set;
-        }
-        public double _NIPA
-        {
-            get; set;
-        }
-        public double _NGPA
-        {
-            get; set;
-        }
-
+        public double _NSMT { get;set; }
+        public double _NTHT { get; set; }
+        public double _NQSMT { get; set; }
+        public double _NQTHT { get; set; }
+        public double _NFTA { get; set; }
+        public double _NFQC { get; set; }
+        public double _NXRAY { get; set; }
+        public double _NIPA { get; set; }
+        public double _NGPA { get; set; }
         public double NSMT
         {
             get {
@@ -163,7 +135,6 @@ namespace Odin.Planning
             }
             set { txt_NGPA.Text = value.ToString(); }
         }
-
         public double CSMT
         {
             get
@@ -253,11 +224,9 @@ namespace Odin.Planning
         public void SetCellsColor()
         {
             foreach (DataGridViewRow row in this.gv_Planned.Rows)
-            {
                 if (Convert.ToDouble(row.Cells["cn_diff"].Value) < 0)
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.LightCoral;              
-            }
 
             //foreach (DataGridViewRow row in this.gv_List.Rows)
             //{
@@ -275,7 +244,7 @@ namespace Odin.Planning
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -290,9 +259,7 @@ namespace Odin.Planning
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -300,14 +267,10 @@ namespace Odin.Planning
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
         public void bw_List(object sender, DoWorkEventArgs e)
@@ -319,7 +282,7 @@ namespace Odin.Planning
             }
             catch { }
 
-            var data = Plan_BLL.getProjectPlanning(cmb_Firms1.FirmId, Convert.ToInt32(txt_Perc.Text));
+            var data = (DataTable)Helper.getSP("sp_SelectProjectPlanningFin", cmb_Firms1.FirmId, Convert.ToInt32(txt_Perc.Text));
 
             DataRow[] datacr = data.Select("plannedqty = 0 and diff > 0");
             DataRow[] datar = data.Select("plannedqty > 0");
@@ -345,7 +308,6 @@ namespace Odin.Planning
                 gv_List.DataSource = bs_List;
 
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
-
             });
 
 
@@ -359,8 +321,6 @@ namespace Odin.Planning
                 DataGridViewColumn oldColumn = gv_Planned.SortedColumn;
                 var dir = Helper.SaveDirection(gv_Planned);
 
-
-
                 gv_Planned.AutoGenerateColumns = false;
                 bs_Planned.DataSource = datap;
                 gv_Planned.DataSource = bs_Planned;
@@ -369,9 +329,7 @@ namespace Odin.Planning
                 Helper.RestoreDirection(gv_Planned, oldColumn, dir);
 
                 SetCellsColor();
-
             });
-
 
             bn_Planned.ThreadSafeCall(delegate
             {
@@ -384,7 +342,7 @@ namespace Odin.Planning
             databatches.Columns.Add("qty", typeof(long));
             databatches.Columns.Add("dateoper", typeof(DateTime));
 
-            DateTime dateof = System.DateTime.Now.AddDays(Convert.ToInt32(txt_Capa.Text) * 7);
+            DateTime dateof = DateTime.Now.AddDays(Convert.ToInt32(txt_Capa.Text) * 7);
             DataRow[] datab = data.Select("plannedqty > 0 and dateofweek < '" + dateof + "'");
 
             foreach (DataRow row in datab)
@@ -401,10 +359,9 @@ namespace Odin.Planning
 
         public void ShowCapacity(int weekoper, DataTable databatches)
         {
-            var data = Plan_BLL.getProjectPlanningCapa(weekoper, databatches);
+            var data = (DataTable)Helper.getSP("sp_SelectProjectPlanningCapacityNeeds", weekoper, databatches);
 
             foreach (DataRow row in data.Rows)
-            {
                 switch (Convert.ToInt32(row["stageid"]))
                 {
                     case 1:
@@ -444,7 +401,6 @@ namespace Odin.Planning
                         _NGPA = Convert.ToDouble(row["stagetime"]);
                         break;
                 }
-            }
         }
         /*public void FillOrders()
         {
@@ -509,9 +465,7 @@ namespace Odin.Planning
             bwStart(bw_List);
         }
 
-
         #region Context menu
-
 
         private void mnu_Lines_Opening(object sender, CancelEventArgs e)
         {
@@ -531,7 +485,6 @@ namespace Odin.Planning
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -552,7 +505,6 @@ namespace Odin.Planning
                 bs_List.Filter = _missed > 0
                     ? String.IsNullOrEmpty(bs_List.Filter) == true ? "missed > 0 " : bs_List.Filter + " AND missed > 0"
                     : String.IsNullOrEmpty(bs_List.Filter) == true ? "missed <= 0 " : bs_List.Filter + " AND missed <= 0";
-
             }
             catch { }
             SetCellsColor();
@@ -567,7 +519,6 @@ namespace Odin.Planning
             catch
             { }
             SetCellsColor();
-
         }
 
         private void mni_Search_Click(object sender, EventArgs e)
@@ -595,7 +546,6 @@ namespace Odin.Planning
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -608,7 +558,6 @@ namespace Odin.Planning
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -619,7 +568,6 @@ namespace Odin.Planning
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_Copy_Click(object sender, EventArgs e)
@@ -647,8 +595,6 @@ namespace Odin.Planning
             }
         }
 
-
-
         private void mnu_LinesP_Opening(object sender, CancelEventArgs e)
         {
             try
@@ -667,7 +613,6 @@ namespace Odin.Planning
                 CellValueP = gv_Planned.Rows[RowIndexP].Cells[ColumnIndexP].Value.ToString();
                 ColumnNameP = gv_Planned.Columns[ColumnIndexP].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -676,7 +621,6 @@ namespace Odin.Planning
                 return;
             }
         }
-                
 
         private void mni_FilterForP_TextChanged(object sender, EventArgs e)
         {
@@ -687,7 +631,6 @@ namespace Odin.Planning
             catch
             { }
             SetCellsColor();
-
         }
 
         private void mni_SearchP_Click(object sender, EventArgs e)
@@ -715,7 +658,6 @@ namespace Odin.Planning
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_FilterExcludingSelP_Click(object sender, EventArgs e)
@@ -728,7 +670,6 @@ namespace Odin.Planning
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_RemoveFilterP_Click(object sender, EventArgs e)
@@ -739,7 +680,6 @@ namespace Odin.Planning
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_CopyP_Click(object sender, EventArgs e)
@@ -806,7 +746,7 @@ namespace Odin.Planning
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    PlanBll.AddBatchPlanning(frm.BatchId, frm.Qty, frm.PlanDate, frm.Comments);
+                    Helper.getSP("sp_AddBatchPlanning", frm.BatchId, frm.Qty, frm.PlanDate, frm.Comments);
                     bwStart(bw_List);
                 }
             }
@@ -828,10 +768,8 @@ namespace Odin.Planning
                 && glob_Class.MessageConfirm("Deleting confirmation", "Are you sure you want to delete planned qty?") == true
                 )
             {
-                
-                    PlanBll.DeleteBatchPlanning(_batchid, _week);
+                Helper.getSP("sp_DeleteBatchPlanning", _batchid, _week);
                     bwStart(bw_List);
-                
             }
         }
 

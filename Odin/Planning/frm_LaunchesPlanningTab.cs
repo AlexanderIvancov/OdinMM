@@ -28,11 +28,7 @@ namespace Odin.Planning
         AdmMenu mMenu = new AdmMenu();
         DAL_Functions DAL = new DAL_Functions();
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
-
-
-
         ExportData ED;
-
 
         #region Context menu
 
@@ -150,17 +146,8 @@ namespace Odin.Planning
 
         #endregion
 
-        public string Query
-        {
-            get;
-            set;
-        }
-
-        public List<SqlParameter> SqlParams
-        {
-            get;
-            set;
-        }
+        public string Query { get; set; }
+        public List<SqlParameter> SqlParams { get; set; }
 
         public void BindData(string StoredProcedure, params SqlParameter[] ParamList)
         {
@@ -173,14 +160,12 @@ namespace Odin.Planning
                 gv_List.DataSource = bs_List;
 
                 SetCellsColor();
-
             });
 
             bn_List.ThreadSafeCall(delegate
             {
                 bn_List.BindingSource = bs_List;
             });
-
         }
 
         public void SetCellsColor()
@@ -199,7 +184,7 @@ namespace Odin.Planning
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -214,9 +199,7 @@ namespace Odin.Planning
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -224,20 +207,15 @@ namespace Odin.Planning
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
         private void frm_LaunchesPlanningTab_Load(object sender, EventArgs e)
         {
             BindData(Query, SqlParams.ToArray());
-
             LoadColumns(gv_List);
         }
 

@@ -22,10 +22,8 @@ namespace Odin.Planning
             get { return this.Text; }
             set { this.Text = value; }
         }
-        public int BatchDetId
-        { get; set; }
-        public int Id
-        { get; set; }
+        public int BatchDetId        { get; set; }
+        public int Id        { get; set; }
         public int ArtId
         {
             get { return cmb_Articles1.ArticleId; }
@@ -53,8 +51,6 @@ namespace Odin.Planning
             }
             set { txt_Qty.Text = value.ToString(); }
         }
-
-
         public double QtyStock
         {
             get
@@ -82,76 +78,47 @@ namespace Odin.Planning
             }
             set { txt_QtyPO.Text = value.ToString(); }
         }
-        
         public int SubBatch
         {
-            get
-            {
-                return chk_SubBatch.CheckState == CheckState.Checked ? -1 : 0;
-            }
-            set
-            {
-                chk_SubBatch.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
-            }
+            get { return chk_SubBatch.CheckState == CheckState.Checked ? -1 : 0; }
+            set { chk_SubBatch.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked; }
         }
-
         public int IsActive
         {
-            get
-            {
-                return chk_Active.CheckState == CheckState.Checked ? -1 : 0;
-            }
-            set
-            {
-                chk_Active.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
-            }
+            get { return chk_Active.CheckState == CheckState.Checked ? -1 : 0; }
+            set { chk_Active.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked; }
         }
-
         public int DNP
         {
-            get
-            {
-                return chk_dnp.CheckState == CheckState.Checked ? -1 : 0;
-            }
-            set
-            {
-                chk_dnp.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
-            }
+            get { return chk_dnp.CheckState == CheckState.Checked ? -1 : 0; }
+            set { chk_dnp.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked; }
         }
-
         public string Stage
         {
             get { return txt_Stage.Text; }
             set { txt_Stage.Text = value;}
-
         }
-
         public string Comments
         {
             get { return txt_Comments.Text; }
             set { txt_Comments.Text = value; }
-
         }
-
         public string DelivDate
         {
             get { return txt_DelivDate.Text; }
             set { txt_DelivDate.Text = value; }
-
         }
-
         public string POrder
         {
             get { return txt_POrder.Text; }
             set { txt_POrder.Text = value; }
-
         }
         public string Supplier
         {
             get { return txt_Supplier.Text; }
             set { txt_Supplier.Text = value; }
-
         }
+
         private void cmb_Articles1_ArticleChanged(object sender)
         {
             Unit = cmb_Articles1.Unit;
@@ -170,7 +137,6 @@ namespace Odin.Planning
         {
             btn_OK.Enabled = (BatchDetId != 0 || Qty != 0)
                 && ArtId != 0;
-
         }
 
         private void txt_Qty_TextChanged(object sender, EventArgs e)
@@ -189,26 +155,11 @@ namespace Odin.Planning
 
         public void SelectAvailable(int ArtId)
         {
-            SqlConnection conn = new SqlConnection(sConnStr);
-            conn.Open();
-            DataSet ds = new DataSet();
-
-            SqlDataAdapter adapter =
-                new SqlDataAdapter(
-                    "execute sp_SelectArticleAvail @artid = " + ArtId, conn);
-
-
-            conn.Close();
-
-            adapter.Fill(ds);
-
-            DataTable dt = ds.Tables[0];
+            DataTable dt = (DataTable)Helper.getSP("sp_SelectArticleAvail", ArtId);
 
             if (dt.Rows.Count > 0)
-            {
                 foreach (DataRow dr in dt.Rows)
                 {
-                   
                     QtyStock = Convert.ToDouble(dr["QtyOnStock"]);
                     QtyAvailable = Convert.ToDouble(dr["QtyAvailable"]);
                     WaitingPO = Convert.ToDouble(dr["WaitingPOQty"]);
@@ -216,7 +167,6 @@ namespace Odin.Planning
                     POrder = dr["POrder"].ToString();
                     Supplier = dr["Supplier"].ToString();
                 }
-            }
             else
             {
                 QtyStock = 0;

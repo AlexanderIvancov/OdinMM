@@ -51,7 +51,7 @@ namespace Odin.Warehouse.Deliveries
 
         public void FillOrders(int typeid)
         {
-            var data = Plan_BLL.getOrdersForBatch(BatchId);
+            var data = (DataTable)Helper.getSP("sp_SelectSalesOrdersForBatchMapped", BatchId);
 
             gv_List.ThreadSafeCall(delegate
             {

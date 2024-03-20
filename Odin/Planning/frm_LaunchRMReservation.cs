@@ -21,7 +21,6 @@ namespace Odin.Planning
 
         Plan_BLL BLL = new Plan_BLL();
         class_Global glob_Class = new class_Global();
-
         public int RowIndex = 0;
         public int ColumnIndex = 0;
         public string ColumnName = "";
@@ -29,7 +28,6 @@ namespace Odin.Planning
         AdmMenu mMenu = new AdmMenu();
         DAL_Functions DAL = new DAL_Functions();
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
-       
         int _id = 0;
         public int LaunchId
         {
@@ -42,7 +40,6 @@ namespace Odin.Planning
             get { return _launchgroup; }
             set { _launchgroup = value; }
         }
-
         public bool IsMB
         {
             get;
@@ -54,7 +51,7 @@ namespace Odin.Planning
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -69,9 +66,7 @@ namespace Odin.Planning
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -79,24 +74,18 @@ namespace Odin.Planning
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
-        
         public void FillList(int _launchid)
         {
-            var data = Plan_BLL.getLaunchesDet(_launchid);
+            var data = (DataTable)Helper.getSP("sp_SelectLaunchDets", _launchid);
 
             gv_List.ThreadSafeCall(delegate
             {
-
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
@@ -104,21 +93,18 @@ namespace Odin.Planning
                 SetCellsColor();
             });
 
-
             bn_List.ThreadSafeCall(delegate
             {
                 bn_List.BindingSource = bs_List;
             });
-
         }
 
         public void FillListGroup(string _launch )
         {
-            var data = Plan_BLL.getLaunchesGroupDet(_launch);
+            var data = (DataTable)Helper.getSP("sp_SelectLaunchDetsGroup", _launch);
 
             gv_List.ThreadSafeCall(delegate
             {
-
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
@@ -126,47 +112,38 @@ namespace Odin.Planning
                 SetCellsColor();
             });
 
-
             bn_List.ThreadSafeCall(delegate
             {
                 bn_List.BindingSource = bs_List;
             });
-
         }
 
         public void FillLabels(int _launchdetid)
         {
-            var data = Plan_BLL.getLaunchesStockDet(_launchdetid);
+            var data = (DataTable)Helper.getSP("sp_SelectLaunchStockDets", _launchdetid);
 
             gv_Labels.ThreadSafeCall(delegate
             {
-
                 gv_Labels.AutoGenerateColumns = false;
                 bs_Labels.DataSource = data;
                 gv_Labels.DataSource = bs_Labels;
-
             });
-
 
             bn_Labels.ThreadSafeCall(delegate
             {
                 bn_Labels.BindingSource = bs_Labels;
             });
-
         }
 
         public void SetCellsColor()
         {
             foreach (DataGridViewRow row in gv_List.Rows)
-            {
                 if (Convert.ToDouble(row.Cells["cn_qty"].Value) > Convert.ToDouble(row.Cells["cn_reserved"].Value) + Convert.ToDouble(row.Cells["cn_given"].Value))
                     row.DefaultCellStyle.BackColor = Color.LightCoral;
-            }
         }
         #endregion
 
         #region Controls
-
 
         #region Context menu
 
@@ -188,7 +165,6 @@ namespace Odin.Planning
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -206,7 +182,6 @@ namespace Odin.Planning
             }
             catch
             { }
-
         }
 
         private void mni_Search_Click(object sender, EventArgs e)
@@ -216,7 +191,6 @@ namespace Odin.Planning
             frm.ColumnNumber = gv_List.CurrentCell.ColumnIndex;
             frm.ColumnText = gv_List.Columns[frm.ColumnNumber].HeaderText;
             frm.ShowDialog();
-
         }
 
         private void mni_FilterBy_Click(object sender, EventArgs e)
@@ -231,7 +205,6 @@ namespace Odin.Planning
                         ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
                         : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
-
             }
             catch { }
         }
@@ -245,7 +218,6 @@ namespace Odin.Planning
                     : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
-
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -269,7 +241,7 @@ namespace Odin.Planning
             frm.HeaderText = "Select view for delivery planning";
             frm.grid = this.gv_List;
             frm.formname = this.Name;
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
             frm.UserId = DAL.UserId;
 
             frm.FillData(frm.grid);
@@ -312,7 +284,7 @@ namespace Odin.Planning
                             _qtytmp = _qtytmp + Convert.ToDouble(row.Cells["cn_rqty"].Value);
                     }
 
-                    BLL.ReserveLaunchLabels(_launchdetid, datastages);
+                    Helper.getSP("sp_ReserveLaunchLabels", _launchdetid, datastages);
 
                     gv_List.CurrentRow.Cells["cn_reserved"].Value = _qtytmp;
                     SetCellsColor();
@@ -320,7 +292,6 @@ namespace Odin.Planning
                     gv_Labels.ThreadSafeCall(delegate { FillLabels(_launchdetid); }) ;
                 }
             }
-           
         }
         
         private void frm_LaunchRMReservation_Load(object sender, EventArgs e)
@@ -390,17 +361,13 @@ namespace Odin.Planning
                             gv_Labels.CurrentRow.Cells["cn_toreserve"].Value = 0;
                         }
                         else
-                        {
                             gv_Labels.CurrentRow.Cells["cn_toreserve"].Value = Convert.ToDouble(gv_Labels.CurrentRow.Cells["cn_rqty"].Value);
-                        }
                     }
                     else
                         gv_Labels.CurrentRow.Cells["cn_toreserve"].Value = Convert.ToDouble(gv_Labels.CurrentRow.Cells["cn_rqty"].Value);
                 }
                 else
-                {
                     gv_Labels.CurrentRow.Cells["cn_toreserve"].Value = 0;
-                }
 
                 bs_Labels.ResetBindings(true);
             }
@@ -410,10 +377,9 @@ namespace Odin.Planning
         {
             if (glob_Class.MessageConfirm("Are you sure you want to release all labels from launch?", "Labels releasing") == true)
             {
-                BLL.ReleaseLaunchLabels(LaunchId);
+                Helper.getSP("sp_ReleaseLaunchLabels", LaunchId);
 
                 gv_List.ThreadSafeCall(delegate { FillList(LaunchId); });
-                
             }
         }
 

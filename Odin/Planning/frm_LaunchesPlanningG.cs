@@ -12,6 +12,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Forms.Calendar;
+
 namespace Odin.Planning
 {
     public partial class frm_LaunchesPlanningG : BaseForm
@@ -43,7 +44,6 @@ namespace Odin.Planning
         string _SelItemText = "";
         DateTime _SelStartDate;
         DateTime _SelEndTime;
-
         private int SelItemId
         {
             get { return _SelItemId; }
@@ -64,19 +64,16 @@ namespace Odin.Planning
             get { return _SelEndTime; }
             set { _SelEndTime = value; }
         }
-
         public string Week
         {
             get { return cmb_Week1.Week; }
             set { cmb_Week1.Week = value; }
         }
-
         public DateTime DateFrom
         {
             get { return Convert.ToDateTime(txt_DateFrom.Value); }
             set { txt_DateFrom.Value = value; }
         }
-
         public DateTime DateTill
         {
             get { return Convert.ToDateTime(txt_DateTill.Value); }
@@ -117,7 +114,7 @@ namespace Odin.Planning
 
             List<BarInformation> lst1 = new List<BarInformation>();
 
-            var data = Plan_BLL.getLaunchesPortfolioGantt(cmb_Firms1.FirmId, cmb_Types1.TypeId, cmb_Common1.SelectedValue, cmb_Articles1.ArticleId,
+            var data = (DataTable)Helper.getSP("sp_LaunchesPortfolioGantt", cmb_Firms1.FirmId, cmb_Types1.TypeId, cmb_Common1.SelectedValue, cmb_Articles1.ArticleId,
                                                         _datefrom, _datetill);
 
             DateTime _starttime;
@@ -136,18 +133,18 @@ namespace Odin.Planning
 
                 _CalendarText = "Launch: " + row["launch"].ToString() + ", group: " + row["groupname"].ToString();
                 _CalendarText = _CalendarText + ", " + row["conforder"].ToString();// + ", Batch: " + row["batch"].ToString();
-                _CalendarText = _CalendarText + System.Environment.NewLine + "Qty: " + row["qty"].ToString() + " " + row["unit"].ToString()
+                _CalendarText = _CalendarText + Environment.NewLine + "Qty: " + row["qty"].ToString() + " " + row["unit"].ToString()
                         + ", Stage: " + row["stage"].ToString();
-                _CalendarText = _CalendarText + System.Environment.NewLine + "Start of production: " + Convert.ToDateTime(row["prodstartdate"].ToString()).ToShortDateString();
-                _CalendarText = _CalendarText + System.Environment.NewLine + "End of production: " + Convert.ToDateTime(row["enddate"].ToString()).ToShortDateString();
-                _CalendarText = _CalendarText + System.Environment.NewLine + "Article: " + row["article"].ToString();
-                _CalendarText = _CalendarText + System.Environment.NewLine + "Cust. article: " + row["custarticle"].ToString();
+                _CalendarText = _CalendarText + Environment.NewLine + "Start of production: " + Convert.ToDateTime(row["prodstartdate"].ToString()).ToShortDateString();
+                _CalendarText = _CalendarText + Environment.NewLine + "End of production: " + Convert.ToDateTime(row["enddate"].ToString()).ToShortDateString();
+                _CalendarText = _CalendarText + Environment.NewLine + "Article: " + row["article"].ToString();
+                _CalendarText = _CalendarText + Environment.NewLine + "Cust. article: " + row["custarticle"].ToString();
                 
                 if (row["printedby"].ToString() != "")
-                    _CalendarText = _CalendarText + System.Environment.NewLine + "Printed at: " + row["printedat"].ToString() + " by " + row["printedby"].ToString();
+                    _CalendarText = _CalendarText + Environment.NewLine + "Printed at: " + row["printedat"].ToString() + " by " + row["printedby"].ToString();
 
                 if (row["additcomments"].ToString() != "")
-                    _CalendarText = _CalendarText + System.Environment.NewLine + row["additcomments"].ToString();
+                    _CalendarText = _CalendarText + Environment.NewLine + row["additcomments"].ToString();
 
                 _Value = _CalendarText;
 
@@ -155,15 +152,11 @@ namespace Odin.Planning
                 if (Convert.ToInt32(row["iscomplected"]) == -1)
                     color1 = Color.White;
                 else
-                {
                     if (Convert.ToInt32(row["isstarted"]) == -1)
                         color1 = Color.LightSkyBlue;
                     else
-                    {
                         //Printed
                         color1 = row["printedby"].ToString() != "" ? Color.LightGreen : Color.LightCoral;
-                    }
-                }
                 //if (Convert.ToInt32(row["isstarted"]) == -1)
                 //{   
                 //    //Complected
@@ -203,9 +196,7 @@ namespace Odin.Planning
                                                                         row["launch"].ToString() + "; " + row["article"].ToString() + "; " + row["custarticle"].ToString()));
             }
             foreach (BarInformation bar in lst1)
-            {
                 ganttChart1.AddChartBar(bar.RowText, bar, bar.FromTime, bar.ToTime, bar.Color, bar.HoverColor, bar.Index, bar.BarText);
-            }
         }
 
         public void FillDataLaunch(string _datefrom, string _datetill, int _launchid)
@@ -239,7 +230,7 @@ namespace Odin.Planning
 
             List<BarInformation> lst1 = new List<BarInformation>();
 
-            var data = Plan_BLL.getLaunchHeadDet(cmb_Launches1.LaunchId);
+            var data = (DataTable)Helper.getSP("sp_SelectLaunchHeadDetsExt", cmb_Launches1.LaunchId);
 
             DateTime _starttime;
             DateTime _endtime;
@@ -257,17 +248,17 @@ namespace Odin.Planning
 
                 _CalendarText = "Launch: " + row["launch"].ToString() + ", group: " + row["groupname"].ToString(); 
                 _CalendarText = _CalendarText + ", " + row["conforder"].ToString();// + ", Batch: " + row["batch"].ToString();
-                _CalendarText = _CalendarText + System.Environment.NewLine + "Qty: " + row["qty"].ToString() + " " + row["unit"].ToString()
+                _CalendarText = _CalendarText + Environment.NewLine + "Qty: " + row["qty"].ToString() + " " + row["unit"].ToString()
                         + ", Stage: " + row["stage"].ToString();
-                _CalendarText = _CalendarText + System.Environment.NewLine + "Start of production: " + Convert.ToDateTime(row["prodstartdate"].ToString()).ToShortDateString();
-                _CalendarText = _CalendarText + System.Environment.NewLine + "End of production: " + Convert.ToDateTime(row["enddate"].ToString()).ToShortDateString();
-                _CalendarText = _CalendarText + System.Environment.NewLine + "Article: " + row["article"].ToString();
-                _CalendarText = _CalendarText + System.Environment.NewLine + "Cust. article: " + row["custarticle"].ToString();
+                _CalendarText = _CalendarText + Environment.NewLine + "Start of production: " + Convert.ToDateTime(row["prodstartdate"].ToString()).ToShortDateString();
+                _CalendarText = _CalendarText + Environment.NewLine + "End of production: " + Convert.ToDateTime(row["enddate"].ToString()).ToShortDateString();
+                _CalendarText = _CalendarText + Environment.NewLine + "Article: " + row["article"].ToString();
+                _CalendarText = _CalendarText + Environment.NewLine + "Cust. article: " + row["custarticle"].ToString();
 
                 if (row["printedby"].ToString() != "")
-                    _CalendarText = _CalendarText + System.Environment.NewLine + "Printed at: " + row["printedat"].ToString() + " by " + row["printedby"].ToString();
+                    _CalendarText = _CalendarText + Environment.NewLine + "Printed at: " + row["printedat"].ToString() + " by " + row["printedby"].ToString();
                 if (row["additcomments"].ToString() != "")
-                    _CalendarText = _CalendarText + System.Environment.NewLine + row["additcomments"].ToString();
+                    _CalendarText = _CalendarText + Environment.NewLine + row["additcomments"].ToString();
 
                 _Value = _CalendarText;
 
@@ -275,15 +266,11 @@ namespace Odin.Planning
                 if (Convert.ToInt32(row["iscomplected"]) == -1)
                     color1 = Color.White;
                 else
-                {
                     if (Convert.ToInt32(row["isstarted"]) == -1)
                         color1 = Color.LightSkyBlue;
                     else
-                    {
                         //Printed
                         color1 = row["printedby"].ToString() != "" ? Color.LightGreen : Color.LightCoral;
-                    }
-                }
                 //if (Convert.ToInt32(row["isstarted"]) == -1)
                 //{
                 //    if (Convert.ToInt32(row["iscomplected"]) == -1)
@@ -314,17 +301,13 @@ namespace Odin.Planning
                 if (Convert.ToInt32(row["isactive"]) == 0)
                     color1 = Color.Gainsboro;
 
-
-
                 lst1.Add(new BarInformation(row["launch"].ToString(), new DateTime(_starttime.Year, _starttime.Month, _starttime.Day, 0, 0, 0),
                                                                       new DateTime(_endtime.Year, _endtime.Month, _endtime.Day, 23, 59, 59),
                                                                       color1, Color.White, _i++, _id, _CalendarText, 
                                                                       row["launch"].ToString() + "; " + row["article"].ToString() + "; " + row["custarticle"].ToString()));
             }
             foreach (BarInformation bar in lst1)
-            {
                 ganttChart1.AddChartBar(bar.RowText, bar, bar.FromTime, bar.ToTime, bar.Color, bar.HoverColor, bar.Index, bar.BarText);
-            }
         }
 
         private void GanttChart1_MouseMove(Object sender, MouseEventArgs e)
@@ -345,10 +328,7 @@ namespace Odin.Planning
                     color1 = val.Color;
                 }
                 else if (typ.ToLower() == "string")
-                {
                     toolTipText.Add(ganttChart1.MouseOverRowValue.ToString());
-                   
-                }
             }
             else
             {
@@ -384,7 +364,6 @@ namespace Odin.Planning
             frm.Close();
             FillData(DateFrom.ToShortDateString(), DateTill.ToShortDateString());
             //FillData(cmb_Week1.FirstDateOfWeek.ToShortDateString(), cmb_Week1.LastDateOfWeek.AddDays(-2).ToShortDateString());
-           
         }
 
         public void EditClosing(object sender)
@@ -475,10 +454,7 @@ namespace Odin.Planning
             //     FillDataLaunch(Convert.ToDateTime(cmb_Launches1.StartDate).ToShortDateString(), Convert.ToDateTime(cmb_Launches1.EndDate).ToShortDateString(), cmb_Launches1.LaunchId);
         }
 
-        private void cm_Main_Opening(object sender, CancelEventArgs e)
-        {
-
-        }
+        private void cm_Main_Opening(object sender, CancelEventArgs e) { }
 
         private void btn_addItem_Click(object sender, EventArgs e)
         {
@@ -486,7 +462,6 @@ namespace Odin.Planning
 
             frm.ctl_CreatLaunchDets1.FillDecNum();
             frm.ctl_CreatLaunchDets1.Mode = "new";
-
             frm.ctl_CreatLaunchDets1.FillDates();
 
             DateTime dstart = ganttChart1.MouseOverColumnDate;
@@ -506,19 +481,14 @@ namespace Odin.Planning
             frm.ctl_CreatLaunchDets1.txt_StartDate.Value = dstart;
             frm.ctl_CreatLaunchDets1.txt_ProdStartDate.Value = dstart;
             frm.ctl_CreatLaunchDets1.txt_EndDate.Value = EndDate;
-            
-
-
 
             frm.LaunchSaved += new LaunchSavedEventHandler(AddLaunch);
 
             frm.Show(); frm.GetKryptonFormFields();
-
         }
 
         private void btn_EditItem_Click(object sender, EventArgs e)
         {
-
             int _id = 0;
 
             try
@@ -529,12 +499,9 @@ namespace Odin.Planning
                 {
                     BarInformation val = (BarInformation)ganttChart1.MouseClickValue;
                     _id = val.Id;
-
                 }
                 else if (typ.ToLower() == "string")
-                {
                     _id = 0;
-                }
             }
             catch { _id = 0; }
 
@@ -560,7 +527,6 @@ namespace Odin.Planning
 
         private void btn_RMMissings_Click(object sender, EventArgs e)
         {
-            
             int _id = 0;
 
             try
@@ -571,12 +537,9 @@ namespace Odin.Planning
                 {
                     BarInformation val = (BarInformation)ganttChart1.MouseClickValue;
                     _id = val.Id;
-
                 }
                 else if (typ.ToLower() == "string")
-                {
                     _id = 0;
-                }
             }
             catch { _id = 0; }
 
@@ -584,7 +547,6 @@ namespace Odin.Planning
             if (_id != 0)
             {
                 var _query = "sp_SelectLaunchRMMissings";
-
                 var sqlparams = new List<SqlParameter>()
                 {
                     new SqlParameter("@launchid",SqlDbType.Int) {Value = _id}
@@ -610,12 +572,9 @@ namespace Odin.Planning
                 {
                     BarInformation val = (BarInformation)ganttChart1.MouseClickValue;
                     _id = val.Id;
-
                 }
                 else if (typ.ToLower() == "string")
-                {
                     _id = 0;
-                }
             }
             catch { _id = 0; }
 
@@ -626,7 +585,7 @@ namespace Odin.Planning
                 if (_id != 0
                     && glob_Class.StartLaunchConfirm() == true)
                 {
-                    DataTable datasource = Plan_BLL.StartLaunch(_id);
+                    DataTable datasource = (DataTable)Helper.getSP("sp_StartLaunch", _id);
                     if (datasource.Rows.Count > 0)
                     {
                         DialogResult result = KryptonTaskDialog.Show("Launch starting warning!",
@@ -637,9 +596,7 @@ namespace Odin.Planning
                         frm_LaunchStartMissings frm = new frm_LaunchStartMissings();
                         frm.data = datasource.Clone();
                         foreach (DataRow dr in datasource.Rows)
-                        {
                             frm.data.ImportRow(dr);
-                        }
 
                         frm.FillData();
 
@@ -655,7 +612,6 @@ namespace Odin.Planning
                     }
                     FillData(DateFrom.ToShortDateString(), DateTill.ToShortDateString());
                     //FillData(cmb_Week1.FirstDateOfWeek.ToShortDateString(), cmb_Week1.LastDateOfWeek.AddDays(12).ToShortDateString());
-
                 }
             }
             else
@@ -666,7 +622,6 @@ namespace Odin.Planning
                                                                 MessageBoxIcon.Warning,
                                                                 TaskDialogButtons.OK);
             }
-                        
         }
 
         private void mni_AutoReserve_Click(object sender, EventArgs e)
@@ -681,12 +636,9 @@ namespace Odin.Planning
                 {
                     BarInformation val = (BarInformation)ganttChart1.MouseClickValue;
                     _id = val.Id;
-
                 }
                 else if (typ.ToLower() == "string")
-                {
                     _id = 0;
-                }
             }
             catch { _id = 0; }
 
@@ -696,7 +648,7 @@ namespace Odin.Planning
                 Bll.LaunchId = _id;
                 if (_id != 0)
                 {
-                    Bll.AutoReserveLaunch(_id);
+                    Helper.getSP("sp_AutoReserveLaunch", _id);
                     FillData(DateFrom.ToShortDateString(), DateTill.ToShortDateString()/*cmb_Week1.FirstDateOfWeek.ToShortDateString(), cmb_Week1.LastDateOfWeek.AddDays(-2).ToShortDateString()*/);
                 }
             }
@@ -704,7 +656,6 @@ namespace Odin.Planning
 
         private void btn_ReserveRM_Click(object sender, EventArgs e)
         {
-
             int _id = 0;
             try
             {
@@ -714,12 +665,9 @@ namespace Odin.Planning
                 {
                     BarInformation val = (BarInformation)ganttChart1.MouseClickValue;
                     _id = val.Id;
-
                 }
                 else if (typ.ToLower() == "string")
-                {
                     _id = 0;
-                }
             }
             catch { _id = 0; }
 
@@ -731,7 +679,6 @@ namespace Odin.Planning
 
                 frm.LaunchId = _id;
                 frm.FillList(_id);
-
 
                 frm.ShowDialog();
 
@@ -750,12 +697,9 @@ namespace Odin.Planning
                 {
                     BarInformation val = (BarInformation)ganttChart1.MouseClickValue;
                     _text = val.Content;
-
                 }
                 else if (typ.ToLower() == "string")
-                {
                     _text = "";
-                }
             }
             catch { _text = ""; }
 
@@ -774,25 +718,19 @@ namespace Odin.Planning
                 {
                     BarInformation val = (BarInformation)ganttChart1.MouseClickValue;
                     _id = val.Id;
-
                 }
                 else if (typ.ToLower() == "string")
-                {
                     _id = 0;
-                }
             }
             catch { _id = 0; }
-
 
             if (_id != 0
                 && glob_Class.DeleteConfirm() == true)
              {
-                MessageBox.Show(Bll.DeleteLaunch(_id));
+                MessageBox.Show(Convert.ToString(Helper.getSP("sp_DeleteLaunch", _id)));
                 FillData(DateFrom.ToShortDateString(), DateTill.ToShortDateString());
                 //FillData(cmb_Week1.FirstDateOfWeek.ToShortDateString(), cmb_Week1.LastDateOfWeek.AddDays(-2).ToShortDateString());
-
             }
-        
         }
 
         private void btn_PrintItem_Click(object sender, EventArgs e)
@@ -807,18 +745,14 @@ namespace Odin.Planning
                 {
                     BarInformation val = (BarInformation)ganttChart1.MouseClickValue;
                     _id = val.Id;
-
                 }
                 else if (typ.ToLower() == "string")
-                {
                     _id = 0;
-                }
             }
             catch { _id = 0; }
 
             if (_id != 0)
             {
-                
                 Bll.LaunchId = _id;
 
                 frm_rptStockMove frm = new frm_rptStockMove();
@@ -884,12 +818,9 @@ namespace Odin.Planning
                 {
                     BarInformation val = (BarInformation)ganttChart1.MouseClickValue;
                     _id = val.Id;
-
                 }
                 else if (typ.ToLower() == "string")
-                {
                     _id = 0;
-                }
             }
             catch { _id = 0; }
 
@@ -897,7 +828,6 @@ namespace Odin.Planning
             {
                     Bll.LaunchId = _id;
                     Bll.PasLaunchId = _id;
-
 
                     frm_rptPassportTitle frm = new frm_rptPassportTitle();
                     frm.HeaderText = "Print pasport for: " + Bll.LaunchName;
@@ -927,7 +857,6 @@ namespace Odin.Planning
 
                     frm.Show(); frm.GetKryptonFormFields();
             }
-                        
         }
 
         private void btn_NotStarted_Click(object sender, EventArgs e)
@@ -953,8 +882,6 @@ namespace Odin.Planning
                 new SqlParameter("@datefrom",SqlDbType.NVarChar){Value = DateFrom},
                 new SqlParameter("@datetill",SqlDbType.NVarChar){Value = DateTill},
                 //new SqlParameter("@launchid",SqlDbType.Int){Value = cmb_Launches1.LaunchId},
-
-
             };
 
             frm_LaunchesPlanningTab frm = new frm_LaunchesPlanningTab();
@@ -978,12 +905,9 @@ namespace Odin.Planning
                 {
                     BarInformation val = (BarInformation)ganttChart1.MouseClickValue;
                     _id = val.Id;
-
                 }
                 else if (typ.ToLower() == "string")
-                {
                     _id = 0;
-                }
             }
             catch { _id = 0; }
 
@@ -1000,7 +924,7 @@ namespace Odin.Planning
 
                 if (result == DialogResult.OK)
                 {
-                   Bll.AddAdditComments(_id, frm.FormText);
+                   Helper.getSP("sp_EditLaunchComments", _id, frm.FormText);
                    FillData(DateFrom.ToShortDateString(), DateTill.ToShortDateString());
                 }
             }

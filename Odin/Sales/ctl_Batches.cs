@@ -35,11 +35,8 @@ namespace Odin.Sales
                 FillDetails(_coid);
             }
         }
-
         int _confid = 0;
-
         frm_AddBatch frm = null;
-
         public int ConfId
         {
             get { return _confid; }
@@ -49,7 +46,6 @@ namespace Odin.Sales
                 COBll.ConfId = _confid;
             }
         }
-
         public int ArticleId { get; set; }
         public double QtyInCO { get; set; }
         public string ResDate { get; set; }
@@ -138,7 +134,7 @@ namespace Odin.Sales
                 if (result == DialogResult.OK
                     && frm.Qty > 0)
                 {
-                    PlanBll.AddBatchCOPOLink(frm.BatchId, COId, 0, frm.Qty, 0, 0);
+                    Helper.getSP("sp_AddBatchCOPOLink", frm.BatchId, COId, 0, frm.Qty, 0, 0);
                     FillBatches(COId);
                 }
             }
@@ -209,13 +205,9 @@ namespace Odin.Sales
                 frm.ctl_CreatBatchDets1.EndDate = PlanBll.EndDate;
                 frm.ctl_CreatBatchDets1.Urgent = PlanBll.Urgent;
                 frm.ctl_CreatBatchDets1.fOldUrgent = PlanBll.Urgent;
-
                 frm.ctl_CreatBatchDets1.FillExistedLines(_batchid);
-
                 frm.ctl_CreatBatchDets1.FillDecNum();
-
                 frm.ctl_CreatBatchDets1.FillGridBatch(_batchid);
-
                 frm.BatchSaved += new BatchSavedEventHandler(AddBatch);
 
                 frm.Show(); frm.GetKryptonFormFields();
@@ -244,7 +236,7 @@ namespace Odin.Sales
                 && _id != 0)
                 try
                 {
-                    PlanBll.DeleteBatchCOPOLink(_id);
+                    Helper.getSP("sp_DeleteBatchCOPOLink", _id);
                     FillBatches(COId);
                 }
                 catch { }
@@ -274,7 +266,7 @@ namespace Odin.Sales
 
                 if (result == DialogResult.OK)
                 {
-                    PlanBll.EditMappedQty(_id, frm.FormNumber);
+                    Helper.getSP("sp_EditMappedQty", _id, frm.FormNumber);
                     FillBatches(COId);
                 }
             }
@@ -314,7 +306,7 @@ namespace Odin.Sales
                 {
                     //if (COBll.COArtId == frm.ArtId)
                     {
-                        PlanBll.RelinkOrder(_id, frm.COId);
+                        Helper.getSP("sp_RelinkCO", _id, frm.COId);
                         FillBatches(COId);
                     }
                     //else

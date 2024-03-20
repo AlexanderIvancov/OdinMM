@@ -26,51 +26,40 @@ namespace Odin.Purchase
         Plan_BLL BLL = new Plan_BLL();
         DAL_Functions DLL = new DAL_Functions();
         ExportData ED;
-
        
         int _deptid = 0;
         int _stageid = 0;
-        
         public int BatchId
         {
             get { return cmb_Batches1.BatchId; }
             set { cmb_Batches1.BatchId = value; }
         }
-
         public int TypeId
         {
             get { return cmb_Types1.TypeId; }
             set { cmb_Types1.TypeId = value; }
         }
-
         public int DeptId
         {
             get { return _deptid; }
             set { _deptid = value; }
         }
-
         public int StageId
         {
             get { return _stageid; }
             set { _stageid = value; }
         }
-
         public int POHeadId
         { get; set; }
-
         public int ArtId
         { get; set; }
-
         public int _PrevId = 0;
-
         double _qtyfreepo = 0;
-
         public double QtyFreePO
         {
             get { return _qtyfreepo; }
             set { _qtyfreepo = value; }
         }
-
         public int RowIndex = 0;
         public int ColumnIndex = 0;
         public string ColumnName = "";
@@ -100,7 +89,6 @@ namespace Odin.Purchase
 
         public void bwStart(DoWorkEventHandler doWork)
         {
-
             // Create a background thread
             var bw = new BackgroundWorker();
             bw.DoWork += doWork;
@@ -134,20 +122,18 @@ namespace Odin.Purchase
                 MessageBox.Show(e.Error.Message);
                 return;
             }
-
             // Check to see if the background process was cancelled.
             if (e.Cancelled)
             {
                 MessageBox.Show(processingCancelled);
                 return;
             }
-
         }
 
         public void bw_List(object sender, DoWorkEventArgs e)
         {
 
-            var data = Plan_BLL.getArtTotalsListRM(TypeId, DeptId, BatchId, StageId);
+            var data = (System.Data.DataTable)Helper.getSP("sp_SelectArtTotalsList", TypeId, DeptId, BatchId, StageId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -157,18 +143,15 @@ namespace Odin.Purchase
                 SetCellsColor();
             });
 
-
             bn_List.ThreadSafeCall(delegate
             {
                 bn_List.BindingSource = bs_List;
             });
             //MessageBox.Show(cmb_Articles1.QtyAvail.ToString());
-            
         }
 
         private bool CheckOldRow()
         {
-
             try
             {
                 ArtId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_artid"].Value);
@@ -179,9 +162,7 @@ namespace Odin.Purchase
             }
 
             if (_PrevId == ArtId)
-            {
                 return true;
-            }
             else
             {
                 _PrevId = ArtId;
@@ -202,11 +183,9 @@ namespace Odin.Purchase
         public void SetCellsColor()
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 if (Convert.ToInt32(row.Cells["cn_isactive"].Value) == 0)
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Gainsboro;
-            }
         }
         #endregion
 
@@ -311,23 +290,17 @@ namespace Odin.Purchase
             Clipboard.SetText(CellValue.ToString());
         }
         #endregion
-        private void cmb_Batches1_BatchChanged(object sender)
-        {
-           
-        }
+        private void cmb_Batches1_BatchChanged(object sender) { }
 
         private void btn_Refresh_Click(object sender, EventArgs e)
         {
             RefreshData();
         }
 
-
         private void gv_List_SelectionChanged(object sender, EventArgs e)
         {
             if (CheckOldRow() == false)
-            {
                 ShowDetails(ArtId);
-            }
             SetCellsColor();
         }
 

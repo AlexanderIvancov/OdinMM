@@ -14,14 +14,12 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+
 namespace Odin.Planning
 {
     public delegate void BatchSaving1EventHandler(object sender);
     public delegate int ReceiveRMId();
-
-
     public delegate int ReceiveBatchId();
-
 
     public partial class frm_Batches : BaseForm
     {
@@ -74,7 +72,6 @@ namespace Odin.Planning
         public ctl_QCTracing ctlBatchQCTracing = null;
         public ctl_Launches ctlBatchLaunches = null;
 
-
         public int ctlCreatBatchWidth = 0;
         public int ctlBatchRMWidth = 0;
         public int ctlArticlesRMWidth = 0;
@@ -87,16 +84,10 @@ namespace Odin.Planning
         public int ctlBatchLaunchesWidth = 0;
 
         public int ControlWidth = 250;
-
-        public int BatchId
-        { get; set; }
-
+        public int BatchId { get; set; }
         int _PrevId = 0;
-
         frm_AddBatch frm = null;
-
-        public int TempArtId
-        { get; set; }
+        public int TempArtId { get; set; }
 
         #endregion
 
@@ -150,7 +141,7 @@ namespace Odin.Planning
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -165,9 +156,7 @@ namespace Odin.Planning
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -175,21 +164,17 @@ namespace Odin.Planning
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
         public void bw_List(object sender, DoWorkEventArgs e)
         {
 
             //MessageBox.Show(cmb_SalesOrdersWithLines1.SalesOrderLineId.ToString());
-            var data = Plan_BLL.getBatches(cmb_Batches1.BatchId, cmb_SalesOrdersWithLines1.SalesOrderLineId, cmb_Articles1.ArticleId, IsActive,
+            var data = (DataTable)Helper.getSP("sp_BatchesList", cmb_Batches1.BatchId, cmb_SalesOrdersWithLines1.SalesOrderLineId, cmb_Articles1.ArticleId, IsActive,
                                             cmb_Types1.TypeId, cmb_Department1.DeptId, txt_StartFrom.Value == null ? "" : txt_StartFrom.Value.ToString().Trim(),
                                             txt_StartTill.Value == null ? "" : txt_StartTill.Value.ToString().Trim(),
                                             txt_EndFrom.Value == null ? "" : txt_EndFrom.Value.ToString().Trim(),
@@ -206,12 +191,10 @@ namespace Odin.Planning
                 SetCellsColor();
             });
 
-
             bn_List.ThreadSafeCall(delegate
             {
                 bn_List.BindingSource = bs_List;
             });
-
         }
 
         private KryptonPage NewPage(string name, int image, Control content, int _Width)
@@ -229,7 +212,6 @@ namespace Odin.Planning
             content.Dock = DockStyle.Fill;
             p.Controls.Add(content);
 
-
             return p;
         }
 
@@ -240,7 +222,6 @@ namespace Odin.Planning
             
             ctlCreatBatch = new ctl_CreatBatchDets();
             ctlCreatBatchWidth = ctlCreatBatch.Width;
-
             ctlCreatBatch.COrderId = PlanBll.BatchCOId;
             ctlCreatBatch.cmb_SalesOrdersWithLines1.SalesOrderLineId = PlanBll.BatchCOId;
             ctlCreatBatch.ArticleId = PlanBll.BatchArtId;
@@ -258,13 +239,9 @@ namespace Odin.Planning
             ctlCreatBatch.EndDate = PlanBll.EndDate;
             ctlCreatBatch.Urgent = PlanBll.Urgent;
             ctlCreatBatch.fOldUrgent = PlanBll.Urgent;
-
             ctlCreatBatch.FillExistedLines(_batchid);
-
             ctlCreatBatch.FillDecNum();
-
             ctlCreatBatch.FillGridBatch(_batchid);
-
             ctlCreatBatch.SaveBatch += new SaveBatchEventHandler(SavedBatch);
             
             ControlWidth = ctlCreatBatch.Width;
@@ -289,7 +266,6 @@ namespace Odin.Planning
 
         private KryptonPage NewInputBatchRMCost(int _batchid)
         {
-
             ctlBatchRMCost = new ctl_RMTracing();
             ctlBatchRMCost.cmb_Batches1.BatchId = _batchid;
             
@@ -301,7 +277,6 @@ namespace Odin.Planning
 
         private KryptonPage NewInputBatchQCTracing(int _batchid)
         {
-
             ctlBatchQCTracing = new ctl_QCTracing();
             ctlBatchQCTracing.BatchId = _batchid;
 
@@ -313,7 +288,6 @@ namespace Odin.Planning
 
         private KryptonPage NewInputBatchLaunches(int _batchid)
         {
-
             ctlBatchLaunches = new ctl_Launches();
             ctlBatchLaunches.BatchId = _batchid;
             //ctlBatchLaunches.gv_List.ThreadSafeCall(delegate { ctlBatchLaunches.SetCellsColor(); });
@@ -326,7 +300,6 @@ namespace Odin.Planning
 
         private KryptonPage NewInputBatchCO(int _batchid)
         {
-
             ctlBatchOrders = new ctl_BatchOrders();
             ctlBatchOrders.cmb_Batches1.BatchId = _batchid;
           
@@ -338,7 +311,6 @@ namespace Odin.Planning
 
         private KryptonPage NewInputBatchStock(int _batchid)
         {
-
             ctlBatchStock = new ctl_BatchStock();
             ctlBatchStock.cmb_Batches1.BatchId = _batchid;
 
@@ -392,9 +364,7 @@ namespace Odin.Planning
                 ctl_CreatBatchDets ctlGen1 = (ctl_CreatBatchDets)page.Controls.Find("ctl_CreatBatchDets", true).FirstOrDefault();
                 if (ctlGen1 != null)
                 {
-
                     PlanBll.BatchId = _batchid;
-
                     
                     ctlGen1.COrderId = PlanBll.BatchCOId;
                     ctlGen1.cmb_SalesOrdersWithLines1.SalesOrderLineId = PlanBll.BatchCOId;
@@ -417,9 +387,7 @@ namespace Odin.Planning
                     ctlCreatBatch.FillExistedLines(_batchid);
 
                     ctlGen1.FillDecNum();
-
                     ctlGen1.FillGridBatch(_batchid);
-
                     ctlGen1.SaveBatch += new SaveBatchEventHandler(SavedBatch);
                     //ctlGen1.CheckEmpty();
                 }
@@ -434,10 +402,8 @@ namespace Odin.Planning
                 ctl_BatchFreeze ctlFreeze1 = (ctl_BatchFreeze)page.Controls.Find("ctl_BatchFreeze", true).FirstOrDefault();
 
                 if (ctlFreeze1 != null)
-                {
                     //ctlFreeze1.BatchId = _batchid;
                     ctlFreeze1.cmb_Batches1.BatchId = _batchid;
-                }
             }
         }
 
@@ -448,9 +414,7 @@ namespace Odin.Planning
                 ctl_RMTracing ctlCost1 = (ctl_RMTracing)page.Controls.Find("ctl_RMTracing", true).FirstOrDefault();
 
                 if (ctlCost1 != null)
-                {
                     ctlCost1.cmb_Batches1.BatchId = _batchid;
-                }
             }
         }
 
@@ -461,9 +425,7 @@ namespace Odin.Planning
                 ctl_QCTracing ctlQCt1 = (ctl_QCTracing)page.Controls.Find("ctl_QCTracing", true).FirstOrDefault();
 
                 if (ctlQCt1 != null)
-                {
                     ctlQCt1.BatchId = _batchid;
-                }
             }
         }
 
@@ -474,10 +436,8 @@ namespace Odin.Planning
                 ctl_Launches ctlLaunches1 = (ctl_Launches)page.Controls.Find("ctl_Launches", true).FirstOrDefault();
 
                 if (ctlLaunches1 != null)
-                {
                     ctlLaunches1.BatchId = _batchid;
                     //ctlLaunches1.gv_List.ThreadSafeCall(delegate { ctlBatchLaunches.SetCellsColor(); });
-                }
             }
         }
 
@@ -503,9 +463,7 @@ namespace Odin.Planning
                 ctl_RMPoDistribute ctlPOReserve1 = (ctl_RMPoDistribute)page.Controls.Find("ctl_RMPoDistribute", true).FirstOrDefault();
 
                 if (ctlPOReserve1 != null)
-                {
                     ctlPOReserve1.cmb_Articles1.ArticleId = _articleid;
-                }
             }
         }
 
@@ -516,9 +474,7 @@ namespace Odin.Planning
                 ctl_ArtTotals ctlTotal1 = (ctl_ArtTotals)page.Controls.Find("ctl_ArtTotals", true).FirstOrDefault();
 
                 if (ctlTotal1 != null)
-                {
                     ctlTotal1.cmb_Articles1.ArticleId = _articleid;
-                }
             }
         }
 
@@ -529,8 +485,7 @@ namespace Odin.Planning
                 ctl_BatchOrders ctlBatchCO1 = (ctl_BatchOrders)page.Controls.Find("ctl_BatchOrders", true).FirstOrDefault();
 
                 if (ctlBatchCO1 != null)
-                {
-                    ctlBatchCO1.cmb_Batches1.BatchId = _batchid;                 }
+                    ctlBatchCO1.cmb_Batches1.BatchId = _batchid;
             }
         }
 
@@ -541,9 +496,7 @@ namespace Odin.Planning
                 ctl_BatchStock ctlBatchStock1 = (ctl_BatchStock)page.Controls.Find("ctl_BatchStock", true).FirstOrDefault();
 
                 if (ctlBatchStock1 != null)
-                {
                     ctlBatchStock1.cmb_Batches1.BatchId = _batchid;
-                }
             }
         }
 
@@ -560,9 +513,7 @@ namespace Odin.Planning
             }
 
             if (_PrevId == BatchId)
-            {
                 return true;
-            }
             else
             {
                 _PrevId = BatchId;
@@ -596,7 +547,6 @@ namespace Odin.Planning
             try
             {
                 _batchid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
-
             }
             catch { }
 
@@ -621,20 +571,15 @@ namespace Odin.Planning
                 frm.ctl_CreatBatchDets1.Urgent = PlanBll.Urgent;
                 frm.ctl_CreatBatchDets1.fOldUrgent = PlanBll.Urgent;
                 frm.ctl_CreatBatchDets1.Serials = PlanBll.BatchSerials;
-
                 frm.ctl_CreatBatchDets1.FillExistedLines(_batchid);
-
                 frm.ctl_CreatBatchDets1.FillDecNum();
-
                 frm.ctl_CreatBatchDets1.FillGridBatch(_batchid);
 
                 frm.BatchSaved += new BatchSavedEventHandler(AddBatch);
 
                 frm.Show(); frm.GetKryptonFormFields();
             }
-
         }
-
 
         //private void ShowGenDetails(object sender)
         //{
@@ -669,7 +614,6 @@ namespace Odin.Planning
         public void ShowPages(int artid, bool general, bool batchrm, bool artrm, bool totalart, bool poreservation)
         {
             int _artid = artid;
-
             int _batchid = BatchId;
 
             if (general == true)
@@ -697,8 +641,6 @@ namespace Odin.Planning
                 FindPORMPages(0);
                 FindPORMPages(_artid);
             }
-
-            
         }
 
         #endregion
@@ -715,7 +657,6 @@ namespace Odin.Planning
             LoadColumns(gv_List);
 
             ClearFilter();
-                       
         }
 
         //kryptonDockingManager1.AddDockspace("Control",
@@ -732,7 +673,6 @@ namespace Odin.Planning
 
             }
             catch { }
-
 
             kryptonDockingManager1.AddDockspace("Control",
                                              DockingEdge.Left,
@@ -772,7 +712,6 @@ namespace Odin.Planning
             }
             catch { }
 
-
             kryptonDockingManager1.AddDockspace("Control",
                                              DockingEdge.Left,
                                              new KryptonPage[] { NewInputBatchRMCost(_batchid) });
@@ -798,7 +737,6 @@ namespace Odin.Planning
 
         #region Context menu
 
-
         private void mnu_Lines_Opening(object sender, CancelEventArgs e)
         {
             try
@@ -817,7 +755,6 @@ namespace Odin.Planning
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -864,11 +801,9 @@ namespace Odin.Planning
                         ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
                         : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
-
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -881,7 +816,6 @@ namespace Odin.Planning
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -892,7 +826,6 @@ namespace Odin.Planning
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_Copy_Click(object sender, EventArgs e)
@@ -907,7 +840,7 @@ namespace Odin.Planning
             frm.HeaderText = "Select view for batches list";
             frm.grid = this.gv_List;
             frm.formname = this.Name;
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
             frm.UserId = DAL.UserId;
 
             frm.FillData(frm.grid);
@@ -929,14 +862,12 @@ namespace Odin.Planning
 
         #endregion
                
-
         private void btn_AddNew_Click(object sender, EventArgs e)
         {
             frm = new frm_AddBatch();
 
             //CO_BLL CO = new CO_BLL();
             //CO.COId = COId;
-
 
             //frm.ctl_CreatBatchDets1.COrderId = COId;
             //frm.ctl_CreatBatchDets1.cmb_SalesOrdersWithLines1.SalesOrderLineId = COId;
@@ -956,7 +887,6 @@ namespace Odin.Planning
             frm.ctl_CreatBatchDets1.FillGridNew(frm.ctl_CreatBatchDets1.ArticleId, frm.ctl_CreatBatchDets1.QtyInBatch);
             frm.ctl_CreatBatchDets1.FillDates();
 
-
             frm.BatchSaved += new BatchSavedEventHandler(AddBatch);
 
             frm.Show(); frm.GetKryptonFormFields();
@@ -967,10 +897,7 @@ namespace Odin.Planning
             ShowEdit();
         }
 
-        private void btn_Copy_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void btn_Copy_Click(object sender, EventArgs e) { }
 
         private void btn_Delete_Click(object sender, EventArgs e)
         {
@@ -979,28 +906,22 @@ namespace Odin.Planning
             try
             {
                 _batchid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
-
             }
             catch { }
 
             if (glob_Class.DeleteConfirm() == true
                 && _batchid != 0)
-            {
                 try
                 {
-                    if (PlanBll.DeleteBatch(_batchid) == -1)
+                    if (Convert.ToInt32(Helper.getSP("sp_DeleteBatch", _batchid)) == -1)
                     {
                         MessageBox.Show("Deletion of batch was succesfull!");
-                        
                         bwStart(bw_List);
                     }
                     else
                         MessageBox.Show("Error during batch deletion!");
-
                 }
-
                 catch { }
-            }
         }
 
         private void btn_Active_Click(object sender, EventArgs e)
@@ -1014,14 +935,13 @@ namespace Odin.Planning
             if (_id != 0
                 && glob_Class.CloseConfirm() == true)
             {
-                PlanBll.CloseBatch(_id);
+                Helper.getSP("sp_CloseBatch", _id);
                 bwStart(bw_List);
             }
         }
 
         private void btn_OpenBatch_Click(object sender, EventArgs e)
         {
-
             int _id = 0;
             try { _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value); }
             catch { }
@@ -1029,7 +949,7 @@ namespace Odin.Planning
             if (_id != 0
                 && glob_Class.OpenConfirm() == true)
             {
-                PlanBll.OpenBatch(_id);
+                Helper.getSP("sp_OpenBatch", _id);
                 bwStart(bw_List);
             }
         }
@@ -1103,7 +1023,6 @@ namespace Odin.Planning
                         ControlWidth = ctlBatchLaunchesWidth;
                     }
 
-
                     kryptonDockingManager1.RemovePage(page, false);
                     kryptonDockingManager1.AddDockspace("Control",
                                                DockingEdge.Left,
@@ -1159,10 +1078,8 @@ namespace Odin.Planning
             try
             {
                 _batchid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
-
             }
             catch { }
-
 
             kryptonDockingManager1.AddDockspace("Control",
                                              DockingEdge.Left,
@@ -1177,9 +1094,7 @@ namespace Odin.Planning
         private void gv_List_SelectionChanged(object sender, EventArgs e)
         {
             if (CheckOldRow() == false)
-            {
                 ShowDetails(BatchId);
-            }
         }
 
         private void btn_Totals_Click(object sender, EventArgs e)
@@ -1221,7 +1136,6 @@ namespace Odin.Planning
             }
             catch { }
 
-
             kryptonDockingManager1.AddDockspace("Control",
                                              DockingEdge.Left,
                                              new KryptonPage[] { NewInputBatchStock(_batchid) });
@@ -1232,8 +1146,6 @@ namespace Odin.Planning
             ShowEdit();
         }
 
-       
-
         private void btn_Orders_Click(object sender, EventArgs e)
         {
             int _batchid = 0;
@@ -1241,10 +1153,8 @@ namespace Odin.Planning
             try
             {
                 _batchid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
-
             }
             catch { }
-
 
             kryptonDockingManager1.AddDockspace("Control",
                                              DockingEdge.Left,
@@ -1283,7 +1193,6 @@ namespace Odin.Planning
             try
             {
                 _batchid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
-
             }
             catch { }
 
@@ -1315,7 +1224,6 @@ namespace Odin.Planning
 
                 frm.Show(); frm.GetKryptonFormFields();
             }
-
         }
 
         private void btn_PrintRouteList_Click(object sender, EventArgs e)
@@ -1349,10 +1257,8 @@ namespace Odin.Planning
             try
             {
                 _batchid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
-
             }
             catch { }
-
 
             kryptonDockingManager1.AddDockspace("Control",
                                              DockingEdge.Left,
@@ -1368,7 +1274,6 @@ namespace Odin.Planning
             {
                 _batchid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
                 _batch = gv_List.CurrentRow.Cells["cn_batch"].Value.ToString();
-
             }
             catch { }
 
@@ -1385,8 +1290,6 @@ namespace Odin.Planning
             frm.Query = _query;
             frm.SqlParams = sqlparams;
             frm.Show(); frm.GetKryptonFormFields();
-
-
         }
 
         private void btn_Launches_Click(object sender, EventArgs e)
@@ -1396,7 +1299,6 @@ namespace Odin.Planning
             try
             {
                 _batchid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
-
             }
             catch { }
 
@@ -1438,10 +1340,9 @@ namespace Odin.Planning
             if (_batchid != 0
                 && glob_Class.ConfirmMessage(_title, _instruction, _message) == true)
             {
-                PlanBll.BlockBatch(_batchid);
+                Helper.getSP("sp_BlockBatch", _batchid);
                 bwStart(bw_List);
             }
-
         }
     }
 }

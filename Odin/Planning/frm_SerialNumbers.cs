@@ -28,26 +28,17 @@ namespace Odin.Planning
         DAL_Functions DAL = new DAL_Functions();
         AdmMenu mMenu = new AdmMenu();
         ExportData ED;
-
         public int RowIndex = 0;
         public int ColumnIndex = 0;
         public string ColumnName = "";
         public string CellValue = "";
-
         public int IsActive
         {
-            get
-            {
-                return chk_Active.CheckState == CheckState.Checked ? -1 : chk_Active.CheckState == CheckState.Unchecked ? 0 : 1;
-            }
-            set
-            {
-                chk_Active.CheckState = value == -1 ? CheckState.Checked : value == 0 ? CheckState.Unchecked : CheckState.Indeterminate;
-            }
+            get { return chk_Active.CheckState == CheckState.Checked ? -1 : chk_Active.CheckState == CheckState.Unchecked ? 0 : 1; }
+            set { chk_Active.CheckState = value == -1 ? CheckState.Checked : value == 0 ? CheckState.Unchecked : CheckState.Indeterminate; }
         }
 
         // rb_All.Checked == true ? 1 : (rb_Valid.Checked == true ? -1 : 0)
-
 
         #endregion
 
@@ -55,7 +46,7 @@ namespace Odin.Planning
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -70,9 +61,7 @@ namespace Odin.Planning
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -80,14 +69,10 @@ namespace Odin.Planning
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
         public void ClearFilter()
@@ -123,11 +108,10 @@ namespace Odin.Planning
         public void bw_List(object sender, DoWorkEventArgs e)
         {
             //MessageBox.Show(cmb_SalesOrdersWithLines1.SalesOrderLineId.ToString());
-            var data = Plan_BLL.getSerialNumbers(Convert.ToInt32(txt_Serial.Text), rb_All.Checked == true ? 1 : (rb_Used.Checked == true ? -1 : 0), 
+            var data = (DataTable)Helper.getSP("sp_SerialNumbersList", Convert.ToInt32(txt_Serial.Text), rb_All.Checked == true ? 1 : (rb_Used.Checked == true ? -1 : 0), 
                                             cmb_Batches1.BatchId, cmb_SalesOrdersWithLines1.SalesOrderLineId, cmb_Articles1.ArticleId, IsActive,
                                             cmb_Types1.TypeId, txt_UseFrom.Value == null ? "" : txt_UseFrom.Value.ToString().Trim(),
                                             txt_UseTill.Value == null ? "" : txt_UseTill.Value.ToString().Trim());
-
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -138,12 +122,10 @@ namespace Odin.Planning
                 SetCellsColor();
             });
 
-
             bn_List.ThreadSafeCall(delegate
             {
                 bn_List.BindingSource = bs_List;
             });
-
         }
 
         public void RefreshData(object sender)
@@ -152,11 +134,10 @@ namespace Odin.Planning
 
             var dir = Helper.SaveDirection(gv_List);
 
-            var data = Plan_BLL.getSerialNumbers(Convert.ToInt32(txt_Serial.Text), rb_All.Checked == true ? 1 : (rb_Used.Checked == true ? -1 : 0),
+            var data = (DataTable)Helper.getSP("sp_SerialNumbersList", Convert.ToInt32(txt_Serial.Text), rb_All.Checked == true ? 1 : (rb_Used.Checked == true ? -1 : 0),
                                              cmb_Batches1.BatchId, cmb_SalesOrdersWithLines1.SalesOrderLineId, cmb_Articles1.ArticleId, IsActive,
                                              cmb_Types1.TypeId, txt_UseFrom.Value == null ? "" : txt_UseFrom.Value.ToString().Trim(),
                                              txt_UseTill.Value == null ? "" : txt_UseTill.Value.ToString().Trim());
-
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -164,7 +145,6 @@ namespace Odin.Planning
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -196,10 +176,8 @@ namespace Odin.Planning
 
             SetCellsColor();
         }
-
         
         #region Context menu
-
 
         private void mnu_Lines_Opening(object sender, CancelEventArgs e)
         {
@@ -219,7 +197,6 @@ namespace Odin.Planning
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -261,7 +238,6 @@ namespace Odin.Planning
                         ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
                         : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
-
             }
             catch { }
 
@@ -302,9 +278,8 @@ namespace Odin.Planning
             frm.HeaderText = "Select view for serial numbers list";
             frm.grid = this.gv_List;
             frm.formname = this.Name;
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
             frm.UserId = DAL.UserId;
-
             frm.FillData(frm.grid);
 
             DialogResult result = frm.ShowDialog();
@@ -327,7 +302,6 @@ namespace Odin.Planning
             KryptonDockingWorkspace w = kryptonDockingManager1.ManageWorkspace(kryptonDockableWorkspace1);
             kryptonDockingManager1.ManageControl(kryptonSplitContainer1.Panel2, w);
             kryptonDockingManager1.ManageFloating(this);
-
 
             LoadColumns(gv_List);
 
@@ -361,7 +335,6 @@ namespace Odin.Planning
             }
         }
 
-
         #endregion
 
         private void txt_UseFrom_DropDown(object sender, DateTimePickerDropArgs e)
@@ -379,14 +352,10 @@ namespace Odin.Planning
             frm_AddSerialNumbers frm = new frm_AddSerialNumbers();
             frm.BatchId = cmb_Batches1.BatchId;
             frm.SendChanges += new SendSerialNumChangesEventHadler(RefreshData);
-
             frm.Show(); frm.GetKryptonFormFields();
         }
         
-        private void btn_Edit_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void btn_Edit_Click(object sender, EventArgs e) { }
 
         private void btn_Delete_Click(object sender, EventArgs e)
         {
@@ -398,7 +367,7 @@ namespace Odin.Planning
                     foreach (DataGridViewRow row in this.gv_List.SelectedRows)
                     {
                         _id = Convert.ToInt32(row.Cells["cn_id"].Value);
-                        PlanBll.DeleteSerialNumber(_id);
+                        Helper.getSP("sp_DeleteSerialNumber", _id);
                     }
                 }
                 catch { }

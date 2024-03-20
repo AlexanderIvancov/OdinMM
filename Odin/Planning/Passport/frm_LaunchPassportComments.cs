@@ -28,40 +28,19 @@ namespace Odin.Planning.Passport
         AdmMenu mMenu = new AdmMenu();
         ExportData ED1;
 
-
         public int RowIndexC = 0;
         public int ColumnIndexC = 0;
         public string ColumnNameC = "";
         public string CellValueC = "";
-
-
         public int ControlWidth = 250;
-
-        public int LaunchId
-        { get; set; }
-
+        public int LaunchId { get; set; }
         int _PrevId = 0;
-
         public int IsActive
         {
-            get
-            {
-                return chk_Active.CheckState == CheckState.Checked ? -1 : chk_Active.CheckState == CheckState.Unchecked ? 0 : 1;
-            }
-            set
-            {
-                chk_Active.CheckState = value == -1 ? CheckState.Checked : value == 0 ? CheckState.Unchecked : CheckState.Indeterminate;
-            }
+            get { return chk_Active.CheckState == CheckState.Checked ? -1 : chk_Active.CheckState == CheckState.Unchecked ? 0 : 1; }
+            set { chk_Active.CheckState = value == -1 ? CheckState.Checked : value == 0 ? CheckState.Unchecked : CheckState.Indeterminate; }
         }
-
-        public int State
-        {
-            get
-            {
-                return rb_All.Checked == true ? -99 : rb_New.Checked == true ? -1 : rb_Closed.Checked == true ? 0 : 1;
-            }
-
-        }
+        public int State { get { return rb_All.Checked == true ? -99 : rb_New.Checked == true ? -1 : rb_Closed.Checked == true ? 0 : 1; } }
 
         #endregion
 
@@ -80,17 +59,15 @@ namespace Odin.Planning.Passport
             txt_StartTill.Value = null;
             cmb_Common1.SelectedValue = 0;
             cmb_Firms1.FirmId = 0;
-
         }
 
         public void bw_List(object sender, DoWorkEventArgs e)
         {
 
             //MessageBox.Show(cmb_SalesOrdersWithLines1.SalesOrderLineId.ToString());
-            var data = Plan_BLL.getLaunchesPassportCommentsList(cmb_Batches1.BatchId, cmb_Launches1.LaunchId, cmb_SalesOrdersWithLines1.SalesOrderLineId, cmb_Articles1.ArticleId, IsActive,
+            var data = (DataTable)Helper.getSP("sp_LaunchesPassportListComReview", cmb_Batches1.BatchId, cmb_Launches1.LaunchId, cmb_SalesOrdersWithLines1.SalesOrderLineId, cmb_Articles1.ArticleId, IsActive,
                                             cmb_Types1.TypeId, txt_StartFrom.Value == null ? "" : txt_StartFrom.Value.ToString().Trim(),
                                             txt_StartTill.Value == null ? "" : txt_StartTill.Value.ToString().Trim(), cmb_Firms1.FirmId, cmb_Common1.SelectedValue, State);
-
 
             gv_Comments.ThreadSafeCall(delegate
             {
@@ -102,12 +79,10 @@ namespace Odin.Planning.Passport
                 SetCellsColor();
             });
 
-
             bn_Comments.ThreadSafeCall(delegate
             {
                 bn_Comments.BindingSource = bs_Comments;
             });
-
         }
         public void SetCellsColor()
         {
@@ -127,7 +102,7 @@ namespace Odin.Planning.Passport
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -142,9 +117,7 @@ namespace Odin.Planning.Passport
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -152,20 +125,15 @@ namespace Odin.Planning.Passport
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
         public void ShowComments(int id)
         {
-            var data = Plan_BLL.getLaunchesPassportComments(id);
-
+            var data = (DataTable)Helper.getSP("sp_LaunchesPassportListCom", id);
 
             gv_Comments.ThreadSafeCall(delegate
             {
@@ -177,13 +145,11 @@ namespace Odin.Planning.Passport
                 SetCellsColor();
             });
 
-
             bn_Comments.ThreadSafeCall(delegate
             {
                 bn_Comments.BindingSource = bs_Comments;
             });
         }
-
 
         #endregion
 
@@ -204,9 +170,7 @@ namespace Odin.Planning.Passport
             e.DockspaceControl.Size = new Size(ControlWidth, kryptonDockableWorkspace1.Height);
         }
 
-
         #region Context menu comments
-
 
         private void mnu_LinesC_Opening(object sender, CancelEventArgs e)
         {
@@ -226,7 +190,6 @@ namespace Odin.Planning.Passport
                 CellValueC = gv_Comments.Rows[RowIndexC].Cells[ColumnIndexC].Value.ToString();
                 ColumnNameC = gv_Comments.Columns[ColumnIndexC].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -248,7 +211,6 @@ namespace Odin.Planning.Passport
             }
             catch
             { }
-
         }
 
         private void mni_SearchC_Click(object sender, EventArgs e)
@@ -275,8 +237,6 @@ namespace Odin.Planning.Passport
 
             }
             catch { }
-
-
         }
 
         private void mni_FilterExcludingSelC_Click(object sender, EventArgs e)
@@ -288,8 +248,6 @@ namespace Odin.Planning.Passport
                     : bs_Comments.Filter + " AND " + ColumnNameC + " <> '" + CellValueC + "'";
             }
             catch { }
-
-
         }
 
         private void mni_RemoveFilterC_Click(object sender, EventArgs e)
@@ -299,7 +257,6 @@ namespace Odin.Planning.Passport
                 bs_Comments.RemoveFilter();
             }
             catch { }
-
         }
 
         private void mni_CopyC_Click(object sender, EventArgs e)
@@ -314,9 +271,8 @@ namespace Odin.Planning.Passport
             frm.HeaderText = "Select view for comments list";
             frm.grid = this.gv_Comments;
             frm.formname = this.Name;
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
             frm.UserId = DAL.UserId;
-
             frm.FillData(frm.grid);
 
             DialogResult result = frm.ShowDialog();
@@ -331,7 +287,6 @@ namespace Odin.Planning.Passport
         {
             ED1.DgvIntoExcel();
         }
-
 
         #endregion
 
@@ -384,7 +339,7 @@ namespace Odin.Planning.Passport
 
                 if (result == DialogResult.OK)
                 {
-                    PlanBll.SavedLaunchPassportComments(_id, 0, frm.Comments, frm.TechComments, frm.StateId);
+                    Helper.getSP("sp_SaveLaunchPassportComments", _id, 0, frm.Comments, frm.TechComments, frm.StateId);
                     DataGridViewColumn oldColumn = gv_Comments.SortedColumn;
                     var dir = Helper.SaveDirection(gv_Comments);
 
@@ -437,7 +392,7 @@ namespace Odin.Planning.Passport
 
                 if (result == DialogResult.OK)
                 {
-                    PlanBll.SavedLaunchPassportComments(_id, 0, frm.Comments, frm.TechComments, frm.StateId);
+                    Helper.getSP("sp_SaveLaunchPassportComments", _id, 0, frm.Comments, frm.TechComments, frm.StateId);
                     DataGridViewColumn oldColumn = gv_Comments.SortedColumn;
                     var dir = Helper.SaveDirection(gv_Comments);
 

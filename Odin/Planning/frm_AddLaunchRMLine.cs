@@ -38,7 +38,6 @@ namespace Odin.Planning
 
                         }
                         row.DefaultCellStyle.BackColor = _colorcount % 2 == 0 ? Color.FromArgb(192, 255, 192) : Color.Azure;//Color.LightGreen : Color.LightPink;
-
                     }
                 }
             }
@@ -48,7 +47,7 @@ namespace Odin.Planning
 
         public void ShowLaunchDets(int _launchid)
         {
-            var data = Plan_BLL.getLaunchesAddDet(_launchid);
+            var data = (DataTable)Helper.getSP("sp_SelectLaunchAddDets", _launchid);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -65,7 +64,6 @@ namespace Odin.Planning
             });
 
             FillBatchUnits();
-
         }
 
         public void FillBatchUnits()
@@ -79,10 +77,8 @@ namespace Odin.Planning
                 _k = 0;
                 _tmpUnit = row.Cells["cn_unit"].Value.ToString().Trim();
                 foreach (DataRow raw1 in dt.Rows)
-                {
                     if (raw1["Unit"].ToString().Trim() == _tmpUnit)
                         _k++;
-                }
                 if (_k == 0)
                 {
                     DataRow _addrow = dt.NewRow();

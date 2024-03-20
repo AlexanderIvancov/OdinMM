@@ -23,10 +23,8 @@ namespace Odin.Planning.Controls
         class_Global glob_Class = new class_Global();
         Plan_BLL PlanBll = new Plan_BLL();
         DAL_Functions DLL = new DAL_Functions();
-        
 
         public bool tmpValidated = false;
-
         public int BatchId
         { get; set; }
         public string Batch
@@ -119,9 +117,7 @@ namespace Odin.Planning.Controls
             get { return txt_Comments.Text; }
             set { txt_Comments.Text = value; }
         }
-
         int _SpoilType = 0;
-
         public int AllSpoil
         {
             get
@@ -175,7 +171,7 @@ namespace Odin.Planning.Controls
 
         public void FillAutoDoc()
         {
-            Batch = DLL.AutoDoc(3, System.DateTime.Now.ToShortDateString());
+            Batch = DLL.AutoDoc(3, DateTime.Now.ToShortDateString());
         }
 
         public bool CheckEmpty()
@@ -214,7 +210,7 @@ namespace Odin.Planning.Controls
 
             Font boldFont = new Font(tv_BOM.DefaultCellStyle.Font, FontStyle.Bold);
 
-            var data = PlanBll.NomDetailsDataCB(ArtId, QtyInBatch);
+            var data = (DataTable)Helper.getSP("sp_SelectCreatBatchNomenclatureNew", ArtId, QtyInBatch);
 
             foreach (DataRow dr in data.AsEnumerable().OrderBy(d => d.Field<int>("Num")))
                 AddNode(dr, boldFont, tv_BOM.Nodes, true);
@@ -267,7 +263,7 @@ namespace Odin.Planning.Controls
                 node.DefaultCellStyle.Font = boldFont;
                 node.DefaultCellStyle.ForeColor = Color.Red;
 
-                var data1 = PlanBll.NomDetailsDataCB(Convert.ToInt32(dr["ArtId"]), Convert.ToDouble(dr["Qty"])/*fQtyInBatch*/);
+                var data1 = (DataTable)Helper.getSP("sp_SelectCreatBatchNomenclatureNew", Convert.ToInt32(dr["ArtId"]), Convert.ToDouble(dr["Qty"])/*fQtyInBatch*/);
                 foreach (DataRow dr1 in data1.AsEnumerable().OrderBy(d => d.Field<int>("Num")))
                     AddNode(dr1, boldFont, node.Nodes, true);
 
@@ -291,7 +287,7 @@ namespace Odin.Planning.Controls
             Font boldFont = new Font(tv_BOM.DefaultCellStyle.Font, FontStyle.Bold);
             //TreeGridNode node;
             //MessageBox.Show(fQtyInBatch.ToString());
-            var data = PlanBll.NomDetailsDataBatch(BatchId);
+            var data = (DataTable)Helper.getSP("sp_SelectBatchNomenclatureNew", BatchId);
 
             foreach (DataRow dr in data.AsEnumerable().OrderBy(d => d.Field<int>("bdid")))
                 AddNodeBatch(dr, boldFont, tv_BOM.Nodes, true);
@@ -334,14 +330,13 @@ namespace Odin.Planning.Controls
 
             //SetRowColor(dr, node);
 
-
             if (dr["ParentBatchId"].ToString() != "0")
             {
                 //node.Expand();
                 node.DefaultCellStyle.Font = boldFont;
                 node.DefaultCellStyle.ForeColor = Color.Red;
 
-                var data1 = PlanBll.NomDetailsDataBatch(Convert.ToInt32(dr["ParentBatchId"]));
+                var data1 = (DataTable)Helper.getSP("sp_SelectBatchNomenclatureNew", Convert.ToInt32(dr["ParentBatchId"]));
                 foreach (DataRow dr1 in data1.AsEnumerable().OrderBy(d => d.Field<int>("bdid")))
                     AddNodeBatch(dr1, boldFont, node.Nodes, false);
             }
@@ -384,7 +379,6 @@ namespace Odin.Planning.Controls
             dt.Rows.Add(dt.NewRow());
             dt.Rows.Add(dt.NewRow());
 
-
             dt.Rows[0][0] = 0;
             dt.Rows[1][0] = 1;
             dt.Rows[2][0] = 2;
@@ -409,7 +403,6 @@ namespace Odin.Planning.Controls
             _tmpQtyWithSpoil = Math.Round(QtyCSE * Convert.ToDouble(node.Cells["cn_nQtyNom"].Value)
                                                                             * _tmpPerc + Convert.ToDouble(node.Cells["cn_nSpoilConst"].Value)
                                                                             , Convert.ToInt32(node.Cells["cn_nNumDecimals"].Value));
-
             if (node.HasChildren == true)
             {
                 //Recalc CSE QTY
@@ -455,7 +448,6 @@ namespace Odin.Planning.Controls
                     //                                    + Convert.ToDouble(row.Cells["cn_nSpoilConst"].Value), 3);
                     //else
                         //row.Cells["cn_nQtyInBatch"].Value = Math.Round(Convert.ToDouble(row.Cells["cn_nQtyDefOldB"].Value) * QtyInBatch + Convert.ToDouble(row.Cells["cn_nSpoilConst"].Value), 3);
-                    
                     if (QtyInBatch == 0)
                         row.Cells["cn_nQtyInBatch"].Value = 0;
                 }
@@ -499,7 +491,6 @@ namespace Odin.Planning.Controls
             //    gv_Orders.AutoGenerateColumns = false;
             //    bs_Orders.DataSource = data;
             //    gv_Orders.DataSource = bs_Orders;
-
             //});
         }
 
@@ -564,9 +555,7 @@ namespace Odin.Planning.Controls
                 double _tmpQtyCSE = node.Level == 1 ? QtyInBatch : Convert.ToDouble(node.Parent.Cells["cn_nSubProdQty"].Value);
                 //Recalc RM QTY
 
-
                 double _tmpPerc = 0;
-
                 double _tmpQtyWOSpoil = 0;
                 double _tmpQtyWithSpoil = 0;
                 _tmpPerc = (100 + Convert.ToDouble(node.Cells["cn_nSpoilNorm"].Value)) / 100;
@@ -649,7 +638,7 @@ namespace Odin.Planning.Controls
                     try
                     {
                         if (Convert.ToInt32(row.Cells["cn_nChildBatchId"].Value) != 0)
-                            if (PlanBll.DeleteBatch(Convert.ToInt32(this.tv_BOM.CurrentRow.Cells["cn_nChildBatchId"].Value)) == -1)
+                            if (Convert.ToInt32(Helper.getSP("sp_DeleteBatch", Convert.ToInt32(this.tv_BOM.CurrentRow.Cells["cn_nChildBatchId"].Value))) == -1)
                             {
                                 MessageBox.Show("Deletion of batch was succesfull!");
                                 FillGridBatch(BatchId);
@@ -657,7 +646,7 @@ namespace Odin.Planning.Controls
                             else
                                 MessageBox.Show("Error during batch deletion!");
 
-                        if (PlanBll.DeleteBatchDetail(Convert.ToInt32(this.tv_BOM.CurrentRow.Cells["cn_nBatchId"].Value)) == 1)
+                        if (Convert.ToInt32(Helper.getSP("sp_DeleteBatchDet", Convert.ToInt32(this.tv_BOM.CurrentRow.Cells["cn_nBatchId"].Value))) == 1)
                         {
                             MessageBox.Show("Deletion of detail was succesfull!");
                             FillGridBatch(BatchId);
@@ -702,9 +691,9 @@ namespace Odin.Planning.Controls
                 if (result == DialogResult.OK)
                 {
                     if (frm.SubBatch == 0)
-                        PlanBll.AddBatchDetail(Convert.ToInt32(tv_BOM.CurrentRow.Cells["cn_nBatchHeadId"].Value), frm.ArtId, frm.Qty, "");
+                        Convert.ToInt32(Helper.getSP("sp_AddBatchDet", Convert.ToInt32(tv_BOM.CurrentRow.Cells["cn_nBatchHeadId"].Value), frm.ArtId, frm.Qty, ""));
                     else
-                        PlanBll.AddBatchDetailSB(Convert.ToInt32(tv_BOM.CurrentRow.Cells["cn_nBatchHeadId"].Value), frm.ArtId, frm.Qty);
+                        Helper.getSP("sp_AddBatchModifRM", Convert.ToInt32(tv_BOM.CurrentRow.Cells["cn_nBatchHeadId"].Value), frm.ArtId, frm.Qty);
                     FillGridBatch(BatchId);
                 }
             }
@@ -733,11 +722,9 @@ namespace Odin.Planning.Controls
                     {
                         //Creation of the link between Client order and batch
                         foreach (DataRow row in dt_Orders.Rows)
-                        {
                             if (Convert.ToDouble(row["qty"]) > 0
                                 && Convert.ToInt32(row["artid"]) == cmb_Articles1.ArticleId)
-                            PlanBll.AddBatchCOPOLink(_id, Convert.ToInt32(row["coid"]), 0, Convert.ToDouble(row["qty"]), 0, 0);
-                        }
+                                    Helper.getSP("sp_AddBatchCOPOLink", _id, Convert.ToInt32(row["coid"]), 0, Convert.ToDouble(row["qty"]), 0, 0);
                         
                         _tmpBatchName = PlanBll.BatchName;
                         //Adding the details
@@ -772,10 +759,8 @@ namespace Odin.Planning.Controls
                         || StartDate != fOldStartDate
                         || EndDate != fOldEndDate
                         || Urgent != fOldUrgent)
-                    {
                         //Header
-                        PlanBll.EditBatchHeader(BatchId, ArticleId, QtyInBatch, StartDate, Comments, EndDate, Urgent, "");
-                    }
+                        Helper.getSP("sp_editbatchheader", BatchId, ArticleId, QtyInBatch, StartDate, Comments, EndDate, Urgent, "");
                         //Delete temporary deleted links
                         var data = (DataTable)Helper.getSP("sp_SelectSalesOrdersMappings", BatchId);
                         int k = 0;
@@ -788,14 +773,14 @@ namespace Odin.Planning.Controls
                                 if (Convert.ToInt32(row["id"]) == tmpid)
                                     k++;
                             if (k == 0)
-                                PlanBll.DeleteBatchCOPOLink(tmpid);
+                                Helper.getSP("sp_DeleteBatchCOPOLink", tmpid);
                         }
 
                         //Edit links
                         foreach (DataRow row in dt_Orders.Rows)
                             if (Convert.ToDouble(row["qty"]) > 0
                                     && Convert.ToInt32(row["artid"]) == cmb_Articles1.ArticleId)
-                                PlanBll.EditBatchCOPOLink(BatchId, Convert.ToInt32(row["coid"]), 0, Convert.ToDouble(row["qty"]), 0, 0);
+                            Helper.getSP("sp_EditBatchCOPOLink", BatchId, Convert.ToInt32(row["coid"]), 0, Convert.ToDouble(row["qty"]), 0, 0);
                         
                         //Details
                         foreach (DataGridViewRow row in this.tv_BOM.Rows)
@@ -803,14 +788,14 @@ namespace Odin.Planning.Controls
                             //Check for header
                             if (Convert.ToInt32(row.Cells["cn_nChildBatchId"].Value) != 0
                                 && Convert.ToDouble(row.Cells["cn_nQtyInBatch"].Value) != Convert.ToDouble(row.Cells["cn_nQtyDefOldB"].Value))
-                                PlanBll.EditBatchHeader(Convert.ToInt32(row.Cells["cn_nChildBatchId"].Value), Convert.ToInt32(row.Cells["cn_nArtId"].Value), Convert.ToInt32(row.Cells["cn_nQtyInBatch"].Value), StartDate, "", EndDate, Urgent, Serials);
+                                Helper.getSP("sp_editbatchheader", Convert.ToInt32(row.Cells["cn_nChildBatchId"].Value), Convert.ToInt32(row.Cells["cn_nArtId"].Value), Convert.ToInt32(row.Cells["cn_nQtyInBatch"].Value), StartDate, "", EndDate, Urgent, Serials);
 
                             //if (Convert.ToDouble(row.Cells["cn_nQtyInBatch"].Value) != Convert.ToDouble(row.Cells["cn_nQtyDefOldB"].Value))
-                            PlanBll.EditBatchDetail(Convert.ToInt32(row.Cells["cn_nBatchId"].Value), Convert.ToDouble(row.Cells["cn_nQtyInBatch"].Value), row.Cells["cn_Comments"].Value.ToString(), Convert.ToInt32(row.Cells["cn_ndetisactive"].Value), Convert.ToInt32(row.Cells["cn_dnp"].Value));
+                            Helper.getSP("sp_EditBatchDet", Convert.ToInt32(row.Cells["cn_nBatchId"].Value), Convert.ToDouble(row.Cells["cn_nQtyInBatch"].Value), row.Cells["cn_Comments"].Value.ToString(), Convert.ToInt32(row.Cells["cn_ndetisactive"].Value), Convert.ToInt32(row.Cells["cn_dnp"].Value));
 
                             if (Convert.ToInt32(row.Cells["cn_nBatchId"].Value) == 0
                                 && Convert.ToDouble(row.Cells["cn_nQtyInBatch"].Value) > 0)
-                                _tmp = PlanBll.AddBatchDetail(Convert.ToInt32(row.Cells["cn_nBatchHeadId"].Value), Convert.ToInt32(row.Cells["cn_nArtId"].Value), Convert.ToDouble(row.Cells["cn_nQtyInBatch"].Value), row.Cells["cn_Comments"].Value.ToString());
+                                _tmp = Convert.ToInt32(Helper.getSP("sp_AddBatchDet", Convert.ToInt32(row.Cells["cn_nBatchHeadId"].Value), Convert.ToInt32(row.Cells["cn_nArtId"].Value), Convert.ToDouble(row.Cells["cn_nQtyInBatch"].Value), row.Cells["cn_Comments"].Value.ToString()));
                         }
 
                     SaveBatch?.Invoke(this);
@@ -841,8 +826,8 @@ namespace Odin.Planning.Controls
                 if (glob_Class.NEN_Double(node.Cells[6].Value.ToString()) != 0
                     || node.HasChildren == true)
                 {
-                    _BatchDetId = PlanBll.AddBatchDetail(_BatchId, Convert.ToInt32(node.Cells["cn_nArtId"].Value),
-                                                                        glob_Class.NEN_Double(node.Cells[6].Value.ToString()), node.Cells["cn_Comments"].Value.ToString());
+                    _BatchDetId = Convert.ToInt32(Helper.getSP("sp_AddBatchDet", _BatchId, Convert.ToInt32(node.Cells["cn_nArtId"].Value),
+                                                                        glob_Class.NEN_Double(node.Cells[6].Value.ToString()), node.Cells["cn_Comments"].Value.ToString()));
                     node.Cells["cn_nBatchId"].Value = _BatchDetId;
                 }
                 if (
@@ -896,7 +881,6 @@ namespace Odin.Planning.Controls
                 foreach (TreeGridNode node1 in node.Nodes)
                     RecalcQtyBatch(node1, AllSpoil, Convert.ToDouble(node.Cells["cn_nSubProdQty"].Value));
             }
-
 
             if (tv_BOM.CurrentRow.Cells["cn_nWithSpoil"].Selected == true)
             {
@@ -1029,10 +1013,8 @@ namespace Odin.Planning.Controls
                     DateTime _reqdate = Convert.ToDateTime(EndDate);
 
                     foreach (DataGridViewRow row in frm.gv_List.Rows)
-                    {
                         if (row.Cells["chk_add"].Value != DBNull.Value
                         && Convert.ToInt16(row.Cells["chk_add"].Value) != 0)
-                        {
                             if (ArticleId == Convert.ToInt32(row.Cells["cn_artid"].Value))
                             {
                                 FillNewOrderLine(0, Convert.ToInt32(row.Cells["cn_id"].Value), row.Cells["cn_order"].Value.ToString(), row.Cells["cn_orderline"].Value.ToString(),
@@ -1043,8 +1025,6 @@ namespace Odin.Planning.Controls
                                 if (Convert.ToDateTime(row.Cells["cn_reqdate"].Value) < _reqdate)
                                     _reqdate = Convert.ToDateTime(row.Cells["cn_reqdate"].Value);
                             }
-                        }
-                    }
                     RecalcQtyInBatch();
                     RecalcQtyInNomenclature();
                 }
@@ -1069,7 +1049,6 @@ namespace Odin.Planning.Controls
                         FillGridNew(ArticleId, QtyInBatch);
                     else
                         RecalcQtyInNomenclature();
-
                     break;
                 }
         }

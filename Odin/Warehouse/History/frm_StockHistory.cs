@@ -436,7 +436,7 @@ namespace Odin.Warehouse.History
 
                 //var data = Plan_BLL.getBatchCostRM(cmb_Batches1.BatchId,  chk_GroupByDoc.CheckState == CheckState.Checked ? -1 : 0, chk_ExcludeA.CheckState == CheckState.Checked ? -1 : 0);
 
-                var data = Plan_BLL.getBatchCostRMCO(cmb_Batches1.BatchId, cmb_SalesOrders1.SalesOrderId, chk_GroupByDoc.CheckState == CheckState.Checked ? -1 : 0, chk_ExcludeA.CheckState == CheckState.Checked ? -1 : 0);
+                var data = (DataTable)Helper.getSP("sp_SelectBatchRMCostCO", cmb_Batches1.BatchId, cmb_SalesOrders1.SalesOrderId, chk_GroupByDoc.CheckState == CheckState.Checked ? -1 : 0, chk_ExcludeA.CheckState == CheckState.Checked ? -1 : 0);
 
 
                 gv_CostList.ThreadSafeCall(delegate
@@ -473,7 +473,7 @@ namespace Odin.Warehouse.History
 
                     //var data = Plan_BLL.getBatchCostRM(cmb_Batches1.BatchId, chk_GroupByDoc.CheckState == CheckState.Checked ? -1 : 0, chk_ExcludeA.CheckState == CheckState.Checked ? -1 : 0);
 
-                    var data = Plan_BLL.getBatchCostRMCO(cmb_Batches1.BatchId, cmb_SalesOrders1.SalesOrderId, chk_GroupByDoc.CheckState == CheckState.Checked ? -1 : 0, chk_ExcludeA.CheckState == CheckState.Checked ? -1 : 0);
+                    var data = (DataTable)Helper.getSP("sp_SelectBatchRMCostCO", cmb_Batches1.BatchId, cmb_SalesOrders1.SalesOrderId, chk_GroupByDoc.CheckState == CheckState.Checked ? -1 : 0, chk_ExcludeA.CheckState == CheckState.Checked ? -1 : 0);
 
 
                     gv_CostList.ThreadSafeCall(delegate

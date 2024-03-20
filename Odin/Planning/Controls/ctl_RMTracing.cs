@@ -25,7 +25,6 @@ namespace Odin.Planning.Controls
         public string CellValue = "";
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
 
-
         ProgressForm wait;
         frm_Batches frmBatches;
         ExportData ED;
@@ -37,23 +36,19 @@ namespace Odin.Planning.Controls
         public void bwStart(DoWorkEventHandler doWork)
         {
             wait = new ProgressForm(frmBatches);
-
             wait.bwStart(doWork);
         }
 
         int _batchid = 0;
-
         public int BatchId
         {
             get { return cmb_Batches1.BatchId; }
             set
             {
-
                 _batchid = value;
                 bwStart(bw_List);
             }
         }
-
         public double QtyIn
         {
             get {
@@ -62,7 +57,6 @@ namespace Odin.Planning.Controls
             }
             set { txt_QtyIn.Text = value.ToString(); }
         }
-
         public double UnitCost
         {
             get
@@ -72,7 +66,6 @@ namespace Odin.Planning.Controls
             }
             set { txt_CostPrice.Text = value.ToString(); }
         }
-
         public double Total
         {
             get
@@ -91,7 +84,7 @@ namespace Odin.Planning.Controls
         {
             try
             {
-                var data = Plan_BLL.getBatchCostRM(BatchId, 0, 0);
+                var data = (DataTable)Helper.getSP("sp_SelectBatchRMCost", BatchId, 0, 0);
 
                 gv_List.ThreadSafeCall(delegate
                 {
@@ -102,13 +95,10 @@ namespace Odin.Planning.Controls
                     RecalcTotals();
                 });
 
-
                 bn_List.ThreadSafeCall(delegate
                 {
                     bn_List.BindingSource = bs_List;
                 });
-
-               
             }
             catch { }
         }
@@ -116,11 +106,9 @@ namespace Odin.Planning.Controls
         public void SetCellsColor()
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 if (Convert.ToInt32(row.Cells["cn_isreturn"].Value) == 1)
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Azure;
-            }
         }
 
         public void RecalcTotals()
@@ -130,9 +118,7 @@ namespace Odin.Planning.Controls
             QtyIn = BLL.BatchQtyIn;
            
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 _total = _total + Convert.ToDouble(row.Cells["cn_total"].Value);
-            }
 
             Total = _total;
             UnitCost = Math.Round(Total / (QtyIn == 0? 1 : QtyIn), 5);
@@ -140,7 +126,7 @@ namespace Odin.Planning.Controls
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -155,9 +141,7 @@ namespace Odin.Planning.Controls
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -165,14 +149,10 @@ namespace Odin.Planning.Controls
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
         #endregion
@@ -189,9 +169,7 @@ namespace Odin.Planning.Controls
             LoadColumns(gv_List);
         }
 
-
         #region Context menu
-
 
         private void mnu_Lines_Opening(object sender, CancelEventArgs e)
         {
@@ -211,7 +189,6 @@ namespace Odin.Planning.Controls
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -230,7 +207,6 @@ namespace Odin.Planning.Controls
             catch
             { }
             SetCellsColor();
-
         }
 
         private void mni_Search_Click(object sender, EventArgs e)
@@ -258,7 +234,6 @@ namespace Odin.Planning.Controls
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -271,7 +246,6 @@ namespace Odin.Planning.Controls
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -282,7 +256,6 @@ namespace Odin.Planning.Controls
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_Copy_Click(object sender, EventArgs e)
@@ -309,7 +282,6 @@ namespace Odin.Planning.Controls
                 LoadColumns(gv_List);
             }
         }
-
 
         #endregion
 

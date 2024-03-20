@@ -32,20 +32,15 @@ namespace Odin.Planning.Controls
         AdmMenu mMenu = new AdmMenu();
 
         int _batchid = 0;
-
         public int BatchId
         {
             get { return cmb_Batches1.BatchId; }
             set
             {
-
                 _batchid = value;
                 ShowDets(_batchid);
             }
         }
-
-       
-
         public double QtyStock
         {
             get
@@ -55,7 +50,6 @@ namespace Odin.Planning.Controls
             }
             set { txt_QtyStock.Text = value.ToString(); }
         }
-
         public double StockIn
         {
             get
@@ -65,7 +59,6 @@ namespace Odin.Planning.Controls
             }
             set { txt_StockIn.Text = value.ToString(); }
         }
-
         public double StockOut
         {
             get
@@ -76,9 +69,6 @@ namespace Odin.Planning.Controls
             set { txt_StockOut.Text = value.ToString(); }
         }
 
-
-
-
         #endregion
 
         #region Methods
@@ -88,7 +78,7 @@ namespace Odin.Planning.Controls
             ClearTotals();
             try
             {
-                var data = Plan_BLL.getBatchStock(batchid);
+                var data = (DataTable)Helper.getSP("sp_SelectBatchStockMove", batchid);
 
                 gv_List.ThreadSafeCall(delegate
                 {
@@ -115,7 +105,6 @@ namespace Odin.Planning.Controls
             double _qtystock = 0;
 
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 if (Convert.ToInt32(row.Cells["cn_ismove"].Value) == 0)
                 {
                     _qtystock = _qtystock + Convert.ToDouble(row.Cells["cn_qty"].Value);
@@ -124,9 +113,7 @@ namespace Odin.Planning.Controls
                         _qtyout = _qtyout + -1 * Convert.ToDouble(row.Cells["cn_qty"].Value);
                     else
                         _qtyin = _qtyin + Convert.ToDouble(row.Cells["cn_qty"].Value);
-                
                 }
-            }
             QtyStock = _qtystock;
             StockIn = _qtyin;
             StockOut = _qtyout;
@@ -134,20 +121,15 @@ namespace Odin.Planning.Controls
 
         public void ClearTotals()
         {
-
             QtyStock = 0;
             StockIn = 0;
             StockOut = 0;
         }
-        public void SetCellsColor()
-        {
-
-        }
-
+        public void SetCellsColor() { }
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -162,9 +144,7 @@ namespace Odin.Planning.Controls
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -172,20 +152,15 @@ namespace Odin.Planning.Controls
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
         #endregion
 
         #region Controls
-
 
         #region Context menu
 
@@ -320,13 +295,11 @@ namespace Odin.Planning.Controls
             LoadColumns(gv_List);
         }
 
-
         private void cmb_Batches1_BatchChanged(object sender)
         {
             BatchId = cmb_Batches1.BatchId;
         }
 
         #endregion
-
     }
 }

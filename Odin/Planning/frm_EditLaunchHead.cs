@@ -32,20 +32,15 @@ namespace Odin.Planning
         DAL_Functions DAL = new DAL_Functions();
         AdmMenu mMenu = new AdmMenu();
 
-
-        public int Id
-        { get; set; }
-
+        public int Id { get; set; }
         public string HeaderText
-        { get { return this.Text; }
-            set { this.Text = value; } }
-
+        {
+            get { return this.Text; }
+            set { this.Text = value; }
+        }
         public string StartDate
         {
-            get
-            {
-                return txt_StartDate.Value == null ? "" : txt_StartDate.Value.ToString();
-            }
+            get { return txt_StartDate.Value == null ? "" : txt_StartDate.Value.ToString(); }
             set
             {
                 try
@@ -55,13 +50,9 @@ namespace Odin.Planning
                 catch { txt_StartDate.Value = null; }
             }
         }
-
         public string ProdStartDate
         {
-            get
-            {
-                return txt_ProdStartDate.Value == null ? "" : txt_StartDate.Value.ToString();
-            }
+            get { return txt_ProdStartDate.Value == null ? "" : txt_StartDate.Value.ToString(); }
             set
             {
                 try
@@ -71,13 +62,9 @@ namespace Odin.Planning
                 catch { txt_ProdStartDate.Value = null; }
             }
         }
-
         public string EndDate
         {
-            get
-            {
-                return txt_EndDate.Value == null ? "" : txt_EndDate.Value.ToString();
-            }
+            get { return txt_EndDate.Value == null ? "" : txt_EndDate.Value.ToString(); }
             set
             {
                 try
@@ -87,14 +74,11 @@ namespace Odin.Planning
                 catch { txt_EndDate.Value = null; }
             }
         }
-
         public string Comments
         {
             get { return txt_Comments.Text; }
             set { txt_Comments.Text = value; }
-
         }
-
         public double QtyInLaunch
         {
             get
@@ -103,14 +87,8 @@ namespace Odin.Planning
                 catch { return 0; }
             }
             set { txt_Qty.Text = value.ToString(); }
-
         }
-
-        public double oQtyInLaunch
-        {
-            get; set;
-
-        }
+        public double oQtyInLaunch { get; set; }
         public bool CheckEmpty()
         {
             return StartDate.Trim() != ""
@@ -118,9 +96,7 @@ namespace Odin.Planning
                 && ProdStartDate.Trim() != ""
                 && Convert.ToDateTime(StartDate) <= Convert.ToDateTime(ProdStartDate)
                 && Convert.ToDateTime(ProdStartDate) <= Convert.ToDateTime(EndDate);
-
         }
-
        
         public void SetCellsColor()
         {
@@ -138,14 +114,11 @@ namespace Odin.Planning
                         if (_bdtemp != Convert.ToInt32(row.Cells["cn_batchdetid"].Value))
                         {
                             //Next color
-
                             //Switch
                             _bdtemp = Convert.ToInt32(row.Cells["cn_batchdetid"].Value);
                             _colorcount++;
-
                         }
                         row.DefaultCellStyle.BackColor = _colorcount % 2 == 0 ? Color.FromArgb(192, 255, 192) : Color.Azure;//Color.LightGreen : Color.LightPink;
-
                     }
                 }
             }
@@ -155,7 +128,7 @@ namespace Odin.Planning
 
         public void ShowLaunchDets(int _launchid)
         {
-            var data = Plan_BLL.getLaunchesEditDet(_launchid);
+            var data = (DataTable)Helper.getSP("sp_SelectLaunchEditDets", _launchid);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -165,7 +138,6 @@ namespace Odin.Planning
 
                 SetCellsColor();
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -186,10 +158,8 @@ namespace Odin.Planning
                 _k = 0;
                 _tmpUnit = row.Cells["cn_unit"].Value.ToString().Trim();
                 foreach (DataRow raw1 in dt.Rows)
-                {
                     if (raw1["Unit"].ToString().Trim() == _tmpUnit)
                         _k++;
-                }
                 if (_k == 0)
                 {
                     DataRow _addrow = dt.NewRow();
@@ -205,22 +175,22 @@ namespace Odin.Planning
 
         private void txt_ProdStartDate_DropDown(object sender, DateTimePickerDropArgs e)
         {
-            txt_ProdStartDate.Value = txt_ProdStartDate.Value == null ? System.DateTime.Now : txt_ProdStartDate.Value;
+            txt_ProdStartDate.Value = txt_ProdStartDate.Value == null ? DateTime.Now : txt_ProdStartDate.Value;
         }
 
         private void txt_StartDate_DropDown(object sender, DateTimePickerDropArgs e)
         {
-            txt_StartDate.Value = txt_StartDate.Value == null ? System.DateTime.Now : txt_StartDate.Value;
+            txt_StartDate.Value = txt_StartDate.Value == null ? DateTime.Now : txt_StartDate.Value;
         }
 
         private void txt_EndDate_DropDown(object sender, DateTimePickerDropArgs e)
         {
-            txt_EndDate.Value = txt_EndDate.Value == null ? System.DateTime.Now : txt_EndDate.Value;
+            txt_EndDate.Value = txt_EndDate.Value == null ? DateTime.Now : txt_EndDate.Value;
         }
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -235,9 +205,7 @@ namespace Odin.Planning
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -245,14 +213,10 @@ namespace Odin.Planning
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
         public void FillDecNum()
@@ -265,7 +229,6 @@ namespace Odin.Planning
             dt.Rows.Add(dt.NewRow());
             dt.Rows.Add(dt.NewRow());
             dt.Rows.Add(dt.NewRow());
-
 
             dt.Rows[0][0] = 0;
             dt.Rows[1][0] = 1;
@@ -280,12 +243,9 @@ namespace Odin.Planning
         public void RecalcQty()
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 row.Cells["cn_qty"].Value = Math.Round(Convert.ToDouble(row.Cells["cn_oldqty"].Value) / oQtyInLaunch * QtyInLaunch, 3);
-            }
         }
         #region Context menu
-
 
         private void mnu_Lines_Opening(object sender, CancelEventArgs e)
         {
@@ -305,7 +265,6 @@ namespace Odin.Planning
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -324,7 +283,6 @@ namespace Odin.Planning
             catch
             { }
             SetCellsColor();
-
         }
 
         private void mni_Search_Click(object sender, EventArgs e)
@@ -348,11 +306,9 @@ namespace Odin.Planning
                         ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
                         : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
-
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -365,7 +321,6 @@ namespace Odin.Planning
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -390,7 +345,7 @@ namespace Odin.Planning
             frm.HeaderText = "Select view for batches list";
             frm.grid = this.gv_List;
             frm.formname = this.Name;
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
             frm.UserId = DAL.UserId;
 
             frm.FillData(frm.grid);
@@ -443,8 +398,7 @@ namespace Odin.Planning
                         }
                     }
 
-                    BLL.AddLaunchDets(Id, datadets);
-                    
+                    Helper.getSP("sp_AddLaunchDets", Id, datadets);
                 }
                 else
                     MessageBox.Show("Please check quantity and dates of the batch!");
@@ -461,7 +415,7 @@ namespace Odin.Planning
             if (_id != 0
                 && glob_Class.DeleteConfirm() == true)
             {
-                BLL.DeleteLaunchDet(_id);
+                Helper.getSP("sp_DeleteLaunchDet", _id);
                 ShowLaunchDets(Id);
             }
         }
@@ -475,21 +429,15 @@ namespace Odin.Planning
         {
             if (CheckEmpty() == true)
             {
-                string _res = BLL.EditLaunch(Id, StartDate, ProdStartDate, EndDate, Comments, QtyInLaunch);
+                string _res = Convert.ToString(Helper.getSP("sp_EditLaunch", Id, StartDate, ProdStartDate, EndDate, Comments, QtyInLaunch));
 
                 foreach (DataGridViewRow row in this.gv_List.Rows)
-                {
                     if (Convert.ToDouble(row.Cells["cn_qty"].Value) != Convert.ToDouble(row.Cells["cn_oldqty"].Value))
-                    {
-                        BLL.EditLaunchDet(Convert.ToInt32(row.Cells["cn_id"].Value), Convert.ToDouble(row.Cells["cn_qty"].Value));
-                    }
-                }
+                        Helper.getSP("sp_EditLaunchDets", Convert.ToInt32(row.Cells["cn_id"].Value), Convert.ToDouble(row.Cells["cn_qty"].Value));
                 MessageBox.Show("Done!");
             }
             else
-            {
                 MessageBox.Show("Please check dates!!!");
-            }
         }
 
         private void frm_EditLaunchHead_FormClosing(object sender, FormClosingEventArgs e)
@@ -506,12 +454,8 @@ namespace Odin.Planning
         {
             gv_List.EndEdit();
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 if (row.Cells["cn_unit"].Value.ToString().Trim() == cmb_Unit.Text.Trim())
-                {
                     row.Cells["cn_qty"].Value = glob_Class.RoundUp(Convert.ToDouble(row.Cells["cn_qty"].Value), Convert.ToInt32(cmb_Decimals.Text));
-                }
-            }
         }
 
         private void frm_EditLaunchHead_Load(object sender, EventArgs e)

@@ -23,7 +23,6 @@ namespace Odin.Planning
             ED = new ExportData(this.gv_List, "BatchesRatioDets.xls", this.Name);
         }
 
-
         #region Variables
 
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
@@ -35,56 +34,35 @@ namespace Odin.Planning
         class_Global globClass = new class_Global();
         ExportData ED;
         Helper MyHelper = new Helper();
-
         public int ControlWidth = 250;
-
         public int RowIndex = 0;
         public int ColumnIndex = 0;
         public string ColumnName = "";
         public string CellValue = "";
-
         public int IsActive
         {
-            get
-            {
-                return chk_Active.CheckState == CheckState.Checked ? -1 : chk_Active.CheckState == CheckState.Unchecked ? 0 : 1;
-            }
-            set
-            {
-                chk_Active.CheckState = value == -1 ? CheckState.Checked : value == 0 ? CheckState.Unchecked : CheckState.Indeterminate;
-            }
+            get { return chk_Active.CheckState == CheckState.Checked ? -1 : chk_Active.CheckState == CheckState.Unchecked ? 0 : 1; }
+            set { chk_Active.CheckState = value == -1 ? CheckState.Checked : value == 0 ? CheckState.Unchecked : CheckState.Indeterminate; }
         }
-
         public int Processing
         {
-            get
-            {
-                return chk_Processing.CheckState == CheckState.Checked ? -1 : chk_Processing.CheckState == CheckState.Unchecked ? 0 : 1;
-            }
-            set
-            {
-                chk_Processing.CheckState = value == -1 ? CheckState.Checked : value == 0 ? CheckState.Unchecked : CheckState.Indeterminate;
-            }
+            get { return chk_Processing.CheckState == CheckState.Checked ? -1 : chk_Processing.CheckState == CheckState.Unchecked ? 0 : 1; }
+            set { chk_Processing.CheckState = value == -1 ? CheckState.Checked : value == 0 ? CheckState.Unchecked : CheckState.Indeterminate; }
         }
-
         int _batchid = 0;
         public int BatchId
         {
             get { return _batchid; }
             set { _batchid = value; }
         }
-
         public int _PrevId = 0;
-               
         public ctl_Launches ctlBatchLaunches = null;
         public int ctlBatchLaunchesWidth = 0;
-
         public int StageId
         {
             get { return cmb_Common1.SelectedValue; }
             set { cmb_Common1.SelectedValue = value; }
         }
-
         public string FilterProcessing
         {
             get
@@ -117,7 +95,7 @@ namespace Odin.Planning
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -132,9 +110,7 @@ namespace Odin.Planning
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -142,14 +118,10 @@ namespace Odin.Planning
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
         public void ClearFilter()
@@ -190,12 +162,10 @@ namespace Odin.Planning
                 //    foreach (DataGridViewCell cell in row.Cells)
                 //        cell.Style.BackColor = Color.Gainsboro;//Color.FromArgb(192, 255, 192);
             }
-
         }
 
         private bool CheckOldRow()
         {
-
             try
             {
                 BatchId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
@@ -206,9 +176,7 @@ namespace Odin.Planning
             }
 
             if (_PrevId == BatchId)
-            {
                 return true;
-            }
             else
             {
                 _PrevId = BatchId;
@@ -274,7 +242,6 @@ namespace Odin.Planning
 
         private KryptonPage NewInputBatchLaunches(int _batchid)
         {
-
             ctlBatchLaunches = new ctl_Launches();
             ctlBatchLaunches.BatchId = _batchid;
 
@@ -287,14 +254,13 @@ namespace Odin.Planning
         {
             bs_List.RemoveFilter();
 
-            var data = Plan_BLL.getBatchesRatio(cmb_Batches1.BatchId, cmb_Articles1.ArticleId, StageId, cmb_SalesOrdersWithLines1.SalesOrderLineId, IsActive,
+            var data = (DataTable)Helper.getSP("sp_BatchesRatioList", cmb_Batches1.BatchId, cmb_Articles1.ArticleId, StageId, cmb_SalesOrdersWithLines1.SalesOrderLineId, IsActive,
                                             cmb_Types1.TypeId, cmb_Department1.DeptId, txt_FirmArt.Text, txt_CustOrder.Text,
                                             txt_StartFrom.Value == null ? "" : txt_StartFrom.Value.ToString().Trim(),
                                             txt_StartTill.Value == null ? "" : txt_StartTill.Value.ToString().Trim(),
                                             txt_EndFrom.Value == null ? "" : txt_EndFrom.Value.ToString().Trim(),
                                             txt_EndTill.Value == null ? "" : txt_EndTill.Value.ToString().Trim(),
                                             cmb_Firms1.FirmId);
-
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -307,7 +273,6 @@ namespace Odin.Planning
 
                 SetCellsColor();
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -342,9 +307,7 @@ namespace Odin.Planning
                 ctl_Launches ctlLaunches1 = (ctl_Launches)page.Controls.Find("ctl_Launches", true).FirstOrDefault();
 
                 if (ctlLaunches1 != null)
-                {
                     ctlLaunches1.BatchId = _batchid;
-                }
             }
         }
         //public void FindProcessHistoryPages(int _batchid)
@@ -360,14 +323,11 @@ namespace Odin.Planning
         //    }
         //}
 
-
         #endregion
 
         #region Controls
 
-
         #region Context menu
-
 
         private void mnu_Lines_Opening(object sender, CancelEventArgs e)
         {
@@ -387,7 +347,6 @@ namespace Odin.Planning
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -409,7 +368,6 @@ namespace Odin.Planning
             catch
             { }
             SetCellsColor();
-
         }
 
         private void mni_Search_Click(object sender, EventArgs e)
@@ -419,7 +377,6 @@ namespace Odin.Planning
             frm.ColumnNumber = gv_List.CurrentCell.ColumnIndex;
             frm.ColumnText = gv_List.Columns[frm.ColumnNumber].HeaderText;
             frm.ShowDialog();
-
         }
 
         private void mni_FilterBy_Click(object sender, EventArgs e)
@@ -434,12 +391,9 @@ namespace Odin.Planning
                         ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
                         : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
-
             }
             catch { }
             SetCellsColor();
-
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -452,7 +406,6 @@ namespace Odin.Planning
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -464,8 +417,6 @@ namespace Odin.Planning
             }
             catch { }
             SetCellsColor();
-
-
         }
 
         private void mni_Copy_Click(object sender, EventArgs e)
@@ -498,7 +449,6 @@ namespace Odin.Planning
             ED.DgvIntoExcel();
         }
 
-
         #endregion
         private void frm_BatchesRatioPortfolio_Load(object sender, EventArgs e)
         {
@@ -521,41 +471,37 @@ namespace Odin.Planning
         private void frm_BatchesRatioPortfolio_Resize(object sender, EventArgs e)
         {
             if (_Main.WindowState == FormWindowState.Maximized)
-            {
                 foreach (var page in kryptonDockingManager1.PagesDocked)
                 {
                     kryptonDockingManager1.RemovePage(page, false);
                     kryptonDockingManager1.AddDockspace("Control",
                                                DockingEdge.Left,
                                                new KryptonPage[] { page });
-
                 }
-            }
         }
         private void btn_Clear_Click(object sender, EventArgs e)
         {
             ClearFilter();
         }
 
-
         private void buttonSpecAny5_Click(object sender, EventArgs e)
         {
-            txt_StartFrom.Value = System.DateTime.Now;
+            txt_StartFrom.Value = DateTime.Now;
         }
 
         private void buttonSpecAny4_Click(object sender, EventArgs e)
         {
-            txt_StartTill.Value = System.DateTime.Now;
+            txt_StartTill.Value = DateTime.Now;
         }
 
         private void buttonSpecAny2_Click(object sender, EventArgs e)
         {
-            txt_EndTill.Value = System.DateTime.Now;
+            txt_EndTill.Value = DateTime.Now;
         }
 
         private void buttonSpecAny3_Click(object sender, EventArgs e)
         {
-            txt_EndFrom.Value = System.DateTime.Now;
+            txt_EndFrom.Value = DateTime.Now;
         }
 
         private void buttonSpecAny6_Click(object sender, EventArgs e)
@@ -591,9 +537,7 @@ namespace Odin.Planning
         private void gv_List_SelectionChanged(object sender, EventArgs e)
         {
             if (CheckOldRow() == false)
-            {
                 ShowDetails(BatchId);
-            }
         }
 
         private void gv_List_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -628,16 +572,14 @@ namespace Odin.Planning
             try
             {
                 _batchid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
-
             }
             catch { }
-
 
             kryptonDockingManager1.AddDockspace("Control",
                                              DockingEdge.Left,
                                              new KryptonPage[] { NewInputBatchLaunches(_batchid) });
         }
 
-#endregion
+        #endregion
     }
 }

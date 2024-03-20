@@ -23,7 +23,6 @@ namespace Odin.Planning
 
         Plan_BLL BLL = new Plan_BLL();
         class_Global glob_Class = new class_Global();
-
         public int RowIndex = 0;
         public int ColumnIndex = 0;
         public string ColumnName = "";
@@ -31,14 +30,12 @@ namespace Odin.Planning
         AdmMenu mMenu = new AdmMenu();
         DAL_Functions DAL = new DAL_Functions();
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
-       
         int _id = 0;
         public int LaunchId
         {
             get { return _id; }
             set { _id = value; }
         }
-
         public string LaunchGroupName
         {
             get { return cmb_LaunchGroups1.LaunchGroup; }
@@ -50,7 +47,7 @@ namespace Odin.Planning
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -65,9 +62,7 @@ namespace Odin.Planning
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -75,22 +70,17 @@ namespace Odin.Planning
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
-
         
         public void FillList(int _stageid)
         {
             ds_List.Clear();
 
-            var data = Plan_BLL.getGroupLaunchesTot(_stageid);
+            var data = (DataTable)Helper.getSP("sp_SelectLaunchesGroupTot", _stageid);
                                     
             foreach (DataRow row in data.Rows)
             {
@@ -105,10 +95,8 @@ namespace Odin.Planning
                 row1["groupname"] = "";
 
                 dt_List.Rows.Add(row1);
-
             }
             this.bs_List.ResetBindings(false);
-
 
             //gv_List.ThreadSafeCall(delegate
             //{
@@ -125,15 +113,13 @@ namespace Odin.Planning
             //{
             //    bn_List.BindingSource = bs_List;
             //});
-
         }
 
         public void FillGroup(string _groupname)
         {
             ds_Group.Clear();
 
-            var data = Plan_BLL.getGroupLaunches(_groupname);
-
+            var data = (DataTable)Helper.getSP("sp_SelectLaunchesGroup", _groupname);
 
             foreach (DataRow row in data.Rows)
             {
@@ -148,7 +134,6 @@ namespace Odin.Planning
                 row1["groupname"] = _groupname;
 
                 dt_Group.Rows.Add(row1);
-
             }
             this.bs_Group.ResetBindings(false);
 
@@ -161,12 +146,10 @@ namespace Odin.Planning
 
             //});
 
-
             //bn_Group.ThreadSafeCall(delegate
             //{
             //    bn_Group.BindingSource = bs_Group;
             //});
-
         }
 
         public void SetCellsColor()
@@ -180,7 +163,6 @@ namespace Odin.Planning
         #endregion
 
         #region Controls
-
 
         #region Context menu
 
@@ -298,11 +280,7 @@ namespace Odin.Planning
 
         #endregion
 
-        private void btn_Save_Click(object sender, EventArgs e)
-        {
-            
-           
-        }
+        private void btn_Save_Click(object sender, EventArgs e) { }
         
         private void frm_LaunchRMReservation_Load(object sender, EventArgs e)
         {
@@ -338,7 +316,6 @@ namespace Odin.Planning
             catch { }
 
             foreach (DataRow row in dt_List.Rows)
-            {
                 if (Convert.ToInt32(row["id"]) == _id)
                 {
                     DataRow row1 = dt_Group.NewRow();
@@ -356,7 +333,6 @@ namespace Odin.Planning
                     row.Delete();
                     break;
                 }
-            }
         }
 
         private void btn_Remove_Click(object sender, EventArgs e)
@@ -369,7 +345,6 @@ namespace Odin.Planning
             catch { }
 
             foreach (DataRow row in dt_Group.Rows)
-            {
                 if (Convert.ToInt32(row["id"]) == _id)
                 {
                     DataRow row1 = dt_List.NewRow();
@@ -387,7 +362,6 @@ namespace Odin.Planning
                     row.Delete();
                     break;
                 }
-            }
         }
 
         private void btn_OK_Click(object sender, EventArgs e)
@@ -395,41 +369,34 @@ namespace Odin.Planning
             gv_Group.EndEdit();
             {
                 //Delete from group
-
-
                 //Add on group
 
                 DataTable datalaunches = new DataTable();
                 datalaunches.Columns.Add("id", typeof(int));
                 
                 foreach (DataRow row in dt_List.Rows)
-                {
                     if (row["groupname"].ToString().Trim() != "")
                     {
                         DataRow dr = datalaunches.NewRow();
                         dr["id"] = Convert.ToInt32(row["id"]);
                         datalaunches.Rows.Add(dr);
                     }
-                }
-                BLL.ReleaseLaunchesfromGroup(datalaunches);
+                Helper.getSP("sp_ReleaseLaunchesFromGroup", datalaunches);
                 //BLL.ReserveLaunchLabels(_launchdetid, datastages);
                 datalaunches.Clear();
                 foreach (DataRow row in dt_Group.Rows)
-                {
                     if (row["groupname"].ToString().Trim() == "")
                     {
                         DataRow dr = datalaunches.NewRow();
                         dr["id"] = Convert.ToInt32(row["id"]);
                         datalaunches.Rows.Add(dr);
                     }
-                }
 
-                string res = BLL.AddLaunchesToGroup(LaunchGroupName, datalaunches);
+                string res = Convert.ToString(Helper.getSP("sp_AddLaunchesInGroup", LaunchGroupName, datalaunches));
                 LaunchGroupName = res;
 
                 gv_List.ThreadSafeCall(delegate { FillList(1); });
                 gv_Group.ThreadSafeCall(delegate { FillGroup(cmb_LaunchGroups1.LaunchGroup); }) ;
-            
             }
         }
 
@@ -444,27 +411,19 @@ namespace Odin.Planning
 
             frm.AssPerson = cmb_Users1.UserShortName;
             frm.RepType = 6;
-            frm.MoveDate = System.DateTime.Today.ToShortDateString();
+            frm.MoveDate = DateTime.Today.ToShortDateString();
             frm.GroupName = LaunchGroupName;
            
             frm.Show(); frm.GetKryptonFormFields();
         }
 
-        private void btn_Start_Click(object sender, EventArgs e)
-        {
+        private void btn_Start_Click(object sender, EventArgs e) { }
 
-        }
-
-        private void btn_reserverm_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void btn_reserverm_Click(object sender, EventArgs e) { }
 
         private void btn_MissingRM_Click(object sender, EventArgs e)
         {
-
             string _groupname = LaunchGroupName;
-            
 
             if (_groupname != "")
             {

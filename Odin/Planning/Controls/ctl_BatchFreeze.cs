@@ -39,20 +39,15 @@ namespace Odin.Planning.Controls
         Plan_BLL BLL = new Plan_BLL();
         DAL_Functions DAL = new DAL_Functions();
         AdmMenu mMenu = new AdmMenu();
-
-        public double pro
-        { get; set; }
-
+        public double pro { get; set; }
 
         public void bwStart(DoWorkEventHandler doWork)
         {
             wait = new ProgressForm(frmBatches);
-
             wait.bwStart(doWork);
         }
 
         int _batchid = 0;
-
         public int BatchId
         {
             get { return cmb_Batches1.BatchId; }
@@ -69,22 +64,9 @@ namespace Odin.Planning.Controls
                 SetCellsColor();
             }
         }
-
-        public int igvArtId
-        {
-            get;
-            set;
-        }
-        public int OldigvArtId
-        {
-            get;
-            set;
-        }
-
-        public int RetArtId()
-        {
-            return igvArtId;
-        }
+        public int igvArtId { get; set; }
+        public int OldigvArtId { get; set; }
+        public int RetArtId() { return igvArtId; }
 
         #endregion
 
@@ -94,7 +76,7 @@ namespace Odin.Planning.Controls
         {
             try
             {
-                var data = Plan_BLL.getBatchRM(BatchId);
+                var data = (DataTable)Helper.getSP("sp_SelectBatchRMFreezedDets", BatchId);
 
                 gv_List.ThreadSafeCall(delegate
                 {
@@ -103,7 +85,6 @@ namespace Odin.Planning.Controls
                     gv_List.DataSource = bs_List;
                     SetCellsColor();
                 });
-
 
                 bn_List.ThreadSafeCall(delegate
                 {
@@ -122,7 +103,7 @@ namespace Odin.Planning.Controls
                 var dir = Helper.SaveDirection(gv_List);
 
                 
-                var data = Plan_BLL.getBatchRM(BatchId);
+                var data = (DataTable)Helper.getSP("sp_SelectBatchRMFreezedDets", BatchId);
 
                 gv_List.ThreadSafeCall(delegate
                 {
@@ -169,16 +150,12 @@ namespace Odin.Planning.Controls
 
                     if (Math.Round(Convert.ToDouble((row.Cells["cn_nomenclature"].Value)), 3) == 0
                         && Convert.ToDouble(row.Cells["cn_qty"].Value) > 0)
-                    {
                         //green
                         row.Cells["cn_nomenclature"].Style.BackColor = Color.LightGreen;
-                    }
                     else if (Math.Round(Convert.ToDouble((row.Cells["cn_nomenclature"].Value)), 3) > 0
                         && Convert.ToDouble(row.Cells["cn_qty"].Value) == 0)
-                    {
                         //red
                         row.Cells["cn_nomenclature"].Style.BackColor = Color.LightPink;
-                    }
                     else if (Math.Round(Convert.ToDouble((row.Cells["cn_nomenclature"].Value)), 3) >
                        Math.Round(Convert.ToDouble(row.Cells["cn_qty"].Value), 3))
                     {
@@ -235,7 +212,6 @@ namespace Odin.Planning.Controls
 
         private bool CheckOldRow()
         {
-
             try
             {
                 igvArtId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_artid"].Value);
@@ -246,9 +222,7 @@ namespace Odin.Planning.Controls
             }
 
             if (OldigvArtId == igvArtId)
-            {
                 return true;
-            }
             else
             {
                 OldigvArtId = igvArtId;
@@ -258,7 +232,7 @@ namespace Odin.Planning.Controls
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -273,9 +247,7 @@ namespace Odin.Planning.Controls
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -283,23 +255,17 @@ namespace Odin.Planning.Controls
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
-
 
         #endregion
 
         #region Controls
 
         #region Context menu
-
 
         private void mnu_Lines_Opening(object sender, CancelEventArgs e)
         {
@@ -319,7 +285,6 @@ namespace Odin.Planning.Controls
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -338,7 +303,6 @@ namespace Odin.Planning.Controls
             catch
             { }
             SetCellsColor();
-
         }
 
         private void mni_Search_Click(object sender, EventArgs e)
@@ -366,7 +330,6 @@ namespace Odin.Planning.Controls
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -379,7 +342,6 @@ namespace Odin.Planning.Controls
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -390,7 +352,6 @@ namespace Odin.Planning.Controls
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_Copy_Click(object sender, EventArgs e)
@@ -468,16 +429,12 @@ namespace Odin.Planning.Controls
                 //if (!outres)
                 //{
                     if (Convert.ToDouble(gv_List.CurrentRow.Cells["cn_reserve"].Value) < 0)
-                    {
                         //proverka osvobozhdenija
                         if (-1 * Convert.ToDouble(gv_List.CurrentRow.Cells["cn_reserve"].Value) > Convert.ToDouble(gv_List.CurrentRow.Cells["cn_reserved"].Value))
                             gv_List.CurrentRow.Cells["cn_reserve"].Value = -1 * Convert.ToDouble(gv_List.CurrentRow.Cells["cn_reserved"].Value);
-                    }
                     if (Convert.ToDouble(gv_List.CurrentRow.Cells["cn_reserve"].Value) > 0)
-                    {
                         if (Convert.ToDouble(gv_List.CurrentRow.Cells["cn_reserve"].Value) > Convert.ToDouble(gv_List.CurrentRow.Cells["cn_available"].Value))
                             gv_List.CurrentRow.Cells["cn_reserve"].Value = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_available"].Value);
-                    }
                 //}
                 //else
                // {
@@ -487,10 +444,7 @@ namespace Odin.Planning.Controls
             SetCellsColor();
         }
 
-        private void gv_List_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+        private void gv_List_CellDoubleClick(object sender, DataGridViewCellEventArgs e) { }
 
         private void gv_List_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -499,19 +453,13 @@ namespace Odin.Planning.Controls
 
                 if (gv_List.CurrentRow.Cells["btn_free"].Selected == true
                     && gv_List.SelectedRows.Count == 0)
-                {
                     if (Convert.ToDouble(gv_List.CurrentRow.Cells["cn_reserved"].Value) > 0)
-                    {
                         //osvobozhdaem esli est' zamorozhennoe
                         gv_List.CurrentRow.Cells["cn_reserve"].Value = -1 * Convert.ToDouble(gv_List.CurrentRow.Cells["cn_reserved"].Value);
-                    }
 
-                }
                 else if (gv_List.CurrentRow.Cells["btn_freeze"].Selected == true
                     && gv_List.SelectedRows.Count == 0)
                 {
-
-
                     double ToFreeze = 0;
                     ToFreeze = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_qty"].Value)
                                 - Convert.ToDouble(gv_List.CurrentRow.Cells["cn_reserved"].Value)
@@ -519,13 +467,11 @@ namespace Odin.Planning.Controls
                                 - Convert.ToDouble(gv_List.CurrentRow.Cells["cn_given"].Value)
                                 + Convert.ToDouble(gv_List.CurrentRow.Cells["cn_returned"].Value);
 
-
                     gv_List.CurrentRow.Cells["cn_reserve"].Value = ToFreeze > 0
                         ? Convert.ToDouble(gv_List.CurrentRow.Cells["cn_available"].Value) >= ToFreeze
                             ? ToFreeze
                             : (object)Convert.ToDouble(gv_List.CurrentRow.Cells["cn_available"].Value)
                         : 0;
-
                 }
             }
             catch { }
@@ -548,9 +494,7 @@ namespace Odin.Planning.Controls
         private void btn_Clear_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 row.Cells["cn_reserve"].Value = 0;
-            }
             SetCellsColor();
         }
         
@@ -562,17 +506,12 @@ namespace Odin.Planning.Controls
             frm.HeaderText = "Add new RM for batch: " + cmb_Batches1.Batch;
             DialogResult result = frm.ShowDialog();
 
-
             if (result == DialogResult.OK)
             {
                 if (frm.SubBatch == 0)
-                {
-                    BLL.AddBatchDetail(BatchId, frm.ArtId, frm.Qty, frm.Comments);
-                }
+                    Convert.ToInt32(Helper.getSP("sp_AddBatchDet", BatchId, frm.ArtId, frm.Qty, frm.Comments));
                 else
-                {
-                    BLL.AddBatchDetailSB(BatchId, frm.ArtId, frm.Qty);
-                }
+                    Helper.getSP("sp_AddBatchModifRM", BatchId, frm.ArtId, frm.Qty);
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
 
@@ -595,24 +534,18 @@ namespace Odin.Planning.Controls
 
             if (_bdid == 0)
             {
-
                 frm_AddBatchRMLine frm = new frm_AddBatchRMLine();
                 frm.Id = 0;
                 frm.ArtId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_artid"].Value);
                 frm.HeaderText = "Add new RM for batch: " + cmb_Batches1.Batch;
                 DialogResult result = frm.ShowDialog();
 
-
                 if (result == DialogResult.OK)
                 {
                     if (frm.SubBatch == 0)
-                    {
-                        BLL.AddBatchDetail(BatchId, frm.ArtId, frm.Qty, frm.Comments);
-                    }
+                        Convert.ToInt32(Helper.getSP("sp_AddBatchDet", BatchId, frm.ArtId, frm.Qty, frm.Comments));
                     else
-                    {
-                        BLL.AddBatchDetailSB(BatchId, frm.ArtId, frm.Qty);
-                    }
+                        Helper.getSP("sp_AddBatchModifRM", BatchId, frm.ArtId, frm.Qty);
 
                     DataGridViewColumn oldColumn = gv_List.SortedColumn;
                     var dir = Helper.SaveDirection(gv_List);
@@ -621,7 +554,6 @@ namespace Odin.Planning.Controls
 
                     Helper.RestoreDirection(gv_List, oldColumn, dir);
                     SetCellsColor();
-
                     // SetDefaultQty();
                 }
             }
@@ -641,8 +573,7 @@ namespace Odin.Planning.Controls
 
                 if (result == DialogResult.OK)
                 {
-
-                    BLL.EditBatchDetail(frm.BatchDetId, frm.Qty, frm.Comments, frm.IsActive, frm.DNP);
+                    Helper.getSP("sp_EditBatchDet", frm.BatchDetId, frm.Qty, frm.Comments, frm.IsActive, frm.DNP);
 
                     DataGridViewColumn oldColumn = gv_List.SortedColumn;
                     var dir = Helper.SaveDirection(gv_List);
@@ -653,7 +584,6 @@ namespace Odin.Planning.Controls
                     SetCellsColor();
                     //SetDefaultQty();
                 }
-
             }
         }
 
@@ -663,12 +593,8 @@ namespace Odin.Planning.Controls
             if (glob_Class.SaveConfirm() == true)
             {
                 foreach (DataGridViewRow row in this.gv_List.Rows)
-                {
                     if (Convert.ToDouble(row.Cells["cn_reserve"].Value) != 0)
-                    {
-                        BLL.ReserveRM(Convert.ToInt32(row.Cells["cn_id"].Value), Convert.ToDouble(row.Cells["cn_reserve"].Value));
-                    }
-                }
+                        Helper.getSP("sp_ReserveBatchRM", Convert.ToInt32(row.Cells["cn_id"].Value), Convert.ToDouble(row.Cells["cn_reserve"].Value));
                 //MyLogistics.ChangeBatchRMStatusBH(BatchId);
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
@@ -677,7 +603,6 @@ namespace Odin.Planning.Controls
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
                 SetCellsColor();
                 //SetDefaultQty();
-
             }
         }
 
@@ -689,15 +614,10 @@ namespace Odin.Planning.Controls
         private void gv_List_SelectionChanged(object sender, EventArgs e)
         {
             if (CheckOldRow() == false)
-            {
                 SendArticle(igvArtId);
-            }
         }
 
-        private void gv_List_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-        }
+        private void gv_List_KeyPress(object sender, KeyPressEventArgs e) { }
 
         private void gv_List_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
         {
@@ -705,13 +625,10 @@ namespace Odin.Planning.Controls
             {
                 double temp = 0;
                 if (!Double.TryParse((string)e.Value, out temp))
-                {
                     MessageBox.Show("Error during entering data, numbers allow only!");
                     //e.Value = 0;
-                }
             }
         }
-
 
         #endregion
 
@@ -722,7 +639,6 @@ namespace Odin.Planning.Controls
                 int _bdid = 0;
 
                 foreach (DataGridViewRow row in this.gv_List.Rows)
-                {
                     if (row.Selected == true)
                     {
                         try
@@ -732,18 +648,13 @@ namespace Odin.Planning.Controls
                         catch { _bdid = 0; }
 
                         if (_bdid != 0)
-                        {
-                            BLL.DeleteBatchDetail(_bdid);
-                        }
+                            Helper.getSP("sp_DeleteBatchDet", _bdid);
                     }
-                }
 
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
                 bwStart(bw_List);
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
-
-
             }
 
             //int _bdid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
@@ -780,9 +691,7 @@ namespace Odin.Planning.Controls
             {
                 row.Cells["cn_reserve"].Value = 0;
                 if (Convert.ToDouble(row.Cells["cn_reserved"].Value) > 0)
-                {
                     row.Cells["cn_reserve"].Value = -1 * Convert.ToDouble(row.Cells["cn_reserved"].Value);
-                }
             }
             SetCellsColor();
         }
@@ -809,13 +718,12 @@ namespace Odin.Planning.Controls
                 DialogResult result = frm.ShowDialog();
 
                 if (result == DialogResult.OK)
-                {
                     if (Convert.ToInt32(gv_List.CurrentRow.Cells["cn_artid"].Value) != frm.ArtId)
                     {
-                        if (BLL.CheckReplaceStages(frm.BatchDetId, frm.ArtId) == true
-                            && BLL.CheckReplaceBatchArticles(frm.ArtId, _oldartid, BatchId) == true)
+                        if (Convert.ToInt32(Helper.GetOneRecord("select dbo.fn_CheckReplaceStages(" + frm.BatchDetId + "," + frm.ArtId + ")")) == -1
+                            && Convert.ToInt32(Helper.GetOneRecord("select dbo.fn_CheckReplaceBatchArticles(" + frm.ArtId + "," + _oldartid + ", " + BatchId + ")")) == -1)
                         {
-                            BLL.ReplaceBatchDetail(frm.BatchDetId, frm.ArtId, frm.Qty);
+                            Helper.getSP("sp_ReplaceBatchDet", frm.BatchDetId, frm.ArtId, frm.Qty);
 
                             DataGridViewColumn oldColumn = gv_List.SortedColumn;
                             var dir = Helper.SaveDirection(gv_List);
@@ -827,13 +735,9 @@ namespace Odin.Planning.Controls
                             SetCellsColor();
                         }
                         else
-                        {
                             MessageBox.Show("Replacement impossible, stages are different or articles are in replacements!");
-                        }
                         //SetDefaultQty();
                     }
-                }
-
             }
         }
 
@@ -854,7 +758,6 @@ namespace Odin.Planning.Controls
                 frm.Query = _query;
                 frm.SqlParams = sqlparams;
                 frm.Show(); frm.GetKryptonFormFields();
-
             }
         }
 

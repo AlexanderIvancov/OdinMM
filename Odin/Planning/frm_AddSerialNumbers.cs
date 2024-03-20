@@ -23,7 +23,6 @@ namespace Odin.Planning
             get { return cmb_Batches1.BatchId; }
             set { cmb_Batches1.BatchId = value; }
         }
-
         Plan_BLL BLL = new Plan_BLL();
 
         #endregion
@@ -33,12 +32,9 @@ namespace Odin.Planning
         public void SetCellsColor()
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 if (Convert.ToInt32(row.Cells["cn_isok"].Value) != -1)
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.LightCoral;
-
-            }
         }
 
         public bool CheckQty()
@@ -53,10 +49,6 @@ namespace Odin.Planning
 
         #endregion
 
-        #region Controls
-
-        #endregion
-
         private void btn_Check_Click(object sender, EventArgs e)
         {
             CheckSerialNumbers();            
@@ -66,8 +58,7 @@ namespace Odin.Planning
         {
             try
             {
-                var data = Plan_BLL.getSerialNumbersPool(Convert.ToInt32(txt_SerialFrom.Text), Convert.ToInt32(txt_SerialTill.Text));
-
+                var data = (System.Data.DataTable)Helper.getSP("sp_SerialNumbersCheckIn", Convert.ToInt32(txt_SerialFrom.Text), Convert.ToInt32(txt_SerialTill.Text));
 
                 gv_List.ThreadSafeCall(delegate
                 {
@@ -76,7 +67,6 @@ namespace Odin.Planning
                     gv_List.DataSource = bs_List;
 
                     SetCellsColor();
-
                 });
 
                 bn_List.ThreadSafeCall(delegate
@@ -92,7 +82,7 @@ namespace Odin.Planning
             if (cmb_Batches1.BatchId != 0
                 && Convert.ToInt32(txt_SerialTill.Text) - Convert.ToInt32(txt_SerialFrom.Text) > 0)
             {
-                BLL.SaveSerialNumbersPool(cmb_Batches1.BatchId, Convert.ToInt32(txt_SerialFrom.Text), Convert.ToInt32(txt_SerialTill.Text));
+                Helper.getSP("sp_SaveSerialNumbers", cmb_Batches1.BatchId, Convert.ToInt32(txt_SerialFrom.Text), Convert.ToInt32(txt_SerialTill.Text));
 
                 CheckSerialNumbers();
 

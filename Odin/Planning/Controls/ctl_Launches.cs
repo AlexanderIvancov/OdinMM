@@ -17,7 +17,6 @@ namespace Odin.Planning.Controls
             ED = new ExportData(this.gv_List, "Launches.xls", this.Name);
         }
 
-
         #region Variables
 
         public int RowIndex = 0;
@@ -25,8 +24,6 @@ namespace Odin.Planning.Controls
         public string ColumnName = "";
         public string CellValue = "";
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
-
-
         ProgressForm wait;
         ExportData ED;
         class_Global glob_Class = new class_Global();
@@ -34,35 +31,26 @@ namespace Odin.Planning.Controls
         DAL_Functions DAL = new DAL_Functions();
         AdmMenu mMenu = new AdmMenu();
         Plan_BLL PlanBll = new Plan_BLL();
-
         int _batchid = 0;
         int _coid = 0;
-
         public int BatchId
         {
             get { return _batchid; }
             set
             {
-
                 _batchid = value;
-
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
-
                 FillLaunches(_batchid);
-
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
-
                 SetCellsColor();
             }
         }
-
         public int COId
         {
             get { return _coid; }
             set
             {
-
                 _coid = value;
 
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
@@ -80,7 +68,7 @@ namespace Odin.Planning.Controls
 
         public void FillLaunches(int BatchId)
         {
-            var data = Plan_BLL.getBatchLaunches(BatchId);
+            var data = (DataTable)Helper.getSP("sp_SelectBatchLaunches", BatchId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -90,7 +78,6 @@ namespace Odin.Planning.Controls
 
                 SetCellsColor();
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -100,7 +87,7 @@ namespace Odin.Planning.Controls
 
         public void FillLaunchesCO(int COId)
         {
-            var data = Plan_BLL.getBatchLaunchesCO(COId);
+            var data = (DataTable)Helper.getSP("sp_SelectCOLaunches", COId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -110,7 +97,6 @@ namespace Odin.Planning.Controls
 
                 SetCellsColor();
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -131,7 +117,7 @@ namespace Odin.Planning.Controls
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -146,9 +132,7 @@ namespace Odin.Planning.Controls
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -156,14 +140,10 @@ namespace Odin.Planning.Controls
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
         #endregion
@@ -174,7 +154,6 @@ namespace Odin.Planning.Controls
         }
 
         #region Context menu
-
 
         private void mnu_Lines_Opening(object sender, CancelEventArgs e)
         {
@@ -194,7 +173,6 @@ namespace Odin.Planning.Controls
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -241,7 +219,6 @@ namespace Odin.Planning.Controls
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -253,7 +230,6 @@ namespace Odin.Planning.Controls
                     : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
-
             SetCellsColor();
         }
 
@@ -265,7 +241,6 @@ namespace Odin.Planning.Controls
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_Copy_Click(object sender, EventArgs e)
@@ -280,7 +255,7 @@ namespace Odin.Planning.Controls
             frm.HeaderText = "Select view for batches list";
             frm.grid = this.gv_List;
             frm.formname = this.Name;
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
             frm.UserId = DAL.UserId;
 
             frm.FillData(frm.grid);
@@ -292,7 +267,6 @@ namespace Odin.Planning.Controls
                 LoadColumns(gv_List);
             }
         }
-
 
         #endregion
 

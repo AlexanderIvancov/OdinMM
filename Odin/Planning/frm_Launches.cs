@@ -31,26 +31,16 @@ namespace Odin.Planning
         DAL_Functions DAL = new DAL_Functions();
         AdmMenu mMenu = new AdmMenu();
         ExportData ED;
-
         frm_AddLaunch frm = null;
-
         public int RowIndex = 0;
         public int ColumnIndex = 0;
         public string ColumnName = "";
         public string CellValue = "";
-
         public int ControlWidth = 250;
-
         public int IsActive
         {
-            get
-            {
-                return chk_Active.CheckState == CheckState.Checked ? -1 : chk_Active.CheckState == CheckState.Unchecked ? 0 : 1;
-            }
-            set
-            {
-                chk_Active.CheckState = value == -1 ? CheckState.Checked : value == 0 ? CheckState.Unchecked : CheckState.Indeterminate;
-            }
+            get { return chk_Active.CheckState == CheckState.Checked ? -1 : chk_Active.CheckState == CheckState.Unchecked ? 0 : 1; }
+            set { chk_Active.CheckState = value == -1 ? CheckState.Checked : value == 0 ? CheckState.Unchecked : CheckState.Indeterminate; }
         }
 
         #endregion
@@ -59,7 +49,7 @@ namespace Odin.Planning
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -74,9 +64,7 @@ namespace Odin.Planning
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -84,14 +72,10 @@ namespace Odin.Planning
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
         public void ClearFilter()
@@ -105,7 +89,6 @@ namespace Odin.Planning
 
             txt_StartFrom.Value = null;
             txt_StartTill.Value = null;
-          
         }
 
         public void SetCellsColor()
@@ -125,10 +108,9 @@ namespace Odin.Planning
         public void bw_List(object sender, DoWorkEventArgs e)
         {
             //MessageBox.Show(cmb_SalesOrdersWithLines1.SalesOrderLineId.ToString());
-            var data = Plan_BLL.getLaunches(cmb_Batches1.BatchId, cmb_SalesOrdersWithLines1.SalesOrderLineId, cmb_Articles1.ArticleId, IsActive,
+            var data = (DataTable)Helper.getSP("sp_LaunchesList", cmb_Batches1.BatchId, cmb_SalesOrdersWithLines1.SalesOrderLineId, cmb_Articles1.ArticleId, IsActive,
                                             cmb_Types1.TypeId, txt_StartFrom.Value == null ? "" : txt_StartFrom.Value.ToString().Trim(),
                                             txt_StartTill.Value == null ? "" : txt_StartTill.Value.ToString().Trim());
-
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -139,12 +121,10 @@ namespace Odin.Planning
                 SetCellsColor();
             });
 
-
             bn_List.ThreadSafeCall(delegate
             {
                 bn_List.BindingSource = bs_List;
             });
-
         }
 
         private void AddLaunch(object sender)
@@ -160,7 +140,6 @@ namespace Odin.Planning
         #region Controls
 
         #region Context menu
-
 
         private void mnu_Lines_Opening(object sender, CancelEventArgs e)
         {
@@ -180,7 +159,6 @@ namespace Odin.Planning
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -199,7 +177,6 @@ namespace Odin.Planning
             catch
             { }
             SetCellsColor();
-
         }
 
         private void mni_Search_Click(object sender, EventArgs e)
@@ -227,7 +204,6 @@ namespace Odin.Planning
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -240,7 +216,6 @@ namespace Odin.Planning
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -251,7 +226,6 @@ namespace Odin.Planning
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_Copy_Click(object sender, EventArgs e)
@@ -285,7 +259,6 @@ namespace Odin.Planning
         }
 
         #endregion
-
 
         private void frm_Launches_Load(object sender, EventArgs e)
         {
@@ -387,25 +360,17 @@ namespace Odin.Planning
                        
             frm.ctl_CreatLaunchDets1.FillDecNum();
             frm.ctl_CreatLaunchDets1.Mode = "new";
-            
             //frm.ctl_CreatBatchDets1.AllSpoil = 0;
             //frm.ctl_CreatBatchDets1.FillGridNew(frm.ctl_CreatBatchDets1.ArticleId, frm.ctl_CreatBatchDets1.QtyInBatch);
             frm.ctl_CreatLaunchDets1.FillDates();
-
 
             frm.LaunchSaved += new LaunchSavedEventHandler(AddLaunch);
 
             frm.Show(); frm.GetKryptonFormFields();
         }
 
-        private void btn_Edit_Click(object sender, EventArgs e)
-        {
+        private void btn_Edit_Click(object sender, EventArgs e) { }
 
-        }
-
-        private void btn_Delete_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void btn_Delete_Click(object sender, EventArgs e) { }
     }
 }

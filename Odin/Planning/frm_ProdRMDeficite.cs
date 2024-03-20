@@ -8,7 +8,6 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 
-
 namespace Odin.Planning
 {
     public partial class frm_ProdRMDeficite : KryptonForm
@@ -48,16 +47,14 @@ namespace Odin.Planning
         public void SetCellsColor()
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 if (Convert.ToInt32(row.Cells["cn_idmove"].Value) == 0)
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Yellow;
-            }
         }
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -72,9 +69,7 @@ namespace Odin.Planning
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -82,14 +77,10 @@ namespace Odin.Planning
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
         public void bw_List(object sender, DoWorkEventArgs e)
@@ -100,14 +91,12 @@ namespace Odin.Planning
             }
             catch { }
 
-            var data = Plan_BLL.RMDeficiteInProduction(cmb_Common1.SelectedValue);
+            var data = (DataTable)Helper.getSP("sp_SelectProductionRMDeficite", cmb_Common1.SelectedValue);
 
             gv_List.ThreadSafeCall(delegate
             {
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
-
-
 
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
@@ -115,9 +104,7 @@ namespace Odin.Planning
 
                 SetCellsColor();
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
-
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -127,14 +114,12 @@ namespace Odin.Planning
 
         public void FillOrders()
         {
-            var data = Plan_BLL.RMDeficiteInProduction(cmb_Common1.SelectedValue);
+            var data = (DataTable)Helper.getSP("sp_SelectProductionRMDeficite", cmb_Common1.SelectedValue);
 
             gv_List.ThreadSafeCall(delegate
             {
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
-
-               
 
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
@@ -142,9 +127,7 @@ namespace Odin.Planning
 
                 SetCellsColor();
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
-
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -158,10 +141,7 @@ namespace Odin.Planning
             //FillOrders();
         }
 
-
-
         #region Context menu
-
 
         private void mnu_Lines_Opening(object sender, CancelEventArgs e)
         {
@@ -228,7 +208,6 @@ namespace Odin.Planning
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -241,7 +220,6 @@ namespace Odin.Planning
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -252,7 +230,6 @@ namespace Odin.Planning
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_Copy_Click(object sender, EventArgs e)
@@ -279,7 +256,6 @@ namespace Odin.Planning
                 LoadColumns(gv_List);
             }
         }
-
 
         #endregion
 

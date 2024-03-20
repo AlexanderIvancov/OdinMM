@@ -19,7 +19,6 @@ namespace Odin.Planning
 
         #region Variables
 
-
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
         class_Global glob_Class = new class_Global();
         Plan_BLL PlanBll = new Plan_BLL();
@@ -44,14 +43,11 @@ namespace Odin.Planning
 
         #region Methods
 
-        public void SetCellsColor()
-        {
-
-        }
+        public void SetCellsColor() { }
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -66,9 +62,7 @@ namespace Odin.Planning
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -76,19 +70,15 @@ namespace Odin.Planning
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
         public void FillOrders(int typeid)
         {
-            var data = Plan_BLL.getOrdersForBatches(cmb_Types1.TypeId);
+            var data = (DataTable)Helper.getSP("sp_SelectSalesOrdersForBatch", cmb_Types1.TypeId);
             
             gv_List.ThreadSafeCall(delegate
             {
@@ -102,7 +92,7 @@ namespace Odin.Planning
 
         public void FillOrdersBP(int typeid)
         {
-            var data = Plan_BLL.getOrdersForBatchesBP(cmb_Types1.TypeId);
+            var data = (DataTable)Helper.getSP("sp_SelectSalesOrdersForBatchBP", cmb_Types1.TypeId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -122,9 +112,7 @@ namespace Odin.Planning
             FillOrders(cmb_Types1.TypeId);
         }
 
-
         #region Context menu
-
 
         private void mnu_Lines_Opening(object sender, CancelEventArgs e)
         {
@@ -144,7 +132,6 @@ namespace Odin.Planning
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -163,7 +150,6 @@ namespace Odin.Planning
             catch
             { }
             SetCellsColor();
-
         }
 
         private void mni_Search_Click(object sender, EventArgs e)
@@ -191,7 +177,6 @@ namespace Odin.Planning
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -204,7 +189,6 @@ namespace Odin.Planning
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -215,7 +199,6 @@ namespace Odin.Planning
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_Copy_Click(object sender, EventArgs e)
@@ -243,9 +226,6 @@ namespace Odin.Planning
             }
         }
 
-
-
-
         #endregion
 
         private void frm_FillOrders_Load(object sender, EventArgs e)
@@ -258,22 +238,14 @@ namespace Odin.Planning
             int k = 0;
                                     
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 if (row.Cells["chk_add"].Value != DBNull.Value
                 && Convert.ToInt16(row.Cells["chk_add"].Value) != 0)
-                {
                    k++;
-                }
-            }
 
             if (k == 0)
-            {
                 bs_List.RemoveFilter();
-            }
             else
-            {
                 bs_List.Filter = "artid = " + ArtId;
-            }
         }
 
         public void FilterByCO(int COId, int QuotId)
@@ -281,22 +253,14 @@ namespace Odin.Planning
             int k = 0;
 
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 if (row.Cells["chk_add"].Value != DBNull.Value
                 && Convert.ToInt16(row.Cells["chk_add"].Value) != 0)
-                {
                     k++;
-                }
-            }
 
             if (k == 0)
-            {
                 bs_List.RemoveFilter();
-            }
             else
-            {
                 bs_List.Filter = COId != 0 ? "id = " + COId : "quotid = " + QuotId;
-            }
         }
 
         public void FilterByArticleEdit(int ArtId)
@@ -310,40 +274,30 @@ namespace Odin.Planning
         private void gv_List_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             if (rowm.Cells["chk_add"].Selected == true)
-            {
                 if (Convert.ToInt32(rowm.Cells["chk_add"].Value) == -1)
-                {
                     if (BPMode == 0)
                         FilterByArticle(Convert.ToInt32(rowm.Cells["cn_artid"].Value));
                     else
                         FilterByCO(Convert.ToInt32(rowm.Cells["cn_id"].Value), Convert.ToInt32(rowm.Cells["cn_quotid"].Value));
-                }
                 else
                     bs_List.RemoveFilter();
-            }
-            
         }
 
         private void gv_List_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (rowm.Cells["chk_add"].Selected == true)
-            {
                 gv_List.EndEdit();
-            }
         }
 
         private void gv_List_CellValidated(object sender, DataGridViewCellEventArgs e)
         {
             rowm = gv_List.CurrentRow;
             gv_List.EndEdit();
-            
         }
 
         private void gv_List_SelectionChanged(object sender, EventArgs e)
         {
             rowm = gv_List.CurrentRow;
         }
-
-
     }
 }

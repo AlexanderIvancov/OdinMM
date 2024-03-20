@@ -830,7 +830,7 @@ namespace Odin.Warehouse.Requests
 
                     if (_batchdetid == 0)
                         //Add detail
-                        _batchdetid = PlanBLL.AddBatchDetail(frm.BatchId, _artid, 0/*_qty*/, "");
+                        _batchdetid = Convert.ToInt32(Helper.getSP("sp_AddBatchDet", frm.BatchId, _artid, 0/*_qty*/, ""));
                     
                     //Edit request, state - enabled
 

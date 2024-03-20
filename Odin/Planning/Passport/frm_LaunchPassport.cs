@@ -52,22 +52,12 @@ namespace Odin.Planning.Passport
         public string CellValueV = "";
 
         public int ControlWidth = 250;
-
-        public int LaunchId
-        { get; set; }
-
+        public int LaunchId { get; set; }
         int _PrevId = 0;
-
         public int IsActive
         {
-            get
-            {
-                return chk_Active.CheckState == CheckState.Checked ? -1 : chk_Active.CheckState == CheckState.Unchecked ? 0 : 1;
-            }
-            set
-            {
-                chk_Active.CheckState = value == -1 ? CheckState.Checked : value == 0 ? CheckState.Unchecked : CheckState.Indeterminate;
-            }
+            get { return chk_Active.CheckState == CheckState.Checked ? -1 : chk_Active.CheckState == CheckState.Unchecked ? 0 : 1; }
+            set { chk_Active.CheckState = value == -1 ? CheckState.Checked : value == 0 ? CheckState.Unchecked : CheckState.Indeterminate; }
         }
 
         #endregion  
@@ -87,7 +77,6 @@ namespace Odin.Planning.Passport
             txt_StartTill.Value = null;
             cmb_Common1.SelectedValue = 0;
             cmb_Firms1.FirmId = 0;
-
         }
 
         public void SetCellsColor()
@@ -136,7 +125,7 @@ namespace Odin.Planning.Passport
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -151,9 +140,7 @@ namespace Odin.Planning.Passport
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -161,24 +148,18 @@ namespace Odin.Planning.Passport
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
         public void bw_List(object sender, DoWorkEventArgs e)
         {
-
             //MessageBox.Show(cmb_SalesOrdersWithLines1.SalesOrderLineId.ToString());
-            var data = Plan_BLL.getLaunchesPassport(cmb_Batches1.BatchId, cmb_Launches1.LaunchId, cmb_SalesOrdersWithLines1.SalesOrderLineId, cmb_Articles1.ArticleId, IsActive,
+            var data = (DataTable)Helper.getSP("sp_LaunchesPassportList", cmb_Batches1.BatchId, cmb_Launches1.LaunchId, cmb_SalesOrdersWithLines1.SalesOrderLineId, cmb_Articles1.ArticleId, IsActive,
                                             cmb_Types1.TypeId, txt_StartFrom.Value == null ? "" : txt_StartFrom.Value.ToString().Trim(),
                                             txt_StartTill.Value == null ? "" : txt_StartTill.Value.ToString().Trim(), cmb_Firms1.FirmId, cmb_Common1.SelectedValue);
-
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -190,18 +171,15 @@ namespace Odin.Planning.Passport
                 SetCellsColor();
             });
 
-
             bn_List.ThreadSafeCall(delegate
             {
                 bn_List.BindingSource = bs_List;
             });
-
         }
 
         public void ShowComments(int id)
         {
-            var data = Plan_BLL.getLaunchesPassportComments(id);
-
+            var data = (DataTable)Helper.getSP("sp_LaunchesPassportListCom", id);
 
             gv_Comments.ThreadSafeCall(delegate
             {
@@ -213,7 +191,6 @@ namespace Odin.Planning.Passport
                 SetCellsColor();
             });
 
-
             bn_Comments.ThreadSafeCall(delegate
             {
                 bn_Comments.BindingSource = bs_Comments;
@@ -222,8 +199,7 @@ namespace Odin.Planning.Passport
 
         public void ShowAddiVisas(int id)
         {
-            var data = Plan_BLL.getLaunchesPassportAddVisas(id);
-
+            var data = (DataTable)Helper.getSP("sp_LaunchesPassportAddVisas", id);
 
             gv_Visas.ThreadSafeCall(delegate
             {
@@ -235,7 +211,6 @@ namespace Odin.Planning.Passport
                 SetCellsColorVisas();
             });
 
-
             gv_Visas.ThreadSafeCall(delegate
             {
                 bn_Visas.BindingSource = bs_Visas;
@@ -244,7 +219,7 @@ namespace Odin.Planning.Passport
 
         public void SetButtonsPermissions()
         {
-            if (DAL.IsUserInGroup(System.Environment.UserName, "RQuality") == true)
+            if (DAL.IsUserInGroup(Environment.UserName, "RQuality") == true)
             {
                 btn_Quality.Enabled = true;
                 btn_QualityAdd.Enabled = true;
@@ -254,8 +229,7 @@ namespace Odin.Planning.Passport
                 btn_Quality.Enabled = false;
                 btn_QualityAdd.Enabled = false;
             }
-
-            if (DAL.IsUserInGroup(System.Environment.UserName, "RIngen") == true)
+            if (DAL.IsUserInGroup(Environment.UserName, "RIngen") == true)
             {
                 btn_Ingeneering.Enabled = true;
                 btn_IngeneeringAdd.Enabled = true;
@@ -265,8 +239,8 @@ namespace Odin.Planning.Passport
                 btn_Ingeneering.Enabled = false;
                 btn_IngeneeringAdd.Enabled = false;
             }
-            if (DAL.IsUserInGroup(System.Environment.UserName, "RQuality") == true
-                || DAL.IsUserInGroup(System.Environment.UserName, "RIngen") == true)
+            if (DAL.IsUserInGroup(Environment.UserName, "RQuality") == true
+                || DAL.IsUserInGroup(Environment.UserName, "RIngen") == true)
             {
                 btn_addavisa.Enabled = true;
                 btn_editvisa.Enabled = true;
@@ -290,7 +264,6 @@ namespace Odin.Planning.Passport
             else
             {
                 pn_Quality.BackColor = _qualityby == "" ? Color.LightYellow : Color.FromArgb(192, 255, 192);
-
                 pn_Ingeneering.BackColor = _techby == "" ? Color.LightYellow : Color.FromArgb(192, 255, 192);
             }
         }
@@ -299,7 +272,6 @@ namespace Odin.Planning.Passport
         #region Controls
 
         #region Context menu
-
 
         private void mnu_Lines_Opening(object sender, CancelEventArgs e)
         {
@@ -319,7 +291,6 @@ namespace Odin.Planning.Passport
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -342,7 +313,6 @@ namespace Odin.Planning.Passport
             catch
             { }
             SetCellsColor();
-
         }
 
         private void mni_Search_Click(object sender, EventArgs e)
@@ -366,11 +336,9 @@ namespace Odin.Planning.Passport
                         ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
                         : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
-
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -383,7 +351,6 @@ namespace Odin.Planning.Passport
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -394,7 +361,6 @@ namespace Odin.Planning.Passport
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_Copy_Click(object sender, EventArgs e)
@@ -431,7 +397,6 @@ namespace Odin.Planning.Passport
 
         #region Context menu comments
 
-
         private void mnu_LinesC_Opening(object sender, CancelEventArgs e)
         {
             try
@@ -450,7 +415,6 @@ namespace Odin.Planning.Passport
                 CellValueC = gv_Comments.Rows[RowIndexC].Cells[ColumnIndexC].Value.ToString();
                 ColumnNameC = gv_Comments.Columns[ColumnIndexC].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -472,7 +436,6 @@ namespace Odin.Planning.Passport
             }
             catch
             { }
-
         }
 
         private void mni_SearchC_Click(object sender, EventArgs e)
@@ -499,8 +462,6 @@ namespace Odin.Planning.Passport
 
             }
             catch { }
-
-
         }
 
         private void mni_FilterExcludingSelC_Click(object sender, EventArgs e)
@@ -512,8 +473,6 @@ namespace Odin.Planning.Passport
                     : bs_Comments.Filter + " AND " + ColumnNameC + " <> '" + CellValueC + "'";
             }
             catch { }
-
-
         }
 
         private void mni_RemoveFilterC_Click(object sender, EventArgs e)
@@ -523,7 +482,6 @@ namespace Odin.Planning.Passport
                 bs_Comments.RemoveFilter();
             }
             catch { }
-
         }
 
         private void mni_CopyC_Click(object sender, EventArgs e)
@@ -538,7 +496,7 @@ namespace Odin.Planning.Passport
             frm.HeaderText = "Select view for comments list";
             frm.grid = this.gv_Comments;
             frm.formname = this.Name;
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
             frm.UserId = DAL.UserId;
 
             frm.FillData(frm.grid);
@@ -560,7 +518,6 @@ namespace Odin.Planning.Passport
 
         #region Context menu visas
 
-
         private void mnu_LinesV_Opening(object sender, CancelEventArgs e)
         {
             try
@@ -579,7 +536,6 @@ namespace Odin.Planning.Passport
                 CellValueV = gv_Visas.Rows[RowIndexV].Cells[ColumnIndexV].Value.ToString();
                 ColumnNameV = gv_Visas.Columns[ColumnIndexV].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -601,7 +557,6 @@ namespace Odin.Planning.Passport
             }
             catch
             { }
-
         }
 
         private void mni_SearchV_Click(object sender, EventArgs e)
@@ -628,8 +583,6 @@ namespace Odin.Planning.Passport
 
             }
             catch { }
-
-
         }
 
         private void mni_FilterExcludingSelV_Click(object sender, EventArgs e)
@@ -641,8 +594,6 @@ namespace Odin.Planning.Passport
                     : bs_Visas.Filter + " AND " + ColumnNameV + " <> '" + CellValueV + "'";
             }
             catch { }
-
-
         }
 
         private void mni_RemoveFilterV_Click(object sender, EventArgs e)
@@ -652,7 +603,6 @@ namespace Odin.Planning.Passport
                 bs_Visas.RemoveFilter();
             }
             catch { }
-
         }
 
         private void mni_CopyV_Click(object sender, EventArgs e)
@@ -667,7 +617,7 @@ namespace Odin.Planning.Passport
             frm.HeaderText = "Select view for visas list";
             frm.grid = this.gv_Visas;
             frm.formname = this.Name;
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
             frm.UserId = DAL.UserId;
 
             frm.FillData(frm.grid);
@@ -687,7 +637,6 @@ namespace Odin.Planning.Passport
 
         #endregion
 
-
         private void btn_Clear_Click(object sender, EventArgs e)
         {
             ClearFilter();
@@ -703,11 +652,9 @@ namespace Odin.Planning.Passport
             LoadColumns(gv_Comments);
             LoadColumns(gv_Visas);
 
-
             SetButtonsPermissions();
             ClearFilter();
         }
-
 
         #endregion
 
@@ -740,7 +687,7 @@ namespace Odin.Planning.Passport
 
                 if (_id != 0)
                 {
-                    string _res = PlanBll.AddLaunchQualityViza(_id);
+                    string _res = Convert.ToString(Helper.getSP("sp_AddLaunchQualityViza", _id));
                     glob_Class.ShowMessage("Quality visa result", "", _res);
                     DataGridViewColumn oldColumn = gv_List.SortedColumn;
 
@@ -751,7 +698,6 @@ namespace Odin.Planning.Passport
                     Helper.RestoreDirection(gv_List, oldColumn, dir);
 
                     SetCellsColor();
-
                 }
             }
         }
@@ -773,7 +719,7 @@ namespace Odin.Planning.Passport
 
                 if (_id != 0)
                 {
-                    string _res = PlanBll.AddLaunchIngenViza(_id);
+                    string _res = Convert.ToString(Helper.getSP("sp_AddLaunchIngenViza", _id));
                     glob_Class.ShowMessage("Ingeneering visa result", "", _res);
 
                     DataGridViewColumn oldColumn = gv_List.SortedColumn;
@@ -784,7 +730,6 @@ namespace Odin.Planning.Passport
                     Helper.RestoreDirection(gv_List, oldColumn, dir);
 
                     SetCellsColor();
-
                 }
             }
         }
@@ -811,9 +756,7 @@ namespace Odin.Planning.Passport
                 SetPanelColors(_qualby, _techby, -1);
             }
             else
-            {
                 SetPanelColors("", "", 0);
-            }
         }
 
         private void btn_AddCom_Click(object sender, EventArgs e)
@@ -838,14 +781,13 @@ namespace Odin.Planning.Passport
 
                 if (result == DialogResult.OK)
                 {
-                    PlanBll.SavedLaunchPassportComments(0, _id, frm.Comments, "", frm.StateId);
+                    Helper.getSP("sp_SaveLaunchPassportComments", 0, _id, frm.Comments, "", frm.StateId);
                     ShowComments(_id);
 
                     if (frm.SendEmail == -1)
                     {
                         string emailaddresses = DAL.EmailAddressesByType(14);
                        
-                        
                         string strMessage = "Launch: " + _launch;
                         strMessage = strMessage + "\r\nComments: " + frm.Comments;
                         strMessage = strMessage + "\r\nState: " + (frm.StateId == -1 ? "New" : (frm.StateId == 0 ? "Closed" : "Cancelled"));
@@ -853,12 +795,9 @@ namespace Odin.Planning.Passport
                         
                         //strMessage = strMessage + "\r\nArticle: " + dr["custarticle"].ToString();
                         MyHelper.SendDirectEMail(glob_Class.ReplaceChar(emailaddresses, ";", ","), "Additional info for " + _launch + " is added!", strMessage);
-
                     }
-
                 }
             }
-
         }
 
         private void btn_EditCom_Click(object sender, EventArgs e)
@@ -892,16 +831,13 @@ namespace Odin.Planning.Passport
 
                 if (result == DialogResult.OK)
                 {
-                    PlanBll.SavedLaunchPassportComments(_id, 0, frm.Comments, frm.TechComments, frm.StateId);
+                    Helper.getSP("sp_SaveLaunchPassportComments", _id, 0, frm.Comments, frm.TechComments, frm.StateId);
                     ShowComments(_launchid);
                 }
             }
         }
 
-        private void btn_DeleteCom_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void btn_DeleteCom_Click(object sender, EventArgs e) { }
 
         private void gv_Comments_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -934,7 +870,7 @@ namespace Odin.Planning.Passport
 
                 if (result == DialogResult.OK)
                 {
-                    PlanBll.SavedLaunchPassportComments(_id, 0, frm.Comments, frm.TechComments, frm.StateId);
+                    Helper.getSP("sp_SaveLaunchPassportComments", _id, 0, frm.Comments, frm.TechComments, frm.StateId);
                     ShowComments(_launchid);
                 }
             }
@@ -966,7 +902,7 @@ namespace Odin.Planning.Passport
 
                 if (result == DialogResult.OK)
                 {
-                    MessageBox.Show(PlanBll.AddLaunchAdditVisa(_id, frm.Comments));
+                    MessageBox.Show(Convert.ToString(Helper.getSP("sp_AddLaunchAdditVisa", _id, frm.Comments)));
                     ShowAddiVisas(_id);
                 }
             }
@@ -997,7 +933,7 @@ namespace Odin.Planning.Passport
 
                 if (result == DialogResult.OK)
                 {
-                    MessageBox.Show(PlanBll.EditLaunchAdditVisa(_id, frm.Comments));
+                    MessageBox.Show(Convert.ToString(Helper.getSP("sp_EditLaunchAdditVisa", _id, frm.Comments)));
                     ShowAddiVisas(_launchid);
                 }
             }
@@ -1030,11 +966,10 @@ namespace Odin.Planning.Passport
 
                 if (_id != 0)
                 {
-                    string _res = PlanBll.AddLaunchQualityAddViza(_id);
+                    string _res = Convert.ToString(Helper.getSP("sp_AddLaunchQualityAddViza", _id));
                     glob_Class.ShowMessage("Quality visa result", "", _res);
 
                     ShowAddiVisas(_launchid);
-
                 }
             }
         }
@@ -1061,11 +996,10 @@ namespace Odin.Planning.Passport
 
                 if (_id != 0)
                 {
-                    string _res = PlanBll.AddLaunchAdditIngenViza(_id);
+                    string _res = Convert.ToString(Helper.getSP("sp_AddLaunchIngenAddViza", _id));
                     glob_Class.ShowMessage("TechDep visa result", "", _res);
 
                     ShowAddiVisas(_launchid);
-
                 }
             }
         }
@@ -1093,7 +1027,7 @@ namespace Odin.Planning.Passport
                 if (result == DialogResult.OK
                     && frm.FormText != _comment)
                 {
-                    string _res = PlanBll.EditLaunchVisaComment(_id, frm.FormText);
+                    string _res = Convert.ToString(Helper.getSP("sp_EditLaunchVisaComment", _id, frm.FormText));
                     glob_Class.ShowMessage("Quality visa result", "", _res);
 
                     DataGridViewColumn oldColumn = gv_List.SortedColumn;
@@ -1108,10 +1042,7 @@ namespace Odin.Planning.Passport
             }
         }
 
-        private void btn_PrintRouteList_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void btn_PrintRouteList_Click(object sender, EventArgs e) { }
 
         private void btn_Print_Click(object sender, EventArgs e)
         {
@@ -1127,7 +1058,6 @@ namespace Odin.Planning.Passport
             {
                 PlanBll.LaunchId = _id;
                 PlanBll.PasLaunchId = _id;
-
 
                 frm_rptPassportTitle frm = new frm_rptPassportTitle();
                 frm.HeaderText = "Print pasport for: " + PlanBll.LaunchName;

@@ -70,12 +70,11 @@ namespace Odin.Planning.Controls
 
         public void FillGrid(int ArtId)
         {
-
             tv_POS.Nodes.Clear();
 
             Font boldFont = new Font(tv_POS.DefaultCellStyle.Font, FontStyle.Bold);
             //Orders
-            var data = BLL.CurrentPOs(ArtId);
+            var data = (DataTable)Helper.getSP("sp_SelectPOCurrentNew", ArtId);
 
             foreach (DataRow dr in data.AsEnumerable().OrderBy(d => d.Field<string>("name")))
                AddNode(dr, boldFont, tv_POS.Nodes, true); 
@@ -84,7 +83,7 @@ namespace Odin.Planning.Controls
             //Details
             foreach (TreeGridNode node1 in tv_POS.Nodes)
             {
-                var data1 = BLL.POReservations(Convert.ToInt32(node1.Cells["cn_id"].Value));
+                var data1 = (DataTable)Helper.getSP("sp_SelectPOReservationsNew", Convert.ToInt32(node1.Cells["cn_id"].Value));
 
                 foreach (DataRow dr in data1.AsEnumerable().OrderBy(d => d.Field<string>("name")))
                    AddNode(dr, boldFont, node1.Nodes, true);
@@ -178,9 +177,9 @@ namespace Odin.Planning.Controls
             node = tv_POS.CurrentNode;
             if (node != null)
                 if (node.Level == 1)
-                    BLL.ReleaseRMFromPO(Convert.ToInt32(node.Cells["cn_id"].Value), 0);
+                    Helper.getSP("sp_ReleaseRMFromPO", Convert.ToInt32(node.Cells["cn_id"].Value), 0);
                 else
-                    BLL.ReleaseRMFromPO(0, Convert.ToInt32(node.Cells["cn_id"].Value));
+                    Helper.getSP("sp_ReleaseRMFromPO", 0, Convert.ToInt32(node.Cells["cn_id"].Value));
 
             FillGrid(ArtId);
 
@@ -246,7 +245,6 @@ namespace Odin.Planning.Controls
                 }
             }
         }
-
         #endregion
     }
 }

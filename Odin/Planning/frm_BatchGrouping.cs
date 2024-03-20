@@ -58,7 +58,7 @@ namespace Odin.Planning
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -73,9 +73,7 @@ namespace Odin.Planning
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -83,23 +81,18 @@ namespace Odin.Planning
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
         
         public void FillList(DataTable datastages)
         {
- 
             ds_List.Clear();
 
-            var data = Plan_BLL.getGroupBatchesTot(datastages);
+            var data = (DataTable)Helper.getSP("sp_SelectBatchesGroupTot", datastages);
                                     
             foreach (DataRow row in data.Rows)
             {
@@ -119,7 +112,6 @@ namespace Odin.Planning
 
                     dt_List.Rows.Add(row1);
                 }
-
             }
             this.bs_List.ResetBindings(false);
 
@@ -145,15 +137,12 @@ namespace Odin.Planning
         public void tmpFillStages(int BatchId)
         {
             //tmpStages.Clear();
-
-
         }
         public void FillGroup(int groupid)
         {
             ds_Group.Clear();
 
-            var data = Plan_BLL.getGroupBatches(groupid);
-
+            var data = (DataTable)Helper.getSP("sp_SelectBatchesGroup", groupid);
 
             foreach (DataRow row in data.Rows)
             {
@@ -169,7 +158,6 @@ namespace Odin.Planning
                 row1["ismain"] = row["ismain"];
 
                 dt_Group.Rows.Add(row1);
-
             }
             this.bs_Group.ResetBindings(false);
 
@@ -202,7 +190,6 @@ namespace Odin.Planning
                     EditMode = -1;
                     btn_Remove.Enabled = false;
                 }
-
                 else
                 {
                     EditMode = 0;
@@ -221,17 +208,13 @@ namespace Odin.Planning
         }
         public void SetCellsColor()
         {
-            
             foreach (DataGridViewRow row in gv_Group.Rows)
-            {
                 if (Convert.ToInt16(row.Cells["cn_gismain"].Value) != 0)
                     row.DefaultCellStyle.BackColor = Color.Yellow;
-            }
         }
         #endregion
 
         #region Controls
-
 
         #region Context menu
 
@@ -253,7 +236,6 @@ namespace Odin.Planning
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -271,7 +253,6 @@ namespace Odin.Planning
             }
             catch
             { }
-
         }
 
         private void mni_Search_Click(object sender, EventArgs e)
@@ -281,7 +262,6 @@ namespace Odin.Planning
             frm.ColumnNumber = gv_List.CurrentCell.ColumnIndex;
             frm.ColumnText = gv_List.Columns[frm.ColumnNumber].HeaderText;
             frm.ShowDialog();
-
         }
 
         private void mni_FilterBy_Click(object sender, EventArgs e)
@@ -296,7 +276,6 @@ namespace Odin.Planning
                         ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
                         : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
-
             }
             catch { }
         }
@@ -310,7 +289,6 @@ namespace Odin.Planning
                     : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
-
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -349,11 +327,7 @@ namespace Odin.Planning
 
         #endregion
 
-        private void btn_Save_Click(object sender, EventArgs e)
-        {
-            
-           
-        }
+        private void btn_Save_Click(object sender, EventArgs e) { }
         
         private void frm_LaunchRMReservation_Load(object sender, EventArgs e)
         {
@@ -380,17 +354,15 @@ namespace Odin.Planning
            
             if (cmb_Batches1.BatchId != 0)
             {
-                var data = Plan_BLL.getBatchStages(BatchId);
+                var data = (DataTable)Helper.getSP("sp_SelectBatchStages", BatchId);
 
                 foreach (DataRow row in data.Rows)
-                {
                     if (Convert.ToInt32(row["checked"]) == -1)
                     {
                         DataRow dr = datastages.NewRow();
                         dr["id"] = Convert.ToInt32(row["id"]);
                         datastages.Rows.Add(dr);
                     }
-                }
             }
 
             FillList(datastages);
@@ -432,7 +404,7 @@ namespace Odin.Planning
                     DataTable datastages = new DataTable();
                     datastages.Columns.Add("id", typeof(int));
 
-                    var data = Plan_BLL.getBatchStages(_tmpid);
+                    var data = (DataTable)Helper.getSP("sp_SelectBatchStages", _tmpid);
                     var selectedid = data.Select("checked = -1");
 
                     if (selectedid.Length == 0)
@@ -442,22 +414,17 @@ namespace Odin.Planning
                         datastages.Rows.Add(dr);
                     }
                     else
-                    {
                         foreach (DataRow row2 in data.Rows)
-                        {
                             if (Convert.ToInt32(row2["checked"]) == -1)
                             {
                                 DataRow dr = datastages.NewRow();
                                 dr["id"] = Convert.ToInt32(row2["id"]);
                                 datastages.Rows.Add(dr);
                             }
-                        }
-                    }   
                     
                     FillList(datastages);
 
                     break;
-
                 }
             }
         }
@@ -472,7 +439,6 @@ namespace Odin.Planning
             catch { }
 
             foreach (DataRow row in dt_Group.Rows)
-            {
                 if (Convert.ToInt32(row["id"]) == _id)
                 {
                     DataRow row1 = dt_List.NewRow();
@@ -490,7 +456,6 @@ namespace Odin.Planning
                     SetCellsColor();
                     break;
                 }
-            }
             if (dt_Group.Rows.Count == 0)
             {
                 DataTable datastages = new DataTable();
@@ -505,32 +470,20 @@ namespace Odin.Planning
             {
                 int _HeadId = 0;
                 gv_Group.EndEdit();
-                {
-                    foreach (DataRow row in dt_Group.Rows)
-                    {
-                        if (Convert.ToInt32(row["groupid"]) == 0)
-                        {
-                            _HeadId = BLL.AddBatchesToGroup(_HeadId, Convert.ToInt32(row["id"]), Convert.ToInt32(row["ismain"]));
-                        }
-                    }
-                    cmb_Batches1.BatchId = _HeadId;
-                    ResetEditMode(_HeadId);
-                }
+                foreach (DataRow row in dt_Group.Rows)
+                    if (Convert.ToInt32(row["groupid"]) == 0)
+                        _HeadId = Convert.ToInt32(Helper.getSP("sp_AddBatchesInGroup", _HeadId, Convert.ToInt32(row["id"]), Convert.ToInt32(row["ismain"])));
+                cmb_Batches1.BatchId = _HeadId;
+                ResetEditMode(_HeadId);
             }
             else
             {
                 gv_Group.EndEdit();
-                {
-                    foreach (DataRow row in dt_Group.Rows)
-                    {
-                        if (Convert.ToInt32(row["groupid"]) == 0)
-                        {
-                            BLL.AddBatchesToGroup(cmb_Batches1.BatchId, Convert.ToInt32(row["id"]), Convert.ToInt32(row["ismain"]));
-                        }
-                    }
-                   
-                    ResetEditMode(cmb_Batches1.BatchId);
-                }
+                foreach (DataRow row in dt_Group.Rows)
+                    if (Convert.ToInt32(row["groupid"]) == 0)
+                        Convert.ToInt32(Helper.getSP("sp_AddBatchesInGroup", cmb_Batches1.BatchId, Convert.ToInt32(row["id"]), Convert.ToInt32(row["ismain"])));
+                
+                ResetEditMode(cmb_Batches1.BatchId);
             }
         }
 
@@ -544,13 +497,11 @@ namespace Odin.Planning
             if (EditMode == 0)
                 btn_Remove.Enabled = true;
             else
-            {
                 try
                 {
                     btn_Remove.Enabled = Convert.ToInt32(gv_Group.CurrentRow.Cells["cn_ggroupid"].Value) == 0;
                 }
                 catch { }
-            }
         }
 
         private void cmb_Batches1_BatchChanged(object sender)
@@ -560,17 +511,15 @@ namespace Odin.Planning
 
             if (cmb_Batches1.BatchId != 0)
             {
-                var data = Plan_BLL.getBatchStages(BatchId);
+                var data = (DataTable)Helper.getSP("sp_SelectBatchStages", BatchId);
 
                 foreach (DataRow row in data.Rows)
-                {
                     if (Convert.ToInt32(row["checked"]) == -1)
                     {
                         DataRow dr = datastages.NewRow();
                         dr["id"] = Convert.ToInt32(row["id"]);
                         datastages.Rows.Add(dr);
                     }
-                }
             }
 
             FillList(datastages);

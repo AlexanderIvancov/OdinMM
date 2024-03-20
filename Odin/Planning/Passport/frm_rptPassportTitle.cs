@@ -14,82 +14,37 @@ namespace Odin.Planning.Passport
             InitializeComponent();
         }
 
-        public int HeadId
-        { get; set; }
-
+        public int HeadId { get; set; }
         public string HeaderText
         {
             get { return this.Text; }
             set { this.Text = value; }
         }
-        public int LaunchId
-        { get; set; }
-
-        public string Batch
-        { get; set; }
-
-        public string Launch
-        { get; set; }
-
-        public int BatchId
-        { get; set; }
-
-        public string Article
-        { get; set; }
-
-        public string CreatedBy
-        { get; set; }
-        
-        public string ValidatedBy
-        { get; set;}
-
-        public string CreatedAt
-        { get; set; }
-
-        public string BatchStages
-        { get; set; }
-
-        public string CompanyOwner
-        { get; set; }
-
-        public string Address
-        { get; set; }
-
-        public string BatchComments
-        { get;set;}
-
-        public string OrderComments
-        { get; set; }
-
-        public string COrder
-        { get; set; }
-
-        public string CustArticle
-        { get; set; }
-
-        public string OrderType
-        { get; set; }
-
-        public int OrderTypeId
-        { get; set; }
-
-        public string Internal
-        { get; set; }
-
-        public string Quantity
-        { get; set; }
-
-        public int RepType
-        { get; set; }
-
-        public string Stage
-        { get; set; }
-        public string VizaComments
-        { get; set; }
+        public int LaunchId { get; set; }
+        public string Batch { get; set; }
+        public string Launch { get; set; }
+        public int BatchId { get; set; }
+        public string Article { get; set; }
+        public string CreatedBy { get; set; }
+        public string ValidatedBy { get; set;}
+        public string CreatedAt { get; set; }
+        public string BatchStages { get; set; }
+        public string CompanyOwner { get; set; }
+        public string Address { get; set; }
+        public string BatchComments { get;set;}
+        public string OrderComments { get; set; }
+        public string COrder { get; set; }
+        public string CustArticle { get; set; }
+        public string OrderType { get; set; }
+        public int OrderTypeId { get; set; }
+        public string Internal { get; set; }
+        public string Quantity { get; set; }
+        public int RepType { get; set; }
+        public string Stage { get; set; }
+        public string VizaComments { get; set; }
 
         DAL_Functions DAL = new DAL_Functions();
         Plan_BLL BLL = new Plan_BLL();
-
 
         public ReportDocument OpenReport()
         {
@@ -123,9 +78,9 @@ namespace Odin.Planning.Passport
             datalaba.Rows.Add(drowa);
 
             DataTable data = new DataTable();
-            data = Plan_BLL.getPassportStages(BatchId);
+            data = (DataTable)Helper.getSP("sp_SelectBatchPassportStages", BatchId);
             DataTable datawarnings = new DataTable();
-            datawarnings = Plan_BLL.getPassportWarnings(BatchId);
+            datawarnings = (DataTable)Helper.getSP("sp_SelectBatchWarnings", BatchId);
 
             //data source
             report.Database.Tables[0].SetDataSource(datalab);
@@ -134,7 +89,6 @@ namespace Odin.Planning.Passport
             report.Database.Tables[3].SetDataSource(datalaba);
 
             report.Subreports["rsub_PassportTitle"].SetDataSource(datawarnings);
-           
 
             ////parameters
             report.SetParameterValue("Creator", CreatedBy);
@@ -160,9 +114,7 @@ namespace Odin.Planning.Passport
             report.SetParameterValue("BoxLabel3", Article + " (" + Batch + ")");
             report.SetParameterValue("BoxLabel4", Article + " (" + Batch + ")");
 
-
             return report;
-
         }
 
         public ReportDocument OpenReportLaunch()
@@ -195,9 +147,8 @@ namespace Odin.Planning.Passport
             drowa[0] = DAL.StringDataMatrixToByte(Launch);
             datalaba.Rows.Add(drowa);
 
-
             DataTable data = new DataTable();
-            data = Plan_BLL.getLaunchStages(LaunchId);
+            data = (DataTable)Helper.getSP("sp_SelectLaunchPassportStages", LaunchId);
 
             //data source
             report.Database.Tables[0].SetDataSource(datalab);
@@ -229,9 +180,7 @@ namespace Odin.Planning.Passport
             report.SetParameterValue("BoxLabel3", Article + " (" + Launch + ")");
             report.SetParameterValue("BoxLabel4", Article + " (" + Launch + ")");
 
-
             return report;
-
         }
 
         public ReportDocument OpenReportLaunchVizas()
@@ -264,9 +213,8 @@ namespace Odin.Planning.Passport
             drowa[0] = DAL.StringDataMatrixToByte(Launch);
             datalaba.Rows.Add(drowa);
 
-
             DataTable data = new DataTable();
-            data = Plan_BLL.getLaunchVizas(LaunchId);
+            data = (DataTable)Helper.getSP("sp_SelectLaunchPassportVizas", LaunchId);
             
             //data source
             report.Database.Tables[0].SetDataSource(datalab);
@@ -300,15 +248,12 @@ namespace Odin.Planning.Passport
             report.SetParameterValue("BoxLabel4", Article + " (" + Launch + ")");
             report.SetParameterValue("VizaComments", VizaComments);
 
-
             return report;
-
         }
         public void FillReport()
         {
             ReportDocument rd = RepType == 1 ? OpenReport() : RepType == 2 ? OpenReportLaunch() : OpenReportLaunchVizas();
             crystalReportViewer1.ReportSource = rd;
-
         }
     }
 }

@@ -19,17 +19,13 @@ namespace Odin.Planning.Controls
             get { return kh_Header.Values.Heading; }
             set { kh_Header.Values.Heading = value; }
         }
-
         ProgressForm wait;
         frm_Batches frmBatches;
-
         class_Global glob_Class = new class_Global();
         Plan_BLL BLL = new Plan_BLL();
         DAL_Functions DLL = new DAL_Functions();
-
         int _articleid = 0;
         int _prevartid = 0;
-
         public int ArtId
         {
             get { return cmb_Articles1.ArticleId; }
@@ -41,13 +37,11 @@ namespace Odin.Planning.Controls
                 ShowDets();
             }
         }
-
         public string Unit
         {
             get { return txt_Unit.Text; }
             set { txt_Unit.Text = value; }
         }
-
         public double QtyStock
         {
             get {
@@ -59,10 +53,8 @@ namespace Odin.Planning.Controls
                 //{
                     txt_QtyStock1.Text = value.ToString();
                 //}));
-                
             }
         }
-
         public double QtyReserved
         {
             get
@@ -72,7 +64,6 @@ namespace Odin.Planning.Controls
             }
             set { txt_QtyReserved1.Text = value.ToString(); }
         }
-
         public double QtyAvailable
         {
             get
@@ -87,7 +78,6 @@ namespace Odin.Planning.Controls
                 //}));
             }
         }
-
         public double QtyNeeds
         {
             get
@@ -102,7 +92,6 @@ namespace Odin.Planning.Controls
                 //}));
             }
         }
-
         public double QtyPurchased
         {
             get
@@ -116,7 +105,6 @@ namespace Odin.Planning.Controls
                     txt_QtyPurchased1.Text = value.ToString(); }
             //)); }
         }
-
         public double QtyAwaiting
         {
             get
@@ -130,7 +118,6 @@ namespace Odin.Planning.Controls
                 txt_QtyAwaiting1.Text = value.ToString();}
             //)); }
         }
-
         public double QtyFreePO
         {
             get
@@ -142,9 +129,7 @@ namespace Odin.Planning.Controls
             {
                 txt_QtyFreePO.Text = value.ToString();
             }
-           
         }
-
         public double QtyNeedsCO
         {
             get
@@ -175,7 +160,6 @@ namespace Odin.Planning.Controls
                 //}));
             }
         }
-
         public double QtyInProduction
         {
             get
@@ -191,7 +175,6 @@ namespace Odin.Planning.Controls
                 //}));
             }
         }
-
         public double QtyQuarantine
         {
             get
@@ -215,7 +198,6 @@ namespace Odin.Planning.Controls
         public void bwStart(DoWorkEventHandler doWork)
         {
             wait = new ProgressForm(frmBatches);
-
             wait.bwStart(doWork);
         }
 
@@ -270,7 +252,5 @@ namespace Odin.Planning.Controls
         }
 
         #endregion
-
-
     }
 }

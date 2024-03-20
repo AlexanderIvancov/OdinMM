@@ -10,12 +10,9 @@ using System.Windows.Forms;
 
 namespace Odin.Planning
 {
-
-
     public partial class frm_PlanningView : BaseForm
     {
         OverlayPainter _mOverlay = new OverlayPainter();
-
         ProjectManager _mManager = null;
 
         public frm_PlanningView()
@@ -23,48 +20,21 @@ namespace Odin.Planning
             InitializeComponent();
             txt_DocDate.Value = System.DateTime.Now;
         }
+
         #region Variables
         Plan_BLL PlanBll = new Plan_BLL();
         class_Global globClass = new class_Global();
-        public Braincase.GanttChart.Task PubTask;
+        public Task PubTask;
 
-        public double _NSMT
-        {
-            get; set;
-        }
-        public double _NTHT
-        {
-            get; set;
-        }
-        public double _NQSMT
-        {
-            get; set;
-        }
-        public double _NQTHT
-        {
-            get; set;
-        }
-        public double _NFTA
-        {
-            get; set;
-        }
-        public double _NFQC
-        {
-            get; set;
-        }
-        public double _NXRAY
-        {
-            get; set;
-        }
-        public double _NIPA
-        {
-            get; set;
-        }
-        public double _NGPA
-        {
-            get; set;
-        }
-
+        public double _NSMT { get; set; }
+        public double _NTHT { get; set; }
+        public double _NQSMT { get; set; }
+        public double _NQTHT { get; set; }
+        public double _NFTA { get; set; }
+        public double _NFQC { get; set; }
+        public double _NXRAY { get; set; }
+        public double _NIPA { get; set; }
+        public double _NGPA { get; set; }
         public double NSMT
         {
             get
@@ -146,7 +116,6 @@ namespace Odin.Planning
             }
             set { txt_NGPA.Text = value.ToString(); }
         }
-
         public double CSMT
         {
             get
@@ -234,10 +203,9 @@ namespace Odin.Planning
 
         public void ShowCapacity(int weekoper)
         {
-            var data = Plan_BLL.getPlanningCapa(weekoper);
+            var data = (DataTable)Helper.getSP("sp_SelectPlanningCapacityNeeds", weekoper);
 
             foreach (DataRow row in data.Rows)
-            {
                 switch (Convert.ToInt32(row["stageid"]))
                 {
                     case 1:
@@ -277,25 +245,23 @@ namespace Odin.Planning
                         _NGPA = Convert.ToDouble(row["stagetime"]);
                         break;
                 }
-            }
         }
 
         private void SetScrollDate()
         {
-            chart1.ScrollTo(System.DateTime.Now);
+            chart1.ScrollTo(DateTime.Now);
             chart1.Invalidate();
         }
 
         public void RefreshGrid()
         {
-
             //_mManager = new ProjectManager();
 
             double CompletePerc = 0;
             string _tmpname = "";
             //double _Separ = 1;
 
-            var data = Plan_BLL.getPlanningView(cmb_Firms1.FirmId, txt_DocDate.Value.ToShortDateString());
+            var data = (DataTable)Helper.getSP("sp_PlanningView", cmb_Firms1.FirmId, txt_DocDate.Value.ToShortDateString());
 
             DataRow[] datacor = data.Select("ispre = -99");
 
@@ -342,8 +308,6 @@ namespace Odin.Planning
                     _mManager.Add(task);
                     _mManager.SetStart(task, ts);
                     //_mManager.SetDuration(task, ts);
-
-
 
                     DataRow[] dataprojectr = data.Select("ispre = -1 and coid = " + Convert.ToInt32(row["coid"]));
                     foreach (DataRow row1 in dataprojectr)
@@ -420,7 +384,6 @@ namespace Odin.Planning
                             _mManager.Group(task, childtask1);
                             _mManager.Relate(childtask, childtask1);
 
-
                             CompletePerc = Convert.ToDouble(row2["qty"]) == 0
                                 || Convert.ToInt32(row2["ismisc"]) == -1
                                 ? 1
@@ -428,12 +391,10 @@ namespace Odin.Planning
 
                             childtask1.Complete = class_Global.ToSingle(CompletePerc);
 
-
                             //if (Convert.ToInt32(row2["isplan"]) != -1)
                             //    childtask1.Complete = 1f;
                             //else
                             //    childtask1.Complete = 0f;
-
 
                             //Create and assign some resourses
                             var _resourse1 = new MyResource()
@@ -526,17 +487,11 @@ namespace Odin.Planning
             }
         }
 
-        public void AddTask(Braincase.GanttChart.Task maintask, Braincase.GanttChart.Task relatetask)
+        public void AddTask(Task maintask, Task relatetask) { }
+
+        public void RemoveTask(Task task)
         {
-
-        }
-
-        public void RemoveTask(Braincase.GanttChart.Task task)
-        {
-
-
             _mManager.Delete(task);
-
             RefreshChart();
         }
 
@@ -546,7 +501,7 @@ namespace Odin.Planning
             ShowCapacity(Convert.ToInt32(txt_Capa.Text));
         }
 
-        public void DeleteItem(Braincase.GanttChart.Task tsk)
+        public void DeleteItem(Task tsk)
         {
             int _planid = 0;
             string _week = "";
@@ -568,14 +523,14 @@ namespace Odin.Planning
                 && _isplan == -1
                 && globClass.DeleteConfirm() == true)
             {
-                PlanBll.DeleteBatchPlanning(_planid);
+                Helper.getSP("sp_DeleteBatchPlanningById", _planid);
                 RemoveTask(PubTask);
                 //RefreshGrid();
                 //bwStart(bw_List);
             }
         }
 
-        public void AddItem(Braincase.GanttChart.Task tsk)
+        public void AddItem(Task tsk)
         {
             int _batchid = 0;
             string _week = "";
@@ -614,7 +569,7 @@ namespace Odin.Planning
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    PlanBll.AddBatchPlanning(frm.BatchId, frm.Qty, frm.PlanDate, frm.Comments);
+                    Helper.getSP("sp_AddBatchPlanning", frm.BatchId, frm.Qty, frm.PlanDate, frm.Comments);
                     RefreshGrid();
 
                     //var _resourse1 = new MyResource()
@@ -634,7 +589,7 @@ namespace Odin.Planning
             }
         }
 
-        public void EditItem(Braincase.GanttChart.Task tsk)
+        public void EditItem(Task tsk)
         {
             int _batchid = 0;
             int _planid = 0;
@@ -676,7 +631,7 @@ namespace Odin.Planning
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    PlanBll.EditBatchPlanning(_planid, frm.Qty, frm.PlanDate, frm.Comments);
+                    Helper.getSP("sp_EditBatchPlanning", _planid, frm.Qty, frm.PlanDate, frm.Comments);
                     RefreshGrid();
                     //bwStart(bw_List);
                 }
@@ -719,60 +674,17 @@ namespace Odin.Planning
 
         #region Controls
 
-        private void txt_CSMT_TextChanged(object sender, EventArgs e)
-        {
-            NSMT = _NSMT * CSMT;
-        }
-
-        private void txt_QCSMT_TextChanged(object sender, EventArgs e)
-        {
-            NQSMT = _NQSMT * CQSMT;
-        }
-
-        private void txt_CXRay_TextChanged(object sender, EventArgs e)
-        {
-            NXRAY = _NXRAY * CXRAY;
-        }
-
-        private void txt_CTHT_TextChanged(object sender, EventArgs e)
-        {
-            NTHT = _NTHT * CTHT;
-        }
-
-        private void txt_CQTHT_TextChanged(object sender, EventArgs e)
-        {
-            NQTHT = _NQTHT * CQTHT;
-        }
-
-        private void txt_CFTA_TextChanged(object sender, EventArgs e)
-        {
-            NFTA = _NFTA * CFTA;
-        }
-
-        private void txt_CFQC_TextChanged(object sender, EventArgs e)
-        {
-            NFQC = _NFQC * CFQC;
-        }
-
-        private void txt_CIPA_TextChanged(object sender, EventArgs e)
-        {
-            NIPA = _NIPA * CIPA;
-        }
-
-        private void txt_CGPA_TextChanged(object sender, EventArgs e)
-        {
-            NGPA = _NGPA * CGPA;
-        }
-
-        private void btn_Refresh1_Click(object sender, EventArgs e)
-        {
-            bwStart(bw_List);
-        }
-
-        private void btn_Refresh_Click(object sender, EventArgs e)
-        {
-            bwStart(bw_List);
-        }
+        private void txt_CSMT_TextChanged(object sender, EventArgs e) { NSMT = _NSMT * CSMT; }
+        private void txt_QCSMT_TextChanged(object sender, EventArgs e) { NQSMT = _NQSMT * CQSMT; }
+        private void txt_CXRay_TextChanged(object sender, EventArgs e) { NXRAY = _NXRAY * CXRAY; }
+        private void txt_CTHT_TextChanged(object sender, EventArgs e) { NTHT = _NTHT * CTHT; }
+        private void txt_CQTHT_TextChanged(object sender, EventArgs e) { NQTHT = _NQTHT * CQTHT; }
+        private void txt_CFTA_TextChanged(object sender, EventArgs e) { NFTA = _NFTA * CFTA; }
+        private void txt_CFQC_TextChanged(object sender, EventArgs e) { NFQC = _NFQC * CFQC; }
+        private void txt_CIPA_TextChanged(object sender, EventArgs e) { NIPA = _NIPA * CIPA; }
+        private void txt_CGPA_TextChanged(object sender, EventArgs e) { NGPA = _NGPA * CGPA; }
+        private void btn_Refresh1_Click(object sender, EventArgs e) { bwStart(bw_List); }
+        private void btn_Refresh_Click(object sender, EventArgs e) { bwStart(bw_List); }
 
         private void chart1_TaskMouseDoubleClick(object sender, TaskMouseEventArgs e)
         {
@@ -812,7 +724,7 @@ namespace Odin.Planning
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    PlanBll.AddBatchPlanning(frm.BatchId, frm.Qty, frm.PlanDate, frm.Comments);
+                    Helper.getSP("sp_AddBatchPlanning", frm.BatchId, frm.Qty, frm.PlanDate, frm.Comments);
                     RefreshGrid();
 
                     //var _resourse1 = new MyResource()
@@ -838,7 +750,7 @@ namespace Odin.Planning
             {
                 //Braincase.GanttChart.Task tsk = _mManager.Contains(new Braincase.GanttChart.Task { Name = mni_FilterFor.Text }));
                 //Braincase.GanttChart.Task tsk = _mManager.Find(x => x.Name.Contains(mni_FilterFor.Text)));
-                foreach (Braincase.GanttChart.Task tsk in _mManager.Tasks)
+                foreach (Task tsk in _mManager.Tasks)
                 {
                     int k = tsk.Name.ToUpper().IndexOf(mni_FilterFor.Text.ToUpper());
                     if (k != -1)
@@ -859,10 +771,7 @@ namespace Odin.Planning
             chart1.ScrollTo(System.DateTime.Now);
         }
 
-        private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void mni_FilterExcludingSel_Click(object sender, EventArgs e) { }
 
         private void chart1_TaskMouseClick(object sender, TaskMouseEventArgs e)
         {
@@ -896,7 +805,6 @@ namespace Odin.Planning
 
                 mnu_Lines.Show(xpos, ypos);
             }
-
         }
 
         private void btn_AddPL_Click(object sender, EventArgs e)
@@ -908,7 +816,6 @@ namespace Odin.Planning
         {
             EditItem(PubTask);
         }
-
 
         #endregion
 
@@ -995,7 +902,6 @@ namespace Odin.Planning
             g.DrawRectangle(Pens.Brown, background);
             g.DrawString(builder.ToString(), chart.Font, color, new PointF(left, chart.Height - margin));
 
-
             // "pop matrix" -- restore the previous matrix
             e.Chart.EndBillboardMode(e.Graphics);
             // Demo: Static billboards end -----------------------------------
@@ -1029,14 +935,13 @@ namespace Odin.Planning
     /// A custom task of your own type deriving from the Task interface (optional)
     /// </summary>
     [Serializable]
-    public class MyTask : Braincase.GanttChart.Task
+    public class MyTask : Task
     {
         public MyTask(ProjectManager manager)
             : base()
         {
             Manager = manager;
         }
-
 
         private ProjectManager Manager { get; set; }
 
@@ -1045,7 +950,6 @@ namespace Odin.Planning
         public new TimeSpan End { get { return base.End; } set { Manager.SetEnd(this, value); } }
         public new TimeSpan Duration { get { return base.Duration; } set { Manager.SetDuration(this, value); } }
         public new float Complete { get { return base.Complete; } set { Manager.SetComplete(this, value); } }
-
     }
     #endregion custom task and resource
 }

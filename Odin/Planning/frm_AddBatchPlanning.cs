@@ -14,19 +14,14 @@ namespace Odin.Planning
 
         public string HeaderText
         {
-            get {
-                return this.Text;
-            }
+            get { return this.Text; }
             set { this.Text = value; }
-            
         }
-
         public int BatchId
         {
             get { return cmb_Batches1.BatchId; }
             set { cmb_Batches1.BatchId = value; }
         }
-
         public double Qty
         {
             get
@@ -36,7 +31,6 @@ namespace Odin.Planning
             }
             set { txt_Qty.Text = value.ToString(); }
         }
-
         public string PlanDate
         {
             get { return txt_PlanDate.Value.ToShortDateString(); }
@@ -46,13 +40,11 @@ namespace Odin.Planning
                 catch { }
             }
         }
-
         public DateTime PlanDateD
         {
             get { return Convert.ToDateTime(txt_PlanDate.Value); }
             set { txt_PlanDate.Value = value; }
         }
-
         public string Week
         {
             get { return cmb_Week1.Week; }

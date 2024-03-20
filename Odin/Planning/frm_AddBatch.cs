@@ -1,4 +1,5 @@
 ﻿using ComponentFactory.Krypton.Toolkit;
+
 namespace Odin.Planning
 {
     public delegate void BatchSavedEventHandler(object sender);
@@ -15,6 +16,5 @@ namespace Odin.Planning
         {
             BatchSaved?.Invoke(this);
         }
-        
     }
 }

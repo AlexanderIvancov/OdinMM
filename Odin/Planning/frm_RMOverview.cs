@@ -47,16 +47,14 @@ namespace Odin.Planning
         public void SetCellsColor()
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 if (Convert.ToInt32(row.Cells["cn_missed"].Value) < 0)
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.LightCoral;
-            }
         }
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -71,9 +69,7 @@ namespace Odin.Planning
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -81,14 +77,10 @@ namespace Odin.Planning
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
         public void bw_List(object sender, DoWorkEventArgs e)
@@ -99,16 +91,12 @@ namespace Odin.Planning
             }
             catch { }
 
-
-
-            var data = Plan_BLL.RMOverview(cmb_Common1.SelectedValue, cmb_Firms1.FirmId);
+            var data = (DataTable)Helper.getSP("sp_SelectRMOverview", cmb_Common1.SelectedValue, cmb_Firms1.FirmId);
 
             gv_List.ThreadSafeCall(delegate
             {
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
-
-
 
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
@@ -116,9 +104,7 @@ namespace Odin.Planning
 
                 SetCellsColor();
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
-
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -128,33 +114,27 @@ namespace Odin.Planning
 
         public void FillOrders()
         {
-            var data = Plan_BLL.RMOverview(cmb_Common1.SelectedValue, cmb_Firms1.FirmId);
+            var data = (DataTable)Helper.getSP("sp_SelectRMOverview", cmb_Common1.SelectedValue, cmb_Firms1.FirmId);
 
             gv_List.ThreadSafeCall(delegate
             {
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
 
-
-
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
-
                 
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
 
                 SetCellsColor();
-
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
                 bn_List.BindingSource = bs_List;
             });
         }
-
 
         #endregion
 
@@ -164,9 +144,7 @@ namespace Odin.Planning
             bwStart(bw_List);
         }
 
-
         #region Context menu
-
 
         private void mnu_Lines_Opening(object sender, CancelEventArgs e)
         {
@@ -186,7 +164,6 @@ namespace Odin.Planning
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -207,7 +184,6 @@ namespace Odin.Planning
                 bs_List.Filter = _missed > 0
                     ? String.IsNullOrEmpty(bs_List.Filter) == true ? "missed > 0 " : bs_List.Filter + " AND missed > 0"
                     : String.IsNullOrEmpty(bs_List.Filter) == true ? "missed <= 0 " : bs_List.Filter + " AND missed <= 0";
-
             }
             catch { }
             SetCellsColor();
@@ -222,7 +198,6 @@ namespace Odin.Planning
             catch
             { }
             SetCellsColor();
-
         }
 
         private void mni_Search_Click(object sender, EventArgs e)
@@ -250,7 +225,6 @@ namespace Odin.Planning
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -263,7 +237,6 @@ namespace Odin.Planning
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -274,7 +247,6 @@ namespace Odin.Planning
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_Copy_Click(object sender, EventArgs e)
@@ -289,7 +261,7 @@ namespace Odin.Planning
             frm.HeaderText = "Select view for production deficite list";
             frm.grid = this.gv_List;
             frm.formname = this.Name;
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
             frm.UserId = DAL.UserId;
 
             frm.FillData(frm.grid);
@@ -301,7 +273,6 @@ namespace Odin.Planning
                 LoadColumns(gv_List);
             }
         }
-
 
         #endregion
 

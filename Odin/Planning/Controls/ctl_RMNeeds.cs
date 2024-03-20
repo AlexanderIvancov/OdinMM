@@ -28,31 +28,20 @@ namespace Odin.Planning.Controls
         Plan_BLL BLL = new Plan_BLL();
         DAL_Functions DLL = new DAL_Functions();
         AdmMenu mMenu = new AdmMenu();
-
         public DataTable data;
-
         public int RowIndex = 0;
         public int ColumnIndex = 0;
         public string ColumnName = "";
         public string CellValue = "";
-
-        public int BatchId
-        { get; set; }
-
-        public int RetBatchId()
-        {
-            return BatchId;
-        }
-
+        public int BatchId { get; set; }
+        public int RetBatchId() { return BatchId; }
         int _articleid = 0;
         double _qtyfreeinpo = 0;
-
         public double QtyFreeInPO
         {
             get { return _qtyfreeinpo; }
             set { _qtyfreeinpo = value; }
         }
-
         public int ArtId
         {
             get { return cmb_Articles1.ArticleId; }
@@ -65,19 +54,16 @@ namespace Odin.Planning.Controls
                 RecalcPOQty();
             }
         }
-         
         public string Comments
         {
             get { return txt_comments.Text; }
             set { txt_comments.Text = value; }
         }
-              
         public string Description
         {
             get { return txt_description.Text; }
             set { txt_description.Text = value; }
         }
-
         public double AvailableQty
         {
             get
@@ -90,7 +76,6 @@ namespace Odin.Planning.Controls
                 txt_Available.Text = value.ToString();
             }
         }
-
         public double PurchasedQty
         {
             get
@@ -103,14 +88,11 @@ namespace Odin.Planning.Controls
                 txt_QtyToPo.Text = value.ToString();
             }
         }
-
         public void EnableSave(bool _istrue)
         {
             btn_Save.Enabled = _istrue == true;
         }
-
         int _mode = 0; //By default new order
-
         public int Mode
         {
             get { return _mode; }
@@ -136,24 +118,15 @@ namespace Odin.Planning.Controls
             //    row.Cells["cn_purchase"].Value = 0;
             //}
             foreach (DataRow row in data.Rows)
-            {
                 row["topurchase"] = 0;
-            }
             RecalcPOQty();
         }
 
-        private void btn_Excel_Click(object sender, EventArgs e)
-        {
+        private void btn_Excel_Click(object sender, EventArgs e) { }
 
-        }
-
-        private void btn_Save_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void btn_Save_Click(object sender, EventArgs e) { }
 
         #region Context menu
-
 
         private void mnu_Lines_Opening(object sender, CancelEventArgs e)
         {
@@ -173,7 +146,6 @@ namespace Odin.Planning.Controls
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -192,7 +164,6 @@ namespace Odin.Planning.Controls
             catch
             { }
             SetCellsColor();
-
         }
 
         private void mni_Search_Click(object sender, EventArgs e)
@@ -220,7 +191,6 @@ namespace Odin.Planning.Controls
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -233,7 +203,6 @@ namespace Odin.Planning.Controls
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -244,7 +213,6 @@ namespace Odin.Planning.Controls
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_Copy_Click(object sender, EventArgs e)
@@ -274,14 +242,13 @@ namespace Odin.Planning.Controls
 
         #endregion
 
-
         #endregion
 
         #region Methods
 
         public void LoadColumns(DataGridView grid)
         {
-            DLL.UserLogin = System.Environment.UserName;
+            DLL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -296,9 +263,7 @@ namespace Odin.Planning.Controls
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -306,19 +271,14 @@ namespace Odin.Planning.Controls
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
         public void bwStart(DoWorkEventHandler doWork)
         {
-
             // Create a background thread
             var bw = new BackgroundWorker();
             bw.DoWork += doWork;
@@ -359,13 +319,11 @@ namespace Odin.Planning.Controls
                 MessageBox.Show(processingCancelled);
                 return;
             }
-
         }
 
         public void bw_List(object sender, DoWorkEventArgs e)
         {
-
-            data = Plan_BLL.getNeedsRM(ArtId);
+            data = (DataTable)Helper.getSP("sp_SelectArticleNeedsDets", ArtId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -374,20 +332,17 @@ namespace Odin.Planning.Controls
                 gv_List.DataSource = bs_List;
                 SetCellsColor();
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
                 bn_List.BindingSource = bs_List;
             });
             //MessageBox.Show(cmb_Articles1.QtyAvail.ToString());
-
         }
 
         public void ShowDets()
         {
-
-            data = Plan_BLL.getNeedsRM(ArtId);
+            data = (DataTable)Helper.getSP("sp_SelectArticleNeedsDets", ArtId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -396,7 +351,6 @@ namespace Odin.Planning.Controls
                 gv_List.DataSource = bs_List;
                 SetCellsColor();
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -409,11 +363,9 @@ namespace Odin.Planning.Controls
             try
             {
                 foreach (DataGridViewRow row in this.gv_List.Rows)
-                {
                     //Color of freezed qty
                     if (Convert.ToDouble((row.Cells["cn_missed"].Value)) < 0)
                         row.Cells["cn_missed"].Style.ForeColor = Color.Red;
-                }
             }
             catch
             { }
@@ -424,9 +376,7 @@ namespace Odin.Planning.Controls
             double Qty = 0;
             double Qty1 = 0;
 
-
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 try
                 {
                     Qty1 = Math.Round(Convert.ToDouble(row.Cells["cn_purchase"].Value), 5);
@@ -434,7 +384,6 @@ namespace Odin.Planning.Controls
                 }
                 catch
                 { }
-            }
 
             PurchasedQty = Math.Round(Qty, 5);
         }
@@ -447,9 +396,7 @@ namespace Odin.Planning.Controls
             //    row.Cells["cn_purchase"].Value = row.Cells["cn_missed"].Value;
             //}
             foreach (DataRow row in data.Rows)
-            {
                 row["topurchase"] = row["missed"];
-            }
             RecalcPOQty();
         }
 
@@ -482,15 +429,11 @@ namespace Odin.Planning.Controls
             //}
             //Clear
             foreach (DataRow row in data.Rows)
-            {
                 row["topurchase"] = 0;
-            }
             //Clear
             foreach (DataRow row in data.Rows)
-            {
                 if (Convert.ToDouble(row["missed"]) > 0
                             && _QtyDistr > 0)
-                {
                     if (Convert.ToDouble(row["missed"]) > _QtyDistr)
                     {
                         row["topurchase"] = _QtyDistr;
@@ -502,8 +445,6 @@ namespace Odin.Planning.Controls
                         row["topurchase"] = Convert.ToDouble(row["missed"]);
                         _QtyDistr = _QtyDistr - Convert.ToDouble(row["missed"]);
                     }
-                }
-            }
 
             RecalcPOQty();
         }
@@ -562,9 +503,7 @@ namespace Odin.Planning.Controls
             double Qty = 0;
             double Qty1 = 0;
 
-
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 try
                 {
                     Qty1 = Math.Round(Convert.ToDouble(row.Cells["cn_missed"].Value), 5);
@@ -572,11 +511,9 @@ namespace Odin.Planning.Controls
                 }
                 catch
                 { }
-            }
 
             return Qty;
         }
-
 
         #endregion
 

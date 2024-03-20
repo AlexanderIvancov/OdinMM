@@ -17,6 +17,5 @@ namespace Odin.Planning
         {
             ProjectSaved?.Invoke(this);
         }
-
     }
 }

@@ -193,7 +193,7 @@ namespace Odin.Warehouse.Requests.Controls
         public void FillBatchDets(int BatchId)
         {
             bool ToAdd = true;
-            var data = Plan_BLL.getBatchRM(BatchId);
+            var data = (DataTable)Helper.getSP("sp_SelectBatchRMFreezedDets", BatchId);
 
             foreach (DataRow row in data.Rows)
             {
@@ -444,7 +444,7 @@ namespace Odin.Warehouse.Requests.Controls
                             && cmb_Batches1.BatchId != 0)
                         {
                             //Dobavljaem liniju partii
-                            _batchdetid = PlanBLL.AddBatchDetail(cmb_Batches1.BatchId, Convert.ToInt32(row.Cells["cn_ArtId"].Value), 0/*Convert.ToDouble(row.Cells["cn_QtyToRequest"].Value)*/, "");
+                            _batchdetid = Convert.ToInt32(Helper.getSP("sp_AddBatchDet", cmb_Batches1.BatchId, Convert.ToInt32(row.Cells["cn_ArtId"].Value), 0/*Convert.ToDouble(row.Cells["cn_QtyToRequest"].Value)*/, ""));
                         }
                         else
                         {

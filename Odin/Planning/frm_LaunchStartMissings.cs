@@ -27,9 +27,7 @@ namespace Odin.Planning
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
-                                
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
