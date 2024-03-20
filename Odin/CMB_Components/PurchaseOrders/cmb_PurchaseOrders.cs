@@ -25,63 +25,51 @@ namespace Odin.CMB_Components.PurchaseOrders
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
         PopupWindowHelper PopupHelper = null;
         DAL_Functions Dll = new DAL_Functions();
-
         int _PurchaseOrderId = 0;
         int _PrevId = 0;
-
         PO_BLL POBll = new PO_BLL();
-
         bool _EnableSearchId = false;
         string _PurchaseOrder = "";
         int _supplierid = 0;
         int _internal = 0;
         int _contactpersonid = 0;
         string _contract = "";
-        
         public int SupplierId
         {
             get { return _supplierid; }
             set { _supplierid = value; }
         }
-
         public string Supplier
         { get; set; }
-
         public int ContactPersonId
         {
             get { return _contactpersonid; }
             set { _contactpersonid = value; }
-
         }
-
         public string Contract
         {
             get { return _contract; }
             set { _contract = value; }
         }
-
-        private void buttonSpecAny1_Click(object sender, EventArgs e)
+        public bool EnableSearchId
         {
-            txt_PurchaseOrder.Text = string.Empty;
+            get
+            {
+                return _EnableSearchId;
+            }
+            set
+            {
+                _EnableSearchId = value;
+            }
         }
-
         public string PurchaseOrder
         {
             get { return txt_PurchaseOrder.Text; }
             set
             {
-
                 _PurchaseOrder = value;
                 txt_PurchaseOrder.Text = value;
-                DataSet ds = new DataSet();
-
-                SqlDataAdapter adapter =
-                    new SqlDataAdapter(
-                        "SELECT DISTINCT TOP 1 id FROM PUR_Header WHERE name = '" + _PurchaseOrder.ToString() + "'", sConnStr);
-
-                adapter.Fill(ds);
-
-                DataTable dt = ds.Tables[0];
+                DataTable dt = (DataTable)Helper.GetOneRecord("SELECT DISTINCT TOP 1 id FROM PUR_Header WHERE name = '" + _PurchaseOrder.ToString() + "'");
 
                 try
                 {
@@ -89,7 +77,6 @@ namespace Odin.CMB_Components.PurchaseOrders
                 }
                 catch
                 {
-
                     _PurchaseOrderId = 0;
                     return;
                 }
@@ -97,7 +84,6 @@ namespace Odin.CMB_Components.PurchaseOrders
                 PurchaseOrderChanged?.Invoke(this);
             }
         }
-
         public int PurchaseOrderId
         {
             get
@@ -107,27 +93,13 @@ namespace Odin.CMB_Components.PurchaseOrders
             }
             set
             {
-
-
                 _PurchaseOrderId = value;
 
                 if (_PrevId != _PurchaseOrderId)
                 {
-                    SqlConnection conn = new SqlConnection(sConnStr);
-                    conn.Open();
-
-                    DataSet ds = new DataSet();
-
-                    SqlDataAdapter adapter =
-                        new SqlDataAdapter("SELECT top 1 h.name, h.supid, isnull(h.contpersid, 0) as contpersid, isnull(h.contract, '') as contract, isnull(c.company, '') as supplier FROM PUR_Header h left join bas_companies c on c.id = h.supid WHERE h.id = " + _PurchaseOrderId.ToString(), conn);
-                    adapter.Fill(ds);
-
-                    conn.Close();
-
-                    DataTable dt = ds.Tables[0];
+                    DataTable dt = (DataTable)Helper.GetOneRecord("SELECT top 1 h.name, h.supid, isnull(h.contpersid, 0) as contpersid, isnull(h.contract, '') as contract, isnull(c.company, '') as supplier FROM PUR_Header h left join bas_companies c on c.id = h.supid WHERE h.id = " + _PurchaseOrderId.ToString());
 
                     if (dt.Rows.Count > 0)
-                    {
                         foreach (DataRow dr in dt.Rows)
                         {
                             txt_PurchaseOrder.Text = dr["name"].ToString();
@@ -137,7 +109,6 @@ namespace Odin.CMB_Components.PurchaseOrders
                             ContactPersonId = Convert.ToInt32(dr["contpersid"]);
                             Contract = dr["contract"].ToString();
                         }
-                    }
                     else
                     {
                         txt_PurchaseOrder.Text = string.Empty;
@@ -151,13 +122,10 @@ namespace Odin.CMB_Components.PurchaseOrders
                     _PrevId = _PurchaseOrderId;
 
                     PurchaseOrderChanged?.Invoke(this);
-
                 }
             }
         }
-
         int _PurchaseOrderSavedId = 0;
-
         public int PurchaseOrderSavedId
         {
             get { return _PurchaseOrderSavedId; }
@@ -168,21 +136,13 @@ namespace Odin.CMB_Components.PurchaseOrders
             }
         }
 
+        private void buttonSpecAny1_Click(object sender, EventArgs e)
+        {
+            txt_PurchaseOrder.Text = string.Empty;
+        }
         public void PurchaseOrdersSendSave()
         {
             PurchaseOrderSaved?.Invoke(this);
-        }
-
-        public bool EnableSearchId
-        {
-            get
-            {
-                return _EnableSearchId;
-            }
-            set
-            {
-                _EnableSearchId = value;
-            }
         }
 
         private void btn_AdvView_Click(object sender, EventArgs e)
@@ -205,9 +165,7 @@ namespace Odin.CMB_Components.PurchaseOrders
             PopupHelper.PopupCancel += delegate (object _sender, PopupCancelEventArgs _e)
             {
                 if (popup.ShowingModal)
-                {
                     _e.Cancel = true;
-                }
             };
 
             popup.FillData(PurchaseOrder);
@@ -232,24 +190,17 @@ namespace Odin.CMB_Components.PurchaseOrders
 
             if (result == DialogResult.OK)
             {
-                int _res = POBll.AddPurchaseOrderHead(frm.SupId, frm.ContPersId, frm.Comments, frm.Contract, frm.CurId, 
-                                                        frm.IncotermsId, frm.DelivPlaceId, frm.DelivAddressId, frm.InProcess);
-
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddPurchaseOrderHead", frm.SupId, frm.ContPersId, frm.Comments, frm.Contract, frm.CurId, 
+                                                        frm.IncotermsId, frm.DelivPlaceId, frm.DelivAddressId, frm.InProcess));
                 PurchaseOrderId = _res;
 
                 PurchaseOrderSaved?.Invoke(this);
-
             }
-            if (result == DialogResult.Cancel)
-            {
-               
-            }
+            if (result == DialogResult.Cancel) { }
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
         {
-
-
             int _id = 0;
 
             try { _id = PurchaseOrderId; }
@@ -277,18 +228,15 @@ namespace Odin.CMB_Components.PurchaseOrders
 
                 if (result == DialogResult.OK)
                 {
-                    
-                    POBll.EditPurchaseOrderHead(_id, frm.SupId, frm.ContPersId, frm.Comments, frm.Contract,
+
+                    Helper.getSP("sp_EditPurchaseOrderHead", _id, frm.SupId, frm.ContPersId, frm.Comments, frm.Contract,
                                                 frm.CurId, frm.IncotermsId, frm.DelivPlaceId, frm.DelivAddressId,
                                                 frm.InProcess);
-
                     POBll.POHeadId = _id;
                     _PrevId = 0;
                     PurchaseOrderId = _id;
                     PurchaseOrderSaved?.Invoke(this);
-
                 }
-                
             }
         }
 

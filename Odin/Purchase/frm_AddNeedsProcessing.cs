@@ -34,7 +34,6 @@ namespace Odin.Purchase
 
         int _deptid = 0;
         int _stageid = 0;
-
         //public int BatchId
         //{
         //    get { return cmb_Batches1.BatchId; }
@@ -46,19 +45,16 @@ namespace Odin.Purchase
         //    get { return cmb_Types1.TypeId; }
         //    set { cmb_Types1.TypeId = value; }
         //}
-
         public int DeptId
         {
             get { return _deptid; }
             set { _deptid = value; }
         }
-
         public int StageId
         {
             get { return _stageid; }
             set { _stageid = value; }
         }
-
         public int RowIndex = 0;
         public int ColumnIndex = 0;
         public string ColumnName = "";
@@ -87,7 +83,7 @@ namespace Odin.Purchase
                 }
             }
 
-            var data = PO_BLL.getArtTotalsListRMForAddingBatches(databatches, StageId);
+            var data = (DataTable)Helper.getSP("sp_SelectArtTotalsListForAddingBatches", databatches, StageId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -100,12 +96,11 @@ namespace Odin.Purchase
             {
                 bn_List.BindingSource = bs_List;
             });
-
         }
 
         public void FillBatches()
         {
-            var data = PO_BLL.getActiveBatches();
+            var data = (DataTable)Helper.getSP("sp_SelectActiveBatches");
 
             gv_Batches.ThreadSafeCall(delegate
             {
@@ -118,7 +113,6 @@ namespace Odin.Purchase
             {
                 bn_Batches.BindingSource = bs_Batches;
             });
-
         }
 
         private void buttonSpecAny1_Click(object sender, EventArgs e)
@@ -174,12 +168,11 @@ namespace Odin.Purchase
                 MessageBox.Show(processingCancelled);
                 return;
             }
-
         }
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -194,9 +187,7 @@ namespace Odin.Purchase
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -204,14 +195,10 @@ namespace Odin.Purchase
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
         private void btn_Excel_Click(object sender, EventArgs e)
@@ -220,7 +207,6 @@ namespace Odin.Purchase
         }
 
         #region Context menu
-
 
         private void mnu_Lines_Opening(object sender, CancelEventArgs e)
         {
@@ -240,7 +226,6 @@ namespace Odin.Purchase
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -259,7 +244,6 @@ namespace Odin.Purchase
             catch
             { }
             //SetCellsColor();
-
         }
 
         private void mni_Search_Click(object sender, EventArgs e)
@@ -287,7 +271,6 @@ namespace Odin.Purchase
             }
             catch { }
             //SetCellsColor();
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -300,7 +283,6 @@ namespace Odin.Purchase
             }
             catch { }
             //SetCellsColor();
-
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -311,7 +293,6 @@ namespace Odin.Purchase
             }
             catch { }
             //SetCellsColor();
-
         }
 
         private void mni_Copy_Click(object sender, EventArgs e)
@@ -343,7 +324,6 @@ namespace Odin.Purchase
 
         #region Context menu Batches
 
-
         private void mnu_LinesB_Opening(object sender, CancelEventArgs e)
         {
             try
@@ -362,7 +342,6 @@ namespace Odin.Purchase
                 CellValueB = gv_Batches.Rows[RowIndexB].Cells[ColumnIndexB].Value.ToString();
                 ColumnNameB = gv_Batches.Columns[ColumnIndexB].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -381,7 +360,6 @@ namespace Odin.Purchase
             catch
             { }
             //SetCellsColor();
-
         }
 
         private void mni_SearchB_Click(object sender, EventArgs e)
@@ -409,7 +387,6 @@ namespace Odin.Purchase
             }
             catch { }
             //SetCellsColor();
-
         }
 
         private void mni_FilterExcludingSelB_Click(object sender, EventArgs e)
@@ -422,7 +399,6 @@ namespace Odin.Purchase
             }
             catch { }
             //SetCellsColor();
-
         }
 
         private void mni_RemoveFilterB_Click(object sender, EventArgs e)
@@ -433,7 +409,6 @@ namespace Odin.Purchase
             }
             catch { }
             //SetCellsColor();
-
         }
 
         private void mni_CopyB_Click(object sender, EventArgs e)
@@ -448,7 +423,7 @@ namespace Odin.Purchase
             frm.HeaderText = "Select view for batches list";
             frm.grid = this.gv_Batches;
             frm.formname = this.Name;
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
             frm.UserId = DAL.UserId;
 
             frm.FillData(frm.grid);
@@ -476,10 +451,8 @@ namespace Odin.Purchase
             
             int _count = 0;
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 if (Convert.ToInt32(row.Cells["chk_toadd"].Value) != 0)
                     _count++;
-            }
             if (_count > 0)
             {
                 DataTable databatches = new DataTable();
@@ -487,22 +460,18 @@ namespace Odin.Purchase
                 
 
                 foreach (DataGridViewRow row in this.gv_Batches.Rows)
-                {
                     if (Convert.ToInt32(row.Cells["chk_toaddb"].Value) != 0)
                     {
                         DataRow drser = databatches.NewRow();
                         drser["id"] = Convert.ToInt32(row.Cells["cn_batchid"].Value.ToString());
                         databatches.Rows.Add(drser);
                     }
-                }
-
 
                 DataTable data = new DataTable();
                 data.Columns.Add("artid", typeof(int));
                 data.Columns.Add("qty", typeof(double));
 
                 foreach (DataGridViewRow row in this.gv_List.Rows)
-                {
                     if (Convert.ToInt32(row.Cells["chk_toadd"].Value) != 0)
                     {
                         DataRow drser = data.NewRow();
@@ -510,17 +479,13 @@ namespace Odin.Purchase
                         drser["qty"] = -1 * Convert.ToDouble(row.Cells["cn_missed"].Value.ToString()); 
                         data.Rows.Add(drser);
                     }
-                }
 
-                BLL.AddNewNeedsBatches(txt_Comments.Text, databatches, data);
+                Helper.getSP("sp_AddPONeedsForProcessBatches", txt_Comments.Text, databatches, data);
                 
                 bwStart(bw_List);
 
-
                 NeedsAdded?.Invoke(this);
-
             }
-           
         }
 
         private void btn_Cancel_Click(object sender, EventArgs e)

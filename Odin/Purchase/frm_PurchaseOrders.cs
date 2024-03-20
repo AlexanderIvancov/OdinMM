@@ -12,6 +12,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+
 namespace Odin.Purchase
 {
     public delegate int ReceivePOId();
@@ -27,7 +28,6 @@ namespace Odin.Purchase
         #region Variables
 
         public static event ReceivePOId ReceiveId;
-
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
         class_Global glob_Class = new class_Global();
         PO_BLL POBll = new PO_BLL();
@@ -37,31 +37,23 @@ namespace Odin.Purchase
         class_Global globClass = new class_Global();
         ExportData ED;
         Helper MyHelper = new Helper();
-
         public ctl_PODets ctlGen = null;
         public ctl_AddFromNeeds ctlNeeds = null;
         public ctl_POConfirms ctlConf = null;
         public ctl_PODeliveries ctlDeliveries = null;
         public ctl_POHistory ctlHistory = null;
-
         public int ControlWidth = 250;
-
         frm_AddPODets frm = null;
-
         public int RowIndex = 0;
         public int ColumnIndex = 0;
         public string ColumnName = "";
         public string CellValue = "";
-
-
         public int POId
         {
             get;
             set;
         }
-
         public int _PrevId = 0;
-
         public DataTable data;
 
         #endregion
@@ -70,7 +62,7 @@ namespace Odin.Purchase
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -85,9 +77,7 @@ namespace Odin.Purchase
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -95,14 +85,10 @@ namespace Odin.Purchase
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
         public void ClearFilter()
@@ -145,7 +131,7 @@ namespace Odin.Purchase
         public void bw_List(object sender, DoWorkEventArgs e)
         {
             //MessageBox.Show(txt_CreatDateFrom.Value.ToShortDateString());
-            data = PO_BLL.getPurchaseOrders(cmb_PurchaseOrders1.PurchaseOrderId, cmb_Types1.TypeId, cmb_Firms1.FirmId, cmb_Common1.SelectedValue,
+            data = (DataTable)Helper.getSP("sp_PurchasePortfolio", cmb_PurchaseOrders1.PurchaseOrderId, cmb_Types1.TypeId, cmb_Firms1.FirmId, cmb_Common1.SelectedValue,
                                             cmb_Articles1.ArticleId, cmb_Articles1.Article.Trim(), txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
                                             txt_CreatDateTill.Value == null ? "" : txt_CreatDateTill.Value.ToString().Trim(), txt_SupOrder.Text, txt_Comments.Text,
                                             txt_ReqDateFrom.Value == null ? "" : txt_ReqDateFrom.Value.ToString().Trim(), 
@@ -160,7 +146,6 @@ namespace Odin.Purchase
 
                 SetCellsColor();
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -247,6 +232,7 @@ namespace Odin.Purchase
 
             return NewPage("Deliveries history ", 1, ctlDeliveries, ctlDeliveries.Width);
         }
+
         private void ChangePOIdSelection(object sender)
         {
             bwStart(bw_List);
@@ -254,7 +240,6 @@ namespace Odin.Purchase
 
         private bool CheckOldRow()
         {
-
             try
             {
                 POId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
@@ -265,9 +250,7 @@ namespace Odin.Purchase
             }
 
             if (_PrevId == POId)
-            {
                 return true;
-            }
             else
             {
                 _PrevId = POId;
@@ -287,7 +270,6 @@ namespace Odin.Purchase
             FindHistoryPages(poid);
 
             //FindBatchPages(coid);
-
         }
 
         public void ShowEdit()
@@ -333,12 +315,9 @@ namespace Odin.Purchase
             {
                 ctl_POConfirms ctlConf1 = (ctl_POConfirms)page.Controls.Find("ctl_POConfirms", true).FirstOrDefault();
                 if (ctlConf1 != null)
-                {
                     //MessageBox.Show(coid.ToString());
                     ctlConf1.cmb_PurchaseOrdersLines1.PurchaseOrderLineId = poid;
                     //ctlConf11.COId = coid;
-                }
-
             }
         }
 
@@ -354,7 +333,6 @@ namespace Odin.Purchase
                     ctlDeliveries1.HeaderText = "History of deliveries for: " + POBll.POName + '/' + POBll.POLine;
                     //ctlConf11.COId = coid;
                 }
-
             }
         }
 
@@ -364,10 +342,8 @@ namespace Odin.Purchase
             {
                 ctl_AddFromNeeds ctlNeeds1 = (ctl_AddFromNeeds)page.Controls.Find("ctl_AddFromNeeds", true).FirstOrDefault();
                 if (ctlNeeds1 != null)
-                {
                     ctlNeeds1.RefreshData();
                     //ctlNeeds1.POHeadId = poheadid;
-                }
                 //break;
             }
         }
@@ -378,11 +354,9 @@ namespace Odin.Purchase
             {
                 ctl_POHistory ctlHis1 = (ctl_POHistory)page.Controls.Find("ctl_POHistory", true).FirstOrDefault();
                 if (ctlHis1 != null)
-                {
                     //MessageBox.Show(coid.ToString());
                     ctlHis1.POId = poid;
                     //ctlConf11.COId = coid;
-                }
                 //break;
             }
         }
@@ -430,7 +404,6 @@ namespace Odin.Purchase
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -449,7 +422,6 @@ namespace Odin.Purchase
             catch
             { }
             SetCellsColor();
-
         }
 
         private void mni_Search_Click(object sender, EventArgs e)
@@ -477,7 +449,6 @@ namespace Odin.Purchase
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -490,7 +461,6 @@ namespace Odin.Purchase
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -501,7 +471,6 @@ namespace Odin.Purchase
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_Copy_Click(object sender, EventArgs e)
@@ -534,13 +503,10 @@ namespace Odin.Purchase
             ED.DgvIntoExcel();
         }
 
-
-
         #endregion
 
         private void AddPO(object sender)
         {
-           
             if (frm.ctl_PODets1.POId != 0)
                 frm.Close();
 
@@ -553,11 +519,8 @@ namespace Odin.Purchase
 
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
             }));
-
-
             //FindNeedsPages(cmb_PurchaseOrders1.PurchaseOrderId);
         }
-
 
         #endregion
 
@@ -657,17 +620,13 @@ namespace Odin.Purchase
 
                             //Date of purchase order!!
 
-
-
                             frm.ctl_PODets1.ShowLineTots();
                             frm.ctl_PODets1.CheckEmpty();
 
                             frm.ctl_PODets1.DataNeeds = ctlNeeds1.ctl_RMNeeds1.data.Copy();
                         }
                         else
-                        {
                             _globtest = false;
-                        }
                     }
                 }
 
@@ -677,9 +636,7 @@ namespace Odin.Purchase
                     frm.Show(); frm.GetKryptonFormFields();
                 }
                 else
-                {
                     frm = null;
-                }
             }
         }
 
@@ -721,7 +678,7 @@ namespace Odin.Purchase
 
             if (globClass.DeleteConfirm() == true)
             {
-                MessageBox.Show(POBll.DeletePOLine(_id));
+                MessageBox.Show(Convert.ToString(Helper.getSP("sp_DeletePODets", _id)));
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
 
@@ -739,7 +696,7 @@ namespace Odin.Purchase
             if (_headid != 0
                 && globClass.CancelConfirm() == true)
             {
-                POBll.CancelAllLines(_headid);
+                Helper.getSP("sp_CancelPO", _headid);
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
 
@@ -752,9 +709,7 @@ namespace Odin.Purchase
         private void gv_List_SelectionChanged(object sender, EventArgs e)
         {
             if (CheckOldRow() == false)
-            {
                 ShowDetails(POId);
-            }
         }
 
         private void btn_General_Click(object sender, EventArgs e)
@@ -772,7 +727,6 @@ namespace Odin.Purchase
         private void frm_PurchaseOrders_Resize(object sender, EventArgs e)
         {
             if (_Main.WindowState == FormWindowState.Maximized)
-            {
                 foreach (var page in kryptonDockingManager1.PagesDocked)
                 {
                     kryptonDockingManager1.RemovePage(page, false);
@@ -781,7 +735,6 @@ namespace Odin.Purchase
                                                new KryptonPage[] { page });
 
                 }
-            }
         }
 
         private void btn_Requests_Click(object sender, EventArgs e)
@@ -792,9 +745,7 @@ namespace Odin.Purchase
             {
                 ctl_AddFromNeeds ctlNeeds1 = (ctl_AddFromNeeds)page.Controls.Find("ctl_AddFromNeeds", true).FirstOrDefault();
                 if (ctlNeeds1 != null)
-                {
                     _countcontrols++;
-                }
             }
 
             if (_countcontrols > 0)
@@ -825,21 +776,13 @@ namespace Odin.Purchase
 
                 frm_rptPurchaseOrder frm = new frm_rptPurchaseOrder();
                 frm.HeadId = cmb_PurchaseOrders1.PurchaseOrderId;
-
-
                 frm.HeaderText = "Print purchase order: " + cmb_PurchaseOrders1.PurchaseOrder;
-
                 frm.data = data.Clone();
 
                 foreach (DataRow dr in data.Rows)
-                {
                     if (Convert.ToInt32(dr["toprint"]) == -1
                         && Convert.ToInt32(dr["headid"]) == cmb_PurchaseOrders1.PurchaseOrderId)
-                    {
                         frm.data.ImportRow(dr);
-                    }
-                }
-
 
                 frm.FillReport();
 
@@ -847,10 +790,7 @@ namespace Odin.Purchase
             }
         }
 
-        private void btn_Batches_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void btn_Batches_Click(object sender, EventArgs e) { }
 
         private void btn_Deliveries_Click(object sender, EventArgs e)
         {
@@ -888,14 +828,10 @@ namespace Odin.Purchase
         {
             if (chk_SelectAll.Checked == true)
                 foreach (DataGridViewRow row in this.gv_List.Rows)
-                {
                     row.Cells["chk_print"].Value = -1;
-                }
             else
                 foreach (DataGridViewRow row in this.gv_List.Rows)
-                {
                     row.Cells["chk_print"].Value = 0;
-                }
         }
 
         private void btn_SendLetter_Click(object sender, EventArgs e)
@@ -906,11 +842,10 @@ namespace Odin.Purchase
 
             if (emailaddresses != "")
             {
-                var data = PO_BLL.getPODets(cmb_PurchaseOrders1.PurchaseOrderId);
+                var data = (DataTable)Helper.getSP("sp_SelectPODetsPrint", cmb_PurchaseOrders1.PurchaseOrderId);
                 POBll.POHeadId = cmb_PurchaseOrders1.PurchaseOrderId;
 
                 foreach (DataRow row in data.Rows)
-                {
                     if (Convert.ToInt32(row["resale"]) == -1)
                     {
                         c++;
@@ -924,16 +859,11 @@ namespace Odin.Purchase
                         //strMessage = strMessage + "Art.Id: " + row["artid"];
                         //strMessage = strMessage + "\r\nSuppliers article: " + row["article"];
                         //strMessage = strMessage + "\r\nQty: " + row["qty"] + " " + row["unit"];
-
-
                     }
-                
-                }
                 MyHelper.SendMessage(globClass.ReplaceChar(emailaddresses, ";", ","),
                                    "Purchase order for resale NR : " + cmb_PurchaseOrders1.PurchaseOrder + ", supplier: " + POBll.POHeadSupplier + " was created!",
                                    strMessage);
             }
-          
         }
 
         private void txt_ConfBefore_DropDown(object sender, DateTimePickerDropArgs e)

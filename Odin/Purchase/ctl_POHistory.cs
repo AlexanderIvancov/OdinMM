@@ -10,13 +10,7 @@ namespace Odin.Purchase
             InitializeComponent();
         }
 
-        public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
-        class_Global glob_Class = new class_Global();
-        PO_BLL BLL = new PO_BLL();
-
-
         int _POId = 0;
-
         public int POId
         {
             get { return _POId; }
@@ -31,7 +25,7 @@ namespace Odin.Purchase
 
         public void FillHistory(int POId)
         {
-            var data = PO_BLL.getHistoryOrders(POId);
+            var data = (System.Data.DataTable)Helper.getSP("sp_SelectPOHistory", POId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -41,7 +35,6 @@ namespace Odin.Purchase
 
                 //SetCellsColor();
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {

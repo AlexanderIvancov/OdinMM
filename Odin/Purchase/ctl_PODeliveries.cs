@@ -1,7 +1,6 @@
 ﻿using Odin.Global_Classes;
 using System.Windows.Forms;
 
-
 namespace Odin.Purchase
 {
     public partial class ctl_PODeliveries : UserControl
@@ -11,18 +10,12 @@ namespace Odin.Purchase
             InitializeComponent();
         }
 
-        public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
-        class_Global glob_Class = new class_Global();
-        PO_BLL BLL = new PO_BLL();
-
         public string HeaderText
         {
             get { return khg_Header.ValuesPrimary.Heading; }
             set { khg_Header.ValuesPrimary.Heading = value; }
         }
-
         int _POId = 0;
-
         public int POId
         {
             get { return _POId; }
@@ -37,7 +30,7 @@ namespace Odin.Purchase
 
         public void FillHistory(int POId)
         {
-            var data = PO_BLL.getDeliveries(POId);
+            var data = (System.Data.DataTable)Helper.getSP("sp_SelectPODeliveries", POId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -47,7 +40,6 @@ namespace Odin.Purchase
 
                 //SetCellsColor();
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {

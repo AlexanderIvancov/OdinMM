@@ -7,8 +7,6 @@ using System.Windows.Forms;
 
 namespace Odin.CMB_Components.PurchaseOrders
 {
-
-
     public partial class frm_PurchaseOrders : KryptonForm
     {
         public frm_PurchaseOrders()
@@ -23,22 +21,18 @@ namespace Odin.CMB_Components.PurchaseOrders
             cmb = f;
         }
 
-
         int _Type = 0;
-
         public int Type
         {
             get { return _Type; }
             set { _Type = value; }
         }
-
         PO_BLL POBll = new PO_BLL();
         DAL_Functions Dll = new DAL_Functions();
         class_Global glob_Class = new class_Global();
         CMB_BLL Bll = new CMB_BLL();
         bool _showingModal = false;
         cmb_PurchaseOrders f;
-
         public bool ShowingModal
         {
             get { return _showingModal; }
@@ -60,17 +54,12 @@ namespace Odin.CMB_Components.PurchaseOrders
                     ((cmb_PurchaseOrdersWithLines)cmb_PurchaseOrderWithLineOne).PurchaseOrderId = (Int32)gv_List.CurrentRow.Cells["cn_id"].Value;
                 }
                 else
-                {
                     ((cmb_PurchaseOrdersLines)cmb_PurchaseOrderLinesOne).PurchaseOrderId = (Int32)gv_List.CurrentRow.Cells["cn_id"].Value;
-                }
             }
             catch { }
         }
 
-        public void SendSaveEvent()
-        {
-
-        }
+        public void SendSaveEvent() { }
 
         public void FillData(string Beg)
         {
@@ -79,7 +68,6 @@ namespace Odin.CMB_Components.PurchaseOrders
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
             gv_List.DataSource = bs_List;
-
         }
 
         public void FillDataEnabledArticles(string Beg, int ArticleId)
@@ -89,7 +77,6 @@ namespace Odin.CMB_Components.PurchaseOrders
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
             gv_List.DataSource = bs_List;
-
         }
 
         private void btn_AddNew_Click(object sender, EventArgs e)
@@ -106,21 +93,17 @@ namespace Odin.CMB_Components.PurchaseOrders
             if (result == DialogResult.OK)
             {
                 _showingModal = false;
-                int _res = POBll.AddPurchaseOrderHead(frm.SupId, frm.ContPersId, frm.Comments, frm.Contract, frm.CurId, 
-                                                    frm.IncotermsId, frm.DelivPlaceId, frm.DelivAddressId, frm.InProcess);
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddPurchaseOrderHead", frm.SupId, frm.ContPersId, frm.Comments, frm.Contract, frm.CurId, 
+                                                    frm.IncotermsId, frm.DelivPlaceId, frm.DelivAddressId, frm.InProcess));
                 FillData(frm.PurchaseOrder);
                 ((cmb_PurchaseOrders)cmb_PurchaseOrderOne).PurchaseOrdersSendSave();
             }
             if (result == DialogResult.Cancel)
-            {
                 _showingModal = false;
-            }
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
         {
-           
-
             int _id = 0;
 
             try { _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value); }
@@ -150,21 +133,18 @@ namespace Odin.CMB_Components.PurchaseOrders
                 if (result == DialogResult.OK)
                 {
                     _showingModal = false;
-                    POBll.EditPurchaseOrderHead(_id, frm.SupId, frm.ContPersId, frm.Comments, frm.Contract, 
+                    Helper.getSP("sp_EditPurchaseOrderHead", _id, frm.SupId, frm.ContPersId, frm.Comments, frm.Contract, 
                                                 frm.CurId, frm.IncotermsId, frm.DelivPlaceId, frm.DelivAddressId,
                                                 frm.InProcess);
                     FillData(frm.PurchaseOrder);
                 }
                 if (result == DialogResult.Cancel)
-                {
                     _showingModal = false;
-                }
             }
         }
 
         private void btn_Delete_Click(object sender, EventArgs e)
         {
-            
             int _id = 0;
 
             try { _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value); }
@@ -173,7 +153,7 @@ namespace Odin.CMB_Components.PurchaseOrders
             if (_id != 0
                 && glob_Class.DeleteConfirm() == true)
             {
-                POBll.DeletePurchaseOrderHead(_id);
+                Helper.getSP("sp_DeletePurchaseOrderHead", _id);
                 FillData(string.Empty);
             }
         }

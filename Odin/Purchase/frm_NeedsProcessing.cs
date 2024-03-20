@@ -29,7 +29,6 @@ namespace Odin.Purchase
             ED1 = new ExportData(this.gv_List, "NeedsPOsList.xls", this.Name);
         }
 
-
         #region Variables
 
         private frm_Wait fmWait = null;
@@ -78,15 +77,12 @@ namespace Odin.Purchase
             get { return _previd; }
             set { _previd = value; }
         }
-
         int _prevartid = 0;
-
         public int PrevArtId
         {
             get { return _prevartid; }
             set { _prevartid = value; }
         }
-
         int _needid = 0;
         //Font FontOK = new Font(tv_Details.DefaultCellStyle.Font, FontStyle.Bold, );
 
@@ -96,7 +92,7 @@ namespace Odin.Purchase
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -111,9 +107,7 @@ namespace Odin.Purchase
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -121,20 +115,16 @@ namespace Odin.Purchase
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
 
             sqlConn.Close();
-
         }
 
         public void bw_List(object sender, DoWorkEventArgs e)
         {
 
-            var data = PO_BLL.getNeedsHeaders(cmb_Batches1.BatchId, chk_active.Checked == true ? -1 : 0);
+            var data = (DataTable)Helper.getSP("sp_SelectNeedsProcessHeaders", cmb_Batches1.BatchId, chk_active.Checked == true ? -1 : 0);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -144,14 +134,12 @@ namespace Odin.Purchase
                 //SetCellsColor();
             });
 
-
             bn_List.ThreadSafeCall(delegate
             {
                 bn_List.BindingSource = bs_List;
             });
                         
             //MessageBox.Show(cmb_Articles1.QtyAvail.ToString());
-
         }
 
         public void NeedsAdded(object sender)
@@ -164,12 +152,10 @@ namespace Odin.Purchase
             tv_Details.Nodes.Clear();
             Font boldFont = new Font(tv_Details.DefaultCellStyle.Font, FontStyle.Bold);
 
-            var data = PO_BLL.getNeedsDetails(needid);
+            var data = (DataTable)Helper.getSP("sp_SelectNeedsProcessDetails", needid);
 
-            foreach (System.Data.DataRow dr in data.AsEnumerable().OrderBy(d => d.Field<string>("article")))
-            {
+            foreach (DataRow dr in data.AsEnumerable().OrderBy(d => d.Field<string>("article")))
                 AddNode(dr, boldFont, tv_Details.Nodes, true, true);
-            }
             _needid = needid;
 
             //FillGridDets();
@@ -177,15 +163,13 @@ namespace Odin.Purchase
 
             tv_Details.Focus();
             foreach (TreeGridNode node1 in tv_Details.Nodes)
-            {
                 ExpandNodes(node1);
-            }
             SetCellsColor();
         }
 
         public void FillPOGrid(int needid)
         {
-            var data = PO_BLL.getNeedsPOs(needid);
+            var data = (DataTable)Helper.getSP("sp_SelectNeedsPODetails", needid);
 
             gv_POList.ThreadSafeCall(delegate
             {
@@ -194,7 +178,6 @@ namespace Odin.Purchase
                 gv_POList.DataSource = bs_POList;
                 //SetCellsColor();
             });
-
 
             bn_POList.ThreadSafeCall(delegate
             {
@@ -243,7 +226,7 @@ namespace Odin.Purchase
         public void SetNeedColor(int artid)
         {
             int _headid = 0;
-            var data = PO_BLL.getNeedsForArticle(artid);
+            var data = (DataTable)Helper.getSP("sp_SelectNeedsForArticle", artid);
 
             foreach (DataGridViewRow row1 in this.gv_List.Rows)
             {
@@ -252,7 +235,6 @@ namespace Odin.Purchase
 
                 row1.DefaultCellStyle.BackColor = selectedid.Length > 0 ? Color.Gold : Color.White;
             }
-
         }
         private void AddNode(DataRow dr, Font boldFont, TreeGridNodeCollection nodes, bool isAddingImage, bool useBold)
         {
@@ -290,10 +272,7 @@ namespace Odin.Purchase
                 node.DefaultCellStyle.Font = boldFont;
 
             if (isAddingImage)
-            {
                 node.ImageIndex = 1;
-            }          
-           
         }
 
         //public void FillGridDets()
@@ -319,20 +298,15 @@ namespace Odin.Purchase
         {
             Font boldFont = new Font(tv_Details.DefaultCellStyle.Font, FontStyle.Bold);
 
-            var data1 = PO_BLL.getNeedsDetailsCat(Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value));
+            var data1 = (DataTable)Helper.getSP("sp_SelectNeedsProcessDetailsCat", Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value));
 
             if (data1.Rows.Count > 0)
-            {
-                foreach (System.Data.DataRow dr1 in data1.AsEnumerable().OrderBy(d => d.Field<int>("id")).ThenByDescending(d => d.Field<int>("catid")))
-                {
+                foreach (DataRow dr1 in data1.AsEnumerable().OrderBy(d => d.Field<int>("id")).ThenByDescending(d => d.Field<int>("catid")))
                     foreach (TreeGridNode node in tv_Details.Nodes)
-                    {
                         if (Convert.ToInt32(node.Cells["cn_did"].Value) == Convert.ToInt32(dr1["id"]))
                             AddNode(dr1, boldFont, node.Nodes, true, false);
-                    }
-                }
-            }
         }
+
         public void ExpandNodes(TreeGridNode node)
         {
             foreach (TreeGridNode node1 in node.Nodes)
@@ -359,15 +333,13 @@ namespace Odin.Purchase
                 node = node.Parent;
             node.Nodes.Clear();
             
-            var data1 = PO_BLL.getNeedsDetailsCatDet(Convert.ToInt32(node.Cells["cn_did"].Value));
+            var data1 = (DataTable)Helper.getSP("sp_SelectNeedsProcessDetailsCatDet", Convert.ToInt32(node.Cells["cn_did"].Value));
 
             if (data1.Rows.Count > 0)
             {
                 node.Expand();
-                foreach (System.Data.DataRow dr1 in data1.AsEnumerable().OrderByDescending(d => d.Field<int>("catid")))
-                {
+                foreach (DataRow dr1 in data1.AsEnumerable().OrderByDescending(d => d.Field<int>("catid")))
                     AddNode(dr1, boldFont, node.Nodes, true, false);
-                }
                 node.Collapse();
             }
 
@@ -381,11 +353,9 @@ namespace Odin.Purchase
             double Ret = 0;
 
             if (Qty > 0)
-            {
                 Ret = Qty < MOQ
                     ? globClass.ApprovePOMOQ() == true ? MOQ : Qty
                     : MPQ > 0 ? Math.Round((Qty % MPQ), 5) == 0 ? Qty : globClass.ApprovePOMOQ() == true ? Qty - (Qty % MPQ) + MPQ : Qty : Qty;
-            }
 
             return Ret;
         }
@@ -420,7 +390,6 @@ namespace Odin.Purchase
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -439,7 +408,6 @@ namespace Odin.Purchase
             catch
             { }
             //SetCellsColor();
-
         }
 
         private void mni_Search_Click(object sender, EventArgs e)
@@ -463,11 +431,9 @@ namespace Odin.Purchase
                         ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
                         : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
-
             }
             catch { }
             //SetCellsColor();
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -480,7 +446,6 @@ namespace Odin.Purchase
             }
             catch { }
             //SetCellsColor();
-
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -491,7 +456,6 @@ namespace Odin.Purchase
             }
             catch { }
             //SetCellsColor();
-
         }
 
         private void mni_Copy_Click(object sender, EventArgs e)
@@ -523,7 +487,6 @@ namespace Odin.Purchase
 
         #region Context menu PO
 
-
         private void mnu_LinesPO_Opening(object sender, CancelEventArgs e)
         {
             try
@@ -542,7 +505,6 @@ namespace Odin.Purchase
                 CellValuePO = gv_POList.Rows[RowIndexPO].Cells[ColumnIndexPO].Value.ToString();
                 ColumnNamePO = gv_POList.Columns[ColumnIndexPO].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -561,7 +523,6 @@ namespace Odin.Purchase
             catch
             { }
             //SetCellsColor();
-
         }
 
         private void mni_SearchPO_Click(object sender, EventArgs e)
@@ -589,7 +550,6 @@ namespace Odin.Purchase
             }
             catch { }
             //SetCellsColor();
-
         }
 
         private void mni_FilterExcludingSelPO_Click(object sender, EventArgs e)
@@ -602,7 +562,6 @@ namespace Odin.Purchase
             }
             catch { }
             //SetCellsColor();
-
         }
 
         private void mni_RemoveFilterPO_Click(object sender, EventArgs e)
@@ -613,7 +572,6 @@ namespace Odin.Purchase
             }
             catch { }
             //SetCellsColor();
-
         }
 
         private void mni_CopyPO_Click(object sender, EventArgs e)
@@ -628,7 +586,7 @@ namespace Odin.Purchase
             frm.HeaderText = "Select view PO list";
             frm.grid = this.gv_POList;
             frm.formname = this.Name;
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
             frm.UserId = DAL.UserId;
 
             frm.FillData(frm.grid);
@@ -644,7 +602,6 @@ namespace Odin.Purchase
         #endregion
 
         #region Context menu Details
-
 
         private void mnu_DLines_Opening(object sender, CancelEventArgs e)
         {
@@ -664,7 +621,6 @@ namespace Odin.Purchase
                 CellValueD = tv_Details.Rows[RowIndexD].Cells[ColumnIndexD].Value.ToString();
                 ColumnNameD = tv_Details.Columns[ColumnIndexD].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -740,7 +696,6 @@ namespace Odin.Purchase
             frm.Show(); frm.GetKryptonFormFields();
 
             frm.gv_Batches.ThreadSafeCall(delegate { frm.FillBatches(); });
-
         }
 
         private void btn_DeleteNeeds_Click(object sender, EventArgs e)
@@ -755,7 +710,7 @@ namespace Odin.Purchase
             if (_id != 0
                 && glob_Class.DeleteConfirm() == true)
             {
-                MessageBox.Show(POBll.DeletePONeed(_id));
+                MessageBox.Show(Convert.ToString(Helper.getSP("sp_DeletePONeed", _id)));
                 bwStart(bw_List);
             }
         }
@@ -787,7 +742,6 @@ namespace Odin.Purchase
                 e.Graphics.DrawImage(Global_Resourses.bindingNavigatorAddNewItem_Image, new Rectangle(x, y, w, h));
                 e.Handled = true;
             }
-
         }
 
         private void gv_List_SelectionChanged(object sender, EventArgs e)
@@ -799,18 +753,12 @@ namespace Odin.Purchase
             catch { }
 
             if (_id != 0)
-            {
                 if (_id != PrevId)
                 {
                     FillGrid(_id);
                     FillPOGrid(_id);
                     PrevId = _id;
                 }
-                else
-                {
-
-                }
-            }
         }
 
        
@@ -831,18 +779,14 @@ namespace Odin.Purchase
                     qtyneeds = Convert.ToDouble(parentnode.Cells["cn_dqtyneed"].Value);
 
                     foreach (TreeGridNode node1 in parentnode.Nodes)
-                    {
                         if (node1 != node)
-                        oldqtypo = oldqtypo + Convert.ToDouble(node1.Cells["cn_dqtyinpo"].Value);
-                    }
+                            oldqtypo = oldqtypo + Convert.ToDouble(node1.Cells["cn_dqtyinpo"].Value);
 
                     node.Cells["cn_dqtyinpo"].Value = qtyneeds - oldqtypo < Convert.ToDouble(node.Cells["cn_dmoq"].Value) ? Convert.ToDouble(node.Cells["cn_dmoq"].Value) : qtyneeds - oldqtypo;
-
                     node.Cells["cn_dqtyinpo"].Value = MOQMPQ(Convert.ToDouble(node.Cells["cn_dqtyinpo"].Value), Convert.ToDouble(node.Cells["cn_dmoq"].Value), Convert.ToDouble(node.Cells["cn_dmpq"].Value));
 
                     RecalcTotalForParent(parentnode);
                 }
-
             }
             catch { }
         }
@@ -876,7 +820,6 @@ namespace Odin.Purchase
                             : (object)MOQMPQ(OutVal, Convert.ToDouble(tv_Details.CurrentRow.Cells["cn_dmoq"].Value), Convert.ToDouble(tv_Details.CurrentRow.Cells["cn_dmpq"].Value));
 
                         RecalcTotalForParent(parentnode);
-                        
                     }
                 }
             }
@@ -887,9 +830,7 @@ namespace Odin.Purchase
         {
             double _Total = 0;
             foreach (TreeGridNode node1 in node.Nodes)
-            {
                 _Total = _Total + Convert.ToDouble(node1.Cells["cn_dqtyinpo"].Value);
-            }
             node.Cells["cn_dqtyinpo"].Value = _Total;
             SetCellsColor();                
         }
@@ -913,7 +854,7 @@ namespace Odin.Purchase
                     && frm.Qty != 0
                     && frm.ArticleId != 0)
                 {
-                    POBll.AddNewNeedDet(_id, frm.ArticleId, frm.Qty);
+                    Helper.getSP("sp_AddPONeedsDet", _id, frm.ArticleId, frm.Qty);
                     FillGrid(_id);
                 }
             }
@@ -934,11 +875,10 @@ namespace Odin.Purchase
             }
             catch { }
 
-
             if (_needid != 0
                 && glob_Class.DeleteConfirm() == true)
             {
-                MessageBox.Show(POBll.DeletePONeedLine(_needid));
+                MessageBox.Show(Convert.ToString(Helper.getSP("sp_DeletePONeedDets", _needid)));
                 FillGrid(_id);
             }
         }
@@ -954,8 +894,8 @@ namespace Odin.Purchase
             frmcat.CatSaved += new CatSavedEventHandler(CatAdded);
 
             frmcat.Show();
-
         }
+
         private void btn_Save_Click(object sender, EventArgs e)
         {
             tv_Details.EndEdit();
@@ -967,14 +907,9 @@ namespace Odin.Purchase
                 ExpandNodes(node);
 
                 foreach (TreeGridNode node1 in node.Nodes)
-                {
                     if (Convert.ToDouble(node1.Cells["cn_dqtyinpo"].Value) != Convert.ToDouble(node1.Cells["cn_doldqtyinpo"].Value))
-                    {
-
-                        POBll.SavePOLineFromNeeds(_needid, Convert.ToDouble(node1.Cells["cn_dqtyinpo"].Value), 
+                        Helper.getSP("sp_SavePODetsFromNeeds", _needid, Convert.ToDouble(node1.Cells["cn_dqtyinpo"].Value), 
                                     Convert.ToInt32(node1.Cells["cn_dcatid"].Value));
-                    }
-                }
             }
 
             //Check for closing of Need
@@ -983,17 +918,13 @@ namespace Odin.Purchase
             try
             {
                 _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
-               
             }
             catch { }
 
             if (_id != 0)
             {
                 int _countactive = Convert.ToInt32(Helper.GetOneRecord("select count(id) from PUR_NeedsDets where headid = " + _id + " and [state] = -1"));
-                if (_countactive > 0)
-                {
-
-                }
+                if (_countactive > 0) { }
             }
 
             KryptonTaskDialog.Show("Purchase orders updating",
@@ -1006,7 +937,6 @@ namespace Odin.Purchase
             try
             {
                 _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
-
             }
             catch { }
 
@@ -1023,7 +953,6 @@ namespace Odin.Purchase
 
                 //}
             }
-
         }
 
         private void btn_DeletePOline_Click(object sender, EventArgs e)
@@ -1037,13 +966,10 @@ namespace Odin.Purchase
             if (_pid != 0
                 && globClass.DeleteConfirm() == true)
             {
-                MessageBox.Show(POBll.DeletePOLine(_pid));
-
+                MessageBox.Show(Convert.ToString(Helper.getSP("sp_DeletePODets", _pid)));
                 bwStart(bw_List);
             }
-
         }
-
 
         #endregion
 
@@ -1075,8 +1001,6 @@ namespace Odin.Purchase
             frm.Query = _query;
             frm.SqlParams = sqlparams;
             frm.Show(); frm.GetKryptonFormFields();
-
-
         }
 
         private void btn_Download_Click(object sender, EventArgs e)
@@ -1098,7 +1022,7 @@ namespace Odin.Purchase
             savefiledialog1.FilterIndex = 1;
             savefiledialog1.RestoreDirectory = true;
 
-            data = PO_BLL.getNeedsPOsExcel(_needid);
+            data = (DataTable)Helper.getSP("sp_SelectNeedsPOExcel", _needid);
             if (savefiledialog1.ShowDialog() == DialogResult.OK)
             {
                 fileName = savefiledialog1.FileName;
@@ -1132,19 +1056,10 @@ namespace Odin.Purchase
             {
                 fmWait.Close();
                 fmWait = null;
-                
             }
 
-            if (e.Error != null)
-            {
+            if (e.Error != null || e.Cancelled)
                 return;
-            }
-
-            // Check to see if the background process was cancelled.
-            if (e.Cancelled)
-            {
-                return;
-            }
         }
 
         private void InitializeWorkbook()
@@ -1189,12 +1104,10 @@ namespace Odin.Purchase
             rowExcel1.CreateCell(5).SetCellValue("Comments");
             rowExcel1.CreateCell(6).SetCellValue("Analogs");
 
-
             //Write the stream data of workbook to the root directory
             FileStream file = new FileStream(fileName, FileMode.Create);
             hssfworkbook.Write(file);
             file.Close();
-            
         }
 
         private void SetHeaderValue(ISheet sheet1, DataGridViewColumn column, IRow headerRow, int j)
@@ -1231,8 +1144,6 @@ namespace Odin.Purchase
 
             try
             {
-
-
                 if (node.Level == 2) //Rabotaem s katalogom
                 {
                     _id = Convert.ToInt32(parentnode.Cells["cn_did"].Value);
@@ -1245,7 +1156,6 @@ namespace Odin.Purchase
                     _qty = Convert.ToDouble(node.Cells["cn_dqtyneed"].Value);
                     _comments = node.Cells["cn_dcomments"].Value.ToString();
                 }
-
             }
             catch { }
             if (_id != 0)
@@ -1258,7 +1168,7 @@ namespace Odin.Purchase
                 if (result == DialogResult.OK
                     && (_qty != frm.Qty || _comments != frm.Comments))
                 {
-                    int _state = POBll.EditNeedDets(_id, frm.Qty, frm.Comments);
+                    int _state = Convert.ToInt32(Helper.getSP("sp_EditPONeedsDet", _id, frm.Qty, frm.Comments));
                     //FillGrid(_hid);
                     //Update data
                     if (node.Level == 2)
@@ -1276,11 +1186,9 @@ namespace Odin.Purchase
                         node.Cells["cn_dstate"].Value = _state;
                         foreach (TreeGridNode nodechild in node.Nodes)
                             nodechild.Cells["cn_dqtyneed"].Value = frm.Qty;
-
                     }
                     //Cells color
                     if (node.Level == 2)
-                    {
                         if (_state == 0)
                         {
                             parentnode.DefaultCellStyle.BackColor = Color.Gainsboro;
@@ -1293,9 +1201,7 @@ namespace Odin.Purchase
                             foreach (TreeGridNode nodechild in parentnode.Nodes)
                                 nodechild.DefaultCellStyle.BackColor = Color.White;
                         }
-                    }
                     else
-                    {
                         if (_state == 0)
                         {
                             node.DefaultCellStyle.BackColor = Color.Gainsboro;
@@ -1308,9 +1214,7 @@ namespace Odin.Purchase
                             foreach (TreeGridNode nodechild in node.Nodes)
                                 nodechild.DefaultCellStyle.BackColor = Color.White;
                         }
-                    }
                 }
-
             }
         }
 
@@ -1333,7 +1237,6 @@ namespace Odin.Purchase
             savefiledialog1.FilterIndex = 1;
             savefiledialog1.RestoreDirectory = true;
 
-
             if (savefiledialog1.ShowDialog() == DialogResult.OK)
             {
                 fileName = savefiledialog1.FileName;
@@ -1350,10 +1253,8 @@ namespace Odin.Purchase
                     bw.RunWorkerAsync();
                     fmWait.Start();
                     fmWait.Show();
-
                 }
             }
-
         }
 
         private void ImportDataForMail(object sender, DoWorkEventArgs e)
@@ -1420,7 +1321,6 @@ namespace Odin.Purchase
             cell = rowExcel1.CreateCell(14);
             cell.SetCellValue("Comments");
             cell.CellStyle = style1;
-
 
             var param = e.Argument as List<DataGridViewColumn>;
             int j = 1;
@@ -1519,7 +1419,6 @@ namespace Odin.Purchase
                     rowExcel.CreateCell(12).SetCellValue(node.Cells["cn_ddelivterm"].Value.ToString());
                     rowExcel.CreateCell(13).SetCellValue(node.Cells["cn_dmanufacturer"].Value.ToString());
                     rowExcel.CreateCell(14).SetCellValue(node.Cells["cn_dcomments"].Value.ToString());
-                   
 
                     beg++;
                     j++;
@@ -1538,12 +1437,10 @@ namespace Odin.Purchase
             for (int k = 0; k <= 14; k++)
                 sheet1.AutoSizeColumn(k);
 
-
             //Write the stream data of workbook to the root directory
             FileStream file = new FileStream(fileName, FileMode.Create);
             hssfworkbook.Write(file);
             file.Close();
-
         }
 
 
@@ -1634,10 +1531,9 @@ namespace Odin.Purchase
             if (_id != 0
                 && glob_Class.CloseProjectConfirm() == true)
             {
-                MessageBox.Show(POBll.ClosePONeed(_id));
+                MessageBox.Show(Convert.ToString(Helper.getSP("sp_ClosePONeed", _id)));
                 bwStart(bw_List);
             }
-            
         }
 
         private void btn_EditComments_Click(object sender, EventArgs e)
@@ -1664,7 +1560,6 @@ namespace Odin.Purchase
                     gv_List.CurrentRow.Cells["cn_comments"].Value = frm.FormText;
                 }
             }
-
         }
 
         private void cmb_Articles1_ArticleIdKeyPressed(object sender)

@@ -27,17 +27,11 @@ namespace Odin.Planning.Controls
         //frm_Batches frmBatches;
         private frm_Wait m_fmProgress = null;
         private const string processingCancelled = "Processing cancelled.";
-
         class_Global glob_Class = new class_Global();
         Plan_BLL BLL = new Plan_BLL();
         DAL_Functions DLL = new DAL_Functions();
         PO_BLL POBLL = new PO_BLL();
-        
-
         int _articleid = 0;
-        
-        
-
         public int ArtId
         {
             get { return cmb_Articles1.ArticleId; }
@@ -47,7 +41,6 @@ namespace Odin.Planning.Controls
                 FillGrid(_articleid);
                 //bwStart(bw_List);
                 //AvailableQty = DLL.AvailQty(cmb_Articles1.ArticleId);
-               
             }
         }
 
@@ -57,7 +50,6 @@ namespace Odin.Planning.Controls
 
         public void bw_List(object sender, DoWorkEventArgs e)
         {
-
             tv_POS.ThreadSafeCall(delegate
             {
                 FillGrid(ArtId);
@@ -67,10 +59,8 @@ namespace Odin.Planning.Controls
         public void SetCellsColor()
         {
             foreach (DataGridViewRow row in this.tv_POS.Rows)
-            {
                 if (Convert.ToDateTime(row.Cells["cn_reqdate"].Value) == Convert.ToDateTime("01.01.1900"))
                     row.Cells["cn_reqdate"].Style.ForeColor = Color.Transparent;
-            }
         }
 
         public void ClearNodes()
@@ -87,10 +77,8 @@ namespace Odin.Planning.Controls
             //Orders
             var data = BLL.CurrentPOs(ArtId);
 
-            foreach (System.Data.DataRow dr in data.AsEnumerable().OrderBy(d => d.Field<string>("name")))
-            {
+            foreach (DataRow dr in data.AsEnumerable().OrderBy(d => d.Field<string>("name")))
                AddNode(dr, boldFont, tv_POS.Nodes, true); 
-            }
 
             //tv_POS.Focus();
             //Details
@@ -98,17 +86,12 @@ namespace Odin.Planning.Controls
             {
                 var data1 = BLL.POReservations(Convert.ToInt32(node1.Cells["cn_id"].Value));
 
-                foreach (System.Data.DataRow dr in data1.AsEnumerable().OrderBy(d => d.Field<string>("name")))
-                {
+                foreach (DataRow dr in data1.AsEnumerable().OrderBy(d => d.Field<string>("name")))
                    AddNode(dr, boldFont, node1.Nodes, true);
-                       
-                }
             }
 
             foreach (TreeGridNode node1 in tv_POS.Nodes)
-            {
                 ExpandNodes(node1);
-            }
             
             SetCellsColor();
         }
@@ -131,10 +114,7 @@ namespace Odin.Planning.Controls
                             Convert.ToDouble(dr["freeqty"]), Convert.ToDateTime(dr["reqdate"]), dr["confdate"], dr["supplier"], dr["cn_POcomments"]);
 
             if (isAddingImage)
-            {
                 node.ImageIndex = 1;
-            }
-                        
         }
 
         public void bwStart(DoWorkEventHandler doWork)
@@ -180,7 +160,6 @@ namespace Odin.Planning.Controls
                 MessageBox.Show(processingCancelled);
                 return;
             }
-
         }
         
         #endregion
@@ -198,12 +177,10 @@ namespace Odin.Planning.Controls
             TreeGridNode node;
             node = tv_POS.CurrentNode;
             if (node != null)
-            {
                 if (node.Level == 1)
                     BLL.ReleaseRMFromPO(Convert.ToInt32(node.Cells["cn_id"].Value), 0);
                 else
                     BLL.ReleaseRMFromPO(0, Convert.ToInt32(node.Cells["cn_id"].Value));
-            }
 
             FillGrid(ArtId);
 
@@ -219,7 +196,6 @@ namespace Odin.Planning.Controls
             node = tv_POS.CurrentNode;
 
             if (node != null)
-            {
                 if (node.Level == 1)
                 {
                     _QtyFreeInPO = Convert.ToDouble(node.Cells["cn_free"].Value);
@@ -232,7 +208,6 @@ namespace Odin.Planning.Controls
                     _poid = Convert.ToInt32(node.Parent.Cells["cn_id"].Value);
                     _porder = node.Parent.Cells["cn_POrder"].Value.ToString();
                 }
-            }
 
             if (_QtyFreeInPO > 0)
             {
@@ -250,37 +225,28 @@ namespace Odin.Planning.Controls
                 if (result == DialogResult.OK)
                 {
                     foreach (DataRow row in frm.ctl_RMNeeds1.data.Rows)
-                    {
                         if (Convert.ToDouble(row["topurchase"]) > 0
                             && _QtyFreeInPO > 0)
-                        {
                             if (Convert.ToDouble(row["topurchase"]) > _QtyFreeInPO)
                             {
-                                POBLL.MapPONeeds(_poid, Convert.ToInt32(row["id"]), Convert.ToInt32(row["typeneed"]), _QtyFreeInPO, "");
+                                Helper.getSP("sp_AddPONeedsMapping", _poid, Convert.ToInt32(row["id"]), Convert.ToInt32(row["typeneed"]), _QtyFreeInPO, "");
                                 _QtyFreeInPO = 0;
-
                                 break;
                             }
                             else
                             {
-                                POBLL.MapPONeeds(_poid, Convert.ToInt32(row["id"]), Convert.ToInt32(row["typeneed"]), Convert.ToDouble(row["topurchase"]), "");
+                                Helper.getSP("sp_AddPONeedsMapping", _poid, Convert.ToInt32(row["id"]), Convert.ToInt32(row["typeneed"]), Convert.ToDouble(row["topurchase"]), "");
                                 _QtyFreeInPO = _QtyFreeInPO - Convert.ToDouble(row["topurchase"]);
-
                             }
-
-                        }
-                    }
                     FillGrid(ArtId);
                     //Notifications for flags
 
-                    POBLL.AddPONotificationBatch(_poid);
+                    Helper.getSP("sp_AddBatchNotificationPO", _poid);
                     SendBatchId?.Invoke(ArtId, true, true, true, true, false);
                 }
             }
         }
 
         #endregion
-
-
     }
 }
