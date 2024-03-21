@@ -17,12 +17,6 @@ namespace Odin.Personnel
             InitializeComponent();
         }
 
-        #region Variables
-
-        Personnel_BLL PerBLL = new Personnel_BLL();
-
-        #endregion
-
         #region Methods
         public void FillDates()
         {
@@ -70,7 +64,7 @@ namespace Odin.Personnel
 
             InsertRow();
             
-            var data1 = Personnel_BLL.getDayStaff(Convert.ToDateTime(txt_From.Value).ToShortDateString(), Convert.ToDateTime(txt_Till.Value).ToShortDateString());
+            var data1 = (DataTable)Helper.getSP("sp_SelectStaffByDate", Convert.ToDateTime(txt_From.Value).ToShortDateString(), Convert.ToDateTime(txt_Till.Value).ToShortDateString());
 
             foreach (DataRow row in data1.Rows)
             {
@@ -172,7 +166,7 @@ namespace Odin.Personnel
             }
 
             //ProcBll.SaveCapacity(Convert.ToDateTime(txt_From.Value).ToShortDateString(), Convert.ToDateTime(txt_Till.Value).ToShortDateString(), datastages);
-            PerBLL.SaveStaffPresence(Convert.ToDateTime(txt_From.Value).ToShortDateString(), Convert.ToDateTime(txt_Till.Value).ToShortDateString(), datastages);
+            Helper.getSP("sp_SaveStaffPresence", Convert.ToDateTime(txt_From.Value).ToShortDateString(), Convert.ToDateTime(txt_Till.Value).ToShortDateString(), datastages);
         }
 
         private void gv_List_CellValidated(object sender, DataGridViewCellEventArgs e)
