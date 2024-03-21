@@ -217,7 +217,7 @@ namespace Odin.Warehouse.Shelves
             DialogResult result = frm.ShowDialog();
             if (result == DialogResult.OK)
             {
-                int rowsaffected = BLL.AddStockPlace(frm.Place, frm.Description, PlaceId, frm.DeptId, frm.FirmId, frm.AddressId, frm.RespPersonId, frm.IsProduction, frm.Quarantine, frm.OwnerId);
+                int rowsaffected = Convert.ToInt32(Helper.getSP("sp_AddStockPlace", frm.Place, frm.Description, PlaceId, frm.DeptId, frm.FirmId, frm.AddressId, frm.RespPersonId, frm.IsProduction, frm.Quarantine, frm.OwnerId));
                 dummy = new TreeNode(frm.Place);
                 dummy.Tag = rowsaffected;
                 SelectedNode.Nodes.Add(dummy);
@@ -242,7 +242,7 @@ namespace Odin.Warehouse.Shelves
             DialogResult result = frm.ShowDialog();
             if (result == DialogResult.OK)
             {
-                BLL.EditStockPlace(BLL.PlaceId, frm.Place, frm.Description, BLL.PlaceParentId, frm.DeptId,
+                Helper.getSP("sp_EditStockPlace", BLL.PlaceId, frm.Place, frm.Description, BLL.PlaceParentId, frm.DeptId,
                                 frm.FirmId, frm.AddressId, frm.RespPersonId, frm.IsProduction, frm.Quarantine,
                                 frm.OwnerId, frm.IsActive);
                 SelectedNode.Text = frm.Place;
@@ -254,7 +254,7 @@ namespace Odin.Warehouse.Shelves
         {
             if (glob_Class.DeleteConfirm() == true)
             {
-                if (BLL.DeleteStockPlace((Int32)SelectedNode.Tag) == -1)
+                if (Convert.ToInt32(Helper.getSP("sp_DeleteStockPlace", (Int32)SelectedNode.Tag)) == -1)
                     SelectedNode.Remove();
                 else
                     MessageBox.Show("Error during deleting, please check sub-places and movements!");
