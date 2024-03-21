@@ -431,7 +431,7 @@ namespace Odin
             int _userid = Convert.ToInt32(Helper.GetOneRecord("select top 1 id from bas_users where userlogin = current_user"));
             
 
-            var data = Tools_BLL.getMenuItems(_userid);
+            var data = (DataTable)Helper.getSP("sp_SelectUserTabs", _userid);
 
 
             foreach (ComponentFactory.Krypton.Ribbon.KryptonRibbonTab tab in kryptonRibbon1.RibbonTabs)
@@ -850,7 +850,7 @@ namespace Odin
 
             if (result == DialogResult.OK)
             {
-                FinBLL.SetBlockDate(frm.Date);
+                Helper.ExecuteQuery("set dateformat dmy update bas_blockdate set blockdate = convert(datetime, '" + frm.Date + "')");
             }
 
         }

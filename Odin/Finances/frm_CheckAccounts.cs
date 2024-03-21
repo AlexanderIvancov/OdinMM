@@ -98,7 +98,7 @@ namespace Odin.Finances
 
             try
             {
-                var data = Finances_BLL.getCheckAccounts(txt_DateFrom.Value == null ? "" : txt_DateFrom.Value.ToString().Trim(),
+                var data = (DataTable)Helper.getSP(AccountId == 2110 ? "sp_CheckDifference2110" : AccountId == 2120 ? "sp_CheckDifference2120" : "sp_CheckDifference2130", txt_DateFrom.Value == null ? "" : txt_DateFrom.Value.ToString().Trim(),
                                                                    txt_DateTill.Value == null ? "" : txt_DateTill.Value.ToString().Trim(),
                                                                    AccountId);
 

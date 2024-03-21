@@ -85,7 +85,7 @@ namespace Odin.Finances
             }
             catch { }
 
-            var data = Finances_BLL.getDocuments(txt_DateFrom.Value == null ? "" : txt_DateFrom.Value.ToString().Trim(),
+            var data = (DataTable)Helper.getSP("sp_SelectDocumentSummasAnalyzis", txt_DateFrom.Value == null ? "" : txt_DateFrom.Value.ToString().Trim(),
                                                                txt_DateTill.Value == null ? "" : txt_DateTill.Value.ToString().Trim());
 
             gv_List.ThreadSafeCall(delegate

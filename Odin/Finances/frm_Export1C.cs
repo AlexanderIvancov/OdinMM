@@ -73,7 +73,7 @@ namespace Odin.Finances
                     var cmd = new OleDbCommand(clearTableQueryProv, dBaseConnection);
                     cmd.ExecuteNonQuery();
 
-                    var data = Finances_BLL.getProvodkiIncomes(txt_DateFrom.Value == null ? "" : txt_DateFrom.Value.ToString().Trim(),
+                    var data = (DataTable)Helper.getSP("sp_ExportInto1CIncomes", txt_DateFrom.Value == null ? "" : txt_DateFrom.Value.ToString().Trim(),
                                                                txt_DateTill.Value == null ? "" : txt_DateTill.Value.ToString().Trim());
                   
                     pb_Progress.ThreadSafeCall(delegate
@@ -228,7 +228,7 @@ namespace Odin.Finances
                     var cmd = new OleDbCommand(clearTableQuerySubconto, dBaseConnection);
                     cmd.ExecuteNonQuery();
 
-                    var data = Finances_BLL.getProvodkiSubconto(txt_DateFrom.Value == null ? "" : txt_DateFrom.Value.ToString().Trim(),
+                    var data = (DataTable)Helper.getSP("sp_ExportInto1CSubconto", txt_DateFrom.Value == null ? "" : txt_DateFrom.Value.ToString().Trim(),
                                                                txt_DateTill.Value == null ? "" : txt_DateTill.Value.ToString().Trim());
 
                    

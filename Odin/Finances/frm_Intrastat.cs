@@ -40,7 +40,7 @@ namespace Odin.Finances
         public void bw_ListIncomes(object sender, DoWorkEventArgs e)
         {
                  
-            var data = Finances_BLL.getIntrastatIncome(txt_DateFrom.Value == null ? "" : txt_DateFrom.Value.ToString().Trim(),
+            var data = (System.Data.DataTable)Helper.getSP("sp_IntrastatIncomes", txt_DateFrom.Value == null ? "" : txt_DateFrom.Value.ToString().Trim(),
                                             txt_DateTill.Value == null ? "" : txt_DateTill.Value.ToString().Trim());
 
             gv_IncomeList.ThreadSafeCall(delegate
@@ -59,7 +59,7 @@ namespace Odin.Finances
 
         public void bw_ListOutcomes(object sender, DoWorkEventArgs e)
         {
-            var data = Finances_BLL.getIntrastatOutcome(txt_DateFrom.Value == null ? "" : txt_DateFrom.Value.ToString().Trim(),
+            var data = (System.Data.DataTable)Helper.getSP("sp_IntrastatOutcomes", txt_DateFrom.Value == null ? "" : txt_DateFrom.Value.ToString().Trim(),
                                          txt_DateTill.Value == null ? "" : txt_DateTill.Value.ToString().Trim());
 
             gv_OutcomeList.ThreadSafeCall(delegate
