@@ -36,7 +36,7 @@ namespace Odin.Tools
 
         public void ShowFields(int id)
         {
-            var data = Tools_BLL.getLabelFields(id);
+            var data = (System.Data.DataTable)Helper.getSP("sp_SelectLabelTemplateFields", id);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -73,7 +73,7 @@ namespace Odin.Tools
 
         private void btn_OK_Click(object sender, EventArgs e)
         {
-            int _res = BLL.SaveLabelTemplate(TemplateId, TemplateText);
+            int _res = Convert.ToInt32(Helper.getSP("sp_SaveLabelTemplate", TemplateId, TemplateText));
 
             if (_res == 0)
                 KryptonTaskDialog.Show("Saving was unsuccessful!",

@@ -58,7 +58,7 @@ namespace Odin.Tools
 
         public void FillList()
         {
-            var data = Tools_BLL.getUsers();
+            var data = (DataTable)Helper.getSP("sp_UsersList");
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -291,7 +291,7 @@ namespace Odin.Tools
             if (_id != 0
                 && glob_Class.DeleteConfirm() == true)
             {
-                Bll.DeleteUser(_id);
+                Helper.getSP("sp_DeleteUser", _id);
                 FillList();
             }
         }

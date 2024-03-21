@@ -17,7 +17,7 @@ namespace Odin.Tools
 
         public void FillTypesList()
         {
-            var data = Tools_BLL.getMailingsTypes();
+            var data = (System.Data.DataTable)Helper.getSP("sp_MailingTypesList");
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -38,7 +38,7 @@ namespace Odin.Tools
 
         public void FillMailList(int _typeid)
         {
-            var data = Tools_BLL.getMailings(_typeid);
+            var data = (System.Data.DataTable)Helper.getSP("sp_MailingList", _typeid);
 
             gv_MailList.ThreadSafeCall(delegate
             {
@@ -70,7 +70,7 @@ namespace Odin.Tools
 
             if (result == DialogResult.OK)
             {
-                BLL.SaveMailingType(0, frm.Description);
+                Helper.getSP("sp_SaveMailingType", 0, frm.Description);
                 FillTypesList();
             }
         }
@@ -92,7 +92,7 @@ namespace Odin.Tools
 
             if (result == DialogResult.OK)
             {
-                BLL.SaveMailingType(_id, frm.Description);
+                Helper.getSP("sp_SaveMailingType", _id, frm.Description);
                 FillTypesList();
             }
 
@@ -123,7 +123,7 @@ namespace Odin.Tools
 
                 if (result == DialogResult.OK)
                 {
-                    BLL.SaveMailing(_id, _typeid, frm.Addresses);
+                    Helper.getSP("sp_SaveMailing", _id, _typeid, frm.Addresses);
                     FillMailList(_typeid);
                 }
 
@@ -148,7 +148,7 @@ namespace Odin.Tools
 
                 if (result == DialogResult.OK)
                 {
-                    BLL.SaveMailing(0, _id, frm.Addresses);
+                    Helper.getSP("sp_SaveMailing", 0, _id, frm.Addresses);
                     FillMailList(_id);
                 }
 
@@ -170,7 +170,7 @@ namespace Odin.Tools
             if (_id != 0
                 && globClass.DeleteConfirm() == true)
             {
-                BLL.DeleteMailing(_id);
+                Helper.getSP("sp_DeleteMailing", _id);
 
                 FillMailList(_typeid);
             }

@@ -23,7 +23,7 @@ namespace Odin.Tools
 
         public void FillList()
         {
-            var data = Tools_BLL.getUsers();
+            var data = (DataTable)Helper.getSP("sp_UsersList");
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -44,7 +44,7 @@ namespace Odin.Tools
 
         public void FillMenuItems(int _userid)
         {
-            var data = Tools_BLL.getMenuItems(_userid);
+            var data = (DataTable)Helper.getSP("sp_SelectUserTabs", _userid);
 
             gv_MenuItems.ThreadSafeCall(delegate
             {
@@ -111,7 +111,7 @@ namespace Odin.Tools
 
                 }
 
-                BLL.SaveMenuUserTabs(_userid, datastages);
+                Helper.getSP("sp_SaveUserMenuTabs", _userid, datastages);
 
                 FillMenuItems(_userid);
 
