@@ -135,7 +135,7 @@ namespace Odin.DataCollection
         }
         public void FillList(int _workerid, int _launchid)
         {
-            var data = DC_BLL.getSerialNumbers(_workerid, _launchid);
+            var data = (DataTable)Helper.getSP("sp_SelectSerialNumbersByWorkerByDate", _workerid, _launchid);
 
 
             gv_List.ThreadSafeCall(delegate
@@ -155,7 +155,7 @@ namespace Odin.DataCollection
 
         public void FillMaterials(int _workerid)
         {
-            var data = DC_BLL.getMaterials(_workerid);
+            var data = (DataTable)Helper.getSP("sp_SelectMaterialsByWorkerByDate", _workerid);
 
 
             gv_Materials.ThreadSafeCall(delegate
@@ -175,7 +175,7 @@ namespace Odin.DataCollection
 
         public void FillMaterialsByLaunch(int _launchid)
         {
-            var data = DC_BLL.getMaterialsByLaunch(_launchid);
+            var data = (DataTable)Helper.getSP("sp_SelectMaterialsByLaunch", _launchid);
 
 
             gv_Materials.ThreadSafeCall(delegate

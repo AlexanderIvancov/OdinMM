@@ -180,7 +180,7 @@ namespace Odin.DataCollection
                                     LaunchId = Convert.ToInt32(dr1["id"].ToString());
                                     Launch = dr1["name"].ToString();
                                 }
-                                DCBll.AddDataCollection(WorkerId, LaunchId);
+                                Helper.getSP("sp_AddDataCollection", WorkerId, LaunchId);
                                 LaunchStarted(Launch);
                                 if (!bw_Launch.IsBusy)
                                     bw_Launch.RunWorkerAsync(null);
@@ -620,7 +620,7 @@ namespace Odin.DataCollection
 
         private void btn_Pause_Click(object sender, EventArgs e)
         {
-            DCBll.AddDataCollectionPause(WorkId);
+            Helper.getSP("sp_AddDataCollectionPause", WorkId);
             LaunchBreaked();
             if (!bw_Launch.IsBusy)
                 bw_Launch.RunWorkerAsync(null);
@@ -629,7 +629,7 @@ namespace Odin.DataCollection
 
         private void btn_Resume_Click(object sender, EventArgs e)
         {
-            DCBll.AddDataCollectionResume(WorkId);
+            Helper.getSP("sp_AddDataCollectionResume", WorkId);
             LaunchResumed();
             if (!bw_Launch.IsBusy)
                 bw_Launch.RunWorkerAsync(null);

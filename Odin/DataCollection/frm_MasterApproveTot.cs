@@ -149,7 +149,7 @@ namespace Odin.DataCollection
         }
         public void FillList()
         {
-            var data = DC_BLL.getSerialNumbersNotApprovedAll(ProdPlace);
+            var data = (DataTable)Helper.getSP("sp_SelectSerialNumbersNAAll", ProdPlace);
 
 
             gv_List.ThreadSafeCall(delegate
@@ -178,7 +178,7 @@ namespace Odin.DataCollection
         public void FillListLaunch(int _launchid)
         {
             //datadetails.Clear();
-            datadetails = DC_BLL.getSerialNumbersNotApproved(_launchid, ProdPlace);
+            datadetails = (DataTable)Helper.getSP("sp_SelectSerialNumbersNA", _launchid, ProdPlace);
         }
 
         public void FillData(int _batchid, int _stageid)
@@ -331,7 +331,7 @@ namespace Odin.DataCollection
 
                         double _qty = 0;
 
-                        _qty = DCBll.ApproveDataCollection(data, MasterId);
+                        _qty = Convert.ToDouble(Helper.getSP("sp_AddDataCollectionApprove", data, MasterId));
 
                     if (_qty > 0 || Freezed != OldFreezed)
                     {
