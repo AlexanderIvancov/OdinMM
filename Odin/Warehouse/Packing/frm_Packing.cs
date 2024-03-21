@@ -27,7 +27,6 @@ namespace Odin.Warehouse.Packing
         
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
         class_Global glob_Class = new class_Global();
-        StockInventory BLL = new StockInventory();
         DAL_Functions DAL = new DAL_Functions();
         AdmMenu mMenu = new AdmMenu();
         class_Global globClass = new class_Global();
@@ -121,7 +120,7 @@ namespace Odin.Warehouse.Packing
 
         public void bw_List(object sender, DoWorkEventArgs e)
         {
-            var data = StockInventory.getBatchBoxList(String.IsNullOrEmpty(txt_boxid.Text.Trim()) == true || txt_boxid.Text.Trim() == "" ? 0 : Convert.ToInt32(txt_boxid.Text), txt_Serial.Text, cmb_Batches1.BatchId,
+            var data = (DataTable)Helper.getSP("sp_SelectBatchBoxList", String.IsNullOrEmpty(txt_boxid.Text.Trim()) == true || txt_boxid.Text.Trim() == "" ? 0 : Convert.ToInt32(txt_boxid.Text), txt_Serial.Text, cmb_Batches1.BatchId,
                                             cmb_SalesOrdersWithLines1.SalesOrderLineId, cmb_Articles1.ArticleId, cmb_DeliveryNotes1.DelivNoteId, cmb_Types1.TypeId,
                                             txt_ClosingDate.Value == null ? "" : txt_ClosingDate.Value.ToString().Trim());
 

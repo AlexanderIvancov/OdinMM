@@ -30,7 +30,6 @@ namespace Odin.Warehouse.Inventory
         //}
 
         class_Global glob_Class = new class_Global();
-        StockInventory StockBll = new StockInventory();
         DAL_Functions DAL = new DAL_Functions();
         AdmMenu mMenu = new AdmMenu();
         class_Global globClass = new class_Global();
@@ -96,7 +95,7 @@ namespace Odin.Warehouse.Inventory
 
         public void bw_List(object sender, DoWorkEventArgs e)
         {
-            data = StockInventory.getProductCard(cmb_Articles1.ArticleId,
+            data = (DataTable)Helper.getSP("sp_SelectProductCard", cmb_Articles1.ArticleId,
                                                     txt_DateFrom.Value == null ? "" : Convert.ToDateTime(txt_DateFrom.Value).ToShortDateString().Trim(),
                                                     txt_DateTill.Value == null ? "" : Convert.ToDateTime(txt_DateTill.Value).ToShortDateString().Trim(),
                                                     chk_type.Checked == true ? 0 : -1, AccountId);

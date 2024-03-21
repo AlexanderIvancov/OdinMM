@@ -32,7 +32,6 @@ namespace Odin.Warehouse.Inventory
 
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
         class_Global glob_Class = new class_Global();
-        StockInventory SIN = new StockInventory();
         DAL_Functions DAL = new DAL_Functions();
         AdmMenu mMenu = new AdmMenu();
         class_Global globClass = new class_Global();
@@ -89,7 +88,7 @@ namespace Odin.Warehouse.Inventory
 
         public void ShowDets(int _label)
         {
-            var data = StockInventory.getStockLabelTracing(_label);
+            var data = (DataTable)Helper.getSP("sp_StockLabelTracing", _label);
 
             gv_List.ThreadSafeCall(delegate
             {

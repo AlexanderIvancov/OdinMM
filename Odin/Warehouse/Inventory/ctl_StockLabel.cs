@@ -25,7 +25,6 @@ namespace Odin.Warehouse.Inventory
 
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
 
-        StockInventory SIBll = new StockInventory();
         StockIn_BLL SINBll = new StockIn_BLL();
         DAL_Functions Fun = new DAL_Functions();
         class_Global globClass = new class_Global();
@@ -176,7 +175,7 @@ namespace Odin.Warehouse.Inventory
 
         public void FillSpecs(int Label)
         {
-            var data = StockInventory.getSpecifications(Label);
+            var data = (DataTable)Helper.getSP("sp_SelectStockLabelSpecification", Label);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -190,7 +189,7 @@ namespace Odin.Warehouse.Inventory
 
         public void FillReservations(int Label)
         {
-            var data = StockInventory.getLabelReservations(Label);
+            var data = (DataTable)Helper.getSP("sp_SelectStockLabelReservations", Label);
 
             gv_Reservations.ThreadSafeCall(delegate
             {
@@ -299,7 +298,7 @@ namespace Odin.Warehouse.Inventory
 
         private void btn_OK_Click(object sender, EventArgs e)
         {
-            SIBll.EditStockLabel(Label, ExpDate, Available, ParentLabel, Comments, DataCode, ManufBatch);
+            Helper.getSP("sp_EditStockLabel", Label, ExpDate, Available, ParentLabel, Comments, DataCode, ManufBatch);
             if (NoExpDate == -1)
                 SINBll.SetNoExpDate(Label);
             ShowDets(Label);
@@ -384,7 +383,7 @@ namespace Odin.Warehouse.Inventory
         {
             if (globClass.RemoveReservationConfirm() == true)
             {
-                SIBll.RemoveLabelReservation(Label);
+                Helper.getSP("sp_RemoveLabelReservation", Label);
                 ShowDets(Label);
                 RemoveReservation?.Invoke(this);
             }

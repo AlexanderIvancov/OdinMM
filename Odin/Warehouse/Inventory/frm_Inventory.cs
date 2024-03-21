@@ -29,7 +29,6 @@ namespace Odin.Warehouse.Inventory
 
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
         class_Global glob_Class = new class_Global();
-        StockInventory SIN = new StockInventory();
         DAL_Functions DAL = new DAL_Functions();
         AdmMenu mMenu = new AdmMenu();
         class_Global globClass = new class_Global();
@@ -177,7 +176,7 @@ namespace Odin.Warehouse.Inventory
         public void bw_List(object sender, DoWorkEventArgs e)
         {
             //MessageBox.Show(txt_CreatDateFrom.Value.ToShortDateString());
-            var data = StockInventory.getStockInventory(cmb_Articles1.ArticleId, cmb_Types1.TypeId, cmb_Firms1.FirmId, cmb_Articles1.Article, cmb_Places1.PlaceId,
+            var data = (DataTable)Helper.getSP("sp_StockInventory", cmb_Articles1.ArticleId, cmb_Types1.TypeId, cmb_Firms1.FirmId, cmb_Articles1.Article, cmb_Places1.PlaceId,
                                                        cmb_Department1.DeptId, Label, chk_GroupByPlaces.Checked == true ? -1 : 0, cmb_Batches1.BatchId,
                                                        chk_Totals.Checked == true ? -1 : 0, cmb_InvNumber.sCurrentValue);
 
@@ -202,7 +201,7 @@ namespace Odin.Warehouse.Inventory
         public void bw_ListOnDate(object sender, DoWorkEventArgs e)
         {
             //MessageBox.Show(txt_CreatDateFrom.Value.ToShortDateString());
-            var data = StockInventory.getStockInventoryOnDate(cmb_Articles1.ArticleId, cmb_Types1.TypeId, cmb_Firms1.FirmId, cmb_Articles1.Article, cmb_Places1.PlaceId,
+            var data = (DataTable)Helper.getSP("sp_StockInventoryOnDate", cmb_Articles1.ArticleId, cmb_Types1.TypeId, cmb_Firms1.FirmId, cmb_Articles1.Article, cmb_Places1.PlaceId,
                                                         cmb_Department1.DeptId, Label, chk_GroupByPlaces.Checked == true ? -1 : 0, cmb_Batches1.BatchId,
                                                         chk_Totals.Checked == true ? -1 : 0, txt_Date.Value.ToShortDateString().Trim());
 

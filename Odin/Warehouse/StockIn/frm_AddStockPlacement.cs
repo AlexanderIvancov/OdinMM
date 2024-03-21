@@ -48,7 +48,6 @@ namespace Odin.Warehouse.StockIn
         ExportData ED;
         Helper MyHelper = new Helper();
         PrinterLabels PrintLabels = new PrinterLabels();
-        StockInventory SInvBll = new StockInventory();
         Reg_BLL Reg = new Reg_BLL();
 
         public int RowIndex = 0;
@@ -174,7 +173,7 @@ namespace Odin.Warehouse.StockIn
 
         public void FillLabels(int artid)
         {
-            var data = StockInventory.getStockRests(artid);
+            var data = (DataTable)Helper.getSP("sp_SelectStockRests", artid);
 
             gv_StockDets.ThreadSafeCall(delegate
             {

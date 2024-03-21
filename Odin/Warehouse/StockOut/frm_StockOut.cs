@@ -47,7 +47,6 @@ namespace Odin.Warehouse.StockOut
         public int ColumnIndex = 0;
         public string ColumnName = "";
         public string CellValue = "";
-        StockInventory Inventory = new StockInventory();
 
 
         PopupWindowHelper PopupHelper = null;
@@ -745,7 +744,7 @@ namespace Odin.Warehouse.StockOut
 
         private void txt_Label_Validating(object sender, CancelEventArgs e)
         {
-            cmb_Articles1.ArticleId = Inventory.ArtIdFromLabel(Label);
+            cmb_Articles1.ArticleId = Convert.ToInt32(Helper.GetOneRecord($"select distinct artid from sto_rests where id = {Label}"));
         }
 
         private void tgv_List_CellClick(object sender, DataGridViewCellEventArgs e)

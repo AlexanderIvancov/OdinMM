@@ -23,7 +23,6 @@ namespace Odin.Warehouse.Inventory
 
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
         class_Global glob_Class = new class_Global();
-        StockInventory SInvBll = new StockInventory();
         StockMove_BLL MovBLL = new StockMove_BLL();
         PrinterLabels PrintLabels = new PrinterLabels();
         DAL_Functions Fun = new DAL_Functions();
@@ -147,7 +146,7 @@ namespace Odin.Warehouse.Inventory
 
         public void FillLabels(int artid)
         {
-            var data = StockInventory.getStockRests(artid);
+            var data = (DataTable)Helper.getSP("sp_SelectStockRests", artid);
 
             gv_List.ThreadSafeCall(delegate
             {
