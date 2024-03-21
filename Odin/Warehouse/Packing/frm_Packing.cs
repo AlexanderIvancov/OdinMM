@@ -439,7 +439,7 @@ namespace Odin.Warehouse.Packing
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    DNBll.EditPackage(_id, _headid, frm.Package, frm.QtyPack, frm.WeightBrut, frm.Comments, frm.BoxNO);
+                    Helper.getSP("sp_EditDeliveryPackage", _id, _headid, frm.Package, frm.QtyPack, frm.WeightBrut, frm.Comments, frm.BoxNO);
                     bwStart(bw_List);
                 }
             }
@@ -476,7 +476,7 @@ namespace Odin.Warehouse.Packing
                 if (result == DialogResult.OK
                     && frm.FormNumber > 0)
                 {
-                    string _res = DNBll.SeparateBox(_id, frm.FormNumber);
+                    string _res = Convert.ToString(Helper.getSP("sp_SeparateDeliveryBox", _id, frm.FormNumber));
                     MessageBox.Show(_res);
                     bwStart(bw_List);
                 }
@@ -520,7 +520,7 @@ namespace Odin.Warehouse.Packing
                     foreach (DataGridViewRow row in gv_List.SelectedRows)
                     {
                         if (Convert.ToInt32(row.Cells["cn_batchid"].Value) == _batchid)
-                            DNBll.MapCOToBatch(Convert.ToInt32(row.Cells["cn_id"].Value), _batchid, frm.COId);
+                            Convert.ToString(Helper.getSP("sp_MapCODeliveryBoxForBatch", Convert.ToInt32(row.Cells["cn_id"].Value), _batchid, frm.COId));
                     }
                     bwStart(bw_List);
                 }
@@ -546,7 +546,7 @@ namespace Odin.Warehouse.Packing
                 && globClass.DeleteConfirm() == true)
             {
 
-                DNBll.DeletePackage(_id);
+                Helper.getSP("sp_DeleteDeliveryPackage", _id);
 
                 bwStart(bw_List);
 

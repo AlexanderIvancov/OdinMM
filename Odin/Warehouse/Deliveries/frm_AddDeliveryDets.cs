@@ -552,7 +552,7 @@ namespace Odin.Warehouse.Deliveries
         public void bw_List(object sender, DoWorkEventArgs e)
         {
 
-            var data = DelivNote_BLL.getStockBatch(BatchId, ArticleId);
+            var data = (DataTable)Helper.getSP("sp_SelectBatchStockDets", BatchId, ArticleId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -597,7 +597,7 @@ namespace Odin.Warehouse.Deliveries
 
         public void ShowDetsArt()
         {
-            var data = DelivNote_BLL.getStockBatch(BatchId, ArticleId);
+            var data = (DataTable)Helper.getSP("sp_SelectBatchStockDets", BatchId, ArticleId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -760,13 +760,13 @@ namespace Odin.Warehouse.Deliveries
 
                     if (_test == true)
                     {
-                        int _res = DLBll.AddDeliveryLine(HeadId, _artid, COId, CustArticle, Qty, CoefConv, UnitId, UnitPrice, Comments,
-                                                        WeightNet, WeightBrut, cmb_CustCodes1.CustCode, PackQty, Package, dataout, Return);
+                        int _res = Convert.ToInt32(Helper.getSP("sp_AddDeliveryDets", HeadId, _artid, COId, CustArticle, Qty, CoefConv, UnitId, UnitPrice, Comments,
+                                                        WeightNet, WeightBrut, cmb_CustCodes1.CustCode, PackQty, Package, dataout, Return));
 
                         if (_res != 0)
                         {
                             if (Internal == -1)
-                                DLBll.AddDeliveryLineInternal(_res);
+                                Helper.getSP("sp_AddDeliveryDetsInternal", _res);
 
                             StockDeliveryLineSaved?.Invoke(this);
                             bwStart(bw_List);

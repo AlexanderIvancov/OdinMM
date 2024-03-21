@@ -110,7 +110,7 @@ namespace Odin.Warehouse.Deliveries
 
         public void FillList()
         {
-            var data = DelivNote_BLL.getBatchBoxesForDelivery();
+            var data = (DataTable)Helper.getSP("sp_SelectBatchBoxForDelivery");
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -130,7 +130,7 @@ namespace Odin.Warehouse.Deliveries
 
         public void FillListNotMapped(int idin)
         {
-            var data = DelivNote_BLL.getBatchBoxesNotMapped(idin);
+            var data = (DataTable)Helper.getSP("sp_SelectBatchBoxNotMapped", idin);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -370,7 +370,7 @@ namespace Odin.Warehouse.Deliveries
                     foreach (DataGridViewRow row in gv_List.SelectedRows)
                     {
                         if (Convert.ToInt32(row.Cells["cn_batchid"].Value) == _batchid)
-                            DNBll.MapCOToBatch(Convert.ToInt32(row.Cells["cn_id"].Value), _batchid, frm.COId);
+                            Convert.ToString(Helper.getSP("sp_MapCODeliveryBoxForBatch", Convert.ToInt32(row.Cells["cn_id"].Value), _batchid, frm.COId));
                     }
                     FillList();
                 }
@@ -407,7 +407,7 @@ namespace Odin.Warehouse.Deliveries
                 if (result == DialogResult.OK
                     && frm.FormNumber > 0)
                 {
-                    string _res = DNBll.SeparateBox(_id, frm.FormNumber);
+                    string _res = Convert.ToString(Helper.getSP("sp_SeparateDeliveryBox", _id, frm.FormNumber));
                     MessageBox.Show(_res);
                     FillList();
                 }
@@ -447,7 +447,7 @@ namespace Odin.Warehouse.Deliveries
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    DNBll.EditPackage(_id, 0, frm.Package, frm.QtyPack, frm.WeightBrut, frm.Comments, frm.BoxNO);
+                    Helper.getSP("sp_EditDeliveryPackage", _id, 0, frm.Package, frm.QtyPack, frm.WeightBrut, frm.Comments, frm.BoxNO);
                     FillList();
                 }
             }

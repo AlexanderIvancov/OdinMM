@@ -57,7 +57,7 @@ namespace Odin.Warehouse.Deliveries
 
         public void ShowNotPackedDets(int _delivnoteid)
         {
-            var data = DelivNote_BLL.getDeliveryNotPacked(_delivenoteid);
+            var data = (DataTable)Helper.getSP("sp_SelectDelivNoteDetsNotPacked", _delivenoteid);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -76,7 +76,7 @@ namespace Odin.Warehouse.Deliveries
         public void ShowPackingDets(int _packid)
         {
             //MessageBox.Show(_packid.ToString());
-            var data = DelivNote_BLL.getDeliveryPackageContent(_packid);
+            var data = (DataTable)Helper.getSP("sp_SelectDelivNoteDetsPackageContent", _packid);
 
             gv_Content.ThreadSafeCall(delegate
             {
@@ -94,7 +94,7 @@ namespace Odin.Warehouse.Deliveries
 
         public void ShowPacking(int _delivnoteid)
         {
-            var data = DelivNote_BLL.getDeliveryPackage(_delivenoteid);
+            var data = (DataTable)Helper.getSP("sp_SelectDelivNoteDetsPackage", _delivenoteid);
 
             gv_Package.ThreadSafeCall(delegate
             {
@@ -150,7 +150,7 @@ namespace Odin.Warehouse.Deliveries
                     if (Convert.ToDouble(row.Cells["cn_topack"].Value) > 0 && Convert.ToDouble(row.Cells["cn_weightnet"].Value) <= 0) { MessageBox.Show("Error! Weight net of box is 0!"); return; }
                 foreach (DataGridViewRow row in this.gv_List.Rows)
                     if (Convert.ToDouble(row.Cells["cn_topack"].Value) > 0)
-                        BLL.AddPackageContent(Convert.ToInt32(row.Cells["cn_id"].Value), _packid, 
+                        Helper.getSP("sp_AddDeliveryPackageContent", Convert.ToInt32(row.Cells["cn_id"].Value), _packid, 
                                                 Convert.ToDouble(row.Cells["cn_topack"].Value), 
                                                 Convert.ToDouble(row.Cells["cn_weightnet"].Value));
             }
@@ -196,7 +196,7 @@ namespace Odin.Warehouse.Deliveries
             if (result == DialogResult.OK
                 && DelivNoteId != 0)
             {
-                int _res = BLL.AddPackage(DelivNoteId, frm.Package, frm.QtyPack, frm.WeightBrut, frm.Comments, frm.BoxNO);
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddDeliveryPackage", DelivNoteId, frm.Package, frm.QtyPack, frm.WeightBrut, frm.Comments, frm.BoxNO));
 
                 ShowPacking(DelivNoteId);
             }
@@ -235,7 +235,7 @@ namespace Odin.Warehouse.Deliveries
                 if (result == DialogResult.OK
                     && DelivNoteId != 0)
                 {
-                    BLL.EditPackage(_id, DelivNoteId, frm.Package, frm.QtyPack, frm.WeightBrut, frm.Comments, frm.BoxNO);
+                    Helper.getSP("sp_EditDeliveryPackage", _id, DelivNoteId, frm.Package, frm.QtyPack, frm.WeightBrut, frm.Comments, frm.BoxNO);
 
                     ShowPacking(DelivNoteId);
                 }
@@ -257,7 +257,7 @@ namespace Odin.Warehouse.Deliveries
                 && globClass.DeleteConfirm() == true)
             {
 
-                BLL.DeletePackage(_id);
+                Helper.getSP("sp_DeleteDeliveryPackage", _id);
                
                 ShowPacking(DelivNoteId);
 
@@ -279,7 +279,7 @@ namespace Odin.Warehouse.Deliveries
                 && globClass.DeleteConfirm() == true)
             {
 
-                BLL.DeletePackageContent(_id);
+                Helper.getSP("sp_DeleteDeliveryPackageContent", _id);
                 ShowNotPackedDets(DelivNoteId);
                 ShowPackingDets(PackId);
             }
@@ -462,7 +462,7 @@ namespace Odin.Warehouse.Deliveries
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    BLL.EditPackageContent(_id, frm.FormNumber);
+                    Helper.getSP("sp_EditDeliveryPackageContent", _id, frm.FormNumber);
                     ShowNotPackedDets(DelivNoteId);
                     ShowPackingDets(PackId);
                 }

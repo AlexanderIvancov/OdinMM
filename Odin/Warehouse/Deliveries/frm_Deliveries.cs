@@ -192,7 +192,7 @@ namespace Odin.Warehouse.Deliveries
         public void bw_List(object sender, DoWorkEventArgs e)
         {
             //MessageBox.Show(cmb_DeliveryNotes1.DelivNoteId.ToString());
-            var data = DelivNote_BLL.getDeliveries(cmb_DeliveryNotes1.DelivNoteId, cmb_Types1.TypeId, cmb_Firms1.FirmId, cmb_Articles1.ArticleId, cmb_Articles1.Article, txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
+            var data = (DataTable)Helper.getSP("sp_DeliveriesPortfolioNew", cmb_DeliveryNotes1.DelivNoteId, cmb_Types1.TypeId, cmb_Firms1.FirmId, cmb_Articles1.ArticleId, cmb_Articles1.Article, txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
                                             txt_CreatDateTill.Value == null ? "" : txt_CreatDateTill.Value.ToString().Trim(), txt_FirmArt.Text, txt_Comments.Text, txt_ConfOrder.Text, txt_CustOrder.Text,
                                             cmb_Batches1.BatchId);
 
@@ -236,7 +236,7 @@ namespace Odin.Warehouse.Deliveries
             {
                 if (Convert.ToInt32(row.Cells["chk_add"].Value) == -1)
                 {
-                    DNBll.AddDeliveryLineFromBox(cmb_DeliveryNotes1.DelivNoteId,
+                    Helper.getSP("sp_AddDeliveryLineFromBox", cmb_DeliveryNotes1.DelivNoteId,
                              Convert.ToInt32(row.Cells["cn_id"].Value),
                              Convert.ToInt32(row.Cells["cn_artid"].Value),
                              Convert.ToInt32(row.Cells["cn_coid"].Value),
@@ -271,9 +271,9 @@ namespace Odin.Warehouse.Deliveries
                 {
                     if (Convert.ToInt32(row.Cells["chk_add"].Value) == -1)
                     {
-                        _res = DNBll.MapDeliveryLineFromBox(cmb_DeliveryNotes1.DelivNoteId,
+                        _res = Convert.ToString(Helper.getSP("sp_MapDeliveryLineFromBox", cmb_DeliveryNotes1.DelivNoteId,
                                  Convert.ToInt32(row.Cells["cn_id"].Value),
-                                _delivid);
+                                _delivid));
                         MessageBox.Show(_res);
                     }
                 }
@@ -400,7 +400,7 @@ namespace Odin.Warehouse.Deliveries
                 
             }
             //MessageBox.Show(id.ToString());
-            DNBll.EditDeliveryLine(id, frm.CustArticle, frm.Comments, frm.NetWeight, frm.BrutWeight, frm.CustCode, frm.QtyPack, frm.Package, frm.Return, _coid);
+            Helper.getSP("sp_EditDeliveryDets", id, frm.CustArticle, frm.Comments, frm.NetWeight, frm.BrutWeight, frm.CustCode, frm.QtyPack, frm.Package, frm.Return, _coid);
 
             frm.Close();
             bwStart(bw_List);
@@ -752,7 +752,7 @@ namespace Odin.Warehouse.Deliveries
                 && globClass.DeleteConfirm() == true)
             {
 
-                DNBll.DeleteDeliveryLine(_id);
+                Helper.getSP("sp_DeleteStockDeliveryLine", _id);
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
 

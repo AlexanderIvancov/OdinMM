@@ -741,7 +741,7 @@ namespace Odin.Sales
         private void btn_Refresh_Click(object sender, EventArgs e)
         {
 
-            var data = DelivNote_BLL.getDeliveryDets(cmb_DeliveryNotes1.DelivNoteId);
+            var data = (DataTable)Helper.getSP("sp_SelectDelivNoteDets", cmb_DeliveryNotes1.DelivNoteId);
 
             gv_List.ThreadSafeCall(delegate
             {

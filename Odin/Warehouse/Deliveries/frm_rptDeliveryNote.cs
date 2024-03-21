@@ -61,7 +61,7 @@ namespace Odin.Warehouse.Deliveries
             ////
             DataTable data = new DataTable();
             DataTable datalab = new DataTable();
-            data = DelivNoteType == 1 ? DelivNote_BLL.getDeliveryDetsPrint(HeadId) : DelivNote_BLL.getDeliveryDetsPrintMov(HeadId);
+            data = DelivNoteType == 1 ? (DataTable)Helper.getSP("sp_SelectDelivNoteDetsPrintNew", HeadId) : (DataTable)Helper.getSP("sp_SelectDelivNoteDetsPrintMov", HeadId);
 
 
             string short_name = "";

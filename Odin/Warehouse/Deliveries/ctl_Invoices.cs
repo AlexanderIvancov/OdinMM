@@ -29,7 +29,7 @@ namespace Odin.Warehouse.Deliveries
 
         public void FillInvoices(int _delivid)
         {
-            var data = DelivNote_BLL.getDelivInvoices(_delivid);
+            var data = (System.Data.DataTable)Helper.getSP("sp_SelectDeliveryInvoices", _delivid);
 
             gv_List.ThreadSafeCall(delegate
             {
