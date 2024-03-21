@@ -32,7 +32,6 @@ namespace Odin.Warehouse.History
 
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
         class_Global glob_Class = new class_Global();
-        StockHistory_BLL SIH = new StockHistory_BLL();
         DAL_Functions DAL = new DAL_Functions();
         AdmMenu mMenu = new AdmMenu();
         class_Global globClass = new class_Global();
@@ -89,7 +88,7 @@ namespace Odin.Warehouse.History
 
         public void ShowDets(int _idin)
         {
-            var data = StockHistory_BLL.getStockIncomeTracing(_idin);
+            var data = (DataTable)Helper.getSP("sp_StockIncomeTracing", _idin);
 
             gv_List.ThreadSafeCall(delegate
             {

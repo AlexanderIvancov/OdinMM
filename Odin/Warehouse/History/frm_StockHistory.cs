@@ -263,7 +263,7 @@ namespace Odin.Warehouse.History
 
             cmb_Operation.Invoke(new MethodInvoker(delegate { _operid = OperationTypeId; }));
 
-            var data = StockHistory_BLL.getIncomesHistory(cmb_IncomeDoc1.IncomeDocId, _operid, cmb_Types1.TypeId, cmb_Firms1.FirmId, cmb_Batches1.BatchId, cmb_SalesOrders1.SalesOrderId, 
+            var data = (DataTable)Helper.getSP("sp_StockHistoryIncomes", cmb_IncomeDoc1.IncomeDocId, _operid, cmb_Types1.TypeId, cmb_Firms1.FirmId, cmb_Batches1.BatchId, cmb_SalesOrders1.SalesOrderId, 
                                             cmb_Articles1.ArticleId, cmb_Articles1.Article, txt_DateFrom.Value == null ? "" : txt_DateFrom.Value.ToString().Trim(),
                                             txt_DateTill.Value == null ? "" : txt_DateTill.Value.ToString().Trim(), txt_FirmArt.Text);
 
@@ -288,7 +288,7 @@ namespace Odin.Warehouse.History
 
             cmb_Operation.Invoke(new MethodInvoker(delegate { _operid = OperationTypeId; }));
 
-            var data = StockHistory_BLL.getOutcomesHistory(cmb_OutcomeDocs1.OutcomeDocId, _operid, cmb_Types1.TypeId, cmb_Firms1.FirmId, cmb_Batches1.BatchId, cmb_SalesOrders1.SalesOrderId,
+            var data = (DataTable)Helper.getSP("sp_StockHistoryOutcomes", cmb_OutcomeDocs1.OutcomeDocId, _operid, cmb_Types1.TypeId, cmb_Firms1.FirmId, cmb_Batches1.BatchId, cmb_SalesOrders1.SalesOrderId,
                                             cmb_Articles1.ArticleId, cmb_Articles1.Article, txt_DateFrom.Value == null ? "" : txt_DateFrom.Value.ToString().Trim(),
                                             txt_DateTill.Value == null ? "" : txt_DateTill.Value.ToString().Trim(), txt_FirmArt.Text, cmb_Places1.PlaceId, chk_groupbybatch.Checked == true? -1 : 0);
 
@@ -409,7 +409,7 @@ namespace Odin.Warehouse.History
 
             cmb_Operation.Invoke(new MethodInvoker(delegate { _operid = OperationTypeId; }));
 
-            var data = StockHistory_BLL.getMovementHistory(cmb_MoveDocs1.MoveDocId, _operid, cmb_Types1.TypeId, cmb_Batches1.BatchId, cmb_SalesOrders1.SalesOrderId,
+            var data = (DataTable)Helper.getSP("sp_StockHistoryMovements", cmb_MoveDocs1.MoveDocId, _operid, cmb_Types1.TypeId, cmb_Batches1.BatchId, cmb_SalesOrders1.SalesOrderId,
                                             cmb_Articles1.ArticleId, cmb_Articles1.Article, txt_DateFrom.Value == null ? "" : txt_DateFrom.Value.ToString().Trim(),
                                             txt_DateTill.Value == null ? "" : txt_DateTill.Value.ToString().Trim(), cmb_Places1.PlaceId, cmb_Places2.PlaceId);
 
@@ -501,7 +501,7 @@ namespace Odin.Warehouse.History
             {
                 bs_ReturnsList.RemoveFilter();
 
-                var data = StockHistory_BLL.getReturnsHistory(cmb_Types1.TypeId, cmb_Batches1.BatchId, cmb_SalesOrders1.SalesOrderId,
+                var data = (DataTable)Helper.getSP("sp_StockHistoryReturns", cmb_Types1.TypeId, cmb_Batches1.BatchId, cmb_SalesOrders1.SalesOrderId,
                                             cmb_Articles1.ArticleId, cmb_Articles1.Article, txt_DateFrom.Value == null ? "" : txt_DateFrom.Value.ToString().Trim(),
                                             txt_DateTill.Value == null ? "" : txt_DateTill.Value.ToString().Trim());
 
