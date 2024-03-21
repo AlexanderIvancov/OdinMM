@@ -17,7 +17,6 @@ namespace Odin.Workshop
         #region Variables
 
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
-        Processing_BLL PBLL = new Processing_BLL();
         public event BatchStageSavingEventHandler BatchStageSaving;
 
         public double PrevQty
@@ -171,7 +170,7 @@ namespace Odin.Workshop
 
         private void btn_AddProcess_Click(object sender, EventArgs e)
         {
-            PBLL.AddStageProcess(BatchId, StageId, PrevStageId, tPrevQty, 1);
+            Global_Classes.Helper.getSP("sp_AddBatchStageProcess", BatchId, StageId, PrevStageId, tPrevQty, 1);
             BatchStageSaving?.Invoke(this);
         }
 
@@ -186,14 +185,14 @@ namespace Odin.Workshop
             if (result1 == DialogResult.Yes
                 && InProcQty != tInProcQty)
             {
-                PBLL.AddStageProcess(BatchId, PrevStageId, StageId, InProcQty - tInProcQty, 1);
+                Global_Classes.Helper.getSP("sp_AddBatchStageProcess", BatchId, PrevStageId, StageId, InProcQty - tInProcQty, 1);
             }
             BatchStageSaving?.Invoke(this);
         }
         
         private void btn_Freeze_Click(object sender, EventArgs e)
         {
-            PBLL.FreezeStageProcess(BatchId, StageId, tFreezedQty);
+            Global_Classes.Helper.getSP("sp_FreezeBatchStageProcess", BatchId, StageId, tFreezedQty);
             BatchStageSaving?.Invoke(this);
         }
         

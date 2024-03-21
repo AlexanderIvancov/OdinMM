@@ -28,7 +28,6 @@ namespace Odin.Workshop
         ExportData ED;
         Tools_BLL Bll = new Tools_BLL();
         CMB_BLL Bllc = new CMB_BLL();
-        Processing_BLL ProcBLL = new Processing_BLL();
 
         public int RowIndex = 0;
         public int ColumnIndex = 0;
@@ -49,7 +48,7 @@ namespace Odin.Workshop
 
         public void FillList()
         {
-            var data = Processing_BLL.getWorkers();
+            var data = (DataTable)Helper.getSP("sp_WorkersList");
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -277,7 +276,7 @@ namespace Odin.Workshop
             DialogResult result = frm.ShowDialog();
             if (result == DialogResult.OK)
             {
-                int _res = ProcBLL.SaveWorker(0, frm.UserName, frm.UserSurName, frm.UserTabNR, frm.IsActive, frm.RFID, frm.Comments, frm.IsMaster);
+                int _res = Convert.ToInt32(Helper.getSP("sp_SaveWorker", 0, frm.UserName, frm.UserSurName, frm.UserTabNR, frm.IsActive, frm.RFID, frm.Comments, frm.IsMaster));
                 FillList();
             }
         }
@@ -318,7 +317,7 @@ namespace Odin.Workshop
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    int _res = ProcBLL.SaveWorker(_id, frm.UserName, frm.UserSurName, frm.UserTabNR, frm.IsActive, frm.RFID, frm.Comments, frm.IsMaster);
+                    int _res = Convert.ToInt32(Helper.getSP("sp_SaveWorker", _id, frm.UserName, frm.UserSurName, frm.UserTabNR, frm.IsActive, frm.RFID, frm.Comments, frm.IsMaster));
                     FillList();
                 }
             }
@@ -338,7 +337,7 @@ namespace Odin.Workshop
             if (_id != 0
                 && glob_Class.DeleteConfirm() == true)
             {
-                glob_Class.ShowMessage("Workers deletion result:", "", ProcBLL.DeleteWorker(_id));
+                glob_Class.ShowMessage("Workers deletion result:", "", Convert.ToString(Helper.getSP("sp_DeleteWorker", _id)));
                 FillList();
             }
         }

@@ -116,7 +116,6 @@ namespace Odin.DataCollection
                 chk_IsLast.Checked = value == -1;
             }
         }
-        Processing_BLL ProdBll = new Processing_BLL();
 
         #endregion
 
@@ -587,7 +586,7 @@ namespace Odin.DataCollection
         }
         public void AddSerialAnalogue(string serial, string analogue, int asprimary)
         {
-            string _res = ProdBll.AddSerialNumberAnalogue(serial, analogue, asprimary);            
+            string _res = Convert.ToString(Helper.getSP("sp_AddSerialAnalogue", serial, analogue, asprimary));            
         }
 
         public void AddSerialAnalog(string Analogue)

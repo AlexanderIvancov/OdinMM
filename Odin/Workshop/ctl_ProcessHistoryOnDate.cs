@@ -21,7 +21,6 @@ namespace Odin.Workshop
 
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
         class_Global glob_Class = new class_Global();
-        Processing_BLL ProcBll = new Processing_BLL();
         DAL_Functions DAL = new DAL_Functions();
         AdmMenu mMenu = new AdmMenu();
         class_Global globClass = new class_Global();
@@ -85,7 +84,7 @@ namespace Odin.Workshop
 
         public void FillHistory()
         {
-            var data = Processing_BLL.getProcessingHistory(StageId, txt_EndFrom.Value == null ? "" : txt_EndFrom.Value.ToString().Trim(),
+            var data = (DataTable)Helper.getSP("sp_SelectBatchStagesProcessHistory", StageId, txt_EndFrom.Value == null ? "" : txt_EndFrom.Value.ToString().Trim(),
                                                                     txt_EndTill.Value == null ? "" : txt_EndTill.Value.ToString().Trim());
 
             gv_List.ThreadSafeCall(delegate

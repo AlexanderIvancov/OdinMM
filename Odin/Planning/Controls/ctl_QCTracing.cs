@@ -31,7 +31,6 @@ namespace Odin.Planning.Controls
         Plan_BLL BLL = new Plan_BLL();
         DAL_Functions DAL = new DAL_Functions();
         AdmMenu mMenu = new AdmMenu();
-        Processing_BLL ProdBll = new Processing_BLL();
         int _batchid = 0;
         public int BatchId
         {
@@ -55,7 +54,7 @@ namespace Odin.Planning.Controls
 
         public void FillTracing(int BatchId)
         {
-            var data = Processing_BLL.getQCTracing(BatchId);
+            var data = (DataTable)Helper.getSP("sp_SelectQCTracing", BatchId);
 
             gv_List.ThreadSafeCall(delegate
             {

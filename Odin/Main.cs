@@ -94,7 +94,6 @@ namespace Odin
         frm_MovementReports MovementReport = null;
         frm_IncomeControl IncomeControlList = null;
         frm_ProductCard ProductCard = null;
-        Finances_BLL FinBLL = new Finances_BLL();
         frm_SerialNumbers SerialNumbers = null;
         frm_ProductivityIndicator ProdIndicators = null;
         frm_LaunchesPlanning Launches = null;

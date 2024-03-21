@@ -37,7 +37,6 @@ namespace Odin.DataCollection
         DAL_Functions DAL = new DAL_Functions();
         DC_BLL DCBll = new DC_BLL();
         Plan_BLL PlanBll = new Plan_BLL();
-        Processing_BLL PBLL = new Processing_BLL();
         public DataTable datadetails;
         frm_ScreenNumKeyboard popup;
         PopupWindowHelper PopupHelper = null;
@@ -617,12 +616,12 @@ namespace Odin.DataCollection
                     if (_qty > 0 || Freezed != OldFreezed)
                     {
                         //MessageBox.Show("Save launch");
-                        int _res = PBLL.SaveLaunchStageProcess(LaunchId,
+                        int _res = Convert.ToInt32(Helper.getSP("sp_SaveLaunchStageProcess", LaunchId,
                             PrevStageId, StageId, NextStageId,
                             0,
                             _qty,
                             Freezed,
-                            IsNextStageLast == -1 ? 0 : ProdPlace);
+                            IsNextStageLast == -1 ? 0 : ProdPlace));
                     }
 
                     DialogResult result = KryptonTaskDialog.Show("Approving of info was successful!",
@@ -1127,7 +1126,7 @@ namespace Odin.DataCollection
             PlanBll.LaunchId = _id;
             if (QtyToStart > 0)
             {
-                _res = PBLL.SaveLaunchStageProcess(_id,
+                _res = Convert.ToInt32(Helper.getSP("sp_SaveLaunchStageProcess", _id,
                                   PrevStageId,
                                   StageId,
                                   NextStageId,
@@ -1135,7 +1134,7 @@ namespace Odin.DataCollection
                                   //Convert.ToDouble(row.Cells["cn_tostart"].Value),
                                   0,
                                   Freezed,
-                                  0);
+                                  0));
 
                 RecalcData(_id);
                 gv_List.CurrentRow.Cells["cn_qtystarrted"].Value = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_qtystarrted"].Value) + QtyToStart;

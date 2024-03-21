@@ -155,7 +155,7 @@ namespace Odin.Workshop
 
             }
 
-            var data = Processing_BLL.getStages(0);
+            var data = Helper.QueryDT("select id, name as stage from bas_stages where id = isnull(nullif(" + 0 + ", 0), id) and indic = -1 order by orderby");
 
             foreach (DataRow row in data.Rows)
             {
@@ -163,7 +163,7 @@ namespace Odin.Workshop
             }
 
             //Summas
-            var datasum = Processing_BLL.getProductivityIndicatorSum(Convert.ToDateTime(txt_From.Value).ToShortDateString(), Convert.ToDateTime(txt_Till.Value).ToShortDateString());
+            var datasum = (DataTable)Helper.getSP("sp_SelectProductivityIndicatorSum", Convert.ToDateTime(txt_From.Value).ToShortDateString(), Convert.ToDateTime(txt_Till.Value).ToShortDateString());
             foreach (DataRow row in datasum.Rows)
             {
                 foreach (DataGridViewRow rowc in gv_List.Rows)
@@ -180,7 +180,7 @@ namespace Odin.Workshop
             }
 
 
-            var data1 = Processing_BLL.getProductivityIndicator(Convert.ToDateTime(txt_From.Value).ToShortDateString(), Convert.ToDateTime(txt_Till.Value).ToShortDateString());
+            var data1 = (DataTable)Helper.getSP("sp_SelectProductivityIndicatorWeeks", Convert.ToDateTime(txt_From.Value).ToShortDateString(), Convert.ToDateTime(txt_Till.Value).ToShortDateString());
 
             int _rowcount = 1;
 
@@ -265,7 +265,7 @@ namespace Odin.Workshop
                 gv_List.Columns.Add(col);
             }
 
-            var data = Processing_BLL.getStages(0);
+            var data = Helper.QueryDT("select id, name as stage from bas_stages where id = isnull(nullif(" + 0 + ", 0), id) and indic = -1 order by orderby");
 
             foreach (DataRow row in data.Rows)
             {
@@ -273,7 +273,7 @@ namespace Odin.Workshop
             }
 
             //Summas
-            var datasum = Processing_BLL.getProductivityIndicatorSum(Convert.ToDateTime(txt_From.Value).ToShortDateString(), Convert.ToDateTime(txt_Till.Value).ToShortDateString());
+            var datasum = (DataTable)Helper.getSP("sp_SelectProductivityIndicatorSum", Convert.ToDateTime(txt_From.Value).ToShortDateString(), Convert.ToDateTime(txt_Till.Value).ToShortDateString());
             foreach (DataRow row in datasum.Rows)
             {
                 foreach (DataGridViewRow rowc in gv_List.Rows)
@@ -290,7 +290,7 @@ namespace Odin.Workshop
             }
 
 
-            var data1 = Processing_BLL.getProductivityIndicator(Convert.ToDateTime(txt_From.Value).ToShortDateString(), Convert.ToDateTime(txt_Till.Value).ToShortDateString());
+            var data1 = (DataTable)Helper.getSP("sp_SelectProductivityIndicatorWeeks", Convert.ToDateTime(txt_From.Value).ToShortDateString(), Convert.ToDateTime(txt_Till.Value).ToShortDateString());
 
 
             foreach (DataRow row in data1.Rows)

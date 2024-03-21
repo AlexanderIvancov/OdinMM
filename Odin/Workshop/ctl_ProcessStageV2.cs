@@ -20,7 +20,6 @@ namespace Odin.Workshop
 
         #region Variables
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
-        Processing_BLL PBLL = new Processing_BLL();
         public event BatchStage2SavingEventHandler BatchStageSaving;
         public event BatchStage2SendingEventHandler BatchStageSending;
         class_Global glob_Class = new class_Global();
@@ -309,7 +308,7 @@ namespace Odin.Workshop
                 if (_test == true)
                 {
                     //MessageBox.Show(StageId.ToString());
-                    PBLL.AddStageProcess(BatchId, NextStageId, StageId, tProcQty, IsNextStageLast == -1 ? 0 : ProdPlace);
+                    Helper.getSP("sp_AddBatchStageProcess", BatchId, NextStageId, StageId, tProcQty, IsNextStageLast == -1 ? 0 : ProdPlace);
                     BatchStageSaving?.Invoke(this);
                     BatchStageSending?.Invoke(this);
                 }
@@ -320,7 +319,7 @@ namespace Odin.Workshop
         {
             if (tRetQty != 0)
             {
-                PBLL.AddStageProcess(BatchId, PrevStageId, StageId, tRetQty, IsNextStageLast == -1 ? 0 : ProdPlace);
+                Helper.getSP("sp_AddBatchStageProcess", BatchId, PrevStageId, StageId, tRetQty, IsNextStageLast == -1 ? 0 : ProdPlace);
                 BatchStageSaving?.Invoke(this);
                 BatchStageSending?.Invoke(this);
             }
@@ -338,7 +337,7 @@ namespace Odin.Workshop
             }
             else
             {
-                PBLL.FreezeStageProcess(BatchId, StageId, tFreezedQty);
+                Helper.getSP("sp_FreezeBatchStageProcess", BatchId, StageId, tFreezedQty);
                 BatchStageSaving?.Invoke(this);
                 BatchStageSending?.Invoke(this);
             }
@@ -347,7 +346,7 @@ namespace Odin.Workshop
         private void btn_Start_Click(object sender, EventArgs e)
         {
             //MessageBox.Show(PrevStageId.ToString());
-            PBLL.AddStageProcess(BatchId, StageId, PrevStageId, PrevQty, IsNextStageLast == -1 ? 0 : ProdPlace);
+            Helper.getSP("sp_AddBatchStageProcess", BatchId, StageId, PrevStageId, PrevQty, IsNextStageLast == -1 ? 0 : ProdPlace);
             BatchStageSaving?.Invoke(this);
             BatchStageSending?.Invoke(this);
         }
@@ -391,7 +390,7 @@ namespace Odin.Workshop
         {
             if (glob_Class.DeleteConfirm() == true)
             {
-                PBLL.DeleteStageProcess(BatchId, StageId);
+                Helper.getSP("sp_DeleteBatchStageProcess", BatchId, StageId);
                 BatchStageSaving?.Invoke(this);
                 BatchStageSending?.Invoke(this);
             }

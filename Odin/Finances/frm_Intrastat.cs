@@ -24,7 +24,6 @@ namespace Odin.Finances
         DAL_Functions DAL = new DAL_Functions();
         AdmMenu mMenu = new AdmMenu();
         Helper MyHelper = new Helper();
-        Finances_BLL Bll = new Finances_BLL();
 
 
         public int RowIndex = 0;

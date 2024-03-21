@@ -28,7 +28,6 @@ namespace Odin.DataCollection
         AdmMenu mMenu = new AdmMenu();
         DAL_Functions DAL = new DAL_Functions();
         DC_BLL DCBll = new DC_BLL();
-        Processing_BLL PBLL = new Processing_BLL();
         public DataTable datadetails;
 
         int _masterid = 0;
@@ -336,12 +335,12 @@ namespace Odin.DataCollection
                     if (_qty > 0 || Freezed != OldFreezed)
                     {
                         //MessageBox.Show("Save launch");
-                        int _res = PBLL.SaveLaunchStageProcess(LaunchId,
+                        int _res = Convert.ToInt32(Helper.getSP("sp_SaveLaunchStageProcess", LaunchId,
                             PrevStageId, StageId, NextStageId,
                             0,
                             _qty,
                             Freezed,
-                            IsNextStageLast == -1 ? 0 : ProdPlace);
+                            IsNextStageLast == -1 ? 0 : ProdPlace));
                     }
 
                     DialogResult result = KryptonTaskDialog.Show("Approving of info was successful!",

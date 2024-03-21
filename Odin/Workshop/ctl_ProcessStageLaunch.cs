@@ -20,7 +20,6 @@ namespace Odin.Workshop
 
 
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
-        Processing_BLL PBLL = new Processing_BLL();
         public event Launch2SavingEventHandler LaunchStageSaving;
         public event Launch2SendingEventHandler LaunchStageSending;
         class_Global glob_Class = new class_Global();
@@ -105,7 +104,7 @@ namespace Odin.Workshop
 
         public void FillList(int _BatchId, int _StageId)
         {
-            var data = Processing_BLL.getBatchLaunchesProcessing(_BatchId, _StageId);
+            var data = (DataTable)Helper.getSP("sp_SelectBatchLaunchesProcessing", _BatchId, _StageId);
 
 
             gv_List.ThreadSafeCall(delegate
@@ -246,11 +245,11 @@ namespace Odin.Workshop
                     //|| Convert.ToDouble(row.Cells["cn_finished"].Value) != Convert.ToDouble(row.Cells["cn_oldfinished"].Value)
                     //|| Convert.ToDouble(row.Cells["cn_freezed"].Value) != Convert.ToDouble(row.Cells["cn_oldfreezed"].Value))
                     {
-                        _res = PBLL.SaveLaunchStageProcess(Convert.ToInt32(row.Cells["cn_id"].Value),
+                        _res = Convert.ToInt32(Helper.getSP("sp_SaveLaunchStageProcess", Convert.ToInt32(row.Cells["cn_id"].Value),
                                 PrevStageId, StageId, NextStageId,
                                 Convert.ToDouble(row.Cells["cn_tostart"].Value),
                                 Convert.ToDouble(row.Cells["cn_tofinish"].Value),
-                                Convert.ToDouble(row.Cells["cn_freezed"].Value), IsNextStageLast == -1 ? 0 : ProdPlace);
+                                Convert.ToDouble(row.Cells["cn_freezed"].Value), IsNextStageLast == -1 ? 0 : ProdPlace));
 
                     }
                 }

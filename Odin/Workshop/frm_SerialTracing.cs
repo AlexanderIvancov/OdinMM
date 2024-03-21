@@ -25,7 +25,6 @@ namespace Odin.Workshop
         string postgreConnStr = ConfigurationManager.ConnectionStrings["PostgreConnectionString"].ConnectionString;
 
         DAL_Functions DAL = new DAL_Functions();
-        Processing_BLL ProdBll = new Processing_BLL();
         CMB_BLL CmbBll = new CMB_BLL();
        
 
@@ -129,9 +128,19 @@ namespace Odin.Workshop
 
         #region Methods
 
+        string rusToEng(string s)
+        {
+            const string rus = "ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ,йцукенгшщзхъфывапролджэячсмитьбю.ё!\"№;%:?*()_+";
+            const string eng = "QWERTYUIOP{}ASDFGHJKL:\"ZXCVBNM,./qwertyuiop[]asdfghjkl;'zxcvbnm,.~!@#$%^&*()_+";
+            string _res = "";
+            foreach (var l in s)
+                _res = _res + (rus.Contains(l.ToString()) ? eng[rus.IndexOf(l.ToString())].ToString() : l.ToString());
+            return (_res);
+        }
+
         public void AddSerialTracing(int stageid, int batchid, string serial)
         {
-            string _res = ProdBll.AddSerialNumberTracing(stageid, batchid, serial);
+            string _res = Convert.ToString(Helper.getSP("sp_AddSerialTracing", stageid, batchid, rusToEng(serial)));
             
             if (_res.IndexOf("success!") >= 0)
             {
@@ -144,14 +153,14 @@ namespace Odin.Workshop
 
         public void ReplaceSerialTracing(string serial, int stageid, string replacement)
         {
-            string _res = ProdBll.ReplaceSerialNumberTracing(serial, stageid, replacement);
+            string _res = Convert.ToString(Helper.getSP("sp_ReplaceSerialTracing", serial, stageid, replacement));
 
             txt_Result.Text = _res + " at " + System.DateTime.Now.ToString() + System.Environment.NewLine + txt_Result.Text;
         }
 
         public void AddSerialAnalogue(string serial, string analogue, int asprimary)
         {
-            string _res = ProdBll.AddSerialNumberAnalogue(serial, analogue, asprimary);
+            string _res = Convert.ToString(Helper.getSP("sp_AddSerialAnalogue", serial, analogue, asprimary));
 
             txt_Result.Text = _res + " at " + System.DateTime.Now.ToString() + System.Environment.NewLine + txt_Result.Text;
         }
@@ -619,7 +628,7 @@ namespace Odin.Workshop
 
                 lbl_Progess.ThreadSafeCall(delegate { lbl_Progess.Text = "Uploading data to server..."; });
 
-                DataTable dataresult = ProdBll.UploadSerialNumbers(dataserials, _machinename);
+                DataTable dataresult = (DataTable)Helper.getSP("sp_UploadSerialNumbers", dataserials, _machinename);
 
                 StringBuilder result = new StringBuilder();
 

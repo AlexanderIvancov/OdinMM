@@ -22,7 +22,6 @@ namespace Odin.Workshop
         private ProgressForm progress;
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
         class_Global glob_Class = new class_Global();
-        Processing_BLL ProcBll = new Processing_BLL();
         DAL_Functions DAL = new DAL_Functions();
         AdmMenu mMenu = new AdmMenu();
         class_Global globClass = new class_Global();
@@ -91,7 +90,7 @@ namespace Odin.Workshop
             }
 
             //var data = Processing_BLL.getStages(cmb_Common1.SelectedValue);
-            var data = Processing_BLL.getShifts(cmb_Common1.SelectedValue, cmb_Common2.SelectedValue, cmb_Common3.SelectedValue, TypeSelection);
+            var data = (DataTable)Helper.getSP("sp_Shifts", cmb_Common1.SelectedValue, cmb_Common2.SelectedValue, cmb_Common3.SelectedValue, TypeSelection);
 
 
             foreach (DataRow row in data.Rows)
@@ -100,7 +99,7 @@ namespace Odin.Workshop
             }
 
             //var data1 = Processing_BLL.getCapacity(cmb_Common1.SelectedValue, Convert.ToDateTime(txt_From.Value).ToShortDateString(), Convert.ToDateTime(txt_Till.Value).ToShortDateString());
-            var data1 = Processing_BLL.getCapacityShifts(cmb_Common1.SelectedValue, Convert.ToDateTime(txt_From.Value).ToShortDateString(), 
+            var data1 = (DataTable)Helper.getSP("sp_SelectProductionCapacityShifts", cmb_Common1.SelectedValue, Convert.ToDateTime(txt_From.Value).ToShortDateString(), 
                                             Convert.ToDateTime(txt_Till.Value).ToShortDateString(), cmb_Common2.SelectedValue, cmb_Common3.SelectedValue);
 
 
@@ -245,7 +244,7 @@ namespace Odin.Workshop
             }
 
             //ProcBll.SaveCapacity(Convert.ToDateTime(txt_From.Value).ToShortDateString(), Convert.ToDateTime(txt_Till.Value).ToShortDateString(), datastages);
-            ProcBll.SaveCapacityShift(Convert.ToDateTime(txt_From.Value).ToShortDateString(), Convert.ToDateTime(txt_Till.Value).ToShortDateString(), datastages);
+            Helper.getSP("sp_SaveCapacityShift", Convert.ToDateTime(txt_From.Value).ToShortDateString(), Convert.ToDateTime(txt_Till.Value).ToShortDateString(), datastages);
 
         }
 

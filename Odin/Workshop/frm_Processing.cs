@@ -28,7 +28,6 @@ namespace Odin.Workshop
 
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
         class_Global glob_Class = new class_Global();
-        Processing_BLL ProcBll = new Processing_BLL();
         Reg_BLL RegBll = new Reg_BLL();
         DAL_Functions DAL = new DAL_Functions();
         AdmMenu mMenu = new AdmMenu();
@@ -307,7 +306,7 @@ namespace Odin.Workshop
         {
             bs_List.RemoveFilter();
 
-            var data = Processing_BLL.getStages(cmb_Batches1.BatchId, cmb_Articles1.ArticleId, StageId, cmb_SalesOrdersWithLines1.SalesOrderLineId, IsActive,
+            var data = (DataTable)Helper.getSP("sp_ProductionStagesList", cmb_Batches1.BatchId, cmb_Articles1.ArticleId, StageId, cmb_SalesOrdersWithLines1.SalesOrderLineId, IsActive,
                                             cmb_Types1.TypeId, cmb_Department1.DeptId, txt_FirmArt.Text, txt_CustOrder.Text, 
                                             txt_StartFrom.Value == null ? "" : txt_StartFrom.Value.ToString().Trim(),
                                             txt_StartTill.Value == null ? "" : txt_StartTill.Value.ToString().Trim(),

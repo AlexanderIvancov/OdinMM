@@ -24,7 +24,6 @@ namespace Odin.Workshop
 
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
         class_Global glob_Class = new class_Global();
-        Processing_BLL ProcBll = new Processing_BLL();
         DAL_Functions DAL = new DAL_Functions();
         AdmMenu mMenu = new AdmMenu();
         class_Global globClass = new class_Global();
@@ -58,7 +57,7 @@ namespace Odin.Workshop
         {
             //var data = Processing_BLL.getProductivityIndicatorDets(StageId, txt_Date.Value == null ? "" : txt_Date.Value.ToString().Trim(),
             //                                                         txt_Date.Value == null ? "" : txt_Date.Value.ToString().Trim());
-            var data = Processing_BLL.getProductivityIndicatorDets(StageId, cmb_Week1.FirstDateOfWeek.ToShortDateString(),
+            var data = (DataTable)Helper.getSP("sp_SelectProductivityIndicatorDets", StageId, cmb_Week1.FirstDateOfWeek.ToShortDateString(),
                                                                      cmb_Week1.LastDateOfWeek.ToShortDateString());
             //var data = Processing_BLL.getProductivityIndicatorDets(StageId, DateFrom,
             //                                                         DateTill);

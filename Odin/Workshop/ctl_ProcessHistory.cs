@@ -43,7 +43,7 @@ namespace Odin.Workshop
 
         public void FillHistory(int Id)
         {
-            var data = Processing_BLL.getStagesHistory(BatchId);
+            var data = (DataTable)Helper.getSP("sp_SelectBatchProcessHistory", BatchId);
 
             gv_List.ThreadSafeCall(delegate
             {
