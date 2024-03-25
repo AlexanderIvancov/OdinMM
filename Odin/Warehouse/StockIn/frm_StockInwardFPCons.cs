@@ -455,7 +455,7 @@ namespace Odin.Warehouse.StockIn
 
                 }
                 //Add details nodes
-                var datad = StockOut_BLL.getStockOutProceedRMDets(BatchId);
+                var datad = (DataTable)Helper.getSP("sp_SelectStockOutcomeRMForProceed", BatchId);
 
                 foreach (System.Data.DataRow dr1 in datad.AsEnumerable().OrderBy(d => d.Field<string>("unit"))
                                                                         .ThenBy(d => d.Field<int>("artid"))
@@ -863,7 +863,7 @@ namespace Odin.Warehouse.StockIn
 
                         //Recalculate of cost of stock-in
 
-                        SOBLL.RecalculateFCPrice(SIBll.InsertedId, BatchId, System.DateTime.Now.ToShortDateString());
+                        Helper.getSP("sp_RecalculateFCPrice", SIBll.InsertedId, BatchId, System.DateTime.Now.ToShortDateString());
 
 
                         KryptonTaskDialog.Show("New stock consumption document for batch was created!",

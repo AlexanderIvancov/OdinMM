@@ -85,7 +85,7 @@ namespace Odin.Warehouse.StockOut
 
         public void FillList()
         {
-            var data = StockOut_BLL.getStockOutProceedInDocDets(cmb_IncomeDoc1.IncomeDocId);
+            var data = (DataTable)Helper.getSP("sp_SelectStockOutcomeInDocForProceed", cmb_IncomeDoc1.IncomeDocId);
 
 
             gv_List.ThreadSafeCall(delegate

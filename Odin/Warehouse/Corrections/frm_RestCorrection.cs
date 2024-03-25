@@ -474,11 +474,11 @@ namespace Odin.Warehouse.Corrections
 
                         //Additional outcome
                         //Add stock out
-                        _res = SOBll.AddStockOutLine(_res, Convert.ToInt32(row.Cells["cn_label"].Value),
+                        _res = Convert.ToInt32(Helper.getSP("sp_AddStockOutLine", _res, Convert.ToInt32(row.Cells["cn_label"].Value),
                                                         -1 * Convert.ToDouble(row.Cells["cn_qtydiff"].Value),
                                                         Convert.ToInt32(row.Cells["cn_artid"].Value),
                                                         Convert.ToInt32(row.Cells["cn_id"].Value), 0,
-                                                        Convert.ToInt32(row.Cells["cn_iscounter"].Value) == 0 ? "Rest correction for " + cmb_Batches1.Batch : "Rest correction for " + cmb_Batches1.Batch + " (X-Ray counter)");
+                                                        Convert.ToInt32(row.Cells["cn_iscounter"].Value) == 0 ? "Rest correction for " + cmb_Batches1.Batch : "Rest correction for " + cmb_Batches1.Batch + " (X-Ray counter)"));
 
                             if (_removereservation == -1)
                                 _resmove = Convert.ToInt32(Helper.getSP("sp_AddStockMoveLineCorrection", _resmove,
@@ -495,7 +495,7 @@ namespace Odin.Warehouse.Corrections
 
                             //Remove reservation if qty to return > 0
                             if (Convert.ToDouble(row.Cells["cn_qtyrest"].Value) == 0)
-                                SOBll.RemoveLabelReservationCorrection(Convert.ToInt32(row.Cells["cn_label"].Value), Convert.ToInt32(row.Cells["cn_batchid"].Value));
+                                Helper.getSP("sp_RemoveLabelReservationCorrection", Convert.ToInt32(row.Cells["cn_label"].Value), Convert.ToInt32(row.Cells["cn_batchid"].Value));
                         }
                     else
                     {
@@ -540,7 +540,7 @@ namespace Odin.Warehouse.Corrections
                     //Remove reservation if qty to return > 0
                     if (Convert.ToDouble(row.Cells["cn_qtyrest"].Value) == 0
                         && Convert.ToInt32(row.Cells["chk_removeres"].Value) == -1)
-                        SOBll.RemoveLabelReservationCorrection(Convert.ToInt32(row.Cells["cn_label"].Value), Convert.ToInt32(row.Cells["cn_batchid"].Value));
+                        Helper.getSP("sp_RemoveLabelReservationCorrection", Convert.ToInt32(row.Cells["cn_label"].Value), Convert.ToInt32(row.Cells["cn_batchid"].Value));
 
                 }
                 #endregion

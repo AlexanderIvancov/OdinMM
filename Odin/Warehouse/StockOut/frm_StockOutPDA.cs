@@ -298,7 +298,7 @@ namespace Odin.Warehouse.StockOut
 
         public void ShowDocDets(int id)
         {
-            var data = StockOut_BLL.getStockOutDets(id);
+            var data = (DataTable)Helper.getSP("sp_SelectStockOutDets", id);
 
             gv_Dets.ThreadSafeCall(delegate
             {
@@ -620,12 +620,12 @@ namespace Odin.Warehouse.StockOut
                     {
                         try
                         {
-                            _res = SOBll.AddStockOutLine(_res, Convert.ToInt32(row.Cells["cn_label"].Value),
+                            _res = Convert.ToInt32(Helper.getSP("sp_AddStockOutLine", _res, Convert.ToInt32(row.Cells["cn_label"].Value),
                                                     Convert.ToDouble(row.Cells["cn_qty"].Value),
                                                     Convert.ToInt32(row.Cells["cn_artid"].Value),
                                                     Convert.ToInt32(row.Cells["cn_reqbdetid"].Value),
                                                     Convert.ToInt32(row.Cells["cn_reqid"].Value),
-                                                    row.Cells["cn_comments"].Value.ToString());
+                                                    row.Cells["cn_comments"].Value.ToString()));
                             //_resmove = SMBll.AddStockMoveLinePDA(_resmove,
                             //                            Convert.ToInt32(row.Cells["cn_label"].Value),
                             //                            Convert.ToDouble(row.Cells["cn_qty"].Value),
@@ -680,7 +680,7 @@ namespace Odin.Warehouse.StockOut
             if (_id != 0
                 && Glob_Class.DeleteConfirm() == true)
             {
-                SOBll.DeleteStockOutLine(_id);
+                Helper.getSP("sp_DeleteStockOutLine", _id);
                 ShowDocDets(OutHeaderId);
             }
         }
@@ -705,7 +705,7 @@ namespace Odin.Warehouse.StockOut
             dt.Rows.Add(drow);
 
             DataTable data = new DataTable();
-            data = StockOut_BLL.getStockOutDets(OutHeaderId);
+            data = (DataTable)Helper.getSP("sp_SelectStockOutDets", OutHeaderId);
             //parameters
 
             report.Database.Tables[0].SetDataSource(dt);

@@ -41,7 +41,7 @@ namespace Odin.Warehouse.StockOut.Reports
             dt.Rows.Add(drow);
 
             DataTable data = new DataTable();
-            data = StockOut_BLL.getStockOutDets(OutcomeDocId);
+            data = (DataTable)Helper.getSP("sp_SelectStockOutDets", OutcomeDocId);
 
             //parameters
             

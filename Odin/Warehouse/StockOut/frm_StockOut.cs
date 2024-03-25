@@ -181,7 +181,7 @@ namespace Odin.Warehouse.StockOut
         public void bw_Dets(object sender, DoWorkEventArgs e)
         {
             //MessageBox.Show(txt_CreatDateFrom.Value.ToShortDateString());
-            var data = StockOut_BLL.getStockOutDets(cmb_OutcomeDocs1.OutcomeDocId);
+            var data = (DataTable)Helper.getSP("sp_SelectStockOutDets", cmb_OutcomeDocs1.OutcomeDocId);
 
             gv_Dets.ThreadSafeCall(delegate
             {
@@ -212,7 +212,7 @@ namespace Odin.Warehouse.StockOut
             TreeGridNode node;
             Font boldFont = new Font(tgv_List.DefaultCellStyle.Font, FontStyle.Bold);
                  
-            var data = StockOut_BLL.getStockOutProceedHead(cmb_Articles1.ArticleId, cmb_Batches1.BatchId, cmb_Requests1.RequestId, cmb_Common1.SelectedValue, LeftOnly);
+            var data = (DataTable)Helper.getSP("sp_SelectStockOutcomeForProceed", cmb_Articles1.ArticleId, cmb_Batches1.BatchId, cmb_Requests1.RequestId, cmb_Common1.SelectedValue, LeftOnly);
 
             foreach (System.Data.DataRow dr in data.AsEnumerable().OrderBy(d => d.Field<string>("unit")).ThenBy(a => a.Field<int>("artid")))
             {
@@ -230,7 +230,7 @@ namespace Odin.Warehouse.StockOut
 
                 node.ImageIndex = 1;
                 //Add details nodes
-                var datad = StockOut_BLL.getStockOutProceedDets(Convert.ToInt32(dr["artid"]), cmb_Batches1.BatchId, Reserved);
+                var datad = (DataTable)Helper.getSP("sp_SelectStockOutcomeForProceedDets", Convert.ToInt32(dr["artid"]), cmb_Batches1.BatchId, Reserved);
                 foreach (System.Data.DataRow dr1 in datad.AsEnumerable().OrderBy(a => a.Field<DateTime>("expdate"))
                                                                         .ThenBy(a => a.Field<int>("label")))
                 {
@@ -627,7 +627,7 @@ namespace Odin.Warehouse.StockOut
         {
             //MessageBox.Show(cmb_OutcomeDocs1.OutcomeDocId.ToString());
             //bwStart(bw_Dets);
-            var data = StockOut_BLL.getStockOutDets(cmb_OutcomeDocs1.OutcomeDocId);
+            var data = (DataTable)Helper.getSP("sp_SelectStockOutDets", cmb_OutcomeDocs1.OutcomeDocId);
 
             gv_Dets.ThreadSafeCall(delegate
             {
@@ -1167,10 +1167,10 @@ namespace Odin.Warehouse.StockOut
                                 _removereservation = 0;
 
                             //Add stock out
-                            _res = SOBll.AddStockOutLine(_res, Convert.ToInt32(node1.Cells["cn_Label"].Value),
+                            _res = Convert.ToInt32(Helper.getSP("sp_AddStockOutLine", _res, Convert.ToInt32(node1.Cells["cn_Label"].Value),
                                                         Convert.ToDouble(node1.Cells["cn_QtyToGive"].Value),
                                                         _artid, _batchdetid, _requestid,
-                                                        node1.Cells["cn_Comments"].Value.ToString());
+                                                        node1.Cells["cn_Comments"].Value.ToString()));
                             //Free labels
                             if (_removereservation == -1)
                                 _resmove = Convert.ToInt32(Helper.getSP("sp_AddStockMoveLine", _resmove,
@@ -1185,7 +1185,7 @@ namespace Odin.Warehouse.StockOut
                                                             "Removing of reservation of " + node1.Cells["cn_Batch"].Value.ToString()));
                             //Remove reservation if qty to return > 0
                             if (Convert.ToDouble(node1.Cells["cn_QtyRest"].Value) == 0)
-                                SOBll.RemoveLabelReservation(Convert.ToInt32(node1.Cells["cn_Label"].Value));
+                                Helper.getSP("sp_RemoveLabelReservation", Convert.ToInt32(node1.Cells["cn_Label"].Value));
                         }                       
                     }
                 }
@@ -1228,7 +1228,7 @@ namespace Odin.Warehouse.StockOut
                     }
                     sqlConn.Close();
                 }
-                SOBll.UpdateSetPrice(_res);
+                Helper.getSP("sp_UpdateSetPrice", _res);
             
 
             if (cmb_OutcomeDocs1.OutcomeDocId != _res)
@@ -1286,7 +1286,7 @@ namespace Odin.Warehouse.StockOut
             if (_id != 0
                 && glob_Class.DeleteConfirm() == true)
             {
-                SOBll.DeleteStockOutLine(_id);
+                Helper.getSP("sp_DeleteStockOutLine", _id);
                 ShowDets(cmb_OutcomeDocs1.OutcomeDocId);
             }
         }
@@ -1316,7 +1316,7 @@ namespace Odin.Warehouse.StockOut
                 if (_idin != 0)
                 {
 
-                    SOBll.UpdateSetActPrice(_idin, txt_DocDate.Text);
+                    Helper.getSP("sp_UpdateSetAktPrice", _idin, txt_DocDate.Text);
 
                     DialogResult result1 = KryptonTaskDialog.Show("Assembling document was created!",
                                                                    "Document: " + SOBll.TmpInsertedDoc,
@@ -1414,7 +1414,7 @@ namespace Odin.Warehouse.StockOut
                 if (result == DialogResult.OK
                     && frm.BatchId != 0)
                 {
-                    SOBll.MapLineToBatch(_id, frm.BatchId);
+                    Helper.getSP("sp_MapStockOutLineToBatch", _id, frm.BatchId);
                     ShowDets(cmb_OutcomeDocs1.OutcomeDocId);
                 }
             }
