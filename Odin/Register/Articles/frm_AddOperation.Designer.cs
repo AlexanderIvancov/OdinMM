@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_AddOperation));
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.txt_OperNO = new Owf.Controls.NumericTetxBox();
             this.btn_AddFromTemplate = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.cmb_Operations1 = new Odin.CMB_Components.Operations.cmb_Operations();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -42,14 +44,17 @@
             this.buttonSpecAny1 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.btn_Cancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.txt_OperNO = new Owf.Controls.NumericTetxBox();
+            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.txt_Comments = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.buttonSpecAny3 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel4);
+            this.kryptonPanel1.Controls.Add(this.txt_Comments);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel3);
             this.kryptonPanel1.Controls.Add(this.txt_OperNO);
             this.kryptonPanel1.Controls.Add(this.btn_AddFromTemplate);
@@ -66,8 +71,26 @@
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonPanel1.Size = new System.Drawing.Size(425, 259);
+            this.kryptonPanel1.Size = new System.Drawing.Size(425, 321);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // kryptonLabel3
+            // 
+            this.kryptonLabel3.Location = new System.Drawing.Point(3, 72);
+            this.kryptonLabel3.Name = "kryptonLabel3";
+            this.kryptonLabel3.Size = new System.Drawing.Size(65, 20);
+            this.kryptonLabel3.TabIndex = 28;
+            this.kryptonLabel3.Values.Text = "Oper NO.:";
+            // 
+            // txt_OperNO
+            // 
+            this.txt_OperNO.AllowDecimalSeparator = false;
+            this.txt_OperNO.AllowSpace = false;
+            this.txt_OperNO.Location = new System.Drawing.Point(84, 71);
+            this.txt_OperNO.Name = "txt_OperNO";
+            this.txt_OperNO.Size = new System.Drawing.Size(42, 23);
+            this.txt_OperNO.TabIndex = 27;
+            this.txt_OperNO.Text = "0";
             // 
             // btn_AddFromTemplate
             // 
@@ -178,29 +201,35 @@
             this.btn_OK.Values.Image = global::Odin.Global_Resourses.Ok;
             this.btn_OK.Values.Text = "OK";
             // 
-            // kryptonLabel3
+            // kryptonLabel4
             // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(3, 72);
-            this.kryptonLabel3.Name = "kryptonLabel3";
-            this.kryptonLabel3.Size = new System.Drawing.Size(65, 20);
-            this.kryptonLabel3.TabIndex = 28;
-            this.kryptonLabel3.Values.Text = "Oper NO.:";
+            this.kryptonLabel4.Location = new System.Drawing.Point(3, 253);
+            this.kryptonLabel4.Name = "kryptonLabel4";
+            this.kryptonLabel4.Size = new System.Drawing.Size(72, 20);
+            this.kryptonLabel4.TabIndex = 30;
+            this.kryptonLabel4.Values.Text = "Comments:";
             // 
-            // txt_OperNO
+            // txt_Comments
             // 
-            this.txt_OperNO.AllowDecimalSeparator = false;
-            this.txt_OperNO.AllowSpace = false;
-            this.txt_OperNO.Location = new System.Drawing.Point(84, 71);
-            this.txt_OperNO.Name = "txt_OperNO";
-            this.txt_OperNO.Size = new System.Drawing.Size(42, 23);
-            this.txt_OperNO.TabIndex = 27;
-            this.txt_OperNO.Text = "0";
+            this.txt_Comments.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
+            this.buttonSpecAny3});
+            this.txt_Comments.Location = new System.Drawing.Point(84, 253);
+            this.txt_Comments.Multiline = true;
+            this.txt_Comments.Name = "txt_Comments";
+            this.txt_Comments.Size = new System.Drawing.Size(329, 53);
+            this.txt_Comments.TabIndex = 29;
+            // 
+            // buttonSpecAny3
+            // 
+            this.buttonSpecAny3.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
+            this.buttonSpecAny3.UniqueName = "4687129580114F1960B04C89E02869BE";
+            this.buttonSpecAny3.Click += new System.EventHandler(this.buttonSpecAny3_Click);
             // 
             // frm_AddOperation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(425, 259);
+            this.ClientSize = new System.Drawing.Size(425, 321);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -211,7 +240,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
@@ -232,5 +261,8 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_AddFromTemplate;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
         private Owf.Controls.NumericTetxBox txt_OperNO;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_Comments;
+        private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny3;
     }
 }
