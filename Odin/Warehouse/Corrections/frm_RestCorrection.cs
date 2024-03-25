@@ -481,7 +481,7 @@ namespace Odin.Warehouse.Corrections
                                                         Convert.ToInt32(row.Cells["cn_iscounter"].Value) == 0 ? "Rest correction for " + cmb_Batches1.Batch : "Rest correction for " + cmb_Batches1.Batch + " (X-Ray counter)");
 
                             if (_removereservation == -1)
-                                _resmove = SMBll.AddStockMoveLineCorrection(_resmove,
+                                _resmove = Convert.ToInt32(Helper.getSP("sp_AddStockMoveLineCorrection", _resmove,
                                                             Convert.ToInt32(row.Cells["cn_label"].Value),
                                                             Convert.ToDouble(row.Cells["cn_qtyrest"].Value),
                                                             cmb_Places1.PlaceId,
@@ -490,7 +490,7 @@ namespace Odin.Warehouse.Corrections
                                                             Convert.ToInt32(row.Cells["cn_batchid"].Value),
                                                             0,
                                                             0,
-                                                            "Removing of reservation of " + cmb_Batches1.Batch);
+                                                            "Removing of reservation of " + cmb_Batches1.Batch));
 
 
                             //Remove reservation if qty to return > 0
@@ -503,7 +503,7 @@ namespace Odin.Warehouse.Corrections
                         SCBll.ReturnRMFromProduction(Convert.ToInt32(row.Cells["cn_id"].Value), Convert.ToInt32(row.Cells["cn_label"].Value), Convert.ToDouble(row.Cells["cn_qtydiff"].Value));
                         if (cmb_Places1.PlaceId != 0)
                             if (_removereservation == -1)
-                                _resmove = SMBll.AddStockMoveLineCorrection(_resmove,
+                                _resmove = Convert.ToInt32(Helper.getSP("sp_AddStockMoveLineCorrection", _resmove,
                                                        Convert.ToInt32(row.Cells["cn_label"].Value),
                                                        Convert.ToDouble(row.Cells["cn_qtyrest"].Value),
                                                        cmb_Places1.PlaceId,
@@ -512,7 +512,7 @@ namespace Odin.Warehouse.Corrections
                                                        Convert.ToInt32(row.Cells["cn_batchid"].Value),
                                                        0,
                                                        0,
-                                                       "Removing of reservation of " + cmb_Batches1.Batch);
+                                                       "Removing of reservation of " + cmb_Batches1.Batch));
                     }
                 }
                 else // Correct quantities, but remove reservation
@@ -525,7 +525,7 @@ namespace Odin.Warehouse.Corrections
                         : 0;
 
                     if (_removereservation == -1)
-                        _resmove = SMBll.AddStockMoveLineCorrection(_resmove,
+                        _resmove = Convert.ToInt32(Helper.getSP("sp_AddStockMoveLineCorrection", _resmove,
                                                         Convert.ToInt32(row.Cells["cn_label"].Value),
                                                         Convert.ToDouble(row.Cells["cn_qtyrest"].Value),
                                                         cmb_Places1.PlaceId,
@@ -534,7 +534,7 @@ namespace Odin.Warehouse.Corrections
                                                         Convert.ToInt32(row.Cells["cn_batchid"].Value),
                                                         0,
                                                         0,
-                                                        "Removing of reservation of " + cmb_Batches1.Batch);
+                                                        "Removing of reservation of " + cmb_Batches1.Batch));
 
 
                     //Remove reservation if qty to return > 0

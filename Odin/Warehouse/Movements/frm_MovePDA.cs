@@ -393,7 +393,7 @@ namespace Odin.Warehouse.Movements
 
             //
             DataTable data = new DataTable();
-            data = StockMove_BLL.getStockMoveDetsPrint(_movdocid, 0);
+            data = (DataTable)Helper.getSP("sp_SelectMoveDocPrintDef", _movdocid, 0);
 
             //data source
             report.Database.Tables[0].SetDataSource(dt);

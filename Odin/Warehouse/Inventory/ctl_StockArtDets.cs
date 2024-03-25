@@ -347,7 +347,7 @@ namespace Odin.Warehouse.Inventory
                                                                  TaskDialogButtons.No);
                 if (result == DialogResult.Yes)
                 {
-                    int _res = MovBLL.MergeLabel(_label, datalabels);
+                    int _res = Convert.ToInt32(Helper.getSP("sp_MergeStockLabels", _label, datalabels));
 
                     if (_res == 0)
                         KryptonTaskDialog.Show("Mistake during merging!",

@@ -177,7 +177,7 @@ namespace Odin.Warehouse.Movements
         {
             
             //MessageBox.Show(txt_CreatDateFrom.Value.ToShortDateString());
-            var data = StockMove_BLL.getStockMoveRests(Label, cmb_Articles1.ArticleId, cmb_Places2.PlaceId, cmb_Batches1.BatchId, StageId);
+            var data = (DataTable)Helper.getSP("sp_StockMoveRests", Label, cmb_Articles1.ArticleId, cmb_Places2.PlaceId, cmb_Batches1.BatchId, StageId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -197,7 +197,7 @@ namespace Odin.Warehouse.Movements
 
         public void ShowList()
         {
-            var data = StockMove_BLL.getStockMoveRests(Label, cmb_Articles1.ArticleId, cmb_Places2.PlaceId, cmb_Batches1.BatchId, StageId);
+            var data = (DataTable)Helper.getSP("sp_StockMoveRests", Label, cmb_Articles1.ArticleId, cmb_Places2.PlaceId, cmb_Batches1.BatchId, StageId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -224,7 +224,7 @@ namespace Odin.Warehouse.Movements
 
         public void bw_Dets(object sender, DoWorkEventArgs e)
         {
-            var data = StockMove_BLL.getStockMoveDets(cmb_MoveDocs1.MoveDocId);
+            var data = (DataTable)Helper.getSP("sp_SelectStockMoveDets", cmb_MoveDocs1.MoveDocId);
 
             gv_Dets.ThreadSafeCall(delegate
             {
@@ -274,7 +274,7 @@ namespace Odin.Warehouse.Movements
         {
             bs_Dets.RemoveFilter();
             //bwStart(bw_Dets);
-            var data = StockMove_BLL.getStockMoveDets(cmb_MoveDocs1.MoveDocId);
+            var data = (DataTable)Helper.getSP("sp_SelectStockMoveDets", cmb_MoveDocs1.MoveDocId);
 
             gv_Dets.ThreadSafeCall(delegate
             {
@@ -682,7 +682,7 @@ namespace Odin.Warehouse.Movements
                         {
                             try
                             {
-                                _res = SMBll.AddStockMoveLine(_res,
+                                _res = Convert.ToInt32(Helper.getSP("sp_AddStockMoveLine", _res,
                                                         Convert.ToInt32(row.Cells["cn_label"].Value),
                                                         Convert.ToDouble(row.Cells["cn_qtytomove"].Value),
                                                         cmb_Places1.PlaceId,
@@ -691,7 +691,7 @@ namespace Odin.Warehouse.Movements
                                                         cmb_Batches1.BatchId,
                                                         StageId,
                                                         QtyToProduce,
-                                                        row.Cells["cn_comments"].Value.ToString());
+                                                        row.Cells["cn_comments"].Value.ToString()));
                             }
                             catch
                             {
@@ -839,7 +839,7 @@ namespace Odin.Warehouse.Movements
 
                         if (_id != 0)
                         {
-                            SMBll.DeleteStockMoveLine(_id);
+                            Helper.getSP("sp_DeleteStockDealLine", _id);
                         }
                     }
                 }

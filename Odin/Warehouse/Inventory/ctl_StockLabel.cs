@@ -447,7 +447,7 @@ namespace Odin.Warehouse.Inventory
                     {
                         if (frm.NewQty > 0)
                         {
-                            MovBLL.SeparateLabel(Label, frm.NewQty);
+                            Helper.getSP("sp_SeparateStockLabels", Label, frm.NewQty);
                             c++;
                         }
                     }

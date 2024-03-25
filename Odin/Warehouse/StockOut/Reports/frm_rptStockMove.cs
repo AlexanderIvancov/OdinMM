@@ -98,7 +98,7 @@ namespace Odin.Warehouse.StockOut.Reports
 
             //
             DataTable data = new DataTable();
-            data = StockMove_BLL.getStockMoveDetsPrint(HeadId ,StageId);
+            data = (DataTable)Helper.getSP("sp_SelectMoveDocPrintDef", HeadId, StageId);
 
             //data source
             report.Database.Tables[0].SetDataSource(dt);
@@ -145,7 +145,7 @@ namespace Odin.Warehouse.StockOut.Reports
 
             //
             DataTable data = new DataTable();
-            data = StockMove_BLL.getStockMoveBatchesPrint(BatchId, StageId);
+            data = (DataTable)Helper.getSP("sp_SelectMoveDocPrintBatches", BatchId, StageId);
 
             //data source
             report.Database.Tables[0].SetDataSource(dt);
@@ -208,7 +208,7 @@ namespace Odin.Warehouse.StockOut.Reports
 
             //
             DataTable data = new DataTable();
-            data = StockMove_BLL.getStockMoveLaunchesPrint(LaunchId, StageId);
+            data = (DataTable)Helper.getSP("sp_SelectMoveDocPrintLaunches", LaunchId, StageId);
 
             //data source
             report.Database.Tables[0].SetDataSource(dt);
@@ -272,7 +272,7 @@ namespace Odin.Warehouse.StockOut.Reports
 
 
             //
-            dataroute = StockMove_BLL.getStockMoveRouteList(BatchId);
+            dataroute = (DataTable)Helper.getSP("sp_SelectRouteListForBatch", BatchId);
             //data source
             report.Database.Tables[0].SetDataSource(dt);
             report.Database.Tables[1].SetDataSource(dataroute);
@@ -316,10 +316,10 @@ namespace Odin.Warehouse.StockOut.Reports
             drow[0] = DAL.LogoToByte();
             dt.Rows.Add(drow);
 
-            datagroup = StockMove_BLL.getStockMoveBatchGroupHead(BatchId);
+            datagroup = (DataTable)Helper.getSP("sp_SelectRouteListForBatchGroupHead", BatchId);
             
             //
-            dataroute = StockMove_BLL.getStockMoveBatchGroup(LaunchId);
+            dataroute = (DataTable)Helper.getSP("sp_SelectRouteListForBatchGroup", LaunchId);
             //data source for subreport
             report.Subreports[0].SetDataSource(datagroup);
             //data source for main report
@@ -356,7 +356,7 @@ namespace Odin.Warehouse.StockOut.Reports
 
 
             //
-            dataroute = StockMove_BLL.getStockMoveLaunch(LaunchId);
+            dataroute = (DataTable)Helper.getSP("sp_SelectRouteListForLaunch", LaunchId);
             //data source
             report.Database.Tables[0].SetDataSource(dt);
             report.Database.Tables[1].SetDataSource(dataroute);
@@ -399,9 +399,9 @@ namespace Odin.Warehouse.StockOut.Reports
             drow[0] = DAL.LogoToByte();
             dt.Rows.Add(drow);
 
-            datagroup = StockMove_BLL.getStockMoveLaunchGroupHead(GroupName);
+            datagroup = (DataTable)Helper.getSP("sp_SelectRouteListForLaunchGroupHead", GroupName);
             //
-            dataroute = StockMove_BLL.getStockMoveLaunchGroup(GroupName);
+            dataroute = (DataTable)Helper.getSP("sp_SelectRouteListForLaunchGroup", GroupName);
             //data source for subreport
             report.Subreports[0].SetDataSource(datagroup);
             //data source for main report
@@ -438,9 +438,9 @@ namespace Odin.Warehouse.StockOut.Reports
             drow[0] = DAL.LogoToByte();
             dt.Rows.Add(drow);
 
-            datagroup = StockMove_BLL.getStockMoveLaunchGroupHead(GroupName);
+            datagroup = (DataTable)Helper.getSP("sp_SelectRouteListForLaunchGroupHead", GroupName);
             //
-            dataroute = StockMove_BLL.getStockMoveLaunchesPrint(GroupName);
+            dataroute = (DataTable)Helper.getSP("sp_SelectMoveDocPrintLaunchesGroup", GroupName);
 
             foreach (DataRow row in dataroute.Rows)
             {
@@ -490,9 +490,9 @@ namespace Odin.Warehouse.StockOut.Reports
             drow[0] = DAL.LogoToByte();
             dt.Rows.Add(drow);
 
-            datagroup = StockMove_BLL.getStockMoveBatchGroupHead(BatchId);
+            datagroup = (DataTable)Helper.getSP("sp_SelectRouteListForBatchGroupHead", BatchId);
             //
-            dataroute = StockMove_BLL.getStockMoveBatchesPrint(LaunchId);
+            dataroute = (DataTable)Helper.getSP("sp_SelectMoveDocPrintBatchesGroup", LaunchId);
 
             foreach (DataRow row in dataroute.Rows)
             {
@@ -604,7 +604,7 @@ namespace Odin.Warehouse.StockOut.Reports
                 }
 
 
-                BLL.ReserveLabels(datalabels);
+                Helper.getSP("sp_ReserveLabelsForBatch", datalabels);
 
                 //Sending letters
 
