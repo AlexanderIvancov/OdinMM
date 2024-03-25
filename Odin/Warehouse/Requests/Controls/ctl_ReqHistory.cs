@@ -30,7 +30,7 @@ namespace Odin.Warehouse.Requests.Controls
 
         public void FillHistory(string request)
         {
-            var data = Requests_BLL.getHistoryRequests(request);
+            var data = (System.Data.DataTable)Helper.getSP("sp_SelectRequestHistory", request);
 
             gv_List.ThreadSafeCall(delegate
             {

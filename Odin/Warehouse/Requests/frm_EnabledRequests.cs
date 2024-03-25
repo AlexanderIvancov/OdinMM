@@ -47,7 +47,7 @@ namespace Odin.Warehouse.Requests
 
         public void FillList()
         {
-            data = Requests_BLL.getRequestsEnabled();
+            data = (DataTable)Helper.getSP("sp_RequestsListEnabled");
             gv_List.ThreadSafeCall(delegate
             {
                 gv_List.AutoGenerateColumns = false;

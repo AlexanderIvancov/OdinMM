@@ -270,7 +270,7 @@ namespace Odin.Warehouse.StockOut
 
         public void UpdateRequestDets(int _requestid)
         {
-            var data = Requests_BLL.getRequestRMDets(_requestid);
+            var data = (DataTable)Helper.getSP("sp_SelectRequestRMDets", _requestid);
 
             foreach (DataGridViewRow rowgv in this.gv_List.Rows)
             {

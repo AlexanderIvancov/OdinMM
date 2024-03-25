@@ -1,6 +1,5 @@
 ﻿using Odin.Global_Classes;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -10,41 +9,7 @@ namespace Odin.Warehouse.Requests
     {
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
 
-        public static DataTable getRequests(int _requestid, int _batchid, int _coid, int _artid, DataTable _states, int _typeid, int _deptid,
-                          string _datefrom, string _datetill, int _custid)
-        {
-            //string query = "EXECUTE sp_RequestsList  @reqid = " + _requestid + ", @batchid = " + _batchid + ", @coid = " + _coid + ", @artid = " + _artid + ", @isactive = " + _states +
-            //                ", @typeid = " + _typeid + ", @deptid = " + _deptid + ", @datefrom = '" + _datefrom + "', @datetill = '" + _datetill + "'";
-            string query = "sp_RequestsList";
-
-            var sqlparams = new List<SqlParameter>
-            {
-                new SqlParameter("@reqid",SqlDbType.Int){Value = _requestid },
-                new SqlParameter("@batchid",SqlDbType.Int){Value = _batchid },
-                new SqlParameter("@coid",SqlDbType.Int){Value = _coid },
-                new SqlParameter("@artid",SqlDbType.Int){Value = _artid },
-                new SqlParameter("@tablestates", SqlDbType.Structured) { TypeName = "UT_IDs", Value = _states},
-                new SqlParameter("@typeid",SqlDbType.Int){Value = _typeid },
-                new SqlParameter("@deptid",SqlDbType.Int){Value = _deptid },
-                new SqlParameter("@datefrom",SqlDbType.NVarChar){Value = _datefrom},
-                new SqlParameter("@datetill",SqlDbType.NVarChar){Value = _datetill},
-                new SqlParameter("@custid",SqlDbType.Int){Value = _custid}
-            };
-
-
-            return Helper.QuerySP(query, sqlparams.ToArray());
-        }
-
-        public static DataTable getRequestsEnabled()
-        {
-            string query = "EXECUTE sp_RequestsListEnabled";
-
-            return Helper.QueryDT(query);
-        }
-
-        public int RequestHeadId
-        { get; set; }
-
+        public int RequestHeadId { get; set; }
 
         public int AddRequestDetail(int HeadId, int ArtId, string Article, int BatchDetId, double Qty, int UnitId,
                                  string ReqDate, int Urgent, string Comments, int CatId, int Reserve, int CauseId,
@@ -88,92 +53,16 @@ namespace Odin.Warehouse.Requests
             return _res;
         }
 
-        public void EditRequestDetail(int Id, int ArtId, string Article, int BatchDetId, double Qty, int UnitId,
-                                        string ReqDate, int Urgent, string Comments, int CatId, int State, 
-                                        int CauseId, string Serials)
-        {
-            SqlConnection sqlConn = new SqlConnection(sConnStr);
-            SqlCommand sqlComm = new SqlCommand("sp_EditRequestDet", sqlConn);
-            sqlComm.CommandType = CommandType.StoredProcedure;
-
-            sqlComm.CommandTimeout = 3000;
-
-            sqlComm.Parameters.AddWithValue("@id", Id);
-            sqlComm.Parameters.AddWithValue("@artid", ArtId);
-            sqlComm.Parameters.AddWithValue("@article", Article);
-            sqlComm.Parameters.AddWithValue("@batchdetid", BatchDetId);
-            sqlComm.Parameters.AddWithValue("@qty", Qty);
-            sqlComm.Parameters.AddWithValue("@unitid", UnitId);
-            sqlComm.Parameters.AddWithValue("@reqdate", ReqDate);
-            sqlComm.Parameters.AddWithValue("@urgent", Urgent);
-            sqlComm.Parameters.AddWithValue("@comments", Comments);
-            sqlComm.Parameters.AddWithValue("@catid", CatId);
-            sqlComm.Parameters.AddWithValue("@state", State);
-            sqlComm.Parameters.AddWithValue("@causeid", CauseId);
-            sqlComm.Parameters.AddWithValue("@serials", Serials);
-
-            sqlConn.Open();
-            sqlComm.ExecuteNonQuery();
-            sqlConn.Close();
-        }
-
-        public void DeleteRequestDetail(int Id)
-        {
-            SqlConnection sqlConn = new SqlConnection(sConnStr);
-            SqlCommand sqlComm = new SqlCommand("sp_DeleteRequestDet", sqlConn);
-            sqlComm.CommandType = CommandType.StoredProcedure;
-
-            sqlComm.CommandTimeout = 3000;
-
-            sqlComm.Parameters.AddWithValue("@id", Id);
-           
-            sqlConn.Open();
-            sqlComm.ExecuteNonQuery();
-            sqlConn.Close();
-        }
-
-        public void ReplaceRequestDetail(int Id, int BatchId, int ArtId, string Comments)
-        {
-            SqlConnection sqlConn = new SqlConnection(sConnStr);
-            SqlCommand sqlComm = new SqlCommand("sp_ReplaceRequestDet", sqlConn);
-            sqlComm.CommandType = CommandType.StoredProcedure;
-
-            sqlComm.CommandTimeout = 3000;
-
-            sqlComm.Parameters.AddWithValue("@id", Id);
-            sqlComm.Parameters.AddWithValue("@oldbatchdetid", BatchId);
-            sqlComm.Parameters.AddWithValue("@artid", ArtId);
-            sqlComm.Parameters.AddWithValue("@comments", Comments);
-
-            sqlConn.Open();
-            sqlComm.ExecuteNonQuery();
-            sqlConn.Close();
-        }
-
-
         int _RequestDetId = 0;
         public int RequestDetId
         {
             get { return _RequestDetId; }
             set {
                 _RequestDetId = value;
-                SqlConnection conn = new SqlConnection(sConnStr);
-                conn.Open();
-                DataSet ds = new DataSet();
 
-                SqlDataAdapter adapter =
-                    new SqlDataAdapter(
-                        "execute sp_SelectRequestDet @id = " + _RequestDetId, conn);
-
-
-                conn.Close();
-
-                adapter.Fill(ds);
-
-                DataTable dt = ds.Tables[0];
+                DataTable dt = (DataTable)Helper.getSP("sp_SelectRequestDet", _RequestDetId);
 
                 if (dt.Rows.Count > 0)
-                {
                     foreach (DataRow dr in dt.Rows)
                     {
                         RDArtId = Convert.ToInt32(dr["artid"]);
@@ -194,13 +83,27 @@ namespace Odin.Warehouse.Requests
                         RDReqName = dr["reqname"].ToString();
                         RDSerials = dr["serials"].ToString();
                     }
-                }
                 else
-                {
                     ClearRDets();
-                }
             }
         }
+        public int RDBatchDetId { get; set; }
+        public int RDArtId { get; set; }
+        public string RDArticle { get; set; }
+        public int RDUrgent { get; set; }
+        public int RDState { get; set; }
+        public int RDUnitid { get; set; }
+        public double RDQty { get; set; }
+        public double RDQtyOut { get; set; }
+        public int RDHeadId { get; set; }
+        public int RDCatId { get; set; }
+        public string RDReqDate { get; set; }
+        public string RDComments { get; set; }
+        public string RDBatch { get; set; }
+        public int RDCauseId { get; set; }
+        public int RDBatchStateId { get; set; }
+        public string RDReqName { get; set; }
+        public string RDSerials { get; set; }
 
         public void ClearRDets()
         {
@@ -222,65 +125,5 @@ namespace Odin.Warehouse.Requests
             RDReqName = "";
             RDSerials = "";
         }
-        public int RDBatchDetId
-        { get; set; }
-        public int RDArtId
-        { get; set; }
-        public string RDArticle
-        { get; set; }
-        public int RDUrgent
-        { get; set; }
-        public int RDState
-        { get; set; }
-        public int RDUnitid
-        { get; set; }
-        public double RDQty
-        { get; set; }
-        public double RDQtyOut
-        { get; set; }
-        public int RDHeadId
-        { get; set; }
-        public int RDCatId
-        { get; set; }
-        public string RDReqDate
-        { get; set; }
-        public string RDComments
-        { get; set; }
-        public string RDBatch
-        { get; set; }
-        public int RDCauseId
-        { get; set; }
-        public int RDBatchStateId
-        { get; set; }
-        public string RDReqName
-        { get; set; }
-        public string RDSerials
-        { get; set; }
-
-
-        public static DataTable getRequestRMDets(int _requestid)
-        {
-            string query = "EXECUTE sp_SelectRequestRMDets @reqid = " + _requestid;
-
-            return Helper.QueryDT(query);
-        }
-
-        #region History
-
-        public static DataTable getHistoryOutcomes(int _id)
-        {
-            string query = "EXECUTE sp_SelectRequestOutcomes @id = " + _id;
-
-            return Helper.QueryDT(query);
-        }
-
-        public static DataTable getHistoryRequests(string _request)
-        {
-            string query = "EXECUTE sp_SelectRequestHistory @request = '" + _request + "'";
-
-            return Helper.QueryDT(query);
-        }
-
-        #endregion
     }
 }

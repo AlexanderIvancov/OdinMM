@@ -31,7 +31,7 @@ namespace Odin.Warehouse.Requests.Controls
 
         public void FillHistory(int ReqId)
         {
-            var data = Requests_BLL.getHistoryOutcomes(ReqId);
+            var data = (System.Data.DataTable)Helper.getSP("sp_SelectRequestOutcomes", ReqId);
 
             gv_List.ThreadSafeCall(delegate
             {

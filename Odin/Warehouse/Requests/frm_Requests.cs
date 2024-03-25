@@ -301,7 +301,7 @@ namespace Odin.Warehouse.Requests
             }
 
             //MessageBox.Show(cmb_SalesOrdersWithLines1.SalesOrderLineId.ToString());
-            data = Requests_BLL.getRequests(cmb_Requests1.RequestId, cmb_Batches1.BatchId, cmb_SalesOrdersWithLines1.SalesOrderLineId, cmb_Articles1.ArticleId, datastates,
+            data = (DataTable)Helper.getSP("sp_RequestsList", cmb_Requests1.RequestId, cmb_Batches1.BatchId, cmb_SalesOrdersWithLines1.SalesOrderLineId, cmb_Articles1.ArticleId, datastates,
                                             cmb_Types1.TypeId, cmb_Department1.DeptId, txt_From.Value == null ? "" : txt_From.Value.ToString().Trim(),
                                             txt_Till.Value == null ? "" : txt_Till.Value.ToString().Trim(), cmb_Firms1.FirmId);
             gv_List.ThreadSafeCall(delegate
@@ -614,7 +614,7 @@ namespace Odin.Warehouse.Requests
                     if (!(DAL.CheckMBLimit(frm.ArticleId) == true && frm.Serials.Trim() == ""))
                     {
 
-                        ReqBll.EditRequestDetail(_reqid, frm.ArticleId, frm.cmb_Articles1.Article, frm.BatchDetId, frm.Qty,
+                        Helper.getSP("sp_EditRequestDet", _reqid, frm.ArticleId, frm.cmb_Articles1.Article, frm.BatchDetId, frm.Qty,
                                              frm.cmb_Articles1.UnitId, frm.ReqDate, frm.Urgent, frm.Comments, ReqBll.RDCatId,
                                              frm.State, frm.CauseId, frm.Serials);
 
@@ -693,7 +693,7 @@ namespace Odin.Warehouse.Requests
                     }
                     else
                     {
-                        ReqBll.DeleteRequestDetail(_reqid);
+                        Helper.getSP("sp_DeleteRequestDet", _reqid);
                         DataGridViewColumn oldColumn = gv_List.SortedColumn;
                         var dir = Helper.SaveDirection(gv_List);
 
@@ -910,7 +910,7 @@ namespace Odin.Warehouse.Requests
                     && frm.ArticleId != 0)
                 {
 
-                    ReqBll.ReplaceRequestDetail(_reqid, ReqBll.RDBatchDetId, frm.ArticleId, frm.Comments);
+                    Helper.getSP("sp_ReplaceRequestDet", _reqid, ReqBll.RDBatchDetId, frm.ArticleId, frm.Comments);
 
                     ReqBll.RequestDetId = _reqid;
                     if (ReqBll.RDUrgent == -1)
