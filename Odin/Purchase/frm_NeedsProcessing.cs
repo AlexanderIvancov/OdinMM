@@ -90,37 +90,6 @@ namespace Odin.Purchase
 
         #region Methods
 
-        public void LoadColumns(DataGridView grid)
-        {
-            DAL.UserLogin = Environment.UserName;
-
-            SqlConnection sqlConn = new SqlConnection(sConnStr);
-            SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
-            sqlComm.CommandType = CommandType.StoredProcedure;
-            sqlComm.Parameters.AddWithValue("@userid", DAL.UserId);
-            sqlComm.Parameters.AddWithValue("@formname", this.Name);
-            sqlComm.Parameters.AddWithValue("@gridname", grid.Name);
-
-            sqlConn.Open();
-            SqlDataReader reader = sqlComm.ExecuteReader();
-
-            if (reader.HasRows)
-            {
-                while (reader.Read())
-                    foreach (DataGridViewColumn column in grid.Columns)
-                        if (column.Name == reader["columnname"].ToString())
-                        {
-                            column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
-                            column.HeaderText = reader["columntext"].ToString();
-                            column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
-                            column.Width = Convert.ToInt32(reader["columnwidth"]);
-                        }
-                reader.Close();
-            }
-
-            sqlConn.Close();
-        }
-
         public void bw_List(object sender, DoWorkEventArgs e)
         {
 
@@ -479,7 +448,7 @@ namespace Odin.Purchase
             if (result == DialogResult.OK)
             {
                 mMenu.CommitUserColumn(frm.UserId, frm.formname, frm.grid.Name, frm.gvList);
-                LoadColumns(gv_List);
+                Helper.LoadColumns(gv_List, this.Name);
             }
         }
 
@@ -595,7 +564,7 @@ namespace Odin.Purchase
             if (result == DialogResult.OK)
             {
                 mMenu.CommitUserColumn(frm.UserId, frm.formname, frm.grid.Name, frm.gvList);
-                LoadColumns(gv_POList);
+                Helper.LoadColumns(gv_POList, this.Name);
             }
         }
 
@@ -661,7 +630,7 @@ namespace Odin.Purchase
             if (result == DialogResult.OK)
             {
                 mMenu.CommitUserColumn(frm.UserId, frm.formname, frm.grid.Name, frm.gvList);
-                LoadColumns(tv_Details);
+                Helper.LoadColumns(tv_Details, this.Name);
             }
         }
 
@@ -717,9 +686,9 @@ namespace Odin.Purchase
 
         private void frm_NeedsProcessing_Load(object sender, EventArgs e)
         {
-            LoadColumns(gv_List);
-            LoadColumns(gv_POList);
-            LoadColumns(tv_Details);
+            Helper.LoadColumns(gv_List, this.Name);
+            Helper.LoadColumns(gv_POList, this.Name);
+            Helper.LoadColumns(tv_Details, this.Name);
            
             //bn_Dets.Items.Insert(17, new ToolStripControlHost(chk_Accumulate));
         }

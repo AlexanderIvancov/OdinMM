@@ -518,7 +518,7 @@ namespace Odin.Workshop
             if (result == DialogResult.OK)
             {
                 mMenu.CommitUserColumn(frm.UserId, frm.formname, frm.grid.Name, frm.gvList);
-                LoadColumns(gv_List);
+                Helper.LoadColumns(gv_List, this.Name);
             }
         }
 
@@ -541,7 +541,7 @@ namespace Odin.Workshop
             kryptonDockingManager1.ManageControl(/*kryptonSplitContainer1.Panel2*/kryptonPanel3, w);
             kryptonDockingManager1.ManageFloating(this);
 
-            LoadColumns(gv_List);
+            Helper.LoadColumns(gv_List, this.Name);
             txt_StartFrom.Value = null;
             txt_StartTill.Value = null;
             txt_EndFrom.Value = null;

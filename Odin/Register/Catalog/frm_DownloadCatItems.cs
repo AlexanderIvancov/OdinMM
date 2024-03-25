@@ -36,43 +36,6 @@ namespace Odin.Register.Catalog
         public event DownloadCatalogEventHandler CatalogDownloaded;
         public event CloseCatalogEventHandler CatalogClosed;
 
-        public void LoadColumns(DataGridView grid)
-        {
-            DAL.UserLogin = System.Environment.UserName;
-
-            SqlConnection sqlConn = new SqlConnection(sConnStr);
-            SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
-            sqlComm.CommandType = CommandType.StoredProcedure;
-            sqlComm.Parameters.AddWithValue("@userid", DAL.UserId);
-            sqlComm.Parameters.AddWithValue("@formname", this.Name);
-            sqlComm.Parameters.AddWithValue("@gridname", grid.Name);
-
-            sqlConn.Open();
-            SqlDataReader reader = sqlComm.ExecuteReader();
-
-            if (reader.HasRows)
-            {
-                while (reader.Read())
-                {
-                    foreach (DataGridViewColumn column in grid.Columns)
-                    {
-                        if (column.Name == reader["columnname"].ToString())
-                        {
-                            column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
-                            column.HeaderText = reader["columntext"].ToString();
-                            column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
-                            column.Width = Convert.ToInt32(reader["columnwidth"]);
-                        }
-                    }
-
-                }
-                reader.Close();
-            }
-
-            sqlConn.Close();
-
-        }
-
         private void btn_Download_Click(object sender, EventArgs e)
         {
             string _Article = "";
@@ -251,7 +214,7 @@ namespace Odin.Register.Catalog
 
         private void frm_DownloadCatItems_Load(object sender, EventArgs e)
         {
-            LoadColumns(gv_List);
+            Helper.LoadColumns(gv_List, this.Name);
         }
 
         #region Context menu
@@ -370,7 +333,7 @@ namespace Odin.Register.Catalog
             if (result == DialogResult.OK)
             {
                 mMenu.CommitUserColumn(frm.UserId, frm.formname, frm.grid.Name, frm.gvList);
-                LoadColumns(gv_List);
+                Helper.LoadColumns(gv_List, this.Name);
             }
         }
 

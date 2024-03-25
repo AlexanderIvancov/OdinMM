@@ -112,44 +112,6 @@ namespace Odin.Sales
             txt_CreatDateTill.Value = null;
         }
 
-
-        public void LoadColumns(DataGridView grid)
-        {
-            DAL.UserLogin = System.Environment.UserName;
-
-            SqlConnection sqlConn = new SqlConnection(sConnStr);
-            SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
-            sqlComm.CommandType = CommandType.StoredProcedure;
-            sqlComm.Parameters.AddWithValue("@userid", DAL.UserId);
-            sqlComm.Parameters.AddWithValue("@formname", this.Name);
-            sqlComm.Parameters.AddWithValue("@gridname", grid.Name);
-
-            sqlConn.Open();
-            SqlDataReader reader = sqlComm.ExecuteReader();
-
-            if (reader.HasRows)
-            {
-                while (reader.Read())
-                {
-                    foreach (DataGridViewColumn column in grid.Columns)
-                    {
-                        if (column.Name == reader["columnname"].ToString())
-                        {
-                            column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
-                            column.HeaderText = reader["columntext"].ToString();
-                            column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
-                            column.Width = Convert.ToInt32(reader["columnwidth"]);
-                        }
-                    }
-
-                }
-                reader.Close();
-            }
-
-            sqlConn.Close();
-
-        }
-
         public void ClearFilter()
         {
             cmb_ExpInvoice1.InvoiceId = 0;
@@ -529,7 +491,7 @@ namespace Odin.Sales
             if (result == DialogResult.OK)
             {
                 mMenu.CommitUserColumn(frm.UserId, frm.formname, frm.grid.Name, frm.gvList);
-                LoadColumns(gv_List);
+                Helper.LoadColumns(gv_List, this.Name);
             }
         }
 
@@ -546,7 +508,7 @@ namespace Odin.Sales
             kryptonDockingManager1.ManageControl(kryptonSplitContainer1.Panel2, w);
             kryptonDockingManager1.ManageFloating(this);
 
-            LoadColumns(gv_List);
+            Helper.LoadColumns(gv_List, this.Name);
             txt_CreatDateFrom.Value = null;// Convert.ToDateTime("01/01/2000");
             txt_CreatDateTill.Value = null; //Convert.ToDateTime("01/01/2100");
             cmb_Common1.SelectedValue = 0;

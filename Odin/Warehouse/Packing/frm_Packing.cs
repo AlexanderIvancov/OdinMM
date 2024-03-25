@@ -81,43 +81,6 @@ namespace Odin.Warehouse.Packing
             //}
         }
 
-        public void LoadColumns(DataGridView grid)
-        {
-            DAL.UserLogin = System.Environment.UserName;
-
-            SqlConnection sqlConn = new SqlConnection(sConnStr);
-            SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
-            sqlComm.CommandType = CommandType.StoredProcedure;
-            sqlComm.Parameters.AddWithValue("@userid", DAL.UserId);
-            sqlComm.Parameters.AddWithValue("@formname", this.Name);
-            sqlComm.Parameters.AddWithValue("@gridname", grid.Name);
-
-            sqlConn.Open();
-            SqlDataReader reader = sqlComm.ExecuteReader();
-
-            if (reader.HasRows)
-            {
-                while (reader.Read())
-                {
-                    foreach (DataGridViewColumn column in grid.Columns)
-                    {
-                        if (column.Name == reader["columnname"].ToString())
-                        {
-                            column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
-                            column.HeaderText = reader["columntext"].ToString();
-                            column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
-                            column.Width = Convert.ToInt32(reader["columnwidth"]);
-                        }
-                    }
-
-                }
-                reader.Close();
-            }
-
-            sqlConn.Close();
-
-        }
-
         public void bw_List(object sender, DoWorkEventArgs e)
         {
             var data = (DataTable)Helper.getSP("sp_SelectBatchBoxList", String.IsNullOrEmpty(txt_boxid.Text.Trim()) == true || txt_boxid.Text.Trim() == "" ? 0 : Convert.ToInt32(txt_boxid.Text), txt_Serial.Text, cmb_Batches1.BatchId,
@@ -294,7 +257,7 @@ namespace Odin.Warehouse.Packing
             if (result == DialogResult.OK)
             {
                 mMenu.CommitUserColumn(frm.UserId, frm.formname, frm.grid.Name, frm.gvList);
-                LoadColumns(gv_List);
+                Helper.LoadColumns(gv_List, this.Name);
             }
         }
 
@@ -314,7 +277,7 @@ namespace Odin.Warehouse.Packing
 
         private void frm_Packing_Load(object sender, EventArgs e)
         {
-            LoadColumns(gv_List);
+            Helper.LoadColumns(gv_List, this.Name);
             ClearFilter();
             txt_ClosingDate.Value = null;
         }

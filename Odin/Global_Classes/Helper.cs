@@ -736,24 +736,36 @@ namespace Odin.Global_Classes
 
         public static void LoadColumns(DataGridView grid, string ControlName)
         {
-            DAL_Functions dal = new DAL_Functions();
-            class_Global globClass = new class_Global();
-            dal.UserLogin = Environment.UserName;
-            //var data = BLL_Functions.LoaDgvColumns(dal.UserId, ControlName, grid.Name);
+            DAL_Functions DAL = new DAL_Functions();
+            class_Global GlobClass = new class_Global();
 
+            DAL.UserLogin = Environment.UserName;
 
-            //foreach (DataRow row in data.Rows)
-            //{
-            //    foreach (DataGridViewColumn column in grid.Columns)
-            //    {
-            //        if (column.Name == row["columnname"].ToString())
-            //        {
-            //            column.DisplayIndex = Convert.ToInt32(row["columnorder"]);
-            //            column.HeaderText = row["columntext"].ToString();
-            //            column.Visible = globClass.NumToBool(row["columnvisibility"].ToString());
-            //        }
-            //    }
-            //}
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+            sqlComm.Parameters.AddWithValue("@userid", DAL.UserId);
+            sqlComm.Parameters.AddWithValue("@formname", ControlName);
+            sqlComm.Parameters.AddWithValue("@gridname", grid.Name);
+
+            sqlConn.Open();
+            SqlDataReader reader = sqlComm.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                    foreach (DataGridViewColumn column in grid.Columns)
+                        if (column.Name == reader["columnname"].ToString())
+                        {
+                            column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
+                            column.HeaderText = reader["columntext"].ToString();
+                            column.Visible = GlobClass.NumToBool(reader["columnvisibility"].ToString());
+                            column.Width = Convert.ToInt32(reader["columnwidth"]);
+                        }
+                reader.Close();
+            }
+
+            sqlConn.Close();
         }
 
         public static DialogResult InputBox(string title, string promptText, ref string value)

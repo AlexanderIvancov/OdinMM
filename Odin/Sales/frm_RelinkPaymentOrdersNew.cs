@@ -347,7 +347,7 @@ namespace Odin.Sales
             if (result == DialogResult.OK)
             {
                 mMenu.CommitUserColumn(frm.UserId, frm.formname, frm.grid.Name, frm.gvList);
-                LoadColumns(gv_List);
+                Helper.LoadColumns(gv_List, this.Name);
             }
         }
 
@@ -360,7 +360,7 @@ namespace Odin.Sales
 
         private void frm_RelinkPaymentOrdersNew_Load(object sender, EventArgs e)
         {
-            LoadColumns(gv_List);
+            Helper.LoadColumns(gv_List, this.Name);
         }
 
         private void btn_Refresh_Click(object sender, EventArgs e)

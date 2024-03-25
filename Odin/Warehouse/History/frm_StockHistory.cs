@@ -192,43 +192,6 @@ namespace Odin.Warehouse.History
 
         #region Methods
 
-        public void LoadColumns(DataGridView grid)
-        {
-            DAL.UserLogin = System.Environment.UserName;
-
-            SqlConnection sqlConn = new SqlConnection(sConnStr);
-            SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
-            sqlComm.CommandType = CommandType.StoredProcedure;
-            sqlComm.Parameters.AddWithValue("@userid", DAL.UserId);
-            sqlComm.Parameters.AddWithValue("@formname", this.Name);
-            sqlComm.Parameters.AddWithValue("@gridname", grid.Name);
-
-            sqlConn.Open();
-            SqlDataReader reader = sqlComm.ExecuteReader();
-
-            if (reader.HasRows)
-            {
-                while (reader.Read())
-                {
-                    foreach (DataGridViewColumn column in grid.Columns)
-                    {
-                        if (column.Name == reader["columnname"].ToString())
-                        {
-                            column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
-                            column.HeaderText = reader["columntext"].ToString();
-                            column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
-                            column.Width = Convert.ToInt32(reader["columnwidth"]);
-                        }
-                    }
-
-                }
-                reader.Close();
-            }
-
-            sqlConn.Close();
-
-        }
-
         public void FillOperTypes()
         {
             DataSet ds = new DataSet();
@@ -972,7 +935,7 @@ namespace Odin.Warehouse.History
             if (result == DialogResult.OK)
             {
                 mMenu.CommitUserColumn(frm.UserId, frm.formname, frm.grid.Name, frm.gvList);
-                LoadColumns(gv_IncomeList);
+                Helper.LoadColumns(gv_IncomeList, this.Name);
             }
         }
 
@@ -1107,7 +1070,7 @@ namespace Odin.Warehouse.History
             if (result == DialogResult.OK)
             {
                 mMenu.CommitUserColumn(frm.UserId, frm.formname, frm.grid.Name, frm.gvList);
-                LoadColumns(gv_OutcomeList);
+                Helper.LoadColumns(gv_OutcomeList, this.Name);
             }
         }
 
@@ -1239,7 +1202,7 @@ namespace Odin.Warehouse.History
             if (result == DialogResult.OK)
             {
                 mMenu.CommitUserColumn(frm.UserId, frm.formname, frm.grid.Name, frm.gvList);
-                LoadColumns(gv_MovementList);
+                Helper.LoadColumns(gv_MovementList, this.Name);
             }
         }
 
@@ -1362,7 +1325,7 @@ namespace Odin.Warehouse.History
             if (result == DialogResult.OK)
             {
                 mMenu.CommitUserColumn(frm.UserId, frm.formname, frm.grid.Name, frm.gvList);
-                LoadColumns(gv_ReturnsList);
+                Helper.LoadColumns(gv_ReturnsList, this.Name);
             }
         }
         private void btn_ExcelR_Click(object sender, EventArgs e)
@@ -1491,7 +1454,7 @@ namespace Odin.Warehouse.History
             if (result == DialogResult.OK)
             {
                 mMenu.CommitUserColumn(frm.UserId, frm.formname, frm.grid.Name, frm.gvList);
-                LoadColumns(gv_TracingList);
+                Helper.LoadColumns(gv_TracingList, this.Name);
             }
         }
 
@@ -1510,12 +1473,12 @@ namespace Odin.Warehouse.History
             kryptonDockingManager1.ManageControl(/*kryptonSplitContainer1.Panel2*/kryptonPanel3, w);
             kryptonDockingManager1.ManageFloating(this);
 
-            LoadColumns(gv_IncomeList);
-            LoadColumns(gv_OutcomeList);
-            LoadColumns(gv_MovementList);
-            LoadColumns(gv_TracingList);
-            LoadColumns(gv_CostList);
-            LoadColumns(gv_ReturnsList);
+            Helper.LoadColumns(gv_IncomeList, this.Name);
+            Helper.LoadColumns(gv_OutcomeList, this.Name);
+            Helper.LoadColumns(gv_MovementList, this.Name);
+            Helper.LoadColumns(gv_TracingList, this.Name);
+            Helper.LoadColumns(gv_CostList, this.Name);
+            Helper.LoadColumns(gv_ReturnsList, this.Name);
 
             txt_DateFrom.Value = null;// Convert.ToDateTime("01/01/2000");
             txt_DateTill.Value = null;
@@ -1750,7 +1713,7 @@ namespace Odin.Warehouse.History
             if (result == DialogResult.OK)
             {
                 mMenu.CommitUserColumn(frm.UserId, frm.formname, frm.grid.Name, frm.gvList);
-                LoadColumns(gv_CostList);
+                Helper.LoadColumns(gv_CostList, this.Name);
             }
         }
 

@@ -45,43 +45,6 @@ namespace Odin.Workshop
 
         #region Methods
 
-        public void LoadColumns(DataGridView grid)
-        {
-            DAL.UserLogin = System.Environment.UserName;
-
-            SqlConnection sqlConn = new SqlConnection(sConnStr);
-            SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
-            sqlComm.CommandType = CommandType.StoredProcedure;
-            sqlComm.Parameters.AddWithValue("@userid", DAL.UserId);
-            sqlComm.Parameters.AddWithValue("@formname", this.Name);
-            sqlComm.Parameters.AddWithValue("@gridname", grid.Name);
-
-            sqlConn.Open();
-            SqlDataReader reader = sqlComm.ExecuteReader();
-
-            if (reader.HasRows)
-            {
-                while (reader.Read())
-                {
-                    foreach (DataGridViewColumn column in grid.Columns)
-                    {
-                        if (column.Name == reader["columnname"].ToString())
-                        {
-                            column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
-                            column.HeaderText = reader["columntext"].ToString();
-                            column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
-                            column.Width = Convert.ToInt32(reader["columnwidth"]);
-                        }
-                    }
-
-                }
-                reader.Close();
-            }
-
-            sqlConn.Close();
-
-        }
-
         public void FillHistory()
         {
             var data = (DataTable)Helper.getSP("sp_SelectBatchStagesProcessHistory", StageId, txt_EndFrom.Value == null ? "" : txt_EndFrom.Value.ToString().Trim(),
@@ -237,7 +200,7 @@ namespace Odin.Workshop
             if (result == DialogResult.OK)
             {
                 mMenu.CommitUserColumn(frm.UserId, frm.formname, frm.grid.Name, frm.gvList);
-                LoadColumns(gv_List);
+                Helper.LoadColumns(gv_List, this.Name);
             }
         }
 
@@ -251,7 +214,7 @@ namespace Odin.Workshop
 
         private void ctl_ProcessHistoryOnDate_Load(object sender, EventArgs e)
         {
-            LoadColumns(gv_List);
+            Helper.LoadColumns(gv_List, this.Name);
             txt_EndFrom.Value = System.DateTime.Now;
             txt_EndTill.Value = System.DateTime.Now;
         }
