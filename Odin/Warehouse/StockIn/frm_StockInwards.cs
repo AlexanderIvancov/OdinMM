@@ -234,7 +234,7 @@ namespace Odin.Warehouse.StockIn
         {
                       
             //MessageBox.Show(txt_CreatDateFrom.Value.ToShortDateString());
-            var data = StockIn_BLL.getStockIncomes(cmb_IncomeDoc1.IncomeDocId, cmb_Types1.TypeId, cmb_Firms1.FirmId, chk_State.Checked == true ? -1 : 0,
+            var data = (DataTable)Helper.getSP("sp_StockIncomesPortfolio", cmb_IncomeDoc1.IncomeDocId, cmb_Types1.TypeId, cmb_Firms1.FirmId, chk_State.Checked == true ? -1 : 0,
                                             cmb_Articles1.ArticleId, cmb_Articles1.Article, txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
                                             txt_CreatDateTill.Value == null ? "" : txt_CreatDateTill.Value.ToString().Trim(), txt_FirmArt.Text, txt_Comments.Text,
                                             cmb_StockInTypes1.StockMovTypeId);
@@ -740,7 +740,7 @@ namespace Odin.Warehouse.StockIn
             if (_id != 0
                 && globClass.DeleteConfirm() == true)
             {
-                int _res = SIBll.DeleteStockInLine(_id);
+                int _res = Convert.ToInt32(Helper.getSP("sp_DeleteStockInLine", _id));
                 if (_res == -1)
                     MessageBox.Show("Delete was successful!");
                 else if (_res == 0-1)
@@ -819,7 +819,7 @@ namespace Odin.Warehouse.StockIn
                     foreach (DataGridViewRow row in frm.gv_List.Rows)
                     {
                         if (Convert.ToInt32(row.Cells["chk_Add"].Value) != 0)
-                            SIBll.AddServiceCost(_id, Convert.ToInt32(row.Cells["cn_id"].Value), Convert.ToDouble(row.Cells["cn_unitprice"].Value));
+                            Helper.getSP("sp_AddStockInServiceCost", _id, Convert.ToInt32(row.Cells["cn_id"].Value), Convert.ToDouble(row.Cells["cn_unitprice"].Value));
                     }
                     DataGridViewColumn oldColumn = gv_List.SortedColumn;
                     var dir = Helper.SaveDirection(gv_List);

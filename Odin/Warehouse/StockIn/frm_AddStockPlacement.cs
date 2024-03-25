@@ -143,7 +143,7 @@ namespace Odin.Warehouse.StockIn
         public void bw_List(object sender, DoWorkEventArgs e)
         {
             //MessageBox.Show(txt_CreatDateFrom.Value.ToShortDateString());
-            var data = StockIn_BLL.getStockNotPlaced(cmb_Articles1.ArticleId, cmb_IncomeDoc1.IncomeDocId);
+            var data = (DataTable)Helper.getSP("sp_StockNotPlacedIncomes", cmb_Articles1.ArticleId, cmb_IncomeDoc1.IncomeDocId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -766,7 +766,7 @@ namespace Odin.Warehouse.StockIn
                     {
                         try
                         {
-                            _res = SIBll.AddStockDeallocation(Convert.ToInt32(row.Cells["cn_inid"].Value),
+                            _res = Convert.ToInt32(Helper.getSP("sp_AddStockDeallocation", Convert.ToInt32(row.Cells["cn_inid"].Value),
                                                         Convert.ToInt32(row.Cells["cn_ilabel"].Value),
                                                         Convert.ToInt32(row.Cells["cn_iartid"].Value),
                                                         Convert.ToInt32(row.Cells["cn_iplaceid"].Value),
@@ -776,10 +776,10 @@ namespace Odin.Warehouse.StockIn
                                                         -1,
                                                         row.Cells["cn_comments"].Value.ToString(),
                                                         row.Cells["cn_idatacode"].Value.ToString(),
-                                                        row.Cells["cn_manufbatch"].Value.ToString());
+                                                        row.Cells["cn_manufbatch"].Value.ToString()));
                             if (_res != 0
                                 && NoExpDate == -1)
-                                SIBll.SetNoExpDate(_res);
+                                Helper.getSP("sp_SetNoExpDate", _res);
 
                             var sqlparamsfields = new List<SqlParameter>()
                             {
@@ -815,7 +815,7 @@ namespace Odin.Warehouse.StockIn
                 {
                     try
                     {
-                        _res = SIBll.AddStockDeallocation(Convert.ToInt32(row.Cells["cn_inid"].Value),
+                        _res = Convert.ToInt32(Helper.getSP("sp_AddStockDeallocation", Convert.ToInt32(row.Cells["cn_inid"].Value),
                                                     Convert.ToInt32(row.Cells["cn_ilabel"].Value),
                                                     Convert.ToInt32(row.Cells["cn_iartid"].Value),
                                                     Convert.ToInt32(row.Cells["cn_iplaceid"].Value),
@@ -825,10 +825,10 @@ namespace Odin.Warehouse.StockIn
                                                     -1,
                                                     row.Cells["cn_comments"].Value.ToString(),
                                                     row.Cells["cn_idatacode"].Value.ToString(),
-                                                    row.Cells["cn_manufbatch"].Value.ToString());
+                                                    row.Cells["cn_manufbatch"].Value.ToString()));
                         if (_res != 0
                                 && NoExpDate == -1)
-                            SIBll.SetNoExpDate(_res);
+                            Helper.getSP("sp_SetNoExpDate", _res);
                     }
 
                     catch { }

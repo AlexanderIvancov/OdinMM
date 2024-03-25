@@ -349,7 +349,7 @@ namespace Odin.Warehouse.StockIn
 
         public void FillBoxes()
         {
-            var data = StockIn_BLL.getBoxesNotPlaced();
+            var data = (DataTable)Helper.getSP("sp_SelectBoxesNotPlaced");
 
 
             gv_Boxes.ThreadSafeCall(delegate
@@ -407,8 +407,8 @@ namespace Odin.Warehouse.StockIn
 
                 if (result == DialogResult.OK)
                 {
-                    int _res = BLL.AddStockInBoxHeader(frm.BatchId, frm.COId, frm.Package, frm.Qty, frm.WeightBrut, "", frm.BoxNO, frm.IsClosed, frm.ProdPlace);
-
+                    int _res = Convert.ToInt32(Helper.getSP("sp_AddStockInBoxHeader", frm.BatchId, frm.COId, frm.Package, frm.Qty, frm.WeightBrut, "", frm.BoxNO, frm.IsClosed, frm.ProdPlace));
+                    BLL.AddedBox = _res != 0 ? frm.Package : "";
                     if (frm.IsClosed == -1)
                     {
                         ProdPlace = frm.ProdPlace;
@@ -522,7 +522,9 @@ namespace Odin.Warehouse.StockIn
 
                 if (result == DialogResult.OK)
                 {
-                    _res = BLL.AddStockInBoxHeader(_batchid, _coid, frm.Package, frm.Qty, frm.WeightBrut, "", frm.BoxNO, frm.IsClosed, frm.ProdPlace);
+                    _res = Convert.ToInt32(Helper.getSP("sp_AddStockInBoxHeader", _batchid, _coid, frm.Package, frm.Qty, frm.WeightBrut, "", frm.BoxNO, frm.IsClosed, frm.ProdPlace));
+                    BLL.AddedBox = _res != 0 ? frm.Package : "";
+
                     if (frm.IsClosed == -1
                         && _res != 0)
                     {
@@ -557,7 +559,7 @@ namespace Odin.Warehouse.StockIn
                         dataserials.Rows.Add(drser);
                     }
 
-                    BLL.AddStockInBoxDets(_res, dataserials);
+                    Helper.getSP("sp_AddStockInBoxDets", _res, dataserials);
 
                     DialogResult result1 = KryptonTaskDialog.Show("Box " + BLL.AddedBox + " was added succesfully!",
                                                                     "Box " + BLL.AddedBox + " was added succesfully!",
@@ -732,7 +734,7 @@ namespace Odin.Warehouse.StockIn
             if (_packid != 0
                 && globClass.DeleteConfirm() == true)
             {
-                BLL.DeleteStockInBox(_packid);
+                Helper.getSP("sp_DeleteStockInBox", _packid);
                 FillBoxes();
                 txt_Oper.Focus();
             }
@@ -867,7 +869,7 @@ namespace Odin.Warehouse.StockIn
 
                 if (result == DialogResult.OK)
                 {
-                    BLL.EditStockInBoxHeader(_packid, frm.Package, frm.Qty, frm.WeightBrut, "", frm.BoxNO, frm.IsClosed, frm.ProdPlace);
+                    Helper.getSP("sp_EditStockInBoxHeader", _packid, frm.Package, frm.Qty, frm.WeightBrut, "", frm.BoxNO, frm.IsClosed, frm.ProdPlace);
                     if (_closed != frm.IsClosed
                         && frm.IsClosed == -1)
                     {
@@ -903,7 +905,7 @@ namespace Odin.Warehouse.StockIn
 
         private void AdditClosed(object sender)
         {
-            BLL.AddStockInBoxAdditContent(frma.Id, frma.TextLabel, frma.Qty);
+            Helper.getSP("sp_AddStockInBoxAdditContent", frma.Id, frma.TextLabel, frma.Qty);
 
             frma.Close();
             FillBoxes();

@@ -33,7 +33,7 @@ namespace Odin.Warehouse.StockIn
 
         public void FillPOs(int id)
         {
-            var data = StockIn_BLL.getStockInPOs(id);
+            var data = (System.Data.DataTable)Helper.getSP("sp_SelectStockInPODets", id);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -68,7 +68,7 @@ namespace Odin.Warehouse.StockIn
 
             if (result == DialogResult.OK)
             {
-                SIBll.AddStockPOLink(frm.PurchaseOrderLineId, IdIn, frm.Qty);
+                Convert.ToInt32(Helper.getSP("sp_AddStockINPOLink", frm.PurchaseOrderLineId, IdIn, frm.Qty));
                 FillPOs(IdIn);
             }
             
@@ -86,7 +86,7 @@ namespace Odin.Warehouse.StockIn
 
             if (glob_Class.DeleteConfirm() == true)
             {
-                SIBll.DeleteStockPOLink(_id, _poid);
+                Helper.getSP("sp_DeleteStockINPOLink", _id, _poid);
                 FillPOs(IdIn);
             }
         }

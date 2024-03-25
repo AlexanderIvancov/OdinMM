@@ -350,7 +350,7 @@ namespace Odin.Warehouse.StockIn
 
         public void bw_List(object sender, DoWorkEventArgs e)
         {
-            var data = StockIn_BLL.getStockInBatch(BatchId);
+            var data = (DataTable)Helper.getSP("sp_SelectBatchStockInDets", BatchId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -366,7 +366,7 @@ namespace Odin.Warehouse.StockIn
                 bn_List.BindingSource = bs_List;
             });
 
-            var data1 = StockIn_BLL.getStockInBatchDelivery(BatchId);
+            var data1 = (DataTable)Helper.getSP("sp_SelectBatchDeliveryRests", BatchId);
 
             gv_Delivery.ThreadSafeCall(delegate
             {
@@ -381,7 +381,7 @@ namespace Odin.Warehouse.StockIn
         public void ShowDetsIn()
         {
 
-            var data = StockIn_BLL.getStockInBatch(BatchId);
+            var data = (DataTable)Helper.getSP("sp_SelectBatchStockInDets", BatchId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -397,7 +397,7 @@ namespace Odin.Warehouse.StockIn
                 bn_List.BindingSource = bs_List;
             });
 
-            var data1 = StockIn_BLL.getStockInBatchDelivery(BatchId);
+            var data1 = (DataTable)Helper.getSP("sp_SelectBatchDeliveryRests", BatchId);
 
             gv_Delivery.ThreadSafeCall(delegate
             {
@@ -426,7 +426,7 @@ namespace Odin.Warehouse.StockIn
                 Font boldFont = new Font(tgv_List.DefaultCellStyle.Font, FontStyle.Bold);
 
 
-                var data2 = StockIn_BLL.getStockInBatchRMDets(BatchId);
+                var data2 = (DataTable)Helper.getSP("sp_SelectBatchStockInRMRests", BatchId);
 
                 foreach (System.Data.DataRow dr in data2.AsEnumerable().OrderBy(a => a.Field<string>("unit"))
                                                                                     .ThenBy(a => a.Field<int>("artid")))
@@ -1356,7 +1356,7 @@ namespace Odin.Warehouse.StockIn
                 foreach (DataGridViewRow row in gridview.Rows)
                 {
                     if (Convert.ToInt32(row.Cells["chk_add"].Value) == -1)
-                        SIBll.MapStockInBox(_id, Convert.ToInt32(row.Cells["cn_id"].Value));
+                        Helper.getSP("sp_MapStockInBox", _id, Convert.ToInt32(row.Cells["cn_id"].Value));
                 }
                 ShowDetsIn();
                 txt_Oper.Text = string.Empty;

@@ -31,7 +31,7 @@ namespace Odin.Warehouse.StockIn
 
         public void FillCO(int _batchid)
         {
-            var data = StockIn_BLL.getBatchCONotIn(_batchid);
+            var data = (System.Data.DataTable)Helper.getSP("sp_SelectCOsNotIn", _batchid);
 
 
             gv_List.ThreadSafeCall(delegate

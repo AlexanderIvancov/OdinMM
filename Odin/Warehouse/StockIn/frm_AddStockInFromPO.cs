@@ -241,7 +241,7 @@ namespace Odin.Warehouse.StockIn
 
         public void FillList(int POId)
         {
-            var data = StockIn_BLL.getStockInFromPO(POId);
+            var data = (DataTable)Helper.getSP("sp_SelectStockFromPORests", POId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -494,7 +494,7 @@ namespace Odin.Warehouse.StockIn
 
 
 
-                        _NewInwardId = SIBll.AddStockIn(HeadId,
+                        _NewInwardId = Convert.ToInt32(Helper.getSP("sp_AddStockInLine", HeadId,
                                                             Convert.ToInt32(row.Cells["cn_artid"].Value),
                                                             row.Cells["cn_suparticle"].Value.ToString(),
                                                             StockMoveTypeId,
@@ -512,15 +512,15 @@ namespace Odin.Warehouse.StockIn
                                                             StateId,
                                                             Convert.ToInt32(row.Cells["cn_id"].Value),
                                                             Convert.ToInt32(setDGVCMBCell.Value),
-                                                            "", 0);
+                                                            "", 0));
                         if (Convert.ToInt32(row.Cells["chk_place"].Value) != 0
                                              && PlaceId != 0
                                              && _NewInwardId != 0
                                              && StateId != 0)
                         {
-                            SIBll.AddStockDeallocation(_NewInwardId, 0, Convert.ToInt32(row.Cells["cn_artid"].Value),
+                            Convert.ToInt32(Helper.getSP("sp_AddStockDeallocation", _NewInwardId, 0, Convert.ToInt32(row.Cells["cn_artid"].Value),
                                                            PlaceId, Convert.ToDouble(row.Cells["cn_qty"].Value),
-                                                           "", 0, -1, row.Cells["cn_comments"].Value.ToString(), "", "");
+                                                           "", 0, -1, row.Cells["cn_comments"].Value.ToString(), "", ""));
                         }
 
 

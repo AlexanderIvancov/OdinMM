@@ -36,7 +36,7 @@ namespace Odin.Warehouse.Deliveries
         public void bw_List(object sender, DoWorkEventArgs e)
         {
 
-            var data1 = StockIn_BLL.getStockInArticleDelivery(ArtId);
+            var data1 = (DataTable)Helper.getSP("sp_SelectArticleDeliveryRests", ArtId);
 
             gv_Delivery.ThreadSafeCall(delegate
             {

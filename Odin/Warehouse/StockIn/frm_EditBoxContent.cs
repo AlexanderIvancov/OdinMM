@@ -59,8 +59,8 @@ namespace Odin.Warehouse.StockIn
                 drser["tablename"] = "";
                 dataserials.Rows.Add(drser);
 
-           
-                BLLIN.AddStockInBoxDets(PackId, dataserials);
+
+                Helper.getSP("sp_AddStockInBoxDets", PackId, dataserials);
 
                 FillList(PackId);               
             }
@@ -86,9 +86,9 @@ namespace Odin.Warehouse.StockIn
                     catch { }
 
                     if (_pref == "S")
-                        BLLIN.DeleteStockInBoxDets(_id);
+                        Helper.getSP("sp_DeleteStockInBoxDets", _id);
                     else
-                        BLLIN.DeleteStockInBoxAddDets(_id);
+                        Helper.getSP("sp_DeleteStockInBoxAddDets", _id);
                 }
                 gv_List.ThreadSafeCall(delegate { FillList(PackId); });
                 txt_Oper.Text = "";
@@ -98,7 +98,7 @@ namespace Odin.Warehouse.StockIn
 
         public void FillList(int packid)
         {
-            var data = StockIn_BLL.getBoxesContent(packid);
+            var data = (DataTable)Helper.getSP("sp_SelectBatchBoxContent", packid);
 
 
             gv_List.ThreadSafeCall(delegate
@@ -327,7 +327,7 @@ namespace Odin.Warehouse.StockIn
                     drser["tablename"] = "";
                     dataserials.Rows.Add(drser);
 
-                    BLLIN.AddStockInBoxDets(PackId, dataserials);
+                    Helper.getSP("sp_AddStockInBoxDets", PackId, dataserials);
 
                     FillList(PackId);
                                        

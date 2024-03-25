@@ -43,7 +43,7 @@ namespace Odin.Warehouse.StockIn
 
         public void FillLabels(int id)
         {
-            var data = StockIn_BLL.getStockIncomeRests(id);
+            var data = (System.Data.DataTable)Helper.getSP("sp_SelectStockIncomeRests", id);
 
             gv_List.ThreadSafeCall(delegate
             {

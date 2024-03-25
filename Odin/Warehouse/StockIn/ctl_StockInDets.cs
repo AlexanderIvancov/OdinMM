@@ -471,7 +471,7 @@ namespace Odin.Warehouse.StockIn
         {
             tv_Rests.Nodes.Clear();
 
-            var data = StockIn_BLL.getStockRests(ArtId);
+            var data = (DataTable)Helper.getSP("sp_StockRestForArticleByPlaces", ArtId);
 
             foreach (DataRow dr in data.AsEnumerable().OrderBy(d => d.Field<string>("place")))
             {
@@ -818,8 +818,8 @@ namespace Odin.Warehouse.StockIn
 
                 if (_test == true)
                 {
-                    int _NewInwardId = SIBll.AddStockIn(HeadId, ArtId, SupArticle, StockMoveTypeId, Qty, UnitId, Comments, UnitPrice, Discount,
-                                                        Vat, CoefConv, Weight, CustCodeId, BatchId, StateId, PurchaseOrderLineId, Producer, DataCode, Dutycost);
+                    int _NewInwardId = Convert.ToInt32(Helper.getSP("sp_AddStockInLine", HeadId, ArtId, SupArticle, StockMoveTypeId, Qty, UnitId, Comments, UnitPrice, Discount,
+                                                        Vat, CoefConv, Weight, CustCodeId, BatchId, StateId, PurchaseOrderLineId, Producer, DataCode, Dutycost));
 
                     //Deallocation
                     if (_NewInwardId != 0)
@@ -829,12 +829,12 @@ namespace Odin.Warehouse.StockIn
                         {
                             if (Convert.ToDouble(row.Cells["cn_qtyoper"].Value) > 0
                                 && StateId != 0)
-                            _inslab = SIBll.AddStockDeallocation(_NewInwardId, 0, ArtId, Convert.ToInt32(row.Cells["cn_placeid"].Value), Convert.ToDouble(row.Cells["cn_qtyoper"].Value),
+                            _inslab = Convert.ToInt32(Helper.getSP("sp_AddStockDeallocation", _NewInwardId, 0, ArtId, Convert.ToInt32(row.Cells["cn_placeid"].Value), Convert.ToDouble(row.Cells["cn_qtyoper"].Value),
                                                             ExpDate, 0, -1, row.Cells["cn_comments"].Value.ToString(), row.Cells["cn_datacode"].Value.ToString(),
-                                                            row.Cells["cn_manufbatch"].Value.ToString());
+                                                            row.Cells["cn_manufbatch"].Value.ToString()));
                             if (_inslab != 0
                                 && NoExpDate == -1)
-                                SIBll.SetNoExpDate(_inslab);
+                                Helper.getSP("sp_SetNoExpDate", _inslab);
                         }
 
                         PO_BLL POB = new PO_BLL();

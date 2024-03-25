@@ -302,9 +302,9 @@ namespace Odin.Warehouse.StockIn
         private void btn_OK_Click(object sender, EventArgs e)
         {
 
-            int _NewInwardId = Bll.EditStockIn(Id, IncomeDocId, ArtId, SupArticle, StockMoveTypeId, Qty, UnitId,
+            int _NewInwardId = Convert.ToInt32(Global_Classes.Helper.getSP("sp_EditStockInLine", Id, IncomeDocId, ArtId, SupArticle, StockMoveTypeId, Qty, UnitId,
                                                 Comments, UnitPrice, Discount, Vat, CoefConv, Weight, CustCodeId, 
-                                                BatchId, Producer, DataCode, Dutycost);
+                                                BatchId, Producer, DataCode, Dutycost));
 
             //Deallocation
             if (_NewInwardId != 0)

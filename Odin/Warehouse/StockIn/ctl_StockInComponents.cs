@@ -42,7 +42,7 @@ namespace Odin.Warehouse.StockIn
 
         public void FillComponents(int id)
         {
-            var data = StockIn_BLL.getStockInComponents(id);
+            var data = (DataTable)Helper.getSP("sp_SelectStockInComponents", id);
 
             gv_List.ThreadSafeCall(delegate
             {

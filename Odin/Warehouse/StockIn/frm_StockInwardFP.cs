@@ -194,7 +194,7 @@ namespace Odin.Warehouse.StockIn
 
         public void bw_List(object sender, DoWorkEventArgs e)
         {
-            var data = StockIn_BLL.getStockInBatch(BatchId);
+            var data = (DataTable)Helper.getSP("sp_SelectBatchStockInDets", BatchId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -210,7 +210,7 @@ namespace Odin.Warehouse.StockIn
                 bn_List.BindingSource = bs_List;
             });
 
-            var data1 = StockIn_BLL.getStockInBatchDelivery(BatchId);
+            var data1 = (DataTable)Helper.getSP("sp_SelectBatchDeliveryRests", BatchId);
 
             gv_Delivery.ThreadSafeCall(delegate
             {
@@ -225,7 +225,7 @@ namespace Odin.Warehouse.StockIn
         public void ShowDetsIn()
         {
 
-            var data = StockIn_BLL.getStockInBatch(BatchId);
+            var data = (DataTable)Helper.getSP("sp_SelectBatchStockInDets", BatchId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -241,7 +241,7 @@ namespace Odin.Warehouse.StockIn
                 bn_List.BindingSource = bs_List;
             });
 
-            var data1 = StockIn_BLL.getStockInBatchDelivery(BatchId);
+            var data1 = (DataTable)Helper.getSP("sp_SelectBatchDeliveryRests", BatchId);
 
             gv_Delivery.ThreadSafeCall(delegate
             {

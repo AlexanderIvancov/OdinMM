@@ -432,7 +432,7 @@ namespace Odin.Warehouse.Deliveries
                         drser["tablename"] = "";
                         dataserials.Rows.Add(drser);
 
-                        BLLIN.AddStockInBoxDets(_id, dataserials);
+                        Helper.getSP("sp_AddStockInBoxDets", _id, dataserials);
                     }
                 }
             }

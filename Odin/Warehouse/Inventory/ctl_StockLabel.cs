@@ -300,7 +300,7 @@ namespace Odin.Warehouse.Inventory
         {
             Helper.getSP("sp_EditStockLabel", Label, ExpDate, Available, ParentLabel, Comments, DataCode, ManufBatch);
             if (NoExpDate == -1)
-                SINBll.SetNoExpDate(Label);
+                Helper.getSP("sp_SetNoExpDate", Label);
             ShowDets(Label);
             SaveLabel?.Invoke(this);
         }

@@ -569,7 +569,7 @@ namespace Odin.Warehouse.Deliveries
 
             if (BatchId != 0)
             {
-                data1 = StockIn_BLL.getStockInBatchDelivery(BatchId);
+                data1 = (DataTable)Helper.getSP("sp_SelectBatchDeliveryRests", BatchId);
 
                 gv_Delivery.ThreadSafeCall(delegate
                 {
@@ -581,7 +581,7 @@ namespace Odin.Warehouse.Deliveries
             }
             else
             {
-                data1 = StockIn_BLL.getStockInArticleDelivery(-99/*ArticleId*/);
+                data1 = (DataTable)Helper.getSP("sp_SelectArticleDeliveryRests", -99/*ArticleId*/);
 
                 gv_Delivery.ThreadSafeCall(delegate
                 {
@@ -614,7 +614,7 @@ namespace Odin.Warehouse.Deliveries
 
             if (BatchId != 0)
             {
-                data1 = StockIn_BLL.getStockInBatchDelivery(BatchId);
+                data1 = (DataTable)Helper.getSP("sp_SelectBatchDeliveryRests", BatchId);
 
                 gv_Delivery.ThreadSafeCall(delegate
                 {
@@ -626,7 +626,7 @@ namespace Odin.Warehouse.Deliveries
             }
             else
             {
-                data1 = StockIn_BLL.getStockInArticleDelivery(-99/*ArticleId*/);
+                data1 = (DataTable)Helper.getSP("sp_SelectArticleDeliveryRests", -99/*ArticleId*/);
 
                 gv_Delivery.ThreadSafeCall(delegate
                 {
@@ -812,7 +812,7 @@ namespace Odin.Warehouse.Deliveries
 
         private void frm_AddDeliveryDets_Load(object sender, EventArgs e)
         {
-            data1 = StockIn_BLL.getStockInArticleDelivery(-99);
+            data1 = (DataTable)Helper.getSP("sp_SelectArticleDeliveryRests", -99);
             gv_Delivery.ThreadSafeCall(delegate
             {
                 gv_Delivery.AutoGenerateColumns = false;

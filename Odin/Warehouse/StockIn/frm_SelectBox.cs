@@ -31,7 +31,7 @@ namespace Odin.Warehouse.StockIn
 
         public void FillBoxes()
         {
-            var data = StockIn_BLL.getBoxesNotPlaced();
+            var data = (System.Data.DataTable)Helper.getSP("sp_SelectBoxesNotPlaced");
 
 
             gv_List.ThreadSafeCall(delegate
@@ -50,7 +50,7 @@ namespace Odin.Warehouse.StockIn
 
         public void FillBoxesNotMapped(int _idin)
         {
-            var data = StockIn_BLL.getBatchBoxesNotMapped(_idin);
+            var data = (System.Data.DataTable)Helper.getSP("sp_SelectBoxesNotMapped", _idin);
 
 
             gv_List.ThreadSafeCall(delegate

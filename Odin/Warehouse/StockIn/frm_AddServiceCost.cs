@@ -100,7 +100,7 @@ namespace Odin.Warehouse.StockIn
 
         public void FillList()
         {
-            var data = StockIn_BLL.getStockServices();
+            var data = (DataTable)Helper.getSP("sp_SelectStockServicesRests");
 
             gv_List.ThreadSafeCall(delegate
             {
