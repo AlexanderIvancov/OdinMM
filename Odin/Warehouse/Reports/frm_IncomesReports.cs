@@ -23,7 +23,6 @@ namespace Odin.Warehouse.Reports
 
         #region Variables
 
-        StockRep_BLL BLL = new StockRep_BLL();
         class_Global glob_Class = new class_Global();
         DAL_Functions DAL = new DAL_Functions();
         AdmMenu mMenu = new AdmMenu();
@@ -112,9 +111,9 @@ namespace Odin.Warehouse.Reports
         {
             //MessageBox.Show(txt_CreatDateFrom.Value.ToShortDateString());
             DataTable data = chk_Summary.CheckState == CheckState.Checked
-                ? StockRep_BLL.getIncomesReportsSum(cmb_Firms1.FirmId, cmb_Types1.TypeId, cmb_StockInTypes1.StockMovTypeId, txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
+                ? (DataTable)Helper.getSP("sp_StockReportsIncomesSum", cmb_Firms1.FirmId, cmb_Types1.TypeId, cmb_StockInTypes1.StockMovTypeId, txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
                                            txt_CreatDateTill.Value == null ? "" : txt_CreatDateTill.Value.ToString().Trim(), Countries, chk_includena.Checked == true ? -1 : 0)
-                : StockRep_BLL.getIncomesReports(cmb_Firms1.FirmId, cmb_Types1.TypeId, cmb_StockInTypes1.StockMovTypeId, txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
+                : (DataTable)Helper.getSP("sp_StockReportsIncomes", cmb_Firms1.FirmId, cmb_Types1.TypeId, cmb_StockInTypes1.StockMovTypeId, txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
                                             txt_CreatDateTill.Value == null ? "" : txt_CreatDateTill.Value.ToString().Trim(), Countries, chk_includena.Checked == true ? -1 : 0);
             gv_List.ThreadSafeCall(delegate
             {

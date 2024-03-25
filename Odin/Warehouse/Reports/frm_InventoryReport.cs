@@ -19,7 +19,6 @@ namespace Odin.Warehouse.Reports
             ED = new ExportData(this.gv_List, "Inventory.xls", this.Name);
         }
 
-        StockRep_BLL BLL = new StockRep_BLL();
         class_Global glob_Class = new class_Global();
         DAL_Functions DAL = new DAL_Functions();
         AdmMenu mMenu = new AdmMenu();
@@ -113,7 +112,7 @@ namespace Odin.Warehouse.Reports
             Account = cmb_Places1.txt_Place.Text;
 
             DataTable data;
-            data = StockRep_BLL.getInventoryReports(cmb_Articles1.ArticleId,
+            data = (DataTable)Helper.getSP(Convert.ToDateTime(txt_Date.Value.ToShortDateString()) <= Convert.ToDateTime("31.12.2019") ? "sp_SelectStockRestsOnDate1706" : "sp_SelectStockRestsOnDate", cmb_Articles1.ArticleId,
                                                     txt_Date.Value.ToShortDateString(),
                                                     cmb_Places1.PlaceId,
                                                     cmb_Types1.TypeId,
@@ -162,7 +161,7 @@ namespace Odin.Warehouse.Reports
             Account = cmb_Places1.txt_Place.Text;
 
             DataTable data;
-            data = StockRep_BLL.getInventoryReportsFA(cmb_Articles1.ArticleId,
+            data = (DataTable)Helper.getSP("sp_SelectStockRestsOnDateFA", cmb_Articles1.ArticleId,
                                                     txt_Date.Value.ToShortDateString(),
                                                     cmb_Places1.PlaceId,
                                                     cmb_Types1.TypeId,
@@ -202,7 +201,9 @@ namespace Odin.Warehouse.Reports
         public void bw_ListAccount(object sender, DoWorkEventArgs e)
         {
             DataTable data;
-            data = StockRep_BLL.getInventoryReportsAccount(txt_Date.Value.ToShortDateString(),
+            data = (DataTable)Helper.getSP(Convert.ToDateTime(txt_Date.Value.ToShortDateString()) <= Convert.ToDateTime("31.12.2019")
+                ? "sp_SelectStockRestsOnDateAccount1706"
+                : "sp_SelectStockRestsOnDateAccount", txt_Date.Value.ToShortDateString(),
                                                     Account,
                                                     chk_groupbyplaces.Checked == true ? -1 : 0,
                                                     chk_groupbydoc.Checked == true ? -1 : 0,

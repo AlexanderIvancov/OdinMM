@@ -20,7 +20,6 @@ namespace Odin.Warehouse.Reports
 
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
         class_Global glob_Class = new class_Global();
-        StockRep_BLL BLL = new StockRep_BLL();
         DAL_Functions DAL = new DAL_Functions();
         AdmMenu mMenu = new AdmMenu();
         ExportData ED;
@@ -37,7 +36,7 @@ namespace Odin.Warehouse.Reports
 
         public void FillList()
         {
-            var data = StockRep_BLL.getDeadStock(cmb_Types1.TypeId, txt_Date.Value.ToShortDateString(), chk_hidezero.Checked == true ? -1 : 0);
+            var data = (DataTable)Helper.getSP("sp_SelectDeadStock", cmb_Types1.TypeId, txt_Date.Value.ToShortDateString(), chk_hidezero.Checked == true ? -1 : 0);
 
 
             gv_List.ThreadSafeCall(delegate

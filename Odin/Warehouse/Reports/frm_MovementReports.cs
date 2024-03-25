@@ -20,7 +20,6 @@ namespace Odin.Warehouse.Reports
         }
         #region Variables
 
-        StockRep_BLL BLL = new StockRep_BLL();
         class_Global glob_Class = new class_Global();
         DAL_Functions DAL = new DAL_Functions();
         AdmMenu mMenu = new AdmMenu();
@@ -111,9 +110,9 @@ namespace Odin.Warehouse.Reports
         {
             
             DataTable data = chk_Summary.CheckState == CheckState.Checked
-                ? StockRep_BLL.getMovementReportsSum(cmb_Types1.TypeId, OperType, txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
+                ? (DataTable)Helper.getSP("sp_StockReportsMovementSum", cmb_Types1.TypeId, OperType, txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
                                            txt_CreatDateTill.Value == null ? "" : txt_CreatDateTill.Value.ToString().Trim())
-                : StockRep_BLL.getMovementReports(cmb_Types1.TypeId, OperType, txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
+                : (DataTable)Helper.getSP("sp_StockReportsMovement", cmb_Types1.TypeId, OperType, txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
                                            txt_CreatDateTill.Value == null ? "" : txt_CreatDateTill.Value.ToString().Trim());
             gv_List.ThreadSafeCall(delegate
             {
