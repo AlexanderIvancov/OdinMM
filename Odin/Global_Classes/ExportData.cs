@@ -208,7 +208,7 @@ namespace Odin.Global_Classes
                       fmWait.progressBar1.Value = Convert.ToInt32(i * 10 * (100.0 / dgv.Rows.Count));
                   }
                 );
-
+                ICellStyle Style = (HSSFCellStyle)hssfworkbook.CreateCellStyle();
                 // Rows adding
                 for (int k = 0; k < dgv.Columns.Count; k++)
                     if (param != null)
@@ -218,9 +218,9 @@ namespace Odin.Global_Classes
                             try
                             {
                                 var cell = rowExcel.CreateCell(k);
-                                //ICellStyle Style = cell.CellStyle;
-                                cell.CellStyle.FillPattern = FillPattern.SolidForeground;
-                                cell.CellStyle.FillForegroundColor = typeMap[row.Cells[dgv.Columns[k].Index].Style.BackColor];
+                                Style.FillPattern = FillPattern.SolidForeground;
+                                Style.FillForegroundColor = typeMap[row.Cells[dgv.Columns[k].Index].Style.BackColor];
+                                rowExcel.Cells[k].CellStyle = Style;
                                 //cell.CellStyle = Style;
                                 cell.SetCellValue(row.Cells[dgv.Columns[k].Index/*DisplayIndex*/].Value.ToString());
                             }
