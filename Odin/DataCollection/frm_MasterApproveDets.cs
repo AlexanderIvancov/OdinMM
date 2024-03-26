@@ -146,7 +146,7 @@ namespace Odin.DataCollection
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
                 if (Convert.ToInt32(row.Cells["cn_isapproved"].Value) == -1)
-                    row.DefaultCellStyle.BackColor = Color.FromArgb(192, 255, 192);
+                    row.DefaultCellStyle.BackColor = Color.LightGray;
             }
         }
         public void FillList(int launchid, int prodplace)

@@ -4,14 +4,10 @@ using Odin.Global_Classes;
 using System;
 using System.Windows.Forms;
 
-
 namespace Odin.CMB_Components.Currencies
 {
     public partial class frm_Currencies : KryptonForm
     {
-
-
-
         public frm_Currencies()
         {
             InitializeComponent();
@@ -26,8 +22,6 @@ namespace Odin.CMB_Components.Currencies
             cmb = f;
         }
 
-
-
         class_Global glob_Class = new class_Global();
         CMB_BLL Bll = new CMB_BLL();
         bool _showingModal = false;
@@ -38,7 +32,6 @@ namespace Odin.CMB_Components.Currencies
             get { return _showingModal; }
             set { _showingModal = value; }
         }
-
 
         public void ChangeCMBElements()
         {
@@ -74,13 +67,11 @@ namespace Odin.CMB_Components.Currencies
             if (result == DialogResult.OK)
             {
                 _showingModal = false;
-                int _res = Bll.AddCurrency(frm.Currency, frm.Description, frm.Symbol);
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddCurrency", frm.Currency, frm.Description, frm.Symbol));
                 FillData(frm.Currency);
             }
             if (result == DialogResult.Cancel)
-            {
                 _showingModal = false;
-            }
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -100,18 +91,15 @@ namespace Odin.CMB_Components.Currencies
                 frm.Description = gv_List.CurrentRow.Cells["cn_description"].Value.ToString();
                 frm.Symbol = gv_List.CurrentRow.Cells["cn_symbol"].Value.ToString();
 
-
                 DialogResult result = frm.ShowDialog();
 
                 if (result == DialogResult.OK)
                 {
                     _showingModal = false;
-                    Bll.EditCurrency(frm.Id, frm.Currency, frm.Description, frm.Symbol);
+                    Helper.getSP("sp_EditCurrency", frm.Id, frm.Currency, frm.Description, frm.Symbol);
                 }
                 if (result == DialogResult.Cancel)
-                {
                     _showingModal = false;
-                }
             }
         }
 
@@ -124,19 +112,18 @@ namespace Odin.CMB_Components.Currencies
 
             if (glob_Class.DeleteConfirm() == true)
             {
-                Bll.DeleteCurrency(_id);
+                Helper.getSP("sp_DeleteCurrency", _id);
                 FillData(string.Empty);
             }
         }
 
         public void FillData(string Beg)
         {
-            var data = CMB_BLL.getCurrencies(Beg);
+            var data = (System.Data.DataTable)Helper.getSP("sp_CurrencySelectLike", Beg);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
             gv_List.DataSource = bs_List;
-
         }
 
         private void gv_List_SelectionChanged(object sender, EventArgs e)
@@ -163,5 +150,4 @@ namespace Odin.CMB_Components.Currencies
             frm.Show(); frm.GetKryptonFormFields();
         }
     }
-
 }

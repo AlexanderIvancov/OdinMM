@@ -118,7 +118,7 @@ namespace Odin.Sales.DeliveryPlanning
                 //Delivered
                 if (Convert.ToDouble(row["confqty"]) <= Convert.ToDouble(row["delivqty"])
                     && Convert.ToInt32(row["confirmed"]) != 0)
-                    cal.ApplyColor(Color.FromArgb(192, 255, 192));
+                    cal.ApplyColor(Color.LightGray);
 
                 //Delivered, but not confirmed
                 if (Convert.ToDouble(row["confqty"]) == 0

@@ -57,7 +57,7 @@ namespace Odin.CMB_Components.Units
             if (result == DialogResult.OK)
             {
                 _showingModal = false;
-                int _res = Bll.AddUnit(frm.Unit, frm.Description, frm.UnitDecs, frm.UnitLat, frm.BaseUnitid, frm.CoefConv);
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddUnit", frm.Unit, frm.Description, frm.UnitDecs, frm.UnitLat, frm.BaseUnitid, frm.CoefConv));
                 FillData(frm.Unit);
             }
             if (result == DialogResult.Cancel)
@@ -91,7 +91,7 @@ namespace Odin.CMB_Components.Units
                 if (result == DialogResult.OK)
                 {
                     _showingModal = false;
-                    Bll.EditUnit(frm.Id, frm.Unit, frm.Description, frm.UnitDecs, frm.UnitLat, frm.BaseUnitid, frm.CoefConv);
+                    Helper.getSP("sp_EditUnit", frm.Id, frm.Unit, frm.Description, frm.UnitDecs, frm.UnitLat, frm.BaseUnitid, frm.CoefConv);
                     FillData(frm.Unit);
                 }
                 if (result == DialogResult.Cancel)
@@ -110,14 +110,14 @@ namespace Odin.CMB_Components.Units
 
             if (glob_Class.DeleteConfirm() == true)
             {
-                Bll.DeleteUnit(_id);
+                Helper.getSP("sp_DeleteUnit", _id);
                 FillData(string.Empty);
             }
         }
 
         public void FillData(string Beg)
         {
-            var data = CMB_BLL.getUnits(Beg);
+            var data = (System.Data.DataTable)Helper.getSP("sp_UnitsSelectLike", Beg);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;

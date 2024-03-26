@@ -59,7 +59,7 @@ namespace Odin.Register.Articles
                         cell.Style.BackColor = Color.Silver;
                 else if (row.Cells["cn_typechange"].Value.ToString() == "inserted")
                     foreach (DataGridViewCell cell in row.Cells)
-                        cell.Style.BackColor = Color.Gold;// Color.FromArgb(192, 255, 192);
+                        cell.Style.BackColor = Color.Gold;// Color.LightGray;
                 else if (row.Cells["cn_typechange"].Value.ToString() == "valid")
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.GreenYellow;

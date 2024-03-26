@@ -107,7 +107,7 @@
             this.gradientPanel26.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.gradientPanel26.BackgroundGradientMode = Owf.Controls.GradientPanel2.PanelGradientMode.BackwardDiagonal;
             this.gradientPanel26.borderColor = System.Drawing.Color.Transparent;
-            this.gradientPanel26.EndColor = System.Drawing.Color.FromArgb(((int)(((byte)(115)))), ((int)(((byte)(155)))), ((int)(((byte)(221)))));
+            this.gradientPanel26.EndColor = System.Drawing.Color.CornflowerBlue;
             this.gradientPanel26.Location = new System.Drawing.Point(15, 85);
             this.gradientPanel26.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.gradientPanel26.Name = "gradientPanel26";
@@ -125,7 +125,7 @@
             this.gradientPanel21.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.gradientPanel21.BackgroundGradientMode = Owf.Controls.GradientPanel2.PanelGradientMode.BackwardDiagonal;
             this.gradientPanel21.borderColor = System.Drawing.Color.Transparent;
-            this.gradientPanel21.EndColor = System.Drawing.Color.FromArgb(((int)(((byte)(115)))), ((int)(((byte)(155)))), ((int)(((byte)(221)))));
+            this.gradientPanel21.EndColor = System.Drawing.Color.CornflowerBlue;
             this.gradientPanel21.Location = new System.Drawing.Point(15, 254);
             this.gradientPanel21.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.gradientPanel21.Name = "gradientPanel21";
@@ -179,9 +179,9 @@
             this.btn_Attach.BackColor = System.Drawing.Color.Transparent;
             this.btn_Attach.ColorBase = System.Drawing.Color.Transparent;
             this.btn_Attach.ColorBaseStroke = System.Drawing.Color.Transparent;
-            this.btn_Attach.ColorOn = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(172)))), ((int)(((byte)(227)))));
-            this.btn_Attach.ColorOnStroke = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(187)))), ((int)(((byte)(243)))));
-            this.btn_Attach.ColorPress = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(100)))), ((int)(((byte)(187)))));
+            this.btn_Attach.ColorOn = System.Drawing.Color.SkyBlue;
+            this.btn_Attach.ColorOnStroke = System.Drawing.Color.RoyalBlue;
+            this.btn_Attach.ColorPress = System.Drawing.Color.RoyalBlue;
             this.btn_Attach.ColorPressStroke = System.Drawing.Color.Transparent;
             this.btn_Attach.FadingSpeed = 35;
             this.btn_Attach.FlatAppearance.BorderSize = 0;
@@ -207,38 +207,38 @@
             // 
             // btn_Print
             // 
-            this.btn_Print.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(100)))), ((int)(((byte)(187)))));
+            this.btn_Print.BackColor = System.Drawing.Color.RoyalBlue;
             this.btn_Print.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btn_Print.ForeColor = System.Drawing.Color.Black;
-            this.btn_Print.GlowColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.btn_Print.InnerBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.btn_Print.GlowColor = System.Drawing.Color.LightSkyBlue;
+            this.btn_Print.InnerBorderColor = System.Drawing.Color.WhiteSmoke;
             this.btn_Print.Location = new System.Drawing.Point(400, 9);
             this.btn_Print.Name = "btn_Print";
-            this.btn_Print.OuterBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            this.btn_Print.OuterBorderColor = System.Drawing.Color.DimGray;
             this.btn_Print.Size = new System.Drawing.Size(72, 34);
             this.btn_Print.TabIndex = 25;
             // 
             // btn_Cancel
             // 
-            this.btn_Cancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(100)))), ((int)(((byte)(187)))));
+            this.btn_Cancel.BackColor = System.Drawing.Color.RoyalBlue;
             this.btn_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_Cancel.ForeColor = System.Drawing.Color.Black;
-            this.btn_Cancel.GlowColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.btn_Cancel.InnerBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.btn_Cancel.GlowColor = System.Drawing.Color.LightSkyBlue;
+            this.btn_Cancel.InnerBorderColor = System.Drawing.Color.WhiteSmoke;
             this.btn_Cancel.Location = new System.Drawing.Point(478, 9);
             this.btn_Cancel.Name = "btn_Cancel";
-            this.btn_Cancel.OuterBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            this.btn_Cancel.OuterBorderColor = System.Drawing.Color.DimGray;
             this.btn_Cancel.Size = new System.Drawing.Size(75, 34);
             this.btn_Cancel.TabIndex = 26;
             // 
             // gradientPanel1
             // 
             this.gradientPanel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.gradientPanel1.borderColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            this.gradientPanel1.borderColor = System.Drawing.Color.DimGray;
             this.gradientPanel1.Controls.Add(this.btn_Cancel);
             this.gradientPanel1.Controls.Add(this.btn_Print);
             this.gradientPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gradientPanel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(192)))), ((int)(((byte)(234)))));
+            this.gradientPanel1.FillColor = System.Drawing.Color.LightSteelBlue;
             this.gradientPanel1.Location = new System.Drawing.Point(0, 323);
             this.gradientPanel1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.gradientPanel1.Name = "gradientPanel1";

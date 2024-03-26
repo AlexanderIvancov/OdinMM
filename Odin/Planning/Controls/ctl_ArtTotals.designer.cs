@@ -341,7 +341,7 @@
             this.txt_QtyNeeds.Location = new System.Drawing.Point(192, 179);
             this.txt_QtyNeeds.Name = "txt_QtyNeeds";
             this.txt_QtyNeeds.Size = new System.Drawing.Size(76, 21);
-            this.txt_QtyNeeds.StateCommon.Content.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.txt_QtyNeeds.StateCommon.Content.Color1 = System.Drawing.Color.MediumBlue;
             this.txt_QtyNeeds.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txt_QtyNeeds.StateCommon.Content.Padding = new System.Windows.Forms.Padding(3);
             this.txt_QtyNeeds.TabIndex = 217;
@@ -418,7 +418,7 @@
             this.txt_QtyReserved.Location = new System.Drawing.Point(195, 90);
             this.txt_QtyReserved.Name = "txt_QtyReserved";
             this.txt_QtyReserved.Size = new System.Drawing.Size(76, 21);
-            this.txt_QtyReserved.StateCommon.Content.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.txt_QtyReserved.StateCommon.Content.Color1 = System.Drawing.Color.MediumBlue;
             this.txt_QtyReserved.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txt_QtyReserved.StateCommon.Content.Padding = new System.Windows.Forms.Padding(3);
             this.txt_QtyReserved.TabIndex = 5;
@@ -508,7 +508,7 @@
             this.txt_QtyQuarantine.Location = new System.Drawing.Point(195, 116);
             this.txt_QtyQuarantine.Name = "txt_QtyQuarantine";
             this.txt_QtyQuarantine.Size = new System.Drawing.Size(76, 21);
-            this.txt_QtyQuarantine.StateCommon.Content.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.txt_QtyQuarantine.StateCommon.Content.Color1 = System.Drawing.Color.MediumBlue;
             this.txt_QtyQuarantine.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txt_QtyQuarantine.StateCommon.Content.Padding = new System.Windows.Forms.Padding(3);
             this.txt_QtyQuarantine.TabIndex = 238;

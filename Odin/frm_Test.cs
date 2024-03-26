@@ -27,14 +27,14 @@ namespace Odin
             //ControlBox = false;
             //Text = "";
 
-            //Color _mainFormBackColor = Color.FromArgb(125, 166, 226);
+            //Color _mainFormBackColor = Color.CornflowerBlue;
             //panel1.BackColor = _mainFormBackColor;
 
-            //Color _selectedTabColor = Color.FromArgb(156, 221, 252);
+            //Color _selectedTabColor = Color.LightSkyBlue;
 
             //panel2.BackColor = _selectedTabColor;
 
-            //Color _TabColor = Color.FromArgb(168, 192, 234);
+            //Color _TabColor = Color.LightSteelBlue;
 
             //panel3.BackColor = _TabColor;
         }

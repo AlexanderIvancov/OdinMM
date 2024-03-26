@@ -44,24 +44,17 @@ namespace Odin.Warehouse.StockIn
             get { return _showingModal; }
             set { _showingModal = value; }
         }
-
         public int RowIndex = 0;
         public int ColumnIndex = 0;
         public string ColumnName = "";
         public string CellValue = "";
-
-        public int HeadId
-        { get; set; }
-
-        public int CurId
-        { get; set; }
-
+        public int HeadId        { get; set; }
+        public int CurId        { get; set; }
         public int POId
         {
             get { return cmb_PurchaseOrders1.PurchaseOrderId; }
             set { cmb_PurchaseOrders1.PurchaseOrderId = value; }
         }
-
         public double Total
         {
             get
@@ -71,7 +64,6 @@ namespace Odin.Warehouse.StockIn
             }
             set { txt_Total.Text = value.ToString(); }
         }
-
         public double TotalVAT
         {
             get
@@ -81,7 +73,6 @@ namespace Odin.Warehouse.StockIn
             }
             set { txt_TotalVAT.Text = value.ToString(); }
         }
-
         public double TotalWithVat
         {
             get
@@ -91,20 +82,16 @@ namespace Odin.Warehouse.StockIn
             }
             set { txt_TotalWVAT.Text = value.ToString(); }
         }
-
         public int PlaceId
         {
             get { return cmb_Places1.PlaceId; }
             set { cmb_Places1.PlaceId = value; }
         }
-
         public int StockMoveTypeId
         {
             get { return cmb_StockInTypes1.StockMovTypeId; }
             set { cmb_StockInTypes1.StockMovTypeId = value; }
         }
-
-
         public int StateId
         {
             get
@@ -116,11 +103,9 @@ namespace Odin.Warehouse.StockIn
             }
         }
 
-
         #endregion
 
         #region Methods
-
 
         public void SetCellsColor()
         {
@@ -143,14 +128,12 @@ namespace Odin.Warehouse.StockIn
             double _vat = 0;
            
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 if (Convert.ToInt32(row.Cells["chk_add"].Value) != 0)
                 {
                     _total = _total + Math.Round(Convert.ToDouble(row.Cells["cn_unitprice"].Value) * Convert.ToDouble(row.Cells["cn_qty"].Value), 2);
                     if (_vat == 0)
                         _vat = Convert.ToDouble(row.Cells["cn_vat"].Value);
                 }
-            }
 
             Total = Math.Round(_total, 2);
             TotalVAT = Math.Round((_total / 100 * _vat), 2);
@@ -162,7 +145,6 @@ namespace Odin.Warehouse.StockIn
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
                 DataGridViewComboBoxCell setDGVCMBCell = row.Cells["cn_custcodecmb"] as DataGridViewComboBoxCell;
-
                
                 setDGVCMBCell.DataSource = DAL_Functions.getCustomCodes();
                 
@@ -171,7 +153,6 @@ namespace Odin.Warehouse.StockIn
                 setDGVCMBCell.ReadOnly = false;
                 
                 setDGVCMBCell.Value = Convert.ToInt32(row.Cells["cn_custcodeid"].Value);
-                
             }
         }
 
@@ -181,7 +162,6 @@ namespace Odin.Warehouse.StockIn
             {
                 DataGridViewComboBoxCell setDGVCMBCell = row.Cells["cn_country"] as DataGridViewComboBoxCell;
 
-
                 setDGVCMBCell.DataSource = DAL_Functions.getCountries();
 
                 setDGVCMBCell.ValueMember = "cid";
@@ -189,17 +169,14 @@ namespace Odin.Warehouse.StockIn
                 setDGVCMBCell.ReadOnly = false;
 
                 setDGVCMBCell.Value = 0;//Convert.ToInt32(row.Cells["cn_custcodeid"].Value);
-
             }
         }
 
         public void FillnewCustCodes(string custcode, int custcodeid)
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 if (row.Cells["cn_custcode"].Value.ToString() == custcode)
                     row.Cells["cn_custcodeid"].Value = custcodeid;
-            }
         }
 
         public void FillList(int POId)
@@ -241,12 +218,8 @@ namespace Odin.Warehouse.StockIn
             int _place = 0;
 
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 if (Convert.ToInt32(row.Cells["chk_place"].Value) != 0)
-                {
                     _place = -1;
-                }
-            }
 
             if (_place == -1
                 && PlaceId == 0)
@@ -258,7 +231,6 @@ namespace Odin.Warehouse.StockIn
         #endregion
 
         #region Controls
-
 
         #region Context menu
         
@@ -326,12 +298,10 @@ namespace Odin.Warehouse.StockIn
                         ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
                         : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
-
             }
             catch { }
             SetCellsColor();
             RecalcTotals();
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -356,7 +326,6 @@ namespace Odin.Warehouse.StockIn
             catch { }
             SetCellsColor();
             RecalcTotals();
-
         }
 
         private void mni_Copy_Click(object sender, EventArgs e)
@@ -396,7 +365,6 @@ namespace Odin.Warehouse.StockIn
             Helper.LoadColumns(gv_List, this.Name);
         }
 
-
         private void btn_Clear_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
@@ -435,27 +403,22 @@ namespace Odin.Warehouse.StockIn
 
             }
 
-
             if (_test == true
                 && StockMoveTypeId != 0)
             {
                 gv_List.EndEdit();
 
                 foreach (DataGridViewRow row in this.gv_List.Rows)
-                {
                     if (Convert.ToInt32(row.Cells["chk_add"].Value) != 0
                         && Convert.ToInt32(row.Cells["cn_unitid"].Value) != 0)
                     {
                         if (Convert.ToInt32(row.Cells["cn_custcodeid"].Value) == 0
                             && row.Cells["cn_custcode"].Value.ToString() != "")
                         {
-                            _custcodeid = Bll.AddCustCode(row.Cells["cn_custcode"].Value.ToString(), "");
-
+                            _custcodeid = Convert.ToInt32(Helper.getSP("sp_AddCustCode", row.Cells["cn_custcode"].Value.ToString(), ""));
                             FillnewCustCodes(row.Cells["cn_custcode"].Value.ToString(), _custcodeid);
                         }
                         DataGridViewComboBoxCell setDGVCMBCell = row.Cells["cn_country"] as DataGridViewComboBoxCell;
-
-
 
                         _NewInwardId = Convert.ToInt32(Helper.getSP("sp_AddStockInLine", HeadId,
                                                             Convert.ToInt32(row.Cells["cn_artid"].Value),
@@ -480,12 +443,9 @@ namespace Odin.Warehouse.StockIn
                                              && PlaceId != 0
                                              && _NewInwardId != 0
                                              && StateId != 0)
-                        {
                             Convert.ToInt32(Helper.getSP("sp_AddStockDeallocation", _NewInwardId, 0, Convert.ToInt32(row.Cells["cn_artid"].Value),
                                                            PlaceId, Convert.ToDouble(row.Cells["cn_qty"].Value),
                                                            "", 0, -1, row.Cells["cn_comments"].Value.ToString(), "", ""));
-                        }
-
 
                         if (Convert.ToInt32(row.Cells["cn_resale"].Value) == -1)
                         {
@@ -497,7 +457,6 @@ namespace Odin.Warehouse.StockIn
                             strMessage = strMessage + "\r\nQty: " + Convert.ToDouble(row.Cells["cn_qty"].Value).ToString() + " " + row.Cells["cn_iunit"].Value.ToString();
                         }
                     }
-                }
 
                 if (_testresale == true
                     && emailaddresses != "")
@@ -516,7 +475,6 @@ namespace Odin.Warehouse.StockIn
             if (gv_List.CurrentRow.Cells["chk_add"].Selected == true)
             {
                 gv_List.EndEdit();
-
                 RecalcTotals();
             }
         }
@@ -555,15 +513,12 @@ namespace Odin.Warehouse.StockIn
                 }
                 catch
                 {
-
                     gv_List.CurrentRow.Cells["cn_custcodeid"].Value = 0;
-                
                 }
 
 
                 SetCellsColor();
             }
-
 
             RecalcTotals();
 

@@ -5,7 +5,6 @@ using Odin.Tools;
 using System;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -29,19 +28,16 @@ namespace Odin.CMB_Components.Types
         Helper MyHelper = new Helper();
         CMB_BLL BLL = new CMB_BLL();
 
-
         int _typeid = 0;
         public int TypeId
         {
             get { return _typeid; }
             set { _typeid = value; }
         }
-
         public int RowIndex = 0;
         public int ColumnIndex = 0;
         public string ColumnName = "";
         public string CellValue = "";
-
         public string HeaderText
         {
             get { return kryptonHeaderGroup1.ValuesPrimary.Heading; }
@@ -54,17 +50,14 @@ namespace Odin.CMB_Components.Types
 
         public void FillList(int _typeid)
         {
-            var data = CMB_BLL.getTypeSpecificationsAll(TypeId);
-
+            var data = (DataTable)Helper.getSP("sp_TypesSpecificationsAll", TypeId);
 
             gv_List.ThreadSafeCall(delegate
             {
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
-                      
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -72,9 +65,7 @@ namespace Odin.CMB_Components.Types
             });
         }
 
-
         #region Context menu
-
 
         private void mnu_Lines_Opening(object sender, CancelEventArgs e)
         {
@@ -94,7 +85,6 @@ namespace Odin.CMB_Components.Types
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -112,7 +102,6 @@ namespace Odin.CMB_Components.Types
             }
             catch
             { }
-            
         }
 
         private void mni_Search_Click(object sender, EventArgs e)
@@ -139,8 +128,6 @@ namespace Odin.CMB_Components.Types
 
             }
             catch { }
-            
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -152,8 +139,6 @@ namespace Odin.CMB_Components.Types
                     : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             }
             catch { }
-           
-
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -163,8 +148,6 @@ namespace Odin.CMB_Components.Types
                 bs_List.RemoveFilter();
             }
             catch { }
-           
-
         }
 
         private void mni_Copy_Click(object sender, EventArgs e)
@@ -216,7 +199,7 @@ namespace Odin.CMB_Components.Types
             DialogResult result = frm.ShowDialog();
             if (result == DialogResult.OK)
             {
-                BLL.AddSpecification(frm.Specification, frm.TypeOfData, frm.Comments, frm.UnitId);
+                Helper.getSP("sp_AddSpecification", frm.Specification, frm.TypeOfData, frm.Comments, frm.UnitId);
                 FillList(TypeId);
             }
         }
@@ -249,7 +232,7 @@ namespace Odin.CMB_Components.Types
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    BLL.EditSpecification(_id, frm.Specification, frm.TypeOfData, frm.Comments, frm.UnitId);
+                    Helper.getSP("sp_EditSpecification", _id, frm.Specification, frm.TypeOfData, frm.Comments, frm.UnitId);
                     FillList(TypeId);
                 }
             }
@@ -268,7 +251,7 @@ namespace Odin.CMB_Components.Types
             if (_id != 0
                 && glob_Class.DeleteConfirm() == true)
             {
-                BLL.DeleteSpecification(_id);
+                Helper.getSP("sp_DeleteSpecification", _id);
                 FillList(TypeId);                
             }
         }
@@ -288,7 +271,6 @@ namespace Odin.CMB_Components.Types
             dataspecs.Columns.Add("id", typeof(int));
            
             foreach (DataGridViewRow row in gv_List.Rows)
-            {
                 if (Convert.ToInt32(row.Cells["chk_check"].Value) == -1)
                 {
                     DataRow dr = dataspecs.NewRow();
@@ -296,8 +278,7 @@ namespace Odin.CMB_Components.Types
                     
                     dataspecs.Rows.Add(dr);
                 }
-            }
-            BLL.SaveSpecsForType(TypeId, dataspecs);
+            Helper.getSP("sp_SaveTypeSpecs", TypeId, dataspecs);
 
             this.Close();
         }

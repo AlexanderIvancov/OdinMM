@@ -118,7 +118,7 @@ namespace Odin.Planning
                             _bdtemp = Convert.ToInt32(row.Cells["cn_batchdetid"].Value);
                             _colorcount++;
                         }
-                        row.DefaultCellStyle.BackColor = _colorcount % 2 == 0 ? Color.FromArgb(192, 255, 192) : Color.Azure;//Color.LightGreen : Color.LightPink;
+                        row.DefaultCellStyle.BackColor = _colorcount % 2 == 0 ? Color.LightGray : Color.Azure;//Color.LightGreen : Color.LightPink;
                     }
                 }
             }

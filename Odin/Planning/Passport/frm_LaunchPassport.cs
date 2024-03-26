@@ -91,7 +91,7 @@ namespace Odin.Planning.Passport
                         cell.Style.BackColor = Color.LightCoral;
                 if (Convert.ToInt32(row.Cells["cn_cstateid"].Value) == 0) //Closed
                     foreach (DataGridViewCell cell in row.Cells)
-                        cell.Style.BackColor = Color.FromArgb(192, 255, 192);
+                        cell.Style.BackColor = Color.LightGray;
             }
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
@@ -103,7 +103,7 @@ namespace Odin.Planning.Passport
                         cell.Style.BackColor = Color.LightCoral;
                 if (Convert.ToInt32(row.Cells["cn_ordertypeid"].Value) == 3) //Repeat
                     foreach (DataGridViewCell cell in row.Cells)
-                        cell.Style.BackColor = Color.FromArgb(192, 255, 192);
+                        cell.Style.BackColor = Color.LightGray;
             }
         }
 
@@ -119,7 +119,7 @@ namespace Odin.Planning.Passport
                 //        cell.Style.BackColor = Color.LightCoral;
                 //if (Convert.ToInt32(row.Cells["cn_cstateid"].Value) == 0) //Closed
                 //    foreach (DataGridViewCell cell in row.Cells)
-                //        cell.Style.BackColor = Color.FromArgb(192, 255, 192);
+                //        cell.Style.BackColor = Color.LightGray;
             }
         }
 
@@ -232,8 +232,8 @@ namespace Odin.Planning.Passport
             }
             else
             {
-                pn_Quality.BackColor = _qualityby == "" ? Color.LightYellow : Color.FromArgb(192, 255, 192);
-                pn_Ingeneering.BackColor = _techby == "" ? Color.LightYellow : Color.FromArgb(192, 255, 192);
+                pn_Quality.BackColor = _qualityby == "" ? Color.LightYellow : Color.LightGray;
+                pn_Ingeneering.BackColor = _techby == "" ? Color.LightYellow : Color.LightGray;
             }
         }
         #endregion

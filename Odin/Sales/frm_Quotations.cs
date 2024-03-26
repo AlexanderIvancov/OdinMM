@@ -125,18 +125,18 @@ namespace Odin.Sales
                 if (Convert.ToInt32(row.Cells["cn_stateid"].Value) == 1)
                     if (Convert.ToInt32(row.Cells["chk_issent"].Value) == 0)
                         foreach (DataGridViewCell cell in row.Cells)
-                            cell.Style.BackColor = Color.FromArgb(255, 255, 192);
+                            cell.Style.BackColor = Color.LemonChiffon;
                     else
                         foreach (DataGridViewCell cell in row.Cells)
                             cell.Style.BackColor = Color.Yellow;
                 //Green - Accepted
                 if (Convert.ToInt32(row.Cells["cn_stateid"].Value) == 3)
                     foreach (DataGridViewCell cell in row.Cells)
-                        cell.Style.BackColor = Color.FromArgb(192, 255, 192);
+                        cell.Style.BackColor = Color.LightGray;
                 //Declined - GREY
                 if (Convert.ToInt32(row.Cells["cn_stateid"].Value) == 5)
                     foreach (DataGridViewCell cell in row.Cells)
-                        cell.Style.BackColor = Color.FromArgb(224, 224, 224);
+                        cell.Style.BackColor = Color.Gainsboro;
                 //Red - no PCB
                 if (row.Cells["cn_pcbtext"].Value.ToString() == "No"
                     && Convert.ToInt32(row.Cells["cn_stateid"].Value) == 3)

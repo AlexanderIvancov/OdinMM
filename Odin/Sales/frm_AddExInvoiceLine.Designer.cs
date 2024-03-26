@@ -504,7 +504,7 @@
             // cn_inadvance
             // 
             this.cn_inadvance.DataPropertyName = "inadvance";
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightPink;
             this.cn_inadvance.DefaultCellStyle = dataGridViewCellStyle1;
             this.cn_inadvance.HeaderText = "In advance";
             this.cn_inadvance.Name = "cn_inadvance";
@@ -512,7 +512,7 @@
             // cn_leftinadvance
             // 
             this.cn_leftinadvance.DataPropertyName = "leftinadvance";
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightPink;
             this.cn_leftinadvance.DefaultCellStyle = dataGridViewCellStyle2;
             this.cn_leftinadvance.HeaderText = "Left in advance";
             this.cn_leftinadvance.Name = "cn_leftinadvance";
@@ -577,7 +577,7 @@
             // cn_orderprice
             // 
             this.cn_orderprice.DataPropertyName = "orderprice";
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Lavender;
             this.cn_orderprice.DefaultCellStyle = dataGridViewCellStyle3;
             this.cn_orderprice.HeaderText = "Order\'s unit price";
             this.cn_orderprice.Name = "cn_orderprice";
@@ -586,7 +586,7 @@
             // cn_unitcostprice
             // 
             this.cn_unitcostprice.DataPropertyName = "unitcostprice";
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Lavender;
             this.cn_unitcostprice.DefaultCellStyle = dataGridViewCellStyle4;
             this.cn_unitcostprice.HeaderText = "Unit cost ";
             this.cn_unitcostprice.Name = "cn_unitcostprice";
@@ -627,7 +627,7 @@
             // cn_coefconv
             // 
             this.cn_coefconv.DataPropertyName = "coefconv";
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Lavender;
             this.cn_coefconv.DefaultCellStyle = dataGridViewCellStyle5;
             this.cn_coefconv.HeaderText = "CoefConv";
             this.cn_coefconv.Name = "cn_coefconv";
@@ -637,7 +637,7 @@
             // cn_totalcost
             // 
             this.cn_totalcost.DataPropertyName = "totalcost";
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Lavender;
             this.cn_totalcost.DefaultCellStyle = dataGridViewCellStyle6;
             this.cn_totalcost.HeaderText = "Total cost";
             this.cn_totalcost.Name = "cn_totalcost";
@@ -646,7 +646,7 @@
             // cn_totalorderprice
             // 
             this.cn_totalorderprice.DataPropertyName = "totalorderprice";
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.Lavender;
             this.cn_totalorderprice.DefaultCellStyle = dataGridViewCellStyle7;
             this.cn_totalorderprice.HeaderText = "Total order";
             this.cn_totalorderprice.Name = "cn_totalorderprice";
@@ -1172,7 +1172,7 @@
             this.txt_LeftInAdvance.Name = "txt_LeftInAdvance";
             this.txt_LeftInAdvance.ReadOnly = true;
             this.txt_LeftInAdvance.Size = new System.Drawing.Size(94, 23);
-            this.txt_LeftInAdvance.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.txt_LeftInAdvance.StateCommon.Back.Color1 = System.Drawing.Color.LightPink;
             this.txt_LeftInAdvance.TabIndex = 272;
             this.txt_LeftInAdvance.Text = "0";
             // 
@@ -1191,7 +1191,7 @@
             this.txt_InAdvance.Location = new System.Drawing.Point(108, 217);
             this.txt_InAdvance.Name = "txt_InAdvance";
             this.txt_InAdvance.Size = new System.Drawing.Size(96, 23);
-            this.txt_InAdvance.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.txt_InAdvance.StateCommon.Back.Color1 = System.Drawing.Color.LightPink;
             this.txt_InAdvance.TabIndex = 270;
             this.txt_InAdvance.Text = "0";
             this.txt_InAdvance.Validated += new System.EventHandler(this.txt_InAdvance_Validated);
@@ -1594,7 +1594,7 @@
             // dataGridViewTextBoxColumn11
             // 
             this.dataGridViewTextBoxColumn11.DataPropertyName = "unit";
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.LightPink;
             this.dataGridViewTextBoxColumn11.DefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridViewTextBoxColumn11.FillWeight = 40F;
             this.dataGridViewTextBoxColumn11.HeaderText = "Unit";
@@ -1605,7 +1605,7 @@
             // dataGridViewTextBoxColumn12
             // 
             this.dataGridViewTextBoxColumn12.DataPropertyName = "unitprice";
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.LightPink;
             this.dataGridViewTextBoxColumn12.DefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridViewTextBoxColumn12.FillWeight = 80F;
             this.dataGridViewTextBoxColumn12.HeaderText = "Unit price";
@@ -1658,7 +1658,7 @@
             // dataGridViewTextBoxColumn18
             // 
             this.dataGridViewTextBoxColumn18.DataPropertyName = "conforder";
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.Lavender;
             this.dataGridViewTextBoxColumn18.DefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridViewTextBoxColumn18.HeaderText = "Conf.order";
             this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
@@ -1667,7 +1667,7 @@
             // dataGridViewTextBoxColumn19
             // 
             this.dataGridViewTextBoxColumn19.DataPropertyName = "custorder";
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.Lavender;
             this.dataGridViewTextBoxColumn19.DefaultCellStyle = dataGridViewCellStyle11;
             this.dataGridViewTextBoxColumn19.HeaderText = "Cust. order";
             this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
@@ -1709,7 +1709,7 @@
             // dataGridViewTextBoxColumn24
             // 
             this.dataGridViewTextBoxColumn24.DataPropertyName = "coefconv";
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.Lavender;
             this.dataGridViewTextBoxColumn24.DefaultCellStyle = dataGridViewCellStyle12;
             this.dataGridViewTextBoxColumn24.HeaderText = "CoefConv";
             this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
@@ -1719,7 +1719,7 @@
             // dataGridViewTextBoxColumn25
             // 
             this.dataGridViewTextBoxColumn25.DataPropertyName = "totalcost";
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.Lavender;
             this.dataGridViewTextBoxColumn25.DefaultCellStyle = dataGridViewCellStyle13;
             this.dataGridViewTextBoxColumn25.HeaderText = "Total cost";
             this.dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
@@ -1728,7 +1728,7 @@
             // dataGridViewTextBoxColumn26
             // 
             this.dataGridViewTextBoxColumn26.DataPropertyName = "totalorderprice";
-            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.Lavender;
             this.dataGridViewTextBoxColumn26.DefaultCellStyle = dataGridViewCellStyle14;
             this.dataGridViewTextBoxColumn26.HeaderText = "Total order";
             this.dataGridViewTextBoxColumn26.Name = "dataGridViewTextBoxColumn26";

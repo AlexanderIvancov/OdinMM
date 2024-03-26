@@ -359,7 +359,7 @@
             this.txt_TotalVAT.Location = new System.Drawing.Point(257, 198);
             this.txt_TotalVAT.Name = "txt_TotalVAT";
             this.txt_TotalVAT.Size = new System.Drawing.Size(61, 23);
-            this.txt_TotalVAT.StateActive.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txt_TotalVAT.StateActive.Back.Color1 = System.Drawing.Color.LemonChiffon;
             this.txt_TotalVAT.TabIndex = 15;
             this.txt_TotalVAT.Text = "0";
             // 
@@ -378,7 +378,7 @@
             this.txt_TotalWVAT.Location = new System.Drawing.Point(412, 198);
             this.txt_TotalWVAT.Name = "txt_TotalWVAT";
             this.txt_TotalWVAT.Size = new System.Drawing.Size(61, 23);
-            this.txt_TotalWVAT.StateActive.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txt_TotalWVAT.StateActive.Back.Color1 = System.Drawing.Color.LemonChiffon;
             this.txt_TotalWVAT.TabIndex = 16;
             this.txt_TotalWVAT.Text = "0";
             // 
@@ -397,7 +397,7 @@
             this.txt_Total.Location = new System.Drawing.Point(120, 198);
             this.txt_Total.Name = "txt_Total";
             this.txt_Total.Size = new System.Drawing.Size(63, 23);
-            this.txt_Total.StateActive.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txt_Total.StateActive.Back.Color1 = System.Drawing.Color.LemonChiffon;
             this.txt_Total.TabIndex = 14;
             this.txt_Total.Text = "0";
             // 

@@ -47,9 +47,9 @@ namespace Odin.Register.Articles
         OpenFileDialog openFileDialogPreview = new OpenFileDialog();
         private const string wrongFileSelected = "Wrong file selected!";
         private readonly Color notSavedCutListColor = Color.Gainsboro;
-        private readonly Color parentCutListColor = Color.FromArgb(240, 240, 240);
+        private readonly Color parentCutListColor = Color.WhiteSmoke;
         private readonly Color notFoundNomColor = Color.LightBlue;
-        private readonly Color qtyExceedColor = Color.FromArgb(255, 170, 170);
+        private readonly Color qtyExceedColor = Color.LightPink;
         private const string notSavedRecordError = "The record is not saved. Impossible to complete the operation.";
         private const string notSavedRecordTitleError = "Not saved record";
         private const string decimalStringFormat = "0.##";

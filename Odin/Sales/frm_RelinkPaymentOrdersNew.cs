@@ -92,7 +92,7 @@ namespace Odin.Sales
             {
                 //if (Convert.ToInt32(row.Cells["cn_isresale"].Value) == -1)
                 //    foreach (DataGridViewCell cell in row.Cells)
-                //    { cell.Style.BackColor = Color.FromArgb(255, 255, 192); }
+                //    { cell.Style.BackColor = Color.LemonChiffon; }
                 //if (Convert.ToInt32(row.Cells["cn_allowtoinvoice"].Value) == 0)
                 //    foreach (DataGridViewCell cell in row.Cells)
                 //    { cell.Style.BackColor = Color.Tomato; }

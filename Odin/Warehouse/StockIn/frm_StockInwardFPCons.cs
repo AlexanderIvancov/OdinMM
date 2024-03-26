@@ -670,7 +670,7 @@ namespace Odin.Warehouse.StockIn
             //if (Convert.ToDateTime(dr["expdate"]) == Convert.ToDateTime("01/01/2199"))
             //{
             //    cell = node.Cells["cn_expdate"];
-            //    cell.Style.BackColor = Color.FromArgb(192, 255, 192);
+            //    cell.Style.BackColor = Color.LightGray;
             //}
 
 
@@ -678,7 +678,7 @@ namespace Odin.Warehouse.StockIn
             //{//Color
             //    foreach (DataGridViewCell cell in node.Cells)
             //    {
-            //        cell.Style.BackColor = Color.FromArgb(192, 255, 192);
+            //        cell.Style.BackColor = Color.LightGray;
             //    }
             //}
             //else if (Convert.ToInt32(dr["usage"]) == 0)
@@ -693,7 +693,7 @@ namespace Odin.Warehouse.StockIn
             //{
             //    foreach (DataGridViewCell cell in node.Cells)
             //    {
-            //        cell.Style.BackColor = Color.PapayaWhip;//Color.FromArgb(255, 224, 192);
+            //        cell.Style.BackColor = Color.PapayaWhip;//Color.Bisque;
             //    }
             //}
             //else
@@ -714,35 +714,25 @@ namespace Odin.Warehouse.StockIn
         {
             double _Total = 0;
             foreach (TreeGridNode node1 in node.Nodes)
-            {
                 _Total = _Total + Convert.ToDouble(node1.Cells["cn_qtytogive"].Value);
-            }
             node.Cells["cn_qtytogive"].Value = _Total;
             //Color and font
 
             //if (_Total > Convert.ToDouble(node.Cells["cn_LeftInBatch"].Value))
             //{
-            //    node.Cells["cn_QtyToGive"].Style.BackColor = Color.FromArgb(255, 224, 192);
+            //    node.Cells["cn_QtyToGive"].Style.BackColor = Color.Bisque;
             //}
             //else
             //{
-            //    node.Cells["cn_QtyToGive"].Style.BackColor = Color.Azure;//Color.FromArgb(192, 255, 192);
+            //    node.Cells["cn_QtyToGive"].Style.BackColor = Color.Azure;//Color.LightGray;
             //}
 
             if (Convert.ToDouble(node.Cells["cn_qtytogive"].Value) < Math.Round((Convert.ToDouble(node.Cells["cn_qtyinbatch"].Value) / cmb_Batches1.Qty) * QtyIn, 5))
-            {
                 foreach (DataGridViewCell cell in node.Cells)
-                {
                     cell.Style.BackColor = Color.Red;
-                }
-            }
             else
-            {
                 foreach (DataGridViewCell cell in node.Cells)
-                {
                     cell.Style.BackColor = Color.Azure;
-                }
-            }
 
         }
         #endregion

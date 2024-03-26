@@ -59,7 +59,7 @@ namespace Odin.CMB_Components.Countries
             if (result == DialogResult.OK)
             {
                 _showingModal = false;
-                int _res = Bll.AddCountry(frm.Country, frm.Abbrev, frm.CurId, frm.VAT, frm.EU);
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddCountry", frm.Country, frm.Abbrev, frm.CurId, frm.VAT, frm.EU));
                 FillData(frm.Country);
             }
             if (result == DialogResult.Cancel)
@@ -92,7 +92,7 @@ namespace Odin.CMB_Components.Countries
                 if (result == DialogResult.OK)
                 {
                     _showingModal = false;
-                    Bll.EditCountry(frm.Id, frm.Country, frm.Abbrev, frm.CurId, frm.VAT, frm.EU);//Bll.EditUnit(frm.Id, frm.Unit, frm.Description, frm.UnitDecs);
+                    Helper.getSP("sp_EditCountry", frm.Id, frm.Country, frm.Abbrev, frm.CurId, frm.VAT, frm.EU);//Bll.EditUnit(frm.Id, frm.Unit, frm.Description, frm.UnitDecs);
                     FillData(frm.Country);    
                 }
                 if (result == DialogResult.Cancel)
@@ -111,14 +111,14 @@ namespace Odin.CMB_Components.Countries
 
             if (glob_Class.DeleteConfirm() == true)
             {
-                Bll.DeleteCountry(_id);
+                Helper.getSP("sp_DeleteCountry", _id);
                 FillData(string.Empty);
             }
         }
 
         public void FillData(string Beg)
         {
-            var data = CMB_BLL.getCountries(Beg);
+            var data = (System.Data.DataTable)Helper.getSP("sp_CountrySelectLike", Beg);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;

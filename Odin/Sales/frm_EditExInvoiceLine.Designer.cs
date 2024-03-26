@@ -278,7 +278,7 @@
             this.txt_LeftInAdvance.Name = "txt_LeftInAdvance";
             this.txt_LeftInAdvance.ReadOnly = true;
             this.txt_LeftInAdvance.Size = new System.Drawing.Size(63, 23);
-            this.txt_LeftInAdvance.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.txt_LeftInAdvance.StateCommon.Back.Color1 = System.Drawing.Color.LightPink;
             this.txt_LeftInAdvance.TabIndex = 276;
             this.txt_LeftInAdvance.Text = "0";
             // 
@@ -297,7 +297,7 @@
             this.txt_InAdvance.Location = new System.Drawing.Point(93, 253);
             this.txt_InAdvance.Name = "txt_InAdvance";
             this.txt_InAdvance.Size = new System.Drawing.Size(63, 23);
-            this.txt_InAdvance.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.txt_InAdvance.StateCommon.Back.Color1 = System.Drawing.Color.LightPink;
             this.txt_InAdvance.TabIndex = 274;
             this.txt_InAdvance.Text = "0";
             this.txt_InAdvance.Validated += new System.EventHandler(this.txt_InAdvance_Validated);

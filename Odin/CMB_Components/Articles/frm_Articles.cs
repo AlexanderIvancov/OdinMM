@@ -194,7 +194,7 @@ namespace Odin.CMB_Components.Articles
 
         public void FillData(string Beg)
         {
-            var data = CMB_BLL.getArticles(Beg);
+            var data = (DataTable)Helper.getSP("sp_ArticlesSelectLike", Beg);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
@@ -205,7 +205,7 @@ namespace Odin.CMB_Components.Articles
 
         public void FillAliases(int ArtId)
         {
-            var data = CMB_BLL.getAliases(ArtId);
+            var data = (DataTable)Helper.getSP("sp_ArticleAliases", ArtId);
 
             gv_AliasList.AutoGenerateColumns = false;
             bs_AliasesList.DataSource = data;

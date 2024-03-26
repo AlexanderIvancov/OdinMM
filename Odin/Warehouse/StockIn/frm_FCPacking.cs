@@ -131,7 +131,7 @@ namespace Odin.Warehouse.StockIn
             foreach (DataGridViewRow row in this.gv_Boxes.Rows)
             {
                 if (Convert.ToInt32(row.Cells["cn_closed"].Value) == -1)
-                    row.DefaultCellStyle.BackColor = Color.FromArgb(192, 255, 192);
+                    row.DefaultCellStyle.BackColor = Color.LightGray;
 
             }
 

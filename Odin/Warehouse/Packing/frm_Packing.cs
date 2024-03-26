@@ -71,7 +71,7 @@ namespace Odin.Warehouse.Packing
             //{
             //    if (Convert.ToInt32(row.Cells["cn_rmstateid"].Value) == -1)
             //        foreach (DataGridViewCell cell in row.Cells)
-            //            cell.Style.BackColor = Color.FromArgb(192, 255, 192);
+            //            cell.Style.BackColor = Color.LightGray;
             //    if (Convert.ToInt32(row.Cells["cn_rmstateid"].Value) == 1)
             //        foreach (DataGridViewCell cell in row.Cells)
             //            cell.Style.BackColor = Color.Yellow;

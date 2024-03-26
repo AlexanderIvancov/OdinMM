@@ -214,7 +214,7 @@ namespace Odin.Warehouse.Requests
                 {
                     foreach (DataGridViewCell cell in row.Cells)
                     {
-                        cell.Style.BackColor = Color.FromArgb(192, 255, 192);
+                        cell.Style.BackColor = Color.LightGray;
                     }
                 }
                 else if (row.Cells["cn_statedesc"].Value.ToString() == "New")

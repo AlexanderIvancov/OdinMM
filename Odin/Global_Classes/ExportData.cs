@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -195,14 +196,11 @@ namespace Odin.Global_Classes
             ISheet sheet1 = hssfworkbook.CreateSheet("Sheet1");
             var param = e.Argument as List<DataGridViewColumn>;
 
-            int columnNumber = 0;
             //MessageBox.Show(dgv.Rows.Count.ToString());
             for (int i = 0; i < dgv.Rows.Count; i++)
             {
                 DataGridViewRow row = dgv.Rows[i]; // rows
                 IRow rowExcel = sheet1.CreateRow(i + 1);
-
-                columnNumber = 0;
 
                 fmWait.progressBar1.BeginInvoke(
                   (MethodInvoker)delegate
@@ -211,35 +209,29 @@ namespace Odin.Global_Classes
                   }
                 );
 
-
                 // Rows adding
-                foreach (DataGridViewColumn column in dgv.Columns)// columns
-                {
+                for (int k = 0; k < dgv.Columns.Count; k++)
                     if (param != null)
                     {
-                        var col = param.Where(p => p.Name == column.Name).SingleOrDefault();
+                        var col = param.Where(p => p.Name == dgv.Columns[k].Name).SingleOrDefault();
                         if (col != null)
-                        {
                             try
                             {
-                                rowExcel.CreateCell(columnNumber).SetCellValue(row.Cells[column.Index/*DisplayIndex*/].Value.ToString());
+                                var cell = rowExcel.CreateCell(k);
+                                //ICellStyle Style = cell.CellStyle;
+                                cell.CellStyle.FillPattern = FillPattern.SolidForeground;
+                                cell.CellStyle.FillForegroundColor = typeMap[row.Cells[dgv.Columns[k].Index].Style.BackColor];
+                                //cell.CellStyle = Style;
+                                cell.SetCellValue(row.Cells[dgv.Columns[k].Index/*DisplayIndex*/].Value.ToString());
                             }
-                            catch { rowExcel.CreateCell(columnNumber).SetCellValue(""); }
-                            columnNumber++;
-                        }
+                            catch { rowExcel.CreateCell(k).SetCellValue(""); }
                     }
-
-                }
-
             }
-
-
 
             // Column headers
             var headerRow = sheet1.CreateRow(0);
             int j = 0;
             foreach (DataGridViewColumn column in dgv.Columns)
-            {
                 if (param != null)
                 {
                     var col = param.Where(p => p.Name == column.Name).SingleOrDefault();
@@ -250,16 +242,83 @@ namespace Odin.Global_Classes
                     }
                 }
 
-            }
-
-
             //Write the stream data of workbook to the root directory
             FileStream file = new FileStream(fileName, FileMode.Create);
             hssfworkbook.Write(file);
             file.Close();
-
-
         }
+
+        public static Dictionary<Color, short> typeMap = new Dictionary<Color, short>
+        {
+            [Color.White] = 9 ,
+            [Color.LightGray] = 22,
+            [Color.Magenta] = 14,
+            [Color.WhiteSmoke] = 22,
+            [Color.Yellow] = 13,
+            [Color.Black] = 8 ,
+            [Color.Blue] = 12,
+            [Color.Red] = 10,
+            [Color.Lime] = 34,
+            [Color.Transparent] = 9 ,
+            [Color.MediumSeaGreen] = 57,
+            [Color.CornflowerBlue] = 48,
+            [Color.SkyBlue] = 40,
+            [Color.RoyalBlue] = 30,
+            [Color.LightSkyBlue] = 35,
+            [Color.DimGray] = 23,
+            [Color.LightSteelBlue] = 27,
+            [Color.Empty] = 9 ,
+            [Color.LawnGreen] = 11,
+            [Color.Green] = 17,
+            [Color.Lavender] = 31,
+            [Color.MediumBlue] = 39,
+            [Color.AliceBlue] = 41,
+            [Color.Gainsboro] = 22,
+            [Color.Gold] = 51,
+            [Color.Maroon] = 37,
+            [Color.LightPink] = 45,
+            [Color.Plum] = 61,
+            [Color.Fuchsia] = 33,
+            [Color.DarkOrange] = 53,
+            [Color.DarkSlateGray] = 58,
+            [Color.PapayaWhip] = 47,
+            [Color.OliveDrab] = 50,
+            [Color.Gray] = 63,
+            [Color.Silver] = 55,
+            [Color.Tomato] = 60,
+            [Color.GreenYellow] = 42,
+            [Color.LightCoral] = 29,
+            [Color.Bisque] = 47,
+            [Color.Azure] = 48,
+            [Color.SandyBrown] = 43,
+            [Color.Khaki] = 19,
+            [Color.LightSalmon] = 29,
+            [Color.NavajoWhite] = 26,
+            [Color.Peru] = 52,
+            [Color.IndianRed] = 29,
+            [Color.Linen] = 26,
+            [Color.Firebrick] = 37,
+            [Color.Pink] = 45,
+            [Color.DarkRed] = 37,
+            [Color.Snow] = 9 ,
+            [Color.DarkGray] = 63,
+            [Color.DarkSlateBlue] = 32,
+            [Color.DimGray] = 22,
+            [Color.DarkBlue] = 12,
+            [Color.LightYellow] = 43,
+            [Color.CornflowerBlue] = 30,
+            [Color.PowderBlue] = 24,
+            [Color.SlateBlue] = 54,
+            [Color.LightBlue] = 35,
+            [SystemColors.WindowText] = 8 ,
+            [SystemColors.Highlight] = 40,
+            [SystemColors.HighlightText] = 9 ,
+            [SystemColors.Window] = 9 ,
+            [Color.PaleTurquoise] = 15,
+            [Color.LightCyan] = 15,
+            [SystemColors.ControlText] = 8,
+            [SystemColors.AppWorkspace] = 9
+        };
 
         private void ImportQueryData(object sender, DoWorkEventArgs e)
         {

@@ -37,7 +37,7 @@ namespace Odin.CMB_Components.BatchStages
         {
             foreach (DataGridViewRow row in gv_List.Rows)
             {
-                row.Cells["cn_name"].Style.BackColor = Convert.ToInt32(row.Cells["cn_checked"].Value) == -1 ? Color.FromArgb(192, 255, 192) : Color.PapayaWhip;
+                row.Cells["cn_name"].Style.BackColor = Convert.ToInt32(row.Cells["cn_checked"].Value) == -1 ? Color.LightGray : Color.PapayaWhip;
             }
         }
 

@@ -50,13 +50,11 @@ namespace Odin.CMB_Components.CustCodes
             if (result == DialogResult.OK)
             {
                 _showingModal = false;
-                int _res = Bll.AddCustCode(frm.CustCode, frm.Description);
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddCustCode", frm.CustCode, frm.Description));
                 FillData(frm.CustCode);
             }
             if (result == DialogResult.Cancel)
-            {
                 _showingModal = false;
-            }
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -80,13 +78,11 @@ namespace Odin.CMB_Components.CustCodes
                 if (result == DialogResult.OK)
                 {
                     _showingModal = false;
-                    Bll.EditCustCode(frm.Id, frm.CustCode, frm.Description);
+                    Helper.getSP("sp_EditCustCode", frm.Id, frm.CustCode, frm.Description);
                     FillData(frm.CustCode);
                 }
                 if (result == DialogResult.Cancel)
-                {
                     _showingModal = false;
-                }
             }
         }
 
@@ -99,14 +95,14 @@ namespace Odin.CMB_Components.CustCodes
 
             if (glob_Class.DeleteConfirm() == true)
             {
-                Bll.DeleteCustCode(_id);
+                Helper.getSP("sp_DeleteCustCode", _id);
                 FillData(string.Empty);
             }
         }
 
         public void FillData(string Beg)
         {
-            var data = CMB_BLL.getCustCodes(Beg);
+            var data = (System.Data.DataTable)Helper.getSP("sp_CustCodesSelectLike", Beg);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;

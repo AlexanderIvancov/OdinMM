@@ -53,10 +53,10 @@ namespace Odin.CMB_Components.Batches
             gv_List.ThreadSafeCall(delegate
             {
                 DataTable data = IsGroup == -1
-                    ? ActiveOnly == 0 ? CMB_BLL.getBatchesGroups(Beg) : CMB_BLL.getBatchesGroupsActiveOnly(Beg)
+                    ? ActiveOnly == 0 ? (DataTable)Helper.getSP("sp_BatchGroupsSelectLike", Beg) : (DataTable)Helper.getSP("sp_BatchGroupsSelectLikeActiveOnly", Beg)
                     : IsProject == 0
-                        ? ActiveOnly == 0 ? CMB_BLL.getBatches(Beg) : CMB_BLL.getBatchesActiveOnly(Beg)
-                        : ActiveOnly == 0 ? CMB_BLL.getBatchesProject(Beg) : CMB_BLL.getBatchesProjectActiveOnly(Beg);
+                        ? ActiveOnly == 0 ? (DataTable)Helper.getSP("sp_BatchSelectLike", Beg) : (DataTable)Helper.getSP("sp_BatchSelectLikeActiveOnly", Beg)
+                        : ActiveOnly == 0 ? (DataTable)Helper.getSP("sp_BatchProjectSelectLike", Beg) : (DataTable)Helper.getSP("sp_BatchProjectSelectLikeActiveOnly", Beg);
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;

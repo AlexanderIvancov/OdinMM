@@ -359,7 +359,7 @@
             this.txt_QtyAfter.Location = new System.Drawing.Point(470, 16);
             this.txt_QtyAfter.Name = "txt_QtyAfter";
             this.txt_QtyAfter.Size = new System.Drawing.Size(88, 21);
-            this.txt_QtyAfter.StateActive.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txt_QtyAfter.StateActive.Back.Color1 = System.Drawing.Color.LemonChiffon;
             this.txt_QtyAfter.StateActive.Content.Color1 = System.Drawing.Color.Blue;
             this.txt_QtyAfter.StateActive.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txt_QtyAfter.StateActive.Content.Padding = new System.Windows.Forms.Padding(3);
@@ -381,7 +381,7 @@
             this.txt_QtyPlaced.Location = new System.Drawing.Point(330, 16);
             this.txt_QtyPlaced.Name = "txt_QtyPlaced";
             this.txt_QtyPlaced.Size = new System.Drawing.Size(85, 21);
-            this.txt_QtyPlaced.StateActive.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txt_QtyPlaced.StateActive.Back.Color1 = System.Drawing.Color.LemonChiffon;
             this.txt_QtyPlaced.StateActive.Content.Color1 = System.Drawing.Color.Green;
             this.txt_QtyPlaced.StateActive.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txt_QtyPlaced.StateActive.Content.Padding = new System.Windows.Forms.Padding(3);
@@ -403,7 +403,7 @@
             this.txt_QtyBefore.Location = new System.Drawing.Point(182, 16);
             this.txt_QtyBefore.Name = "txt_QtyBefore";
             this.txt_QtyBefore.Size = new System.Drawing.Size(78, 21);
-            this.txt_QtyBefore.StateActive.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txt_QtyBefore.StateActive.Back.Color1 = System.Drawing.Color.LemonChiffon;
             this.txt_QtyBefore.StateActive.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txt_QtyBefore.StateActive.Content.Padding = new System.Windows.Forms.Padding(3);
             this.txt_QtyBefore.TabIndex = 266;

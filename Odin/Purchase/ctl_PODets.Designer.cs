@@ -287,7 +287,7 @@
             this.txt_QtyMissed.Name = "txt_QtyMissed";
             this.txt_QtyMissed.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Silver;
             this.txt_QtyMissed.Size = new System.Drawing.Size(93, 21);
-            this.txt_QtyMissed.StateActive.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.txt_QtyMissed.StateActive.Back.Color1 = System.Drawing.Color.Lavender;
             this.txt_QtyMissed.StateActive.Content.Color1 = System.Drawing.Color.Red;
             this.txt_QtyMissed.StateActive.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txt_QtyMissed.StateActive.Content.Padding = new System.Windows.Forms.Padding(3);
@@ -397,7 +397,7 @@
             this.gradientPanel23.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.gradientPanel23.BackgroundGradientMode = Owf.Controls.GradientPanel2.PanelGradientMode.BackwardDiagonal;
             this.gradientPanel23.borderColor = System.Drawing.Color.Transparent;
-            this.gradientPanel23.EndColor = System.Drawing.Color.FromArgb(((int)(((byte)(115)))), ((int)(((byte)(155)))), ((int)(((byte)(221)))));
+            this.gradientPanel23.EndColor = System.Drawing.Color.CornflowerBlue;
             this.gradientPanel23.Location = new System.Drawing.Point(14, 420);
             this.gradientPanel23.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.gradientPanel23.Name = "gradientPanel23";
@@ -464,7 +464,7 @@
             this.txt_NeedsInPO.Name = "txt_NeedsInPO";
             this.txt_NeedsInPO.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Silver;
             this.txt_NeedsInPO.Size = new System.Drawing.Size(93, 21);
-            this.txt_NeedsInPO.StateActive.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.txt_NeedsInPO.StateActive.Back.Color1 = System.Drawing.Color.Lavender;
             this.txt_NeedsInPO.StateActive.Content.Color1 = System.Drawing.Color.Blue;
             this.txt_NeedsInPO.StateActive.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txt_NeedsInPO.StateActive.Content.Padding = new System.Windows.Forms.Padding(3);
@@ -486,7 +486,7 @@
             this.txt_MPQ.Location = new System.Drawing.Point(225, 117);
             this.txt_MPQ.Name = "txt_MPQ";
             this.txt_MPQ.Size = new System.Drawing.Size(73, 23);
-            this.txt_MPQ.StateActive.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.txt_MPQ.StateActive.Back.Color1 = System.Drawing.Color.Lavender;
             this.txt_MPQ.TabIndex = 236;
             this.txt_MPQ.Text = "0";
             // 
@@ -505,8 +505,8 @@
             this.txt_MOQ.Location = new System.Drawing.Point(114, 117);
             this.txt_MOQ.Name = "txt_MOQ";
             this.txt_MOQ.Size = new System.Drawing.Size(63, 23);
-            this.txt_MOQ.StateActive.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.txt_MOQ.StateNormal.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.txt_MOQ.StateActive.Back.Color1 = System.Drawing.Color.Lavender;
+            this.txt_MOQ.StateNormal.Back.Color1 = System.Drawing.Color.Lavender;
             this.txt_MOQ.TabIndex = 234;
             this.txt_MOQ.Text = "0";
             // 
@@ -642,7 +642,7 @@
             this.txt_UnFNPrice.Location = new System.Drawing.Point(548, 182);
             this.txt_UnFNPrice.Name = "txt_UnFNPrice";
             this.txt_UnFNPrice.Size = new System.Drawing.Size(53, 21);
-            this.txt_UnFNPrice.StateActive.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txt_UnFNPrice.StateActive.Back.Color1 = System.Drawing.Color.LightGray;
             this.txt_UnFNPrice.StateActive.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txt_UnFNPrice.StateActive.Content.Padding = new System.Windows.Forms.Padding(3);
             this.txt_UnFNPrice.TabIndex = 222;

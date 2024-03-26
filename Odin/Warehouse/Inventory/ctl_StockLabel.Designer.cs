@@ -628,7 +628,7 @@
             this.txt_Label.Location = new System.Drawing.Point(63, 14);
             this.txt_Label.Name = "txt_Label";
             this.txt_Label.Size = new System.Drawing.Size(91, 21);
-            this.txt_Label.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txt_Label.StateCommon.Back.Color1 = System.Drawing.Color.LightGray;
             this.txt_Label.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txt_Label.StateCommon.Content.Padding = new System.Windows.Forms.Padding(3);
             this.txt_Label.TabIndex = 0;

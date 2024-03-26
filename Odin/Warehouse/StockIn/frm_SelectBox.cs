@@ -73,7 +73,7 @@ namespace Odin.Warehouse.StockIn
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
                 if (Convert.ToInt32(row.Cells["cn_closed"].Value) == -1)
-                    row.DefaultCellStyle.BackColor = Color.FromArgb(192, 255, 192);
+                    row.DefaultCellStyle.BackColor = Color.LightGray;
                 //if (Convert.ToInt32(row.Cells["cn_bdid"].Value) == 0
                 //    || ((row.Cells["cn_batch"].Value.ToString().Trim() != ""
                 //    || string.IsNullOrEmpty(row.Cells["cn_batch"].Value.ToString().Trim()) != true)
@@ -82,7 +82,7 @@ namespace Odin.Warehouse.StockIn
                 //        cell.Style.BackColor = Color.LightCoral;
                 //else
                 //    foreach (DataGridViewCell cell in row.Cells)
-                //        cell.Style.BackColor = Color.FromArgb(192, 255, 192);
+                //        cell.Style.BackColor = Color.LightGray;
 
             }
 

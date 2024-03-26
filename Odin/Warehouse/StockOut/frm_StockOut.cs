@@ -188,7 +188,7 @@ namespace Odin.Warehouse.StockOut
 
                 foreach (DataGridViewCell cell in node.Cells)
                 {
-                    cell.Style.BackColor = Color.Azure;//Color.FromArgb(192, 255, 192);
+                    cell.Style.BackColor = Color.Azure;//Color.LightGray;
                 }
 
                 node.ImageIndex = 1;
@@ -226,7 +226,7 @@ namespace Odin.Warehouse.StockOut
                     //{
                     //    foreach (DataGridViewCell cell in row.Cells)
                     //    {
-                    //        cell.Style.BackColor = Color.FromArgb(192, 255, 192);
+                    //        cell.Style.BackColor = Color.LightGray;
                     //    }
                     //}
                 //}
@@ -257,7 +257,7 @@ namespace Odin.Warehouse.StockOut
             {//Color
                 foreach (DataGridViewCell cell in node.Cells)
                 {
-                    cell.Style.BackColor = Color.FromArgb(192, 255, 192);
+                    cell.Style.BackColor = Color.LightGray;
                 }
             }
             else if (Convert.ToInt32(dr["usage"]) == 0)
@@ -272,7 +272,7 @@ namespace Odin.Warehouse.StockOut
             {
                 foreach (DataGridViewCell cell in node.Cells)
                 {
-                    cell.Style.BackColor = Color.PapayaWhip;//Color.FromArgb(255, 224, 192);
+                    cell.Style.BackColor = Color.PapayaWhip;//Color.Bisque;
                 }
             }
             else
@@ -629,11 +629,11 @@ namespace Odin.Warehouse.StockOut
 
             if (_Total > Convert.ToDouble(node.Cells["cn_LeftInBatch"].Value))
             {
-                node.Cells["cn_QtyToGive"].Style.BackColor = Color.FromArgb(255, 224, 192);
+                node.Cells["cn_QtyToGive"].Style.BackColor = Color.Bisque;
             }
             else
             {
-                node.Cells["cn_QtyToGive"].Style.BackColor = Color.Azure;//Color.FromArgb(192, 255, 192);
+                node.Cells["cn_QtyToGive"].Style.BackColor = Color.Azure;//Color.LightGray;
             }
 
             //If request

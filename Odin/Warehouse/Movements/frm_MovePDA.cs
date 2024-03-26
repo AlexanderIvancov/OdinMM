@@ -140,7 +140,7 @@ namespace Odin.Warehouse.Movements
                             cell.Style.BackColor = Color.LightCoral;
                     else
                         foreach (DataGridViewCell cell in row.Cells)
-                            cell.Style.BackColor = Color.FromArgb(192, 255, 192);
+                            cell.Style.BackColor = Color.LightGray;
                 }
                 else
                 {
@@ -155,7 +155,7 @@ namespace Odin.Warehouse.Movements
                             cell.Style.BackColor = Color.LightCoral;
                     else
                         foreach (DataGridViewCell cell in row.Cells)
-                            cell.Style.BackColor = Color.FromArgb(192, 255, 192);
+                            cell.Style.BackColor = Color.LightGray;
                 }
             }
 

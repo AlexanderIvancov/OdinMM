@@ -8,7 +8,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
-
 namespace Odin.CMB_Components.Types
 {
     public partial class frm_TypesTree : Form
@@ -33,38 +32,16 @@ namespace Odin.CMB_Components.Types
         }
 
         bool _showingModal = false;
-
         public bool ShowingModal
         {
             get { return _showingModal; }
             set { _showingModal = value; }
         }
-
         private bool isSelectedNode;
-
-        public string SelectedNodeText
-        {
-            get;
-            set;
-        }
-
-        public int NodeId
-        {
-            get;
-            set;
-        }
-
-        public string SelectedNodePath
-        {
-            get;
-            set;
-        }
-
-        public TreeNode SelectedNode
-        {
-            get;
-            set;
-        }
+        public string SelectedNodeText { get; set; }
+        public int NodeId { get; set; }
+        public string SelectedNodePath { get; set; }
+        public TreeNode SelectedNode { get; set; }
 
         public void Load_tree()
         {
@@ -129,7 +106,6 @@ namespace Odin.CMB_Components.Types
             return 0;
         }
 
-
         private KryptonTreeNode CreateNewItem(string _nodetext, int _tag)
         {
             KryptonTreeNode item = new KryptonTreeNode();
@@ -138,42 +114,25 @@ namespace Odin.CMB_Components.Types
             return item;
         }
         int _TypeId = 0;
-
-        public string Description
-        { get; set; }
-        public string TypeLat
-        { get; set; }
-        public int CustCodeId
-        { get; set; }
-
+        public string Description        { get; set; }
+        public string TypeLat        { get; set; }
+        public int CustCodeId        { get; set; }
         public int TypeId
         {
             get { return _TypeId; }
             set
             {
                 _TypeId = value;
-                SqlConnection conn = new SqlConnection(sConnStr);
-                conn.Open();
 
-                DataSet ds = new DataSet();
-
-                SqlDataAdapter adapter =
-                    new SqlDataAdapter("SELECT top 1 * FROM BAS_Type WHERE id = " + _TypeId.ToString(), conn);
-                adapter.Fill(ds);
-
-                conn.Close();
-
-                DataTable dt = ds.Tables[0];
+                DataTable dt = Helper.QueryDT("SELECT top 1 * FROM BAS_Type WHERE id = " + _TypeId.ToString());
 
                 if (dt.Rows.Count > 0)
-                {
                     foreach (DataRow dr in dt.Rows)
                     {
                         Description = dr["description"].ToString();
                         TypeLat = dr["namelat"].ToString();
                         CustCodeId = Convert.ToInt32(dr["custcodeid"]);
                     }
-                }
                 else
                 {
                     _TypeId = 0;
@@ -183,8 +142,6 @@ namespace Odin.CMB_Components.Types
         }
 
         #region Controls
-
-
 
         private void btn_AddNew_Click(object sender, EventArgs e)
         {
@@ -208,15 +165,12 @@ namespace Odin.CMB_Components.Types
             if (result == DialogResult.OK)
             {
                 _showingModal = false;
-                int _res = Bll.AddType(frm.Type, frm.Description, frm.ParentId, frm.TypeLat, frm.CustCodeId);
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddArtType", frm.Type, frm.Description, frm.ParentId, frm.TypeLat, frm.CustCodeId));
                 Load_tree();
                 cmb_TypeOne.TypeId = _res;
-
             }
             if (result == DialogResult.Cancel)
-            {
                 _showingModal = false;
-            }
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -250,15 +204,12 @@ namespace Odin.CMB_Components.Types
                 if (result == DialogResult.OK)
                 {
                     _showingModal = false;
-                    int _res = Bll.EditType(frm.Id, frm.Type, frm.Description, frm.ParentId, frm.TypeLat, frm.CustCodeId);
+                    int _res = Convert.ToInt32(Helper.getSP("sp_AddArtType", frm.Id, frm.Type, frm.Description, frm.ParentId, frm.TypeLat, frm.CustCodeId));
                     Load_tree();
                     cmb_TypeOne.TypeId = _res;
-
                 }
                 if (result == DialogResult.Cancel)
-                {
                     _showingModal = false;
-                }
             }
             catch { }
         }
@@ -267,11 +218,10 @@ namespace Odin.CMB_Components.Types
         {
             try
             {
-               
                 if (glob_Class.DeleteConfirm() == true)
                 {
                     //MessageBox.Show(TypeId.ToString());
-                    Bll.DeleteType(TypeId);
+                    Helper.getSP("sp_DeleteType", TypeId);
                     Load_tree();
                 }
             }
@@ -296,15 +246,10 @@ namespace Odin.CMB_Components.Types
                 cmb_TypeOne.ValueChanged(tv_Types);
             }
             else
-            {
                 ///GroupId = 0;
-
-            }
 
             isSelectedNode = true;
         }
-
-
 
         #endregion
 
@@ -334,24 +279,14 @@ namespace Odin.CMB_Components.Types
         private void tv_Types_AfterCheck(object sender, TreeViewEventArgs e)
         {
             if (e.Node.Checked == true)
-            {
                 foreach (KryptonTreeNode node in e.Node.Nodes)
-                {
                     node.Checked = true;
-                }
-            }
             else
-            {
                 foreach (KryptonTreeNode node in e.Node.Nodes)
-                {
                     node.Checked = false;
-                }
-            }
         }
 
-        private void frm_TypesTree_FormClosing(object sender, FormClosingEventArgs e)
-        {
-        }
+        private void frm_TypesTree_FormClosing(object sender, FormClosingEventArgs e) { }
 
         private void frm_TypesTree_FormClosed(object sender, FormClosedEventArgs e)
         {

@@ -9,7 +9,7 @@ namespace Odin.CustomControls
         #region Constants
 
         private const int DEFAULT_INTERVAL = 60;
-        private readonly Color DEFAULT_TICK_COLOR = Color.FromArgb(58, 58, 58);
+        private readonly Color DEFAULT_TICK_COLOR = Color.DarkSlateGray;
         private const int DEFAULT_TICK_WIDTH = 2;
         private const int MINIMUM_INNER_RADIUS = 4;
         private const int MINIMUM_OUTER_RADIUS = 8;

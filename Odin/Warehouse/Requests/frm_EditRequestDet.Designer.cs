@@ -230,7 +230,7 @@
             this.txt_QtyOut.Location = new System.Drawing.Point(307, 154);
             this.txt_QtyOut.Name = "txt_QtyOut";
             this.txt_QtyOut.Size = new System.Drawing.Size(65, 23);
-            this.txt_QtyOut.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.txt_QtyOut.StateCommon.Back.Color1 = System.Drawing.Color.Lavender;
             this.txt_QtyOut.TabIndex = 11;
             this.txt_QtyOut.Text = "0";
             // 

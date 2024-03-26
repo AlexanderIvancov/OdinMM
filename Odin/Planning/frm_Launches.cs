@@ -66,7 +66,7 @@ namespace Odin.Planning
             //{
             //    if (Convert.ToInt32(row.Cells["cn_complected"].Value) != 0)
             //        foreach (DataGridViewCell cell in row.Cells)
-            //            cell.Style.BackColor = Color.FromArgb(192, 255, 192);
+            //            cell.Style.BackColor = Color.LightGray;
             //    if (Convert.ToInt32(row.Cells["chk_isactive"].Value) == 0)
             //        foreach (DataGridViewCell cell in row.Cells)
             //            cell.Style.BackColor = Color.Gainsboro;

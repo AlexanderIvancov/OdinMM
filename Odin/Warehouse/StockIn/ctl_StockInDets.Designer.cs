@@ -180,7 +180,7 @@
             // 
             this.tv_Rests.AllowUserToAddRows = false;
             this.tv_Rests.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(244)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.AliceBlue;
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
             this.tv_Rests.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.tv_Rests.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
@@ -227,7 +227,7 @@
             this.txt_QtyAfter.Location = new System.Drawing.Point(452, 8);
             this.txt_QtyAfter.Name = "txt_QtyAfter";
             this.txt_QtyAfter.Size = new System.Drawing.Size(88, 21);
-            this.txt_QtyAfter.StateActive.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txt_QtyAfter.StateActive.Back.Color1 = System.Drawing.Color.LemonChiffon;
             this.txt_QtyAfter.StateActive.Content.Color1 = System.Drawing.Color.Blue;
             this.txt_QtyAfter.StateActive.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txt_QtyAfter.StateActive.Content.Padding = new System.Windows.Forms.Padding(3);
@@ -249,7 +249,7 @@
             this.txt_QtyPlaced.Location = new System.Drawing.Point(312, 8);
             this.txt_QtyPlaced.Name = "txt_QtyPlaced";
             this.txt_QtyPlaced.Size = new System.Drawing.Size(85, 21);
-            this.txt_QtyPlaced.StateActive.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txt_QtyPlaced.StateActive.Back.Color1 = System.Drawing.Color.LemonChiffon;
             this.txt_QtyPlaced.StateActive.Content.Color1 = System.Drawing.Color.Green;
             this.txt_QtyPlaced.StateActive.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txt_QtyPlaced.StateActive.Content.Padding = new System.Windows.Forms.Padding(3);
@@ -271,7 +271,7 @@
             this.txt_QtyBefore.Location = new System.Drawing.Point(164, 8);
             this.txt_QtyBefore.Name = "txt_QtyBefore";
             this.txt_QtyBefore.Size = new System.Drawing.Size(78, 21);
-            this.txt_QtyBefore.StateActive.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txt_QtyBefore.StateActive.Back.Color1 = System.Drawing.Color.LemonChiffon;
             this.txt_QtyBefore.StateActive.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txt_QtyBefore.StateActive.Content.Padding = new System.Windows.Forms.Padding(3);
             this.txt_QtyBefore.TabIndex = 260;
@@ -811,7 +811,7 @@
             this.txt_TotalVAT.Location = new System.Drawing.Point(257, 198);
             this.txt_TotalVAT.Name = "txt_TotalVAT";
             this.txt_TotalVAT.Size = new System.Drawing.Size(61, 23);
-            this.txt_TotalVAT.StateActive.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txt_TotalVAT.StateActive.Back.Color1 = System.Drawing.Color.LemonChiffon;
             this.txt_TotalVAT.TabIndex = 15;
             this.txt_TotalVAT.Text = "0";
             // 
@@ -830,7 +830,7 @@
             this.txt_TotalWVAT.Location = new System.Drawing.Point(412, 198);
             this.txt_TotalWVAT.Name = "txt_TotalWVAT";
             this.txt_TotalWVAT.Size = new System.Drawing.Size(61, 23);
-            this.txt_TotalWVAT.StateActive.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txt_TotalWVAT.StateActive.Back.Color1 = System.Drawing.Color.LemonChiffon;
             this.txt_TotalWVAT.TabIndex = 16;
             this.txt_TotalWVAT.Text = "0";
             // 
@@ -849,7 +849,7 @@
             this.txt_Total.Location = new System.Drawing.Point(120, 198);
             this.txt_Total.Name = "txt_Total";
             this.txt_Total.Size = new System.Drawing.Size(63, 23);
-            this.txt_Total.StateActive.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txt_Total.StateActive.Back.Color1 = System.Drawing.Color.LemonChiffon;
             this.txt_Total.TabIndex = 14;
             this.txt_Total.Text = "0";
             // 
@@ -932,7 +932,7 @@
             this.txt_UnPriceInOrder.Location = new System.Drawing.Point(331, 120);
             this.txt_UnPriceInOrder.Name = "txt_UnPriceInOrder";
             this.txt_UnPriceInOrder.Size = new System.Drawing.Size(63, 23);
-            this.txt_UnPriceInOrder.StateActive.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txt_UnPriceInOrder.StateActive.Back.Color1 = System.Drawing.Color.LemonChiffon;
             this.txt_UnPriceInOrder.TabIndex = 5;
             this.txt_UnPriceInOrder.Text = "0";
             // 
@@ -952,7 +952,7 @@
             this.txt_QtyInOrder.Location = new System.Drawing.Point(120, 120);
             this.txt_QtyInOrder.Name = "txt_QtyInOrder";
             this.txt_QtyInOrder.Size = new System.Drawing.Size(63, 23);
-            this.txt_QtyInOrder.StateActive.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txt_QtyInOrder.StateActive.Back.Color1 = System.Drawing.Color.LemonChiffon;
             this.txt_QtyInOrder.TabIndex = 4;
             this.txt_QtyInOrder.Text = "0";
             // 
@@ -992,7 +992,7 @@
             this.txt_UnitPrice.Location = new System.Drawing.Point(120, 172);
             this.txt_UnitPrice.Name = "txt_UnitPrice";
             this.txt_UnitPrice.Size = new System.Drawing.Size(63, 21);
-            this.txt_UnitPrice.StateActive.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txt_UnitPrice.StateActive.Back.Color1 = System.Drawing.Color.LightGray;
             this.txt_UnitPrice.StateActive.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txt_UnitPrice.StateActive.Content.Padding = new System.Windows.Forms.Padding(3);
             this.txt_UnitPrice.TabIndex = 10;
@@ -1157,13 +1157,13 @@
             // kryptonPalette1
             // 
             this.kryptonPalette1.BasePaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
-            this.kryptonPalette1.GridStyles.GridCustom1.StateCommon.Background.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.kryptonPalette1.GridStyles.GridCustom1.StateCommon.Background.Color1 = System.Drawing.Color.LightGray;
             this.kryptonPalette1.GridStyles.GridCustom1.StateCommon.BackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.GridBackgroundList;
-            this.kryptonPalette1.GridStyles.GridCustom1.StateCommon.HeaderColumn.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.kryptonPalette1.GridStyles.GridCustom1.StateCommon.HeaderColumn.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.kryptonPalette1.GridStyles.GridCustom1.StateCommon.HeaderRow.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.kryptonPalette1.GridStyles.GridCustom1.StateCommon.HeaderRow.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.kryptonPalette1.PanelStyles.PanelCustom1.StateCommon.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.kryptonPalette1.GridStyles.GridCustom1.StateCommon.HeaderColumn.Back.Color1 = System.Drawing.Color.LightGreen;
+            this.kryptonPalette1.GridStyles.GridCustom1.StateCommon.HeaderColumn.Back.Color2 = System.Drawing.Color.LightGray;
+            this.kryptonPalette1.GridStyles.GridCustom1.StateCommon.HeaderRow.Back.Color1 = System.Drawing.Color.LightGreen;
+            this.kryptonPalette1.GridStyles.GridCustom1.StateCommon.HeaderRow.Back.Color2 = System.Drawing.Color.LightGray;
+            this.kryptonPalette1.PanelStyles.PanelCustom1.StateCommon.Color1 = System.Drawing.Color.LightGray;
             // 
             // txt_ManufBatch
             // 

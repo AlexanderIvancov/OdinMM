@@ -168,20 +168,20 @@ namespace Odin.Register.Articles
                 else if (Convert.ToInt32(row.Cells["cn_bomstate"].Value) == -1)
                 {
                     foreach (DataGridViewCell cell in row.Cells)
-                        cell.Style.BackColor = Color.GreenYellow;//Color.FromArgb(192, 255, 192);
+                        cell.Style.BackColor = Color.GreenYellow;//Color.LightGray;
                     if (Convert.ToString(row.Cells["cn_stencil"].Value) == "Not Required")
                         foreach (DataGridViewCell cell in row.Cells)
-                            cell.Style.BackColor = Color.FromArgb(121, 178, 32);
+                            cell.Style.BackColor = Color.OliveDrab;
                     if (Convert.ToString(row.Cells["cn_stencil"].Value) == "")
                         foreach (DataGridViewCell cell in row.Cells)
-                            cell.Style.BackColor = Color.FromArgb(135, 206, 250);
+                            cell.Style.BackColor = Color.LightSkyBlue;
                 }
                 else
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Gold;
                 if (Convert.ToString(row.Cells["cn_description"].Value) == "!!! Cancelled !!!")
                     foreach (DataGridViewCell cell in row.Cells)
-                        cell.Style.BackColor = Color.FromArgb(130, 137, 142);
+                        cell.Style.BackColor = Color.Gray;
                 if (Convert.ToInt32(row.Cells["cn_isactive"].Value) == 0)
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Silver;
@@ -200,7 +200,7 @@ namespace Odin.Register.Articles
         //        else if (row.Cells["cn_typechange"].Value.ToString() == "inserted")
         //        {
         //            foreach (DataGridViewCell cell in row.Cells)
-        //                cell.Style.BackColor = Color.FromArgb(192, 255, 192);
+        //                cell.Style.BackColor = Color.LightGray;
         //        }
         //        else
         //        {

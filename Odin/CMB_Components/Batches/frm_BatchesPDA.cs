@@ -2,6 +2,7 @@
 using Odin.CMB_Components.BLL;
 using Odin.Global_Classes;
 using System;
+using System.Data;
 using System.Windows.Forms;
 
 namespace Odin.CMB_Components.Batches
@@ -44,7 +45,7 @@ namespace Odin.CMB_Components.Batches
 
         public void FillData(string Beg)
         {
-            var data = CMB_BLL.getBatches(Beg);
+            var data = (DataTable)Helper.getSP("sp_BatchSelectLike", Beg);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;

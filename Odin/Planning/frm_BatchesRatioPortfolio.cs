@@ -125,11 +125,11 @@ namespace Odin.Planning
                 //    || Convert.ToDouble(row.Cells["cn_IPA"].Value) > 0
                 //    || Convert.ToDouble(row.Cells["cn_FCS"].Value) > 0)
                 //    foreach (DataGridViewCell cell in row.Cells)
-                //        cell.Style.BackColor = Color.FromArgb(192, 255, 192);
+                //        cell.Style.BackColor = Color.LightGray;
                 //if (Convert.ToDouble(row.Cells["cn_FCS"].Value) >= Convert.ToDouble(row.Cells["cn_qty"].Value)
                 //    || Convert.ToInt32(row.Cells["chk_isactive"].Value) == 0)
                 //    foreach (DataGridViewCell cell in row.Cells)
-                //        cell.Style.BackColor = Color.Gainsboro;//Color.FromArgb(192, 255, 192);
+                //        cell.Style.BackColor = Color.Gainsboro;//Color.LightGray;
             }
         }
 

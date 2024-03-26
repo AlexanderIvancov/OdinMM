@@ -8,7 +8,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
-
 namespace Odin.CMB_Components.Types
 {
     public partial class frm_Types : KryptonForm
@@ -94,30 +93,24 @@ namespace Odin.CMB_Components.Types
                 if (result == DialogResult.OK)
                 {
                     _showingModal = false;
-                    int _res = Bll.EditType(frm.Id, frm.Type, frm.Description, frm.ParentId, frm.TypeLat, frm.CustCodeId);
+                    int _res = Convert.ToInt32(Helper.getSP("sp_EditType", frm.Id, frm.Type, frm.Description, frm.ParentId, frm.TypeLat, frm.CustCodeId));
                     cmb_TypeOne.TypeId = _id;
                     FillData(frm.Type);
                 }
                 if (result == DialogResult.Cancel)
-                {
                     _showingModal = false;
-                }
             }
         }
 
-        private void btn_Delete_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void btn_Delete_Click(object sender, EventArgs e) { }
 
         public void FillData(string Beg)
         {
-            var data = CMB_BLL.getTypes(Beg);
+            var data = (DataTable)Helper.getSP("sp_TypesSelectLike", Beg);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
             gv_List.DataSource = bs_List;
-
         }
 
         private void gv_List_SelectionChanged(object sender, EventArgs e)

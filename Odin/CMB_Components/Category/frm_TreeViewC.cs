@@ -220,15 +220,12 @@ namespace Odin.CMB_Components.Category
             if (result == DialogResult.OK)
             {
                 _showingModal = false;
-                int _res = Bll.AddCategory(frm.Category, frm.Description, frm.ParentId);
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddCategory", frm.Category, frm.Description, frm.ParentId));
                 Load_tree();
                 cmb_CategoryOne.CategoryId = _res;
-
             }
             if (result == DialogResult.Cancel)
-            {
                 _showingModal = false;
-            }
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -257,15 +254,13 @@ namespace Odin.CMB_Components.Category
             if (result == DialogResult.OK)
             {
                 _showingModal = false;
-                int _res = Bll.EditCategory(frm.Id, frm.Category, frm.Description, frm.ParentId);
+                int _res = Convert.ToInt32(Helper.getSP("sp_EditCategory", frm.Id, frm.Category, frm.Description, frm.ParentId));
                 Load_tree();
                 cmb_CategoryOne.CategoryId = _res;
 
             }
             if (result == DialogResult.Cancel)
-            {
                 _showingModal = false;
-            }
         }
 
         private void btn_Delete_Click(object sender, EventArgs e)
@@ -275,7 +270,7 @@ namespace Odin.CMB_Components.Category
                 //tv_Depts.HideSelection = true;
                 if (glob_Class.DeleteConfirm() == true)
                 {
-                    Bll.DeleteCategory(CategoryId);
+                    Helper.getSP("sp_DeleteCategory", CategoryId);
                     Load_tree();
                 }
             }

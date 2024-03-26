@@ -804,7 +804,7 @@
             // 
             this.tv_BOM.AllowUserToAddRows = false;
             this.tv_BOM.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(244)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.AliceBlue;
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
             this.tv_BOM.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.tv_BOM.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;

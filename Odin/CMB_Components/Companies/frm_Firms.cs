@@ -40,7 +40,7 @@ namespace Odin.CMB_Components.Companies
 
         public void FillData(string Beg)
         {
-            var data = CMB_BLL.getFirms(Beg);
+            var data = (System.Data.DataTable)Helper.getSP("sp_CompaniesSelectLike", Beg);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;

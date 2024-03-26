@@ -10,7 +10,6 @@ namespace Odin.CMB_Components.Departments
 {
     public partial class frm_TreeViewD : Form
     {
-
         cmb_Department f;
         class_Global glob_Class = new class_Global();
         CMB_BLL Bll = new CMB_BLL();
@@ -31,77 +30,51 @@ namespace Odin.CMB_Components.Departments
         }
 
         bool _showingModal = false;
-
         public bool ShowingModal
         {
             get { return _showingModal; }
             set { _showingModal = value; }
         }
-
         private bool isSelectedNode = false;
-
         public string SelectedNodeText
         {
             get;
             set;
         }
-
         public int NodeId
         {
             get;
             set;
         }
-
         public string SelectedNodePath
         {
             get;
             set;
         }
-
         public TreeNode SelectedNode
         {
             get;
             set;
         }
-
         int _DeptId = 0;
-
-        public string Description
-        { get; set; }
-        public string RespPersonTN
-        { get; set; }
-
+        public string Description { get; set; }
+        public string RespPersonTN { get; set; }
         public int DeptId
         {
             get { return _DeptId; }
             set {
                 _DeptId = value;
-                SqlConnection conn = new SqlConnection(sConnStr);
-                conn.Open();
 
-                DataSet ds = new DataSet();
-
-                SqlDataAdapter adapter =
-                    new SqlDataAdapter("SELECT top 1 * FROM BAS_Departments WHERE id = " + _DeptId.ToString(), conn);
-                adapter.Fill(ds);
-
-                conn.Close();
-
-                DataTable dt = ds.Tables[0];
+                DataTable dt = Helper.QueryDT("SELECT top 1 * FROM BAS_Departments WHERE id = " + _DeptId.ToString());
 
                 if (dt.Rows.Count > 0)
-                {
                     foreach (DataRow dr in dt.Rows)
                     {
                         Description = dr["description"].ToString();
                         RespPersonTN = dr["resppersontn"].ToString();
                     }
-                }
                 else
-                {
                     _DeptId = 0;
-
-                }
             }
         }
 
@@ -126,15 +99,13 @@ namespace Odin.CMB_Components.Departments
             if (result == DialogResult.OK)
             {
                 _showingModal = false;
-                int _res = Bll.AddDepartment(frm.Department, frm.Description, frm.ParentId, frm.RespPerson);
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddDepartment", frm.Department, frm.Description, frm.ParentId, frm.RespPerson));
                 Load_tree();
                 cmb_DepartmentOne.DeptId = _res;
                 
             }
             if (result == DialogResult.Cancel)
-            {
                 _showingModal = false;
-            }
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -164,15 +135,13 @@ namespace Odin.CMB_Components.Departments
             if (result == DialogResult.OK)
             {
                 _showingModal = false;
-                int _res = Bll.EditDepartment(frm.Id, frm.Department, frm.Description, frm.ParentId, frm.RespPerson);
+                int _res = Convert.ToInt32(Helper.getSP("sp_EditDepartment", frm.Id, frm.Department, frm.Description, frm.ParentId, frm.RespPerson));
                 Load_tree();
                 cmb_DepartmentOne.DeptId = _res;
 
             }
             if (result == DialogResult.Cancel)
-            {
                 _showingModal = false;
-            }
         }
 
         private void btn_Delete_Click(object sender, EventArgs e)
@@ -183,7 +152,7 @@ namespace Odin.CMB_Components.Departments
                 //tv_Depts.HideSelection = true;
                 if (glob_Class.DeleteConfirm() == true)
                 {
-                    Bll.DeleteDepartment(DeptId);
+                    Helper.getSP("sp_DeleteDepartment", DeptId);
                     Load_tree();
                 }
             }
@@ -203,11 +172,7 @@ namespace Odin.CMB_Components.Departments
 
             }
             else
-            {
                 ///GroupId = 0;
-
-            }
-
             isSelectedNode = true;
         }
 
@@ -237,20 +202,15 @@ namespace Odin.CMB_Components.Departments
 
             tv_Depts.Nodes.Clear();
             foreach (System.Data.DataRow dr in data.Rows)
-            {
                 if (Convert.ToInt32(dr["parentid"]) == 0)
                 {
-
                     int value = Convert.ToInt32(dr["id"]);
                     tnParent = CreateNewItem(dr["department"].ToString(), Convert.ToInt32(dr["id"]));
                     tv_Depts.Nodes.Add(tnParent);
 
                     tnParent.Expand();
                     FillChild(tnParent, value);
-
                 }
-            }
-
         }
 
         public int FillChild(KryptonTreeNode parent, int _id)

@@ -37,7 +37,7 @@ namespace Odin.Planning
                             _colorcount++;
 
                         }
-                        row.DefaultCellStyle.BackColor = _colorcount % 2 == 0 ? Color.FromArgb(192, 255, 192) : Color.Azure;//Color.LightGreen : Color.LightPink;
+                        row.DefaultCellStyle.BackColor = _colorcount % 2 == 0 ? Color.LightGray : Color.Azure;//Color.LightGreen : Color.LightPink;
                     }
                 }
             }

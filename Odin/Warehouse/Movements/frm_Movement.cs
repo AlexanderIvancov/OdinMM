@@ -102,7 +102,7 @@ namespace Odin.Warehouse.Movements
                 {
                     foreach (DataGridViewCell cell in row.Cells)
                     {
-                        cell.Style.BackColor = Color.FromArgb(192, 255, 192);
+                        cell.Style.BackColor = Color.LightGray;
                     }
                 }
             }

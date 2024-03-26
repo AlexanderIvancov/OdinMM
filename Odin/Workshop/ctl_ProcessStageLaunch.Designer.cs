@@ -310,7 +310,7 @@
             // cn_finished
             // 
             this.cn_finished.DataPropertyName = "finished";
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.LightGray;
             this.cn_finished.DefaultCellStyle = dataGridViewCellStyle3;
             this.cn_finished.FillWeight = 70F;
             this.cn_finished.HeaderText = "Finished";
@@ -322,7 +322,7 @@
             // 
             this.cn_freezed.DataPropertyName = "freezed";
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.MediumBlue;
             this.cn_freezed.DefaultCellStyle = dataGridViewCellStyle4;
             this.cn_freezed.HeaderText = "Freezed";
             this.cn_freezed.Name = "cn_freezed";
