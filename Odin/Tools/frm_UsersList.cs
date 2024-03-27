@@ -275,7 +275,7 @@ namespace Odin.Tools
                     DialogResult result = frm.ShowDialog();
 
                     if (result == DialogResult.OK)
-                        Bllc.EncryptMailPassword(_id, frm.Password);
+                        Helper.ExecuteQuery($@"update BAS_Users set mailpwd = EncryptByPassPhrase(name + surname + userlogin, {frm.Password}, 1, CONVERT(varbinary, id)) where id = {_id}");
                     //if (result == DialogResult.Cancel) { }
                 }
             }
