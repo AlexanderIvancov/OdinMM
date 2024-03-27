@@ -82,25 +82,6 @@ namespace Odin.Global_Classes
             }
         }
 
-        public static Dictionary<string, SqlDbType> typeMap = new Dictionary<string, SqlDbType>
-        {
-            ["char"] = SqlDbType.NVarChar,
-            ["nchar"] = SqlDbType.NVarChar,
-            ["nvarchar"] = SqlDbType.NVarChar,
-            ["varchar"] = SqlDbType.NVarChar,
-            ["int"] = SqlDbType.Int,
-            ["smallint"] = SqlDbType.SmallInt,
-            ["bigint"] = SqlDbType.BigInt,
-            ["varbinary"] = SqlDbType.VarBinary,
-            ["bit"] = SqlDbType.Bit,
-            ["datetime"] = SqlDbType.DateTime2,
-            ["decimal"] = SqlDbType.Decimal,
-            ["float"] = SqlDbType.Float,
-            ["tinyint"] = SqlDbType.TinyInt,
-            ["table type"] = SqlDbType.Structured,
-            ["datetime"] = SqlDbType.Time
-        };
-
         public static object getSP(string sp, params object[] parameters)
         {
             var sqlparams = new List<SqlParameter>();

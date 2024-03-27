@@ -414,7 +414,6 @@ namespace Odin.Purchase
                         ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
                         : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
-
             }
             catch { }
             SetCellsColor();
@@ -702,7 +701,6 @@ namespace Odin.Purchase
                     kryptonDockingManager1.AddDockspace("Control",
                                                DockingEdge.Left,
                                                new KryptonPage[] { page });
-
                 }
         }
 
