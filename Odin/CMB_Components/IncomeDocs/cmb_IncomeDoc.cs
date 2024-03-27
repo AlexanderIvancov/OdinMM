@@ -2,7 +2,6 @@
 using Odin.Global_Classes;
 using System;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -24,56 +23,39 @@ namespace Odin.CMB_Components.IncomeDocs
 
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
         PopupWindowHelper PopupHelper = null;
-
         int _IncomeDocId = 0;
         int _PrevId = 0;
         public bool _isedit = false;
-
         //StockIn_BLL SIBll = new StockIn_BLL();
         CMB_BLL Bll = new CMB_BLL();
-
         bool _EnableSearchId = false;
         string _IncomeDoc = "";
         int _supplierid = 0;
         int _curid = 0;
-
         public int SupplierId
         {
             get { return _supplierid; }
             set { _supplierid = value; }
         }
-
         public int CurId
         {
             get { return _curid; }
             set { _curid = value;}
         }
-
         public string IncomeDoc
         {
             get { return txt_IncomeDoc.Text; }
             set
             {
-
                 _IncomeDoc = value;
                 txt_IncomeDoc.Text = value;
-                DataSet ds = new DataSet();
-
-                SqlDataAdapter adapter =
-                    new SqlDataAdapter(
-                        "SELECT DISTINCT TOP 1 id FROM STO_StockInHead WHERE name = '" + _IncomeDoc.ToString() + "'", sConnStr);
-
-                adapter.Fill(ds);
-
-                DataTable dt = ds.Tables[0];
 
                 try
                 {
-                    IncomeDocId = Convert.ToInt32(dt.Rows[0]["id"].ToString());
+                    IncomeDocId = Convert.ToInt32(Helper.QueryDT("SELECT DISTINCT TOP 1 id FROM STO_StockInHead WHERE name = '" + _IncomeDoc.ToString() + "'").Rows[0]["id"].ToString());
                 }
                 catch
                 {
-
                     _IncomeDocId = 0;
                     return;
                 }
@@ -81,7 +63,6 @@ namespace Odin.CMB_Components.IncomeDocs
                 IncomeDocChanged?.Invoke(this);
             }
         }
-
         public int IncomeDocId
         {
             get
@@ -91,34 +72,19 @@ namespace Odin.CMB_Components.IncomeDocs
             }
             set
             {
-
-
                 _IncomeDocId = value;
 
                 if (_PrevId != _IncomeDocId)
                 {
-                    SqlConnection conn = new SqlConnection(sConnStr);
-                    conn.Open();
-
-                    DataSet ds = new DataSet();
-
-                    SqlDataAdapter adapter =
-                        new SqlDataAdapter("SELECT top 1 * FROM STO_StockInHead WHERE id = " + _IncomeDocId.ToString(), conn);
-                    adapter.Fill(ds);
-
-                    conn.Close();
-
-                    DataTable dt = ds.Tables[0];
+                    DataTable dt = Helper.QueryDT("SELECT top 1 * FROM STO_StockInHead WHERE id = " + _IncomeDocId.ToString());
 
                     if (dt.Rows.Count > 0)
-                    {
                         foreach (DataRow dr in dt.Rows)
                         {
                             txt_IncomeDoc.Text = dr["name"].ToString();
                             SupplierId = Convert.ToInt32(dr["supid"]);
                             CurId = Convert.ToInt32(dr["curid"]);
                         }
-                    }
                     else
                     {
                         txt_IncomeDoc.Text = string.Empty;
@@ -129,13 +95,10 @@ namespace Odin.CMB_Components.IncomeDocs
                     _PrevId = _IncomeDocId;
 
                     IncomeDocChanged?.Invoke(this);
-
                 }
             }
         }
-
         int _IncomeDocSavedId = 0;
-
         public int IncomeDocSavedId
         {
             get { return _IncomeDocSavedId; }
@@ -145,22 +108,15 @@ namespace Odin.CMB_Components.IncomeDocs
                 IncomeDocSaved?.Invoke(this);
             }
         }
+        public bool EnableSearchId
+        {
+            get { return _EnableSearchId; }
+            set { _EnableSearchId = value; }
+        }
 
         public void IncomeDocSendSave()
         {
             IncomeDocSaved?.Invoke(this);
-        }
-
-        public bool EnableSearchId
-        {
-            get
-            {
-                return _EnableSearchId;
-            }
-            set
-            {
-                _EnableSearchId = value;
-            }
         }
 
         private void btn_AdvView_Click(object sender, EventArgs e)
@@ -183,9 +139,7 @@ namespace Odin.CMB_Components.IncomeDocs
             PopupHelper.PopupCancel += delegate (object _sender, PopupCancelEventArgs _e)
             {
                 if (popup.ShowingModal)
-                {
                     _e.Cancel = true;
-                }
             };
 
             popup.FillData(IncomeDoc);
@@ -213,9 +167,9 @@ namespace Odin.CMB_Components.IncomeDocs
 
             if (result == DialogResult.OK)
             {
-                int _res = Bll.AddIncomeDocHead(frm.IncomeDoc, frm.Serie, frm.RegDate, frm.DocDate, frm.SupId, frm.Comments, frm.CurId, frm.CurRate, frm.SenderCountryId,
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddIncomeDocHead", frm.IncomeDoc, frm.Serie, frm.RegDate, frm.DocDate, frm.SupId, frm.Comments, frm.CurId, frm.CurRate, frm.SenderCountryId,
                                                 frm.ProducerCountryId, frm.Bargain, frm.TransportId, frm.IncotermsId, frm.AdditCost, frm.Advance, frm.AdvanceDate,
-                                                frm.PayDate, frm.NoReversePVN, frm.MediatedCost, frm.Check);
+                                                frm.PayDate, frm.NoReversePVN, frm.MediatedCost, frm.Check));
                 IncomeDocId = _res;
                 IncomeDocChanged?.Invoke(this);
             }
@@ -264,7 +218,7 @@ namespace Odin.CMB_Components.IncomeDocs
                 if (result == DialogResult.OK)
                 {
 
-                    Bll.EditIncomeDocHead(_id, frm.IncomeDoc, frm.Serie, frm.RegDate, frm.DocDate, frm.SupId, frm.Comments, frm.CurId, frm.CurRate, frm.SenderCountryId,
+                    Helper.getSP("sp_EditIncomeDocHead", _id, frm.IncomeDoc, frm.Serie, frm.RegDate, frm.DocDate, frm.SupId, frm.Comments, frm.CurId, frm.CurRate, frm.SenderCountryId,
                                                     frm.ProducerCountryId, frm.Bargain, frm.TransportId, frm.IncotermsId, frm.AdditCost, frm.Advance, frm.AdvanceDate,
                                                     frm.PayDate, frm.NoReversePVN, frm.MediatedCost, frm.Check);
                     if (Bll.IncomeDocRegDate != frm.RegDate)

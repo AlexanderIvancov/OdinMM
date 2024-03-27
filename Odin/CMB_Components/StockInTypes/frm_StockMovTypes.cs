@@ -11,7 +11,6 @@ namespace Odin.CMB_Components.StockInTypes
         public frm_StockMovTypes()
         {
             InitializeComponent();
-            
         }
 
         public frm_StockMovTypes(cmb_StockInTypes cmb)
@@ -44,15 +43,13 @@ namespace Odin.CMB_Components.StockInTypes
             catch { }
         }
 
-
         public void FillData(string _beg, string _lang, int _movtype)
         {
-            var data = CMB_BLL.getStockDocsTypes(_beg, _lang, _movtype);
+            var data = (System.Data.DataTable)Helper.getSP("sp_StockDocTypesSelectLike", _beg, _lang, _movtype);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
             gv_List.DataSource = bs_List;
-
         }
 
         private void gv_List_SelectionChanged(object sender, EventArgs e)

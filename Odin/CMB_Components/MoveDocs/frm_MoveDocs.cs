@@ -5,7 +5,6 @@ using Odin.Warehouse.Movements;
 using System;
 using System.Windows.Forms;
 
-
 namespace Odin.CMB_Components.MoveDocs
 {
     public partial class frm_MoveDocs : KryptonForm
@@ -28,7 +27,6 @@ namespace Odin.CMB_Components.MoveDocs
         CMB_BLL Bll = new CMB_BLL();
         bool _showingModal = false;
         cmb_MoveDocs f;
-
         public bool ShowingModal
         {
             get { return _showingModal; }
@@ -39,22 +37,19 @@ namespace Odin.CMB_Components.MoveDocs
         {
             try
             {
-
                 ((cmb_MoveDocs)cmb_MoveDocOne).txt_MoveDoc.Text = gv_List.CurrentRow.Cells["cn_name"].Value.ToString();
                 ((cmb_MoveDocs)cmb_MoveDocOne).MoveDocId = (Int32)gv_List.CurrentRow.Cells["cn_id"].Value;
-
             }
             catch { }
         }
 
         public void FillData(string Beg)
         {
-            var data = CMB_BLL.getMoveDocs(Beg);
+            var data = (System.Data.DataTable)Helper.getSP("sp_MoveDocsSelectLike", Beg);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
             gv_List.DataSource = bs_List;
-
         }
 
         private void btn_AddNew_Click(object sender, EventArgs e)
@@ -70,15 +65,13 @@ namespace Odin.CMB_Components.MoveDocs
             if (result == DialogResult.OK)
             {
                 _showingModal = false;
-                int _res = Bll.AddMoveDocHead(frm.DocDate, frm.DelivDate, frm.Comments, frm.DestPlaceId, frm.DelivAddressId, frm.FinDestPlaceId, frm.FinDelivAddressId,
-                                                frm.TransportId, frm.IncotermsId, frm.PalettesQty, frm.PalettesWeight, frm.BatchId, frm.StageId, frm.QtyToProduce);
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddMoveDocHead", frm.DocDate, frm.DelivDate, frm.Comments, frm.DestPlaceId, frm.DelivAddressId, frm.FinDestPlaceId, frm.FinDelivAddressId,
+                                                frm.TransportId, frm.IncotermsId, frm.PalettesQty, frm.PalettesWeight, frm.BatchId, frm.StageId, frm.QtyToProduce));
                 FillData(frm.MoveDoc);
                 ((cmb_MoveDocs)cmb_MoveDocOne).MoveDocSendSave();
             }
             if (result == DialogResult.Cancel)
-            {
                 _showingModal = false;
-            }
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -118,15 +111,13 @@ namespace Odin.CMB_Components.MoveDocs
                 if (result == DialogResult.OK)
                 {
                     _showingModal = false;
-                    Bll.EditMoveDocHead(_id, frm.DocDate, frm.DelivDate, frm.Comments, frm.DestPlaceId, frm.DelivAddressId, frm.FinDestPlaceId, frm.FinDelivAddressId,
+                    Helper.getSP("sp_EditMoveDocHead", _id, frm.DocDate, frm.DelivDate, frm.Comments, frm.DestPlaceId, frm.DelivAddressId, frm.FinDestPlaceId, frm.FinDelivAddressId,
                                        frm.TransportId, frm.IncotermsId, frm.PalettesQty, frm.PalettesWeight, frm.BatchId, frm.StageId, frm.QtyToProduce);
                     FillData(frm.MoveDoc);
                     ((cmb_MoveDocs)cmb_MoveDocOne).MoveDocSendSave();
                 }
                 if (result == DialogResult.Cancel)
-                {
                     _showingModal = false;
-                }
             }
         }
 
@@ -140,7 +131,7 @@ namespace Odin.CMB_Components.MoveDocs
             if (_id != 0
                 && glob_Class.DeleteConfirm() == true)
             {
-                Bll.DeleteMoveDocHead(_id);
+                Helper.getSP("sp_DeleteMoveDocHead", _id);
                 FillData(string.Empty);
             }
         }

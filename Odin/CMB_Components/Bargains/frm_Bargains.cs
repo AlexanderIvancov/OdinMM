@@ -24,7 +24,6 @@ namespace Odin.CMB_Components.Bargains
         CMB_BLL Bll = new CMB_BLL();
         bool _showingModal = false;
         cmb_Bargain f;
-
         public bool ShowingModal
         {
             get { return _showingModal; }
@@ -43,12 +42,11 @@ namespace Odin.CMB_Components.Bargains
 
         public void FillData(string Beg)
         {
-            var data = CMB_BLL.getBargains(Beg);
+            var data = (System.Data.DataTable)Helper.getSP("sp_BargainsSelectLike", Beg);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
             gv_List.DataSource = bs_List;
-
         }
 
         private void gv_List_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -70,13 +68,11 @@ namespace Odin.CMB_Components.Bargains
             if (result == DialogResult.OK)
             {
                 _showingModal = false;
-                int _res = Bll.AddBargain(frm.Bargain, frm.IntrastatCode, frm.BargainLat);
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddBargain", frm.Bargain, frm.IntrastatCode, frm.BargainLat));
                 FillData(frm.Bargain);
             }
             if (result == DialogResult.Cancel)
-            {
                 _showingModal = false;
-            }
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -111,13 +107,11 @@ namespace Odin.CMB_Components.Bargains
                 if (result == DialogResult.OK)
                 {
                     _showingModal = false;
-                    Bll.EditBargain(frm.Id, frm.Bargain, frm.IntrastatCode, frm.BargainLat);
+                    Helper.getSP("sp_EditBargain", frm.Id, frm.Bargain, frm.IntrastatCode, frm.BargainLat);
                     FillData(frm.Bargain);
                 }
                 if (result == DialogResult.Cancel)
-                {
                     _showingModal = false;
-                }
             }
         }
 
@@ -130,7 +124,7 @@ namespace Odin.CMB_Components.Bargains
 
             if (glob_Class.DeleteConfirm() == true)
             {
-                Bll.DeleteBargain(_id);
+                Helper.getSP("sp_DeleteBargain", _id);
                 FillData(string.Empty);
             }
         }

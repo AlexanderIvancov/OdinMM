@@ -36,9 +36,7 @@ namespace Odin.CMB_Components.BatchStages
         public void SetCellsColor()
         {
             foreach (DataGridViewRow row in gv_List.Rows)
-            {
                 row.Cells["cn_name"].Style.BackColor = Convert.ToInt32(row.Cells["cn_checked"].Value) == -1 ? Color.LightGray : Color.PapayaWhip;
-            }
         }
 
         public void ChangeCMBElements()
@@ -53,14 +51,12 @@ namespace Odin.CMB_Components.BatchStages
 
         public void FillData(int BatchId, int IsLaunches)
         {
-            DataTable data = IsLaunches == 0 ? CMB_BLL.getBatchStages(BatchId) : CMB_BLL.getBatchLaunchesStages(BatchId);
+            DataTable data = IsLaunches == 0 ? (DataTable)Helper.getSP("sp_SelectBatchStages", BatchId) : (DataTable)Helper.getSP("sp_SelectBatchStagesLaunchesOnly", BatchId);
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
             gv_List.DataSource = bs_List;
 
-
             SetCellsColor();
-
         }
 
         private void gv_List_SelectionChanged(object sender, EventArgs e)
@@ -72,6 +68,5 @@ namespace Odin.CMB_Components.BatchStages
         {
             this.Close();
         }
-
     }
 }

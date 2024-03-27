@@ -7,7 +7,6 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 
-
 namespace Odin.CMB_Components.Requests
 {
     public delegate void RequestEventHandler(object sender);
@@ -30,10 +29,8 @@ namespace Odin.CMB_Components.Requests
 
         int _RequestId = 0;
         int _PrevId = 0;
-
         Requests_BLL SMBll = new Requests_BLL();
         CMB_BLL Bll = new CMB_BLL();
-
         bool _EnableSearchId = false;
         string _Request = "";
 
@@ -42,32 +39,19 @@ namespace Odin.CMB_Components.Requests
             get { return txt_Request.Text; }
             set
             {
-
                 _Request = value;
                 txt_Request.Text = value;
-                DataSet ds = new DataSet();
 
-                SqlDataAdapter adapter =
-                    new SqlDataAdapter(
-                        "SELECT DISTINCT TOP 1 id FROM REQ_Head WHERE name = '" + _Request.ToString() + "'", sConnStr);
-
-                adapter.Fill(ds);
-
-                DataTable dt = ds.Tables[0];
+                DataTable dt = Helper.QueryDT("SELECT DISTINCT TOP 1 id FROM REQ_Head WHERE name = '" + _Request.ToString() + "'");
 
                 if (dt.Rows.Count > 0)
-                {
                     RequestId = Convert.ToInt32(dt.Rows[0]["id"].ToString());
-                }
                 else
                 {
-
                     _RequestId = 0;
                     RequestChanged?.Invoke(this);
                     //return;
                 }
-
-                
             }
         }
 
@@ -80,38 +64,20 @@ namespace Odin.CMB_Components.Requests
             }
             set
             {
-
-
                 _RequestId = value;
 
                 if (_PrevId != _RequestId)
                 {
-                    SqlConnection conn = new SqlConnection(sConnStr);
-                    conn.Open();
-
-                    DataSet ds = new DataSet();
-
-                    SqlDataAdapter adapter =
-                        new SqlDataAdapter("SELECT top 1 * FROM REQ_Head WHERE id = " + _RequestId.ToString(), conn);
-                    adapter.Fill(ds);
-
-                    conn.Close();
-
-                    DataTable dt = ds.Tables[0];
+                    DataTable dt = Helper.QueryDT("SELECT top 1 * FROM REQ_Head WHERE id = " + _RequestId.ToString());
 
                     if (dt.Rows.Count > 0)
                     {
                         foreach (DataRow dr in dt.Rows)
-                        {
                             txt_Request.Text = dr["name"].ToString();
-                        }
-
                         RequestChanged?.Invoke(this);
                     }
                     else
-                    {
                         txt_Request.Text = string.Empty;
-                    }
 
                     _PrevId = _RequestId;
 
@@ -119,7 +85,6 @@ namespace Odin.CMB_Components.Requests
                     //{
                     //    RequestChanged(this);
                     //}
-
                 }
             }
         }
@@ -143,14 +108,8 @@ namespace Odin.CMB_Components.Requests
 
         public bool EnableSearchId
         {
-            get
-            {
-                return _EnableSearchId;
-            }
-            set
-            {
-                _EnableSearchId = value;
-            }
+            get { return _EnableSearchId; }
+            set { _EnableSearchId = value; }
         }
 
         private void buttonSpecAny1_Click(object sender, EventArgs e)
@@ -174,13 +133,10 @@ namespace Odin.CMB_Components.Requests
 
             if (result == DialogResult.OK)
             {
-                int _res = Bll.AddRequestHead(frm.Comments, frm.ProdPlaceId);
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddRequestHead", frm.Comments, frm.ProdPlaceId));
                 RequestId = _res;
             }
-            if (result == DialogResult.Cancel)
-            {
-                
-            }
+            //if (result == DialogResult.Cancel) { }
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -199,7 +155,7 @@ namespace Odin.CMB_Components.Requests
 
                 if (result == DialogResult.OK)
                 {
-                    Bll.EditRequestHead(RequestId, frm.Comments, frm.ProdPlaceId);
+                    Helper.getSP("sp_EditRequestHead", RequestId, frm.Comments, frm.ProdPlaceId);
                     RequestChanged?.Invoke(this);
                 }
             }

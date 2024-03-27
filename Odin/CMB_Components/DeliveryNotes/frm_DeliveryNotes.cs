@@ -19,6 +19,7 @@ namespace Odin.CMB_Components.DeliveryNotes
             f = new cmb_DeliveryNotes();
             cmb = f;
         }
+
         DelivNote_BLL DNBll = new DelivNote_BLL();
         DAL_Functions Dll = new DAL_Functions();
         class_Global glob_Class = new class_Global();
@@ -36,22 +37,19 @@ namespace Odin.CMB_Components.DeliveryNotes
         {
             try
             {
-
                 ((cmb_DeliveryNotes)cmb_DeliveryNoteOne).txt_DeliveryNote.Text = gv_List.CurrentRow.Cells["cn_name"].Value.ToString();
                 ((cmb_DeliveryNotes)cmb_DeliveryNoteOne).DelivNoteId = (Int32)gv_List.CurrentRow.Cells["cn_id"].Value;
-
             }
             catch { }
         }
 
         public void FillData(string Beg)
         {
-            var data = CMB_BLL.getDeliveryNotes(Beg);
+            var data = (System.Data.DataTable)Helper.getSP("sp_DeliveryNotesSelectLike", Beg);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
             gv_List.DataSource = bs_List;
-
         }
 
         private void gv_List_SelectionChanged(object sender, EventArgs e)
@@ -78,17 +76,15 @@ namespace Odin.CMB_Components.DeliveryNotes
             if (result == DialogResult.OK)
             {
                 _showingModal = false;
-                int _res = Bll.AddDelivNoteHead(frm.DocDate, frm.DelivDate, frm.Comments, frm.DelivPlaceId, frm.DelivAddressId,
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddDelivNoteHead", frm.DocDate, frm.DelivDate, frm.Comments, frm.DelivPlaceId, frm.DelivAddressId,
                                                 frm.FinalDelivPlaceId, frm.FinalDelivAddressId, frm.TransportId, frm.IncotermsId,
                                                 frm.QtyPalettes, frm.PalettesWeight, frm.CreditAccount, frm.IsReturn, frm.NoReversePVN,
-                                                frm.Internal);
+                                                frm.Internal));
                 FillData(frm.DelivNote);
                 ((cmb_DeliveryNotes)cmb_DeliveryNoteOne).DelivNoteSendSave();
             }
             if (result == DialogResult.Cancel)
-            {
                 _showingModal = false;
-            }
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -100,14 +96,11 @@ namespace Odin.CMB_Components.DeliveryNotes
 
             if (_id != 0)
             {
-
                 _showingModal = true;
 
                 frm_AddDeliveryNote frm = new frm_AddDeliveryNote();
-
                 
                 frm.Id = _id;
-                
                 
                 Bll.DelivNoteHeadId = _id;
 
@@ -133,7 +126,7 @@ namespace Odin.CMB_Components.DeliveryNotes
                 if (result == DialogResult.OK)
                 {
                     _showingModal = false;
-                    Bll.EditDelivNoteHead(_id, frm.DocDate, frm.DelivDate, frm.Comments, frm.DelivPlaceId, frm.DelivAddressId,
+                    Helper.getSP("sp_EditDelivNoteHead", _id, frm.DocDate, frm.DelivDate, frm.Comments, frm.DelivPlaceId, frm.DelivAddressId,
                                                 frm.FinalDelivPlaceId, frm.FinalDelivAddressId, frm.TransportId, frm.IncotermsId,
                                                 frm.QtyPalettes, frm.PalettesWeight, frm.CreditAccount, frm.IsReturn, frm.NoReversePVN,
                                                 frm.Internal);
@@ -141,9 +134,7 @@ namespace Odin.CMB_Components.DeliveryNotes
                     ((cmb_DeliveryNotes)cmb_DeliveryNoteOne).DelivNoteSendSave();
                 }
                 if (result == DialogResult.Cancel)
-                {
                     _showingModal = false;
-                }
             }
         }
 
@@ -157,7 +148,7 @@ namespace Odin.CMB_Components.DeliveryNotes
             if (_id != 0
                 && glob_Class.DeleteConfirm() == true)
             {
-                Bll.DeleteDelivNoteHead(_id);
+                Helper.getSP("sp_DeleteDelivNoteHead", _id);
                 FillData(string.Empty);
             }
         }

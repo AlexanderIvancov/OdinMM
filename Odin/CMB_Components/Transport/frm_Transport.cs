@@ -44,12 +44,11 @@ namespace Odin.CMB_Components.Transport
 
         public void FillData(string Beg)
         {
-            var data = CMB_BLL.getTransport(Beg);
+            var data = (System.Data.DataTable)Helper.getSP("sp_TransportSelectLike", Beg);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
             gv_List.DataSource = bs_List;
-
         }
 
         private void gv_List_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -71,13 +70,11 @@ namespace Odin.CMB_Components.Transport
             if (result == DialogResult.OK)
             {
                 _showingModal = false;
-                int _res = Bll.AddTransport(frm.Transport, frm.IntrastatCode, frm.TransType);
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddTransport", frm.Transport, frm.IntrastatCode, frm.TransType));
                 FillData(frm.Transport);
             }
             if (result == DialogResult.Cancel)
-            {
                 _showingModal = false;
-            }
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -103,13 +100,11 @@ namespace Odin.CMB_Components.Transport
                 if (result == DialogResult.OK)
                 {
                     _showingModal = false;
-                    Bll.EditTransport(frm.Id, frm.Transport, frm.IntrastatCode, frm.TransType);
+                    Helper.getSP("sp_EditTransport", frm.Id, frm.Transport, frm.IntrastatCode, frm.TransType);
                     FillData(frm.Transport);
                 }
                 if (result == DialogResult.Cancel)
-                {
                     _showingModal = false;
-                }
             }
         }
 
@@ -122,7 +117,7 @@ namespace Odin.CMB_Components.Transport
 
             if (glob_Class.DeleteConfirm() == true)
             {
-                Bll.DeleteTransport(_id);
+                Helper.getSP("sp_DeleteTransport", _id);
                 FillData(string.Empty);
             }
         }

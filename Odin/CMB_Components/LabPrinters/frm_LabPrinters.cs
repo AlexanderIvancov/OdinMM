@@ -8,14 +8,11 @@ namespace Odin.CMB_Components.LabPrinters
     public partial class frm_LabPrinters : Form
     {
         PopupWindowHelper PopupHelper = null;
-
         cmb_LabPrinter f;
         class_Global glob_Class = new class_Global();
         CMB_BLL Bll = new CMB_BLL();
         DAL_Functions DAL = new DAL_Functions();
-        
         bool _showingModal = false;
-
         public bool ShowingModal
         {
             get { return _showingModal; }
@@ -48,12 +45,11 @@ namespace Odin.CMB_Components.LabPrinters
 
         public void FillData()
         {
-            var data = CMB_BLL.getPrinters(System.Environment.MachineName);
+            var data = (System.Data.DataTable)Helper.getSP("sp_SelectEtPrinters", Environment.MachineName);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
             gv_List.DataSource = bs_List;
-
         }
 
         private void gv_List_SelectionChanged(object sender, EventArgs e)
@@ -71,7 +67,7 @@ namespace Odin.CMB_Components.LabPrinters
             if (gv_List.CurrentRow.Cells["cn_default"].Selected == true)
             {
                 gv_List.EndEdit();
-                Bll.MakeDefaultPinter((Int32)gv_List.CurrentRow.Cells["cn_id"].Value);
+                Helper.getSP("sp_MakePrinterByDefault", (Int32)gv_List.CurrentRow.Cells["cn_id"].Value);
                 FillData();
             }
         }
@@ -88,17 +84,13 @@ namespace Odin.CMB_Components.LabPrinters
                 try
                 {
                     _showingModal = false;
-                    Bll.AddPrinter(popup.PrinterName, popup.IP_Address, popup.Default);
+                    Helper.getSP("sp_AddPrinter", popup.PrinterName, popup.IP_Address, popup.Default);
                 }
                 catch
-                {
-
-                }
+                { }
             }
             if (result == DialogResult.Cancel)
-            {
                 _showingModal = false;
-            }
             FillData();
         }
 
@@ -120,18 +112,15 @@ namespace Odin.CMB_Components.LabPrinters
                 //{
                 _showingModal = false;
                 //MessageBox.Show(popup.Default.ToString());
-                Bll.EditPrinter(popup.Id, popup.PrinterName, popup.IP_Address, popup.Default);
+                Helper.getSP("sp_EditPrinter", popup.Id, popup.PrinterName, popup.IP_Address, popup.Default);
                 //}
                 //catch
                 // {
 
                 //}
-
             }
             if (result == DialogResult.Cancel)
-            {
                 _showingModal = false;
-            }
             FillData();
         }
 
@@ -142,13 +131,12 @@ namespace Odin.CMB_Components.LabPrinters
                 try
                 {
                     int id = (Int32)gv_List.CurrentRow.Cells["cn_id"].Value;
-                    Bll.DeletePrinter(id);
+                    Helper.getSP("sp_deletePrinter", id);
                 }
                 catch
                 {
                     return;
                 }
-
             }
             FillData();
         }

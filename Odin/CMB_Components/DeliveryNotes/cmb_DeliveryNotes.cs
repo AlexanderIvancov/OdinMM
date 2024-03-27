@@ -34,38 +34,22 @@ namespace Odin.CMB_Components.DeliveryNotes
 
         bool _EnableSearchId = false;
         string _DelivNote = "";
-
         public string DelivNote
         {
             get { return txt_DeliveryNote.Text; }
             set
             {
-
                 _DelivNote = value;
                 txt_DeliveryNote.Text = value;
 
                 //if (_PrevId != _DelivNoteId)
                 //{
-
-                    DataSet ds = new DataSet();
-
-                    SqlDataAdapter adapter =
-                        new SqlDataAdapter(
-                            "SELECT DISTINCT TOP 1 id FROM STO_StockOutHead WHERE name = '" + _DelivNote.ToString() + "'", sConnStr);
-
-                    adapter.Fill(ds);
-
-                    DataTable dt = ds.Tables[0];
+                    DataTable dt = Helper.QueryDT("SELECT DISTINCT TOP 1 id FROM STO_StockOutHead WHERE name = '" + _DelivNote.ToString() + "'");
 
                     if (dt.Rows.Count > 0)
-                    {
                         foreach (DataRow dr in dt.Rows)
-                        {
                             DelivNoteId = Convert.ToInt32(dt.Rows[0]["id"].ToString());
-                        }
-                    }
                     else
-                    {
                         _DelivNoteId = 0;
 
                     DelivNoteChanged?.Invoke(this);
@@ -73,11 +57,8 @@ namespace Odin.CMB_Components.DeliveryNotes
                     //}
 
                     //_PrevId = _DelivNoteId;
-                }
-
             }
         }
-
         public int DelivNoteId
         {
             get
@@ -87,39 +68,22 @@ namespace Odin.CMB_Components.DeliveryNotes
             }
             set
             {
-
-
                 _DelivNoteId = value;
 
                 if (_PrevId != _DelivNoteId)
                 {
-                    SqlConnection conn = new SqlConnection(sConnStr);
-                    conn.Open();
-
-                    DataSet ds = new DataSet();
-
-                    SqlDataAdapter adapter =
-                        new SqlDataAdapter("SELECT top 1 * FROM STO_StockOutHead WHERE id = " + _DelivNoteId.ToString(), conn);
-                    adapter.Fill(ds);
-
-                    conn.Close();
-
-                    DataTable dt = ds.Tables[0];
+                    DataTable dt = Helper.QueryDT("SELECT top 1 * FROM STO_StockOutHead WHERE id = " + _DelivNoteId.ToString());
 
                     if (dt.Rows.Count > 0)
                     {
                         foreach (DataRow dr in dt.Rows)
-                        {
                             //DelivNote = dr["name"].ToString();
                             txt_DeliveryNote.Text = dr["name"].ToString();
-                        }
                         DelivNoteChanged?.Invoke(this);
                     }
                     else
-                    {
                          //DelivNote = string.Empty;
                         txt_DeliveryNote.Text = string.Empty;
-                    }                  
 
                     _PrevId = _DelivNoteId;
 
@@ -127,13 +91,10 @@ namespace Odin.CMB_Components.DeliveryNotes
                     //{
                     //    OutDocChanged(this);
                     //}
-
                 }
             }
         }
-
         int _DelivNoteSavedId = 0;
-
         public int DelivNoteSavedId
         {
             get { return _DelivNoteSavedId; }
@@ -151,14 +112,8 @@ namespace Odin.CMB_Components.DeliveryNotes
 
         public bool EnableSearchId
         {
-            get
-            {
-                return _EnableSearchId;
-            }
-            set
-            {
-                _EnableSearchId = value;
-            }
+            get { return _EnableSearchId; }
+            set { _EnableSearchId = value; }
         }
 
         private void buttonSpecAny1_Click(object sender, EventArgs e)
@@ -185,10 +140,10 @@ namespace Odin.CMB_Components.DeliveryNotes
 
             if (result == DialogResult.OK)
             {
-                int _res = Bll.AddDelivNoteHead(frm.DocDate, frm.DelivDate, frm.Comments, frm.DelivPlaceId, frm.DelivAddressId,
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddDelivNoteHead", frm.DocDate, frm.DelivDate, frm.Comments, frm.DelivPlaceId, frm.DelivAddressId,
                                                 frm.FinalDelivPlaceId, frm.FinalDelivAddressId, frm.TransportId, frm.IncotermsId,
                                                 frm.QtyPalettes, frm.PalettesWeight, frm.CreditAccount, frm.IsReturn, frm.NoReversePVN,
-                                                frm.Internal);
+                                                frm.Internal));
                 DelivNoteId = _res;
                 DelivNoteChanged?.Invoke(this);
             }
@@ -200,9 +155,7 @@ namespace Odin.CMB_Components.DeliveryNotes
             {
                 frm_AddDeliveryNote frm = new frm_AddDeliveryNote();
 
-
                 frm.Id = DelivNoteId;
-
 
                 Bll.DelivNoteHeadId = DelivNoteId;
 
@@ -228,12 +181,11 @@ namespace Odin.CMB_Components.DeliveryNotes
 
                 if (result == DialogResult.OK)
                 {
-                    Bll.EditDelivNoteHead(DelivNoteId, frm.DocDate, frm.DelivDate, frm.Comments, frm.DelivPlaceId, frm.DelivAddressId,
+                    Helper.getSP("sp_EditDelivNoteHead", DelivNoteId, frm.DocDate, frm.DelivDate, frm.Comments, frm.DelivPlaceId, frm.DelivAddressId,
                                                 frm.FinalDelivPlaceId, frm.FinalDelivAddressId, frm.TransportId, frm.IncotermsId,
                                                 frm.QtyPalettes, frm.PalettesWeight, frm.CreditAccount, frm.IsReturn, frm.NoReversePVN,
                                                 frm.Internal);
                     DelivNoteChanged?.Invoke(this);
-
                 }
             }
         }
@@ -258,9 +210,7 @@ namespace Odin.CMB_Components.DeliveryNotes
             PopupHelper.PopupCancel += delegate (object _sender, PopupCancelEventArgs _e)
             {
                 if (popup.ShowingModal)
-                {
                     _e.Cancel = true;
-                }
             };
 
             //MessageBox.Show("OK");

@@ -2,6 +2,7 @@
 using Odin.CMB_Components.BLL;
 using Odin.Global_Classes;
 using System;
+using System.Data;
 using System.Windows.Forms;
 
 namespace Odin.CMB_Components.Incoterms
@@ -19,6 +20,7 @@ namespace Odin.CMB_Components.Incoterms
             f = new cmb_Incoterms();
             cmb = f;
         }
+
         class_Global glob_Class = new class_Global();
         CMB_BLL Bll = new CMB_BLL();
         bool _showingModal = false;
@@ -42,12 +44,11 @@ namespace Odin.CMB_Components.Incoterms
 
         public void FillData(string Beg)
         {
-            var data = CMB_BLL.getIncoterms(Beg);
+            var data = (DataTable)Helper.getSP("sp_IncotermsSelectLike", Beg);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
             gv_List.DataSource = bs_List;
-
         }
 
         private void btn_AddNew_Click(object sender, EventArgs e)
@@ -59,13 +60,11 @@ namespace Odin.CMB_Components.Incoterms
             if (result == DialogResult.OK)
             {
                 _showingModal = false;
-                int _res = Bll.AddIncoterm(frm.Incoterms, frm.Description);
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddIncoterm", frm.Incoterms, frm.Description));
                 FillData(frm.Incoterms);
             }
             if (result == DialogResult.Cancel)
-            {
                 _showingModal = false;
-            }
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -89,13 +88,11 @@ namespace Odin.CMB_Components.Incoterms
                 if (result == DialogResult.OK)
                 {
                     _showingModal = false;
-                    Bll.EditIncoterm(frm.Id, frm.Incoterms, frm.Description);
+                    Helper.getSP("sp_EditIncoterm", frm.Id, frm.Incoterms, frm.Description);
                     FillData(frm.Incoterms);
                 }
                 if (result == DialogResult.Cancel)
-                {
                     _showingModal = false;
-                }
             }
         }
 
@@ -108,7 +105,7 @@ namespace Odin.CMB_Components.Incoterms
 
             if (glob_Class.DeleteConfirm() == true)
             {
-                Bll.DeleteIncoterm(_id);
+                Helper.getSP("sp_DeleteIncoterm", _id);
                 FillData(string.Empty);
             }
         }
@@ -118,10 +115,7 @@ namespace Odin.CMB_Components.Incoterms
             ChangeCMBElements();
         }
 
-        private void gv_List_DoubleClick(object sender, EventArgs e)
-        {
-
-        }
+        private void gv_List_DoubleClick(object sender, EventArgs e) { }
 
         private void gv_List_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {

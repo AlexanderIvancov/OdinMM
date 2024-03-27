@@ -21,15 +21,12 @@ namespace Odin.CMB_Components.PurchaseOrders
             cmb = f;
         }
 
-             
-
         PO_BLL POBll = new PO_BLL();
         DAL_Functions Dll = new DAL_Functions();
         class_Global glob_Class = new class_Global();
         CMB_BLL Bll = new CMB_BLL();
         bool _showingModal = false;
         cmb_PurchaseOrdersLines f;
-
         public bool ShowingModal
         {
             get { return _showingModal; }
@@ -45,29 +42,24 @@ namespace Odin.CMB_Components.PurchaseOrders
             catch { }
         }
 
-        public void SendSaveEvent()
-        {
-
-        }
+        public void SendSaveEvent() { }
 
         public void FillData(int POId)
         {
-            var data = CMB_BLL.getPurchaseOrdersLines(POId);
+            var data = (System.Data.DataTable)Helper.getSP("sp_PurchaseOrdersLines", POId);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
             gv_List.DataSource = bs_List;
-
         }
 
         public void FillDataEnabledArticles(int POId, int ArticleId)
         {
-            var data = CMB_BLL.getPurchaseOrdersLinesArticles(POId, ArticleId);
+            var data = (System.Data.DataTable)Helper.getSP("sp_PurchaseOrdersLinesArticles", POId, ArticleId);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
             gv_List.DataSource = bs_List;
-
         }
 
         private void gv_List_SelectionChanged(object sender, EventArgs e)

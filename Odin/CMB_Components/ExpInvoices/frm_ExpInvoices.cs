@@ -25,7 +25,6 @@ namespace Odin.CMB_Components.ExpInvoices
         CMB_BLL Bll = new CMB_BLL();
         bool _showingModal = false;
         cmb_ExpInvoice f;
-
         public bool ShowingModal
         {
             get { return _showingModal; }
@@ -36,22 +35,19 @@ namespace Odin.CMB_Components.ExpInvoices
         {
             try
             {
-
                 ((cmb_ExpInvoice)cmb_ExpInvoiceOne).txt_ExpInvoice.Text = gv_List.CurrentRow.Cells["cn_name"].Value.ToString();
                 ((cmb_ExpInvoice)cmb_ExpInvoiceOne).InvoiceId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
-
             }
             catch { }
         }
 
         public void FillData(string Beg)
         {
-            var data = CMB_BLL.getExpInvoices(Beg);
+            var data = (System.Data.DataTable)Helper.getSP("sp_ExpInvoiceSelectLike", Beg);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
             gv_List.DataSource = bs_List;
-
         }
 
         private void gv_List_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -85,21 +81,18 @@ namespace Odin.CMB_Components.ExpInvoices
             {
                 _showingModal = false;
 
-                int _res = Bll.AddExInvoice(frm.Serie, frm.Invoice, frm.InvoiceType, frm.InvCode, frm.StampDate, frm.DocDate, frm.ReceiverId,
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddExInvoiceHead", frm.Serie, frm.Invoice, frm.InvoiceType, frm.InvCode, frm.StampDate, frm.DocDate, frm.ReceiverId,
                                             frm.BuyerId, frm.ReceiverAddressId, frm.BuyerAddressId, frm.Comments, frm.CurId, frm.CurRate,
                                             frm.Bargain, frm.TransportId, frm.IncotermsId, frm.Payment, frm.BankContId, frm.AssetId,
                                             frm.SenderAddressId, "", 0, 0, frm.VAT, frm.PayBefore, frm.InAdvance,
                                             frm.AdvanceDate, frm.ProformaNR, frm.PayDate, frm.PaymentId, frm.SellerContPersId, 
-                                            frm.BuyerContPersId, frm.ValueForCustoms, frm.ESignature, frm.Recipient);
+                                            frm.BuyerContPersId, frm.ValueForCustoms, frm.ESignature, frm.Recipient));
                 FillData(frm.Invoice);
                 ((cmb_ExpInvoice)cmb_ExpInvoiceOne).InvoiceSendSave();
 
             }
             if (result == DialogResult.Cancel)
-            {
                 _showingModal = false;
-            }
-
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -123,9 +116,7 @@ namespace Odin.CMB_Components.ExpInvoices
                 Bll.ExInvoiceId = _id;
                 frm.Invoice = Bll.ExInvoice;
                 frm.FillSellerContPersons();
-
                 frm.HeaderText = "Edit invoice: " + frm.Invoice;
-
                 frm.Serie = Bll.ExInvoiceSerie;
                 frm.InvoiceType = Bll.ExInvoiceType;
                 frm.StampDate = Bll.ExInvoiceStampDate;
@@ -156,7 +147,6 @@ namespace Odin.CMB_Components.ExpInvoices
                 frm.ValueForCustoms = Bll.ExInvoiceValueForCustoms;
                 frm.ESignature = Bll.ExInvoiceESignature;
                 frm.Recipient = Bll.ExInvoiceRecepPers;
-
                 frm.CheckEmpty();
 
                 DialogResult result = frm.ShowDialog();
@@ -164,7 +154,7 @@ namespace Odin.CMB_Components.ExpInvoices
                 if (result == DialogResult.OK)
                 {
                     _showingModal = false;
-                    Bll.EditExInvoice(frm.Id, frm.Invoice, frm.Serie, frm.StampDate, frm.DocDate, frm.ReceiverId,
+                    Helper.getSP("sp_EditExInvoiceHead", frm.Id, frm.Invoice, frm.Serie, frm.StampDate, frm.DocDate, frm.ReceiverId,
                                             frm.BuyerId, frm.ReceiverAddressId, frm.BuyerAddressId, frm.Comments, frm.CurId, frm.CurRate,
                                             frm.Bargain, frm.TransportId, frm.IncotermsId, frm.Payment, frm.BankContId, frm.AssetId,
                                             frm.SenderAddressId, "", 0, 0, frm.VAT, frm.PayBefore, frm.InAdvance, frm.AdvanceDate,
@@ -177,12 +167,9 @@ namespace Odin.CMB_Components.ExpInvoices
                     ((cmb_ExpInvoice)cmb_ExpInvoiceOne).InvoiceSendSave();
                     ((cmb_ExpInvoice)cmb_ExpInvoiceOne).ValueForCustoms = frm.ValueForCustoms;
                     ((cmb_ExpInvoice)cmb_ExpInvoiceOne).BuyerId = frm.BuyerId;
-
                 }
                 if (result == DialogResult.Cancel)
-                {
                     _showingModal = false;
-                }
             }
         }
 
@@ -196,7 +183,7 @@ namespace Odin.CMB_Components.ExpInvoices
             if (_id != 0
                 && glob_Class.DeleteConfirm() == true)
             {
-                Bll.DeleteExInvoice(_id);
+                Helper.getSP("sp_DeleteExInvoiceHead", _id);
                 FillData(string.Empty);
             }
         }

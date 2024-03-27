@@ -3,7 +3,6 @@ using Odin.Global_Classes;
 using Odin.Warehouse.StockOut;
 using System;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -25,30 +24,24 @@ namespace Odin.CMB_Components.OutcomeDocs
 
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
         PopupWindowHelper PopupHelper = null;
-
         int _OutcomeDocId = 0;
         int _PrevId = 0;
         int _BatchId = 0;
-
         public int BatchId
         {
             get { return _BatchId; }
             set { _BatchId = value; }
         }
-
         StockOut_BLL SMBll = new StockOut_BLL();
         CMB_BLL Bll = new CMB_BLL();
-
         bool _EnableSearchId = false;
         string _OutcomeDoc = "";
-
         bool _EnableDN = false;
         public bool EnableDN
         {
             get { return _EnableDN; }
             set { _EnableDN = value; }
         }
-
         public string OutcomeDoc
         {
             get { return txt_OutcomeDoc.Text; }
@@ -62,38 +55,25 @@ namespace Odin.CMB_Components.OutcomeDocs
                 string strSQL = EnableDN == true
                     ? "SELECT DISTINCT TOP 1 id FROM STO_StockOutHead WHERE name = '" + _OutcomeDoc.ToString() + "' and (typeout = 5 or typeout = 15 or typeout = 17 or typeout = 28 or typeout = 4)"
                     : "SELECT DISTINCT TOP 1 id FROM STO_StockOutHead WHERE name = '" + _OutcomeDoc.ToString() + "' and (typeout = 5 or typeout = 15 or typeout = 17 or typeout = 28)";
-                SqlDataAdapter adapter =
-                    new SqlDataAdapter(
-                        strSQL, sConnStr);
 
-                adapter.Fill(ds);
-
-                DataTable dt = ds.Tables[0];
+                DataTable dt = Helper.QueryDT(strSQL);
 
                 if (dt.Rows.Count > 0)
-                {
                     foreach (DataRow dr in dt.Rows)
                     {
                         OutcomeDocId = Convert.ToInt32(dt.Rows[0]["id"].ToString());
                         BatchId = Convert.ToInt32(dt.Rows[0]["batchid"].ToString());
                     }
-                }
                 else
                 {
                     _OutcomeDocId = 0;
                     _BatchId = 0;
 
                     OutDocChanged?.Invoke(this);
-
-
-
                     //return;
                 }
-
-                
             }
         }
-
         public int OutcomeDocId
         {
             get
@@ -103,24 +83,11 @@ namespace Odin.CMB_Components.OutcomeDocs
             }
             set
             {
-
-
                 _OutcomeDocId = value;
 
                 //if (_PrevId != _OutcomeDocId)
                // {
-                    SqlConnection conn = new SqlConnection(sConnStr);
-                    conn.Open();
-
-                    DataSet ds = new DataSet();
-
-                    SqlDataAdapter adapter =
-                        new SqlDataAdapter("SELECT top 1 name, isnull(batchid, 0) as batchid FROM STO_StockOutHead WHERE id = " + _OutcomeDocId.ToString(), conn);
-                    adapter.Fill(ds);
-
-                    conn.Close();
-
-                    DataTable dt = ds.Tables[0];
+                    DataTable dt = Helper.QueryDT("SELECT top 1 name, isnull(batchid, 0) as batchid FROM STO_StockOutHead WHERE id = " + _OutcomeDocId.ToString());
 
                     if (dt.Rows.Count > 0)
                     {
@@ -147,9 +114,7 @@ namespace Odin.CMB_Components.OutcomeDocs
                 //}
             }
         }
-
         int _OutcomeDocSavedId = 0;
-
         public int OutcomeDocSavedId
         {
             get { return _OutcomeDocSavedId; }
@@ -167,14 +132,8 @@ namespace Odin.CMB_Components.OutcomeDocs
 
         public bool EnableSearchId
         {
-            get
-            {
-                return _EnableSearchId;
-            }
-            set
-            {
-                _EnableSearchId = value;
-            }
+            get { return _EnableSearchId; }
+            set { _EnableSearchId = value; }
         }
 
         private void buttonSpecAny1_Click(object sender, EventArgs e)
@@ -199,12 +158,11 @@ namespace Odin.CMB_Components.OutcomeDocs
 
             if (result == DialogResult.OK)
             {
-                int _res = Bll.AddOutcomeDocHead(frm.DocDate, frm.Comments, frm.TypeOff, frm.ReasonId, frm.BatchId);
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddOutcomeDocHead", frm.DocDate, frm.Comments, frm.TypeOff, frm.ReasonId, frm.BatchId));
                 OutcomeDocId = _res;
                 OutDocChanged?.Invoke(this);
                 OutDocSaved?.Invoke(this);
             }
-            
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -226,7 +184,7 @@ namespace Odin.CMB_Components.OutcomeDocs
 
                 if (result == DialogResult.OK)
                 {
-                    Bll.EditOutcomeDocHead(frm.Id, frm.DocDate, frm.Comments, frm.TypeOff, frm.ReasonId, frm.BatchId);
+                    Helper.getSP("sp_EditOutcomeDocHead", frm.Id, frm.DocDate, frm.Comments, frm.TypeOff, frm.ReasonId, frm.BatchId);
 
                     OutDocChanged?.Invoke(this);
                     OutDocSaved?.Invoke(this);
@@ -254,9 +212,7 @@ namespace Odin.CMB_Components.OutcomeDocs
             PopupHelper.PopupCancel += delegate (object _sender, PopupCancelEventArgs _e)
             {
                 if (popup.ShowingModal)
-                {
                     _e.Cancel = true;
-                }
             };
             if (EnableDN == true)
                 popup.FillDataAll(OutcomeDoc);

@@ -105,7 +105,7 @@ namespace Odin.CMB_Components.LabPrinters
 
         public void ShowDefaults()
         {
-            Bll.ShowDefaultPrinter();
+            Helper.getSP("sp_SelectEtPrinters", Environment.MachineName);
             PrinterName = Bll.DefPrinter;
             IP_Adress = Bll.DefIPPrinter;
             PrinterDPI = Bll.DefPrinterDPI;

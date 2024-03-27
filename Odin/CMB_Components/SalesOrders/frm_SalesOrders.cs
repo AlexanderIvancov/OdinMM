@@ -21,7 +21,6 @@ namespace Odin.CMB_Components.SalesOrders
             cmb = f;
         }
 
-
         int _Type = 0;
 
         public int Type
@@ -61,22 +60,18 @@ namespace Odin.CMB_Components.SalesOrders
             catch { }
         }
 
-        public void SendSaveEvent()
-        {
-
-        }
+        public void SendSaveEvent() { }
 
         public void FillData(string Beg)
         {
             gv_List.ThreadSafeCall(delegate
             {
-                var data = CMB_BLL.getSalesOrders(Beg);
+                var data = (System.Data.DataTable)Helper.getSP("sp_SalesOrdersSelectLike", Beg);
 
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
             });
-
         }
 
         private void btn_AddNew_Click(object sender, EventArgs e)

@@ -19,13 +19,13 @@ namespace Odin.CMB_Components.Requests
             f = new cmb_Requests();
             cmb = f;
         }
+
         Requests_BLL ReqBll = new Requests_BLL();
         DAL_Functions Dll = new DAL_Functions();
         class_Global glob_Class = new class_Global();
         CMB_BLL Bll = new CMB_BLL();
         bool _showingModal = false;
         cmb_Requests f;
-
         public bool ShowingModal
         {
             get { return _showingModal; }
@@ -36,22 +36,19 @@ namespace Odin.CMB_Components.Requests
         {
             try
             {
-
                 ((cmb_Requests)cmb_RequestOne).txt_Request.Text = gv_List.CurrentRow.Cells["cn_name"].Value.ToString();
                 ((cmb_Requests)cmb_RequestOne).RequestId = (Int32)gv_List.CurrentRow.Cells["cn_id"].Value;
-
             }
             catch { }
         }
 
         public void FillData(string Beg)
         {
-            var data = CMB_BLL.getRequests(Beg);
+            var data = (System.Data.DataTable)Helper.getSP("sp_RequestsSelectLike", Beg);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
             gv_List.DataSource = bs_List;
-
         }
 
         private void btn_AddNew_Click(object sender, EventArgs e)
@@ -67,14 +64,12 @@ namespace Odin.CMB_Components.Requests
             if (result == DialogResult.OK)
             {
                 _showingModal = false;
-                int _res = Bll.AddRequestHead(frm.Comments, frm.ProdPlaceId);
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddRequestHead", frm.Comments, frm.ProdPlaceId));
                 FillData(frm.Request);
                 ((cmb_Requests)cmb_RequestOne).OutcomeDocSendSave();
             }
             if (result == DialogResult.Cancel)
-            {
                 _showingModal = false;
-            }
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -86,7 +81,6 @@ namespace Odin.CMB_Components.Requests
 
             if (_id != 0)
             {
-
                 _showingModal = true;
 
                 frm_AddRequest frm = new frm_AddRequest();
@@ -102,14 +96,12 @@ namespace Odin.CMB_Components.Requests
                 if (result == DialogResult.OK)
                 {
                     _showingModal = false;
-                    Bll.EditRequestHead(_id, frm.Comments, frm.ProdPlaceId);
+                    Helper.getSP("sp_EditRequestHead", _id, frm.Comments, frm.ProdPlaceId);
                     FillData(frm.Request);
                     ((cmb_Requests)cmb_RequestOne).OutcomeDocSendSave();
                 }
                 if (result == DialogResult.Cancel)
-                {
                     _showingModal = false;
-                }
             }
         }
 
@@ -123,7 +115,7 @@ namespace Odin.CMB_Components.Requests
             if (_id != 0
                 && glob_Class.DeleteConfirm() != false)
             {
-                Bll.DeleteRequestHead(_id);
+                Helper.getSP("sp_DeleteRequestHead", _id);
                 FillData(string.Empty);
             }
         }

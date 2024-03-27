@@ -4,7 +4,6 @@ using Odin.Global_Classes;
 using System;
 using System.Windows.Forms;
 
-
 namespace Odin.CMB_Components.EndCustomers
 {
     public partial class frm_EndCustomers : KryptonForm
@@ -20,6 +19,7 @@ namespace Odin.CMB_Components.EndCustomers
             f = new cmb_EndCustomer();
             cmb = f;
         }
+
         class_Global glob_Class = new class_Global();
         CMB_BLL Bll = new CMB_BLL();
         bool _showingModal = false;
@@ -33,12 +33,11 @@ namespace Odin.CMB_Components.EndCustomers
 
         public void FillData(string Beg)
         {
-            var data = CMB_BLL.getEndCustomers(Beg);
+            var data = (System.Data.DataTable)Helper.getSP("sp_EndCustomersSelectLike", Beg);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
             gv_List.DataSource = bs_List;
-
         }
 
         public void ChangeCMBElements()
@@ -62,13 +61,11 @@ namespace Odin.CMB_Components.EndCustomers
             if (result == DialogResult.OK)
             {
                 _showingModal = false;
-                int _res = Bll.AddEndCustomer(frm.FormText);
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddEndCustomer", frm.FormText));
                 FillData(frm.FormText);
             }
             if (result == DialogResult.Cancel)
-            {
                 _showingModal = false;
-            }
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -92,13 +89,11 @@ namespace Odin.CMB_Components.EndCustomers
                 if (result == DialogResult.OK)
                 {
                     _showingModal = false;
-                    Bll.EditEndCustomer(_id, frm.FormText);
+                    Helper.getSP("sp_EditEndCustomer", _id, frm.FormText);
                     FillData(frm.FormText);
                 }
                 if (result == DialogResult.Cancel)
-                {
                     _showingModal = false;
-                }
             }
         }
 
@@ -111,7 +106,7 @@ namespace Odin.CMB_Components.EndCustomers
 
             if (glob_Class.DeleteConfirm() == true)
             {
-                Bll.DeleteEndCustomer(_id);
+                Helper.getSP("sp_DeleteEndCustomer", _id);
                 FillData(string.Empty);
             }
         }

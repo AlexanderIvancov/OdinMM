@@ -42,12 +42,11 @@ namespace Odin.CMB_Components.Banks
 
         public void FillData(string Beg)
         {
-            var data = CMB_BLL.getBanks(Beg);
+            var data = (System.Data.DataTable)Helper.getSP("sp_BanksSelectLike", Beg);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
             gv_List.DataSource = bs_List;
-
         }
 
         private void gv_List_SelectionChanged(object sender, EventArgs e)
@@ -64,13 +63,11 @@ namespace Odin.CMB_Components.Banks
             if (result == DialogResult.OK)
             {
                 _showingModal = false;
-                int _res = Bll.AddBank(frm.Bank, frm.Iban, frm.Address, frm.Comments);
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddBank", frm.Bank, frm.Iban, frm.Address, frm.Comments));
                 FillData(frm.Bank);
             }
             if (result == DialogResult.Cancel)
-            {
                 _showingModal = false;
-            }
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -100,13 +97,11 @@ namespace Odin.CMB_Components.Banks
                 if (result == DialogResult.OK)
                 {
                     _showingModal = false;
-                    Bll.EditBank(frm.Id, frm.Bank, frm.Iban, frm.Address, frm.Comments);
+                    Helper.getSP("sp_EditBank", frm.Id, frm.Bank, frm.Iban, frm.Address, frm.Comments);
                     FillData(frm.Bank);
                 }
                 if (result == DialogResult.Cancel)
-                {
                     _showingModal = false;
-                }
             }
         }
 
@@ -119,7 +114,7 @@ namespace Odin.CMB_Components.Banks
 
             if (glob_Class.DeleteConfirm() == true)
             {
-                Bll.DeleteBank(_id);
+                Helper.getSP("sp_DeleteCountry", _id);
                 FillData(string.Empty);
             }
         }

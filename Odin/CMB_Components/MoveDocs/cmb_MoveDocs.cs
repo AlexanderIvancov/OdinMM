@@ -27,51 +27,32 @@ namespace Odin.CMB_Components.MoveDocs
 
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
         PopupWindowHelper PopupHelper = null;
-
         int _MoveDocId = 0;
         int _PrevId = 0;
-
         StockMove_BLL SMBll = new StockMove_BLL();
         CMB_BLL Bll = new CMB_BLL();
-
         bool _EnableSearchId = false;
         string _MoveDoc = "";
-
         public string MoveDoc
         {
             get { return txt_MoveDoc.Text; }
             set
             {
-
                 _MoveDoc = value;
                 txt_MoveDoc.Text = value;
-                DataSet ds = new DataSet();
 
-                SqlDataAdapter adapter =
-                    new SqlDataAdapter(
-                        "SELECT DISTINCT TOP 1 id FROM STO_StockOutHead WHERE name = '" + _MoveDoc.ToString() + "'", sConnStr);
-
-                adapter.Fill(ds);
-
-                DataTable dt = ds.Tables[0];
+                DataTable dt = Helper.QueryDT("SELECT DISTINCT TOP 1 id FROM STO_StockOutHead WHERE name = '" + _MoveDoc.ToString() + "'");
 
                 if (dt.Rows.Count > 0)
-                {
                     MoveDocId = Convert.ToInt32(dt.Rows[0]["id"].ToString());
-                }
                 else
                 {
-                    
-
                     _MoveDocId = 0;
                     //return;
                 }
                 MoveDocChanged?.Invoke(this);
-
-
             }
         }
-
         public int MoveDocId
         {
             get
@@ -81,38 +62,21 @@ namespace Odin.CMB_Components.MoveDocs
             }
             set
             {
-
-
                 _MoveDocId = value;
                 //MessageBox.Show(_MoveDocId.ToString());
 
                 if (_PrevId != _MoveDocId)
                 {
-                    SqlConnection conn = new SqlConnection(sConnStr);
-                    conn.Open();
-
-                    DataSet ds = new DataSet();
-
-                    SqlDataAdapter adapter =
-                        new SqlDataAdapter("SELECT top 1 * FROM STO_StockOutHead WHERE id = " + _MoveDocId.ToString(), conn);
-                    adapter.Fill(ds);
-
-                    conn.Close();
-
-                    DataTable dt = ds.Tables[0];
+                    DataTable dt = Helper.QueryDT("SELECT top 1 * FROM STO_StockOutHead WHERE id = " + _MoveDocId.ToString());
 
                     if (dt.Rows.Count > 0)
                     {
                         foreach (DataRow dr in dt.Rows)
-                        {
                             txt_MoveDoc.Text = dr["name"].ToString();
-                        }
                         MoveDocChanged?.Invoke(this);
                     }
                     else
-                    {
                         txt_MoveDoc.Text = string.Empty;
-                    }
 
                     _PrevId = _MoveDocId;
 
@@ -120,13 +84,10 @@ namespace Odin.CMB_Components.MoveDocs
                     //{
                     //    MoveDocChanged(this);
                     //}
-
                 }
             }
         }
-
         int _MoveDocSavedId = 0;
-
         public int MoveDocSavedId
         {
             get { return _MoveDocSavedId; }
@@ -144,14 +105,8 @@ namespace Odin.CMB_Components.MoveDocs
 
         public bool EnableSearchId
         {
-            get
-            {
-                return _EnableSearchId;
-            }
-            set
-            {
-                _EnableSearchId = value;
-            }
+            get { return _EnableSearchId; }
+            set { _EnableSearchId = value; }
         }
 
         private void btn_AddNew_Click(object sender, EventArgs e)
@@ -164,9 +119,8 @@ namespace Odin.CMB_Components.MoveDocs
 
             if (result == DialogResult.OK)
             {
-                
-                int _res = Bll.AddMoveDocHead(frm.DocDate, frm.DelivDate, frm.Comments, frm.DestPlaceId, frm.DelivAddressId, frm.FinDestPlaceId, frm.FinDelivAddressId,
-                                                frm.TransportId, frm.IncotermsId, frm.PalettesQty, frm.PalettesWeight, frm.BatchId, frm.StageId, frm.QtyToProduce);
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddMoveDocHead", frm.DocDate, frm.DelivDate, frm.Comments, frm.DestPlaceId, frm.DelivAddressId, frm.FinDestPlaceId, frm.FinDelivAddressId,
+                                                frm.TransportId, frm.IncotermsId, frm.PalettesQty, frm.PalettesWeight, frm.BatchId, frm.StageId, frm.QtyToProduce));
                 MoveDocId = _res;
                 MoveDocChanged?.Invoke(this);
             }
@@ -209,7 +163,7 @@ namespace Odin.CMB_Components.MoveDocs
                 if (result == DialogResult.OK)
                 {
 
-                    Bll.EditMoveDocHead(_id, frm.DocDate, frm.DelivDate, frm.Comments, frm.DestPlaceId, frm.DelivAddressId, frm.FinDestPlaceId, frm.FinDelivAddressId,
+                    Helper.getSP("sp_EditMoveDocHead", _id, frm.DocDate, frm.DelivDate, frm.Comments, frm.DestPlaceId, frm.DelivAddressId, frm.FinDestPlaceId, frm.FinDelivAddressId,
                                        frm.TransportId, frm.IncotermsId, frm.PalettesQty, frm.PalettesWeight, frm.BatchId, frm.StageId, frm.QtyToProduce);
 
                     Bll.MoveDocHeadId = _id;
@@ -240,9 +194,7 @@ namespace Odin.CMB_Components.MoveDocs
             PopupHelper.PopupCancel += delegate (object _sender, PopupCancelEventArgs _e)
             {
                 if (popup.ShowingModal)
-                {
                     _e.Cancel = true;
-                }
             };
 
             popup.FillData(MoveDoc);

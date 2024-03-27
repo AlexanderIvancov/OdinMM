@@ -43,12 +43,11 @@ namespace Odin.CMB_Components.Project
 
         public void FillData(string Beg)
         {
-            var data = CMB_BLL.getProjects(Beg);
+            var data = (System.Data.DataTable)Helper.getSP("sp_ProjectsSelectLike", Beg);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
             gv_List.DataSource = bs_List;
-
         }
 
         private void btn_AddNew_Click(object sender, EventArgs e)
@@ -62,13 +61,11 @@ namespace Odin.CMB_Components.Project
             if (result == DialogResult.OK)
             {
                 _showingModal = false;
-                int _res = Bll.AddProject(frm.FormText);
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddProject", frm.FormText));
                 FillData(frm.FormText);
             }
             if (result == DialogResult.Cancel)
-            {
                 _showingModal = false;
-            }
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -93,13 +90,11 @@ namespace Odin.CMB_Components.Project
                 if (result == DialogResult.OK)
                 {
                     _showingModal = false;
-                    Bll.EditProject(frm.Id, frm.FormText);
+                    Helper.getSP("sp_EditProject", frm.Id, frm.FormText);
                     FillData(frm.FormText);
                 }
                 if (result == DialogResult.Cancel)
-                {
                     _showingModal = false;
-                }
             }
         }
 
@@ -112,7 +107,7 @@ namespace Odin.CMB_Components.Project
 
             if (glob_Class.DeleteConfirm() == true)
             {
-                Bll.DeleteProject(_id);
+                Helper.getSP("sp_DeleteProject", _id);
                 FillData(string.Empty);
             }
         }

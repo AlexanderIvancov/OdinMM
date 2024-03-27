@@ -4,7 +4,6 @@ using Odin.Global_Classes;
 using System;
 using System.Windows.Forms;
 
-
 namespace Odin.CMB_Components.PayTerms
 {
     public partial class frm_Payterms : KryptonForm
@@ -44,12 +43,11 @@ namespace Odin.CMB_Components.PayTerms
 
         public void FillData(string Beg)
         {
-            var data = CMB_BLL.getPayterms(Beg);
+            var data = (System.Data.DataTable)Helper.getSP("sp_PaytermsSelectLike", Beg);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
             gv_List.DataSource = bs_List;
-
         }
 
         private void btn_AddNew_Click(object sender, EventArgs e)
@@ -61,13 +59,11 @@ namespace Odin.CMB_Components.PayTerms
             if (result == DialogResult.OK)
             {
                 _showingModal = false;
-                int _res = Bll.AddPayterm(frm.Payterms, frm.PaytermsLat, frm.Description);
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddPayterm", frm.Payterms, frm.PaytermsLat, frm.Description));
                 FillData(frm.Payterms);
             }
             if (result == DialogResult.Cancel)
-            {
                 _showingModal = false;
-            }
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -92,13 +88,11 @@ namespace Odin.CMB_Components.PayTerms
                 if (result == DialogResult.OK)
                 {
                     _showingModal = false;
-                    Bll.EditPayterm(frm.Id, frm.Payterms, frm.PaytermsLat, frm.Description);
+                    Helper.getSP("sp_EditPayterm", frm.Id, frm.Payterms, frm.PaytermsLat, frm.Description);
                     FillData(frm.Payterms);
                 }
                 if (result == DialogResult.Cancel)
-                {
                     _showingModal = false;
-                }
             }
         }
 
@@ -111,7 +105,7 @@ namespace Odin.CMB_Components.PayTerms
 
             if (glob_Class.DeleteConfirm() == true)
             {
-                Bll.DeletePayterm(_id);
+                Helper.getSP("sp_DeletePayterm", _id);
                 FillData(string.Empty);
             }
         }

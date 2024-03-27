@@ -26,7 +26,6 @@ namespace Odin.CMB_Components.IncomeDocs
         CMB_BLL Bll = new CMB_BLL();
         bool _showingModal = false;
         cmb_IncomeDoc f;
-
         public bool ShowingModal
         {
             get { return _showingModal; }
@@ -37,22 +36,19 @@ namespace Odin.CMB_Components.IncomeDocs
         {
             try
             {
-                
-                    ((cmb_IncomeDoc)cmb_IncomeDocOne).txt_IncomeDoc.Text = gv_List.CurrentRow.Cells["cn_name"].Value.ToString();
-                    ((cmb_IncomeDoc)cmb_IncomeDocOne).IncomeDocId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
-                
+                ((cmb_IncomeDoc)cmb_IncomeDocOne).txt_IncomeDoc.Text = gv_List.CurrentRow.Cells["cn_name"].Value.ToString();
+                ((cmb_IncomeDoc)cmb_IncomeDocOne).IncomeDocId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
             }
             catch { }
         }
 
         public void FillData(string Beg)
         {
-            var data = CMB_BLL.getIncomeDocs(Beg);
+            var data = (System.Data.DataTable)Helper.getSP("sp_IncomeDocsSelectLike", Beg);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
             gv_List.DataSource = bs_List;
-
         }
 
         private void btn_AddNew_Click(object sender, EventArgs e)
@@ -69,21 +65,18 @@ namespace Odin.CMB_Components.IncomeDocs
             if (result == DialogResult.OK)
             {
                 _showingModal = false;
-                int _res = Bll.AddIncomeDocHead(frm.IncomeDoc, frm.Serie, frm.RegDate, frm.DocDate, frm.SupId, frm.Comments, frm.CurId, frm.CurRate, frm.SenderCountryId,
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddIncomeDocHead", frm.IncomeDoc, frm.Serie, frm.RegDate, frm.DocDate, frm.SupId, frm.Comments, frm.CurId, frm.CurRate, frm.SenderCountryId,
                                                 frm.ProducerCountryId, frm.Bargain, frm.TransportId, frm.IncotermsId, frm.AdditCost, frm.Advance, frm.AdvanceDate,
-                                                frm.PayDate, frm.NoReversePVN, frm.MediatedCost, frm.Check);
+                                                frm.PayDate, frm.NoReversePVN, frm.MediatedCost, frm.Check));
                 FillData(frm.IncomeDoc);
                 ((cmb_IncomeDoc)cmb_IncomeDocOne).IncomeDocSendSave();
             }
             if (result == DialogResult.Cancel)
-            {
                 _showingModal = false;
-            }
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
         {
-
             int _id = 0;
 
             try { _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value); }
@@ -127,7 +120,7 @@ namespace Odin.CMB_Components.IncomeDocs
                 if (result == DialogResult.OK)
                 {
                     _showingModal = false;
-                    Bll.EditIncomeDocHead(_id, frm.IncomeDoc, frm.Serie, frm.RegDate, frm.DocDate, frm.SupId, frm.Comments, frm.CurId, frm.CurRate, frm.SenderCountryId,
+                    Helper.getSP("sp_EditIncomeDocHead", _id, frm.IncomeDoc, frm.Serie, frm.RegDate, frm.DocDate, frm.SupId, frm.Comments, frm.CurId, frm.CurRate, frm.SenderCountryId,
                                                     frm.ProducerCountryId, frm.Bargain, frm.TransportId, frm.IncotermsId, frm.AdditCost, frm.Advance, frm.AdvanceDate,
                                                     frm.PayDate, frm.NoReversePVN, frm.MediatedCost, frm.Check);
                     if (Bll.IncomeDocRegDate != frm.RegDate)
@@ -137,10 +130,7 @@ namespace Odin.CMB_Components.IncomeDocs
                     ((cmb_IncomeDoc)cmb_IncomeDocOne).IncomeDocSendSave();
                 }
                 if (result == DialogResult.Cancel)
-                {
                     _showingModal = false;
-                }
-
             }
         }
 
@@ -154,7 +144,7 @@ namespace Odin.CMB_Components.IncomeDocs
             if (_id != 0
                 && glob_Class.DeleteConfirm() == true)
             {
-                Bll.DeleteIncomeDocHead(_id);
+                Helper.getSP("sp_DeleteIncomeDocHead", _id);
                 FillData(string.Empty);
             }
         }

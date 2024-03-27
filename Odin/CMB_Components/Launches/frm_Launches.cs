@@ -45,16 +45,14 @@ namespace Odin.CMB_Components.Launches
         public void SetCellsColor()
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 if (Convert.ToInt32(row.Cells["cn_started"].Value) == -1)
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.LightSkyBlue;
-            }
         }
 
         public void FillData(string Beg)
         {
-            var data = CMB_BLL.getLaunches(Beg);
+            var data = (System.Data.DataTable)Helper.getSP("sp_LaunchSelectLike", Beg);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;

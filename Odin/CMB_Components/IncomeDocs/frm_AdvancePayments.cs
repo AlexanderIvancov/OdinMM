@@ -14,26 +14,16 @@ namespace Odin.CMB_Components.IncomeDocs
         }
         CMB_BLL Bll = new CMB_BLL();
         class_Global glob_Class = new class_Global();
-        #region Variables
-        public int HeadId
-        { get; set; }
-
-        #endregion
-
-        #region Methods
+        public int HeadId { get; set; }
 
         public void FillAdvances(int headid)
         {
-            var data = CMB_BLL.getIncomeAdvances(headid);
+            var data = (System.Data.DataTable)Helper.getSP("sp_SelectIncomeDocAdvances", headid);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
             gv_List.DataSource = bs_List;
         }
-
-        #endregion
-
-        #region Controls
 
         private void btn_AddNew_Click(object sender, EventArgs e)
         {
@@ -41,10 +31,9 @@ namespace Odin.CMB_Components.IncomeDocs
             DialogResult result = frm.ShowDialog();
             if (result == DialogResult.OK)
             {
-                Bll.AddIncomeDocAdvance(HeadId, frm.Amount, frm.CurId, frm.CurDate, frm.Rate);
+                Helper.getSP("sp_AddIncomeDocAdvance", HeadId, frm.Amount, frm.CurId, frm.CurDate, frm.Rate);
                 FillAdvances(HeadId);
             }
-
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -71,17 +60,15 @@ namespace Odin.CMB_Components.IncomeDocs
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    Bll.EditIncomeDocAdvance(_id, frm.Amount, frm.CurId, frm.CurDate, frm.Rate);
+                    Helper.getSP("sp_EditIncomeDocAdvance", _id, frm.Amount, frm.CurId, frm.CurDate, frm.Rate);
                     FillAdvances(HeadId);
                 }
-
             }
         }
 
         private void btn_Delete_Click(object sender, EventArgs e)
         {
             int _id = 0;
-           
 
             try
             {
@@ -91,12 +78,9 @@ namespace Odin.CMB_Components.IncomeDocs
             catch { }
             if (_id != 0 && glob_Class.DeleteConfirm() == true)
             {
-                Bll.DeleteIncomeDocAdvance(_id);
+                Helper.getSP("sp_DeleteIncomeDocAdvance", _id);
                 FillAdvances(HeadId);
             }
         }
-
-        #endregion
-
     }
 }

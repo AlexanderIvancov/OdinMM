@@ -45,15 +45,13 @@ namespace Odin.CMB_Components.Quotations
             catch { }
         }
 
-
         public void FillData(string Beg)
         {
-            var data = CMB_BLL.getQuotations(Beg);
+            var data = (System.Data.DataTable)Helper.getSP("sp_QuotationsSelectLike", Beg);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
             gv_List.DataSource = bs_List;
-
         }
 
         private void gv_List_SelectionChanged(object sender, EventArgs e)
@@ -77,7 +75,6 @@ namespace Odin.CMB_Components.Quotations
             frm.ctl_QuotDets1.ReqDateD = System.DateTime.Now;
             //frm.ctl_QuotDets1.Week = "W" + frm.ctl_QuotDets1.cmb_Week1.WeekNumber(System.DateTime.Now).ToString() + "/" + System.DateTime.Now.Year.ToString();
 
-
             frm.QuotationSaved += new QuotationSavedEventHandler(AddQuotation);
 
             frm.Show(); frm.GetKryptonFormFields();
@@ -92,7 +89,6 @@ namespace Odin.CMB_Components.Quotations
                 ((cmb_Quotations)cmb_QuotationOne).QuotationId = frm.ctl_QuotDets1.QuotId;
                 ((cmb_Quotations)cmb_QuotationOne).QuotationSendSave();
                 frm.Close();
-                
             }
         }
 
@@ -101,7 +97,6 @@ namespace Odin.CMB_Components.Quotations
             int _id = 0;
             try { _id = (Int32)gv_List.CurrentRow.Cells["cn_id"].Value; }
             catch { }
-
 
             if (_id != 0)
             {
@@ -114,7 +109,6 @@ namespace Odin.CMB_Components.Quotations
                 frm.QuotationSaved += new QuotationSavedEventHandler(AddQuotation);
 
                 frm.Show(); frm.GetKryptonFormFields();
-
             }
         }
     }

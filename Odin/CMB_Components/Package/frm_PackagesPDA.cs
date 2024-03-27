@@ -19,11 +19,11 @@ namespace Odin.CMB_Components.Package
             f = new cmb_PackagesPDA();
             cmb = f;
         }
+
         class_Global glob_Class = new class_Global();
         CMB_BLL Bll = new CMB_BLL();
         bool _showingModal = false;
         cmb_PackagesPDA f;
-
         public bool ShowingModal
         {
             get { return _showingModal; }
@@ -42,12 +42,11 @@ namespace Odin.CMB_Components.Package
 
         public void FillData(string Beg)
         {
-            var data = CMB_BLL.getPackage(Beg);
+            var data = (System.Data.DataTable)Helper.getSP("sp_PackageSelectLike", Beg);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
             gv_List.DataSource = bs_List;
-
         }
 
         private void gv_List_SelectionChanged(object sender, EventArgs e)

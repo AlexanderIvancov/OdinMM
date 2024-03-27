@@ -36,19 +36,17 @@ namespace Odin.CMB_Components.Launches
             try
             {
                 ((cmb_LaunchGroups)cmb_LaunchOne).txt_LaunchGroup.Text = gv_List.CurrentRow.Cells["cn_launchgroups"].Value.ToString();
-                
             }
             catch { }
         }
         
         public void FillData(string Beg)
         {
-            var data = CMB_BLL.getLaunchGroups(Beg);
+            var data = (System.Data.DataTable)Helper.getSP("sp_LaunchGroupsSelectLike", Beg);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
             gv_List.DataSource = bs_List;
-
         }
 
         private void gv_List_SelectionChanged(object sender, EventArgs e)

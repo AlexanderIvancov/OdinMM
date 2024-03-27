@@ -24,15 +24,11 @@ namespace Odin.CMB_Components.ExpInvoices
 
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
         PopupWindowHelper PopupHelper = null;
-
         int _InvoiceId = 0;
         int _PrevId = 0;
         public bool _isedit = false;
-
         class_Global glob_Class = new class_Global();
-          
         CMB_BLL Bll = new CMB_BLL();
-
         bool _EnableSearchId = false;
         string _Invoice = "";
         int _buyerid = 0;
@@ -44,36 +40,25 @@ namespace Odin.CMB_Components.ExpInvoices
             get { return _buyerid; }
             set { _buyerid = value; }
         }
-
         public int ReceipId
         {
             get { return _receipid; }
             set { _receipid = value; }
         }
-
         public int ValueForCustoms
         {
             get { return _valueforcustoms; }
             set { _valueforcustoms = value; }
         }
-
         public string Invoice
         {
             get { return txt_ExpInvoice.Text; }
             set
             {
-
                 _Invoice = value;
                 txt_ExpInvoice.Text = value;
-                DataSet ds = new DataSet();
 
-                SqlDataAdapter adapter =
-                    new SqlDataAdapter(
-                        "SELECT DISTINCT TOP 1 id FROM FIN_DocHeader WHERE name = '" + _Invoice.ToString() + "'", sConnStr);
-
-                adapter.Fill(ds);
-
-                DataTable dt = ds.Tables[0];
+                DataTable dt = Helper.QueryDT("SELECT DISTINCT TOP 1 id FROM FIN_DocHeader WHERE name = '" + _Invoice.ToString() + "'");
 
                 try
                 {
@@ -81,7 +66,6 @@ namespace Odin.CMB_Components.ExpInvoices
                 }
                 catch
                 {
-
                     _InvoiceId = 0;
                     return;
                 }
@@ -89,7 +73,6 @@ namespace Odin.CMB_Components.ExpInvoices
                 ExpInvoiceChanged?.Invoke(this);
             }
         }
-
         public int InvoiceId
         {
             get
@@ -99,36 +82,21 @@ namespace Odin.CMB_Components.ExpInvoices
             }
             set
             {
-
-
                 _InvoiceId = value;
 
                 //MessageBox.Show(_InvoiceId.ToString());
 
                 if (_PrevId != _InvoiceId)
                 {
-                    SqlConnection conn = new SqlConnection(sConnStr);
-                    conn.Open();
-
-                    DataSet ds = new DataSet();
-
-                    SqlDataAdapter adapter =
-                        new SqlDataAdapter("SELECT top 1 name, buyerid, isnull(valueforcustoms, 0) as valueforcustoms FROM FIN_DocHeader WHERE id = " + _InvoiceId.ToString(), conn);
-                    adapter.Fill(ds);
-
-                    conn.Close();
-
-                    DataTable dt = ds.Tables[0];
+                    DataTable dt = Helper.QueryDT("SELECT top 1 name, buyerid, isnull(valueforcustoms, 0) as valueforcustoms FROM FIN_DocHeader WHERE id = " + _InvoiceId.ToString());
 
                     if (dt.Rows.Count > 0)
-                    {
                         foreach (DataRow dr in dt.Rows)
                         {
                             txt_ExpInvoice.Text = dr["name"].ToString();
                             BuyerId = Convert.ToInt32(dr["buyerid"]);
                             ValueForCustoms = Convert.ToInt32(dr["valueforcustoms"]);
                         }
-                    }
                     else
                     {
                         txt_ExpInvoice.Text = string.Empty;
@@ -139,13 +107,10 @@ namespace Odin.CMB_Components.ExpInvoices
                     _PrevId = _InvoiceId;
 
                     ExpInvoiceChanged?.Invoke(this);
-
                 }
             }
         }
-
         int _InvoiceSavedId = 0;
-
         public int InvoiceSavedId
         {
             get { return _InvoiceSavedId; }
@@ -155,22 +120,14 @@ namespace Odin.CMB_Components.ExpInvoices
                 ExpInvoiceSaved?.Invoke(this);
             }
         }
-
         public void InvoiceSendSave()
         {
             ExpInvoiceSaved?.Invoke(this);
         }
-
         public bool EnableSearchId
         {
-            get
-            {
-                return _EnableSearchId;
-            }
-            set
-            {
-                _EnableSearchId = value;
-            }
+            get { return _EnableSearchId; }
+            set { _EnableSearchId = value; }
         }
 
         private void btn_AdvView_Click(object sender, EventArgs e)
@@ -193,9 +150,7 @@ namespace Odin.CMB_Components.ExpInvoices
             PopupHelper.PopupCancel += delegate (object _sender, PopupCancelEventArgs _e)
             {
                 if (popup.ShowingModal)
-                {
                     _e.Cancel = true;
-                }
             };
 
             popup.FillData(Invoice);
@@ -217,29 +172,27 @@ namespace Odin.CMB_Components.ExpInvoices
 
             frm.ExportInvoiceSaving += new ExportInvoiceSavingEventHandler(AddingInvoice);
             frm.Show(); frm.GetKryptonFormFields();
-                        
         }
 
         public void AddingInvoice(object sender)
         {
 
-            int _res = Bll.AddExInvoice(frm.Serie, frm.Invoice, frm.InvoiceType, frm.InvCode, frm.StampDate, frm.DocDate, frm.ReceiverId,
+            int _res = Convert.ToInt32(Helper.getSP("sp_AddExInvoiceHead", frm.Serie, frm.Invoice, frm.InvoiceType, frm.InvCode, frm.StampDate, frm.DocDate, frm.ReceiverId,
                                         frm.BuyerId, frm.ReceiverAddressId, frm.BuyerAddressId, frm.Comments, frm.CurId, frm.CurRate,
                                         frm.Bargain, frm.TransportId, frm.IncotermsId, frm.Payment, frm.BankContId, frm.AssetId,
                                         frm.SenderAddressId, frm.PlaceOfLoading, 0, 0, frm.VAT, frm.PayBefore, frm.InAdvance,
                                         frm.AdvanceDate, frm.ProformaNR, frm.PayDate, frm.PaymentId, frm.SellerContPersId,
-                                        frm.BuyerContPersId, frm.ValueForCustoms, frm.ESignature, frm.Recipient);
+                                        frm.BuyerContPersId, frm.ValueForCustoms, frm.ESignature, frm.Recipient));
             InvoiceId = _res;
             ExpInvoiceChanged?.Invoke(this);
 
             frm.Close();
-
         }
 
         public void EditingInvoice(object sender)
         {
 
-            Bll.EditExInvoice(frm.Id, frm.Invoice, frm.Serie, frm.StampDate, frm.DocDate, frm.ReceiverId,
+            Helper.getSP("sp_EditExInvoiceHead", frm.Id, frm.Invoice, frm.Serie, frm.StampDate, frm.DocDate, frm.ReceiverId,
                                              frm.BuyerId, frm.ReceiverAddressId, frm.BuyerAddressId, frm.Comments, frm.CurId, frm.CurRate,
                                              frm.Bargain, frm.TransportId, frm.IncotermsId, frm.Payment, frm.BankContId, frm.AssetId,
                                              frm.SenderAddressId, frm.PlaceOfLoading, 0, 0, frm.VAT, frm.PayBefore, frm.InAdvance,
@@ -253,7 +206,6 @@ namespace Odin.CMB_Components.ExpInvoices
             BuyerId = frm.BuyerId;
 
             frm.Close();
-
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -275,9 +227,7 @@ namespace Odin.CMB_Components.ExpInvoices
                 Bll.ExInvoiceId = _id;
                 frm.Invoice = Bll.ExInvoice;
                 frm.FillSellerContPersons();
-
                 frm.HeaderText = "Edit invoice: " + frm.Invoice;
-
                 frm.Serie = Bll.ExInvoiceSerie;
                 frm.InvoiceType = Bll.ExInvoiceType;
                 frm.StampDate = Bll.ExInvoiceStampDate;
@@ -309,13 +259,9 @@ namespace Odin.CMB_Components.ExpInvoices
                 frm.ValueForCustoms = Bll.ExInvoiceValueForCustoms;
                 frm.ESignature = Bll.ExInvoiceESignature;
                 frm.Recipient = Bll.ExInvoiceRecepPers;
-
                 frm.CheckEmpty();
-
                 frm.ExportInvoiceSaving += new ExportInvoiceSavingEventHandler(EditingInvoice);
-
                 frm.Show(); frm.GetKryptonFormFields();
-                
             }
         }
 

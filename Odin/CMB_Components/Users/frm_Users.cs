@@ -22,9 +22,7 @@ namespace Odin.CMB_Components.Users
         cmb_Users f;
         class_Global glob_Class = new class_Global();
         CMB_BLL Bll = new CMB_BLL();
-
         bool _showingModal = false;
-
         public bool ShowingModal
         {
             get { return _showingModal; }
@@ -33,12 +31,11 @@ namespace Odin.CMB_Components.Users
 
         public void FillData(string Beg)
         {
-            var data = CMB_BLL.getUsers(Beg);
+            var data = (System.Data.DataTable)Helper.getSP("sp_UsersSelectLike", Beg);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
             gv_List.DataSource = bs_List;
-
         }
 
         public void ChangeCMBElements()
@@ -61,15 +58,13 @@ namespace Odin.CMB_Components.Users
             if (result == DialogResult.OK)
             {
                 _showingModal = false;
-                int _res = Bll.SaveUser(0, frm.UserName, frm.UserSurName, frm.UserLogin, frm.IsDBUser, frm.UserEmail, frm.UserLang,
+                int _res = Convert.ToInt32(Helper.getSP("sp_SaveUser", 0, frm.UserName, frm.UserSurName, frm.UserLogin, frm.IsDBUser, frm.UserEmail, frm.UserLang,
                                         frm.UserPhone, frm.UserFax, frm.UserJob, frm.UserInitials, frm.UserDeptId, frm.UserTabNR, 
-                                        frm.IsActive, frm.UserShortName);
+                                        frm.IsActive, frm.UserShortName));
                 FillData(frm.UserName + " " + frm.UserSurName);
             }
             if (result == DialogResult.Cancel)
-            {
                 _showingModal = false;
-            }
         }
 
         private void btn_Edit_Click(object sender, EventArgs e)
@@ -106,15 +101,13 @@ namespace Odin.CMB_Components.Users
                 if (result == DialogResult.OK)
                 {
                     _showingModal = false;
-                    int _res = Bll.SaveUser(_id, frm.UserName, frm.UserSurName, frm.UserLogin, frm.IsDBUser, frm.UserEmail, frm.UserLang,
+                    int _res = Convert.ToInt32(Helper.getSP("sp_SaveUser", _id, frm.UserName, frm.UserSurName, frm.UserLogin, frm.IsDBUser, frm.UserEmail, frm.UserLang,
                                             frm.UserPhone, frm.UserFax, frm.UserJob, frm.UserInitials, frm.UserDeptId, frm.UserTabNR,
-                                            frm.IsActive, frm.UserShortName);
+                                            frm.IsActive, frm.UserShortName));
                     FillData(frm.UserName + " " + frm.UserSurName);
                 }
                 if (result == DialogResult.Cancel)
-                {
                     _showingModal = false;
-                }
             }
         }
         private void btn_Delete_Click(object sender, EventArgs e)
@@ -126,7 +119,7 @@ namespace Odin.CMB_Components.Users
 
             if (glob_Class.DeleteConfirm() == true)
             {
-                Bll.DeleteUser(_id);
+                Helper.getSP("sp_DeleteUser", _id);
                 FillData(string.Empty);
             }
         }
@@ -170,14 +163,12 @@ namespace Odin.CMB_Components.Users
                     if (result == DialogResult.OK)
                     {
                         _showingModal = false;
-                        Bll.EncryptMailPassword(_id, frm.Password);
+                        Helper.ExecuteQuery($@"update BAS_Users set mailpwd = EncryptByPassPhrase(name + surname + userlogin, {frm.Password}, 1, CONVERT(varbinary, id)) where id = {_id}");
                         
                         FillData(Bll.UserName + " " + Bll.UserSurName);
                     }
                     if (result == DialogResult.Cancel)
-                    {
                         _showingModal = false;
-                    }
                 //}
             }
         }

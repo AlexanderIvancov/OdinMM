@@ -63,7 +63,7 @@ namespace Odin.CMB_Components.PurchaseOrders
 
         public void FillData(string Beg)
         {
-            var data = CMB_BLL.getPurchaseOrders(Beg);
+            var data = (System.Data.DataTable)Helper.getSP("sp_PurchaseOrdersSelectLike", Beg);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;
@@ -72,7 +72,7 @@ namespace Odin.CMB_Components.PurchaseOrders
 
         public void FillDataEnabledArticles(string Beg, int ArticleId)
         {
-            var data = CMB_BLL.getPurchaseOrdersEnabledArticles(Beg, ArticleId);
+            var data = (System.Data.DataTable)Helper.getSP("sp_PurchaseOrdersSelectLikeArticles", Beg, ArticleId);
 
             gv_List.AutoGenerateColumns = false;
             bs_List.DataSource = data;

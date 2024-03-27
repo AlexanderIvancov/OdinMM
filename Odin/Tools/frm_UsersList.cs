@@ -5,7 +5,6 @@ using Odin.Global_Classes;
 using System;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -29,14 +28,11 @@ namespace Odin.Tools
         Tools_BLL Bll = new Tools_BLL();
         CMB_BLL Bllc = new CMB_BLL();
         CMB_BLL Bll1 = new CMB_BLL();
-
         public int RowIndex = 0;
         public int ColumnIndex = 0;
         public string ColumnName = "";
         public string CellValue = "";
-
         public int _PrevId = 0;
-        
         public int UserId
         {
             get;
@@ -50,10 +46,8 @@ namespace Odin.Tools
         public void SetCellsColor()
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 if (Convert.ToInt32(row.Cells["chk_isactive"].Value) != -1)
                     row.DefaultCellStyle.BackColor = Color.Gainsboro;
-            }
         }
 
         public void FillList()
@@ -62,25 +56,20 @@ namespace Odin.Tools
 
             gv_List.ThreadSafeCall(delegate
             {
-
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
                 SetCellsColor();
-                
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
                 bn_List.BindingSource = bs_List;
             });
- 
         }
 
         private bool CheckOldRow()
         {
-
             try
             {
                 UserId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
@@ -91,9 +80,7 @@ namespace Odin.Tools
             }
 
             if (_PrevId == UserId)
-            {
                 return true;
-            }
             else
             {
                 _PrevId = UserId;
@@ -122,7 +109,6 @@ namespace Odin.Tools
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -150,7 +136,6 @@ namespace Odin.Tools
             frm.ColumnNumber = gv_List.CurrentCell.ColumnIndex;
             frm.ColumnText = gv_List.Columns[frm.ColumnNumber].HeaderText;
             frm.ShowDialog();
-
         }
 
         private void mni_FilterBy_Click(object sender, EventArgs e)
@@ -169,8 +154,6 @@ namespace Odin.Tools
             }
             catch { }
             SetCellsColor();
-
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -183,7 +166,6 @@ namespace Odin.Tools
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -193,7 +175,6 @@ namespace Odin.Tools
                 bs_List.RemoveFilter();
             }
             catch { }
-            
         }
 
         private void mni_Copy_Click(object sender, EventArgs e)
@@ -226,7 +207,6 @@ namespace Odin.Tools
             ED.DgvIntoExcel();
         }
 
-
         #endregion
         #endregion
 
@@ -258,12 +238,11 @@ namespace Odin.Tools
 
         private void gv_List_SelectionChanged(object sender, EventArgs e)
         {
-            if (CheckOldRow() == false)
-            {
-                //cmb_Users1.UserId = UserId;
-            }
+            //if (CheckOldRow() == false)
+            //{
+            //    cmb_Users1.UserId = UserId;
+            //}
         }
-
 
         #endregion
 
@@ -274,7 +253,6 @@ namespace Odin.Tools
 
         private void btn_ChangePassword_Click(object sender, EventArgs e)
         {
-            
             int _id = 0;
 
             try { _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value); }
@@ -285,10 +263,8 @@ namespace Odin.Tools
                 Bllc.UserId = _id;
                 if (Bllc.UserLogin.ToLower().Trim() != Bllc.UserCurrent.ToLower().Trim()
                     /*Bllc.UserLogin != System.Environment.UserName*/)
-                {
                     MessageBox.Show("You can not change password for user with different login! Current user: " + Bllc.UserCurrent.ToLower() + ", login to change: " + Bllc.UserLogin.ToLower());
                     //MessageBox.Show("You can not change password for user with different login!");
-                }
                 else
                 {
                     frm_EmailPassword frm = new frm_EmailPassword();
@@ -299,13 +275,8 @@ namespace Odin.Tools
                     DialogResult result = frm.ShowDialog();
 
                     if (result == DialogResult.OK)
-                    {
                         Bllc.EncryptMailPassword(_id, frm.Password);
-                    }
-                    if (result == DialogResult.Cancel)
-                    {
-                        
-                    }
+                    //if (result == DialogResult.Cancel) { }
                 }
             }
         }
@@ -341,13 +312,11 @@ namespace Odin.Tools
 
                 if (result == DialogResult.OK)
                 {
-                   
-                    int _res = Bll1.SaveUser(_id, frm.UserName, frm.UserSurName, frm.UserLogin, frm.IsDBUser, frm.UserEmail, frm.UserLang,
+                    int _res = Convert.ToInt32(Helper.getSP("sp_SaveUser", _id, frm.UserName, frm.UserSurName, frm.UserLogin, frm.IsDBUser, frm.UserEmail, frm.UserLang,
                                             frm.UserPhone, frm.UserFax, frm.UserJob, frm.UserInitials, frm.UserDeptId, frm.UserTabNR,
-                                            frm.IsActive, frm.UserShortName);
+                                            frm.IsActive, frm.UserShortName));
                     FillList();
                 }
-                
             }
         }
 
@@ -359,9 +328,9 @@ namespace Odin.Tools
 
             if (result == DialogResult.OK)
             {
-                int _res = Bll1.SaveUser(0, frm.UserName, frm.UserSurName, frm.UserLogin, frm.IsDBUser, frm.UserEmail, frm.UserLang,
+                int _res = Convert.ToInt32(Helper.getSP("sp_SaveUser", 0, frm.UserName, frm.UserSurName, frm.UserLogin, frm.IsDBUser, frm.UserEmail, frm.UserLang,
                                         frm.UserPhone, frm.UserFax, frm.UserJob, frm.UserInitials, frm.UserDeptId, frm.UserTabNR,
-                                        frm.IsActive, frm.UserShortName);
+                                        frm.IsActive, frm.UserShortName));
                 FillList();
             }
         }
