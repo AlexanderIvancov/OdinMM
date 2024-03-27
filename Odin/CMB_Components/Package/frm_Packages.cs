@@ -58,7 +58,7 @@ namespace Odin.CMB_Components.Package
             if (result == DialogResult.OK)
             {
                 _showingModal = false;
-                int _res = Convert.ToInt32(Helper.getSP("sp_AddPackage", frm.Package, frm.VolumeWeight);
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddPackage", frm.Package, frm.VolumeWeight));
                 FillData(frm.Package);
             }
             if (result == DialogResult.Cancel)
