@@ -182,7 +182,7 @@
             this.btn_CheckAccounts = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.kryptonRibbonGroupTriple32 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
             this.btn_Intrastat = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
-            this.kryptonRibbonGroupButton14 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.btn_Turnover = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.kryptonRibbonGroupButton15 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.tab_Personnel = new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab();
             this.kryptonRibbonGroup24 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
@@ -250,7 +250,8 @@
             this.kryptonRibbon1.RibbonAppButton.AppButtonBaseColorLight = System.Drawing.Color.Black;
             this.kryptonRibbon1.RibbonAppButton.AppButtonImage = global::Odin.Global_Resourses.Valknut;
             this.kryptonRibbon1.RibbonAppButton.AppButtonMenuItems.AddRange(new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItemBase[] {
-            this.btn_Exit, this.btn_Lang});
+            this.btn_Exit,
+            this.btn_Lang});
             this.kryptonRibbon1.RibbonAppButton.AppButtonShowRecentDocs = false;
             this.kryptonRibbon1.RibbonTabs.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab[] {
             this.tab_Register,
@@ -266,8 +267,7 @@
             this.tab_DataCollection,
             this.tab_ReadOnly,
             this.tab_Settings});
-            this.kryptonRibbon1.SelectedContext = null;
-            this.kryptonRibbon1.SelectedTab = this.tab_Register;
+            this.kryptonRibbon1.SelectedTab = this.tab_BookKeeping;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1660, 115);
             this.kryptonRibbon1.TabIndex = 0;
             // 
@@ -1308,8 +1308,8 @@
             // kryptonRibbonGroupTriple32
             // 
             this.kryptonRibbonGroupTriple32.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupItem[] {
+            this.btn_Turnover,
             this.btn_Intrastat,
-            this.kryptonRibbonGroupButton14,
             this.kryptonRibbonGroupButton15});
             // 
             // btn_Intrastat
@@ -1319,9 +1319,12 @@
             this.btn_Intrastat.TextLine1 = "Intrastat";
             this.btn_Intrastat.Click += new System.EventHandler(this.btn_Intrastat_Click);
             // 
-            // kryptonRibbonGroupButton14
+            // btn_Turnover
             // 
-            this.kryptonRibbonGroupButton14.Visible = false;
+            this.btn_Turnover.ImageLarge = global::Odin.Global_Resourses.Refresh_24x24;
+            this.btn_Turnover.ImageSmall = global::Odin.Global_Resourses.Refresh_24x24;
+            this.btn_Turnover.TextLine1 = "Turnover";
+            this.btn_Turnover.Click += new System.EventHandler(this.btn_Turnover_Click);
             // 
             // kryptonRibbonGroupButton15
             // 
@@ -1722,8 +1725,8 @@
             this.SizeChanged += new System.EventHandler(this.Main_SizeChanged);
             this.Resize += new System.EventHandler(this.Main_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonRibbon1)).EndInit();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
-            this.PerformLayout(); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1892,7 +1895,7 @@
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton13;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple32;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_Intrastat;
-        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton14;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_Turnover;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton15;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_ImmidiateConsumption;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_BatchRatio;

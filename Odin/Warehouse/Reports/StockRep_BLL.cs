@@ -168,5 +168,45 @@ namespace Odin.Warehouse.Reports
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
 
+        public static DataTable getTurnover2110(string _datefrom, string _datetill)
+        {
+            string query = "sp_BookTurnover2110";
+
+            var sqlparams = new List<SqlParameter>
+            {
+
+                new SqlParameter("@datefrom",SqlDbType.NVarChar){Value = _datefrom},
+                new SqlParameter("@datetill",SqlDbType.NVarChar){Value = _datetill}
+            };
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
+        }
+
+        public static DataTable getTurnover2120(string _datefrom, string _datetill)
+        {
+            string query = "sp_BookTurnover2120";
+
+            var sqlparams = new List<SqlParameter>
+            {
+                new SqlParameter("@datefrom",SqlDbType.NVarChar){Value = _datefrom},
+                new SqlParameter("@datetill",SqlDbType.NVarChar){Value = _datetill}
+            };
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
+        }
+
+        public static DataTable getTurnover2130(string _datefrom, string _datetill)
+        {
+            string query = "sp_BookTurnover2130";
+
+            var sqlparams = new List<SqlParameter>
+            {
+
+                new SqlParameter("@datefrom",SqlDbType.NVarChar){Value = _datefrom},
+                new SqlParameter("@datetill",SqlDbType.NVarChar){Value = _datetill}
+            };
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
+        }
     }
 }

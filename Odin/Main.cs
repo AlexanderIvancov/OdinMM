@@ -39,6 +39,7 @@ using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
+
 namespace Odin
 {
     public delegate void  InitiateMinimizeEventHandler(object sender);
@@ -114,6 +115,7 @@ namespace Odin
         frm_BatchProjects BatchProjects = null;
         frm_BatchesNew BatchesNew = null;
         frm_PlanningView PlanningView = null;
+        frm_TurnoverReports TurnoverReport = null;
 
         #endregion
 
@@ -1369,6 +1371,21 @@ namespace Odin
             PlanningView = new frm_PlanningView();
             PlanningView._Main = this;
             PlanningView.Show(pn_Main);
+        }
+
+        private void btn_Turnover_Click(object sender, EventArgs e)
+        {
+            foreach (var f in MdiChildren.Where(f => f.Name == "frm_TurnoverReports"))
+            {
+                f.BringToFront();
+                return;
+            }
+            TurnoverReport = new frm_TurnoverReports();
+            TurnoverReport._Main = this;
+            TurnoverReport.ClearDates();
+            // public Main _Main;
+            //Articles.InitiateResize();
+            TurnoverReport.Show(pn_Main);
         }
     }
 }

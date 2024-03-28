@@ -2533,6 +2533,12 @@
       <DependentUpon>frm_Movement.cs</DependentUpon>
     </Compile>
     <Compile Include="Warehouse\Movements\StockMove_BLL.cs" />
+    <Compile Include="Warehouse\Reports\frm_TurnoverReports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\Reports\frm_TurnoverReports.designer.cs">
+      <DependentUpon>frm_TurnoverReports.cs</DependentUpon>
+    </Compile>
     <Compile Include="Warehouse\Reports\rpt_IncomeReport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -3974,6 +3980,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\Reports\frm_DeadStock.resx">
       <DependentUpon>frm_DeadStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\Reports\frm_TurnoverReports.resx">
+      <DependentUpon>frm_TurnoverReports.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\Requests\Controls\ctl_ReqHistory.resx">
       <DependentUpon>ctl_ReqHistory.cs</DependentUpon>
