@@ -99,6 +99,7 @@
             this.chk_WIP = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.chk_ShowInTransit = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
+            this.rb_Rus = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
             this.rb_English = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
             this.rb_Lat = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
             this.kryptonLabel27 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -118,7 +119,6 @@
             this.btn_FixedAssets = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.btn_Refresh = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.btn_Clear = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.rb_Rus = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).BeginInit();
             this.mnu_Lines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
@@ -165,7 +165,6 @@
             // mni_FilterFor
             // 
             this.mni_FilterFor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.mni_FilterFor.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.mni_FilterFor.Name = "mni_FilterFor";
             this.mni_FilterFor.Size = new System.Drawing.Size(150, 23);
             this.mni_FilterFor.TextChanged += new System.EventHandler(this.mni_FilterFor_TextChanged);
@@ -250,7 +249,6 @@
             this.kryptonHeader2.AutoSize = false;
             this.kryptonHeader2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
             this.kryptonHeader2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.kryptonHeader2.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.Primary;
             this.kryptonHeader2.Location = new System.Drawing.Point(0, 0);
             this.kryptonHeader2.Name = "kryptonHeader2";
             this.kryptonHeader2.Size = new System.Drawing.Size(701, 41);
@@ -504,8 +502,8 @@
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(43, 22);
-            this.bindingNavigatorCountItem.Text = "для {0}";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
+            this.bindingNavigatorCountItem.Text = "of {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
             // 
             // bindingNavigatorMoveFirstItem
@@ -535,7 +533,6 @@
             // 
             this.bindingNavigatorPositionItem.AccessibleName = "Position";
             this.bindingNavigatorPositionItem.AutoSize = false;
-            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
             this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
             this.bindingNavigatorPositionItem.Text = "0";
@@ -683,7 +680,6 @@
             this.txt_ActDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.txt_ActDate.Location = new System.Drawing.Point(121, 74);
             this.txt_ActDate.Name = "txt_ActDate";
-            this.txt_ActDate.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Global;
             this.txt_ActDate.Size = new System.Drawing.Size(100, 21);
             this.txt_ActDate.TabIndex = 284;
             // 
@@ -715,9 +711,6 @@
             // 
             // kryptonGroupBox2
             // 
-            this.kryptonGroupBox2.CaptionStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.GroupBoxCaption;
-            this.kryptonGroupBox2.GroupBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlGroupBox;
-            this.kryptonGroupBox2.GroupBorderStyle = ComponentFactory.Krypton.Toolkit.PaletteBorderStyle.ControlGroupBox;
             this.kryptonGroupBox2.Location = new System.Drawing.Point(506, 106);
             this.kryptonGroupBox2.Name = "kryptonGroupBox2";
             // 
@@ -730,7 +723,6 @@
             this.kryptonGroupBox2.Size = new System.Drawing.Size(223, 97);
             this.kryptonGroupBox2.TabIndex = 281;
             this.kryptonGroupBox2.Values.Heading = "Accounting inventory";
-            this.kryptonGroupBox2.Visible = false;
             // 
             // btn_FCSRefresh
             // 
@@ -792,9 +784,6 @@
             // 
             // kryptonGroupBox1
             // 
-            this.kryptonGroupBox1.CaptionStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.GroupBoxCaption;
-            this.kryptonGroupBox1.GroupBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlGroupBox;
-            this.kryptonGroupBox1.GroupBorderStyle = ComponentFactory.Krypton.Toolkit.PaletteBorderStyle.ControlGroupBox;
             this.kryptonGroupBox1.Location = new System.Drawing.Point(506, 237);
             this.kryptonGroupBox1.Name = "kryptonGroupBox1";
             // 
@@ -806,6 +795,14 @@
             this.kryptonGroupBox1.Size = new System.Drawing.Size(223, 55);
             this.kryptonGroupBox1.TabIndex = 278;
             this.kryptonGroupBox1.Values.Heading = "Printing language";
+            // 
+            // rb_Rus
+            // 
+            this.rb_Rus.Location = new System.Drawing.Point(151, 3);
+            this.rb_Rus.Name = "rb_Rus";
+            this.rb_Rus.Size = new System.Drawing.Size(64, 20);
+            this.rb_Rus.TabIndex = 2;
+            this.rb_Rus.Values.Text = "Russian";
             // 
             // rb_English
             // 
@@ -851,7 +848,6 @@
             this.txt_Date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.txt_Date.Location = new System.Drawing.Point(121, 237);
             this.txt_Date.Name = "txt_Date";
-            this.txt_Date.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Global;
             this.txt_Date.Size = new System.Drawing.Size(92, 21);
             this.txt_Date.TabIndex = 249;
             // 
@@ -986,7 +982,6 @@
             this.btn_Refresh,
             this.btn_Clear});
             this.kryptonHeader1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.kryptonHeader1.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.Primary;
             this.kryptonHeader1.Location = new System.Drawing.Point(0, 0);
             this.kryptonHeader1.Name = "kryptonHeader1";
             this.kryptonHeader1.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Silver;
@@ -1000,9 +995,6 @@
             // 
             this.btn_FixedAssets.Edge = ComponentFactory.Krypton.Toolkit.PaletteRelativeEdgeAlign.Near;
             this.btn_FixedAssets.Image = global::Odin.Global_Resourses.toolbox;
-            this.btn_FixedAssets.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.btn_FixedAssets.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
-            this.btn_FixedAssets.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Generic;
             this.btn_FixedAssets.UniqueName = "FE5F36CD6C8248129A92CED3FB774333";
             this.btn_FixedAssets.Click += new System.EventHandler(this.btn_FixedAssets_Click);
             // 
@@ -1010,9 +1002,6 @@
             // 
             this.btn_Refresh.Edge = ComponentFactory.Krypton.Toolkit.PaletteRelativeEdgeAlign.Near;
             this.btn_Refresh.Image = global::Odin.Global_Resourses.reload_4545;
-            this.btn_Refresh.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.btn_Refresh.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
-            this.btn_Refresh.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Generic;
             this.btn_Refresh.UniqueName = "B6748632D5384B24EEB0EB4621A7108D";
             this.btn_Refresh.Click += new System.EventHandler(this.btn_Refresh_Click);
             // 
@@ -1020,19 +1009,8 @@
             // 
             this.btn_Clear.Edge = ComponentFactory.Krypton.Toolkit.PaletteRelativeEdgeAlign.Near;
             this.btn_Clear.Image = global::Odin.Global_Resourses.clear;
-            this.btn_Clear.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.btn_Clear.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
-            this.btn_Clear.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Generic;
             this.btn_Clear.UniqueName = "3502D2542D5C42F0078623FF0A695273";
             this.btn_Clear.Click += new System.EventHandler(this.btn_Clear_Click);
-            // 
-            // rb_Rus
-            // 
-            this.rb_Rus.Location = new System.Drawing.Point(151, 3);
-            this.rb_Rus.Name = "rb_Rus";
-            this.rb_Rus.Size = new System.Drawing.Size(64, 20);
-            this.rb_Rus.TabIndex = 2;
-            this.rb_Rus.Values.Text = "Russian";
             // 
             // frm_InventoryReport
             // 
@@ -1073,7 +1051,7 @@
             this.kryptonGroupBox1.Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).EndInit();
             this.kryptonGroupBox1.ResumeLayout(false);
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
