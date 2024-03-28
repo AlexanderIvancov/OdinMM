@@ -10,6 +10,7 @@ namespace Odin.Purchase
         {
             InitializeComponent();
         }
+
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
         class_Global glob_Class = new class_Global();
 
@@ -22,16 +23,13 @@ namespace Odin.Purchase
             get { return cmb_PurchaseOrdersLines1.PurchaseOrderLineId; }
             set
             {
-
                 _poid = value;
                 FillConfirmations(_poid);
                 POBll.POId = _poid;
 
             }
         }
-
         int _confid = 0;
-
         public int ConfId
         {
             get { return _confid; }
@@ -48,25 +46,21 @@ namespace Odin.Purchase
             double _res = 0;
 
             foreach (DataGridViewRow row in gv_List.Rows)
-            {
                 _res = _res + Convert.ToDouble(row.Cells["cn_confirmqty"].Value);
-            }
 
             return _res;
         }
 
         public void FillConfirmations(int _POId)
         {
-            var data = PO_BLL.getPOConfirmations(_POId);
+            var data = (System.Data.DataTable)Helper.getSP("sp_SelectPOConfirmations", _POId);
 
             gv_List.ThreadSafeCall(delegate
             {
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
-
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -87,7 +81,7 @@ namespace Odin.Purchase
 
             if (result == DialogResult.OK)
             {
-                int _res = POBll.AddPOConfirmation(POId, frm.Qty, frm.ConfDate, frm.Comments, frm.ConfType);
+                int _res = Convert.ToInt32(Helper.getSP("sp_AddPOConfirm", POId, frm.Qty, frm.ConfDate, frm.Comments, frm.ConfType));
 
                 FillConfirmations(POId);
             }
@@ -102,17 +96,15 @@ namespace Odin.Purchase
             frm.ConfDate = POBll.ConfDate;
             frm.Comments = POBll.ConfComments;
             frm.ConfType = POBll.ConfType;
-           
 
             DialogResult result = frm.ShowDialog();
 
             if (result == DialogResult.OK)
             {
-                POBll.EditPOConfirmation(POBll.ConfId, POId, frm.Qty, frm.ConfDate, frm.Comments, frm.ConfType);
+                Helper.getSP("sp_EditPOConfirm", POBll.ConfId, POId, frm.Qty, frm.ConfDate, frm.Comments, frm.ConfType);
 
                 FillConfirmations(POId);
             }
-
         }
 
         private void btn_Delete_Click(object sender, EventArgs e)
@@ -123,7 +115,7 @@ namespace Odin.Purchase
             catch { _confid = 0; }
 
             if (glob_Class.DeleteConfirm() == true)
-                POBll.DeletePOConfirmation(_confid);
+                Helper.getSP("sp_DeletePOConfirm", _confid);
         }
               
 
@@ -135,10 +127,7 @@ namespace Odin.Purchase
             catch { ConfId = 0; }
         }
 
-        private void cmb_PurchaseOrdersLines1_Load(object sender, EventArgs e)
-        {
-           
-        }
+        private void cmb_PurchaseOrdersLines1_Load(object sender, EventArgs e)        {        }
 
         private void cmb_PurchaseOrdersLines1_PurchaseOrderChanged(object sender)
         {
@@ -164,10 +153,9 @@ namespace Odin.Purchase
 
                 if (result == DialogResult.OK)
                 {
-                    POBll.AddPOConfirmationAll(POId, frm.Date, frm.ConfType);
+                    Helper.getSP("sp_AddPOConfirmAll", POId, frm.Date, frm.ConfType);
                     FillConfirmations(POId);
                 }
-
             }
         }
     }

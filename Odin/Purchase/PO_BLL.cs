@@ -1,13 +1,11 @@
 ﻿using Odin.Global_Classes;
 using System;
 using System.Data;
-using System.Data.SqlClient;
 
 namespace Odin.Purchase
 {
     public class PO_BLL
     {
-        public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
 
         #region Header
 
@@ -131,7 +129,6 @@ namespace Odin.Purchase
         #region Details
 
         int _poid = 0;
-
         public int LastPOLine(int poheadid)
         {
             int _res = 0;
@@ -146,7 +143,6 @@ namespace Odin.Purchase
 
             return _res;
         }
-
         public int POId
         {
             get { return _poid; }
@@ -247,15 +243,7 @@ namespace Odin.Purchase
 
         #region Confirmations
 
-        public static DataTable getPOConfirmations(int _poid)
-        {
-            string query = "EXECUTE sp_SelectPOConfirmations @poid = " + _poid;
-
-            return Helper.QueryDT(query);
-        }
-
         int _confid = 0;
-
         public int ConfId
         {
             get { return _confid; }
@@ -263,26 +251,11 @@ namespace Odin.Purchase
             {
                 _confid = value;
 
-                SqlConnection conn = new SqlConnection(sConnStr);
-                conn.Open();
-                DataSet ds = new DataSet();
-
-                SqlDataAdapter adapter =
-                    new SqlDataAdapter(
-                        "execute sp_SelectPOConfDets @id = " + _confid, conn);
-
-
-                conn.Close();
-
-                adapter.Fill(ds);
-
-                DataTable dt = ds.Tables[0];
+                DataTable dt = (DataTable)Helper.getSP("sp_SelectPOConfDets", _confid);
 
                 if (dt.Rows.Count > 0)
-                {
                     foreach (DataRow dr in dt.Rows)
                     {
-
                         ConfComments = dr["comments"].ToString();
                         ConfCreatAt = dr["createdat"].ToString();
                         ConfCreatBy = dr["createdby"].ToString();
@@ -290,31 +263,18 @@ namespace Odin.Purchase
                         ConfDate = dr["confirmdate"].ToString();
                         ConfQty = Convert.ToDouble(dr["confirmqty"]);
                         ConfType = dr["conftype"].ToString();
-
                     }
-                }
                 else
-                {
                     ClearConfDets();
-                }
             }
         }
-
-        public string ConfComments
-        { get; set; }
-        public string ConfCreatAt
-        { get; set; }
-        public string ConfCreatBy
-        { get; set; }
-        public int ConfPOId
-        { get; set; }
-        public string ConfDate
-        { get; set; }
-        public double ConfQty
-        { get; set; }
-        public string ConfType
-        { get; set; }
-       
+        public string ConfComments { get; set; }
+        public string ConfCreatAt { get; set; }
+        public string ConfCreatBy { get; set; }
+        public int ConfPOId { get; set; }
+        public string ConfDate { get; set; }
+        public double ConfQty { get; set; }
+        public string ConfType { get; set; }
 
         public void ClearConfDets()
         {
@@ -327,104 +287,7 @@ namespace Odin.Purchase
             ConfType = "";
         }
 
-        public int AddPOConfirmation(int poid, double qty, string confdate, string comments, string conftype)
-        {
-            int _res = 0;
-
-            SqlConnection sqlConn = new SqlConnection(sConnStr);
-            SqlCommand sqlComm = new SqlCommand("sp_AddPOConfirm", sqlConn);
-            sqlComm.CommandType = CommandType.StoredProcedure;
-
-            sqlComm.Parameters.AddWithValue("@poid", poid);
-            sqlComm.Parameters.AddWithValue("@qty", qty);
-            sqlComm.Parameters.AddWithValue("@confdate", confdate);
-            sqlComm.Parameters.AddWithValue("@comments", comments);
-            sqlComm.Parameters.AddWithValue("@conftype", conftype);
-
-
-            sqlComm.Parameters.Add("@insertedid", SqlDbType.Int).Direction = ParameterDirection.Output;
-
-            sqlConn.Open();
-            sqlComm.ExecuteNonQuery();
-            _res = Convert.ToInt32(sqlComm.Parameters["@insertedid"].Value);
-            sqlConn.Close();
-
-
-            return _res;
-        }
-
-        public void AddPOConfirmationAll(int poid, string confdate, string conftype)
-        {
-            
-
-            SqlConnection sqlConn = new SqlConnection(sConnStr);
-            SqlCommand sqlComm = new SqlCommand("sp_AddPOConfirmAll", sqlConn);
-            sqlComm.CommandType = CommandType.StoredProcedure;
-
-            sqlComm.Parameters.AddWithValue("@poid", poid);
-            sqlComm.Parameters.AddWithValue("@confdate", confdate);
-            sqlComm.Parameters.AddWithValue("@conftype", conftype);
-
-            sqlConn.Open();
-            sqlComm.ExecuteNonQuery();
-            sqlConn.Close();
-          
-        }
-
-        public void EditPOConfirmation(int id, int poid, double qty, string confdate, string comments, string conftype)
-        {
-
-            SqlConnection sqlConn = new SqlConnection(sConnStr);
-            SqlCommand sqlComm = new SqlCommand("sp_EditPOConfirm", sqlConn);
-            sqlComm.CommandType = CommandType.StoredProcedure;
-
-            sqlComm.Parameters.AddWithValue("@id", id);
-            sqlComm.Parameters.AddWithValue("@poid", poid);
-            sqlComm.Parameters.AddWithValue("@qty", qty);
-            sqlComm.Parameters.AddWithValue("@confdate", confdate);
-            sqlComm.Parameters.AddWithValue("@comments", comments);
-            sqlComm.Parameters.AddWithValue("@conftype", conftype);
-
-
-            sqlConn.Open();
-            sqlComm.ExecuteNonQuery();
-
-            sqlConn.Close();
-
-        }
-
-        public void DeletePOConfirmation(int id)
-        {
-
-            SqlConnection sqlConn = new SqlConnection(sConnStr);
-            SqlCommand sqlComm = new SqlCommand("sp_DeletePOConfirm", sqlConn);
-            sqlComm.CommandType = CommandType.StoredProcedure;
-
-            sqlComm.Parameters.AddWithValue("@id", id);
-
-            sqlConn.Open();
-            sqlComm.ExecuteNonQuery();
-
-            sqlConn.Close();
-
-        }
-
         #endregion
 
-        #region Processing
-
-        public void EditPONeedComments(int id, string comments)
-        {
-            SqlConnection sqlConn = new SqlConnection(sConnStr);
-            SqlCommand sqlComm = new SqlCommand("update pur_needsheader set comments = @comments where id = @id ", sqlConn);
-            sqlComm.Parameters.AddWithValue("@id", id);
-            sqlComm.Parameters.AddWithValue("@comments", comments);
-          
-            sqlConn.Open();
-            sqlComm.ExecuteNonQuery();
-            sqlConn.Close();
-        }
-
-        #endregion
     }
 }

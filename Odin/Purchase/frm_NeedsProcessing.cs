@@ -1525,7 +1525,7 @@ namespace Odin.Purchase
 
                 if (result == DialogResult.OK)
                 {
-                    POBll.EditPONeedComments(_id, frm.FormText);
+                    Helper.QueryDT($@"update pur_needsheader set comments = {frm.FormText} where id = {_id} ");
                     gv_List.CurrentRow.Cells["cn_comments"].Value = frm.FormText;
                 }
             }
