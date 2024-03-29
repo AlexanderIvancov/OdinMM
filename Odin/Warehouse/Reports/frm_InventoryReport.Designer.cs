@@ -119,6 +119,7 @@
             this.btn_FixedAssets = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.btn_Refresh = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.btn_Clear = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.chk_hidezero = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).BeginInit();
             this.mnu_Lines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
@@ -587,6 +588,7 @@
             // 
             // kryptonPanel3
             // 
+            this.kryptonPanel3.Controls.Add(this.chk_hidezero);
             this.kryptonPanel3.Controls.Add(this.kryptonLabel7);
             this.kryptonPanel3.Controls.Add(this.kryptonLabel6);
             this.kryptonPanel3.Controls.Add(this.cmb_Users1);
@@ -711,7 +713,7 @@
             // 
             // kryptonGroupBox2
             // 
-            this.kryptonGroupBox2.Location = new System.Drawing.Point(506, 106);
+            this.kryptonGroupBox2.Location = new System.Drawing.Point(512, 107);
             this.kryptonGroupBox2.Name = "kryptonGroupBox2";
             // 
             // kryptonGroupBox2.Panel
@@ -776,15 +778,16 @@
             // 
             // chk_ShowInTransit
             // 
-            this.chk_ShowInTransit.Location = new System.Drawing.Point(402, 184);
+            this.chk_ShowInTransit.Location = new System.Drawing.Point(402, 237);
             this.chk_ShowInTransit.Name = "chk_ShowInTransit";
             this.chk_ShowInTransit.Size = new System.Drawing.Size(104, 20);
             this.chk_ShowInTransit.TabIndex = 279;
             this.chk_ShowInTransit.Values.Text = "Show in transit";
+            this.chk_ShowInTransit.Visible = false;
             // 
             // kryptonGroupBox1
             // 
-            this.kryptonGroupBox1.Location = new System.Drawing.Point(506, 237);
+            this.kryptonGroupBox1.Location = new System.Drawing.Point(512, 237);
             this.kryptonGroupBox1.Name = "kryptonGroupBox1";
             // 
             // kryptonGroupBox1.Panel
@@ -1012,6 +1015,14 @@
             this.btn_Clear.UniqueName = "3502D2542D5C42F0078623FF0A695273";
             this.btn_Clear.Click += new System.EventHandler(this.btn_Clear_Click);
             // 
+            // chk_hidezero
+            // 
+            this.chk_hidezero.Location = new System.Drawing.Point(402, 183);
+            this.chk_hidezero.Name = "chk_hidezero";
+            this.chk_hidezero.Size = new System.Drawing.Size(111, 20);
+            this.chk_hidezero.TabIndex = 292;
+            this.chk_hidezero.Values.Text = "Hide zero prices";
+            // 
             // frm_InventoryReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1144,5 +1155,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_batch;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_invnumber;
         private ComponentFactory.Krypton.Toolkit.KryptonRadioButton rb_Rus;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_hidezero;
     }
 }
