@@ -203,11 +203,12 @@ namespace Odin.Warehouse.Reports
         {
             DataTable data;
             data = StockRep_BLL.getInventoryReportsAccount(txt_Date.Value.ToShortDateString(),
-                                                    Account,
-                                                    chk_groupbyplaces.Checked == true ? -1 : 0,
-                                                    chk_groupbydoc.Checked == true ? -1 : 0,
-                                                    chk_groupbylabel.Checked == true ? -1 : 0,
-                                                    chk_GroupByPrices.Checked == true ? -1 : 0);
+                                                   Account,
+                                                   chk_groupbyplaces.Checked == true ? -1 : 0,
+                                                   chk_groupbydoc.Checked == true ? -1 : 0,
+                                                   chk_groupbylabel.Checked == true ? -1 : 0,
+                                                   chk_GroupByPrices.Checked == true ? -1 : 0,
+                                                   chk_hidezero.Checked == true ? -1 : 0);
 
 
             gv_List.ThreadSafeCall(delegate

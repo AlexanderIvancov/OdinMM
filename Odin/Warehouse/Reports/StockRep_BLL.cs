@@ -104,7 +104,7 @@ namespace Odin.Warehouse.Reports
 
         public static DataTable getInventoryReportsAccount(string _date, string _account, 
                                                      int _groupbyplaces, int _groupbydoc, 
-                                                     int _groupbylabel, int _groupbyprices)
+                                                     int _groupbylabel, int _groupbyprices, int _hidezero)
         {
             string query = Convert.ToDateTime(_date) <= Convert.ToDateTime("31.12.2019")
                 ? "sp_SelectStockRestsOnDateAccount1706"
@@ -116,7 +116,8 @@ namespace Odin.Warehouse.Reports
                 new SqlParameter("@groupbyplaces",SqlDbType.Int){Value = _groupbyplaces },
                 new SqlParameter("@groupbydoc",SqlDbType.Int){Value = _groupbydoc },
                 new SqlParameter("@groupbylabel",SqlDbType.Int){Value = _groupbylabel },
-                new SqlParameter("@groupbyprices",SqlDbType.Int){Value = _groupbyprices }
+                new SqlParameter("@groupbyprices",SqlDbType.Int){Value = _groupbyprices },
+                new SqlParameter("@hidezero",SqlDbType.Int){Value = _hidezero }
             };
 
             return Helper.QuerySP(query, sqlparams.ToArray());
