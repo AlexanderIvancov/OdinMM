@@ -2228,6 +2228,12 @@
     <Compile Include="Tools\frm_ChooseRows.Designer.cs">
       <DependentUpon>frm_ChooseRows.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tools\frm_Confirmation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\frm_Confirmation.designer.cs">
+      <DependentUpon>frm_Confirmation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Tools\frm_Error.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -3962,6 +3968,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\frm_ChooseRows.resx">
       <DependentUpon>frm_ChooseRows.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\frm_Confirmation.resx">
+      <DependentUpon>frm_Confirmation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\frm_Error.resx">
       <DependentUpon>frm_Error.cs</DependentUpon>
