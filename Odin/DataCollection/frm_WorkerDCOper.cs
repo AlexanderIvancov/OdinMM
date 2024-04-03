@@ -633,7 +633,7 @@ namespace Odin.DataCollection
                 else
                 {
                     string _serial = txt_Oper.Text.Trim();
-                    bool check = DCBll.CheckDataCollectionSerialOper(_serial, 4);
+                    bool check = DCBll.CheckDataCollectionSerialOper(_serial, 4, LaunchId);
                     if (check)
                     {
                         frm_Confirmation frm2 = new frm_Confirmation();
@@ -726,7 +726,7 @@ namespace Odin.DataCollection
         public void AddManualSerial(string _Serial)
         {
             string _serial = _Serial;
-            bool check = DCBll.CheckDataCollectionSerialOper(_serial, 4);
+            bool check = DCBll.CheckDataCollectionSerialOper(_serial, 4, LaunchId);
             if (!check)
             {
                 frm_Confirmation frm2 = new frm_Confirmation();

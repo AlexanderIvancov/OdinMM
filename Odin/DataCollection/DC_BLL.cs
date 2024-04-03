@@ -201,7 +201,7 @@ namespace Odin.DataCollection
             //catch { }
             return _res;
         }
-        public bool CheckDataCollectionSerialOper(string Serial, int StageId)
+        public bool CheckDataCollectionSerialOper(string Serial, int StageId, int LaunchId)
         {
             string _res = "";
 
@@ -211,7 +211,7 @@ namespace Odin.DataCollection
 
             sqlComm.Parameters.AddWithValue("@serial", Serial);
             sqlComm.Parameters.AddWithValue("@stageid", StageId);
-
+            sqlComm.Parameters.AddWithValue("@launchid", LaunchId);
             sqlComm.Parameters.Add("@success", SqlDbType.NVarChar, 150).Direction = ParameterDirection.Output;
 
             //try
