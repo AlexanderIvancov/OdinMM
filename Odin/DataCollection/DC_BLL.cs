@@ -201,6 +201,30 @@ namespace Odin.DataCollection
             //catch { }
             return _res;
         }
+        public bool CheckDataCollectionSerialOper(string Serial, int StageId)
+        {
+            string _res = "";
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_CheckDataCollectionSerialOper", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@serial", Serial);
+            sqlComm.Parameters.AddWithValue("@stageid", StageId);
+
+            sqlComm.Parameters.Add("@success", SqlDbType.NVarChar, 150).Direction = ParameterDirection.Output;
+
+            //try
+            //{
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            _res = sqlComm.Parameters["@success"].Value.ToString();
+            sqlConn.Close();
+            //}
+            //catch { }
+            return _res == "Success!" ? true : false;
+        }
+
         public string AddDataCollectionQty(int WorkerId, int LaunchId, double Qty)
         {
             string _res = "";

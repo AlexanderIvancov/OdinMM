@@ -50,8 +50,7 @@ namespace Odin.Global_Classes
             if (e.KeyChar == (char)Keys.Enter)
             {
                 TextEntering?.Invoke(FormText);
-                FormText = "";
-                txt_Text.Focus();
+                this.Close();
             }
         }
 
