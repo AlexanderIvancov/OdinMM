@@ -33,6 +33,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_Quotations));
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.ctl_btnNum2 = new Odin.CustomControls.ctl_btnNum();
             this.ctl_btnNum1 = new Odin.CustomControls.ctl_btnNum();
             this.btn_PCBNeeds = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Orders = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -80,6 +81,35 @@
             this.btn_Refresh = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.btn_Clear = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.mnu_Lines = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mni_FilterFor = new System.Windows.Forms.ToolStripTextBox();
+            this.mni_Search = new System.Windows.Forms.ToolStripMenuItem();
+            this.mni_FilterBy = new System.Windows.Forms.ToolStripMenuItem();
+            this.mni_FilterExcludingSel = new System.Windows.Forms.ToolStripMenuItem();
+            this.mni_RemoveFilter = new System.Windows.Forms.ToolStripMenuItem();
+            this.mni_Copy = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.mni_Admin = new System.Windows.Forms.ToolStripMenuItem();
+            this.bn_List = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
+            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.btn_AddNew = new System.Windows.Forms.ToolStripButton();
+            this.btn_Edit = new System.Windows.Forms.ToolStripButton();
+            this.btn_Copy = new System.Windows.Forms.ToolStripButton();
+            this.btn_Delete = new System.Windows.Forms.ToolStripButton();
+            this.btn_Excel = new System.Windows.Forms.ToolStripButton();
+            this.kryptonDockableWorkspace1 = new ComponentFactory.Krypton.Docking.KryptonDockableWorkspace();
+            this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
+            this.kryptonDockingManager1 = new ComponentFactory.Krypton.Docking.KryptonDockingManager();
+            this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
+            this.bs_List = new Odin.Global_Classes.SyncBindingSource();
             this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_revision = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -112,36 +142,7 @@
             this.cn_paid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_conforder = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_blockdelivery = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.mnu_Lines = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mni_FilterFor = new System.Windows.Forms.ToolStripTextBox();
-            this.mni_Search = new System.Windows.Forms.ToolStripMenuItem();
-            this.mni_FilterBy = new System.Windows.Forms.ToolStripMenuItem();
-            this.mni_FilterExcludingSel = new System.Windows.Forms.ToolStripMenuItem();
-            this.mni_RemoveFilter = new System.Windows.Forms.ToolStripMenuItem();
-            this.mni_Copy = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.mni_Admin = new System.Windows.Forms.ToolStripMenuItem();
-            this.bn_List = new System.Windows.Forms.BindingNavigator(this.components);
-            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.btn_AddNew = new System.Windows.Forms.ToolStripButton();
-            this.btn_Edit = new System.Windows.Forms.ToolStripButton();
-            this.btn_Copy = new System.Windows.Forms.ToolStripButton();
-            this.btn_Delete = new System.Windows.Forms.ToolStripButton();
-            this.btn_Excel = new System.Windows.Forms.ToolStripButton();
-            this.kryptonDockableWorkspace1 = new ComponentFactory.Krypton.Docking.KryptonDockableWorkspace();
-            this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
-            this.kryptonDockingManager1 = new ComponentFactory.Krypton.Docking.KryptonDockingManager();
-            this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
-            this.bs_List = new Odin.Global_Classes.SyncBindingSource();
-            this.ctl_btnNum2 = new Odin.CustomControls.ctl_btnNum();
+            this.cn_delivaddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
@@ -179,6 +180,21 @@
             this.kryptonPanel1.Size = new System.Drawing.Size(1103, 49);
             this.kryptonPanel1.TabIndex = 3;
             // 
+            // ctl_btnNum2
+            // 
+            this.ctl_btnNum2.BackColor = System.Drawing.Color.Transparent;
+            this.ctl_btnNum2.ButtonText = "Confirmed BOMs";
+            this.ctl_btnNum2.FormText = "Confirmed BOM\'s list";
+            this.ctl_btnNum2.GetCountQuery = "exec sp_SelectConfirmedBOMsCount";
+            this.ctl_btnNum2.IconPath = global::Odin.Global_Resourses.Confirm_History;
+            this.ctl_btnNum2.Location = new System.Drawing.Point(393, 2);
+            this.ctl_btnNum2.Name = "ctl_btnNum2";
+            this.ctl_btnNum2.Padding = new System.Windows.Forms.Padding(3);
+            this.ctl_btnNum2.Qty = "1";
+            this.ctl_btnNum2.Size = new System.Drawing.Size(199, 45);
+            this.ctl_btnNum2.strRunQuery = "sp_SelectConfirmedBOMs";
+            this.ctl_btnNum2.TabIndex = 12;
+            // 
             // ctl_btnNum1
             // 
             this.ctl_btnNum1.BackColor = System.Drawing.Color.Transparent;
@@ -189,7 +205,7 @@
             this.ctl_btnNum1.Location = new System.Drawing.Point(216, 2);
             this.ctl_btnNum1.Name = "ctl_btnNum1";
             this.ctl_btnNum1.Padding = new System.Windows.Forms.Padding(3);
-            this.ctl_btnNum1.Qty = "10";
+            this.ctl_btnNum1.Qty = "8";
             this.ctl_btnNum1.Size = new System.Drawing.Size(187, 45);
             this.ctl_btnNum1.strRunQuery = "sp_SelectInvalideBOMs";
             this.ctl_btnNum1.TabIndex = 11;
@@ -470,6 +486,7 @@
             // 
             this.cmb_Articles1.Article = "";
             this.cmb_Articles1.ArticleId = 0;
+            this.cmb_Articles1.ArticleIdRec = 0;
             this.cmb_Articles1.ArtType = null;
             this.cmb_Articles1.BOMState = 0;
             this.cmb_Articles1.Comments = null;
@@ -488,6 +505,7 @@
             this.cmb_Articles1.ProjectId = 0;
             this.cmb_Articles1.QtyAvail = 0D;
             this.cmb_Articles1.QtyConsStock = 0D;
+            this.cmb_Articles1.RMId = 0;
             this.cmb_Articles1.SecName = null;
             this.cmb_Articles1.Size = new System.Drawing.Size(283, 20);
             this.cmb_Articles1.SMTType = 0;
@@ -750,7 +768,8 @@
             this.cn_endcustomer,
             this.cn_paid,
             this.cn_conforder,
-            this.cn_blockdelivery});
+            this.cn_blockdelivery,
+            this.cn_delivaddress});
             this.gv_List.ContextMenuStrip = this.mnu_Lines;
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_List.Location = new System.Drawing.Point(0, 0);
@@ -761,6 +780,268 @@
             this.gv_List.TabIndex = 3;
             this.gv_List.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_List_CellDoubleClick);
             this.gv_List.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_List_ColumnHeaderMouseClick);
+            // 
+            // mnu_Lines
+            // 
+            this.mnu_Lines.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.mnu_Lines.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mni_FilterFor,
+            this.mni_Search,
+            this.mni_FilterBy,
+            this.mni_FilterExcludingSel,
+            this.mni_RemoveFilter,
+            this.mni_Copy,
+            this.toolStripSeparator2,
+            this.mni_Admin});
+            this.mnu_Lines.Name = "mnu_Requests";
+            this.mnu_Lines.Size = new System.Drawing.Size(211, 167);
+            this.mnu_Lines.Opening += new System.ComponentModel.CancelEventHandler(this.mnu_Lines_Opening);
+            // 
+            // mni_FilterFor
+            // 
+            this.mni_FilterFor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mni_FilterFor.Name = "mni_FilterFor";
+            this.mni_FilterFor.Size = new System.Drawing.Size(150, 23);
+            this.mni_FilterFor.TextChanged += new System.EventHandler(this.mni_FilterFor_TextChanged);
+            // 
+            // mni_Search
+            // 
+            this.mni_Search.Image = global::Odin.Global_Resourses.binoculars_8090;
+            this.mni_Search.Name = "mni_Search";
+            this.mni_Search.Size = new System.Drawing.Size(210, 22);
+            this.mni_Search.Text = "Search for record";
+            this.mni_Search.Click += new System.EventHandler(this.mni_Search_Click);
+            // 
+            // mni_FilterBy
+            // 
+            this.mni_FilterBy.Image = global::Odin.Global_Resourses.FilterBySel;
+            this.mni_FilterBy.Name = "mni_FilterBy";
+            this.mni_FilterBy.Size = new System.Drawing.Size(210, 22);
+            this.mni_FilterBy.Text = "Filter by selection";
+            this.mni_FilterBy.Click += new System.EventHandler(this.mni_FilterBy_Click);
+            // 
+            // mni_FilterExcludingSel
+            // 
+            this.mni_FilterExcludingSel.Image = global::Odin.Global_Resourses.scissors_3838;
+            this.mni_FilterExcludingSel.Name = "mni_FilterExcludingSel";
+            this.mni_FilterExcludingSel.Size = new System.Drawing.Size(210, 22);
+            this.mni_FilterExcludingSel.Text = "Filter excluding selection";
+            this.mni_FilterExcludingSel.Click += new System.EventHandler(this.mni_FilterExcludingSel_Click);
+            // 
+            // mni_RemoveFilter
+            // 
+            this.mni_RemoveFilter.Image = global::Odin.Global_Resourses.RemoveFilter;
+            this.mni_RemoveFilter.Name = "mni_RemoveFilter";
+            this.mni_RemoveFilter.Size = new System.Drawing.Size(210, 22);
+            this.mni_RemoveFilter.Text = "Remove filter";
+            this.mni_RemoveFilter.Click += new System.EventHandler(this.mni_RemoveFilter_Click);
+            // 
+            // mni_Copy
+            // 
+            this.mni_Copy.Image = global::Odin.Global_Resourses.Copy_16x16;
+            this.mni_Copy.Name = "mni_Copy";
+            this.mni_Copy.Size = new System.Drawing.Size(210, 22);
+            this.mni_Copy.Text = "Copy";
+            this.mni_Copy.Click += new System.EventHandler(this.mni_Copy_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(207, 6);
+            // 
+            // mni_Admin
+            // 
+            this.mni_Admin.Image = global::Odin.Global_Resourses.Settings_24x24;
+            this.mni_Admin.Name = "mni_Admin";
+            this.mni_Admin.Size = new System.Drawing.Size(210, 22);
+            this.mni_Admin.Text = "List settings";
+            this.mni_Admin.Click += new System.EventHandler(this.mni_Admin_Click);
+            // 
+            // bn_List
+            // 
+            this.bn_List.AddNewItem = null;
+            this.bn_List.CountItem = this.bindingNavigatorCountItem;
+            this.bn_List.DeleteItem = null;
+            this.bn_List.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.bn_List.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.bn_List.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bindingNavigatorMoveFirstItem,
+            this.bindingNavigatorMovePreviousItem,
+            this.bindingNavigatorSeparator,
+            this.bindingNavigatorPositionItem,
+            this.bindingNavigatorCountItem,
+            this.bindingNavigatorSeparator1,
+            this.bindingNavigatorMoveNextItem,
+            this.bindingNavigatorMoveLastItem,
+            this.bindingNavigatorSeparator2,
+            this.btn_AddNew,
+            this.btn_Edit,
+            this.btn_Copy,
+            this.btn_Delete,
+            this.btn_Excel});
+            this.bn_List.Location = new System.Drawing.Point(0, 432);
+            this.bn_List.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
+            this.bn_List.MoveLastItem = this.bindingNavigatorMoveLastItem;
+            this.bn_List.MoveNextItem = this.bindingNavigatorMoveNextItem;
+            this.bn_List.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
+            this.bn_List.Name = "bn_List";
+            this.bn_List.PositionItem = this.bindingNavigatorPositionItem;
+            this.bn_List.Size = new System.Drawing.Size(799, 25);
+            this.bn_List.TabIndex = 1;
+            this.bn_List.Text = "bindingNavigator1";
+            // 
+            // bindingNavigatorCountItem
+            // 
+            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
+            this.bindingNavigatorCountItem.Text = "of {0}";
+            this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
+            // 
+            // bindingNavigatorMoveFirstItem
+            // 
+            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
+            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
+            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveFirstItem.Text = "Move first";
+            // 
+            // bindingNavigatorMovePreviousItem
+            // 
+            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
+            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
+            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMovePreviousItem.Text = "Move previous";
+            // 
+            // bindingNavigatorSeparator
+            // 
+            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorPositionItem
+            // 
+            this.bindingNavigatorPositionItem.AccessibleName = "Position";
+            this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
+            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
+            this.bindingNavigatorPositionItem.Text = "0";
+            this.bindingNavigatorPositionItem.ToolTipText = "Current position";
+            // 
+            // bindingNavigatorSeparator1
+            // 
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorMoveNextItem
+            // 
+            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
+            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
+            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveNextItem.Text = "Move next";
+            // 
+            // bindingNavigatorMoveLastItem
+            // 
+            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
+            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
+            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveLastItem.Text = "Move last";
+            // 
+            // bindingNavigatorSeparator2
+            // 
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // btn_AddNew
+            // 
+            this.btn_AddNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_AddNew.Image = ((System.Drawing.Image)(resources.GetObject("btn_AddNew.Image")));
+            this.btn_AddNew.Name = "btn_AddNew";
+            this.btn_AddNew.RightToLeftAutoMirrorImage = true;
+            this.btn_AddNew.Size = new System.Drawing.Size(23, 22);
+            this.btn_AddNew.Text = "Add new";
+            this.btn_AddNew.Click += new System.EventHandler(this.btn_AddNew_Click);
+            // 
+            // btn_Edit
+            // 
+            this.btn_Edit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_Edit.Image = global::Odin.Global_Resourses.edit;
+            this.btn_Edit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_Edit.Name = "btn_Edit";
+            this.btn_Edit.Size = new System.Drawing.Size(23, 22);
+            this.btn_Edit.Text = "Edit";
+            this.btn_Edit.Click += new System.EventHandler(this.btn_Edit_Click);
+            // 
+            // btn_Copy
+            // 
+            this.btn_Copy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_Copy.Image = global::Odin.Global_Resourses.Copy_16x16;
+            this.btn_Copy.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_Copy.Name = "btn_Copy";
+            this.btn_Copy.Size = new System.Drawing.Size(23, 22);
+            this.btn_Copy.Text = "Copy quotation";
+            this.btn_Copy.Click += new System.EventHandler(this.btn_Copy_Click);
+            // 
+            // btn_Delete
+            // 
+            this.btn_Delete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_Delete.Image = ((System.Drawing.Image)(resources.GetObject("btn_Delete.Image")));
+            this.btn_Delete.Name = "btn_Delete";
+            this.btn_Delete.RightToLeftAutoMirrorImage = true;
+            this.btn_Delete.Size = new System.Drawing.Size(23, 22);
+            this.btn_Delete.Text = "Delete";
+            this.btn_Delete.Click += new System.EventHandler(this.btn_Delete_Click);
+            // 
+            // btn_Excel
+            // 
+            this.btn_Excel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_Excel.Image = global::Odin.Global_Resourses.ExcelSpreadsheetSmall;
+            this.btn_Excel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_Excel.Name = "btn_Excel";
+            this.btn_Excel.Size = new System.Drawing.Size(23, 22);
+            this.btn_Excel.Text = "Export into excel";
+            this.btn_Excel.Click += new System.EventHandler(this.btn_Excel_Click);
+            // 
+            // kryptonDockableWorkspace1
+            // 
+            this.kryptonDockableWorkspace1.AutoHiddenHost = false;
+            this.kryptonDockableWorkspace1.AutoScroll = true;
+            this.kryptonDockableWorkspace1.CompactFlags = ((ComponentFactory.Krypton.Workspace.CompactFlags)(((ComponentFactory.Krypton.Workspace.CompactFlags.RemoveEmptyCells | ComponentFactory.Krypton.Workspace.CompactFlags.RemoveEmptySequences) 
+            | ComponentFactory.Krypton.Workspace.CompactFlags.PromoteLeafs)));
+            this.kryptonDockableWorkspace1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonDockableWorkspace1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonDockableWorkspace1.Name = "kryptonDockableWorkspace1";
+            // 
+            // 
+            // 
+            this.kryptonDockableWorkspace1.Root.UniqueName = "3603EBC349EA4AA52F8724469FC85DA3";
+            this.kryptonDockableWorkspace1.Root.WorkspaceControl = this.kryptonDockableWorkspace1;
+            this.kryptonDockableWorkspace1.ShowMaximizeButton = false;
+            this.kryptonDockableWorkspace1.Size = new System.Drawing.Size(1103, 131);
+            this.kryptonDockableWorkspace1.TabIndex = 4;
+            this.kryptonDockableWorkspace1.TabStop = true;
+            // 
+            // kryptonManager1
+            // 
+            this.kryptonManager1.GlobalPaletteMode = ComponentFactory.Krypton.Toolkit.PaletteModeManager.Office2010Silver;
+            // 
+            // kryptonDockingManager1
+            // 
+            this.kryptonDockingManager1.DefaultCloseRequest = ComponentFactory.Krypton.Docking.DockingCloseRequest.RemovePageAndDispose;
+            this.kryptonDockingManager1.DockspaceAdding += new System.EventHandler<ComponentFactory.Krypton.Docking.DockspaceEventArgs>(this.kryptonDockingManager1_DockspaceAdding);
+            // 
+            // imageListSmall
+            // 
+            this.imageListSmall.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListSmall.ImageStream")));
+            this.imageListSmall.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListSmall.Images.SetKeyName(0, "document_plain.png");
+            this.imageListSmall.Images.SetKeyName(1, "preferences.png");
+            this.imageListSmall.Images.SetKeyName(2, "information2.png");
             // 
             // cn_id
             // 
@@ -1038,284 +1319,12 @@
             this.cn_blockdelivery.TrueValue = "-1";
             this.cn_blockdelivery.Width = 40;
             // 
-            // mnu_Lines
+            // cn_delivaddress
             // 
-            this.mnu_Lines.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.mnu_Lines.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mni_FilterFor,
-            this.mni_Search,
-            this.mni_FilterBy,
-            this.mni_FilterExcludingSel,
-            this.mni_RemoveFilter,
-            this.mni_Copy,
-            this.toolStripSeparator2,
-            this.mni_Admin});
-            this.mnu_Lines.Name = "mnu_Requests";
-            this.mnu_Lines.Size = new System.Drawing.Size(211, 167);
-            this.mnu_Lines.Opening += new System.ComponentModel.CancelEventHandler(this.mnu_Lines_Opening);
-            // 
-            // mni_FilterFor
-            // 
-            this.mni_FilterFor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.mni_FilterFor.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.mni_FilterFor.Name = "mni_FilterFor";
-            this.mni_FilterFor.Size = new System.Drawing.Size(150, 23);
-            this.mni_FilterFor.TextChanged += new System.EventHandler(this.mni_FilterFor_TextChanged);
-            // 
-            // mni_Search
-            // 
-            this.mni_Search.Image = global::Odin.Global_Resourses.binoculars_8090;
-            this.mni_Search.Name = "mni_Search";
-            this.mni_Search.Size = new System.Drawing.Size(210, 22);
-            this.mni_Search.Text = "Search for record";
-            this.mni_Search.Click += new System.EventHandler(this.mni_Search_Click);
-            // 
-            // mni_FilterBy
-            // 
-            this.mni_FilterBy.Image = global::Odin.Global_Resourses.FilterBySel;
-            this.mni_FilterBy.Name = "mni_FilterBy";
-            this.mni_FilterBy.Size = new System.Drawing.Size(210, 22);
-            this.mni_FilterBy.Text = "Filter by selection";
-            this.mni_FilterBy.Click += new System.EventHandler(this.mni_FilterBy_Click);
-            // 
-            // mni_FilterExcludingSel
-            // 
-            this.mni_FilterExcludingSel.Image = global::Odin.Global_Resourses.scissors_3838;
-            this.mni_FilterExcludingSel.Name = "mni_FilterExcludingSel";
-            this.mni_FilterExcludingSel.Size = new System.Drawing.Size(210, 22);
-            this.mni_FilterExcludingSel.Text = "Filter excluding selection";
-            this.mni_FilterExcludingSel.Click += new System.EventHandler(this.mni_FilterExcludingSel_Click);
-            // 
-            // mni_RemoveFilter
-            // 
-            this.mni_RemoveFilter.Image = global::Odin.Global_Resourses.RemoveFilter;
-            this.mni_RemoveFilter.Name = "mni_RemoveFilter";
-            this.mni_RemoveFilter.Size = new System.Drawing.Size(210, 22);
-            this.mni_RemoveFilter.Text = "Remove filter";
-            this.mni_RemoveFilter.Click += new System.EventHandler(this.mni_RemoveFilter_Click);
-            // 
-            // mni_Copy
-            // 
-            this.mni_Copy.Image = global::Odin.Global_Resourses.Copy_16x16;
-            this.mni_Copy.Name = "mni_Copy";
-            this.mni_Copy.Size = new System.Drawing.Size(210, 22);
-            this.mni_Copy.Text = "Copy";
-            this.mni_Copy.Click += new System.EventHandler(this.mni_Copy_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(207, 6);
-            // 
-            // mni_Admin
-            // 
-            this.mni_Admin.Image = global::Odin.Global_Resourses.Settings_24x24;
-            this.mni_Admin.Name = "mni_Admin";
-            this.mni_Admin.Size = new System.Drawing.Size(210, 22);
-            this.mni_Admin.Text = "List settings";
-            this.mni_Admin.Click += new System.EventHandler(this.mni_Admin_Click);
-            // 
-            // bn_List
-            // 
-            this.bn_List.AddNewItem = null;
-            this.bn_List.CountItem = this.bindingNavigatorCountItem;
-            this.bn_List.DeleteItem = null;
-            this.bn_List.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bn_List.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.bn_List.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bindingNavigatorMoveFirstItem,
-            this.bindingNavigatorMovePreviousItem,
-            this.bindingNavigatorSeparator,
-            this.bindingNavigatorPositionItem,
-            this.bindingNavigatorCountItem,
-            this.bindingNavigatorSeparator1,
-            this.bindingNavigatorMoveNextItem,
-            this.bindingNavigatorMoveLastItem,
-            this.bindingNavigatorSeparator2,
-            this.btn_AddNew,
-            this.btn_Edit,
-            this.btn_Copy,
-            this.btn_Delete,
-            this.btn_Excel});
-            this.bn_List.Location = new System.Drawing.Point(0, 432);
-            this.bn_List.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
-            this.bn_List.MoveLastItem = this.bindingNavigatorMoveLastItem;
-            this.bn_List.MoveNextItem = this.bindingNavigatorMoveNextItem;
-            this.bn_List.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
-            this.bn_List.Name = "bn_List";
-            this.bn_List.PositionItem = this.bindingNavigatorPositionItem;
-            this.bn_List.Size = new System.Drawing.Size(799, 25);
-            this.bn_List.TabIndex = 1;
-            this.bn_List.Text = "bindingNavigator1";
-            // 
-            // bindingNavigatorCountItem
-            // 
-            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
-            this.bindingNavigatorCountItem.Text = "of {0}";
-            this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
-            // 
-            // bindingNavigatorMoveFirstItem
-            // 
-            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
-            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
-            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveFirstItem.Text = "Move first";
-            // 
-            // bindingNavigatorMovePreviousItem
-            // 
-            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
-            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
-            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMovePreviousItem.Text = "Move previous";
-            // 
-            // bindingNavigatorSeparator
-            // 
-            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bindingNavigatorPositionItem
-            // 
-            this.bindingNavigatorPositionItem.AccessibleName = "Position";
-            this.bindingNavigatorPositionItem.AutoSize = false;
-            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
-            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
-            this.bindingNavigatorPositionItem.Text = "0";
-            this.bindingNavigatorPositionItem.ToolTipText = "Current position";
-            // 
-            // bindingNavigatorSeparator1
-            // 
-            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
-            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bindingNavigatorMoveNextItem
-            // 
-            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
-            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
-            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveNextItem.Text = "Move next";
-            // 
-            // bindingNavigatorMoveLastItem
-            // 
-            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
-            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
-            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveLastItem.Text = "Move last";
-            // 
-            // bindingNavigatorSeparator2
-            // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // btn_AddNew
-            // 
-            this.btn_AddNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btn_AddNew.Image = ((System.Drawing.Image)(resources.GetObject("btn_AddNew.Image")));
-            this.btn_AddNew.Name = "btn_AddNew";
-            this.btn_AddNew.RightToLeftAutoMirrorImage = true;
-            this.btn_AddNew.Size = new System.Drawing.Size(23, 22);
-            this.btn_AddNew.Text = "Add new";
-            this.btn_AddNew.Click += new System.EventHandler(this.btn_AddNew_Click);
-            // 
-            // btn_Edit
-            // 
-            this.btn_Edit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btn_Edit.Image = global::Odin.Global_Resourses.edit;
-            this.btn_Edit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_Edit.Name = "btn_Edit";
-            this.btn_Edit.Size = new System.Drawing.Size(23, 22);
-            this.btn_Edit.Text = "Edit";
-            this.btn_Edit.Click += new System.EventHandler(this.btn_Edit_Click);
-            // 
-            // btn_Copy
-            // 
-            this.btn_Copy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btn_Copy.Image = global::Odin.Global_Resourses.Copy_16x16;
-            this.btn_Copy.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_Copy.Name = "btn_Copy";
-            this.btn_Copy.Size = new System.Drawing.Size(23, 22);
-            this.btn_Copy.Text = "Copy quotation";
-            this.btn_Copy.Click += new System.EventHandler(this.btn_Copy_Click);
-            // 
-            // btn_Delete
-            // 
-            this.btn_Delete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btn_Delete.Image = ((System.Drawing.Image)(resources.GetObject("btn_Delete.Image")));
-            this.btn_Delete.Name = "btn_Delete";
-            this.btn_Delete.RightToLeftAutoMirrorImage = true;
-            this.btn_Delete.Size = new System.Drawing.Size(23, 22);
-            this.btn_Delete.Text = "Delete";
-            this.btn_Delete.Click += new System.EventHandler(this.btn_Delete_Click);
-            // 
-            // btn_Excel
-            // 
-            this.btn_Excel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btn_Excel.Image = global::Odin.Global_Resourses.ExcelSpreadsheetSmall;
-            this.btn_Excel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_Excel.Name = "btn_Excel";
-            this.btn_Excel.Size = new System.Drawing.Size(23, 22);
-            this.btn_Excel.Text = "Export into excel";
-            this.btn_Excel.Click += new System.EventHandler(this.btn_Excel_Click);
-            // 
-            // kryptonDockableWorkspace1
-            // 
-            this.kryptonDockableWorkspace1.AutoHiddenHost = false;
-            this.kryptonDockableWorkspace1.AutoScroll = true;
-            this.kryptonDockableWorkspace1.CompactFlags = ((ComponentFactory.Krypton.Workspace.CompactFlags)(((ComponentFactory.Krypton.Workspace.CompactFlags.RemoveEmptyCells | ComponentFactory.Krypton.Workspace.CompactFlags.RemoveEmptySequences) 
-            | ComponentFactory.Krypton.Workspace.CompactFlags.PromoteLeafs)));
-            this.kryptonDockableWorkspace1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonDockableWorkspace1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonDockableWorkspace1.Name = "kryptonDockableWorkspace1";
-            // 
-            // 
-            // 
-            this.kryptonDockableWorkspace1.Root.UniqueName = "3603EBC349EA4AA52F8724469FC85DA3";
-            this.kryptonDockableWorkspace1.Root.WorkspaceControl = this.kryptonDockableWorkspace1;
-            this.kryptonDockableWorkspace1.ShowMaximizeButton = false;
-            this.kryptonDockableWorkspace1.Size = new System.Drawing.Size(1103, 131);
-            this.kryptonDockableWorkspace1.TabIndex = 4;
-            this.kryptonDockableWorkspace1.TabStop = true;
-            // 
-            // kryptonManager1
-            // 
-            this.kryptonManager1.GlobalPaletteMode = ComponentFactory.Krypton.Toolkit.PaletteModeManager.Office2010Silver;
-            // 
-            // kryptonDockingManager1
-            // 
-            this.kryptonDockingManager1.DefaultCloseRequest = ComponentFactory.Krypton.Docking.DockingCloseRequest.RemovePageAndDispose;
-            this.kryptonDockingManager1.DockspaceAdding += new System.EventHandler<ComponentFactory.Krypton.Docking.DockspaceEventArgs>(this.kryptonDockingManager1_DockspaceAdding);
-            // 
-            // imageListSmall
-            // 
-            this.imageListSmall.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListSmall.ImageStream")));
-            this.imageListSmall.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListSmall.Images.SetKeyName(0, "document_plain.png");
-            this.imageListSmall.Images.SetKeyName(1, "preferences.png");
-            this.imageListSmall.Images.SetKeyName(2, "information2.png");
-            // 
-            // ctl_btnNum2
-            // 
-            this.ctl_btnNum2.BackColor = System.Drawing.Color.Transparent;
-            this.ctl_btnNum2.ButtonText = "Confirmed BOMs";
-            this.ctl_btnNum2.FormText = "Confirmed BOM\'s list";
-            this.ctl_btnNum2.GetCountQuery = "exec sp_SelectConfirmedBOMsCount";
-            this.ctl_btnNum2.IconPath = global::Odin.Global_Resourses.Confirm_History;
-            this.ctl_btnNum2.Location = new System.Drawing.Point(393, 2);
-            this.ctl_btnNum2.Name = "ctl_btnNum2";
-            this.ctl_btnNum2.Padding = new System.Windows.Forms.Padding(3);
-            this.ctl_btnNum2.Qty = "10";
-            this.ctl_btnNum2.Size = new System.Drawing.Size(199, 45);
-            this.ctl_btnNum2.strRunQuery = "sp_SelectConfirmedBOMs";
-            this.ctl_btnNum2.TabIndex = 12;
+            this.cn_delivaddress.DataPropertyName = "delivaddress";
+            this.cn_delivaddress.HeaderText = "Deliv. address";
+            this.cn_delivaddress.Name = "cn_delivaddress";
+            this.cn_delivaddress.ReadOnly = true;
             // 
             // frm_Quotations
             // 
@@ -1355,7 +1364,7 @@
             this.bn_List.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonDockableWorkspace1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
@@ -1437,6 +1446,8 @@
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_PCB;
         private Global_Classes.SyncBindingSource bs_List;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_PCBNeeds;
+        private CustomControls.ctl_btnNum ctl_btnNum1;
+        private CustomControls.ctl_btnNum ctl_btnNum2;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_revision;
@@ -1469,7 +1480,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_paid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_conforder;
         private System.Windows.Forms.DataGridViewCheckBoxColumn cn_blockdelivery;
-        private CustomControls.ctl_btnNum ctl_btnNum1;
-        private CustomControls.ctl_btnNum ctl_btnNum2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_delivaddress;
     }
 }
