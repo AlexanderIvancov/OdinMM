@@ -101,7 +101,7 @@ namespace Odin.Planning
 
 
 
-            var data = Plan_BLL.RMOverview(cmb_Common1.SelectedValue, cmb_Firms1.FirmId);
+            var data = Plan_BLL.RMOverview(cmb_Common1.SelectedValue, cmb_Firms1.FirmId, chk_exclude.Checked == true ? -1 : 0);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -128,7 +128,7 @@ namespace Odin.Planning
 
         public void FillOrders()
         {
-            var data = Plan_BLL.RMOverview(cmb_Common1.SelectedValue, cmb_Firms1.FirmId);
+            var data = Plan_BLL.RMOverview(cmb_Common1.SelectedValue, cmb_Firms1.FirmId, chk_exclude.Checked == true ? -1 : 0);
 
             gv_List.ThreadSafeCall(delegate
             {

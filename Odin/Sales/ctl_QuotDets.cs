@@ -326,6 +326,17 @@ namespace Odin.Sales
         }
         public int CheckRMQP
         { get; set; }
+
+        public int DelivPlaceId
+        {
+            get { return cmb_Firms2.FirmId; }
+            set { cmb_Firms2.FirmId = value; }
+        }
+        public int DelivAddressId
+        {
+            get { return cmb_Address2.AddressId; }
+            set { cmb_Address2.AddressId = value; }
+        }
         public void ClearCODets()
         {
             ArtId = 0;
@@ -348,6 +359,8 @@ namespace Odin.Sales
             ValidBOM = 0;
             CheckRMQP = 0;
             Primary = 0;
+            DelivPlaceId = 0;
+            DelivAddressId = 0;
         }
 
         public string CustOrder
@@ -368,6 +381,11 @@ namespace Odin.Sales
         public void FillAutoDoc(int _code)
         {
             Quotation = DLL.AutoDoc(_code, System.DateTime.Now.ToShortDateString());
+        }
+
+        public void FillAddress(int id)
+        {
+            cmb_Address2.FirmId = id;
         }
 
         public void FillStages(int id)
@@ -440,7 +458,9 @@ namespace Odin.Sales
                 ValidBOM = COBll.QValidBOM;
                 CheckRMQP = COBll.QCheckRMQP;
                 Primary = COBll.QPrimary;
-                
+                DelivPlaceId = COBll.QDelivPlaceId;
+                DelivAddressId = COBll.QDelivAddressId;
+
                 FillStages(_quotid);
 
                 if (IsCopy == -1)
@@ -522,7 +542,7 @@ namespace Odin.Sales
 
                     NewLineId = COBll.SaveQuotation(QuotId, DLL.CheckArtId(ArtId), Revision, CustArticle, Qty, UnitId, ReqDate, ExpDate, Week, StateId,
                                                 UnitPrice, Comments, CustId, PCB, datastages, CurId, CustOrder, CustLine, IsSent, SentDate, EndCustomerId,
-                                                Internal, Spoilage, Resale, Blocked, IsProject, Primary);
+                                                Internal, Spoilage, Resale, Blocked, IsProject, Primary, DelivPlaceId, DelivAddressId);
                     QuotId = NewLineId;
                     COBll.QuotId = QuotId;
 
@@ -595,6 +615,11 @@ namespace Odin.Sales
         private void cmb_Firms1_FirmsChanged(object sender)
         {
             CurId = cmb_Firms1.CurId;
+            if (QuotId == 0)
+            {
+                DelivPlaceId = cmb_Firms1.FirmId;
+                FillAddress(DelivPlaceId);
+            }
         }
 
 
@@ -624,7 +649,11 @@ namespace Odin.Sales
         {
             MessageBox.Show(txt_SentDate.Value.ToString());
         }
-        
+
+        private void cmb_Firms2_FirmsChanged(object sender)
+        {
+            cmb_Address2.FirmId = cmb_Firms2.FirmId;
+        }
     }
     
 }

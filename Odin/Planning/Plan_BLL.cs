@@ -787,9 +787,9 @@ namespace Odin.Planning
             return Helper.QueryDT("execute sp_SelectProductionRMDeficite @stageid = " + stageid);
         }
 
-        public static DataTable RMOverview(int stageid, int custid)
+        public static DataTable RMOverview(int stageid, int custid, int excludezero)
         {
-            return Helper.QueryDT("execute sp_SelectRMOverview @stageid = " + stageid + ", @custid = " + custid);
+            return Helper.QueryDT("execute sp_SelectRMOverview @stageid = " + stageid + ", @custid = " + custid + ", @excludezero = " + excludezero);
         }
 
 

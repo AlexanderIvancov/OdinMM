@@ -84,6 +84,7 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.mni_Admin = new System.Windows.Forms.ToolStripMenuItem();
             this.bs_List = new System.Windows.Forms.BindingSource(this.components);
+            this.chk_exclude = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bn_List)).BeginInit();
@@ -192,7 +193,6 @@
             // 
             this.bindingNavigatorPositionItem.AccessibleName = "Position";
             this.bindingNavigatorPositionItem.AutoSize = false;
-            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
             this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
             this.bindingNavigatorPositionItem.Text = "0";
@@ -250,6 +250,7 @@
             // 
             // kryptonPanel2
             // 
+            this.kryptonPanel2.Controls.Add(this.chk_exclude);
             this.kryptonPanel2.Controls.Add(this.kryptonLabel1);
             this.kryptonPanel2.Controls.Add(this.cmb_Firms1);
             this.kryptonPanel2.Controls.Add(this.kryptonLabel18);
@@ -546,7 +547,6 @@
             // mni_FilterFor
             // 
             this.mni_FilterFor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.mni_FilterFor.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.mni_FilterFor.Name = "mni_FilterFor";
             this.mni_FilterFor.Size = new System.Drawing.Size(150, 23);
             this.mni_FilterFor.TextChanged += new System.EventHandler(this.mni_FilterFor_TextChanged);
@@ -612,6 +612,14 @@
             this.mni_Admin.Text = "List settings";
             this.mni_Admin.Click += new System.EventHandler(this.mni_Admin_Click);
             // 
+            // chk_exclude
+            // 
+            this.chk_exclude.Location = new System.Drawing.Point(580, 14);
+            this.chk_exclude.Name = "chk_exclude";
+            this.chk_exclude.Size = new System.Drawing.Size(149, 20);
+            this.chk_exclude.TabIndex = 339;
+            this.chk_exclude.Values.Text = "Exclude zero quantities";
+            // 
             // frm_RMOverview
             // 
             this.AllowFormChrome = false;
@@ -639,8 +647,8 @@
             this.mnu_Lines.ResumeLayout(false);
             this.mnu_Lines.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
-            this.PerformLayout(); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -700,5 +708,6 @@
         private System.Windows.Forms.ToolStripMenuItem mni_Conditional;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
         private CMB_Components.Companies.cmb_Firms cmb_Firms1;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_exclude;
     }
 }

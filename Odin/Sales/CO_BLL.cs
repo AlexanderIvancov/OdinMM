@@ -916,6 +916,8 @@ namespace Odin.Sales
                         QValidBOM = Convert.ToInt32(dr["isvalid"]);
                         QCheckRMQP = Convert.ToInt32(dr["checkrmqp"]);
                         QPrimary = Convert.ToInt32(dr["isprimary"]);
+                        QDelivPlaceId = Convert.ToInt32(dr["delivplaceid"]);
+                        QDelivAddressId = Convert.ToInt32(dr["delivaddressid"]);
                     }
                 }
                 else
@@ -1029,6 +1031,10 @@ namespace Odin.Sales
         { get; set; }
         public int QPrimary
         { get; set; }
+        public int QDelivPlaceId
+        { get; set; }
+        public int QDelivAddressId
+        { get; set; }
         public void ClearQuotDets()
         {
             QCustId = 0;
@@ -1063,12 +1069,14 @@ namespace Odin.Sales
             QValidBOM = 0;
             QCheckRMQP = 0;
             QPrimary = 0;
+            QDelivPlaceId = 0;
+            QDelivAddressId = 0;
         }
         public int SaveQuotation(int id, int artid, string revision, string custarticle, double qty, int unitid, string reqdate,
                                 string expdate, string week, int stateid, double unitprice, string comments, int custid,
                                 int pcb, DataTable stages, int CurId, string corder, string coline, int issent, string sentdate,
                                 int endcustomerid, int _internal, double _spoilage, int _resale, int _blockdelivery, int _isproject,
-                                int _isprimary)
+                                int _isprimary, int _delivplaceid, int _delivaddressid)
         {
             int _res = 0;
 
@@ -1103,6 +1111,8 @@ namespace Odin.Sales
             sqlComm.Parameters.AddWithValue("@blockdelivery", _blockdelivery);
             sqlComm.Parameters.AddWithValue("@isproject", _isproject);
             sqlComm.Parameters.AddWithValue("@isprimary", _isprimary);
+            sqlComm.Parameters.AddWithValue("@delivplaceid", _delivplaceid);
+            sqlComm.Parameters.AddWithValue("@delivaddressid", _delivaddressid);
 
             sqlComm.Parameters.Add("@tablestages", SqlDbType.Structured);
             sqlComm.Parameters["@tablestages"].TypeName = "UT_COStages";
