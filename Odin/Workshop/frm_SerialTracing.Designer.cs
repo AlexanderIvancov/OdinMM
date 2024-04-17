@@ -44,7 +44,6 @@
             this.lbl_Progess = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.pb_Progress = new System.Windows.Forms.ProgressBar();
             this.btn_Download = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.chk_Freezed = new System.Windows.Forms.CheckBox();
             this.chk_FQC = new System.Windows.Forms.CheckBox();
             this.chk_QCTHT = new System.Windows.Forms.CheckBox();
             this.chk_QCSMT = new System.Windows.Forms.CheckBox();
@@ -184,7 +183,6 @@
             // kryptonPanel1
             // 
             this.kryptonPanel1.Controls.Add(this.kryptonPanel3);
-            this.kryptonPanel1.Controls.Add(this.chk_Freezed);
             this.kryptonPanel1.Controls.Add(this.chk_FQC);
             this.kryptonPanel1.Controls.Add(this.chk_QCTHT);
             this.kryptonPanel1.Controls.Add(this.chk_QCSMT);
@@ -234,20 +232,6 @@
             this.btn_Download.Values.Image = global::Odin.Global_Resourses.download_manager_7535;
             this.btn_Download.Values.Text = "";
             this.btn_Download.Click += new System.EventHandler(this.btn_Download_Click);
-            // 
-            // chk_FQC
-            // 
-            this.chk_Freezed.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chk_Freezed.BackColor = System.Drawing.Color.LightGreen;
-            this.chk_Freezed.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.chk_Freezed.Location = new System.Drawing.Point(758, 20);
-            this.chk_Freezed.Name = "chk_Freezed";
-            this.chk_Freezed.Size = new System.Drawing.Size(243, 60);
-            this.chk_Freezed.TabIndex = 230;
-            this.chk_Freezed.Text = "Freezed";
-            this.chk_Freezed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chk_Freezed.UseVisualStyleBackColor = false;
-            this.chk_Freezed.CheckedChanged += new System.EventHandler(this.chk_Freezed_CheckedChanged);
             // 
             // chk_FQC
             // 
@@ -386,7 +370,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup kryptonHeaderGroup1;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private System.Windows.Forms.CheckBox chk_Replace;
-        private System.Windows.Forms.CheckBox chk_Freezed;
         private System.Windows.Forms.CheckBox chk_FQC;
         private System.Windows.Forms.CheckBox chk_QCTHT;
         private System.Windows.Forms.CheckBox chk_QCSMT;

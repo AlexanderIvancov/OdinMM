@@ -116,19 +116,6 @@ namespace Odin.DataCollection
                 chk_IsLast.Checked = value == -1;
             }
         }
-
-        public int IsFreezed
-        {
-            get
-            {
-                return chk_IsFreezed.Checked == true ? -1 : 0;
-            }
-            set
-            {
-                chk_IsFreezed.Checked = value == -1;
-            }
-        }
-
         Processing_BLL ProdBll = new Processing_BLL();
 
         #endregion
@@ -646,37 +633,40 @@ namespace Odin.DataCollection
                 else
                 {
                     string _serial = txt_Oper.Text.Trim();
-                    string _res = DCBll.AddDataCollectionSerialOper(WorkerId, _serial, LaunchId, PrevStageId, OperNO, OperNO == 0 ? -1 : IsLast, cmb_CommonPDA1.SelectedValue);
-                    //MessageBox.Show(DCBll.SuccessId.ToString());
-                    if (DCBll.SuccessId == -1)
-                        FillList(WorkerId, LaunchId);
-                    else if (DCBll.SuccessId == 1)
-                        FillMaterialsByLaunch(LaunchId);
-                    else if (DCBll.SuccessId == -2)
+                    bool check = DCBll.CheckDataCollectionSerialOper(_serial, 4, LaunchId);
+                    if (check)
                     {
-                        TmpSerial = _serial;
-                        ShowFrmAnalog();
-                    }
-                    else
-                    {
+                        frm_Confirmation frm2 = new frm_Confirmation();
+                        frm2.HeaderText = "New serial number! Make sure the side is correct.";
                         System.Media.SystemSounds.Exclamation.Play();
-                        frm_Error frm1 = new frm_Error();
-                        frm1.HeaderText = "Something wrong! " + _res;
-                        DialogResult result = frm1.ShowDialog();
+                        DialogResult result2 = frm2.ShowDialog();
+                        check = result2 == DialogResult.OK ? true : false;
                     }
 
-                    if (IsFreezed == 0)
+                    if (check)
                     {
-                        CMB_Components.AddSerialFreezed.frm_AddSerialFreezed frm = new CMB_Components.AddSerialFreezed.frm_AddSerialFreezed();
-                        frm.Serial = _serial;
+                        string _res = DCBll.AddDataCollectionSerialOper(WorkerId, _serial, LaunchId, PrevStageId, OperNO, OperNO == 0 ? -1 : IsLast, cmb_CommonPDA1.SelectedValue);
+                        //MessageBox.Show(DCBll.SuccessId.ToString());
+                        if (DCBll.SuccessId == -1)
+                            FillList(WorkerId, LaunchId);
+                        else if (DCBll.SuccessId == 1)
+                            FillMaterialsByLaunch(LaunchId);
+                        else if (DCBll.SuccessId == -2)
+                        {
+                            TmpSerial = _serial;
+                            ShowFrmAnalog();
+                        }
+                        else
+                        {
+                            System.Media.SystemSounds.Exclamation.Play();
+                            frm_Error frm1 = new frm_Error();
+                            frm1.HeaderText = "Something wrong! " + _res;
+                            DialogResult result = frm1.ShowDialog();
+                        }
 
-                        DialogResult result = frm.ShowDialog();
-
-                        if (result == DialogResult.OK)
-                            ProdBll.AddSerialFreezed(frm.StageId, frm.BatchId, frm.Serial, frm.Position, frm.FreezedReasonId);
+                        txt_Oper.Text = "";
+                        txt_Oper.Focus();
                     }
-                    txt_Oper.Text = "";
-                    txt_Oper.Focus();
                 }
             }
         }
@@ -736,29 +726,30 @@ namespace Odin.DataCollection
         public void AddManualSerial(string _Serial)
         {
             string _serial = _Serial;
-
-            string _res = DCBll.AddDataCollectionSerialOper(WorkerId, _serial, LaunchId, PrevStageId, OperNO, OperNO == 0 ? -1 : IsLast, cmb_CommonPDA1.SelectedValue);
-            if (DCBll.SuccessId == -1)
-                FillList(WorkerId, LaunchId);
-            else if (DCBll.SuccessId == 1)
-                FillMaterialsByLaunch(LaunchId);
-            else
+            bool check = DCBll.CheckDataCollectionSerialOper(_serial, 4, LaunchId);
+            if (!check)
             {
+                frm_Confirmation frm2 = new frm_Confirmation();
+                frm2.HeaderText = "New serial number! Make sure the side is correct.";
                 System.Media.SystemSounds.Exclamation.Play();
-                frm_Error frm1 = new frm_Error();
-                frm1.HeaderText = "Something wrong! " + _res;
-                DialogResult result = frm1.ShowDialog();
+                DialogResult result2 = frm2.ShowDialog();
+                check = result2 == DialogResult.OK ? true : false;
             }
 
-            if (IsFreezed == 0)
+            if (check)
             {
-                CMB_Components.AddSerialFreezed.frm_AddSerialFreezed frm = new CMB_Components.AddSerialFreezed.frm_AddSerialFreezed();
-                frm.Serial = _serial;
-
-                DialogResult result = frm.ShowDialog();
-
-                if (result == DialogResult.OK)
-                    ProdBll.AddSerialFreezed(frm.StageId, frm.BatchId, frm.Serial, frm.Position, frm.FreezedReasonId);
+                string _res = DCBll.AddDataCollectionSerialOper(WorkerId, _serial, LaunchId, PrevStageId, OperNO, OperNO == 0 ? -1 : IsLast, cmb_CommonPDA1.SelectedValue);
+                if (DCBll.SuccessId == -1)
+                    FillList(WorkerId, LaunchId);
+                else if (DCBll.SuccessId == 1)
+                    FillMaterialsByLaunch(LaunchId);
+                else
+                {
+                    System.Media.SystemSounds.Exclamation.Play();
+                    frm_Error frm1 = new frm_Error();
+                    frm1.HeaderText = "Something wrong! " + _res;
+                    DialogResult result = frm1.ShowDialog();
+                }
             }
         }
 
