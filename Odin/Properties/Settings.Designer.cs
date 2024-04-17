@@ -70,8 +70,8 @@ namespace Odin.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=HOME\\SQLEXPRESS;Initial Catalog=OdinDB;Integrated Security=True;Conne" +
-            "ct Timeout=3000")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=TCP:192.168.10.5;Initial Catalog=OdinDB;Integrated Security=True;Conn" +
+            "ect Timeout=3000")]
         public string OdinDBConnectionString {
             get {
                 return ((string)(this["OdinDBConnectionString"]));

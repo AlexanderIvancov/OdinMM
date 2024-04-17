@@ -312,6 +312,23 @@ namespace Odin.Workshop
             return _res;
         }
 
+        public void AddSerialFreezed(int _stageid, int _batchid, string _serial, string _placement, int _reasonid)
+        {
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_AddSerialFreezed", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+            sqlComm.CommandTimeout = 3000;
+            sqlComm.Parameters.AddWithValue("@stageid", _stageid);
+            sqlComm.Parameters.AddWithValue("@batchid", _batchid);
+            sqlComm.Parameters.AddWithValue("@serial", rusToEng(_serial));
+            sqlComm.Parameters.AddWithValue("@placement", _placement);
+            sqlComm.Parameters.AddWithValue("@reasonid", _reasonid);
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+        }
+
         string rusToEng(string s)
         {
             const string rus = "ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ,йцукенгшщзхъфывапролджэячсмитьбю.ё!\"№;%:?*()_+";
@@ -378,6 +395,51 @@ namespace Odin.Workshop
             };
 
             return Helper.QuerySP(query, sqlparams.ToArray());
+        }
+
+        public static DataTable getQCSerialFreezed(int _batchid, string _serial)
+        {
+            string query = "sp_SelectQCSerialFreezed";
+            DAL_Functions df = new DAL_Functions();
+            var sqlparams = new List<SqlParameter>
+            {
+                new SqlParameter("@batchid",SqlDbType.Int){Value = _batchid },
+                new SqlParameter("@lang",SqlDbType.NVarChar){Value = df.UserLang },
+                new SqlParameter("@serial",SqlDbType.NVarChar){Value = _serial }
+            };
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
+        }
+
+        public void EditSerialFreezed(int _id, int _stageid, int _batchid, string _serial, string _placement, int _reasonid)
+        {
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_EditSerialFreezed", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+            sqlComm.CommandTimeout = 3000;
+            sqlComm.Parameters.AddWithValue("@id", _id);
+            sqlComm.Parameters.AddWithValue("@stageid", _stageid);
+            sqlComm.Parameters.AddWithValue("@batchid", _batchid);
+            sqlComm.Parameters.AddWithValue("@serial", rusToEng(_serial));
+            sqlComm.Parameters.AddWithValue("@placement", _placement);
+            sqlComm.Parameters.AddWithValue("@reasonid", _reasonid);
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+        }
+
+        public void DeleteSerialFreezed(int _id)
+        {
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_DeleteSerialFreezed", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+            sqlComm.CommandTimeout = 3000;
+            sqlComm.Parameters.AddWithValue("@id", _id);
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
         }
 
         public DataTable UploadSerialNumbers(DataTable dataserials, string machinename)

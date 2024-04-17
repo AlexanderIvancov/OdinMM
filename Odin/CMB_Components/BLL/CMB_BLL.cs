@@ -3395,6 +3395,28 @@ namespace Odin.CMB_Components.BLL
         }
 
         #endregion
+
+        #region FreezedReasons
+
+        public static DataTable getFreezedReasons()
+        {
+            return Helper.QueryDT("SELECT * FROM TMP_FreezedReason where lang = '" + new DAL_Functions().UserLang + "'");
+        }
+
+        #endregion
+
+        #region Serial
+
+        public static DataTable getSerials()
+        {
+            return Helper.QueryDT(@"SELECT distinct id, [serial], 'SA' as tbl
+                                      FROM [OdinDB].[dbo].[PROD_SerialAssembling]
+                                      union 
+                                      SELECT distinct id, [serial], 'ST' as tbl
+                                      FROM [OdinDB].[dbo].[PROD_SerialTracing]");
+        }
+
+        #endregion
     }
 
 }
