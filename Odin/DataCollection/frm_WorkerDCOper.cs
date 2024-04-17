@@ -633,40 +633,27 @@ namespace Odin.DataCollection
                 else
                 {
                     string _serial = txt_Oper.Text.Trim();
-                    bool check = DCBll.CheckDataCollectionSerialOper(_serial, 4, LaunchId);
-                    if (check)
+                    string _res = DCBll.AddDataCollectionSerialOper(WorkerId, _serial, LaunchId, PrevStageId, OperNO, OperNO == 0 ? -1 : IsLast, cmb_CommonPDA1.SelectedValue);
+                    //MessageBox.Show(DCBll.SuccessId.ToString());
+                    if (DCBll.SuccessId == -1)
+                        FillList(WorkerId, LaunchId);
+                    else if (DCBll.SuccessId == 1)
+                        FillMaterialsByLaunch(LaunchId);
+                    else if (DCBll.SuccessId == -2)
                     {
-                        frm_Confirmation frm2 = new frm_Confirmation();
-                        frm2.HeaderText = "New serial number! Make sure the side is correct.";
+                        TmpSerial = _serial;
+                        ShowFrmAnalog();
+                    }
+                    else
+                    {
                         System.Media.SystemSounds.Exclamation.Play();
-                        DialogResult result2 = frm2.ShowDialog();
-                        check = result2 == DialogResult.OK ? true : false;
+                        frm_Error frm1 = new frm_Error();
+                        frm1.HeaderText = "Something wrong! " + _res;
+                        DialogResult result = frm1.ShowDialog();
                     }
 
-                    if (check)
-                    {
-                        string _res = DCBll.AddDataCollectionSerialOper(WorkerId, _serial, LaunchId, PrevStageId, OperNO, OperNO == 0 ? -1 : IsLast, cmb_CommonPDA1.SelectedValue);
-                        //MessageBox.Show(DCBll.SuccessId.ToString());
-                        if (DCBll.SuccessId == -1)
-                            FillList(WorkerId, LaunchId);
-                        else if (DCBll.SuccessId == 1)
-                            FillMaterialsByLaunch(LaunchId);
-                        else if (DCBll.SuccessId == -2)
-                        {
-                            TmpSerial = _serial;
-                            ShowFrmAnalog();
-                        }
-                        else
-                        {
-                            System.Media.SystemSounds.Exclamation.Play();
-                            frm_Error frm1 = new frm_Error();
-                            frm1.HeaderText = "Something wrong! " + _res;
-                            DialogResult result = frm1.ShowDialog();
-                        }
-
-                        txt_Oper.Text = "";
-                        txt_Oper.Focus();
-                    }
+                    txt_Oper.Text = "";
+                    txt_Oper.Focus();
                 }
             }
         }
@@ -726,30 +713,17 @@ namespace Odin.DataCollection
         public void AddManualSerial(string _Serial)
         {
             string _serial = _Serial;
-            bool check = DCBll.CheckDataCollectionSerialOper(_serial, 4, LaunchId);
-            if (!check)
+            string _res = DCBll.AddDataCollectionSerialOper(WorkerId, _serial, LaunchId, PrevStageId, OperNO, OperNO == 0 ? -1 : IsLast, cmb_CommonPDA1.SelectedValue);
+            if (DCBll.SuccessId == -1)
+                FillList(WorkerId, LaunchId);
+            else if (DCBll.SuccessId == 1)
+                FillMaterialsByLaunch(LaunchId);
+            else
             {
-                frm_Confirmation frm2 = new frm_Confirmation();
-                frm2.HeaderText = "New serial number! Make sure the side is correct.";
                 System.Media.SystemSounds.Exclamation.Play();
-                DialogResult result2 = frm2.ShowDialog();
-                check = result2 == DialogResult.OK ? true : false;
-            }
-
-            if (check)
-            {
-                string _res = DCBll.AddDataCollectionSerialOper(WorkerId, _serial, LaunchId, PrevStageId, OperNO, OperNO == 0 ? -1 : IsLast, cmb_CommonPDA1.SelectedValue);
-                if (DCBll.SuccessId == -1)
-                    FillList(WorkerId, LaunchId);
-                else if (DCBll.SuccessId == 1)
-                    FillMaterialsByLaunch(LaunchId);
-                else
-                {
-                    System.Media.SystemSounds.Exclamation.Play();
-                    frm_Error frm1 = new frm_Error();
-                    frm1.HeaderText = "Something wrong! " + _res;
-                    DialogResult result = frm1.ShowDialog();
-                }
+                frm_Error frm1 = new frm_Error();
+                frm1.HeaderText = "Something wrong! " + _res;
+                DialogResult result = frm1.ShowDialog();
             }
         }
 
