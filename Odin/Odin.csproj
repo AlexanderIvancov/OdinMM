@@ -1485,6 +1485,12 @@
     <Compile Include="Planning\frm_FillOrders.Designer.cs">
       <DependentUpon>frm_FillOrders.cs</DependentUpon>
     </Compile>
+    <Compile Include="Planning\frm_FindBatchAnalogs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Planning\frm_FindBatchAnalogs.designer.cs">
+      <DependentUpon>frm_FindBatchAnalogs.cs</DependentUpon>
+    </Compile>
     <Compile Include="Planning\frm_Launches.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1877,6 +1883,12 @@
     </Compile>
     <Compile Include="Register\Articles\frm_FindAnalogs.Designer.cs">
       <DependentUpon>frm_FindAnalogs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Register\Articles\frm_MapAnalog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Register\Articles\frm_MapAnalog.designer.cs">
+      <DependentUpon>frm_MapAnalog.cs</DependentUpon>
     </Compile>
     <Compile Include="Register\Articles\frm_RatioTab.cs">
       <SubType>Form</SubType>
@@ -3617,6 +3629,9 @@
     <EmbeddedResource Include="Planning\frm_FillOrders.resx">
       <DependentUpon>frm_FillOrders.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Planning\frm_FindBatchAnalogs.resx">
+      <DependentUpon>frm_FindBatchAnalogs.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Planning\frm_Launches.resx">
       <DependentUpon>frm_Launches.cs</DependentUpon>
     </EmbeddedResource>
@@ -3820,6 +3835,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Register\Articles\frm_FindAnalogs.resx">
       <DependentUpon>frm_FindAnalogs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Register\Articles\frm_MapAnalog.resx">
+      <DependentUpon>frm_MapAnalog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Register\Articles\frm_RatioTab.resx">
       <DependentUpon>frm_RatioTab.cs</DependentUpon>

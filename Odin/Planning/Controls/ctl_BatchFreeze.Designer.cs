@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctl_BatchFreeze));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.cmb_Batches1 = new Odin.CMB_Components.Batches.cmb_Batches();
@@ -60,32 +60,6 @@
             this.btn_History = new System.Windows.Forms.ToolStripButton();
             this.btn_Save = new System.Windows.Forms.ToolStripButton();
             this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.mnu_Lines = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mni_FilterFor = new System.Windows.Forms.ToolStripTextBox();
-            this.mni_Search = new System.Windows.Forms.ToolStripMenuItem();
-            this.mni_FilterBy = new System.Windows.Forms.ToolStripMenuItem();
-            this.mni_FilterExcludingSel = new System.Windows.Forms.ToolStripMenuItem();
-            this.mni_RemoveFilter = new System.Windows.Forms.ToolStripMenuItem();
-            this.mni_Copy = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.mni_Admin = new System.Windows.Forms.ToolStripMenuItem();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bs_List = new Odin.Global_Classes.SyncBindingSource();
             this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_bomnum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_artid = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -124,6 +98,34 @@
             this.cn_inbom = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_dnp = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.cn_allanalogues = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_Analogs = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.mnu_Lines = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mni_FilterFor = new System.Windows.Forms.ToolStripTextBox();
+            this.mni_Search = new System.Windows.Forms.ToolStripMenuItem();
+            this.mni_FilterBy = new System.Windows.Forms.ToolStripMenuItem();
+            this.mni_FilterExcludingSel = new System.Windows.Forms.ToolStripMenuItem();
+            this.mni_RemoveFilter = new System.Windows.Forms.ToolStripMenuItem();
+            this.mni_Copy = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.mni_Admin = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bs_List = new Odin.Global_Classes.SyncBindingSource();
+            this.mni_ShowAnalogStock = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bn_List)).BeginInit();
@@ -446,7 +448,8 @@
             this.cn_bomcomments,
             this.cn_inbom,
             this.cn_dnp,
-            this.cn_allanalogues});
+            this.cn_allanalogues,
+            this.btn_Analogs});
             this.gv_List.ContextMenuStrip = this.mnu_Lines;
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_List.Location = new System.Drawing.Point(0, 72);
@@ -455,233 +458,13 @@
             this.gv_List.Size = new System.Drawing.Size(1308, 320);
             this.gv_List.TabIndex = 5;
             this.gv_List.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_List_CellClick);
+            this.gv_List.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_List_CellContentClick);
             this.gv_List.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_List_CellDoubleClick);
             this.gv_List.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.gv_List_CellPainting);
             this.gv_List.CellParsing += new System.Windows.Forms.DataGridViewCellParsingEventHandler(this.gv_List_CellParsing);
             this.gv_List.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_List_CellValidated);
             this.gv_List.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_List_ColumnHeaderMouseClick);
             this.gv_List.SelectionChanged += new System.EventHandler(this.gv_List_SelectionChanged);
-            // 
-            // mnu_Lines
-            // 
-            this.mnu_Lines.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.mnu_Lines.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mni_FilterFor,
-            this.mni_Search,
-            this.mni_FilterBy,
-            this.mni_FilterExcludingSel,
-            this.mni_RemoveFilter,
-            this.mni_Copy,
-            this.toolStripSeparator2,
-            this.mni_Admin});
-            this.mnu_Lines.Name = "mnu_Requests";
-            this.mnu_Lines.Size = new System.Drawing.Size(211, 167);
-            this.mnu_Lines.Opening += new System.ComponentModel.CancelEventHandler(this.mnu_Lines_Opening);
-            // 
-            // mni_FilterFor
-            // 
-            this.mni_FilterFor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.mni_FilterFor.Name = "mni_FilterFor";
-            this.mni_FilterFor.Size = new System.Drawing.Size(150, 23);
-            this.mni_FilterFor.TextChanged += new System.EventHandler(this.mni_FilterFor_TextChanged);
-            // 
-            // mni_Search
-            // 
-            this.mni_Search.Image = global::Odin.Global_Resourses.binoculars_8090;
-            this.mni_Search.Name = "mni_Search";
-            this.mni_Search.Size = new System.Drawing.Size(210, 22);
-            this.mni_Search.Text = "Search for record";
-            this.mni_Search.Click += new System.EventHandler(this.mni_Search_Click);
-            // 
-            // mni_FilterBy
-            // 
-            this.mni_FilterBy.Image = global::Odin.Global_Resourses.FilterBySel;
-            this.mni_FilterBy.Name = "mni_FilterBy";
-            this.mni_FilterBy.Size = new System.Drawing.Size(210, 22);
-            this.mni_FilterBy.Text = "Filter by selection";
-            this.mni_FilterBy.Click += new System.EventHandler(this.mni_FilterBy_Click);
-            // 
-            // mni_FilterExcludingSel
-            // 
-            this.mni_FilterExcludingSel.Image = global::Odin.Global_Resourses.scissors_3838;
-            this.mni_FilterExcludingSel.Name = "mni_FilterExcludingSel";
-            this.mni_FilterExcludingSel.Size = new System.Drawing.Size(210, 22);
-            this.mni_FilterExcludingSel.Text = "Filter excluding selection";
-            this.mni_FilterExcludingSel.Click += new System.EventHandler(this.mni_FilterExcludingSel_Click);
-            // 
-            // mni_RemoveFilter
-            // 
-            this.mni_RemoveFilter.Image = global::Odin.Global_Resourses.RemoveFilter;
-            this.mni_RemoveFilter.Name = "mni_RemoveFilter";
-            this.mni_RemoveFilter.Size = new System.Drawing.Size(210, 22);
-            this.mni_RemoveFilter.Text = "Remove filter";
-            this.mni_RemoveFilter.Click += new System.EventHandler(this.mni_RemoveFilter_Click);
-            // 
-            // mni_Copy
-            // 
-            this.mni_Copy.Image = global::Odin.Global_Resourses.Copy_16x16;
-            this.mni_Copy.Name = "mni_Copy";
-            this.mni_Copy.Size = new System.Drawing.Size(210, 22);
-            this.mni_Copy.Text = "Copy";
-            this.mni_Copy.Click += new System.EventHandler(this.mni_Copy_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(207, 6);
-            // 
-            // mni_Admin
-            // 
-            this.mni_Admin.Image = global::Odin.Global_Resourses.Settings_24x24;
-            this.mni_Admin.Name = "mni_Admin";
-            this.mni_Admin.Size = new System.Drawing.Size(210, 22);
-            this.mni_Admin.Text = "List settings";
-            this.mni_Admin.Click += new System.EventHandler(this.mni_Admin_Click);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "id";
-            this.dataGridViewTextBoxColumn1.HeaderText = "id";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "artid";
-            this.dataGridViewTextBoxColumn2.FillWeight = 70F;
-            this.dataGridViewTextBoxColumn2.HeaderText = "Art. id";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Width = 70;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "article";
-            this.dataGridViewTextBoxColumn3.FillWeight = 150F;
-            this.dataGridViewTextBoxColumn3.HeaderText = "Article";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.Width = 150;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "unit";
-            this.dataGridViewTextBoxColumn4.FillWeight = 40F;
-            this.dataGridViewTextBoxColumn4.HeaderText = "Unit";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.Width = 40;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "batch";
-            this.dataGridViewTextBoxColumn5.FillWeight = 80F;
-            this.dataGridViewTextBoxColumn5.HeaderText = "Batch";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            this.dataGridViewTextBoxColumn5.Width = 80;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "qty";
-            this.dataGridViewTextBoxColumn6.FillWeight = 70F;
-            this.dataGridViewTextBoxColumn6.HeaderText = "Qty in batch";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            this.dataGridViewTextBoxColumn6.Width = 85;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "reserved";
-            this.dataGridViewTextBoxColumn7.FillWeight = 70F;
-            this.dataGridViewTextBoxColumn7.HeaderText = "Reserved";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            this.dataGridViewTextBoxColumn7.Width = 70;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "toreserve";
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridViewTextBoxColumn8.FillWeight = 70F;
-            this.dataGridViewTextBoxColumn8.HeaderText = "To reserve";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.Width = 70;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.DataPropertyName = "requested";
-            this.dataGridViewTextBoxColumn9.FillWeight = 70F;
-            this.dataGridViewTextBoxColumn9.HeaderText = "Requested";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
-            this.dataGridViewTextBoxColumn9.Width = 70;
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.DataPropertyName = "given";
-            this.dataGridViewTextBoxColumn10.FillWeight = 70F;
-            this.dataGridViewTextBoxColumn10.HeaderText = "Given";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.ReadOnly = true;
-            this.dataGridViewTextBoxColumn10.Width = 70;
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            this.dataGridViewTextBoxColumn11.DataPropertyName = "purchased";
-            this.dataGridViewTextBoxColumn11.FillWeight = 70F;
-            this.dataGridViewTextBoxColumn11.HeaderText = "Purchased";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            this.dataGridViewTextBoxColumn11.ReadOnly = true;
-            this.dataGridViewTextBoxColumn11.Width = 70;
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            this.dataGridViewTextBoxColumn12.DataPropertyName = "returned";
-            this.dataGridViewTextBoxColumn12.FillWeight = 70F;
-            this.dataGridViewTextBoxColumn12.HeaderText = "Returned";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            this.dataGridViewTextBoxColumn12.ReadOnly = true;
-            this.dataGridViewTextBoxColumn12.Visible = false;
-            this.dataGridViewTextBoxColumn12.Width = 70;
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            this.dataGridViewTextBoxColumn13.DataPropertyName = "qtystock";
-            this.dataGridViewTextBoxColumn13.FillWeight = 70F;
-            this.dataGridViewTextBoxColumn13.HeaderText = "On stock";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            this.dataGridViewTextBoxColumn13.ReadOnly = true;
-            this.dataGridViewTextBoxColumn13.Width = 70;
-            // 
-            // dataGridViewTextBoxColumn14
-            // 
-            this.dataGridViewTextBoxColumn14.DataPropertyName = "available";
-            this.dataGridViewTextBoxColumn14.FillWeight = 70F;
-            this.dataGridViewTextBoxColumn14.HeaderText = "Available";
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            this.dataGridViewTextBoxColumn14.ReadOnly = true;
-            this.dataGridViewTextBoxColumn14.Width = 70;
-            // 
-            // dataGridViewTextBoxColumn15
-            // 
-            this.dataGridViewTextBoxColumn15.DataPropertyName = "missed";
-            this.dataGridViewTextBoxColumn15.FillWeight = 70F;
-            this.dataGridViewTextBoxColumn15.HeaderText = "Missed";
-            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            this.dataGridViewTextBoxColumn15.ReadOnly = true;
-            this.dataGridViewTextBoxColumn15.Width = 70;
-            // 
-            // dataGridViewTextBoxColumn16
-            // 
-            this.dataGridViewTextBoxColumn16.DataPropertyName = "nomenclature";
-            this.dataGridViewTextBoxColumn16.FillWeight = 70F;
-            this.dataGridViewTextBoxColumn16.HeaderText = "In nom.";
-            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
-            this.dataGridViewTextBoxColumn16.ReadOnly = true;
-            this.dataGridViewTextBoxColumn16.Width = 70;
             // 
             // cn_id
             // 
@@ -997,6 +780,243 @@
             this.cn_allanalogues.HeaderText = "Analogues";
             this.cn_allanalogues.Name = "cn_allanalogues";
             // 
+            // btn_Analogs
+            // 
+            this.btn_Analogs.FillWeight = 25F;
+            this.btn_Analogs.HeaderText = "";
+            this.btn_Analogs.Name = "btn_Analogs";
+            this.btn_Analogs.Width = 25;
+            // 
+            // mnu_Lines
+            // 
+            this.mnu_Lines.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.mnu_Lines.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mni_ShowAnalogStock,
+            this.mni_FilterFor,
+            this.mni_Search,
+            this.mni_FilterBy,
+            this.mni_FilterExcludingSel,
+            this.mni_RemoveFilter,
+            this.mni_Copy,
+            this.toolStripSeparator2,
+            this.mni_Admin});
+            this.mnu_Lines.Name = "mnu_Requests";
+            this.mnu_Lines.Size = new System.Drawing.Size(211, 211);
+            this.mnu_Lines.Opening += new System.ComponentModel.CancelEventHandler(this.mnu_Lines_Opening);
+            // 
+            // mni_FilterFor
+            // 
+            this.mni_FilterFor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mni_FilterFor.Name = "mni_FilterFor";
+            this.mni_FilterFor.Size = new System.Drawing.Size(150, 23);
+            this.mni_FilterFor.TextChanged += new System.EventHandler(this.mni_FilterFor_TextChanged);
+            // 
+            // mni_Search
+            // 
+            this.mni_Search.Image = global::Odin.Global_Resourses.binoculars_8090;
+            this.mni_Search.Name = "mni_Search";
+            this.mni_Search.Size = new System.Drawing.Size(210, 22);
+            this.mni_Search.Text = "Search for record";
+            this.mni_Search.Click += new System.EventHandler(this.mni_Search_Click);
+            // 
+            // mni_FilterBy
+            // 
+            this.mni_FilterBy.Image = global::Odin.Global_Resourses.FilterBySel;
+            this.mni_FilterBy.Name = "mni_FilterBy";
+            this.mni_FilterBy.Size = new System.Drawing.Size(210, 22);
+            this.mni_FilterBy.Text = "Filter by selection";
+            this.mni_FilterBy.Click += new System.EventHandler(this.mni_FilterBy_Click);
+            // 
+            // mni_FilterExcludingSel
+            // 
+            this.mni_FilterExcludingSel.Image = global::Odin.Global_Resourses.scissors_3838;
+            this.mni_FilterExcludingSel.Name = "mni_FilterExcludingSel";
+            this.mni_FilterExcludingSel.Size = new System.Drawing.Size(210, 22);
+            this.mni_FilterExcludingSel.Text = "Filter excluding selection";
+            this.mni_FilterExcludingSel.Click += new System.EventHandler(this.mni_FilterExcludingSel_Click);
+            // 
+            // mni_RemoveFilter
+            // 
+            this.mni_RemoveFilter.Image = global::Odin.Global_Resourses.RemoveFilter;
+            this.mni_RemoveFilter.Name = "mni_RemoveFilter";
+            this.mni_RemoveFilter.Size = new System.Drawing.Size(210, 22);
+            this.mni_RemoveFilter.Text = "Remove filter";
+            this.mni_RemoveFilter.Click += new System.EventHandler(this.mni_RemoveFilter_Click);
+            // 
+            // mni_Copy
+            // 
+            this.mni_Copy.Image = global::Odin.Global_Resourses.Copy_16x16;
+            this.mni_Copy.Name = "mni_Copy";
+            this.mni_Copy.Size = new System.Drawing.Size(210, 22);
+            this.mni_Copy.Text = "Copy";
+            this.mni_Copy.Click += new System.EventHandler(this.mni_Copy_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(207, 6);
+            // 
+            // mni_Admin
+            // 
+            this.mni_Admin.Image = global::Odin.Global_Resourses.Settings_24x24;
+            this.mni_Admin.Name = "mni_Admin";
+            this.mni_Admin.Size = new System.Drawing.Size(210, 22);
+            this.mni_Admin.Text = "List settings";
+            this.mni_Admin.Click += new System.EventHandler(this.mni_Admin_Click);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "id";
+            this.dataGridViewTextBoxColumn1.HeaderText = "id";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "artid";
+            this.dataGridViewTextBoxColumn2.FillWeight = 70F;
+            this.dataGridViewTextBoxColumn2.HeaderText = "Art. id";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 70;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "article";
+            this.dataGridViewTextBoxColumn3.FillWeight = 150F;
+            this.dataGridViewTextBoxColumn3.HeaderText = "Article";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Width = 150;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "unit";
+            this.dataGridViewTextBoxColumn4.FillWeight = 40F;
+            this.dataGridViewTextBoxColumn4.HeaderText = "Unit";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Width = 40;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "batch";
+            this.dataGridViewTextBoxColumn5.FillWeight = 80F;
+            this.dataGridViewTextBoxColumn5.HeaderText = "Batch";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            this.dataGridViewTextBoxColumn5.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "qty";
+            this.dataGridViewTextBoxColumn6.FillWeight = 70F;
+            this.dataGridViewTextBoxColumn6.HeaderText = "Qty in batch";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            this.dataGridViewTextBoxColumn6.Width = 85;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "reserved";
+            this.dataGridViewTextBoxColumn7.FillWeight = 70F;
+            this.dataGridViewTextBoxColumn7.HeaderText = "Reserved";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            this.dataGridViewTextBoxColumn7.Width = 70;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "toreserve";
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridViewTextBoxColumn8.FillWeight = 70F;
+            this.dataGridViewTextBoxColumn8.HeaderText = "To reserve";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.Width = 70;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.DataPropertyName = "requested";
+            this.dataGridViewTextBoxColumn9.FillWeight = 70F;
+            this.dataGridViewTextBoxColumn9.HeaderText = "Requested";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            this.dataGridViewTextBoxColumn9.Width = 70;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.DataPropertyName = "given";
+            this.dataGridViewTextBoxColumn10.FillWeight = 70F;
+            this.dataGridViewTextBoxColumn10.HeaderText = "Given";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.ReadOnly = true;
+            this.dataGridViewTextBoxColumn10.Width = 70;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.DataPropertyName = "purchased";
+            this.dataGridViewTextBoxColumn11.FillWeight = 70F;
+            this.dataGridViewTextBoxColumn11.HeaderText = "Purchased";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.ReadOnly = true;
+            this.dataGridViewTextBoxColumn11.Width = 70;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.DataPropertyName = "returned";
+            this.dataGridViewTextBoxColumn12.FillWeight = 70F;
+            this.dataGridViewTextBoxColumn12.HeaderText = "Returned";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.ReadOnly = true;
+            this.dataGridViewTextBoxColumn12.Visible = false;
+            this.dataGridViewTextBoxColumn12.Width = 70;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.DataPropertyName = "qtystock";
+            this.dataGridViewTextBoxColumn13.FillWeight = 70F;
+            this.dataGridViewTextBoxColumn13.HeaderText = "On stock";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            this.dataGridViewTextBoxColumn13.ReadOnly = true;
+            this.dataGridViewTextBoxColumn13.Width = 70;
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.DataPropertyName = "available";
+            this.dataGridViewTextBoxColumn14.FillWeight = 70F;
+            this.dataGridViewTextBoxColumn14.HeaderText = "Available";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            this.dataGridViewTextBoxColumn14.ReadOnly = true;
+            this.dataGridViewTextBoxColumn14.Width = 70;
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            this.dataGridViewTextBoxColumn15.DataPropertyName = "missed";
+            this.dataGridViewTextBoxColumn15.FillWeight = 70F;
+            this.dataGridViewTextBoxColumn15.HeaderText = "Missed";
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            this.dataGridViewTextBoxColumn15.ReadOnly = true;
+            this.dataGridViewTextBoxColumn15.Width = 70;
+            // 
+            // dataGridViewTextBoxColumn16
+            // 
+            this.dataGridViewTextBoxColumn16.DataPropertyName = "nomenclature";
+            this.dataGridViewTextBoxColumn16.FillWeight = 70F;
+            this.dataGridViewTextBoxColumn16.HeaderText = "In nom.";
+            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            this.dataGridViewTextBoxColumn16.ReadOnly = true;
+            this.dataGridViewTextBoxColumn16.Width = 70;
+            // 
+            // mni_ShowAnalogStock
+            // 
+            this.mni_ShowAnalogStock.Image = global::Odin.Global_Resourses.agt_reload24x24;
+            this.mni_ShowAnalogStock.Name = "mni_ShowAnalogStock";
+            this.mni_ShowAnalogStock.Size = new System.Drawing.Size(210, 22);
+            this.mni_ShowAnalogStock.Text = "Show valid analog stock";
+            this.mni_ShowAnalogStock.Click += new System.EventHandler(this.mni_ShowAnalogStock_Click);
+            // 
             // ctl_BatchFreeze
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1018,8 +1038,8 @@
             this.mnu_Lines.ResumeLayout(false);
             this.mnu_Lines.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
-            this.PerformLayout(); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1115,5 +1135,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_inbom;
         private System.Windows.Forms.DataGridViewCheckBoxColumn cn_dnp;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_allanalogues;
+        private System.Windows.Forms.DataGridViewButtonColumn btn_Analogs;
+        private System.Windows.Forms.ToolStripMenuItem mni_ShowAnalogStock;
     }
 }

@@ -407,9 +407,9 @@ namespace Odin.Workshop
 
         #region Workers
 
-        public static DataTable getWorkers()
+        public static DataTable getWorkers(int _state)
         {
-            string query = "EXECUTE sp_WorkersList";
+            string query = "EXECUTE sp_WorkersList @state =" + _state;
 
             return Helper.QueryDT(query);
         }

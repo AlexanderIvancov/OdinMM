@@ -86,9 +86,11 @@
             this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bs_List = new Odin.Global_Classes.SyncBindingSource();
+            this.btn_back = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.cn_num = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_artid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_art = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_up = new System.Windows.Forms.DataGridViewButtonColumn();
             this.cn_secart = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_analogs = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_Analogs = new System.Windows.Forms.DataGridViewButtonColumn();
@@ -111,6 +113,7 @@
             this.cn_positions = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_typechange = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_valanalog = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bn_List)).BeginInit();
@@ -122,6 +125,7 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.btn_back);
             this.kryptonPanel1.Controls.Add(this.btn_History);
             this.kryptonPanel1.Controls.Add(this.btn_Refresh);
             this.kryptonPanel1.Controls.Add(this.btn_Decline);
@@ -156,7 +160,7 @@
             // btn_Refresh
             // 
             this.btn_Refresh.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.LowProfile;
-            this.btn_Refresh.Location = new System.Drawing.Point(408, 5);
+            this.btn_Refresh.Location = new System.Drawing.Point(419, 5);
             this.btn_Refresh.Name = "btn_Refresh";
             this.btn_Refresh.Size = new System.Drawing.Size(49, 38);
             this.btn_Refresh.TabIndex = 50;
@@ -234,7 +238,7 @@
             // btn_Lock
             // 
             this.btn_Lock.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.LowProfile;
-            this.btn_Lock.Location = new System.Drawing.Point(375, 13);
+            this.btn_Lock.Location = new System.Drawing.Point(366, 13);
             this.btn_Lock.Name = "btn_Lock";
             this.btn_Lock.Size = new System.Drawing.Size(27, 25);
             this.btn_Lock.TabIndex = 41;
@@ -246,6 +250,7 @@
             // 
             this.cmb_Articles1.Article = "";
             this.cmb_Articles1.ArticleId = 0;
+            this.cmb_Articles1.ArticleIdRec = 0;
             this.cmb_Articles1.ArtType = null;
             this.cmb_Articles1.BOMState = 0;
             this.cmb_Articles1.Comments = null;
@@ -264,6 +269,7 @@
             this.cmb_Articles1.ProjectId = 0;
             this.cmb_Articles1.QtyAvail = 0D;
             this.cmb_Articles1.QtyConsStock = 0D;
+            this.cmb_Articles1.RMId = 0;
             this.cmb_Articles1.SecName = null;
             this.cmb_Articles1.Size = new System.Drawing.Size(265, 20);
             this.cmb_Articles1.SMTType = 0;
@@ -400,6 +406,7 @@
             this.cn_num,
             this.cn_artid,
             this.cn_art,
+            this.btn_up,
             this.cn_secart,
             this.cn_analogs,
             this.btn_Analogs,
@@ -421,7 +428,8 @@
             this.cn_isactive,
             this.cn_positions,
             this.cn_type,
-            this.cn_typechange});
+            this.cn_typechange,
+            this.cn_valanalog});
             this.gv_List.ContextMenuStrip = this.mnu_Lines;
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_List.Location = new System.Drawing.Point(0, 75);
@@ -687,6 +695,17 @@
             this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
             this.dataGridViewTextBoxColumn20.Visible = false;
             // 
+            // btn_back
+            // 
+            this.btn_back.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.LowProfile;
+            this.btn_back.Location = new System.Drawing.Point(394, 13);
+            this.btn_back.Name = "btn_back";
+            this.btn_back.Size = new System.Drawing.Size(27, 25);
+            this.btn_back.TabIndex = 53;
+            this.btn_back.Values.Image = global::Odin.Global_Resourses.undo_small;
+            this.btn_back.Values.Text = "";
+            this.btn_back.Click += new System.EventHandler(this.btn_back_Click);
+            // 
             // cn_num
             // 
             this.cn_num.DataPropertyName = "LineNumber";
@@ -710,6 +729,13 @@
             this.cn_art.HeaderText = "Article name";
             this.cn_art.Name = "cn_art";
             this.cn_art.Width = 150;
+            // 
+            // btn_up
+            // 
+            this.btn_up.FillWeight = 25F;
+            this.btn_up.HeaderText = "";
+            this.btn_up.Name = "btn_up";
+            this.btn_up.Width = 25;
             // 
             // cn_secart
             // 
@@ -877,6 +903,12 @@
             this.cn_typechange.Name = "cn_typechange";
             this.cn_typechange.Visible = false;
             // 
+            // cn_valanalog
+            // 
+            this.cn_valanalog.DataPropertyName = "ValAnalog";
+            this.cn_valanalog.HeaderText = "Valid. analogs";
+            this.cn_valanalog.Name = "cn_valanalog";
+            // 
             // ctl_BOMSimple
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -897,8 +929,8 @@
             this.mnu_Lines.ResumeLayout(false);
             this.mnu_Lines.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
-            this.PerformLayout(); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -960,9 +992,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
         private System.Windows.Forms.ToolStripButton btn_Sort;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btn_back;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_num;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_artid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_art;
+        private System.Windows.Forms.DataGridViewButtonColumn btn_up;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_secart;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_analogs;
         private System.Windows.Forms.DataGridViewButtonColumn btn_Analogs;
@@ -985,5 +1019,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_positions;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_type;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_typechange;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_valanalog;
     }
 }
