@@ -36,7 +36,7 @@ namespace Odin.CMB_Components.FreezedReason
         {
             try
             {
-                ((cmb_FreezedReason)cmb_FreezedReason).txt_FreezedReason.Text = gv_List.CurrentRow.Cells["cn_description"].Value.ToString();
+                ((cmb_FreezedReason)cmb_FreezedReason).FreezedReason = gv_List.CurrentRow.Cells["cn_description"].Value.ToString();
                 ((cmb_FreezedReason)cmb_FreezedReason).FreezedReasonId = (Int32)gv_List.CurrentRow.Cells["cn_code"].Value;
             }
             catch { }

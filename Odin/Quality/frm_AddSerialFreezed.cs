@@ -27,8 +27,8 @@ namespace Odin.CMB_Components.AddSerialFreezed
 
         public int FreezedReasonId
         {
-            get { return cmb_FreezedReason1._FreezedReasonId; }
-            set { cmb_FreezedReason1._FreezedReasonId = value; }
+            get { return cmb_FreezedReason1.FreezedReasonId; }
+            set { cmb_FreezedReason1.FreezedReasonId = value; }
         }
 
         public string Serial

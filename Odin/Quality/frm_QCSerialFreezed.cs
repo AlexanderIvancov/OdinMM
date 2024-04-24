@@ -289,7 +289,7 @@ namespace Odin.Quality
                 frm_AddSerialFreezed frm = new frm_AddSerialFreezed();
 
                 frm.StageId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_stageid"].Value.ToString());
-                frm.BatchId = BatchId;
+                frm.BatchId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_batchid"].Value.ToString());
                 frm.Serial = gv_List.CurrentRow.Cells["cn_serial"].Value.ToString();
                 frm.Position = gv_List.CurrentRow.Cells["cn_placement"].Value.ToString();
                 frm.FreezedReasonId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_reasonid"].Value.ToString());

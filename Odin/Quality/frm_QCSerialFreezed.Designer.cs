@@ -75,6 +75,7 @@
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_stageid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_batchid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_stage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_who = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -329,6 +330,7 @@
             this.gv_List.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cn_id,
             this.cn_stageid,
+            this.cn_batchid,
             this.cn_reasonid,
             this.cn_stage,
             this.cn_serial,
@@ -492,6 +494,15 @@
             this.cn_stageid.Width = 0;
             this.cn_stageid.Visible = false;
             // 
+            // cn_batchid
+            // 
+            this.cn_batchid.DataPropertyName = "batchid";
+            this.cn_batchid.FillWeight = 80F;
+            this.cn_batchid.HeaderText = "batchid";
+            this.cn_batchid.Name = "cn_batchid";
+            this.cn_batchid.Width = 0;
+            this.cn_batchid.Visible = false;
+            // 
             // cn_serial
             // 
             this.cn_serial.DataPropertyName = "serial";
@@ -619,6 +630,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_stage;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_stageid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_batchid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_serial;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_who;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_when;

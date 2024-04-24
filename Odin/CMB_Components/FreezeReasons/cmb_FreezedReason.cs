@@ -151,6 +151,7 @@ namespace Odin.CMB_Components.FreezedReason
 
         private void buttonSpecAny1_Click(object sender, EventArgs e)
         {
+            _FreezedReason = string.Empty;
             txt_FreezedReason.Text = string.Empty;
         }
 
@@ -158,7 +159,7 @@ namespace Odin.CMB_Components.FreezedReason
         {
             try
             {
-                FreezedReason = txt_FreezedReason.Text;
+                FreezedReason = _FreezedReason = txt_FreezedReason.Text;
             }
             catch
             {
