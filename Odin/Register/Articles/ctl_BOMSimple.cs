@@ -949,7 +949,7 @@ namespace Odin.Register.Articles
             }
 
             //I supposed your button column is at index 0
-            if (e.ColumnIndex == 5)
+            if (e.ColumnIndex == 6)
             {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
 
