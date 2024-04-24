@@ -330,7 +330,10 @@ namespace Odin.Warehouse.StockOut
                 }
             }
 
-            _res = _qtytemp <= qty;
+            if (_qtytemp > qty)
+                _res = false;
+            else
+                _res = true;
 
             return _res;
         }
