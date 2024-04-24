@@ -39,7 +39,7 @@ namespace Odin.DataCollection
         DC_BLL DCBll = new DC_BLL();
         frm_cmbTextPDA_NC frmSer = null;
 
-       string _worker = "";
+        string _worker = "";
         int _workerid = 0;
         public string Worker
         {
@@ -103,18 +103,6 @@ namespace Odin.DataCollection
                 catch { return 0; }
             }
             set { txt_OperNO.Text = value.ToString(); }
-        }
-
-        public int IsFreezed
-        {
-            get
-            {
-                return chk_IsFreezed.Checked == true ? -1 : 0;
-            }
-            set
-            {
-                chk_IsFreezed.Checked = value == -1;
-            }
         }
 
         public int IsLast
@@ -599,7 +587,7 @@ namespace Odin.DataCollection
         }
         public void AddSerialAnalogue(string serial, string analogue, int asprimary)
         {
-            string _res = ProdBll.AddSerialNumberAnalogue(serial, analogue, asprimary);            
+            string _res = ProdBll.AddSerialNumberAnalogue(serial, analogue, asprimary);
         }
 
         public void AddSerialAnalog(string Analogue)
@@ -664,16 +652,6 @@ namespace Odin.DataCollection
                         DialogResult result = frm1.ShowDialog();
                     }
 
-                    if (IsFreezed == 0)
-                    {
-                        CMB_Components.AddSerialFreezed.frm_AddSerialFreezed frm = new CMB_Components.AddSerialFreezed.frm_AddSerialFreezed();
-                        frm.Serial = _serial;
-
-                        DialogResult result = frm.ShowDialog();
-
-                        if (result == DialogResult.OK)
-                            ProdBll.AddSerialFreezed(frm.StageId, frm.BatchId, frm.Serial, frm.Position, frm.FreezedReasonId);
-                    }
                     txt_Oper.Text = "";
                     txt_Oper.Focus();
                 }
@@ -735,7 +713,6 @@ namespace Odin.DataCollection
         public void AddManualSerial(string _Serial)
         {
             string _serial = _Serial;
-
             string _res = DCBll.AddDataCollectionSerialOper(WorkerId, _serial, LaunchId, PrevStageId, OperNO, OperNO == 0 ? -1 : IsLast, cmb_CommonPDA1.SelectedValue);
             if (DCBll.SuccessId == -1)
                 FillList(WorkerId, LaunchId);
@@ -747,17 +724,6 @@ namespace Odin.DataCollection
                 frm_Error frm1 = new frm_Error();
                 frm1.HeaderText = "Something wrong! " + _res;
                 DialogResult result = frm1.ShowDialog();
-            }
-
-            if (IsFreezed == 0)
-            {
-                CMB_Components.AddSerialFreezed.frm_AddSerialFreezed frm = new CMB_Components.AddSerialFreezed.frm_AddSerialFreezed();
-                frm.Serial = _serial;
-
-                DialogResult result = frm.ShowDialog();
-
-                if (result == DialogResult.OK)
-                    ProdBll.AddSerialFreezed(frm.StageId, frm.BatchId, frm.Serial, frm.Position, frm.FreezedReasonId);
             }
         }
 
@@ -792,7 +758,7 @@ namespace Odin.DataCollection
             int _id = 0;
             try
             {
-               _id = Convert.ToInt32(Helper.GetOneRecord("select placeid from SYS_PCPlaces where pcname = '" + System.Environment.MachineName + "'"));
+                _id = Convert.ToInt32(Helper.GetOneRecord("select placeid from SYS_PCPlaces where pcname = '" + System.Environment.MachineName + "'"));
             }
             catch { }
             cmb_CommonPDA1.SelectedValue = _id;
