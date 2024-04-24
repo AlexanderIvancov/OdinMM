@@ -26,7 +26,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\192.168.10.5\ERP_Install\OdinInstall\</InstallUrl>
     <MinimumRequiredVersion>1.0.0.199</MinimumRequiredVersion>
-    <ApplicationRevision>1476</ApplicationRevision>
+    <ApplicationRevision>1426</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
