@@ -98,7 +98,10 @@ namespace Odin.CMB_Components.FreezedReason
                 if (dt.Rows.Count > 0)
                 {
                     foreach (DataRow dr in dt.Rows)
+                    {
                         txt_FreezedReason.Text = dr["description"].ToString();
+                        _FreezedReason = dr["description"].ToString();
+                    }
 
                     if (PrevId != FreezedReasonId)
                     {
@@ -111,7 +114,10 @@ namespace Odin.CMB_Components.FreezedReason
                     //}
                 }
                 else
+                {
                     txt_FreezedReason.Text = "";
+                    _FreezedReason = "";
+                }
             }
         }
 
