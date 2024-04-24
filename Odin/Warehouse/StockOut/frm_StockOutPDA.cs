@@ -336,8 +336,6 @@ namespace Odin.Warehouse.StockOut
                 _res = true;
 
             return _res;
-
-            return _res;
         }
         #endregion
 
