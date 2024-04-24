@@ -123,6 +123,13 @@ namespace Odin.Register.Articles
             set { txt_ValidState.Text = value; }
         }
 
+        int _previd = 0;
+        public int PrevId
+        {
+            get { return _previd; }
+            set { _previd = value; }
+        }
+
         #endregion
 
         #region Methods
@@ -928,6 +935,19 @@ namespace Odin.Register.Articles
             if (e.RowIndex < 0)
                 return;
 
+            if (e.ColumnIndex == 3)
+            {
+                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+
+                var w = Global_Resourses.bindingNavigatorAddNewItem_Image.Width;
+                var h = Global_Resourses.bindingNavigatorAddNewItem_Image.Height;
+                var x = e.CellBounds.Left + (e.CellBounds.Width - w) / 2;
+                var y = e.CellBounds.Top + (e.CellBounds.Height - h) / 2;
+
+                e.Graphics.DrawImage(Global_Resourses.up_small, new Rectangle(x, y, w, h));
+                e.Handled = true;
+            }
+
             //I supposed your button column is at index 0
             if (e.ColumnIndex == 5)
             {
@@ -1140,6 +1160,22 @@ namespace Odin.Register.Articles
                 //popup.ctl_StockLabel1.txt_Label.Text = _label.ToString();
 
             }
+            if (gv_List.CurrentRow.Cells["btn_up"].Selected == true)
+            {
+                int _cstid = 0;
+
+                try { _cstid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_artid"].Value); }
+                catch { }
+
+                PrevId = cmb_Articles1.ArticleId;
+
+                cmb_Articles1.ArticleId = _cstid;
+            }
+        }
+
+        private void btn_back_Click(object sender, EventArgs e)
+        {
+            cmb_Articles1.ArticleId = PrevId;
         }
     }
 }

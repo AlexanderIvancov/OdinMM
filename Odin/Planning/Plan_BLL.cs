@@ -2128,7 +2128,12 @@ namespace Odin.Planning
 
         //    return Helper.QueryDT(query);
         //}
+        public static DataTable getRMAnalogs(int artid, int artcseid)
+        {
+            string query = "EXECUTE sp_SelectProjectAnalogues @artid = " + artid + ", @cseid = " + artcseid;
 
+            return Helper.QueryDT(query);
+        }
         public static DataTable getCreateBatchRM(int _projectid)
         {
             string query = "EXECUTE sp_SelectCreatBatchFromProject @projectid = " + _projectid;

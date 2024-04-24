@@ -102,6 +102,7 @@
             this.btn_Delete = new System.Windows.Forms.ToolStripButton();
             this.btn_Active = new System.Windows.Forms.ToolStripButton();
             this.btn_Block = new System.Windows.Forms.ToolStripButton();
+            this.btn_ToFollow = new System.Windows.Forms.ToolStripButton();
             this.btn_OpenBatch = new System.Windows.Forms.ToolStripButton();
             this.btn_Excel = new System.Windows.Forms.ToolStripButton();
             this.kryptonDockableWorkspace1 = new ComponentFactory.Krypton.Docking.KryptonDockableWorkspace();
@@ -109,7 +110,6 @@
             this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
             this.kryptonDockingManager1 = new ComponentFactory.Krypton.Docking.KryptonDockingManager();
             this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
-            this.btn_ToFollow = new System.Windows.Forms.ToolStripButton();
             this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_project = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_artid = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -139,6 +139,7 @@
             this.cn_startdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_canproduce = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chk_Follow = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.cn_coconfdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
@@ -767,7 +768,8 @@
             this.cn_coartid,
             this.cn_startdate,
             this.cn_canproduce,
-            this.chk_Follow});
+            this.chk_Follow,
+            this.cn_coconfdate});
             this.gv_List.ContextMenuStrip = this.mnu_Lines;
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_List.Location = new System.Drawing.Point(0, 0);
@@ -1019,6 +1021,16 @@
             this.btn_Block.Text = "Block batch";
             this.btn_Block.Click += new System.EventHandler(this.btn_Block_Click);
             // 
+            // btn_ToFollow
+            // 
+            this.btn_ToFollow.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_ToFollow.Image = global::Odin.Global_Resourses.OptionsFollowUp;
+            this.btn_ToFollow.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_ToFollow.Name = "btn_ToFollow";
+            this.btn_ToFollow.Size = new System.Drawing.Size(23, 22);
+            this.btn_ToFollow.Text = "Follow up";
+            this.btn_ToFollow.Click += new System.EventHandler(this.btn_ToFollow_Click);
+            // 
             // btn_OpenBatch
             // 
             this.btn_OpenBatch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -1074,16 +1086,6 @@
             // kryptonManager1
             // 
             this.kryptonManager1.GlobalPaletteMode = ComponentFactory.Krypton.Toolkit.PaletteModeManager.Office2010Silver;
-            // 
-            // btn_ToFollow
-            // 
-            this.btn_ToFollow.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btn_ToFollow.Image = global::Odin.Global_Resourses.OptionsFollowUp;
-            this.btn_ToFollow.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_ToFollow.Name = "btn_ToFollow";
-            this.btn_ToFollow.Size = new System.Drawing.Size(23, 22);
-            this.btn_ToFollow.Text = "Follow up";
-            this.btn_ToFollow.Click += new System.EventHandler(this.btn_ToFollow_Click);
             // 
             // cn_id
             // 
@@ -1339,6 +1341,13 @@
             this.chk_Follow.ReadOnly = true;
             this.chk_Follow.TrueValue = "-1";
             // 
+            // cn_coconfdate
+            // 
+            this.cn_coconfdate.DataPropertyName = "coconfdate";
+            this.cn_coconfdate.HeaderText = "CO conf. date";
+            this.cn_coconfdate.Name = "cn_coconfdate";
+            this.cn_coconfdate.ReadOnly = true;
+            // 
             // frm_BatchProjects
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1376,7 +1385,7 @@
             this.bn_List.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonDockableWorkspace1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
@@ -1463,6 +1472,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_ShowBatches;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel14;
         private CMB_Components.Companies.cmb_Firms cmb_Firms1;
+        private System.Windows.Forms.ToolStripButton btn_ToFollow;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_project;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_artid;
@@ -1492,6 +1502,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_startdate;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_canproduce;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chk_Follow;
-        private System.Windows.Forms.ToolStripButton btn_ToFollow;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_coconfdate;
     }
 }

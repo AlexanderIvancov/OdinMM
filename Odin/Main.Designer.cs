@@ -193,11 +193,9 @@
             this.tab_Quality = new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab();
             this.kryptonRibbonGroup19 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
             this.kryptonRibbonGroupTriple22 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
-            this.kryptonRibbonGroupTriple48 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
             this.btn_IncomeControlList = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.btn_SerialTracing1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.btn_QCTraceView = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
-            this.btn_QCSerialFreezed = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.tab_TechDept = new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab();
             this.kryptonRibbonGroup25 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
             this.kryptonRibbonGroupTriple35 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
@@ -1375,8 +1373,7 @@
             // kryptonRibbonGroup19
             // 
             this.kryptonRibbonGroup19.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupContainer[] {
-            this.kryptonRibbonGroupTriple22,
-            this.kryptonRibbonGroupTriple48});
+            this.kryptonRibbonGroupTriple22});
             // 
             // kryptonRibbonGroupTriple22
             // 
@@ -1384,11 +1381,6 @@
             this.btn_IncomeControlList,
             this.btn_SerialTracing1,
             this.btn_QCTraceView});
-            // 
-            // kryptonRibbonGroupTriple22
-            // 
-            this.kryptonRibbonGroupTriple48.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupItem[] {
-            this.btn_QCSerialFreezed});
             // 
             // btn_IncomeControlList
             // 
@@ -1413,14 +1405,6 @@
             this.btn_QCTraceView.TextLine1 = "QC tracing";
             this.btn_QCTraceView.TextLine2 = "view";
             this.btn_QCTraceView.Click += new System.EventHandler(this.btn_QCTraceView_Click);
-            // 
-            // btn_QCTraceView
-            // 
-            this.btn_QCSerialFreezed.ImageLarge = global::Odin.Global_Resourses.snowflake;
-            this.btn_QCSerialFreezed.ImageSmall = global::Odin.Global_Resourses.snowflake;
-            this.btn_QCSerialFreezed.TextLine1 = "QC freezing";
-            this.btn_QCSerialFreezed.TextLine2 = "view";
-            this.btn_QCSerialFreezed.Click += new System.EventHandler(this.btn_QCSerialFreezed_Click);
             // 
             // tab_TechDept
             // 
@@ -1504,8 +1488,7 @@
             // kryptonRibbonGroup26
             // 
             this.kryptonRibbonGroup26.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupContainer[] {
-            this.kryptonRibbonGroupTriple36,
-            this.kryptonRibbonGroupTriple48});
+            this.kryptonRibbonGroupTriple36});
             this.kryptonRibbonGroup26.TextLine1 = "Data collection";
             // 
             // kryptonRibbonGroupTriple36
@@ -1865,7 +1848,6 @@
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_MovementReport;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup kryptonRibbonGroup19;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple22;
-        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple48;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_IncomeControlList;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup kryptonRibbonGroup20;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple23;
@@ -1896,7 +1878,6 @@
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_SerialTracing;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_SerialTracing1;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_QCTraceView;
-        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_QCSerialFreezed;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_Worker;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple29;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_FCPacking;

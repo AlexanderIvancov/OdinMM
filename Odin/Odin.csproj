@@ -39,7 +39,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\Desktop\</OutputPath>
+    <OutputPath>..\..\..\..\..\Desktop\OdinReleaseMM\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -609,18 +609,6 @@
     </Compile>
     <Compile Include="CMB_Components\ExpInvoices\frm_ExpInvoices.Designer.cs">
       <DependentUpon>frm_ExpInvoices.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CMB_Components\FreezeReasons\cmb_FreezedReason.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="CMB_Components\FreezeReasons\cmb_FreezedReason.Designer.cs">
-      <DependentUpon>cmb_FreezedReason.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CMB_Components\FreezeReasons\frm_FreezedReason.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CMB_Components\FreezeReasons\frm_FreezedReason.Designer.cs">
-      <DependentUpon>frm_FreezedReason.cs</DependentUpon>
     </Compile>
     <Compile Include="CMB_Components\IncomeDocs\cmb_IncomeDoc.cs">
       <SubType>UserControl</SubType>
@@ -1497,6 +1485,12 @@
     <Compile Include="Planning\frm_FillOrders.Designer.cs">
       <DependentUpon>frm_FillOrders.cs</DependentUpon>
     </Compile>
+    <Compile Include="Planning\frm_FindBatchAnalogs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Planning\frm_FindBatchAnalogs.designer.cs">
+      <DependentUpon>frm_FindBatchAnalogs.cs</DependentUpon>
+    </Compile>
     <Compile Include="Planning\frm_Launches.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1751,23 +1745,11 @@
     <Compile Include="Quality\frm_AddIncomeControl.Designer.cs">
       <DependentUpon>frm_AddIncomeControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Quality\frm_AddSerialFreezed.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Quality\frm_AddSerialFreezed.Designer.cs">
-      <DependentUpon>frm_AddSerialFreezed.cs</DependentUpon>
-    </Compile>
     <Compile Include="Quality\frm_IncomeControl.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Quality\frm_IncomeControl.Designer.cs">
       <DependentUpon>frm_IncomeControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Quality\frm_QCSerialFreezed.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Quality\frm_QCSerialFreezed.Designer.cs">
-      <DependentUpon>frm_QCSerialFreezed.cs</DependentUpon>
     </Compile>
     <Compile Include="Quality\frm_QCTracingView.cs">
       <SubType>Form</SubType>
@@ -1901,6 +1883,12 @@
     </Compile>
     <Compile Include="Register\Articles\frm_FindAnalogs.Designer.cs">
       <DependentUpon>frm_FindAnalogs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Register\Articles\frm_MapAnalog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Register\Articles\frm_MapAnalog.designer.cs">
+      <DependentUpon>frm_MapAnalog.cs</DependentUpon>
     </Compile>
     <Compile Include="Register\Articles\frm_RatioTab.cs">
       <SubType>Form</SubType>
@@ -3226,12 +3214,6 @@
     <EmbeddedResource Include="CMB_Components\ExpInvoices\frm_ExpInvoices.resx">
       <DependentUpon>frm_ExpInvoices.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CMB_Components\FreezeReasons\cmb_FreezedReason.resx">
-      <DependentUpon>cmb_FreezedReason.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CMB_Components\FreezeReasons\frm_FreezedReason.resx">
-      <DependentUpon>frm_FreezedReason.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CMB_Components\IncomeDocs\cmb_IncomeDoc.resx">
       <DependentUpon>cmb_IncomeDoc.cs</DependentUpon>
     </EmbeddedResource>
@@ -3647,6 +3629,9 @@
     <EmbeddedResource Include="Planning\frm_FillOrders.resx">
       <DependentUpon>frm_FillOrders.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Planning\frm_FindBatchAnalogs.resx">
+      <DependentUpon>frm_FindBatchAnalogs.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Planning\frm_Launches.resx">
       <DependentUpon>frm_Launches.cs</DependentUpon>
     </EmbeddedResource>
@@ -3782,14 +3767,8 @@
     <EmbeddedResource Include="Quality\frm_AddIncomeControl.resx">
       <DependentUpon>frm_AddIncomeControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Quality\frm_AddSerialFreezed.resx">
-      <DependentUpon>frm_AddSerialFreezed.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Quality\frm_IncomeControl.resx">
       <DependentUpon>frm_IncomeControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Quality\frm_QCSerialFreezed.resx">
-      <DependentUpon>frm_QCSerialFreezed.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Quality\frm_QCTracingView.resx">
       <DependentUpon>frm_QCTracingView.cs</DependentUpon>
@@ -3856,6 +3835,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Register\Articles\frm_FindAnalogs.resx">
       <DependentUpon>frm_FindAnalogs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Register\Articles\frm_MapAnalog.resx">
+      <DependentUpon>frm_MapAnalog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Register\Articles\frm_RatioTab.resx">
       <DependentUpon>frm_RatioTab.cs</DependentUpon>

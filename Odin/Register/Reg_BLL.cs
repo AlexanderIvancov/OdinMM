@@ -2094,6 +2094,21 @@ namespace Odin.Register
             sqlConn.Close();
         }
 
+        public void ValidAnalog(int artid, int analogid, int productid, int valid)
+        {
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_ValidAnalog", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@artid", artid);
+            sqlComm.Parameters.AddWithValue("@analogid", analogid);
+            sqlComm.Parameters.AddWithValue("@productid", productid);
+            sqlComm.Parameters.AddWithValue("@valid", valid);
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+        }
         #endregion
     }
 }

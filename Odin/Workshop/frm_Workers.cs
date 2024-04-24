@@ -43,13 +43,27 @@ namespace Odin.Workshop
             set;
         }
 
+        public int StateId
+        {
+            get
+            {
+                if (rb_Active.Checked == true)
+                    return -1;
+                else if (rb_InActive.Checked == true)
+                    return 0;
+                else
+                    return -99;
+            }
+            set { }
+        }
+
         #endregion
 
         #region Methods
 
         public void FillList()
         {
-            var data = Processing_BLL.getWorkers();
+            var data = Processing_BLL.getWorkers(StateId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -67,6 +81,7 @@ namespace Odin.Workshop
             });
 
         }
+
 
         private bool CheckOldRow()
         {
@@ -359,6 +374,21 @@ namespace Odin.Workshop
         private void gv_List_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             SetCellsColor();
+        }
+
+        private void rb_Active_CheckedChanged(object sender, EventArgs e)
+        {
+            FillList();
+        }
+
+        private void rb_InActive_CheckedChanged(object sender, EventArgs e)
+        {
+            FillList();
+        }
+
+        private void rb_All_CheckedChanged(object sender, EventArgs e)
+        {
+            FillList();
         }
     }
 }

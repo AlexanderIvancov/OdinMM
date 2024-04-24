@@ -57,7 +57,11 @@ namespace Odin.Register.Articles
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
-                if (Convert.ToInt32(row.Cells["cn_allowtoreplace"].Value) == 0)
+                //if (Convert.ToInt32(row.Cells["cn_allowtoreplace"].Value) == 0)
+                //    foreach (DataGridViewCell cell in row.Cells)
+                //        cell.Style.BackColor = Color.Tomato;
+                if (!(Convert.ToInt32(row.Cells["chk_valid"].Value) == -1
+                        && Convert.ToInt32(row.Cells["cn_productid"].Value) == ArtCSEId))
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Tomato;
             }
@@ -91,23 +95,47 @@ namespace Odin.Register.Articles
 
         private void btn_OK_Click(object sender, EventArgs e)
         {
-           
+
+            //int _analogid = 0;
+
+            //try
+            //{
+            //    _analogid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_analogid"].Value);
+
+            //}
+            //catch { }
+
+            //if (_analogid != 0 
+            //    && ArtCSEId != 0
+            //    && ArtId != 0)
+            //{
+            //    Reg.AddAnalogToBOM(ArtCSEId, ArtId, _analogid);
+
+            //    AnalogChanged?.Invoke(this);
+
+            //}
             int _analogid = 0;
-           
+            int _productid = 0;
+            int _valid = 0;
+
             try
             {
                 _analogid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_analogid"].Value);
-               
+                _valid = Convert.ToInt32(gv_List.CurrentRow.Cells["chk_valid"].Value);
+                _productid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_productid"].Value);
             }
             catch { }
 
-            if (_analogid != 0 
+            if (_analogid != 0
                 && ArtCSEId != 0
-                && ArtId != 0)
+                && ArtCSEId == _productid
+                && ArtId != 0
+                && _valid == -1)
             {
                 Reg.AddAnalogToBOM(ArtCSEId, ArtId, _analogid);
 
-                AnalogChanged?.Invoke(this);
+                if (AnalogChanged != null)
+                    AnalogChanged(this);
 
             }
         }
@@ -199,6 +227,54 @@ namespace Odin.Register.Articles
             //    btn_OK.Enabled = false;
             //else
             //    btn_OK.Enabled = true;
+        }
+
+        private void btn_Valid_Click(object sender, EventArgs e)
+        {
+            this.ShowingModal = true;
+
+            int _id = 0;
+
+            int _analogid = 0;
+            int _customerid = 0;
+            string _comments = "";
+            int _productid = 0;
+            int _valid = 0;
+            string _validat = "";
+            string _validby = "";
+
+            try
+            {
+                _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
+                _analogid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_analogid"].Value);
+                _customerid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_customerid"].Value);
+                _comments = gv_List.CurrentRow.Cells["cn_comments"].Value.ToString();
+                _productid = ArtCSEId;//Convert.ToInt32(gv_List.CurrentRow.Cells["cn_productid"].Value);
+                _valid = Convert.ToInt32(gv_List.CurrentRow.Cells["chk_valid"].Value);
+                _validat = gv_List.CurrentRow.Cells["cn_validat"].Value.ToString();
+                _validby = gv_List.CurrentRow.Cells["cn_validby"].Value.ToString();
+            }
+            catch { }
+
+            if (_id != 0)
+            {
+                frm_MapAnalog frm = new frm_MapAnalog();
+                frm.AnalogId = _analogid;
+                frm.CustomerId = _customerid;
+                frm.Comments = _comments;
+                frm.ProductId = _productid;
+                frm.Valid = _valid;
+                frm.ValidAt = _validat;
+                frm.ValidBy = _validby;
+
+                DialogResult result = frm.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    Reg.ValidAnalog(ArtId, frm.AnalogId, frm.ProductId, frm.Valid);
+                    FillList();
+                }
+            }
+            this.ShowingModal = false;
         }
     }
 }

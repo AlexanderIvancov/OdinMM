@@ -933,14 +933,6 @@ namespace Odin
             frm.Show(); frm.GetKryptonFormFields();
         }
 
-        private void btn_QCSerialFreezed_Click(object sender, EventArgs e)
-        {
-            if (glob_Class.IsFormAlreadyOpen("frm_QCSerialFreezed")) return;
-
-            frm_QCSerialFreezed frm = new frm_QCSerialFreezed();
-            frm.Show(); frm.GetKryptonFormFields();
-        }
-
         private void btn_FCPacking_Click(object sender, EventArgs e)
         {
             if (glob_Class.IsFormAlreadyOpen("frm_FCPacking")) return;
