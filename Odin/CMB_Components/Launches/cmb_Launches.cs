@@ -219,6 +219,8 @@ namespace Odin.CMB_Components.Launches
             StageId = 0;
             StartDate = "";
             EndDate = "";
+            SecName = "";
+            Article = "";
         }
 
         private void ShowLaunchFilter(string Beg)
