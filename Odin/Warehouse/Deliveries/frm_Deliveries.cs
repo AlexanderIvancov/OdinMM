@@ -367,6 +367,8 @@ namespace Odin.Warehouse.Deliveries
                     frm.Return = DNBll.DReturn;
                     frm.ArtId = DNBll.DArtId;
                     frm.ConfOrder = DNBll.DConfOrder;
+                    frm.Spec = DNBll.DSpec;
+                    frm.OrderState = DNBll.DOrderState;
                     frm.DelivDate = DNBll.DDelivDate;
                     frm.Customer = DNBll.DCustomer;
                     frm.Unit = DNBll.DUnit;
@@ -378,6 +380,7 @@ namespace Odin.Warehouse.Deliveries
                     frm.SaveChanges += new SaveChangesDNEventHandler(EditDelivNoteDets);
 
                     frm.Show(); frm.GetKryptonFormFields();
+                    frm.ThreadSafeCall(delegate { frm.SetCellsColor(); });
                 }
             }));
            

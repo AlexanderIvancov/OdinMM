@@ -553,6 +553,18 @@ namespace Odin.Warehouse.StockIn
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
 
+        public static DataTable getStockInArticleDeliveryEdit(int _id)
+        {
+            string query = "sp_SelectArticleDeliveryRestsNewForEdit";
+
+            var sqlparams = new List<SqlParameter>
+            {
+                new SqlParameter("@artid",SqlDbType.Int){Value = _id }
+            };
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
+        }
+
         public static DataTable getStockInBatchRMDets(int _id)
         {
             string query = "sp_SelectBatchStockInRMRests";

@@ -36,26 +36,28 @@ namespace Odin.Warehouse.Deliveries
         public void bw_List(object sender, DoWorkEventArgs e)
         {
 
-            var data1 = StockIn_BLL.getStockInArticleDelivery(ArtId);
+            var data1 = StockIn_BLL.getStockInArticleDeliveryEdit(ArtId);
 
             gv_Delivery.ThreadSafeCall(delegate
             {
                 gv_Delivery.AutoGenerateColumns = false;
                 bs_Delivery.DataSource = data1;
                 gv_Delivery.DataSource = bs_Delivery;
-
             });
 
             //Add already delivered conf.order
             if (COId != 0)
             {
                 DataRow newrow = data1.NewRow();
+                var conforderstring = ConfOrder.Replace(" ", "").Split('/');
 
                 newrow["toadd"] = -1;
                 newrow["id"] = Id;
                 newrow["coid"] = COId;
-                newrow["conforder"] = ConfOrder;
-                newrow["orderstate"] = "";
+                newrow["conforder"] = conforderstring[0];
+                newrow["conforderline"] = conforderstring[1];
+                newrow["spec"] = Spec;
+                newrow["orderstate"] = OrderState;
                 newrow["client"] = Customer;
                 newrow["confdate"] = DelivDate;
                 newrow["confqty"] = Qty;
@@ -69,8 +71,18 @@ namespace Odin.Warehouse.Deliveries
 
                 data1.Rows.Add(newrow);
             }
+
+            SetCellsColor();
         }
 
+        public void SetCellsColor()
+        {
+            foreach (DataGridViewRow row in this.gv_Delivery.Rows)
+                if (Convert.ToInt32(row.Cells["cn_dorderstate"].Value) == -1)
+                    foreach (DataGridViewCell cell in row.Cells)
+                        cell.Style.BackColor = System.Drawing.Color.Coral;
+        }
+    
         public void ShowDets()
         {
             bwStart(bw_List);
@@ -151,13 +163,17 @@ namespace Odin.Warehouse.Deliveries
 
         public string ConfOrder
         { get; set; }
+        public string Spec
+        { get; set; }
+        public int COId
+        { get; set; }
         public string DelivDate
         { get; set; }
         public string Customer
         { get; set; }
         public string Unit
         { get; set; }
-        public int COId
+        public int OrderState
         { get; set; }
         public double Qty
         { get; set; }
