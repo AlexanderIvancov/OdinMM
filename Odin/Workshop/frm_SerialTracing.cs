@@ -40,6 +40,7 @@ namespace Odin.Workshop
         }
 
         int _RegMode = -1;
+        int _Freezed = -1;
 
         public int RegMode
         {
@@ -62,6 +63,24 @@ namespace Odin.Workshop
             }
         }
 
+        public int Freezed
+        {
+            get { return _Freezed; }
+            set
+            {
+                _Freezed = value;
+                if (_Freezed == -1)
+                {
+                    chk_Freezed.CheckState = CheckState.Unchecked;
+                    chk_Freezed.BackColor = Color.LightGreen;
+                }
+                else
+                {
+                    chk_Freezed.CheckState = CheckState.Checked;
+                    chk_Freezed.BackColor = Color.LightPink;
+                }
+            }
+        }
         public int BatchId
         {
             get { return cmb_BatchPDA1.BatchId; }
@@ -144,6 +163,11 @@ namespace Odin.Workshop
             txt_Result.Text = _res + " at " + System.DateTime.Now.ToString() + System.Environment.NewLine + txt_Result.Text;
         }
 
+        public void AddSerialFreezed(int stageid, int batchid, int launchid, string serial, string placement, int reasonid)
+        {
+            ProdBll.AddSerialFreezed(stageid, batchid, launchid, serial, placement, reasonid);
+        }
+
         public void ReplaceSerialTracing(string serial, int stageid, string replacement)
         {
             string _res = ProdBll.ReplaceSerialNumberTracing(serial, stageid, replacement);
@@ -206,6 +230,22 @@ namespace Odin.Workshop
             else
             {
                 RegMode = -1;
+                txt_Oper.Focus();
+                //cmb_Articles1.Focus();
+            }
+        }
+
+        private void chk_Freezed_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chk_Freezed.CheckState == CheckState.Checked)
+            {
+                Freezed = 1;
+                _scanlabel = "";
+                txt_Oper.Focus();
+            }
+            else
+            {
+                Freezed = -1;
                 txt_Oper.Focus();
                 //cmb_Articles1.Focus();
             }
@@ -309,7 +349,18 @@ namespace Odin.Workshop
                                 if (ScanOrder == 2)
                                 {
                                     _scanlabel = txt_Oper.Text;
+                                    if (_Freezed != 0)
+                                    {
+                                        CMB_Components.AddSerialFreezed.frm_AddSerialFreezed frm = new CMB_Components.AddSerialFreezed.frm_AddSerialFreezed();
+                                        frm.StageId = StageId;
+                                        frm.BatchId = BatchId;
+                                        frm.Serial = txt_Oper.Text.Trim();
 
+                                        DialogResult result = frm.ShowDialog();
+
+                                        if (result == DialogResult.OK)
+                                            AddSerialFreezed(frm.StageId, frm.BatchId, frm.LaunchId, frm.Serial, frm.Position, frm.FreezedReasonId);
+                                    }
                                     //Add New Serial
                                     //MessageBox.Show("Adding!");
                                     AddSerialTracing(StageId, BatchId, txt_Oper.Text.Trim());

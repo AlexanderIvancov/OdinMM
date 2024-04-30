@@ -1421,7 +1421,7 @@
             this.btn_QCSerialFreezed.TextLine1 = "QC freezing";
             this.btn_QCSerialFreezed.TextLine2 = "view";
             this.btn_QCSerialFreezed.Click += new System.EventHandler(this.btn_QCSerialFreezed_Click);
-            this.btn_QCSerialFreezed.Visible = false;
+            this.btn_QCSerialFreezed.Visible = true;
             // 
             // tab_TechDept
             // 

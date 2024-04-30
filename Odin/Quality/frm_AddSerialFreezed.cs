@@ -1,6 +1,5 @@
 ﻿using ComponentFactory.Krypton.Toolkit;
 using System;
-using System.Data;
 
 namespace Odin.CMB_Components.AddSerialFreezed
 {
@@ -23,6 +22,12 @@ namespace Odin.CMB_Components.AddSerialFreezed
         {
             get { return cmb_Batches1.BatchId; }
             set { cmb_Batches1.BatchId = value; }
+        }
+
+        public int LaunchId
+        {
+            get { return cmb_Launches1.LaunchId; }
+            set { cmb_Launches1.LaunchId = value; }
         }
 
         public int FreezedReasonId

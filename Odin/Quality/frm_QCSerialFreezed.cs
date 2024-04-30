@@ -268,7 +268,7 @@ namespace Odin.Quality
             if (result == DialogResult.OK)
             {
                 _showingModal = false;
-                ProdBll.AddSerialFreezed(frm.StageId, frm.BatchId, frm.Serial, frm.Position, frm.FreezedReasonId);
+                ProdBll.AddSerialFreezed(frm.StageId, frm.BatchId, frm.LaunchId, frm.Serial, frm.Position, frm.FreezedReasonId);
                 FillQCSerialFreezed(frm.BatchId);
             }
             if (result == DialogResult.Cancel)
@@ -290,6 +290,7 @@ namespace Odin.Quality
 
                 frm.StageId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_stageid"].Value.ToString());
                 frm.BatchId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_batchid"].Value.ToString());
+                frm.LaunchId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_launchid"].Value.ToString());
                 frm.Serial = gv_List.CurrentRow.Cells["cn_serial"].Value.ToString();
                 frm.Position = gv_List.CurrentRow.Cells["cn_placement"].Value.ToString();
                 frm.FreezedReasonId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_reasonid"].Value.ToString());
@@ -299,7 +300,7 @@ namespace Odin.Quality
                 if (result == DialogResult.OK)
                 {
                     _showingModal = false;
-                    ProdBll.EditSerialFreezed(_id, frm.StageId, frm.BatchId, frm.Serial, frm.Position, frm.FreezedReasonId);
+                    ProdBll.AddSerialFreezed(frm.StageId, frm.BatchId, frm.LaunchId, frm.Serial, frm.Position, frm.FreezedReasonId);
                     FillQCSerialFreezed(frm.BatchId);
                 }
                 if (result == DialogResult.Cancel)
@@ -309,14 +310,9 @@ namespace Odin.Quality
 
         private void btn_Delete_Click(object sender, EventArgs e)
         {
-            int _id = 0;
-
-            try { _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value); }
-            catch { }
-
             if (glob_Class.DeleteConfirm() == true)
             {
-                ProdBll.DeleteSerialFreezed(_id);
+                ProdBll.DeleteSerialFreezed(gv_List.CurrentRow.Cells["cn_serial"].Value.ToString());
                 FillQCSerialFreezed(0);
             }
         }

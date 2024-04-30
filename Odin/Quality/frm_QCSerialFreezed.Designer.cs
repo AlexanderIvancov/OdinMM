@@ -73,9 +73,11 @@
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_stageid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_batchid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_launchid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_stage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_who = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -84,6 +86,7 @@
             this.cn_reasonid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_placement = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_batch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_launch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bn_List)).BeginInit();
             this.bn_List.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
@@ -331,12 +334,14 @@
             this.cn_id,
             this.cn_stageid,
             this.cn_batchid,
+            this.cn_launchid,
             this.cn_reasonid,
             this.cn_stage,
             this.cn_serial,
             this.cn_who,
             this.cn_when,
             this.cn_batch,
+            this.cn_launch,
             this.cn_placement,
             this.cn_reason});
             this.gv_List.ContextMenuStrip = this.mnu_Lines;
@@ -443,10 +448,8 @@
             // dataGridViewTextBoxColumn5
             // 
             this.dataGridViewTextBoxColumn5.DataPropertyName = "who";
-            this.dataGridViewTextBoxColumn5.FillWeight = 90F;
             this.dataGridViewTextBoxColumn5.HeaderText = "Who";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.Width = 90;
             // 
             // dataGridViewTextBoxColumn6
             // 
@@ -456,17 +459,28 @@
             // 
             // dataGridViewTextBoxColumn7
             // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "havenext";
-            this.dataGridViewTextBoxColumn7.HeaderText = "have next";
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "batch";
+            this.dataGridViewTextBoxColumn7.HeaderText = "Batch";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.Visible = false;
             // 
             // dataGridViewTextBoxColumn8
             // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "laststage";
-            this.dataGridViewTextBoxColumn8.HeaderText = "last stage";
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "launch";
+            this.dataGridViewTextBoxColumn8.HeaderText = "Launch";
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.DataPropertyName = "placement";
+            this.dataGridViewTextBoxColumn9.HeaderText = "Placement";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn10.DataPropertyName = "description";
+            this.dataGridViewTextBoxColumn10.HeaderText = "Freezed Reason";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+
             // 
             // cn_id
             // 
@@ -479,7 +493,7 @@
             // 
             // cn_stage
             // 
-            this.cn_stage.DataPropertyName = "name";
+            this.cn_stage.DataPropertyName = "stage";
             this.cn_stage.FillWeight = 80F;
             this.cn_stage.HeaderText = "Stage";
             this.cn_stage.Name = "cn_stage";
@@ -502,6 +516,15 @@
             this.cn_batchid.Name = "cn_batchid";
             this.cn_batchid.Width = 0;
             this.cn_batchid.Visible = false;
+            // 
+            // cn_launchid
+            // 
+            this.cn_launchid.DataPropertyName = "launchid";
+            this.cn_launchid.FillWeight = 80F;
+            this.cn_launchid.HeaderText = "launchid";
+            this.cn_launchid.Name = "cn_launchid";
+            this.cn_launchid.Width = 0;
+            this.cn_launchid.Visible = false;
             // 
             // cn_serial
             // 
@@ -546,6 +569,14 @@
             this.cn_batch.HeaderText = "Batch";
             this.cn_batch.Name = "cn_batch";
             this.cn_batch.Width = 50;
+            // 
+            // cn_launch
+            // 
+            this.cn_launch.DataPropertyName = "launch";
+            this.cn_launch.FillWeight = 50F;
+            this.cn_launch.HeaderText = "Launch";
+            this.cn_launch.Name = "cn_launch";
+            this.cn_launch.Width = 50;
             // 
             // cn_analog
             // 
@@ -627,10 +658,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_stage;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_stageid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_batchid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_launchid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_serial;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_who;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_when;
@@ -638,5 +671,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_reason;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_reasonid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_batch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_launch;
     }
 }

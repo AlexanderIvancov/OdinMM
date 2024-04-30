@@ -99,6 +99,7 @@
             this.cn_operno = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_islast = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_analog = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chk_IsFreezed = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2.Panel)).BeginInit();
             this.kryptonHeaderGroup2.Panel.SuspendLayout();
@@ -135,6 +136,7 @@
             // 
             // kryptonHeaderGroup2.Panel
             // 
+            this.kryptonHeaderGroup2.Panel.Controls.Add(this.chk_IsFreezed);
             this.kryptonHeaderGroup2.Panel.Controls.Add(this.btn_SetPlace);
             this.kryptonHeaderGroup2.Panel.Controls.Add(this.cmb_CommonPDA1);
             this.kryptonHeaderGroup2.Panel.Controls.Add(this.lbl_Viza);
@@ -261,9 +263,9 @@
             // chk_IsLast
             // 
             this.chk_IsLast.AutoSize = false;
-            this.chk_IsLast.Location = new System.Drawing.Point(46, 287);
+            this.chk_IsLast.Location = new System.Drawing.Point(29, 294);
             this.chk_IsLast.Name = "chk_IsLast";
-            this.chk_IsLast.Size = new System.Drawing.Size(209, 40);
+            this.chk_IsLast.Size = new System.Drawing.Size(156, 40);
             this.chk_IsLast.StateCommon.LongText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.chk_IsLast.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.chk_IsLast.TabIndex = 257;
@@ -856,6 +858,18 @@
             this.cn_analog.Name = "cn_analog";
             this.cn_analog.Width = 250;
             // 
+            // chk_IsFreezed
+            // 
+            this.chk_IsFreezed.AutoSize = false;
+            this.chk_IsFreezed.Location = new System.Drawing.Point(204, 294);
+            this.chk_IsFreezed.Name = "chk_IsFreezed";
+            this.chk_IsFreezed.Size = new System.Drawing.Size(104, 40);
+            this.chk_IsFreezed.StateCommon.LongText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.chk_IsFreezed.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.chk_IsFreezed.TabIndex = 265;
+            this.chk_IsFreezed.Values.Text = "Freezed";
+            this.chk_IsFreezed.Visible = true;
+            // 
             // frm_WorkerDCOper
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -894,7 +908,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).EndInit();
             this.kryptonHeaderGroup1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gv_List)).EndInit();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
@@ -967,5 +981,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_analog;
         private CMB_Components.Common.cmb_CommonPDA cmb_CommonPDA1;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_SetPlace;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_IsFreezed;
     }
 }

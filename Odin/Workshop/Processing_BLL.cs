@@ -312,7 +312,7 @@ namespace Odin.Workshop
             return _res;
         }
 
-        public void AddSerialFreezed(int _stageid, int _batchid, string _serial, string _placement, int _reasonid)
+        public void AddSerialFreezed(int _stageid, int _batchid, int _launchid, string _serial, string _placement, int _reasonid)
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_AddSerialFreezed", sqlConn);
@@ -320,6 +320,7 @@ namespace Odin.Workshop
             sqlComm.CommandTimeout = 3000;
             sqlComm.Parameters.AddWithValue("@stageid", _stageid);
             sqlComm.Parameters.AddWithValue("@batchid", _batchid);
+            sqlComm.Parameters.AddWithValue("@launchid", _launchid);
             sqlComm.Parameters.AddWithValue("@serial", rusToEng(_serial));
             sqlComm.Parameters.AddWithValue("@placement", _placement);
             sqlComm.Parameters.AddWithValue("@reasonid", _reasonid);
@@ -375,31 +376,13 @@ namespace Odin.Workshop
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
 
-        public void EditSerialFreezed(int _id, int _stageid, int _batchid, string _serial, string _placement, int _reasonid)
-        {
-            SqlConnection sqlConn = new SqlConnection(sConnStr);
-            SqlCommand sqlComm = new SqlCommand("sp_EditSerialFreezed", sqlConn);
-            sqlComm.CommandType = CommandType.StoredProcedure;
-            sqlComm.CommandTimeout = 3000;
-            sqlComm.Parameters.AddWithValue("@id", _id);
-            sqlComm.Parameters.AddWithValue("@stageid", _stageid);
-            sqlComm.Parameters.AddWithValue("@batchid", _batchid);
-            sqlComm.Parameters.AddWithValue("@serial", rusToEng(_serial));
-            sqlComm.Parameters.AddWithValue("@placement", _placement);
-            sqlComm.Parameters.AddWithValue("@reasonid", _reasonid);
-
-            sqlConn.Open();
-            sqlComm.ExecuteNonQuery();
-            sqlConn.Close();
-        }
-
-        public void DeleteSerialFreezed(int _id)
+        public void DeleteSerialFreezed(string _serial)
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_DeleteSerialFreezed", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
             sqlComm.CommandTimeout = 3000;
-            sqlComm.Parameters.AddWithValue("@id", _id);
+            sqlComm.Parameters.AddWithValue("@serial", _serial);
 
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
