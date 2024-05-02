@@ -20,6 +20,7 @@ namespace Odin.Planning.Controls
             InitializeComponent();
             //frm_Batches.ReceiveRMArtId += new ReceiveRMId(RetArtId);
             ED = new ExportData(this.gv_List, "BatchBOM.xls", this.Name);
+            PopupHelper = new PopupWindowHelper();
         }
 
         #region Variables
