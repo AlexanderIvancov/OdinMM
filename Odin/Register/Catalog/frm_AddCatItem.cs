@@ -216,6 +216,25 @@ namespace Odin.Register.Catalog
             get { return cmb_Firms2.FirmId; }
             set { cmb_Firms2.FirmId = value; }
         }
+        public string ValidTill
+        {
+            get
+            {
+                if (txt_ExpDate.Value == null)
+                    return "";
+                else
+                    return Convert.ToDateTime(txt_ExpDate.Value).ToShortDateString();
+            }
+            set
+            {
+                try
+                {
+                    txt_ExpDate.Value = Convert.ToDateTime(value);
+                }
+                catch { txt_ExpDate.Value = null; }
+            }
+        }
+
         #endregion
 
         #region Controls
@@ -285,6 +304,16 @@ namespace Odin.Register.Catalog
         private void buttonSpecAny6_Click(object sender, EventArgs e)
         {
             txt_BarCode.Text = string.Empty;
+        }
+
+        public void FillValid()
+        {
+            txt_ExpDate.Value = System.DateTime.Now.AddMonths(1);
+        }
+
+        private void txt_ExpDate_DropDown(object sender, DateTimePickerDropArgs e)
+        {
+            txt_ExpDate.Value = txt_ExpDate.Value == null ? System.DateTime.Now : txt_ExpDate.Value;
         }
     }
 }

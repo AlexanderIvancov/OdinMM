@@ -1413,7 +1413,8 @@ namespace Odin.Register
         public int CatId
         {
             get { return _catid; }
-            set {
+            set
+            {
                 _catid = value;
 
                 SqlConnection conn = new SqlConnection(sConnStr);
@@ -1439,7 +1440,7 @@ namespace Odin.Register
                         CatFirmArt = dr["firmart"].ToString();
                         CatFirmId = Convert.ToInt32(dr["firmid"]);
                         CatUnitId = Convert.ToInt32(dr["unitid"]);
-                        CatUnitPrice = Convert.ToDouble(dr["unitprice"]); 
+                        CatUnitPrice = Convert.ToDouble(dr["unitprice"]);
                         CatCurId = Convert.ToInt32(dr["curid"]);
                         CatManufacturer = dr["manufacturer"].ToString();
                         CatDelivDerm = Convert.ToInt32(dr["delivterm"]);
@@ -1456,6 +1457,7 @@ namespace Odin.Register
                         CatQuoted = Convert.ToInt32(dr["quoted"]);
                         CatBarCode = dr["ean"].ToString();
                         CatForCust = Convert.ToInt32(dr["forcustomer"]);
+                        CatValidTill = dr["validtill"].ToString();
                     }
                 }
                 else
@@ -1491,6 +1493,7 @@ namespace Odin.Register
             CatQuoted = 0;
             CatBarCode = "";
             CatForCust = 0;
+            CatValidTill = "";
         }
 
         public int CatArtId
@@ -1499,7 +1502,7 @@ namespace Odin.Register
         { get; set; }
         public int CatFirmId
         {
-            get;set;
+            get; set;
         }
         public string CatFirmArt
         { get; set; }
@@ -1539,10 +1542,12 @@ namespace Odin.Register
         { get; set; }
         public int CatForCust
         { get; set; }
+        public string CatValidTill
+        { get; set; }
         public int AddCatalogItem(int bargtype, int artid, int firmid, string firmart, int unitid, double unitprice, int curid,
                                 string manufacturer, string comments, int delivterm, double moq, double mpq, int asdefault,
                                 string elink, int vat, int minexpdays, double coefconv, string datacode, string delivtermtxt,
-                                int quoted, string barcode, int forcustomer)
+                                int quoted, string barcode, int forcustomer, string validtill)
         {
             int _res = 0;
 
@@ -1572,6 +1577,7 @@ namespace Odin.Register
             sqlComm.Parameters.AddWithValue("@quoted", quoted);
             sqlComm.Parameters.AddWithValue("@ean", barcode);
             sqlComm.Parameters.AddWithValue("@forcustomer", forcustomer);
+            sqlComm.Parameters.AddWithValue("@validtill", validtill);
 
             sqlComm.Parameters.Add("@insertedid", SqlDbType.Int).Direction = ParameterDirection.Output;
 
@@ -1590,7 +1596,7 @@ namespace Odin.Register
         public void EditCatalogItem(int id, int bargtype, int artid, int firmid, string firmart, int unitid, double unitprice, int curid,
                                 string manufacturer, string comments, int delivterm, double moq, double mpq, int asdefault,
                                 string elink, int vat, int minexpdays, double coefconv, string datacode, string delivtermtxt,
-                                int quoted, string barcode, int forcustomer)
+                                int quoted, string barcode, int forcustomer, string validtill)
         {
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
@@ -1620,6 +1626,7 @@ namespace Odin.Register
             sqlComm.Parameters.AddWithValue("@quoted", quoted);
             sqlComm.Parameters.AddWithValue("@ean", barcode);
             sqlComm.Parameters.AddWithValue("@forcustomer", forcustomer);
+            sqlComm.Parameters.AddWithValue("@validtill", validtill);
             //try
             //{
             sqlConn.Open();
@@ -1639,7 +1646,7 @@ namespace Odin.Register
             sqlComm.CommandType = CommandType.StoredProcedure;
 
             sqlComm.Parameters.AddWithValue("@id", id);
-            
+
 
             try
             {
@@ -1663,7 +1670,7 @@ namespace Odin.Register
 
             sqlComm.Parameters.AddWithValue("@supid", supid);
             sqlComm.Parameters.Add("@tablecatalog", SqlDbType.Structured);
-            sqlComm.Parameters["@tablecatalog"].TypeName = "UT_CatalogNew";
+            sqlComm.Parameters["@tablecatalog"].TypeName = "UT_Catalog";
             sqlComm.Parameters["@tablecatalog"].Value = data;
 
             sqlConn.Open();
@@ -1673,7 +1680,6 @@ namespace Odin.Register
             return dt;
 
         }
-
         #endregion
 
         #region Properties

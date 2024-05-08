@@ -135,7 +135,7 @@ namespace Odin.Purchase
         {
             BLL.EditCatalogItem(frm.CatID, frm.BargType, frm.ArticleId, frm.FirmId, frm.FirmArt, frm.UnitId, frm.UnitPrice, frm.CurId, frm.Manufacturer, frm.Comments,
                                             frm.DelivTerms, frm.MOQ, frm.MPQ, frm.AsDefault, "", Convert.ToInt32(frm.Vat), frm.MinExpDays, frm.CoefConv, frm.DataCode, 
-                                            frm.DelivTermTxt, frm.Quoted, frm.BarCode, frm.ForCustomer);
+                                            frm.DelivTermTxt, frm.Quoted, frm.BarCode, frm.ForCustomer, frm.ValidTill);
             BLL.CatId = frm.CatID;
             FillList(ArtId, SupId);
 
@@ -151,7 +151,7 @@ namespace Odin.Purchase
 
             NewLineId = BLL.AddCatalogItem(frm.BargType, frm.ArticleId, frm.FirmId, frm.FirmArt, frm.UnitId, frm.UnitPrice, frm.CurId, frm.Manufacturer, frm.Comments,
                                             frm.DelivTerms, frm.MOQ, frm.MPQ, frm.AsDefault, "", Convert.ToInt32(frm.Vat), frm.MinExpDays, frm.CoefConv, frm.DataCode, 
-                                            frm.DelivTermTxt, frm.Quoted, frm.BarCode, frm.ForCustomer);
+                                            frm.DelivTermTxt, frm.Quoted, frm.BarCode, frm.ForCustomer, frm.ValidTill);
             FillList(ArtId, SupId);
 
             frm.Close();
@@ -288,7 +288,7 @@ namespace Odin.Purchase
             frm = new frm_AddCatItem();
             frm.ArticleId = ArtId;
             frm.FirmId = SupId;
-
+            frm.FillValid();
             frm.CatSaved += new CatSavedEventHandler(CatAdded);
             frm.CatClosed += new CatClosedEventHandler(CatClosed);
 
@@ -329,6 +329,7 @@ namespace Odin.Purchase
                 frm.Quoted = BLL.CatQuoted;
                 frm.BarCode = BLL.CatBarCode;
                 frm.ForCustomer = BLL.CatForCust;
+                frm.ValidTill = BLL.CatValidTill;
                 frm.CatSaved += new CatSavedEventHandler(CatEdited);
                 frm.CatClosed += new CatClosedEventHandler(CatClosed);
 

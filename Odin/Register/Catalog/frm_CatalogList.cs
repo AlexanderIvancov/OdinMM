@@ -234,7 +234,7 @@ namespace Odin.Register.Catalog
 
             NewLineId = RegBll.AddCatalogItem(frm.BargType, frm.ArticleId, frm.FirmId, frm.FirmArt, frm.UnitId, frm.UnitPrice, frm.CurId, frm.Manufacturer, frm.Comments,
                                             frm.DelivTerms, frm.MOQ, frm.MPQ, frm.AsDefault, "", Convert.ToInt32(frm.Vat), frm.MinExpDays, frm.CoefConv, frm.DataCode, 
-                                            frm.DelivTermTxt, frm.Quoted, frm.BarCode, frm.ForCustomer);
+                                            frm.DelivTermTxt, frm.Quoted, frm.BarCode, frm.ForCustomer, frm.ValidTill);
 
             cmb_Articles1.ArticleId = frm.ArticleId;
 
@@ -252,7 +252,7 @@ namespace Odin.Register.Catalog
         {
             RegBll.EditCatalogItem(frm.CatID, frm.BargType, frm.ArticleId, frm.FirmId, frm.FirmArt, frm.UnitId, frm.UnitPrice, frm.CurId, frm.Manufacturer, frm.Comments,
                                             frm.DelivTerms, frm.MOQ, frm.MPQ, frm.AsDefault, "", Convert.ToInt32(frm.Vat), frm.MinExpDays, frm.CoefConv, frm.DataCode,
-                                            frm.DelivTermTxt, frm.Quoted, frm.BarCode, frm.ForCustomer);
+                                            frm.DelivTermTxt, frm.Quoted, frm.BarCode, frm.ForCustomer, frm.ValidTill);
             RegBll.CatId = frm.CatID;
 
             DataGridViewColumn oldColumn = gv_List.SortedColumn;
@@ -498,6 +498,7 @@ namespace Odin.Register.Catalog
                 frm.BarCode = RegBll.CatBarCode;
                 frm.DataCode = RegBll.CatDataCode;
                 frm.ForCustomer = RegBll.CatForCust;
+                frm.ValidTill = RegBll.CatValidTill;
 
                 frm.CatSaved += new CatSavedEventHandler(CatEdited);
 
@@ -542,7 +543,7 @@ namespace Odin.Register.Catalog
                 frm.DelivTermTxt = RegBll.CatDelivTermTxt;
                 frm.BarCode = RegBll.CatBarCode;
                 frm.ForCustomer = RegBll.CatForCust;
-
+                frm.FillValid();
                 frm.CatSaved += new CatSavedEventHandler(CatAdded);
 
 
