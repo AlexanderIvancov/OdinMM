@@ -1,6 +1,7 @@
 ﻿using Odin.Global_Classes;
 using System;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace Odin.Register.Articles
 {
@@ -22,9 +23,9 @@ namespace Odin.Register.Articles
             get { return cmb_Articles1.ArticleId; }
             set
             {
-                
+
                 _ArtId = value;
-                
+
             }
         }
 
@@ -43,7 +44,7 @@ namespace Odin.Register.Articles
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
 
-                //SetCellsColor();
+                SetCellsColor();
             });
 
 
@@ -87,7 +88,7 @@ namespace Odin.Register.Articles
                 bs_ResList.DataSource = data;
                 gv_ResList.DataSource = bs_ResList;
 
-                //SetCellsColor();
+                SetCellsColor();
             });
 
 
@@ -102,6 +103,25 @@ namespace Odin.Register.Articles
 
             BLL.DeleteArticleForAnalyzisAll();
             FillRM();
+        }
+
+        private void gv_ResList_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            SetCellsColor();
+        }
+
+        public void SetCellsColor()
+        {
+            foreach (DataGridViewRow row in this.gv_ResList.Rows)
+            {
+                if (Convert.ToInt32(row.Cells["chk_isactive"].Value) == 0)
+                {
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        cell.Style.BackColor = Color.Silver;
+                    }
+                }
+            }
         }
     }
 }

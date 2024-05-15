@@ -89,6 +89,7 @@ namespace Odin.Register.Catalog
             string _Comments = "";
             string _Supplier = "";
             string _ValidTill = "";
+            DateTime dt;
 
             DataTable data = new DataTable();
             data.Columns.Add("article", typeof(string));
@@ -157,7 +158,8 @@ namespace Odin.Register.Catalog
                             _Manufacturer = glob_Class.NES(myExcel.GetValue("L" + k.ToString()));
                             _Comments = glob_Class.NES(myExcel.GetValue("M" + k.ToString()).Trim());
                             _Supplier = glob_Class.NES(myExcel.GetValue("N" + k.ToString()).Trim());
-                            _ValidTill = glob_Class.NES(myExcel.GetValue("O" + k.ToString()).Trim());
+                            DateTime.TryParse(glob_Class.NES(myExcel.GetValue("O" + k.ToString()).ToString().Trim()), out dt);
+                            _ValidTill = (dt.ToShortDateString() == "01.01.0001" ? "" : dt.ToShortDateString());
 
                             //if (Math.Round(_UnitPrice, 5) > 0
                             //    || glob_Class.NES(myExcel.GetValue("D" + k.ToString()).Trim().ToUpper()) == "Q")

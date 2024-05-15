@@ -78,6 +78,7 @@
             this.cn_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_analogcomments = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chk_isactive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
@@ -122,6 +123,7 @@
             // 
             this.cmb_Articles1.Article = "";
             this.cmb_Articles1.ArticleId = 0;
+            this.cmb_Articles1.ArticleIdRec = 0;
             this.cmb_Articles1.ArtType = null;
             this.cmb_Articles1.BOMState = 0;
             this.cmb_Articles1.Comments = null;
@@ -140,6 +142,7 @@
             this.cmb_Articles1.ProjectId = 0;
             this.cmb_Articles1.QtyAvail = 0D;
             this.cmb_Articles1.QtyConsStock = 0D;
+            this.cmb_Articles1.RMId = 0;
             this.cmb_Articles1.SecName = null;
             this.cmb_Articles1.Size = new System.Drawing.Size(265, 20);
             this.cmb_Articles1.SMTType = 0;
@@ -392,13 +395,15 @@
             this.cn_rmsecname,
             this.cn_qty,
             this.cn_unit,
-            this.cn_analogcomments});
+            this.cn_analogcomments,
+            this.chk_isactive});
             this.gv_ResList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_ResList.Location = new System.Drawing.Point(0, 25);
             this.gv_ResList.Name = "gv_ResList";
             this.gv_ResList.RowHeadersWidth = 25;
             this.gv_ResList.Size = new System.Drawing.Size(869, 255);
             this.gv_ResList.TabIndex = 1;
+            this.gv_ResList.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_ResList_ColumnHeaderMouseClick);
             // 
             // bn_ResList
             // 
@@ -566,6 +571,17 @@
             this.cn_analogcomments.HeaderText = "Analog comments";
             this.cn_analogcomments.Name = "cn_analogcomments";
             // 
+            // chk_isactive
+            // 
+            this.chk_isactive.DataPropertyName = "isactive";
+            this.chk_isactive.FalseValue = "0";
+            this.chk_isactive.HeaderText = "isactive";
+            this.chk_isactive.IndeterminateValue = "1";
+            this.chk_isactive.Name = "chk_isactive";
+            this.chk_isactive.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.chk_isactive.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.chk_isactive.TrueValue = "-1";
+            // 
             // ctl_Assemblies
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -600,7 +616,7 @@
             this.bn_ResList.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_ResList)).EndInit();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
@@ -654,5 +670,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_unit;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_analogcomments;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn chk_isactive;
     }
 }
