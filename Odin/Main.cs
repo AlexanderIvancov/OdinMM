@@ -73,7 +73,7 @@ namespace Odin
         static String path_Set()
         {
             XmlDocument xDoc = new XmlDocument();
-            xDoc.Load("C:/PST/OdinLauncher/OdinLauncher.exe.config");
+            xDoc.Load("//FS-PRIMARY/ERP_Install/OdinLauncher/OdinLauncher.exe.config");
             XmlElement xRoot = xDoc.DocumentElement;
             if (xRoot != null)
                 foreach (XmlElement xnode in xRoot)
@@ -83,7 +83,7 @@ namespace Odin
                                 foreach (XmlNode childnode2 in childnode.ChildNodes)
                                     if (childnode2.Name == "setting")
                                         return childnode.InnerText;
-            return "/FS-Primary/ERP_InstallOdin";
+            return "//FS-Primary/ERP_InstallOdin";
         }
 
         void timer_Tick(object sender, EventArgs e)
