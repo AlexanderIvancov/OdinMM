@@ -36,6 +36,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using System.Windows.Threading;
 using WeifenLuo.WinFormsUI.Docking;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
@@ -48,12 +49,28 @@ namespace Odin
         public Main()
         {
             InitializeComponent();
-
+            InitTimer();
             this.IsMdiContainer = true;
             //mdiClientController1.BackColor = col.mainFormBackColor;
             //custom
             //ToolStripManager.Renderer = new Office2007Renderer();
             
+        }
+
+        DispatcherTimer timer = new DispatcherTimer();
+
+        public void InitTimer()
+        {
+            timer.Interval = new TimeSpan(0, 1, 0);
+            timer.Tick += timer_Tick;
+            timer.Start();
+        }
+
+        void timer_Tick(object sender, EventArgs e)
+        {
+            if (System.Diagnostics.FileVersionInfo.GetVersionInfo("Z:/Odin/Odin.exe").FileVersion != Assembly.GetExecutingAssembly().GetName().Version.ToString())
+                System.Windows.MessageBox.Show("Odin's update is ready to be installed", "Odin Update", System.Windows.MessageBoxButton.OK, 
+                    System.Windows.MessageBoxImage.Warning, System.Windows.MessageBoxResult.Yes);
         }
 
         public event InitiateMinimizeEventHandler MinimizeForm;
