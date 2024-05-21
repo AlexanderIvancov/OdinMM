@@ -11,6 +11,9 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Odin.Warehouse.StockOut.Reports;
+using Odin.CMB_Components.BLL;
+
 
 namespace Odin.Warehouse.StockIn
 {
@@ -41,6 +44,7 @@ namespace Odin.Warehouse.StockIn
         class_Global globClass = new class_Global();
         ExportData ED;
         Helper MyHelper = new Helper();
+        CMB_BLL cBLL = new CMB_BLL();
 
         public ctl_StockInPO ctlPO = null;
         public ctl_StockInRests ctlIn = null;
@@ -871,6 +875,19 @@ namespace Odin.Warehouse.StockIn
         private void txt_CreatDateTill_DropDown(object sender, DateTimePickerDropArgs e)
         {
             txt_CreatDateTill.Value = txt_CreatDateTill.Value == null ? System.DateTime.Now : txt_CreatDateTill.Value;
+        }
+
+        private void btn_Print_Click(object sender, EventArgs e)
+        {
+            cBLL.IncomeDocHeadId = cmb_IncomeDoc1.IncomeDocId;
+            frm_rptStockIn frm = new frm_rptStockIn();
+            //frm.FillDataSet();
+            frm.DocDate = cBLL.IncomeDocDocDate;//CmbBll.OutDocDocDate;
+            frm.DocName = cBLL.IncomeDocName;
+            frm.IncomeDocId = cmb_IncomeDoc1.IncomeDocId;
+            frm.Place = cBLL.IncomeDocPlace;
+
+            frm.Show();
         }
     }
 }

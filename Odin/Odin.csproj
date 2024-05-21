@@ -2860,6 +2860,12 @@
     <Compile Include="Warehouse\StockOut\frm_StockOutPDA.Designer.cs">
       <DependentUpon>frm_StockOutPDA.cs</DependentUpon>
     </Compile>
+    <Compile Include="Warehouse\StockOut\Reports\frm_rptStockIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\StockOut\Reports\frm_rptStockIn.designer.cs">
+      <DependentUpon>frm_rptStockIn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Warehouse\StockOut\Reports\frm_rptStockMove.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2925,6 +2931,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>rpt_StockBatchReservation.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Warehouse\StockOut\Reports\rpt_StockIn.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_StockIn.rpt</DependentUpon>
       <SubType>Component</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
@@ -4077,6 +4090,14 @@
     <EmbeddedResource Include="Warehouse\StockOut\frm_ImmidiateConsumption.resx">
       <DependentUpon>frm_ImmidiateConsumption.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\StockOut\Reports\frm_rptStockIn.resx">
+      <DependentUpon>frm_rptStockIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <Content Include="Warehouse\StockOut\Reports\rpt_StockIn.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_StockIn.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <EmbeddedResource Include="Workshop\frm_WorkshopLabels.resx">
       <DependentUpon>frm_WorkshopLabels.cs</DependentUpon>
     </EmbeddedResource>
