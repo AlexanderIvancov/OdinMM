@@ -330,7 +330,10 @@ namespace Odin.Warehouse.StockOut
                 }
             }
 
-            _res = _qtytemp <= qty;
+            if (_qtytemp > qty)
+                _res = false;
+            else
+                _res = true;
 
             return _res;
         }
@@ -647,8 +650,18 @@ namespace Odin.Warehouse.StockOut
                 }
 
                 OutHeaderId = _res;
-               
-                string _resdoc = Helper.GetOneRecord("select name from sto_stockouthead where id = " + _res).ToString();
+
+                string _resdoc = "";
+                if (_res != 0)
+                    _resdoc = Helper.GetOneRecord("select name from sto_stockouthead where id = " + _res).ToString();
+                else
+                {
+                    DialogResult result = KryptonTaskDialog.Show("Quantity outcome line warning!",
+                                                                "Saving of line impossible due quantity or reservation!",
+                                                                "Please check batch reservation! ",
+                                                                MessageBoxIcon.Warning,
+                                                                TaskDialogButtons.OK);
+                }
 
                 OutHeader = _resdoc;
 
@@ -668,7 +681,9 @@ namespace Odin.Warehouse.StockOut
 
                 txt_Oper.Focus();
             }
-            catch { }
+            catch {
+               
+            }
         }
 
         private void kryptonButton1_Click(object sender, EventArgs e)

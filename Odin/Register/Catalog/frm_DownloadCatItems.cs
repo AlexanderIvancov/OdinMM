@@ -51,6 +51,8 @@ namespace Odin.Register.Catalog
             string _Manufacturer = "";
             string _Comments = "";
             string _Supplier = "";
+            string _ValidTill = "";
+            DateTime dt;
 
             DataTable data = new DataTable();
             data.Columns.Add("article", typeof(string));
@@ -66,6 +68,7 @@ namespace Odin.Register.Catalog
             data.Columns.Add("manufacturer", typeof(string));
             data.Columns.Add("comments", typeof(string));
             data.Columns.Add("supplier", typeof(string));
+            data.Columns.Add("validtill", typeof(string));
 
 
             pb_Progress.Value = 0;
@@ -118,6 +121,8 @@ namespace Odin.Register.Catalog
                             _Manufacturer = glob_Class.NES(myExcel.GetValue("L" + k.ToString()));
                             _Comments = glob_Class.NES(myExcel.GetValue("M" + k.ToString()).Trim());
                             _Supplier = glob_Class.NES(myExcel.GetValue("N" + k.ToString()).Trim());
+                            DateTime.TryParse(glob_Class.NES(myExcel.GetValue("O" + k.ToString()).ToString().Trim()), out dt);
+                            _ValidTill = (dt.ToShortDateString() == "01.01.0001" ? "" : dt.ToShortDateString());
 
                             //if (Math.Round(_UnitPrice, 5) > 0
                             //    || glob_Class.NES(myExcel.GetValue("D" + k.ToString()).Trim().ToUpper()) == "Q")
@@ -136,11 +141,13 @@ namespace Odin.Register.Catalog
                                 drser["manufacturer"] = _Manufacturer;
                                 drser["comments"] = _Comments;
                                 drser["supplier"] = _Supplier;
-                                
+                                drser["validtill"] = _ValidTill;
+
                                 data.Rows.Add(drser);
                             }
                         }
-                        catch {
+                        catch
+                        {
                             //MessageBox.Show("Problems with downloading file, row number: " + k.ToString());
                         }
                         //MessageBox.Show(_CustReqDate);
@@ -201,7 +208,8 @@ namespace Odin.Register.Catalog
                 myExcel.Dispose();
                 glob_Class.ShowMessage("Result for downloading", "", "Done!");
 
-                CatalogDownloaded?.Invoke(this);
+                if (CatalogDownloaded != null)
+                    CatalogDownloaded(this);
 
             }
 

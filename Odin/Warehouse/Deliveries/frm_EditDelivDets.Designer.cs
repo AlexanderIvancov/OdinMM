@@ -35,6 +35,9 @@
             this.gv_Delivery = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.chk_Add = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.cn_dconforder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_dconforderline = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_dspec = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_dorderstate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_dclient = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_confdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_dqty = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -95,7 +98,7 @@
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonPanel1.Size = new System.Drawing.Size(399, 371);
+            this.kryptonPanel1.Size = new System.Drawing.Size(500, 200);
             this.kryptonPanel1.TabIndex = 30;
             // 
             // kryptonHeaderGroup1
@@ -103,13 +106,13 @@
             this.kryptonHeaderGroup1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.kryptonHeaderGroup1.HeaderStylePrimary = ComponentFactory.Krypton.Toolkit.HeaderStyle.Secondary;
             this.kryptonHeaderGroup1.HeaderVisibleSecondary = false;
-            this.kryptonHeaderGroup1.Location = new System.Drawing.Point(0, 211);
+            this.kryptonHeaderGroup1.Location = new System.Drawing.Point(0, 0);
             this.kryptonHeaderGroup1.Name = "kryptonHeaderGroup1";
             // 
             // kryptonHeaderGroup1.Panel
             // 
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.gv_Delivery);
-            this.kryptonHeaderGroup1.Size = new System.Drawing.Size(399, 160);
+            this.kryptonHeaderGroup1.Size = new System.Drawing.Size(500, 235);
             this.kryptonHeaderGroup1.TabIndex = 293;
             this.kryptonHeaderGroup1.ValuesPrimary.Heading = "List of confirmed orders for selected article";
             this.kryptonHeaderGroup1.ValuesPrimary.Image = global::Odin.Global_Resourses.Docs24x24;
@@ -122,6 +125,9 @@
             this.gv_Delivery.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.chk_Add,
             this.cn_dconforder,
+            this.cn_dconforderline,
+            this.cn_dspec,
+            this.cn_dorderstate,
             this.cn_dclient,
             this.cn_confdate,
             this.cn_dqty,
@@ -132,7 +138,7 @@
             this.gv_Delivery.Location = new System.Drawing.Point(0, 0);
             this.gv_Delivery.Name = "gv_Delivery";
             this.gv_Delivery.RowHeadersWidth = 25;
-            this.gv_Delivery.Size = new System.Drawing.Size(397, 131);
+            this.gv_Delivery.Size = new System.Drawing.Size(497, 131);
             this.gv_Delivery.TabIndex = 6;
             this.gv_Delivery.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_Delivery_CellContentClick);
             // 
@@ -153,6 +159,31 @@
             this.cn_dconforder.HeaderText = "Conf. order";
             this.cn_dconforder.Name = "cn_dconforder";
             this.cn_dconforder.ReadOnly = true;
+            // 
+            // cn_dconforder
+            // 
+            this.cn_dconforderline.DataPropertyName = "conforderline";
+            this.cn_dconforderline.HeaderText = "Line";
+            this.cn_dconforderline.Name = "cn_dconforderline";
+            this.cn_dconforderline.Width = 35;
+            this.cn_dconforderline.ReadOnly = true;
+            // 
+            // cn_dspec
+            // 
+            this.cn_dspec.DataPropertyName = "spec";
+            this.cn_dspec.HeaderText = "Spec";
+            this.cn_dspec.Name = "cn_dspec";
+            this.cn_dspec.Width = 43;
+            this.cn_dspec.ReadOnly = true;
+            // 
+            // cn_dspec
+            // 
+            this.cn_dorderstate.DataPropertyName = "orderstate";
+            this.cn_dorderstate.HeaderText = "orderstate";
+            this.cn_dorderstate.Name = "cn_dorderstate";
+            this.cn_dorderstate.Width = 0;
+            this.cn_dorderstate.ReadOnly = true;
+            this.cn_dorderstate.Visible = false;
             // 
             // cn_dclient
             // 
@@ -262,7 +293,7 @@
             // 
             // kryptonLabel5
             // 
-            this.kryptonLabel5.Location = new System.Drawing.Point(12, 181);
+            this.kryptonLabel5.Location = new System.Drawing.Point(12, 100);
             this.kryptonLabel5.Name = "kryptonLabel5";
             this.kryptonLabel5.Size = new System.Drawing.Size(90, 20);
             this.kryptonLabel5.TabIndex = 38;
@@ -273,14 +304,14 @@
             this.cmb_CustCodes1.CustCode = "";
             this.cmb_CustCodes1.CustCodeId = 0;
             this.cmb_CustCodes1.EnableSearchId = false;
-            this.cmb_CustCodes1.Location = new System.Drawing.Point(118, 181);
+            this.cmb_CustCodes1.Location = new System.Drawing.Point(118, 100);
             this.cmb_CustCodes1.Name = "cmb_CustCodes1";
             this.cmb_CustCodes1.Size = new System.Drawing.Size(150, 20);
             this.cmb_CustCodes1.TabIndex = 37;
             // 
             // kryptonLabel3
             // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(12, 123);
+            this.kryptonLabel3.Location = new System.Drawing.Point(12, 40);
             this.kryptonLabel3.Name = "kryptonLabel3";
             this.kryptonLabel3.Size = new System.Drawing.Size(72, 20);
             this.kryptonLabel3.TabIndex = 36;
@@ -290,7 +321,7 @@
             // 
             this.txt_Comments.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
             this.buttonSpecAny2});
-            this.txt_Comments.Location = new System.Drawing.Point(118, 123);
+            this.txt_Comments.Location = new System.Drawing.Point(118, 40);
             this.txt_Comments.Multiline = true;
             this.txt_Comments.Name = "txt_Comments";
             this.txt_Comments.Size = new System.Drawing.Size(265, 52);
@@ -326,7 +357,7 @@
             // 
             // kryptonLabel4
             // 
-            this.kryptonLabel4.Location = new System.Drawing.Point(12, 97);
+            this.kryptonLabel4.Location = new System.Drawing.Point(12, 10);
             this.kryptonLabel4.Name = "kryptonLabel4";
             this.kryptonLabel4.Size = new System.Drawing.Size(76, 20);
             this.kryptonLabel4.TabIndex = 32;
@@ -336,7 +367,7 @@
             // 
             this.txt_CustArticle.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
             this.buttonSpecAny1});
-            this.txt_CustArticle.Location = new System.Drawing.Point(118, 97);
+            this.txt_CustArticle.Location = new System.Drawing.Point(118,10);
             this.txt_CustArticle.Name = "txt_CustArticle";
             this.txt_CustArticle.Size = new System.Drawing.Size(265, 20);
             this.txt_CustArticle.TabIndex = 31;
@@ -372,7 +403,7 @@
             // btn_OK
             // 
             this.btn_OK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btn_OK.Location = new System.Drawing.Point(293, 10);
+            this.btn_OK.Location = new System.Drawing.Point(420, 20);
             this.btn_OK.Name = "btn_OK";
             this.btn_OK.Size = new System.Drawing.Size(90, 34);
             this.btn_OK.TabIndex = 25;
@@ -383,7 +414,7 @@
             // btn_Cancel
             // 
             this.btn_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_Cancel.Location = new System.Drawing.Point(293, 50);
+            this.btn_Cancel.Location = new System.Drawing.Point(420, 70);
             this.btn_Cancel.Name = "btn_Cancel";
             this.btn_Cancel.Size = new System.Drawing.Size(90, 34);
             this.btn_Cancel.TabIndex = 20;
@@ -395,7 +426,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(399, 371);
+            this.ClientSize = new System.Drawing.Size(560, 371);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -411,7 +442,7 @@
             this.kryptonHeaderGroup1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gv_Delivery)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_Delivery)).EndInit();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
@@ -442,6 +473,9 @@
         private System.Windows.Forms.BindingSource bs_Delivery;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chk_Add;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_dconforder;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_dconforderline;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_dspec;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_dorderstate;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_dclient;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_confdate;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_dqty;

@@ -25,7 +25,6 @@ namespace Odin.Warehouse.Reports
         class_Global globClass = new class_Global();
         ExportData ED;
 
-
         public int RowIndex = 0;
         public int ColumnIndex = 0;
         public string ColumnName = "";
@@ -64,7 +63,6 @@ namespace Odin.Warehouse.Reports
             cmb_Types1.LoadTypeIDS();
         }
 
-
         public void bw_List(object sender, DoWorkEventArgs e)
         {
             //foreach (int typeid in cmb_Types1.TypeIDs)
@@ -88,15 +86,12 @@ namespace Odin.Warehouse.Reports
                                                     chk_GroupByPrices.Checked == true ? -1 : 0,
                                                     cmb_Users1.UserId);
 
-
             gv_List.ThreadSafeCall(delegate
             {
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
-
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -111,7 +106,6 @@ namespace Odin.Warehouse.Reports
 
                 crystalReportViewer1.ReportSource = rd;
             });
-
         }
 
         public void bw_ListFA(object sender, DoWorkEventArgs e)
@@ -141,9 +135,7 @@ namespace Odin.Warehouse.Reports
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
-
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -158,7 +150,6 @@ namespace Odin.Warehouse.Reports
 
                 crystalReportViewer1.ReportSource = rd;
             });
-
         }
 
         public void bw_ListAccount(object sender, DoWorkEventArgs e)
@@ -171,17 +162,15 @@ namespace Odin.Warehouse.Reports
                                                     chk_groupbyplaces.Checked == true ? -1 : 0,
                                                     chk_groupbydoc.Checked == true ? -1 : 0,
                                                     chk_groupbylabel.Checked == true ? -1 : 0,
-                                                    chk_GroupByPrices.Checked == true ? -1 : 0);
-
+                                                    chk_GroupByPrices.Checked == true ? -1 : 0,
+                                                    chk_hidezero.Checked == true ? -1 : 0);
 
             gv_List.ThreadSafeCall(delegate
             {
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
-
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -190,7 +179,6 @@ namespace Odin.Warehouse.Reports
 
             crystalReportViewer1.ThreadSafeCall(delegate
             {
-
                 ReportDocument rd;
 
                 //using (var report = new ReportDocument())
@@ -202,7 +190,6 @@ namespace Odin.Warehouse.Reports
 
                 crystalReportViewer1.ReportSource = rd;
             });
-
         }
         
         #endregion
@@ -210,7 +197,6 @@ namespace Odin.Warehouse.Reports
         #region Controls
 
         #region Context menu
-
 
         private void mnu_Lines_Opening(object sender, CancelEventArgs e)
         {
@@ -230,7 +216,6 @@ namespace Odin.Warehouse.Reports
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -261,7 +246,6 @@ namespace Odin.Warehouse.Reports
             frm.ColumnNumber = gv_List.CurrentCell.ColumnIndex;
             frm.ColumnText = gv_List.Columns[frm.ColumnNumber].HeaderText;
             frm.ShowDialog();
-
         }
 
         private void mni_FilterBy_Click(object sender, EventArgs e)
@@ -276,12 +260,10 @@ namespace Odin.Warehouse.Reports
                         ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
                         : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
-
             }
             catch { }
             //SetCellsColor();
             //RecalcTotals(gv_List.CurrentRow.Cells["cn_name"].Value.ToString(), Convert.ToInt32(gv_List.CurrentRow.Cells["cn_headid"].Value));
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -306,7 +288,6 @@ namespace Odin.Warehouse.Reports
             catch { }
             //SetCellsColor();
             //RecalcTotals(gv_List.CurrentRow.Cells["cn_name"].Value.ToString(), Convert.ToInt32(gv_List.CurrentRow.Cells["cn_headid"].Value));
-
         }
 
         private void mni_Copy_Click(object sender, EventArgs e)
@@ -347,7 +328,6 @@ namespace Odin.Warehouse.Reports
             ClearDates();
         }
 
-
         #endregion
 
         private void btn_Refresh_Click(object sender, EventArgs e)
@@ -361,7 +341,6 @@ namespace Odin.Warehouse.Reports
             ReportDocument report = new ReportDocument();
 
             report.FileName = Application.StartupPath + "\\Warehouse\\Reports\\" + "rpt_Inventory.rpt";
-
 
             //DataMatrix
             DataTable dt = new DataTable();
@@ -405,7 +384,6 @@ namespace Odin.Warehouse.Reports
             //report.SetParameterValue("UserName", System.Environment.UserName);
 
             return report;
-
         }
 
         private void btn_Clear_Click(object sender, EventArgs e)

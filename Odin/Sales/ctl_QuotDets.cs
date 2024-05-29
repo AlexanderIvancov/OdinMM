@@ -39,35 +39,22 @@ namespace Odin.Sales
         }
         public int PCB
         {
-            get {
-                return chk_PCB.CheckState == CheckState.Checked ? -1 : chk_PCB.CheckState == CheckState.Unchecked ? 0 : 1;
-            }
-            set {
-                chk_PCB.CheckState = value == -1 ? CheckState.Checked : value == 0 ? CheckState.Unchecked : CheckState.Indeterminate;
-            }
+            get { return chk_PCB.CheckState == CheckState.Checked ? -1 : chk_PCB.CheckState == CheckState.Unchecked ? 0 : 1; }
+            set { chk_PCB.CheckState = value == -1 ? CheckState.Checked : value == 0 ? CheckState.Unchecked : CheckState.Indeterminate; }
         }
+
         public int IsProject
         {
-            get
-            {
-                return chk_project.CheckState == CheckState.Checked ? -1 : 0;
-            }
-            set
-            {
-                chk_project.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
-            }
+            get { return chk_project.CheckState == CheckState.Checked ? -1 : 0; }
+            set { chk_project.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked; }
         }
+
         public int IsSent
         {
-            get
-            {
-                return chk_IsSent.CheckState == CheckState.Checked ? -1 : 0;
-            }
-            set
-            {
-                chk_IsSent.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
-            }
+            get { return chk_IsSent.CheckState == CheckState.Checked ? -1 : 0; }
+            set { chk_IsSent.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked; }
         }
+
         class_Global globClass = new class_Global();
         CO_BLL COBll = new CO_BLL();
         public int ArtId
@@ -75,16 +62,19 @@ namespace Odin.Sales
             get { return cmb_Articles1.ArticleId; }
             set { cmb_Articles1.ArticleId = value; }
         }
+
         public int CustId
         {
             get { return cmb_Firms1.FirmId; }
             set { cmb_Firms1.FirmId = value; }
         }
+
         public string CustArticle
         {
             get { return txt_CustArticle.Text; }
             set { txt_CustArticle.Text = value; }
         }
+
         public double Qty
         {
             get
@@ -94,6 +84,7 @@ namespace Odin.Sales
             }
             set { txt_Qty.Text = value.ToString(); }
         }
+
         public double Spoilage
         {
             get
@@ -103,11 +94,13 @@ namespace Odin.Sales
             }
             set { txt_Spoilage.Text = value.ToString(); }
         }
+
         public int UnitId
         {
             get { return cmb_Units1.UnitId; }
             set { cmb_Units1.UnitId = value; }
         }
+
         public double UnitPrice
         {
             get
@@ -117,16 +110,19 @@ namespace Odin.Sales
             }
             set { txt_UnitPrice.Text = value.ToString(); }
         }
+
         public int StateId
         {
             get { return cmb_Common1.SelectedValue; }
             set { cmb_Common1.SelectedValue = value; }
         }
+
         public string Comments
         {
             get { return txt_Comments.Text; }
             set { txt_Comments.Text = value; }
         }
+
         public string ReqDate
         {
             get { return txt_ReqDate.Value.ToShortDateString(); }
@@ -171,47 +167,49 @@ namespace Odin.Sales
                 catch { txt_SentDate.Value = null; }
             }
         }
+
         public DateTime ExpDateD
         {
             get { return Convert.ToDateTime(txt_ExpDate.Value); }
             set { txt_ExpDate.Value = value; }
         }
+
         public DateTime SentDateD
         {
             get { return Convert.ToDateTime(txt_SentDate.Value); }
             set { txt_SentDate.Value = value; }
         }
+
         public string Week
         {
             get { return cmb_Week1.Week; }
             set { cmb_Week1.Week = value; }
         }
+
         public string CreatAt
         {
             get { return txt_CreatAt.Text; }
             set { txt_CreatAt.Text = value; }
         }
+
         public string CreatBy
         {
             get { return txt_CreatBy.Text; }
             set { txt_CreatBy.Text = value; }
         }
+
         public int CurId
         {
             get { return cmb_Currency1.CurrencyId; }
             set { cmb_Currency1.CurrencyId = value; }
         }
+
         int _notpaidadvance = 0;
+
         public int Resale
         {
-            get
-            {
-                return chk_resale.CheckState == CheckState.Checked ? -1 : 0;
-            }
-            set
-            {
-                chk_resale.Checked = value == -1;
-            }
+            get { return chk_resale.CheckState == CheckState.Checked ? -1 : 0; }
+            set { chk_resale.Checked = value == -1; }
         }
         public int NotPaidAdvance
         {
@@ -239,7 +237,9 @@ namespace Odin.Sales
                 }
             }
         }
+
         int _validbom;
+
         public int ValidBOM
         {
             get { return _validbom; }
@@ -258,43 +258,30 @@ namespace Odin.Sales
                 }
         }
         public int EndCustomerId
-        {   get { return cmb_EndCustomer1.FirmId; }
-            set { cmb_EndCustomer1.FirmId = value; } }
+        {
+            get { return cmb_EndCustomer1.FirmId; }
+            set { cmb_EndCustomer1.FirmId = value; }
+        }
         public int Internal
         {
-            get
-            {
-                return chk_internal.CheckState == CheckState.Checked ? -1 : 0;
-            }
-            set
-            {
-                chk_internal.Checked = value == -1;
-            }
+            get { return chk_internal.CheckState == CheckState.Checked ? -1 : 0; }
+            set { chk_internal.Checked = value == -1; }
         }
+
         public int Blocked
         {
-            get
-            {
-                return chk_blockdelivery.CheckState == CheckState.Checked ? -1 : 0;
-            }
-            set
-            {
-                chk_blockdelivery.Checked = value == -1;
-            }
+            get { return chk_blockdelivery.CheckState == CheckState.Checked ? -1 : 0; }
+            set { chk_blockdelivery.Checked = value == -1; }
         }
+
         public int Primary
         {
-            get
-            {
-                return chk_primary.CheckState == CheckState.Checked ? -1 : 0;
-            }
-            set
-            {
-                chk_primary.Checked = value == -1;
-            }
+            get { return chk_primary.CheckState == CheckState.Checked ? -1 : 0; }
+            set { chk_primary.Checked = value == -1; }
         }
-        public int CheckRMQP
-        { get; set; }
+
+        public int CheckRMQP { get; set; }
+
         public string CustOrder
         {
             get { return txt_CustOrder.Text; }
@@ -304,6 +291,18 @@ namespace Odin.Sales
         {
             get { return txt_CustLine.Text; }
             set { txt_CustLine.Text = value; }
+        }
+
+        public int DelivPlaceId
+        {
+            get { return cmb_Firms2.FirmId; }
+            set { cmb_Firms2.FirmId = value; }
+        }
+
+        public int DelivAddressId
+        {
+            get { return cmb_Address2.AddressId; }
+            set { cmb_Address2.AddressId = value; }
         }
 
         public void ClearCODets()
@@ -328,6 +327,8 @@ namespace Odin.Sales
             ValidBOM = 0;
             CheckRMQP = 0;
             Primary = 0;
+            DelivPlaceId = 0;
+            DelivAddressId = 0;
         }
 
         #endregion
@@ -337,6 +338,11 @@ namespace Odin.Sales
         public void FillAutoDoc(int _code)
         {
             Quotation = DLL.AutoDoc(_code, DateTime.Now.ToShortDateString());
+        }
+
+        public void FillAddress(int id)
+        {
+            cmb_Address2.FirmId = id;
         }
 
         public void FillStages(int id)
@@ -408,7 +414,9 @@ namespace Odin.Sales
                 ValidBOM = COBll.QValidBOM;
                 CheckRMQP = COBll.QCheckRMQP;
                 Primary = COBll.QPrimary;
-                
+                DelivPlaceId = COBll.QDelivPlaceId;
+                DelivAddressId = COBll.QDelivAddressId;
+
                 FillStages(_quotid);
 
                 if (IsCopy == -1)
@@ -485,7 +493,7 @@ namespace Odin.Sales
 
                     NewLineId = COBll.SaveQuotation(QuotId, DLL.CheckArtId(ArtId), Revision, CustArticle, Qty, UnitId, ReqDate, ExpDate, Week, StateId,
                                                 UnitPrice, Comments, CustId, PCB, datastages, CurId, CustOrder, CustLine, IsSent, SentDate, EndCustomerId,
-                                                Internal, Spoilage, Resale, Blocked, IsProject, Primary);
+                                                Internal, Spoilage, Resale, Blocked, IsProject, Primary, DelivPlaceId, DelivAddressId);
                     QuotId = NewLineId;
                     COBll.QuotId = QuotId;
 
@@ -557,6 +565,11 @@ namespace Odin.Sales
         private void cmb_Firms1_FirmsChanged(object sender)
         {
             CurId = cmb_Firms1.CurId;
+            if (QuotId == 0)
+            {
+                DelivPlaceId = cmb_Firms1.FirmId;
+                FillAddress(DelivPlaceId);
+            }
         }
 
         #endregion
@@ -584,6 +597,11 @@ namespace Odin.Sales
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
             MessageBox.Show(txt_SentDate.Value.ToString());
+        }
+
+        private void cmb_Firms2_FirmsChanged(object sender)
+        {
+            cmb_Address2.FirmId = cmb_Firms2.FirmId;
         }
     }
 }

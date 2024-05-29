@@ -28,10 +28,7 @@ namespace Odin.Warehouse.Deliveries
             wait.bwStart(doWork);
         }
 
-        public int ArtId
-        {
-            get; set;
-        }
+        public int ArtId { get; set; }
 
         public void bw_List(object sender, DoWorkEventArgs e)
         {
@@ -43,19 +40,21 @@ namespace Odin.Warehouse.Deliveries
                 gv_Delivery.AutoGenerateColumns = false;
                 bs_Delivery.DataSource = data1;
                 gv_Delivery.DataSource = bs_Delivery;
-
             });
 
             //Add already delivered conf.order
             if (COId != 0)
             {
                 DataRow newrow = data1.NewRow();
+                var conforderstring = ConfOrder.Replace(" ", "").Split('/');
 
                 newrow["toadd"] = -1;
                 newrow["id"] = Id;
                 newrow["coid"] = COId;
-                newrow["conforder"] = ConfOrder;
-                newrow["orderstate"] = "";
+                newrow["conforder"] = conforderstring[0];
+                newrow["conforderline"] = conforderstring[1];
+                newrow["spec"] = Spec;
+                newrow["orderstate"] = OrderState;
                 newrow["client"] = Customer;
                 newrow["confdate"] = DelivDate;
                 newrow["confqty"] = Qty;
@@ -69,8 +68,18 @@ namespace Odin.Warehouse.Deliveries
 
                 data1.Rows.Add(newrow);
             }
+
+            SetCellsColor();
         }
 
+        public void SetCellsColor()
+        {
+            foreach (DataGridViewRow row in this.gv_Delivery.Rows)
+                if (Convert.ToInt32(row.Cells["cn_dorderstate"].Value) == -1)
+                    foreach (DataGridViewCell cell in row.Cells)
+                        cell.Style.BackColor = System.Drawing.Color.Coral;
+        }
+    
         public void ShowDets()
         {
             bwStart(bw_List);
@@ -78,8 +87,7 @@ namespace Odin.Warehouse.Deliveries
 
         public event SaveChangesDNEventHandler SaveChanges;
 
-        public int Id
-        { get; set; }
+        public int Id { get; set; }
 
         public string HeaderText
         {
@@ -142,25 +150,18 @@ namespace Odin.Warehouse.Deliveries
 
         public int Return
         {
-            get {
-                return chk_Return.CheckState == CheckState.Checked ? -1 : 0;
-            }
-            set { chk_Return.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
-            }
+            get { return chk_Return.CheckState == CheckState.Checked ? -1 : 0; }
+            set { chk_Return.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked; }
         }
 
-        public string ConfOrder
-        { get; set; }
-        public string DelivDate
-        { get; set; }
-        public string Customer
-        { get; set; }
-        public string Unit
-        { get; set; }
-        public int COId
-        { get; set; }
-        public double Qty
-        { get; set; }
+        public string ConfOrder { get; set; }
+        public string Spec { get; set; }
+        public int COId { get; set; }
+        public string DelivDate { get; set; }
+        public string Customer { get; set; }
+        public string Unit { get; set; }
+        public int OrderState { get; set; }
+        public double Qty { get; set; }
 
 
         #endregion
@@ -195,13 +196,10 @@ namespace Odin.Warehouse.Deliveries
                 {
                     int _coid = Convert.ToInt32(gv_Delivery.CurrentRow.Cells["cn_dcoid"].Value);
                     foreach (DataGridViewRow row in this.gv_Delivery.Rows)
-                    {
                         if (Convert.ToInt32(row.Cells["cn_dcoid"].Value) != _coid)
                             row.Cells["chk_Add"].Value = 0;
-                    }
                 }
             }
-
          }
     }
 }

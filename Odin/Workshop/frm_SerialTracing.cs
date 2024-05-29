@@ -26,17 +26,18 @@ namespace Odin.Workshop
 
         DAL_Functions DAL = new DAL_Functions();
         CMB_BLL CmbBll = new CMB_BLL();
-       
-
 
         public int ReadValue = 0;
         public string Result = "";
         int _counter = 0;
         public int Counter
-        { get { return _counter; }
-        set { _counter = value; } }
-               
+        {
+            get { return _counter; }
+            set { _counter = value; }
+        }
+
         int _RegMode = -1;
+        int _Freezed = -1;
 
         public int RegMode
         {
@@ -59,6 +60,24 @@ namespace Odin.Workshop
             }
         }
 
+        public int Freezed
+        {
+            get { return _Freezed; }
+            set
+            {
+                _Freezed = value;
+                if (_Freezed == -1)
+                {
+                    chk_Freezed.CheckState = CheckState.Unchecked;
+                    chk_Freezed.BackColor = Color.LightGreen;
+                }
+                else
+                {
+                    chk_Freezed.CheckState = CheckState.Checked;
+                    chk_Freezed.BackColor = Color.LightPink;
+                }
+            }
+        }
         public int BatchId
         {
             get { return cmb_BatchPDA1.BatchId; }
@@ -66,9 +85,7 @@ namespace Odin.Workshop
             {
                 cmb_BatchPDA1.BatchId = value;
                 ScanOrder = value != 0 ? RegMode == -1 ? 2 : 3 : 1;
-
             }
-
         }
 
         int _StageId = 5;
@@ -119,7 +136,6 @@ namespace Odin.Workshop
                     chk_QCTHT.BackColor = Color.LightGreen;
                     chk_FQC.BackColor = Color.LightGreen;
                 }
-            
             }
         }
 
@@ -151,6 +167,11 @@ namespace Odin.Workshop
             txt_Result.Text = _res + " at " + System.DateTime.Now.ToString() + System.Environment.NewLine + txt_Result.Text;
         }
 
+        public void AddSerialFreezed(int stageid, int batchid, int launchid, string serial, string placement, int reasonid)
+        {
+            Helper.getSP("sp_AddSerialFreezed", stageid, batchid, launchid, rusToEng(serial), placement, reasonid);
+        }
+
         public void ReplaceSerialTracing(string serial, int stageid, string replacement)
         {
             string _res = Convert.ToString(Helper.getSP("sp_ReplaceSerialTracing", serial, stageid, replacement));
@@ -170,7 +191,8 @@ namespace Odin.Workshop
         {
             get { return _scanorder; }
             set
-            { _scanorder = value;
+            {
+                _scanorder = value;
                 lbl_Order.Text = _scanorder == 1
                     ? "SCAN BATCH LABEL!"
                     : _scanorder == 2
@@ -200,7 +222,7 @@ namespace Odin.Workshop
         {
             txt_Oper.Focus();
         }
-        
+
         private void chk_Replace_CheckedChanged(object sender, EventArgs e)
         {
             if (chk_Replace.CheckState == CheckState.Checked)
@@ -212,6 +234,22 @@ namespace Odin.Workshop
             else
             {
                 RegMode = -1;
+                txt_Oper.Focus();
+                //cmb_Articles1.Focus();
+            }
+        }
+
+        private void chk_Freezed_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chk_Freezed.CheckState == CheckState.Checked)
+            {
+                Freezed = 1;
+                _scanlabel = "";
+                txt_Oper.Focus();
+            }
+            else
+            {
+                Freezed = -1;
                 txt_Oper.Focus();
                 //cmb_Articles1.Focus();
             }
@@ -251,7 +289,7 @@ namespace Odin.Workshop
 
         private void cmb_BatchPDA1_BatchChanged(object sender)
         {
-            
+
             ScanOrder = BatchId == 0 ? 1 : RegMode == -1 ? 2 : 3;
             txt_Oper.Focus();
         }
@@ -260,20 +298,17 @@ namespace Odin.Workshop
         {
             string _scanreplacement = "";
 
-
             if (e.KeyChar == (char)Keys.Enter)
             {
                 //ReadValue = 0;
-                    //Check for batchstring _r = "";
+                //Check for batchstring _r = "";
 
                 string _batch = txt_Oper.Text.Trim();
                 int _batchid = 0;
                 _batchid = Convert.ToInt32(Helper.GetOneRecord("select top 1 id from prod_batchhead where Batch = '" + _batch + "'"));
 
                 if (_batchid != 0)
-                {
                     BatchId = _batchid;
-                }
                 else
                 {
                     _batchid = Convert.ToInt32(Helper.GetOneRecord("select top 1 batchid from PROD_SerialAssembling where serial = '" + txt_Oper.Text.Trim() + "' order by id desc"));
@@ -286,13 +321,9 @@ namespace Odin.Workshop
                             _batchid = Convert.ToInt32(Helper.GetOneRecord("select top 1 batchid from prod_serialtracing where analog = '" + txt_Oper.Text.Trim() + "' or serial = '" + txt_Oper.Text.Trim() + "' order by id desc"));
                     }
 
-
-
                     if (_batchid != 0
                         && _batchid != BatchId)
-                    {
                         BatchId = _batchid;
-                    }
                     else
                     {
                         if (BatchId == 0)
@@ -315,7 +346,18 @@ namespace Odin.Workshop
                                 if (ScanOrder == 2)
                                 {
                                     _scanlabel = txt_Oper.Text;
+                                    if (_Freezed != 0)
+                                    {
+                                        CMB_Components.AddSerialFreezed.frm_AddSerialFreezed frm = new CMB_Components.AddSerialFreezed.frm_AddSerialFreezed();
+                                        frm.StageId = StageId;
+                                        frm.BatchId = BatchId;
+                                        frm.Serial = txt_Oper.Text.Trim();
 
+                                        DialogResult result = frm.ShowDialog();
+
+                                        if (result == DialogResult.OK)
+                                            AddSerialFreezed(frm.StageId, frm.BatchId, frm.LaunchId, frm.Serial, frm.Position, frm.FreezedReasonId);
+                                    }
                                     //Add New Serial
                                     //MessageBox.Show("Adding!");
                                     AddSerialTracing(StageId, BatchId, txt_Oper.Text.Trim());
@@ -341,12 +383,11 @@ namespace Odin.Workshop
                                         RegMode = -1;
                                     }
                                 }
-
                             }
                         }
                     }
                 }
-                
+
                 //else
                 //{
                 //        SqlConnection conn = new SqlConnection(sConnStr);
@@ -386,11 +427,10 @@ namespace Odin.Workshop
                 //                                                     TaskDialogButtons.OK);
                 //        }
                 //}
-                
+
                 //Clear temp field
                 txt_Oper.Text = "";
                 txt_Oper.Focus();
-
             }
         }
 
@@ -455,7 +495,6 @@ namespace Odin.Workshop
             dataserials.Columns.Add("serial", typeof(string));
             dataserials.Columns.Add("tablename", typeof(string));
             dataserials.Columns.Add("group", typeof(string));
-
 
             DataSet ds = new DataSet();
 
@@ -610,7 +649,6 @@ namespace Odin.Workshop
                             }
                             rdr2.Close();
                             con.Close();
-
                         }
                         #endregion
                         //Add new row with number
@@ -620,7 +658,6 @@ namespace Odin.Workshop
 
                         pb_Progress.ThreadSafeCall(delegate { pb_Progress.Value = pb_Progress.Value + 1; });
                     }
-
                 }
                 #endregion
 
@@ -640,7 +677,6 @@ namespace Odin.Workshop
                     //txt_Result.Text = rowresult["result"].ToString() + System.Environment.NewLine + txt_Result.Text;
                     if (rowresult["result"].ToString().StartsWith("SUCCESS!") == true)
                         succount++;
-
                 }
                 txt_Result.ThreadSafeCall(delegate { txt_Result.Text = result.ToString(); });
             }
@@ -652,8 +688,6 @@ namespace Odin.Workshop
 
             lbl_Progess.Text = "Done! " + succount.ToString() + " records added!";
             txt_Oper.Focus();
-
-
         }
 
         private void btn_Copy_Click(object sender, EventArgs e)
@@ -667,7 +701,6 @@ namespace Odin.Workshop
             txt_Oper.Text = string.Empty;
             txt_Oper.Focus();
         }
-               
 
         private void btn_AddAnalog_Click(object sender, EventArgs e)
         {
@@ -676,9 +709,7 @@ namespace Odin.Workshop
             if (result == DialogResult.OK
                 && frm.SerialNumber != ""
                 && frm.Analogue != "")
-            {
                 AddSerialAnalogue(frm.SerialNumber, frm.Analogue, frm.AnalogAsPrimary);
-            }
             txt_Oper.Focus();
         }
     }

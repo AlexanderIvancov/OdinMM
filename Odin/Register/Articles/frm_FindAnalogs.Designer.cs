@@ -45,12 +45,16 @@
             this.cn_product = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_oa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chk_valid = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.cn_validby = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_validat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_who = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_when = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_customerid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_productid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_allowtoreplace = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_Valid = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).BeginInit();
             this.kryptonHeaderGroup1.Panel.SuspendLayout();
@@ -78,7 +82,7 @@
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.gv_List);
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.kryptonPanel1);
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.bn_List);
-            this.kryptonHeaderGroup1.Size = new System.Drawing.Size(669, 286);
+            this.kryptonHeaderGroup1.Size = new System.Drawing.Size(876, 286);
             this.kryptonHeaderGroup1.TabIndex = 4;
             this.kryptonHeaderGroup1.ValuesPrimary.Heading = "Analogs";
             this.kryptonHeaderGroup1.ValuesPrimary.Image = global::Odin.Global_Resourses.agt_reload24x24;
@@ -96,6 +100,9 @@
             this.cn_product,
             this.cn_comments,
             this.cn_oa,
+            this.chk_valid,
+            this.cn_validby,
+            this.cn_validat,
             this.cn_who,
             this.cn_when,
             this.cn_id,
@@ -106,7 +113,7 @@
             this.gv_List.Location = new System.Drawing.Point(0, 25);
             this.gv_List.Name = "gv_List";
             this.gv_List.RowHeadersWidth = 25;
-            this.gv_List.Size = new System.Drawing.Size(667, 176);
+            this.gv_List.Size = new System.Drawing.Size(874, 176);
             this.gv_List.TabIndex = 48;
             this.gv_List.SelectionChanged += new System.EventHandler(this.gv_List_SelectionChanged);
             // 
@@ -117,13 +124,13 @@
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 201);
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonPanel1.Size = new System.Drawing.Size(667, 56);
+            this.kryptonPanel1.Size = new System.Drawing.Size(874, 56);
             this.kryptonPanel1.TabIndex = 47;
             // 
             // btn_OK
             // 
             this.btn_OK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btn_OK.Location = new System.Drawing.Point(566, 11);
+            this.btn_OK.Location = new System.Drawing.Point(773, 11);
             this.btn_OK.Name = "btn_OK";
             this.btn_OK.Size = new System.Drawing.Size(90, 34);
             this.btn_OK.TabIndex = 5;
@@ -140,6 +147,7 @@
             this.bn_List.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btn_Add,
             this.btn_Edit,
+            this.btn_Valid,
             this.btn_Delete});
             this.bn_List.Location = new System.Drawing.Point(0, 0);
             this.bn_List.MoveFirstItem = null;
@@ -148,7 +156,7 @@
             this.bn_List.MovePreviousItem = null;
             this.bn_List.Name = "bn_List";
             this.bn_List.PositionItem = null;
-            this.bn_List.Size = new System.Drawing.Size(667, 25);
+            this.bn_List.Size = new System.Drawing.Size(874, 25);
             this.bn_List.TabIndex = 46;
             this.bn_List.Text = "Bill of materials";
             // 
@@ -226,6 +234,29 @@
             this.cn_oa.Name = "cn_oa";
             this.cn_oa.Width = 40;
             // 
+            // chk_valid
+            // 
+            this.chk_valid.DataPropertyName = "valid";
+            this.chk_valid.FalseValue = "0";
+            this.chk_valid.FillWeight = 40F;
+            this.chk_valid.HeaderText = "Valid";
+            this.chk_valid.IndeterminateValue = "1";
+            this.chk_valid.Name = "chk_valid";
+            this.chk_valid.TrueValue = "-1";
+            this.chk_valid.Width = 40;
+            // 
+            // cn_validby
+            // 
+            this.cn_validby.DataPropertyName = "validby";
+            this.cn_validby.HeaderText = "Valid by";
+            this.cn_validby.Name = "cn_validby";
+            // 
+            // cn_validat
+            // 
+            this.cn_validat.DataPropertyName = "validat";
+            this.cn_validat.HeaderText = "Valid at";
+            this.cn_validat.Name = "cn_validat";
+            // 
             // cn_who
             // 
             this.cn_who.DataPropertyName = "who";
@@ -268,11 +299,21 @@
             this.cn_allowtoreplace.Name = "cn_allowtoreplace";
             this.cn_allowtoreplace.Visible = false;
             // 
+            // btn_Valid
+            // 
+            this.btn_Valid.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_Valid.Image = global::Odin.Global_Resourses.Approve_32;
+            this.btn_Valid.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_Valid.Name = "btn_Valid";
+            this.btn_Valid.Size = new System.Drawing.Size(23, 22);
+            this.btn_Valid.Text = "Validate line";
+            this.btn_Valid.Click += new System.EventHandler(this.btn_Valid_Click);
+            // 
             // frm_FindAnalogs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(669, 286);
+            this.ClientSize = new System.Drawing.Size(876, 286);
             this.Controls.Add(this.kryptonHeaderGroup1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frm_FindAnalogs";
@@ -289,7 +330,7 @@
             this.bn_List.ResumeLayout(false);
             this.bn_List.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
@@ -310,11 +351,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_product;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_comments;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_oa;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn chk_valid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_validby;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_validat;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_who;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_when;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_customerid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_productid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_allowtoreplace;
+        private System.Windows.Forms.ToolStripButton btn_Valid;
     }
 }

@@ -20,6 +20,7 @@ namespace Odin.Planning.Controls
             InitializeComponent();
             //frm_Batches.ReceiveRMArtId += new ReceiveRMId(RetArtId);
             ED = new ExportData(this.gv_List, "BatchBOM.xls", this.Name);
+            PopupHelper = new PopupWindowHelper();
         }
 
         #region Variables
@@ -39,6 +40,8 @@ namespace Odin.Planning.Controls
         Plan_BLL BLL = new Plan_BLL();
         DAL_Functions DAL = new DAL_Functions();
         AdmMenu mMenu = new AdmMenu();
+        PopupWindowHelper PopupHelper = null;
+
         public double pro { get; set; }
 
         public void bwStart(DoWorkEventHandler doWork)
@@ -94,14 +97,12 @@ namespace Odin.Planning.Controls
             catch { }
         }
 
-
         public void ShowDets()
         {
             try
             {
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
-
                 
                 var data = (DataTable)Helper.getSP("sp_SelectBatchRMFreezedDets", BatchId);
 
@@ -295,7 +296,6 @@ namespace Odin.Planning.Controls
                         ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
                         : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
-
             }
             catch { }
             SetCellsColor();
@@ -385,6 +385,19 @@ namespace Odin.Planning.Controls
                 var y = e.CellBounds.Top + (e.CellBounds.Height - h) / 2;
 
                 e.Graphics.DrawImage(Global_Resourses.bindingNavigatorDeleteItem_Image, new Rectangle(x, y, w, h));
+                e.Handled = true;
+            }
+
+            if (e.ColumnIndex == 38)
+            {
+                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+
+                var w = Global_Resourses.bindingNavigatorAddNewItem_Image.Width;
+                var h = Global_Resourses.bindingNavigatorAddNewItem_Image.Height;
+                var x = e.CellBounds.Left + (e.CellBounds.Width - w) / 2;
+                var y = e.CellBounds.Top + (e.CellBounds.Height - h) / 2;
+
+                e.Graphics.DrawImage(Global_Resourses.agt_reload24x24, new Rectangle(x, y, w, h));
                 e.Handled = true;
             }
         }
@@ -740,6 +753,87 @@ namespace Odin.Planning.Controls
             Helper.RestoreDirection(gv_List, oldColumn, dir);
 
             SetCellsColor();
+        }
+
+        private void gv_List_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (gv_List.CurrentRow.Cells["btn_Analogs"].Selected == true)
+            {
+                int _cstid = 0;
+                int _cseid = 0;
+                string _article = "";
+
+                try
+                {
+                    _cstid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_artid"].Value);
+                    _article = gv_List.CurrentRow.Cells["cn_article"].Value.ToString();
+                }
+                catch { }
+
+                _cseid = cmb_Batches1.ArticleId;
+
+                Form f;
+                f = this.FindForm();
+
+                Point LocationPoint = gv_List.PointToScreen(Point.Empty);
+                int xpos = LocationPoint.X + 400;
+                int ypos = LocationPoint.Y;
+                Point _location = new Point(xpos, ypos);
+                frm_FindBatchAnalogs popup = new frm_FindBatchAnalogs();
+
+                PopupHelper.ClosePopup();
+                PopupHelper.ShowPopup(f, popup, _location);
+                PopupHelper.PopupCancel += delegate (object _sender, PopupCancelEventArgs _e)
+                {
+                    if (popup.ShowingModal)
+                        _e.Cancel = true;
+                };
+
+                popup.ArtId = _cstid;
+                popup.ArtCSEId = _cseid;
+                popup.HeadingText = "Validated analogs for article: " + _article;
+
+                popup.FillList();
+                // popup.AnalogChanged += new AnalogChangesEventHandler(RefreshList);
+            }
+        }
+
+        private void mni_ShowAnalogStock_Click(object sender, EventArgs e)
+        {
+            int _cstid = 0;
+            int _cseid = 0;
+            string _article = "";
+
+            try
+            {
+                _cstid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_artid"].Value);
+                _article = gv_List.CurrentRow.Cells["cn_article"].Value.ToString();
+            }
+            catch { }
+
+            _cseid = cmb_Batches1.ArticleId;
+
+            Form f;
+            f = this.FindForm();
+
+            Point LocationPoint = gv_List.PointToScreen(Point.Empty);
+            int xpos = LocationPoint.X + 400;
+            int ypos = LocationPoint.Y;
+            Point _location = new Point(xpos, ypos);
+            frm_FindBatchAnalogs popup = new frm_FindBatchAnalogs();
+
+            PopupHelper.ClosePopup();
+            PopupHelper.ShowPopup(f, popup, _location);
+            PopupHelper.PopupCancel += delegate (object _sender, PopupCancelEventArgs _e)
+            {
+                if (popup.ShowingModal)
+                    _e.Cancel = true;
+            };
+
+            popup.ArtId = _cstid;
+            popup.ArtCSEId = _cseid;
+            popup.HeadingText = "Validated analogs for article: " + _article;
+            popup.FillList();
         }
     }
 }

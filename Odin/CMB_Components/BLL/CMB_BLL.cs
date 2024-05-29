@@ -824,5 +824,14 @@ namespace Odin.CMB_Components.BLL
         }
 
         #endregion
+
+        #region FreezedReasons
+
+        public static DataTable getFreezedReasons()
+        {
+            return Helper.QueryDT("SELECT * FROM TMP_FreezedReason where lang = '" + new DAL_Functions().UserLang + "'");
+        }
+
+        #endregion
     }
 }

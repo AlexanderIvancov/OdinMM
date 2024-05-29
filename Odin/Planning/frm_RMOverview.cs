@@ -60,7 +60,7 @@ namespace Odin.Planning
             }
             catch { }
 
-            var data = (DataTable)Helper.getSP("sp_SelectRMOverview", cmb_Common1.SelectedValue, cmb_Firms1.FirmId);
+            var data = (DataTable)Helper.getSP("sp_SelectRMOverview", cmb_Common1.SelectedValue, cmb_Firms1.FirmId, chk_exclude.Checked == true ? -1 : 0);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -83,7 +83,7 @@ namespace Odin.Planning
 
         public void FillOrders()
         {
-            var data = (DataTable)Helper.getSP("sp_SelectRMOverview", cmb_Common1.SelectedValue, cmb_Firms1.FirmId);
+            var data = (DataTable)Helper.getSP("sp_SelectRMOverview", cmb_Common1.SelectedValue, cmb_Firms1.FirmId, chk_exclude.Checked == true ? -1 : 0);
 
             gv_List.ThreadSafeCall(delegate
             {

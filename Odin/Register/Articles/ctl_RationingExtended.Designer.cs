@@ -81,6 +81,7 @@
             this.chk_useonetime = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.cn_opertime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_operno = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
@@ -356,7 +357,8 @@
             this.cn_ostageid,
             this.chk_useonetime,
             this.cn_opertime,
-            this.cn_operno});
+            this.cn_operno,
+            this.cn_comments});
             this.gv_Opers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_Opers.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.gv_Opers.Location = new System.Drawing.Point(0, 25);
@@ -680,6 +682,12 @@
             this.cn_operno.Name = "cn_operno";
             this.cn_operno.Width = 60;
             // 
+            // cn_comments
+            // 
+            this.cn_comments.DataPropertyName = "comments";
+            this.cn_comments.HeaderText = "Comments";
+            this.cn_comments.Name = "cn_comments";
+            // 
             // ctl_RationingExtended
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -725,7 +733,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_Opers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_Params)).EndInit();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
@@ -783,5 +791,6 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn chk_useonetime;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_opertime;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_operno;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_comments;
     }
 }

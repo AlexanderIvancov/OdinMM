@@ -34,6 +34,8 @@ namespace Odin.Warehouse.Deliveries
                         DPackage = dr["package"].ToString();
                         DReturn = Convert.ToInt32(dr["isreturn"]);
                         DConfOrder = dr["conforder"].ToString();
+                        DSpec = dr["spec"].ToString();
+                        DOrderState = Convert.ToInt32(dr["orderstate"]);
                         DDelivDate = dr["delivdate"].ToString();
                         DCustomer = dr["customer"].ToString();
                         DUnit = dr["unit"].ToString();
@@ -60,6 +62,8 @@ namespace Odin.Warehouse.Deliveries
         public string DCustCode { get; set; }
         public int DReturn { get; set; }
         public string DConfOrder { get; set; }
+        public string DSpec { get; set; }
+        public int DOrderState { get; set; } 
         public string DDelivDate { get; set; }
         public string DCustomer { get; set; }
         public string DUnit { get; set; }
@@ -84,6 +88,8 @@ namespace Odin.Warehouse.Deliveries
             DPackage = "";
             DReturn = 0;
             DConfOrder = "";
+            DSpec = "";
+            DOrderState = 0;
             DDelivDate = "";
             DCustomer = "";
             DUnit = "";

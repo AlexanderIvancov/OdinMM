@@ -36,10 +36,20 @@ namespace Odin.Workshop
 
         public int _PrevId = 0;
 
-        public int WorkerId
+        public int WorkerId { get; set; }
+
+        public int StateId
         {
-            get;
-            set;
+            get
+            {
+                if (rb_Active.Checked == true)
+                    return -1;
+                else if (rb_InActive.Checked == true)
+                    return 0;
+                else
+                    return -99;
+            }
+            set { }
         }
 
         #endregion
@@ -48,28 +58,25 @@ namespace Odin.Workshop
 
         public void FillList()
         {
-            var data = (DataTable)Helper.getSP("sp_WorkersList");
+            var data = (DataTable)Helper.getSP("sp_WorkersList", StateId);
 
             gv_List.ThreadSafeCall(delegate
             {
-
                 gv_List.AutoGenerateColumns = false;
                 bs_List.DataSource = data;
                 gv_List.DataSource = bs_List;
                 SetCellsColor();
             });
 
-
             bn_List.ThreadSafeCall(delegate
             {
                 bn_List.BindingSource = bs_List;
             });
-
         }
+
 
         private bool CheckOldRow()
         {
-
             try
             {
                 WorkerId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
@@ -80,9 +87,7 @@ namespace Odin.Workshop
             }
 
             if (_PrevId == WorkerId)
-            {
                 return true;
-            }
             else
             {
                 _PrevId = WorkerId;
@@ -93,18 +98,14 @@ namespace Odin.Workshop
         public void SetCellsColor()
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
                 if (Convert.ToInt32(row.Cells["chk_isactive"].Value) == 0)
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Silver;
-            }
         }
-
 
         #endregion
 
         #region Context menu
-
 
         private void mnu_Lines_Opening(object sender, CancelEventArgs e)
         {
@@ -124,7 +125,6 @@ namespace Odin.Workshop
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -152,7 +152,6 @@ namespace Odin.Workshop
             frm.ColumnNumber = gv_List.CurrentCell.ColumnIndex;
             frm.ColumnText = gv_List.Columns[frm.ColumnNumber].HeaderText;
             frm.ShowDialog();
-
         }
 
         private void mni_FilterBy_Click(object sender, EventArgs e)
@@ -167,12 +166,9 @@ namespace Odin.Workshop
                         ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
                         : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
                 //MessageBox.Show(bs_List.Filter);
-
             }
             catch { }
             SetCellsColor();
-
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -185,7 +181,6 @@ namespace Odin.Workshop
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -195,7 +190,6 @@ namespace Odin.Workshop
                 bs_List.RemoveFilter();
             }
             catch { }
-
         }
 
         private void mni_Copy_Click(object sender, EventArgs e)
@@ -227,7 +221,6 @@ namespace Odin.Workshop
         {
             ED.DgvIntoExcel();
         }
-
 
         #endregion
 
@@ -293,7 +286,6 @@ namespace Odin.Workshop
             try
             {
                 _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
-               
             }
             catch { }
 
@@ -313,14 +305,26 @@ namespace Odin.Workshop
             Helper.LoadColumns(gv_List, this.Name);
         }
 
-        private void frm_Workers_Activated(object sender, EventArgs e)
-        {
-
-        }
+        private void frm_Workers_Activated(object sender, EventArgs e) { }
 
         private void gv_List_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             SetCellsColor();
+        }
+
+        private void rb_Active_CheckedChanged(object sender, EventArgs e)
+        {
+            FillList();
+        }
+
+        private void rb_InActive_CheckedChanged(object sender, EventArgs e)
+        {
+            FillList();
+        }
+
+        private void rb_All_CheckedChanged(object sender, EventArgs e)
+        {
+            FillList();
         }
     }
 }

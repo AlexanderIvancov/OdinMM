@@ -36,8 +36,11 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using System.Windows.Threading;
+using System.Xml;
 using WeifenLuo.WinFormsUI.Docking;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+
 
 namespace Odin
 {
@@ -47,12 +50,47 @@ namespace Odin
         public Main()
         {
             InitializeComponent();
-
+            InitTimer();
             this.IsMdiContainer = true;
             //mdiClientController1.BackColor = col.mainFormBackColor;
             //custom
             //ToolStripManager.Renderer = new Office2007Renderer();
             
+        }
+
+        DispatcherTimer timer = new DispatcherTimer();
+
+        public void InitTimer()
+        {
+            timer.Interval = new TimeSpan(0, 1, 0);
+            timer.Tick += timer_Tick;
+            timer.Start();
+        }
+
+        String SV = System.Diagnostics.FileVersionInfo.GetVersionInfo(path_Set() + "/Odin.exe").FileVersion;
+        String CV = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+        static String path_Set()
+        {
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.Load("//FS-PRIMARY/ERP_Install/OdinLauncher/OdinLauncher.exe.config");
+            XmlElement xRoot = xDoc.DocumentElement;
+            if (xRoot != null)
+                foreach (XmlElement xnode in xRoot)
+                    if (xnode.Name == "applicationSettings")
+                        foreach (XmlNode childnode in xnode.ChildNodes)
+                            if (childnode.Name == "OdinLauncher.Properties.Settings")
+                                foreach (XmlNode childnode2 in childnode.ChildNodes)
+                                    if (childnode2.Name == "setting")
+                                        return childnode.InnerText;
+            return "//FS-Primary/ERP_InstallOdin";
+        }
+
+        void timer_Tick(object sender, EventArgs e)
+        {
+            if (SV != CV)
+                System.Windows.MessageBox.Show("Odin's update is ready to be installed", "Odin Update", System.Windows.MessageBoxButton.OK, 
+                    System.Windows.MessageBoxImage.Warning, System.Windows.MessageBoxResult.Yes);
         }
 
         public event InitiateMinimizeEventHandler MinimizeForm;
@@ -113,6 +151,7 @@ namespace Odin
         frm_BatchProjects BatchProjects = null;
         frm_BatchesNew BatchesNew = null;
         frm_PlanningView PlanningView = null;
+        frm_TurnoverReports TurnoverReport = null;
 
         #endregion
 
@@ -930,6 +969,14 @@ namespace Odin
             frm.Show(); frm.GetKryptonFormFields();
         }
 
+        private void btn_QCSerialFreezed_Click(object sender, EventArgs e)
+        {
+            if (glob_Class.IsFormAlreadyOpen("frm_QCSerialFreezed")) return;
+
+            frm_QCSerialFreezed frm = new frm_QCSerialFreezed();
+            frm.Show(); frm.GetKryptonFormFields();
+        }
+
         private void btn_FCPacking_Click(object sender, EventArgs e)
         {
             if (glob_Class.IsFormAlreadyOpen("frm_FCPacking")) return;
@@ -1368,6 +1415,21 @@ namespace Odin
             PlanningView = new frm_PlanningView();
             PlanningView._Main = this;
             PlanningView.Show(pn_Main);
+        }
+
+        private void btn_Turnover_Click(object sender, EventArgs e)
+        {
+            foreach (var f in MdiChildren.Where(f => f.Name == "frm_TurnoverReports"))
+            {
+                f.BringToFront();
+                return;
+            }
+            TurnoverReport = new frm_TurnoverReports();
+            TurnoverReport._Main = this;
+            TurnoverReport.ClearDates();
+            // public Main _Main;
+            //Articles.InitiateResize();
+            TurnoverReport.Show(pn_Main);
         }
     }
 }

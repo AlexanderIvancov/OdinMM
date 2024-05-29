@@ -37,11 +37,6 @@
             this.SecName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Analog = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SpoilConst = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Stage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Positions = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ArtType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Supplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SupArticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DN = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -93,11 +88,6 @@
             this.Analog,
             this.Qty,
             this.DateCreation,
-            this.Comments,
-            this.SpoilConst,
-            this.Stage,
-            this.Positions,
-            this.ArtType,
             this.Supplier,
             this.SupArticle,
             this.DN,
@@ -140,47 +130,17 @@
             this.Qty.HeaderText = "Qty";
             this.Qty.Name = "Qty";
             // 
-            // CpseMark
-            // 
-            this.DateCreation.DataPropertyName = "DateCreation";
-            this.DateCreation.HeaderText = "DateCreation";
-            this.DateCreation.Name = "DateCreation";
-            // 
-            // Comments
-            // 
-            this.Comments.DataPropertyName = "Comments";
-            this.Comments.HeaderText = "Comments";
-            this.Comments.Name = "Comments";
-            // 
-            // SpoilNorm
+            // Indate
             // 
             this.Indate.DataPropertyName = "indate";
             this.Indate.HeaderText = "Indate";
             this.Indate.Name = "Indate";
             // 
-            // SpoilConst
+            // CpseMark
             // 
-            this.SpoilConst.DataPropertyName = "SpoilConst";
-            this.SpoilConst.HeaderText = "SpoilConst";
-            this.SpoilConst.Name = "SpoilConst";
-            // 
-            // Stage
-            // 
-            this.Stage.DataPropertyName = "Stage";
-            this.Stage.HeaderText = "Stage";
-            this.Stage.Name = "Stage";
-            // 
-            // Positions
-            // 
-            this.Positions.DataPropertyName = "Positions";
-            this.Positions.HeaderText = "Positions";
-            this.Positions.Name = "Positions";
-            // 
-            // ArtType
-            // 
-            this.ArtType.DataPropertyName = "ArtType";
-            this.ArtType.HeaderText = "ArtType";
-            this.ArtType.Name = "ArtType";
+            this.DateCreation.DataPropertyName = "DateCreation";
+            this.DateCreation.HeaderText = "DateCreation";
+            this.DateCreation.Name = "DateCreation";
             // 
             // Supplier
             // 
@@ -310,12 +270,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Analog;
         private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn DateCreation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Comments;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SpoilConst;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Stage;
         private System.Windows.Forms.DataGridViewTextBoxColumn Indate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Positions;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ArtType;
         private System.Windows.Forms.DataGridViewTextBoxColumn Supplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn SupArticle;
         private System.Windows.Forms.DataGridViewTextBoxColumn DN;

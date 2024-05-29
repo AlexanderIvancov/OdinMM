@@ -14,25 +14,15 @@ namespace Odin.Sales
         #region Header
 
         int _coheadid = 0;
-
-        public string COHeader
-        { get; set; }
-        public int COHeadCustId
-        { get; set; }
-        public int COHeadContPersId
-        { get; set; }
-        public string COHeadComments
-        { get; set; }
-        public string COHeadCreatAt
-        { get; set; }
-        public string COHeadCreatBy
-        { get; set; }
-        public string COHeadContract
-        { get; set; }
-        public int COHeadCurId
-        { get; set; }
-        public int COHeadIncoterms
-        { get; set; }
+        public string COHeader { get; set; }
+        public int COHeadCustId { get; set; }
+        public int COHeadContPersId { get; set; }
+        public string COHeadComments { get; set; }
+        public string COHeadCreatAt { get; set; }
+        public string COHeadCreatBy { get; set; }
+        public string COHeadContract { get; set; }
+        public int COHeadCurId { get; set; }
+        public int COHeadIncoterms { get; set; }
         public int COHeadId
         {
             get { return _coheadid; }
@@ -87,8 +77,7 @@ namespace Odin.Sales
             SqlDataAdapter adapter =
                 new SqlDataAdapter(
                     "select top 1 id from sal_clientordersdets where id < " + coid + " and artid = " + artid, conn);
-
-
+            
             conn.Close();
 
             adapter.Fill(ds);
@@ -359,6 +348,8 @@ namespace Odin.Sales
                         QValidBOM = Convert.ToInt32(dr["isvalid"]);
                         QCheckRMQP = Convert.ToInt32(dr["checkrmqp"]);
                         QPrimary = Convert.ToInt32(dr["isprimary"]);
+                        QDelivPlaceId = Convert.ToInt32(dr["delivplaceid"]);
+                        QDelivAddressId = Convert.ToInt32(dr["delivaddressid"]);
                     }
                 else
                     ClearQuotDets();
@@ -397,6 +388,8 @@ namespace Odin.Sales
         public int QValidBOM { get; set; }
         public int QCheckRMQP { get; set; }
         public int QPrimary { get; set; }
+        public int QDelivPlaceId { get; set; }
+        public int QDelivAddressId { get; set; }
         bool _createorder = false;
         public bool CreateOrder
         {
@@ -438,13 +431,15 @@ namespace Odin.Sales
             QValidBOM = 0;
             QCheckRMQP = 0;
             QPrimary = 0;
+            QDelivPlaceId = 0;
+            QDelivAddressId = 0;
         }
 
         public int SaveQuotation(int id, int artid, string revision, string custarticle, double qty, int unitid, string reqdate,
                                 string expdate, string week, int stateid, double unitprice, string comments, int custid,
                                 int pcb, DataTable stages, int CurId, string corder, string coline, int issent, string sentdate,
                                 int endcustomerid, int _internal, double _spoilage, int _resale, int _blockdelivery, int _isproject,
-                                int _isprimary)
+                                int _isprimary, int _delivplaceid, int _delivaddressid)
         {
             int _res = 0;
 
@@ -478,6 +473,8 @@ namespace Odin.Sales
             sqlComm.Parameters.AddWithValue("@blockdelivery", _blockdelivery);
             sqlComm.Parameters.AddWithValue("@isproject", _isproject);
             sqlComm.Parameters.AddWithValue("@isprimary", _isprimary);
+            sqlComm.Parameters.AddWithValue("@delivplaceid", _delivplaceid);
+            sqlComm.Parameters.AddWithValue("@delivaddressid", _delivaddressid);
 
             sqlComm.Parameters.Add("@tablestages", SqlDbType.Structured);
             sqlComm.Parameters["@tablestages"].TypeName = "UT_COStages";

@@ -31,15 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_Workers));
             this.kryptonHeaderGroup1 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
-            this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_surname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chk_isactive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.cn_tabnr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_rfid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chk_ismaster = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.mnu_Lines = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mni_FilterFor = new System.Windows.Forms.ToolStripTextBox();
             this.mni_Search = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,15 +59,35 @@
             this.btn_Edit = new System.Windows.Forms.ToolStripButton();
             this.bs_List = new System.Windows.Forms.BindingSource(this.components);
             this.kryptonPalette1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
+            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
+            this.rb_All = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
+            this.rb_InActive = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
+            this.rb_Active = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
+            this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_surname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chk_isactive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.cn_tabnr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rfid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chk_ismaster = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).BeginInit();
             this.kryptonHeaderGroup1.Panel.SuspendLayout();
             this.kryptonHeaderGroup1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gv_List)).BeginInit();
             this.mnu_Lines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bn_List)).BeginInit();
             this.bn_List.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
+            this.kryptonPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).BeginInit();
+            this.kryptonGroupBox1.Panel.SuspendLayout();
+            this.kryptonGroupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gv_List)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonHeaderGroup1
@@ -88,104 +99,11 @@
             // kryptonHeaderGroup1.Panel
             // 
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.gv_List);
+            this.kryptonHeaderGroup1.Panel.Controls.Add(this.kryptonPanel1);
             this.kryptonHeaderGroup1.Size = new System.Drawing.Size(819, 484);
             this.kryptonHeaderGroup1.TabIndex = 0;
             this.kryptonHeaderGroup1.ValuesPrimary.Heading = "Workers";
             this.kryptonHeaderGroup1.ValuesPrimary.Image = global::Odin.Global_Resourses.role;
-            // 
-            // gv_List
-            // 
-            this.gv_List.AllowUserToAddRows = false;
-            this.gv_List.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.gv_List.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.cn_id,
-            this.cn_name,
-            this.cn_surname,
-            this.chk_isactive,
-            this.cn_tabnr,
-            this.cn_rfid,
-            this.cn_comments,
-            this.chk_ismaster});
-            this.gv_List.ContextMenuStrip = this.mnu_Lines;
-            this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gv_List.Location = new System.Drawing.Point(0, 0);
-            this.gv_List.Name = "gv_List";
-            this.gv_List.RowHeadersWidth = 25;
-            this.gv_List.Size = new System.Drawing.Size(817, 426);
-            this.gv_List.TabIndex = 41;
-            this.gv_List.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_List_ColumnHeaderMouseClick);
-            // 
-            // cn_id
-            // 
-            this.cn_id.DataPropertyName = "id";
-            this.cn_id.FillWeight = 5F;
-            this.cn_id.HeaderText = "id";
-            this.cn_id.Name = "cn_id";
-            this.cn_id.ReadOnly = true;
-            this.cn_id.Visible = false;
-            this.cn_id.Width = 5;
-            // 
-            // cn_name
-            // 
-            this.cn_name.DataPropertyName = "name";
-            this.cn_name.HeaderText = "Name";
-            this.cn_name.Name = "cn_name";
-            this.cn_name.ReadOnly = true;
-            // 
-            // cn_surname
-            // 
-            this.cn_surname.DataPropertyName = "surname";
-            this.cn_surname.FillWeight = 130F;
-            this.cn_surname.HeaderText = "Surname";
-            this.cn_surname.Name = "cn_surname";
-            this.cn_surname.ReadOnly = true;
-            this.cn_surname.Width = 130;
-            // 
-            // chk_isactive
-            // 
-            this.chk_isactive.DataPropertyName = "isactive";
-            this.chk_isactive.FalseValue = "0";
-            this.chk_isactive.FillWeight = 40F;
-            this.chk_isactive.HeaderText = "Active";
-            this.chk_isactive.IndeterminateValue = "1";
-            this.chk_isactive.Name = "chk_isactive";
-            this.chk_isactive.TrueValue = "-1";
-            this.chk_isactive.Width = 40;
-            // 
-            // cn_tabnr
-            // 
-            this.cn_tabnr.DataPropertyName = "tabnum";
-            this.cn_tabnr.FillWeight = 40F;
-            this.cn_tabnr.HeaderText = "Tab. nr.";
-            this.cn_tabnr.Name = "cn_tabnr";
-            this.cn_tabnr.Width = 40;
-            // 
-            // cn_rfid
-            // 
-            this.cn_rfid.DataPropertyName = "rfid";
-            this.cn_rfid.FillWeight = 200F;
-            this.cn_rfid.HeaderText = "RFID identifier";
-            this.cn_rfid.Name = "cn_rfid";
-            this.cn_rfid.Width = 200;
-            // 
-            // cn_comments
-            // 
-            this.cn_comments.DataPropertyName = "comments";
-            this.cn_comments.FillWeight = 200F;
-            this.cn_comments.HeaderText = "Comments";
-            this.cn_comments.Name = "cn_comments";
-            this.cn_comments.Width = 200;
-            // 
-            // chk_ismaster
-            // 
-            this.chk_ismaster.DataPropertyName = "ismaster";
-            this.chk_ismaster.FalseValue = "0";
-            this.chk_ismaster.FillWeight = 60F;
-            this.chk_ismaster.HeaderText = "Master";
-            this.chk_ismaster.IndeterminateValue = "1";
-            this.chk_ismaster.Name = "chk_ismaster";
-            this.chk_ismaster.TrueValue = "-1";
-            this.chk_ismaster.Width = 60;
             // 
             // mnu_Lines
             // 
@@ -206,7 +124,6 @@
             // mni_FilterFor
             // 
             this.mni_FilterFor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.mni_FilterFor.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.mni_FilterFor.Name = "mni_FilterFor";
             this.mni_FilterFor.Size = new System.Drawing.Size(150, 23);
             this.mni_FilterFor.TextChanged += new System.EventHandler(this.mni_FilterFor_TextChanged);
@@ -312,7 +229,6 @@
             // 
             this.toolStripTextBox1.AccessibleName = "Position";
             this.toolStripTextBox1.AutoSize = false;
-            this.toolStripTextBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.toolStripTextBox1.Name = "toolStripTextBox1";
             this.toolStripTextBox1.Size = new System.Drawing.Size(50, 23);
             this.toolStripTextBox1.Text = "0";
@@ -442,6 +358,151 @@
             this.kryptonPalette1.PanelStyles.PanelCustom1.StateCommon.Color1 = System.Drawing.Color.LightGray;
             this.kryptonPalette1.Ribbon.RibbonGroupArea.StateCommon.BackColor1 = System.Drawing.Color.LightGreen;
             // 
+            // kryptonPanel1
+            // 
+            this.kryptonPanel1.Controls.Add(this.kryptonGroupBox1);
+            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonPanel1.Name = "kryptonPanel1";
+            this.kryptonPanel1.Size = new System.Drawing.Size(817, 66);
+            this.kryptonPanel1.TabIndex = 43;
+            // 
+            // kryptonGroupBox1
+            // 
+            this.kryptonGroupBox1.Location = new System.Drawing.Point(11, 5);
+            this.kryptonGroupBox1.Name = "kryptonGroupBox1";
+            // 
+            // kryptonGroupBox1.Panel
+            // 
+            this.kryptonGroupBox1.Panel.Controls.Add(this.rb_All);
+            this.kryptonGroupBox1.Panel.Controls.Add(this.rb_InActive);
+            this.kryptonGroupBox1.Panel.Controls.Add(this.rb_Active);
+            this.kryptonGroupBox1.Size = new System.Drawing.Size(192, 53);
+            this.kryptonGroupBox1.TabIndex = 0;
+            this.kryptonGroupBox1.Values.Heading = "Worker state";
+            // 
+            // rb_All
+            // 
+            this.rb_All.Location = new System.Drawing.Point(135, 3);
+            this.rb_All.Name = "rb_All";
+            this.rb_All.Size = new System.Drawing.Size(36, 20);
+            this.rb_All.TabIndex = 2;
+            this.rb_All.Values.Text = "All";
+            this.rb_All.CheckedChanged += new System.EventHandler(this.rb_All_CheckedChanged);
+            // 
+            // rb_InActive
+            // 
+            this.rb_InActive.Location = new System.Drawing.Point(65, 3);
+            this.rb_InActive.Name = "rb_InActive";
+            this.rb_InActive.Size = new System.Drawing.Size(64, 20);
+            this.rb_InActive.TabIndex = 1;
+            this.rb_InActive.Values.Text = "Inactive";
+            this.rb_InActive.CheckedChanged += new System.EventHandler(this.rb_InActive_CheckedChanged);
+            // 
+            // rb_Active
+            // 
+            this.rb_Active.Checked = true;
+            this.rb_Active.Location = new System.Drawing.Point(3, 3);
+            this.rb_Active.Name = "rb_Active";
+            this.rb_Active.Size = new System.Drawing.Size(56, 20);
+            this.rb_Active.TabIndex = 0;
+            this.rb_Active.Values.Text = "Active";
+            this.rb_Active.CheckedChanged += new System.EventHandler(this.rb_Active_CheckedChanged);
+            // 
+            // gv_List
+            // 
+            this.gv_List.AllowUserToAddRows = false;
+            this.gv_List.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.gv_List.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.cn_id,
+            this.cn_name,
+            this.cn_surname,
+            this.chk_isactive,
+            this.cn_tabnr,
+            this.cn_rfid,
+            this.cn_comments,
+            this.chk_ismaster});
+            this.gv_List.ContextMenuStrip = this.mnu_Lines;
+            this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gv_List.Location = new System.Drawing.Point(0, 66);
+            this.gv_List.Name = "gv_List";
+            this.gv_List.RowHeadersWidth = 25;
+            this.gv_List.Size = new System.Drawing.Size(817, 360);
+            this.gv_List.TabIndex = 44;
+            this.gv_List.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_List_ColumnHeaderMouseClick);
+            // 
+            // cn_id
+            // 
+            this.cn_id.DataPropertyName = "id";
+            this.cn_id.FillWeight = 5F;
+            this.cn_id.HeaderText = "id";
+            this.cn_id.Name = "cn_id";
+            this.cn_id.ReadOnly = true;
+            this.cn_id.Visible = false;
+            this.cn_id.Width = 5;
+            // 
+            // cn_name
+            // 
+            this.cn_name.DataPropertyName = "name";
+            this.cn_name.HeaderText = "Name";
+            this.cn_name.Name = "cn_name";
+            this.cn_name.ReadOnly = true;
+            // 
+            // cn_surname
+            // 
+            this.cn_surname.DataPropertyName = "surname";
+            this.cn_surname.FillWeight = 130F;
+            this.cn_surname.HeaderText = "Surname";
+            this.cn_surname.Name = "cn_surname";
+            this.cn_surname.ReadOnly = true;
+            this.cn_surname.Width = 130;
+            // 
+            // chk_isactive
+            // 
+            this.chk_isactive.DataPropertyName = "isactive";
+            this.chk_isactive.FalseValue = "0";
+            this.chk_isactive.FillWeight = 40F;
+            this.chk_isactive.HeaderText = "Active";
+            this.chk_isactive.IndeterminateValue = "1";
+            this.chk_isactive.Name = "chk_isactive";
+            this.chk_isactive.TrueValue = "-1";
+            this.chk_isactive.Width = 40;
+            // 
+            // cn_tabnr
+            // 
+            this.cn_tabnr.DataPropertyName = "tabnum";
+            this.cn_tabnr.FillWeight = 40F;
+            this.cn_tabnr.HeaderText = "Tab. nr.";
+            this.cn_tabnr.Name = "cn_tabnr";
+            this.cn_tabnr.Width = 40;
+            // 
+            // cn_rfid
+            // 
+            this.cn_rfid.DataPropertyName = "rfid";
+            this.cn_rfid.FillWeight = 200F;
+            this.cn_rfid.HeaderText = "RFID identifier";
+            this.cn_rfid.Name = "cn_rfid";
+            this.cn_rfid.Width = 200;
+            // 
+            // cn_comments
+            // 
+            this.cn_comments.DataPropertyName = "comments";
+            this.cn_comments.FillWeight = 200F;
+            this.cn_comments.HeaderText = "Comments";
+            this.cn_comments.Name = "cn_comments";
+            this.cn_comments.Width = 200;
+            // 
+            // chk_ismaster
+            // 
+            this.chk_ismaster.DataPropertyName = "ismaster";
+            this.chk_ismaster.FalseValue = "0";
+            this.chk_ismaster.FillWeight = 60F;
+            this.chk_ismaster.HeaderText = "Master";
+            this.chk_ismaster.IndeterminateValue = "1";
+            this.chk_ismaster.Name = "chk_ismaster";
+            this.chk_ismaster.TrueValue = "-1";
+            this.chk_ismaster.Width = 60;
+            // 
             // frm_Workers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -459,22 +520,28 @@
             this.kryptonHeaderGroup1.Panel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).EndInit();
             this.kryptonHeaderGroup1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gv_List)).EndInit();
             this.mnu_Lines.ResumeLayout(false);
             this.mnu_Lines.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bn_List)).EndInit();
             this.bn_List.ResumeLayout(false);
             this.bn_List.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
-            this.PerformLayout(); this.GetKryptonFormFields(this.GetType());
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
+            this.kryptonPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).EndInit();
+            this.kryptonGroupBox1.Panel.ResumeLayout(false);
+            this.kryptonGroupBox1.Panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).EndInit();
+            this.kryptonGroupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gv_List)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup kryptonHeaderGroup1;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridView gv_List;
         private System.Windows.Forms.ContextMenuStrip mnu_Lines;
         private System.Windows.Forms.ToolStripTextBox mni_FilterFor;
         private System.Windows.Forms.ToolStripMenuItem mni_Search;
@@ -503,6 +570,7 @@
         private System.Windows.Forms.ToolStripButton btn_Edit;
         private System.Windows.Forms.BindingSource bs_List;
         private ComponentFactory.Krypton.Toolkit.KryptonPalette kryptonPalette1;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridView gv_List;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_surname;
@@ -511,5 +579,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_rfid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_comments;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chk_ismaster;
+        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
+        private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBox1;
+        private ComponentFactory.Krypton.Toolkit.KryptonRadioButton rb_All;
+        private ComponentFactory.Krypton.Toolkit.KryptonRadioButton rb_InActive;
+        private ComponentFactory.Krypton.Toolkit.KryptonRadioButton rb_Active;
     }
 }

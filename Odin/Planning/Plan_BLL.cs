@@ -204,6 +204,63 @@ namespace Odin.Planning
 
         #endregion
 
+        #region PO distribution
+
+        public DataTable CurrentPOs(int artid)
+        {
+            return Helper.QueryDT("execute sp_SelectPOCurrentNew @ArtId = " + artid);
+        }
+
+        public DataTable POReservations(int poid)
+        {
+            return Helper.QueryDT("execute sp_SelectPOReservationsNew @poid = " + poid);
+        }
+
+        public void ReleaseRMFromPO(int poid, int id)
+        {
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_ReleaseRMFromPO", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@poid", poid);
+            sqlComm.Parameters.AddWithValue("@id", id);
+            
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+        }
+
+        public static DataTable RMDeficiteInProduction(int stageid)
+        {
+            return Helper.QueryDT("execute sp_SelectProductionRMDeficite @stageid = " + stageid);
+        }
+
+        public static DataTable RMOverview(int stageid, int custid, int excludezero)
+        {
+            return Helper.QueryDT("execute sp_SelectRMOverview @stageid = " + stageid + ", @custid = " + custid + ", @excludezero = " + excludezero);
+        }
+
+
+        #endregion
+
+        #region Calculation of cost
+
+        public static DataTable getBatchCostRM(int _batchid, int _groupbydoc, int _projecta)
+        {
+            string query = "EXECUTE sp_SelectBatchRMCost @batchid = " + _batchid + ", @groupbydoc = " + _groupbydoc + ", @projecta = " + _projecta;
+
+            return Helper.QueryDT(query);
+        }
+
+        public static DataTable getBatchCostRMCO(int _batchid, int _coid, int _groupbydoc, int _projecta)
+        {
+            string query = "EXECUTE sp_SelectBatchRMCostCO @batchid = " + _batchid + ", @coid = " + _coid + ", @groupbydoc = " + _groupbydoc + ", @projecta = " + _projecta;
+
+            return Helper.QueryDT(query);
+        }
+
+        #endregion
+
         #region Passport
 
         public string PasBatch { get; set; }
@@ -479,6 +536,84 @@ namespace Odin.Planning
             //}
             //catch { BatchName = "Error!"; }
             return _res;
+        }
+
+        public void EditBatchProjectHeader(int BatchId, int ArtId, double Qty, string Comments, string StartDate, string ResDate)
+        {
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_editbatchprojectheader", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+
+            sqlComm.Parameters.AddWithValue("@BatchId", BatchId);
+            sqlComm.Parameters.AddWithValue("@ArtId", ArtId);
+            sqlComm.Parameters.AddWithValue("@Qty", Qty);
+            sqlComm.Parameters.AddWithValue("@Comments", Comments);
+            sqlComm.Parameters.AddWithValue("@StartDate", StartDate);
+            sqlComm.Parameters.AddWithValue("@ResDate", ResDate);
+
+            //try
+            //{
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+            //}
+            //catch { }
+        }
+
+        public void CloseBatchProject(int IdBatch)
+        {
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_CloseBatchProject", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@Id", IdBatch);
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+
+        }
+
+        public void FollowBatchProject(int IdBatch, int ToFollow)
+        {
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_FollowBatchProject", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@Id", IdBatch);
+            sqlComm.Parameters.AddWithValue("@ToFollow", ToFollow);
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+
+        }
+
+        public DataTable NomDetailsDataProject(int artid, double qty)
+        {
+            return Helper.QueryDT("execute sp_SelectCreatBatchProjectNew @ArtId = " + artid + ", @Qty = " + qty);
+        }
+
+        //public static DataTable getProjectMappings(int _projectid)
+        //{
+        //    string query = "EXECUTE sp_SelectSalesOrdersMappings @batchid = " + _batchid;
+
+        //    return Helper.QueryDT(query);
+        //}
+        public static DataTable getRMAnalogs(int artid, int artcseid)
+        {
+            string query = "EXECUTE sp_SelectProjectAnalogues @artid = " + artid + ", @cseid = " + artcseid;
+
+            return Helper.QueryDT(query);
+        }
+        public static DataTable getCreateBatchRM(int _projectid)
+        {
+            string query = "EXECUTE sp_SelectCreatBatchFromProject @projectid = " + _projectid;
+
+            return Helper.QueryDT(query);
         }
 
         public int AddBatchHeaderFromProject(int ProjectId, int ArtId, double Qty, string ResDate, string Comments, int Urgent, string Serials)

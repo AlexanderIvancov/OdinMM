@@ -25,7 +25,6 @@ namespace Odin.Register.Articles
         DAL_Functions DAL = new DAL_Functions();
         AdmMenu mMenu = new AdmMenu();
 
-
         int _lock = 0;
         public int Lock
         {
@@ -34,9 +33,7 @@ namespace Odin.Register.Articles
                 return _lock;
             }
             set { _lock = value; }
-
         }
-
 
         public int RowIndex = 0;
         public int ColumnIndex = 0;
@@ -52,7 +49,6 @@ namespace Odin.Register.Articles
             {
                 _articleid = value;
                 FillStages(_articleid);
-
             }
         }
 
@@ -70,7 +66,6 @@ namespace Odin.Register.Articles
             set {
                 txt_value.Text = value.ToString();
             }
-            
         }
 
         public string ParamDesc
@@ -79,8 +74,7 @@ namespace Odin.Register.Articles
             set { txt_paramdesc.Text = value; }
         }
 
-        public int OperId
-        { get; set; }
+        public int OperId { get; set; }
 
         public double Prepa
         {
@@ -93,7 +87,6 @@ namespace Odin.Register.Articles
             {
                 txt_Prepa.Text = value.ToString();
             }
-
         }
 
         public double Total
@@ -107,7 +100,6 @@ namespace Odin.Register.Articles
             {
                 txt_Total.Text = value.ToString();
             }
-
         }
 
         #endregion
@@ -220,6 +212,7 @@ namespace Odin.Register.Articles
             int _operid = 0;
             string _operation = "";
             string _formula = "";
+            string _commments = "";
             int _useonce = 0;
             int _operno = 0;
             try
@@ -229,6 +222,7 @@ namespace Odin.Register.Articles
                 _formula = gv_Opers.CurrentRow.Cells["cn_formula"].Value.ToString();
                 _useonce = Convert.ToInt32(gv_Opers.CurrentRow.Cells["chk_useonetime"].Value);
                 _operno = Convert.ToInt32(gv_Opers.CurrentRow.Cells["cn_operno"].Value);
+                _commments = gv_Opers.CurrentRow.Cells["cn_comments"].Value.ToString();
             }
             catch { }
 
@@ -240,11 +234,12 @@ namespace Odin.Register.Articles
                 frm.Formula = _formula;
                 frm.UsingOnce = _useonce;
                 frm.OperNO = _operno;
+                frm.Comments = _commments;
                 frm.CheckEmpty();
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    Helper.getSP("sp_EditRatioOperation", frm.Id, frm.Operation, frm.Formula, frm.UsingOnce, frm.OperNO);
+                    Helper.getSP("sp_EditRatioOperation", frm.Id, frm.Operation, frm.Formula, frm.UsingOnce, frm.OperNO, frm.Comments);
                     //Forumla result update
 
                     double FormulaRes = Reg.SelectFormulaRes(_operid);
@@ -391,7 +386,7 @@ namespace Odin.Register.Articles
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    Helper.getSP("sp_AddRatioOperation", ArtId, _stageid, frm.Operation, frm.Formula, frm.UsingOnce, frm.OperNO);
+                    Helper.getSP("sp_AddRatioOperation", ArtId, _stageid, frm.Operation, frm.Formula, frm.UsingOnce, frm.OperNO, frm.Comments);
                     FillOpers(ArtId, _stageid);
                     ShowTotals(ArtId);
                 }

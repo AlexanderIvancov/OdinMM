@@ -295,7 +295,7 @@ namespace Odin.Purchase
                                             frmcat.UnitId, frmcat.UnitPrice, frmcat.CurId, frmcat.Manufacturer, frmcat.Comments,
                                             frmcat.DelivTerms, frmcat.MOQ, frmcat.MPQ, frmcat.AsDefault, "",
                                             Convert.ToInt32(frmcat.Vat), frmcat.MinExpDays, frmcat.CoefConv, frmcat.DataCode, frmcat.DelivTermTxt, 
-                                            frmcat.Quoted, frmcat.BarCode, frmcat.ForCustomer));
+                                            frmcat.Quoted, frmcat.BarCode, frmcat.ForCustomer, frmcat.ValidTill));
 
             TreeGridNode node = tv_Details.CurrentNode;
             if (node.Level == 2)
@@ -729,7 +729,6 @@ namespace Odin.Purchase
                     PrevId = _id;
                 }
         }
-
        
         private void tv_Details_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -860,8 +859,8 @@ namespace Odin.Purchase
 
             frmcat = new frm_AddCatItem();
             frmcat.ArticleId = _artid;
+            frmcat.FillValid();
             frmcat.CatSaved += new CatSavedEventHandler(CatAdded);
-
             frmcat.Show();
         }
 
@@ -1397,9 +1396,6 @@ namespace Odin.Purchase
             }
 
             //ICell cell1 = HSSFCellUtil.CreateCell(headerRow, j, column.Caption);
-
-         
-
             //cell1.CellStyle = style2;
 
            

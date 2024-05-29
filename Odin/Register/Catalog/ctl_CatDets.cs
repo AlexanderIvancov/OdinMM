@@ -64,7 +64,7 @@ namespace Odin.Register.Catalog
 
             NewLineId = Convert.ToInt32(Helper.getSP("sp_AddCatalogItem", frm.BargType, frm.ArticleId, frm.FirmId, frm.FirmArt, frm.UnitId, frm.UnitPrice, frm.CurId, frm.Manufacturer, frm.Comments,
                                             frm.DelivTerms, frm.MOQ, frm.MPQ, frm.AsDefault, "", Convert.ToInt32(frm.Vat), frm.MinExpDays, frm.CoefConv, frm.DataCode, 
-                                            frm.DelivTermTxt, frm.Quoted, frm.BarCode, frm.ForCustomer));
+                                            frm.DelivTermTxt, frm.Quoted, frm.BarCode, frm.ForCustomer, frm.ValidTill));
 
             FillCatalog(ArticleId);
 
@@ -75,7 +75,7 @@ namespace Odin.Register.Catalog
         {
             Helper.getSP("sp_EditCatalogItem", frm.CatID, frm.BargType, frm.ArticleId, frm.FirmId, frm.FirmArt, frm.UnitId, frm.UnitPrice, frm.CurId, frm.Manufacturer, frm.Comments,
                                             frm.DelivTerms, frm.MOQ, frm.MPQ, frm.AsDefault, "", Convert.ToInt32(frm.Vat), frm.MinExpDays, frm.CoefConv, frm.DataCode,
-                                            frm.DelivTermTxt, frm.Quoted, frm.BarCode, frm.ForCustomer);
+                                            frm.DelivTermTxt, frm.Quoted, frm.BarCode, frm.ForCustomer, frm.ValidTill);
             BLL.CatId = frm.CatID;
             FillCatalog(ArticleId);
             
@@ -94,6 +94,7 @@ namespace Odin.Register.Catalog
         {
             frm = new frm_AddCatItem();
             frm.ArticleId = ArticleId;
+            frm.FillValid();
             frm.CatSaved += new CatSavedEventHandler(CatAdded);
 
             frm.Show(); frm.GetKryptonFormFields();
@@ -131,7 +132,7 @@ namespace Odin.Register.Catalog
                 frm.Quoted = BLL.CatQuoted;
                 frm.BarCode = BLL.CatBarCode;
                 frm.ForCustomer = BLL.CatForCust;
-
+                frm.ValidTill = BLL.CatValidTill;
                 frm.CatSaved += new CatSavedEventHandler(CatEdited);
                 
                 frm.Show(); frm.GetKryptonFormFields();

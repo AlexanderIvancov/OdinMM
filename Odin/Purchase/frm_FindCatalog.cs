@@ -47,11 +47,8 @@ namespace Odin.Purchase
         public int ColumnIndex = 0;
         public string ColumnName = "";
         public string CellValue = "";
-
-        public int ArtId
-        { get; set; }
-        public int SupId
-        { get; set; }
+        public int ArtId { get; set; }
+        public int SupId { get; set; }
 
         #endregion
 
@@ -101,12 +98,10 @@ namespace Odin.Purchase
                 SetCellsColor();
             });
 
-
             bn_List.ThreadSafeCall(delegate
             {
                 bn_List.BindingSource = bs_List;
             });
-
         }
 
         public void SetCellsColor()
@@ -124,10 +119,9 @@ namespace Odin.Purchase
         {
             Helper.getSP("sp_EditCatalogItem", frm.CatID, frm.BargType, frm.ArticleId, frm.FirmId, frm.FirmArt, frm.UnitId, frm.UnitPrice, frm.CurId, frm.Manufacturer, frm.Comments,
                                             frm.DelivTerms, frm.MOQ, frm.MPQ, frm.AsDefault, "", Convert.ToInt32(frm.Vat), frm.MinExpDays, frm.CoefConv, frm.DataCode, 
-                                            frm.DelivTermTxt, frm.Quoted, frm.BarCode, frm.ForCustomer);
+                                            frm.DelivTermTxt, frm.Quoted, frm.BarCode, frm.ForCustomer, frm.ValidTill);
             BLL.CatId = frm.CatID;
             FillList(ArtId, SupId);
-
 
             frm.Close();
 
@@ -140,7 +134,7 @@ namespace Odin.Purchase
 
             NewLineId = Convert.ToInt32(Helper.getSP("sp_AddCatalogItem", frm.BargType, frm.ArticleId, frm.FirmId, frm.FirmArt, frm.UnitId, frm.UnitPrice, frm.CurId, frm.Manufacturer, frm.Comments,
                                             frm.DelivTerms, frm.MOQ, frm.MPQ, frm.AsDefault, "", Convert.ToInt32(frm.Vat), frm.MinExpDays, frm.CoefConv, frm.DataCode, 
-                                            frm.DelivTermTxt, frm.Quoted, frm.BarCode, frm.ForCustomer));
+                                            frm.DelivTermTxt, frm.Quoted, frm.BarCode, frm.ForCustomer, frm.ValidTill));
             FillList(ArtId, SupId);
 
             frm.Close();
@@ -187,7 +181,6 @@ namespace Odin.Purchase
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
                 //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -206,7 +199,6 @@ namespace Odin.Purchase
             catch
             { }
             SetCellsColor();
-
         }
 
         private void mni_Search_Click(object sender, EventArgs e)
@@ -234,7 +226,6 @@ namespace Odin.Purchase
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -247,7 +238,6 @@ namespace Odin.Purchase
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
@@ -258,7 +248,6 @@ namespace Odin.Purchase
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_Copy_Click(object sender, EventArgs e)
@@ -277,7 +266,7 @@ namespace Odin.Purchase
             frm = new frm_AddCatItem();
             frm.ArticleId = ArtId;
             frm.FirmId = SupId;
-
+            frm.FillValid();
             frm.CatSaved += new CatSavedEventHandler(CatAdded);
             frm.CatClosed += new CatClosedEventHandler(CatClosed);
 
@@ -318,6 +307,7 @@ namespace Odin.Purchase
                 frm.Quoted = BLL.CatQuoted;
                 frm.BarCode = BLL.CatBarCode;
                 frm.ForCustomer = BLL.CatForCust;
+                frm.ValidTill = BLL.CatValidTill;
                 frm.CatSaved += new CatSavedEventHandler(CatEdited);
                 frm.CatClosed += new CatClosedEventHandler(CatClosed);
 

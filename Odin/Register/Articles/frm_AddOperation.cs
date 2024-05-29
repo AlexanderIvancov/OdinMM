@@ -1,6 +1,16 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
+using ComponentFactory.Krypton.Workspace;
+using ComponentFactory.Krypton.Toolkit;
 
 namespace Odin.Register.Articles
 {
@@ -23,11 +33,17 @@ namespace Odin.Register.Articles
         {
             get
             {
-                return chk_Use.CheckState == CheckState.Checked ? -1 : 0;
+                if (chk_Use.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
             }
             set
             {
-                chk_Use.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+                if (value == -1)
+                    chk_Use.CheckState = CheckState.Checked;
+                else
+                    chk_Use.CheckState = CheckState.Unchecked;
             }
         }
         public string Operation
@@ -39,6 +55,11 @@ namespace Odin.Register.Articles
         {
             get { return txt_Formula.Text; }
             set { txt_Formula.Text = value; }
+        }
+        public string Comments
+        {
+            get { return txt_Comments.Text; }
+            set { txt_Comments.Text = value; }
         }
         public int OperNO
         {
@@ -54,10 +75,13 @@ namespace Odin.Register.Articles
         }
         public void CheckEmpty()
         {
-            btn_OK.Enabled = txt_Formula.Text != ""
-                && txt_Operation.Text != ""
-                && txt_Operation.Text != string.Empty
-                && txt_Formula.Text != string.Empty;
+            if (txt_Formula.Text == ""
+                || txt_Operation.Text == ""
+                || txt_Operation.Text == string.Empty
+                || txt_Formula.Text == string.Empty)
+                btn_OK.Enabled = false;
+            else
+                btn_OK.Enabled = true;
         }
 
         private void txt_Operation_TextChanged(object sender, EventArgs e)
@@ -89,6 +113,11 @@ namespace Odin.Register.Articles
         {
             Operation = cmb_Operations1.Operation;
             Formula = cmb_Operations1.Formula;
+        }
+
+        private void buttonSpecAny3_Click(object sender, EventArgs e)
+        {
+            txt_Comments.Text = string.Empty;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Odin.Global_Classes;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -149,6 +150,66 @@ namespace Odin.Warehouse.StockIn
             BConfOrder = "";
             BQtyIn = 0;
             BCountCO = 0;
+        }
+
+        public static DataTable getStockInBatch(int _id)
+        {
+            string query = "sp_SelectBatchStockInDets";
+
+            var sqlparams = new List<SqlParameter>
+            {
+                new SqlParameter("@id",SqlDbType.Int){Value = _id }
+            };
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
+        }
+
+        public static DataTable getStockInBatchDelivery(int _id)
+        {
+            string query = "sp_SelectBatchDeliveryRests";
+
+            var sqlparams = new List<SqlParameter>
+            {
+                new SqlParameter("@id",SqlDbType.Int){Value = _id }
+            };
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
+        }
+
+        public static DataTable getStockInArticleDelivery(int _id)
+        {
+            string query = "sp_SelectArticleDeliveryRests";
+
+            var sqlparams = new List<SqlParameter>
+            {
+                new SqlParameter("@artid",SqlDbType.Int){Value = _id }
+            };
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
+        }
+
+        public static DataTable getStockInArticleDeliveryEdit(int _id)
+        {
+            string query = "sp_SelectArticleDeliveryRestsNewForEdit";
+
+            var sqlparams = new List<SqlParameter>
+            {
+                new SqlParameter("@artid",SqlDbType.Int){Value = _id }
+            };
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
+        }
+
+        public static DataTable getStockInBatchRMDets(int _id)
+        {
+            string query = "sp_SelectBatchStockInRMRests";
+
+            var sqlparams = new List<SqlParameter>
+            {
+                new SqlParameter("@id",SqlDbType.Int){Value = _id }
+            };
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
         }
 
         public string AddStockInFP(int artid, double qty, double unitprice, int batchid, int placeid, string comments, DataTable tablebox, int coid)
