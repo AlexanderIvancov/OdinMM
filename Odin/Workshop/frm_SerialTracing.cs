@@ -349,7 +349,7 @@ namespace Odin.Workshop
                                 if (ScanOrder == 2)
                                 {
                                     _scanlabel = txt_Oper.Text;
-                                    if (_Freezed != 0)
+                                    if (_Freezed != -1)
                                     {
                                         CMB_Components.AddSerialFreezed.frm_AddSerialFreezed frm = new CMB_Components.AddSerialFreezed.frm_AddSerialFreezed();
                                         frm.StageId = StageId;
