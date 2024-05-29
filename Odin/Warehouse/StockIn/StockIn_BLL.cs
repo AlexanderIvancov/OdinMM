@@ -34,6 +34,18 @@ namespace Odin.Warehouse.StockIn
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
 
+        public static DataTable getStockInDets(int _inheadid)
+        {
+            string query = "sp_SelectStockInDetsAll";
+
+            var sqlparams = new List<SqlParameter>
+            {
+                new SqlParameter("@id",SqlDbType.Int){Value = _inheadid }
+            };
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
+        }
+
         public static DataTable getStockRests(int _artid)
         {
             string query = "sp_StockRestForArticleByPlaces";

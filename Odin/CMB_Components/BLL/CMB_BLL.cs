@@ -1614,6 +1614,7 @@ namespace Odin.CMB_Components.BLL
                         IncomeDocNoReversePVN = Convert.ToInt32(dr["noreversepvn"]);
                         IncomeDocMediatedCost = Convert.ToDouble(dr["mediatedcost"]);
                         IncomeDocCheck = Convert.ToInt32(dr["check"]);
+                        IncomeDocPlace = dr["place"].ToString();
                     }
                 }
                 else
@@ -1663,6 +1664,8 @@ namespace Odin.CMB_Components.BLL
         { get; set; }
         public int IncomeDocCheck
         { get; set; }
+        public string IncomeDocPlace
+        { get; set; }
 
         public void ClearIncomeDocHead()
         {
@@ -1686,6 +1689,7 @@ namespace Odin.CMB_Components.BLL
             IncomeDocNoReversePVN = 0;
             IncomeDocMediatedCost = 0;
             IncomeDocCheck = 0;
+            IncomeDocPlace = "";
         }
 
         public static DataTable getStockDocsTypes(string _beg, string _lang, int _movtype)
