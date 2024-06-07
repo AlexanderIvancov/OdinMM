@@ -132,6 +132,15 @@ namespace Odin.Workshop
             set { txt_QtyInBatch.Text = value.ToString(); }
         }
 
+        public double QtyOut
+        {
+            get
+            {
+                try { return Convert.ToDouble(txt_QtyOut.Text); }
+                catch { return 0; }
+            }
+            set { txt_QtyOut.Text = value.ToString(); }
+        }
         #endregion
 
         #region Methods
@@ -172,6 +181,7 @@ namespace Odin.Workshop
                 FreezedQty = Convert.ToDouble(reader["freezedqty"]);
                 AllowMoveBack = Convert.ToInt32(reader["allowmoveback"]);
                 IsNextStageLast = Convert.ToInt32(reader["isnextstagelast"]);
+                QtyOut = Convert.ToDouble(reader["qtyout"]);
 
                 reader.Close();
             }
@@ -224,6 +234,8 @@ namespace Odin.Workshop
                 txt_Freezed.Visible = true;
                 btn_Freeze.Visible = true;
                 lbl_Freezed.Visible = true;
+                txt_QtyOut.Visible = false;
+                lbl_QtyOut.Visible = false;
             }
             else
             {
@@ -239,6 +251,8 @@ namespace Odin.Workshop
                     lbl_Freezed.Visible = false;
                     txt_QtyInBatch.Visible = true;
                     lbl_QtyInBatch.Visible = true;
+                    txt_QtyOut.Visible = true;
+                    lbl_QtyOut.Visible = true;
                 }
                 else
                 {
@@ -246,6 +260,8 @@ namespace Odin.Workshop
                     lbl_Freezed.Visible = true;
                     txt_QtyInBatch.Visible = false;
                     lbl_QtyInBatch.Visible = false;
+                    txt_QtyOut.Visible = false;
+                    lbl_QtyOut.Visible = false;
                 }
                 btn_Freeze.Visible = false;
                 //
@@ -268,6 +284,7 @@ namespace Odin.Workshop
             QtyOnStage = 0;
             AllowMoveBack = -1;
             IsNextStageLast = 0;
+            QtyOut = 0;
         }
 
         #endregion

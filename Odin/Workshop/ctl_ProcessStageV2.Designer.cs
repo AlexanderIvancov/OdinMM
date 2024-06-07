@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.lbl_QtyOut = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.txt_QtyOut = new Owf.Controls.NumericTetxBox();
+            this.lbl_QtyInBatch = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.txt_QtyInBatch = new Owf.Controls.NumericTetxBox();
             this.gradientPanel22 = new Owf.Controls.GradientPanel2();
             this.txt_OnStage = new Owf.Controls.NumericTetxBox();
             this.btn_Start = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
@@ -44,14 +48,14 @@
             this.lbl_Stage = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.btn_AddProcess = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_DeleteProcess = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.txt_QtyInBatch = new Owf.Controls.NumericTetxBox();
-            this.lbl_QtyInBatch = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.lbl_QtyOut);
+            this.kryptonPanel1.Controls.Add(this.txt_QtyOut);
             this.kryptonPanel1.Controls.Add(this.lbl_QtyInBatch);
             this.kryptonPanel1.Controls.Add(this.txt_QtyInBatch);
             this.kryptonPanel1.Controls.Add(this.gradientPanel22);
@@ -72,13 +76,58 @@
             this.kryptonPanel1.Size = new System.Drawing.Size(171, 275);
             this.kryptonPanel1.TabIndex = 1;
             // 
+            // lbl_QtyOut
+            // 
+            this.lbl_QtyOut.Location = new System.Drawing.Point(6, 126);
+            this.lbl_QtyOut.Name = "lbl_QtyOut";
+            this.lbl_QtyOut.Size = new System.Drawing.Size(62, 20);
+            this.lbl_QtyOut.TabIndex = 242;
+            this.lbl_QtyOut.Values.Text = "Delivered";
+            this.lbl_QtyOut.Visible = false;
+            // 
+            // txt_QtyOut
+            // 
+            this.txt_QtyOut.AllowDecimalSeparator = false;
+            this.txt_QtyOut.AllowSpace = false;
+            this.txt_QtyOut.Location = new System.Drawing.Point(74, 123);
+            this.txt_QtyOut.Name = "txt_QtyOut";
+            this.txt_QtyOut.Size = new System.Drawing.Size(90, 26);
+            this.txt_QtyOut.StateCommon.Content.Color1 = System.Drawing.Color.Green;
+            this.txt_QtyOut.StateCommon.Content.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txt_QtyOut.TabIndex = 241;
+            this.txt_QtyOut.Text = "0";
+            this.txt_QtyOut.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lbl_QtyInBatch
+            // 
+            this.lbl_QtyInBatch.Location = new System.Drawing.Point(87, 210);
+            this.lbl_QtyInBatch.Name = "lbl_QtyInBatch";
+            this.lbl_QtyInBatch.Size = new System.Drawing.Size(77, 20);
+            this.lbl_QtyInBatch.TabIndex = 240;
+            this.lbl_QtyInBatch.Values.Text = "Qty in batch";
+            this.lbl_QtyInBatch.Visible = false;
+            // 
+            // txt_QtyInBatch
+            // 
+            this.txt_QtyInBatch.AllowDecimalSeparator = false;
+            this.txt_QtyInBatch.AllowSpace = false;
+            this.txt_QtyInBatch.Location = new System.Drawing.Point(87, 236);
+            this.txt_QtyInBatch.Name = "txt_QtyInBatch";
+            this.txt_QtyInBatch.Size = new System.Drawing.Size(78, 30);
+            this.txt_QtyInBatch.StateCommon.Content.Color1 = System.Drawing.Color.Black;
+            this.txt_QtyInBatch.StateCommon.Content.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txt_QtyInBatch.TabIndex = 239;
+            this.txt_QtyInBatch.Text = "0";
+            this.txt_QtyInBatch.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txt_QtyInBatch.Visible = false;
+            // 
             // gradientPanel22
             // 
             this.gradientPanel22.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.gradientPanel22.BackgroundGradientMode = Owf.Controls.GradientPanel2.PanelGradientMode.BackwardDiagonal;
             this.gradientPanel22.borderColor = System.Drawing.Color.Transparent;
             this.gradientPanel22.EndColor = System.Drawing.Color.Lime;
-            this.gradientPanel22.Location = new System.Drawing.Point(5, 202);
+            this.gradientPanel22.Location = new System.Drawing.Point(5, 196);
             this.gradientPanel22.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.gradientPanel22.Name = "gradientPanel22";
             this.gradientPanel22.Padding = new System.Windows.Forms.Padding(1);
@@ -121,7 +170,7 @@
             // btn_Freeze
             // 
             this.btn_Freeze.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Cluster;
-            this.btn_Freeze.Location = new System.Drawing.Point(5, 211);
+            this.btn_Freeze.Location = new System.Drawing.Point(5, 205);
             this.btn_Freeze.Name = "btn_Freeze";
             this.btn_Freeze.Size = new System.Drawing.Size(78, 58);
             this.btn_Freeze.TabIndex = 12;
@@ -133,7 +182,7 @@
             // 
             this.txt_Freezed.AllowDecimalSeparator = false;
             this.txt_Freezed.AllowSpace = false;
-            this.txt_Freezed.Location = new System.Drawing.Point(87, 242);
+            this.txt_Freezed.Location = new System.Drawing.Point(87, 236);
             this.txt_Freezed.Name = "txt_Freezed";
             this.txt_Freezed.Size = new System.Drawing.Size(78, 30);
             this.txt_Freezed.StateCommon.Content.Color1 = System.Drawing.Color.Blue;
@@ -145,7 +194,7 @@
             // 
             // lbl_Freezed
             // 
-            this.lbl_Freezed.Location = new System.Drawing.Point(101, 216);
+            this.lbl_Freezed.Location = new System.Drawing.Point(101, 210);
             this.lbl_Freezed.Name = "lbl_Freezed";
             this.lbl_Freezed.Size = new System.Drawing.Size(53, 20);
             this.lbl_Freezed.TabIndex = 10;
@@ -157,7 +206,7 @@
             this.txt_Proc.AllowSpace = false;
             this.txt_Proc.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
             this.btn_Wizard});
-            this.txt_Proc.Location = new System.Drawing.Point(87, 128);
+            this.txt_Proc.Location = new System.Drawing.Point(87, 122);
             this.txt_Proc.Name = "txt_Proc";
             this.txt_Proc.Size = new System.Drawing.Size(78, 26);
             this.txt_Proc.StateCommon.Content.Color1 = System.Drawing.Color.Green;
@@ -179,7 +228,7 @@
             this.txt_Ret.AllowSpace = false;
             this.txt_Ret.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
             this.btn_RetWizard});
-            this.txt_Ret.Location = new System.Drawing.Point(5, 128);
+            this.txt_Ret.Location = new System.Drawing.Point(5, 122);
             this.txt_Ret.Name = "txt_Ret";
             this.txt_Ret.Size = new System.Drawing.Size(78, 26);
             this.txt_Ret.StateCommon.Content.Color1 = System.Drawing.Color.Red;
@@ -229,7 +278,7 @@
             // btn_AddProcess
             // 
             this.btn_AddProcess.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Cluster;
-            this.btn_AddProcess.Location = new System.Drawing.Point(87, 155);
+            this.btn_AddProcess.Location = new System.Drawing.Point(87, 149);
             this.btn_AddProcess.Name = "btn_AddProcess";
             this.btn_AddProcess.Size = new System.Drawing.Size(78, 43);
             this.btn_AddProcess.TabIndex = 4;
@@ -240,7 +289,7 @@
             // btn_DeleteProcess
             // 
             this.btn_DeleteProcess.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Cluster;
-            this.btn_DeleteProcess.Location = new System.Drawing.Point(5, 155);
+            this.btn_DeleteProcess.Location = new System.Drawing.Point(5, 149);
             this.btn_DeleteProcess.Name = "btn_DeleteProcess";
             this.btn_DeleteProcess.Size = new System.Drawing.Size(78, 43);
             this.btn_DeleteProcess.TabIndex = 3;
@@ -248,29 +297,6 @@
             this.btn_DeleteProcess.Values.Text = "";
             this.btn_DeleteProcess.Visible = false;
             this.btn_DeleteProcess.Click += new System.EventHandler(this.btn_DeleteProcess_Click);
-            // 
-            // txt_QtyInBatch
-            // 
-            this.txt_QtyInBatch.AllowDecimalSeparator = false;
-            this.txt_QtyInBatch.AllowSpace = false;
-            this.txt_QtyInBatch.Location = new System.Drawing.Point(87, 242);
-            this.txt_QtyInBatch.Name = "txt_QtyInBatch";
-            this.txt_QtyInBatch.Size = new System.Drawing.Size(78, 30);
-            this.txt_QtyInBatch.StateCommon.Content.Color1 = System.Drawing.Color.Black;
-            this.txt_QtyInBatch.StateCommon.Content.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txt_QtyInBatch.TabIndex = 239;
-            this.txt_QtyInBatch.Text = "0";
-            this.txt_QtyInBatch.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txt_QtyInBatch.Visible = false;
-            // 
-            // lbl_QtyInBatch
-            // 
-            this.lbl_QtyInBatch.Location = new System.Drawing.Point(87, 216);
-            this.lbl_QtyInBatch.Name = "lbl_QtyInBatch";
-            this.lbl_QtyInBatch.Size = new System.Drawing.Size(77, 20);
-            this.lbl_QtyInBatch.TabIndex = 240;
-            this.lbl_QtyInBatch.Values.Text = "Qty in batch";
-            this.lbl_QtyInBatch.Visible = false;
             // 
             // ctl_ProcessStageV2
             // 
@@ -282,7 +308,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
@@ -306,5 +332,7 @@
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny btn_Delete;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lbl_QtyInBatch;
         private Owf.Controls.NumericTetxBox txt_QtyInBatch;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel lbl_QtyOut;
+        private Owf.Controls.NumericTetxBox txt_QtyOut;
     }
 }
