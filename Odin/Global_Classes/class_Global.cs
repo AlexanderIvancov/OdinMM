@@ -11,6 +11,16 @@ namespace Odin.Global_Classes
 
         public static string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
 
+        public bool TextIsDate(string text)
+        {
+            DateTime scheduleDate;
+            if (DateTime.TryParse(text, out scheduleDate))
+            {
+                return true;
+            }
+            return false;
+        }
+
         public int NEN_Int(string Fld)
         {
             return String.IsNullOrEmpty(Fld) || Fld == "(None)" ? 0 : Convert.ToInt32(Fld);

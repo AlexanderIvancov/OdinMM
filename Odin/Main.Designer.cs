@@ -59,6 +59,7 @@
             this.kryptonRibbonGroup8 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
             this.kryptonRibbonGroupTriple41 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
             this.btn_PlanningView = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.btn_ProdPlanning = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.kryptonRibbonGroupTriple38 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
             this.btn_BatchProject = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.btn_BatchManagementP = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
@@ -181,8 +182,8 @@
             this.btn_DocRegister = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.btn_CheckAccounts = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.kryptonRibbonGroupTriple32 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
-            this.btn_Intrastat = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.btn_Turnover = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.btn_Intrastat = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.kryptonRibbonGroupButton15 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.tab_Personnel = new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab();
             this.kryptonRibbonGroup24 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
@@ -193,10 +194,10 @@
             this.tab_Quality = new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab();
             this.kryptonRibbonGroup19 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
             this.kryptonRibbonGroupTriple22 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
-            this.kryptonRibbonGroupTriple48 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
             this.btn_IncomeControlList = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.btn_SerialTracing1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.btn_QCTraceView = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.kryptonRibbonGroupTriple48 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
             this.btn_QCSerialFreezed = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.tab_TechDept = new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab();
             this.kryptonRibbonGroup25 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
@@ -269,7 +270,7 @@
             this.tab_DataCollection,
             this.tab_ReadOnly,
             this.tab_Settings});
-            this.kryptonRibbon1.SelectedTab = this.tab_BookKeeping;
+            this.kryptonRibbon1.SelectedTab = this.tab_Needs;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1660, 115);
             this.kryptonRibbon1.TabIndex = 0;
             // 
@@ -451,7 +452,8 @@
             // kryptonRibbonGroupTriple41
             // 
             this.kryptonRibbonGroupTriple41.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupItem[] {
-            this.btn_PlanningView});
+            this.btn_PlanningView,
+            this.btn_ProdPlanning});
             // 
             // btn_PlanningView
             // 
@@ -459,6 +461,14 @@
             this.btn_PlanningView.TextLine1 = "Planning";
             this.btn_PlanningView.TextLine2 = "view";
             this.btn_PlanningView.Click += new System.EventHandler(this.btn_PlanningView_Click);
+            // 
+            // btn_ProdPlanning
+            // 
+            this.btn_ProdPlanning.ImageLarge = global::Odin.Global_Resourses.table_tab_search;
+            this.btn_ProdPlanning.ImageSmall = global::Odin.Global_Resourses.table_tab_search;
+            this.btn_ProdPlanning.TextLine1 = "Production";
+            this.btn_ProdPlanning.TextLine2 = "planning";
+            this.btn_ProdPlanning.Click += new System.EventHandler(this.btn_ProdPlanning_Click);
             // 
             // kryptonRibbonGroupTriple38
             // 
@@ -1314,19 +1324,19 @@
             this.btn_Intrastat,
             this.kryptonRibbonGroupButton15});
             // 
-            // btn_Intrastat
-            // 
-            this.btn_Intrastat.ImageLarge = global::Odin.Global_Resourses.european_union_flag_3872;
-            this.btn_Intrastat.ImageSmall = global::Odin.Global_Resourses.european_union_flag_3872;
-            this.btn_Intrastat.TextLine1 = "Intrastat";
-            this.btn_Intrastat.Click += new System.EventHandler(this.btn_Intrastat_Click);
-            // 
             // btn_Turnover
             // 
             this.btn_Turnover.ImageLarge = global::Odin.Global_Resourses.Refresh_24x24;
             this.btn_Turnover.ImageSmall = global::Odin.Global_Resourses.Refresh_24x24;
             this.btn_Turnover.TextLine1 = "Turnover";
             this.btn_Turnover.Click += new System.EventHandler(this.btn_Turnover_Click);
+            // 
+            // btn_Intrastat
+            // 
+            this.btn_Intrastat.ImageLarge = global::Odin.Global_Resourses.european_union_flag_3872;
+            this.btn_Intrastat.ImageSmall = global::Odin.Global_Resourses.european_union_flag_3872;
+            this.btn_Intrastat.TextLine1 = "Intrastat";
+            this.btn_Intrastat.Click += new System.EventHandler(this.btn_Intrastat_Click);
             // 
             // kryptonRibbonGroupButton15
             // 
@@ -1385,11 +1395,6 @@
             this.btn_SerialTracing1,
             this.btn_QCTraceView});
             // 
-            // kryptonRibbonGroupTriple22
-            // 
-            this.kryptonRibbonGroupTriple48.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupItem[] {
-            this.btn_QCSerialFreezed});
-            // 
             // btn_IncomeControlList
             // 
             this.btn_IncomeControlList.ImageLarge = global::Odin.Global_Resourses.document_inspector;
@@ -1414,14 +1419,18 @@
             this.btn_QCTraceView.TextLine2 = "view";
             this.btn_QCTraceView.Click += new System.EventHandler(this.btn_QCTraceView_Click);
             // 
-            // btn_QCTraceView
+            // kryptonRibbonGroupTriple48
+            // 
+            this.kryptonRibbonGroupTriple48.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupItem[] {
+            this.btn_QCSerialFreezed});
+            // 
+            // btn_QCSerialFreezed
             // 
             this.btn_QCSerialFreezed.ImageLarge = global::Odin.Global_Resourses.snowflake;
             this.btn_QCSerialFreezed.ImageSmall = global::Odin.Global_Resourses.snowflake;
             this.btn_QCSerialFreezed.TextLine1 = "QC freezing";
             this.btn_QCSerialFreezed.TextLine2 = "view";
             this.btn_QCSerialFreezed.Click += new System.EventHandler(this.btn_QCSerialFreezed_Click);
-            this.btn_QCSerialFreezed.Visible = true;
             // 
             // tab_TechDept
             // 
@@ -1960,5 +1969,6 @@
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_ProjectPlanning;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple41;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_PlanningView;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_ProdPlanning;
     }
 }

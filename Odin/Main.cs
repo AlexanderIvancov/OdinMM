@@ -153,6 +153,7 @@ namespace Odin
         frm_BatchesNew BatchesNew = null;
         frm_PlanningView PlanningView = null;
         frm_TurnoverReports TurnoverReport = null;
+        frm_ProductionPlanning ProductionPlanning = null;
 
         #endregion
 
@@ -1431,6 +1432,19 @@ namespace Odin
             // public Main _Main;
             //Articles.InitiateResize();
             TurnoverReport.Show(pn_Main);
+        }
+
+        private void btn_ProdPlanning_Click(object sender, EventArgs e)
+        {
+
+            foreach (var f in MdiChildren.Where(f => f.Name == "frm_ProductionPlanning"))
+            {
+                f.BringToFront();
+                return;
+            }
+            ProductionPlanning = new frm_ProductionPlanning();
+            ProductionPlanning._Main = this;
+            ProductionPlanning.Show(pn_Main);
         }
     }
 }

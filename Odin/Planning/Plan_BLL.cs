@@ -2434,5 +2434,60 @@ namespace Odin.Planning
         }
 
         #endregion
+
+        #region Production Planning
+
+        public static DataTable getProdPlanning(int custid, string datefrom, string datetill, int batchid, int coid, int isactive)
+        {
+            //.return Helper.QueryDT("execute sp_SelectProductionPlanningFin @custid = " + custid + ", @datefrom = " + perc);
+            string query = "sp_SelectProductionPlanning";
+
+            var sqlparams = new List<SqlParameter>
+            {
+                new SqlParameter("@custid",SqlDbType.Int){Value = custid },
+                new SqlParameter("@datefrom", SqlDbType.NVarChar) { Value = datefrom},
+                new SqlParameter("@datetill", SqlDbType.NVarChar) { Value = datetill},
+                new SqlParameter("@batchid",SqlDbType.Int){Value = batchid },
+                new SqlParameter("@coid",SqlDbType.Int){Value = coid },
+                new SqlParameter("@isactive",SqlDbType.Int){Value = isactive }
+            };
+
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
+        }
+
+        public static DataTable getProdPlanningDets(string datefrom, string datetill)
+        {
+            //.return Helper.QueryDT("execute sp_SelectProductionPlanningFin @custid = " + custid + ", @datefrom = " + perc);
+            string query = "sp_SelectProductionPlanningDets";
+
+            var sqlparams = new List<SqlParameter>
+            {
+                new SqlParameter("@datefrom", SqlDbType.NVarChar) { Value = datefrom},
+                new SqlParameter("@datetill", SqlDbType.NVarChar) { Value = datetill}
+
+            };
+
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
+        }
+
+        public void SaveProductionPlanning(DataTable tableplanning)
+        {
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_SaveProductionPlanning", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.Add("@tableplanning", SqlDbType.Structured);
+            sqlComm.Parameters["@tableplanning"].TypeName = "UT_BatchPlanning";
+            sqlComm.Parameters["@tableplanning"].Value = tableplanning;
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+        }
+
+        #endregion
     }
 }

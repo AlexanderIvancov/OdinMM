@@ -1557,6 +1557,12 @@
     <Compile Include="Planning\frm_ProdRMDeficite.Designer.cs">
       <DependentUpon>frm_ProdRMDeficite.cs</DependentUpon>
     </Compile>
+    <Compile Include="Planning\frm_ProductonPlanning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Planning\frm_ProductonPlanning.designer.cs">
+      <DependentUpon>frm_ProductonPlanning.cs</DependentUpon>
+    </Compile>
     <Compile Include="Planning\frm_ProjectPlanning.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -3701,6 +3707,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Planning\frm_ProdRMDeficite.resx">
       <DependentUpon>frm_ProdRMDeficite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Planning\frm_ProductonPlanning.resx">
+      <DependentUpon>frm_ProductonPlanning.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Planning\frm_ProjectPlanning.resx">
       <DependentUpon>frm_ProjectPlanning.cs</DependentUpon>
