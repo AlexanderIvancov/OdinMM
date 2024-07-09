@@ -85,12 +85,14 @@
             this.btn_Cancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
+            this.chk_Allow = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.chk_Allow);
             this.kryptonPanel1.Controls.Add(this.btn_AdvancePayments);
             this.kryptonPanel1.Controls.Add(this.chk_Check);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel18);
@@ -653,6 +655,14 @@
             // 
             this.kryptonManager1.GlobalPaletteMode = ComponentFactory.Krypton.Toolkit.PaletteModeManager.Office2010Silver;
             // 
+            // chk_Allow
+            // 
+            this.chk_Allow.Location = new System.Drawing.Point(132, 100);
+            this.chk_Allow.Name = "chk_Allow";
+            this.chk_Allow.Size = new System.Drawing.Size(101, 20);
+            this.chk_Allow.TabIndex = 286;
+            this.chk_Allow.Values.Text = "Allow to place";
+            // 
             // frm_AddIncomeDoc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -668,7 +678,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
@@ -730,5 +740,6 @@
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny11;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_Check;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_AdvancePayments;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_Allow;
     }
 }

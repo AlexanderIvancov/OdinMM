@@ -1476,7 +1476,7 @@ namespace Odin.CMB_Components.BLL
         public int AddIncomeDocHead(string _name, string _serie, string _regdate, string _docdate, int _supid, string _comments, int _curid,
                                     double _currate, int _sender, int _producer, string _bargain, int _transportid, int _incotermsid,
                                     double _additcost, double _inadvance, string _advancedate, string _paydate, int _noreversepvn, 
-                                    double _mediatedcost, int _check)
+                                    double _mediatedcost, int _check, int _allow)
         {
             int _res = 0;
 
@@ -1505,6 +1505,7 @@ namespace Odin.CMB_Components.BLL
             sqlComm.Parameters.AddWithValue("@noreversepvn", _noreversepvn);
             sqlComm.Parameters.AddWithValue("@mediatedcost", _mediatedcost);
             sqlComm.Parameters.AddWithValue("@check", _check);
+            sqlComm.Parameters.AddWithValue("@allow", _allow);
 
             sqlComm.Parameters.Add("@insertedid", SqlDbType.Int).Direction = ParameterDirection.Output;
 
@@ -1517,7 +1518,8 @@ namespace Odin.CMB_Components.BLL
 
         public void EditIncomeDocHead(int _id, string _name, string _serie, string _regdate, string _docdate, int _supid, string _comments, int _curid,
                                     double _currate, int _sender, int _producer, string _bargain, int _transportid, int _incotermsid, double _additcost,
-                                    double _inadvance, string _advancedate, string _paydate, int _noreversepvn, double _mediatedcost, int _check)
+                                    double _inadvance, string _advancedate, string _paydate, int _noreversepvn, double _mediatedcost, int _check,
+                                    int _allow)
         {
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
@@ -1545,6 +1547,7 @@ namespace Odin.CMB_Components.BLL
             sqlComm.Parameters.AddWithValue("@noreversepvn", _noreversepvn);
             sqlComm.Parameters.AddWithValue("@mediatedcost", _mediatedcost);
             sqlComm.Parameters.AddWithValue("@check", _check);
+            sqlComm.Parameters.AddWithValue("@allow", _allow);
 
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
@@ -1615,6 +1618,7 @@ namespace Odin.CMB_Components.BLL
                         IncomeDocMediatedCost = Convert.ToDouble(dr["mediatedcost"]);
                         IncomeDocCheck = Convert.ToInt32(dr["check"]);
                         IncomeDocPlace = dr["place"].ToString();
+                        IncomeDocAllow = Convert.ToInt32(dr["allow"]);
                     }
                 }
                 else
@@ -1666,6 +1670,8 @@ namespace Odin.CMB_Components.BLL
         { get; set; }
         public string IncomeDocPlace
         { get; set; }
+        public int IncomeDocAllow
+        { get; set; }
 
         public void ClearIncomeDocHead()
         {
@@ -1690,6 +1696,7 @@ namespace Odin.CMB_Components.BLL
             IncomeDocMediatedCost = 0;
             IncomeDocCheck = 0;
             IncomeDocPlace = "";
+            IncomeDocAllow = 0;
         }
 
         public static DataTable getStockDocsTypes(string _beg, string _lang, int _movtype)

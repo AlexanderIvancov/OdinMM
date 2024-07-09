@@ -210,6 +210,24 @@ namespace Odin.CMB_Components.IncomeDocs
             }
         }
 
+        public int AllowToPlace
+        {
+            get
+            {
+                if (chk_Allow.Checked == true)
+                    return -1;
+                else
+                    return 0;
+            }
+            set
+            {
+                if (value == -1)
+                    chk_Allow.Checked = true;
+                else
+                    chk_Allow.Checked = false;
+            }
+        }
+
         #endregion
 
 

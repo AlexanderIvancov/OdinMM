@@ -71,7 +71,7 @@ namespace Odin.CMB_Components.IncomeDocs
                 _showingModal = false;
                 int _res = Bll.AddIncomeDocHead(frm.IncomeDoc, frm.Serie, frm.RegDate, frm.DocDate, frm.SupId, frm.Comments, frm.CurId, frm.CurRate, frm.SenderCountryId,
                                                 frm.ProducerCountryId, frm.Bargain, frm.TransportId, frm.IncotermsId, frm.AdditCost, frm.Advance, frm.AdvanceDate,
-                                                frm.PayDate, frm.NoReversePVN, frm.MediatedCost, frm.Check);
+                                                frm.PayDate, frm.NoReversePVN, frm.MediatedCost, frm.Check, frm.AllowToPlace);
                 FillData(frm.IncomeDoc);
                 ((cmb_IncomeDoc)cmb_IncomeDocOne).IncomeDocSendSave();
             }
@@ -119,6 +119,7 @@ namespace Odin.CMB_Components.IncomeDocs
                 frm.NoReversePVN = Bll.IncomeDocNoReversePVN;
                 frm.MediatedCost = Bll.IncomeDocMediatedCost;
                 frm.Check = Bll.IncomeDocCheck;
+                frm.AllowToPlace = Bll.IncomeDocAllow;
                 frm.CheckEmpty();
                 frm.RecalcCurRate();
 
@@ -129,7 +130,7 @@ namespace Odin.CMB_Components.IncomeDocs
                     _showingModal = false;
                     Bll.EditIncomeDocHead(_id, frm.IncomeDoc, frm.Serie, frm.RegDate, frm.DocDate, frm.SupId, frm.Comments, frm.CurId, frm.CurRate, frm.SenderCountryId,
                                                     frm.ProducerCountryId, frm.Bargain, frm.TransportId, frm.IncotermsId, frm.AdditCost, frm.Advance, frm.AdvanceDate,
-                                                    frm.PayDate, frm.NoReversePVN, frm.MediatedCost, frm.Check);
+                                                    frm.PayDate, frm.NoReversePVN, frm.MediatedCost, frm.Check, frm.AllowToPlace);
                     if (Bll.IncomeDocRegDate != frm.RegDate)
                         Bll.CheckSendResaleLetter(_id);
 

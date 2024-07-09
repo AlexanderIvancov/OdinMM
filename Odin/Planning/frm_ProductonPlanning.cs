@@ -663,7 +663,12 @@ namespace Odin.Planning
                 }
                
             }
-            
+
+            //if (Convert.ToDouble(row.Cells["cn_qtyinbatch"].Value) <= _sumbefore)
+            //    row.Cells["cn_qtyinbatch"].Style.BackColor = Color.FromArgb(192, 255, 192);
+            //else
+            //    row.Cells["cn_qtyinbatch"].Style.BackColor = Color.White;
+
             //}
             //catch { }
         }
