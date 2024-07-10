@@ -2488,6 +2488,19 @@ namespace Odin.Planning
             sqlConn.Close();
         }
 
+        public static DataTable getProductionPlanningCapa(string date)
+        {
+            string query = "sp_SelectProductionPlanningCapacityNeeds";
+
+            var sqlparams = new List<SqlParameter>
+            {
+                new SqlParameter("@date",SqlDbType.NVarChar){Value = date }
+            };
+
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
+        }
+
         #endregion
     }
 }

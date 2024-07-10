@@ -759,6 +759,54 @@ namespace Odin.Global_Classes
 
         #region Common
 
+        public DateTime DateOfWeek(int week, int year)
+        {
+            DateTime _res;
+
+            //_res = System.DateTime.Now;
+
+            var startDate = new DateTime(year, 1, 4); // вычисляем опорную дату — 4 января текущего года (почему, читать тут http://planetcalc.ru/1252/)
+
+
+            int offsetToFirstMonday = startDate.DayOfWeek == DayOfWeek.Sunday ? 6 : ((int)startDate.DayOfWeek) - 1; // смещение к понедельнику первой недели текущего года, в днях
+            int offsetToDemandedMonday = -offsetToFirstMonday + 7 * (week - 1); // смещение к искомому понедельнику, в днях
+            _res = startDate + new TimeSpan(offsetToDemandedMonday, 0, 0, 0);
+
+
+            return _res;
+        }
+
+        public int WeekNumber(DateTime fromDate)
+        {
+            // Получаем 1 января указанного нами года
+            DateTime startOfYear = fromDate.AddDays(-fromDate.Day + 1).AddMonths(-fromDate.Month + 1);
+            // Получение 31 декабря указанного нами года
+            DateTime endOfYear = startOfYear.AddYears(1).AddDays(-1);
+            //Согласно ISO 8601 четверг считается 
+            //четвёртым днём недели, а также днём, 
+            //который определяет нумерацию недель: 
+            //первая неделя года определяется как неделя, 
+            //содержащая первый четверг года, и так далее.
+            //Вносим соответствующие корректировки
+            int[] iso8601Correction = { 6, 7, 8, 9, 10, 4, 5 };
+            int nds = fromDate.Subtract(startOfYear).Days +
+            iso8601Correction[(int)startOfYear.DayOfWeek];
+            int wk = nds / 7;
+            switch (wk)
+            {
+                case 0:
+                    // Возвращаем номер недели от 31 декабря предыдущего года
+                    return WeekNumber(startOfYear.AddDays(-1));
+                case 53:
+                    // Если 31 декабря выпадает до четверга 1 недели следующего года                    
+                    if (endOfYear.DayOfWeek < DayOfWeek.Thursday)
+                        return 1;
+                    else
+                        return wk;
+                default: return wk;
+            }
+        }
+
         public string WeekFromDate(string Date)
         {
             string _Res = "";
