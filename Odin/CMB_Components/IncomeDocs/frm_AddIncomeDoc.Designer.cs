@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.chk_Allow = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.btn_AdvancePayments = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.chk_Check = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonLabel18 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -85,7 +86,6 @@
             this.btn_Cancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
-            this.chk_Allow = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -142,6 +142,14 @@
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
             this.kryptonPanel1.Size = new System.Drawing.Size(451, 449);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // chk_Allow
+            // 
+            this.chk_Allow.Location = new System.Drawing.Point(132, 100);
+            this.chk_Allow.Name = "chk_Allow";
+            this.chk_Allow.Size = new System.Drawing.Size(123, 20);
+            this.chk_Allow.TabIndex = 286;
+            this.chk_Allow.Values.Text = "Not allow to place";
             // 
             // btn_AdvancePayments
             // 
@@ -654,14 +662,6 @@
             // kryptonManager1
             // 
             this.kryptonManager1.GlobalPaletteMode = ComponentFactory.Krypton.Toolkit.PaletteModeManager.Office2010Silver;
-            // 
-            // chk_Allow
-            // 
-            this.chk_Allow.Location = new System.Drawing.Point(132, 100);
-            this.chk_Allow.Name = "chk_Allow";
-            this.chk_Allow.Size = new System.Drawing.Size(101, 20);
-            this.chk_Allow.TabIndex = 286;
-            this.chk_Allow.Values.Text = "Allow to place";
             // 
             // frm_AddIncomeDoc
             // 

@@ -399,8 +399,31 @@ namespace Odin.Planning
             ShowCapacity(Convert.ToInt32(txt_Capa.Text), databatches);
         }
 
+        public void ClearCapacity()
+        {
+            NSMT = 0;
+            _NSMT = 0;
+            NTHT = 0;
+            _NTHT = 0;
+            NFTA = 0;
+            _NFTA = 0;
+            NIPA = 0;
+            _NIPA = 0;
+            NQSMT = 0;
+            _NQSMT = 0;
+            NQTHT = 0;
+            _NQTHT = 0;
+            NFQC = 0;
+            _NFQC = 0;
+            NXRAY = 0;
+            _NXRAY = 0;
+            NGPA = 0;
+            _NGPA = 0;
+        }
+
         public void ShowCapacity(int weekoper, DataTable databatches)
         {
+            ClearCapacity();
             var data = Plan_BLL.getProjectPlanningCapa(weekoper, databatches);
 
             foreach (DataRow row in data.Rows)
