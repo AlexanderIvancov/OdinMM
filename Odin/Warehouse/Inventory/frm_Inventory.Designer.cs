@@ -115,6 +115,7 @@
             this.cn_invnumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_manufbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_suparticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).BeginInit();
             this.mnu_Lines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
@@ -638,7 +639,8 @@
             this.cn_customer,
             this.cn_invnumber,
             this.cn_sn,
-            this.cn_manufbatch});
+            this.cn_manufbatch,
+            this.cn_suparticle});
             this.gv_List.ContextMenuStrip = this.mnu_Lines;
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_List.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
@@ -1018,6 +1020,12 @@
             this.cn_manufbatch.HeaderText = "Manuf. batch";
             this.cn_manufbatch.Name = "cn_manufbatch";
             // 
+            // cn_suparticle
+            // 
+            this.cn_suparticle.DataPropertyName = "suparticle";
+            this.cn_suparticle.HeaderText = "Sup. article";
+            this.cn_suparticle.Name = "cn_suparticle";
+            // 
             // frm_Inventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1055,7 +1063,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonDockableWorkspace1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
@@ -1144,5 +1152,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_invnumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_sn;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_manufbatch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_suparticle;
     }
 }
