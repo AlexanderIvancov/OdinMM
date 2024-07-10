@@ -1356,7 +1356,31 @@ namespace Odin.Planning
 
         private void btn_Launches_Click(object sender, EventArgs e)
         {
+            int _id = 0;
 
+            try
+            {
+                _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_batchid"].Value);
+            }
+            catch { _id = 0; }
+
+
+            if (_id != 0)
+            {
+                var _query = "sp_SelectBatchLaunchedPlanning";
+
+                var sqlparams = new List<SqlParameter>()
+                {
+                    new SqlParameter("@batchid",SqlDbType.Int) {Value = _id}
+                };
+
+                Template_DataGridView frm = new Template_DataGridView();
+
+                frm.Text = "Batch launches ";
+                frm.Query = _query;
+                frm.SqlParams = sqlparams;
+                frm.Show();
+            }
         }
     }
 }
