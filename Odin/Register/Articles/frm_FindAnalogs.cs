@@ -149,6 +149,8 @@ namespace Odin.Register.Articles
             this.ShowingModal = true;
 
             frm = new frm_AddAnalog();
+            if (ArtCSEId != 0)
+                frm.ProductId = ArtCSEId;
 
             DialogResult result = frm.ShowDialog();
             if (result == DialogResult.OK
