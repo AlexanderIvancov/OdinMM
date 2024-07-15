@@ -116,6 +116,7 @@
             this.cn_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_manufbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_suparticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_expdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).BeginInit();
             this.mnu_Lines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
@@ -640,7 +641,8 @@
             this.cn_invnumber,
             this.cn_sn,
             this.cn_manufbatch,
-            this.cn_suparticle});
+            this.cn_suparticle,
+            this.cn_expdate});
             this.gv_List.ContextMenuStrip = this.mnu_Lines;
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_List.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
@@ -1026,6 +1028,12 @@
             this.cn_suparticle.HeaderText = "Sup. article";
             this.cn_suparticle.Name = "cn_suparticle";
             // 
+            // cn_expdate
+            // 
+            this.cn_expdate.DataPropertyName = "expdate";
+            this.cn_expdate.HeaderText = "Exp. date";
+            this.cn_expdate.Name = "cn_expdate";
+            // 
             // frm_Inventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1153,5 +1161,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_sn;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_manufbatch;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_suparticle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_expdate;
     }
 }

@@ -150,9 +150,13 @@ namespace Odin.Warehouse.Inventory
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
-                if (Convert.ToInt32(row.Cells["cn_isactive"].Value) == 0)
+                if (Convert.ToInt32(row.Cells["cn_isactive"].Value) == 0
+                     || Convert.ToDouble(row.Cells["cn_qtyrest"].Value) <= 0)
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Gainsboro;
+                if (row.Cells["cn_expdate"].Value.ToString() != ""
+                   && Convert.ToDateTime(row.Cells["cn_expdate"].Value) <= System.DateTime.Now.AddDays(7))
+                    row.Cells["cn_expdate"].Style.BackColor = Color.Red;
             }
         }
 
