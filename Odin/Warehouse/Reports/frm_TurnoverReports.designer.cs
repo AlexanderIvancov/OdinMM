@@ -534,7 +534,7 @@
             this.btn_FCSRefresh.Size = new System.Drawing.Size(101, 31);
             this.btn_FCSRefresh.TabIndex = 3;
             this.btn_FCSRefresh.Values.Image = global::Odin.Global_Resourses.reload_24x24;
-            this.btn_FCSRefresh.Values.Text = "2130";
+            this.btn_FCSRefresh.Values.Text = "43";
             this.btn_FCSRefresh.Click += new System.EventHandler(this.btn_FCSRefresh_Click);
             // 
             // btn_WIPRefresh
@@ -544,7 +544,7 @@
             this.btn_WIPRefresh.Size = new System.Drawing.Size(101, 31);
             this.btn_WIPRefresh.TabIndex = 2;
             this.btn_WIPRefresh.Values.Image = global::Odin.Global_Resourses.reload_24x24;
-            this.btn_WIPRefresh.Values.Text = "2120";
+            this.btn_WIPRefresh.Values.Text = "20";
             this.btn_WIPRefresh.Click += new System.EventHandler(this.btn_WIPRefresh_Click);
             // 
             // btn_OthersRefresh
@@ -564,7 +564,7 @@
             this.btn_RMRefresh.Size = new System.Drawing.Size(101, 31);
             this.btn_RMRefresh.TabIndex = 0;
             this.btn_RMRefresh.Values.Image = global::Odin.Global_Resourses.reload_24x24;
-            this.btn_RMRefresh.Values.Text = "2110";
+            this.btn_RMRefresh.Values.Text = "10.1";
             this.btn_RMRefresh.Click += new System.EventHandler(this.btn_RMRefresh_Click);
             // 
             // txt_CreatDateTill
@@ -715,7 +715,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frm_TurnoverReports";
             this.TabText = "Turnover reports";
-            this.Text = "Turnover reports";
+            this.Text = "Movement reports";
             this.Load += new System.EventHandler(this.frm_MovementReports_Load);
             this.mnu_Lines.ResumeLayout(false);
             this.mnu_Lines.PerformLayout();
@@ -739,7 +739,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).EndInit();
             this.kryptonPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.GetKryptonFormFields(this.GetType());
+
         }
 
         #endregion

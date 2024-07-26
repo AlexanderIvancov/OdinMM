@@ -278,5 +278,44 @@ namespace Odin.Register.Articles
             }
             this.ShowingModal = false;
         }
+
+        private void btn_Copy_Click(object sender, EventArgs e)
+        {
+            int _id = 0;
+            int _analogid = 0;
+            int _customerid = 0;
+            string _comments = "";
+            int _productid = 0;
+
+            try
+            {
+                _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
+                _analogid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_analogid"].Value);
+                _customerid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_customerid"].Value);
+                _comments = gv_List.CurrentRow.Cells["cn_comments"].Value.ToString();
+                _productid = ArtCSEId;//Convert.ToInt32(gv_List.CurrentRow.Cells["cn_productid"].Value);
+            }
+            catch { }
+
+            if (_id != 0)
+            {
+                this.ShowingModal = true;
+
+                frm = new frm_AddAnalog();
+                frm.ProductId = _productid;
+                frm.AnalogId = _analogid;
+                frm.CustomerId = _customerid;
+                DialogResult result = frm.ShowDialog();
+                if (result == DialogResult.OK
+                      && ArtId != 0)
+                {
+                    Reg.AddAnalog(ArtId, frm.AnalogId, frm.CustomerId, frm.Comments, frm.ProductId);
+                    FillList();
+                }
+
+                this.ShowingModal = false;
+            }
+        }
+    
     }
 }

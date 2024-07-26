@@ -32,13 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_FindAnalogs));
             this.kryptonHeaderGroup1 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.bn_List = new System.Windows.Forms.BindingNavigator(this.components);
-            this.btn_Add = new System.Windows.Forms.ToolStripButton();
-            this.btn_Edit = new System.Windows.Forms.ToolStripButton();
-            this.btn_Delete = new System.Windows.Forms.ToolStripButton();
-            this.bs_List = new Odin.Global_Classes.SyncBindingSource();
             this.cn_analogid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_art = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,7 +47,15 @@
             this.cn_customerid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_productid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_allowtoreplace = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.bn_List = new System.Windows.Forms.BindingNavigator(this.components);
+            this.btn_Add = new System.Windows.Forms.ToolStripButton();
+            this.btn_Edit = new System.Windows.Forms.ToolStripButton();
             this.btn_Valid = new System.Windows.Forms.ToolStripButton();
+            this.btn_Delete = new System.Windows.Forms.ToolStripButton();
+            this.bs_List = new Odin.Global_Classes.SyncBindingSource();
+            this.btn_Copy = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).BeginInit();
             this.kryptonHeaderGroup1.Panel.SuspendLayout();
@@ -116,79 +117,6 @@
             this.gv_List.Size = new System.Drawing.Size(874, 176);
             this.gv_List.TabIndex = 48;
             this.gv_List.SelectionChanged += new System.EventHandler(this.gv_List_SelectionChanged);
-            // 
-            // kryptonPanel1
-            // 
-            this.kryptonPanel1.Controls.Add(this.btn_OK);
-            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.kryptonPanel1.Location = new System.Drawing.Point(0, 201);
-            this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonPanel1.Size = new System.Drawing.Size(874, 56);
-            this.kryptonPanel1.TabIndex = 47;
-            // 
-            // btn_OK
-            // 
-            this.btn_OK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btn_OK.Location = new System.Drawing.Point(773, 11);
-            this.btn_OK.Name = "btn_OK";
-            this.btn_OK.Size = new System.Drawing.Size(90, 34);
-            this.btn_OK.TabIndex = 5;
-            this.btn_OK.Values.Image = global::Odin.Global_Resourses.agt_reload24x24;
-            this.btn_OK.Values.Text = "Replace";
-            this.btn_OK.Click += new System.EventHandler(this.btn_OK_Click);
-            // 
-            // bn_List
-            // 
-            this.bn_List.AddNewItem = null;
-            this.bn_List.CountItem = null;
-            this.bn_List.DeleteItem = null;
-            this.bn_List.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.bn_List.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btn_Add,
-            this.btn_Edit,
-            this.btn_Valid,
-            this.btn_Delete});
-            this.bn_List.Location = new System.Drawing.Point(0, 0);
-            this.bn_List.MoveFirstItem = null;
-            this.bn_List.MoveLastItem = null;
-            this.bn_List.MoveNextItem = null;
-            this.bn_List.MovePreviousItem = null;
-            this.bn_List.Name = "bn_List";
-            this.bn_List.PositionItem = null;
-            this.bn_List.Size = new System.Drawing.Size(874, 25);
-            this.bn_List.TabIndex = 46;
-            this.bn_List.Text = "Bill of materials";
-            // 
-            // btn_Add
-            // 
-            this.btn_Add.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btn_Add.Image = ((System.Drawing.Image)(resources.GetObject("btn_Add.Image")));
-            this.btn_Add.Name = "btn_Add";
-            this.btn_Add.RightToLeftAutoMirrorImage = true;
-            this.btn_Add.Size = new System.Drawing.Size(23, 22);
-            this.btn_Add.Text = "Add new";
-            this.btn_Add.Click += new System.EventHandler(this.btn_Add_Click);
-            // 
-            // btn_Edit
-            // 
-            this.btn_Edit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btn_Edit.Image = global::Odin.Global_Resourses.edit;
-            this.btn_Edit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_Edit.Name = "btn_Edit";
-            this.btn_Edit.Size = new System.Drawing.Size(23, 22);
-            this.btn_Edit.Text = "Edit selected line";
-            this.btn_Edit.Click += new System.EventHandler(this.btn_Edit_Click);
-            // 
-            // btn_Delete
-            // 
-            this.btn_Delete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btn_Delete.Image = ((System.Drawing.Image)(resources.GetObject("btn_Delete.Image")));
-            this.btn_Delete.Name = "btn_Delete";
-            this.btn_Delete.RightToLeftAutoMirrorImage = true;
-            this.btn_Delete.Size = new System.Drawing.Size(23, 22);
-            this.btn_Delete.Text = "Delete";
-            this.btn_Delete.Click += new System.EventHandler(this.btn_Delete_Click);
             // 
             // cn_analogid
             // 
@@ -299,6 +227,70 @@
             this.cn_allowtoreplace.Name = "cn_allowtoreplace";
             this.cn_allowtoreplace.Visible = false;
             // 
+            // kryptonPanel1
+            // 
+            this.kryptonPanel1.Controls.Add(this.btn_OK);
+            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.kryptonPanel1.Location = new System.Drawing.Point(0, 201);
+            this.kryptonPanel1.Name = "kryptonPanel1";
+            this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
+            this.kryptonPanel1.Size = new System.Drawing.Size(874, 56);
+            this.kryptonPanel1.TabIndex = 47;
+            // 
+            // btn_OK
+            // 
+            this.btn_OK.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btn_OK.Location = new System.Drawing.Point(773, 11);
+            this.btn_OK.Name = "btn_OK";
+            this.btn_OK.Size = new System.Drawing.Size(90, 34);
+            this.btn_OK.TabIndex = 5;
+            this.btn_OK.Values.Image = global::Odin.Global_Resourses.agt_reload24x24;
+            this.btn_OK.Values.Text = "Replace";
+            this.btn_OK.Click += new System.EventHandler(this.btn_OK_Click);
+            // 
+            // bn_List
+            // 
+            this.bn_List.AddNewItem = null;
+            this.bn_List.CountItem = null;
+            this.bn_List.DeleteItem = null;
+            this.bn_List.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.bn_List.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btn_Add,
+            this.btn_Edit,
+            this.btn_Valid,
+            this.btn_Copy,
+            this.btn_Delete});
+            this.bn_List.Location = new System.Drawing.Point(0, 0);
+            this.bn_List.MoveFirstItem = null;
+            this.bn_List.MoveLastItem = null;
+            this.bn_List.MoveNextItem = null;
+            this.bn_List.MovePreviousItem = null;
+            this.bn_List.Name = "bn_List";
+            this.bn_List.PositionItem = null;
+            this.bn_List.Size = new System.Drawing.Size(874, 25);
+            this.bn_List.TabIndex = 46;
+            this.bn_List.Text = "Bill of materials";
+            // 
+            // btn_Add
+            // 
+            this.btn_Add.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_Add.Image = ((System.Drawing.Image)(resources.GetObject("btn_Add.Image")));
+            this.btn_Add.Name = "btn_Add";
+            this.btn_Add.RightToLeftAutoMirrorImage = true;
+            this.btn_Add.Size = new System.Drawing.Size(23, 22);
+            this.btn_Add.Text = "Add new";
+            this.btn_Add.Click += new System.EventHandler(this.btn_Add_Click);
+            // 
+            // btn_Edit
+            // 
+            this.btn_Edit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_Edit.Image = global::Odin.Global_Resourses.edit;
+            this.btn_Edit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_Edit.Name = "btn_Edit";
+            this.btn_Edit.Size = new System.Drawing.Size(23, 22);
+            this.btn_Edit.Text = "Edit selected line";
+            this.btn_Edit.Click += new System.EventHandler(this.btn_Edit_Click);
+            // 
             // btn_Valid
             // 
             this.btn_Valid.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -308,6 +300,26 @@
             this.btn_Valid.Size = new System.Drawing.Size(23, 22);
             this.btn_Valid.Text = "Validate line";
             this.btn_Valid.Click += new System.EventHandler(this.btn_Valid_Click);
+            // 
+            // btn_Delete
+            // 
+            this.btn_Delete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_Delete.Image = ((System.Drawing.Image)(resources.GetObject("btn_Delete.Image")));
+            this.btn_Delete.Name = "btn_Delete";
+            this.btn_Delete.RightToLeftAutoMirrorImage = true;
+            this.btn_Delete.Size = new System.Drawing.Size(23, 22);
+            this.btn_Delete.Text = "Delete";
+            this.btn_Delete.Click += new System.EventHandler(this.btn_Delete_Click);
+            // 
+            // btn_Copy
+            // 
+            this.btn_Copy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_Copy.Image = global::Odin.Global_Resourses.Copy_16x16;
+            this.btn_Copy.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_Copy.Name = "btn_Copy";
+            this.btn_Copy.Size = new System.Drawing.Size(23, 22);
+            this.btn_Copy.Text = "Copy analog line";
+            this.btn_Copy.Click += new System.EventHandler(this.btn_Copy_Click);
             // 
             // frm_FindAnalogs
             // 
@@ -361,5 +373,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_productid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_allowtoreplace;
         private System.Windows.Forms.ToolStripButton btn_Valid;
+        private System.Windows.Forms.ToolStripButton btn_Copy;
     }
 }

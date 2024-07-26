@@ -82,6 +82,7 @@
             this.btn_Excel = new System.Windows.Forms.ToolStripButton();
             this.splitter2 = new BSE.Windows.Forms.Splitter();
             this.kryptonPanel3 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.chk_hidezero = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.cmb_Users1 = new Odin.CMB_Components.Users.cmb_Users();
@@ -119,7 +120,6 @@
             this.btn_FixedAssets = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.btn_Refresh = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.btn_Clear = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.chk_hidezero = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).BeginInit();
             this.mnu_Lines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
@@ -622,6 +622,14 @@
             this.kryptonPanel3.Size = new System.Drawing.Size(817, 329);
             this.kryptonPanel3.TabIndex = 1;
             // 
+            // chk_hidezero
+            // 
+            this.chk_hidezero.Location = new System.Drawing.Point(402, 183);
+            this.chk_hidezero.Name = "chk_hidezero";
+            this.chk_hidezero.Size = new System.Drawing.Size(111, 20);
+            this.chk_hidezero.TabIndex = 292;
+            this.chk_hidezero.Values.Text = "Hide zero prices";
+            // 
             // kryptonLabel7
             // 
             this.kryptonLabel7.Location = new System.Drawing.Point(8, 303);
@@ -733,7 +741,7 @@
             this.btn_FCSRefresh.Size = new System.Drawing.Size(101, 31);
             this.btn_FCSRefresh.TabIndex = 3;
             this.btn_FCSRefresh.Values.Image = global::Odin.Global_Resourses.reload_24x24;
-            this.btn_FCSRefresh.Values.Text = "2130";
+            this.btn_FCSRefresh.Values.Text = "43";
             this.btn_FCSRefresh.Click += new System.EventHandler(this.btn_FCSRefresh_Click);
             // 
             // btn_WIPRefresh
@@ -743,7 +751,7 @@
             this.btn_WIPRefresh.Size = new System.Drawing.Size(101, 31);
             this.btn_WIPRefresh.TabIndex = 2;
             this.btn_WIPRefresh.Values.Image = global::Odin.Global_Resourses.reload_24x24;
-            this.btn_WIPRefresh.Values.Text = "2120";
+            this.btn_WIPRefresh.Values.Text = "20";
             this.btn_WIPRefresh.Click += new System.EventHandler(this.btn_WIPRefresh_Click);
             // 
             // btn_OthersRefresh
@@ -763,7 +771,7 @@
             this.btn_RMRefresh.Size = new System.Drawing.Size(101, 31);
             this.btn_RMRefresh.TabIndex = 0;
             this.btn_RMRefresh.Values.Image = global::Odin.Global_Resourses.reload_24x24;
-            this.btn_RMRefresh.Values.Text = "2110";
+            this.btn_RMRefresh.Values.Text = "10.1";
             this.btn_RMRefresh.Click += new System.EventHandler(this.btn_RMRefresh_Click);
             // 
             // chk_WIP
@@ -1014,14 +1022,6 @@
             this.btn_Clear.Image = global::Odin.Global_Resourses.clear;
             this.btn_Clear.UniqueName = "3502D2542D5C42F0078623FF0A695273";
             this.btn_Clear.Click += new System.EventHandler(this.btn_Clear_Click);
-            // 
-            // chk_hidezero
-            // 
-            this.chk_hidezero.Location = new System.Drawing.Point(402, 183);
-            this.chk_hidezero.Name = "chk_hidezero";
-            this.chk_hidezero.Size = new System.Drawing.Size(111, 20);
-            this.chk_hidezero.TabIndex = 292;
-            this.chk_hidezero.Values.Text = "Hide zero prices";
             // 
             // frm_InventoryReport
             // 

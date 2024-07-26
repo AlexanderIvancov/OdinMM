@@ -120,14 +120,14 @@ namespace Odin.Warehouse.Reports
                 bn_List.BindingSource = bs_List;
             });
 
-            //crystalReportViewer1.ThreadSafeCall(delegate
-            //{
-            //    ReportDocument rd;
+            crystalReportViewer1.ThreadSafeCall(delegate
+            {
+                ReportDocument rd;
 
-            //    rd = OpenReport(data, "2110");
+                rd = OpenReport(data, "2110");
 
-            //    crystalReportViewer1.ReportSource = rd;
-            //});
+                crystalReportViewer1.ReportSource = rd;
+            });
 
         }
 
@@ -152,14 +152,14 @@ namespace Odin.Warehouse.Reports
                 bn_List.BindingSource = bs_List;
             });
 
-            //crystalReportViewer1.ThreadSafeCall(delegate
-            //{
-            //    ReportDocument rd;
+            crystalReportViewer1.ThreadSafeCall(delegate
+            {
+                ReportDocument rd;
 
-            //    rd = OpenReport(data, "2120");
+                rd = OpenReport(data, "2120");
 
-            //    crystalReportViewer1.ReportSource = rd;
-            //});
+                crystalReportViewer1.ReportSource = rd;
+            });
 
         }
 
@@ -184,14 +184,14 @@ namespace Odin.Warehouse.Reports
                 bn_List.BindingSource = bs_List;
             });
 
-            //crystalReportViewer1.ThreadSafeCall(delegate
-            //{
-            //    ReportDocument rd;
+            crystalReportViewer1.ThreadSafeCall(delegate
+            {
+                ReportDocument rd;
 
-            //    rd = OpenReport(data, "2130");
+                rd = OpenReport(data, "2130");
 
-            //    crystalReportViewer1.ReportSource = rd;
-            //});
+                crystalReportViewer1.ReportSource = rd;
+            });
 
         }
 
