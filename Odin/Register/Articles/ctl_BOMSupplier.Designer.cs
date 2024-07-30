@@ -34,6 +34,7 @@
             this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.ArtID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Article = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.position = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SecName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Analog = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -85,6 +86,7 @@
             this.ArtID,
             this.Article,
             this.SecName,
+            this.position,
             this.Analog,
             this.Qty,
             this.DateCreation,
@@ -117,6 +119,12 @@
             this.SecName.DataPropertyName = "SecName";
             this.SecName.HeaderText = "SecName";
             this.SecName.Name = "SecName";
+            // 
+            // SecName
+            // 
+            this.position.DataPropertyName = "position";
+            this.position.HeaderText = "position";
+            this.position.Name = "position";
             // 
             // Analog
             // 
@@ -267,6 +275,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ArtID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Article;
         private System.Windows.Forms.DataGridViewTextBoxColumn SecName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn position;
         private System.Windows.Forms.DataGridViewTextBoxColumn Analog;
         private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn DateCreation;
