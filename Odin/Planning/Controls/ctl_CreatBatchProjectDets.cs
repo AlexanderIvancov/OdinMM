@@ -757,7 +757,7 @@ namespace Odin.Planning.Controls
                 else
                 {
                     //Creation of header of new batch
-                    int _id = PlanBll.AddBatchProjectHeader(ArticleId, QtyInBatch, Comments, StartDate, (QuotId == 0 ? 0 : -1), ResDate);
+                    int _id = PlanBll.AddBatchProjectHeader(ArticleId, QtyInBatch, Comments, StartDate, (QuotId == 0 ? 0 : -1), ResDate, 0);
                     if (_id != 0)
                     {
                         //Creation of the link between Client order and batch
@@ -805,7 +805,7 @@ namespace Odin.Planning.Controls
                         )
                     {
                         //Header
-                        PlanBll.EditBatchProjectHeader(BatchId, ArticleId, QtyInBatch, Comments, StartDate, ResDate);
+                        PlanBll.EditBatchProjectHeader(BatchId, ArticleId, QtyInBatch, Comments, StartDate, ResDate, 0);
 
                     }
                     if (QtyInBatch != fOldQtyInBatch

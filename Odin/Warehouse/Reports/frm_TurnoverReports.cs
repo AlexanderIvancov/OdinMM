@@ -124,7 +124,7 @@ namespace Odin.Warehouse.Reports
             {
                 ReportDocument rd;
 
-                rd = OpenReport(data, "2110");
+                rd = OpenReport(data, "Счет 10.1");
 
                 crystalReportViewer1.ReportSource = rd;
             });
@@ -156,7 +156,7 @@ namespace Odin.Warehouse.Reports
             {
                 ReportDocument rd;
 
-                rd = OpenReport(data, "2120");
+                rd = OpenReport(data, "Счет 20");
 
                 crystalReportViewer1.ReportSource = rd;
             });
@@ -188,7 +188,7 @@ namespace Odin.Warehouse.Reports
             {
                 ReportDocument rd;
 
-                rd = OpenReport(data, "2130");
+                rd = OpenReport(data, "Счет 43");
 
                 crystalReportViewer1.ReportSource = rd;
             });

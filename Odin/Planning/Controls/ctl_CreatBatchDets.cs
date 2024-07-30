@@ -847,7 +847,7 @@ namespace Odin.Planning.Controls
                 else
                 {
                     //Creation of header of new batch
-                    int _id = PlanBll.AddBatchHeader("", ArticleId, QtyInBatch, StartDate, Comments, 0, 0, EndDate, Urgent);
+                    int _id = PlanBll.AddBatchHeader("", ArticleId, QtyInBatch, StartDate, Comments, 0, 0, EndDate, Urgent, 0);
                     if (_id != 0)
                     {
                         //Creation of the link between Client order and batch
@@ -897,7 +897,7 @@ namespace Odin.Planning.Controls
                         || Urgent != fOldUrgent)
                     {
                         //Header
-                        PlanBll.EditBatchHeader(BatchId, ArticleId, QtyInBatch, StartDate, Comments, EndDate, Urgent, "");
+                        PlanBll.EditBatchHeader(BatchId, ArticleId, QtyInBatch, StartDate, Comments, EndDate, Urgent, "", 0);
 
                     }
                         //Delete temporary deleted links
@@ -933,7 +933,7 @@ namespace Odin.Planning.Controls
                             if (Convert.ToInt32(row.Cells["cn_nChildBatchId"].Value) != 0
                                 && Convert.ToDouble(row.Cells["cn_nQtyInBatch"].Value) != Convert.ToDouble(row.Cells["cn_nQtyDefOldB"].Value))
                             {
-                                PlanBll.EditBatchHeader(Convert.ToInt32(row.Cells["cn_nChildBatchId"].Value), Convert.ToInt32(row.Cells["cn_nArtId"].Value), Convert.ToInt32(row.Cells["cn_nQtyInBatch"].Value), StartDate, "", EndDate, Urgent, Serials);
+                                PlanBll.EditBatchHeader(Convert.ToInt32(row.Cells["cn_nChildBatchId"].Value), Convert.ToInt32(row.Cells["cn_nArtId"].Value), Convert.ToInt32(row.Cells["cn_nQtyInBatch"].Value), StartDate, "", EndDate, Urgent, Serials, 0);
                             }
 
                             //if (Convert.ToDouble(row.Cells["cn_nQtyInBatch"].Value) != Convert.ToDouble(row.Cells["cn_nQtyDefOldB"].Value))
@@ -988,7 +988,7 @@ namespace Odin.Planning.Controls
                 {
                     //MessageBox.Show(_Batch);
                     //Sozdaem podpartiju
-                    _IdSB = PlanBll.AddBatchHeader(_Batch, Convert.ToInt32(node.Cells["cn_nArtId"].Value), glob_Class.NEN_Double(node.Cells[7].Value.ToString()), StartDate, "Sub-Batch for batch id: " + _BatchId.ToString(), _BatchId, _BatchDetId, EndDate, Urgent);
+                    _IdSB = PlanBll.AddBatchHeader(_Batch, Convert.ToInt32(node.Cells["cn_nArtId"].Value), glob_Class.NEN_Double(node.Cells[7].Value.ToString()), StartDate, "Sub-Batch for batch id: " + _BatchId.ToString(), _BatchId, _BatchDetId, EndDate, Urgent, 0);
                     //details
                     if (_IdSB != 0)
                     {

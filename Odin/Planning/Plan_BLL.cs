@@ -64,7 +64,7 @@ namespace Odin.Planning
             return Helper.QueryDT("execute sp_SelectBatchNomenclatureNew @batchid = " + batchid);
         }
 
-        public int AddBatchHeader(string BatchName1, int ArtId, double Qty, string ResDate, string Comments, int ParentBatchId, int ChildBatchId, string EndDate, int Urgent)
+        public int AddBatchHeader(string BatchName1, int ArtId, double Qty, string ResDate, string Comments, int ParentBatchId, int ChildBatchId, string EndDate, int Urgent, int ProdPlaceId)
         {
             int _res = 0;
             SqlConnection sqlConn = new SqlConnection(sConnStr);
@@ -82,6 +82,7 @@ namespace Odin.Planning
             sqlComm.Parameters.AddWithValue("@ChildBatchId", ChildBatchId);
             sqlComm.Parameters.AddWithValue("@EndDate", EndDate);
             sqlComm.Parameters.AddWithValue("@Urgent", Urgent);
+            sqlComm.Parameters.AddWithValue("@ProdPlaceId", ProdPlaceId);
             sqlComm.Parameters.Add("@insertedname", SqlDbType.NVarChar, 25).Direction = ParameterDirection.Output;
             sqlComm.Parameters.Add("@insertedid", SqlDbType.Int).Direction = ParameterDirection.Output;
             //try
@@ -96,7 +97,7 @@ namespace Odin.Planning
             return _res;
         }
 
-        public void EditBatchHeader(int BatchId, int ArtId, double Qty, string ResDate, string Comments, string EndDate, int Urgent, string Serials)
+        public void EditBatchHeader(int BatchId, int ArtId, double Qty, string ResDate, string Comments, string EndDate, int Urgent, string Serials, int ProdPlaceId)
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_editbatchheader", sqlConn);
@@ -111,7 +112,7 @@ namespace Odin.Planning
             sqlComm.Parameters.AddWithValue("@EndDate", EndDate);
             sqlComm.Parameters.AddWithValue("@Urgent", Urgent);
             sqlComm.Parameters.AddWithValue("@SerialNumbers", Serials);
-
+            sqlComm.Parameters.AddWithValue("@ProdPlaceId", ProdPlaceId);
             //try
             //{
             sqlConn.Open();
@@ -121,7 +122,7 @@ namespace Odin.Planning
             //catch { }
         }
 
-        public void EditBatchHeaderP(int BatchId, int ArtId, string ResDate, string Comments, int Urgent, string Serials)
+        public void EditBatchHeaderP(int BatchId, int ArtId, string ResDate, string Comments, int Urgent, string Serials, int ProdPlaceId)
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_editbatchheaderfromproject", sqlConn);
@@ -134,7 +135,7 @@ namespace Odin.Planning
             sqlComm.Parameters.AddWithValue("@Comments", Comments);
             sqlComm.Parameters.AddWithValue("@Urgent", Urgent);
             sqlComm.Parameters.AddWithValue("@SerialNumbers", Serials);
-
+            sqlComm.Parameters.AddWithValue("@ProdPlaceId", ProdPlaceId);
             //try
             //{
             sqlConn.Open();
@@ -2034,7 +2035,7 @@ namespace Odin.Planning
             set { _ProjectName = value; }
         }
 
-        public int AddBatchProjectHeader(int ArtId, double Qty, string Comments, string StartDate, int IsQuot, string ResDate)
+        public int AddBatchProjectHeader(int ArtId, double Qty, string Comments, string StartDate, int IsQuot, string ResDate, int ProdPlaceId)
         {
             int _res = 0;
             SqlConnection sqlConn = new SqlConnection(sConnStr);
@@ -2049,6 +2050,8 @@ namespace Odin.Planning
             sqlComm.Parameters.AddWithValue("@StartDate", StartDate);
             sqlComm.Parameters.AddWithValue("@IsQuot", IsQuot);
             sqlComm.Parameters.AddWithValue("@ResDate", ResDate);
+            sqlComm.Parameters.AddWithValue("@ProdPlaceId", ProdPlaceId);
+
             sqlComm.Parameters.Add("@insertedname", SqlDbType.NVarChar, 25).Direction = ParameterDirection.Output;
             sqlComm.Parameters.Add("@insertedid", SqlDbType.Int).Direction = ParameterDirection.Output;
             //try
@@ -2063,7 +2066,7 @@ namespace Odin.Planning
             return _res;
         }
 
-        public void EditBatchProjectHeader(int BatchId, int ArtId, double Qty, string Comments, string StartDate, string ResDate)
+        public void EditBatchProjectHeader(int BatchId, int ArtId, double Qty, string Comments, string StartDate, string ResDate, int ProdPlaceId)
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_editbatchprojectheader", sqlConn);
@@ -2076,7 +2079,7 @@ namespace Odin.Planning
             sqlComm.Parameters.AddWithValue("@Comments", Comments);
             sqlComm.Parameters.AddWithValue("@StartDate", StartDate);
             sqlComm.Parameters.AddWithValue("@ResDate", ResDate);
-
+            sqlComm.Parameters.AddWithValue("@ProdPlaceId", ProdPlaceId);
             //try
             //{
             sqlConn.Open();
@@ -2141,7 +2144,7 @@ namespace Odin.Planning
             return Helper.QueryDT(query);
         }
 
-        public int AddBatchHeaderFromProject(int ProjectId, int ArtId, double Qty, string ResDate, string Comments, int Urgent, string Serials)
+        public int AddBatchHeaderFromProject(int ProjectId, int ArtId, double Qty, string ResDate, string Comments, int Urgent, string Serials, int ProdPlaceId)
         {
             int _res = 0;
             SqlConnection sqlConn = new SqlConnection(sConnStr);
@@ -2157,6 +2160,7 @@ namespace Odin.Planning
             sqlComm.Parameters.AddWithValue("@Comments", Comments);
             sqlComm.Parameters.AddWithValue("@Urgent", Urgent);
             sqlComm.Parameters.AddWithValue("@SerialNumbers", Serials);
+            sqlComm.Parameters.AddWithValue("@ProdPlaceId", ProdPlaceId);
             sqlComm.Parameters.Add("@insertedname", SqlDbType.NVarChar, 25).Direction = ParameterDirection.Output;
             sqlComm.Parameters.Add("@insertedid", SqlDbType.Int).Direction = ParameterDirection.Output;
             //try

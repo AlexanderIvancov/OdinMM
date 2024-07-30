@@ -1047,7 +1047,7 @@ namespace Odin.Planning.Controls
                     else
                     {
                         //Creation of header of new batch
-                        int _id = PlanBll.AddBatchHeaderFromProject(ProjectId, ArticleId, QtyInBatch, StartDate, Comments, Urgent, Serials);
+                        int _id = PlanBll.AddBatchHeaderFromProject(ProjectId, ArticleId, QtyInBatch, StartDate, Comments, Urgent, Serials, 0);
                         if (_id != 0)
                         {
                             DataTable datadets = new DataTable();
@@ -1123,7 +1123,7 @@ namespace Odin.Planning.Controls
                         || Urgent != fOldUrgent)
                     {
                         //Header
-                        PlanBll.EditBatchHeaderP(BatchId, ArticleId, StartDate, Comments, Urgent, Serials);
+                        PlanBll.EditBatchHeaderP(BatchId, ArticleId, StartDate, Comments, Urgent, Serials, 0);
 
                     }
 
