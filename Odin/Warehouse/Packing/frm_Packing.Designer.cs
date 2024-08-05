@@ -40,6 +40,9 @@
             this.btn_AddOrder = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.kryptonSplitContainer2 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
+            this.txt_ClosingDate = new Odin.CustomControls.NullableDateTimePicker();
+            this.buttonSpecAny5 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_boxid = new Owf.Controls.NumericTetxBox();
             this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -60,6 +63,32 @@
             this.btn_Refresh = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.btn_Clear = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.mnu_Lines = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mni_FilterFor = new System.Windows.Forms.ToolStripTextBox();
+            this.mni_Search = new System.Windows.Forms.ToolStripMenuItem();
+            this.mni_FilterBy = new System.Windows.Forms.ToolStripMenuItem();
+            this.mni_FilterExcludingSel = new System.Windows.Forms.ToolStripMenuItem();
+            this.mni_RemoveFilter = new System.Windows.Forms.ToolStripMenuItem();
+            this.mni_Copy = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.mni_Admin = new System.Windows.Forms.ToolStripMenuItem();
+            this.bn_List = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
+            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.btn_Delete = new System.Windows.Forms.ToolStripButton();
+            this.btn_Excel = new System.Windows.Forms.ToolStripButton();
+            this.kryptonDockableWorkspace1 = new ComponentFactory.Krypton.Docking.KryptonDockableWorkspace();
+            this.buttonSpecAny1 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.kryptonDockingManager1 = new ComponentFactory.Krypton.Docking.KryptonDockingManager();
+            this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
+            this.bs_List = new Odin.Global_Classes.SyncBindingSource();
             this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_package = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_boxno = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -89,35 +118,7 @@
             this.cn_closedplace = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_additcontent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_headid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mnu_Lines = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mni_FilterFor = new System.Windows.Forms.ToolStripTextBox();
-            this.mni_Search = new System.Windows.Forms.ToolStripMenuItem();
-            this.mni_FilterBy = new System.Windows.Forms.ToolStripMenuItem();
-            this.mni_FilterExcludingSel = new System.Windows.Forms.ToolStripMenuItem();
-            this.mni_RemoveFilter = new System.Windows.Forms.ToolStripMenuItem();
-            this.mni_Copy = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.mni_Admin = new System.Windows.Forms.ToolStripMenuItem();
-            this.bn_List = new System.Windows.Forms.BindingNavigator(this.components);
-            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.btn_Delete = new System.Windows.Forms.ToolStripButton();
-            this.btn_Excel = new System.Windows.Forms.ToolStripButton();
-            this.kryptonDockableWorkspace1 = new ComponentFactory.Krypton.Docking.KryptonDockableWorkspace();
-            this.buttonSpecAny1 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.kryptonDockingManager1 = new ComponentFactory.Krypton.Docking.KryptonDockingManager();
-            this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
-            this.bs_List = new Odin.Global_Classes.SyncBindingSource();
-            this.txt_ClosingDate = new Odin.CustomControls.NullableDateTimePicker();
-            this.buttonSpecAny5 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.cn_incomedoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
@@ -270,6 +271,33 @@
             this.kryptonSplitContainer2.Size = new System.Drawing.Size(1018, 449);
             this.kryptonSplitContainer2.SplitterDistance = 313;
             this.kryptonSplitContainer2.TabIndex = 0;
+            // 
+            // txt_ClosingDate
+            // 
+            this.txt_ClosingDate.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
+            this.buttonSpecAny5});
+            this.txt_ClosingDate.CalendarShowWeekNumbers = true;
+            this.txt_ClosingDate.CustomFormat = null;
+            this.txt_ClosingDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.txt_ClosingDate.Location = new System.Drawing.Point(94, 249);
+            this.txt_ClosingDate.Name = "txt_ClosingDate";
+            this.txt_ClosingDate.NullValue = " ";
+            this.txt_ClosingDate.Size = new System.Drawing.Size(105, 21);
+            this.txt_ClosingDate.TabIndex = 295;
+            this.txt_ClosingDate.DropDown += new System.EventHandler<ComponentFactory.Krypton.Toolkit.DateTimePickerDropArgs>(this.txt_ClosingDate_DropDown);
+            // 
+            // buttonSpecAny5
+            // 
+            this.buttonSpecAny5.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Context;
+            this.buttonSpecAny5.UniqueName = "E61697DA9D484B901DB9E49E0F0EE20E";
+            // 
+            // kryptonLabel8
+            // 
+            this.kryptonLabel8.Location = new System.Drawing.Point(8, 249);
+            this.kryptonLabel8.Name = "kryptonLabel8";
+            this.kryptonLabel8.Size = new System.Drawing.Size(81, 20);
+            this.kryptonLabel8.TabIndex = 294;
+            this.kryptonLabel8.Values.Text = "Closing date:";
             // 
             // kryptonLabel6
             // 
@@ -532,7 +560,8 @@
             this.cn_closedby,
             this.cn_closedplace,
             this.cn_additcontent,
-            this.cn_headid});
+            this.cn_headid,
+            this.cn_incomedoc});
             this.gv_List.ContextMenuStrip = this.mnu_Lines;
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_List.Location = new System.Drawing.Point(0, 0);
@@ -540,225 +569,6 @@
             this.gv_List.RowHeadersWidth = 25;
             this.gv_List.Size = new System.Drawing.Size(700, 424);
             this.gv_List.TabIndex = 7;
-            // 
-            // cn_id
-            // 
-            this.cn_id.DataPropertyName = "id";
-            this.cn_id.FillWeight = 5F;
-            this.cn_id.HeaderText = "id";
-            this.cn_id.Name = "cn_id";
-            this.cn_id.ReadOnly = true;
-            this.cn_id.Visible = false;
-            this.cn_id.Width = 5;
-            // 
-            // cn_package
-            // 
-            this.cn_package.DataPropertyName = "package";
-            this.cn_package.HeaderText = "Package";
-            this.cn_package.Name = "cn_package";
-            this.cn_package.ReadOnly = true;
-            // 
-            // cn_boxno
-            // 
-            this.cn_boxno.DataPropertyName = "boxno";
-            this.cn_boxno.FillWeight = 50F;
-            this.cn_boxno.HeaderText = "Box NO.";
-            this.cn_boxno.Name = "cn_boxno";
-            this.cn_boxno.ReadOnly = true;
-            this.cn_boxno.Width = 50;
-            // 
-            // cn_batch
-            // 
-            this.cn_batch.DataPropertyName = "batch";
-            this.cn_batch.HeaderText = "Batch";
-            this.cn_batch.Name = "cn_batch";
-            this.cn_batch.ReadOnly = true;
-            // 
-            // cn_qty
-            // 
-            this.cn_qty.DataPropertyName = "qty";
-            this.cn_qty.FillWeight = 70F;
-            this.cn_qty.HeaderText = "Qty in box";
-            this.cn_qty.Name = "cn_qty";
-            this.cn_qty.ReadOnly = true;
-            this.cn_qty.Width = 70;
-            // 
-            // cn_artid
-            // 
-            this.cn_artid.DataPropertyName = "artid";
-            this.cn_artid.FillWeight = 60F;
-            this.cn_artid.HeaderText = "Art. ID";
-            this.cn_artid.Name = "cn_artid";
-            this.cn_artid.Width = 60;
-            // 
-            // cn_article
-            // 
-            this.cn_article.DataPropertyName = "article";
-            this.cn_article.FillWeight = 120F;
-            this.cn_article.HeaderText = "Article";
-            this.cn_article.Name = "cn_article";
-            this.cn_article.ReadOnly = true;
-            this.cn_article.Width = 120;
-            // 
-            // cn_custcode
-            // 
-            this.cn_custcode.DataPropertyName = "custcode";
-            this.cn_custcode.HeaderText = "Custom\'s code";
-            this.cn_custcode.Name = "cn_custcode";
-            // 
-            // cn_coid
-            // 
-            this.cn_coid.DataPropertyName = "coid";
-            this.cn_coid.FillWeight = 80F;
-            this.cn_coid.HeaderText = "coid";
-            this.cn_coid.Name = "cn_coid";
-            this.cn_coid.ReadOnly = true;
-            this.cn_coid.Visible = false;
-            this.cn_coid.Width = 80;
-            // 
-            // cn_custarticle
-            // 
-            this.cn_custarticle.DataPropertyName = "custarticle";
-            this.cn_custarticle.FillWeight = 150F;
-            this.cn_custarticle.HeaderText = "Cust. article";
-            this.cn_custarticle.Name = "cn_custarticle";
-            this.cn_custarticle.ReadOnly = true;
-            this.cn_custarticle.Width = 150;
-            // 
-            // cn_dconforder
-            // 
-            this.cn_dconforder.DataPropertyName = "conforder";
-            this.cn_dconforder.HeaderText = "Conf. order";
-            this.cn_dconforder.Name = "cn_dconforder";
-            this.cn_dconforder.ReadOnly = true;
-            // 
-            // cn_custorder
-            // 
-            this.cn_custorder.DataPropertyName = "custorder";
-            this.cn_custorder.HeaderText = "Customer\'s order";
-            this.cn_custorder.Name = "cn_custorder";
-            this.cn_custorder.ReadOnly = true;
-            // 
-            // cn_dclient
-            // 
-            this.cn_dclient.DataPropertyName = "client";
-            this.cn_dclient.FillWeight = 120F;
-            this.cn_dclient.HeaderText = "Customer";
-            this.cn_dclient.Name = "cn_dclient";
-            this.cn_dclient.ReadOnly = true;
-            this.cn_dclient.Width = 120;
-            // 
-            // cn_dunit
-            // 
-            this.cn_dunit.DataPropertyName = "unit";
-            this.cn_dunit.FillWeight = 40F;
-            this.cn_dunit.HeaderText = "Unit";
-            this.cn_dunit.Name = "cn_dunit";
-            this.cn_dunit.ReadOnly = true;
-            this.cn_dunit.Width = 40;
-            // 
-            // cn_ddelivplace
-            // 
-            this.cn_ddelivplace.DataPropertyName = "delivplace";
-            this.cn_ddelivplace.FillWeight = 150F;
-            this.cn_ddelivplace.HeaderText = "Deliv. place";
-            this.cn_ddelivplace.Name = "cn_ddelivplace";
-            this.cn_ddelivplace.ReadOnly = true;
-            this.cn_ddelivplace.Width = 150;
-            // 
-            // cn_daddress
-            // 
-            this.cn_daddress.DataPropertyName = "delivaddress";
-            this.cn_daddress.FillWeight = 125F;
-            this.cn_daddress.HeaderText = "Deliv. address";
-            this.cn_daddress.Name = "cn_daddress";
-            this.cn_daddress.ReadOnly = true;
-            this.cn_daddress.Width = 125;
-            // 
-            // cn_weight
-            // 
-            this.cn_weight.DataPropertyName = "weight";
-            this.cn_weight.HeaderText = "Weight";
-            this.cn_weight.Name = "cn_weight";
-            this.cn_weight.ReadOnly = true;
-            // 
-            // cn_inid
-            // 
-            this.cn_inid.DataPropertyName = "inid";
-            this.cn_inid.HeaderText = "inid";
-            this.cn_inid.Name = "cn_inid";
-            this.cn_inid.Visible = false;
-            // 
-            // cn_comments
-            // 
-            this.cn_comments.DataPropertyName = "comments";
-            this.cn_comments.FillWeight = 150F;
-            this.cn_comments.HeaderText = "Comments";
-            this.cn_comments.Name = "cn_comments";
-            this.cn_comments.Width = 150;
-            // 
-            // cn_batchid
-            // 
-            this.cn_batchid.DataPropertyName = "batchid";
-            this.cn_batchid.HeaderText = "batchid";
-            this.cn_batchid.Name = "cn_batchid";
-            this.cn_batchid.Visible = false;
-            // 
-            // cn_delivnote
-            // 
-            this.cn_delivnote.DataPropertyName = "delivnote";
-            this.cn_delivnote.HeaderText = "Deliv. note";
-            this.cn_delivnote.Name = "cn_delivnote";
-            // 
-            // cn_finaldestination
-            // 
-            this.cn_finaldestination.DataPropertyName = "finaldestination";
-            this.cn_finaldestination.HeaderText = "Final destination";
-            this.cn_finaldestination.Name = "cn_finaldestination";
-            // 
-            // cn_state
-            // 
-            this.cn_state.DataPropertyName = "state";
-            this.cn_state.HeaderText = "State";
-            this.cn_state.Name = "cn_state";
-            // 
-            // cn_delivid
-            // 
-            this.cn_delivid.DataPropertyName = "delivid";
-            this.cn_delivid.HeaderText = "delivid";
-            this.cn_delivid.Name = "cn_delivid";
-            this.cn_delivid.Visible = false;
-            // 
-            // cn_closedat
-            // 
-            this.cn_closedat.DataPropertyName = "closedat";
-            this.cn_closedat.HeaderText = "Closed at";
-            this.cn_closedat.Name = "cn_closedat";
-            // 
-            // cn_closedby
-            // 
-            this.cn_closedby.DataPropertyName = "closedby";
-            this.cn_closedby.HeaderText = "Closed by";
-            this.cn_closedby.Name = "cn_closedby";
-            // 
-            // cn_closedplace
-            // 
-            this.cn_closedplace.DataPropertyName = "closedplace";
-            this.cn_closedplace.HeaderText = "Place of closing";
-            this.cn_closedplace.Name = "cn_closedplace";
-            // 
-            // cn_additcontent
-            // 
-            this.cn_additcontent.DataPropertyName = "addcontent";
-            this.cn_additcontent.HeaderText = "Add. content";
-            this.cn_additcontent.Name = "cn_additcontent";
-            // 
-            // cn_headid
-            // 
-            this.cn_headid.DataPropertyName = "headid";
-            this.cn_headid.HeaderText = "headid";
-            this.cn_headid.Name = "cn_headid";
-            this.cn_headid.Visible = false;
             // 
             // mnu_Lines
             // 
@@ -986,32 +796,230 @@
             // 
             this.kryptonManager1.GlobalPaletteMode = ComponentFactory.Krypton.Toolkit.PaletteModeManager.Office2010Silver;
             // 
-            // txt_ClosingDate
+            // cn_id
             // 
-            this.txt_ClosingDate.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
-            this.buttonSpecAny5});
-            this.txt_ClosingDate.CalendarShowWeekNumbers = true;
-            this.txt_ClosingDate.CustomFormat = null;
-            this.txt_ClosingDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.txt_ClosingDate.Location = new System.Drawing.Point(94, 249);
-            this.txt_ClosingDate.Name = "txt_ClosingDate";
-            this.txt_ClosingDate.NullValue = " ";
-            this.txt_ClosingDate.Size = new System.Drawing.Size(105, 21);
-            this.txt_ClosingDate.TabIndex = 295;
-            this.txt_ClosingDate.DropDown += new System.EventHandler<ComponentFactory.Krypton.Toolkit.DateTimePickerDropArgs>(this.txt_ClosingDate_DropDown);
+            this.cn_id.DataPropertyName = "id";
+            this.cn_id.FillWeight = 5F;
+            this.cn_id.HeaderText = "id";
+            this.cn_id.Name = "cn_id";
+            this.cn_id.ReadOnly = true;
+            this.cn_id.Visible = false;
+            this.cn_id.Width = 5;
             // 
-            // buttonSpecAny5
+            // cn_package
             // 
-            this.buttonSpecAny5.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Context;
-            this.buttonSpecAny5.UniqueName = "E61697DA9D484B901DB9E49E0F0EE20E";
+            this.cn_package.DataPropertyName = "package";
+            this.cn_package.HeaderText = "Package";
+            this.cn_package.Name = "cn_package";
+            this.cn_package.ReadOnly = true;
             // 
-            // kryptonLabel8
+            // cn_boxno
             // 
-            this.kryptonLabel8.Location = new System.Drawing.Point(8, 249);
-            this.kryptonLabel8.Name = "kryptonLabel8";
-            this.kryptonLabel8.Size = new System.Drawing.Size(81, 20);
-            this.kryptonLabel8.TabIndex = 294;
-            this.kryptonLabel8.Values.Text = "Closing date:";
+            this.cn_boxno.DataPropertyName = "boxno";
+            this.cn_boxno.FillWeight = 50F;
+            this.cn_boxno.HeaderText = "Box NO.";
+            this.cn_boxno.Name = "cn_boxno";
+            this.cn_boxno.ReadOnly = true;
+            this.cn_boxno.Width = 50;
+            // 
+            // cn_batch
+            // 
+            this.cn_batch.DataPropertyName = "batch";
+            this.cn_batch.HeaderText = "Batch";
+            this.cn_batch.Name = "cn_batch";
+            this.cn_batch.ReadOnly = true;
+            // 
+            // cn_qty
+            // 
+            this.cn_qty.DataPropertyName = "qty";
+            this.cn_qty.FillWeight = 70F;
+            this.cn_qty.HeaderText = "Qty in box";
+            this.cn_qty.Name = "cn_qty";
+            this.cn_qty.ReadOnly = true;
+            this.cn_qty.Width = 70;
+            // 
+            // cn_artid
+            // 
+            this.cn_artid.DataPropertyName = "artid";
+            this.cn_artid.FillWeight = 60F;
+            this.cn_artid.HeaderText = "Art. ID";
+            this.cn_artid.Name = "cn_artid";
+            this.cn_artid.Width = 60;
+            // 
+            // cn_article
+            // 
+            this.cn_article.DataPropertyName = "article";
+            this.cn_article.FillWeight = 120F;
+            this.cn_article.HeaderText = "Article";
+            this.cn_article.Name = "cn_article";
+            this.cn_article.ReadOnly = true;
+            this.cn_article.Width = 120;
+            // 
+            // cn_custcode
+            // 
+            this.cn_custcode.DataPropertyName = "custcode";
+            this.cn_custcode.HeaderText = "Custom\'s code";
+            this.cn_custcode.Name = "cn_custcode";
+            // 
+            // cn_coid
+            // 
+            this.cn_coid.DataPropertyName = "coid";
+            this.cn_coid.FillWeight = 80F;
+            this.cn_coid.HeaderText = "coid";
+            this.cn_coid.Name = "cn_coid";
+            this.cn_coid.ReadOnly = true;
+            this.cn_coid.Visible = false;
+            this.cn_coid.Width = 80;
+            // 
+            // cn_custarticle
+            // 
+            this.cn_custarticle.DataPropertyName = "custarticle";
+            this.cn_custarticle.FillWeight = 150F;
+            this.cn_custarticle.HeaderText = "Cust. article";
+            this.cn_custarticle.Name = "cn_custarticle";
+            this.cn_custarticle.ReadOnly = true;
+            this.cn_custarticle.Width = 150;
+            // 
+            // cn_dconforder
+            // 
+            this.cn_dconforder.DataPropertyName = "conforder";
+            this.cn_dconforder.HeaderText = "Conf. order";
+            this.cn_dconforder.Name = "cn_dconforder";
+            this.cn_dconforder.ReadOnly = true;
+            // 
+            // cn_custorder
+            // 
+            this.cn_custorder.DataPropertyName = "custorder";
+            this.cn_custorder.HeaderText = "Customer\'s order";
+            this.cn_custorder.Name = "cn_custorder";
+            this.cn_custorder.ReadOnly = true;
+            // 
+            // cn_dclient
+            // 
+            this.cn_dclient.DataPropertyName = "client";
+            this.cn_dclient.FillWeight = 120F;
+            this.cn_dclient.HeaderText = "Customer";
+            this.cn_dclient.Name = "cn_dclient";
+            this.cn_dclient.ReadOnly = true;
+            this.cn_dclient.Width = 120;
+            // 
+            // cn_dunit
+            // 
+            this.cn_dunit.DataPropertyName = "unit";
+            this.cn_dunit.FillWeight = 40F;
+            this.cn_dunit.HeaderText = "Unit";
+            this.cn_dunit.Name = "cn_dunit";
+            this.cn_dunit.ReadOnly = true;
+            this.cn_dunit.Width = 40;
+            // 
+            // cn_ddelivplace
+            // 
+            this.cn_ddelivplace.DataPropertyName = "delivplace";
+            this.cn_ddelivplace.FillWeight = 150F;
+            this.cn_ddelivplace.HeaderText = "Deliv. place";
+            this.cn_ddelivplace.Name = "cn_ddelivplace";
+            this.cn_ddelivplace.ReadOnly = true;
+            this.cn_ddelivplace.Width = 150;
+            // 
+            // cn_daddress
+            // 
+            this.cn_daddress.DataPropertyName = "delivaddress";
+            this.cn_daddress.FillWeight = 125F;
+            this.cn_daddress.HeaderText = "Deliv. address";
+            this.cn_daddress.Name = "cn_daddress";
+            this.cn_daddress.ReadOnly = true;
+            this.cn_daddress.Width = 125;
+            // 
+            // cn_weight
+            // 
+            this.cn_weight.DataPropertyName = "weight";
+            this.cn_weight.HeaderText = "Weight";
+            this.cn_weight.Name = "cn_weight";
+            this.cn_weight.ReadOnly = true;
+            // 
+            // cn_inid
+            // 
+            this.cn_inid.DataPropertyName = "inid";
+            this.cn_inid.HeaderText = "inid";
+            this.cn_inid.Name = "cn_inid";
+            this.cn_inid.Visible = false;
+            // 
+            // cn_comments
+            // 
+            this.cn_comments.DataPropertyName = "comments";
+            this.cn_comments.FillWeight = 150F;
+            this.cn_comments.HeaderText = "Comments";
+            this.cn_comments.Name = "cn_comments";
+            this.cn_comments.Width = 150;
+            // 
+            // cn_batchid
+            // 
+            this.cn_batchid.DataPropertyName = "batchid";
+            this.cn_batchid.HeaderText = "batchid";
+            this.cn_batchid.Name = "cn_batchid";
+            this.cn_batchid.Visible = false;
+            // 
+            // cn_delivnote
+            // 
+            this.cn_delivnote.DataPropertyName = "delivnote";
+            this.cn_delivnote.HeaderText = "Deliv. note";
+            this.cn_delivnote.Name = "cn_delivnote";
+            // 
+            // cn_finaldestination
+            // 
+            this.cn_finaldestination.DataPropertyName = "finaldestination";
+            this.cn_finaldestination.HeaderText = "Final destination";
+            this.cn_finaldestination.Name = "cn_finaldestination";
+            // 
+            // cn_state
+            // 
+            this.cn_state.DataPropertyName = "state";
+            this.cn_state.HeaderText = "State";
+            this.cn_state.Name = "cn_state";
+            // 
+            // cn_delivid
+            // 
+            this.cn_delivid.DataPropertyName = "delivid";
+            this.cn_delivid.HeaderText = "delivid";
+            this.cn_delivid.Name = "cn_delivid";
+            this.cn_delivid.Visible = false;
+            // 
+            // cn_closedat
+            // 
+            this.cn_closedat.DataPropertyName = "closedat";
+            this.cn_closedat.HeaderText = "Closed at";
+            this.cn_closedat.Name = "cn_closedat";
+            // 
+            // cn_closedby
+            // 
+            this.cn_closedby.DataPropertyName = "closedby";
+            this.cn_closedby.HeaderText = "Closed by";
+            this.cn_closedby.Name = "cn_closedby";
+            // 
+            // cn_closedplace
+            // 
+            this.cn_closedplace.DataPropertyName = "closedplace";
+            this.cn_closedplace.HeaderText = "Place of closing";
+            this.cn_closedplace.Name = "cn_closedplace";
+            // 
+            // cn_additcontent
+            // 
+            this.cn_additcontent.DataPropertyName = "addcontent";
+            this.cn_additcontent.HeaderText = "Add. content";
+            this.cn_additcontent.Name = "cn_additcontent";
+            // 
+            // cn_headid
+            // 
+            this.cn_headid.DataPropertyName = "headid";
+            this.cn_headid.HeaderText = "headid";
+            this.cn_headid.Name = "cn_headid";
+            this.cn_headid.Visible = false;
+            // 
+            // cn_incomedoc
+            // 
+            this.cn_incomedoc.DataPropertyName = "incomedoc";
+            this.cn_incomedoc.HeaderText = "Income doc.";
+            this.cn_incomedoc.Name = "cn_incomedoc";
             // 
             // frm_Packing
             // 
@@ -1049,7 +1057,7 @@
             this.bn_List.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonDockableWorkspace1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
@@ -1109,6 +1117,9 @@
         private Owf.Controls.NumericTetxBox txt_boxid;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny1;
         private System.Windows.Forms.ToolStripButton btn_Delete;
+        private CustomControls.NullableDateTimePicker txt_ClosingDate;
+        private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny5;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel8;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_package;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_boxno;
@@ -1138,8 +1149,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_closedplace;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_additcontent;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_headid;
-        private CustomControls.NullableDateTimePicker txt_ClosingDate;
-        private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny5;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_incomedoc;
     }
 }

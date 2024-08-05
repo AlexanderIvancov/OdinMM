@@ -2441,7 +2441,7 @@ namespace Odin.Planning
 
         #region Production Planning
 
-        public static DataTable getProdPlanning(int custid, string datefrom, string datetill, int batchid, int coid, int isactive)
+        public static DataTable getProdPlanning(int custid, string datefrom, string datetill, int batchid, int coid, int isactive, int prodplaceid)
         {
             //.return Helper.QueryDT("execute sp_SelectProductionPlanningFin @custid = " + custid + ", @datefrom = " + perc);
             string query = "sp_SelectProductionPlanning";
@@ -2492,13 +2492,31 @@ namespace Odin.Planning
             sqlConn.Close();
         }
 
-        public static DataTable getProductionPlanningCapa(string date)
+        public static DataTable getProductionPlanningCapa(string date, int prodplaceid)
         {
             string query = "sp_SelectProductionPlanningCapacityNeeds";
 
             var sqlparams = new List<SqlParameter>
             {
                 new SqlParameter("@date",SqlDbType.NVarChar){Value = date }
+            };
+
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
+        }
+
+        public static DataTable getProdPlanning2Weeks(string datefrom, int custid, int isactive, int prodplaceid)
+        {
+            //.return Helper.QueryDT("execute sp_SelectProductionPlanningFin @custid = " + custid + ", @datefrom = " + perc);
+            string query = "sp_SelectProductionPlanning2Weeks";
+
+            var sqlparams = new List<SqlParameter>
+            {
+                new SqlParameter("@datefrom", SqlDbType.NVarChar) { Value = datefrom},
+                new SqlParameter("@custid",SqlDbType.Int){Value = custid },
+                new SqlParameter("@isactive",SqlDbType.Int){Value = isactive },
+                new SqlParameter("@prodplaceid",SqlDbType.Int){Value = prodplaceid }
+
             };
 
 

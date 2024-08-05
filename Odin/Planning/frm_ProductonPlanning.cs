@@ -364,7 +364,7 @@ namespace Odin.Planning
             {
                 var data = Plan_BLL.getProdPlanning(cmb_Firms1.FirmId, txt_StartFrom.Value == null ? "" : txt_StartFrom.Value.ToString().Trim(),
                                             txt_StartTill.Value == null ? "" : txt_StartTill.Value.ToString().Trim(),
-                                            cmb_Batches1.BatchId, cmb_SalesOrdersWithLines1.SalesOrderLineId, IsActive);
+                                            cmb_Batches1.BatchId, cmb_SalesOrdersWithLines1.SalesOrderLineId, IsActive, 0);
 
                 var datadets = Plan_BLL.getProdPlanningDets(txt_StartFrom.Value == null ? "" : txt_StartFrom.Value.ToString().Trim(),
                                                 txt_StartTill.Value == null ? "" : txt_StartTill.Value.ToString().Trim());
@@ -582,7 +582,7 @@ namespace Odin.Planning
         public void ShowCapacity(string date)
         {
             ClearCapacity();
-            var data = Plan_BLL.getProductionPlanningCapa(date);
+            var data = Plan_BLL.getProductionPlanningCapa(date, 0);
 
             foreach (DataRow row in data.Rows)
             {
