@@ -585,8 +585,14 @@ namespace Odin.Planning
         private void AddBatch(object sender)
         {
             frm.Close();
+            DataGridViewColumn oldColumn = gv_List.SortedColumn;
+            var dir = Helper.SaveDirection(gv_List);
+
             bwStart(bw_List);
 
+            Helper.RestoreDirection(gv_List, oldColumn, dir);
+
+            SetCellsColor();
             BatchSaved?.Invoke(this);
         }
 
