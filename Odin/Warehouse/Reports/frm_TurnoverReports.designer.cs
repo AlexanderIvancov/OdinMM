@@ -81,6 +81,7 @@
             this.cn_num = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_artid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_article = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_suparticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_unitprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_qtybeg = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -225,6 +226,7 @@
             this.cn_num,
             this.cn_artid,
             this.cn_article,
+            this.cn_suparticle,
             this.cn_unit,
             this.cn_unitprice,
             this.cn_qtybeg,
@@ -596,6 +598,15 @@
             this.cn_article.ReadOnly = true;
             this.cn_article.Width = 200;
             // 
+            // cn_article
+            // 
+            this.cn_suparticle.DataPropertyName = "suparticle";
+            this.cn_suparticle.FillWeight = 200F;
+            this.cn_suparticle.HeaderText = "SupArticle";
+            this.cn_suparticle.Name = "cn_suparticle";
+            this.cn_suparticle.ReadOnly = true;
+            this.cn_suparticle.Width = 200;
+            // 
             // cn_unit
             // 
             this.cn_unit.DataPropertyName = "unit";
@@ -794,6 +805,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_num;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_artid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_article;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_suparticle;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_unit;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_unitprice;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_qtybeg;
