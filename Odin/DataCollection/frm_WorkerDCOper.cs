@@ -684,7 +684,6 @@ namespace Odin.DataCollection
                     if (check)
                     {
                         serialorder.Enqueue(_serial);
-                        if (counter == PCBs_per_panel && PCB_label == 2) { analogflag = analogflag == 0 ? 1 : 0; counter = 0; }
                         string _res = "";
 
                         if (counter == PCBs_per_panel && PCB_label == 2) { analogflag = analogflag == 0 ? 1 : 0; counter = 0; }
