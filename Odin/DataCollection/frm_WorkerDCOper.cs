@@ -541,8 +541,12 @@ namespace Odin.DataCollection
                     {
                         _id = Convert.ToInt32(row.Cells["cn_id"].Value);
                         _serial = row.Cells["cn_serial"].Value.ToString();
-                        counter--;
                         if (row.Cells["cn_serial"].Value.ToString() != "") delcounterser++;
+                        else
+                        {
+                            counter--;
+                            serialorder = new Queue<string>(serialorder.Where(x => x != row.Cells["cn_serial"].Value.ToString()));
+                        }
                     }
                     catch { }
                     DCBll.DeleteDataCollectionSerial(_id, _serial);
