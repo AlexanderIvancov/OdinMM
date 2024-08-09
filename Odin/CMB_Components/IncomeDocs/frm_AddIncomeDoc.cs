@@ -68,7 +68,7 @@ namespace Odin.CMB_Components.IncomeDocs
         {
             get { try { return Convert.ToDouble(txt_CurRate.Text); }
                 catch { return 1; } }
-            set { txt_CurRate.Text = value.ToString(); }
+            set { txt_CurRate.Text = value.ToString("0.000000"); }
         }
 
         public string RegDate
