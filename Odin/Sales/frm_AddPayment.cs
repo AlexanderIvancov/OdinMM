@@ -731,7 +731,7 @@ namespace Odin.Sales
             txt_CurRate.ThreadSafeCall(delegate
             {
                 DAL.ShowCurRate(CurId, PayDate.Trim() == "" ? System.DateTime.Now.ToShortDateString() : PayDate.Trim());
-                CurRate = DAL.CurRate;
+                CurRate = Convert.ToDouble(DAL.CurRate);
                 txt_CurRate.StateCommon.Back.Color1 = CurRate == 0 ? Color.Red : Color.White;
             });
 

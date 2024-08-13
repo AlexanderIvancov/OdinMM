@@ -447,7 +447,7 @@ namespace Odin.Sales
         public void MakeAction()
         {
             DAL.ShowCurRate(CurId, Convert.ToDateTime(txt_PayDate.Value).ToShortDateString());
-            int _headres = COBll.AddPaymentHeader(cmb_Firms2.FirmId, 18, Convert.ToDateTime(txt_PayDate.Value).ToShortDateString(), Mapped - ToFree, 0, CurId, DAL.CurRate, Comments);
+            int _headres = COBll.AddPaymentHeader(cmb_Firms2.FirmId, 18, Convert.ToDateTime(txt_PayDate.Value).ToShortDateString(), Mapped - ToFree, 0, CurId, Convert.ToDouble(DAL.CurRate), Comments);
 
             if (_headres != 0)
             {
