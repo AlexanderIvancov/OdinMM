@@ -96,7 +96,7 @@ namespace Odin.CMB_Components.IncomeDocs
             txt_Rate.ThreadSafeCall(delegate
             {
                 DLL.ShowCurRate(CurId, CurDate.Trim() == "" ? System.DateTime.Now.ToShortDateString() : CurDate.Trim());
-                Rate = DLL.CurRate;
+                Rate = Convert.ToDouble(DLL.CurRate);
                 txt_Rate.StateCommon.Back.Color1 = Rate == 0 ? Color.Red : Color.White;
             });
 
@@ -108,7 +108,7 @@ namespace Odin.CMB_Components.IncomeDocs
             txt_Rate.ThreadSafeCall(delegate
             {
                 DLL.ShowCurRate(CurId, CurDate.Trim() == "" ? System.DateTime.Now.ToShortDateString() : CurDate.Trim());
-                Rate = DLL.CurRate;
+                Rate = Convert.ToDouble(DLL.CurRate);
                 txt_Rate.StateCommon.Back.Color1 = Rate == 0 ? Color.Red : Color.White;
             });
 

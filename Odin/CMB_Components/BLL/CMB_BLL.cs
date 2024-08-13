@@ -1474,7 +1474,7 @@ namespace Odin.CMB_Components.BLL
         }
 
         public int AddIncomeDocHead(string _name, string _serie, string _regdate, string _docdate, int _supid, string _comments, int _curid,
-                                    double _currate, int _sender, int _producer, string _bargain, int _transportid, int _incotermsid,
+                                    Decimal _currate, int _sender, int _producer, string _bargain, int _transportid, int _incotermsid,
                                     double _additcost, double _inadvance, string _advancedate, string _paydate, int _noreversepvn, 
                                     double _mediatedcost, int _check, int _allow)
         {
@@ -1517,7 +1517,7 @@ namespace Odin.CMB_Components.BLL
         }
 
         public void EditIncomeDocHead(int _id, string _name, string _serie, string _regdate, string _docdate, int _supid, string _comments, int _curid,
-                                    double _currate, int _sender, int _producer, string _bargain, int _transportid, int _incotermsid, double _additcost,
+                                    Decimal _currate, int _sender, int _producer, string _bargain, int _transportid, int _incotermsid, double _additcost,
                                     double _inadvance, string _advancedate, string _paydate, int _noreversepvn, double _mediatedcost, int _check,
                                     int _allow)
         {
@@ -1604,7 +1604,7 @@ namespace Odin.CMB_Components.BLL
                         IncomeDocComments = dr["comments"].ToString();
                         IncomeDocSupId = Convert.ToInt32(dr["supid"]);
                         IncomeDocCurId = Convert.ToInt32(dr["curid"]);
-                        IncomeDocCurRate = Convert.ToDouble(dr["currate"]);
+                        IncomeDocCurRate = Convert.ToDecimal(dr["currate"]);
                         IncomeDocSender = Convert.ToInt32(dr["sendercountryid"]);
                         IncomeDocProducer = Convert.ToInt32(dr["producercountryid"]);
                         IncomeDocTransportId = Convert.ToInt32(dr["transportid"]);
@@ -1642,7 +1642,7 @@ namespace Odin.CMB_Components.BLL
         { get; set; }
         public int IncomeDocCurId
         { get; set; }
-        public double IncomeDocCurRate
+        public Decimal IncomeDocCurRate
         { get; set; }
         public int IncomeDocSender
         { get; set; }

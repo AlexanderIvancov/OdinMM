@@ -17,10 +17,10 @@ namespace Odin.Global_Classes
 
         #region Currency Rate
 
-        public double curRate;
+        public decimal curRate;
         public string curDate;
 
-        public double CurRate
+        public decimal CurRate
         {
             get { return this.curRate; }
             set { this.curRate = value; }
@@ -111,7 +111,7 @@ namespace Odin.Global_Classes
                 SqlDataReader sqlReader = sqlComm.ExecuteReader();
                 sqlReader.Read();
 
-                curRate = Convert.ToDouble(sqlReader[0].ToString());
+                curRate = Convert.ToDecimal(sqlReader[0].ToString());
                 curDate = sqlReader[1].ToString();
 
                 sqlReader.Close();

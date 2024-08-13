@@ -411,7 +411,7 @@ namespace Odin.CMB_Components.ExpInvoices
             txt_CurRate.ThreadSafeCall(delegate
             {
                 DLL.ShowCurRate(CurId, DocDate);
-                CurRate = DLL.CurRate;
+                CurRate = Convert.ToDouble(DLL.CurRate);
             });
 
             CheckEmpty();

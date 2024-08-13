@@ -64,9 +64,9 @@ namespace Odin.CMB_Components.IncomeDocs
             set { cmb_Incoterms1.IncotermId = value; }
         }
 
-        public double CurRate
+        public Decimal CurRate
         {
-            get { try { return Convert.ToDouble(txt_CurRate.Text); }
+            get { try { return Convert.ToDecimal(txt_CurRate.Text); }
                 catch { return 1; } }
             set { txt_CurRate.Text = value.ToString("0.000000"); }
         }
