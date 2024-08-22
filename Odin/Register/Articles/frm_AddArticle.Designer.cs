@@ -34,6 +34,7 @@
             this.btn_Cancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.chk_MBLimit = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.cmb_Articles2 = new Odin.CMB_Components.Articles.cmb_Articles();
             this.kryptonLabel19 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel18 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -47,6 +48,7 @@
             this.kryptonLabel15 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_QtyReserve = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.chk_IsActive = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
+            this.chk_IsCertified = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.chk_SubBatch = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonLabel14 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_Weight = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
@@ -87,7 +89,6 @@
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_Id = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.btn_Concidences = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.chk_MBLimit = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
@@ -156,6 +157,7 @@
             this.kryptonPanel2.Controls.Add(this.kryptonLabel15);
             this.kryptonPanel2.Controls.Add(this.txt_QtyReserve);
             this.kryptonPanel2.Controls.Add(this.chk_IsActive);
+            this.kryptonPanel2.Controls.Add(this.chk_IsCertified);
             this.kryptonPanel2.Controls.Add(this.chk_SubBatch);
             this.kryptonPanel2.Controls.Add(this.kryptonLabel14);
             this.kryptonPanel2.Controls.Add(this.txt_Weight);
@@ -194,6 +196,14 @@
             this.kryptonPanel2.Size = new System.Drawing.Size(684, 400);
             this.kryptonPanel2.TabIndex = 1;
             // 
+            // chk_MBLimit
+            // 
+            this.chk_MBLimit.Location = new System.Drawing.Point(343, 284);
+            this.chk_MBLimit.Name = "chk_MBLimit";
+            this.chk_MBLimit.Size = new System.Drawing.Size(74, 20);
+            this.chk_MBLimit.TabIndex = 76;
+            this.chk_MBLimit.Values.Text = "M.B.Limit";
+            // 
             // cmb_Articles2
             // 
             this.cmb_Articles2.Article = "";
@@ -208,6 +218,7 @@
             this.cmb_Articles2.DeptId = 0;
             this.cmb_Articles2.Description = null;
             this.cmb_Articles2.IsActive = -1;
+            this.cmb_Articles2.IsCertified = -1;
             this.cmb_Articles2.IsPF = 0;
             this.cmb_Articles2.Location = new System.Drawing.Point(93, 251);
             this.cmb_Articles2.Manufacturer = "";
@@ -256,7 +267,7 @@
             // 
             // chk_Warning
             // 
-            this.chk_Warning.Location = new System.Drawing.Point(222, 284);
+            this.chk_Warning.Location = new System.Drawing.Point(200, 284);
             this.chk_Warning.Name = "chk_Warning";
             this.chk_Warning.Size = new System.Drawing.Size(70, 20);
             this.chk_Warning.TabIndex = 55;
@@ -264,7 +275,7 @@
             // 
             // chk_Service
             // 
-            this.chk_Service.Location = new System.Drawing.Point(140, 284);
+            this.chk_Service.Location = new System.Drawing.Point(135, 284);
             this.chk_Service.Name = "chk_Service";
             this.chk_Service.Size = new System.Drawing.Size(62, 20);
             this.chk_Service.TabIndex = 45;
@@ -345,6 +356,14 @@
             this.chk_IsActive.Size = new System.Drawing.Size(57, 20);
             this.chk_IsActive.TabIndex = 32;
             this.chk_IsActive.Values.Text = "Active";
+            // 
+            // chk_IsCertified
+            // 
+            this.chk_IsCertified.Location = new System.Drawing.Point(276, 284);
+            this.chk_IsCertified.Name = "chk_IsCertified";
+            this.chk_IsCertified.Size = new System.Drawing.Size(70, 20);
+            this.chk_IsCertified.TabIndex = 77;
+            this.chk_IsCertified.Values.Text = "Certified";
             // 
             // chk_SubBatch
             // 
@@ -693,14 +712,6 @@
             this.btn_Concidences.Values.Text = "";
             this.btn_Concidences.Click += new System.EventHandler(this.btn_Concidences_Click);
             // 
-            // chk_MBLimit
-            // 
-            this.chk_MBLimit.Location = new System.Drawing.Point(308, 284);
-            this.chk_MBLimit.Name = "chk_MBLimit";
-            this.chk_MBLimit.Size = new System.Drawing.Size(74, 20);
-            this.chk_MBLimit.TabIndex = 76;
-            this.chk_MBLimit.Values.Text = "M.B.Limit";
-            // 
             // frm_AddArticle
             // 
             this.AcceptButton = this.btn_OK;
@@ -724,7 +735,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel3)).EndInit();
             this.kryptonPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pic_Image)).EndInit();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
@@ -774,6 +785,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_Weight;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_SubBatch;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_IsActive;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_IsCertified;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel15;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_QtyReserve;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel16;

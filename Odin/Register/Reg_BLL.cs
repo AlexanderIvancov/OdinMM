@@ -15,7 +15,7 @@ namespace Odin.Register
         #region Articles
 
         public static DataTable getArticles(int _artid, string _artbeg, string _secarticle, string _description, int _typeid, int _deptid,
-                                            string _comments, int _firmid, string _reffirm, int _isactive, int _stageid, int _bomstate,
+                                            string _comments, int _firmid, string _reffirm, int _isactive, int _iscertified, int _stageid, int _bomstate,
                                             int _bomexists, int _mslexists)
         {
             string query = "sp_ArticlesList";
@@ -32,6 +32,7 @@ namespace Odin.Register
                 new SqlParameter("@firmid",SqlDbType.Int){Value = _firmid },
                 new SqlParameter("@reffirm",SqlDbType.NVarChar){Value = _reffirm},
                 new SqlParameter("@isactive",SqlDbType.Int){Value = _isactive },
+                new SqlParameter("@iscertified",SqlDbType.Int){Value = _iscertified },
                 new SqlParameter("@stageid",SqlDbType.Int){Value = _stageid },
                 new SqlParameter("@bomstate",SqlDbType.Int){Value = _bomstate },
                 new SqlParameter("@bomexists",SqlDbType.Int){Value = _bomexists },
@@ -103,7 +104,7 @@ namespace Odin.Register
 
         public int SaveArticle(int id, string article, string secname, string description, int typeid,
                                 int unitid, string imagepath, string comments, int custcodeid,
-                                double qtyreserve, int deptid, int createsubbatch, double weight, int isactive,
+                                double qtyreserve, int deptid, int createsubbatch, double weight, int isactive, int iscertified,
                                 string revision, string storagerules, double spoilnorm, int stageid, string msl,
                                 int service, int qtylabels, int stencilrequired, int stencilid, int warning,
                                 double spoilconst, int aspf, int mblimit)
@@ -129,6 +130,7 @@ namespace Odin.Register
             sqlComm.Parameters.AddWithValue("@createsubbatch", createsubbatch);
             sqlComm.Parameters.AddWithValue("@weight", weight);
             sqlComm.Parameters.AddWithValue("@isactive", isactive);
+            sqlComm.Parameters.AddWithValue("@iscertified", iscertified);
             sqlComm.Parameters.AddWithValue("@revision", revision);
             sqlComm.Parameters.AddWithValue("@storagerules", storagerules);
             sqlComm.Parameters.AddWithValue("@spoilnorm", spoilnorm);
@@ -225,6 +227,8 @@ namespace Odin.Register
         { get; set; }
         public int IsActive
         { get; set; }
+        public int IsCertified
+        { get; set; }
         public double SpoilNorm
         { get; set; }
         public int StageId
@@ -290,6 +294,7 @@ namespace Odin.Register
                         QtyReserve = Convert.ToDouble(dr["QtyReserve"]);
                         CreateSubBatch = Convert.ToInt32(dr["createsubbatch"]);
                         IsActive = Convert.ToInt32(dr["isactive"]);
+                        IsCertified = Convert.ToInt32(dr["iscertified"]);
                         Revision = dr["revision"].ToString();
                         StorageRules = dr["storagerules"].ToString();
                         SpoilNorm = Convert.ToDouble(dr["spoilnorm"]);
@@ -336,6 +341,7 @@ namespace Odin.Register
             Revision = "";
             StorageRules = "";
             IsActive = -1;
+            IsCertified = -1;
             SpoilNorm = 0;
             StageId = 0;
             MSL = "1";

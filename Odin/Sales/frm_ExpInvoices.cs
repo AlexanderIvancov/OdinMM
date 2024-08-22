@@ -171,7 +171,14 @@ namespace Odin.Sales
         }
 
         public void SetCellsColor()
-        { }
+        {
+            foreach (DataGridViewRow row in this.gv_List.Rows)
+                if (Convert.ToInt32(row.Cells["cn_iscertified"].Value) == -1)
+                {
+                    row.Cells["cn_article"].Style.BackColor = Color.LightGreen;
+                    row.Cells["cn_artid"].Style.BackColor = Color.LightGreen;
+                }
+        }
 
         public void bw_List(object sender, DoWorkEventArgs e)
         {

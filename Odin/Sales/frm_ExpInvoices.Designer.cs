@@ -103,6 +103,7 @@
             this.cn_conforder = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_artid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_article = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_iscertified = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_custart = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -850,6 +851,7 @@
             this.cn_conforder,
             this.cn_artid,
             this.cn_article,
+            this.cn_iscertified,
             this.cn_custart,
             this.cn_qty,
             this.cn_unit,
@@ -959,6 +961,16 @@
             this.cn_article.Name = "cn_article";
             this.cn_article.ReadOnly = true;
             this.cn_article.Width = 200;
+            // 
+            // cn_article
+            // 
+            this.cn_iscertified.DataPropertyName = "iscertified";
+            this.cn_iscertified.FillWeight = 200F;
+            this.cn_iscertified.HeaderText = "Certified";
+            this.cn_iscertified.Name = "cn_iscertified";
+            this.cn_iscertified.Visible = false;
+            this.cn_iscertified.ReadOnly = true;
+            this.cn_iscertified.Width = 200;
             // 
             // cn_custart
             // 
@@ -1597,6 +1609,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_conforder;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_artid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_article;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_iscertified;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_custart;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_unit;

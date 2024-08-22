@@ -42,6 +42,7 @@ namespace Odin.CMB_Components.Articles
         int _ArticleId = 0;
         string _Article = "";
         int _isactive = -1;
+        int _iscertified = -1;
         public string SecName
         { get; set; }
         public string Comments
@@ -140,6 +141,25 @@ namespace Odin.CMB_Components.Articles
             }
         }
 
+        public int IsCertified
+        {
+            get { return _iscertified; }
+            set
+            {
+                _iscertified = value;
+
+                if (IsCertified == 0)
+                {
+                    txt_Article.StateCommon.Back.Color1 = Color.Silver;
+                    txt_Id.StateCommon.Back.Color1 = Color.Silver;
+                }
+                else
+                {
+                    txt_Article.StateCommon.Back.Color1 = Color.White;
+                    txt_Id.StateCommon.Back.Color1 = Color.White;
+                }
+            }
+        }
         public int IsPF
         { get; set; }
         public int RMId
@@ -327,7 +347,7 @@ namespace Odin.CMB_Components.Articles
                                 " Isnull(a.qtyavail,0) as avail, isnull(a.deptid, 0) as deptid, isnull(d.department, '') as department, " +
                                 " isnull(a.custcodeid, 0) as custcodeid, isnull(s.name, '') as stage, isnull(nv.state, 0) as bomstate, " +
                                 " isnull(a.stageid, 0) as stageid, isnull(a.smttype, 0) as smttype, isnull(a.isactive, -1) as isactive, " +
-                                " isnull(a.spoilconst, 0) as spoilconst, isnull(apc.manufacturer, '') as manufacturer, " +
+                                " isnull(a.iscertified, -1) as iscertified, isnull(a.spoilconst, 0) as spoilconst, isnull(apc.manufacturer, '') as manufacturer, " +
                                 " iif(isnull(pf.id, 0) = 0, 0, -1) as ispf, " +
                                 " isnull(a.rmid, 0) as rmid  " +
                                 "FROM bas_articles a " +
@@ -375,6 +395,7 @@ namespace Odin.CMB_Components.Articles
                     StageID = Convert.ToInt32(dr["stageid"]);
                     SMTType = Convert.ToInt32(dr["smttype"]);
                     IsActive = Convert.ToInt32(dr["isactive"]);
+                    IsCertified = Convert.ToInt32(dr["iscertified"]);
                     SpoilConst = Convert.ToDouble(dr["spoilconst"]);
                     Manufacturer = dr["manufacturer"].ToString();
                     IsPF = Convert.ToInt32(dr["ispf"]);

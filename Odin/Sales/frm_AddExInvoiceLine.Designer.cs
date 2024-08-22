@@ -90,6 +90,7 @@
             this.cn_comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_curid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_isresale = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_iscertified = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_isfinalproduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_allowtoinvoice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_delivplaceid = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -389,6 +390,7 @@
             this.cn_comments,
             this.cn_curid,
             this.cn_isresale,
+            this.cn_iscertified,
             this.cn_isfinalproduct,
             this.cn_allowtoinvoice,
             this.cn_delivplaceid,
@@ -684,6 +686,13 @@
             this.cn_isresale.HeaderText = "isresale";
             this.cn_isresale.Name = "cn_isresale";
             this.cn_isresale.Visible = false;
+            // 
+            // cn_iscertified
+            // 
+            this.cn_iscertified.DataPropertyName = "iscertified";
+            this.cn_iscertified.HeaderText = "iscertified";
+            this.cn_iscertified.Name = "cn_iscertified";
+            this.cn_iscertified.Visible = false;
             // 
             // cn_isfinalproduct
             // 
@@ -1988,6 +1997,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_comments;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_curid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_isresale;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_iscertified;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_isfinalproduct;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_allowtoinvoice;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_delivplaceid;

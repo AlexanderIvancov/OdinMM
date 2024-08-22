@@ -45,6 +45,7 @@
             this.kryptonLabel15 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_QtyReserve = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.chk_IsActive = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
+            this.chk_IsCertified = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.chk_SubBatch = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonLabel14 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_Weight = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
@@ -107,6 +108,7 @@
             this.kryptonPanel2.Controls.Add(this.kryptonLabel15);
             this.kryptonPanel2.Controls.Add(this.txt_QtyReserve);
             this.kryptonPanel2.Controls.Add(this.chk_IsActive);
+            this.kryptonPanel2.Controls.Add(this.chk_IsCertified);
             this.kryptonPanel2.Controls.Add(this.chk_SubBatch);
             this.kryptonPanel2.Controls.Add(this.kryptonLabel14);
             this.kryptonPanel2.Controls.Add(this.txt_Weight);
@@ -341,6 +343,16 @@
             this.chk_IsActive.Size = new System.Drawing.Size(57, 20);
             this.chk_IsActive.TabIndex = 31;
             this.chk_IsActive.Values.Text = "Active";
+            // 
+            // chk_IsCertified
+            // 
+            this.chk_IsCertified.Checked = true;
+            this.chk_IsCertified.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk_IsCertified.Location = new System.Drawing.Point(93, 12);
+            this.chk_IsCertified.Name = "chk_IsCertified";
+            this.chk_IsCertified.Size = new System.Drawing.Size(57, 20);
+            this.chk_IsCertified.TabIndex = 31;
+            this.chk_IsCertified.Values.Text = "Certified";
             // 
             // chk_SubBatch
             // 
@@ -704,6 +716,7 @@
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny2;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_IsActive;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_IsCertified;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel15;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_QtyReserve;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_OK;

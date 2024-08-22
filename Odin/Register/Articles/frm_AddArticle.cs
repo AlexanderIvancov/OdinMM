@@ -188,6 +188,18 @@ namespace Odin.Register.Articles
             set { cmb_MSL.Text = value; }
         }
 
+        public int IsCertified
+        {
+            get
+            {
+                return chk_IsCertified.CheckState == CheckState.Checked ? -1 : 0;
+            }
+            set
+            {
+                chk_IsCertified.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+            }
+        }
+
         //public int LabelsQty
         //{
         //    get
@@ -463,6 +475,7 @@ namespace Odin.Register.Articles
             CreateSubBatch = Reg.CreateSubBatch;
             Weight = Reg.Weight;
             IsActive = Reg.IsActive;
+            IsCertified = Reg.IsCertified;
             Revision = Reg.Revision;
             StoreRules = Reg.StorageRules;
             SpoilNorm = Reg.SpoilNorm;
