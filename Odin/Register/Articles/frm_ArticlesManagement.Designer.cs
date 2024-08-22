@@ -460,8 +460,7 @@
             // 
             // chk_IsCertified
             // 
-            this.chk_IsCertified.Checked = true;
-            this.chk_IsCertified.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk_IsCertified.CheckState = System.Windows.Forms.CheckState.Indeterminate;
             this.chk_IsCertified.Location = new System.Drawing.Point(167, 247);
             this.chk_IsCertified.Name = "chk_IsCertified";
             this.chk_IsCertified.Size = new System.Drawing.Size(80, 20);

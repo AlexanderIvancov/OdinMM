@@ -147,17 +147,6 @@ namespace Odin.CMB_Components.Articles
             set
             {
                 _iscertified = value;
-
-                if (IsCertified == 0)
-                {
-                    txt_Article.StateCommon.Back.Color1 = Color.Silver;
-                    txt_Id.StateCommon.Back.Color1 = Color.Silver;
-                }
-                else
-                {
-                    txt_Article.StateCommon.Back.Color1 = Color.White;
-                    txt_Id.StateCommon.Back.Color1 = Color.White;
-                }
             }
         }
         public int IsPF
