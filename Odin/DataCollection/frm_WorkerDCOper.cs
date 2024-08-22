@@ -541,7 +541,7 @@ namespace Odin.DataCollection
                     {
                         _id = Convert.ToInt32(row.Cells["cn_id"].Value);
                         _serial = row.Cells["cn_serial"].Value.ToString();
-                        if (row.Cells["cn_serial"].Value.ToString() != "") delcounterser++;
+                        if (row.Cells["cn_analog"].Value.ToString() != "") delcounterser++;
                         else
                         {
                             counter--;
@@ -687,13 +687,12 @@ namespace Odin.DataCollection
 
                     if (check)
                     {
-                        serialorder.Enqueue(_serial);
                         string _res = "";
 
                         if (counter == PCBs_per_panel && PCB_label == 2) { analogflag = analogflag == 0 ? 1 : 0; counter = 0; }
                         if (delcounterser == 0)
                         {
-                            if (analogflag == 0) serialorder.Enqueue(_serial);
+                            serialorder.Enqueue(_serial);
                             _res = analogflag == 0 ? DCBll.AddDataCollectionSerialOper(WorkerId, _serial, LaunchId, PrevStageId, OperNO, OperNO == 0 ? -1 : IsLast, cmb_CommonPDA1.SelectedValue) :
                                    ProdBll.AddSerialNumberAnalogue(serialorder.Dequeue(), _serial, -1);
                             counter++;
