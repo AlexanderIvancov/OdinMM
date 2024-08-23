@@ -391,8 +391,11 @@ namespace Odin.Workshop
                                     //Add New Serial
                                     //MessageBox.Show("Adding!");
                                     string _res = "";
-                                    serialorder.Enqueue(txt_Oper.Text.Trim());
-                                    if ((PCB_label != 2 || StageId != 5) || !analogflag ) AddSerialTracing(StageId, BatchId, txt_Oper.Text.Trim());
+                                    if ((PCB_label != 2 || StageId != 5) || !analogflag)
+                                    {
+                                        AddSerialTracing(StageId, BatchId, txt_Oper.Text.Trim());
+                                        serialorder.Enqueue(txt_Oper.Text.Trim());
+                                    }
                                     else
                                     {
                                         _res = ProdBll.AddSerialNumberAnalogue(serialorder.Dequeue(), txt_Oper.Text.Trim(), 0);
