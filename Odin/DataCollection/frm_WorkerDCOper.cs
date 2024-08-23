@@ -130,16 +130,6 @@ namespace Odin.DataCollection
             }
         }
 
-        int PCB_label = 1;
-        int Panel_label = 0;
-        int PCBs_per_panel = 1;
-        Queue<string> serialorder = new Queue<string>();
-        int counter = 0;
-        int analogflag = 0;
-        Queue<string> delserialorder = new Queue<string>();
-        int delanalogflag = 0;
-        int delcounterser = 0;
-
         Processing_BLL ProdBll = new Processing_BLL();
 
         #endregion
@@ -175,16 +165,6 @@ namespace Odin.DataCollection
             //{
             //    bn_Materials.BindingSource = bs_Boxes;
             //});
-        }
-
-        public void FillSerialScanOrder(int _launchid)
-        {
-            string[] data = ((string)Helper.GetOneRecord(string.Format("exec sp_SelectSerialScanOrder @launchid = '{0}'", _launchid))).Split(' ');
-
-            PCB_label = Convert.ToInt32(data[0]);
-            Panel_label = Convert.ToInt32(data[1]);
-            PCBs_per_panel = Convert.ToInt32(data[2]);
-            counter = 0;
         }
 
         public void FillMaterials(int _workerid)
@@ -457,7 +437,6 @@ namespace Odin.DataCollection
                         PrevStageId = Convert.ToInt32(dr1["prevstageid"].ToString());
                     }
                     FillList(WorkerId, LaunchId);
-                    FillSerialScanOrder(LaunchId);
                     FillMaterialsByLaunch(LaunchId);
                     CheckViza(LaunchId);
                 }
@@ -541,12 +520,6 @@ namespace Odin.DataCollection
                     {
                         _id = Convert.ToInt32(row.Cells["cn_id"].Value);
                         _serial = row.Cells["cn_serial"].Value.ToString();
-                        if (row.Cells["cn_analog"].Value.ToString() != "") delcounterser++;
-                        else
-                        {
-                            counter--;
-                            serialorder = new Queue<string>(serialorder.Where(x => x != row.Cells["cn_serial"].Value.ToString()));
-                        }
                     }
                     catch { }
                     DCBll.DeleteDataCollectionSerial(_id, _serial);
@@ -689,27 +662,7 @@ namespace Odin.DataCollection
                     {
                         string _res = "";
 
-                        if (counter == PCBs_per_panel && PCB_label == 2) { analogflag = analogflag == 0 ? 1 : 0; counter = 0; }
-                        if (delcounterser == 0)
-                        {
-                            serialorder.Enqueue(_serial);
-                            _res = analogflag == 0 ? DCBll.AddDataCollectionSerialOper(WorkerId, _serial, LaunchId, PrevStageId, OperNO, OperNO == 0 ? -1 : IsLast, cmb_CommonPDA1.SelectedValue) :
-                                   ProdBll.AddSerialNumberAnalogue(serialorder.Dequeue(), _serial, -1);
-                            counter++;
-                        }
-                        else
-                        {
-                            delserialorder.Enqueue(_serial);
-                            _res = delanalogflag == 0 ? DCBll.AddDataCollectionSerialOper(WorkerId, _serial, LaunchId, PrevStageId, OperNO, OperNO == 0 ? -1 : IsLast, cmb_CommonPDA1.SelectedValue) :
-                                   ProdBll.AddSerialNumberAnalogue(delserialorder.Dequeue(), _serial, -1);
-                            if (delanalogflag == 0)
-                                delanalogflag = 1;
-                            else
-                            {
-                                delanalogflag = 0;
-                                delcounterser--;
-                            }
-                        }
+                        _res = DCBll.AddDataCollectionSerialOper(WorkerId, _serial, LaunchId, PrevStageId, OperNO, OperNO == 0 ? -1 : IsLast, cmb_CommonPDA1.SelectedValue);
                         //MessageBox.Show(DCBll.SuccessId.ToString());
                         if (DCBll.SuccessId == -1)
                             FillList(WorkerId, LaunchId);
@@ -812,28 +765,7 @@ namespace Odin.DataCollection
 
             if (check)
             {
-                if (counter == PCBs_per_panel && PCB_label == 2) { analogflag = analogflag == 0 ? 1 : 0; counter = 0; }
-                string _res = "";
-                if (delcounterser == 0)
-                {
-                    if (analogflag == 0) serialorder.Enqueue(_serial);
-                    _res = analogflag == 0 ? DCBll.AddDataCollectionSerialOper(WorkerId, _serial, LaunchId, PrevStageId, OperNO, OperNO == 0 ? -1 : IsLast, cmb_CommonPDA1.SelectedValue) :
-                                   ProdBll.AddSerialNumberAnalogue(serialorder.Dequeue(), _serial, -1);
-                    counter++;
-                }
-                else
-                {
-                    delserialorder.Enqueue(_serial);
-                    _res = delanalogflag == 0 ? DCBll.AddDataCollectionSerialOper(WorkerId, _serial, LaunchId, PrevStageId, OperNO, OperNO == 0 ? -1 : IsLast, cmb_CommonPDA1.SelectedValue) :
-                                   ProdBll.AddSerialNumberAnalogue(delserialorder.Dequeue(), _serial, -1);
-                    if (delanalogflag == 0)
-                        delanalogflag = 1;
-                    else
-                    {
-                        delanalogflag = 0;
-                        delcounterser--;
-                    }
-                }
+                string _res = DCBll.AddDataCollectionSerialOper(WorkerId, _serial, LaunchId, PrevStageId, OperNO, OperNO == 0 ? -1 : IsLast, cmb_CommonPDA1.SelectedValue);
 
                 if (DCBll.SuccessId == -1)
                     FillList(WorkerId, LaunchId);

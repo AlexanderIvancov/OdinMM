@@ -3,6 +3,7 @@ using Npgsql;
 using Odin.CMB_Components.BLL;
 using Odin.Global_Classes;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -28,7 +29,11 @@ namespace Odin.Workshop
         Processing_BLL ProdBll = new Processing_BLL();
         CMB_BLL CmbBll = new CMB_BLL();
 
-
+        int PCB_label = 1;
+        int Panel_label = 0;
+        int PCBs_per_panel = 1;
+        Queue<string> serialorder = new Queue<string>();
+        bool analogflag = false;
 
         public int ReadValue = 0;
         public string Result = "";
@@ -88,7 +93,6 @@ namespace Odin.Workshop
             {
                 cmb_BatchPDA1.BatchId = value;
                 ScanOrder = value != 0 ? RegMode == -1 ? 2 : 3 : 1;
-
             }
 
         }
@@ -149,6 +153,17 @@ namespace Odin.Workshop
         #endregion
 
         #region Methods
+
+        public void FillSerialScanOrder(int _batchid)
+        {
+            if (_batchid == 0) return;
+            string[] data = ((string)Helper.GetOneRecord(string.Format("exec sp_SelectSerialScanOrder @batchid = '{0}'", _batchid))).Split(' ');
+
+            PCB_label = Convert.ToInt32(data[0]);
+            Panel_label = Convert.ToInt32(data[1]);
+            PCBs_per_panel = Convert.ToInt32(data[2]);
+            analogflag = false;
+        }
 
         public void AddSerialTracing(int stageid, int batchid, string serial)
         {
@@ -242,12 +257,16 @@ namespace Odin.Workshop
                 Freezed = 1;
                 _scanlabel = "";
                 txt_Oper.Focus();
+                FillSerialScanOrder(BatchId);
+
             }
             else
             {
                 Freezed = -1;
                 txt_Oper.Focus();
                 //cmb_Articles1.Focus();
+                FillSerialScanOrder(BatchId);
+
             }
         }
 
@@ -260,6 +279,8 @@ namespace Odin.Workshop
                 StageId = 5;
                 txt_Oper.Text = string.Empty;
                 txt_Oper.Focus();
+                FillSerialScanOrder(BatchId);
+
             }
         }
 
@@ -270,6 +291,8 @@ namespace Odin.Workshop
                 StageId = 6;
                 txt_Oper.Text = string.Empty;
                 txt_Oper.Focus();
+                FillSerialScanOrder(BatchId);
+
             }
         }
 
@@ -280,6 +303,8 @@ namespace Odin.Workshop
                 StageId = 7;
                 txt_Oper.Text = string.Empty;
                 txt_Oper.Focus();
+                FillSerialScanOrder(BatchId);
+
             }
         }
 
@@ -288,6 +313,8 @@ namespace Odin.Workshop
 
             ScanOrder = BatchId == 0 ? 1 : RegMode == -1 ? 2 : 3;
             txt_Oper.Focus();
+            FillSerialScanOrder(BatchId);
+
         }
 
         private void txt_Oper_KeyPress(object sender, KeyPressEventArgs e)
@@ -363,7 +390,16 @@ namespace Odin.Workshop
                                     }
                                     //Add New Serial
                                     //MessageBox.Show("Adding!");
-                                    AddSerialTracing(StageId, BatchId, txt_Oper.Text.Trim());
+                                    string _res = "";
+                                    serialorder.Enqueue(txt_Oper.Text.Trim());
+                                    if ((PCB_label != 2 || StageId != 5) || !analogflag ) AddSerialTracing(StageId, BatchId, txt_Oper.Text.Trim());
+                                    else
+                                    {
+                                        _res = ProdBll.AddSerialNumberAnalogue(serialorder.Dequeue(), txt_Oper.Text.Trim(), 0);
+                                        txt_Result.Text = _res + " at " + System.DateTime.Now.ToString() + System.Environment.NewLine + txt_Result.Text;
+                                    }
+                                    analogflag = analogflag ? false : true;
+                                    
                                     _RegMode = -1;
                                 }
                             }
@@ -459,11 +495,15 @@ namespace Odin.Workshop
         private void cmb_BatchPDA1_BatchTextEntered(object sender)
         {
             txt_Oper.Focus();
+            FillSerialScanOrder(BatchId);
+
         }
 
         private void cmb_BatchPDA1_BatchKeyPressed(object sender)
         {
             txt_Oper.Focus();
+            FillSerialScanOrder(BatchId);
+
         }
 
         private void btn_AdvView_Click(object sender, EventArgs e)
