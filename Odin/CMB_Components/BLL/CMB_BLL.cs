@@ -1474,7 +1474,7 @@ namespace Odin.CMB_Components.BLL
         }
 
         public int AddIncomeDocHead(string _name, string _serie, string _regdate, string _docdate, int _supid, string _comments, int _curid,
-                                    Decimal _currate, int _sender, int _producer, string _bargain, int _transportid, int _incotermsid,
+                                    decimal _currate, int _sender, int _producer, string _bargain, int _transportid, int _incotermsid,
                                     double _additcost, double _inadvance, string _advancedate, string _paydate, int _noreversepvn, 
                                     double _mediatedcost, int _check, int _allow)
         {
@@ -1517,7 +1517,7 @@ namespace Odin.CMB_Components.BLL
         }
 
         public void EditIncomeDocHead(int _id, string _name, string _serie, string _regdate, string _docdate, int _supid, string _comments, int _curid,
-                                    Decimal _currate, int _sender, int _producer, string _bargain, int _transportid, int _incotermsid, double _additcost,
+                                    decimal _currate, int _sender, int _producer, string _bargain, int _transportid, int _incotermsid, double _additcost,
                                     double _inadvance, string _advancedate, string _paydate, int _noreversepvn, double _mediatedcost, int _check,
                                     int _allow)
         {

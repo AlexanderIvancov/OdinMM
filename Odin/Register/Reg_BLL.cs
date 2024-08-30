@@ -1843,7 +1843,7 @@ namespace Odin.Register
             return _res;
         }
 
-        public void AddRatioOperation(int artid, int stageid, string operation, string formula, int useonce, int operno, string comments)
+        public void AddRatioOperation(int artid, int stageid, string operation, string formula, int useonce, int operno, string comments, int checkbefore, string instructions)
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_AddRatioOperation", sqlConn);
@@ -1856,13 +1856,15 @@ namespace Odin.Register
             sqlComm.Parameters.AddWithValue("@useontime", useonce);
             sqlComm.Parameters.AddWithValue("@operno", operno);
             sqlComm.Parameters.AddWithValue("@comments", comments);
+            sqlComm.Parameters.AddWithValue("@checkbefore", checkbefore);
+            sqlComm.Parameters.AddWithValue("@instructions", instructions);
 
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
         }
 
-        public void EditRatioOperation(int id, string operation, string formula, int useonce, int operno, string comments)
+        public void EditRatioOperation(int id, string operation, string formula, int useonce, int operno, string comments, int checkbefore, string instructions)
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_EditRatioOperation", sqlConn);
@@ -1874,6 +1876,8 @@ namespace Odin.Register
             sqlComm.Parameters.AddWithValue("@useontime", useonce);
             sqlComm.Parameters.AddWithValue("@operno", operno);
             sqlComm.Parameters.AddWithValue("@comments", comments);
+            sqlComm.Parameters.AddWithValue("@checkbefore", checkbefore);
+            sqlComm.Parameters.AddWithValue("@instructions", instructions);
 
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();

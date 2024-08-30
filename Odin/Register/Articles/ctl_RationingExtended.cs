@@ -263,7 +263,7 @@ namespace Odin.Register.Articles
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    Reg.EditRatioOperation(frm.Id, frm.Operation, frm.Formula, frm.UsingOnce, frm.OperNO, frm.Comments);
+                    Reg.EditRatioOperation(frm.Id, frm.Operation, frm.Formula, frm.UsingOnce, frm.OperNO, frm.Comments, 0, "");
                     //Forumla result update
 
                     double FormulaRes = Reg.SelectFormulaRes(_operid);
@@ -424,7 +424,7 @@ namespace Odin.Register.Articles
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    Reg.AddRatioOperation(ArtId, _stageid, frm.Operation, frm.Formula, frm.UsingOnce, frm.OperNO, frm.Comments);
+                    Reg.AddRatioOperation(ArtId, _stageid, frm.Operation, frm.Formula, frm.UsingOnce, frm.OperNO, frm.Comments, 0, "");
                     FillOpers(ArtId, _stageid);
                     ShowTotals(ArtId);
                 }
