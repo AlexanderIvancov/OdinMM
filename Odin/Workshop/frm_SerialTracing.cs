@@ -34,6 +34,7 @@ namespace Odin.Workshop
         int PCBs_per_panel = 1;
         Queue<string> serialorder = new Queue<string>();
         bool analogflag = false;
+        int Serial_req = 0;
 
         public int ReadValue = 0;
         public string Result = "";
@@ -162,6 +163,7 @@ namespace Odin.Workshop
             PCB_label = Convert.ToInt32(data[0]);
             Panel_label = Convert.ToInt32(data[1]);
             PCBs_per_panel = Convert.ToInt32(data[2]);
+            Serial_req = Convert.ToInt32(data[3]);
             analogflag = false;
         }
 
@@ -364,7 +366,10 @@ namespace Odin.Workshop
                                                                              MessageBoxIcon.Warning,
                                                                             TaskDialogButtons.OK);
                         }
-                        else
+                        var b = Helper.GetOneRecord("select top 1 batch from prod_batchhead where id = '" + BatchId + "'").ToString();
+                        var l = "L" + txt_Oper.Text.Trim().Substring(0, txt_Oper.Text.Trim().IndexOf("-") < 0 ? 0 : txt_Oper.Text.Trim().IndexOf("-") - 2).ToString();
+
+                        if (Serial_req == 0 || b == l)
                         {
                             //Trying to insert
                             if (RegMode == -1)
@@ -402,7 +407,7 @@ namespace Odin.Workshop
                                         txt_Result.Text = _res + " at " + System.DateTime.Now.ToString() + System.Environment.NewLine + txt_Result.Text;
                                     }
                                     analogflag = analogflag ? false : true;
-                                    
+
                                     _RegMode = -1;
                                 }
                             }
@@ -428,50 +433,17 @@ namespace Odin.Workshop
 
                             }
                         }
+                        else
+                        {
+                            DialogResult result = KryptonTaskDialog.Show("Error during label reading!",
+                                                                             "You are trying to insert label in wrong batch!",
+                                                                             "Label reading data: " + txt_Oper.Text.Trim(),
+                                                                             MessageBoxIcon.Warning,
+                                                                            TaskDialogButtons.OK);
+                        }
                     }
                 }
 
-                //else
-                //{
-                //        SqlConnection conn = new SqlConnection(sConnStr);
-                //        conn.Open();
-                //        DataSet ds = new DataSet();
-
-                //        SqlDataAdapter adapter =
-                //            new SqlDataAdapter(
-                //                "execute sp_SelectStockLabelDetsForMove @id = " + ReadValue + ", @batchid = " + BatchId, conn);
-
-
-                //        conn.Close();
-
-                //        adapter.Fill(ds);
-
-                //        DataTable dt = ds.Tables[0];
-
-                //        if (dt.Rows.Count > 0)
-                //        {
-                //        if (CheckRow(ReadValue) == true)
-                //        {
-                //            foreach (DataRow dr in dt.Rows)
-                //            {
-                //                InsertRow(Convert.ToInt32(dr["artid"]), dr["article"].ToString(), ReadValue, Convert.ToDouble(dr["qty"]), dr["unit"].ToString(),
-                //                            dr["batch"].ToString(), Convert.ToInt32(dr["placeid"]), dr["place"].ToString(), dr["comments"].ToString(),
-                //                            dr["datacode"].ToString(), dr["expdate"].ToString(), Convert.ToInt32(dr["bdid"]));
-                //            }
-                //            SetCellsColor();
-                //        }
-                //    }
-                //        else
-                //        {
-                //            DialogResult result = KryptonTaskDialog.Show("Error during label reading!",
-                //                                                     "Error during label reading!",
-                //                                                     "Label reading data: " + txt_Oper.Text.Trim(),
-                //                                                     MessageBoxIcon.Warning,
-                //                                                     TaskDialogButtons.OK);
-                //        }
-                //}
-
-                //Clear temp field
                 txt_Oper.Text = "";
                 txt_Oper.Focus();
 
