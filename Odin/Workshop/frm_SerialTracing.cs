@@ -3,7 +3,6 @@ using Npgsql;
 using Odin.CMB_Components.BLL;
 using Odin.Global_Classes;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -29,12 +28,7 @@ namespace Odin.Workshop
         Processing_BLL ProdBll = new Processing_BLL();
         CMB_BLL CmbBll = new CMB_BLL();
 
-        int PCB_label = 1;
-        int Panel_label = 0;
-        int PCBs_per_panel = 1;
-        Queue<string> serialorder = new Queue<string>();
-        bool analogflag = false;
-        int Serial_req = 0;
+
 
         public int ReadValue = 0;
         public string Result = "";
@@ -94,6 +88,7 @@ namespace Odin.Workshop
             {
                 cmb_BatchPDA1.BatchId = value;
                 ScanOrder = value != 0 ? RegMode == -1 ? 2 : 3 : 1;
+
             }
 
         }
@@ -154,18 +149,6 @@ namespace Odin.Workshop
         #endregion
 
         #region Methods
-
-        public void FillSerialScanOrder(int _batchid)
-        {
-            if (_batchid == 0) return;
-            string[] data = ((string)Helper.GetOneRecord(string.Format("exec sp_SelectSerialScanOrder @batchid = '{0}'", _batchid))).Split(' ');
-
-            PCB_label = Convert.ToInt32(data[0]);
-            Panel_label = Convert.ToInt32(data[1]);
-            PCBs_per_panel = Convert.ToInt32(data[2]);
-            Serial_req = Convert.ToInt32(data[3]);
-            analogflag = false;
-        }
 
         public void AddSerialTracing(int stageid, int batchid, string serial)
         {
@@ -259,16 +242,12 @@ namespace Odin.Workshop
                 Freezed = 1;
                 _scanlabel = "";
                 txt_Oper.Focus();
-                FillSerialScanOrder(BatchId);
-
             }
             else
             {
                 Freezed = -1;
                 txt_Oper.Focus();
                 //cmb_Articles1.Focus();
-                FillSerialScanOrder(BatchId);
-
             }
         }
 
@@ -281,8 +260,6 @@ namespace Odin.Workshop
                 StageId = 5;
                 txt_Oper.Text = string.Empty;
                 txt_Oper.Focus();
-                FillSerialScanOrder(BatchId);
-
             }
         }
 
@@ -293,8 +270,6 @@ namespace Odin.Workshop
                 StageId = 6;
                 txt_Oper.Text = string.Empty;
                 txt_Oper.Focus();
-                FillSerialScanOrder(BatchId);
-
             }
         }
 
@@ -305,8 +280,6 @@ namespace Odin.Workshop
                 StageId = 7;
                 txt_Oper.Text = string.Empty;
                 txt_Oper.Focus();
-                FillSerialScanOrder(BatchId);
-
             }
         }
 
@@ -315,8 +288,6 @@ namespace Odin.Workshop
 
             ScanOrder = BatchId == 0 ? 1 : RegMode == -1 ? 2 : 3;
             txt_Oper.Focus();
-            FillSerialScanOrder(BatchId);
-
         }
 
         private void txt_Oper_KeyPress(object sender, KeyPressEventArgs e)
@@ -366,10 +337,7 @@ namespace Odin.Workshop
                                                                              MessageBoxIcon.Warning,
                                                                             TaskDialogButtons.OK);
                         }
-                        var b = Helper.GetOneRecord("select top 1 batch from prod_batchhead where id = '" + BatchId + "'").ToString();
-                        var l = "L" + txt_Oper.Text.Trim().Substring(0, txt_Oper.Text.Trim().IndexOf("-") < 0 ? 0 : txt_Oper.Text.Trim().IndexOf("-") - 2).ToString();
-
-                        if (Serial_req == 0 || b == l)
+                        else
                         {
                             //Trying to insert
                             if (RegMode == -1)
@@ -395,19 +363,7 @@ namespace Odin.Workshop
                                     }
                                     //Add New Serial
                                     //MessageBox.Show("Adding!");
-                                    string _res = "";
-                                    if ((PCB_label != 2 || StageId != 5) || !analogflag)
-                                    {
-                                        AddSerialTracing(StageId, BatchId, txt_Oper.Text.Trim());
-                                        serialorder.Enqueue(txt_Oper.Text.Trim());
-                                    }
-                                    else
-                                    {
-                                        _res = ProdBll.AddSerialNumberAnalogue(serialorder.Dequeue(), txt_Oper.Text.Trim(), 0);
-                                        txt_Result.Text = _res + " at " + System.DateTime.Now.ToString() + System.Environment.NewLine + txt_Result.Text;
-                                    }
-                                    analogflag = analogflag ? false : true;
-
+                                    AddSerialTracing(StageId, BatchId, txt_Oper.Text.Trim());
                                     _RegMode = -1;
                                 }
                             }
@@ -433,17 +389,50 @@ namespace Odin.Workshop
 
                             }
                         }
-                        else
-                        {
-                            DialogResult result = KryptonTaskDialog.Show("Error during label reading!",
-                                                                             "You are trying to insert label in wrong batch!",
-                                                                             "Label reading data: " + txt_Oper.Text.Trim(),
-                                                                             MessageBoxIcon.Warning,
-                                                                            TaskDialogButtons.OK);
-                        }
                     }
                 }
 
+                //else
+                //{
+                //        SqlConnection conn = new SqlConnection(sConnStr);
+                //        conn.Open();
+                //        DataSet ds = new DataSet();
+
+                //        SqlDataAdapter adapter =
+                //            new SqlDataAdapter(
+                //                "execute sp_SelectStockLabelDetsForMove @id = " + ReadValue + ", @batchid = " + BatchId, conn);
+
+
+                //        conn.Close();
+
+                //        adapter.Fill(ds);
+
+                //        DataTable dt = ds.Tables[0];
+
+                //        if (dt.Rows.Count > 0)
+                //        {
+                //        if (CheckRow(ReadValue) == true)
+                //        {
+                //            foreach (DataRow dr in dt.Rows)
+                //            {
+                //                InsertRow(Convert.ToInt32(dr["artid"]), dr["article"].ToString(), ReadValue, Convert.ToDouble(dr["qty"]), dr["unit"].ToString(),
+                //                            dr["batch"].ToString(), Convert.ToInt32(dr["placeid"]), dr["place"].ToString(), dr["comments"].ToString(),
+                //                            dr["datacode"].ToString(), dr["expdate"].ToString(), Convert.ToInt32(dr["bdid"]));
+                //            }
+                //            SetCellsColor();
+                //        }
+                //    }
+                //        else
+                //        {
+                //            DialogResult result = KryptonTaskDialog.Show("Error during label reading!",
+                //                                                     "Error during label reading!",
+                //                                                     "Label reading data: " + txt_Oper.Text.Trim(),
+                //                                                     MessageBoxIcon.Warning,
+                //                                                     TaskDialogButtons.OK);
+                //        }
+                //}
+
+                //Clear temp field
                 txt_Oper.Text = "";
                 txt_Oper.Focus();
 
@@ -470,15 +459,11 @@ namespace Odin.Workshop
         private void cmb_BatchPDA1_BatchTextEntered(object sender)
         {
             txt_Oper.Focus();
-            FillSerialScanOrder(BatchId);
-
         }
 
         private void cmb_BatchPDA1_BatchKeyPressed(object sender)
         {
             txt_Oper.Focus();
-            FillSerialScanOrder(BatchId);
-
         }
 
         private void btn_AdvView_Click(object sender, EventArgs e)
