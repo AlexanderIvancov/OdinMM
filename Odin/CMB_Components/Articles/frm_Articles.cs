@@ -10,6 +10,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 namespace Odin.CMB_Components.Articles
 {
     public partial class frm_Articles : Form
@@ -534,6 +535,77 @@ namespace Odin.CMB_Components.Articles
         private void btn_Supplier_Click(object sender, EventArgs e)
         {
             ShowSupplier();
+        }
+
+        private void btn_Copy_Click(object sender, EventArgs e)
+        {
+            int _id = 0;
+
+            try { _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value); }
+            catch { }
+
+            if (_id != 0)
+            {
+                _showingModal = true;
+
+                frm_AddArticle frm = new frm_AddArticle();
+                frm.CheckEmpty();
+
+                Reg.ArtId = _id;
+
+                frm.Id = 0;// Reg.ArtId;
+                frm.Article = Reg.Article;
+                frm.SecName = Reg.SecName;
+                frm.Description = Reg.Description;
+                frm.TypeId = Reg.TypeId;
+                frm.UnitId = Reg.UnitId;
+                frm.ImagePath = "";
+                frm.Comments = Reg.Comments;
+                frm.CustCodeId = Reg.CustCodeId;
+                frm.QtyReserve = Reg.QtyReserve;
+                frm.DeptId = Reg.DeptId;
+                frm.CreateSubBatch = Reg.CreateSubBatch;
+                frm.Weight = Reg.Weight;
+                frm.IsActive = Reg.IsActive;
+                frm.Revision = Reg.Revision;
+                frm.StoreRules = Reg.StorageRules;
+                frm.SpoilNorm = Reg.SpoilNorm;
+                //frm.ShowImage(frm.ImagePath);
+                frm.StageId = Reg.StageId;
+                frm.MSL = Reg.MSL;
+                frm.Service = Reg.Service;
+                //frm.LabelsQty = Reg.LabelsQty;
+                //frm.StencilRequired = Reg.StencilRequired;
+                //frm.StencilID = Reg.StencilID;
+                frm.Warning = Reg.Warning;
+                frm.SpoilConst = Reg.SpoilConst;
+                frm.AsPF = 0;
+                frm.MBLimit = Reg.MBLimit;
+                DialogResult result = frm.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    _showingModal = false;
+
+                    //Copy
+                    int _res = Reg.SaveArticle(0, Regex.Replace(frm.Article, @"\p{C}+", string.Empty), frm.SecName, frm.Description, frm.TypeId, frm.UnitId, frm.ImagePath, frm.Comments,
+                                    frm.CustCodeId, frm.QtyReserve, frm.DeptId, frm.CreateSubBatch, frm.Weight, frm.IsActive, frm.IsCertified,
+                                    frm.Revision, frm.StoreRules, frm.SpoilNorm, frm.StageId, frm.MSL, frm.Service, /*frm.LabelsQty, frm.StencilRequired, 
+                                    frm.StencilID*/0, 0, 0, frm.Warning, frm.SpoilConst, frm.AsPF, frm.MBLimit);
+                    if (_res != 0)
+                    {
+                        Reg.ArtId = _res;
+                        FillData(frm.Article);
+                        ((cmb_Articles)cmb_ArticleOne).ArticleId = _res;
+                        ((cmb_Articles)cmb_ArticleOne).ArticleDets(_res);
+                        ((cmb_Articles)cmb_ArticleOne).ArticleSendSave();
+                    }
+                }
+                if (result == DialogResult.Cancel)
+                {
+                    _showingModal = false;
+                }
+            }
         }
     }
 }
