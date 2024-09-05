@@ -34,7 +34,8 @@
             this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.ArtID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Article = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.position = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Position = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Stage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SecName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Analog = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -86,7 +87,8 @@
             this.ArtID,
             this.Article,
             this.SecName,
-            this.position,
+            this.Position,
+            this.Stage,
             this.Analog,
             this.Qty,
             this.DateCreation,
@@ -122,9 +124,15 @@
             // 
             // SecName
             // 
-            this.position.DataPropertyName = "position";
-            this.position.HeaderText = "position";
-            this.position.Name = "position";
+            this.Position.DataPropertyName = "Position";
+            this.Position.HeaderText = "Position";
+            this.Position.Name = "Position";
+                // 
+            // SecName
+            // 
+            this.Stage.DataPropertyName = "Stage";
+            this.Stage.HeaderText = "Stage";
+            this.Stage.Name = "Stage";
             // 
             // Analog
             // 
@@ -146,9 +154,9 @@
             // 
             // CpseMark
             // 
-            this.DateCreation.DataPropertyName = "DateCreation";
-            this.DateCreation.HeaderText = "DateCreation";
-            this.DateCreation.Name = "DateCreation";
+            this.DateCreation.DataPropertyName = "DateOfClosing";
+            this.DateCreation.HeaderText = "Date of closing";
+            this.DateCreation.Name = "DateOfClosing";
             // 
             // Supplier
             // 
@@ -275,7 +283,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ArtID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Article;
         private System.Windows.Forms.DataGridViewTextBoxColumn SecName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn position;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Position;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Stage;
         private System.Windows.Forms.DataGridViewTextBoxColumn Analog;
         private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn DateCreation;

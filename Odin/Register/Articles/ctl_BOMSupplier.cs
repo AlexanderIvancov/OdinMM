@@ -68,13 +68,13 @@ namespace Odin.Register.Articles
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
                 if (row.Cells["Indate"].Value.ToString() != "") {
-                    if (Convert.ToDateTime(row.Cells["Indate"].Value) >= Convert.ToDateTime(row.Cells["DateCreation"].Value))
+                    if (Convert.ToDateTime(row.Cells["Indate"].Value) >= Convert.ToDateTime(row.Cells["DateOfClosing"].Value))
                         foreach (DataGridViewCell cell in row.Cells)
                             cell.Style.BackColor = System.Drawing.Color.Yellow;
                 }
-            else
-                foreach (DataGridViewCell cell in row.Cells)
-                    cell.Style.BackColor = System.Drawing.Color.Tomato;
+                else
+                    foreach (DataGridViewCell cell in row.Cells)
+                        cell.Style.BackColor = System.Drawing.Color.Tomato;
         }
         private void btn_Excel_Click(object sender, EventArgs e)
         {
