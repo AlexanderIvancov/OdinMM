@@ -126,18 +126,6 @@
             this.kryptonHeader2 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.kryptonLabel16 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.gv_Dets = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_labelid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_dartid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_darticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_dqtyoper = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_dunit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_dplace = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_unitprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_dbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_drequest = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_dcomments = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_ddepartment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bn_Dets = new System.Windows.Forms.BindingNavigator(this.components);
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
@@ -150,9 +138,21 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.btn_Delete = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.btn_PrintLabel = new System.Windows.Forms.ToolStripButton();
             this.kryptonHeader3 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.buttonSpecAny1 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.btn_PrintLabel = new System.Windows.Forms.ToolStripButton();
+            this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_labelid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_dartid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_darticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_dqtyoper = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_dunit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_dplace = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_unitprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_dbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_drequest = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_dcomments = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_ddepartment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.tgv_List)).BeginInit();
             this.mnu_Lines.SuspendLayout();
             this.mnu_LinesDets.SuspendLayout();
@@ -1030,7 +1030,6 @@
             this.cmb_Batches1.ConfOrderId = 0;
             this.cmb_Batches1.CustArticle = "";
             this.cmb_Batches1.Customer = "";
-            this.cmb_Batches1.Enabled = false;
             this.cmb_Batches1.IsActive = 0;
             this.cmb_Batches1.IsGroup = 0;
             this.cmb_Batches1.IsProject = 0;
@@ -1075,6 +1074,7 @@
             this.cmb_Articles1.DeptId = 0;
             this.cmb_Articles1.Description = null;
             this.cmb_Articles1.IsActive = -1;
+            this.cmb_Articles1.IsCertified = -1;
             this.cmb_Articles1.IsPF = 0;
             this.cmb_Articles1.Location = new System.Drawing.Point(88, 40);
             this.cmb_Articles1.Manufacturer = "";
@@ -1163,106 +1163,6 @@
             this.gv_Dets.RowHeadersWidth = 20;
             this.gv_Dets.Size = new System.Drawing.Size(1424, 61);
             this.gv_Dets.TabIndex = 9;
-            // 
-            // cn_id
-            // 
-            this.cn_id.DataPropertyName = "id";
-            this.cn_id.HeaderText = "Id";
-            this.cn_id.Name = "cn_id";
-            this.cn_id.ReadOnly = true;
-            this.cn_id.Visible = false;
-            // 
-            // cn_labelid
-            // 
-            this.cn_labelid.DataPropertyName = "label";
-            this.cn_labelid.HeaderText = "Label";
-            this.cn_labelid.Name = "cn_labelid";
-            this.cn_labelid.ReadOnly = true;
-            // 
-            // cn_dartid
-            // 
-            this.cn_dartid.DataPropertyName = "artid";
-            this.cn_dartid.FillWeight = 80F;
-            this.cn_dartid.HeaderText = "Art. id";
-            this.cn_dartid.Name = "cn_dartid";
-            this.cn_dartid.ReadOnly = true;
-            this.cn_dartid.Width = 80;
-            // 
-            // cn_darticle
-            // 
-            this.cn_darticle.DataPropertyName = "article";
-            this.cn_darticle.FillWeight = 200F;
-            this.cn_darticle.HeaderText = "Article";
-            this.cn_darticle.Name = "cn_darticle";
-            this.cn_darticle.ReadOnly = true;
-            this.cn_darticle.Width = 200;
-            // 
-            // cn_dqtyoper
-            // 
-            this.cn_dqtyoper.DataPropertyName = "qty";
-            this.cn_dqtyoper.FillWeight = 80F;
-            this.cn_dqtyoper.HeaderText = "Qty";
-            this.cn_dqtyoper.Name = "cn_dqtyoper";
-            this.cn_dqtyoper.ReadOnly = true;
-            this.cn_dqtyoper.Width = 80;
-            // 
-            // cn_dunit
-            // 
-            this.cn_dunit.DataPropertyName = "unit";
-            this.cn_dunit.FillWeight = 40F;
-            this.cn_dunit.HeaderText = "Unit";
-            this.cn_dunit.Name = "cn_dunit";
-            this.cn_dunit.ReadOnly = true;
-            this.cn_dunit.Width = 40;
-            // 
-            // cn_dplace
-            // 
-            this.cn_dplace.DataPropertyName = "place";
-            this.cn_dplace.FillWeight = 250F;
-            this.cn_dplace.HeaderText = "Place";
-            this.cn_dplace.Name = "cn_dplace";
-            this.cn_dplace.ReadOnly = true;
-            this.cn_dplace.Width = 250;
-            // 
-            // cn_unitprice
-            // 
-            this.cn_unitprice.DataPropertyName = "unitprice";
-            this.cn_unitprice.HeaderText = "Unit price(€)";
-            this.cn_unitprice.Name = "cn_unitprice";
-            this.cn_unitprice.ReadOnly = true;
-            // 
-            // cn_dbatch
-            // 
-            this.cn_dbatch.DataPropertyName = "batch";
-            this.cn_dbatch.FillWeight = 75F;
-            this.cn_dbatch.HeaderText = "Batch";
-            this.cn_dbatch.Name = "cn_dbatch";
-            this.cn_dbatch.ReadOnly = true;
-            this.cn_dbatch.Width = 75;
-            // 
-            // cn_drequest
-            // 
-            this.cn_drequest.DataPropertyName = "request";
-            this.cn_drequest.FillWeight = 75F;
-            this.cn_drequest.HeaderText = "Request";
-            this.cn_drequest.Name = "cn_drequest";
-            this.cn_drequest.ReadOnly = true;
-            this.cn_drequest.Width = 75;
-            // 
-            // cn_dcomments
-            // 
-            this.cn_dcomments.DataPropertyName = "comments";
-            this.cn_dcomments.FillWeight = 250F;
-            this.cn_dcomments.HeaderText = "Comments";
-            this.cn_dcomments.Name = "cn_dcomments";
-            this.cn_dcomments.ReadOnly = true;
-            this.cn_dcomments.Width = 250;
-            // 
-            // cn_ddepartment
-            // 
-            this.cn_ddepartment.HeaderText = "Department";
-            this.cn_ddepartment.Name = "cn_ddepartment";
-            this.cn_ddepartment.ReadOnly = true;
             // 
             // bn_Dets
             // 
@@ -1380,6 +1280,16 @@
             this.toolStripButton5.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton5.Text = "Export into excel";
             // 
+            // btn_PrintLabel
+            // 
+            this.btn_PrintLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_PrintLabel.Image = ((System.Drawing.Image)(resources.GetObject("btn_PrintLabel.Image")));
+            this.btn_PrintLabel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_PrintLabel.Name = "btn_PrintLabel";
+            this.btn_PrintLabel.Size = new System.Drawing.Size(23, 22);
+            this.btn_PrintLabel.Text = "Print outcome label";
+            this.btn_PrintLabel.Click += new System.EventHandler(this.btn_PrintLabel_Click);
+            // 
             // kryptonHeader3
             // 
             this.kryptonHeader3.Dock = System.Windows.Forms.DockStyle.Top;
@@ -1396,15 +1306,105 @@
             this.buttonSpecAny1.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny1.UniqueName = "ED62D4F425E1454A7EB8AAF6D8EF2F6F";
             // 
-            // btn_PrintLabel
+            // cn_id
             // 
-            this.btn_PrintLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btn_PrintLabel.Image = ((System.Drawing.Image)(resources.GetObject("btn_PrintLabel.Image")));
-            this.btn_PrintLabel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_PrintLabel.Name = "btn_PrintLabel";
-            this.btn_PrintLabel.Size = new System.Drawing.Size(23, 22);
-            this.btn_PrintLabel.Text = "Print outcome label";
-            this.btn_PrintLabel.Click += new System.EventHandler(this.btn_PrintLabel_Click);
+            this.cn_id.DataPropertyName = "id";
+            this.cn_id.HeaderText = "Id";
+            this.cn_id.Name = "cn_id";
+            this.cn_id.ReadOnly = true;
+            this.cn_id.Visible = false;
+            // 
+            // cn_labelid
+            // 
+            this.cn_labelid.DataPropertyName = "label";
+            this.cn_labelid.HeaderText = "Label";
+            this.cn_labelid.Name = "cn_labelid";
+            this.cn_labelid.ReadOnly = true;
+            // 
+            // cn_dartid
+            // 
+            this.cn_dartid.DataPropertyName = "artid";
+            this.cn_dartid.FillWeight = 80F;
+            this.cn_dartid.HeaderText = "Art. id";
+            this.cn_dartid.Name = "cn_dartid";
+            this.cn_dartid.ReadOnly = true;
+            this.cn_dartid.Width = 80;
+            // 
+            // cn_darticle
+            // 
+            this.cn_darticle.DataPropertyName = "article";
+            this.cn_darticle.FillWeight = 200F;
+            this.cn_darticle.HeaderText = "Article";
+            this.cn_darticle.Name = "cn_darticle";
+            this.cn_darticle.ReadOnly = true;
+            this.cn_darticle.Width = 200;
+            // 
+            // cn_dqtyoper
+            // 
+            this.cn_dqtyoper.DataPropertyName = "qty";
+            this.cn_dqtyoper.FillWeight = 80F;
+            this.cn_dqtyoper.HeaderText = "Qty";
+            this.cn_dqtyoper.Name = "cn_dqtyoper";
+            this.cn_dqtyoper.ReadOnly = true;
+            this.cn_dqtyoper.Width = 80;
+            // 
+            // cn_dunit
+            // 
+            this.cn_dunit.DataPropertyName = "unit";
+            this.cn_dunit.FillWeight = 40F;
+            this.cn_dunit.HeaderText = "Unit";
+            this.cn_dunit.Name = "cn_dunit";
+            this.cn_dunit.ReadOnly = true;
+            this.cn_dunit.Width = 40;
+            // 
+            // cn_dplace
+            // 
+            this.cn_dplace.DataPropertyName = "place";
+            this.cn_dplace.FillWeight = 250F;
+            this.cn_dplace.HeaderText = "Place";
+            this.cn_dplace.Name = "cn_dplace";
+            this.cn_dplace.ReadOnly = true;
+            this.cn_dplace.Width = 250;
+            // 
+            // cn_unitprice
+            // 
+            this.cn_unitprice.DataPropertyName = "unitprice";
+            this.cn_unitprice.HeaderText = "Unit price(BYN)";
+            this.cn_unitprice.Name = "cn_unitprice";
+            this.cn_unitprice.ReadOnly = true;
+            // 
+            // cn_dbatch
+            // 
+            this.cn_dbatch.DataPropertyName = "batch";
+            this.cn_dbatch.FillWeight = 75F;
+            this.cn_dbatch.HeaderText = "Batch";
+            this.cn_dbatch.Name = "cn_dbatch";
+            this.cn_dbatch.ReadOnly = true;
+            this.cn_dbatch.Width = 75;
+            // 
+            // cn_drequest
+            // 
+            this.cn_drequest.DataPropertyName = "request";
+            this.cn_drequest.FillWeight = 75F;
+            this.cn_drequest.HeaderText = "Request";
+            this.cn_drequest.Name = "cn_drequest";
+            this.cn_drequest.ReadOnly = true;
+            this.cn_drequest.Width = 75;
+            // 
+            // cn_dcomments
+            // 
+            this.cn_dcomments.DataPropertyName = "comments";
+            this.cn_dcomments.FillWeight = 250F;
+            this.cn_dcomments.HeaderText = "Comments";
+            this.cn_dcomments.Name = "cn_dcomments";
+            this.cn_dcomments.ReadOnly = true;
+            this.cn_dcomments.Width = 250;
+            // 
+            // cn_ddepartment
+            // 
+            this.cn_ddepartment.HeaderText = "Department";
+            this.cn_ddepartment.Name = "cn_ddepartment";
+            this.cn_ddepartment.ReadOnly = true;
             // 
             // frm_StockOut
             // 
@@ -1454,7 +1454,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bn_Dets)).EndInit();
             this.bn_Dets.ResumeLayout(false);
             this.bn_Dets.PerformLayout();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
@@ -1536,18 +1536,6 @@
         private AdvancedDataGridView.TreeGridView tgv_List;
         private System.Windows.Forms.ToolStripButton btn_Wizard;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_labelid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_dartid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_darticle;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_dqtyoper;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_dunit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_dplace;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_unitprice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_dbatch;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_drequest;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_dcomments;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_ddepartment;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_Reserved;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel9;
         private CMB_Components.Common.cmb_Common cmb_Common1;
@@ -1581,5 +1569,17 @@
         public CMB_Components.Requests.cmb_Requests cmb_Requests1;
         private System.Windows.Forms.ToolStripMenuItem mnu_MapBatch;
         private System.Windows.Forms.ToolStripButton btn_PrintLabel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_labelid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_dartid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_darticle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_dqtyoper;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_dunit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_dplace;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_unitprice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_dbatch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_drequest;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_dcomments;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_ddepartment;
     }
 }
