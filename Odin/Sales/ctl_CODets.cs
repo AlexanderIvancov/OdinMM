@@ -162,6 +162,12 @@ namespace Odin.Sales
             set { txt_SalesComments.Text = value; }
         }
 
+        public string COContract
+        {
+            get { return txt_Contract.Text; }
+            set { txt_Contract.Text = value; }
+        }
+
         public int CODelivPlaceId
         {
             get { return cmb_Firms1.FirmId; }
@@ -356,6 +362,7 @@ namespace Odin.Sales
                 COQtyInBatch = COBll.COQtyInBatch;
                 COBlocked = COBll.COBlocked;
                 COSalesComments = COBll.COSalesComments;
+                COContract = COBll.COContract;
                 COPrimary = COBll.COPrimary;
 
                 FillStages(_coid);
@@ -440,7 +447,7 @@ namespace Odin.Sales
                 NewLineId = COBll.SaveCOLine(COId, COHeadId, COLine, COCustOrder, COCustLine, "", "", COArtId, COCustArticle, COService, COQty,
                                             COUnitId, COReqDate, COStateId, COUnitPrice, COVat, COComments, COComments1,
                                             COLogComments, CODelivPlaceId, CODelivAddressId, COEndCustId, "", "", "", datastages, COInternal, 
-                                            COResale, COSpoilage, COBlocked, COSalesComments, COPrimary);
+                                            COResale, COSpoilage, COBlocked, COSalesComments, COContract, COPrimary);
 
                
             }

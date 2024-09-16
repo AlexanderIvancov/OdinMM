@@ -376,7 +376,7 @@ namespace Odin.Sales
                                             frm.ctl_CODets1.COVat, frm.ctl_CODets1.COComments, frm.ctl_CODets1.COComments1,
                                             frm.ctl_CODets1.COLogComments, frm.ctl_CODets1.CODelivPlaceId, frm.ctl_CODets1.CODelivAddressId, frm.ctl_CODets1.COEndCustId, "", "", "",
                                             datastages, frm.ctl_CODets1.COInternal, frm.ctl_CODets1.COResale, frm.ctl_CODets1.COSpoilage, frm.ctl_CODets1.COBlocked, 
-                                            frm.ctl_CODets1.COSalesComments, frm.ctl_CODets1.COPrimary);
+                                            frm.ctl_CODets1.COSalesComments, frm.ctl_CODets1.COContract, frm.ctl_CODets1.COPrimary);
 
 
                 bwStart(bw_List);

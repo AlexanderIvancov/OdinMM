@@ -298,6 +298,7 @@ namespace Odin.Sales
                         COBlocked = Convert.ToInt32(dr["blockdelivery"]);
                         COPaid = Convert.ToDouble(dr["paid"]);
                         COSalesComments = dr["salescomments"].ToString();
+                        COContract = dr["contract"].ToString();
                         COQtyIn = Convert.ToDouble(dr["qtyin"]);
                         COPrimary = Convert.ToInt32(dr["isprimary"]);
                     }
@@ -448,6 +449,8 @@ namespace Odin.Sales
         { get; set; }
         public string COSalesComments
         { get; set; }
+        public string COContract
+        { get; set; }
         public double COQtyIn
         { get; set; }
         public int COPrimary
@@ -496,6 +499,7 @@ namespace Odin.Sales
             COBlocked = 0;
             COPaid = 0;
             COSalesComments = "";
+            COContract = "";
             COQtyIn = 0;
             COPrimary = 0;
         }
@@ -504,7 +508,7 @@ namespace Odin.Sales
                             int service, double qty, int unitid, string reqdate, int stateid, double unitprice, double vat,
                             string comments, string comments1, string logcomments, int delivplaceid, int delivaddressid, int endcustid, string endcustorder,
                             string endcustref, string endcustreqdate, DataTable stages, int _internal, int _resale, double _spoilage, int _blocked,
-                            string _salescomments, int _isprimary)
+                            string _salescomments, string _contract, int _isprimary)
         {
             int _res = 0;
 
@@ -547,6 +551,7 @@ namespace Odin.Sales
             sqlComm.Parameters.AddWithValue("@internal", _internal);
             sqlComm.Parameters.AddWithValue("@resale", _resale);
             sqlComm.Parameters.AddWithValue("@salescomments", _salescomments);
+            sqlComm.Parameters.AddWithValue("@contract", _contract);
             sqlComm.Parameters.AddWithValue("@isprimary", _isprimary);
 
 

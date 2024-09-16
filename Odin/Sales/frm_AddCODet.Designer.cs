@@ -41,7 +41,7 @@
             this.kryptonPanel1.Controls.Add(this.btn_Cancel);
             this.kryptonPanel1.Controls.Add(this.btn_OK);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.kryptonPanel1.Location = new System.Drawing.Point(0, 416);
+            this.kryptonPanel1.Location = new System.Drawing.Point(0, 443);
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(548, 59);
             this.kryptonPanel1.TabIndex = 1;
@@ -74,6 +74,7 @@
             this.ctl_CODets1.COBlocked = 0;
             this.ctl_CODets1.COComments = "";
             this.ctl_CODets1.COComments1 = "";
+            this.ctl_CODets1.COContract = "";
             this.ctl_CODets1.COCreatAt = "";
             this.ctl_CODets1.COCreatBy = "";
             this.ctl_CODets1.COCustArticle = "";
@@ -89,6 +90,7 @@
             this.ctl_CODets1.COInternal = 0;
             this.ctl_CODets1.COLine = 0;
             this.ctl_CODets1.COLogComments = "";
+            this.ctl_CODets1.COPrimary = 0;
             this.ctl_CODets1.COPurLine = null;
             this.ctl_CODets1.COPurOrder = null;
             this.ctl_CODets1.COQty = 0D;
@@ -107,14 +109,14 @@
             this.ctl_CODets1.IsCopy = 0;
             this.ctl_CODets1.Location = new System.Drawing.Point(0, 0);
             this.ctl_CODets1.Name = "ctl_CODets1";
-            this.ctl_CODets1.Size = new System.Drawing.Size(548, 416);
+            this.ctl_CODets1.Size = new System.Drawing.Size(548, 443);
             this.ctl_CODets1.TabIndex = 2;
             // 
             // frm_AddCODet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(548, 475);
+            this.ClientSize = new System.Drawing.Size(548, 502);
             this.Controls.Add(this.ctl_CODets1);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -123,7 +125,7 @@
             this.Text = "Add CO line";
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
