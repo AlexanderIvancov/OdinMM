@@ -52,12 +52,13 @@
             this.txt_Stock = new System.Windows.Forms.ToolStripButton();
             this.btn_CONeeds = new System.Windows.Forms.ToolStripButton();
             this.btn_Coincidences = new System.Windows.Forms.ToolStripButton();
+            this.btn_Setup = new System.Windows.Forms.ToolStripButton();
+            this.btn_Supplier = new System.Windows.Forms.ToolStripButton();
             this.btn_ProductCard = new System.Windows.Forms.ToolStripButton();
             this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
             this.bs_List = new System.Windows.Forms.BindingSource(this.components);
             this.bs_AliasesList = new System.Windows.Forms.BindingSource(this.components);
-            this.btn_Setup = new System.Windows.Forms.ToolStripButton();
-            this.btn_Supplier = new System.Windows.Forms.ToolStripButton();
+            this.btn_Copy = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).BeginInit();
             this.kryptonHeaderGroup1.Panel.SuspendLayout();
@@ -269,6 +270,7 @@
             this.bindingNavigator1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btn_AddNew,
             this.btn_Edit,
+            this.btn_Copy,
             this.btn_Delete,
             this.txt_Stock,
             this.btn_CONeeds,
@@ -347,20 +349,6 @@
             this.btn_Coincidences.Text = "Check for coincidence";
             this.btn_Coincidences.Click += new System.EventHandler(this.btn_Coincidences_Click);
             // 
-            // btn_ProductCard
-            // 
-            this.btn_ProductCard.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btn_ProductCard.Image = global::Odin.Global_Resourses.Print2;
-            this.btn_ProductCard.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_ProductCard.Name = "btn_ProductCard";
-            this.btn_ProductCard.Size = new System.Drawing.Size(23, 22);
-            this.btn_ProductCard.Text = "Print product card";
-            this.btn_ProductCard.Click += new System.EventHandler(this.btn_ProductCard_Click);
-            // 
-            // kryptonManager1
-            // 
-            this.kryptonManager1.GlobalPaletteMode = ComponentFactory.Krypton.Toolkit.PaletteModeManager.Office2010Silver;
-            // 
             // btn_Setup
             // 
             this.btn_Setup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -380,6 +368,30 @@
             this.btn_Supplier.Size = new System.Drawing.Size(23, 22);
             this.btn_Supplier.Text = "Show supplier";
             this.btn_Supplier.Click += new System.EventHandler(this.btn_Supplier_Click);
+            // 
+            // btn_ProductCard
+            // 
+            this.btn_ProductCard.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_ProductCard.Image = global::Odin.Global_Resourses.Print2;
+            this.btn_ProductCard.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_ProductCard.Name = "btn_ProductCard";
+            this.btn_ProductCard.Size = new System.Drawing.Size(23, 22);
+            this.btn_ProductCard.Text = "Print product card";
+            this.btn_ProductCard.Click += new System.EventHandler(this.btn_ProductCard_Click);
+            // 
+            // kryptonManager1
+            // 
+            this.kryptonManager1.GlobalPaletteMode = ComponentFactory.Krypton.Toolkit.PaletteModeManager.Office2010Silver;
+            // 
+            // btn_Copy
+            // 
+            this.btn_Copy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_Copy.Image = global::Odin.Global_Resourses.Copy_16x16;
+            this.btn_Copy.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_Copy.Name = "btn_Copy";
+            this.btn_Copy.Size = new System.Drawing.Size(23, 22);
+            this.btn_Copy.Text = "Copy";
+            this.btn_Copy.Click += new System.EventHandler(this.btn_Copy_Click);
             // 
             // frm_Articles
             // 
@@ -408,7 +420,7 @@
             this.bindingNavigator1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_AliasesList)).EndInit();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
@@ -442,5 +454,6 @@
         public CombBoxGridView.ComboBoxGrid gv_List;
         private System.Windows.Forms.ToolStripButton btn_Setup;
         private System.Windows.Forms.ToolStripButton btn_Supplier;
+        private System.Windows.Forms.ToolStripButton btn_Copy;
     }
 }
