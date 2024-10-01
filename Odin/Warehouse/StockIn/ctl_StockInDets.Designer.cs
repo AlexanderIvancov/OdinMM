@@ -830,9 +830,13 @@
             this.txt_TotalWVAT.Location = new System.Drawing.Point(412, 198);
             this.txt_TotalWVAT.Name = "txt_TotalWVAT";
             this.txt_TotalWVAT.Size = new System.Drawing.Size(61, 23);
-            this.txt_TotalWVAT.StateActive.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txt_TotalWVAT.TabIndex = 16;
             this.txt_TotalWVAT.Text = "0";
+            this.txt_TotalWVAT.StateActive.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txt_TotalWVAT.StateActive.Content.Padding = new System.Windows.Forms.Padding(3);
+            this.txt_TotalWVAT.TextChanged += new System.EventHandler(this.txt_TotalWVAT_TextChanged);
+            this.txt_TotalWVAT.Click += new System.EventHandler(this.txt_TotalWVAT_Click);
+            this.txt_TotalWVAT.Enter += new System.EventHandler(this.txt_TotalWVAT_Enter);
             // 
             // kryptonLabel23
             // 
@@ -849,9 +853,14 @@
             this.txt_Total.Location = new System.Drawing.Point(120, 198);
             this.txt_Total.Name = "txt_Total";
             this.txt_Total.Size = new System.Drawing.Size(63, 23);
-            this.txt_Total.StateActive.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txt_Total.TabIndex = 14;
             this.txt_Total.Text = "0";
+            this.txt_Total.StateActive.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txt_Total.StateActive.Content.Padding = new System.Windows.Forms.Padding(3);
+            this.txt_Total.TextChanged += new System.EventHandler(this.txt_Total_TextChanged);
+            this.txt_Total.Click += new System.EventHandler(this.txt_Total_Click);
+            this.txt_Total.Enter += new System.EventHandler(this.txt_Total_Enter);
+
             // 
             // gradientPanel22
             // 

@@ -32,6 +32,7 @@ namespace Odin.Warehouse.StockIn
         }
 
         bool _IsCopy = false;
+        bool _IsAuto = false;
 
         public bool IsCopy
         {
@@ -380,33 +381,61 @@ namespace Odin.Warehouse.StockIn
             UnitPrice = 0;
             CoefConv = 1;
             CoefConvInOrder = 1;
-            //Vat = 0;
-
+            Total = 0;
+            TotalWVAT = 0;
+            TotalVAT = 0;
             strField = "UP";
-            CalcPriceVat();
-
-            ShowLineTots();
             NoExpDate = 0;
             ManufBatch = "";
         }
 
         private void ShowLineTots()
         {
+            _IsAuto = true;
             Total = Math.Round((Qty * UnitPrice), 2);
             TotalWVAT = Math.Round((Qty * PriceWVat), 2);
             TotalVAT = Math.Round(((Qty * PriceWVat) - (Qty * UnitPrice)), 2);
+            _IsAuto = false;
+        }
+
+        private void ShowLineUnits()
+        {
+            _IsAuto = true;
+            UnitPrice = Math.Round((Total / Qty), 2);
+            PriceWVat = Math.Round((TotalWVAT / Qty), 2);
+            _IsAuto = false;
+        }
+
+        private void CalcTotalWVAT()
+        {
+            _IsAuto = true;
+            TotalWVAT = Math.Round((Total + (Total / 100 * Vat)), 5, MidpointRounding.AwayFromZero);
+            ShowLineUnits();
+            _IsAuto = false;
+        }
+
+        private void CalcTotal()
+        {
+            _IsAuto = true;
+            Total = Math.Round(((TotalWVAT * 100) / (100 + Vat)), 5, MidpointRounding.AwayFromZero);
+            ShowLineUnits();
+            _IsAuto = false;
         }
 
         private void CalcPriceVat()
         {
+            _IsAuto = true;
             PriceWVat = Math.Round((UnitPrice + (UnitPrice / 100 * Vat)), 5, MidpointRounding.AwayFromZero);
             ShowLineTots();
+            _IsAuto = false;
         }
 
         private void CalcPrice()
         {
+            _IsAuto = true;
             UnitPrice = Math.Round(((PriceWVat * 100) / (100 + Vat)), 5, MidpointRounding.AwayFromZero);
             ShowLineTots();
+            _IsAuto = false;
         }
 
         private void CheckUnitPrice()
@@ -600,14 +629,46 @@ namespace Odin.Warehouse.StockIn
 
         private void txt_UnitPrice_TextChanged(object sender, EventArgs e)
         {
-            CalcPriceVat();
+            if (_IsAuto == false) CalcPriceVat();
             CheckUnitPrice();
         }
         
         private void txt_PriceWVat_TextChanged(object sender, EventArgs e)
         {
-            CalcPrice();
+            if (_IsAuto == false) CalcPrice();
             CheckUnitPrice();
+        }
+
+        private void txt_Total_TextChanged(object sender, EventArgs e)
+        {
+            if (_IsAuto == false) CalcTotalWVAT();
+            CheckUnitPrice();
+        }
+
+        private void txt_TotalWVAT_TextChanged(object sender, EventArgs e)
+        {
+            if (_IsAuto == false) CalcTotal();
+            CheckUnitPrice();
+        }
+
+        private void txt_Total_Click(object sender, EventArgs e)
+        {
+            strField = "TUP";
+        }
+
+        private void txt_Total_Enter(object sender, EventArgs e)
+        {
+            strField = "TUP";
+        }
+
+        private void txt_TotalWVAT_Click(object sender, EventArgs e)
+        {
+            strField = "TVAT";
+        }
+
+        private void txt_TotalWVAT_Enter(object sender, EventArgs e)
+        {
+            strField = "TVAT";
         }
 
         private void txt_UnitPrice_Click(object sender, EventArgs e)
@@ -632,10 +693,11 @@ namespace Odin.Warehouse.StockIn
 
         private void txt_Vat_TextChanged(object sender, EventArgs e)
         {
-            if (strField == "UP")
-                CalcPriceVat();
-            else
-                CalcPrice();
+            if (strField == "UP") CalcPriceVat();
+            else if (strField == "VAT") CalcPrice();
+            else if (strField == "TUP") CalcTotalWVAT();
+            else if (strField == "TVAT") CalcTotal();
+
             CheckUnitPrice();
         }
 
