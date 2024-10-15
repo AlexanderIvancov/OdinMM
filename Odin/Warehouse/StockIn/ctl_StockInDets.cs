@@ -410,6 +410,7 @@ namespace Odin.Warehouse.StockIn
         {
             _IsAuto = true;
             TotalWVAT = Math.Round((Total + (Total / 100 * Vat)), 5, MidpointRounding.AwayFromZero);
+            TotalVAT = Math.Round(TotalWVAT - Total, 5, MidpointRounding.AwayFromZero);
             ShowLineUnits();
             _IsAuto = false;
         }
@@ -418,6 +419,7 @@ namespace Odin.Warehouse.StockIn
         {
             _IsAuto = true;
             Total = Math.Round(((TotalWVAT * 100) / (100 + Vat)), 5, MidpointRounding.AwayFromZero);
+            TotalVAT = Math.Round(TotalWVAT - Total, 5, MidpointRounding.AwayFromZero);
             ShowLineUnits();
             _IsAuto = false;
         }
