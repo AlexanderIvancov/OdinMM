@@ -346,7 +346,7 @@ namespace Odin.Planning
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_CloseBatch", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
-
+            sqlComm.CommandTimeout= 30000;
             sqlComm.Parameters.AddWithValue("@Id", IdBatch);
 
             sqlConn.Open();
