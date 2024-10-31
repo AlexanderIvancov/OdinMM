@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_RestCorrection));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -52,6 +52,21 @@
             this.btn_Refresh = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.HeadArt = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_label = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_artid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_article = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_qtyinbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_qtyout = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_unitprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_qtyrest = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chk_removeres = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.cn_qtydiff = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_batchid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_iscounter = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_when = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mnu_Lines = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mni_FilterFor = new System.Windows.Forms.ToolStripTextBox();
             this.mni_Search = new System.Windows.Forms.ToolStripMenuItem();
@@ -83,21 +98,7 @@
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_label = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_artid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_article = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_qtyinbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_qtyout = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_unitprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_qtyrest = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chk_removeres = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.cn_qtydiff = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_batchid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_iscounter = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_when = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chk_CheckMode = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
             this.kryptonPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
@@ -214,6 +215,7 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.chk_CheckMode);
             this.kryptonPanel1.Controls.Add(this.chk_SelectAll);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel2);
             this.kryptonPanel1.Controls.Add(this.cmb_BatchStages1);
@@ -373,6 +375,138 @@
             this.gv_List.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_List_CellEnter);
             this.gv_List.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_List_CellValidated);
             this.gv_List.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_List_ColumnHeaderMouseClick);
+            // 
+            // cn_id
+            // 
+            this.cn_id.DataPropertyName = "id";
+            this.cn_id.FillWeight = 5F;
+            this.cn_id.HeaderText = "id";
+            this.cn_id.Name = "cn_id";
+            this.cn_id.ReadOnly = true;
+            this.cn_id.Visible = false;
+            this.cn_id.Width = 5;
+            // 
+            // cn_label
+            // 
+            this.cn_label.DataPropertyName = "label";
+            this.cn_label.FillWeight = 90F;
+            this.cn_label.HeaderText = "Label";
+            this.cn_label.Name = "cn_label";
+            this.cn_label.ReadOnly = true;
+            this.cn_label.Width = 90;
+            // 
+            // cn_artid
+            // 
+            this.cn_artid.DataPropertyName = "artid";
+            this.cn_artid.FillWeight = 80F;
+            this.cn_artid.HeaderText = "Art. id";
+            this.cn_artid.Name = "cn_artid";
+            this.cn_artid.ReadOnly = true;
+            this.cn_artid.Width = 80;
+            // 
+            // cn_article
+            // 
+            this.cn_article.DataPropertyName = "article";
+            this.cn_article.FillWeight = 200F;
+            this.cn_article.HeaderText = "Article";
+            this.cn_article.Name = "cn_article";
+            this.cn_article.ReadOnly = true;
+            this.cn_article.Width = 200;
+            // 
+            // cn_qtyinbatch
+            // 
+            this.cn_qtyinbatch.DataPropertyName = "qtyinbatch";
+            this.cn_qtyinbatch.FillWeight = 80F;
+            this.cn_qtyinbatch.HeaderText = "Qty in batch";
+            this.cn_qtyinbatch.Name = "cn_qtyinbatch";
+            this.cn_qtyinbatch.Width = 80;
+            // 
+            // cn_qty
+            // 
+            this.cn_qty.DataPropertyName = "qty";
+            this.cn_qty.FillWeight = 80F;
+            this.cn_qty.HeaderText = "Qty on label";
+            this.cn_qty.Name = "cn_qty";
+            this.cn_qty.ReadOnly = true;
+            this.cn_qty.Width = 80;
+            // 
+            // cn_qtyout
+            // 
+            this.cn_qtyout.DataPropertyName = "qtyout";
+            this.cn_qtyout.HeaderText = "Qty used";
+            this.cn_qtyout.Name = "cn_qtyout";
+            this.cn_qtyout.ReadOnly = true;
+            // 
+            // cn_unit
+            // 
+            this.cn_unit.DataPropertyName = "unit";
+            this.cn_unit.FillWeight = 40F;
+            this.cn_unit.HeaderText = "Unit";
+            this.cn_unit.Name = "cn_unit";
+            this.cn_unit.ReadOnly = true;
+            this.cn_unit.Width = 40;
+            // 
+            // cn_unitprice
+            // 
+            this.cn_unitprice.DataPropertyName = "unitprice";
+            this.cn_unitprice.FillWeight = 80F;
+            this.cn_unitprice.HeaderText = "Unit price (BR)";
+            this.cn_unitprice.Name = "cn_unitprice";
+            this.cn_unitprice.ReadOnly = true;
+            this.cn_unitprice.Width = 80;
+            // 
+            // cn_qtyrest
+            // 
+            this.cn_qtyrest.DataPropertyName = "qtyrest";
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Blue;
+            this.cn_qtyrest.DefaultCellStyle = dataGridViewCellStyle7;
+            this.cn_qtyrest.HeaderText = "Correct rest";
+            this.cn_qtyrest.Name = "cn_qtyrest";
+            // 
+            // chk_removeres
+            // 
+            this.chk_removeres.DataPropertyName = "removereservation";
+            this.chk_removeres.FalseValue = "0";
+            this.chk_removeres.FillWeight = 50F;
+            this.chk_removeres.HeaderText = "Remove res.";
+            this.chk_removeres.IndeterminateValue = "1";
+            this.chk_removeres.Name = "chk_removeres";
+            this.chk_removeres.TrueValue = "-1";
+            this.chk_removeres.Width = 50;
+            // 
+            // cn_qtydiff
+            // 
+            this.cn_qtydiff.DataPropertyName = "qtydiff";
+            this.cn_qtydiff.FillWeight = 80F;
+            this.cn_qtydiff.HeaderText = "Difference";
+            this.cn_qtydiff.Name = "cn_qtydiff";
+            this.cn_qtydiff.ReadOnly = true;
+            this.cn_qtydiff.Width = 80;
+            // 
+            // cn_batchid
+            // 
+            this.cn_batchid.DataPropertyName = "batchid";
+            this.cn_batchid.HeaderText = "batchid";
+            this.cn_batchid.Name = "cn_batchid";
+            this.cn_batchid.Visible = false;
+            // 
+            // cn_iscounter
+            // 
+            this.cn_iscounter.DataPropertyName = "iscounter";
+            this.cn_iscounter.HeaderText = "iscounter";
+            this.cn_iscounter.Name = "cn_iscounter";
+            this.cn_iscounter.Visible = false;
+            // 
+            // cn_when
+            // 
+            this.cn_when.DataPropertyName = "whencounter";
+            dataGridViewCellStyle8.Format = "G";
+            dataGridViewCellStyle8.NullValue = null;
+            this.cn_when.DefaultCellStyle = dataGridViewCellStyle8;
+            this.cn_when.HeaderText = "when";
+            this.cn_when.Name = "cn_when";
+            this.cn_when.Visible = false;
             // 
             // mnu_Lines
             // 
@@ -629,9 +763,9 @@
             // dataGridViewTextBoxColumn9
             // 
             this.dataGridViewTextBoxColumn9.DataPropertyName = "qtyrest";
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Red;
-            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Red;
+            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridViewTextBoxColumn9.HeaderText = "Correct rest";
             this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
             // 
@@ -643,137 +777,20 @@
             this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             this.dataGridViewTextBoxColumn10.Width = 80;
             // 
-            // cn_id
+            // chk_CheckMode
             // 
-            this.cn_id.DataPropertyName = "id";
-            this.cn_id.FillWeight = 5F;
-            this.cn_id.HeaderText = "id";
-            this.cn_id.Name = "cn_id";
-            this.cn_id.ReadOnly = true;
-            this.cn_id.Visible = false;
-            this.cn_id.Width = 5;
-            // 
-            // cn_label
-            // 
-            this.cn_label.DataPropertyName = "label";
-            this.cn_label.FillWeight = 90F;
-            this.cn_label.HeaderText = "Label";
-            this.cn_label.Name = "cn_label";
-            this.cn_label.ReadOnly = true;
-            this.cn_label.Width = 90;
-            // 
-            // cn_artid
-            // 
-            this.cn_artid.DataPropertyName = "artid";
-            this.cn_artid.FillWeight = 80F;
-            this.cn_artid.HeaderText = "Art. id";
-            this.cn_artid.Name = "cn_artid";
-            this.cn_artid.ReadOnly = true;
-            this.cn_artid.Width = 80;
-            // 
-            // cn_article
-            // 
-            this.cn_article.DataPropertyName = "article";
-            this.cn_article.FillWeight = 200F;
-            this.cn_article.HeaderText = "Article";
-            this.cn_article.Name = "cn_article";
-            this.cn_article.ReadOnly = true;
-            this.cn_article.Width = 200;
-            // 
-            // cn_qtyinbatch
-            // 
-            this.cn_qtyinbatch.DataPropertyName = "qtyinbatch";
-            this.cn_qtyinbatch.FillWeight = 80F;
-            this.cn_qtyinbatch.HeaderText = "Qty in batch";
-            this.cn_qtyinbatch.Name = "cn_qtyinbatch";
-            this.cn_qtyinbatch.Width = 80;
-            // 
-            // cn_qty
-            // 
-            this.cn_qty.DataPropertyName = "qty";
-            this.cn_qty.FillWeight = 80F;
-            this.cn_qty.HeaderText = "Qty on label";
-            this.cn_qty.Name = "cn_qty";
-            this.cn_qty.ReadOnly = true;
-            this.cn_qty.Width = 80;
-            // 
-            // cn_qtyout
-            // 
-            this.cn_qtyout.DataPropertyName = "qtyout";
-            this.cn_qtyout.HeaderText = "Qty used";
-            this.cn_qtyout.Name = "cn_qtyout";
-            this.cn_qtyout.ReadOnly = true;
-            // 
-            // cn_unit
-            // 
-            this.cn_unit.DataPropertyName = "unit";
-            this.cn_unit.FillWeight = 40F;
-            this.cn_unit.HeaderText = "Unit";
-            this.cn_unit.Name = "cn_unit";
-            this.cn_unit.ReadOnly = true;
-            this.cn_unit.Width = 40;
-            // 
-            // cn_unitprice
-            // 
-            this.cn_unitprice.DataPropertyName = "unitprice";
-            this.cn_unitprice.FillWeight = 80F;
-            this.cn_unitprice.HeaderText = "Unit price (BR)";
-            this.cn_unitprice.Name = "cn_unitprice";
-            this.cn_unitprice.ReadOnly = true;
-            this.cn_unitprice.Width = 80;
-            // 
-            // cn_qtyrest
-            // 
-            this.cn_qtyrest.DataPropertyName = "qtyrest";
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
-            this.cn_qtyrest.DefaultCellStyle = dataGridViewCellStyle1;
-            this.cn_qtyrest.HeaderText = "Correct rest";
-            this.cn_qtyrest.Name = "cn_qtyrest";
-            // 
-            // chk_removeres
-            // 
-            this.chk_removeres.DataPropertyName = "removereservation";
-            this.chk_removeres.FalseValue = "0";
-            this.chk_removeres.FillWeight = 50F;
-            this.chk_removeres.HeaderText = "Remove res.";
-            this.chk_removeres.IndeterminateValue = "1";
-            this.chk_removeres.Name = "chk_removeres";
-            this.chk_removeres.TrueValue = "-1";
-            this.chk_removeres.Width = 50;
-            // 
-            // cn_qtydiff
-            // 
-            this.cn_qtydiff.DataPropertyName = "qtydiff";
-            this.cn_qtydiff.FillWeight = 80F;
-            this.cn_qtydiff.HeaderText = "Difference";
-            this.cn_qtydiff.Name = "cn_qtydiff";
-            this.cn_qtydiff.ReadOnly = true;
-            this.cn_qtydiff.Width = 80;
-            // 
-            // cn_batchid
-            // 
-            this.cn_batchid.DataPropertyName = "batchid";
-            this.cn_batchid.HeaderText = "batchid";
-            this.cn_batchid.Name = "cn_batchid";
-            this.cn_batchid.Visible = false;
-            // 
-            // cn_iscounter
-            // 
-            this.cn_iscounter.DataPropertyName = "iscounter";
-            this.cn_iscounter.HeaderText = "iscounter";
-            this.cn_iscounter.Name = "cn_iscounter";
-            this.cn_iscounter.Visible = false;
-            // 
-            // cn_when
-            // 
-            this.cn_when.DataPropertyName = "whencounter";
-            dataGridViewCellStyle2.Format = "G";
-            dataGridViewCellStyle2.NullValue = null;
-            this.cn_when.DefaultCellStyle = dataGridViewCellStyle2;
-            this.cn_when.HeaderText = "when";
-            this.cn_when.Name = "cn_when";
-            this.cn_when.Visible = false;
+            this.chk_CheckMode.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chk_CheckMode.AutoSize = true;
+            this.chk_CheckMode.BackColor = System.Drawing.Color.LightGreen;
+            this.chk_CheckMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.chk_CheckMode.Location = new System.Drawing.Point(899, 8);
+            this.chk_CheckMode.Name = "chk_CheckMode";
+            this.chk_CheckMode.Size = new System.Drawing.Size(113, 36);
+            this.chk_CheckMode.TabIndex = 230;
+            this.chk_CheckMode.Text = "Data scanner \r\ncheck mode OFF";
+            this.chk_CheckMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chk_CheckMode.UseVisualStyleBackColor = false;
+            this.chk_CheckMode.CheckStateChanged += new System.EventHandler(this.chk_CheckMode_CheckStateChanged);
             // 
             // frm_RestCorrection
             // 
@@ -808,7 +825,7 @@
             this.bn_List.ResumeLayout(false);
             this.bn_List.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
@@ -880,5 +897,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_batchid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_iscounter;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_when;
+        private System.Windows.Forms.CheckBox chk_CheckMode;
     }
 }

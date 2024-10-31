@@ -175,6 +175,8 @@ namespace Odin.Warehouse.Corrections
             chk_RemoveReservation.CheckState = CheckState.Unchecked;
 
             chk_DataScanner.CheckState = CheckState.Unchecked;
+
+            chk_CheckMode.CheckState = CheckState.Unchecked;
         }
 
         public void AddQtyForLabel(int label, double qty, int printlabels)
@@ -286,17 +288,23 @@ namespace Odin.Warehouse.Corrections
         {
             gv_List.EndEdit();
             chk_DataScanner.CheckState = CheckState.Unchecked;
+            if (OutMode == 3)
+                txt_Oper.Focus();
         }
 
         private void gv_List_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             gv_List.EndEdit();
             chk_DataScanner.CheckState = CheckState.Unchecked;
+            if (OutMode == 3)
+                txt_Oper.Focus();
         }
 
         private void cmb_Batches1_ControlClick(object sender)
         {
             chk_DataScanner.CheckState = CheckState.Unchecked;
+            if (OutMode == 3)
+                txt_Oper.Focus();
         }
 
         public void CheckEmpty()
@@ -679,76 +687,104 @@ namespace Odin.Warehouse.Corrections
 
         private void txt_Oper_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //string strLabelMark = "(3L)";
-            //string strNextMark = "\n";
-            double _qtyonlabel = 0;
-            double _qtyrest = 0;
-            string _unit = "";
-            bool _isok = false;
-            //char _PrevChar = (char)Keys.Space;
-
-            if (e.KeyChar == (char)Keys.Enter)
+            if (OutMode != 3)
             {
-                //if (e.KeyChar == _PrevChar)
-                //{ 
-                bool _check = Int32.TryParse(txt_Oper.Text, out ReadValue);
+                //string strLabelMark = "(3L)";
+                //string strNextMark = "\n";
+                double _qtyonlabel = 0;
+                double _qtyrest = 0;
+                string _unit = "";
+                bool _isok = false;
+                //char _PrevChar = (char)Keys.Space;
 
-                if (_check == false)
-                    ReadValue = 0;
-                //int begindex = ReadValue.IndexOf(strLabelMark);
-                //int endindex = 0;
+                if (e.KeyChar == (char)Keys.Enter)
+                {
+                    //if (e.KeyChar == _PrevChar)
+                    //{ 
+                    bool _check = Int32.TryParse(txt_Oper.Text, out ReadValue);
+
+                    if (_check == false)
+                        ReadValue = 0;
+                    //int begindex = ReadValue.IndexOf(strLabelMark);
+                    //int endindex = 0;
 
                     //if (begindex > -1)
                     //{
                     //    endindex = ReadValue.Substring(begindex + 4, ReadValue.Length - (begindex + 4)).IndexOf(strNextMark);
                     //    Result = ReadValue.Substring(begindex + 4, endindex);
 
-                foreach (DataGridViewRow row in this.gv_List.Rows)
-                {
-                    if (Convert.ToInt32(row.Cells["cn_label"].Value) == /*Convert.ToInt32(txt_Oper.Text)*/ReadValue)
+                    foreach (DataGridViewRow row in this.gv_List.Rows)
                     {
-                        _isok = true;
-                        _qtyonlabel = Convert.ToDouble(row.Cells["cn_qty"].Value);
-                        _qtyrest = Convert.ToDouble(row.Cells["cn_qtyrest"].Value);
-                        _unit = row.Cells["cn_unit"].Value.ToString();
-                        break;
+                        if (Convert.ToInt32(row.Cells["cn_label"].Value) == /*Convert.ToInt32(txt_Oper.Text)*/ReadValue)
+                        {
+                            _isok = true;
+                            _qtyonlabel = Convert.ToDouble(row.Cells["cn_qty"].Value);
+                            _qtyrest = Convert.ToDouble(row.Cells["cn_qtyrest"].Value);
+                            _unit = row.Cells["cn_unit"].Value.ToString();
+                            break;
+                        }
+
                     }
+                    if (_isok == true)
+                    {
+                        //MessageBox.Show(Result);
 
-                }
-                if (_isok == true)
-                {
-                    //MessageBox.Show(Result);
+                        frm = new frm_BCCorrection();
+                        frm.Label = txt_Oper.Text;
+                        frm.QtyInDB = _qtyonlabel;
+                        frm.QtyOnLabel = _qtyrest;
+                        frm.Unit = _unit;
 
-                    frm = new frm_BCCorrection();
-                    frm.Label = txt_Oper.Text;
-                    frm.QtyInDB = _qtyonlabel;
-                    frm.QtyOnLabel = _qtyrest;
-                    frm.Unit = _unit;
-                    
-                    frm.SendLabelQty += new SendLabelQtyEventHandler(AddQtyForLabel);
-                    frm.Show(); frm.GetKryptonFormFields();
+                        frm.SendLabelQty += new SendLabelQtyEventHandler(AddQtyForLabel);
+                        frm.Show(); frm.GetKryptonFormFields();
 
-                    frm.ReceiveFocus();
-                }
-                else
-                {
-                    KryptonTaskDialog.Show("Mistake during label entering!",
-                                          "There is no such label in selected batch!",
-                                          "",
-                                          MessageBoxIcon.Warning,
-                                          TaskDialogButtons.OK);
+                        frm.ReceiveFocus();
+                    }
+                    else
+                    {
+                        KryptonTaskDialog.Show("Mistake during label entering!",
+                                              "There is no such label in selected batch!",
+                                              "",
+                                              MessageBoxIcon.Warning,
+                                              TaskDialogButtons.OK);
+                        txt_Oper.Text = "";
+
+                    }
+                    //Clear temp field
                     txt_Oper.Text = "";
-
-                }
-                //Clear temp field
-                txt_Oper.Text = "";
                     //}
                     //}
                     //txt_Oper.Focus();
                     //_PrevChar = (char)Keys.Enter;
-                //}
-                //else
-                //    _PrevChar = (char)Keys.Space;
+                    //}
+                    //else
+                    //    _PrevChar = (char)Keys.Space;
+                }
+            }
+            else
+            {
+               
+                if (e.KeyChar == (char)Keys.Enter)
+                {
+                    //if (e.KeyChar == _PrevChar)
+                    //{ 
+                    bool _check = Int32.TryParse(txt_Oper.Text, out ReadValue);
+
+                    if (_check == false)
+                        ReadValue = 0;
+                    foreach (DataGridViewRow row in this.gv_List.Rows)
+                    {
+                        if (Convert.ToInt32(row.Cells["cn_label"].Value) == /*Convert.ToInt32(txt_Oper.Text)*/ReadValue)
+                        {
+                            foreach (DataGridViewCell cell in row.Cells)
+                                cell.Style.BackColor = Color.LightGreen;
+                            txt_Oper.Text = "";
+                            txt_Oper.Focus();
+                            break;
+                        }
+
+                    }
+                }
             }
         }
 
@@ -869,6 +905,33 @@ namespace Odin.Warehouse.Corrections
         private void gv_List_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             SetCellsColor();
+        }
+
+        private void chk_CheckMode_CheckStateChanged(object sender, EventArgs e)
+        {
+            if (chk_CheckMode.CheckState == CheckState.Checked)
+            {
+                chk_CheckMode.Text = "Data scanner " + System.Environment.NewLine + "check mode ON";
+                chk_CheckMode.BackColor = Color.LightPink;
+                OutMode = 3;
+                txt_Oper.Focus();
+                btn_OK.Visible = false;
+                //frm_DirectStockOut frm = new frm_DirectStockOut();
+                //frm.Show(); frm.GetKryptonFormFields();
+                //txt_DC.Focus();
+            }
+            else
+            {
+                chk_CheckMode.Text = "Data scanner " + System.Environment.NewLine + "check mode OFF";
+                chk_CheckMode.BackColor = Color.LightGreen;
+                if (chk_DataScanner.CheckState == CheckState.Checked)
+                    OutMode = 2;
+                else
+                    OutMode = 1;
+                btn_OK.Visible = true;
+                bwStart(bw_List);
+                //cmb_Articles1.Focus();
+            }
         }
     }
 }
