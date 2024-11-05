@@ -338,7 +338,19 @@ namespace Odin.Warehouse.StockIn
         {
             try { 
             popup.CellText = txt_BoxNO.Text.ToString();
-            txt_BoxNO.SelectionStart = txt_BoxNO.Text.Length;
+                if (BoxNO <= Convert.ToInt32(Helper.GetOneRecord(@"SELECT TOP 1[boxno]
+                                                          FROM[OdinDB].[dbo].[STO_Package] where id in (SELECT[packid]
+                                                          FROM[OdinDB].[dbo].[STO_DelivPackMapping] where batchid = " + BatchId + ") ORDER BY[boxno] DESC" )))
+                {
+                    txt_BoxNO.BackColor = Color.Gold;
+                    MessageBox.Show("Error! Check Box No");
+                }
+                else
+                {
+                    txt_BoxNO.BackColor = Color.White;
+                    txt_BoxNO.Enabled = true;
+                }
+                txt_BoxNO.SelectionStart = txt_BoxNO.Text.Length;
             }
             catch { }
         }
