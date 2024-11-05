@@ -763,7 +763,7 @@ namespace Odin.Warehouse.Corrections
             }
             else
             {
-               
+                int _count = 0;
                 if (e.KeyChar == (char)Keys.Enter)
                 {
                     //if (e.KeyChar == _PrevChar)
@@ -778,11 +778,18 @@ namespace Odin.Warehouse.Corrections
                         {
                             foreach (DataGridViewCell cell in row.Cells)
                                 cell.Style.BackColor = Color.LightGreen;
+                            _count++;
                             txt_Oper.Text = "";
                             txt_Oper.Focus();
                             break;
                         }
 
+                    }
+                    if (_count == 0)
+                    {
+                        MessageBox.Show("There is no such label on batch!");
+                        txt_Oper.Text = "";
+                        txt_Oper.Focus();
                     }
                 }
             }
