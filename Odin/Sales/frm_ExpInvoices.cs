@@ -294,8 +294,8 @@ namespace Odin.Sales
         {
             double _total = 0;
             double _byproforma = 0;
-            //double _totalvat = 0;
-            //double _totalwithvat = 0;
+            double _totalvat = 0;
+            double _totalwithvat = 0;
             string _cur = "€";
             double _vat = 0;
 
@@ -306,8 +306,8 @@ namespace Odin.Sales
                     if (row.Cells["cn_name"].Value.ToString() == _document)
                     {
                         _total = _total + Math.Round(Convert.ToDouble(row.Cells["cn_total"].Value), 2, MidpointRounding.AwayFromZero);
-                        //_totalvat = _totalvat + Math.Round(Convert.ToDouble(row.Cells["cn_totalvat"].Value), 2, MidpointRounding.AwayFromZero);
-                        //_totalwithvat = _totalwithvat + Math.Round(Convert.ToDouble(row.Cells["cn_totalwithvat"].Value), 2, MidpointRounding.AwayFromZero);
+                        _totalvat = _totalvat + Math.Round(Convert.ToDouble(row.Cells["cn_totalvat"].Value), 2, MidpointRounding.AwayFromZero);
+                        _totalwithvat = _totalwithvat + Math.Round(Convert.ToDouble(row.Cells["cn_totalwithvat"].Value), 2, MidpointRounding.AwayFromZero);
                         _cur = row.Cells["cn_currency"].Value.ToString();
                         if (_vat < Convert.ToDouble(row.Cells["cn_vat"].Value))
                             _vat = Convert.ToDouble(row.Cells["cn_vat"].Value);
@@ -318,8 +318,8 @@ namespace Odin.Sales
             }
 
             Total = _total;
-            TotalVat = Math.Round(_total / 100 * _vat, 2);//_totalvat;
-            TotalWithVat =_total + Math.Round(_total / 100 * _vat, 2);
+            TotalVat = Math.Round(_totalvat, 2, MidpointRounding.AwayFromZero);//Math.Round(_total / 100 * _vat, 2);//_totalvat;
+            TotalWithVat = _total + Math.Round(_totalwithvat, 2, MidpointRounding.AwayFromZero);//_total + Math.Round(_total / 100 * _vat, 2);
             TotalByProforma = _byproforma;
 
             lbl_Total.Text = "Total for document (" + _cur + "):";
