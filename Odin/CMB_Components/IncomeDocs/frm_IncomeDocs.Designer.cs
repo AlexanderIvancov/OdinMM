@@ -33,10 +33,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_IncomeDocs));
             this.gv_List = new CombBoxGridView.ComboBoxGrid();
-            this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_supid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_supplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
             this.kryptonHeaderGroup1 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
@@ -44,6 +40,11 @@
             this.btn_Edit = new System.Windows.Forms.ToolStripButton();
             this.btn_Delete = new System.Windows.Forms.ToolStripButton();
             this.bs_List = new System.Windows.Forms.BindingSource(this.components);
+            this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_supid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_supplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_docdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gv_List)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).BeginInit();
@@ -66,46 +67,19 @@
             this.cn_id,
             this.cn_name,
             this.cn_supid,
-            this.cn_supplier});
+            this.cn_supplier,
+            this.cn_docdate});
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_List.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gv_List.GridColor = System.Drawing.Color.LightGray;
             this.gv_List.Location = new System.Drawing.Point(0, 25);
             this.gv_List.Name = "gv_List";
             this.gv_List.RowHeadersVisible = false;
-            this.gv_List.Size = new System.Drawing.Size(259, 214);
+            this.gv_List.Size = new System.Drawing.Size(367, 214);
             this.gv_List.TabIndex = 5;
             this.gv_List.TabStop = false;
             this.gv_List.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_List_CellDoubleClick);
             this.gv_List.SelectionChanged += new System.EventHandler(this.gv_List_SelectionChanged);
-            // 
-            // cn_id
-            // 
-            this.cn_id.DataPropertyName = "id";
-            this.cn_id.HeaderText = "id";
-            this.cn_id.Name = "cn_id";
-            this.cn_id.Visible = false;
-            // 
-            // cn_name
-            // 
-            this.cn_name.DataPropertyName = "name";
-            this.cn_name.HeaderText = "name";
-            this.cn_name.Name = "cn_name";
-            // 
-            // cn_supid
-            // 
-            this.cn_supid.DataPropertyName = "supid";
-            this.cn_supid.HeaderText = "supid";
-            this.cn_supid.Name = "cn_supid";
-            this.cn_supid.Visible = false;
-            // 
-            // cn_supplier
-            // 
-            this.cn_supplier.DataPropertyName = "supplier";
-            this.cn_supplier.FillWeight = 150F;
-            this.cn_supplier.HeaderText = "supplier";
-            this.cn_supplier.Name = "cn_supplier";
-            this.cn_supplier.Width = 150;
             // 
             // kryptonManager1
             // 
@@ -125,7 +99,7 @@
             // 
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.gv_List);
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.bindingNavigator1);
-            this.kryptonHeaderGroup1.Size = new System.Drawing.Size(261, 262);
+            this.kryptonHeaderGroup1.Size = new System.Drawing.Size(369, 262);
             this.kryptonHeaderGroup1.TabIndex = 4;
             this.kryptonHeaderGroup1.ValuesPrimary.Heading = "Income documents";
             this.kryptonHeaderGroup1.ValuesPrimary.Image = global::Odin.Global_Resourses.basket_put;
@@ -148,7 +122,7 @@
             this.bindingNavigator1.MovePreviousItem = null;
             this.bindingNavigator1.Name = "bindingNavigator1";
             this.bindingNavigator1.PositionItem = null;
-            this.bindingNavigator1.Size = new System.Drawing.Size(259, 25);
+            this.bindingNavigator1.Size = new System.Drawing.Size(367, 25);
             this.bindingNavigator1.TabIndex = 4;
             this.bindingNavigator1.Text = "bindingNavigator1";
             // 
@@ -182,11 +156,45 @@
             this.btn_Delete.Text = "Delete";
             this.btn_Delete.Click += new System.EventHandler(this.btn_Delete_Click);
             // 
+            // cn_id
+            // 
+            this.cn_id.DataPropertyName = "id";
+            this.cn_id.HeaderText = "id";
+            this.cn_id.Name = "cn_id";
+            this.cn_id.Visible = false;
+            // 
+            // cn_name
+            // 
+            this.cn_name.DataPropertyName = "name";
+            this.cn_name.HeaderText = "name";
+            this.cn_name.Name = "cn_name";
+            // 
+            // cn_supid
+            // 
+            this.cn_supid.DataPropertyName = "supid";
+            this.cn_supid.HeaderText = "supid";
+            this.cn_supid.Name = "cn_supid";
+            this.cn_supid.Visible = false;
+            // 
+            // cn_supplier
+            // 
+            this.cn_supplier.DataPropertyName = "supplier";
+            this.cn_supplier.FillWeight = 150F;
+            this.cn_supplier.HeaderText = "supplier";
+            this.cn_supplier.Name = "cn_supplier";
+            this.cn_supplier.Width = 150;
+            // 
+            // cn_docdate
+            // 
+            this.cn_docdate.DataPropertyName = "docdate";
+            this.cn_docdate.HeaderText = "docdate";
+            this.cn_docdate.Name = "cn_docdate";
+            // 
             // frm_IncomeDocs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(261, 262);
+            this.ClientSize = new System.Drawing.Size(369, 262);
             this.Controls.Add(this.kryptonHeaderGroup1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frm_IncomeDocs";
@@ -201,17 +209,13 @@
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
         #endregion
 
         private CombBoxGridView.ComboBoxGrid gv_List;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_supid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_supplier;
         private ComponentFactory.Krypton.Toolkit.KryptonManager kryptonManager1;
         private ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup kryptonHeaderGroup1;
         private System.Windows.Forms.BindingNavigator bindingNavigator1;
@@ -219,5 +223,10 @@
         private System.Windows.Forms.ToolStripButton btn_Edit;
         private System.Windows.Forms.ToolStripButton btn_Delete;
         private System.Windows.Forms.BindingSource bs_List;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_supid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_supplier;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_docdate;
     }
 }
