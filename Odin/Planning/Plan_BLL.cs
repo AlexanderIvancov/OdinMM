@@ -2492,6 +2492,40 @@ namespace Odin.Planning
             sqlConn.Close();
         }
 
+        public void EditProductionPlanning(int batchid, string date, string comments)
+        {
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_EditProductionPlanning", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@batchid", batchid);
+            sqlComm.Parameters.AddWithValue("@date", date);
+            sqlComm.Parameters.AddWithValue("@comments", comments);
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+        }
+
+        public void ValidateProductionPlanning(DataTable tableplanning, int type)
+        {
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_ValidateProductionPlanning", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@type", type);
+            sqlComm.Parameters.Add("@tableplanning", SqlDbType.Structured);
+            sqlComm.Parameters["@tableplanning"].TypeName = "UT_BatchPlanning";
+            sqlComm.Parameters["@tableplanning"].Value = tableplanning;
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+        }
+
+
         public static DataTable getProductionPlanningCapa(string date, int prodplaceid)
         {
             string query = "sp_SelectProductionPlanningCapacityNeeds";
@@ -2517,6 +2551,24 @@ namespace Odin.Planning
                 new SqlParameter("@isactive",SqlDbType.Int){Value = isactive },
                 new SqlParameter("@prodplaceid",SqlDbType.Int){Value = prodplaceid }
 
+            };
+
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
+        }
+
+        public static DataTable getProductionPlanningDets(int coid, int custid, string datefrom, string datetill, int byweeks, int bymonth)
+        {
+            string query = "sp_SelectDeliveryPlanningDets";
+
+            var sqlparams = new List<SqlParameter>
+            {
+                new SqlParameter("@coid",SqlDbType.Int){Value = coid },
+                new SqlParameter("@custid",SqlDbType.Int){Value = custid },
+                new SqlParameter("@datefrom",SqlDbType.NVarChar){Value = datefrom },
+                new SqlParameter("@datetill",SqlDbType.NVarChar){Value = datetill },
+                new SqlParameter("@byweek",SqlDbType.Int){Value = byweeks },
+                new SqlParameter("@bymonth",SqlDbType.Int){Value = bymonth }
             };
 
 
