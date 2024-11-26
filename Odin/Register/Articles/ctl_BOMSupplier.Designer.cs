@@ -44,6 +44,7 @@
             this.DN = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CustCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DateCreation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DateRegister = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Indate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_Excel = new System.Windows.Forms.ToolStripButton();
             this.bs_List = new Odin.Global_Classes.SyncBindingSource();
@@ -92,6 +93,7 @@
             this.Analog,
             this.Qty,
             this.DateCreation,
+            this.DateRegister,
             this.Supplier,
             this.SupArticle,
             this.DN,
@@ -157,6 +159,12 @@
             this.DateCreation.DataPropertyName = "DateOfClosing";
             this.DateCreation.HeaderText = "Date of closing";
             this.DateCreation.Name = "DateOfClosing";
+            // 
+            // DateRegister
+            // 
+            this.DateRegister.DataPropertyName = "regdate";
+            this.DateRegister.HeaderText = "Date of register";
+            this.DateRegister.Name = "DateRegister";
             // 
             // Supplier
             // 
@@ -288,6 +296,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Analog;
         private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn DateCreation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DateRegister;
         private System.Windows.Forms.DataGridViewTextBoxColumn Indate;
         private System.Windows.Forms.DataGridViewTextBoxColumn Supplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn SupArticle;
