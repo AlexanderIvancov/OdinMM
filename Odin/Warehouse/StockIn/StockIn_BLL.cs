@@ -88,9 +88,9 @@ namespace Odin.Warehouse.StockIn
             sqlComm.Parameters.AddWithValue("@producer", producer);
             sqlComm.Parameters.AddWithValue("@datacode", datacode);
             sqlComm.Parameters.AddWithValue("@dutycost", dutycost);
-            sqlComm.Parameters.AddWithValue("@datacode", total);
-            sqlComm.Parameters.AddWithValue("@dutycost", totalvat);
-            sqlComm.Parameters.AddWithValue("@dutycost", totalwvat);
+            sqlComm.Parameters.AddWithValue("@total", total);
+            sqlComm.Parameters.AddWithValue("@totalvat", totalvat);
+            sqlComm.Parameters.AddWithValue("@totalwvat", totalwvat);
 
             sqlComm.Parameters.Add("@insertedid", SqlDbType.Int).Direction = ParameterDirection.Output;
 
