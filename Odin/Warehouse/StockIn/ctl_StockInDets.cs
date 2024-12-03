@@ -252,6 +252,15 @@ namespace Odin.Warehouse.StockIn
             }
             set { txt_Total.Text = value.ToString(); }
         }
+        public double Total2
+        {
+            get
+            {
+                try { return Convert.ToDouble(txt_Total2.Text); }
+                catch { return 0; }
+            }
+            set { txt_Total2.Text = value.ToString(); }
+        }
         public double TotalVAT
         {
             get
@@ -644,6 +653,7 @@ namespace Odin.Warehouse.StockIn
         private void txt_Total_TextChanged(object sender, EventArgs e)
         {
             if (_IsAuto == false) CalcTotalWVAT();
+            txt_Total2.Text = txt_Total.Text;
             CheckUnitPrice();
         }
 
@@ -883,7 +893,7 @@ namespace Odin.Warehouse.StockIn
                 if (_test == true)
                 {
                     int _NewInwardId = SIBll.AddStockIn(HeadId, ArtId, SupArticle, StockMoveTypeId, Qty, UnitId, Comments, UnitPrice, Discount,
-                                                        Vat, CoefConv, Weight, CustCodeId, BatchId, StateId, PurchaseOrderLineId, Producer, DataCode, Dutycost, Total, TotalVAT, TotalWVAT);
+                                                        Vat, CoefConv, Weight, CustCodeId, BatchId, StateId, PurchaseOrderLineId, Producer, DataCode, Dutycost, Total2);
 
                     //Deallocation
                     if (_NewInwardId != 0)

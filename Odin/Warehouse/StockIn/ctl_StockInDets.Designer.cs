@@ -34,6 +34,15 @@
             this.kryptonPanel3 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonHeaderGroup2 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.tv_Rests = new AdvancedDataGridView.TreeGridView();
+            this.attachmentColumn = new System.Windows.Forms.DataGridViewImageColumn();
+            this.cn_place = new AdvancedDataGridView.TreeGridColumn();
+            this.cn_placeid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_qtyonplace = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_qtyoper = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_QtyAfter = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_datacode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_manufbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.kryptonPanel5 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.txt_QtyAfter = new Owf.Controls.NumericTetxBox();
             this.kryptonLabel21 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -63,6 +72,9 @@
             this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel10 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.txt_ManufBatch = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.buttonSpecAny5 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.kryptonLabel31 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.chk_NoDate = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.lbl_Resale = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.lbl_Quarantine = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -121,18 +133,8 @@
             this.cmb_Articles1 = new Odin.CMB_Components.Articles.cmb_Articles();
             this.bs_List = new System.Windows.Forms.BindingSource(this.components);
             this.kryptonPalette1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
-            this.txt_ManufBatch = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.buttonSpecAny5 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.kryptonLabel31 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.attachmentColumn = new System.Windows.Forms.DataGridViewImageColumn();
-            this.cn_place = new AdvancedDataGridView.TreeGridColumn();
-            this.cn_placeid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_qtyonplace = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_qtyoper = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_QtyAfter = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_datacode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_manufbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kryptonLabel33 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.txt_Total2 = new Owf.Controls.NumericTetxBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel3)).BeginInit();
             this.kryptonPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2)).BeginInit();
@@ -153,9 +155,9 @@
             // 
             this.kryptonPanel3.Controls.Add(this.kryptonHeaderGroup2);
             this.kryptonPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonPanel3.Location = new System.Drawing.Point(0, 353);
+            this.kryptonPanel3.Location = new System.Drawing.Point(0, 394);
             this.kryptonPanel3.Name = "kryptonPanel3";
-            this.kryptonPanel3.Size = new System.Drawing.Size(645, 213);
+            this.kryptonPanel3.Size = new System.Drawing.Size(645, 172);
             this.kryptonPanel3.TabIndex = 2;
             // 
             // kryptonHeaderGroup2
@@ -171,7 +173,7 @@
             this.kryptonHeaderGroup2.Panel.Controls.Add(this.tv_Rests);
             this.kryptonHeaderGroup2.Panel.Controls.Add(this.kryptonPanel5);
             this.kryptonHeaderGroup2.Panel.Controls.Add(this.bn_List);
-            this.kryptonHeaderGroup2.Size = new System.Drawing.Size(645, 213);
+            this.kryptonHeaderGroup2.Size = new System.Drawing.Size(645, 172);
             this.kryptonHeaderGroup2.TabIndex = 3;
             this.kryptonHeaderGroup2.ValuesPrimary.Heading = "Stock placement and labels";
             this.kryptonHeaderGroup2.ValuesPrimary.Image = global::Odin.Global_Resourses.barcode_2d;
@@ -203,8 +205,79 @@
             this.tv_Rests.RowHeadersWidth = 25;
             this.tv_Rests.ShowCellErrors = false;
             this.tv_Rests.ShowRowErrors = false;
-            this.tv_Rests.Size = new System.Drawing.Size(643, 129);
+            this.tv_Rests.Size = new System.Drawing.Size(643, 88);
             this.tv_Rests.TabIndex = 23;
+            // 
+            // attachmentColumn
+            // 
+            this.attachmentColumn.HeaderText = "attachmentColumn";
+            this.attachmentColumn.Name = "attachmentColumn";
+            this.attachmentColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.attachmentColumn.Visible = false;
+            // 
+            // cn_place
+            // 
+            this.cn_place.DefaultNodeImage = null;
+            this.cn_place.FillWeight = 235F;
+            this.cn_place.HeaderText = "Place";
+            this.cn_place.Name = "cn_place";
+            this.cn_place.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.cn_place.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_place.Width = 235;
+            // 
+            // cn_placeid
+            // 
+            this.cn_placeid.HeaderText = "placeid";
+            this.cn_placeid.Name = "cn_placeid";
+            this.cn_placeid.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_placeid.Visible = false;
+            // 
+            // cn_qtyonplace
+            // 
+            this.cn_qtyonplace.FillWeight = 80F;
+            this.cn_qtyonplace.HeaderText = "Qty on place";
+            this.cn_qtyonplace.Name = "cn_qtyonplace";
+            this.cn_qtyonplace.ReadOnly = true;
+            this.cn_qtyonplace.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_qtyonplace.Width = 80;
+            // 
+            // cn_qtyoper
+            // 
+            this.cn_qtyoper.FillWeight = 80F;
+            this.cn_qtyoper.HeaderText = "Qty oper";
+            this.cn_qtyoper.Name = "cn_qtyoper";
+            this.cn_qtyoper.ReadOnly = true;
+            this.cn_qtyoper.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_qtyoper.Width = 80;
+            // 
+            // cn_QtyAfter
+            // 
+            this.cn_QtyAfter.FillWeight = 80F;
+            this.cn_QtyAfter.HeaderText = "Qty after";
+            this.cn_QtyAfter.Name = "cn_QtyAfter";
+            this.cn_QtyAfter.ReadOnly = true;
+            this.cn_QtyAfter.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_QtyAfter.Width = 80;
+            // 
+            // cn_datacode
+            // 
+            this.cn_datacode.HeaderText = "DataCode";
+            this.cn_datacode.Name = "cn_datacode";
+            this.cn_datacode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // cn_comments
+            // 
+            this.cn_comments.FillWeight = 120F;
+            this.cn_comments.HeaderText = "Comments";
+            this.cn_comments.Name = "cn_comments";
+            this.cn_comments.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_comments.Width = 120;
+            // 
+            // cn_manufbatch
+            // 
+            this.cn_manufbatch.HeaderText = "Manuf. batch";
+            this.cn_manufbatch.Name = "cn_manufbatch";
+            this.cn_manufbatch.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // kryptonPanel5
             // 
@@ -215,7 +288,7 @@
             this.kryptonPanel5.Controls.Add(this.txt_QtyBefore);
             this.kryptonPanel5.Controls.Add(this.kryptonLabel19);
             this.kryptonPanel5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.kryptonPanel5.Location = new System.Drawing.Point(0, 154);
+            this.kryptonPanel5.Location = new System.Drawing.Point(0, 113);
             this.kryptonPanel5.Name = "kryptonPanel5";
             this.kryptonPanel5.Size = new System.Drawing.Size(643, 36);
             this.kryptonPanel5.TabIndex = 3;
@@ -427,7 +500,7 @@
             // 
             // btn_AddPlaces
             // 
-            this.btn_AddPlaces.Location = new System.Drawing.Point(569, 231);
+            this.btn_AddPlaces.Location = new System.Drawing.Point(569, 273);
             this.btn_AddPlaces.Name = "btn_AddPlaces";
             this.btn_AddPlaces.Size = new System.Drawing.Size(61, 47);
             this.btn_AddPlaces.TabIndex = 21;
@@ -478,6 +551,8 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel33);
+            this.kryptonPanel1.Controls.Add(this.txt_Total2);
             this.kryptonPanel1.Controls.Add(this.txt_ManufBatch);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel31);
             this.kryptonPanel1.Controls.Add(this.chk_NoDate);
@@ -546,12 +621,36 @@
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonPanel1.Size = new System.Drawing.Size(645, 353);
+            this.kryptonPanel1.Size = new System.Drawing.Size(645, 394);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // txt_ManufBatch
+            // 
+            this.txt_ManufBatch.AllowButtonSpecToolTips = true;
+            this.txt_ManufBatch.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
+            this.buttonSpecAny5});
+            this.txt_ManufBatch.Location = new System.Drawing.Point(120, 366);
+            this.txt_ManufBatch.Name = "txt_ManufBatch";
+            this.txt_ManufBatch.Size = new System.Drawing.Size(140, 23);
+            this.txt_ManufBatch.TabIndex = 301;
+            // 
+            // buttonSpecAny5
+            // 
+            this.buttonSpecAny5.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
+            this.buttonSpecAny5.UniqueName = "ECFB869BD7764A9C8F8EA2E658584FE7";
+            this.buttonSpecAny5.Click += new System.EventHandler(this.buttonSpecAny5_Click);
+            // 
+            // kryptonLabel31
+            // 
+            this.kryptonLabel31.Location = new System.Drawing.Point(15, 369);
+            this.kryptonLabel31.Name = "kryptonLabel31";
+            this.kryptonLabel31.Size = new System.Drawing.Size(85, 20);
+            this.kryptonLabel31.TabIndex = 300;
+            this.kryptonLabel31.Values.Text = "Manuf. batch:";
             // 
             // chk_NoDate
             // 
-            this.chk_NoDate.Location = new System.Drawing.Point(231, 231);
+            this.chk_NoDate.Location = new System.Drawing.Point(231, 273);
             this.chk_NoDate.Name = "chk_NoDate";
             this.chk_NoDate.Size = new System.Drawing.Size(104, 20);
             this.chk_NoDate.TabIndex = 290;
@@ -583,7 +682,7 @@
             // 
             // kryptonLabel30
             // 
-            this.kryptonLabel30.Location = new System.Drawing.Point(329, 231);
+            this.kryptonLabel30.Location = new System.Drawing.Point(329, 273);
             this.kryptonLabel30.Name = "kryptonLabel30";
             this.kryptonLabel30.Size = new System.Drawing.Size(69, 20);
             this.kryptonLabel30.TabIndex = 287;
@@ -593,7 +692,7 @@
             // 
             this.txt_DataCode.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
             this.buttonSpecAny3});
-            this.txt_DataCode.Location = new System.Drawing.Point(398, 231);
+            this.txt_DataCode.Location = new System.Drawing.Point(398, 273);
             this.txt_DataCode.Name = "txt_DataCode";
             this.txt_DataCode.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txt_DataCode.Size = new System.Drawing.Size(160, 23);
@@ -736,7 +835,7 @@
             // 
             // kryptonLabel15
             // 
-            this.kryptonLabel15.Location = new System.Drawing.Point(190, 256);
+            this.kryptonLabel15.Location = new System.Drawing.Point(190, 298);
             this.kryptonLabel15.Name = "kryptonLabel15";
             this.kryptonLabel15.Size = new System.Drawing.Size(36, 20);
             this.kryptonLabel15.TabIndex = 269;
@@ -744,14 +843,14 @@
             // 
             // txt_Unit
             // 
-            this.txt_Unit.Location = new System.Drawing.Point(231, 256);
+            this.txt_Unit.Location = new System.Drawing.Point(231, 298);
             this.txt_Unit.Name = "txt_Unit";
             this.txt_Unit.Size = new System.Drawing.Size(37, 23);
             this.txt_Unit.TabIndex = 19;
             // 
             // kryptonLabel13
             // 
-            this.kryptonLabel13.Location = new System.Drawing.Point(274, 256);
+            this.kryptonLabel13.Location = new System.Drawing.Point(274, 298);
             this.kryptonLabel13.Name = "kryptonLabel13";
             this.kryptonLabel13.Size = new System.Drawing.Size(42, 20);
             this.kryptonLabel13.TabIndex = 267;
@@ -762,7 +861,7 @@
             this.cmb_Places1.BackColor = System.Drawing.Color.Transparent;
             this.cmb_Places1.Department = "";
             this.cmb_Places1.IsQuarantine = 0;
-            this.cmb_Places1.Location = new System.Drawing.Point(329, 256);
+            this.cmb_Places1.Location = new System.Drawing.Point(329, 298);
             this.cmb_Places1.Lock = 0;
             this.cmb_Places1.Name = "cmb_Places1";
             this.cmb_Places1.PlaceId = 0;
@@ -773,7 +872,7 @@
             // 
             // kryptonLabel17
             // 
-            this.kryptonLabel17.Location = new System.Drawing.Point(15, 281);
+            this.kryptonLabel17.Location = new System.Drawing.Point(15, 323);
             this.kryptonLabel17.Name = "kryptonLabel17";
             this.kryptonLabel17.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Silver;
             this.kryptonLabel17.Size = new System.Drawing.Size(72, 20);
@@ -784,7 +883,7 @@
             // 
             this.txt_Comments.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
             this.buttonSpecAny4});
-            this.txt_Comments.Location = new System.Drawing.Point(120, 281);
+            this.txt_Comments.Location = new System.Drawing.Point(120, 323);
             this.txt_Comments.Multiline = true;
             this.txt_Comments.Name = "txt_Comments";
             this.txt_Comments.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -829,11 +928,11 @@
             this.txt_TotalWVAT.AllowSpace = false;
             this.txt_TotalWVAT.Location = new System.Drawing.Point(412, 198);
             this.txt_TotalWVAT.Name = "txt_TotalWVAT";
-            this.txt_TotalWVAT.Size = new System.Drawing.Size(61, 23);
-            this.txt_TotalWVAT.TabIndex = 16;
-            this.txt_TotalWVAT.Text = "0";
+            this.txt_TotalWVAT.Size = new System.Drawing.Size(61, 21);
             this.txt_TotalWVAT.StateActive.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txt_TotalWVAT.StateActive.Content.Padding = new System.Windows.Forms.Padding(3);
+            this.txt_TotalWVAT.TabIndex = 16;
+            this.txt_TotalWVAT.Text = "0";
             this.txt_TotalWVAT.TextChanged += new System.EventHandler(this.txt_TotalWVAT_TextChanged);
             this.txt_TotalWVAT.Click += new System.EventHandler(this.txt_TotalWVAT_Click);
             this.txt_TotalWVAT.Enter += new System.EventHandler(this.txt_TotalWVAT_Enter);
@@ -852,15 +951,14 @@
             this.txt_Total.AllowSpace = false;
             this.txt_Total.Location = new System.Drawing.Point(120, 198);
             this.txt_Total.Name = "txt_Total";
-            this.txt_Total.Size = new System.Drawing.Size(63, 23);
-            this.txt_Total.TabIndex = 14;
-            this.txt_Total.Text = "0";
+            this.txt_Total.Size = new System.Drawing.Size(63, 21);
             this.txt_Total.StateActive.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txt_Total.StateActive.Content.Padding = new System.Windows.Forms.Padding(3);
+            this.txt_Total.TabIndex = 14;
+            this.txt_Total.Text = "0";
             this.txt_Total.TextChanged += new System.EventHandler(this.txt_Total_TextChanged);
             this.txt_Total.Click += new System.EventHandler(this.txt_Total_Click);
             this.txt_Total.Enter += new System.EventHandler(this.txt_Total_Enter);
-
             // 
             // gradientPanel22
             // 
@@ -868,7 +966,7 @@
             this.gradientPanel22.BackgroundGradientMode = Owf.Controls.GradientPanel2.PanelGradientMode.BackwardDiagonal;
             this.gradientPanel22.borderColor = System.Drawing.Color.Transparent;
             this.gradientPanel22.EndColor = System.Drawing.Color.Lime;
-            this.gradientPanel22.Location = new System.Drawing.Point(15, 224);
+            this.gradientPanel22.Location = new System.Drawing.Point(15, 263);
             this.gradientPanel22.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.gradientPanel22.Name = "gradientPanel22";
             this.gradientPanel22.Padding = new System.Windows.Forms.Padding(1);
@@ -882,7 +980,7 @@
             // 
             // kryptonLabel9
             // 
-            this.kryptonLabel9.Location = new System.Drawing.Point(15, 256);
+            this.kryptonLabel9.Location = new System.Drawing.Point(15, 298);
             this.kryptonLabel9.Name = "kryptonLabel9";
             this.kryptonLabel9.Size = new System.Drawing.Size(80, 20);
             this.kryptonLabel9.TabIndex = 255;
@@ -892,7 +990,7 @@
             // 
             this.txt_QtyToPlace.AllowDecimalSeparator = true;
             this.txt_QtyToPlace.AllowSpace = false;
-            this.txt_QtyToPlace.Location = new System.Drawing.Point(120, 256);
+            this.txt_QtyToPlace.Location = new System.Drawing.Point(120, 298);
             this.txt_QtyToPlace.Name = "txt_QtyToPlace";
             this.txt_QtyToPlace.Size = new System.Drawing.Size(63, 23);
             this.txt_QtyToPlace.TabIndex = 18;
@@ -905,7 +1003,7 @@
             this.txt_ExpDate.CalendarShowWeekNumbers = true;
             this.txt_ExpDate.CustomFormat = null;
             this.txt_ExpDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.txt_ExpDate.Location = new System.Drawing.Point(120, 230);
+            this.txt_ExpDate.Location = new System.Drawing.Point(120, 272);
             this.txt_ExpDate.Name = "txt_ExpDate";
             this.txt_ExpDate.NullValue = " ";
             this.txt_ExpDate.Size = new System.Drawing.Size(106, 21);
@@ -920,7 +1018,7 @@
             // 
             // kryptonLabel16
             // 
-            this.kryptonLabel16.Location = new System.Drawing.Point(15, 231);
+            this.kryptonLabel16.Location = new System.Drawing.Point(15, 273);
             this.kryptonLabel16.Name = "kryptonLabel16";
             this.kryptonLabel16.Size = new System.Drawing.Size(73, 20);
             this.kryptonLabel16.TabIndex = 252;
@@ -1024,18 +1122,18 @@
             this.txt_Disc.AllowDecimalSeparator = true;
             this.txt_Disc.AllowSpace = false;
             this.txt_Disc.Location = new System.Drawing.Point(274, 173);
-            this.txt_Disc.Name = "txt_Dutycost";
+            this.txt_Disc.Name = "txt_Disc";
             this.txt_Disc.Size = new System.Drawing.Size(44, 23);
             this.txt_Disc.TabIndex = 13;
             this.txt_Disc.Text = "0";
-            this.txt_Disc.TextChanged += new System.EventHandler(this.txt_Dutycost_TextChanged);
             this.txt_Disc.Visible = false;
+            this.txt_Disc.TextChanged += new System.EventHandler(this.txt_Dutycost_TextChanged);
             // 
             // kryptonLabel32
             // 
             this.kryptonLabel32.Location = new System.Drawing.Point(190, 173);
             this.kryptonLabel32.Name = "kryptonLabel32";
-            this.kryptonLabel32.Size = new System.Drawing.Size(79, 20);
+            this.kryptonLabel32.Size = new System.Drawing.Size(61, 20);
             this.kryptonLabel32.TabIndex = 235;
             this.kryptonLabel32.Values.Text = "DutyCost";
             // 
@@ -1044,7 +1142,7 @@
             this.txt_Dutycost.AllowDecimalSeparator = true;
             this.txt_Dutycost.AllowSpace = false;
             this.txt_Dutycost.Location = new System.Drawing.Point(274, 173);
-            this.txt_Dutycost.Name = "txt_Disc";
+            this.txt_Dutycost.Name = "txt_Dutycost";
             this.txt_Dutycost.Size = new System.Drawing.Size(44, 23);
             this.txt_Dutycost.TabIndex = 13;
             this.txt_Dutycost.Text = "0";
@@ -1138,6 +1236,7 @@
             this.cmb_Articles1.DeptId = 0;
             this.cmb_Articles1.Description = null;
             this.cmb_Articles1.IsActive = -1;
+            this.cmb_Articles1.IsCertified = -1;
             this.cmb_Articles1.IsPF = 0;
             this.cmb_Articles1.Location = new System.Drawing.Point(120, 42);
             this.cmb_Articles1.Manufacturer = "";
@@ -1174,100 +1273,25 @@
             this.kryptonPalette1.GridStyles.GridCustom1.StateCommon.HeaderRow.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.kryptonPalette1.PanelStyles.PanelCustom1.StateCommon.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             // 
-            // txt_ManufBatch
+            // kryptonLabel33
             // 
-            this.txt_ManufBatch.AllowButtonSpecToolTips = true;
-            this.txt_ManufBatch.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
-            this.buttonSpecAny5});
-            this.txt_ManufBatch.Location = new System.Drawing.Point(120, 324);
-            this.txt_ManufBatch.Name = "txt_ManufBatch";
-            this.txt_ManufBatch.Size = new System.Drawing.Size(140, 23);
-            this.txt_ManufBatch.TabIndex = 301;
+            this.kryptonLabel33.Location = new System.Drawing.Point(15, 224);
+            this.kryptonLabel33.Name = "kryptonLabel33";
+            this.kryptonLabel33.Size = new System.Drawing.Size(40, 20);
+            this.kryptonLabel33.TabIndex = 303;
+            this.kryptonLabel33.Values.Text = "Total (manual):";
             // 
-            // buttonSpecAny5
+            // numericTetxBox1
             // 
-            this.buttonSpecAny5.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
-            this.buttonSpecAny5.UniqueName = "ECFB869BD7764A9C8F8EA2E658584FE7";
-            this.buttonSpecAny5.Click += new System.EventHandler(this.buttonSpecAny5_Click);
-            // 
-            // kryptonLabel31
-            // 
-            this.kryptonLabel31.Location = new System.Drawing.Point(15, 327);
-            this.kryptonLabel31.Name = "kryptonLabel31";
-            this.kryptonLabel31.Size = new System.Drawing.Size(85, 20);
-            this.kryptonLabel31.TabIndex = 300;
-            this.kryptonLabel31.Values.Text = "Manuf. batch:";
-            // 
-            // attachmentColumn
-            // 
-            this.attachmentColumn.HeaderText = "attachmentColumn";
-            this.attachmentColumn.Name = "attachmentColumn";
-            this.attachmentColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.attachmentColumn.Visible = false;
-            // 
-            // cn_place
-            // 
-            this.cn_place.DefaultNodeImage = null;
-            this.cn_place.FillWeight = 235F;
-            this.cn_place.HeaderText = "Place";
-            this.cn_place.Name = "cn_place";
-            this.cn_place.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.cn_place.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cn_place.Width = 235;
-            // 
-            // cn_placeid
-            // 
-            this.cn_placeid.HeaderText = "placeid";
-            this.cn_placeid.Name = "cn_placeid";
-            this.cn_placeid.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cn_placeid.Visible = false;
-            // 
-            // cn_qtyonplace
-            // 
-            this.cn_qtyonplace.FillWeight = 80F;
-            this.cn_qtyonplace.HeaderText = "Qty on place";
-            this.cn_qtyonplace.Name = "cn_qtyonplace";
-            this.cn_qtyonplace.ReadOnly = true;
-            this.cn_qtyonplace.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cn_qtyonplace.Width = 80;
-            // 
-            // cn_qtyoper
-            // 
-            this.cn_qtyoper.FillWeight = 80F;
-            this.cn_qtyoper.HeaderText = "Qty oper";
-            this.cn_qtyoper.Name = "cn_qtyoper";
-            this.cn_qtyoper.ReadOnly = true;
-            this.cn_qtyoper.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cn_qtyoper.Width = 80;
-            // 
-            // cn_QtyAfter
-            // 
-            this.cn_QtyAfter.FillWeight = 80F;
-            this.cn_QtyAfter.HeaderText = "Qty after";
-            this.cn_QtyAfter.Name = "cn_QtyAfter";
-            this.cn_QtyAfter.ReadOnly = true;
-            this.cn_QtyAfter.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cn_QtyAfter.Width = 80;
-            // 
-            // cn_datacode
-            // 
-            this.cn_datacode.HeaderText = "DataCode";
-            this.cn_datacode.Name = "cn_datacode";
-            this.cn_datacode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // cn_comments
-            // 
-            this.cn_comments.FillWeight = 120F;
-            this.cn_comments.HeaderText = "Comments";
-            this.cn_comments.Name = "cn_comments";
-            this.cn_comments.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cn_comments.Width = 120;
-            // 
-            // cn_manufbatch
-            // 
-            this.cn_manufbatch.HeaderText = "Manuf. batch";
-            this.cn_manufbatch.Name = "cn_manufbatch";
-            this.cn_manufbatch.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.txt_Total2.AllowDecimalSeparator = true;
+            this.txt_Total2.AllowSpace = false;
+            this.txt_Total2.Location = new System.Drawing.Point(120, 224);
+            this.txt_Total2.Name = "txt_Total2";
+            this.txt_Total2.Size = new System.Drawing.Size(63, 21);
+            this.txt_Total2.StateActive.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txt_Total2.StateActive.Content.Padding = new System.Windows.Forms.Padding(3);
+            this.txt_Total2.TabIndex = 302;
+            this.txt_Total2.Text = "0";
             // 
             // ctl_StockInDets
             // 
@@ -1296,7 +1320,7 @@
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
@@ -1403,5 +1427,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_datacode;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_comments;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_manufbatch;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel33;
+        private Owf.Controls.NumericTetxBox txt_Total2;
     }
 }

@@ -397,9 +397,9 @@
             this.txt_Total.Location = new System.Drawing.Point(120, 198);
             this.txt_Total.Name = "txt_Total";
             this.txt_Total.Size = new System.Drawing.Size(63, 23);
-            this.txt_Total.StateActive.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txt_Total.TabIndex = 14;
             this.txt_Total.Text = "0";
+            this.txt_Total.TextChanged += new System.EventHandler(this.txt_Total_TextChanged);
             // 
             // kryptonLabel18
             // 

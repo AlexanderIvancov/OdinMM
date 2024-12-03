@@ -512,7 +512,7 @@ namespace Odin.Warehouse.StockIn
                                                             StateId,
                                                             Convert.ToInt32(row.Cells["cn_id"].Value),
                                                             Convert.ToInt32(setDGVCMBCell.Value),
-                                                            "", 0, Total, TotalVAT, TotalWithVat);
+                                                            "", 0, Total);
                         if (Convert.ToInt32(row.Cells["chk_place"].Value) != 0
                                              && PlaceId != 0
                                              && _NewInwardId != 0

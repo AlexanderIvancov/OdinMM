@@ -54,6 +54,8 @@ namespace Odin.Warehouse.StockIn
                 Producer = Bll.ProducerCountryId;
                 DataCode = Bll.DataCode;
                 Dutycost = Bll.Dutycost;
+                Total = Bll.Total;
+                PriceWVat = UnitPrice * (Vat + 100) / 100;
             }
 
         }
@@ -278,6 +280,12 @@ namespace Odin.Warehouse.StockIn
         }
         #endregion
 
+        private void txt_Total_TextChanged(object sender, EventArgs e)
+        {
+            TotalVAT = Total * Vat/100;
+            TotalWVAT = Total + TotalVAT;
+        }
+
         private void cmb_Articles1_ArticleChanged(object sender)
         {
             ArtUnitId = cmb_Articles1.UnitId;
@@ -304,7 +312,7 @@ namespace Odin.Warehouse.StockIn
 
             int _NewInwardId = Bll.EditStockIn(Id, IncomeDocId, ArtId, SupArticle, StockMoveTypeId, Qty, UnitId,
                                                 Comments, UnitPrice, Discount, Vat, CoefConv, Weight, CustCodeId, 
-                                                BatchId, Producer, DataCode, Dutycost);
+                                                BatchId, Producer, DataCode, Dutycost, Total);
 
             //Deallocation
             if (_NewInwardId != 0)

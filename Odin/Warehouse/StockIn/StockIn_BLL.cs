@@ -61,7 +61,7 @@ namespace Odin.Warehouse.StockIn
 
         public int AddStockIn(int headid, int artid, string suparticle, int type, double qty, int unitid, string comments, 
                             double unitprice, double discount, double vat, double coefconv, double weight, int custcodeid,
-                            int batchid, int state, int poid, int producer, string datacode, double dutycost, double total, double totalvat, double totalwvat)
+                            int batchid, int state, int poid, int producer, string datacode, double dutycost, double total)
         {
             int _res = 0;
 
@@ -89,8 +89,6 @@ namespace Odin.Warehouse.StockIn
             sqlComm.Parameters.AddWithValue("@datacode", datacode);
             sqlComm.Parameters.AddWithValue("@dutycost", dutycost);
             sqlComm.Parameters.AddWithValue("@total", total);
-            sqlComm.Parameters.AddWithValue("@totalvat", totalvat);
-            sqlComm.Parameters.AddWithValue("@totalwvat", totalwvat);
 
             sqlComm.Parameters.Add("@insertedid", SqlDbType.Int).Direction = ParameterDirection.Output;
 
@@ -151,7 +149,7 @@ namespace Odin.Warehouse.StockIn
 
         public int EditStockIn(int id, int headid, int artid, string suparticle, int type, double qty, int unitid, string comments,
                             double unitprice, double discount, double vat, double coefconv, double weight, int custcodeid,
-                            int batchid, int producer, string datacode, double dutycost)
+                            int batchid, int producer, string datacode, double dutycost, double total)
         {
             int _res = 0;
             SqlConnection sqlConn = new SqlConnection(sConnStr);
@@ -177,6 +175,7 @@ namespace Odin.Warehouse.StockIn
             sqlComm.Parameters.AddWithValue("@producer", producer);
             sqlComm.Parameters.AddWithValue("@datacode", datacode);
             sqlComm.Parameters.AddWithValue("@dutycost", dutycost);
+            sqlComm.Parameters.AddWithValue("@total", total);
 
             sqlComm.Parameters.Add("@success", SqlDbType.Int).Direction = ParameterDirection.Output;
 
@@ -361,6 +360,8 @@ namespace Odin.Warehouse.StockIn
         { get; set; }
         public double Dutycost
         { get; set; }
+        public double Total
+        { get; set; }
 
         public int IdIn
         {
@@ -405,6 +406,7 @@ namespace Odin.Warehouse.StockIn
                         ProducerCountryId = Convert.ToInt32(dr["producercountryid"]);
                         DataCode = dr["datacode"].ToString();
                         Dutycost = Convert.ToDouble(dr["dutycost"]);
+                        Total = Convert.ToDouble(dr["total"]) != 0 ? Convert.ToDouble(dr["total"]) : UnitPrice * Qty;
                     }
                 }
                 else
