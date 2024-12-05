@@ -1860,6 +1860,16 @@ namespace Odin {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap events {
+            get {
+                object obj = ResourceManager.GetObject("events", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ExcelSpreadsheetSmall {
             get {
                 object obj = ResourceManager.GetObject("ExcelSpreadsheetSmall", resourceCulture);
@@ -1934,6 +1944,16 @@ namespace Odin {
             get {
                 object obj = ResourceManager.GetObject("face_sad_8468", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap factory {
+            get {
+                object obj = ResourceManager.GetObject("factory", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
