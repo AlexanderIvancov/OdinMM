@@ -375,7 +375,7 @@ namespace Odin.Warehouse.History
                 _total = _total + Convert.ToDouble(row.Cells["cn_ototal"].Value);
             }
 
-            TotalOutcomes = _total;
+            TotalOutcomes = Math.Round(_total, 2);
 
         }
 
@@ -388,7 +388,7 @@ namespace Odin.Warehouse.History
                 _total = _total + Convert.ToDouble(row.Cells["cn_mtotal"].Value);
             }
 
-            TotalMovements = _total;
+            TotalMovements = Math.Round(_total, 2);
         }
 
         public void RecalcTotalReturns()
@@ -400,7 +400,7 @@ namespace Odin.Warehouse.History
                 _total = _total + Convert.ToDouble(row.Cells["cn_rtotal"].Value);
             }
 
-            TotalReturns = _total;
+            TotalReturns = Math.Round(_total, 2);
         }
 
         public void bw_ListMovements(object sender, DoWorkEventArgs e)
