@@ -3838,6 +3838,8 @@ namespace Odin.Warehouse.DataSets {
             
             private global::System.Data.DataColumn columnartcomments;
             
+            private global::System.Data.DataColumn columnMSL;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public dt_BatchStockReservationDataTable() {
@@ -4009,6 +4011,14 @@ namespace Odin.Warehouse.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn MSLColumn {
+                get {
+                    return this.columnMSL;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -4061,7 +4071,8 @@ namespace Odin.Warehouse.DataSets {
                         int parentid, 
                         int analogueid, 
                         int warning, 
-                        string artcomments) {
+                        string artcomments, 
+                        string MSL) {
                 dt_BatchStockReservationRow rowdt_BatchStockReservationRow = ((dt_BatchStockReservationRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         labels,
@@ -4080,7 +4091,8 @@ namespace Odin.Warehouse.DataSets {
                         parentid,
                         analogueid,
                         warning,
-                        artcomments};
+                        artcomments,
+                        MSL};
                 rowdt_BatchStockReservationRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowdt_BatchStockReservationRow);
                 return rowdt_BatchStockReservationRow;
@@ -4120,6 +4132,7 @@ namespace Odin.Warehouse.DataSets {
                 this.columnanalogueid = base.Columns["analogueid"];
                 this.columnwarning = base.Columns["warning"];
                 this.columnartcomments = base.Columns["artcomments"];
+                this.columnMSL = base.Columns["MSL"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4159,6 +4172,8 @@ namespace Odin.Warehouse.DataSets {
                 base.Columns.Add(this.columnwarning);
                 this.columnartcomments = new global::System.Data.DataColumn("artcomments", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnartcomments);
+                this.columnMSL = new global::System.Data.DataColumn("MSL", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMSL);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10745,6 +10760,22 @@ namespace Odin.Warehouse.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string MSL {
+                get {
+                    try {
+                        return ((string)(this[this.tabledt_BatchStockReservation.MSLColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MSL\' in table \'dt_BatchStockReservation\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledt_BatchStockReservation.MSLColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IslabelsNull() {
                 return this.IsNull(this.tabledt_BatchStockReservation.labelsColumn);
             }
@@ -10945,6 +10976,18 @@ namespace Odin.Warehouse.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetartcommentsNull() {
                 this[this.tabledt_BatchStockReservation.artcommentsColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsMSLNull() {
+                return this.IsNull(this.tabledt_BatchStockReservation.MSLColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetMSLNull() {
+                this[this.tabledt_BatchStockReservation.MSLColumn] = global::System.Convert.DBNull;
             }
         }
         

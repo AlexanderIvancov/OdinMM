@@ -179,6 +179,7 @@
               <xs:element name="analogueid" msprop:Generator_ColumnVarNameInTable="columnanalogueid" msprop:Generator_ColumnPropNameInRow="analogueid" msprop:Generator_ColumnPropNameInTable="analogueidColumn" msprop:Generator_UserColumnName="analogueid" type="xs:int" minOccurs="0" />
               <xs:element name="warning" msprop:Generator_ColumnVarNameInTable="columnwarning" msprop:Generator_ColumnPropNameInRow="warning" msprop:Generator_ColumnPropNameInTable="warningColumn" msprop:Generator_UserColumnName="warning" type="xs:int" minOccurs="0" />
               <xs:element name="artcomments" msprop:Generator_ColumnVarNameInTable="columnartcomments" msprop:Generator_ColumnPropNameInRow="artcomments" msprop:Generator_ColumnPropNameInTable="artcommentsColumn" msprop:Generator_UserColumnName="artcomments" type="xs:string" minOccurs="0" />
+              <xs:element name="MSL" msprop:Generator_ColumnVarNameInTable="columnMSL" msprop:Generator_ColumnPropNameInRow="MSL" msprop:Generator_ColumnPropNameInTable="MSLColumn" msprop:Generator_UserColumnName="MSL" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
