@@ -75,6 +75,7 @@
             this.btn_Excel = new System.Windows.Forms.ToolStripButton();
             this.splitter2 = new BSE.Windows.Forms.Splitter();
             this.kryptonPanel3 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.btn_Check1C = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonGroupBox2 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.btn_FCSRefresh = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_WIPRefresh = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -94,7 +95,6 @@
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.crystalReportViewer1 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.kryptonHeader2 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
-            this.btn_Check1C = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.mnu_Lines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
@@ -525,6 +525,16 @@
             this.kryptonPanel3.Size = new System.Drawing.Size(817, 204);
             this.kryptonPanel3.TabIndex = 1;
             // 
+            // btn_Check1C
+            // 
+            this.btn_Check1C.Location = new System.Drawing.Point(309, 156);
+            this.btn_Check1C.Name = "btn_Check1C";
+            this.btn_Check1C.Size = new System.Drawing.Size(101, 41);
+            this.btn_Check1C.TabIndex = 283;
+            this.btn_Check1C.Values.Image = global::Odin.Global_Resourses._1c_32x32px;
+            this.btn_Check1C.Values.Text = "Check 1C";
+            this.btn_Check1C.Click += new System.EventHandler(this.btn_Check1C_Click);
+            // 
             // kryptonGroupBox2
             // 
             this.kryptonGroupBox2.Location = new System.Drawing.Point(12, 48);
@@ -716,17 +726,6 @@
             this.kryptonHeader2.Values.Description = "";
             this.kryptonHeader2.Values.Heading = "Print form";
             this.kryptonHeader2.Values.Image = global::Odin.Global_Resourses.AppMenuPrint1;
-            // 
-            // btn_Check1C
-            // 
-            this.btn_Check1C.Location = new System.Drawing.Point(309, 156);
-            this.btn_Check1C.Name = "btn_Check1C";
-            this.btn_Check1C.Size = new System.Drawing.Size(101, 41);
-            this.btn_Check1C.TabIndex = 283;
-            this.btn_Check1C.Values.Image = global::Odin.Global_Resourses._1c_32x32px;
-            this.btn_Check1C.Values.Text = "Check 1C";
-            this.btn_Check1C.Visible = false;
-            this.btn_Check1C.Click += new System.EventHandler(this.btn_Check1C_Click);
             // 
             // frm_TurnoverReports
             // 
