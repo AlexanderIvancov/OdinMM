@@ -46,6 +46,22 @@
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonPanel4 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.cn_num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_artid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_article = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_suparticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_unitprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_qtybeg = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_sumbeg = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_qtyin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_sumin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_qtyout = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_sumout = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_qtyend = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_sumend = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_qtydiff = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_sumdiff = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bn_List = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -78,22 +94,7 @@
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.crystalReportViewer1 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.kryptonHeader2 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
-            this.cn_num = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_artid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_article = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_suparticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_unitprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_qtybeg = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_sumbeg = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_qtyin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_sumin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_qtyout = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_sumout = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_qtyend = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_sumend = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_qtydiff = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_sumdiff = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_Check1C = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.mnu_Lines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
@@ -249,6 +250,150 @@
             this.gv_List.Size = new System.Drawing.Size(817, 386);
             this.gv_List.TabIndex = 5;
             // 
+            // cn_num
+            // 
+            this.cn_num.DataPropertyName = "num";
+            this.cn_num.FillWeight = 70F;
+            this.cn_num.HeaderText = "Num.";
+            this.cn_num.Name = "cn_num";
+            this.cn_num.ReadOnly = true;
+            this.cn_num.Width = 70;
+            // 
+            // cn_artid
+            // 
+            this.cn_artid.DataPropertyName = "artid";
+            this.cn_artid.FillWeight = 80F;
+            this.cn_artid.HeaderText = "Art. id";
+            this.cn_artid.Name = "cn_artid";
+            this.cn_artid.ReadOnly = true;
+            this.cn_artid.Width = 80;
+            // 
+            // cn_article
+            // 
+            this.cn_article.DataPropertyName = "article";
+            this.cn_article.FillWeight = 200F;
+            this.cn_article.HeaderText = "Article";
+            this.cn_article.Name = "cn_article";
+            this.cn_article.ReadOnly = true;
+            this.cn_article.Width = 200;
+            // 
+            // cn_suparticle
+            // 
+            this.cn_suparticle.DataPropertyName = "suparticle";
+            this.cn_suparticle.FillWeight = 200F;
+            this.cn_suparticle.HeaderText = "SupArticle";
+            this.cn_suparticle.Name = "cn_suparticle";
+            this.cn_suparticle.ReadOnly = true;
+            this.cn_suparticle.Width = 200;
+            // 
+            // cn_unit
+            // 
+            this.cn_unit.DataPropertyName = "unit";
+            this.cn_unit.FillWeight = 40F;
+            this.cn_unit.HeaderText = "Unit";
+            this.cn_unit.Name = "cn_unit";
+            this.cn_unit.ReadOnly = true;
+            this.cn_unit.Width = 40;
+            // 
+            // cn_unitprice
+            // 
+            this.cn_unitprice.DataPropertyName = "unitprice";
+            this.cn_unitprice.FillWeight = 80F;
+            this.cn_unitprice.HeaderText = "Unit price (BYN)";
+            this.cn_unitprice.Name = "cn_unitprice";
+            this.cn_unitprice.ReadOnly = true;
+            this.cn_unitprice.Width = 80;
+            // 
+            // cn_qtybeg
+            // 
+            this.cn_qtybeg.DataPropertyName = "qtybeg";
+            this.cn_qtybeg.FillWeight = 80F;
+            this.cn_qtybeg.HeaderText = "Qty beg.";
+            this.cn_qtybeg.Name = "cn_qtybeg";
+            this.cn_qtybeg.ReadOnly = true;
+            this.cn_qtybeg.Width = 80;
+            // 
+            // cn_sumbeg
+            // 
+            this.cn_sumbeg.DataPropertyName = "sumbeg";
+            this.cn_sumbeg.FillWeight = 80F;
+            this.cn_sumbeg.HeaderText = "Summ beg.(BYN)";
+            this.cn_sumbeg.Name = "cn_sumbeg";
+            this.cn_sumbeg.ReadOnly = true;
+            this.cn_sumbeg.Width = 80;
+            // 
+            // cn_qtyin
+            // 
+            this.cn_qtyin.DataPropertyName = "qtyin";
+            this.cn_qtyin.FillWeight = 80F;
+            this.cn_qtyin.HeaderText = "Qty in";
+            this.cn_qtyin.Name = "cn_qtyin";
+            this.cn_qtyin.ReadOnly = true;
+            this.cn_qtyin.Width = 80;
+            // 
+            // cn_sumin
+            // 
+            this.cn_sumin.DataPropertyName = "sumin";
+            this.cn_sumin.FillWeight = 80F;
+            this.cn_sumin.HeaderText = "Sum in (BYN)";
+            this.cn_sumin.Name = "cn_sumin";
+            this.cn_sumin.ReadOnly = true;
+            this.cn_sumin.Width = 80;
+            // 
+            // cn_qtyout
+            // 
+            this.cn_qtyout.DataPropertyName = "qtyout";
+            this.cn_qtyout.FillWeight = 80F;
+            this.cn_qtyout.HeaderText = "Qty out";
+            this.cn_qtyout.Name = "cn_qtyout";
+            this.cn_qtyout.ReadOnly = true;
+            this.cn_qtyout.Width = 80;
+            // 
+            // cn_sumout
+            // 
+            this.cn_sumout.DataPropertyName = "sumout";
+            this.cn_sumout.FillWeight = 80F;
+            this.cn_sumout.HeaderText = "Sum out (BYN)";
+            this.cn_sumout.Name = "cn_sumout";
+            this.cn_sumout.ReadOnly = true;
+            this.cn_sumout.Width = 80;
+            // 
+            // cn_qtyend
+            // 
+            this.cn_qtyend.DataPropertyName = "qtyend";
+            this.cn_qtyend.FillWeight = 80F;
+            this.cn_qtyend.HeaderText = "Qty end";
+            this.cn_qtyend.Name = "cn_qtyend";
+            this.cn_qtyend.ReadOnly = true;
+            this.cn_qtyend.Width = 80;
+            // 
+            // cn_sumend
+            // 
+            this.cn_sumend.DataPropertyName = "sumend";
+            this.cn_sumend.FillWeight = 80F;
+            this.cn_sumend.HeaderText = "Sum end (BYN)";
+            this.cn_sumend.Name = "cn_sumend";
+            this.cn_sumend.ReadOnly = true;
+            this.cn_sumend.Width = 80;
+            // 
+            // cn_qtydiff
+            // 
+            this.cn_qtydiff.DataPropertyName = "qtydiff";
+            this.cn_qtydiff.FillWeight = 80F;
+            this.cn_qtydiff.HeaderText = "Qty diff";
+            this.cn_qtydiff.Name = "cn_qtydiff";
+            this.cn_qtydiff.ReadOnly = true;
+            this.cn_qtydiff.Width = 80;
+            // 
+            // cn_sumdiff
+            // 
+            this.cn_sumdiff.DataPropertyName = "sumdiff";
+            this.cn_sumdiff.FillWeight = 80F;
+            this.cn_sumdiff.HeaderText = "Sum diff (BYN)";
+            this.cn_sumdiff.Name = "cn_sumdiff";
+            this.cn_sumdiff.ReadOnly = true;
+            this.cn_sumdiff.Width = 80;
+            // 
             // bn_List
             // 
             this.bn_List.AddNewItem = null;
@@ -366,6 +511,7 @@
             // 
             // kryptonPanel3
             // 
+            this.kryptonPanel3.Controls.Add(this.btn_Check1C);
             this.kryptonPanel3.Controls.Add(this.kryptonGroupBox2);
             this.kryptonPanel3.Controls.Add(this.txt_CreatDateTill);
             this.kryptonPanel3.Controls.Add(this.txt_CreatDateFrom);
@@ -571,149 +717,16 @@
             this.kryptonHeader2.Values.Heading = "Print form";
             this.kryptonHeader2.Values.Image = global::Odin.Global_Resourses.AppMenuPrint1;
             // 
-            // cn_num
+            // btn_Check1C
             // 
-            this.cn_num.DataPropertyName = "num";
-            this.cn_num.FillWeight = 70F;
-            this.cn_num.HeaderText = "Num.";
-            this.cn_num.Name = "cn_num";
-            this.cn_num.ReadOnly = true;
-            this.cn_num.Width = 70;
-            // 
-            // cn_artid
-            // 
-            this.cn_artid.DataPropertyName = "artid";
-            this.cn_artid.FillWeight = 80F;
-            this.cn_artid.HeaderText = "Art. id";
-            this.cn_artid.Name = "cn_artid";
-            this.cn_artid.ReadOnly = true;
-            this.cn_artid.Width = 80;
-            // 
-            // cn_article
-            // 
-            this.cn_article.DataPropertyName = "article";
-            this.cn_article.FillWeight = 200F;
-            this.cn_article.HeaderText = "Article";
-            this.cn_article.Name = "cn_article";
-            this.cn_article.ReadOnly = true;
-            this.cn_article.Width = 200;
-            // 
-            // cn_article
-            // 
-            this.cn_suparticle.DataPropertyName = "suparticle";
-            this.cn_suparticle.FillWeight = 200F;
-            this.cn_suparticle.HeaderText = "SupArticle";
-            this.cn_suparticle.Name = "cn_suparticle";
-            this.cn_suparticle.ReadOnly = true;
-            this.cn_suparticle.Width = 200;
-            // 
-            // cn_unit
-            // 
-            this.cn_unit.DataPropertyName = "unit";
-            this.cn_unit.FillWeight = 40F;
-            this.cn_unit.HeaderText = "Unit";
-            this.cn_unit.Name = "cn_unit";
-            this.cn_unit.ReadOnly = true;
-            this.cn_unit.Width = 40;
-            // 
-            // cn_unitprice
-            // 
-            this.cn_unitprice.DataPropertyName = "unitprice";
-            this.cn_unitprice.FillWeight = 80F;
-            this.cn_unitprice.HeaderText = "Unit price (BYN)";
-            this.cn_unitprice.Name = "cn_unitprice";
-            this.cn_unitprice.ReadOnly = true;
-            this.cn_unitprice.Width = 80;
-            // 
-            // cn_qtybeg
-            // 
-            this.cn_qtybeg.DataPropertyName = "qtybeg";
-            this.cn_qtybeg.FillWeight = 80F;
-            this.cn_qtybeg.HeaderText = "Qty beg.";
-            this.cn_qtybeg.Name = "cn_qtybeg";
-            this.cn_qtybeg.ReadOnly = true;
-            this.cn_qtybeg.Width = 80;
-            // 
-            // cn_sumbeg
-            // 
-            this.cn_sumbeg.DataPropertyName = "sumbeg";
-            this.cn_sumbeg.FillWeight = 80F;
-            this.cn_sumbeg.HeaderText = "Summ beg.(BYN)";
-            this.cn_sumbeg.Name = "cn_sumbeg";
-            this.cn_sumbeg.ReadOnly = true;
-            this.cn_sumbeg.Width = 80;
-            // 
-            // cn_qtyin
-            // 
-            this.cn_qtyin.DataPropertyName = "qtyin";
-            this.cn_qtyin.FillWeight = 80F;
-            this.cn_qtyin.HeaderText = "Qty in";
-            this.cn_qtyin.Name = "cn_qtyin";
-            this.cn_qtyin.ReadOnly = true;
-            this.cn_qtyin.Width = 80;
-            // 
-            // cn_sumin
-            // 
-            this.cn_sumin.DataPropertyName = "sumin";
-            this.cn_sumin.FillWeight = 80F;
-            this.cn_sumin.HeaderText = "Sum in (BYN)";
-            this.cn_sumin.Name = "cn_sumin";
-            this.cn_sumin.ReadOnly = true;
-            this.cn_sumin.Width = 80;
-            // 
-            // cn_qtyout
-            // 
-            this.cn_qtyout.DataPropertyName = "qtyout";
-            this.cn_qtyout.FillWeight = 80F;
-            this.cn_qtyout.HeaderText = "Qty out";
-            this.cn_qtyout.Name = "cn_qtyout";
-            this.cn_qtyout.ReadOnly = true;
-            this.cn_qtyout.Width = 80;
-            // 
-            // cn_sumout
-            // 
-            this.cn_sumout.DataPropertyName = "sumout";
-            this.cn_sumout.FillWeight = 80F;
-            this.cn_sumout.HeaderText = "Sum out (BYN)";
-            this.cn_sumout.Name = "cn_sumout";
-            this.cn_sumout.ReadOnly = true;
-            this.cn_sumout.Width = 80;
-            // 
-            // cn_qtyend
-            // 
-            this.cn_qtyend.DataPropertyName = "qtyend";
-            this.cn_qtyend.FillWeight = 80F;
-            this.cn_qtyend.HeaderText = "Qty end";
-            this.cn_qtyend.Name = "cn_qtyend";
-            this.cn_qtyend.ReadOnly = true;
-            this.cn_qtyend.Width = 80;
-            // 
-            // cn_sumend
-            // 
-            this.cn_sumend.DataPropertyName = "sumend";
-            this.cn_sumend.FillWeight = 80F;
-            this.cn_sumend.HeaderText = "Sum end (BYN)";
-            this.cn_sumend.Name = "cn_sumend";
-            this.cn_sumend.ReadOnly = true;
-            this.cn_sumend.Width = 80;
-            // 
-            // cn_qtydiff
-            // 
-            this.cn_qtydiff.DataPropertyName = "qtydiff";
-            this.cn_qtydiff.FillWeight = 80F;
-            this.cn_qtydiff.HeaderText = "Qty diff";
-            this.cn_qtydiff.Name = "cn_qtydiff";
-            this.cn_qtydiff.ReadOnly = true;
-            this.cn_qtydiff.Width = 80;
-            // 
-            // cn_sumdiff
-            // 
-            this.cn_sumdiff.DataPropertyName = "sumdiff";
-            this.cn_sumdiff.FillWeight = 80F;
-            this.cn_sumdiff.HeaderText = "Sum diff (BYN)";
-            this.cn_sumdiff.Name = "cn_sumdiff";
-            this.cn_sumdiff.ReadOnly = true;
-            this.cn_sumdiff.Width = 80;
+            this.btn_Check1C.Location = new System.Drawing.Point(309, 156);
+            this.btn_Check1C.Name = "btn_Check1C";
+            this.btn_Check1C.Size = new System.Drawing.Size(101, 41);
+            this.btn_Check1C.TabIndex = 283;
+            this.btn_Check1C.Values.Image = global::Odin.Global_Resourses._1c_32x32px;
+            this.btn_Check1C.Values.Text = "Check 1C";
+            this.btn_Check1C.Visible = false;
+            this.btn_Check1C.Click += new System.EventHandler(this.btn_Check1C_Click);
             // 
             // frm_TurnoverReports
             // 
@@ -818,5 +831,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_sumend;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_qtydiff;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_sumdiff;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Check1C;
     }
 }
