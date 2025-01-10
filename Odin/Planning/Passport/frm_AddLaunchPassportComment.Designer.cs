@@ -206,7 +206,7 @@
             this.grp_State.Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grp_State)).EndInit();
             this.grp_State.ResumeLayout(false);
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false); //this.GetKryptonFormFields(this.GetType());
 
         }
 

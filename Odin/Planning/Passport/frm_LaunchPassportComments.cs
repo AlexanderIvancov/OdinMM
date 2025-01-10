@@ -27,7 +27,7 @@ namespace Odin.Planning.Passport
         DAL_Functions DAL = new DAL_Functions();
         AdmMenu mMenu = new AdmMenu();
         ExportData ED1;
-
+        Helper MyHelper = new Helper();
 
         public int RowIndexC = 0;
         public int ColumnIndexC = 0;
@@ -374,7 +374,7 @@ namespace Odin.Planning.Passport
             if (_id != 0)
             {
                 frm_AddLaunchPassportComment frm = new frm_AddLaunchPassportComment();
-                frm.HeaderText = "Edit launch comments for: " + _launch; 
+                frm.HeaderText = "Edit launch comments for: " + gv_Comments.CurrentRow.Cells["cn_launch"].Value.ToString(); 
                 frm.Comments = _comments;
                 frm.TechComments = _techcomments;
                 frm.StateId = _stateid;
@@ -384,6 +384,14 @@ namespace Odin.Planning.Passport
 
                 if (result == DialogResult.OK)
                 {
+                    string emailaddresses = "";
+                    emailaddresses = DAL.EmailAddressesByType(14);
+
+                    if (frm.SendEmail == -1)
+                    {
+                        MyHelper.SendMessage(emailaddresses, "Tech Comments for Launch: " + gv_Comments.CurrentRow.Cells["cn_launch"].Value.ToString(), "Quality Comments:\n" + frm.Comments.Substring(frm.Comments.LastIndexOf('/') + 1) + "\nTechComments:\n" + frm.TechComments.Substring(frm.TechComments.LastIndexOf('/') + 1));
+                    }
+
                     PlanBll.SavedLaunchPassportComments(_id, 0, frm.Comments, frm.TechComments, frm.StateId);
                     DataGridViewColumn oldColumn = gv_Comments.SortedColumn;
                     var dir = Helper.SaveDirection(gv_Comments);
@@ -391,6 +399,7 @@ namespace Odin.Planning.Passport
                     bwStart(bw_List);
 
                     Helper.RestoreDirection(gv_Comments, oldColumn, dir);
+
 
                     SetCellsColor();
                 }
@@ -427,7 +436,7 @@ namespace Odin.Planning.Passport
             if (_id != 0)
             {
                 frm_AddLaunchPassportComment frm = new frm_AddLaunchPassportComment();
-                frm.HeaderText = "Edit launch comments for: " + _launch;
+                frm.HeaderText = "Edit launch comments for: " + gv_Comments.CurrentRow.Cells["cn_launch"].Value.ToString();
                 frm.Comments = _comments;
                 frm.TechComments = _techcomments;
                 frm.StateId = _stateid;
@@ -444,6 +453,14 @@ namespace Odin.Planning.Passport
                     bwStart(bw_List);
 
                     Helper.RestoreDirection(gv_Comments, oldColumn, dir);
+
+                    string emailaddresses = "";
+                    emailaddresses = DAL.EmailAddressesByType(14);
+
+                    if (frm.SendEmail == -1)
+                    {
+                        MyHelper.SendMessage(emailaddresses, "Tech Comments for Launch: " + gv_Comments.CurrentRow.Cells["cn_launch"].Value.ToString(), "Quality Comments:\n" + frm.Comments.Substring(frm.Comments.LastIndexOf('/') + 1) + "\nTechComments:\n" + frm.TechComments.Substring(frm.TechComments.LastIndexOf('/') + 1));
+                    }
 
                     SetCellsColor();
                 }
