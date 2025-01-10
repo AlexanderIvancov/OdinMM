@@ -438,8 +438,27 @@ namespace Odin.Warehouse.Reports
             Helper.RestoreDirection(gv_List, oldColumn, dir);
         }
 
+
         #endregion
 
+        private void btn_Check1C_Click(object sender, EventArgs e)
+        {
+            var _query = "";
+            //_query = "sp_SelectNetUnitCostForBatchDets";
+            _query = "sp_ExportInto1CBYCheck";
 
+            var sqlparams = new List<SqlParameter>
+                {
+                 new SqlParameter("@datefrom",SqlDbType.NVarChar){Value = txt_CreatDateFrom.Value == null ? "" : Convert.ToDateTime(txt_CreatDateFrom.Value).ToShortDateString().Trim()},
+                 new SqlParameter("@datetill",SqlDbType.NVarChar){Value = txt_CreatDateTill.Value == null ? "" : Convert.ToDateTime(txt_CreatDateTill.Value).ToShortDateString().Trim()}
+                };
+
+            Template_DataGridView frm = new Template_DataGridView();
+
+            frm.Text = "Check export data in 1C";
+            frm.Query = _query;
+            frm.SqlParams = sqlparams;
+            frm.Show(); frm.GetKryptonFormFields();
+        }
     }
 }
