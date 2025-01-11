@@ -312,7 +312,7 @@ namespace Odin.Warehouse.StockIn
 
             int _NewInwardId = Bll.EditStockIn(Id, IncomeDocId, ArtId, SupArticle, StockMoveTypeId, Qty, UnitId,
                                                 Comments, UnitPrice, Discount, Vat, CoefConv, Weight, CustCodeId, 
-                                                BatchId, Producer, DataCode, Dutycost, Total);
+                                                BatchId, Producer, DataCode, Dutycost, Total, TotalVAT);
 
             //Deallocation
             if (_NewInwardId != 0)
