@@ -649,14 +649,14 @@ namespace Odin.DataCollection
                     string _serial = txt_Oper.Text.Trim();
 
                     bool check = DCBll.CheckDataCollectionSerialOper(_serial, 4, LaunchId);
-                    if (!check)
-                    {
-                        frm_Confirmation frm2 = new frm_Confirmation();
-                        frm2.HeaderText = "New serial number! Make sure the side is correct.";
-                        System.Media.SystemSounds.Exclamation.Play();
-                        DialogResult result2 = frm2.ShowDialog();
-                        check = result2 == DialogResult.OK ? true : false;
-                    }
+                    //if (!check)
+                    //{
+                    //    frm_Confirmation frm2 = new frm_Confirmation();
+                    //    frm2.HeaderText = "New serial number! Make sure the side is correct.";
+                    //    System.Media.SystemSounds.Exclamation.Play();
+                    //    DialogResult result2 = frm2.ShowDialog();
+                    //    check = result2 == DialogResult.OK ? true : false;
+                    //}
 
                     if (check)
                     {
@@ -754,14 +754,14 @@ namespace Odin.DataCollection
         {
             string _serial = _Serial;
             bool check = DCBll.CheckDataCollectionSerialOper(_serial, 4, LaunchId);
-            if (!check)
-            {
-                frm_Confirmation frm2 = new frm_Confirmation();
-                frm2.HeaderText = "New serial number! Make sure the side is correct.";
-                System.Media.SystemSounds.Exclamation.Play();
-                DialogResult result2 = frm2.ShowDialog();
-                check = result2 == DialogResult.OK ? true : false;
-            }
+            //if (!check)
+            //{
+            //    frm_Confirmation frm2 = new frm_Confirmation();
+            //    frm2.HeaderText = "New serial number! Make sure the side is correct.";
+            //    System.Media.SystemSounds.Exclamation.Play();
+            //    DialogResult result2 = frm2.ShowDialog();
+            //    check = result2 == DialogResult.OK ? true : false;
+            //}
 
             if (check)
             {
