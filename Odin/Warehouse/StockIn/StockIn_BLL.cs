@@ -149,7 +149,7 @@ namespace Odin.Warehouse.StockIn
 
         public int EditStockIn(int id, int headid, int artid, string suparticle, int type, double qty, int unitid, string comments,
                             double unitprice, double discount, double vat, double coefconv, double weight, int custcodeid,
-                            int batchid, int producer, string datacode, double dutycost, double total)
+                            int batchid, int producer, string datacode, double dutycost, double total, double totalvat)
         {
             int _res = 0;
             SqlConnection sqlConn = new SqlConnection(sConnStr);
@@ -176,6 +176,7 @@ namespace Odin.Warehouse.StockIn
             sqlComm.Parameters.AddWithValue("@datacode", datacode);
             sqlComm.Parameters.AddWithValue("@dutycost", dutycost);
             sqlComm.Parameters.AddWithValue("@total", total);
+            sqlComm.Parameters.AddWithValue("@totalvat", totalvat);
 
             sqlComm.Parameters.Add("@success", SqlDbType.Int).Direction = ParameterDirection.Output;
 
