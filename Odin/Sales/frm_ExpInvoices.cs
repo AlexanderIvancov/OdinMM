@@ -319,7 +319,7 @@ namespace Odin.Sales
 
             Total = _total;
             TotalVat = Math.Round(_totalvat, 2, MidpointRounding.AwayFromZero);//Math.Round(_total / 100 * _vat, 2);//_totalvat;
-            TotalWithVat = _total + Math.Round(_totalwithvat, 2, MidpointRounding.AwayFromZero);//_total + Math.Round(_total / 100 * _vat, 2);
+            TotalWithVat = Math.Round(_totalwithvat, 2, MidpointRounding.AwayFromZero);//_total + Math.Round(_total / 100 * _vat, 2);
             TotalByProforma = _byproforma;
 
             lbl_Total.Text = "Total for document (" + _cur + "):";
