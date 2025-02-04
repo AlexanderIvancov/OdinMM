@@ -4106,6 +4106,7 @@
     <Content Include="Resourses\crm.png" />
     <Content Include="Resourses\events.png" />
     <Content Include="Resourses\factory.png" />
+    <Content Include="Resourses\certificates.png" />
     <Content Include="Warehouse\Reports\rpt_TurnoverReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rpt_TurnoverReport.cs</LastGenOutput>
