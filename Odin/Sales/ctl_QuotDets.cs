@@ -542,7 +542,7 @@ namespace Odin.Sales
 
                     NewLineId = COBll.SaveQuotation(QuotId, DLL.CheckArtId(ArtId), Revision, CustArticle, Qty, UnitId, ReqDate, ExpDate, Week, StateId,
                                                 UnitPrice, Comments, CustId, PCB, datastages, CurId, CustOrder, CustLine, IsSent, SentDate, EndCustomerId,
-                                                Internal, Spoilage, Resale, Blocked, IsProject, Primary, DelivPlaceId, DelivAddressId);
+                                                Internal, Spoilage, Resale, Blocked, IsProject, Primary, DelivPlaceId, DelivAddressId, 0);
                     QuotId = NewLineId;
                     COBll.QuotId = QuotId;
 

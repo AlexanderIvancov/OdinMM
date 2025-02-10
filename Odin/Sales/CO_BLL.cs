@@ -1081,7 +1081,7 @@ namespace Odin.Sales
                                 string expdate, string week, int stateid, double unitprice, string comments, int custid,
                                 int pcb, DataTable stages, int CurId, string corder, string coline, int issent, string sentdate,
                                 int endcustomerid, int _internal, double _spoilage, int _resale, int _blockdelivery, int _isproject,
-                                int _isprimary, int _delivplaceid, int _delivaddressid)
+                                int _isprimary, int _delivplaceid, int _delivaddressid, int _npi)
         {
             int _res = 0;
 
