@@ -1118,6 +1118,7 @@ namespace Odin.Sales
             sqlComm.Parameters.AddWithValue("@isprimary", _isprimary);
             sqlComm.Parameters.AddWithValue("@delivplaceid", _delivplaceid);
             sqlComm.Parameters.AddWithValue("@delivaddressid", _delivaddressid);
+            sqlComm.Parameters.AddWithValue("@npi", _npi);
 
             sqlComm.Parameters.Add("@tablestages", SqlDbType.Structured);
             sqlComm.Parameters["@tablestages"].TypeName = "UT_COStages";
