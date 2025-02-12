@@ -312,6 +312,25 @@ namespace Odin.Workshop
             return _res;
         }
 
+        public int CheckSerialNumberTracing(int _batchid)
+        {
+            string _res = "";
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_CheckSerialTracing", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+            sqlComm.CommandTimeout = 3000;
+            sqlComm.Parameters.AddWithValue("@batchid", _batchid);
+            sqlComm.Parameters.Add("@result", SqlDbType.NVarChar, 150).Direction = ParameterDirection.Output;
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            _res = sqlComm.Parameters["@result"].Value.ToString();
+            sqlConn.Close();
+
+            return Int32.Parse(_res);
+        }
+
         public void AddSerialFreezed(int _stageid, int _batchid, int _launchid, string _serial, string _placement, int _reasonid)
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);

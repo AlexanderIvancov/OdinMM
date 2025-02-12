@@ -363,7 +363,18 @@ namespace Odin.Workshop
                                     }
                                     //Add New Serial
                                     //MessageBox.Show("Adding!");
-                                    AddSerialTracing(StageId, BatchId, txt_Oper.Text.Trim());
+                                    var s = txt_Oper.Text.Trim();
+                                    var d = cmb_BatchPDA1.Batch.Substring(1);
+                                    if (s.StartsWith(d) || ProdBll.CheckSerialNumberTracing(BatchId) == -1)
+                                        AddSerialTracing(StageId, BatchId, txt_Oper.Text.Trim());
+                                    else
+                                    {
+                                        DialogResult result = KryptonTaskDialog.Show("Error during label reading!",
+                                                                             "You are trying to insert label for wrong batch!",
+                                                                             "Label reading data: " + txt_Oper.Text.Trim(),
+                                                                             MessageBoxIcon.Warning,
+                                                                            TaskDialogButtons.OK);
+                                    }
                                     _RegMode = -1;
                                 }
                             }
