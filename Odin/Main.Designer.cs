@@ -94,7 +94,7 @@
             this.kryptonRibbonGroupButton17 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.kryptonRibbonGroup12 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
             this.kryptonRibbonGroupTriple9 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
-            this.kryptonRibbonGroupButton24 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.btn_SupEvaluation = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.tab_Production = new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab();
             this.kryptonRibbonGroup13 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
             this.kryptonRibbonGroupTriple10 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
@@ -704,18 +704,19 @@
             // 
             this.kryptonRibbonGroup12.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupContainer[] {
             this.kryptonRibbonGroupTriple9});
-            this.kryptonRibbonGroup12.TextLine1 = "Portfolio";
-            this.kryptonRibbonGroup12.Visible = false;
+            this.kryptonRibbonGroup12.TextLine1 = "Indicators";
             // 
             // kryptonRibbonGroupTriple9
             // 
             this.kryptonRibbonGroupTriple9.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupItem[] {
-            this.kryptonRibbonGroupButton24});
+            this.btn_SupEvaluation});
             // 
-            // kryptonRibbonGroupButton24
+            // btn_SupEvaluation
             // 
-            this.kryptonRibbonGroupButton24.TextLine1 = "Orders";
-            this.kryptonRibbonGroupButton24.Visible = false;
+            this.btn_SupEvaluation.ImageLarge = global::Odin.Global_Resourses.medal_gold_2;
+            this.btn_SupEvaluation.ImageSmall = global::Odin.Global_Resourses.medal_gold_2;
+            this.btn_SupEvaluation.TextLine1 = "Supplier\'s";
+            this.btn_SupEvaluation.TextLine2 = "evaluation";
             // 
             // tab_Production
             // 
@@ -1808,7 +1809,7 @@
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton32;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup kryptonRibbonGroup12;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple9;
-        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton24;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_SupEvaluation;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonTab tab_Production;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup kryptonRibbonGroup13;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple10;
