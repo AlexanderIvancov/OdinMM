@@ -768,9 +768,9 @@
             this.btn_Replace,
             this.btn_Copy,
             this.btn_EnableSelected,
-            this.btn_Delete,
             this.btn_Active,
-            this.btn_Excel});
+            this.btn_Excel,
+            this.btn_Delete});
             this.bn_List.Location = new System.Drawing.Point(0, 433);
             this.bn_List.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.bn_List.MoveLastItem = this.bindingNavigatorMoveLastItem;
