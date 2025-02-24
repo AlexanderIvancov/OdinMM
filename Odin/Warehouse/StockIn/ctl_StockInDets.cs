@@ -893,7 +893,7 @@ namespace Odin.Warehouse.StockIn
                 if (_test == true)
                 {
                     int _NewInwardId = SIBll.AddStockIn(HeadId, ArtId, SupArticle, StockMoveTypeId, Qty, UnitId, Comments, UnitPrice, Discount,
-                                                        Vat, CoefConv, Weight, CustCodeId, BatchId, StateId, PurchaseOrderLineId, Producer, DataCode, Dutycost, Total2);
+                                                        Vat, CoefConv, Weight, CustCodeId, BatchId, StateId, PurchaseOrderLineId, Producer, DataCode, Dutycost, Total2, TotalVAT);
 
                     //Deallocation
                     if (_NewInwardId != 0)
