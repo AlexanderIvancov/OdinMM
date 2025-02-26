@@ -45,6 +45,7 @@
             this.cn_art = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_product = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_secname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_oa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_who = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -124,6 +125,7 @@
             this.cn_art,
             this.cn_customer,
             this.cn_product,
+            this.cn_secname,
             this.cn_comments,
             this.cn_oa,
             this.cn_who,
@@ -240,6 +242,14 @@
             this.cn_product.HeaderText = "Product";
             this.cn_product.Name = "cn_product";
             // 
+            // cn_second_name
+            // 
+            this.cn_secname.DataPropertyName = "secname";
+            this.cn_secname.FillWeight = 150F;
+            this.cn_secname.HeaderText = "Second name";
+            this.cn_secname.Name = "cn_secname";
+            this.cn_secname.Width = 150;
+            // 
             // cn_comments
             // 
             this.cn_comments.DataPropertyName = "comments";
@@ -331,6 +341,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_customer;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_product;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_comments;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_secname;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_oa;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_who;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_when;
