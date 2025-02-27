@@ -1015,8 +1015,18 @@ namespace Odin.Warehouse.Movements
                 frm.BatchId = cmb_Batches2.BatchId;
                 frm.QtyLabels = PlanBll.BatchQtyLabels;
                 frm.Serials = PlanBll.BatchSerials;
-                frm.Stencil = PlanBll.Stencil;
-                frm.Stencilplace = PlanBll.Stencilplace;
+                frm.Stencil1 = PlanBll.Stencil1;
+                frm.Stencilplace1 = PlanBll.Stencilplace1;
+                frm.Stencil2 = PlanBll.Stencil2;
+                frm.Stencilplace2 = PlanBll.Stencilplace2;
+                frm.Equipment1 = PlanBll.Equipment1;
+                frm.Equipmentplace1 = PlanBll.Equipmentplace1;
+                frm.Equipment2 = PlanBll.Equipment2;
+                frm.Equipmentplace2 = PlanBll.Equipmentplace2;
+                frm.Solderpaste = PlanBll.Solderpaste;
+                frm.perp = PlanBll.perp;
+                frm.perl = PlanBll.perl;
+                frm.lcomm = PlanBll.lcomm;
                 frm.RepType = 2;
             }
             else
@@ -1047,8 +1057,18 @@ namespace Odin.Warehouse.Movements
                     frm.QtyLabels = PlanBll.LaunchQtyLabels;
                     frm.MoveDate = PlanBll.LaunchStartDate;
                     frm.Serials = PlanBll.LaunchSerials;
-                    frm.Stencilplace = PlanBll.Stencilplace;
-                    frm.Stencil = PlanBll.Stencil;
+                    frm.Stencil1 = PlanBll.Stencil1;
+                    frm.Stencilplace1 = PlanBll.Stencilplace1;
+                    frm.Stencil2 = PlanBll.Stencil2;
+                    frm.Stencilplace2 = PlanBll.Stencilplace2;
+                    frm.Equipment1 = PlanBll.Equipment1;
+                    frm.Equipmentplace1 = PlanBll.Equipmentplace1;
+                    frm.Equipment2 = PlanBll.Equipment2;
+                    frm.Equipmentplace2 = PlanBll.Equipmentplace2;
+                    frm.Solderpaste = PlanBll.Solderpaste;
+                    frm.perp = PlanBll.perp;
+                    frm.perl = PlanBll.perl;
+                    frm.lcomm = PlanBll.lcomm;
                     frm.RepType = 5;
                 }
                 else
@@ -1073,8 +1093,18 @@ namespace Odin.Warehouse.Movements
                     frm.MoveDate = PlanBll.LaunchStartDate;
                     frm.Serials = PlanBll.LaunchSerials;
                     frm.BatchId = PlanBll.LaunchBatchId;
-                    frm.Stencilplace = PlanBll.Stencilplace;
-                    frm.Stencil = PlanBll.Stencil;
+                    frm.Stencil1 = PlanBll.Stencil1;
+                    frm.Stencilplace1 = PlanBll.Stencilplace1;
+                    frm.Stencil2 = PlanBll.Stencil2;
+                    frm.Stencilplace2 = PlanBll.Stencilplace2;
+                    frm.Equipment1 = PlanBll.Equipment1;
+                    frm.Equipmentplace1 = PlanBll.Equipmentplace1;
+                    frm.Equipment2 = PlanBll.Equipment2;
+                    frm.Equipmentplace2 = PlanBll.Equipmentplace2;
+                    frm.Solderpaste = PlanBll.Solderpaste;
+                    frm.perp = PlanBll.perp;
+                    frm.perl = PlanBll.perl;
+                    frm.lcomm = PlanBll.lcomm;
                     frm.RepType = 9;
                 }
             }

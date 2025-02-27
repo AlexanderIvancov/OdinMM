@@ -505,9 +505,29 @@ namespace Odin.Planning
         { get; set; }
         public int BatchToFollow
         { get; set; }
-        public string Stencil
+        public string Stencil1
         { get; set; }
-        public string Stencilplace
+        public string Stencilplace1
+        { get; set; }
+        public string Stencil2
+        { get; set; }
+        public string Stencilplace2
+        { get; set; }
+        public string Equipment1
+        { get; set; }
+        public string Equipmentplace1
+        { get; set; }
+        public string Equipment2
+        { get; set; }
+        public string Equipmentplace2
+        { get; set; }
+        public string Solderpaste
+        { get; set; }
+        public string perl
+        { get; set; }
+        public string perp
+        { get; set; }
+        public string lcomm
         { get; set; }
         public int BatchId
         {
@@ -1179,8 +1199,17 @@ namespace Odin.Planning
                         LaunchAdditComments = dr["additcomments"].ToString();
                         LaunchVizaComments = dr["vizacomments"].ToString();
                         LaunchSerials = dr["serialnumbers"].ToString();
-                        Stencil = dr["stencil"].ToString();
-                        Stencilplace = dr["stencilplace"].ToString();
+                        Stencil1 = dr["stencil"].ToString().Split(',').GetLength(0) >= 1  ? dr["stencil"].ToString().Split(',')[0] : " - ";
+                        Stencilplace1 = dr["stencilplace"].ToString().Split(',').GetLength(0) >= 1 ? dr["stencilplace"].ToString().Split(',')[0] : " - ";
+                        Stencil2 = dr["stencil"].ToString().Split(',').GetLength(0) == 2 ? dr["stencil"].ToString().Split(',')[1] : " - ";
+                        Stencilplace2 = dr["stencilplace"].ToString().Split(',').GetLength(0) == 2 ? dr["stencilplace"].ToString().Split(',')[1] : " - ";
+                        Equipment1 = dr["equipment"].ToString().Split(',')[0] == "" ? " - " : dr["equipment"].ToString().Split(',')[0];
+                        Equipmentplace1 = dr["equipmentplace"].ToString().Split(',')[0] == "" ? " - " : dr["equipmentplace"].ToString().Split(',')[0];
+                        Equipment2 = dr["equipment"].ToString().Split(',').GetLength(0) == 2 ? dr["equipment"].ToString().Split(',')[1] : " - ";
+                        Equipmentplace2 = dr["equipmentplace"].ToString().Split(',').GetLength(0) == 2 ? dr["equipmentplace"].ToString().Split(',')[1] : " - ";
+                        Solderpaste = dr["solderpaste"].ToString().Split(',').GetLength(0) == 1 ? dr["solderpaste"].ToString().Split(',')[0] : " - ";
+                        perp = dr["perp"].ToString().Split(',').GetLength(0) == 1 ? dr["perp"].ToString().Split(',')[0] : " - ";
+                        perl = dr["perl"].ToString().Split(',').GetLength(0) == 1 ? dr["perl"].ToString().Split(',')[0] : " - ";
                     }
                 }
                 else

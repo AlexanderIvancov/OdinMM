@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Odin.Warehouse.StockOut.Reports
@@ -62,9 +63,29 @@ namespace Odin.Warehouse.StockOut.Reports
         { get; set; }
         public string GroupName
         { get; set; }
-        public string Stencil
+        public string Stencil1
         { get; set; }
-        public string Stencilplace
+        public string Stencilplace1
+        { get; set; }
+        public string Stencil2
+        { get; set; }
+        public string Stencilplace2
+        { get; set; }
+        public string Equipment1
+        { get; set; }
+        public string Equipmentplace1
+        { get; set; }
+        public string Equipment2
+        { get; set; }
+        public string Equipmentplace2
+        { get; set; }
+        public string Solderpaste
+        { get; set; }
+        public string perl
+        { get; set; }
+        public string perp
+        { get; set; }
+        public string lcomm
         { get; set; }
 
         Helper MyHelper = new Helper();
@@ -146,7 +167,12 @@ namespace Odin.Warehouse.StockOut.Reports
             //
             DataTable data = new DataTable();
             data = StockMove_BLL.getStockMoveBatchesPrint(BatchId, StageId);
-
+            int i = 2;
+            foreach (DataRow row in data.Rows)
+            {
+                row["labels"] = "1)" + row["labels"].ToString().Replace(", ", $", {i})"); i++;
+            }
+            i = 2;
             //data source
             report.Database.Tables[0].SetDataSource(dt);
             report.Database.Tables[1].SetDataSource(data);
@@ -174,15 +200,21 @@ namespace Odin.Warehouse.StockOut.Reports
             report.SetParameterValue("Customer", Customer);
             report.SetParameterValue("Comment", Comments);
             report.SetParameterValue("QtyLabels", QtyLabels == -999 ? "N/D" : QtyLabels.ToString());
-            report.SetParameterValue("BatchLab", "Партия:");
             report.SetParameterValue("WarQty", _warqty);
             report.SetParameterValue("Warnings", _warnings.TrimStart());
-            report.SetParameterValue("QtyLab", "Кол-во в партии:");
             report.SetParameterValue("Serials", Serials);
-            report.SetParameterValue("Stencil", Stage == "SMT" ? Stencil ?? " " : "  ");
-            report.SetParameterValue("Stencilplace", Stage == "SMT" ? Stencilplace ?? " " : "  ");
-            report.SetParameterValue("StencilLab", Stage == "SMT" ? "Трафарет" : "  ");
-            report.SetParameterValue("StencilplaceLab", Stage == "SMT" ? "Место" : "  ");
+            report.SetParameterValue("Stencil1", Stage == "SMT" ? Stencil1 ?? " - " : " - ");
+            report.SetParameterValue("Stencil2", Stage == "SMT" ? Stencil2 ?? " - " : " - ");
+            report.SetParameterValue("Stencilplace1", Stage == "SMT" ? Stencilplace1 ?? " - " : " - ");
+            report.SetParameterValue("Stencilplace2", Stage == "SMT" ? Stencilplace2 ?? " - " : " - ");
+            report.SetParameterValue("Equipment1", Stage == "SMT" ? Equipment1 ?? " - " : " - ");
+            report.SetParameterValue("Equipment2", Stage == "SMT" ? Equipment2 ?? " - " : " - ");
+            report.SetParameterValue("Equipmentplace1", Stage == "SMT" ? Equipmentplace1 ?? " - " : " - ");
+            report.SetParameterValue("Equipmentplace2", Stage == "SMT" ? Equipmentplace2 ?? " - " : " - ");
+            report.SetParameterValue("Solderpaste", Stage == "SMT" ? Solderpaste ?? " - " : " - ");
+            report.SetParameterValue("perp", Stage == "SMT" ? perp ?? " - " : " - ");
+            report.SetParameterValue("perl", Stage == "SMT" ? perl ?? " - " : " - ");
+            report.SetParameterValue("lcomm", Stage == "SMT" ? lcomm ?? " - " : " - ");
             return report;
 
         }
@@ -209,6 +241,26 @@ namespace Odin.Warehouse.StockOut.Reports
             //
             DataTable data = new DataTable();
             data = StockMove_BLL.getStockMoveLaunchesPrint(LaunchId, StageId);
+            int i = 2;
+            foreach (DataRow row in data.Rows)
+            {
+                row["labels"] = "1)" + row["labels"].ToString();
+                var match = Regex.Match(row["labels"].ToString(), @", \d\d");
+                int j = 0;
+                while (true)
+                {
+                    if (match == match.NextMatch()) break;
+                    else
+                    {
+                        j += i > 10 ? 3 : 2;
+                        row["labels"] = row["labels"].ToString().Insert(match.Index + j, $"{i})");
+                        match = match.NextMatch();
+                    }
+                    i++;
+                }
+                i = 2;
+                j = 0;
+            }
 
             //data source
             report.Database.Tables[0].SetDataSource(dt);
@@ -237,17 +289,21 @@ namespace Odin.Warehouse.StockOut.Reports
             report.SetParameterValue("Customer", Customer);
             report.SetParameterValue("Comment", Comments);
             report.SetParameterValue("QtyLabels", QtyLabels == -999 ? "N/D" : QtyLabels.ToString());
-            report.SetParameterValue("BatchLab", "Запуск:");
             report.SetParameterValue("WarQty", _warqty);
             report.SetParameterValue("Warnings", _warnings.TrimStart());
-            report.SetParameterValue("QtyLab", "Кол-во в зап.:");
             report.SetParameterValue("Serials", Serials);
-            report.SetParameterValue("Stencil", Stencil ?? "");
-            report.SetParameterValue("Stencilplace", Stencilplace ?? "");
-            report.SetParameterValue("Stencil", Stage == "SMT" ? Stencil ?? " " : "  ");
-            report.SetParameterValue("Stencilplace", Stage == "SMT" ? Stencilplace ?? " " : "  ");
-            report.SetParameterValue("StencilLab", Stage == "SMT" ? "Трафарет" : "  ");
-            report.SetParameterValue("StencilplaceLab", Stage == "SMT" ? "Место" : "  ");
+            report.SetParameterValue("Stencil1", Stage == "SMT" ? Stencil1 ?? " - " : " - ");
+            report.SetParameterValue("Stencil2", Stage == "SMT" ? Stencil2 ?? " - " : " - ");
+            report.SetParameterValue("Stencilplace1", Stage == "SMT" ? Stencilplace1 ?? " - " : " - ");
+            report.SetParameterValue("Stencilplace2", Stage == "SMT" ? Stencilplace2 ?? " - " : " - ");
+            report.SetParameterValue("Equipment1", Stage == "SMT" ? Equipment1 ?? " - " : " - ");
+            report.SetParameterValue("Equipment2", Stage == "SMT" ? Equipment2 ?? " - " : " - ");
+            report.SetParameterValue("Equipmentplace1", Stage == "SMT" ? Equipmentplace1 ?? " - " : " - ");
+            report.SetParameterValue("Equipmentplace2", Stage == "SMT" ? Equipmentplace2 ?? " - " : " - ");
+            report.SetParameterValue("Solderpaste", Stage == "SMT" ? Solderpaste ?? " - " : " - ");
+            report.SetParameterValue("perp", Stage == "SMT" ? perp ?? " - " : " - ");
+            report.SetParameterValue("perl", Stage == "SMT" ? perl ?? " - " : " - ");
+            report.SetParameterValue("lcomm", Stage == "SMT" ? lcomm ?? " - " : " - ");
 
             return report;
 
