@@ -123,7 +123,8 @@ namespace Odin.Warehouse.Packing
         {
             var data = StockInventory.getBatchBoxList(String.IsNullOrEmpty(txt_boxid.Text.Trim()) == true || txt_boxid.Text.Trim() == "" ? 0 : Convert.ToInt32(txt_boxid.Text), txt_Serial.Text, cmb_Batches1.BatchId,
                                             cmb_SalesOrdersWithLines1.SalesOrderLineId, cmb_Articles1.ArticleId, cmb_DeliveryNotes1.DelivNoteId, cmb_Types1.TypeId,
-                                            txt_ClosingDate.Value == null ? "" : txt_ClosingDate.Value.ToString().Trim());
+                                            txt_ClosingDate.Value == null ? "" : txt_ClosingDate.Value.ToString().Trim(),
+                                            txt_ClosingDateTill.Value == null ? "" : txt_ClosingDateTill.Value.ToString().Trim());
 
 
             gv_List.ThreadSafeCall(delegate
@@ -318,6 +319,7 @@ namespace Odin.Warehouse.Packing
             LoadColumns(gv_List);
             ClearFilter();
             txt_ClosingDate.Value = null;
+            txt_ClosingDateTill.Value = null;
         }
 
         private void buttonSpecAny1_Click(object sender, EventArgs e)
@@ -556,6 +558,11 @@ namespace Odin.Warehouse.Packing
         private void txt_ClosingDate_DropDown(object sender, DateTimePickerDropArgs e)
         {
             txt_ClosingDate.Value = txt_ClosingDate.Value == null ? System.DateTime.Now : txt_ClosingDate.Value;
+        }
+
+        private void txt_ClosingDateTill_DropDown(object sender, DateTimePickerDropArgs e)
+        {
+            txt_ClosingDateTill.Value = txt_ClosingDateTill.Value == null ? System.DateTime.Now : txt_ClosingDateTill.Value;
         }
     }
 }

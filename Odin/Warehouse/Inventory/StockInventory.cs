@@ -212,7 +212,7 @@ namespace Odin.Warehouse.Inventory
 
         #region Package
 
-        public static DataTable getBatchBoxList(int _boxid, string _serial, int _batchid, int _conforderid, int _artid, int _delivnoteid, int _typeid, string _closingdate)
+        public static DataTable getBatchBoxList(int _boxid, string _serial, int _batchid, int _conforderid, int _artid, int _delivnoteid, int _typeid, string _closingdate, string _closingdatetill)
         {
             string query = "sp_SelectBatchBoxList";
 
@@ -226,6 +226,7 @@ namespace Odin.Warehouse.Inventory
                 new SqlParameter("@delivnoteid",SqlDbType.Int){Value = _delivnoteid },
                 new SqlParameter("@typeid",SqlDbType.Int){Value = _typeid },
                 new SqlParameter("@closingdate",SqlDbType.NVarChar){Value = _closingdate },
+                new SqlParameter("@closingdatetill",SqlDbType.NVarChar){Value = _closingdatetill },
 
             };
 
