@@ -894,12 +894,14 @@ namespace Odin.Purchase
             sqlComm.CommandTimeout = 3000;
 
             sqlComm.Parameters.AddWithValue("@comments", comments);
+            sqlComm.Parameters.AddWithValue("@procbefore", System.DateTime.Now.AddDays(21).ToShortDateString());
             sqlComm.Parameters.Add("@tablebatches", SqlDbType.Structured);
             sqlComm.Parameters["@tablebatches"].TypeName = "UT_IDs";
             sqlComm.Parameters["@tablebatches"].Value = databatches;
             sqlComm.Parameters.Add("@tableart", SqlDbType.Structured);
             sqlComm.Parameters["@tableart"].TypeName = "UT_ArtQty";
             sqlComm.Parameters["@tableart"].Value = data;
+
 
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
