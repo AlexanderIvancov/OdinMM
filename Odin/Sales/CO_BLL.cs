@@ -980,6 +980,11 @@ namespace Odin.Sales
             get; set;
         }
 
+        public string QContract
+        {
+            get; set;
+        }
+
         public int QPCB
         {
             get; set;
@@ -1046,6 +1051,7 @@ namespace Odin.Sales
             QName = "";
             QArtId = 0;
             QComments = "";
+            QContract = "";
             QRevision = "";
             QCreatAt = "";
             QCreatBy = "";
@@ -1081,7 +1087,7 @@ namespace Odin.Sales
                                 string expdate, string week, int stateid, double unitprice, string comments, int custid,
                                 int pcb, DataTable stages, int CurId, string corder, string coline, int issent, string sentdate,
                                 int endcustomerid, int _internal, double _spoilage, int _resale, int _blockdelivery, int _isproject,
-                                int _isprimary, int _delivplaceid, int _delivaddressid, int _npi)
+                                int _isprimary, int _delivplaceid, int _delivaddressid, int _npi, string _contract)
         {
             int _res = 0;
 
@@ -1119,6 +1125,7 @@ namespace Odin.Sales
             sqlComm.Parameters.AddWithValue("@delivplaceid", _delivplaceid);
             sqlComm.Parameters.AddWithValue("@delivaddressid", _delivaddressid);
             sqlComm.Parameters.AddWithValue("@npi", _npi);
+            sqlComm.Parameters.AddWithValue("@contract", _contract);
 
             sqlComm.Parameters.Add("@tablestages", SqlDbType.Structured);
             sqlComm.Parameters["@tablestages"].TypeName = "UT_COStages";

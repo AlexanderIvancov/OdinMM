@@ -145,8 +145,14 @@ namespace Odin.Sales
             get { return txt_Comments.Text; }
             set { txt_Comments.Text = value; }
         }
-        
-        
+
+        public string Contract
+        {
+            get { return txt_Contract.Text; }
+            set { txt_Contract.Text = value; }
+        }
+
+
         public string ReqDate
         {
             get { return txt_ReqDate.Value.ToShortDateString(); }
@@ -361,6 +367,7 @@ namespace Odin.Sales
             Primary = 0;
             DelivPlaceId = 0;
             DelivAddressId = 0;
+            Contract = "";
         }
 
         public string CustOrder
@@ -426,6 +433,7 @@ namespace Odin.Sales
                     Quotation = COBll.QName;
                 ArtId = COBll.QArtId;
                 Comments = COBll.QComments;
+                Contract = COBll.QContract;
                 CreatAt = COBll.QCreatAt;
                 CreatBy = COBll.QCreatBy;
                 CustArticle = COBll.QCustArticle;
@@ -542,7 +550,7 @@ namespace Odin.Sales
 
                     NewLineId = COBll.SaveQuotation(QuotId, DLL.CheckArtId(ArtId), Revision, CustArticle, Qty, UnitId, ReqDate, ExpDate, Week, StateId,
                                                 UnitPrice, Comments, CustId, PCB, datastages, CurId, CustOrder, CustLine, IsSent, SentDate, EndCustomerId,
-                                                Internal, Spoilage, Resale, Blocked, IsProject, Primary, DelivPlaceId, DelivAddressId, 0);
+                                                Internal, Spoilage, Resale, Blocked, IsProject, Primary, DelivPlaceId, DelivAddressId, 0, Contract);
                     QuotId = NewLineId;
                     COBll.QuotId = QuotId;
 
