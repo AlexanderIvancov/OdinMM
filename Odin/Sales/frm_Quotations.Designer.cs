@@ -127,6 +127,7 @@
             this.cn_unitprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_currency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_contract = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_pcbtext = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chk_SMT = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.chk_THT = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -754,6 +755,7 @@
             this.cn_unitprice,
             this.cn_currency,
             this.cn_comments,
+            this.cn_contract,
             this.cn_pcbtext,
             this.chk_SMT,
             this.chk_THT,
@@ -1183,6 +1185,15 @@
             this.cn_comments.ReadOnly = true;
             this.cn_comments.Width = 150;
             // 
+            // cn_contract
+            // 
+            this.cn_contract.DataPropertyName = "contract";
+            this.cn_contract.FillWeight = 150F;
+            this.cn_contract.HeaderText = "Contract";
+            this.cn_contract.Name = "cn_contract";
+            this.cn_contract.ReadOnly = true;
+            this.cn_contract.Width = 150;
+            // 
             // cn_pcbtext
             // 
             this.cn_pcbtext.DataPropertyName = "pcbtext";
@@ -1465,6 +1476,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_unitprice;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_currency;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_comments;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_contract;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_pcbtext;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chk_SMT;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chk_THT;
