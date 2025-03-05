@@ -890,6 +890,7 @@ namespace Odin.Sales
                     {
                         QArtId = Convert.ToInt32(dr["artid"]);
                         QComments = dr["comments"].ToString();
+                        QContract = dr["contract"].ToString();
                         QCreatAt = dr["createdat"].ToString();
                         QCreatBy = dr["createdby"].ToString();
                         QCustArticle = dr["custarticle"].ToString();

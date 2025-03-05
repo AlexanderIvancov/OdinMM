@@ -190,7 +190,7 @@
             // 
             // txt_Contract
             // 
-            this.txt_Contract.Enabled = false;
+            this.txt_Contract.Enabled = true;
             this.txt_Contract.Location = new System.Drawing.Point(121, 321);
             this.txt_Contract.Name = "txt_Contract";
             this.txt_Contract.Size = new System.Drawing.Size(394, 23);
