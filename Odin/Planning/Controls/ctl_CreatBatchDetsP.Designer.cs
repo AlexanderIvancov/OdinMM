@@ -322,8 +322,6 @@
             // 
             // buttonSpecAny1
             // 
-            this.buttonSpecAny1.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny1.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny1.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny1.UniqueName = "D5B6C03750554195328E4B264796E65F";
             // 
@@ -374,8 +372,6 @@
             // 
             // buttonSpecAny3
             // 
-            this.buttonSpecAny3.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny3.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny3.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny3.UniqueName = "D5B6C03750554195328E4B264796E65F";
             // 

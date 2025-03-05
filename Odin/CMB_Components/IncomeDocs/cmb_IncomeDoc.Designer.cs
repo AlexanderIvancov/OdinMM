@@ -104,8 +104,6 @@
             // 
             // buttonSpecAny1
             // 
-            this.buttonSpecAny1.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny1.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny1.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny1.UniqueName = "45DE44E33D694823B4A79EE0133E159F";
             this.buttonSpecAny1.Click += new System.EventHandler(this.buttonSpecAny1_Click);
