@@ -1468,7 +1468,10 @@ namespace Odin.CMB_Components.BLL
 
         public static DataTable getIncomeDocs(string _beg)
         {
-            string query = "EXECUTE sp_IncomeDocsSelectLike @Beg = '" + _beg + "'";
+            string query = _beg.EndsWith("@") ? @"SELECT Top(1) s.id,    s.name,	s.supid,	c.company as supplier,	convert(nvarchar(10), s.docdate, 103) as docdate,	isnull(DATEDIFF(day, s.regdate, b.blockdate), -99) as isbanned
+                                                    FROM STO_StockInHead s    WITH(NOLOCK)    inner join BAS_BlockDate b on '' = ''    inner join BAS_Companies c on c.id = s.supid
+                                                    WHERE name = Rtrim('" + _beg.TrimEnd('@') + "')"
+            : "EXECUTE sp_IncomeDocsSelectLike @Beg = '" + _beg + "'";
 
             return Helper.QueryDT(query);
         }
