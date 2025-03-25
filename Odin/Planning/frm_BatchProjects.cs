@@ -22,6 +22,7 @@ namespace Odin.Planning
         public frm_BatchProjects()
         {
             InitializeComponent();
+             ED = new ExportData(this.gv_List, "BatchProjectList.xls", this.Name);
         }
 
         #region Variables
