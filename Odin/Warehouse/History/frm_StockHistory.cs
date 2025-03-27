@@ -165,6 +165,16 @@ namespace Odin.Warehouse.History
             set { txt_TotalOutcomes.Text = value.ToString(); }
         }
 
+        public double TotalIncomes
+        {
+            get
+            {
+                try { return Convert.ToDouble(txt_TotalIncomes.Text); }
+                catch { return 0; }
+            }
+            set { txt_TotalIncomes.Text = value.ToString(); }
+        }
+
         public double TotalMovements
         {
             get
@@ -367,6 +377,14 @@ namespace Odin.Warehouse.History
         
         public void RecalcTotalIncomes()
         {
+            double _total = 0;
+
+            foreach (DataGridViewRow row in this.gv_IncomeList.Rows)
+            {
+                _total = _total + Convert.ToDouble(row.Cells["cn_total"].Value);
+            }
+
+            TotalIncomes = Math.Round(_total, 2);
 
         }
 
