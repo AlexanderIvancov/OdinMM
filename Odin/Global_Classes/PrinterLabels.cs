@@ -143,7 +143,7 @@ namespace Odin.Global_Classes
                         _value = data.Rows[0][_spname].ToString().Substring(0, data.Rows[0][_spname].ToString().Length < _symnum ? data.Rows[0][_spname].ToString().Length : _symnum);
                         
 
-                        TemplateLabelText = TemplateLabelText.Replace(_fieldname, _value);
+                        TemplateLabelText = TemplateLabelText.Replace(_fieldname, _value.Length < 3 ? _value.Insert(0, " ") : _value);
                         break;
                     }
                 }
