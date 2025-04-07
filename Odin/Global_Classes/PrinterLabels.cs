@@ -141,9 +141,9 @@ namespace Odin.Global_Classes
                     if (column.ColumnName == _spname)
                     {
                         _value = data.Rows[0][_spname].ToString().Substring(0, data.Rows[0][_spname].ToString().Length < _symnum ? data.Rows[0][_spname].ToString().Length : _symnum);
-                        
 
-                        TemplateLabelText = TemplateLabelText.Replace(_fieldname, _value.Length < 3 ? _value.Insert(0, " ") : _value);
+                        if (column.ColumnName == "artid")  _value = _value.Length < 3 ? _value.Insert(0, " ") : _value;
+                        TemplateLabelText = TemplateLabelText.Replace(_fieldname, _value);
                         break;
                     }
                 }
