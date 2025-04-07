@@ -2470,6 +2470,7 @@ namespace Odin.Planning
 
         #region Production Planning
 
+
         public static DataTable getProdPlanning(int custid, string datefrom, string datetill, int batchid, int coid, int isactive, int prodplaceid)
         {
             //.return Helper.QueryDT("execute sp_SelectProductionPlanningFin @custid = " + custid + ", @datefrom = " + perc);
@@ -2482,7 +2483,8 @@ namespace Odin.Planning
                 new SqlParameter("@datetill", SqlDbType.NVarChar) { Value = datetill},
                 new SqlParameter("@batchid",SqlDbType.Int){Value = batchid },
                 new SqlParameter("@coid",SqlDbType.Int){Value = coid },
-                new SqlParameter("@isactive",SqlDbType.Int){Value = isactive }
+                new SqlParameter("@isactive",SqlDbType.Int){Value = isactive },
+                new SqlParameter("@prodplaceid",SqlDbType.Int){Value = prodplaceid }
             };
 
 
@@ -2554,7 +2556,6 @@ namespace Odin.Planning
             sqlConn.Close();
         }
 
-
         public static DataTable getProductionPlanningCapa(string date, int prodplaceid)
         {
             string query = "sp_SelectProductionPlanningCapacityNeeds";
@@ -2568,6 +2569,7 @@ namespace Odin.Planning
 
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
+
 
         public static DataTable getProdPlanning2Weeks(string datefrom, int custid, int isactive, int prodplaceid)
         {
@@ -2604,6 +2606,7 @@ namespace Odin.Planning
 
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
+
 
         #endregion
     }
