@@ -2561,7 +2561,8 @@ namespace Odin.Planning
 
             var sqlparams = new List<SqlParameter>
             {
-                new SqlParameter("@date",SqlDbType.NVarChar){Value = date }
+                new SqlParameter("@date",SqlDbType.NVarChar){Value = date },
+                new SqlParameter("@prodplaceid",SqlDbType.Int){Value = prodplaceid }
             };
 
 

@@ -1234,6 +1234,27 @@ namespace Odin.Global_Classes
 
             return isInGroup;
         }
+
+        public int MakeHoliday(string _date)
+        {
+            int _res = 0;
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_MakeHoliday", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@date", _date);
+            sqlComm.Parameters.Add("@res", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+            sqlConn.Open();
+            try
+            {
+                sqlComm.ExecuteNonQuery();
+                _res = Convert.ToInt32(sqlComm.Parameters["@res"].Value);
+            }
+            catch { }
+            sqlConn.Close();
+            return _res;
+        }
         #endregion
 
         #region DataMatrix

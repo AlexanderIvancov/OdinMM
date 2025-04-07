@@ -19,7 +19,7 @@ namespace Odin.Planning
         public frm_ProductionPlanning()
         {
             InitializeComponent();
-            //ED = new ExportData(this.gv_List, "ProjectPlanningCanProduce.xls", this.Name);
+            ED = new ExportData(this.gv_List, "ProductionPlanning.xls", this.Name);
             //ED1 = new ExportData(this.gv_List, "ProjectPlanning.xls", this.Name);
             wait = new ProgressForm(this);
         }
@@ -90,10 +90,10 @@ namespace Odin.Planning
         {
             get { return Convert.ToInt32(txt_Weeks.Text); }
             set { }
-        } 
+        }
         public double _NSMT
         {
-            get;set;        
+            get; set;
         }
         public double _NTHT
         {
@@ -347,7 +347,7 @@ namespace Odin.Planning
         public void bw_List(object sender, DoWorkEventArgs e)
         {
             var col = new DataGridViewTextBoxColumn();
-
+            string _checkdate = "";
             try
             {
                 bs_List.RemoveFilter();
@@ -369,20 +369,20 @@ namespace Odin.Planning
                 //DataRow[] datacr = data.Select(/*"plannedqty = 0 and diff > 0"*/);
                 //DataRow[] datar = datadets.Select(/*"plannedqty > 0"*/);
 
-               //try
-               // {
+                //try
+                // {
                 //DataTable datapr = null;
                 //if (datacr.Any())
                 //    datapr = datacr.CopyToDataTable();
-                    //DataTable datap = null;
-                    //if (datar.Any())
-                    //    datap = datar.CopyToDataTable();
+                //DataTable datap = null;
+                //if (datar.Any())
+                //    datap = datar.CopyToDataTable();
                 //}
                 //catch { }     
 
 
 
-               
+
                 //Dates
 
                 col = new DataGridViewTextBoxColumn();
@@ -394,7 +394,7 @@ namespace Odin.Planning
                     countcol++;
                 }
 
-                for (int l=countcol-1; l > 13; l--)
+                for (int l = countcol - 1; l > 13; l--)
                     gv_List.ThreadSafeCall(delegate { gv_List.Columns.RemoveAt(l); });
 
                 for (DateTime d = Convert.ToDateTime(txt_StartFrom.Value); d <= Convert.ToDateTime(txt_StartFrom.Value).AddDays(WeekCount * 7); d = d.AddDays(1))
@@ -414,8 +414,14 @@ namespace Odin.Planning
                         col.Visible = true;
                         col.Width = 50;
                         col.DataPropertyName = "cn_" + d.Day.ToString() + d.Month.ToString() + d.Year.ToString();
-
-                        if (d.DayOfWeek == DayOfWeek.Saturday || d.DayOfWeek == DayOfWeek.Sunday)
+                        try
+                        {
+                            _checkdate = Helper.GetOneRecord("set dateformat dmy select holyday from BAS_Holydays where holyday = convert(datetime, '" + d.ToShortDateString() + "')").ToString();
+                        }
+                        catch { _checkdate = ""; }
+                        if (d.DayOfWeek == DayOfWeek.Saturday
+                            || d.DayOfWeek == DayOfWeek.Sunday
+                            || _checkdate != "")
                         {
                             //col.HeaderCell.Style.BackColor = Color.Red;
                             col.HeaderCell.Style.ForeColor = Color.Red;
@@ -442,7 +448,7 @@ namespace Odin.Planning
                             gv_List.ThreadSafeCall(delegate { gv_List.Columns.Add(col); });
 
                             //Time
-                            
+
                             col = new DataGridViewTextBoxColumn();
                             col.Name = "cn_time" + d.Day.ToString() + d.Month.ToString() + d.Year.ToString();
                             col.HeaderText = "Time need";
@@ -477,7 +483,7 @@ namespace Odin.Planning
                 //Fill with data
                 foreach (DataRow row in datadets.Rows)
                 {
-                    DataRow dr = data.Select("id=" + row["batchid"]).FirstOrDefault(); 
+                    DataRow dr = data.Select("id=" + row["batchid"]).FirstOrDefault();
                     if (dr != null)
                     {
                         //MessageBox.Show("cn_" + Convert.ToDateTime(row["plandate"]).Day.ToString() + Convert.ToDateTime(row["plandate"]).Month.ToString() + Convert.ToDateTime(row["plandate"]).Year.ToString());
@@ -493,7 +499,7 @@ namespace Odin.Planning
 
                 //Recalculate totals
 
-               
+
                 /*
                  Update rows with data
                  DataTable dt = new DataTable();
@@ -595,7 +601,7 @@ namespace Odin.Planning
                     case 1:
                         NSMT = Convert.ToDouble(row["stagetime"]);
                         _NSMT = Convert.ToDouble(row["stagetime"]);
-                        break;    
+                        break;
                     case 2:
                         NTHT = Convert.ToDouble(row["stagetime"]);
                         _NTHT = Convert.ToDouble(row["stagetime"]);
@@ -638,19 +644,19 @@ namespace Odin.Planning
             _NSMT = 0;
             NTHT = 0;
             _NTHT = 0;
-            NFTA =0;
+            NFTA = 0;
             _NFTA = 0;
-            NIPA =0;
+            NIPA = 0;
             _NIPA = 0;
             NQSMT = 0;
             _NQSMT = 0;
             NQTHT = 0;
-            _NQTHT =0;
-            NFQC =0;
+            _NQTHT = 0;
+            NFQC = 0;
             _NFQC = 0;
-            NXRAY =0;
-            _NXRAY =0;
-            NGPA =0;
+            NXRAY = 0;
+            _NXRAY = 0;
+            NGPA = 0;
             _NGPA = 0;
         }
         public void RecalcTotals()
@@ -658,13 +664,13 @@ namespace Odin.Planning
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
                 RecalcRowTotals(row);
-                RepaintCellColors(row);                           
+                RepaintCellColors(row);
             }
         }
         public void RepaintRowColors()
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
-            {   
+            {
                 RepaintCellColors(row);
             }
         }
@@ -672,16 +678,16 @@ namespace Odin.Planning
         {
             try
             {
-            double _sumbefore = Convert.ToDouble(row.Cells["cn_sumbefore"].Value);
-            double _sumbeforetime = 0;
-            double _qtyinbatch = Convert.ToDouble(row.Cells["cn_qtyinbatch"].Value);
-            double _teortime = Convert.ToDouble(row.Cells["cn_teortime"].Value);
+                double _sumbefore = Convert.ToDouble(row.Cells["cn_sumbefore"].Value);
+                double _sumbeforetime = 0;
+                double _qtyinbatch = Convert.ToDouble(row.Cells["cn_qtyinbatch"].Value);
+                double _teortime = Convert.ToDouble(row.Cells["cn_teortime"].Value);
 
-            int tmpcol = 1;
+                int tmpcol = 1;
 
-            for (int j = 14; j < row.Cells.Count; j++)
-            {
-                
+                for (int j = 14; j < row.Cells.Count; j++)
+                {
+
                     switch (tmpcol % 8)
                     {
                         case 7:
@@ -701,8 +707,8 @@ namespace Odin.Planning
                             break;
                     }
                     tmpcol++;
-                
-            }
+
+                }
                 //foreach (DataGridViewCell cell in row.Cells)
                 //{
                 //    //cell.Value = _sumbefore;
@@ -739,7 +745,7 @@ namespace Odin.Planning
         {
             DataTable dr1 = null;
 
-           
+
             DataRow[] dr = data.Select("id =" + Convert.ToInt32(row.Cells["cn_batchid"].Value).ToString());
 
             if (dr.Any())
@@ -764,13 +770,14 @@ namespace Odin.Planning
                         c.ColumnName.Substring(0, 3) == "cnc"
                         && dr1.Rows[0][c.ColumnName].ToString() != "")
                     {
-                        row.Cells["cn" + c.ColumnName.Substring(3)].ToolTipText = dr1.Rows[0][c.ColumnName].ToString();                        
+                        row.Cells["cn" + c.ColumnName.Substring(3)].ToolTipText = dr1.Rows[0][c.ColumnName].ToString();
+                        row.Cells["cn" + c.ColumnName.Substring(3)].Style.BackColor = Color.LightPink;
                     }
                 }
-          
+
             }
         }
-        
+
         public void ShowToolTip(string text)
         {
             toolTip1.Show(text, gv_List);
@@ -1054,7 +1061,7 @@ namespace Odin.Planning
                 return;
             }
         }
-                
+
 
         private void mni_FilterForP_TextChanged(object sender, EventArgs e)
         {
@@ -1173,7 +1180,8 @@ namespace Odin.Planning
             int _batchid = 0;
             string _week = "";
             double _qty = 0;
-            try {
+            try
+            {
                 _batchid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_batchid"].Value);
                 _week = gv_List.CurrentRow.Cells["cn_week"].Value.ToString();
                 _qty = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_canproduce"].Value);
@@ -1203,11 +1211,11 @@ namespace Odin.Planning
         {
             int _batchid = 0;
             string _week = "";
-           
+
             try
             {
                 _batchid = Convert.ToInt32(gv_Planned.CurrentRow.Cells["cn_pbatchid"].Value);
-                _week = gv_Planned.CurrentRow.Cells["cn_pweekoper"].Value.ToString();                
+                _week = gv_Planned.CurrentRow.Cells["cn_pweekoper"].Value.ToString();
             }
             catch { }
 
@@ -1215,10 +1223,10 @@ namespace Odin.Planning
                 && glob_Class.MessageConfirm("Deleting confirmation", "Are you sure you want to delete planned qty?") == true
                 )
             {
-                
-                    PlanBll.DeleteBatchPlanning(_batchid, _week);
-                    bwStart(bw_List);
-                
+
+                PlanBll.DeleteBatchPlanning(_batchid, _week);
+                bwStart(bw_List);
+
             }
         }
 
@@ -1505,7 +1513,7 @@ namespace Odin.Planning
                     _tmpyear = curdate.Year;
 
                     //MessageBox.Show("true");
-                    
+
 
                 }
                 else
@@ -1525,7 +1533,7 @@ namespace Odin.Planning
             var dets = Plan_BLL.getProdPlanning2Weeks(FirstDate, cmb_Firms1.FirmId, IsActive, ProdPlaceId);
 
             foreach (DataRow row in dets.Rows)
-            {   
+            {
                 DataRow dr = datadets.NewRow();
                 dr["wcount"] = Convert.ToInt32(row["wcount"]);
                 dr["wdatecount"] = Convert.ToInt32(row["wdatecount"]);
@@ -1567,7 +1575,7 @@ namespace Odin.Planning
 
 
             foreach (DataRow dr in data01)
-               frm.data01.ImportRow(dr);
+                frm.data01.ImportRow(dr);
             foreach (DataRow dr in data02)
                 frm.data02.ImportRow(dr);
             foreach (DataRow dr in data03)
@@ -1642,30 +1650,30 @@ namespace Odin.Planning
             dataplanning.Columns.Add("plandate", typeof(DateTime));
             dataplanning.Columns.Add("comments", typeof(string));
 
-            
-                foreach (DataGridViewCell cell in gv_List.SelectedCells)
+
+            foreach (DataGridViewCell cell in gv_List.SelectedCells)
+            {
+                if (cell.ColumnIndex > 12)
                 {
-                    if (cell.ColumnIndex > 12)
+                    //MessageBox.Show(cell.OwningColumn.HeaderText);
+                    //try
+                    //{
+                    if (glob_Class.TextIsDate(cell.OwningColumn.HeaderText) == true)
                     {
-                        //MessageBox.Show(cell.OwningColumn.HeaderText);
-                        //try
-                        //{
-                        if (glob_Class.TextIsDate(cell.OwningColumn.HeaderText) == true)
-                        {
-                            DataRow dr = dataplanning.NewRow();
-                            dr["batchid"] = Convert.ToInt32(cell.OwningRow.Cells["cn_batchid"].Value);
-                            dr["qty"] = (cell.Value == null || cell.Value.ToString() == "") ? 0 : Convert.ToDouble(cell.Value);
-                            dr["plandate"] = Convert.ToDateTime(cell.OwningColumn.HeaderText);
-                            dr["comments"] = "";
-                            dataplanning.Rows.Add(dr);
+                        DataRow dr = dataplanning.NewRow();
+                        dr["batchid"] = Convert.ToInt32(cell.OwningRow.Cells["cn_batchid"].Value);
+                        dr["qty"] = (cell.Value == null || cell.Value.ToString() == "") ? 0 : Convert.ToDouble(cell.Value);
+                        dr["plandate"] = Convert.ToDateTime(cell.OwningColumn.HeaderText);
+                        dr["comments"] = "";
+                        dataplanning.Rows.Add(dr);
 
                         cell.Style.BackColor = Color.Aquamarine;
-                        }
-                        // }
-                        // catch { }
                     }
+                    // }
+                    // catch { }
                 }
-                           
+            }
+
 
             PlanBll.ValidateProductionPlanning(dataplanning, -1);
 
@@ -1707,7 +1715,7 @@ namespace Odin.Planning
                     // catch { }
                 }
             }
-            
+
             PlanBll.ValidateProductionPlanning(dataplanning, 0);
 
             glob_Class.ShowMessage("ODIN message", "Invalidation: ", "Done!");
@@ -1753,9 +1761,9 @@ namespace Odin.Planning
                     )
                 {
                     if (glob_Class.TextIsDate(cell.OwningColumn.HeaderText) == true)
-                        PlanBll.EditProductionPlanning(_batchid, _columnname, frm.FormText);   
-                        cell.ToolTipText = frm.FormText;
-                        
+                        PlanBll.EditProductionPlanning(_batchid, _columnname, frm.FormText);
+                    cell.ToolTipText = frm.FormText;
+
                 }
 
             }
@@ -1810,6 +1818,30 @@ namespace Odin.Planning
             frm_ProductionPlanningDets frm = new frm_ProductionPlanningDets();
             frm.Show();
         }
-        
+
+        private void mni_Holidays_Click(object sender, EventArgs e)
+        {
+            DateTime holyday;
+            if (glob_Class.MessageConfirm("Holidays", "Are you sure change holiday property for this date?") == true)
+            {
+                foreach (DataGridViewCell cell in gv_List.SelectedCells)
+                {
+                    if (cell.ColumnIndex > 12)
+                    {
+                        if (glob_Class.TextIsDate(cell.OwningColumn.HeaderText) == true)
+                        {
+                            holyday = Convert.ToDateTime(cell.OwningColumn.HeaderText);
+
+                            if (DAL.MakeHoliday(holyday.ToShortDateString()) == -1)
+                                cell.OwningColumn.HeaderCell.Style.ForeColor = Color.Red;
+                            else
+                                cell.OwningColumn.HeaderCell.Style.ForeColor = Color.Black;
+
+
+                        }
+                    }
+                }
+            }
+        }
     }
 }

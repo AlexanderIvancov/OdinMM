@@ -194,6 +194,7 @@
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Cancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.mni_Holidays = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Lines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).BeginInit();
             this.mnu_LinesP.SuspendLayout();
@@ -239,6 +240,7 @@
             this.mnu_Lines.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.mnu_Lines.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mni_Comments,
+            this.mni_Holidays,
             this.mni_FilterFor,
             this.mni_Search,
             this.mni_FilterBy,
@@ -248,7 +250,7 @@
             this.toolStripSeparator2,
             this.mni_Admin});
             this.mnu_Lines.Name = "mnu_Requests";
-            this.mnu_Lines.Size = new System.Drawing.Size(211, 189);
+            this.mnu_Lines.Size = new System.Drawing.Size(211, 233);
             this.mnu_Lines.Opening += new System.ComponentModel.CancelEventHandler(this.mnu_Lines_Opening);
             // 
             // mni_Comments
@@ -1875,6 +1877,14 @@
             this.btn_Cancel.Values.Image = global::Odin.Global_Resourses.Cancel;
             this.btn_Cancel.Values.Text = "Cancel";
             // 
+            // mni_Holidays
+            // 
+            this.mni_Holidays.Image = global::Odin.Global_Resourses.IncludeCalendar;
+            this.mni_Holidays.Name = "mni_Holidays";
+            this.mni_Holidays.Size = new System.Drawing.Size(210, 22);
+            this.mni_Holidays.Text = "Mark as holiday";
+            this.mni_Holidays.Click += new System.EventHandler(this.mni_Holidays_Click);
+            // 
             // frm_ProductionPlanning
             // 
             this.AllowFormChrome = false;
@@ -2121,5 +2131,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_prodplace;
         private System.Windows.Forms.ToolStripButton btn_Check;
         private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
+        private System.Windows.Forms.ToolStripMenuItem mni_Holidays;
     }
 }
