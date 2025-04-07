@@ -124,6 +124,7 @@
             this.cn_batch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_reqdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_confdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_statedesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -722,6 +723,7 @@
             this.cn_batch,
             this.cn_description,
             this.cn_reqdate,
+            this.cn_confdate,
             this.cn_comments,
             this.cn_statedesc,
             this.cn_type,
@@ -1161,6 +1163,16 @@
             this.cn_reqdate.Name = "cn_reqdate";
             this.cn_reqdate.ReadOnly = true;
             // 
+            // cn_confdate
+            // 
+            this.cn_confdate.DataPropertyName = "confdate";
+            dataGridViewCellStyle2.Format = "d";
+            dataGridViewCellStyle2.NullValue = null;
+            this.cn_confdate.DefaultCellStyle = dataGridViewCellStyle2;
+            this.cn_confdate.HeaderText = "Conf. date";
+            this.cn_confdate.Name = "cn_confdate";
+            this.cn_confdate.ReadOnly = true;
+            // 
             // cn_comments
             // 
             this.cn_comments.DataPropertyName = "comments";
@@ -1395,6 +1407,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_batch;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_description;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_reqdate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_confdate;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_comments;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_statedesc;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_type;
