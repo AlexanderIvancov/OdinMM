@@ -3077,7 +3077,7 @@
     <Compile Include="Workshop\frm_ProductionResult.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Workshop\frm_ProductionResult.Designer.cs">
+    <Compile Include="Workshop\frm_ProductionResult.designer.cs">
       <DependentUpon>frm_ProductionResult.cs</DependentUpon>
     </Compile>
     <Compile Include="Workshop\frm_ProductivityDets.cs">
@@ -4151,6 +4151,9 @@
       <LastGenOutput>rpt_StockIn.cs</LastGenOutput>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="Workshop\frm_ProductionResult.resx">
+      <DependentUpon>frm_ProductionResult.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Workshop\frm_WorkshopLabels.resx">
       <DependentUpon>frm_WorkshopLabels.cs</DependentUpon>
     </EmbeddedResource>
@@ -4208,9 +4211,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Workshop\frm_AddWorker.resx">
       <DependentUpon>frm_AddWorker.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Workshop\frm_ProductionResult.resx">
-      <DependentUpon>frm_ProductionResult.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Workshop\frm_SerialTracing.resx">
       <DependentUpon>frm_SerialTracing.cs</DependentUpon>

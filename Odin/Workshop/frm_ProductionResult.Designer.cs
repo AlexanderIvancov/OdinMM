@@ -60,6 +60,7 @@
             this.kryptonLabel12 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_Serial = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonSplitContainer2 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
+            this.chk_ConcOperations = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.chk_Sum = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.txt_DateTill = new Odin.CustomControls.NullableDateTimePicker();
             this.buttonSpecAny2 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
@@ -93,6 +94,9 @@
             this.cn_isapproved = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_islast = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_analogs = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_teortime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_teortotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_parameters = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bn_List = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -108,18 +112,6 @@
             this.txt_Sum = new System.Windows.Forms.ToolStripTextBox();
             this.kryptonHeaderGroup2 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.gv_Materials = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.cn_mid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_mlabel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_matartid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_matarticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_mbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_mlaunch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_martid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_marticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_msecname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_mconforder = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_mwhen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_mworker = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mnu_mLines = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mni_mFilterFor = new System.Windows.Forms.ToolStripTextBox();
             this.mni_mSearch = new System.Windows.Forms.ToolStripMenuItem();
@@ -142,7 +134,20 @@
             this.btn_mExcel = new System.Windows.Forms.ToolStripButton();
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.bs_Materials = new Odin.Global_Classes.SyncBindingSource();
-            this.chk_ConcOperations = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
+            this.cn_mid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_mlabel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_matartid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_matarticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_mbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_mlaunch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_martid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_marticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_msecname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_mconforder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_mwhen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_mworker = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_manufbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_incomedoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.mnu_Lines.SuspendLayout();
@@ -491,6 +496,14 @@
             this.kryptonSplitContainer2.SplitterDistance = 303;
             this.kryptonSplitContainer2.TabIndex = 0;
             // 
+            // chk_ConcOperations
+            // 
+            this.chk_ConcOperations.Location = new System.Drawing.Point(94, 299);
+            this.chk_ConcOperations.Name = "chk_ConcOperations";
+            this.chk_ConcOperations.Size = new System.Drawing.Size(154, 20);
+            this.chk_ConcOperations.TabIndex = 299;
+            this.chk_ConcOperations.Values.Text = "Concatenate operations";
+            // 
             // chk_Sum
             // 
             this.chk_Sum.Location = new System.Drawing.Point(94, 273);
@@ -586,7 +599,7 @@
             // 
             // cmb_Launches1
             // 
-            this.cmb_Launches1.Article = null;
+            this.cmb_Launches1.Article = "";
             this.cmb_Launches1.ArticleId = 0;
             this.cmb_Launches1.Batch = "";
             this.cmb_Launches1.BatchId = 0;
@@ -703,7 +716,10 @@
             this.cn_worker,
             this.cn_isapproved,
             this.cn_islast,
-            this.cn_analogs});
+            this.cn_analogs,
+            this.cn_teortime,
+            this.cn_teortotal,
+            this.cn_parameters});
             this.gv_List.ContextMenuStrip = this.mnu_Lines;
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_List.Location = new System.Drawing.Point(0, 0);
@@ -824,6 +840,24 @@
             this.cn_analogs.DataPropertyName = "analog";
             this.cn_analogs.HeaderText = "Analog";
             this.cn_analogs.Name = "cn_analogs";
+            // 
+            // cn_teortime
+            // 
+            this.cn_teortime.DataPropertyName = "teortime";
+            this.cn_teortime.HeaderText = "Teor. time";
+            this.cn_teortime.Name = "cn_teortime";
+            // 
+            // cn_teortotal
+            // 
+            this.cn_teortotal.DataPropertyName = "teortotal";
+            this.cn_teortotal.HeaderText = "Teor. total";
+            this.cn_teortotal.Name = "cn_teortotal";
+            // 
+            // cn_parameters
+            // 
+            this.cn_parameters.DataPropertyName = "parameters";
+            this.cn_parameters.HeaderText = "Check parameters";
+            this.cn_parameters.Name = "cn_parameters";
             // 
             // bn_List
             // 
@@ -976,7 +1010,9 @@
             this.cn_msecname,
             this.cn_mconforder,
             this.cn_mwhen,
-            this.cn_mworker});
+            this.cn_mworker,
+            this.cn_manufbatch,
+            this.cn_incomedoc});
             this.gv_Materials.ContextMenuStrip = this.mnu_mLines;
             this.gv_Materials.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_Materials.Location = new System.Drawing.Point(0, 0);
@@ -984,98 +1020,6 @@
             this.gv_Materials.RowHeadersWidth = 25;
             this.gv_Materials.Size = new System.Drawing.Size(943, 277);
             this.gv_Materials.TabIndex = 9;
-            // 
-            // cn_mid
-            // 
-            this.cn_mid.DataPropertyName = "id";
-            this.cn_mid.FillWeight = 5F;
-            this.cn_mid.HeaderText = "id";
-            this.cn_mid.Name = "cn_mid";
-            this.cn_mid.ReadOnly = true;
-            this.cn_mid.Visible = false;
-            this.cn_mid.Width = 5;
-            // 
-            // cn_mlabel
-            // 
-            this.cn_mlabel.DataPropertyName = "label";
-            this.cn_mlabel.FillWeight = 120F;
-            this.cn_mlabel.HeaderText = "Label";
-            this.cn_mlabel.Name = "cn_mlabel";
-            this.cn_mlabel.ReadOnly = true;
-            this.cn_mlabel.Width = 120;
-            // 
-            // cn_matartid
-            // 
-            this.cn_matartid.DataPropertyName = "matartid";
-            this.cn_matartid.FillWeight = 80F;
-            this.cn_matartid.HeaderText = "Mat. art.id.";
-            this.cn_matartid.Name = "cn_matartid";
-            this.cn_matartid.Width = 80;
-            // 
-            // cn_matarticle
-            // 
-            this.cn_matarticle.DataPropertyName = "matarticle";
-            this.cn_matarticle.FillWeight = 120F;
-            this.cn_matarticle.HeaderText = "Material ";
-            this.cn_matarticle.Name = "cn_matarticle";
-            this.cn_matarticle.Width = 120;
-            // 
-            // cn_mbatch
-            // 
-            this.cn_mbatch.DataPropertyName = "batch";
-            this.cn_mbatch.HeaderText = "Batch";
-            this.cn_mbatch.Name = "cn_mbatch";
-            this.cn_mbatch.ReadOnly = true;
-            // 
-            // cn_mlaunch
-            // 
-            this.cn_mlaunch.DataPropertyName = "launch";
-            this.cn_mlaunch.HeaderText = "Launch";
-            this.cn_mlaunch.Name = "cn_mlaunch";
-            // 
-            // cn_martid
-            // 
-            this.cn_martid.DataPropertyName = "artid";
-            this.cn_martid.FillWeight = 60F;
-            this.cn_martid.HeaderText = "Product art. ID";
-            this.cn_martid.Name = "cn_martid";
-            this.cn_martid.Width = 60;
-            // 
-            // cn_marticle
-            // 
-            this.cn_marticle.DataPropertyName = "article";
-            this.cn_marticle.FillWeight = 120F;
-            this.cn_marticle.HeaderText = "Product article";
-            this.cn_marticle.Name = "cn_marticle";
-            this.cn_marticle.ReadOnly = true;
-            this.cn_marticle.Width = 120;
-            // 
-            // cn_msecname
-            // 
-            this.cn_msecname.DataPropertyName = "secname";
-            this.cn_msecname.HeaderText = "Product sec. name";
-            this.cn_msecname.Name = "cn_msecname";
-            // 
-            // cn_mconforder
-            // 
-            this.cn_mconforder.DataPropertyName = "conforder";
-            this.cn_mconforder.HeaderText = "Conf. order";
-            this.cn_mconforder.Name = "cn_mconforder";
-            this.cn_mconforder.ReadOnly = true;
-            // 
-            // cn_mwhen
-            // 
-            this.cn_mwhen.DataPropertyName = "when";
-            this.cn_mwhen.HeaderText = "When";
-            this.cn_mwhen.Name = "cn_mwhen";
-            // 
-            // cn_mworker
-            // 
-            this.cn_mworker.DataPropertyName = "worker";
-            this.cn_mworker.FillWeight = 180F;
-            this.cn_mworker.HeaderText = "Worker";
-            this.cn_mworker.Name = "cn_mworker";
-            this.cn_mworker.Width = 180;
             // 
             // mnu_mLines
             // 
@@ -1281,13 +1225,109 @@
             this.kryptonSplitContainer1.SplitterDistance = 470;
             this.kryptonSplitContainer1.TabIndex = 6;
             // 
-            // chk_ConcOperations
+            // cn_mid
             // 
-            this.chk_ConcOperations.Location = new System.Drawing.Point(94, 299);
-            this.chk_ConcOperations.Name = "chk_ConcOperations";
-            this.chk_ConcOperations.Size = new System.Drawing.Size(154, 20);
-            this.chk_ConcOperations.TabIndex = 300;
-            this.chk_ConcOperations.Values.Text = "Concatenate operations";
+            this.cn_mid.DataPropertyName = "id";
+            this.cn_mid.FillWeight = 5F;
+            this.cn_mid.HeaderText = "id";
+            this.cn_mid.Name = "cn_mid";
+            this.cn_mid.ReadOnly = true;
+            this.cn_mid.Visible = false;
+            this.cn_mid.Width = 5;
+            // 
+            // cn_mlabel
+            // 
+            this.cn_mlabel.DataPropertyName = "label";
+            this.cn_mlabel.FillWeight = 120F;
+            this.cn_mlabel.HeaderText = "Label";
+            this.cn_mlabel.Name = "cn_mlabel";
+            this.cn_mlabel.ReadOnly = true;
+            this.cn_mlabel.Width = 120;
+            // 
+            // cn_matartid
+            // 
+            this.cn_matartid.DataPropertyName = "matartid";
+            this.cn_matartid.FillWeight = 80F;
+            this.cn_matartid.HeaderText = "Mat. art.id.";
+            this.cn_matartid.Name = "cn_matartid";
+            this.cn_matartid.Width = 80;
+            // 
+            // cn_matarticle
+            // 
+            this.cn_matarticle.DataPropertyName = "matarticle";
+            this.cn_matarticle.FillWeight = 120F;
+            this.cn_matarticle.HeaderText = "Material ";
+            this.cn_matarticle.Name = "cn_matarticle";
+            this.cn_matarticle.Width = 120;
+            // 
+            // cn_mbatch
+            // 
+            this.cn_mbatch.DataPropertyName = "batch";
+            this.cn_mbatch.HeaderText = "Batch";
+            this.cn_mbatch.Name = "cn_mbatch";
+            this.cn_mbatch.ReadOnly = true;
+            // 
+            // cn_mlaunch
+            // 
+            this.cn_mlaunch.DataPropertyName = "launch";
+            this.cn_mlaunch.HeaderText = "Launch";
+            this.cn_mlaunch.Name = "cn_mlaunch";
+            // 
+            // cn_martid
+            // 
+            this.cn_martid.DataPropertyName = "artid";
+            this.cn_martid.FillWeight = 60F;
+            this.cn_martid.HeaderText = "Product art. ID";
+            this.cn_martid.Name = "cn_martid";
+            this.cn_martid.Width = 60;
+            // 
+            // cn_marticle
+            // 
+            this.cn_marticle.DataPropertyName = "article";
+            this.cn_marticle.FillWeight = 120F;
+            this.cn_marticle.HeaderText = "Product article";
+            this.cn_marticle.Name = "cn_marticle";
+            this.cn_marticle.ReadOnly = true;
+            this.cn_marticle.Width = 120;
+            // 
+            // cn_msecname
+            // 
+            this.cn_msecname.DataPropertyName = "secname";
+            this.cn_msecname.HeaderText = "Product sec. name";
+            this.cn_msecname.Name = "cn_msecname";
+            // 
+            // cn_mconforder
+            // 
+            this.cn_mconforder.DataPropertyName = "conforder";
+            this.cn_mconforder.HeaderText = "Conf. order";
+            this.cn_mconforder.Name = "cn_mconforder";
+            this.cn_mconforder.ReadOnly = true;
+            // 
+            // cn_mwhen
+            // 
+            this.cn_mwhen.DataPropertyName = "when";
+            this.cn_mwhen.HeaderText = "When";
+            this.cn_mwhen.Name = "cn_mwhen";
+            // 
+            // cn_mworker
+            // 
+            this.cn_mworker.DataPropertyName = "worker";
+            this.cn_mworker.FillWeight = 180F;
+            this.cn_mworker.HeaderText = "Worker";
+            this.cn_mworker.Name = "cn_mworker";
+            this.cn_mworker.Width = 180;
+            // 
+            // cn_manufbatch
+            // 
+            this.cn_manufbatch.DataPropertyName = "manufbatch";
+            this.cn_manufbatch.HeaderText = "Manuf. batch";
+            this.cn_manufbatch.Name = "cn_manufbatch";
+            // 
+            // cn_incomedoc
+            // 
+            this.cn_incomedoc.DataPropertyName = "incomedoc";
+            this.cn_incomedoc.HeaderText = "Income doc.";
+            this.cn_incomedoc.Name = "cn_incomedoc";
             // 
             // frm_ProductionResult
             // 
@@ -1341,7 +1381,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).EndInit();
             this.kryptonSplitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bs_Materials)).EndInit();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
@@ -1428,20 +1468,9 @@
         private System.Windows.Forms.ToolStripMenuItem mni_mCopy;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem mni_mAdmin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mlabel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_matartid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_matarticle;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mbatch;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mlaunch;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_martid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_marticle;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_msecname;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mconforder;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mwhen;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mworker;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
         private System.Windows.Forms.ToolStripTextBox txt_Sum;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_ConcOperations;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_sn;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_operno;
@@ -1457,6 +1486,22 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_isapproved;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_islast;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_analogs;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_ConcOperations;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_teortime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_teortotal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_parameters;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mlabel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_matartid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_matarticle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mbatch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mlaunch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_martid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_marticle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_msecname;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mconforder;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mwhen;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mworker;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_manufbatch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_incomedoc;
     }
 }
