@@ -1652,14 +1652,18 @@
       <DependentUpon>frm_LaunchesPlanningG.cs</DependentUpon>
     </Compile>
     <Compile Include="Planning\Plan_BLL.cs" />
-    <Content Include="Planning\rpt_Plan2Weeks.cs">
+    <Compile Include="Planning\rpt_Plan2Weeks.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_Plan2Weeks.rpt</DependentUpon>
       <SubType>Component</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Planning\rsub_Plan2WeeksDet.cs">
+    </Compile>
+    <Compile Include="Planning\rsub_Plan2WeeksDet.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rsub_Plan2WeeksDet.rpt</DependentUpon>
       <SubType>Component</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Purchase\ctl_AddFromNeeds.cs">
@@ -3781,6 +3785,14 @@
       <LastGenOutput>rpt_PassportVizas.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="Planning\rpt_Plan2Weeks.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_Plan2Weeks.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Planning\rsub_Plan2WeeksDet.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rsub_Plan2WeeksDet.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
