@@ -1789,17 +1789,35 @@
     <Compile Include="Quality\frm_AddIncomeControl.Designer.cs">
       <DependentUpon>frm_AddIncomeControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Quality\frm_AddIncomeControlResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Quality\frm_AddIncomeControlResult.designer.cs">
+      <DependentUpon>frm_AddIncomeControlResult.cs</DependentUpon>
+    </Compile>
     <Compile Include="Quality\frm_AddSerialFreezed.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Quality\frm_AddSerialFreezed.Designer.cs">
       <DependentUpon>frm_AddSerialFreezed.cs</DependentUpon>
     </Compile>
+    <Compile Include="Quality\frm_EditIncomeControlResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Quality\frm_EditIncomeControlResult.designer.cs">
+      <DependentUpon>frm_EditIncomeControlResult.cs</DependentUpon>
+    </Compile>
     <Compile Include="Quality\frm_IncomeControl.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Quality\frm_IncomeControl.Designer.cs">
       <DependentUpon>frm_IncomeControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Quality\frm_IncomeControlResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Quality\frm_IncomeControlResult.designer.cs">
+      <DependentUpon>frm_IncomeControlResult.cs</DependentUpon>
     </Compile>
     <Compile Include="Quality\frm_QCSerialFreezed.cs">
       <SubType>Form</SubType>
@@ -3868,11 +3886,20 @@
     <EmbeddedResource Include="Quality\frm_AddIncomeControl.resx">
       <DependentUpon>frm_AddIncomeControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Quality\frm_AddIncomeControlResult.resx">
+      <DependentUpon>frm_AddIncomeControlResult.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Quality\frm_AddSerialFreezed.resx">
       <DependentUpon>frm_AddSerialFreezed.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Quality\frm_EditIncomeControlResult.resx">
+      <DependentUpon>frm_EditIncomeControlResult.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Quality\frm_IncomeControl.resx">
       <DependentUpon>frm_IncomeControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Quality\frm_IncomeControlResult.resx">
+      <DependentUpon>frm_IncomeControlResult.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Quality\frm_QCSerialFreezed.resx">
       <DependentUpon>frm_QCSerialFreezed.cs</DependentUpon>
@@ -4123,6 +4150,7 @@
     <Content Include="Resourses\events.png" />
     <Content Include="Resourses\factory.png" />
     <Content Include="Resourses\certificates.png" />
+    <Content Include="Resourses\microscope-test-icon.png" />
     <Content Include="Resourses\new_logo2.png" />
     <Content Include="Warehouse\Reports\rpt_TurnoverReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

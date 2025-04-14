@@ -37,6 +37,9 @@ namespace Odin.CMB_Components.IncomeDocs
         int _supplierid = 0;
         int _curid = 0;
 
+        string _DocDate = "";
+
+
         public int SupplierId
         {
             get { return _supplierid; }
@@ -48,6 +51,35 @@ namespace Odin.CMB_Components.IncomeDocs
             get { return _curid; }
             set { _curid = value;}
         }
+
+        public string DocDate
+        {
+            get { return _DocDate; }
+            set { _DocDate = value; }
+        }
+
+        int _isbanned = -1;
+
+        public int IsBanned
+        {
+            get { return _isbanned; }
+            set
+            {
+                _isbanned = value;
+
+                if (IsBanned > 0)
+                {
+                    txt_IncomeDoc.StateCommon.Back.Color1 = Color.Silver;
+
+                }
+                else
+                {
+                    txt_IncomeDoc.StateCommon.Back.Color1 = Color.White;
+
+                }
+            }
+        }
+
 
         public string IncomeDoc
         {
@@ -61,7 +93,7 @@ namespace Odin.CMB_Components.IncomeDocs
 
                 SqlDataAdapter adapter =
                     new SqlDataAdapter(
-                        "SELECT DISTINCT TOP 1 id FROM STO_StockInHead WHERE name = '" + _IncomeDoc.ToString() + "'", sConnStr);
+                        "SELECT DISTINCT TOP 1 h.id, isnull(DATEDIFF(day, regdate, blockdate), -99) as isbanned FROM STO_StockInHead h, BAS_BlockDate WHERE name = '" + _IncomeDoc.ToString() + "'", sConnStr);
 
                 adapter.Fill(ds);
 
@@ -73,12 +105,14 @@ namespace Odin.CMB_Components.IncomeDocs
                 }
                 catch
                 {
-
                     _IncomeDocId = 0;
                     return;
                 }
 
-                IncomeDocChanged?.Invoke(this);
+                if (IncomeDocChanged != null)
+                {
+                    IncomeDocChanged(this);
+                }
             }
         }
 
@@ -91,7 +125,7 @@ namespace Odin.CMB_Components.IncomeDocs
             }
             set
             {
-
+                //MessageBox.Show(value.ToString());
 
                 _IncomeDocId = value;
 
@@ -103,7 +137,7 @@ namespace Odin.CMB_Components.IncomeDocs
                     DataSet ds = new DataSet();
 
                     SqlDataAdapter adapter =
-                        new SqlDataAdapter("SELECT top 1 * FROM STO_StockInHead WHERE id = " + _IncomeDocId.ToString(), conn);
+                        new SqlDataAdapter("SELECT top 1 *, isnull(DATEDIFF(day, regdate, blockdate), -99) as isbanned FROM STO_StockInHead h, BAS_BlockDate WHERE h.id = " + _IncomeDocId.ToString(), conn);
                     adapter.Fill(ds);
 
                     conn.Close();
@@ -114,9 +148,11 @@ namespace Odin.CMB_Components.IncomeDocs
                     {
                         foreach (DataRow dr in dt.Rows)
                         {
+
                             txt_IncomeDoc.Text = dr["name"].ToString();
                             SupplierId = Convert.ToInt32(dr["supid"]);
                             CurId = Convert.ToInt32(dr["curid"]);
+                            IsBanned = Convert.ToInt32(dr["isbanned"]);
                         }
                     }
                     else
@@ -124,11 +160,15 @@ namespace Odin.CMB_Components.IncomeDocs
                         txt_IncomeDoc.Text = string.Empty;
                         SupplierId = 0;
                         CurId = 0;
+                        IsBanned = -1;
                     }
 
                     _PrevId = _IncomeDocId;
 
-                    IncomeDocChanged?.Invoke(this);
+                    if (IncomeDocChanged != null)
+                    {
+                        IncomeDocChanged(this);
+                    }
 
                 }
             }

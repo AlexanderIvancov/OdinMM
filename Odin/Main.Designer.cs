@@ -199,6 +199,7 @@
             this.btn_QCTraceView = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.kryptonRibbonGroupTriple48 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
             this.btn_QCSerialFreezed = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.btn_IncomeControlResult = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.tab_TechDept = new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab();
             this.kryptonRibbonGroup25 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
             this.kryptonRibbonGroupTriple35 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
@@ -1423,7 +1424,8 @@
             // kryptonRibbonGroupTriple48
             // 
             this.kryptonRibbonGroupTriple48.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupItem[] {
-            this.btn_QCSerialFreezed});
+            this.btn_QCSerialFreezed,
+            this.btn_IncomeControlResult});
             // 
             // btn_QCSerialFreezed
             // 
@@ -1432,6 +1434,14 @@
             this.btn_QCSerialFreezed.TextLine1 = "QC freezing";
             this.btn_QCSerialFreezed.TextLine2 = "view";
             this.btn_QCSerialFreezed.Click += new System.EventHandler(this.btn_QCSerialFreezed_Click);
+            // 
+            // btn_IncomeControlResult
+            // 
+            this.btn_IncomeControlResult.ImageLarge = global::Odin.Global_Resourses.microscope_test_icon;
+            this.btn_IncomeControlResult.ImageSmall = global::Odin.Global_Resourses.microscope_test_icon;
+            this.btn_IncomeControlResult.TextLine1 = "Income control";
+            this.btn_IncomeControlResult.TextLine2 = "result";
+            this.btn_IncomeControlResult.Click += new System.EventHandler(this.btn_IncomeControlResult_Click);
             // 
             // tab_TechDept
             // 
@@ -1971,5 +1981,6 @@
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple41;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_PlanningView;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_ProdPlanning;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_IncomeControlResult;
     }
 }

@@ -154,6 +154,7 @@ namespace Odin
         frm_PlanningView PlanningView = null;
         frm_TurnoverReports TurnoverReport = null;
         frm_ProductionPlanning ProductionPlanning = null;
+        frm_IncomeControlResult IncomeControlResult = null;
 
         #endregion
 
@@ -1445,6 +1446,20 @@ namespace Odin
             ProductionPlanning = new frm_ProductionPlanning();
             ProductionPlanning._Main = this;
             ProductionPlanning.Show(pn_Main);
+        }
+
+        private void btn_IncomeControlResult_Click(object sender, EventArgs e)
+        {
+            foreach (var f in MdiChildren.Where(f => f.Name == "frm_IncomeControlResult"))
+            {
+                f.BringToFront();
+                return;
+            }
+            IncomeControlResult = new frm_IncomeControlResult();
+            IncomeControlResult._Main = this;
+            // public Main _Main;
+            //Articles.InitiateResize();
+            IncomeControlResult.Show(pn_Main);
         }
     }
 }
