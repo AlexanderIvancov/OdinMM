@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctl_BOMSimple));
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.btn_back = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_History = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Refresh = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Decline = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -54,6 +55,33 @@
             this.btn_Excel = new System.Windows.Forms.ToolStripButton();
             this.btn_ExportForQuote = new System.Windows.Forms.ToolStripButton();
             this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.cn_num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_artid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_art = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_up = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.cn_secart = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_analogs = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_Analogs = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.cn_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_spoilperc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_spoilconst = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_using = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.cn_who = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_when = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_ciscse = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_stage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_isvalidated = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_validat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_lastchange = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_StageID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_isactive = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_positions = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_typechange = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_valanalog = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mnu_Lines = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mni_Analog = new System.Windows.Forms.ToolStripMenuItem();
             this.mni_FilterHistory = new System.Windows.Forms.ToolStripMenuItem();
@@ -86,34 +114,8 @@
             this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bs_List = new Odin.Global_Classes.SyncBindingSource();
-            this.btn_back = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.cn_num = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_artid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_art = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btn_up = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.cn_secart = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_analogs = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btn_Analogs = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.cn_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_spoilperc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_spoilconst = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_using = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.cn_who = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_when = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_ciscse = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_stage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_isvalidated = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_validat = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_lastchange = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_StageID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_isactive = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_positions = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_typechange = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_valanalog = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txt_Comments = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bn_List)).BeginInit();
@@ -125,6 +127,8 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.txt_Comments);
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel5);
             this.kryptonPanel1.Controls.Add(this.btn_back);
             this.kryptonPanel1.Controls.Add(this.btn_History);
             this.kryptonPanel1.Controls.Add(this.btn_Refresh);
@@ -143,8 +147,19 @@
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonPanel1.Size = new System.Drawing.Size(1053, 50);
+            this.kryptonPanel1.Size = new System.Drawing.Size(1053, 75);
             this.kryptonPanel1.TabIndex = 1;
+            // 
+            // btn_back
+            // 
+            this.btn_back.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.LowProfile;
+            this.btn_back.Location = new System.Drawing.Point(394, 13);
+            this.btn_back.Name = "btn_back";
+            this.btn_back.Size = new System.Drawing.Size(27, 25);
+            this.btn_back.TabIndex = 53;
+            this.btn_back.Values.Image = global::Odin.Global_Resourses.undo_small;
+            this.btn_back.Values.Text = "";
+            this.btn_back.Click += new System.EventHandler(this.btn_back_Click);
             // 
             // btn_History
             // 
@@ -260,6 +275,7 @@
             this.cmb_Articles1.DeptId = 0;
             this.cmb_Articles1.Description = null;
             this.cmb_Articles1.IsActive = -1;
+            this.cmb_Articles1.IsCertified = -1;
             this.cmb_Articles1.IsPF = 0;
             this.cmb_Articles1.Location = new System.Drawing.Point(98, 15);
             this.cmb_Articles1.Manufacturer = "";
@@ -306,7 +322,7 @@
             this.btn_DeleteNorm,
             this.btn_Excel,
             this.btn_ExportForQuote});
-            this.bn_List.Location = new System.Drawing.Point(0, 50);
+            this.bn_List.Location = new System.Drawing.Point(0, 75);
             this.bn_List.MoveFirstItem = null;
             this.bn_List.MoveLastItem = null;
             this.bn_List.MoveNextItem = null;
@@ -432,10 +448,10 @@
             this.cn_valanalog});
             this.gv_List.ContextMenuStrip = this.mnu_Lines;
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gv_List.Location = new System.Drawing.Point(0, 75);
+            this.gv_List.Location = new System.Drawing.Point(0, 100);
             this.gv_List.Name = "gv_List";
             this.gv_List.RowHeadersWidth = 25;
-            this.gv_List.Size = new System.Drawing.Size(1053, 398);
+            this.gv_List.Size = new System.Drawing.Size(1053, 373);
             this.gv_List.TabIndex = 43;
             this.gv_List.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_List_CellClick);
             this.gv_List.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_List_CellContentClick);
@@ -448,6 +464,209 @@
             this.gv_List.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gv_List_MouseClick);
             this.gv_List.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gv_List_MouseMove);
             this.gv_List.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gv_List_MouseUp);
+            // 
+            // cn_num
+            // 
+            this.cn_num.DataPropertyName = "LineNumber";
+            this.cn_num.FillWeight = 50F;
+            this.cn_num.HeaderText = "Num.";
+            this.cn_num.Name = "cn_num";
+            this.cn_num.Width = 50;
+            // 
+            // cn_artid
+            // 
+            this.cn_artid.DataPropertyName = "IdCst";
+            this.cn_artid.FillWeight = 80F;
+            this.cn_artid.HeaderText = "Art.id.";
+            this.cn_artid.Name = "cn_artid";
+            this.cn_artid.Width = 80;
+            // 
+            // cn_art
+            // 
+            this.cn_art.DataPropertyName = "Article";
+            this.cn_art.FillWeight = 150F;
+            this.cn_art.HeaderText = "Article name";
+            this.cn_art.Name = "cn_art";
+            this.cn_art.Width = 150;
+            // 
+            // btn_up
+            // 
+            this.btn_up.FillWeight = 25F;
+            this.btn_up.HeaderText = "";
+            this.btn_up.Name = "btn_up";
+            this.btn_up.Width = 25;
+            // 
+            // cn_secart
+            // 
+            this.cn_secart.DataPropertyName = "secname";
+            this.cn_secart.FillWeight = 120F;
+            this.cn_secart.HeaderText = "2nd name";
+            this.cn_secart.Name = "cn_secart";
+            this.cn_secart.Width = 120;
+            // 
+            // cn_analogs
+            // 
+            this.cn_analogs.DataPropertyName = "Analog";
+            this.cn_analogs.FillWeight = 125F;
+            this.cn_analogs.HeaderText = "Analogs";
+            this.cn_analogs.Name = "cn_analogs";
+            this.cn_analogs.Width = 125;
+            // 
+            // btn_Analogs
+            // 
+            this.btn_Analogs.FillWeight = 25F;
+            this.btn_Analogs.HeaderText = "";
+            this.btn_Analogs.Name = "btn_Analogs";
+            this.btn_Analogs.Width = 25;
+            // 
+            // cn_qty
+            // 
+            this.cn_qty.DataPropertyName = "Quantity";
+            this.cn_qty.FillWeight = 70F;
+            this.cn_qty.HeaderText = "Qty";
+            this.cn_qty.Name = "cn_qty";
+            this.cn_qty.Width = 70;
+            // 
+            // cn_unit
+            // 
+            this.cn_unit.DataPropertyName = "unit";
+            this.cn_unit.FillWeight = 40F;
+            this.cn_unit.HeaderText = "Unit";
+            this.cn_unit.Name = "cn_unit";
+            this.cn_unit.Width = 40;
+            // 
+            // cn_spoilperc
+            // 
+            this.cn_spoilperc.DataPropertyName = "SpoilNorm";
+            this.cn_spoilperc.FillWeight = 50F;
+            this.cn_spoilperc.HeaderText = "Spoil %";
+            this.cn_spoilperc.Name = "cn_spoilperc";
+            this.cn_spoilperc.Width = 50;
+            // 
+            // cn_spoilconst
+            // 
+            this.cn_spoilconst.DataPropertyName = "SpoilConst";
+            this.cn_spoilconst.FillWeight = 50F;
+            this.cn_spoilconst.HeaderText = "Spoil (const)";
+            this.cn_spoilconst.Name = "cn_spoilconst";
+            this.cn_spoilconst.Width = 50;
+            // 
+            // cn_comments
+            // 
+            this.cn_comments.DataPropertyName = "Comments";
+            this.cn_comments.FillWeight = 150F;
+            this.cn_comments.HeaderText = "Comments";
+            this.cn_comments.Name = "cn_comments";
+            this.cn_comments.Width = 150;
+            // 
+            // cn_using
+            // 
+            this.cn_using.DataPropertyName = "Using";
+            this.cn_using.FalseValue = "0";
+            this.cn_using.FillWeight = 50F;
+            this.cn_using.HeaderText = "Usage";
+            this.cn_using.IndeterminateValue = "1";
+            this.cn_using.Name = "cn_using";
+            this.cn_using.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.cn_using.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.cn_using.TrueValue = "-1";
+            this.cn_using.Width = 50;
+            // 
+            // cn_who
+            // 
+            this.cn_who.DataPropertyName = "CreatedBy";
+            this.cn_who.HeaderText = "Who";
+            this.cn_who.Name = "cn_who";
+            // 
+            // cn_when
+            // 
+            this.cn_when.DataPropertyName = "DateCreation";
+            this.cn_when.HeaderText = "When";
+            this.cn_when.Name = "cn_when";
+            // 
+            // cn_id
+            // 
+            this.cn_id.DataPropertyName = "ID";
+            this.cn_id.FillWeight = 5F;
+            this.cn_id.HeaderText = "id";
+            this.cn_id.Name = "cn_id";
+            this.cn_id.Visible = false;
+            this.cn_id.Width = 5;
+            // 
+            // cn_ciscse
+            // 
+            this.cn_ciscse.DataPropertyName = "CpseMark";
+            this.cn_ciscse.FillWeight = 50F;
+            this.cn_ciscse.HeaderText = "IsCSE";
+            this.cn_ciscse.Name = "cn_ciscse";
+            this.cn_ciscse.Visible = false;
+            this.cn_ciscse.Width = 50;
+            // 
+            // cn_stage
+            // 
+            this.cn_stage.DataPropertyName = "stage";
+            this.cn_stage.HeaderText = "Stage";
+            this.cn_stage.Name = "cn_stage";
+            // 
+            // cn_isvalidated
+            // 
+            this.cn_isvalidated.DataPropertyName = "isvalidated";
+            this.cn_isvalidated.HeaderText = "Is validated";
+            this.cn_isvalidated.Name = "cn_isvalidated";
+            this.cn_isvalidated.Visible = false;
+            // 
+            // cn_validat
+            // 
+            this.cn_validat.DataPropertyName = "DateValidation";
+            this.cn_validat.HeaderText = "Valid. at.";
+            this.cn_validat.Name = "cn_validat";
+            this.cn_validat.Visible = false;
+            // 
+            // cn_lastchange
+            // 
+            this.cn_lastchange.DataPropertyName = "DateLastChanges";
+            this.cn_lastchange.HeaderText = "Last change";
+            this.cn_lastchange.Name = "cn_lastchange";
+            this.cn_lastchange.Visible = false;
+            // 
+            // cn_StageID
+            // 
+            this.cn_StageID.DataPropertyName = "stageid";
+            this.cn_StageID.HeaderText = "StageID";
+            this.cn_StageID.Name = "cn_StageID";
+            this.cn_StageID.Visible = false;
+            // 
+            // cn_isactive
+            // 
+            this.cn_isactive.DataPropertyName = "isactive";
+            this.cn_isactive.HeaderText = "is active";
+            this.cn_isactive.Name = "cn_isactive";
+            this.cn_isactive.Visible = false;
+            // 
+            // cn_positions
+            // 
+            this.cn_positions.DataPropertyName = "positions";
+            this.cn_positions.HeaderText = "Positions";
+            this.cn_positions.Name = "cn_positions";
+            // 
+            // cn_type
+            // 
+            this.cn_type.DataPropertyName = "type";
+            this.cn_type.HeaderText = "Type";
+            this.cn_type.Name = "cn_type";
+            // 
+            // cn_typechange
+            // 
+            this.cn_typechange.DataPropertyName = "TypeChange";
+            this.cn_typechange.HeaderText = "typechange";
+            this.cn_typechange.Name = "cn_typechange";
+            this.cn_typechange.Visible = false;
+            // 
+            // cn_valanalog
+            // 
+            this.cn_valanalog.DataPropertyName = "ValAnalog";
+            this.cn_valanalog.HeaderText = "Valid. analogs";
+            this.cn_valanalog.Name = "cn_valanalog";
             // 
             // mnu_Lines
             // 
@@ -695,219 +914,20 @@
             this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
             this.dataGridViewTextBoxColumn20.Visible = false;
             // 
-            // btn_back
+            // txt_Comments
             // 
-            this.btn_back.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.LowProfile;
-            this.btn_back.Location = new System.Drawing.Point(394, 13);
-            this.btn_back.Name = "btn_back";
-            this.btn_back.Size = new System.Drawing.Size(27, 25);
-            this.btn_back.TabIndex = 53;
-            this.btn_back.Values.Image = global::Odin.Global_Resourses.undo_small;
-            this.btn_back.Values.Text = "";
-            this.btn_back.Click += new System.EventHandler(this.btn_back_Click);
+            this.txt_Comments.Location = new System.Drawing.Point(98, 41);
+            this.txt_Comments.Name = "txt_Comments";
+            this.txt_Comments.Size = new System.Drawing.Size(809, 23);
+            this.txt_Comments.TabIndex = 56;
             // 
-            // cn_num
+            // kryptonLabel5
             // 
-            this.cn_num.DataPropertyName = "LineNumber";
-            this.cn_num.FillWeight = 50F;
-            this.cn_num.HeaderText = "Num.";
-            this.cn_num.Name = "cn_num";
-            this.cn_num.Width = 50;
-            // 
-            // cn_artid
-            // 
-            this.cn_artid.DataPropertyName = "IdCst";
-            this.cn_artid.FillWeight = 80F;
-            this.cn_artid.HeaderText = "Art.id.";
-            this.cn_artid.Name = "cn_artid";
-            this.cn_artid.Width = 80;
-            // 
-            // cn_art
-            // 
-            this.cn_art.DataPropertyName = "Article";
-            this.cn_art.FillWeight = 150F;
-            this.cn_art.HeaderText = "Article name";
-            this.cn_art.Name = "cn_art";
-            this.cn_art.Width = 150;
-            // 
-            // btn_up
-            // 
-            this.btn_up.FillWeight = 25F;
-            this.btn_up.HeaderText = "";
-            this.btn_up.Name = "btn_up";
-            this.btn_up.Width = 25;
-            // 
-            // cn_secart
-            // 
-            this.cn_secart.DataPropertyName = "secname";
-            this.cn_secart.FillWeight = 120F;
-            this.cn_secart.HeaderText = "2nd name";
-            this.cn_secart.Name = "cn_secart";
-            this.cn_secart.Width = 120;
-            // 
-            // cn_analogs
-            // 
-            this.cn_analogs.DataPropertyName = "Analog";
-            this.cn_analogs.FillWeight = 125F;
-            this.cn_analogs.HeaderText = "Analogs";
-            this.cn_analogs.Name = "cn_analogs";
-            this.cn_analogs.Width = 125;
-            // 
-            // btn_Analogs
-            // 
-            this.btn_Analogs.FillWeight = 25F;
-            this.btn_Analogs.HeaderText = "";
-            this.btn_Analogs.Name = "btn_Analogs";
-            this.btn_Analogs.Width = 25;
-            // 
-            // cn_qty
-            // 
-            this.cn_qty.DataPropertyName = "Quantity";
-            this.cn_qty.FillWeight = 70F;
-            this.cn_qty.HeaderText = "Qty";
-            this.cn_qty.Name = "cn_qty";
-            this.cn_qty.Width = 70;
-            // 
-            // cn_unit
-            // 
-            this.cn_unit.DataPropertyName = "unit";
-            this.cn_unit.FillWeight = 40F;
-            this.cn_unit.HeaderText = "Unit";
-            this.cn_unit.Name = "cn_unit";
-            this.cn_unit.Width = 40;
-            // 
-            // cn_spoilperc
-            // 
-            this.cn_spoilperc.DataPropertyName = "SpoilNorm";
-            this.cn_spoilperc.FillWeight = 50F;
-            this.cn_spoilperc.HeaderText = "Spoil %";
-            this.cn_spoilperc.Name = "cn_spoilperc";
-            this.cn_spoilperc.Width = 50;
-            // 
-            // cn_spoilconst
-            // 
-            this.cn_spoilconst.DataPropertyName = "SpoilConst";
-            this.cn_spoilconst.FillWeight = 50F;
-            this.cn_spoilconst.HeaderText = "Spoil (const)";
-            this.cn_spoilconst.Name = "cn_spoilconst";
-            this.cn_spoilconst.Width = 50;
-            // 
-            // cn_comments
-            // 
-            this.cn_comments.DataPropertyName = "Comments";
-            this.cn_comments.FillWeight = 150F;
-            this.cn_comments.HeaderText = "Comments";
-            this.cn_comments.Name = "cn_comments";
-            this.cn_comments.Width = 150;
-            // 
-            // cn_using
-            // 
-            this.cn_using.DataPropertyName = "Using";
-            this.cn_using.FalseValue = "0";
-            this.cn_using.FillWeight = 50F;
-            this.cn_using.HeaderText = "Usage";
-            this.cn_using.IndeterminateValue = "1";
-            this.cn_using.Name = "cn_using";
-            this.cn_using.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.cn_using.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.cn_using.TrueValue = "-1";
-            this.cn_using.Width = 50;
-            // 
-            // cn_who
-            // 
-            this.cn_who.DataPropertyName = "CreatedBy";
-            this.cn_who.HeaderText = "Who";
-            this.cn_who.Name = "cn_who";
-            // 
-            // cn_when
-            // 
-            this.cn_when.DataPropertyName = "DateCreation";
-            this.cn_when.HeaderText = "When";
-            this.cn_when.Name = "cn_when";
-            // 
-            // cn_id
-            // 
-            this.cn_id.DataPropertyName = "ID";
-            this.cn_id.FillWeight = 5F;
-            this.cn_id.HeaderText = "id";
-            this.cn_id.Name = "cn_id";
-            this.cn_id.Visible = false;
-            this.cn_id.Width = 5;
-            // 
-            // cn_ciscse
-            // 
-            this.cn_ciscse.DataPropertyName = "CpseMark";
-            this.cn_ciscse.FillWeight = 50F;
-            this.cn_ciscse.HeaderText = "IsCSE";
-            this.cn_ciscse.Name = "cn_ciscse";
-            this.cn_ciscse.Visible = false;
-            this.cn_ciscse.Width = 50;
-            // 
-            // cn_stage
-            // 
-            this.cn_stage.DataPropertyName = "stage";
-            this.cn_stage.HeaderText = "Stage";
-            this.cn_stage.Name = "cn_stage";
-            // 
-            // cn_isvalidated
-            // 
-            this.cn_isvalidated.DataPropertyName = "isvalidated";
-            this.cn_isvalidated.HeaderText = "Is validated";
-            this.cn_isvalidated.Name = "cn_isvalidated";
-            this.cn_isvalidated.Visible = false;
-            // 
-            // cn_validat
-            // 
-            this.cn_validat.DataPropertyName = "DateValidation";
-            this.cn_validat.HeaderText = "Valid. at.";
-            this.cn_validat.Name = "cn_validat";
-            this.cn_validat.Visible = false;
-            // 
-            // cn_lastchange
-            // 
-            this.cn_lastchange.DataPropertyName = "DateLastChanges";
-            this.cn_lastchange.HeaderText = "Last change";
-            this.cn_lastchange.Name = "cn_lastchange";
-            this.cn_lastchange.Visible = false;
-            // 
-            // cn_StageID
-            // 
-            this.cn_StageID.DataPropertyName = "stageid";
-            this.cn_StageID.HeaderText = "StageID";
-            this.cn_StageID.Name = "cn_StageID";
-            this.cn_StageID.Visible = false;
-            // 
-            // cn_isactive
-            // 
-            this.cn_isactive.DataPropertyName = "isactive";
-            this.cn_isactive.HeaderText = "is active";
-            this.cn_isactive.Name = "cn_isactive";
-            this.cn_isactive.Visible = false;
-            // 
-            // cn_positions
-            // 
-            this.cn_positions.DataPropertyName = "positions";
-            this.cn_positions.HeaderText = "Positions";
-            this.cn_positions.Name = "cn_positions";
-            // 
-            // cn_type
-            // 
-            this.cn_type.DataPropertyName = "type";
-            this.cn_type.HeaderText = "Type";
-            this.cn_type.Name = "cn_type";
-            // 
-            // cn_typechange
-            // 
-            this.cn_typechange.DataPropertyName = "TypeChange";
-            this.cn_typechange.HeaderText = "typechange";
-            this.cn_typechange.Name = "cn_typechange";
-            this.cn_typechange.Visible = false;
-            // 
-            // cn_valanalog
-            // 
-            this.cn_valanalog.DataPropertyName = "ValAnalog";
-            this.cn_valanalog.HeaderText = "Valid. analogs";
-            this.cn_valanalog.Name = "cn_valanalog";
+            this.kryptonLabel5.Location = new System.Drawing.Point(10, 41);
+            this.kryptonLabel5.Name = "kryptonLabel5";
+            this.kryptonLabel5.Size = new System.Drawing.Size(72, 20);
+            this.kryptonLabel5.TabIndex = 55;
+            this.kryptonLabel5.Values.Text = "Comments:";
             // 
             // ctl_BOMSimple
             // 
@@ -1020,5 +1040,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_type;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_typechange;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_valanalog;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_Comments;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel5;
     }
 }

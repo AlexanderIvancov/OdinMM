@@ -130,6 +130,12 @@ namespace Odin.Register.Articles
             set { _previd = value; }
         }
 
+        public string Comments
+        {
+            get { return txt_Comments.Text; }
+            set { txt_Comments.Text = value; }
+        }
+
         #endregion
 
         #region Methods
@@ -372,9 +378,10 @@ namespace Odin.Register.Articles
         {
             SqlConnection conn = new SqlConnection(sConnStr);
             string strSQL = "select distinct nv.id, " +
-                                " nv.validat, " + 
-	                            " nv.validby, " +
-	                            " case nv.state when -1 then 'valid' else 'invalid' end as validstate " +
+                                " nv.validat, " +
+                                " nv.validby, " +
+                                " isnull(nv.comments, '') as comments, " +
+                                " case nv.state when -1 then 'valid' else 'invalid' end as validstate " +
                                 " from BAS_NomenclaturesValidation nv " +
                                 " where artid = " + ArtId.ToString();
 
@@ -398,6 +405,7 @@ namespace Odin.Register.Articles
                     ValidAt = dr["validat"].ToString();
                     ValidBy = dr["validby"].ToString();
                     ValidState = dr["validstate"].ToString();
+                    Comments = dr["comments"].ToString();
                 }
             }
             else
@@ -406,6 +414,7 @@ namespace Odin.Register.Articles
                 ValidAt = "";
                 ValidBy = "";
                 ValidState = "invalid";
+                Comments = "";
             }
         }
 
