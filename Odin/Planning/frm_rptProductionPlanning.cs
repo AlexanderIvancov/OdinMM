@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+﻿using System.Data;
 using System.Windows.Forms;
 using CrystalDecisions.CrystalReports.Engine;
-using CrystalDecisions.Windows.Forms;
 
 namespace Odin.Planning
 {
@@ -48,6 +41,7 @@ namespace Odin.Planning
             ReportDocument report = new ReportDocument();
 
             report.FileName = Application.StartupPath + "\\Planning\\" + "rpt_Plan2Weeks.rpt";
+            Global_Classes.DAL_Functions DAL = new Global_Classes.DAL_Functions();
 
 
 
@@ -64,8 +58,20 @@ namespace Odin.Planning
             report.Subreports["SubReport8"].Database.Tables[0].SetDataSource(data13);
             report.Subreports["SubReport9"].Database.Tables[0].SetDataSource(data14);
             report.Subreports["SubReport10"].Database.Tables[0].SetDataSource(data15);
+
             //report.Subreports["rsub_DeclTaxes.rpt"].Database.Tables[0].SetDataSource(datataxes);
             //report.Subreports["rsub_DeclOverheads.rpt"].Database.Tables[0].SetDataSource(dataoverheads);
+            var datalab = Global_Classes.DAL_Functions.getReportLabels("ProdPlanning2Weeks", DAL.UserLang);
+
+            foreach (DataRow row in datalab.Rows)
+            {
+                //MessageBox.Show(row["paramvalue"].ToString());
+                try
+                {
+                    report.SetParameterValue(row["paramname"].ToString(), row["paramvalue"].ToString());
+                }
+                catch { }
+            }
 
             ////parameters
             //report.SetParameterValue("Supplier", Supplier);

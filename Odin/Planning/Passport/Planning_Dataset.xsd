@@ -42,6 +42,23 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="dt_ProdPlanning" msprop:Generator_TableClassName="dt_ProdPlanningDataTable" msprop:Generator_TableVarName="tabledt_ProdPlanning" msprop:Generator_RowChangedName="dt_ProdPlanningRowChanged" msprop:Generator_TablePropName="dt_ProdPlanning" msprop:Generator_RowDeletingName="dt_ProdPlanningRowDeleting" msprop:Generator_RowChangingName="dt_ProdPlanningRowChanging" msprop:Generator_RowEvHandlerName="dt_ProdPlanningRowChangeEventHandler" msprop:Generator_RowDeletedName="dt_ProdPlanningRowDeleted" msprop:Generator_RowClassName="dt_ProdPlanningRow" msprop:Generator_UserTableName="dt_ProdPlanning" msprop:Generator_RowEvArgName="dt_ProdPlanningRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="wcount" msprop:Generator_ColumnVarNameInTable="columnwcount" msprop:Generator_ColumnPropNameInRow="wcount" msprop:Generator_ColumnPropNameInTable="wcountColumn" msprop:Generator_UserColumnName="wcount" type="xs:int" minOccurs="0" />
+              <xs:element name="wdatecount" msprop:Generator_ColumnVarNameInTable="columnwdatecount" msprop:Generator_ColumnPropNameInRow="wdatecount" msprop:Generator_ColumnPropNameInTable="wdatecountColumn" msprop:Generator_UserColumnName="wdatecount" type="xs:int" minOccurs="0" />
+              <xs:element name="weekday" msprop:Generator_ColumnVarNameInTable="columnweekday" msprop:Generator_ColumnPropNameInRow="weekday" msprop:Generator_ColumnPropNameInTable="weekdayColumn" msprop:Generator_UserColumnName="weekday" type="xs:string" minOccurs="0" />
+              <xs:element name="date" msprop:Generator_ColumnVarNameInTable="columndate" msprop:Generator_ColumnPropNameInRow="date" msprop:Generator_ColumnPropNameInTable="dateColumn" msprop:Generator_UserColumnName="date" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="batch" msprop:Generator_ColumnVarNameInTable="columnbatch" msprop:Generator_ColumnPropNameInRow="batch" msprop:Generator_ColumnPropNameInTable="batchColumn" msprop:Generator_UserColumnName="batch" type="xs:string" minOccurs="0" />
+              <xs:element name="qty" msprop:Generator_ColumnVarNameInTable="columnqty" msprop:Generator_ColumnPropNameInRow="qty" msprop:Generator_ColumnPropNameInTable="qtyColumn" msprop:Generator_UserColumnName="qty" type="xs:double" minOccurs="0" />
+              <xs:element name="product" msprop:Generator_ColumnVarNameInTable="columnproduct" msprop:Generator_ColumnPropNameInRow="product" msprop:Generator_ColumnPropNameInTable="productColumn" msprop:Generator_UserColumnName="product" type="xs:string" minOccurs="0" />
+              <xs:element name="isgreen" msprop:Generator_ColumnVarNameInTable="columnisgreen" msprop:Generator_ColumnPropNameInRow="isgreen" msprop:Generator_ColumnPropNameInTable="isgreenColumn" msprop:Generator_UserColumnName="isgreen" type="xs:int" minOccurs="0" />
+              <xs:element name="BatchLab" msprop:Generator_ColumnVarNameInTable="columnBatchLab" msprop:Generator_ColumnPropNameInRow="BatchLab" msprop:Generator_ColumnPropNameInTable="BatchLabColumn" msprop:Generator_UserColumnName="BatchLab" type="xs:string" minOccurs="0" />
+              <xs:element name="QtyLab" msprop:Generator_ColumnVarNameInTable="columnQtyLab" msprop:Generator_ColumnPropNameInRow="QtyLab" msprop:Generator_ColumnPropNameInTable="QtyLabColumn" msprop:Generator_UserColumnName="QtyLab" type="xs:string" minOccurs="0" />
+              <xs:element name="ProdLab" msprop:Generator_ColumnVarNameInTable="columnProdLab" msprop:Generator_ColumnPropNameInRow="ProdLab" msprop:Generator_ColumnPropNameInTable="ProdLabColumn" msprop:Generator_UserColumnName="ProdLab" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
   </xs:element>

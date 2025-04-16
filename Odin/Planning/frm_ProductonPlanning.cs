@@ -1490,6 +1490,9 @@ namespace Odin.Planning
             datadets.Columns.Add("qty", typeof(double));
             datadets.Columns.Add("product", typeof(string));
             datadets.Columns.Add("isgreen", typeof(int));
+            datadets.Columns.Add("BatchLab", typeof(string));
+            datadets.Columns.Add("QtyLab", typeof(string));
+            datadets.Columns.Add("ProdLab", typeof(string));
 
             //1st
             DateTime curdate = System.DateTime.Now;
@@ -1531,10 +1534,14 @@ namespace Odin.Planning
             }
 
             var dets = Plan_BLL.getProdPlanning2Weeks(FirstDate, cmb_Firms1.FirmId, IsActive, ProdPlaceId);
+            var datalab = DAL_Functions.getReportLabels("ProdPlanning2Weeks", DAL.UserLang);
 
             foreach (DataRow row in dets.Rows)
             {
                 DataRow dr = datadets.NewRow();
+                dr["BatchLab"] = Convert.ToString(datalab.Rows[2][2]);
+                dr["QtyLab"] = Convert.ToString(datalab.Rows[3][2]);
+                dr["ProdLab"] = Convert.ToString(datalab.Rows[4][2]);
                 dr["wcount"] = Convert.ToInt32(row["wcount"]);
                 dr["wdatecount"] = Convert.ToInt32(row["wdatecount"]);
                 dr["weekday"] = row["weekday"].ToString();
@@ -1546,7 +1553,6 @@ namespace Odin.Planning
                 datadets.Rows.Add(dr);
 
             }
-
             frm_rptProductionPlanning frm = new frm_rptProductionPlanning();
             frm.Week1 = DAL.WeekFromDate(FirstDate);
             frm.Week2 = DAL.WeekFromDate(Convert.ToDateTime(FirstDate).AddDays(7).ToString());
