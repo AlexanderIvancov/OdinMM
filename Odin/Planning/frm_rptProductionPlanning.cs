@@ -61,7 +61,7 @@ namespace Odin.Planning
 
             //report.Subreports["rsub_DeclTaxes.rpt"].Database.Tables[0].SetDataSource(datataxes);
             //report.Subreports["rsub_DeclOverheads.rpt"].Database.Tables[0].SetDataSource(dataoverheads);
-            var datalab = Global_Classes.DAL_Functions.getReportLabels("ProdPlanning2Weeks", DAL.UserLang);
+            var datalab = Global_Classes.DAL_Functions.getReportLabels("ProdPlanning2Weeks", "RUS"/*DAL.UserLang*/);
 
             foreach (DataRow row in datalab.Rows)
             {

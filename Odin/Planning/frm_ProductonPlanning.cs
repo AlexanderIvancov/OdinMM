@@ -1534,7 +1534,7 @@ namespace Odin.Planning
             }
 
             var dets = Plan_BLL.getProdPlanning2Weeks(FirstDate, cmb_Firms1.FirmId, IsActive, ProdPlaceId);
-            var datalab = DAL_Functions.getReportLabels("ProdPlanning2Weeks", DAL.UserLang);
+            var datalab = DAL_Functions.getReportLabels("ProdPlanning2Weeks", "RUS"/*DAL.UserLang*/);
 
             foreach (DataRow row in dets.Rows)
             {
