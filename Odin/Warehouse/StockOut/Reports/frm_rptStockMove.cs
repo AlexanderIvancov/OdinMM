@@ -244,22 +244,22 @@ namespace Odin.Warehouse.StockOut.Reports
             int i = 2;
             foreach (DataRow row in data.Rows)
             {
-                row["labels"] = "1)" + row["labels"].ToString();
+                row["labels"] = "1) " + row["labels"].ToString();
                 var match = Regex.Match(row["labels"].ToString(), @", \d\d");
-                int j = 0;
+                int j = -1;
                 while (true)
                 {
                     if (match == match.NextMatch()) break;
                     else
                     {
-                        j += i > 10 ? 3 : 2;
-                        row["labels"] = row["labels"].ToString().Insert(match.Index + j, $"{i})");
+                        j += i > 10 ? i > 100 ? 5 : 4 : 3;
+                        row["labels"] = row["labels"].ToString().Insert(match.Index + j, $"{i}) ");
                         match = match.NextMatch();
                     }
                     i++;
                 }
                 i = 2;
-                j = 0;
+                j = -1;
             }
 
             //data source
