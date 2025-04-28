@@ -392,7 +392,7 @@ namespace Odin.Warehouse.Requests.Controls
             }
             else
             {
-                MessageBox.Show("Please check empty requested date or usage code!");
+                MessageBox.Show("Please check empty requested date!");
             }
         }
 

@@ -72,12 +72,35 @@ namespace Odin.Warehouse.Requests
         public bool CheckEmpty()
         {
             bool _res = true;
-            if (cmb_Common1.SelectedValue == 0)
+            if (cmb_Common1.SelectedValue == 0
+                || CheckEmptyTest() == false)
                 _res = false;
+
+
 
             return _res;
 
         }
+
+        public bool CheckEmptyTest()
+        {
+            int _countempty = 0;
+            foreach (DataGridViewRow row in this.gv_List.Rows)
+            {
+                if (Convert.ToInt32(row.Cells["cn_id"].Value) == 0)
+                    _countempty++;
+            }
+
+            bool _res = true;
+            if (cmb_Common1.SelectedValue == 7
+                || _countempty == 0)
+                _res = false;
+            
+
+            return _res;
+
+        }
+
 
         public bool CheckMB()
         {
