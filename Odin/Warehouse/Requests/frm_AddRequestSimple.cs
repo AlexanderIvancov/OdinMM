@@ -73,7 +73,7 @@ namespace Odin.Warehouse.Requests
         {
             bool _res = true;
             if (cmb_Common1.SelectedValue == 0
-                || CheckEmptyTest() == false)
+                || CheckEmptyTest() == true)
                 _res = false;
 
 
