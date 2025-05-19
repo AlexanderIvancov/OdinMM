@@ -131,6 +131,8 @@ namespace Odin.Purchase
         { get; set; }
         public string POHeadComments
         { get; set; }
+        public string POHeadPayment
+        { get; set; }
         public string POHeadCreatAt
         { get; set; }
         public string POHeadCreatBy
@@ -219,6 +221,7 @@ namespace Odin.Purchase
                         POHeadCreatAt = dr["when"].ToString();
                         POHeadCreatBy = dr["userlogin"].ToString();
                         POHeadComments = dr["comments"].ToString();
+                        POHeadPayment = dr["payment"].ToString();
                         POHeadContract = dr["contract"].ToString();
                         POHeadCurId = Convert.ToInt32(dr["curid"]);
                         POHeadIncoterms = Convert.ToInt32(dr["incotermid"]);
@@ -260,6 +263,7 @@ namespace Odin.Purchase
             POHeadCreatAt = "";
             POHeadCreatBy = "";
             POHeadComments = "";
+            POHeadPayment = "";
             POHeadContract = "";
             POHeadCurId = 0;
             POHeadIncoterms = 0;

@@ -264,6 +264,7 @@ namespace Odin.CMB_Components.PurchaseOrders
                 frm.SupId = POBll.POHeadSupId;
                 frm.ContPersId = POBll.POHeadContPersId;
                 frm.Comments = POBll.POHeadComments;
+                frm.Payment = POBll.POHeadPayment;
                 frm.Contract = POBll.POHeadContract;
                 frm.IncotermsId = POBll.POHeadIncoterms;
                 frm.CurId = POBll.POHeadCurId;
