@@ -54,12 +54,17 @@
             this.buttonSpecAny2 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.btn_Cancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.kryptonLabel10 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.txt_Payment = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.buttonSpecAny4 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel10);
+            this.kryptonPanel1.Controls.Add(this.txt_Payment);
             this.kryptonPanel1.Controls.Add(this.chk_processing);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel9);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel8);
@@ -85,7 +90,7 @@
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonPanel1.Size = new System.Drawing.Size(391, 328);
+            this.kryptonPanel1.Size = new System.Drawing.Size(391, 347);
             this.kryptonPanel1.TabIndex = 1;
             // 
             // chk_processing
@@ -119,6 +124,7 @@
             this.cmb_Incoterms1.EnableSearchId = false;
             this.cmb_Incoterms1.IncotermId = 0;
             this.cmb_Incoterms1.Incoterms = "";
+            this.cmb_Incoterms1.IsEmptyColor = false;
             this.cmb_Incoterms1.Location = new System.Drawing.Point(289, 148);
             this.cmb_Incoterms1.Name = "cmb_Incoterms1";
             this.cmb_Incoterms1.Size = new System.Drawing.Size(90, 20);
@@ -136,7 +142,7 @@
             // 
             // kryptonLabel7
             // 
-            this.kryptonLabel7.Location = new System.Drawing.Point(12, 294);
+            this.kryptonLabel7.Location = new System.Drawing.Point(12, 320);
             this.kryptonLabel7.Name = "kryptonLabel7";
             this.kryptonLabel7.Size = new System.Drawing.Size(57, 20);
             this.kryptonLabel7.TabIndex = 39;
@@ -149,15 +155,16 @@
             this.cmb_Address1.DefaultDelivPlace = 0;
             this.cmb_Address1.EnableSearchId = false;
             this.cmb_Address1.FirmId = 0;
+            this.cmb_Address1.IsEmptyColor = false;
             this.cmb_Address1.LegalAddress = 0;
-            this.cmb_Address1.Location = new System.Drawing.Point(114, 294);
+            this.cmb_Address1.Location = new System.Drawing.Point(114, 320);
             this.cmb_Address1.Name = "cmb_Address1";
             this.cmb_Address1.Size = new System.Drawing.Size(265, 20);
             this.cmb_Address1.TabIndex = 38;
             // 
             // kryptonLabel6
             // 
-            this.kryptonLabel6.Location = new System.Drawing.Point(12, 268);
+            this.kryptonLabel6.Location = new System.Drawing.Point(12, 294);
             this.kryptonLabel6.Name = "kryptonLabel6";
             this.kryptonLabel6.Size = new System.Drawing.Size(75, 20);
             this.kryptonLabel6.TabIndex = 37;
@@ -173,9 +180,11 @@
             this.cmb_Firms2.EnableSearchId = false;
             this.cmb_Firms2.Firm = "";
             this.cmb_Firms2.FirmId = 0;
-            this.cmb_Firms2.Location = new System.Drawing.Point(114, 268);
+            this.cmb_Firms2.IsEmptyColor = false;
+            this.cmb_Firms2.Location = new System.Drawing.Point(114, 294);
             this.cmb_Firms2.Name = "cmb_Firms2";
             this.cmb_Firms2.Size = new System.Drawing.Size(204, 20);
+            this.cmb_Firms2.SupComments = null;
             this.cmb_Firms2.SupIncotermsId = 0;
             this.cmb_Firms2.TabIndex = 36;
             this.cmb_Firms2.VATNr = null;
@@ -196,7 +205,7 @@
             this.buttonSpecAny3});
             this.txt_Contract.Location = new System.Drawing.Point(114, 173);
             this.txt_Contract.Name = "txt_Contract";
-            this.txt_Contract.Size = new System.Drawing.Size(204, 20);
+            this.txt_Contract.Size = new System.Drawing.Size(204, 23);
             this.txt_Contract.TabIndex = 34;
             // 
             // buttonSpecAny3
@@ -207,7 +216,7 @@
             // 
             // kryptonLabel4
             // 
-            this.kryptonLabel4.Location = new System.Drawing.Point(12, 242);
+            this.kryptonLabel4.Location = new System.Drawing.Point(12, 268);
             this.kryptonLabel4.Name = "kryptonLabel4";
             this.kryptonLabel4.Size = new System.Drawing.Size(96, 20);
             this.kryptonLabel4.TabIndex = 33;
@@ -219,7 +228,7 @@
             this.cmb_ContactPersons1.ContPersId = 0;
             this.cmb_ContactPersons1.EnableSearchId = false;
             this.cmb_ContactPersons1.FirmId = 0;
-            this.cmb_ContactPersons1.Location = new System.Drawing.Point(114, 242);
+            this.cmb_ContactPersons1.Location = new System.Drawing.Point(114, 268);
             this.cmb_ContactPersons1.Name = "cmb_ContactPersons1";
             this.cmb_ContactPersons1.Size = new System.Drawing.Size(204, 20);
             this.cmb_ContactPersons1.TabIndex = 32;
@@ -242,9 +251,11 @@
             this.cmb_Firms1.EnableSearchId = false;
             this.cmb_Firms1.Firm = "";
             this.cmb_Firms1.FirmId = 0;
+            this.cmb_Firms1.IsEmptyColor = false;
             this.cmb_Firms1.Location = new System.Drawing.Point(114, 122);
             this.cmb_Firms1.Name = "cmb_Firms1";
             this.cmb_Firms1.Size = new System.Drawing.Size(204, 20);
+            this.cmb_Firms1.SupComments = null;
             this.cmb_Firms1.SupIncotermsId = 0;
             this.cmb_Firms1.TabIndex = 30;
             this.cmb_Firms1.VATNr = null;
@@ -257,7 +268,7 @@
             this.buttonSpecAny1});
             this.txt_PurchaseOrder.Location = new System.Drawing.Point(114, 96);
             this.txt_PurchaseOrder.Name = "txt_PurchaseOrder";
-            this.txt_PurchaseOrder.Size = new System.Drawing.Size(179, 20);
+            this.txt_PurchaseOrder.Size = new System.Drawing.Size(179, 23);
             this.txt_PurchaseOrder.TabIndex = 26;
             // 
             // buttonSpecAny1
@@ -268,7 +279,7 @@
             // 
             // kryptonLabel2
             // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(12, 199);
+            this.kryptonLabel2.Location = new System.Drawing.Point(12, 225);
             this.kryptonLabel2.Name = "kryptonLabel2";
             this.kryptonLabel2.Size = new System.Drawing.Size(72, 20);
             this.kryptonLabel2.TabIndex = 29;
@@ -287,7 +298,7 @@
             this.txt_Comments.AllowButtonSpecToolTips = true;
             this.txt_Comments.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
             this.buttonSpecAny2});
-            this.txt_Comments.Location = new System.Drawing.Point(114, 199);
+            this.txt_Comments.Location = new System.Drawing.Point(114, 225);
             this.txt_Comments.Multiline = true;
             this.txt_Comments.Name = "txt_Comments";
             this.txt_Comments.Size = new System.Drawing.Size(265, 37);
@@ -319,11 +330,34 @@
             this.btn_OK.Values.Image = global::Odin.Global_Resourses.Ok;
             this.btn_OK.Values.Text = "OK";
             // 
+            // kryptonLabel10
+            // 
+            this.kryptonLabel10.Location = new System.Drawing.Point(12, 199);
+            this.kryptonLabel10.Name = "kryptonLabel10";
+            this.kryptonLabel10.Size = new System.Drawing.Size(61, 20);
+            this.kryptonLabel10.TabIndex = 46;
+            this.kryptonLabel10.Values.Text = "Payment:";
+            // 
+            // kryptonTextBox1
+            // 
+            this.txt_Payment.AllowButtonSpecToolTips = true;
+            this.txt_Payment.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
+            this.buttonSpecAny4});
+            this.txt_Payment.Location = new System.Drawing.Point(114, 199);
+            this.txt_Payment.Name = "txt_Payment";
+            this.txt_Payment.Size = new System.Drawing.Size(204, 23);
+            this.txt_Payment.TabIndex = 45;
+            // 
+            // buttonSpecAny4
+            // 
+            this.buttonSpecAny4.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
+            this.buttonSpecAny4.UniqueName = "ECFB869BD7764A9C8F8EA2E658584FE7";
+            // 
             // frm_AddPurchaseOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(391, 328);
+            this.ClientSize = new System.Drawing.Size(391, 347);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -333,7 +367,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
@@ -364,5 +398,8 @@
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_Comments;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny2;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_processing;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel10;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_Payment;
+        private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny4;
     }
 }

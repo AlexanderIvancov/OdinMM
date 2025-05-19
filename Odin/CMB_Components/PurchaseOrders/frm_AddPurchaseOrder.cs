@@ -38,6 +38,12 @@ namespace Odin.CMB_Components.PurchaseOrders
             set { txt_Comments.Text = value; }
         }
 
+        public string Payment
+        {
+            get { return txt_Payment.Text; }
+            set { txt_Payment.Text = value; }
+        }
+
         public int SupId
         {
             get { return cmb_Firms1.FirmId; }

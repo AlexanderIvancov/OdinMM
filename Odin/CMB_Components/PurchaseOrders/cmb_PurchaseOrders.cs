@@ -232,7 +232,7 @@ namespace Odin.CMB_Components.PurchaseOrders
 
             if (result == DialogResult.OK)
             {
-                int _res = POBll.AddPurchaseOrderHead(frm.SupId, frm.ContPersId, frm.Comments, frm.Contract, frm.CurId, 
+                int _res = POBll.AddPurchaseOrderHead(frm.SupId, frm.ContPersId, frm.Comments, frm.Payment, frm.Contract, frm.CurId, 
                                                         frm.IncotermsId, frm.DelivPlaceId, frm.DelivAddressId, frm.InProcess);
 
                 PurchaseOrderId = _res;
@@ -278,7 +278,7 @@ namespace Odin.CMB_Components.PurchaseOrders
                 if (result == DialogResult.OK)
                 {
                     
-                    POBll.EditPurchaseOrderHead(_id, frm.SupId, frm.ContPersId, frm.Comments, frm.Contract,
+                    POBll.EditPurchaseOrderHead(_id, frm.SupId, frm.ContPersId, frm.Comments, frm.Payment, frm.Contract,
                                                 frm.CurId, frm.IncotermsId, frm.DelivPlaceId, frm.DelivAddressId,
                                                 frm.InProcess);
 

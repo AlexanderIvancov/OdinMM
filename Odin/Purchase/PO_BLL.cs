@@ -40,7 +40,7 @@ namespace Odin.Purchase
 
         #region Header
 
-        public int AddPurchaseOrderHead(int SupId, int ContPersonId, string Comments, string Contract, int CurId,
+        public int AddPurchaseOrderHead(int SupId, int ContPersonId, string Comments, string Payment, string Contract, int CurId,
                                         int IncotermId, int DelivPlaceId, int DelivAddressId, int InProcess)
         {
             int _res = 0;
@@ -53,6 +53,7 @@ namespace Odin.Purchase
             sqlComm.Parameters.AddWithValue("@SupId", SupId);
             sqlComm.Parameters.AddWithValue("@ContPersonId", ContPersonId);
             sqlComm.Parameters.AddWithValue("@Comments", Comments);
+            sqlComm.Parameters.AddWithValue("@Payment", Payment);
             sqlComm.Parameters.AddWithValue("@Contract", Contract);
             sqlComm.Parameters.AddWithValue("@CurId", CurId);
             sqlComm.Parameters.AddWithValue("@IncotermId", IncotermId);
@@ -73,7 +74,7 @@ namespace Odin.Purchase
             return _res;
         }
 
-        public void EditPurchaseOrderHead(int Id, int SupId, int ContPersonId, string Comments, string Contract, int CurId,
+        public void EditPurchaseOrderHead(int Id, int SupId, int ContPersonId, string Comments, string Payment, string Contract, int CurId,
                                             int IncotermId, int DelivPlaceId, int DelivAddressId, int InProcess)
         {
 
@@ -85,6 +86,7 @@ namespace Odin.Purchase
             sqlComm.Parameters.AddWithValue("@SupId", SupId);
             sqlComm.Parameters.AddWithValue("@ContPersonId", ContPersonId);
             sqlComm.Parameters.AddWithValue("@Comments", Comments);
+            sqlComm.Parameters.AddWithValue("@Payment", Payment);
             sqlComm.Parameters.AddWithValue("@Contract", Contract);
             sqlComm.Parameters.AddWithValue("@CurId", CurId);
             sqlComm.Parameters.AddWithValue("@IncotermId", IncotermId);

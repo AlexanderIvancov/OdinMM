@@ -106,7 +106,7 @@ namespace Odin.CMB_Components.PurchaseOrders
             if (result == DialogResult.OK)
             {
                 _showingModal = false;
-                int _res = POBll.AddPurchaseOrderHead(frm.SupId, frm.ContPersId, frm.Comments, frm.Contract, frm.CurId, 
+                int _res = POBll.AddPurchaseOrderHead(frm.SupId, frm.ContPersId, frm.Comments, frm.Payment, frm.Contract, frm.CurId, 
                                                     frm.IncotermsId, frm.DelivPlaceId, frm.DelivAddressId, frm.InProcess);
                 FillData(frm.PurchaseOrder);
                 ((cmb_PurchaseOrders)cmb_PurchaseOrderOne).PurchaseOrdersSendSave();
@@ -150,7 +150,7 @@ namespace Odin.CMB_Components.PurchaseOrders
                 if (result == DialogResult.OK)
                 {
                     _showingModal = false;
-                    POBll.EditPurchaseOrderHead(_id, frm.SupId, frm.ContPersId, frm.Comments, frm.Contract, 
+                    POBll.EditPurchaseOrderHead(_id, frm.SupId, frm.ContPersId, frm.Comments, frm.Payment, frm.Contract, 
                                                 frm.CurId, frm.IncotermsId, frm.DelivPlaceId, frm.DelivAddressId,
                                                 frm.InProcess);
                     FillData(frm.PurchaseOrder);
