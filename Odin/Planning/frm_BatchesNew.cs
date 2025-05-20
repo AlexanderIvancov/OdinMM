@@ -636,6 +636,10 @@ namespace Odin.Planning
                 frm.ctl_CreatBatchDetsP1.fOldUrgent = PlanBll.Urgent;
                 frm.ctl_CreatBatchDetsP1.ProjectId = PlanBll.BatchProjectId;
                 frm.ctl_CreatBatchDetsP1.Serials = PlanBll.BatchSerials;
+                frm.ctl_CreatBatchDetsP1.CopyTHT = PlanBll.BatchCopyTHT;
+                frm.ctl_CreatBatchDetsP1.CopyFTA = PlanBll.BatchCopyFTA;
+                frm.ctl_CreatBatchDetsP1.fOldCopyTHT = PlanBll.BatchCopyTHT;
+                frm.ctl_CreatBatchDetsP1.fOldCopyFTA = PlanBll.BatchCopyFTA;
 
                 //frm.ctl_CreatBatchDetsP1.FillExistedLines(_batchid);
 

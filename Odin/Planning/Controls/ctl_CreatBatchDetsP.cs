@@ -118,6 +118,10 @@ namespace Odin.Planning.Controls
         { get; set; }
         public int fOldUrgent
         { get; set; }
+        public int fOldCopyTHT
+        { get; set; }
+        public int fOldCopyFTA
+        { get; set; }
 
         public string Comments
         {
@@ -180,6 +184,42 @@ namespace Odin.Planning.Controls
             }
         }
 
+        public int CopyTHT
+        {
+            get
+            {
+                if (chk_CopyTHT.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
+            }
+            set
+            {
+                if (value == -1)
+                    chk_CopyTHT.Checked = true;
+                else
+                    chk_CopyTHT.Checked = false;
+            }
+        }
+
+        public int CopyFTA
+        {
+            get
+            {
+                if (chk_CopyFTA.CheckState == CheckState.Checked)
+                    return -1;
+                else
+                    return 0;
+            }
+            set
+            {
+                if (value == -1)
+                    chk_CopyFTA.Checked = true;
+                else
+                    chk_CopyFTA.Checked = false;
+            }
+        }
+
         public int _EditMode1 = 0; //-by default - new 
 
         public int _EditMode
@@ -218,6 +258,7 @@ namespace Odin.Planning.Controls
             }
             set { txt_PCB.Text = value.ToString(); }
         }
+
 
         #endregion
 
@@ -1047,7 +1088,7 @@ namespace Odin.Planning.Controls
                     else
                     {
                         //Creation of header of new batch
-                        int _id = PlanBll.AddBatchHeaderFromProject(ProjectId, ArticleId, QtyInBatch, StartDate, Comments, Urgent, Serials, 0);
+                        int _id = PlanBll.AddBatchHeaderFromProject(ProjectId, ArticleId, QtyInBatch, StartDate, Comments, Urgent, Serials, 0, CopyTHT, CopyFTA);
                         if (_id != 0)
                         {
                             DataTable datadets = new DataTable();
@@ -1120,10 +1161,12 @@ namespace Odin.Planning.Controls
                     if (ArticleId != fOldArticleId
                         || Comments != fOldComments
                         || StartDate != fOldStartDate
-                        || Urgent != fOldUrgent)
+                        || Urgent != fOldUrgent
+                        || fOldCopyFTA != CopyFTA
+                        || fOldCopyTHT != CopyTHT)
                     {
                         //Header
-                        PlanBll.EditBatchHeaderP(BatchId, ArticleId, StartDate, Comments, Urgent, Serials, 0);
+                        PlanBll.EditBatchHeaderP(BatchId, ArticleId, StartDate, Comments, Urgent, Serials, 0, CopyTHT, CopyFTA);
 
                     }
 

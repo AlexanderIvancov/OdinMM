@@ -32,6 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctl_CreatBatchDetsP));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.chk_CopyFTA = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
+            this.chk_CopyTHT = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
+            this.kryptonLabel12 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.lbl_Serial = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_Serial = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel11 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -116,6 +119,9 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.chk_CopyFTA);
+            this.kryptonPanel1.Controls.Add(this.chk_CopyTHT);
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel12);
             this.kryptonPanel1.Controls.Add(this.lbl_Serial);
             this.kryptonPanel1.Controls.Add(this.txt_Serial);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel11);
@@ -148,6 +154,30 @@
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
             this.kryptonPanel1.Size = new System.Drawing.Size(1296, 202);
             this.kryptonPanel1.TabIndex = 46;
+            // 
+            // chk_CopyFTA
+            // 
+            this.chk_CopyFTA.Location = new System.Drawing.Point(771, 144);
+            this.chk_CopyFTA.Name = "chk_CopyFTA";
+            this.chk_CopyFTA.Size = new System.Drawing.Size(44, 20);
+            this.chk_CopyFTA.TabIndex = 307;
+            this.chk_CopyFTA.Values.Text = "FTA";
+            // 
+            // chk_CopyTHT
+            // 
+            this.chk_CopyTHT.Location = new System.Drawing.Point(720, 144);
+            this.chk_CopyTHT.Name = "chk_CopyTHT";
+            this.chk_CopyTHT.Size = new System.Drawing.Size(45, 20);
+            this.chk_CopyTHT.TabIndex = 306;
+            this.chk_CopyTHT.Values.Text = "THT";
+            // 
+            // kryptonLabel12
+            // 
+            this.kryptonLabel12.Location = new System.Drawing.Point(624, 144);
+            this.kryptonLabel12.Name = "kryptonLabel12";
+            this.kryptonLabel12.Size = new System.Drawing.Size(87, 20);
+            this.kryptonLabel12.TabIndex = 305;
+            this.kryptonLabel12.Values.Text = "Multiply visas:";
             // 
             // lbl_Serial
             // 
@@ -1030,5 +1060,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_dnp;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lbl_Serial;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_Serial;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_CopyFTA;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_CopyTHT;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel12;
     }
 }
