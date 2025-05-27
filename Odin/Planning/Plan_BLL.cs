@@ -122,7 +122,7 @@ namespace Odin.Planning
             //catch { }
         }
 
-        public void EditBatchHeaderP(int BatchId, int ArtId, string ResDate, string Comments, int Urgent, string Serials, int ProdPlaceId)
+        public void EditBatchHeaderP(int BatchId, int ArtId, string ResDate, string Comments, int Urgent, string Serials, int ProdPlaceId, int copyvizatht, int copyvizafta)
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_editbatchheaderfromproject", sqlConn);
@@ -136,6 +136,8 @@ namespace Odin.Planning
             sqlComm.Parameters.AddWithValue("@Urgent", Urgent);
             sqlComm.Parameters.AddWithValue("@SerialNumbers", Serials);
             sqlComm.Parameters.AddWithValue("@ProdPlaceId", ProdPlaceId);
+            sqlComm.Parameters.AddWithValue("@copyvizatht", copyvizatht);
+            sqlComm.Parameters.AddWithValue("@copyvizafta", copyvizafta);
             //try
             //{
             sqlConn.Open();
@@ -529,6 +531,10 @@ namespace Odin.Planning
         { get; set; }
         public string lcomm
         { get; set; }
+        public int BatchCopyTHT
+        { get; set; }
+        public int BatchCopyFTA
+        { get; set; }
         public int BatchId
         {
             get { return _batchid; }
@@ -579,6 +585,10 @@ namespace Odin.Planning
                         BatchQuotId = Convert.ToInt32(dr["quotid"]);
                         BatchResDate = dr["resdate"].ToString();
                         BatchToFollow = Convert.ToInt32(dr["tofollow"]);
+                        BatchCopyTHT = Convert.ToInt32(dr["copyvizatht"]);
+                        BatchCopyFTA = Convert.ToInt32(dr["copyvizafta"]);
+                        BatchCopyTHT = 0;
+                        BatchCopyFTA = 0;
                     }
                 }
                 else
@@ -2173,7 +2183,7 @@ namespace Odin.Planning
             return Helper.QueryDT(query);
         }
 
-        public int AddBatchHeaderFromProject(int ProjectId, int ArtId, double Qty, string ResDate, string Comments, int Urgent, string Serials, int ProdPlaceId)
+        public int AddBatchHeaderFromProject(int ProjectId, int ArtId, double Qty, string ResDate, string Comments, int Urgent, string Serials, int ProdPlaceId, int copyvizatht, int copyvizafta)
         {
             int _res = 0;
             SqlConnection sqlConn = new SqlConnection(sConnStr);
@@ -2192,6 +2202,8 @@ namespace Odin.Planning
             sqlComm.Parameters.AddWithValue("@ProdPlaceId", ProdPlaceId);
             sqlComm.Parameters.Add("@insertedname", SqlDbType.NVarChar, 25).Direction = ParameterDirection.Output;
             sqlComm.Parameters.Add("@insertedid", SqlDbType.Int).Direction = ParameterDirection.Output;
+            sqlComm.Parameters.AddWithValue("@copyvizatht", copyvizatht);
+            sqlComm.Parameters.AddWithValue("@copyvizafta", copyvizafta);
             //try
             //{
             sqlConn.Open();
