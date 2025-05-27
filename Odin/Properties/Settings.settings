@@ -38,7 +38,7 @@
       <Value Profile="(Default)">Data Source=HOME\SQLEXPRESS;Initial Catalog=OdinDB;Integrated Security=True;Connect Timeout=3000</Value>
     </Setting>
     <Setting Name="SMTPAddress" Type="System.String" Scope="User">
-      <Value Profile="(Default)">mail.smd-baltic.lv</Value>
+      <Value Profile="(Default)">mail.micromount.by</Value>
     </Setting>
     <Setting Name="Printer_Port" Type="System.String" Scope="User">
       <Value Profile="(Default)">9100</Value>

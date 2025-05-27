@@ -80,7 +80,7 @@ namespace Odin.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("mail.smd-baltic.lv")]
+        [global::System.Configuration.DefaultSettingValueAttribute("mail.micromount.by")]
         public string SMTPAddress {
             get {
                 return ((string)(this["SMTPAddress"]));

@@ -164,7 +164,7 @@
             this.txt_SMTP.Name = "txt_SMTP";
             this.txt_SMTP.Size = new System.Drawing.Size(124, 20);
             this.txt_SMTP.TabIndex = 12;
-            this.txt_SMTP.Text = "mail.smd-baltic.lv";
+            this.txt_SMTP.Text = "mail.micromount.by";
             // 
             // button2
             // 
