@@ -55,7 +55,7 @@
             this.ctl_StockInEdit1.Producer = 0;
             this.ctl_StockInEdit1.Qty = 0D;
             this.ctl_StockInEdit1.Sender = 0;
-            this.ctl_StockInEdit1.Size = new System.Drawing.Size(642, 383);
+            this.ctl_StockInEdit1.Size = new System.Drawing.Size(642, 368);
             this.ctl_StockInEdit1.State = 0;
             this.ctl_StockInEdit1.StockMoveTypeId = 1;
             this.ctl_StockInEdit1.SupArticle = "";
@@ -76,7 +76,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(642, 383);
+            this.ClientSize = new System.Drawing.Size(642, 368);
             this.Controls.Add(this.ctl_StockInEdit1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
