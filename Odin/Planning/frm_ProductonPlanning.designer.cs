@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_ProductionPlanning));
             this.mnu_Lines = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mni_Comments = new System.Windows.Forms.ToolStripMenuItem();
+            this.mni_Holidays = new System.Windows.Forms.ToolStripMenuItem();
             this.mni_FilterFor = new System.Windows.Forms.ToolStripTextBox();
             this.mni_Search = new System.Windows.Forms.ToolStripMenuItem();
             this.mni_FilterBy = new System.Windows.Forms.ToolStripMenuItem();
@@ -194,7 +195,7 @@
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Cancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.mni_Holidays = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_SaveWeek = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.mnu_Lines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).BeginInit();
             this.mnu_LinesP.SuspendLayout();
@@ -250,7 +251,7 @@
             this.toolStripSeparator2,
             this.mni_Admin});
             this.mnu_Lines.Name = "mnu_Requests";
-            this.mnu_Lines.Size = new System.Drawing.Size(211, 233);
+            this.mnu_Lines.Size = new System.Drawing.Size(211, 211);
             this.mnu_Lines.Opening += new System.ComponentModel.CancelEventHandler(this.mnu_Lines_Opening);
             // 
             // mni_Comments
@@ -260,6 +261,14 @@
             this.mni_Comments.Size = new System.Drawing.Size(210, 22);
             this.mni_Comments.Text = "Add comments";
             this.mni_Comments.Click += new System.EventHandler(this.mni_Comments_Click);
+            // 
+            // mni_Holidays
+            // 
+            this.mni_Holidays.Image = global::Odin.Global_Resourses.IncludeCalendar;
+            this.mni_Holidays.Name = "mni_Holidays";
+            this.mni_Holidays.Size = new System.Drawing.Size(210, 22);
+            this.mni_Holidays.Text = "Mark as holiday";
+            this.mni_Holidays.Click += new System.EventHandler(this.mni_Holidays_Click);
             // 
             // mni_FilterFor
             // 
@@ -1537,6 +1546,7 @@
             // 
             // kryptonPanel2
             // 
+            this.kryptonPanel2.Controls.Add(this.btn_SaveWeek);
             this.kryptonPanel2.Controls.Add(this.kryptonButton1);
             this.kryptonPanel2.Controls.Add(this.kryptonLabel34);
             this.kryptonPanel2.Controls.Add(this.cmb_Common1);
@@ -1877,13 +1887,16 @@
             this.btn_Cancel.Values.Image = global::Odin.Global_Resourses.Cancel;
             this.btn_Cancel.Values.Text = "Cancel";
             // 
-            // mni_Holidays
+            // btn_SaveWeek
             // 
-            this.mni_Holidays.Image = global::Odin.Global_Resourses.IncludeCalendar;
-            this.mni_Holidays.Name = "mni_Holidays";
-            this.mni_Holidays.Size = new System.Drawing.Size(210, 22);
-            this.mni_Holidays.Text = "Mark as holiday";
-            this.mni_Holidays.Click += new System.EventHandler(this.mni_Holidays_Click);
+            this.btn_SaveWeek.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btn_SaveWeek.Location = new System.Drawing.Point(1198, 3);
+            this.btn_SaveWeek.Name = "btn_SaveWeek";
+            this.btn_SaveWeek.Size = new System.Drawing.Size(168, 39);
+            this.btn_SaveWeek.TabIndex = 296;
+            this.btn_SaveWeek.Values.Image = global::Odin.Global_Resourses.db_update;
+            this.btn_SaveWeek.Values.Text = "Save selected week";
+            this.btn_SaveWeek.Click += new System.EventHandler(this.btn_SaveWeek_Click);
             // 
             // frm_ProductionPlanning
             // 
@@ -2132,5 +2145,6 @@
         private System.Windows.Forms.ToolStripButton btn_Check;
         private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
         private System.Windows.Forms.ToolStripMenuItem mni_Holidays;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btn_SaveWeek;
     }
 }

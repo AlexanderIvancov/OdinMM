@@ -286,13 +286,13 @@ namespace Odin.Sales
                 {
                     cmb_SalesOrdersWithLines1.Enabled = false;
                     cmb_Articles1.Enabled = false;
-                    txt_Qty.Enabled = false;
+                   // txt_Qty.Enabled = false;
                 }
                 else
                 {
                     cmb_SalesOrdersWithLines1.Enabled = true;
                     cmb_Articles1.Enabled = true;
-                    txt_Qty.Enabled = true;
+                    //txt_Qty.Enabled = true;
                 }
                
                 Qty = COBll.InvQty;

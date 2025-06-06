@@ -2535,6 +2535,22 @@ namespace Odin.Planning
             sqlConn.Close();
         }
 
+        public void SaveProductionPlanningHistory(DataTable tableplanning)
+        {
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_SaveProductionPlanningHistory", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.Add("@tableplanning", SqlDbType.Structured);
+            sqlComm.Parameters["@tableplanning"].TypeName = "UT_BatchPlanning";
+            sqlComm.Parameters["@tableplanning"].Value = tableplanning;
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+        }
+
         public void EditProductionPlanning(int batchid, string date, string comments)
         {
 
@@ -2619,6 +2635,15 @@ namespace Odin.Planning
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
 
+        public int CheckProdWeek(string Week)
+        {
+
+            int _Res = 0;
+
+            _Res = Convert.ToInt32(Helper.GetOneRecord("select dbo.fn_CheckPlanStockWeek('" + Week + "')"));
+
+            return _Res;
+        }
 
         #endregion
     }

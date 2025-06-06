@@ -1849,5 +1849,67 @@ namespace Odin.Planning
                 }
             }
         }
+
+        private void btn_SaveWeek_Click(object sender, EventArgs e)
+        {
+            gv_List.EndEdit();
+            string _tmpweek = "";
+            btn_OK.Focus();
+
+            _tmpweek = gv_List.CurrentCell.OwningColumn.ToolTipText;
+
+            int _checkweek = PlanBll.CheckProdWeek(_tmpweek);
+
+
+            if (_tmpweek != ""
+               )
+            {
+                if (_checkweek == 0
+                || (_checkweek == -1 && glob_Class.MessageConfirm("Week saving", "Save for selected week exists! Are you sure you want to overwrite it?") == true))
+
+                {
+                    DataTable dataplanning = new DataTable();
+                    dataplanning.Columns.Add("batchid", typeof(int));
+                    dataplanning.Columns.Add("qty", typeof(double));
+                    dataplanning.Columns.Add("plandate", typeof(DateTime));
+                    dataplanning.Columns.Add("comments", typeof(string));
+
+                    foreach (DataGridViewRow row in this.gv_List.Rows)
+                    {
+                        foreach (DataGridViewCell cell in row.Cells)
+                        {
+                            if (cell.ColumnIndex > 13)
+                            {
+                                //MessageBox.Show(cell.OwningColumn.HeaderText);
+                                //try
+                                //{
+                                if (cell.OwningColumn.ToolTipText == _tmpweek &&
+                                    glob_Class.TextIsDate(cell.OwningColumn.HeaderText) == true)
+                                {
+
+                                    DataRow dr = dataplanning.NewRow();
+                                    dr["batchid"] = Convert.ToInt32(row.Cells["cn_batchid"].Value);
+                                    dr["qty"] = (cell.Value == null || cell.Value.ToString() == "") ? 0 : Convert.ToDouble(cell.Value);
+                                    dr["plandate"] = Convert.ToDateTime(cell.OwningColumn.HeaderText);
+                                    dr["comments"] = cell.ToolTipText;
+                                    dataplanning.Rows.Add(dr);
+
+                                }
+                                // }
+                                // catch { }
+                            }
+                        }
+
+                    }
+
+                    PlanBll.SaveProductionPlanningHistory(dataplanning);
+                }
+            }
+            else
+            {
+                glob_Class.ShowMessage("Warning!", "Please choose date for week to be saved!", "Please choose date for week to be saved!");
+            }
+        }
+    
     }
 }
