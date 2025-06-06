@@ -132,16 +132,15 @@
             this.kryptonPanel1.Controls.Add(this.kryptonLabel3);
             this.kryptonPanel1.Controls.Add(this.cmb_Articles1);
             this.kryptonPanel1.Controls.Add(this.btn_OK);
-            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonPanel1.Size = new System.Drawing.Size(643, 274);
+            this.kryptonPanel1.Size = new System.Drawing.Size(643, 367);
             this.kryptonPanel1.TabIndex = 1;
             // 
             // kryptonLabel30
             // 
-            this.kryptonLabel30.Location = new System.Drawing.Point(15, 250);
+            this.kryptonLabel30.Location = new System.Drawing.Point(15, 340);
             this.kryptonLabel30.Name = "kryptonLabel30";
             this.kryptonLabel30.Size = new System.Drawing.Size(69, 20);
             this.kryptonLabel30.TabIndex = 289;
@@ -151,7 +150,7 @@
             // 
             this.txt_DataCode.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
             this.buttonSpecAny3});
-            this.txt_DataCode.Location = new System.Drawing.Point(120, 250);
+            this.txt_DataCode.Location = new System.Drawing.Point(120, 340);
             this.txt_DataCode.Name = "txt_DataCode";
             this.txt_DataCode.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txt_DataCode.Size = new System.Drawing.Size(301, 23);
@@ -165,7 +164,7 @@
             // 
             // kryptonLabel5
             // 
-            this.kryptonLabel5.Location = new System.Drawing.Point(274, 119);
+            this.kryptonLabel5.Location = new System.Drawing.Point(274, 209);
             this.kryptonLabel5.Name = "kryptonLabel5";
             this.kryptonLabel5.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Silver;
             this.kryptonLabel5.Size = new System.Drawing.Size(62, 20);
@@ -177,14 +176,14 @@
             this.cmb_Countries2.Country = "";
             this.cmb_Countries2.CountryId = 0;
             this.cmb_Countries2.EnableSearchId = false;
-            this.cmb_Countries2.Location = new System.Drawing.Point(357, 120);
+            this.cmb_Countries2.Location = new System.Drawing.Point(357, 210);
             this.cmb_Countries2.Name = "cmb_Countries2";
             this.cmb_Countries2.Size = new System.Drawing.Size(116, 20);
             this.cmb_Countries2.TabIndex = 282;
             // 
             // kryptonLabel2
             // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(432, 62);
+            this.kryptonLabel2.Location = new System.Drawing.Point(438, 183);
             this.kryptonLabel2.Name = "kryptonLabel2";
             this.kryptonLabel2.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Silver;
             this.kryptonLabel2.Size = new System.Drawing.Size(96, 20);
@@ -197,7 +196,7 @@
             this.cmb_Countries1.Country = "";
             this.cmb_Countries1.CountryId = 0;
             this.cmb_Countries1.EnableSearchId = false;
-            this.cmb_Countries1.Location = new System.Drawing.Point(537, 62);
+            this.cmb_Countries1.Location = new System.Drawing.Point(543, 183);
             this.cmb_Countries1.Name = "cmb_Countries1";
             this.cmb_Countries1.Size = new System.Drawing.Size(87, 20);
             this.cmb_Countries1.TabIndex = 280;
@@ -215,11 +214,13 @@
             // cmb_IncomeDoc1
             // 
             this.cmb_IncomeDoc1.CurId = 0;
+            this.cmb_IncomeDoc1.DocDate = "";
             this.cmb_IncomeDoc1.Enabled = false;
             this.cmb_IncomeDoc1.EnableSearchId = false;
             this.cmb_IncomeDoc1.IncomeDoc = "";
             this.cmb_IncomeDoc1.IncomeDocId = 0;
             this.cmb_IncomeDoc1.IncomeDocSavedId = 0;
+            this.cmb_IncomeDoc1.IsBanned = -1;
             this.cmb_IncomeDoc1.Location = new System.Drawing.Point(120, 16);
             this.cmb_IncomeDoc1.Name = "cmb_IncomeDoc1";
             this.cmb_IncomeDoc1.Size = new System.Drawing.Size(198, 20);
@@ -228,7 +229,7 @@
             // 
             // kryptonLabel28
             // 
-            this.kryptonLabel28.Location = new System.Drawing.Point(481, 198);
+            this.kryptonLabel28.Location = new System.Drawing.Point(481, 288);
             this.kryptonLabel28.Name = "kryptonLabel28";
             this.kryptonLabel28.Size = new System.Drawing.Size(74, 20);
             this.kryptonLabel28.TabIndex = 277;
@@ -238,7 +239,7 @@
             // 
             this.txt_Weight.AllowDecimalSeparator = true;
             this.txt_Weight.AllowSpace = false;
-            this.txt_Weight.Location = new System.Drawing.Point(559, 198);
+            this.txt_Weight.Location = new System.Drawing.Point(559, 288);
             this.txt_Weight.Name = "txt_Weight";
             this.txt_Weight.Size = new System.Drawing.Size(71, 23);
             this.txt_Weight.TabIndex = 276;
@@ -246,7 +247,7 @@
             // 
             // kryptonLabel27
             // 
-            this.kryptonLabel27.Location = new System.Drawing.Point(15, 93);
+            this.kryptonLabel27.Location = new System.Drawing.Point(15, 183);
             this.kryptonLabel27.Name = "kryptonLabel27";
             this.kryptonLabel27.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Silver;
             this.kryptonLabel27.Size = new System.Drawing.Size(68, 20);
@@ -256,7 +257,7 @@
             // cmb_StockInTypes1
             // 
             this.cmb_StockInTypes1.Lang = "ENG";
-            this.cmb_StockInTypes1.Location = new System.Drawing.Point(120, 93);
+            this.cmb_StockInTypes1.Location = new System.Drawing.Point(120, 183);
             this.cmb_StockInTypes1.MovType = 1;
             this.cmb_StockInTypes1.Name = "cmb_StockInTypes1";
             this.cmb_StockInTypes1.Size = new System.Drawing.Size(195, 20);
@@ -267,7 +268,7 @@
             // 
             // kryptonLabel26
             // 
-            this.kryptonLabel26.Location = new System.Drawing.Point(481, 120);
+            this.kryptonLabel26.Location = new System.Drawing.Point(481, 210);
             this.kryptonLabel26.Name = "kryptonLabel26";
             this.kryptonLabel26.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Silver;
             this.kryptonLabel26.Size = new System.Drawing.Size(43, 20);
@@ -290,7 +291,7 @@
             this.cmb_Batches1.IsGroup = 0;
             this.cmb_Batches1.IsProject = 0;
             this.cmb_Batches1.IsQuote = 0;
-            this.cmb_Batches1.Location = new System.Drawing.Point(531, 120);
+            this.cmb_Batches1.Location = new System.Drawing.Point(531, 210);
             this.cmb_Batches1.Name = "cmb_Batches1";
             this.cmb_Batches1.ParentBatchId = 0;
             this.cmb_Batches1.Qty = 0D;
@@ -304,7 +305,7 @@
             // 
             // kryptonLabel22
             // 
-            this.kryptonLabel22.Location = new System.Drawing.Point(15, 120);
+            this.kryptonLabel22.Location = new System.Drawing.Point(15, 210);
             this.kryptonLabel22.Name = "kryptonLabel22";
             this.kryptonLabel22.Size = new System.Drawing.Size(85, 20);
             this.kryptonLabel22.TabIndex = 271;
@@ -315,14 +316,14 @@
             this.cmb_CustCodes1.CustCode = "";
             this.cmb_CustCodes1.CustCodeId = 0;
             this.cmb_CustCodes1.EnableSearchId = false;
-            this.cmb_CustCodes1.Location = new System.Drawing.Point(120, 120);
+            this.cmb_CustCodes1.Location = new System.Drawing.Point(120, 210);
             this.cmb_CustCodes1.Name = "cmb_CustCodes1";
             this.cmb_CustCodes1.Size = new System.Drawing.Size(141, 20);
             this.cmb_CustCodes1.TabIndex = 270;
             // 
             // kryptonLabel17
             // 
-            this.kryptonLabel17.Location = new System.Drawing.Point(15, 224);
+            this.kryptonLabel17.Location = new System.Drawing.Point(15, 314);
             this.kryptonLabel17.Name = "kryptonLabel17";
             this.kryptonLabel17.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Silver;
             this.kryptonLabel17.Size = new System.Drawing.Size(72, 20);
@@ -333,7 +334,7 @@
             // 
             this.txt_Comments.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
             this.buttonSpecAny4});
-            this.txt_Comments.Location = new System.Drawing.Point(120, 224);
+            this.txt_Comments.Location = new System.Drawing.Point(120, 314);
             this.txt_Comments.Name = "txt_Comments";
             this.txt_Comments.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txt_Comments.Size = new System.Drawing.Size(510, 23);
@@ -346,7 +347,7 @@
             // 
             // kryptonLabel25
             // 
-            this.kryptonLabel25.Location = new System.Drawing.Point(324, 198);
+            this.kryptonLabel25.Location = new System.Drawing.Point(324, 288);
             this.kryptonLabel25.Name = "kryptonLabel25";
             this.kryptonLabel25.Size = new System.Drawing.Size(71, 20);
             this.kryptonLabel25.TabIndex = 263;
@@ -356,7 +357,7 @@
             // 
             this.txt_TotalVAT.AllowDecimalSeparator = true;
             this.txt_TotalVAT.AllowSpace = false;
-            this.txt_TotalVAT.Location = new System.Drawing.Point(257, 198);
+            this.txt_TotalVAT.Location = new System.Drawing.Point(257, 288);
             this.txt_TotalVAT.Name = "txt_TotalVAT";
             this.txt_TotalVAT.Size = new System.Drawing.Size(61, 23);
             this.txt_TotalVAT.StateActive.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
@@ -365,7 +366,7 @@
             // 
             // kryptonLabel24
             // 
-            this.kryptonLabel24.Location = new System.Drawing.Point(189, 198);
+            this.kryptonLabel24.Location = new System.Drawing.Point(189, 288);
             this.kryptonLabel24.Name = "kryptonLabel24";
             this.kryptonLabel24.Size = new System.Drawing.Size(62, 20);
             this.kryptonLabel24.TabIndex = 261;
@@ -375,7 +376,7 @@
             // 
             this.txt_TotalWVAT.AllowDecimalSeparator = true;
             this.txt_TotalWVAT.AllowSpace = false;
-            this.txt_TotalWVAT.Location = new System.Drawing.Point(412, 198);
+            this.txt_TotalWVAT.Location = new System.Drawing.Point(412, 288);
             this.txt_TotalWVAT.Name = "txt_TotalWVAT";
             this.txt_TotalWVAT.Size = new System.Drawing.Size(61, 23);
             this.txt_TotalWVAT.StateActive.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
@@ -384,7 +385,7 @@
             // 
             // kryptonLabel23
             // 
-            this.kryptonLabel23.Location = new System.Drawing.Point(15, 198);
+            this.kryptonLabel23.Location = new System.Drawing.Point(15, 288);
             this.kryptonLabel23.Name = "kryptonLabel23";
             this.kryptonLabel23.Size = new System.Drawing.Size(40, 20);
             this.kryptonLabel23.TabIndex = 259;
@@ -394,7 +395,7 @@
             // 
             this.txt_Total.AllowDecimalSeparator = true;
             this.txt_Total.AllowSpace = false;
-            this.txt_Total.Location = new System.Drawing.Point(120, 198);
+            this.txt_Total.Location = new System.Drawing.Point(120, 288);
             this.txt_Total.Name = "txt_Total";
             this.txt_Total.Size = new System.Drawing.Size(63, 23);
             this.txt_Total.TabIndex = 14;
@@ -403,7 +404,7 @@
             // 
             // kryptonLabel18
             // 
-            this.kryptonLabel18.Location = new System.Drawing.Point(480, 172);
+            this.kryptonLabel18.Location = new System.Drawing.Point(480, 262);
             this.kryptonLabel18.Name = "kryptonLabel18";
             this.kryptonLabel18.Size = new System.Drawing.Size(70, 20);
             this.kryptonLabel18.TabIndex = 239;
@@ -413,7 +414,7 @@
             // 
             this.txt_PriceWVat.AllowDecimalSeparator = true;
             this.txt_PriceWVat.AllowSpace = false;
-            this.txt_PriceWVat.Location = new System.Drawing.Point(559, 172);
+            this.txt_PriceWVat.Location = new System.Drawing.Point(559, 262);
             this.txt_PriceWVat.Name = "txt_PriceWVat";
             this.txt_PriceWVat.Size = new System.Drawing.Size(71, 23);
             this.txt_PriceWVat.TabIndex = 12;
@@ -421,7 +422,7 @@
             // 
             // kryptonLabel14
             // 
-            this.kryptonLabel14.Location = new System.Drawing.Point(15, 172);
+            this.kryptonLabel14.Location = new System.Drawing.Point(15, 262);
             this.kryptonLabel14.Name = "kryptonLabel14";
             this.kryptonLabel14.Size = new System.Drawing.Size(66, 20);
             this.kryptonLabel14.TabIndex = 237;
@@ -431,7 +432,7 @@
             // 
             this.txt_UnitPrice.AllowDecimalSeparator = true;
             this.txt_UnitPrice.AllowSpace = false;
-            this.txt_UnitPrice.Location = new System.Drawing.Point(120, 172);
+            this.txt_UnitPrice.Location = new System.Drawing.Point(120, 262);
             this.txt_UnitPrice.Name = "txt_UnitPrice";
             this.txt_UnitPrice.Size = new System.Drawing.Size(63, 21);
             this.txt_UnitPrice.StateActive.Back.Color1 = System.Drawing.Color.White;
@@ -442,7 +443,7 @@
             // 
             // kryptonLabel11
             // 
-            this.kryptonLabel11.Location = new System.Drawing.Point(189, 173);
+            this.kryptonLabel11.Location = new System.Drawing.Point(189, 263);
             this.kryptonLabel11.Name = "kryptonLabel11";
             this.kryptonLabel11.Size = new System.Drawing.Size(79, 20);
             this.kryptonLabel11.TabIndex = 235;
@@ -453,7 +454,7 @@
             // 
             this.txt_Disc.AllowDecimalSeparator = true;
             this.txt_Disc.AllowSpace = false;
-            this.txt_Disc.Location = new System.Drawing.Point(274, 172);
+            this.txt_Disc.Location = new System.Drawing.Point(274, 262);
             this.txt_Disc.Name = "txt_Disc";
             this.txt_Disc.Size = new System.Drawing.Size(44, 23);
             this.txt_Disc.TabIndex = 13;
@@ -461,19 +462,19 @@
             this.txt_Disc.Visible = false;
             this.txt_Disc.TextChanged += new System.EventHandler(this.txt_Disc_TextChanged);
             // 
-            // kryptonLabel11
+            // kryptonLabel31
             // 
-            this.kryptonLabel31.Location = new System.Drawing.Point(189, 173);
+            this.kryptonLabel31.Location = new System.Drawing.Point(189, 263);
             this.kryptonLabel31.Name = "kryptonLabel31";
-            this.kryptonLabel31.Size = new System.Drawing.Size(79, 20);
+            this.kryptonLabel31.Size = new System.Drawing.Size(61, 20);
             this.kryptonLabel31.TabIndex = 235;
             this.kryptonLabel31.Values.Text = "Dutycost:";
             // 
-            // txt_Disc
+            // txt_Dutycost
             // 
             this.txt_Dutycost.AllowDecimalSeparator = true;
             this.txt_Dutycost.AllowSpace = false;
-            this.txt_Dutycost.Location = new System.Drawing.Point(274, 172);
+            this.txt_Dutycost.Location = new System.Drawing.Point(274, 262);
             this.txt_Dutycost.Name = "txt_Dutycost";
             this.txt_Dutycost.Size = new System.Drawing.Size(44, 23);
             this.txt_Dutycost.TabIndex = 13;
@@ -482,7 +483,7 @@
             // 
             // kryptonLabel12
             // 
-            this.kryptonLabel12.Location = new System.Drawing.Point(324, 173);
+            this.kryptonLabel12.Location = new System.Drawing.Point(324, 263);
             this.kryptonLabel12.Name = "kryptonLabel12";
             this.kryptonLabel12.Size = new System.Drawing.Size(56, 20);
             this.kryptonLabel12.TabIndex = 233;
@@ -492,7 +493,7 @@
             // 
             this.txt_Vat.AllowDecimalSeparator = true;
             this.txt_Vat.AllowSpace = false;
-            this.txt_Vat.Location = new System.Drawing.Point(412, 173);
+            this.txt_Vat.Location = new System.Drawing.Point(412, 263);
             this.txt_Vat.Name = "txt_Vat";
             this.txt_Vat.Size = new System.Drawing.Size(61, 23);
             this.txt_Vat.TabIndex = 11;
@@ -500,7 +501,7 @@
             // 
             // kryptonLabel10
             // 
-            this.kryptonLabel10.Location = new System.Drawing.Point(479, 145);
+            this.kryptonLabel10.Location = new System.Drawing.Point(479, 235);
             this.kryptonLabel10.Name = "kryptonLabel10";
             this.kryptonLabel10.Size = new System.Drawing.Size(74, 20);
             this.kryptonLabel10.TabIndex = 225;
@@ -508,7 +509,7 @@
             // 
             // kryptonLabel6
             // 
-            this.kryptonLabel6.Location = new System.Drawing.Point(324, 146);
+            this.kryptonLabel6.Location = new System.Drawing.Point(324, 236);
             this.kryptonLabel6.Name = "kryptonLabel6";
             this.kryptonLabel6.Size = new System.Drawing.Size(73, 20);
             this.kryptonLabel6.TabIndex = 224;
@@ -518,7 +519,7 @@
             // 
             this.txt_Multiplicity.AllowDecimalSeparator = true;
             this.txt_Multiplicity.AllowSpace = false;
-            this.txt_Multiplicity.Location = new System.Drawing.Point(559, 146);
+            this.txt_Multiplicity.Location = new System.Drawing.Point(559, 236);
             this.txt_Multiplicity.Name = "txt_Multiplicity";
             this.txt_Multiplicity.Size = new System.Drawing.Size(71, 23);
             this.txt_Multiplicity.TabIndex = 9;
@@ -529,7 +530,7 @@
             // 
             this.txt_CoefConv.AllowDecimalSeparator = true;
             this.txt_CoefConv.AllowSpace = false;
-            this.txt_CoefConv.Location = new System.Drawing.Point(412, 146);
+            this.txt_CoefConv.Location = new System.Drawing.Point(412, 236);
             this.txt_CoefConv.Name = "txt_CoefConv";
             this.txt_CoefConv.Size = new System.Drawing.Size(61, 23);
             this.txt_CoefConv.TabIndex = 8;
@@ -538,7 +539,7 @@
             // 
             // kryptonLabel8
             // 
-            this.kryptonLabel8.Location = new System.Drawing.Point(189, 146);
+            this.kryptonLabel8.Location = new System.Drawing.Point(189, 236);
             this.kryptonLabel8.Name = "kryptonLabel8";
             this.kryptonLabel8.Size = new System.Drawing.Size(36, 20);
             this.kryptonLabel8.TabIndex = 221;
@@ -547,7 +548,7 @@
             // cmb_Units1
             // 
             this.cmb_Units1.EnableSearchId = false;
-            this.cmb_Units1.Location = new System.Drawing.Point(231, 146);
+            this.cmb_Units1.Location = new System.Drawing.Point(231, 236);
             this.cmb_Units1.Name = "cmb_Units1";
             this.cmb_Units1.Size = new System.Drawing.Size(87, 20);
             this.cmb_Units1.TabIndex = 7;
@@ -556,7 +557,7 @@
             // 
             // kryptonLabel7
             // 
-            this.kryptonLabel7.Location = new System.Drawing.Point(15, 146);
+            this.kryptonLabel7.Location = new System.Drawing.Point(15, 236);
             this.kryptonLabel7.Name = "kryptonLabel7";
             this.kryptonLabel7.Size = new System.Drawing.Size(60, 20);
             this.kryptonLabel7.TabIndex = 219;
@@ -566,7 +567,7 @@
             // 
             this.txt_Qty.AllowDecimalSeparator = true;
             this.txt_Qty.AllowSpace = false;
-            this.txt_Qty.Location = new System.Drawing.Point(120, 145);
+            this.txt_Qty.Location = new System.Drawing.Point(120, 235);
             this.txt_Qty.Name = "txt_Qty";
             this.txt_Qty.Size = new System.Drawing.Size(63, 21);
             this.txt_Qty.StateActive.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -587,9 +588,11 @@
             // 
             this.txt_SupArticle.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
             this.buttonSpecAny1});
+            this.txt_SupArticle.InputControlStyle = ComponentFactory.Krypton.Toolkit.InputControlStyle.Custom1;
             this.txt_SupArticle.Location = new System.Drawing.Point(120, 67);
+            this.txt_SupArticle.Multiline = true;
             this.txt_SupArticle.Name = "txt_SupArticle";
-            this.txt_SupArticle.Size = new System.Drawing.Size(272, 23);
+            this.txt_SupArticle.Size = new System.Drawing.Size(510, 110);
             this.txt_SupArticle.TabIndex = 3;
             // 
             // buttonSpecAny1
@@ -620,6 +623,7 @@
             this.cmb_Articles1.DeptId = 0;
             this.cmb_Articles1.Description = null;
             this.cmb_Articles1.IsActive = -1;
+            this.cmb_Articles1.IsCertified = -1;
             this.cmb_Articles1.IsPF = 0;
             this.cmb_Articles1.Location = new System.Drawing.Point(120, 42);
             this.cmb_Articles1.Manufacturer = "";
@@ -661,11 +665,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.kryptonPanel1);
             this.Name = "ctl_StockInEdit";
-            this.Size = new System.Drawing.Size(643, 274);
+            this.Size = new System.Drawing.Size(643, 366);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
