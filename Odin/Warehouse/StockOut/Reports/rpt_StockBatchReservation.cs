@@ -98,7 +98,7 @@ namespace Odin.Warehouse.StockOut.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section ReportHeaderSection11 {
+        public CrystalDecisions.CrystalReports.Engine.Section ReportHeaderSection7 {
             get {
                 return this.ReportDefinition.Sections[6];
             }
@@ -106,7 +106,7 @@ namespace Odin.Warehouse.StockOut.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section ReportHeaderSection7 {
+        public CrystalDecisions.CrystalReports.Engine.Section ReportHeaderSection11 {
             get {
                 return this.ReportDefinition.Sections[7];
             }

@@ -167,10 +167,10 @@ namespace Odin.Warehouse.StockOut.Reports
             //
             DataTable data = new DataTable();
             data = StockMove_BLL.getStockMoveBatchesPrint(BatchId, StageId);
-            int i = 2;
+            int i = 3;
             foreach (DataRow row in data.Rows)
             {
-                row["labels"] = "1)" + row["labels"].ToString().Replace(", ", $", {i})"); i++;
+                row["labels"] = "1) " + row["labels"].ToString().Replace(", ", $", {i}) "); i++;
             }
             i = 2;
             //data source
