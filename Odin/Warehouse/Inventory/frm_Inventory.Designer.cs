@@ -117,6 +117,7 @@
             this.cn_manufbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_suparticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_expdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_MSL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).BeginInit();
             this.mnu_Lines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
@@ -510,6 +511,7 @@
             this.cmb_Articles1.DeptId = 0;
             this.cmb_Articles1.Description = null;
             this.cmb_Articles1.IsActive = -1;
+            this.cmb_Articles1.IsCertified = -1;
             this.cmb_Articles1.IsPF = 0;
             this.cmb_Articles1.Location = new System.Drawing.Point(10, 104);
             this.cmb_Articles1.Manufacturer = "";
@@ -642,7 +644,8 @@
             this.cn_sn,
             this.cn_manufbatch,
             this.cn_suparticle,
-            this.cn_expdate});
+            this.cn_expdate,
+            this.cn_MSL});
             this.gv_List.ContextMenuStrip = this.mnu_Lines;
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_List.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
@@ -1034,6 +1037,12 @@
             this.cn_expdate.HeaderText = "Exp. date";
             this.cn_expdate.Name = "cn_expdate";
             // 
+            // cn_MSL
+            // 
+            this.cn_MSL.DataPropertyName = "MSL";
+            this.cn_MSL.HeaderText = "MSL";
+            this.cn_MSL.Name = "cn_MSL";
+            // 
             // frm_Inventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1162,5 +1171,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_manufbatch;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_suparticle;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_expdate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_MSL;
     }
 }
