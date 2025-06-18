@@ -1094,69 +1094,80 @@ namespace Odin.Warehouse.StockIn
         private void txt_Oper_KeyPress(object sender, KeyPressEventArgs e)
         {
             //int _tmpartid = 0;
-
-            if (e.KeyChar == (char)Keys.Enter
-                && chk_scanbox.Checked == true)
+            
+            if (cmb_Batches1.IsActive == -1)
             {
-                databoxes.Clear();
-                if (txt_Oper.Text.Substring(0, 1) == "B")
+                if (e.KeyChar == (char)Keys.Enter
+                    && chk_scanbox.Checked == true)
                 {
-                    bool _check = Int32.TryParse(txt_Oper.Text.Substring(1), out ReadValue);
-                    //PackingId = ReadValue;
-                    if (_check == true)
+                    databoxes.Clear();
+                    if (txt_Oper.Text.Substring(0, 1) == "B")
                     {
-                        SqlConnection conn = new SqlConnection(sConnStr);
-                        conn.Open();
-                        DataSet ds = new DataSet();
-
-                        SqlDataAdapter adapter =
-                            new SqlDataAdapter(
-                                "select top 1 isnull(bmain.id, dl.batchid) as batchid, dl.qty, isnull(bchild.artid, bmain.artid) as artid from sto_delivpackmapping dl " +
-                                            "inner join PROD_BatchHead bchild on bchild.id = dl.batchid " +
-                                            "left join PROD_BatchHead bmain on bmain.id = bchild.groupid " +
-                                            "where packid = " + ReadValue + " and isnull(inid, 0) = 0 and isnull(delivid, 0) = 0", conn);
-
-                        adapter.Fill(ds);
-
-                        DataTable dt = ds.Tables[0];
-
-                        if (dt.Rows.Count > 0)
+                        bool _check = Int32.TryParse(txt_Oper.Text.Substring(1), out ReadValue);
+                        //PackingId = ReadValue;
+                        if (_check == true)
                         {
-                            BatchId = Convert.ToInt32(dt.Rows[0]["batchid"]);
-                            ArticleId = Convert.ToInt32(dt.Rows[0]["artid"]);
-                            DataRow dr = databoxes.NewRow();
-                            dr["id"] = ReadValue;
-                            databoxes.Rows.Add(dr);
+                            SqlConnection conn = new SqlConnection(sConnStr);
+                            conn.Open();
+                            DataSet ds = new DataSet();
 
-                            if (QtyInBatch < Convert.ToDouble(dt.Rows[0]["qty"]))
+                            SqlDataAdapter adapter =
+                                new SqlDataAdapter(
+                                    "select top 1 isnull(bmain.id, dl.batchid) as batchid, dl.qty, isnull(bchild.artid, bmain.artid) as artid from sto_delivpackmapping dl " +
+                                                "inner join PROD_BatchHead bchild on bchild.id = dl.batchid " +
+                                                "left join PROD_BatchHead bmain on bmain.id = bchild.groupid " +
+                                                "where packid = " + ReadValue + " and isnull(inid, 0) = 0 and isnull(delivid, 0) = 0", conn);
+
+                            adapter.Fill(ds);
+
+                            DataTable dt = ds.Tables[0];
+
+                            if (dt.Rows.Count > 0)
                             {
-                                DialogResult result1 = KryptonTaskDialog.Show("Qty on FCS stage and in box are incorrect!",
-                                                                        "Qty on FCS stage and in box are incorrect!",
-                                                                        "Be careful! You must move on stage FCS at the first!",
-                                                                        MessageBoxIcon.Warning,
-                                                                        TaskDialogButtons.OK);
+                                BatchId = Convert.ToInt32(dt.Rows[0]["batchid"]);
+                                ArticleId = Convert.ToInt32(dt.Rows[0]["artid"]);
+                                DataRow dr = databoxes.NewRow();
+                                dr["id"] = ReadValue;
+                                databoxes.Rows.Add(dr);
 
-                                QtyIn = 0;
-                                databoxes.Clear();
-                                //PackingId = 0;
+                                if (QtyInBatch < Convert.ToDouble(dt.Rows[0]["qty"]))
+                                {
+                                    DialogResult result1 = KryptonTaskDialog.Show("Qty on FCS stage and in box are incorrect!",
+                                                                            "Qty on FCS stage and in box are incorrect!",
+                                                                            "Be careful! You must move on stage FCS at the first!",
+                                                                            MessageBoxIcon.Warning,
+                                                                            TaskDialogButtons.OK);
+
+                                    QtyIn = 0;
+                                    databoxes.Clear();
+                                    //PackingId = 0;
+                                }
+                                else
+                                {
+                                    QtyIn = Convert.ToDouble(dt.Rows[0]["qty"]);
+                                }
+
+
+                                cmb_Batches1.Focus();
                             }
                             else
                             {
-                                QtyIn = Convert.ToDouble(dt.Rows[0]["qty"]);
+                                DialogResult result1 = KryptonTaskDialog.Show("There is no such registered box label!",
+                                                                            "Box already registered or label is incorrect!",
+                                                                            "There is no such registered box label!",
+                                                                            MessageBoxIcon.Warning,
+                                                                            TaskDialogButtons.OK);
                             }
-
-
-                            cmb_Batches1.Focus();
+                            conn.Close();
                         }
                         else
                         {
                             DialogResult result1 = KryptonTaskDialog.Show("There is no such registered box label!",
-                                                                        "Box already registered or label is incorrect!",
-                                                                        "There is no such registered box label!",
-                                                                        MessageBoxIcon.Warning,
-                                                                        TaskDialogButtons.OK);
+                                                                             "Impossible to read batch!",
+                                                                             "There is no such registered box label!",
+                                                                             MessageBoxIcon.Warning,
+                                                                             TaskDialogButtons.OK);
                         }
-                        conn.Close();
                     }
                     else
                     {
@@ -1166,17 +1177,17 @@ namespace Odin.Warehouse.StockIn
                                                                          MessageBoxIcon.Warning,
                                                                          TaskDialogButtons.OK);
                     }
+                    chk_scanbox.CheckState = CheckState.Unchecked;
+                    chk_scanbox.BackColor = Color.LightGreen;
                 }
-                else
-                {
-                    DialogResult result1 = KryptonTaskDialog.Show("There is no such registered box label!",
-                                                                     "Impossible to read batch!",
-                                                                     "There is no such registered box label!",
-                                                                     MessageBoxIcon.Warning,
-                                                                     TaskDialogButtons.OK);
-                }
-                chk_scanbox.CheckState = CheckState.Unchecked;
-                chk_scanbox.BackColor = Color.LightGreen;
+            }
+            else
+            {
+                DialogResult result1 = KryptonTaskDialog.Show("Batch is inactive!",
+                                                        "Verify the batch!",
+                                                        "Verify the batch!",
+                                                        MessageBoxIcon.Warning,
+                                                        TaskDialogButtons.OK);
             }
         }
 
