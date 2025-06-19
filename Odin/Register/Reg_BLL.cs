@@ -2048,6 +2048,11 @@ namespace Odin.Register
             return Helper.QueryDT("execute sp_SelectArticleAnalogues @artId = " + Id + ", @CSEId = " + CSEId);
         }
 
+        public DataTable ArticleCertificatesData(int Id, int CSEId)
+        {
+            return Helper.QueryDT("execute sp_SelectArticleCertificates @artId = " + Id + ", @CSEId = " + CSEId);
+        }
+
         public void AddAnalog(int artid, int analogid, int customerid, string comments, int productid)
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);
@@ -2086,6 +2091,54 @@ namespace Odin.Register
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_DeleteAnalog", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@id", id);
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+        }
+
+        public void AddArtCertificates(string dateFrom, string dateTo, string comments, int certNum, string TNVED)
+        {
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_AddArtCertificates", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@certNum", certNum);
+            sqlComm.Parameters.AddWithValue("@comments", comments);
+            sqlComm.Parameters.AddWithValue("@dateFrom", dateFrom);
+            sqlComm.Parameters.AddWithValue("@dateTo", dateTo);
+            sqlComm.Parameters.AddWithValue("@TNVED", TNVED);
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+        }
+
+        public void EditAnalog(int id, string dateFrom, string dateTo, string comments, int certNum, string TNVED)
+        {
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_EditArtCertificates", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@id", id);
+            sqlComm.Parameters.AddWithValue("@certNum", certNum);
+            sqlComm.Parameters.AddWithValue("@comments", comments);
+            sqlComm.Parameters.AddWithValue("@dateFrom", dateFrom);
+            sqlComm.Parameters.AddWithValue("@dateTo", dateTo);
+            sqlComm.Parameters.AddWithValue("@TNVED", TNVED);
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+        }
+
+        public void DeleteArtCertificates(int id)
+        {
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_DeleteArtCertificates", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
 
             sqlComm.Parameters.AddWithValue("@id", id);

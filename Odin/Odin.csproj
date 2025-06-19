@@ -1832,6 +1832,12 @@
       <DependentUpon>frm_QCTracingView.cs</DependentUpon>
     </Compile>
     <Compile Include="Quality\Quality_BLL.cs" />
+    <Compile Include="Register\Articles\ctl_ArtCertificates.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Register\Articles\ctl_ArtCertificates.Designer.cs">
+      <DependentUpon>ctl_ArtCertificates.cs</DependentUpon>
+    </Compile>
     <Compile Include="Register\Articles\ctl_Analogs.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1903,6 +1909,12 @@
     </Compile>
     <Compile Include="Register\Articles\ctl_TechDocs.Designer.cs">
       <DependentUpon>ctl_TechDocs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Register\Articles\frm_AddArtCertificates.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Register\Articles\frm_AddArtCertificates.Designer.cs">
+      <DependentUpon>frm_AddArtCertificates.cs</DependentUpon>
     </Compile>
     <Compile Include="Register\Articles\frm_AddAnalog.cs">
       <SubType>Form</SubType>
@@ -3907,6 +3919,9 @@
     <EmbeddedResource Include="Quality\frm_QCTracingView.resx">
       <DependentUpon>frm_QCTracingView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Register\Articles\ctl_ArtCertificates.resx">
+      <DependentUpon>ctl_ArtCertificates.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Register\Articles\ctl_Analogs.resx">
       <DependentUpon>ctl_Analogs.cs</DependentUpon>
     </EmbeddedResource>
@@ -3942,6 +3957,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Register\Articles\ctl_TechDocs.resx">
       <DependentUpon>ctl_TechDocs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Register\Articles\frm_AddArtCertificates.resx">
+      <DependentUpon>frm_AddArtCertificates.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Register\Articles\frm_AddAnalog.resx">
       <DependentUpon>frm_AddAnalog.cs</DependentUpon>

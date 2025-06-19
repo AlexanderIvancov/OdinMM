@@ -134,6 +134,7 @@
             this.btn_BOM = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_General = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.bs_List = new Odin.Global_Classes.SyncBindingSource();
+            this.btn_Certificates = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.mnu_Lines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).BeginInit();
@@ -175,24 +176,17 @@
             // 
             this.kryptonPalette1.BasePaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Silver;
             this.kryptonPalette1.GridStyles.GridCustom1.StateCommon.Background.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.kryptonPalette1.GridStyles.GridCustom1.StateCommon.Background.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPalette1.GridStyles.GridCustom1.StateCommon.BackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.GridBackgroundList;
             this.kryptonPalette1.GridStyles.GridCustom1.StateCommon.HeaderColumn.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.kryptonPalette1.GridStyles.GridCustom1.StateCommon.HeaderColumn.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.kryptonPalette1.GridStyles.GridCustom1.StateCommon.HeaderColumn.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPalette1.GridStyles.GridCustom1.StateCommon.HeaderRow.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.kryptonPalette1.GridStyles.GridCustom1.StateCommon.HeaderRow.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.kryptonPalette1.GridStyles.GridCustom1.StateCommon.HeaderRow.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPalette1.GridStyles.GridCustom1.StateNormal.Background.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.kryptonPalette1.GridStyles.GridCustom1.StateNormal.Background.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPalette1.GridStyles.GridCustom1.StateNormal.HeaderColumn.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.kryptonPalette1.GridStyles.GridCustom1.StateNormal.HeaderColumn.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.kryptonPalette1.GridStyles.GridCustom1.StateNormal.HeaderColumn.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPalette1.GridStyles.GridCustom1.StateNormal.HeaderRow.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.kryptonPalette1.GridStyles.GridCustom1.StateNormal.HeaderRow.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.kryptonPalette1.GridStyles.GridCustom1.StateNormal.HeaderRow.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPalette1.PanelStyles.PanelCustom1.StateCommon.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.kryptonPalette1.PanelStyles.PanelCustom1.StateCommon.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPalette1.Ribbon.RibbonGroupArea.StateCommon.BackColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             // 
             // mnu_Lines
@@ -392,9 +386,6 @@
             // 
             // grp_BOMvalidation
             // 
-            this.grp_BOMvalidation.CaptionStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.GroupBoxCaption;
-            this.grp_BOMvalidation.GroupBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlGroupBox;
-            this.grp_BOMvalidation.GroupBorderStyle = ComponentFactory.Krypton.Toolkit.PaletteBorderStyle.ControlGroupBox;
             this.grp_BOMvalidation.Location = new System.Drawing.Point(9, 299);
             this.grp_BOMvalidation.Name = "grp_BOMvalidation";
             // 
@@ -501,8 +492,6 @@
             // 
             // buttonSpecAny4
             // 
-            this.buttonSpecAny4.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny4.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny4.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny4.UniqueName = "46482B28C1D342E20F86470E7089BEE4";
             this.buttonSpecAny4.Click += new System.EventHandler(this.buttonSpecAny4_Click);
@@ -549,8 +538,6 @@
             // 
             // buttonSpecAny3
             // 
-            this.buttonSpecAny3.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny3.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny3.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny3.UniqueName = "46482B28C1D342E20F86470E7089BEE4";
             this.buttonSpecAny3.Click += new System.EventHandler(this.buttonSpecAny3_Click);
@@ -576,8 +563,6 @@
             // 
             // buttonSpecAny2
             // 
-            this.buttonSpecAny2.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny2.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny2.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny2.UniqueName = "46482B28C1D342E20F86470E7089BEE4";
             this.buttonSpecAny2.Click += new System.EventHandler(this.buttonSpecAny2_Click);
@@ -652,8 +637,6 @@
             // 
             // buttonSpecAny1
             // 
-            this.buttonSpecAny1.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny1.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny1.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny1.UniqueName = "46482B28C1D342E20F86470E7089BEE4";
             this.buttonSpecAny1.Click += new System.EventHandler(this.buttonSpecAny1_Click);
@@ -711,7 +694,6 @@
             this.btn_Refresh,
             this.btn_Clear});
             this.kryptonHeader1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.kryptonHeader1.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.Primary;
             this.kryptonHeader1.Location = new System.Drawing.Point(0, 0);
             this.kryptonHeader1.Name = "kryptonHeader1";
             this.kryptonHeader1.Size = new System.Drawing.Size(284, 42);
@@ -723,18 +705,12 @@
             // btn_Refresh
             // 
             this.btn_Refresh.Image = global::Odin.Global_Resourses.reload_4545;
-            this.btn_Refresh.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.btn_Refresh.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
-            this.btn_Refresh.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Generic;
             this.btn_Refresh.UniqueName = "B6748632D5384B24EEB0EB4621A7108D";
             this.btn_Refresh.Click += new System.EventHandler(this.btn_Refresh_Click);
             // 
             // btn_Clear
             // 
             this.btn_Clear.Image = global::Odin.Global_Resourses.clear;
-            this.btn_Clear.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.btn_Clear.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
-            this.btn_Clear.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Generic;
             this.btn_Clear.UniqueName = "3502D2542D5C42F0078623FF0A695273";
             this.btn_Clear.Click += new System.EventHandler(this.btn_Clear_Click);
             // 
@@ -1154,6 +1130,7 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.btn_Certificates);
             this.kryptonPanel1.Controls.Add(this.btn_Analogs);
             this.kryptonPanel1.Controls.Add(this.btn_Rationing);
             this.kryptonPanel1.Controls.Add(this.btn_Assemblies);
@@ -1211,7 +1188,7 @@
             // 
             // btn_Properties
             // 
-            this.btn_Properties.Location = new System.Drawing.Point(914, 4);
+            this.btn_Properties.Location = new System.Drawing.Point(942, 3);
             this.btn_Properties.Name = "btn_Properties";
             this.btn_Properties.Size = new System.Drawing.Size(109, 40);
             this.btn_Properties.TabIndex = 5;
@@ -1232,7 +1209,7 @@
             // 
             // btn_Documents
             // 
-            this.btn_Documents.Location = new System.Drawing.Point(802, 4);
+            this.btn_Documents.Location = new System.Drawing.Point(930, 3);
             this.btn_Documents.Name = "btn_Documents";
             this.btn_Documents.Size = new System.Drawing.Size(109, 40);
             this.btn_Documents.TabIndex = 3;
@@ -1260,6 +1237,15 @@
             this.btn_General.Values.Image = global::Odin.Global_Resourses.ButtonImageLarge;
             this.btn_General.Values.Text = "General";
             this.btn_General.Click += new System.EventHandler(this.btn_General_Click);
+            // 
+            // btn_Certificates
+            // 
+            this.btn_Certificates.Location = new System.Drawing.Point(817, 3);
+            this.btn_Certificates.Name = "btn_Certificates";
+            this.btn_Certificates.Size = new System.Drawing.Size(107, 40);
+            this.btn_Certificates.TabIndex = 10;
+            this.btn_Certificates.Values.Image = global::Odin.Global_Resourses.agt_reload24x24;
+            this.btn_Certificates.Values.Text = "Certificates";
             // 
             // frm_ArticlesManagement
             // 
@@ -1391,6 +1377,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_MSL;
         private Global_Classes.SyncBindingSource bs_List;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Analogs;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Certificates;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_article;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_secname;

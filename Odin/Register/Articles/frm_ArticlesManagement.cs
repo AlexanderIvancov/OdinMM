@@ -109,6 +109,7 @@ namespace Odin.Register.Articles
         public ctl_Assemblies ctlAssemblies = null;
         public ctl_RationingExtended ctlRatio = null;
         public ctl_Analogs ctlAnalogue = null;
+        public ctl_ArtCertificates ctlArtCertificates = null;
         public int ControlWidth = 250;
         
         #endregion
@@ -289,6 +290,14 @@ namespace Odin.Register.Articles
             ControlWidth = ctlAnalogue.Width;
             ctlAnalogue.cmb_Articles1.ArticleId = ArtId;
             return NewPage("Analogues ", 1, ctlAnalogue, ctlAnalogue.Width);
+        }
+
+        private KryptonPage NewInputCertificates(string Article, int ArtId)
+        {
+            ctlArtCertificates = new ctl_ArtCertificates();
+            ControlWidth = ctlArtCertificates.Width;
+            ctlArtCertificates.cmb_Articles1.ArticleId = ArtId;
+            return NewPage("Certificates ", 1, ctlArtCertificates, ctlArtCertificates.Width);
         }
 
         private KryptonPage NewInputCatalog(string Article, int ArtId)
@@ -1131,6 +1140,13 @@ namespace Odin.Register.Articles
             kryptonDockingManager1.AddDockspace("Control",
                                               DockingEdge.Left,
                                               new KryptonPage[] { NewInputAnalogue(Reg.Article, Reg.ArtId) });
+        }
+
+        private void btn_Certificates_Click(object sender, EventArgs e)
+        {
+            kryptonDockingManager1.AddDockspace("Control",
+                                              DockingEdge.Left,
+                                              new KryptonPage[] { NewInputCertificates(Reg.Article, Reg.ArtId) });
         }
     }
 }
