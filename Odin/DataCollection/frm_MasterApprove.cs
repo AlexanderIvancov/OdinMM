@@ -422,7 +422,7 @@ namespace Odin.DataCollection
                 {
                     System.Media.SystemSounds.Exclamation.Play();
                     frm_Error frm1 = new frm_Error();
-                    frm1.HeaderText = "Wrong msater scanning! Your rfid is not correct or you have no master access!";
+                    frm1.HeaderText = "Wrong master scanning! Your rfid is not correct or you have no master access!";
                     DialogResult result1 = frm1.ShowDialog();
                     //globClass.ShowMessage("Wrong worker scanning", "Please contact your master", "Your rfid is not correct!");
                     Master = "";
