@@ -1246,6 +1246,7 @@
             this.btn_Certificates.TabIndex = 10;
             this.btn_Certificates.Values.Image = global::Odin.Global_Resourses.agt_reload24x24;
             this.btn_Certificates.Values.Text = "Certificates";
+            this.btn_Certificates.Visible = false;
             // 
             // frm_ArticlesManagement
             // 
