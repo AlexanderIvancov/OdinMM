@@ -277,7 +277,8 @@ namespace Odin.Planning
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Gainsboro;
                 if (DateTime.Parse(row.Cells["cn_createdat"].Value.ToString())
-                    < DateTime.Now.AddDays(-24))
+                    < DateTime.Now.AddDays(-24) && DateTime.Parse(row.Cells["cn_createdat"].Value.ToString())
+                    > DateTime.Now.AddDays(-21))
                     row.Cells["cn_createdat"].Style.BackColor = Color.Orange;
                 else if (DateTime.Parse(row.Cells["cn_createdat"].Value.ToString())
                     < DateTime.Now.AddDays(-21))
