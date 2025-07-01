@@ -276,11 +276,12 @@ namespace Odin.Planning
                 if (Convert.ToInt32(row.Cells["chk_isactive"].Value) == 0)
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Gainsboro;
-                if ((string.IsNullOrWhiteSpace(row.Cells["cn_createdat"].Value?.ToString())
-                        ? DateTime.Now
-                        : DateTime.Parse(row.Cells["cn_createdat"].Value.ToString()))
+                if (DateTime.Parse(row.Cells["cn_createdat"].Value.ToString())
+                    < DateTime.Now.AddDays(-24))
+                    row.Cells["cn_createdat"].Style.BackColor = Color.Orange;
+                else if (DateTime.Parse(row.Cells["cn_createdat"].Value.ToString())
                     < DateTime.Now.AddDays(-21))
-                    row.Cells["cn_createdat"].Style.BackColor = Color.Crimson;
+                    row.Cells["cn_createdat"].Style.BackColor = Color.Red;
                 if (Convert.ToInt32(row.Cells["cn_artid"].Value) != Convert.ToInt32(row.Cells["cn_coartid"].Value))
                 {
                     row.Cells["cn_article"].Style.Font = new Font(this.Font, FontStyle.Bold);
