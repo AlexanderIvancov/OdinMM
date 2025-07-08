@@ -44,7 +44,7 @@ namespace Odin.Register.Articles
 
         public void ShowDets()
         {
-            var data = Reg.ArticleCertificatesData(ArtId, ArtCseId);
+            var data = Reg.ArticleCertificatesData(ArtId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -84,7 +84,7 @@ namespace Odin.Register.Articles
             if (result == DialogResult.OK
                   && ArtId != 0)
             {
-                Reg.AddArtCertificates(frm.dateFrom, frm.dateTo, frm.Comments, frm.certNum, frm.TNVED);
+                Reg.AddArtCertificates(frm.dateFrom, frm.dateTo, frm.Comments, frm.certNum, frm.TNVED, frm.CSEId, ArtId);
                 ShowDets();
             }
         }
@@ -97,15 +97,17 @@ namespace Odin.Register.Articles
             string _dateFrom = "";
             string _dateTo = "";
             string _TNVED = "";
+            int _CSEId = 0;
 
             try
             {
-                _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
+                _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_certid"].Value);
                 _certNum = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_certNum"].Value);
-                _comments = Convert.ToString(gv_List.CurrentRow.Cells["cn_comment"].Value);
+                _comments = Convert.ToString(gv_List.CurrentRow.Cells["cn_comments"].Value);
                 _dateFrom = gv_List.CurrentRow.Cells["cn_dateFrom"].Value.ToString();
                 _dateTo = gv_List.CurrentRow.Cells["cn_dateTo"].Value.ToString();
                 _TNVED = gv_List.CurrentRow.Cells["cn_tnved"].Value.ToString();
+                _CSEId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_CSEId"].Value);
             }
             catch { }
 
@@ -118,11 +120,12 @@ namespace Odin.Register.Articles
                 frm.dateFrom = _dateFrom;
                 frm.dateTo = _dateTo;
                 frm.TNVED = _TNVED;
+                frm.CSEId = _CSEId;
 
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    Reg.EditAnalog (_id, frm.dateFrom, frm.dateTo, frm.Comments, frm.certNum, frm.TNVED);
+                    Reg.EditArtCertificates(_id, frm.dateFrom, frm.dateTo, frm.Comments, frm.certNum, frm.TNVED, frm.CSEId, ArtId);
                     ShowDets();
                 }
             }
@@ -139,14 +142,14 @@ namespace Odin.Register.Articles
 
             try
             {
-                _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
+                _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_certid"].Value);
             }
             catch { }
 
             if (_id != 0
                 && glob_Class.DeleteConfirm() == true)
             {
-                Reg.DeleteAnalog(_id);
+                Reg.DeleteArtCertificates(_id);
                 ShowDets();
             }
         }

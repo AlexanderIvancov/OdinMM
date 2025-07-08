@@ -30,6 +30,12 @@ namespace Odin.Register.Articles
         set { cn_comment.Text = value; }
         }
 
+        public int CSEId
+        {
+            get { return cmb_Articles1.ArticleId; }
+            set { cmb_Articles1.ArticleId = value; }
+        }
+
         public string TNVED
         {
             get { return cn_tnved.Text; }

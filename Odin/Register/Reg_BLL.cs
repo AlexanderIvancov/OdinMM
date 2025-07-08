@@ -2048,9 +2048,9 @@ namespace Odin.Register
             return Helper.QueryDT("execute sp_SelectArticleAnalogues @artId = " + Id + ", @CSEId = " + CSEId);
         }
 
-        public DataTable ArticleCertificatesData(int Id, int CSEId)
+        public DataTable ArticleCertificatesData(int Id)
         {
-            return Helper.QueryDT("execute sp_SelectArticleCertificates @artId = " + Id + ", @CSEId = " + CSEId);
+            return Helper.QueryDT("execute sp_SelectArticleCertificates @artId = " + Id);
         }
 
         public void AddAnalog(int artid, int analogid, int customerid, string comments, int productid)
@@ -2100,7 +2100,7 @@ namespace Odin.Register
             sqlConn.Close();
         }
 
-        public void AddArtCertificates(string dateFrom, string dateTo, string comments, int certNum, string TNVED)
+        public void AddArtCertificates(string dateFrom, string dateTo, string comments, int certNum, string TNVED, int CSEId, int ArtId)
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_AddArtCertificates", sqlConn);
@@ -2111,13 +2111,15 @@ namespace Odin.Register
             sqlComm.Parameters.AddWithValue("@dateFrom", dateFrom);
             sqlComm.Parameters.AddWithValue("@dateTo", dateTo);
             sqlComm.Parameters.AddWithValue("@TNVED", TNVED);
+            sqlComm.Parameters.AddWithValue("@CSEId", CSEId);
+            sqlComm.Parameters.AddWithValue("@artId", ArtId);
 
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
         }
 
-        public void EditAnalog(int id, string dateFrom, string dateTo, string comments, int certNum, string TNVED)
+        public void EditArtCertificates(int id, string dateFrom, string dateTo, string comments, int certNum, string TNVED, int CSEId, int ArtId)
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_EditArtCertificates", sqlConn);
@@ -2129,7 +2131,8 @@ namespace Odin.Register
             sqlComm.Parameters.AddWithValue("@dateFrom", dateFrom);
             sqlComm.Parameters.AddWithValue("@dateTo", dateTo);
             sqlComm.Parameters.AddWithValue("@TNVED", TNVED);
-
+            sqlComm.Parameters.AddWithValue("@CSEId", CSEId);
+            sqlComm.Parameters.AddWithValue("@artId", ArtId);
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();

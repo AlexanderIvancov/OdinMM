@@ -911,7 +911,7 @@
             // 
             // cn_iscertified
             // 
-            this.cn_iscertified.DataPropertyName = "certified";
+            this.cn_iscertified.DataPropertyName = "iscertified";
             this.cn_iscertified.FalseValue = "0";
             this.cn_iscertified.FillWeight = 40F;
             this.cn_iscertified.HeaderText = "Cert.";
@@ -922,6 +922,7 @@
             this.cn_iscertified.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.cn_iscertified.TrueValue = "-1";
             this.cn_iscertified.Width = 40;
+            //this.cn_iscertified.State = this.cn_iscertified.
             // 
             // cn_imagepath
             // 
@@ -1246,7 +1247,8 @@
             this.btn_Certificates.TabIndex = 10;
             this.btn_Certificates.Values.Image = global::Odin.Global_Resourses.agt_reload24x24;
             this.btn_Certificates.Values.Text = "Certificates";
-            this.btn_Certificates.Visible = false;
+            this.btn_Certificates.Click += new System.EventHandler(this.btn_Certificates_Click);
+            //this.btn_Certificates.Visible = false;
             // 
             // frm_ArticlesManagement
             // 

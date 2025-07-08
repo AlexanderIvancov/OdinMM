@@ -158,6 +158,10 @@ namespace Odin.Register.Articles
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
+                if (Convert.ToInt32(row.Cells["cn_iscertified"].Value) == -1)
+                    if (Convert.ToInt32(Helper.GetOneRecord("select dbo.fn_CheckArtCert(" + Convert.ToInt32(row.Cells["cn_id"].Value) + ")")) == 0)
+                        row.Cells["cn_iscertified"].Style.BackColor = Color.Crimson;
+
                 if (Convert.ToInt32(row.Cells["cn_isactive"].Value) == 0)
                 {
                     foreach (DataGridViewCell cell in row.Cells)
@@ -165,6 +169,7 @@ namespace Odin.Register.Articles
                         cell.Style.BackColor = Color.Silver;
                     }
                 }
+
                 if (Convert.ToInt32(row.Cells["cn_barg"].Value) == -1)
                     row.Cells["cn_reffirm"].Style.BackColor = Color.Yellow;
                 if (Convert.ToInt32(row.Cells["cn_barg"].Value) == 1)
@@ -703,6 +708,7 @@ namespace Odin.Register.Articles
             frm.CreateSubBatch = Reg.CreateSubBatch;
             frm.Weight = Reg.Weight;
             frm.IsActive = Reg.IsActive;
+            frm.IsCertified = Reg.IsCertified;
             frm.Revision = Reg.Revision;
             frm.StoreRules = Reg.StorageRules;
             frm.SpoilNorm = Reg.SpoilNorm;
@@ -899,6 +905,7 @@ namespace Odin.Register.Articles
             frm.CreateSubBatch = Reg.CreateSubBatch;
             frm.Weight = Reg.Weight;
             frm.IsActive = Reg.IsActive;
+            frm.IsCertified = Reg.IsCertified;
             frm.Revision = Reg.Revision;
             frm.StoreRules = Reg.StorageRules;
             frm.SpoilNorm = Reg.SpoilNorm;
