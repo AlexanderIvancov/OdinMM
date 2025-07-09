@@ -37,7 +37,6 @@
             this.kryptonLabel20 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.cmb_CertState = new System.Windows.Forms.ComboBox();
             this.chk_MBLimit = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
-            this.cmb_Articles2 = new Odin.CMB_Components.Articles.cmb_Articles();
             this.kryptonLabel19 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel18 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_SpoilConst = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
@@ -46,7 +45,6 @@
             this.kryptonLabel17 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.cmb_MSL = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.kryptonLabel16 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.cmb_Common1 = new Odin.CMB_Components.Common.cmb_Common();
             this.kryptonLabel15 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_QtyReserve = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.chk_IsActive = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
@@ -54,7 +52,6 @@
             this.kryptonLabel14 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_Weight = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel13 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.cmb_CustCodes1 = new Odin.CMB_Components.CustCodes.cmb_CustCodes();
             this.kryptonLabel12 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_SpoilNorm = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel11 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -68,11 +65,9 @@
             this.txt_Image = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.buttonSpecAny5 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.cmb_Department1 = new Odin.CMB_Components.Departments.cmb_Department();
             this.kryptonPanel3 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.pic_Image = new System.Windows.Forms.PictureBox();
             this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.cmb_Types1 = new Odin.CMB_Components.Types.cmb_Types();
             this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_Comments = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.buttonSpecAny4 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
@@ -80,7 +75,6 @@
             this.txt_Description = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.buttonSpecAny3 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.cmb_Units1 = new Odin.CMB_Components.Units.cmb_Units();
             this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_2ndName = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.buttonSpecAny2 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
@@ -90,6 +84,12 @@
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_Id = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.btn_Concidences = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.cmb_Articles2 = new Odin.CMB_Components.Articles.cmb_Articles();
+            this.cmb_Common1 = new Odin.CMB_Components.Common.cmb_Common();
+            this.cmb_CustCodes1 = new Odin.CMB_Components.CustCodes.cmb_CustCodes();
+            this.cmb_Department1 = new Odin.CMB_Components.Departments.cmb_Department();
+            this.cmb_Types1 = new Odin.CMB_Components.Types.cmb_Types();
+            this.cmb_Units1 = new Odin.CMB_Components.Units.cmb_Units();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
@@ -205,7 +205,6 @@
             this.kryptonLabel20.Size = new System.Drawing.Size(68, 20);
             this.kryptonLabel20.TabIndex = 78;
             this.kryptonLabel20.Values.Text = "Cert. state:";
-            this.kryptonLabel20.Visible = false;
             // 
             // cmb_CertState
             // 
@@ -215,7 +214,7 @@
             "Will be certified",
             "Will not be certified"});
             this.cmb_CertState.Location = new System.Drawing.Point(569, 12);
-            this.cmb_CertState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmb_CertState.Margin = new System.Windows.Forms.Padding(2);
             this.cmb_CertState.Name = "cmb_CertState";
             this.cmb_CertState.Size = new System.Drawing.Size(105, 21);
             this.cmb_CertState.TabIndex = 77;
@@ -227,43 +226,6 @@
             this.chk_MBLimit.Size = new System.Drawing.Size(74, 20);
             this.chk_MBLimit.TabIndex = 76;
             this.chk_MBLimit.Values.Text = "M.B.Limit";
-            // 
-            // cmb_Articles2
-            // 
-            this.cmb_Articles2.Article = "";
-            this.cmb_Articles2.ArticleId = 0;
-            this.cmb_Articles2.ArticleIdRec = 0;
-            this.cmb_Articles2.ArtType = null;
-            this.cmb_Articles2.BOMState = 0;
-            this.cmb_Articles2.CertState = "";
-            this.cmb_Articles2.Comments = null;
-            this.cmb_Articles2.CustCode = null;
-            this.cmb_Articles2.CustCodeId = 0;
-            this.cmb_Articles2.Department = null;
-            this.cmb_Articles2.DeptId = 0;
-            this.cmb_Articles2.Description = null;
-            this.cmb_Articles2.IsActive = -1;
-            this.cmb_Articles2.IsPF = 0;
-            this.cmb_Articles2.Location = new System.Drawing.Point(93, 251);
-            this.cmb_Articles2.Manufacturer = "";
-            this.cmb_Articles2.Margin = new System.Windows.Forms.Padding(0);
-            this.cmb_Articles2.Name = "cmb_Articles2";
-            this.cmb_Articles2.Project = null;
-            this.cmb_Articles2.ProjectId = 0;
-            this.cmb_Articles2.QtyAvail = 0D;
-            this.cmb_Articles2.QtyConsStock = 0D;
-            this.cmb_Articles2.RMId = 0;
-            this.cmb_Articles2.SecName = null;
-            this.cmb_Articles2.Size = new System.Drawing.Size(275, 20);
-            this.cmb_Articles2.SMTType = 0;
-            this.cmb_Articles2.SpoilConst = 0D;
-            this.cmb_Articles2.Stage = "";
-            this.cmb_Articles2.StageID = 0;
-            this.cmb_Articles2.TabIndex = 73;
-            this.cmb_Articles2.TypeId = 0;
-            this.cmb_Articles2.Unit = null;
-            this.cmb_Articles2.UnitId = 0;
-            this.cmb_Articles2.Weight = 0D;
             // 
             // kryptonLabel19
             // 
@@ -340,22 +302,6 @@
             this.kryptonLabel16.TabIndex = 42;
             this.kryptonLabel16.Values.Text = "Stage:";
             // 
-            // cmb_Common1
-            // 
-            this.cmb_Common1.IsEmptyColor = false;
-            this.cmb_Common1.Location = new System.Drawing.Point(228, 91);
-            this.cmb_Common1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cmb_Common1.Name = "cmb_Common1";
-            this.cmb_Common1.OrderBy = "id";
-            this.cmb_Common1.sCurrentValue = "";
-            this.cmb_Common1.SelectedValue = 0;
-            this.cmb_Common1.sID_Filled = "id";
-            this.cmb_Common1.Size = new System.Drawing.Size(92, 20);
-            this.cmb_Common1.sTable = "vw_ProductionStagesOnly";
-            this.cmb_Common1.sText_Filled = "name";
-            this.cmb_Common1.sTitle = "Stages of usage";
-            this.cmb_Common1.TabIndex = 17;
-            // 
             // kryptonLabel15
             // 
             this.kryptonLabel15.Location = new System.Drawing.Point(249, 310);
@@ -413,17 +359,6 @@
             this.kryptonLabel13.Size = new System.Drawing.Size(70, 20);
             this.kryptonLabel13.TabIndex = 27;
             this.kryptonLabel13.Values.Text = "Cust. code:";
-            // 
-            // cmb_CustCodes1
-            // 
-            this.cmb_CustCodes1.CustCode = "";
-            this.cmb_CustCodes1.CustCodeId = 0;
-            this.cmb_CustCodes1.EnableSearchId = false;
-            this.cmb_CustCodes1.Location = new System.Drawing.Point(93, 336);
-            this.cmb_CustCodes1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cmb_CustCodes1.Name = "cmb_CustCodes1";
-            this.cmb_CustCodes1.Size = new System.Drawing.Size(152, 20);
-            this.cmb_CustCodes1.TabIndex = 64;
             // 
             // kryptonLabel12
             // 
@@ -532,18 +467,6 @@
             this.kryptonLabel8.Values.Text = "Department:";
             this.kryptonLabel8.Visible = false;
             // 
-            // cmb_Department1
-            // 
-            this.cmb_Department1.Department = "";
-            this.cmb_Department1.DeptId = 0;
-            this.cmb_Department1.Location = new System.Drawing.Point(372, 12);
-            this.cmb_Department1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cmb_Department1.Name = "cmb_Department1";
-            this.cmb_Department1.SelectedNode = null;
-            this.cmb_Department1.Size = new System.Drawing.Size(117, 20);
-            this.cmb_Department1.TabIndex = 15;
-            this.cmb_Department1.Visible = false;
-            // 
             // kryptonPanel3
             // 
             this.kryptonPanel3.Controls.Add(this.pic_Image);
@@ -571,21 +494,6 @@
             this.kryptonLabel7.Size = new System.Drawing.Size(39, 20);
             this.kryptonLabel7.TabIndex = 13;
             this.kryptonLabel7.Values.Text = "Type:";
-            // 
-            // cmb_Types1
-            // 
-            this.cmb_Types1.Location = new System.Drawing.Point(93, 65);
-            this.cmb_Types1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cmb_Types1.Name = "cmb_Types1";
-            this.cmb_Types1.Path = "";
-            this.cmb_Types1.SelectedNode = null;
-            this.cmb_Types1.Size = new System.Drawing.Size(275, 20);
-            this.cmb_Types1.TabIndex = 12;
-            this.cmb_Types1.Type = "";
-            this.cmb_Types1.TypeId = 0;
-            this.cmb_Types1.TypeIDs = ((System.Collections.Generic.List<int>)(resources.GetObject("cmb_Types1.TypeIDs")));
-            this.cmb_Types1.TypeLat = "";
-            this.cmb_Types1.SelectedValueChanged += new Odin.CMB_Components.Types.TypesEventHandler(this.cmb_Types1_SelectedValueChanged);
             // 
             // kryptonLabel6
             // 
@@ -641,18 +549,6 @@
             this.kryptonLabel4.Size = new System.Drawing.Size(36, 20);
             this.kryptonLabel4.TabIndex = 7;
             this.kryptonLabel4.Values.Text = "Unit:";
-            // 
-            // cmb_Units1
-            // 
-            this.cmb_Units1.EnableSearchId = false;
-            this.cmb_Units1.Location = new System.Drawing.Point(93, 91);
-            this.cmb_Units1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cmb_Units1.Name = "cmb_Units1";
-            this.cmb_Units1.Size = new System.Drawing.Size(67, 20);
-            this.cmb_Units1.TabIndex = 14;
-            this.cmb_Units1.Unit = "";
-            this.cmb_Units1.UnitId = 0;
-            this.cmb_Units1.UnitChanged += new Odin.CMB_Components.Units.UnitEventHandler(this.cmb_Units1_UnitChanged);
             // 
             // kryptonLabel3
             // 
@@ -732,6 +628,109 @@
             this.btn_Concidences.Values.Image = global::Odin.Global_Resourses.arrow_switch;
             this.btn_Concidences.Values.Text = "";
             this.btn_Concidences.Click += new System.EventHandler(this.btn_Concidences_Click);
+            // 
+            // cmb_Articles2
+            // 
+            this.cmb_Articles2.Article = "";
+            this.cmb_Articles2.ArticleId = 0;
+            this.cmb_Articles2.ArticleIdRec = 0;
+            this.cmb_Articles2.ArtType = null;
+            this.cmb_Articles2.BOMState = 0;
+            this.cmb_Articles2.CertState = "";
+            this.cmb_Articles2.Comments = null;
+            this.cmb_Articles2.CustCode = null;
+            this.cmb_Articles2.CustCodeId = 0;
+            this.cmb_Articles2.Department = null;
+            this.cmb_Articles2.DeptId = 0;
+            this.cmb_Articles2.Description = null;
+            this.cmb_Articles2.IsActive = -1;
+            this.cmb_Articles2.IsPF = 0;
+            this.cmb_Articles2.Location = new System.Drawing.Point(93, 251);
+            this.cmb_Articles2.Manufacturer = "";
+            this.cmb_Articles2.Margin = new System.Windows.Forms.Padding(0);
+            this.cmb_Articles2.Name = "cmb_Articles2";
+            this.cmb_Articles2.Project = null;
+            this.cmb_Articles2.ProjectId = 0;
+            this.cmb_Articles2.QtyAvail = 0D;
+            this.cmb_Articles2.QtyConsStock = 0D;
+            this.cmb_Articles2.RMId = 0;
+            this.cmb_Articles2.SecName = null;
+            this.cmb_Articles2.Size = new System.Drawing.Size(275, 20);
+            this.cmb_Articles2.SMTType = 0;
+            this.cmb_Articles2.SpoilConst = 0D;
+            this.cmb_Articles2.Stage = "";
+            this.cmb_Articles2.StageID = 0;
+            this.cmb_Articles2.TabIndex = 73;
+            this.cmb_Articles2.TypeId = 0;
+            this.cmb_Articles2.Unit = null;
+            this.cmb_Articles2.UnitId = 0;
+            this.cmb_Articles2.Weight = 0D;
+            // 
+            // cmb_Common1
+            // 
+            this.cmb_Common1.IsEmptyColor = false;
+            this.cmb_Common1.Location = new System.Drawing.Point(228, 91);
+            this.cmb_Common1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cmb_Common1.Name = "cmb_Common1";
+            this.cmb_Common1.OrderBy = "id";
+            this.cmb_Common1.sCurrentValue = "";
+            this.cmb_Common1.SelectedValue = 0;
+            this.cmb_Common1.sID_Filled = "id";
+            this.cmb_Common1.Size = new System.Drawing.Size(92, 20);
+            this.cmb_Common1.sTable = "vw_ProductionStagesOnly";
+            this.cmb_Common1.sText_Filled = "name";
+            this.cmb_Common1.sTitle = "Stages of usage";
+            this.cmb_Common1.TabIndex = 17;
+            // 
+            // cmb_CustCodes1
+            // 
+            this.cmb_CustCodes1.CustCode = "";
+            this.cmb_CustCodes1.CustCodeId = 0;
+            this.cmb_CustCodes1.EnableSearchId = false;
+            this.cmb_CustCodes1.Location = new System.Drawing.Point(93, 336);
+            this.cmb_CustCodes1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cmb_CustCodes1.Name = "cmb_CustCodes1";
+            this.cmb_CustCodes1.Size = new System.Drawing.Size(152, 20);
+            this.cmb_CustCodes1.TabIndex = 64;
+            // 
+            // cmb_Department1
+            // 
+            this.cmb_Department1.Department = "";
+            this.cmb_Department1.DeptId = 0;
+            this.cmb_Department1.Location = new System.Drawing.Point(372, 12);
+            this.cmb_Department1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cmb_Department1.Name = "cmb_Department1";
+            this.cmb_Department1.SelectedNode = null;
+            this.cmb_Department1.Size = new System.Drawing.Size(117, 20);
+            this.cmb_Department1.TabIndex = 15;
+            this.cmb_Department1.Visible = false;
+            // 
+            // cmb_Types1
+            // 
+            this.cmb_Types1.Location = new System.Drawing.Point(93, 65);
+            this.cmb_Types1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cmb_Types1.Name = "cmb_Types1";
+            this.cmb_Types1.Path = "";
+            this.cmb_Types1.SelectedNode = null;
+            this.cmb_Types1.Size = new System.Drawing.Size(275, 20);
+            this.cmb_Types1.TabIndex = 12;
+            this.cmb_Types1.Type = "";
+            this.cmb_Types1.TypeId = 0;
+            this.cmb_Types1.TypeIDs = ((System.Collections.Generic.List<int>)(resources.GetObject("cmb_Types1.TypeIDs")));
+            this.cmb_Types1.TypeLat = "";
+            this.cmb_Types1.SelectedValueChanged += new Odin.CMB_Components.Types.TypesEventHandler(this.cmb_Types1_SelectedValueChanged);
+            // 
+            // cmb_Units1
+            // 
+            this.cmb_Units1.EnableSearchId = false;
+            this.cmb_Units1.Location = new System.Drawing.Point(93, 91);
+            this.cmb_Units1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cmb_Units1.Name = "cmb_Units1";
+            this.cmb_Units1.Size = new System.Drawing.Size(67, 20);
+            this.cmb_Units1.TabIndex = 14;
+            this.cmb_Units1.Unit = "";
+            this.cmb_Units1.UnitId = 0;
+            this.cmb_Units1.UnitChanged += new Odin.CMB_Components.Units.UnitEventHandler(this.cmb_Units1_UnitChanged);
             // 
             // frm_AddArticle
             // 
