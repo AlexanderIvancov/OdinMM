@@ -137,6 +137,7 @@ namespace Odin.CMB_Components.Articles
                 frm.Revision = Reg.Revision;
                 frm.StoreRules = Reg.StorageRules;
                 frm.SpoilNorm = Reg.SpoilNorm;
+                frm.CertState = Reg.CertState;
                 frm.ShowImage(frm.ImagePath);
                 frm.StageId = Reg.StageId;
                 frm.MSL = Reg.MSL;
