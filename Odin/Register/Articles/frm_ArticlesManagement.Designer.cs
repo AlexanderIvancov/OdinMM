@@ -134,6 +134,7 @@
             this.btn_BOM = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_General = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.bs_List = new Odin.Global_Classes.SyncBindingSource();
+            this.cmb_CertState = new System.Windows.Forms.ComboBox();
             this.btn_Certificates = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.mnu_Lines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).BeginInit();
@@ -328,6 +329,7 @@
             // 
             // kryptonSplitContainer2.Panel1
             // 
+            this.kryptonSplitContainer2.Panel1.Controls.Add(this.cmb_CertState);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.chk_MSL);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.chk_BOM);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.grp_BOMvalidation);
@@ -451,7 +453,7 @@
             // 
             this.chk_IsActive.Checked = true;
             this.chk_IsActive.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk_IsActive.Location = new System.Drawing.Point(90, 247);
+            this.chk_IsActive.Location = new System.Drawing.Point(150, 247);
             this.chk_IsActive.Name = "chk_IsActive";
             this.chk_IsActive.Size = new System.Drawing.Size(67, 20);
             this.chk_IsActive.TabIndex = 17;
@@ -1147,6 +1149,18 @@
             this.btn_Rationing.Values.Text = "Rationing";
             this.btn_Rationing.Click += new System.EventHandler(this.btn_Rationing_Click);
             // 
+            // cmb_CertState
+            // 
+            this.cmb_CertState.FormattingEnabled = true;
+            this.cmb_CertState.Items.AddRange(new object[] {
+            "Certified",
+            "Will be certified",
+            "Will not be certified"});
+            this.cmb_CertState.Location = new System.Drawing.Point(14, 247);
+            this.cmb_CertState.Name = "cmb_CertState";
+            this.cmb_CertState.Size = new System.Drawing.Size(121, 28);
+            this.cmb_CertState.TabIndex = 24;
+            // 
             // btn_Assemblies
             // 
             this.btn_Assemblies.Location = new System.Drawing.Point(591, 3);
@@ -1383,5 +1397,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_imagepath;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_fulltype;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_aliases;
+        private System.Windows.Forms.ComboBox cmb_CertState;
     }
 }

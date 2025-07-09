@@ -54,7 +54,14 @@ namespace Odin.Register.Articles
         private const string notSavedRecordTitleError = "Not saved record";
         private const string decimalStringFormat = "0.##";
         private const string cpseMarkConst = "Y";
-       
+        private string _currentCertState;
+        public string CertState
+        {
+            get { return cmb_CertState.Text; }
+            set { cmb_CertState.Text = value; }
+        }
+
+
         //private bool isNotSavedRecords; // variable to detect emty inserted cutting list row
 
         private const string deleteChildsConfirm = "Are you sure want to delete all nodes?";
@@ -181,10 +188,11 @@ namespace Odin.Register.Articles
 
         public void bw_List(object sender, DoWorkEventArgs e)
         {
+            string certStateValue = _currentCertState;
             var data = Reg_BLL.getArticles(cmb_Articles1.ArticleId, cmb_Articles1.Article.Trim(), txt_SecArticle.Text, Description, 
                                             cmb_Types1.TypeId, cmb_Department1.DeptId, txt_Comments.Text, cmb_Firms1.FirmId, 
                                             txt_ExtArt.Text, chk_IsActive.CheckState == CheckState.Checked ? -1 : (chk_IsActive.CheckState == CheckState.Indeterminate ? 1 : 0),
-                                            /*cmb_CertState.SelectedText*/"Certified",
+                                            certStateValue,
                                             cmb_Common1.SelectedValue, rb_All.Checked == true ? 1 : (rb_Valid.Checked == true ? -1 : 0),
                                             chk_BOM.CheckState == CheckState.Checked ? -1 : (chk_BOM.CheckState == CheckState.Indeterminate ? 1 : 0),
                                             chk_MSL.CheckState == CheckState.Checked ? -1 : (chk_MSL.CheckState == CheckState.Indeterminate ? 1 : 0));
@@ -364,7 +372,7 @@ namespace Odin.Register.Articles
         {
             DataGridViewColumn oldColumn = gv_List.SortedColumn;
             var dir = Helper.SaveDirection(gv_List);
-
+            _currentCertState = this.CertState;
             bwStart(bw_List);
 
             Helper.RestoreDirection(gv_List, oldColumn, dir);
@@ -419,7 +427,7 @@ namespace Odin.Register.Articles
                     cmb_Articles1.ArticleId = _res;
                     DataGridViewColumn oldColumn = gv_List.SortedColumn;
                     var dir = Helper.SaveDirection(gv_List);
-
+                    _currentCertState = this.CertState;
                     bwStart(bw_List);
 
                     Helper.RestoreDirection(gv_List, oldColumn, dir);
@@ -739,7 +747,7 @@ namespace Odin.Register.Articles
                     //cmb_Articles1.ArticleId = _res;
                     DataGridViewColumn oldColumn = gv_List.SortedColumn;
                     var dir = Helper.SaveDirection(gv_List);
-
+                    _currentCertState = this.CertState;
                     bwStart(bw_List);
 
                     Helper.RestoreDirection(gv_List, oldColumn, dir);
@@ -873,7 +881,7 @@ namespace Odin.Register.Articles
                 cmb_Articles1.ArticleId = 0;
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
-
+                _currentCertState = this.CertState;
                 bwStart(bw_List);
 
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
@@ -934,7 +942,7 @@ namespace Odin.Register.Articles
                     cmb_Articles1.ArticleId = _res;
                     DataGridViewColumn oldColumn = gv_List.SortedColumn;
                     var dir = Helper.SaveDirection(gv_List);
-
+                    _currentCertState = this.CertState;
                     bwStart(bw_List);
 
                     Helper.RestoreDirection(gv_List, oldColumn, dir);
@@ -1021,7 +1029,7 @@ namespace Odin.Register.Articles
         {
             DataGridViewColumn oldColumn = gv_List.SortedColumn;
             var dir = Helper.SaveDirection(gv_List);
-
+            _currentCertState = this.CertState;
             bwStart(bw_List);
 
             Helper.RestoreDirection(gv_List, oldColumn, dir);
@@ -1084,7 +1092,7 @@ namespace Odin.Register.Articles
             {
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
-
+                _currentCertState = this.CertState;
                 bwStart(bw_List);
 
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
@@ -1099,7 +1107,7 @@ namespace Odin.Register.Articles
             {
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
-
+                _currentCertState = this.CertState;
                 bwStart(bw_List);
 
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
@@ -1114,7 +1122,7 @@ namespace Odin.Register.Articles
             {
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
-
+                _currentCertState = this.CertState;
                 bwStart(bw_List);
 
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
@@ -1129,7 +1137,7 @@ namespace Odin.Register.Articles
             {
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
-
+                _currentCertState = this.CertState;
                 bwStart(bw_List);
 
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
