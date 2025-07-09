@@ -50,8 +50,6 @@
             this.kryptonPage2 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.kryptonSplitContainer2 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
-            this.cmb_CertState = new System.Windows.Forms.ComboBox();
-            this.kryptonLabel20 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.chk_MSL = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.chk_BOM = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.grp_BOMvalidation = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
@@ -103,7 +101,7 @@
             this.cn_msl = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_custcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_warning = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.cn_iscertified = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.cn_certState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_imagepath = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_fulltype = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_aliases = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -329,8 +327,6 @@
             // 
             // kryptonSplitContainer2.Panel1
             // 
-            this.kryptonSplitContainer2.Panel1.Controls.Add(this.cmb_CertState);
-            this.kryptonSplitContainer2.Panel1.Controls.Add(this.kryptonLabel20);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.chk_MSL);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.chk_BOM);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.grp_BOMvalidation);
@@ -363,29 +359,6 @@
             this.kryptonSplitContainer2.Size = new System.Drawing.Size(1051, 379);
             this.kryptonSplitContainer2.SplitterDistance = 284;
             this.kryptonSplitContainer2.TabIndex = 0;
-            // 
-            // cmb_CertState
-            // 
-            this.cmb_CertState.FormattingEnabled = true;
-            this.cmb_CertState.Items.AddRange(new object[] {
-            "Certified",
-            "Will be certified",
-            "Will not be certified"});
-            this.cmb_CertState.Location = new System.Drawing.Point(169, 249);
-            this.cmb_CertState.Margin = new System.Windows.Forms.Padding(2);
-            this.cmb_CertState.Name = "cmb_CertState";
-            this.cmb_CertState.Size = new System.Drawing.Size(105, 21);
-            this.cmb_CertState.TabIndex = 79;
-            this.cmb_CertState.SelectedIndexChanged += new System.EventHandler(this.cmb_CertState_SelectedIndexChanged);
-            this.cmb_CertState.Text = "Certified";
-            // 
-            // kryptonLabel20
-            // 
-            this.kryptonLabel20.Location = new System.Drawing.Point(90, 250);
-            this.kryptonLabel20.Name = "kryptonLabel20";
-            this.kryptonLabel20.Size = new System.Drawing.Size(68, 20);
-            this.kryptonLabel20.TabIndex = 80;
-            this.kryptonLabel20.Values.Text = "Cert. state:";
             // 
             // chk_MSL
             // 
@@ -752,7 +725,7 @@
             this.cn_msl,
             this.cn_custcode,
             this.cn_warning,
-            this.cn_iscertified,
+            this.cn_certState,
             this.cn_imagepath,
             this.cn_fulltype,
             this.cn_aliases});
@@ -922,19 +895,12 @@
             this.cn_warning.TrueValue = "-1";
             this.cn_warning.Width = 40;
             // 
-            // cn_iscertified
+            // cn_fulltype
             // 
-            this.cn_iscertified.DataPropertyName = "iscertified";
-            this.cn_iscertified.FalseValue = "0";
-            this.cn_iscertified.FillWeight = 40F;
-            this.cn_iscertified.HeaderText = "Cert.";
-            this.cn_iscertified.IndeterminateValue = "1";
-            this.cn_iscertified.Name = "cn_iscertified";
-            this.cn_iscertified.ReadOnly = true;
-            this.cn_iscertified.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.cn_iscertified.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.cn_iscertified.TrueValue = "-1";
-            this.cn_iscertified.Width = 40;
+            this.cn_certState.DataPropertyName = "certState";
+            this.cn_certState.HeaderText = "СertState";
+            this.cn_certState.Name = "cn_certState";
+            this.cn_certState.ReadOnly = true;
             // 
             // cn_imagepath
             // 
@@ -1409,11 +1375,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_msl;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_custcode;
         private System.Windows.Forms.DataGridViewCheckBoxColumn cn_warning;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn cn_iscertified;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_certState;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_imagepath;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_fulltype;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_aliases;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel20;
-        private System.Windows.Forms.ComboBox cmb_CertState;
     }
 }

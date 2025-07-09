@@ -100,8 +100,6 @@ namespace Odin.Register.Articles
         }
 
         public int _PrevId = 0;
-        public delegate void CertStateEventHandler(object sender);
-        public event CertStateEventHandler cmb_CertStateChanged;
 
         public ctl_Nomenclatures ctlBOM = null;
         public ctl_General ctlGen = null;
@@ -183,11 +181,10 @@ namespace Odin.Register.Articles
 
         public void bw_List(object sender, DoWorkEventArgs e)
         {
-            cmb_CertStateChanged?.Invoke(this);
             var data = Reg_BLL.getArticles(cmb_Articles1.ArticleId, cmb_Articles1.Article.Trim(), txt_SecArticle.Text, Description, 
                                             cmb_Types1.TypeId, cmb_Department1.DeptId, txt_Comments.Text, cmb_Firms1.FirmId, 
                                             txt_ExtArt.Text, chk_IsActive.CheckState == CheckState.Checked ? -1 : (chk_IsActive.CheckState == CheckState.Indeterminate ? 1 : 0),
-                                            cmb_CertState.SelectedText,
+                                            /*cmb_CertState.SelectedText*/"Certified",
                                             cmb_Common1.SelectedValue, rb_All.Checked == true ? 1 : (rb_Valid.Checked == true ? -1 : 0),
                                             chk_BOM.CheckState == CheckState.Checked ? -1 : (chk_BOM.CheckState == CheckState.Indeterminate ? 1 : 0),
                                             chk_MSL.CheckState == CheckState.Checked ? -1 : (chk_MSL.CheckState == CheckState.Indeterminate ? 1 : 0));
@@ -1155,9 +1152,5 @@ namespace Odin.Register.Articles
                                               new KryptonPage[] { NewInputCertificates(Reg.Article, Reg.ArtId) });
         }
 
-        private void cmb_CertState_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            cmb_CertStateChanged?.Invoke(this);
-        }
     }
 }
