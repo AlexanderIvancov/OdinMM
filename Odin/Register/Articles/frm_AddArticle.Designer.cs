@@ -34,6 +34,8 @@
             this.btn_Cancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonLabel20 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.cmb_CertState = new System.Windows.Forms.ComboBox();
             this.chk_MBLimit = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.cmb_Articles2 = new Odin.CMB_Components.Articles.cmb_Articles();
             this.kryptonLabel19 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -48,7 +50,6 @@
             this.kryptonLabel15 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_QtyReserve = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.chk_IsActive = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
-            this.chk_IsCertified = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.chk_SubBatch = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonLabel14 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_Weight = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
@@ -143,6 +144,8 @@
             // 
             // kryptonPanel2
             // 
+            this.kryptonPanel2.Controls.Add(this.kryptonLabel20);
+            this.kryptonPanel2.Controls.Add(this.cmb_CertState);
             this.kryptonPanel2.Controls.Add(this.chk_MBLimit);
             this.kryptonPanel2.Controls.Add(this.cmb_Articles2);
             this.kryptonPanel2.Controls.Add(this.kryptonLabel19);
@@ -157,7 +160,6 @@
             this.kryptonPanel2.Controls.Add(this.kryptonLabel15);
             this.kryptonPanel2.Controls.Add(this.txt_QtyReserve);
             this.kryptonPanel2.Controls.Add(this.chk_IsActive);
-            this.kryptonPanel2.Controls.Add(this.chk_IsCertified);
             this.kryptonPanel2.Controls.Add(this.chk_SubBatch);
             this.kryptonPanel2.Controls.Add(this.kryptonLabel14);
             this.kryptonPanel2.Controls.Add(this.txt_Weight);
@@ -196,6 +198,28 @@
             this.kryptonPanel2.Size = new System.Drawing.Size(684, 400);
             this.kryptonPanel2.TabIndex = 1;
             // 
+            // kryptonLabel20
+            // 
+            this.kryptonLabel20.Location = new System.Drawing.Point(496, 12);
+            this.kryptonLabel20.Name = "kryptonLabel20";
+            this.kryptonLabel20.Size = new System.Drawing.Size(68, 20);
+            this.kryptonLabel20.TabIndex = 78;
+            this.kryptonLabel20.Values.Text = "Cert. state:";
+            this.kryptonLabel20.Visible = false;
+            // 
+            // cmb_CertState
+            // 
+            this.cmb_CertState.FormattingEnabled = true;
+            this.cmb_CertState.Items.AddRange(new object[] {
+            "Certified",
+            "Will be certified",
+            "Will not be certified"});
+            this.cmb_CertState.Location = new System.Drawing.Point(569, 12);
+            this.cmb_CertState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmb_CertState.Name = "cmb_CertState";
+            this.cmb_CertState.Size = new System.Drawing.Size(105, 21);
+            this.cmb_CertState.TabIndex = 77;
+            // 
             // chk_MBLimit
             // 
             this.chk_MBLimit.Location = new System.Drawing.Point(343, 284);
@@ -211,6 +235,7 @@
             this.cmb_Articles2.ArticleIdRec = 0;
             this.cmb_Articles2.ArtType = null;
             this.cmb_Articles2.BOMState = 0;
+            this.cmb_Articles2.CertState = "";
             this.cmb_Articles2.Comments = null;
             this.cmb_Articles2.CustCode = null;
             this.cmb_Articles2.CustCodeId = 0;
@@ -218,7 +243,6 @@
             this.cmb_Articles2.DeptId = 0;
             this.cmb_Articles2.Description = null;
             this.cmb_Articles2.IsActive = -1;
-            this.cmb_Articles2.IsCertified = -1;
             this.cmb_Articles2.IsPF = 0;
             this.cmb_Articles2.Location = new System.Drawing.Point(93, 251);
             this.cmb_Articles2.Manufacturer = "";
@@ -267,7 +291,7 @@
             // 
             // chk_Warning
             // 
-            this.chk_Warning.Location = new System.Drawing.Point(200, 284);
+            this.chk_Warning.Location = new System.Drawing.Point(241, 285);
             this.chk_Warning.Name = "chk_Warning";
             this.chk_Warning.Size = new System.Drawing.Size(70, 20);
             this.chk_Warning.TabIndex = 55;
@@ -275,7 +299,7 @@
             // 
             // chk_Service
             // 
-            this.chk_Service.Location = new System.Drawing.Point(135, 284);
+            this.chk_Service.Location = new System.Drawing.Point(155, 284);
             this.chk_Service.Name = "chk_Service";
             this.chk_Service.Size = new System.Drawing.Size(62, 20);
             this.chk_Service.TabIndex = 45;
@@ -320,6 +344,7 @@
             // 
             this.cmb_Common1.IsEmptyColor = false;
             this.cmb_Common1.Location = new System.Drawing.Point(228, 91);
+            this.cmb_Common1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cmb_Common1.Name = "cmb_Common1";
             this.cmb_Common1.OrderBy = "id";
             this.cmb_Common1.sCurrentValue = "";
@@ -356,14 +381,6 @@
             this.chk_IsActive.Size = new System.Drawing.Size(57, 20);
             this.chk_IsActive.TabIndex = 32;
             this.chk_IsActive.Values.Text = "Active";
-            // 
-            // chk_IsCertified
-            // 
-            this.chk_IsCertified.Location = new System.Drawing.Point(276, 284);
-            this.chk_IsCertified.Name = "chk_IsCertified";
-            this.chk_IsCertified.Size = new System.Drawing.Size(70, 20);
-            this.chk_IsCertified.TabIndex = 77;
-            this.chk_IsCertified.Values.Text = "Certified";
             // 
             // chk_SubBatch
             // 
@@ -403,6 +420,7 @@
             this.cmb_CustCodes1.CustCodeId = 0;
             this.cmb_CustCodes1.EnableSearchId = false;
             this.cmb_CustCodes1.Location = new System.Drawing.Point(93, 336);
+            this.cmb_CustCodes1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cmb_CustCodes1.Name = "cmb_CustCodes1";
             this.cmb_CustCodes1.Size = new System.Drawing.Size(152, 20);
             this.cmb_CustCodes1.TabIndex = 64;
@@ -519,6 +537,7 @@
             this.cmb_Department1.Department = "";
             this.cmb_Department1.DeptId = 0;
             this.cmb_Department1.Location = new System.Drawing.Point(372, 12);
+            this.cmb_Department1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cmb_Department1.Name = "cmb_Department1";
             this.cmb_Department1.SelectedNode = null;
             this.cmb_Department1.Size = new System.Drawing.Size(117, 20);
@@ -556,6 +575,7 @@
             // cmb_Types1
             // 
             this.cmb_Types1.Location = new System.Drawing.Point(93, 65);
+            this.cmb_Types1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cmb_Types1.Name = "cmb_Types1";
             this.cmb_Types1.Path = "";
             this.cmb_Types1.SelectedNode = null;
@@ -626,6 +646,7 @@
             // 
             this.cmb_Units1.EnableSearchId = false;
             this.cmb_Units1.Location = new System.Drawing.Point(93, 91);
+            this.cmb_Units1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cmb_Units1.Name = "cmb_Units1";
             this.cmb_Units1.Size = new System.Drawing.Size(67, 20);
             this.cmb_Units1.TabIndex = 14;
@@ -785,7 +806,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_Weight;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_SubBatch;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_IsActive;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_IsCertified;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel15;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_QtyReserve;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel16;
@@ -801,5 +821,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel19;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_CreatePF;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_MBLimit;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel20;
+        private System.Windows.Forms.ComboBox cmb_CertState;
     }
 }

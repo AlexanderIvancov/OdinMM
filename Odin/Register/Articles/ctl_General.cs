@@ -183,18 +183,6 @@ namespace Odin.Register.Articles
             }
         }
 
-        public int IsCertified
-        {
-            get
-            {
-                return chk_IsCertified.CheckState == CheckState.Checked ? -1 : 0;
-            }
-            set
-            {
-                chk_IsCertified.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
-            }
-        }
-
         public double QtyReserve
         {
             get
@@ -409,7 +397,7 @@ namespace Odin.Register.Articles
         private void btn_OK_Click(object sender, EventArgs e)
         {
             int _res = Reg.SaveArticle(Id, Regex.Replace(Article, @"\p{C}+", string.Empty), SecName, Description, TypeId, UnitId, ImagePath, Comments,
-                                    CustCodeId, QtyReserve, DeptId, CreateSubBatch, Weight, IsActive, IsCertified,
+                                    CustCodeId, QtyReserve, DeptId, CreateSubBatch, Weight, IsActive, "Certified",
                                     Revision, StoreRules, SpoilNorm, StageId, MSL, Service, /*LabelsQty, StencilRequired, StencilID*/
                                     0, 0, 0, Warning, SpoilConst, AsPF, MBLimit);
             //Event

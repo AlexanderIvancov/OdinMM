@@ -15,7 +15,7 @@ namespace Odin.Register
         #region Articles
 
         public static DataTable getArticles(int _artid, string _artbeg, string _secarticle, string _description, int _typeid, int _deptid,
-                                            string _comments, int _firmid, string _reffirm, int _isactive, int _iscertified, int _stageid, int _bomstate,
+                                            string _comments, int _firmid, string _reffirm, int _isactive, string _certState, int _stageid, int _bomstate,
                                             int _bomexists, int _mslexists)
         {
             string query = "sp_ArticlesList";
@@ -32,7 +32,7 @@ namespace Odin.Register
                 new SqlParameter("@firmid",SqlDbType.Int){Value = _firmid },
                 new SqlParameter("@reffirm",SqlDbType.NVarChar){Value = _reffirm},
                 new SqlParameter("@isactive",SqlDbType.Int){Value = _isactive },
-                new SqlParameter("@iscertified",SqlDbType.Int){Value = _iscertified },
+                new SqlParameter("@certState",SqlDbType.NVarChar){Value = _certState },
                 new SqlParameter("@stageid",SqlDbType.Int){Value = _stageid },
                 new SqlParameter("@bomstate",SqlDbType.Int){Value = _bomstate },
                 new SqlParameter("@bomexists",SqlDbType.Int){Value = _bomexists },
@@ -104,7 +104,7 @@ namespace Odin.Register
 
         public int SaveArticle(int id, string article, string secname, string description, int typeid,
                                 int unitid, string imagepath, string comments, int custcodeid,
-                                double qtyreserve, int deptid, int createsubbatch, double weight, int isactive, int iscertified,
+                                double qtyreserve, int deptid, int createsubbatch, double weight, int isactive, string certState,
                                 string revision, string storagerules, double spoilnorm, int stageid, string msl,
                                 int service, int qtylabels, int stencilrequired, int stencilid, int warning,
                                 double spoilconst, int aspf, int mblimit)
@@ -130,7 +130,7 @@ namespace Odin.Register
             sqlComm.Parameters.AddWithValue("@createsubbatch", createsubbatch);
             sqlComm.Parameters.AddWithValue("@weight", weight);
             sqlComm.Parameters.AddWithValue("@isactive", isactive);
-            sqlComm.Parameters.AddWithValue("@iscertified", iscertified);
+            sqlComm.Parameters.AddWithValue("@certState", certState);
             sqlComm.Parameters.AddWithValue("@revision", revision);
             sqlComm.Parameters.AddWithValue("@storagerules", storagerules);
             sqlComm.Parameters.AddWithValue("@spoilnorm", spoilnorm);
@@ -227,7 +227,7 @@ namespace Odin.Register
         { get; set; }
         public int IsActive
         { get; set; }
-        public int IsCertified
+        public string CertState
         { get; set; }
         public double SpoilNorm
         { get; set; }
@@ -294,7 +294,7 @@ namespace Odin.Register
                         QtyReserve = Convert.ToDouble(dr["QtyReserve"]);
                         CreateSubBatch = Convert.ToInt32(dr["createsubbatch"]);
                         IsActive = Convert.ToInt32(dr["isactive"]);
-                        IsCertified = Convert.ToInt32(dr["iscertified"]);
+                        CertState = dr["certState"].ToString();
                         Revision = dr["revision"].ToString();
                         StorageRules = dr["storagerules"].ToString();
                         SpoilNorm = Convert.ToDouble(dr["spoilnorm"]);
@@ -341,7 +341,7 @@ namespace Odin.Register
             Revision = "";
             StorageRules = "";
             IsActive = -1;
-            IsCertified = -1;
+            CertState = "";
             SpoilNorm = 0;
             StageId = 0;
             MSL = "1";
@@ -2100,7 +2100,7 @@ namespace Odin.Register
             sqlConn.Close();
         }
 
-        public void AddArtCertificates(string dateFrom, string dateTo, string comments, int certNum, string TNVED, int CSEId, int ArtId)
+        public void AddArtCertificates(string dateFrom, string dateTo, string comments, string certNum, string TNVED, int ArtId)
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_AddArtCertificates", sqlConn);
@@ -2111,7 +2111,6 @@ namespace Odin.Register
             sqlComm.Parameters.AddWithValue("@dateFrom", dateFrom);
             sqlComm.Parameters.AddWithValue("@dateTo", dateTo);
             sqlComm.Parameters.AddWithValue("@TNVED", TNVED);
-            sqlComm.Parameters.AddWithValue("@CSEId", CSEId);
             sqlComm.Parameters.AddWithValue("@artId", ArtId);
 
             sqlConn.Open();
@@ -2119,7 +2118,7 @@ namespace Odin.Register
             sqlConn.Close();
         }
 
-        public void EditArtCertificates(int id, string dateFrom, string dateTo, string comments, int certNum, string TNVED, int CSEId, int ArtId)
+        public void EditArtCertificates(int id, string dateFrom, string dateTo, string comments, string certNum, string TNVED, string isValid, int ArtId)
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_EditArtCertificates", sqlConn);
@@ -2131,7 +2130,7 @@ namespace Odin.Register
             sqlComm.Parameters.AddWithValue("@dateFrom", dateFrom);
             sqlComm.Parameters.AddWithValue("@dateTo", dateTo);
             sqlComm.Parameters.AddWithValue("@TNVED", TNVED);
-            sqlComm.Parameters.AddWithValue("@CSEId", CSEId);
+            sqlComm.Parameters.AddWithValue("@isValid", isValid);
             sqlComm.Parameters.AddWithValue("@artId", ArtId);
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();

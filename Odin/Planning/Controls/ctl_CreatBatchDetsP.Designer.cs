@@ -493,7 +493,7 @@
             this.cmb_Articles1.Description = null;
             this.cmb_Articles1.Enabled = false;
             this.cmb_Articles1.IsActive = -1;
-            this.cmb_Articles1.IsCertified = -1;
+            this.cmb_Articles1.CertState = "";
             this.cmb_Articles1.IsPF = 0;
             this.cmb_Articles1.Location = new System.Drawing.Point(105, 118);
             this.cmb_Articles1.Manufacturer = "";
