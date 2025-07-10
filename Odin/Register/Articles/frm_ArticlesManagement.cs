@@ -54,7 +54,14 @@ namespace Odin.Register.Articles
         private const string notSavedRecordTitleError = "Not saved record";
         private const string decimalStringFormat = "0.##";
         private const string cpseMarkConst = "Y";
-       
+        private string _currentCertState;
+        public string CertState
+        {
+            get { return cmb_CertState.Text; }
+            set { cmb_CertState.Text = value; }
+        }
+
+
         //private bool isNotSavedRecords; // variable to detect emty inserted cutting list row
 
         private const string deleteChildsConfirm = "Are you sure want to delete all nodes?";
@@ -158,9 +165,9 @@ namespace Odin.Register.Articles
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
-                if (Convert.ToInt32(row.Cells["cn_iscertified"].Value) == -1)
+                if (row.Cells["cn_certState"].Value.ToString() != "Will not be certified")
                     if (Convert.ToInt32(Helper.GetOneRecord("select dbo.fn_CheckArtCert(" + Convert.ToInt32(row.Cells["cn_id"].Value) + ")")) == 0)
-                        row.Cells["cn_iscertified"].Style.BackColor = Color.Crimson;
+                        row.Cells["cn_certState"].Style.BackColor = Color.Crimson;
 
                 if (Convert.ToInt32(row.Cells["cn_isactive"].Value) == 0)
                 {
@@ -181,10 +188,11 @@ namespace Odin.Register.Articles
 
         public void bw_List(object sender, DoWorkEventArgs e)
         {
+            string certStateValue = _currentCertState;
             var data = Reg_BLL.getArticles(cmb_Articles1.ArticleId, cmb_Articles1.Article.Trim(), txt_SecArticle.Text, Description, 
                                             cmb_Types1.TypeId, cmb_Department1.DeptId, txt_Comments.Text, cmb_Firms1.FirmId, 
                                             txt_ExtArt.Text, chk_IsActive.CheckState == CheckState.Checked ? -1 : (chk_IsActive.CheckState == CheckState.Indeterminate ? 1 : 0),
-                                            chk_IsCertified.CheckState == CheckState.Checked ? -1 : (chk_IsCertified.CheckState == CheckState.Indeterminate ? 1 : 0),
+                                            certStateValue,
                                             cmb_Common1.SelectedValue, rb_All.Checked == true ? 1 : (rb_Valid.Checked == true ? -1 : 0),
                                             chk_BOM.CheckState == CheckState.Checked ? -1 : (chk_BOM.CheckState == CheckState.Indeterminate ? 1 : 0),
                                             chk_MSL.CheckState == CheckState.Checked ? -1 : (chk_MSL.CheckState == CheckState.Indeterminate ? 1 : 0));
@@ -364,7 +372,7 @@ namespace Odin.Register.Articles
         {
             DataGridViewColumn oldColumn = gv_List.SortedColumn;
             var dir = Helper.SaveDirection(gv_List);
-
+            _currentCertState = this.CertState;
             bwStart(bw_List);
 
             Helper.RestoreDirection(gv_List, oldColumn, dir);
@@ -411,7 +419,7 @@ namespace Odin.Register.Articles
                 //s = Regex.Replace(s, @"\p{C}+", string.Empty);
                 //Add new 
                 int _res = Reg.SaveArticle(frm.Id, Regex.Replace(frm.Article, @"\p{C}+", string.Empty), frm.SecName, frm.Description, frm.TypeId, frm.UnitId, frm.ImagePath, frm.Comments,
-                                    frm.CustCodeId, frm.QtyReserve, frm.DeptId, frm.CreateSubBatch, frm.Weight, frm.IsActive, frm.IsCertified,
+                                    frm.CustCodeId, frm.QtyReserve, frm.DeptId, frm.CreateSubBatch, frm.Weight, frm.IsActive, frm.CertState,
                                     frm.Revision, frm.StoreRules, frm.SpoilNorm, frm.StageId, frm.MSL, frm.Service, 0, 0, 0/*frm.LabelsQty, frm.StencilRequired, 
                                     frm.StencilID*/, frm.Warning, frm.SpoilConst, frm.AsPF, frm.MBLimit);
                 if (_res != 0)
@@ -419,7 +427,7 @@ namespace Odin.Register.Articles
                     cmb_Articles1.ArticleId = _res;
                     DataGridViewColumn oldColumn = gv_List.SortedColumn;
                     var dir = Helper.SaveDirection(gv_List);
-
+                    _currentCertState = this.CertState;
                     bwStart(bw_List);
 
                     Helper.RestoreDirection(gv_List, oldColumn, dir);
@@ -708,7 +716,7 @@ namespace Odin.Register.Articles
             frm.CreateSubBatch = Reg.CreateSubBatch;
             frm.Weight = Reg.Weight;
             frm.IsActive = Reg.IsActive;
-            frm.IsCertified = Reg.IsCertified;
+            frm.CertState = Reg.CertState;
             frm.Revision = Reg.Revision;
             frm.StoreRules = Reg.StorageRules;
             frm.SpoilNorm = Reg.SpoilNorm;
@@ -730,7 +738,7 @@ namespace Odin.Register.Articles
                 //MessageBox.Show(frm.MSL);
                 //Edit
                 int _res = Reg.SaveArticle(frm.Id, Regex.Replace(frm.Article, @"\p{C}+", string.Empty), frm.SecName, frm.Description, frm.TypeId, frm.UnitId, frm.ImagePath, frm.Comments,
-                                    frm.CustCodeId, frm.QtyReserve, frm.DeptId, frm.CreateSubBatch, frm.Weight, frm.IsActive, frm.IsCertified,
+                                    frm.CustCodeId, frm.QtyReserve, frm.DeptId, frm.CreateSubBatch, frm.Weight, frm.IsActive, frm.CertState,
                                     frm.Revision, frm.StoreRules, frm.SpoilNorm, frm.StageId, frm.MSL, frm.Service, /*frm.LabelsQty, frm.StencilRequired, 
                                     frm.StencilID*/0, 0, 0, frm.Warning, frm.SpoilConst, frm.AsPF, frm.MBLimit);
                 //MessageBox.Show(_res.ToString());
@@ -739,7 +747,7 @@ namespace Odin.Register.Articles
                     //cmb_Articles1.ArticleId = _res;
                     DataGridViewColumn oldColumn = gv_List.SortedColumn;
                     var dir = Helper.SaveDirection(gv_List);
-
+                    _currentCertState = this.CertState;
                     bwStart(bw_List);
 
                     Helper.RestoreDirection(gv_List, oldColumn, dir);
@@ -873,7 +881,7 @@ namespace Odin.Register.Articles
                 cmb_Articles1.ArticleId = 0;
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
-
+                _currentCertState = this.CertState;
                 bwStart(bw_List);
 
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
@@ -905,7 +913,7 @@ namespace Odin.Register.Articles
             frm.CreateSubBatch = Reg.CreateSubBatch;
             frm.Weight = Reg.Weight;
             frm.IsActive = Reg.IsActive;
-            frm.IsCertified = Reg.IsCertified;
+            frm.CertState = Reg.CertState;
             frm.Revision = Reg.Revision;
             frm.StoreRules = Reg.StorageRules;
             frm.SpoilNorm = Reg.SpoilNorm;
@@ -926,7 +934,7 @@ namespace Odin.Register.Articles
             {
                 //Edit
                 int _res = Reg.SaveArticle(0, Regex.Replace(frm.Article, @"\p{C}+", string.Empty), frm.SecName, frm.Description, frm.TypeId, frm.UnitId, frm.ImagePath, frm.Comments,
-                                    frm.CustCodeId, frm.QtyReserve, frm.DeptId, frm.CreateSubBatch, frm.Weight, frm.IsActive, frm.IsCertified,
+                                    frm.CustCodeId, frm.QtyReserve, frm.DeptId, frm.CreateSubBatch, frm.Weight, frm.IsActive, frm.CertState,
                                     frm.Revision, frm.StoreRules, frm.SpoilNorm, frm.StageId, frm.MSL, frm.Service, /*frm.LabelsQty, frm.StencilRequired, 
                                     frm.StencilID*/0, 0, 0, frm.Warning, frm.SpoilConst, frm.AsPF, frm.MBLimit);
                 if (_res != 0)
@@ -934,7 +942,7 @@ namespace Odin.Register.Articles
                     cmb_Articles1.ArticleId = _res;
                     DataGridViewColumn oldColumn = gv_List.SortedColumn;
                     var dir = Helper.SaveDirection(gv_List);
-
+                    _currentCertState = this.CertState;
                     bwStart(bw_List);
 
                     Helper.RestoreDirection(gv_List, oldColumn, dir);
@@ -1021,7 +1029,7 @@ namespace Odin.Register.Articles
         {
             DataGridViewColumn oldColumn = gv_List.SortedColumn;
             var dir = Helper.SaveDirection(gv_List);
-
+            _currentCertState = this.CertState;
             bwStart(bw_List);
 
             Helper.RestoreDirection(gv_List, oldColumn, dir);
@@ -1077,10 +1085,6 @@ namespace Odin.Register.Articles
         {
             //bwStart(bw_List);
         }
-        private void chk_IsCertified_CheckedChanged(object sender, EventArgs e)
-        {
-            //bwStart(bw_List);
-        }
 
         private void txt_SecArticle_KeyDown(object sender, KeyEventArgs e)
         {
@@ -1088,7 +1092,7 @@ namespace Odin.Register.Articles
             {
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
-
+                _currentCertState = this.CertState;
                 bwStart(bw_List);
 
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
@@ -1103,7 +1107,7 @@ namespace Odin.Register.Articles
             {
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
-
+                _currentCertState = this.CertState;
                 bwStart(bw_List);
 
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
@@ -1118,7 +1122,7 @@ namespace Odin.Register.Articles
             {
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
-
+                _currentCertState = this.CertState;
                 bwStart(bw_List);
 
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
@@ -1133,7 +1137,7 @@ namespace Odin.Register.Articles
             {
                 DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 var dir = Helper.SaveDirection(gv_List);
-
+                _currentCertState = this.CertState;
                 bwStart(bw_List);
 
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
@@ -1155,5 +1159,6 @@ namespace Odin.Register.Articles
                                               DockingEdge.Left,
                                               new KryptonPage[] { NewInputCertificates(Reg.Article, Reg.ArtId) });
         }
+
     }
 }

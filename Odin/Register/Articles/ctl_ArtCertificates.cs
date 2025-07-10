@@ -84,7 +84,7 @@ namespace Odin.Register.Articles
             if (result == DialogResult.OK
                   && ArtId != 0)
             {
-                Reg.AddArtCertificates(frm.dateFrom, frm.dateTo, frm.Comments, frm.certNum, frm.TNVED, frm.CSEId, ArtId);
+                Reg.AddArtCertificates(frm.dateFrom, frm.dateTo, frm.Comments, frm.certNum, frm.TNVED, ArtId);
                 ShowDets();
             }
         }
@@ -92,22 +92,23 @@ namespace Odin.Register.Articles
         private void btn_Edit_Click(object sender, EventArgs e)
         {
             int _id = 0;
-            int _certNum = 0;
+            string _certNum = "";
             string _comments = "";
             string _dateFrom = "";
             string _dateTo = "";
             string _TNVED = "";
-            int _CSEId = 0;
+            string _IsValid = "";
 
             try
             {
                 _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_certid"].Value);
-                _certNum = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_certNum"].Value);
+                _certNum = gv_List.CurrentRow.Cells["cn_certNum"].Value.ToString();
                 _comments = Convert.ToString(gv_List.CurrentRow.Cells["cn_comments"].Value);
                 _dateFrom = gv_List.CurrentRow.Cells["cn_dateFrom"].Value.ToString();
                 _dateTo = gv_List.CurrentRow.Cells["cn_dateTo"].Value.ToString();
                 _TNVED = gv_List.CurrentRow.Cells["cn_tnved"].Value.ToString();
-                _CSEId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_CSEId"].Value);
+                _IsValid = gv_List.CurrentRow.Cells["chk_IsValid"].Value.ToString();
+
             }
             catch { }
 
@@ -120,12 +121,12 @@ namespace Odin.Register.Articles
                 frm.dateFrom = _dateFrom;
                 frm.dateTo = _dateTo;
                 frm.TNVED = _TNVED;
-                frm.CSEId = _CSEId;
+                frm.isValid = _IsValid;
 
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    Reg.EditArtCertificates(_id, frm.dateFrom, frm.dateTo, frm.Comments, frm.certNum, frm.TNVED, frm.CSEId, ArtId);
+                    Reg.EditArtCertificates(_id, frm.dateFrom, frm.dateTo, frm.Comments, frm.certNum, frm.TNVED, frm.isValid, ArtId);
                     ShowDets();
                 }
             }

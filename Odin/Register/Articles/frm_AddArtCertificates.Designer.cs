@@ -42,16 +42,14 @@
             this.dateFromLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.btn_Cancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.cmb_Articles1 = new Odin.CMB_Components.Articles.cmb_Articles();
-            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.chk_IsValid = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
-            this.kryptonPanel1.Controls.Add(this.cmb_Articles1);
+            this.kryptonPanel1.Controls.Add(this.chk_IsValid);
             this.kryptonPanel1.Controls.Add(this.tnvedLabel);
             this.kryptonPanel1.Controls.Add(this.cn_tnved);
             this.kryptonPanel1.Controls.Add(this.commentLabel);
@@ -69,21 +67,21 @@
             this.kryptonPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonPanel1.Size = new System.Drawing.Size(531, 379);
+            this.kryptonPanel1.Size = new System.Drawing.Size(531, 380);
             this.kryptonPanel1.TabIndex = 1;
             // 
             // tnvedLabel
             // 
-            this.tnvedLabel.Location = new System.Drawing.Point(18, 228);
+            this.tnvedLabel.Location = new System.Drawing.Point(18, 185);
             this.tnvedLabel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tnvedLabel.Name = "tnvedLabel";
-            this.tnvedLabel.Size = new System.Drawing.Size(74, 29);
+            this.tnvedLabel.Size = new System.Drawing.Size(88, 29);
             this.tnvedLabel.TabIndex = 28;
-            this.tnvedLabel.Values.Text = "TNVED:";
+            this.tnvedLabel.Values.Text = "HS Code:";
             // 
             // cn_tnved
             // 
-            this.cn_tnved.Location = new System.Drawing.Point(215, 231);
+            this.cn_tnved.Location = new System.Drawing.Point(215, 188);
             this.cn_tnved.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cn_tnved.Name = "cn_tnved";
             this.cn_tnved.Size = new System.Drawing.Size(284, 26);
@@ -91,7 +89,7 @@
             // 
             // commentLabel
             // 
-            this.commentLabel.Location = new System.Drawing.Point(18, 268);
+            this.commentLabel.Location = new System.Drawing.Point(18, 263);
             this.commentLabel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.commentLabel.Name = "commentLabel";
             this.commentLabel.Size = new System.Drawing.Size(97, 29);
@@ -100,7 +98,7 @@
             // 
             // cn_comment
             // 
-            this.cn_comment.Location = new System.Drawing.Point(215, 271);
+            this.cn_comment.Location = new System.Drawing.Point(215, 266);
             this.cn_comment.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cn_comment.Multiline = true;
             this.cn_comment.Name = "cn_comment";
@@ -109,7 +107,7 @@
             // 
             // certNumLabel
             // 
-            this.certNumLabel.Location = new System.Drawing.Point(18, 188);
+            this.certNumLabel.Location = new System.Drawing.Point(18, 146);
             this.certNumLabel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.certNumLabel.Name = "certNumLabel";
             this.certNumLabel.Size = new System.Drawing.Size(168, 29);
@@ -118,7 +116,7 @@
             // 
             // cn_certNum
             // 
-            this.cn_certNum.Location = new System.Drawing.Point(215, 191);
+            this.cn_certNum.Location = new System.Drawing.Point(215, 149);
             this.cn_certNum.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cn_certNum.Name = "cn_certNum";
             this.cn_certNum.Size = new System.Drawing.Size(284, 26);
@@ -186,57 +184,20 @@
             this.btn_OK.Values.Image = global::Odin.Global_Resourses.Ok;
             this.btn_OK.Values.Text = "OK";
             // 
-            // cmb_Articles1
+            // chk_IsValid
             // 
-            this.cmb_Articles1.Article = "";
-            this.cmb_Articles1.ArticleId = 0;
-            this.cmb_Articles1.ArticleIdRec = 0;
-            this.cmb_Articles1.ArtType = null;
-            this.cmb_Articles1.BOMState = 0;
-            this.cmb_Articles1.Comments = null;
-            this.cmb_Articles1.CustCode = null;
-            this.cmb_Articles1.CustCodeId = 0;
-            this.cmb_Articles1.Department = null;
-            this.cmb_Articles1.DeptId = 0;
-            this.cmb_Articles1.Description = null;
-            this.cmb_Articles1.IsActive = -1;
-            this.cmb_Articles1.IsCertified = -1;
-            this.cmb_Articles1.IsPF = 0;
-            this.cmb_Articles1.Location = new System.Drawing.Point(101, 149);
-            this.cmb_Articles1.Manufacturer = null;
-            this.cmb_Articles1.Margin = new System.Windows.Forms.Padding(0);
-            this.cmb_Articles1.Name = "cmb_Articles1";
-            this.cmb_Articles1.Project = null;
-            this.cmb_Articles1.ProjectId = 0;
-            this.cmb_Articles1.QtyAvail = 0D;
-            this.cmb_Articles1.QtyConsStock = 0D;
-            this.cmb_Articles1.RMId = 0;
-            this.cmb_Articles1.SecName = null;
-            this.cmb_Articles1.Size = new System.Drawing.Size(398, 31);
-            this.cmb_Articles1.SMTType = 0;
-            this.cmb_Articles1.SpoilConst = 0D;
-            this.cmb_Articles1.Stage = null;
-            this.cmb_Articles1.StageID = 0;
-            this.cmb_Articles1.TabIndex = 29;
-            this.cmb_Articles1.TypeId = 0;
-            this.cmb_Articles1.Unit = null;
-            this.cmb_Articles1.UnitId = 0;
-            this.cmb_Articles1.Weight = 0D;
-            // 
-            // kryptonLabel1
-            // 
-            this.kryptonLabel1.Location = new System.Drawing.Point(18, 149);
-            this.kryptonLabel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(47, 29);
-            this.kryptonLabel1.TabIndex = 30;
-            this.kryptonLabel1.Values.Text = "CSE:";
+            this.chk_IsValid.Location = new System.Drawing.Point(20, 224);
+            this.chk_IsValid.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.chk_IsValid.Name = "chk_IsValid";
+            this.chk_IsValid.Size = new System.Drawing.Size(142, 29);
+            this.chk_IsValid.TabIndex = 78;
+            this.chk_IsValid.Values.Text = "Valid HS Code";
             // 
             // frm_AddArtCertificates
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(531, 379);
+            this.ClientSize = new System.Drawing.Size(531, 380);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -266,7 +227,6 @@
         private System.Windows.Forms.TextBox cn_comment;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel tnvedLabel;
         private System.Windows.Forms.TextBox cn_tnved;
-        private CMB_Components.Articles.cmb_Articles cmb_Articles1;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_IsValid;
     }
 }

@@ -21,19 +21,19 @@ namespace Odin.Register.Articles
         public int Id
         { get; set; }
 
-        public int certNum
-        { get { return Convert.ToInt32(cn_certNum.Text); }
-        set { cn_certNum.Text = value.ToString(); } }
+        public string certNum
+        { get { return cn_certNum.Text; }
+        set { cn_certNum.Text = value; } }
+
+        public string isValid
+        {
+            get { return chk_IsValid.Text; }
+            set { chk_IsValid.Text = value; }
+        }
 
         public string Comments
         { get { return cn_comment.Text; }
         set { cn_comment.Text = value; }
-        }
-
-        public int CSEId
-        {
-            get { return cmb_Articles1.ArticleId; }
-            set { cmb_Articles1.ArticleId = value; }
         }
 
         public string TNVED
