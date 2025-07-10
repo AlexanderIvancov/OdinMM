@@ -59,7 +59,6 @@
             this.kryptonLabel9 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.cmb_Common1 = new Odin.CMB_Components.Common.cmb_Common();
             this.chk_IsActive = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
-            this.chk_IsCertified = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_SecArticle = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.buttonSpecAny4 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
@@ -76,6 +75,7 @@
             this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.cmb_Types1 = new Odin.CMB_Components.Types.cmb_Types();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel10 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_Description = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.buttonSpecAny1 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -336,7 +336,6 @@
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.kryptonLabel9);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.cmb_Common1);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.chk_IsActive);
-            this.kryptonSplitContainer2.Panel1.Controls.Add(this.chk_IsCertified);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.kryptonLabel8);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.txt_SecArticle);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.cmb_Department1);
@@ -350,6 +349,7 @@
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.kryptonLabel3);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.cmb_Types1);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.kryptonLabel2);
+            this.kryptonSplitContainer2.Panel1.Controls.Add(this.kryptonLabel10);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.txt_Description);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.kryptonLabel1);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.cmb_Articles1);
@@ -453,7 +453,7 @@
             // 
             this.chk_IsActive.Checked = true;
             this.chk_IsActive.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk_IsActive.Location = new System.Drawing.Point(150, 247);
+            this.chk_IsActive.Location = new System.Drawing.Point(20, 364);
             this.chk_IsActive.Name = "chk_IsActive";
             this.chk_IsActive.Size = new System.Drawing.Size(67, 20);
             this.chk_IsActive.TabIndex = 17;
@@ -1149,6 +1149,14 @@
             this.btn_Rationing.Values.Text = "Rationing";
             this.btn_Rationing.Click += new System.EventHandler(this.btn_Rationing_Click);
             // 
+            // kryptonLabel2
+            // 
+            this.kryptonLabel10.Location = new System.Drawing.Point(9, 247);
+            this.kryptonLabel10.Name = "kryptonLabel10";
+            this.kryptonLabel10.Size = new System.Drawing.Size(75, 20);
+            this.kryptonLabel10.TabIndex = 4;
+            this.kryptonLabel10.Values.Text = "Cert. State:";
+            // 
             // cmb_CertState
             // 
             this.cmb_CertState.FormattingEnabled = true;
@@ -1156,9 +1164,9 @@
             "Certified",
             "Will be certified",
             "Will not be certified"});
-            this.cmb_CertState.Location = new System.Drawing.Point(14, 247);
+            this.cmb_CertState.Location = new System.Drawing.Point(90, 247);
             this.cmb_CertState.Name = "cmb_CertState";
-            this.cmb_CertState.Size = new System.Drawing.Size(121, 28);
+            this.cmb_CertState.Size = new System.Drawing.Size(184, 28);
             this.cmb_CertState.TabIndex = 24;
             // 
             // btn_Assemblies
@@ -1304,6 +1312,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonSplitContainer kryptonSplitContainer2;
         private ComponentFactory.Krypton.Docking.KryptonDockableWorkspace kryptonDockableWorkspace1;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel10;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_Description;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny1;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
@@ -1358,7 +1367,6 @@
         private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage2;
         private System.Windows.Forms.ToolStripButton btn_Excel;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_IsActive;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_IsCertified;
         private System.Windows.Forms.ToolStripButton btn_Copy;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Suppliers;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Assemblies;
