@@ -363,7 +363,7 @@ namespace Odin.Sales
                 if (row.Cells["cn_salescomments"].Value.ToString().Trim() != "")
                     foreach (DataGridViewCell cell in row.Cells)
                     { cell.Style.BackColor = Color.Plum; }
-                if (Convert.ToInt32(row.Cells["cn_iscertified"].Value) == -1)
+                if (row.Cells["cn_iscertified"].Value.ToString() == "Certified")
                     {
                         row.Cells["cn_artid"].Style.BackColor = Color.LightGreen;
                         row.Cells["cn_article"].Style.BackColor = Color.LightGreen;

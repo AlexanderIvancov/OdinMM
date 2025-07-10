@@ -173,7 +173,7 @@ namespace Odin.Sales
         public void SetCellsColor()
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
-                if (Convert.ToInt32(row.Cells["cn_iscertified"].Value) == -1)
+                if (row.Cells["cn_iscertified"].Value.ToString() == "Certified")
                 {
                     row.Cells["cn_article"].Style.BackColor = Color.LightGreen;
                     row.Cells["cn_artid"].Style.BackColor = Color.LightGreen;
