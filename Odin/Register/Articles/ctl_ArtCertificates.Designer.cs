@@ -33,11 +33,9 @@
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.cn_certid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_CSEId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_certNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_tnved = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_dateFrom = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_dateTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_createdby = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_createdat = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -74,11 +72,9 @@
             this.gv_List.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.gv_List.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cn_certid,
-            this.cn_CSEId,
             this.cn_certNum,
             this.cn_tnved,
             this.cn_dateFrom,
-            this.cn_dateTo,
             this.cn_comments,
             this.cn_createdby,
             this.cn_createdat});
@@ -97,15 +93,6 @@
             this.cn_certid.HeaderText = "id";
             this.cn_certid.Name = "cn_certid";
             this.cn_certid.Width = 70;
-            // 
-            // cn_CSEId
-            // 
-            this.cn_CSEId.DataPropertyName = "cseid";
-            this.cn_CSEId.FillWeight = 150F;
-            this.cn_CSEId.HeaderText = "CSEId";
-            this.cn_CSEId.Name = "cn_CSEId";
-            this.cn_CSEId.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.cn_CSEId.Width = 150;
             // 
             // cn_certNum
             // 
@@ -131,14 +118,6 @@
             this.cn_dateFrom.HeaderText = "Valid from";
             this.cn_dateFrom.Name = "cn_dateFrom";
             this.cn_dateFrom.Width = 150;
-            // 
-            // cn_dateTo
-            // 
-            this.cn_dateTo.DataPropertyName = "dateTo";
-            this.cn_dateTo.FillWeight = 150F;
-            this.cn_dateTo.HeaderText = "Valid till";
-            this.cn_dateTo.Name = "cn_dateTo";
-            this.cn_dateTo.Width = 150;
             // 
             // cn_comments
             // 
@@ -287,16 +266,13 @@
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridView gv_List;
         private Global_Classes.SyncBindingSource bs_List;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_certid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_CSEId;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_certNum;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_tnved;
         private System.Windows.Forms.DataGridViewTextBoxColumn dateFrom;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dateTo;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_comments;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_createdby;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_createdat;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_dateFrom;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_dateTo;
         public CMB_Components.Articles.cmb_Articles cmb_Articles1;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
         private System.Windows.Forms.ToolStripButton btn_Add;

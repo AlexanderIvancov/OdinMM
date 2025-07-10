@@ -42,12 +42,6 @@ namespace Odin.Register.Articles
             set { cn_tnved.Text = value; }
         }
 
-        public string dateTo
-        { 
-            get { return cn_dateTo.Value.ToString(); }
-            set { cn_dateTo.Value = Convert.ToDateTime(value); }
-        }
-
         public string dateFrom
         {
             get { return cn_dateFrom.Value.ToString(); }

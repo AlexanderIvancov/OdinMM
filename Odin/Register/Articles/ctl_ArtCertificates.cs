@@ -84,7 +84,7 @@ namespace Odin.Register.Articles
             if (result == DialogResult.OK
                   && ArtId != 0)
             {
-                Reg.AddArtCertificates(frm.dateFrom, frm.dateTo, frm.Comments, frm.certNum, frm.TNVED, ArtId);
+                Reg.AddArtCertificates(frm.dateFrom, frm.Comments, frm.certNum, cmb_Articles1.CustCode, ArtId, frm.isValid);
                 ShowDets();
             }
         }
@@ -119,14 +119,13 @@ namespace Odin.Register.Articles
                 frm.certNum = _certNum;
                 frm.Comments = _comments;
                 frm.dateFrom = _dateFrom;
-                frm.dateTo = _dateTo;
-                frm.TNVED = _TNVED;
+                frm.TNVED = cmb_Articles1.CustCode;
                 frm.isValid = _IsValid;
 
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    Reg.EditArtCertificates(_id, frm.dateFrom, frm.dateTo, frm.Comments, frm.certNum, frm.TNVED, frm.isValid, ArtId);
+                    Reg.EditArtCertificates(_id, frm.dateFrom, frm.Comments, frm.certNum, cmb_Articles1.CustCode, frm.isValid, ArtId);
                     ShowDets();
                 }
             }
