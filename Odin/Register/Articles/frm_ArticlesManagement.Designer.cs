@@ -50,6 +50,7 @@
             this.kryptonPage2 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.kryptonSplitContainer2 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
+            this.cmb_CertState = new System.Windows.Forms.ComboBox();
             this.chk_MSL = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.chk_BOM = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.grp_BOMvalidation = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
@@ -124,6 +125,7 @@
             this.btn_Excel = new System.Windows.Forms.ToolStripButton();
             this.kryptonDockableWorkspace1 = new ComponentFactory.Krypton.Docking.KryptonDockableWorkspace();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.btn_Certificates = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Analogs = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Rationing = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Assemblies = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -134,8 +136,6 @@
             this.btn_BOM = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_General = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.bs_List = new Odin.Global_Classes.SyncBindingSource();
-            this.cmb_CertState = new System.Windows.Forms.ComboBox();
-            this.btn_Certificates = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.mnu_Lines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).BeginInit();
@@ -363,6 +363,18 @@
             this.kryptonSplitContainer2.Size = new System.Drawing.Size(1051, 246);
             this.kryptonSplitContainer2.SplitterDistance = 284;
             this.kryptonSplitContainer2.TabIndex = 0;
+            // 
+            // cmb_CertState
+            // 
+            this.cmb_CertState.FormattingEnabled = true;
+            this.cmb_CertState.Items.AddRange(new object[] {
+            "Certified",
+            "Will be certified",
+            "Will not be certified"});
+            this.cmb_CertState.Location = new System.Drawing.Point(90, 247);
+            this.cmb_CertState.Name = "cmb_CertState";
+            this.cmb_CertState.Size = new System.Drawing.Size(184, 21);
+            this.cmb_CertState.TabIndex = 24;
             // 
             // chk_MSL
             // 
@@ -614,6 +626,14 @@
             this.kryptonLabel2.TabIndex = 4;
             this.kryptonLabel2.Values.Text = "Description:";
             // 
+            // kryptonLabel10
+            // 
+            this.kryptonLabel10.Location = new System.Drawing.Point(9, 247);
+            this.kryptonLabel10.Name = "kryptonLabel10";
+            this.kryptonLabel10.Size = new System.Drawing.Size(70, 20);
+            this.kryptonLabel10.TabIndex = 4;
+            this.kryptonLabel10.Values.Text = "Cert. State:";
+            // 
             // txt_Description
             // 
             this.txt_Description.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
@@ -646,6 +666,7 @@
             this.cmb_Articles1.ArticleIdRec = 0;
             this.cmb_Articles1.ArtType = null;
             this.cmb_Articles1.BOMState = 0;
+            this.cmb_Articles1.CertState = "";
             this.cmb_Articles1.Comments = null;
             this.cmb_Articles1.CustCode = null;
             this.cmb_Articles1.CustCodeId = 0;
@@ -653,7 +674,6 @@
             this.cmb_Articles1.DeptId = 0;
             this.cmb_Articles1.Description = null;
             this.cmb_Articles1.IsActive = -1;
-            this.cmb_Articles1.CertState = "";
             this.cmb_Articles1.IsPF = 0;
             this.cmb_Articles1.Location = new System.Drawing.Point(9, 68);
             this.cmb_Articles1.Manufacturer = "";
@@ -1094,7 +1114,7 @@
             // kryptonDockableWorkspace1
             // 
             this.kryptonDockableWorkspace1.AutoHiddenHost = false;
-            this.kryptonDockableWorkspace1.CompactFlags = ((ComponentFactory.Krypton.Workspace.CompactFlags)(((ComponentFactory.Krypton.Workspace.CompactFlags.RemoveEmptyCells | ComponentFactory.Krypton.Workspace.CompactFlags.RemoveEmptySequences)
+            this.kryptonDockableWorkspace1.CompactFlags = ((ComponentFactory.Krypton.Workspace.CompactFlags)(((ComponentFactory.Krypton.Workspace.CompactFlags.RemoveEmptyCells | ComponentFactory.Krypton.Workspace.CompactFlags.RemoveEmptySequences) 
             | ComponentFactory.Krypton.Workspace.CompactFlags.PromoteLeafs)));
             this.kryptonDockableWorkspace1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonDockableWorkspace1.Location = new System.Drawing.Point(0, 0);
@@ -1129,6 +1149,16 @@
             this.kryptonPanel1.Size = new System.Drawing.Size(1051, 49);
             this.kryptonPanel1.TabIndex = 2;
             // 
+            // btn_Certificates
+            // 
+            this.btn_Certificates.Location = new System.Drawing.Point(817, 3);
+            this.btn_Certificates.Name = "btn_Certificates";
+            this.btn_Certificates.Size = new System.Drawing.Size(107, 40);
+            this.btn_Certificates.TabIndex = 10;
+            this.btn_Certificates.Values.Image = global::Odin.Global_Resourses.agt_reload24x24;
+            this.btn_Certificates.Values.Text = "Certificates";
+            this.btn_Certificates.Click += new System.EventHandler(this.btn_Certificates_Click);
+            // 
             // btn_Analogs
             // 
             this.btn_Analogs.Location = new System.Drawing.Point(480, 3);
@@ -1148,26 +1178,6 @@
             this.btn_Rationing.Values.Image = global::Odin.Global_Resourses.stopwatch_start;
             this.btn_Rationing.Values.Text = "Rationing";
             this.btn_Rationing.Click += new System.EventHandler(this.btn_Rationing_Click);
-            // 
-            // kryptonLabel2
-            // 
-            this.kryptonLabel10.Location = new System.Drawing.Point(9, 247);
-            this.kryptonLabel10.Name = "kryptonLabel10";
-            this.kryptonLabel10.Size = new System.Drawing.Size(75, 20);
-            this.kryptonLabel10.TabIndex = 4;
-            this.kryptonLabel10.Values.Text = "Cert. State:";
-            // 
-            // cmb_CertState
-            // 
-            this.cmb_CertState.FormattingEnabled = true;
-            this.cmb_CertState.Items.AddRange(new object[] {
-            "Certified",
-            "Will be certified",
-            "Will not be certified"});
-            this.cmb_CertState.Location = new System.Drawing.Point(90, 247);
-            this.cmb_CertState.Name = "cmb_CertState";
-            this.cmb_CertState.Size = new System.Drawing.Size(184, 28);
-            this.cmb_CertState.TabIndex = 24;
             // 
             // btn_Assemblies
             // 
@@ -1240,17 +1250,6 @@
             this.btn_General.Values.Image = global::Odin.Global_Resourses.ButtonImageLarge;
             this.btn_General.Values.Text = "General";
             this.btn_General.Click += new System.EventHandler(this.btn_General_Click);
-            // 
-            // btn_Certificates
-            // 
-            this.btn_Certificates.Location = new System.Drawing.Point(817, 3);
-            this.btn_Certificates.Name = "btn_Certificates";
-            this.btn_Certificates.Size = new System.Drawing.Size(107, 40);
-            this.btn_Certificates.TabIndex = 10;
-            this.btn_Certificates.Values.Image = global::Odin.Global_Resourses.agt_reload24x24;
-            this.btn_Certificates.Values.Text = "Certificates";
-            this.btn_Certificates.Click += new System.EventHandler(this.btn_Certificates_Click);
-            //this.btn_Certificates.Visible = false;
             // 
             // frm_ArticlesManagement
             // 
