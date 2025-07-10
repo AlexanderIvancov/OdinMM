@@ -24,27 +24,24 @@ namespace Odin.Register.Articles
 
         public int ArtId
         {
-            get { return cmb_Articles1.ArticleId; }
+            get {
+                return cmb_Articles1.ArticleId;
+            }
             set
             {
                 _articleid = value;
                 //cmb_Articles1.ArticleId = _articleid;
-                ShowDets();
                 //bwStart(bw_List);
             }
         }
-        int _artcseid = 0;
 
-        public int ArtCseId
-        { get { return _artcseid; }
-            set { _artcseid = value; } }
         #endregion
 
         #region Methods
 
         public void ShowDets()
         {
-            var data = Reg.ArticleCertificatesData(ArtId);
+            var data = Reg.ArticleCertificatesData(cmb_Articles1.ArticleId);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -73,6 +70,7 @@ namespace Odin.Register.Articles
         private void cmb_Articles1_ArticleChanged(object sender)
         {
             ArtId = cmb_Articles1.ArticleId;
+            ShowDets();
         }
               
 
@@ -154,16 +152,6 @@ namespace Odin.Register.Articles
             }
         }
 
-        private void btn_Excel_Click(object sender, EventArgs e)
-        {
-            ExportData ED;
-
-            string _filename = "Analog.xls";
-            if (cmb_Articles1.ArticleId != 0)
-                _filename = "Analogs " + cmb_Articles1.Article + ".xls";
-            ED = new ExportData(this.gv_List, _filename, this.Name);
-            ED.DgvIntoExcel();
-        }
 
         #endregion
     }

@@ -227,6 +227,7 @@
             this.cmb_Articles1.RMId = 0;
             this.cmb_Articles1.SecName = null;
             this.cmb_Articles1.Size = new System.Drawing.Size(398, 31);
+            this.cmb_Articles1.ArticleChanged += new Odin.CMB_Components.Articles.ArticlesEventHandler(this.cmb_Articles1_ArticleChanged);
             this.cmb_Articles1.SMTType = 0;
             this.cmb_Articles1.SpoilConst = 0D;
             this.cmb_Articles1.Stage = "";
