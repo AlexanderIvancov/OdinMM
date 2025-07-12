@@ -62,7 +62,7 @@
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonPanel1.Size = new System.Drawing.Size(1386, 72);
+            this.kryptonPanel1.Size = new System.Drawing.Size(924, 52);
             this.kryptonPanel1.TabIndex = 1;
             // 
             // gv_List
@@ -141,11 +141,10 @@
             // 
             // kryptonLabel2
             // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(31, 21);
-            this.kryptonLabel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.kryptonLabel2.Location = new System.Drawing.Point(11, 15);
             this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(68, 29);
-            this.kryptonLabel2.TabIndex = 44;
+            this.kryptonLabel2.Size = new System.Drawing.Size(48, 20);
+            this.kryptonLabel2.TabIndex = 42;
             this.kryptonLabel2.Values.Text = "Article:";
             // 
             // btn_Add
@@ -184,19 +183,18 @@
             this.bn_List.CountItem = null;
             this.bn_List.DeleteItem = null;
             this.bn_List.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.bn_List.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.bn_List.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btn_Add,
             this.btn_Edit,
             this.btn_Delete});
-            this.bn_List.Location = new System.Drawing.Point(0, 72);
+            this.bn_List.Location = new System.Drawing.Point(0, 52);
             this.bn_List.MoveFirstItem = null;
             this.bn_List.MoveLastItem = null;
             this.bn_List.MoveNextItem = null;
             this.bn_List.MovePreviousItem = null;
             this.bn_List.Name = "bn_List";
             this.bn_List.PositionItem = null;
-            this.bn_List.Size = new System.Drawing.Size(1386, 31);
+            this.bn_List.Size = new System.Drawing.Size(924, 25);
             this.bn_List.TabIndex = 45;
             this.bn_List.Text = "Bill of materials";
             // 
@@ -216,7 +214,7 @@
             this.cmb_Articles1.IsActive = -1;
             this.cmb_Articles1.CertState = "";
             this.cmb_Articles1.IsPF = 0;
-            this.cmb_Articles1.Location = new System.Drawing.Point(123, 21);
+            this.cmb_Articles1.Location = new System.Drawing.Point(72, 15);
             this.cmb_Articles1.Manufacturer = "";
             this.cmb_Articles1.Margin = new System.Windows.Forms.Padding(0);
             this.cmb_Articles1.Name = "cmb_Articles1";
@@ -226,7 +224,7 @@
             this.cmb_Articles1.QtyConsStock = 0D;
             this.cmb_Articles1.RMId = 0;
             this.cmb_Articles1.SecName = null;
-            this.cmb_Articles1.Size = new System.Drawing.Size(398, 31);
+            this.cmb_Articles1.Size = new System.Drawing.Size(265, 20);
             this.cmb_Articles1.ArticleChanged += new Odin.CMB_Components.Articles.ArticlesEventHandler(this.cmb_Articles1_ArticleChanged);
             this.cmb_Articles1.SMTType = 0;
             this.cmb_Articles1.SpoilConst = 0D;
@@ -237,17 +235,18 @@
             this.cmb_Articles1.Unit = null;
             this.cmb_Articles1.UnitId = 0;
             this.cmb_Articles1.Weight = 0D;
+            this.cmb_Articles1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
             // 
             // ctl_ArtCertificates
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.gv_List);
             this.Controls.Add(this.bn_List);
             this.Controls.Add(this.kryptonPanel1);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "ctl_ArtCertificates";
-            this.Size = new System.Drawing.Size(1386, 500);
+            this.Size = new System.Drawing.Size(924, 325);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
