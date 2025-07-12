@@ -1,5 +1,6 @@
 ﻿using ComponentFactory.Krypton.Toolkit;
 using System;
+using System.Windows.Forms;
 
 namespace Odin.Register.Articles
 {
@@ -25,10 +26,16 @@ namespace Odin.Register.Articles
         { get { return cn_certNum.Text; }
         set { cn_certNum.Text = value; } }
 
-        public string isValid
+        public int isValid
         {
-            get { return chk_IsValid.Text; }
-            set { chk_IsValid.Text = value; }
+            get
+            {
+                return chk_IsValid.CheckState == CheckState.Checked ? -1 : 0;
+            }
+            set
+            {
+                chk_IsValid.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+            }
         }
 
         public string Comments

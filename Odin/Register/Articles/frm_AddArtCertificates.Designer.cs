@@ -163,13 +163,12 @@
             // 
             // chk_IsValid
             // 
-            this.chk_IsValid.Location = new System.Drawing.Point(18, 224);
+            this.chk_IsValid.Location = new System.Drawing.Point(25, 224);
             this.chk_IsValid.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.chk_IsValid.Name = "chk_IsValid";
             this.chk_IsValid.Size = new System.Drawing.Size(142, 29);
             this.chk_IsValid.TabIndex = 78;
             this.chk_IsValid.Values.Text = "Valid HS Code";
-            this.chk_IsValid.Text = "Valid HS Code";
             this.chk_IsValid.Visible = true;
             // 
             // frm_AddArtCertificates
