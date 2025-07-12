@@ -107,7 +107,7 @@
             // 
             this.cn_tnved.DataPropertyName = "tnved";
             this.cn_tnved.FillWeight = 150F;
-            this.cn_tnved.HeaderText = "TNVED code";
+            this.cn_tnved.HeaderText = "HS code";
             this.cn_tnved.Name = "cn_tnved";
             this.cn_tnved.Width = 150;
             // 

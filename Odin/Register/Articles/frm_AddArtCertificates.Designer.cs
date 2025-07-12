@@ -73,6 +73,7 @@
             this.tnvedLabel.Name = "tnvedLabel";
             this.tnvedLabel.Size = new System.Drawing.Size(88, 29);
             this.tnvedLabel.TabIndex = 28;
+            this.tnvedLabel.Visible = true;
             this.tnvedLabel.Values.Text = "HS Code:";
             // 
             // cn_tnved
