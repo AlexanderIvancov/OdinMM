@@ -144,6 +144,7 @@
             this.cn_qtypack = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_package = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_custcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_certstate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_createdat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_createdby = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_batch = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -771,6 +772,7 @@
             this.cn_qtypack,
             this.cn_package,
             this.cn_custcode,
+            this.cn_certstate,
             this.cn_createdat,
             this.cn_createdby,
             this.cn_batch,
@@ -1329,6 +1331,13 @@
             this.cn_custcode.Name = "cn_custcode";
             this.cn_custcode.ReadOnly = true;
             // 
+            // cn_certstate
+            // 
+            this.cn_certstate.DataPropertyName = "certstate";
+            this.cn_certstate.HeaderText = "Cert. state";
+            this.cn_certstate.Name = "cn_certstate";
+            this.cn_certstate.ReadOnly = true;
+            // 
             // cn_createdat
             // 
             this.cn_createdat.DataPropertyName = "createdat";
@@ -1538,6 +1547,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_qtypack;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_package;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_custcode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_certstate;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_createdat;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_createdby;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_batch;
