@@ -381,7 +381,7 @@ namespace Odin.Warehouse.History
 
             foreach (DataGridViewRow row in this.gv_IncomeList.Rows)
             {
-                _total = _total + Convert.ToDouble(row.Cells["cn_total"].Value);
+                _total = _total + Convert.ToDouble(row.Cells["cn_totaleur"].Value);
             }
 
             TotalIncomes = Math.Round(_total, 2);

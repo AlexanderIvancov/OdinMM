@@ -32,10 +32,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_StockHistory));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mnu_IncomeLines = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mni_FilterForI = new System.Windows.Forms.ToolStripTextBox();
             this.mni_SearchI = new System.Windows.Forms.ToolStripMenuItem();
@@ -1035,10 +1035,12 @@
             // cmb_IncomeDoc1
             // 
             this.cmb_IncomeDoc1.CurId = 0;
+            this.cmb_IncomeDoc1.DocDate = "";
             this.cmb_IncomeDoc1.EnableSearchId = false;
             this.cmb_IncomeDoc1.IncomeDoc = "";
             this.cmb_IncomeDoc1.IncomeDocId = 0;
             this.cmb_IncomeDoc1.IncomeDocSavedId = 0;
+            this.cmb_IncomeDoc1.IsBanned = -1;
             this.cmb_IncomeDoc1.Location = new System.Drawing.Point(87, 52);
             this.cmb_IncomeDoc1.Name = "cmb_IncomeDoc1";
             this.cmb_IncomeDoc1.Size = new System.Drawing.Size(204, 20);
@@ -1256,6 +1258,7 @@
             this.cmb_Articles1.ArticleIdRec = 0;
             this.cmb_Articles1.ArtType = null;
             this.cmb_Articles1.BOMState = 0;
+            this.cmb_Articles1.CertState = "";
             this.cmb_Articles1.Comments = null;
             this.cmb_Articles1.CustCode = null;
             this.cmb_Articles1.CustCodeId = 0;
@@ -1263,7 +1266,6 @@
             this.cmb_Articles1.DeptId = 0;
             this.cmb_Articles1.Description = null;
             this.cmb_Articles1.IsActive = -1;
-            this.cmb_Articles1.CertState = "";
             this.cmb_Articles1.IsPF = 0;
             this.cmb_Articles1.Location = new System.Drawing.Point(8, 172);
             this.cmb_Articles1.Manufacturer = "";
@@ -1723,9 +1725,9 @@
             // cn_createdat
             // 
             this.cn_createdat.DataPropertyName = "createdat";
-            dataGridViewCellStyle1.Format = "G";
-            dataGridViewCellStyle1.NullValue = null;
-            this.cn_createdat.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Format = "G";
+            dataGridViewCellStyle5.NullValue = null;
+            this.cn_createdat.DefaultCellStyle = dataGridViewCellStyle5;
             this.cn_createdat.FillWeight = 85F;
             this.cn_createdat.HeaderText = "Created at";
             this.cn_createdat.Name = "cn_createdat";
@@ -2177,9 +2179,9 @@
             // cn_ocreatat
             // 
             this.cn_ocreatat.DataPropertyName = "createdat";
-            dataGridViewCellStyle2.Format = "G";
-            dataGridViewCellStyle2.NullValue = null;
-            this.cn_ocreatat.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Format = "G";
+            dataGridViewCellStyle6.NullValue = null;
+            this.cn_ocreatat.DefaultCellStyle = dataGridViewCellStyle6;
             this.cn_ocreatat.FillWeight = 85F;
             this.cn_ocreatat.HeaderText = "Created at";
             this.cn_ocreatat.Name = "cn_ocreatat";
@@ -2605,9 +2607,9 @@
             // cn_mcreatedat
             // 
             this.cn_mcreatedat.DataPropertyName = "createdat";
-            dataGridViewCellStyle3.Format = "G";
-            dataGridViewCellStyle3.NullValue = null;
-            this.cn_mcreatedat.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Format = "G";
+            dataGridViewCellStyle7.NullValue = null;
+            this.cn_mcreatedat.DefaultCellStyle = dataGridViewCellStyle7;
             this.cn_mcreatedat.FillWeight = 85F;
             this.cn_mcreatedat.HeaderText = "Created at";
             this.cn_mcreatedat.Name = "cn_mcreatedat";
@@ -2908,9 +2910,9 @@
             // cn_rcreatedat
             // 
             this.cn_rcreatedat.DataPropertyName = "createdat";
-            dataGridViewCellStyle4.Format = "G";
-            dataGridViewCellStyle4.NullValue = null;
-            this.cn_rcreatedat.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Format = "G";
+            dataGridViewCellStyle8.NullValue = null;
+            this.cn_rcreatedat.DefaultCellStyle = dataGridViewCellStyle8;
             this.cn_rcreatedat.FillWeight = 115F;
             this.cn_rcreatedat.HeaderText = "Returned at";
             this.cn_rcreatedat.Name = "cn_rcreatedat";
