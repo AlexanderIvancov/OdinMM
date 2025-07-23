@@ -38,6 +38,8 @@
             this.cn_certNum = new System.Windows.Forms.TextBox();
             this.cn_dateFrom = new Odin.CustomControls.NullableDateTimePicker();
             this.dateFromLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.cn_dateTo = new Odin.CustomControls.NullableDateTimePicker();
+            this.dateToLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.btn_Cancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.chk_IsValid = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
@@ -56,6 +58,8 @@
             this.kryptonPanel1.Controls.Add(this.cn_certNum);
             this.kryptonPanel1.Controls.Add(this.cn_dateFrom);
             this.kryptonPanel1.Controls.Add(this.dateFromLabel);
+            this.kryptonPanel1.Controls.Add(this.cn_dateTo);
+            this.kryptonPanel1.Controls.Add(this.dateToLabel);
             this.kryptonPanel1.Controls.Add(this.btn_Cancel);
             this.kryptonPanel1.Controls.Add(this.btn_OK);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -118,6 +122,26 @@
             this.cn_certNum.Name = "cn_certNum";
             this.cn_certNum.Size = new System.Drawing.Size(284, 26);
             this.cn_certNum.TabIndex = 23;
+            // 
+            // cn_dateTo
+            // 
+            this.cn_dateTo.CustomFormat = null;
+            this.cn_dateTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.cn_dateTo.Location = new System.Drawing.Point(130, 67);
+            this.cn_dateTo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cn_dateTo.Name = "cn_dateTo";
+            this.cn_dateTo.NullValue = " ";
+            this.cn_dateTo.Size = new System.Drawing.Size(124, 30);
+            this.cn_dateTo.TabIndex = 20;
+            // 
+            // dateToLabel
+            // 
+            this.dateToLabel.Location = new System.Drawing.Point(18, 65);
+            this.dateToLabel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dateToLabel.Name = "dateToLabel";
+            this.dateToLabel.Size = new System.Drawing.Size(59, 29);
+            this.dateToLabel.TabIndex = 18;
+            this.dateToLabel.Values.Text = "To:";
             // 
             // cn_dateFrom
             // 
@@ -197,6 +221,8 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_OK;
         private CustomControls.NullableDateTimePicker cn_dateFrom;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel dateFromLabel;
+        private CustomControls.NullableDateTimePicker cn_dateTo;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel dateToLabel;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel certNumLabel;
         private System.Windows.Forms.TextBox cn_certNum;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel commentLabel;

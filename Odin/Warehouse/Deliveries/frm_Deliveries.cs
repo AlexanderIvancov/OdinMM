@@ -187,7 +187,18 @@ namespace Odin.Warehouse.Deliveries
         }
 
         public void SetCellsColor()
-        { }
+        {
+            foreach (DataGridViewRow row in this.gv_List.Rows)
+            {
+                if (Convert.ToString(row.Cells["cn_certstate"].Value) == "Certified")
+                    if (Convert.ToString(row.Cells["cn_custcode"].Value) == "")
+                        row.Cells["cn_certstate"].Style.BackColor = Color.Coral;//LightCoral;
+                    else if (Convert.ToString(row.Cells["cn_isvalid"].Value) != "-1")
+                        row.Cells["cn_certstate"].Style.BackColor = Color.Green;//LightCoral;
+                    else
+                        row.Cells["cn_certstate"].Style.BackColor = Color.Gold;//LightCoral;
+            }
+        }
 
         public void bw_List(object sender, DoWorkEventArgs e)
         {
