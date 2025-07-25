@@ -118,6 +118,7 @@
             this.cn_suparticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_expdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_MSL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chk_available = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).BeginInit();
             this.mnu_Lines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
@@ -504,6 +505,7 @@
             this.cmb_Articles1.ArticleIdRec = 0;
             this.cmb_Articles1.ArtType = null;
             this.cmb_Articles1.BOMState = 0;
+            this.cmb_Articles1.CertState = "";
             this.cmb_Articles1.Comments = null;
             this.cmb_Articles1.CustCode = null;
             this.cmb_Articles1.CustCodeId = 0;
@@ -511,7 +513,6 @@
             this.cmb_Articles1.DeptId = 0;
             this.cmb_Articles1.Description = null;
             this.cmb_Articles1.IsActive = -1;
-            this.cmb_Articles1.CertState = "";
             this.cmb_Articles1.IsPF = 0;
             this.cmb_Articles1.Location = new System.Drawing.Point(10, 104);
             this.cmb_Articles1.Manufacturer = "";
@@ -645,7 +646,8 @@
             this.cn_manufbatch,
             this.cn_suparticle,
             this.cn_expdate,
-            this.cn_MSL});
+            this.cn_MSL,
+            this.chk_available});
             this.gv_List.ContextMenuStrip = this.mnu_Lines;
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_List.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
@@ -1043,6 +1045,18 @@
             this.cn_MSL.HeaderText = "MSL";
             this.cn_MSL.Name = "cn_MSL";
             // 
+            // chk_available
+            // 
+            this.chk_available.DataPropertyName = "available";
+            this.chk_available.FalseValue = "0";
+            this.chk_available.FillWeight = 40F;
+            this.chk_available.HeaderText = "Avail.";
+            this.chk_available.IndeterminateValue = "1";
+            this.chk_available.Name = "chk_available";
+            this.chk_available.ThreeState = true;
+            this.chk_available.TrueValue = "-1";
+            this.chk_available.Width = 40;
+            // 
             // frm_Inventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1172,5 +1186,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_suparticle;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_expdate;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_MSL;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn chk_available;
     }
 }
