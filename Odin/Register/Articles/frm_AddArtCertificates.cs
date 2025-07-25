@@ -54,6 +54,11 @@ namespace Odin.Register.Articles
             get { return cn_dateFrom.Value.ToString(); }
             set { cn_dateFrom.Value = Convert.ToDateTime(value); }
         }
+        public string dateTo
+        {
+            get { return cn_dateTo.Value.ToString(); }
+            set { cn_dateTo.Value = Convert.ToDateTime(value); }
+        }
         #endregion
 
         private void buttonSpecAny1_Click(object sender, EventArgs e)

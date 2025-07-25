@@ -151,6 +151,7 @@
             this.chk_isreturn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.cn_account = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_country = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_isvalid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mnu_Lines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
@@ -778,7 +779,8 @@
             this.cn_batch,
             this.chk_isreturn,
             this.cn_account,
-            this.cn_country});
+            this.cn_country,
+            this.cn_isvalid});
             this.gv_List.ContextMenuStrip = this.mnu_Lines;
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_List.Location = new System.Drawing.Point(0, 0);
@@ -1387,6 +1389,14 @@
             this.cn_country.Name = "cn_country";
             this.cn_country.ReadOnly = true;
             // 
+            // cn_isvalid
+            // 
+            this.cn_isvalid.DataPropertyName = "isvalid";
+            this.cn_isvalid.HeaderText = "isValid";
+            this.cn_isvalid.Name = "cn_isvalid";
+            this.cn_isvalid.ReadOnly = true;
+            this.cn_isvalid.Visible = false;
+            // 
             // frm_Deliveries
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1554,5 +1564,6 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn chk_isreturn;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_account;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_country;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_isvalid;
     }
 }
