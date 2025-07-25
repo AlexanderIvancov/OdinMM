@@ -173,7 +173,7 @@ namespace Odin.Warehouse.Movements
         }
 
         public int AddStockMoveLine(int _headid, int _label, double _qty, int _placeid, int _batchdetid, int _reserve, 
-                                    int _batchid, int _stageid, double _qtyonstage, string _comments)
+                                    int _batchid, int _stageid, double _qtyonstage, string _comments, int _available)
         {
             int _res = 0;
 
@@ -192,6 +192,7 @@ namespace Odin.Warehouse.Movements
             sqlComm.Parameters.AddWithValue("@stageid", _stageid);
             sqlComm.Parameters.AddWithValue("@qtyonstage", _qtyonstage);
             sqlComm.Parameters.AddWithValue("@comments", _comments);
+            sqlComm.Parameters.AddWithValue("@available", _available);
 
             sqlComm.Parameters.Add("@insertedheadid", SqlDbType.Int).Direction = ParameterDirection.Output;
             sqlConn.Open();

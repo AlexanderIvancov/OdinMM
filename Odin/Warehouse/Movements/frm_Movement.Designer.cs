@@ -101,6 +101,24 @@
             this.btn_PrintDLN = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.btn_Clear = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.cn_label = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_artid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_article = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_place = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_qtyinbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_Add = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewButtonColumn();
+            this.cn_qtytomove = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_qtyreserved = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_expdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_bdid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_reservation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_tomove = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_docdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_placeid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_storagerules = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bn_List = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -160,24 +178,7 @@
             this.btn_Delete = new System.Windows.Forms.ToolStripButton();
             this.btn_IntoExcelDets = new System.Windows.Forms.ToolStripButton();
             this.kryptonHeader3 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
-            this.cn_label = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_artid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_article = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_place = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_qtyinbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btn_Add = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewButtonColumn();
-            this.cn_qtytomove = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_qtyreserved = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_expdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_bdid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_reservation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_tomove = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_docdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_placeid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_storagerules = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chk_Available = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.mnu_Lines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).BeginInit();
             this.mnu_LinesDets.SuspendLayout();
@@ -477,7 +478,7 @@
             // 
             // cmb_Launches1
             // 
-            this.cmb_Launches1.Article = null;
+            this.cmb_Launches1.Article = "";
             this.cmb_Launches1.ArticleId = 0;
             this.cmb_Launches1.Batch = "";
             this.cmb_Launches1.BatchId = 0;
@@ -504,6 +505,7 @@
             this.cmb_Articles2.ArticleIdRec = 0;
             this.cmb_Articles2.ArtType = null;
             this.cmb_Articles2.BOMState = 0;
+            this.cmb_Articles2.CertState = "";
             this.cmb_Articles2.Comments = null;
             this.cmb_Articles2.CustCode = null;
             this.cmb_Articles2.CustCodeId = 0;
@@ -940,6 +942,142 @@
             this.gv_List.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_List_ColumnHeaderMouseClick);
             this.gv_List.SelectionChanged += new System.EventHandler(this.gv_List_SelectionChanged);
             // 
+            // cn_label
+            // 
+            this.cn_label.DataPropertyName = "label";
+            this.cn_label.HeaderText = "Label";
+            this.cn_label.Name = "cn_label";
+            this.cn_label.ReadOnly = true;
+            // 
+            // cn_artid
+            // 
+            this.cn_artid.DataPropertyName = "artid";
+            this.cn_artid.FillWeight = 80F;
+            this.cn_artid.HeaderText = "Art. id";
+            this.cn_artid.Name = "cn_artid";
+            this.cn_artid.ReadOnly = true;
+            this.cn_artid.Width = 80;
+            // 
+            // cn_article
+            // 
+            this.cn_article.DataPropertyName = "article";
+            this.cn_article.FillWeight = 200F;
+            this.cn_article.HeaderText = "Article";
+            this.cn_article.Name = "cn_article";
+            this.cn_article.ReadOnly = true;
+            this.cn_article.Width = 200;
+            // 
+            // cn_place
+            // 
+            this.cn_place.DataPropertyName = "place";
+            this.cn_place.FillWeight = 250F;
+            this.cn_place.HeaderText = "Place";
+            this.cn_place.Name = "cn_place";
+            this.cn_place.ReadOnly = true;
+            this.cn_place.Width = 250;
+            // 
+            // cn_qty
+            // 
+            this.cn_qty.DataPropertyName = "qty";
+            this.cn_qty.FillWeight = 80F;
+            this.cn_qty.HeaderText = "Qty";
+            this.cn_qty.Name = "cn_qty";
+            this.cn_qty.ReadOnly = true;
+            this.cn_qty.Width = 80;
+            // 
+            // cn_qtyinbatch
+            // 
+            this.cn_qtyinbatch.DataPropertyName = "qtyinbatch";
+            this.cn_qtyinbatch.FillWeight = 80F;
+            this.cn_qtyinbatch.HeaderText = "Qty in batch";
+            this.cn_qtyinbatch.Name = "cn_qtyinbatch";
+            this.cn_qtyinbatch.Width = 80;
+            // 
+            // cn_unit
+            // 
+            this.cn_unit.DataPropertyName = "unit";
+            this.cn_unit.FillWeight = 40F;
+            this.cn_unit.HeaderText = "Unit";
+            this.cn_unit.Name = "cn_unit";
+            this.cn_unit.ReadOnly = true;
+            this.cn_unit.Width = 40;
+            // 
+            // btn_Add
+            // 
+            this.btn_Add.FillWeight = 25F;
+            this.btn_Add.HeaderText = "";
+            this.btn_Add.Name = "btn_Add";
+            this.btn_Add.ReadOnly = true;
+            this.btn_Add.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.btn_Add.Width = 25;
+            // 
+            // cn_qtytomove
+            // 
+            this.cn_qtytomove.HeaderText = "Qty to move";
+            this.cn_qtytomove.Name = "cn_qtytomove";
+            this.cn_qtytomove.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.cn_qtytomove.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // cn_qtyreserved
+            // 
+            this.cn_qtyreserved.DataPropertyName = "reserved";
+            this.cn_qtyreserved.HeaderText = "Reserved";
+            this.cn_qtyreserved.Name = "cn_qtyreserved";
+            // 
+            // cn_comments
+            // 
+            this.cn_comments.DataPropertyName = "comments";
+            this.cn_comments.FillWeight = 150F;
+            this.cn_comments.HeaderText = "Comments";
+            this.cn_comments.Name = "cn_comments";
+            this.cn_comments.Width = 150;
+            // 
+            // cn_expdate
+            // 
+            this.cn_expdate.DataPropertyName = "expdate";
+            this.cn_expdate.HeaderText = "Expiry date";
+            this.cn_expdate.Name = "cn_expdate";
+            this.cn_expdate.ReadOnly = true;
+            // 
+            // cn_bdid
+            // 
+            this.cn_bdid.DataPropertyName = "bdid";
+            this.cn_bdid.HeaderText = "bdid";
+            this.cn_bdid.Name = "cn_bdid";
+            this.cn_bdid.Visible = false;
+            // 
+            // cn_reservation
+            // 
+            this.cn_reservation.DataPropertyName = "reservation";
+            this.cn_reservation.HeaderText = "Reservation";
+            this.cn_reservation.Name = "cn_reservation";
+            // 
+            // cn_tomove
+            // 
+            this.cn_tomove.DataPropertyName = "tomove";
+            this.cn_tomove.HeaderText = "tomove";
+            this.cn_tomove.Name = "cn_tomove";
+            this.cn_tomove.Visible = false;
+            // 
+            // cn_docdate
+            // 
+            this.cn_docdate.DataPropertyName = "regdate";
+            this.cn_docdate.HeaderText = "Doc. date";
+            this.cn_docdate.Name = "cn_docdate";
+            // 
+            // cn_placeid
+            // 
+            this.cn_placeid.DataPropertyName = "placeid";
+            this.cn_placeid.HeaderText = "placeid";
+            this.cn_placeid.Name = "cn_placeid";
+            this.cn_placeid.Visible = false;
+            // 
+            // cn_storagerules
+            // 
+            this.cn_storagerules.DataPropertyName = "storagerules";
+            this.cn_storagerules.HeaderText = "Storage rules";
+            this.cn_storagerules.Name = "cn_storagerules";
+            // 
             // bn_List
             // 
             this.bn_List.AddNewItem = null;
@@ -1058,6 +1196,7 @@
             // 
             // kryptonPanel3
             // 
+            this.kryptonPanel3.Controls.Add(this.chk_Available);
             this.kryptonPanel3.Controls.Add(this.kryptonLabel20);
             this.kryptonPanel3.Controls.Add(this.txt_QtyOfProduct);
             this.kryptonPanel3.Controls.Add(this.chk_Reserve);
@@ -1271,6 +1410,7 @@
             this.cmb_Articles1.ArticleIdRec = 0;
             this.cmb_Articles1.ArtType = null;
             this.cmb_Articles1.BOMState = 0;
+            this.cmb_Articles1.CertState = "";
             this.cmb_Articles1.Comments = null;
             this.cmb_Articles1.CustCode = null;
             this.cmb_Articles1.CustCodeId = 0;
@@ -1585,141 +1725,15 @@
             this.kryptonHeader3.Values.Heading = "Document details";
             this.kryptonHeader3.Values.Image = global::Odin.Global_Resourses.document;
             // 
-            // cn_label
+            // chk_Available
             // 
-            this.cn_label.DataPropertyName = "label";
-            this.cn_label.HeaderText = "Label";
-            this.cn_label.Name = "cn_label";
-            this.cn_label.ReadOnly = true;
-            // 
-            // cn_artid
-            // 
-            this.cn_artid.DataPropertyName = "artid";
-            this.cn_artid.FillWeight = 80F;
-            this.cn_artid.HeaderText = "Art. id";
-            this.cn_artid.Name = "cn_artid";
-            this.cn_artid.ReadOnly = true;
-            this.cn_artid.Width = 80;
-            // 
-            // cn_article
-            // 
-            this.cn_article.DataPropertyName = "article";
-            this.cn_article.FillWeight = 200F;
-            this.cn_article.HeaderText = "Article";
-            this.cn_article.Name = "cn_article";
-            this.cn_article.ReadOnly = true;
-            this.cn_article.Width = 200;
-            // 
-            // cn_place
-            // 
-            this.cn_place.DataPropertyName = "place";
-            this.cn_place.FillWeight = 250F;
-            this.cn_place.HeaderText = "Place";
-            this.cn_place.Name = "cn_place";
-            this.cn_place.ReadOnly = true;
-            this.cn_place.Width = 250;
-            // 
-            // cn_qty
-            // 
-            this.cn_qty.DataPropertyName = "qty";
-            this.cn_qty.FillWeight = 80F;
-            this.cn_qty.HeaderText = "Qty";
-            this.cn_qty.Name = "cn_qty";
-            this.cn_qty.ReadOnly = true;
-            this.cn_qty.Width = 80;
-            // 
-            // cn_qtyinbatch
-            // 
-            this.cn_qtyinbatch.DataPropertyName = "qtyinbatch";
-            this.cn_qtyinbatch.FillWeight = 80F;
-            this.cn_qtyinbatch.HeaderText = "Qty in batch";
-            this.cn_qtyinbatch.Name = "cn_qtyinbatch";
-            this.cn_qtyinbatch.Width = 80;
-            // 
-            // cn_unit
-            // 
-            this.cn_unit.DataPropertyName = "unit";
-            this.cn_unit.FillWeight = 40F;
-            this.cn_unit.HeaderText = "Unit";
-            this.cn_unit.Name = "cn_unit";
-            this.cn_unit.ReadOnly = true;
-            this.cn_unit.Width = 40;
-            // 
-            // btn_Add
-            // 
-            this.btn_Add.FillWeight = 25F;
-            this.btn_Add.HeaderText = "";
-            this.btn_Add.Name = "btn_Add";
-            this.btn_Add.ReadOnly = true;
-            this.btn_Add.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.btn_Add.Width = 25;
-            // 
-            // cn_qtytomove
-            // 
-            this.cn_qtytomove.HeaderText = "Qty to move";
-            this.cn_qtytomove.Name = "cn_qtytomove";
-            this.cn_qtytomove.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.cn_qtytomove.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // cn_qtyreserved
-            // 
-            this.cn_qtyreserved.DataPropertyName = "reserved";
-            this.cn_qtyreserved.HeaderText = "Reserved";
-            this.cn_qtyreserved.Name = "cn_qtyreserved";
-            // 
-            // cn_comments
-            // 
-            this.cn_comments.DataPropertyName = "comments";
-            this.cn_comments.FillWeight = 150F;
-            this.cn_comments.HeaderText = "Comments";
-            this.cn_comments.Name = "cn_comments";
-            this.cn_comments.Width = 150;
-            // 
-            // cn_expdate
-            // 
-            this.cn_expdate.DataPropertyName = "expdate";
-            this.cn_expdate.HeaderText = "Expiry date";
-            this.cn_expdate.Name = "cn_expdate";
-            this.cn_expdate.ReadOnly = true;
-            // 
-            // cn_bdid
-            // 
-            this.cn_bdid.DataPropertyName = "bdid";
-            this.cn_bdid.HeaderText = "bdid";
-            this.cn_bdid.Name = "cn_bdid";
-            this.cn_bdid.Visible = false;
-            // 
-            // cn_reservation
-            // 
-            this.cn_reservation.DataPropertyName = "reservation";
-            this.cn_reservation.HeaderText = "Reservation";
-            this.cn_reservation.Name = "cn_reservation";
-            // 
-            // cn_tomove
-            // 
-            this.cn_tomove.DataPropertyName = "tomove";
-            this.cn_tomove.HeaderText = "tomove";
-            this.cn_tomove.Name = "cn_tomove";
-            this.cn_tomove.Visible = false;
-            // 
-            // cn_docdate
-            // 
-            this.cn_docdate.DataPropertyName = "regdate";
-            this.cn_docdate.HeaderText = "Doc. date";
-            this.cn_docdate.Name = "cn_docdate";
-            // 
-            // cn_placeid
-            // 
-            this.cn_placeid.DataPropertyName = "placeid";
-            this.cn_placeid.HeaderText = "placeid";
-            this.cn_placeid.Name = "cn_placeid";
-            this.cn_placeid.Visible = false;
-            // 
-            // cn_storagerules
-            // 
-            this.cn_storagerules.DataPropertyName = "storagerules";
-            this.cn_storagerules.HeaderText = "Storage rules";
-            this.cn_storagerules.Name = "cn_storagerules";
+            this.chk_Available.Checked = true;
+            this.chk_Available.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk_Available.Location = new System.Drawing.Point(241, 40);
+            this.chk_Available.Name = "chk_Available";
+            this.chk_Available.Size = new System.Drawing.Size(73, 20);
+            this.chk_Available.TabIndex = 248;
+            this.chk_Available.Values.Text = "Available";
             // 
             // frm_Movement
             // 
@@ -1769,7 +1783,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bn_Dets)).EndInit();
             this.bn_Dets.ResumeLayout(false);
             this.bn_Dets.PerformLayout();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
@@ -1921,5 +1935,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_docdate;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_placeid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_storagerules;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_Available;
     }
 }

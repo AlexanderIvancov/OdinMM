@@ -83,6 +83,19 @@ namespace Odin.Warehouse.Movements
             }
         }
 
+
+        public int Available
+        {
+            get
+            {
+                return chk_Available.CheckState == CheckState.Checked ? -1 : 0;
+            }
+            set
+            {
+                chk_Available.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+            }
+        }
+
         public double QtyToProduce
         {
             get { try { return Convert.ToDouble(txt_QtyOfProduct.Text); }
@@ -691,7 +704,8 @@ namespace Odin.Warehouse.Movements
                                                         cmb_Batches1.BatchId,
                                                         StageId,
                                                         QtyToProduce,
-                                                        row.Cells["cn_comments"].Value.ToString());
+                                                        row.Cells["cn_comments"].Value.ToString(),
+                                                        Available);
                             }
                             catch
                             {

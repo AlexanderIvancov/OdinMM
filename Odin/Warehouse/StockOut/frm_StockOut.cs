@@ -1183,7 +1183,8 @@ namespace Odin.Warehouse.StockOut
                                                             cmb_Batches1.BatchId, 
                                                             0, 
                                                             0,
-                                                            "Removing of reservation of " + node1.Cells["cn_Batch"].Value.ToString());
+                                                            "Removing of reservation of " + node1.Cells["cn_Batch"].Value.ToString(), 
+                                                            -99);
                             //Remove reservation if qty to return > 0
                             if (Convert.ToDouble(node1.Cells["cn_QtyRest"].Value) == 0)
                                 SOBll.RemoveLabelReservation(Convert.ToInt32(node1.Cells["cn_Label"].Value));
