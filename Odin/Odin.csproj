@@ -284,6 +284,18 @@
     <Compile Include="CMB_Components\Addresses\frm_Address.Designer.cs">
       <DependentUpon>frm_Address.cs</DependentUpon>
     </Compile>
+    <Compile Include="CMB_Components\ArtCert\cmb_ArtCerts.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CMB_Components\ArtCert\cmb_ArtCerts.Designer.cs">
+      <DependentUpon>cmb_ArtCerts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CMB_Components\ArtCert\frm_ArtCerts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CMB_Components\ArtCert\frm_ArtCerts.Designer.cs">
+      <DependentUpon>frm_ArtCerts.cs</DependentUpon>
+    </Compile>
     <Compile Include="CMB_Components\Articles\cmb_Articles.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -3157,6 +3169,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CMB_Components\Addresses\frm_Address.resx">
       <DependentUpon>frm_Address.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CMB_Components\ArtCert\cmb_ArtCerts.resx">
+      <DependentUpon>cmb_ArtCerts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CMB_Components\ArtCert\frm_ArtCerts.resx">
+      <DependentUpon>frm_ArtCerts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CMB_Components\Articles\cmb_Articles.resx">
       <DependentUpon>cmb_Articles.cs</DependentUpon>

@@ -34,6 +34,7 @@
             this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.cn_certid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_certNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_artid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_tnved = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_dateFrom = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_dateTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,6 +48,7 @@
             this.btn_Delete = new System.Windows.Forms.ToolStripButton();
             this.bn_List = new System.Windows.Forms.BindingNavigator(this.components);
             this.cmb_Articles1 = new Odin.CMB_Components.Articles.cmb_Articles();
+            this.cmb_Certs1 = new Odin.CMB_Components.ArtCerts.cmb_ArtCerts();
             this.bs_List = new Odin.Global_Classes.SyncBindingSource();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -59,6 +61,7 @@
             // kryptonPanel1
             // 
             this.kryptonPanel1.Controls.Add(this.cmb_Articles1);
+            this.kryptonPanel1.Controls.Add(this.cmb_Certs1);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel2);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
@@ -75,6 +78,7 @@
             this.gv_List.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cn_certid,
             this.cn_certNum,
+            this.cn_artid,
             this.cn_tnved,
             this.cn_dateFrom,
             this.cn_dateTo,
@@ -106,6 +110,15 @@
             this.cn_certNum.Name = "cn_certNum";
             this.cn_certNum.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.cn_certNum.Width = 150;
+            // 
+            // cn_artid
+            // 
+            this.cn_artid.DataPropertyName = "artid";
+            this.cn_artid.FillWeight = 150F;
+            this.cn_artid.HeaderText = "Article Id";
+            this.cn_artid.Name = "cn_artid";
+            this.cn_artid.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.cn_artid.Width = 150;
             // 
             // cn_tnved
             // 
@@ -258,6 +271,17 @@
             this.cmb_Articles1.Weight = 0D;
             this.cmb_Articles1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
             // 
+            // cmb_Certs1
+            // 
+            this.cmb_Certs1.Cert = "";
+            this.cmb_Certs1.Location = new System.Drawing.Point(352, 15);
+            this.cmb_Certs1.Margin = new System.Windows.Forms.Padding(0);
+            this.cmb_Certs1.Name = "cmb_Certs1";
+            this.cmb_Certs1.Size = new System.Drawing.Size(165, 20);
+            this.cmb_Certs1.CertChanged += new Odin.CMB_Components.ArtCerts.ArtCertsEventHandler(this.cmb_Certs1_CertChanged);
+            this.cmb_Certs1.TabIndex = 45;
+            this.cmb_Certs1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
+            // 
             // ctl_ArtCertificates
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -288,8 +312,8 @@
         private Global_Classes.SyncBindingSource bs_List;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_certid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_certNum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_artid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_tnved;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dateFrom;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_dateTo;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_comments;
         private System.Windows.Forms.DataGridViewTextBoxColumn chk_IsValid;
@@ -297,6 +321,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_createdat;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_dateFrom;
         public CMB_Components.Articles.cmb_Articles cmb_Articles1;
+        public CMB_Components.ArtCerts.cmb_ArtCerts cmb_Certs1;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
         private System.Windows.Forms.ToolStripButton btn_Add;
         private System.Windows.Forms.ToolStripButton btn_Edit;

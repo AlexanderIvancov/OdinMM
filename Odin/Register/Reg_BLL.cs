@@ -2048,9 +2048,9 @@ namespace Odin.Register
             return Helper.QueryDT("execute sp_SelectArticleAnalogues @artId = " + Id + ", @CSEId = " + CSEId);
         }
 
-        public DataTable ArticleCertificatesData(int Id)
+        public DataTable ArticleCertificatesData(int Id, string cert)
         {
-            return Helper.QueryDT("execute sp_SelectArticleCertificates @artId = " + Id);
+            return Helper.QueryDT("execute sp_SelectArticleCertificates @artId = " + Id + ", @cert = '" + cert + "'");
         }
 
         public void AddAnalog(int artid, int analogid, int customerid, string comments, int productid)

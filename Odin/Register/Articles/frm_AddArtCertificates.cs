@@ -22,6 +22,19 @@ namespace Odin.Register.Articles
         public int Id
         { get; set; }
 
+        public int _ArtId = 0;
+        public int ArtId
+        {
+            get
+            {
+                return cmb_Articles1.ArticleId;
+            }
+            set
+            {
+                _ArtId = value;
+            }
+        }
+
         public string certNum
         { get { return cn_certNum.Text; }
         set { cn_certNum.Text = value; } }
@@ -64,6 +77,11 @@ namespace Odin.Register.Articles
         private void buttonSpecAny1_Click(object sender, EventArgs e)
         {
             cn_comment.Text = string.Empty;
+        }
+
+        private void cmb_Articles1_ArticleChanged(object sender)
+        {
+            ArtId = cmb_Articles1.ArticleId;
         }
     }
 }

@@ -1250,6 +1250,16 @@ namespace Odin.CMB_Components.BLL
 
         #endregion
 
+        #region Certs
+
+        public static DataTable getCerts(string _beg)
+        {
+            string query = "EXECUTE sp_CertsSelectLike @Beg = '" + _beg + "'";
+
+            return Helper.QueryDT(query);
+        }
+        #endregion
+
         #region Users
 
         public static DataTable getUsers(string _beg)
