@@ -35,6 +35,7 @@
             this.cn_certid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_certNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_artid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_article = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_tnved = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_dateFrom = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_dateTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -79,6 +80,7 @@
             this.cn_certid,
             this.cn_certNum,
             this.cn_artid,
+            this.cn_article,
             this.cn_tnved,
             this.cn_dateFrom,
             this.cn_dateTo,
@@ -119,6 +121,15 @@
             this.cn_artid.Name = "cn_artid";
             this.cn_artid.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.cn_artid.Width = 150;
+            // 
+            // cn_article
+            // 
+            this.cn_article.DataPropertyName = "article";
+            this.cn_article.FillWeight = 150F;
+            this.cn_article.HeaderText = "Article";
+            this.cn_article.Name = "cn_article";
+            this.cn_article.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.cn_article.Width = 150;
             // 
             // cn_tnved
             // 
@@ -313,6 +324,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_certid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_certNum;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_artid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_article;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_tnved;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_dateTo;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_comments;
