@@ -968,7 +968,6 @@
             this.cn_iscertified.FillWeight = 200F;
             this.cn_iscertified.HeaderText = "Certified";
             this.cn_iscertified.Name = "cn_iscertified";
-            this.cn_iscertified.Visible = false;
             this.cn_iscertified.ReadOnly = true;
             this.cn_iscertified.Width = 200;
             // 
