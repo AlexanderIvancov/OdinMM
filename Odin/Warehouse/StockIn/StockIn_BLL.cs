@@ -227,6 +227,24 @@ namespace Odin.Warehouse.StockIn
             return _res;
         }
 
+        public int EditStockPOLink(int id, double qty)
+        {
+            int _res = 0;
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_EditStockINPOLink", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@id", id);
+            sqlComm.Parameters.AddWithValue("@qty", qty);
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+
+            return _res;
+        }
+
         public int DeleteStockInLine(int id)
         {
             int _res = 0;

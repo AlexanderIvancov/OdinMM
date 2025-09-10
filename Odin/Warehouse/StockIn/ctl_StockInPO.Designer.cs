@@ -32,6 +32,17 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctl_StockInPO));
             this.kryptonHeaderGroup1 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_inid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_poid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_porder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_line = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_supplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_suparticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_unitprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_currency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bn_List = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -45,17 +56,7 @@
             this.btn_Add = new System.Windows.Forms.ToolStripButton();
             this.btn_Delete = new System.Windows.Forms.ToolStripButton();
             this.bs_List = new System.Windows.Forms.BindingSource(this.components);
-            this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_inid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_poid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_porder = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_line = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_supplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_suparticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_unitprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_currency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_Edit = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).BeginInit();
             this.kryptonHeaderGroup1.Panel.SuspendLayout();
@@ -106,6 +107,89 @@
             this.gv_List.Size = new System.Drawing.Size(556, 285);
             this.gv_List.TabIndex = 1;
             // 
+            // cn_id
+            // 
+            this.cn_id.DataPropertyName = "id";
+            this.cn_id.HeaderText = "id";
+            this.cn_id.Name = "cn_id";
+            this.cn_id.Visible = false;
+            // 
+            // cn_inid
+            // 
+            this.cn_inid.DataPropertyName = "inid";
+            this.cn_inid.FillWeight = 5F;
+            this.cn_inid.HeaderText = "inid";
+            this.cn_inid.Name = "cn_inid";
+            this.cn_inid.Visible = false;
+            this.cn_inid.Width = 5;
+            // 
+            // cn_poid
+            // 
+            this.cn_poid.DataPropertyName = "poid";
+            this.cn_poid.FillWeight = 80F;
+            this.cn_poid.HeaderText = "poid";
+            this.cn_poid.Name = "cn_poid";
+            this.cn_poid.Visible = false;
+            this.cn_poid.Width = 80;
+            // 
+            // cn_qty
+            // 
+            this.cn_qty.DataPropertyName = "qty";
+            this.cn_qty.FillWeight = 70F;
+            this.cn_qty.HeaderText = "Qty delivered";
+            this.cn_qty.Name = "cn_qty";
+            this.cn_qty.Width = 70;
+            // 
+            // cn_unit
+            // 
+            this.cn_unit.DataPropertyName = "unit";
+            this.cn_unit.FillWeight = 40F;
+            this.cn_unit.HeaderText = "Unit";
+            this.cn_unit.Name = "cn_unit";
+            this.cn_unit.Width = 40;
+            // 
+            // cn_porder
+            // 
+            this.cn_porder.DataPropertyName = "porder";
+            this.cn_porder.HeaderText = "Purchase order";
+            this.cn_porder.Name = "cn_porder";
+            // 
+            // cn_line
+            // 
+            this.cn_line.DataPropertyName = "line";
+            this.cn_line.FillWeight = 40F;
+            this.cn_line.HeaderText = "Line";
+            this.cn_line.Name = "cn_line";
+            this.cn_line.Width = 40;
+            // 
+            // cn_supplier
+            // 
+            this.cn_supplier.DataPropertyName = "supplier";
+            this.cn_supplier.HeaderText = "Supplier";
+            this.cn_supplier.Name = "cn_supplier";
+            // 
+            // cn_suparticle
+            // 
+            this.cn_suparticle.DataPropertyName = "suparticle";
+            this.cn_suparticle.HeaderText = "Sup. article";
+            this.cn_suparticle.Name = "cn_suparticle";
+            // 
+            // cn_unitprice
+            // 
+            this.cn_unitprice.DataPropertyName = "unitprice";
+            this.cn_unitprice.FillWeight = 80F;
+            this.cn_unitprice.HeaderText = "Unit price";
+            this.cn_unitprice.Name = "cn_unitprice";
+            this.cn_unitprice.Width = 80;
+            // 
+            // cn_currency
+            // 
+            this.cn_currency.DataPropertyName = "currency";
+            this.cn_currency.FillWeight = 50F;
+            this.cn_currency.HeaderText = "Curr.";
+            this.cn_currency.Name = "cn_currency";
+            this.cn_currency.Width = 50;
+            // 
             // bn_List
             // 
             this.bn_List.AddNewItem = null;
@@ -123,6 +207,7 @@
             this.bindingNavigatorMoveLastItem,
             this.bindingNavigatorSeparator2,
             this.btn_Add,
+            this.btn_Edit,
             this.btn_Delete});
             this.bn_List.Location = new System.Drawing.Point(0, 0);
             this.bn_List.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
@@ -222,88 +307,15 @@
             this.btn_Delete.Text = "Delete link";
             this.btn_Delete.Click += new System.EventHandler(this.btn_Delete_Click);
             // 
-            // cn_id
+            // btn_Edit
             // 
-            this.cn_id.DataPropertyName = "id";
-            this.cn_id.HeaderText = "id";
-            this.cn_id.Name = "cn_id";
-            this.cn_id.Visible = false;
-            // 
-            // cn_inid
-            // 
-            this.cn_inid.DataPropertyName = "inid";
-            this.cn_inid.FillWeight = 5F;
-            this.cn_inid.HeaderText = "inid";
-            this.cn_inid.Name = "cn_inid";
-            this.cn_inid.Visible = false;
-            this.cn_inid.Width = 5;
-            // 
-            // cn_poid
-            // 
-            this.cn_poid.DataPropertyName = "poid";
-            this.cn_poid.FillWeight = 80F;
-            this.cn_poid.HeaderText = "poid";
-            this.cn_poid.Name = "cn_poid";
-            this.cn_poid.Visible = false;
-            this.cn_poid.Width = 80;
-            // 
-            // cn_qty
-            // 
-            this.cn_qty.DataPropertyName = "qty";
-            this.cn_qty.FillWeight = 70F;
-            this.cn_qty.HeaderText = "Qty delivered";
-            this.cn_qty.Name = "cn_qty";
-            this.cn_qty.Width = 70;
-            // 
-            // cn_unit
-            // 
-            this.cn_unit.DataPropertyName = "unit";
-            this.cn_unit.FillWeight = 40F;
-            this.cn_unit.HeaderText = "Unit";
-            this.cn_unit.Name = "cn_unit";
-            this.cn_unit.Width = 40;
-            // 
-            // cn_porder
-            // 
-            this.cn_porder.DataPropertyName = "porder";
-            this.cn_porder.HeaderText = "Purchase order";
-            this.cn_porder.Name = "cn_porder";
-            // 
-            // cn_line
-            // 
-            this.cn_line.DataPropertyName = "line";
-            this.cn_line.FillWeight = 40F;
-            this.cn_line.HeaderText = "Line";
-            this.cn_line.Name = "cn_line";
-            this.cn_line.Width = 40;
-            // 
-            // cn_supplier
-            // 
-            this.cn_supplier.DataPropertyName = "supplier";
-            this.cn_supplier.HeaderText = "Supplier";
-            this.cn_supplier.Name = "cn_supplier";
-            // 
-            // cn_suparticle
-            // 
-            this.cn_suparticle.DataPropertyName = "suparticle";
-            this.cn_suparticle.HeaderText = "Sup. article";
-            this.cn_suparticle.Name = "cn_suparticle";
-            // 
-            // cn_unitprice
-            // 
-            this.cn_unitprice.DataPropertyName = "unitprice";
-            this.cn_unitprice.FillWeight = 80F;
-            this.cn_unitprice.HeaderText = "Unit price";
-            this.cn_unitprice.Name = "cn_unitprice";
-            this.cn_unitprice.Width = 80;
-            // 
-            // cn_currency
-            // 
-            this.cn_currency.DataPropertyName = "currency";
-            this.cn_currency.FillWeight = 50F;
-            this.cn_currency.HeaderText = "Curr.";
-            this.cn_currency.Name = "cn_currency";
-            this.cn_currency.Width = 50;
+            this.btn_Edit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_Edit.Image = global::Odin.Global_Resourses.edit;
+            this.btn_Edit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_Edit.Name = "btn_Edit";
+            this.btn_Edit.Size = new System.Drawing.Size(23, 22);
+            this.btn_Edit.Text = "Edit selected line";
+            this.btn_Edit.Click += new System.EventHandler(this.btn_Edit_Click);
             // 
             // ctl_StockInPO
             // 
@@ -322,7 +334,7 @@
             this.bn_List.ResumeLayout(false);
             this.bn_List.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
@@ -354,5 +366,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_suparticle;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_unitprice;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_currency;
+        private System.Windows.Forms.ToolStripButton btn_Edit;
     }
 }

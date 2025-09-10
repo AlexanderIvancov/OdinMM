@@ -90,5 +90,35 @@ namespace Odin.Warehouse.StockIn
                 FillPOs(IdIn);
             }
         }
+
+        private void btn_Edit_Click(object sender, EventArgs e)
+        {
+            int _id = 0;
+            double _qty = 0;
+
+            try
+            {
+                _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
+                _qty = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_qty"].Value);
+            }
+            catch { }
+            if (_id != 0)
+            {
+                frm_cmbNumber frm = new frm_cmbNumber();
+                frm.FormNumber = _qty;
+                frm.HeaderText = "Edit qty delivered";
+                frm.LabelText = "Qty:";
+
+                DialogResult result = frm.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    SIBll.EditStockPOLink(_id, frm.FormNumber);
+                    FillPOs(IdIn);
+                }
+
+
+
+            }
+        }
     }
 }
