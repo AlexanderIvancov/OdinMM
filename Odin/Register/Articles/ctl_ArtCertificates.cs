@@ -99,6 +99,7 @@ namespace Odin.Register.Articles
         private void btn_Add_Click(object sender, EventArgs e)
         {
             frm_AddArtCertificates frm = new frm_AddArtCertificates();
+            frm.cmb_Articles1.ArticleId = ArtId;
 
             DialogResult result = frm.ShowDialog();
             if (result == DialogResult.OK

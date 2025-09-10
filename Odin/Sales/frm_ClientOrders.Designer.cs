@@ -141,6 +141,7 @@
             this.cn_artid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_article = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_secname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_iscert = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_department = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chk_servce = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -855,6 +856,7 @@
             this.cn_artid,
             this.cn_article,
             this.cn_secname,
+            this.cn_iscert,
             this.cn_type,
             this.cn_department,
             this.chk_servce,
@@ -1340,6 +1342,15 @@
             this.cn_secname.ReadOnly = true;
             this.cn_secname.Width = 150;
             // 
+            // cn_iscert
+            // 
+            this.cn_iscert.DataPropertyName = "iscertified";
+            this.cn_iscert.FillWeight = 150F;
+            this.cn_iscert.HeaderText = "Certified";
+            this.cn_iscert.Name = "cn_iscert";
+            this.cn_iscert.ReadOnly = true;
+            this.cn_iscert.Width = 150;
+            // 
             // cn_type
             // 
             this.cn_type.DataPropertyName = "type";
@@ -1735,6 +1746,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_artid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_article;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_secname;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_iscert;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_type;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_department;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chk_servce;
