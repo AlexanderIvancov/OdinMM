@@ -31,6 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctl_ArtCertificates));
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.cmb_Articles1 = new Odin.CMB_Components.Articles.cmb_Articles();
+            this.cmb_Certs1 = new Odin.CMB_Components.ArtCerts.cmb_ArtCerts();
+            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.cn_certid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_certNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,14 +46,12 @@
             this.chk_IsValid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_createdby = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_createdat = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.btn_Add = new System.Windows.Forms.ToolStripButton();
             this.btn_Edit = new System.Windows.Forms.ToolStripButton();
             this.btn_Delete = new System.Windows.Forms.ToolStripButton();
             this.bn_List = new System.Windows.Forms.BindingNavigator(this.components);
-            this.cmb_Articles1 = new Odin.CMB_Components.Articles.cmb_Articles();
-            this.cmb_Certs1 = new Odin.CMB_Components.ArtCerts.cmb_ArtCerts();
             this.bs_List = new Odin.Global_Classes.SyncBindingSource();
+            this.btn_Lock = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_List)).BeginInit();
@@ -61,6 +62,7 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.btn_Lock);
             this.kryptonPanel1.Controls.Add(this.cmb_Articles1);
             this.kryptonPanel1.Controls.Add(this.cmb_Certs1);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel2);
@@ -70,6 +72,63 @@
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
             this.kryptonPanel1.Size = new System.Drawing.Size(924, 52);
             this.kryptonPanel1.TabIndex = 1;
+            // 
+            // cmb_Articles1
+            // 
+            this.cmb_Articles1.Article = "";
+            this.cmb_Articles1.ArticleId = 0;
+            this.cmb_Articles1.ArticleIdRec = 0;
+            this.cmb_Articles1.ArtType = null;
+            this.cmb_Articles1.BOMState = 0;
+            this.cmb_Articles1.CertState = "";
+            this.cmb_Articles1.Comments = null;
+            this.cmb_Articles1.CustCode = null;
+            this.cmb_Articles1.CustCodeId = 0;
+            this.cmb_Articles1.Department = null;
+            this.cmb_Articles1.DeptId = 0;
+            this.cmb_Articles1.Description = null;
+            this.cmb_Articles1.IsActive = -1;
+            this.cmb_Articles1.IsPF = 0;
+            this.cmb_Articles1.Location = new System.Drawing.Point(72, 15);
+            this.cmb_Articles1.Manufacturer = "";
+            this.cmb_Articles1.Margin = new System.Windows.Forms.Padding(0);
+            this.cmb_Articles1.Name = "cmb_Articles1";
+            this.cmb_Articles1.Project = null;
+            this.cmb_Articles1.ProjectId = 0;
+            this.cmb_Articles1.QtyAvail = 0D;
+            this.cmb_Articles1.QtyConsStock = 0D;
+            this.cmb_Articles1.RMId = 0;
+            this.cmb_Articles1.SecName = null;
+            this.cmb_Articles1.Size = new System.Drawing.Size(265, 20);
+            this.cmb_Articles1.SMTType = 0;
+            this.cmb_Articles1.SpoilConst = 0D;
+            this.cmb_Articles1.Stage = "";
+            this.cmb_Articles1.StageID = 0;
+            this.cmb_Articles1.TabIndex = 45;
+            this.cmb_Articles1.TypeId = 0;
+            this.cmb_Articles1.Unit = null;
+            this.cmb_Articles1.UnitId = 0;
+            this.cmb_Articles1.Weight = 0D;
+            this.cmb_Articles1.ArticleChanged += new Odin.CMB_Components.Articles.ArticlesEventHandler(this.cmb_Articles1_ArticleChanged);
+            // 
+            // cmb_Certs1
+            // 
+            this.cmb_Certs1.Cert = "";
+            this.cmb_Certs1.IsEmptyColor = false;
+            this.cmb_Certs1.Location = new System.Drawing.Point(352, 15);
+            this.cmb_Certs1.Margin = new System.Windows.Forms.Padding(0);
+            this.cmb_Certs1.Name = "cmb_Certs1";
+            this.cmb_Certs1.Size = new System.Drawing.Size(165, 20);
+            this.cmb_Certs1.TabIndex = 45;
+            this.cmb_Certs1.CertChanged += new Odin.CMB_Components.ArtCerts.ArtCertsEventHandler(this.cmb_Certs1_CertChanged);
+            // 
+            // kryptonLabel2
+            // 
+            this.kryptonLabel2.Location = new System.Drawing.Point(11, 15);
+            this.kryptonLabel2.Name = "kryptonLabel2";
+            this.kryptonLabel2.Size = new System.Drawing.Size(48, 20);
+            this.kryptonLabel2.TabIndex = 42;
+            this.kryptonLabel2.Values.Text = "Article:";
             // 
             // gv_List
             // 
@@ -89,11 +148,11 @@
             this.cn_createdby,
             this.cn_createdat});
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gv_List.Location = new System.Drawing.Point(0, 103);
+            this.gv_List.Location = new System.Drawing.Point(0, 77);
             this.gv_List.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gv_List.Name = "gv_List";
             this.gv_List.RowHeadersWidth = 25;
-            this.gv_List.Size = new System.Drawing.Size(1386, 397);
+            this.gv_List.Size = new System.Drawing.Size(924, 248);
             this.gv_List.TabIndex = 46;
             // 
             // cn_certid
@@ -169,8 +228,8 @@
             this.chk_IsValid.FillWeight = 150F;
             this.chk_IsValid.HeaderText = "IsValid";
             this.chk_IsValid.Name = "chk_IsValid";
-            this.chk_IsValid.Width = 150;
             this.chk_IsValid.Visible = false;
+            this.chk_IsValid.Width = 150;
             // 
             // cn_createdby
             // 
@@ -184,21 +243,13 @@
             this.cn_createdat.HeaderText = "When";
             this.cn_createdat.Name = "cn_createdat";
             // 
-            // kryptonLabel2
-            // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(11, 15);
-            this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(48, 20);
-            this.kryptonLabel2.TabIndex = 42;
-            this.kryptonLabel2.Values.Text = "Article:";
-            // 
             // btn_Add
             // 
             this.btn_Add.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.btn_Add.Image = ((System.Drawing.Image)(resources.GetObject("btn_Add.Image")));
             this.btn_Add.Name = "btn_Add";
             this.btn_Add.RightToLeftAutoMirrorImage = true;
-            this.btn_Add.Size = new System.Drawing.Size(28, 28);
+            this.btn_Add.Size = new System.Drawing.Size(23, 22);
             this.btn_Add.Text = "Add new";
             this.btn_Add.Click += new System.EventHandler(this.btn_Add_Click);
             // 
@@ -208,7 +259,7 @@
             this.btn_Edit.Image = global::Odin.Global_Resourses.edit;
             this.btn_Edit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btn_Edit.Name = "btn_Edit";
-            this.btn_Edit.Size = new System.Drawing.Size(28, 28);
+            this.btn_Edit.Size = new System.Drawing.Size(23, 22);
             this.btn_Edit.Text = "Edit selected line";
             this.btn_Edit.Click += new System.EventHandler(this.btn_Edit_Click);
             // 
@@ -218,7 +269,7 @@
             this.btn_Delete.Image = ((System.Drawing.Image)(resources.GetObject("btn_Delete.Image")));
             this.btn_Delete.Name = "btn_Delete";
             this.btn_Delete.RightToLeftAutoMirrorImage = true;
-            this.btn_Delete.Size = new System.Drawing.Size(28, 28);
+            this.btn_Delete.Size = new System.Drawing.Size(23, 22);
             this.btn_Delete.Text = "Delete";
             this.btn_Delete.Click += new System.EventHandler(this.btn_Delete_Click);
             // 
@@ -243,55 +294,16 @@
             this.bn_List.TabIndex = 45;
             this.bn_List.Text = "Bill of materials";
             // 
-            // cmb_Articles1
+            // btn_Lock
             // 
-            this.cmb_Articles1.Article = "";
-            this.cmb_Articles1.ArticleId = 0;
-            this.cmb_Articles1.ArticleIdRec = 0;
-            this.cmb_Articles1.ArtType = null;
-            this.cmb_Articles1.BOMState = 0;
-            this.cmb_Articles1.Comments = null;
-            this.cmb_Articles1.CustCode = null;
-            this.cmb_Articles1.CustCodeId = 0;
-            this.cmb_Articles1.Department = null;
-            this.cmb_Articles1.DeptId = 0;
-            this.cmb_Articles1.Description = null;
-            this.cmb_Articles1.IsActive = -1;
-            this.cmb_Articles1.CertState = "";
-            this.cmb_Articles1.IsPF = 0;
-            this.cmb_Articles1.Location = new System.Drawing.Point(72, 15);
-            this.cmb_Articles1.Manufacturer = "";
-            this.cmb_Articles1.Margin = new System.Windows.Forms.Padding(0);
-            this.cmb_Articles1.Name = "cmb_Articles1";
-            this.cmb_Articles1.Project = null;
-            this.cmb_Articles1.ProjectId = 0;
-            this.cmb_Articles1.QtyAvail = 0D;
-            this.cmb_Articles1.QtyConsStock = 0D;
-            this.cmb_Articles1.RMId = 0;
-            this.cmb_Articles1.SecName = null;
-            this.cmb_Articles1.Size = new System.Drawing.Size(265, 20);
-            this.cmb_Articles1.ArticleChanged += new Odin.CMB_Components.Articles.ArticlesEventHandler(this.cmb_Articles1_ArticleChanged);
-            this.cmb_Articles1.SMTType = 0;
-            this.cmb_Articles1.SpoilConst = 0D;
-            this.cmb_Articles1.Stage = "";
-            this.cmb_Articles1.StageID = 0;
-            this.cmb_Articles1.TabIndex = 45;
-            this.cmb_Articles1.TypeId = 0;
-            this.cmb_Articles1.Unit = null;
-            this.cmb_Articles1.UnitId = 0;
-            this.cmb_Articles1.Weight = 0D;
-            this.cmb_Articles1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
-            // 
-            // cmb_Certs1
-            // 
-            this.cmb_Certs1.Cert = "";
-            this.cmb_Certs1.Location = new System.Drawing.Point(352, 15);
-            this.cmb_Certs1.Margin = new System.Windows.Forms.Padding(0);
-            this.cmb_Certs1.Name = "cmb_Certs1";
-            this.cmb_Certs1.Size = new System.Drawing.Size(165, 20);
-            this.cmb_Certs1.CertChanged += new Odin.CMB_Components.ArtCerts.ArtCertsEventHandler(this.cmb_Certs1_CertChanged);
-            this.cmb_Certs1.TabIndex = 45;
-            this.cmb_Certs1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
+            this.btn_Lock.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.LowProfile;
+            this.btn_Lock.Location = new System.Drawing.Point(529, 15);
+            this.btn_Lock.Name = "btn_Lock";
+            this.btn_Lock.Size = new System.Drawing.Size(27, 25);
+            this.btn_Lock.TabIndex = 46;
+            this.btn_Lock.Values.Image = global::Odin.Global_Resourses.lock_open;
+            this.btn_Lock.Values.Text = "";
+            this.btn_Lock.Click += new System.EventHandler(this.btn_Lock_Click);
             // 
             // ctl_ArtCertificates
             // 
@@ -339,5 +351,6 @@
         private System.Windows.Forms.ToolStripButton btn_Edit;
         private System.Windows.Forms.ToolStripButton btn_Delete;
         private System.Windows.Forms.BindingNavigator bn_List;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Lock;
     }
 }

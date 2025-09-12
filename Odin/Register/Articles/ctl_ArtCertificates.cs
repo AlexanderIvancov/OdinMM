@@ -22,33 +22,26 @@ namespace Odin.Register.Articles
 
         int _articleid = 0;
 
+        int _lock = 0;
+        public int Lock
+        {
+            get { return _lock; }
+            set { _lock = value; }
+        }
+
+
         public int ArtId
         {
-            get {
-                return cmb_Articles1.ArticleId;
-            }
-            set
-            {
-                _articleid = value;
-                //cmb_Articles1.ArticleId = _articleid;
-                //bwStart(bw_List);
-            }
+            get { return cmb_Articles1.ArticleId; }
+            set { _articleid = value; }
         }
 
         string _cert = "";
 
         public string Cert
         {
-            get
-            {
-                return cmb_Certs1.Cert;
-            }
-            set
-            {
-                _cert = value;
-                //cmb_Articles1.ArticleId = _articleid;
-                //bwStart(bw_List);
-            }
+            get { return cmb_Certs1.Cert; }
+            set { _cert = value; }
         }
 
         #endregion
@@ -176,6 +169,22 @@ namespace Odin.Register.Articles
             {
                 Reg.DeleteArtCertificates(_id);
                 ShowDets();
+            }
+        }
+
+
+        private void btn_Lock_Click(object sender, EventArgs e)
+        {
+            if (Lock == -1)
+            {
+                this.btn_Lock.Values.Image = global::Odin.Global_Resourses.lock_open;
+                Lock = 0;
+            }
+            else
+
+            {
+                this.btn_Lock.Values.Image = global::Odin.Global_Resourses._lock;
+                Lock = -1;
             }
         }
 

@@ -686,6 +686,7 @@ namespace Odin.Register.Articles
 
             FindArtPages(artid);
             FindBOMPages(artid);
+            FindCertPages(artid);
             FindRatioPages(artid);
             FindAnaloguesPages(artid);
             FindCatPages(artid);
@@ -807,6 +808,18 @@ namespace Odin.Register.Articles
                 if (ctlBOM1 != null
                     && ctlBOM1.Lock == 0)
                     ctlBOM1.cmb_Articles1.ArticleId = artid;
+                //break;
+            }
+        }
+
+        public void FindCertPages(int artid)
+        {
+            foreach (var page in kryptonDockingManager1.Pages)
+            {
+                ctl_ArtCertificates ctlCert1 = (ctl_ArtCertificates)page.Controls.Find("ctl_ArtCertificates", true).FirstOrDefault();
+                if (ctlCert1 != null
+                    && ctlCert1.Lock == 0)
+                    ctlCert1.cmb_Articles1.ArticleId = artid;
                 //break;
             }
         }
