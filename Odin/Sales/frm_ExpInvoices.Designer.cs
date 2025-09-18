@@ -585,6 +585,7 @@
             // 
             this.buttonSpecAny4.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Context;
             this.buttonSpecAny4.UniqueName = "6A2751F9284C45EEA28C814570A892DD";
+            this.buttonSpecAny4.Click += new System.EventHandler(this.buttonSpecAny4_Click_1);
             // 
             // txt_CreatDateFrom
             // 
@@ -604,6 +605,7 @@
             // 
             this.buttonSpecAny5.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Context;
             this.buttonSpecAny5.UniqueName = "E61697DA9D484B901DB9E49E0F0EE20E";
+            this.buttonSpecAny5.Click += new System.EventHandler(this.buttonSpecAny5_Click_1);
             // 
             // gradientPanel22
             // 

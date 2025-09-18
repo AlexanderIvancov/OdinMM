@@ -769,6 +769,15 @@ namespace Odin.Sales
             frm.Show(); frm.GetKryptonFormFields();
         }
 
+        private void buttonSpecAny5_Click_1(object sender, EventArgs e)
+        {
+            txt_CreatDateFrom.Value = System.DateTime.Now;
+        }
+        private void buttonSpecAny4_Click_1(object sender, EventArgs e)
+        {
+            txt_CreatDateTill.Value = System.DateTime.Now;
+        }
+
         private void txt_CreatDateFrom_DropDown(object sender, DateTimePickerDropArgs e)
         {
             txt_CreatDateFrom.Value = txt_CreatDateFrom.Value == null ? System.DateTime.Now : txt_CreatDateFrom.Value;
