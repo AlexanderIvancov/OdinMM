@@ -137,6 +137,7 @@
             this.chk_blocked = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.cn_coartid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_startdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_reqdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_canproduce = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chk_Follow = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.cn_coconfdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -767,6 +768,7 @@
             this.chk_blocked,
             this.cn_coartid,
             this.cn_startdate,
+            this.cn_reqdate,
             this.cn_canproduce,
             this.chk_Follow,
             this.cn_coconfdate});
@@ -1324,6 +1326,13 @@
             this.cn_startdate.Name = "cn_startdate";
             this.cn_startdate.ReadOnly = true;
             // 
+            // cn_reqdate
+            // 
+            this.cn_reqdate.DataPropertyName = "reqdate";
+            this.cn_reqdate.HeaderText = "Req date";
+            this.cn_reqdate.Name = "cn_reqdate";
+            this.cn_reqdate.ReadOnly = true;
+            // 
             // cn_canproduce
             // 
             this.cn_canproduce.DataPropertyName = "canproduce";
@@ -1500,6 +1509,7 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn chk_blocked;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_coartid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_startdate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_reqdate;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_canproduce;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chk_Follow;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_coconfdate;
