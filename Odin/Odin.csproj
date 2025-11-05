@@ -952,6 +952,24 @@
     <Compile Include="CMB_Components\StockInTypes\frm_StockMovTypes.Designer.cs">
       <DependentUpon>frm_StockMovTypes.cs</DependentUpon>
     </Compile>
+    <Compile Include="CMB_Components\ToolsType\cmb_ToolsType.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CMB_Components\ToolsType\cmb_ToolsType.designer.cs">
+      <DependentUpon>cmb_ToolsType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CMB_Components\ToolsType\frm_AddToolsType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CMB_Components\ToolsType\frm_AddToolsType.designer.cs">
+      <DependentUpon>frm_AddToolsType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CMB_Components\ToolsType\frm_ToolsType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CMB_Components\ToolsType\frm_ToolsType.designer.cs">
+      <DependentUpon>frm_ToolsType.cs</DependentUpon>
+    </Compile>
     <Compile Include="CMB_Components\Transport\cmb_Transport.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -3502,6 +3520,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CMB_Components\StockInTypes\frm_StockMovTypes.resx">
       <DependentUpon>frm_StockMovTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CMB_Components\ToolsType\cmb_ToolsType.resx">
+      <DependentUpon>cmb_ToolsType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CMB_Components\ToolsType\frm_AddToolsType.resx">
+      <DependentUpon>frm_AddToolsType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CMB_Components\ToolsType\frm_ToolsType.resx">
+      <DependentUpon>frm_ToolsType.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CMB_Components\Transport\cmb_Transport.resx">
       <DependentUpon>cmb_Transport.cs</DependentUpon>

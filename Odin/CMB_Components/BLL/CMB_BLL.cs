@@ -1154,6 +1154,110 @@ namespace Odin.CMB_Components.BLL
 
         #endregion
 
+        #region ToolsType
+
+        public static DataTable getToolsType(string _beg)
+        {
+            string query = "EXECUTE sp_ToolsTypeSelectLike @Beg = '" + _beg + "'";
+
+            return Helper.QueryDT(query);
+        }
+
+
+        public int AddToolsType(string Name)
+        {
+            int _res = 0;
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_AddToolsType", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+
+            sqlComm.Parameters.AddWithValue("@Name", Name);
+
+            sqlComm.Parameters.Add("@insertedid", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            _res = Convert.ToInt32(sqlComm.Parameters["@insertedid"].Value);
+            sqlConn.Close();
+            return _res;
+        }
+
+        public void EditToolsType(int Id, string Name)
+        {
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_EditToolsType", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@Id", Id);
+            sqlComm.Parameters.AddWithValue("@Name", Name);
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+
+        }
+
+        public void DeleteToolsType(int Id)
+        {
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_DeleteToolsType", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@Id", Id);
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+
+        }
+
+        int _ToolsTypeid = 0;
+
+        public string ToolsType
+        { get; set; }
+
+        public int ToolsTypetId
+        {
+            get { return _ToolsTypeid; }
+            set
+            {
+                _ToolsTypeid = value;
+                SqlConnection conn = new SqlConnection(sConnStr);
+                conn.Open();
+                DataSet ds = new DataSet();
+
+                SqlDataAdapter adapter =
+                    new SqlDataAdapter(
+                        "execute sp_SelectToolsType @id = " + _ToolsTypeid, conn);
+
+
+                conn.Close();
+
+                adapter.Fill(ds);
+
+                DataTable dt = ds.Tables[0];
+
+                if (dt.Rows.Count > 0)
+                {
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        ToolsType = dr["name"].ToString();
+                    }
+                }
+                else
+                {
+                    ToolsType = "";
+                }
+            }
+
+        }
+
+        #endregion
+
         #region Sales orders
 
         public static DataTable getSalesOrders(string _beg)

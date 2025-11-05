@@ -20,8 +20,8 @@ namespace Odin.Register.Articles
 
         public int ToolTypeId
         {
-            get { return cmb_Common1.SelectedValue; }
-            set { cmb_Common1.SelectedValue = value; }
+            get { return cmb_ToolsType.ToolsTypeId; }
+            set { cmb_ToolsType.ToolsTypeId = value; }
         }
 
         public int ToolId

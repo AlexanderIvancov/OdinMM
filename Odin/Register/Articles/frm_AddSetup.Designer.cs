@@ -32,7 +32,7 @@
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.btn_Cancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.cmb_Common1 = new Odin.CMB_Components.Common.cmb_Common();
+            this.cmb_ToolsType = new Odin.CMB_Components.ToolsType.cmb_ToolsType();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.chk_Required = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.cmb_Articles1 = new Odin.CMB_Components.Articles.cmb_Articles();
@@ -56,7 +56,7 @@
             this.kryptonPanel1.Controls.Add(this.cmb_Articles1);
             this.kryptonPanel1.Controls.Add(this.chk_Required);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
-            this.kryptonPanel1.Controls.Add(this.cmb_Common1);
+            this.kryptonPanel1.Controls.Add(this.cmb_ToolsType);
             this.kryptonPanel1.Controls.Add(this.btn_Cancel);
             this.kryptonPanel1.Controls.Add(this.btn_OK);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -88,17 +88,11 @@
             // 
             // cmb_Common1
             // 
-            this.cmb_Common1.Location = new System.Drawing.Point(88, 92);
-            this.cmb_Common1.Name = "cmb_Common1";
-            this.cmb_Common1.OrderBy = "id";
-            this.cmb_Common1.sCurrentValue = "";
-            this.cmb_Common1.SelectedValue = 0;
-            this.cmb_Common1.sID_Filled = "id";
-            this.cmb_Common1.Size = new System.Drawing.Size(148, 20);
-            this.cmb_Common1.sTable = "BAS_ToolsType";
-            this.cmb_Common1.sText_Filled = "name";
-            this.cmb_Common1.sTitle = "Tools type";
-            this.cmb_Common1.TabIndex = 7;
+            this.cmb_ToolsType.Location = new System.Drawing.Point(88, 92);
+            this.cmb_ToolsType.Name = "cmb_ToolsType";
+            this.cmb_ToolsType.ToolsType = "";
+            this.cmb_ToolsType.ToolsTypeId = 0;
+            this.cmb_ToolsType.TabIndex = 7;
             // 
             // kryptonLabel1
             // 
@@ -221,7 +215,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_Required;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
-        private CMB_Components.Common.cmb_Common cmb_Common1;
+        private CMB_Components.ToolsType.cmb_ToolsType cmb_ToolsType;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Cancel;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_OK;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_Comments;
