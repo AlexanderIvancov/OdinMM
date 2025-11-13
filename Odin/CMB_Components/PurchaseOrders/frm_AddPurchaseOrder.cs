@@ -38,6 +38,12 @@ namespace Odin.CMB_Components.PurchaseOrders
             set { txt_Comments.Text = value; }
         }
 
+        public string ADetails
+        {
+            get { return txt_ADetails.Text; }
+            set { txt_ADetails.Text = value; }
+        }
+
         public string Payment
         {
             get { return txt_Payment.Text; }
@@ -67,6 +73,12 @@ namespace Odin.CMB_Components.PurchaseOrders
         {
             get { return cmb_Firms2.FirmId; }
             set { cmb_Firms2.FirmId = value; }
+        }
+
+        public int BankContId
+        {
+            get { return cmb_BankCont.SelectedValue; }
+            set { cmb_BankCont.SelectedValue = value; }
         }
 
         public int DelivAddressId
@@ -133,9 +145,19 @@ namespace Odin.CMB_Components.PurchaseOrders
             CheckEmpty();
         }
 
+        private void cmb_BankCont_SelectedValueChanged(object sender)
+        {
+            CheckEmpty();
+        }
+
         private void buttonSpecAny2_Click(object sender, EventArgs e)
         {
             txt_Comments.Text = string.Empty;
+        }
+
+        private void buttonSpecAny5_Click(object sender, EventArgs e)
+        {
+            txt_ADetails.Text = string.Empty;
         }
 
         private void buttonSpecAny1_Click(object sender, EventArgs e)

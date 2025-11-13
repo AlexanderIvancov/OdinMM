@@ -233,7 +233,7 @@ namespace Odin.CMB_Components.PurchaseOrders
             if (result == DialogResult.OK)
             {
                 int _res = POBll.AddPurchaseOrderHead(frm.SupId, frm.ContPersId, frm.Comments, frm.Payment, frm.Contract, frm.CurId, 
-                                                        frm.IncotermsId, frm.DelivPlaceId, frm.DelivAddressId, frm.InProcess);
+                                                        frm.IncotermsId, frm.DelivPlaceId, frm.DelivAddressId, frm.InProcess, frm.ADetails, frm.BankContId);
 
                 PurchaseOrderId = _res;
 
@@ -271,7 +271,8 @@ namespace Odin.CMB_Components.PurchaseOrders
                 frm.DelivPlaceId = POBll.POHeadDelivPlaceId;
                 frm.DelivAddressId = POBll.POHeadDelivAddressId;
                 frm.InProcess = POBll.POHeadProcessing;
-
+                frm.ADetails = POBll.POHeadADetails;
+                frm.BankContId = POBll.POHeadBankContId;
                 frm.CheckEmpty();
 
                 DialogResult result = frm.ShowDialog();
@@ -281,7 +282,7 @@ namespace Odin.CMB_Components.PurchaseOrders
                     
                     POBll.EditPurchaseOrderHead(_id, frm.SupId, frm.ContPersId, frm.Comments, frm.Payment, frm.Contract,
                                                 frm.CurId, frm.IncotermsId, frm.DelivPlaceId, frm.DelivAddressId,
-                                                frm.InProcess);
+                                                frm.InProcess, frm.ADetails, frm.BankContId);
 
                     POBll.POHeadId = _id;
                     _PrevId = 0;

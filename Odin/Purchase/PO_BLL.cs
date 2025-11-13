@@ -41,7 +41,7 @@ namespace Odin.Purchase
         #region Header
 
         public int AddPurchaseOrderHead(int SupId, int ContPersonId, string Comments, string Payment, string Contract, int CurId,
-                                        int IncotermId, int DelivPlaceId, int DelivAddressId, int InProcess)
+                                        int IncotermId, int DelivPlaceId, int DelivAddressId, int InProcess, string ADetails, int BankContId)
         {
             int _res = 0;
 
@@ -60,6 +60,8 @@ namespace Odin.Purchase
             sqlComm.Parameters.AddWithValue("@DelivPlaceId", DelivPlaceId);
             sqlComm.Parameters.AddWithValue("@DelivAddressId", DelivAddressId);
             sqlComm.Parameters.AddWithValue("@InProcess", InProcess);
+            sqlComm.Parameters.AddWithValue("@ADetails", ADetails);
+            sqlComm.Parameters.AddWithValue("@BankContId", BankContId);
 
             sqlComm.Parameters.Add("@insertedid", SqlDbType.Int).Direction = ParameterDirection.Output;
 
@@ -75,7 +77,7 @@ namespace Odin.Purchase
         }
 
         public void EditPurchaseOrderHead(int Id, int SupId, int ContPersonId, string Comments, string Payment, string Contract, int CurId,
-                                            int IncotermId, int DelivPlaceId, int DelivAddressId, int InProcess)
+                                            int IncotermId, int DelivPlaceId, int DelivAddressId, int InProcess, string ADetails, int BankContId)
         {
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
@@ -93,6 +95,8 @@ namespace Odin.Purchase
             sqlComm.Parameters.AddWithValue("@DelivPlaceId", DelivPlaceId);
             sqlComm.Parameters.AddWithValue("@DelivAddressId", DelivAddressId);
             sqlComm.Parameters.AddWithValue("@InProcess", InProcess);
+            sqlComm.Parameters.AddWithValue("@ADetails", ADetails);
+            sqlComm.Parameters.AddWithValue("@BankContId", BankContId);
 
             try
             {
@@ -183,11 +187,12 @@ namespace Odin.Purchase
         { get; set; }
         public string POHeadIncotermsStr
         { get; set; }
+        public string POHeadADetails
+        { get; set; }
+        public int POHeadBankContId
+        { get; set; }
         public int POHeadProcessing
-        {
-            get;
-            set; 
-        }
+        { get; set; }
         public string POHeadSupplierCountryISO
         { get; set; }
         public int POHeadId
@@ -247,6 +252,8 @@ namespace Odin.Purchase
                         POHeadIncotermsStr = dr["incoterms"].ToString();
                         POHeadProcessing = Convert.ToInt32(dr["inprocess"]);
                         POHeadSupplierCountryISO = dr["countryiso"].ToString();
+                        POHeadADetails = dr["aDetails"].ToString();
+                        POHeadBankContId = Convert.ToInt32(dr["bankContId"]);
                     }
                 }
                 else

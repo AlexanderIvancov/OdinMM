@@ -53,6 +53,8 @@
             this.buttonSpecAny1});
             this.txt_Address.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txt_Address.Location = new System.Drawing.Point(0, 0);
+            this.txt_Address.Multiline = true;
+            this.txt_Address.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txt_Address.Name = "txt_Address";
             this.txt_Address.Size = new System.Drawing.Size(208, 23);
             this.txt_Address.TabIndex = 1;
@@ -88,7 +90,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
