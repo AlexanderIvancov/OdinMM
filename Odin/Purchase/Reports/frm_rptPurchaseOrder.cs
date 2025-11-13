@@ -3,6 +3,7 @@ using CrystalDecisions.CrystalReports.Engine;
 using Odin.Global_Classes;
 using System;
 using System.Data;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 
@@ -16,6 +17,8 @@ namespace Odin.Purchase.Reports
         }
 
         #region Variables
+
+        public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
 
 
         public int HeadId
@@ -92,7 +95,7 @@ namespace Odin.Purchase.Reports
             report.SetParameterValue("Payment", BLL.POHeadPayments);
             report.SetParameterValue("Supplier", BLL.POHeadSupplier);
             report.SetParameterValue("SupplierVAT", BLL.POHeadSupplierVAT);
-            report.SetParameterValue("SupplierAddress", BLL.POHeadSupAddress);
+            report.SetParameterValue("SupplierAddress", "                  " + BLL.POHeadSupAddress);
             report.SetParameterValue("SupplierCont", BLL.POHeadSupContPerson);
             report.SetParameterValue("SupplierPhone", BLL.POHeadSupContPersPhone);
             report.SetParameterValue("SupplierFax", BLL.POHeadSupContPersFax);
@@ -100,7 +103,7 @@ namespace Odin.Purchase.Reports
             report.SetParameterValue("Contract", BLL.POHeadContract);
             report.SetParameterValue("Receiver", BLL.POHeadReceiver);
             report.SetParameterValue("ReceiverVAT", BLL.POHeadReceiverVAT);
-            report.SetParameterValue("ReceiverAddress", BLL.POHeadRecAddress);
+            report.SetParameterValue("ReceiverAddress", "                 " + BLL.POHeadRecAddress);
             report.SetParameterValue("ReceiverCont", BLL.POHeadRecContPerson);
             report.SetParameterValue("ReceiverPhone", BLL.POHeadRecContPersPhone);
             report.SetParameterValue("ReceiverFax", BLL.POHeadRecContPersFax);
@@ -108,6 +111,7 @@ namespace Odin.Purchase.Reports
             report.SetParameterValue("HeadComments", BLL.POHeadComments);
             report.SetParameterValue("Incoterms", BLL.POHeadIncotermsStr);
             report.SetParameterValue("Currency", BLL.POHeadCurrency);
+            report.SetParameterValue("BankCont", Convert.ToString(Helper.GetOneRecord(string.Format("SELECT account FROM vw_CurrentBanks WHERE id = '{0}'", BLL.POHeadBankContId))));
 
             //Labels
 
