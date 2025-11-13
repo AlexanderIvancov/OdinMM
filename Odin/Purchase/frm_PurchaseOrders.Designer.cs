@@ -118,6 +118,7 @@
             this.cn_suporder = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_secname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_adetails = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_bestbefore = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_catalogid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_coefconv = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -861,6 +862,7 @@
             this.cn_suporder,
             this.cn_secname,
             this.cn_comments,
+            this.cn_adetails,
             this.cn_bestbefore,
             this.cn_catalogid,
             this.cn_coefconv,
@@ -1048,6 +1050,15 @@
             this.cn_comments.HeaderText = "Comments";
             this.cn_comments.Name = "cn_comments";
             this.cn_comments.Width = 150;
+            // 
+            // cn_adetails
+            // 
+            this.cn_adetails.DataPropertyName = "adetails";
+            this.cn_adetails.FillWeight = 150F;
+            this.cn_adetails.HeaderText = "Account details";
+            this.cn_adetails.Name = "cn_adetails";
+            this.cn_adetails.Width = 150;
+
             // 
             // cn_bestbefore
             // 
@@ -1467,6 +1478,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_suporder;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_secname;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_comments;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_adetails;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_bestbefore;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_catalogid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_coefconv;

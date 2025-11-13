@@ -476,7 +476,7 @@ namespace Odin.Purchase
 
         public int SavePOLine(int id, int headid, int line, int artid, double qty, int unitid, double unitprice, double vat, 
                             double discount, string reqdate, string comments, int stateid, int catalogid, double coefconv,
-                            string bestbefore, string suporder, string suparticle, int resale, int projectid, string internalcomments)
+                            string bestbefore, string suporder, string suparticle, int resale, int projectid, string internalcomments, string changeInOrder)
         {
             int _res = 0;
 
@@ -505,6 +505,7 @@ namespace Odin.Purchase
             sqlComm.Parameters.AddWithValue("@resale", resale);
             sqlComm.Parameters.AddWithValue("@projectid", projectid);
             sqlComm.Parameters.AddWithValue("@internalcomments", internalcomments);
+            sqlComm.Parameters.AddWithValue("@changeInOrder", internalcomments);
 
             sqlComm.Parameters.Add("@insertedid", SqlDbType.Int).Direction = ParameterDirection.Output;
 

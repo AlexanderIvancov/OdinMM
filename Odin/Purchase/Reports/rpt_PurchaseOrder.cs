@@ -575,6 +575,14 @@ namespace Odin.Purchase.Reports {
                 return this.DataDefinition.ParameterFields[60];
             }
         }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_ADetails {
+            get {
+                return this.DataDefinition.ParameterFields[61];
+            }
+        }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]

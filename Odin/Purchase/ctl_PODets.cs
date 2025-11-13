@@ -364,6 +364,11 @@ namespace Odin.Purchase
             get { return txt_Comments.Text; }
             set { txt_Comments.Text = value; }
         }
+        public string ChangeInOrder
+        {
+            get { return txt_ChangeInOrder.Text; }
+            set { txt_ChangeInOrder.Text = value; }
+        }
         public string ArtComments
         {
             get { return txt_ArtComments.Text; }
@@ -527,6 +532,7 @@ namespace Odin.Purchase
             SupArticle = string.Empty;
             UnitPrice = 0;
             InternalComments = "";
+            ChangeInOrder = "";
             ProjectId = 0;
             CalcPriceFields(0, UnitPrice, Discount, DiscFix, UnitFNPrice, Vat, PriceWVat);
             ShowLineTots();
@@ -645,6 +651,10 @@ namespace Odin.Purchase
         private void buttonSpecAny4_Click(object sender, EventArgs e)
         {
             txt_Comments.Text = string.Empty;
+        }
+        private void buttonSpecAny6_Click(object sender, EventArgs e)
+        {
+            txt_ChangeInOrder.Text = string.Empty;
         }
 
         private void cmb_Articles1_ArticleChanged(object sender)
@@ -882,6 +892,11 @@ namespace Odin.Purchase
             CheckEmpty();
         }
 
+        private void txt_ChangeInOrder_TextChanged(object sender, EventArgs e)
+        {
+            CheckEmpty();
+        }
+
         private void txt_ReqDate_TextChanged(object sender, EventArgs e)
         {
             CheckEmpty();
@@ -905,7 +920,7 @@ namespace Odin.Purchase
             if (DLL.CheckArtId(ArtId) != 0)
             {
                 NewLineId = POBll.SavePOLine(_POId, HeadId, Line, ArtId, Qty, UnitId, UnitFNPrice, Vat, Discount, ReqDate, Comments, StateId, 
-                                            CatId, CoefConv, MinExpDate, SuppliersOrder, SupArticle, Resale, ProjectId, InternalComments);
+                                            CatId, CoefConv, MinExpDate, SuppliersOrder, SupArticle, Resale, ProjectId, InternalComments, ChangeInOrder);
 
                 _QtyDistr = Math.Round(Qty / (CoefConv == 0 ? 1 : CoefConv), 5);
                 //MessageBox.Show(NewLineId.ToString());

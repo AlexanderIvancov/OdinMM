@@ -112,6 +112,7 @@ namespace Odin.Purchase.Reports
             report.SetParameterValue("Incoterms", BLL.POHeadIncotermsStr);
             report.SetParameterValue("Currency", BLL.POHeadCurrency);
             report.SetParameterValue("BankCont", Convert.ToString(Helper.GetOneRecord(string.Format("SELECT account FROM vw_CurrentBanks WHERE id = '{0}'", BLL.POHeadBankContId))));
+            report.SetParameterValue("ADetails", BLL.POHeadADetails);
 
             //Labels
 
