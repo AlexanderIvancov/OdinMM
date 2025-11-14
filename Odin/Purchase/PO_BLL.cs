@@ -505,7 +505,7 @@ namespace Odin.Purchase
             sqlComm.Parameters.AddWithValue("@resale", resale);
             sqlComm.Parameters.AddWithValue("@projectid", projectid);
             sqlComm.Parameters.AddWithValue("@internalcomments", internalcomments);
-            sqlComm.Parameters.AddWithValue("@changeInOrder", internalcomments);
+            sqlComm.Parameters.AddWithValue("@changeInOrder", changeInOrder);
 
             sqlComm.Parameters.Add("@insertedid", SqlDbType.Int).Direction = ParameterDirection.Output;
 
