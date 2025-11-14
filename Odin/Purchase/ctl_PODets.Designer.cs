@@ -188,7 +188,7 @@
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Silver;
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonPanel1.Size = new System.Drawing.Size(619, 460);
+            this.kryptonPanel1.Size = new System.Drawing.Size(619, 500);
             this.kryptonPanel1.TabIndex = 0;
             // 
             // kryptonLabel39
