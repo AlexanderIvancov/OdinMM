@@ -89,6 +89,7 @@ namespace Odin.Purchase
                 Resale = POBll.POResale;
                 InternalComments = POBll.POInternalComments;
                 ProjectId = POBll.POProjectId;
+                ChangeInOrder = POBll.POChangeInOrder;
                 EndCustomer = POBll.POEndCustomer;
 
                 strField = "txt_UnPrice";

@@ -386,6 +386,7 @@ namespace Odin.Purchase
                         POResale = Convert.ToInt32(dr["resale"]);
                         POProjectId = Convert.ToInt32(dr["projectid"]);
                         POInternalComments = dr["internalcomments"].ToString();
+                        POChangeInOrder = dr["changeInOrder"].ToString();
                         POEndCustomer = dr["endcustomer"].ToString();
                     }
                 }
@@ -439,10 +440,11 @@ namespace Odin.Purchase
         { get; set; }
         public int POResale
         { get; set; }
-
+        public string POInternalComments
+        { get; set; }
         public int POProjectId
         { get; set; }
-        public string POInternalComments
+        public string POChangeInOrder
         { get; set; }
         public string POEndCustomer
         { get; set; }
@@ -471,6 +473,7 @@ namespace Odin.Purchase
             POResale = 0;
             POProjectId = 0;
             POInternalComments = "";
+            POChangeInOrder = "";
             POEndCustomer = "";
         }
 
