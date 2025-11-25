@@ -29,20 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctl_StockInDets));
             this.kryptonPanel3 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonHeaderGroup2 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
-            this.tv_Rests = new AdvancedDataGridView.TreeGridView();
-            this.attachmentColumn = new System.Windows.Forms.DataGridViewImageColumn();
-            this.cn_place = new AdvancedDataGridView.TreeGridColumn();
-            this.cn_placeid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_qtyonplace = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_qtyoper = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_QtyAfter = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_datacode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_manufbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.kryptonPanel5 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.txt_QtyAfter = new Owf.Controls.NumericTetxBox();
             this.kryptonLabel21 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -61,6 +50,15 @@
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btn_DeleteLine = new System.Windows.Forms.ToolStripButton();
+            this.attachmentColumn = new System.Windows.Forms.DataGridViewImageColumn();
+            this.cn_place = new AdvancedDataGridView.TreeGridColumn();
+            this.cn_placeid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_qtyonplace = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_qtyoper = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_QtyAfter = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_datacode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_manufbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.buttonSpecAny1 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
@@ -72,6 +70,8 @@
             this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel10 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonLabel33 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.txt_Total2 = new Owf.Controls.NumericTetxBox();
             this.txt_ManufBatch = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.buttonSpecAny5 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.kryptonLabel31 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -133,15 +133,13 @@
             this.cmb_Articles1 = new Odin.CMB_Components.Articles.cmb_Articles();
             this.bs_List = new System.Windows.Forms.BindingSource(this.components);
             this.kryptonPalette1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
-            this.kryptonLabel33 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.txt_Total2 = new Owf.Controls.NumericTetxBox();
+            this.chk_blockdelivery = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel3)).BeginInit();
             this.kryptonPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2.Panel)).BeginInit();
             this.kryptonHeaderGroup2.Panel.SuspendLayout();
             this.kryptonHeaderGroup2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tv_Rests)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel5)).BeginInit();
             this.kryptonPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bn_List)).BeginInit();
@@ -170,114 +168,12 @@
             // 
             // kryptonHeaderGroup2.Panel
             // 
-            this.kryptonHeaderGroup2.Panel.Controls.Add(this.tv_Rests);
             this.kryptonHeaderGroup2.Panel.Controls.Add(this.kryptonPanel5);
             this.kryptonHeaderGroup2.Panel.Controls.Add(this.bn_List);
             this.kryptonHeaderGroup2.Size = new System.Drawing.Size(645, 172);
             this.kryptonHeaderGroup2.TabIndex = 3;
             this.kryptonHeaderGroup2.ValuesPrimary.Heading = "Stock placement and labels";
             this.kryptonHeaderGroup2.ValuesPrimary.Image = global::Odin.Global_Resourses.barcode_2d;
-            // 
-            // tv_Rests
-            // 
-            this.tv_Rests.AllowUserToAddRows = false;
-            this.tv_Rests.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(244)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            this.tv_Rests.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.tv_Rests.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.tv_Rests.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.attachmentColumn,
-            this.cn_place,
-            this.cn_placeid,
-            this.cn_qtyonplace,
-            this.cn_qtyoper,
-            this.cn_QtyAfter,
-            this.cn_datacode,
-            this.cn_comments,
-            this.cn_manufbatch});
-            this.tv_Rests.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tv_Rests.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.tv_Rests.ImageList = null;
-            this.tv_Rests.Location = new System.Drawing.Point(0, 25);
-            this.tv_Rests.Name = "tv_Rests";
-            this.tv_Rests.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Silver;
-            this.tv_Rests.RowHeadersWidth = 25;
-            this.tv_Rests.ShowCellErrors = false;
-            this.tv_Rests.ShowRowErrors = false;
-            this.tv_Rests.Size = new System.Drawing.Size(643, 88);
-            this.tv_Rests.TabIndex = 23;
-            // 
-            // attachmentColumn
-            // 
-            this.attachmentColumn.HeaderText = "attachmentColumn";
-            this.attachmentColumn.Name = "attachmentColumn";
-            this.attachmentColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.attachmentColumn.Visible = false;
-            // 
-            // cn_place
-            // 
-            this.cn_place.DefaultNodeImage = null;
-            this.cn_place.FillWeight = 235F;
-            this.cn_place.HeaderText = "Place";
-            this.cn_place.Name = "cn_place";
-            this.cn_place.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.cn_place.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cn_place.Width = 235;
-            // 
-            // cn_placeid
-            // 
-            this.cn_placeid.HeaderText = "placeid";
-            this.cn_placeid.Name = "cn_placeid";
-            this.cn_placeid.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cn_placeid.Visible = false;
-            // 
-            // cn_qtyonplace
-            // 
-            this.cn_qtyonplace.FillWeight = 80F;
-            this.cn_qtyonplace.HeaderText = "Qty on place";
-            this.cn_qtyonplace.Name = "cn_qtyonplace";
-            this.cn_qtyonplace.ReadOnly = true;
-            this.cn_qtyonplace.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cn_qtyonplace.Width = 80;
-            // 
-            // cn_qtyoper
-            // 
-            this.cn_qtyoper.FillWeight = 80F;
-            this.cn_qtyoper.HeaderText = "Qty oper";
-            this.cn_qtyoper.Name = "cn_qtyoper";
-            this.cn_qtyoper.ReadOnly = true;
-            this.cn_qtyoper.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cn_qtyoper.Width = 80;
-            // 
-            // cn_QtyAfter
-            // 
-            this.cn_QtyAfter.FillWeight = 80F;
-            this.cn_QtyAfter.HeaderText = "Qty after";
-            this.cn_QtyAfter.Name = "cn_QtyAfter";
-            this.cn_QtyAfter.ReadOnly = true;
-            this.cn_QtyAfter.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cn_QtyAfter.Width = 80;
-            // 
-            // cn_datacode
-            // 
-            this.cn_datacode.HeaderText = "DataCode";
-            this.cn_datacode.Name = "cn_datacode";
-            this.cn_datacode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // cn_comments
-            // 
-            this.cn_comments.FillWeight = 120F;
-            this.cn_comments.HeaderText = "Comments";
-            this.cn_comments.Name = "cn_comments";
-            this.cn_comments.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cn_comments.Width = 120;
-            // 
-            // cn_manufbatch
-            // 
-            this.cn_manufbatch.HeaderText = "Manuf. batch";
-            this.cn_manufbatch.Name = "cn_manufbatch";
-            this.cn_manufbatch.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // kryptonPanel5
             // 
@@ -463,6 +359,77 @@
             this.btn_DeleteLine.Text = "Delete";
             this.btn_DeleteLine.Click += new System.EventHandler(this.btn_DeleteLine_Click);
             // 
+            // attachmentColumn
+            // 
+            this.attachmentColumn.HeaderText = "attachmentColumn";
+            this.attachmentColumn.Name = "attachmentColumn";
+            this.attachmentColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.attachmentColumn.Visible = false;
+            // 
+            // cn_place
+            // 
+            this.cn_place.DefaultNodeImage = null;
+            this.cn_place.FillWeight = 235F;
+            this.cn_place.HeaderText = "Place";
+            this.cn_place.Name = "cn_place";
+            this.cn_place.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.cn_place.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_place.Width = 235;
+            // 
+            // cn_placeid
+            // 
+            this.cn_placeid.HeaderText = "placeid";
+            this.cn_placeid.Name = "cn_placeid";
+            this.cn_placeid.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_placeid.Visible = false;
+            // 
+            // cn_qtyonplace
+            // 
+            this.cn_qtyonplace.FillWeight = 80F;
+            this.cn_qtyonplace.HeaderText = "Qty on place";
+            this.cn_qtyonplace.Name = "cn_qtyonplace";
+            this.cn_qtyonplace.ReadOnly = true;
+            this.cn_qtyonplace.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_qtyonplace.Width = 80;
+            // 
+            // cn_qtyoper
+            // 
+            this.cn_qtyoper.FillWeight = 80F;
+            this.cn_qtyoper.HeaderText = "Qty oper";
+            this.cn_qtyoper.Name = "cn_qtyoper";
+            this.cn_qtyoper.ReadOnly = true;
+            this.cn_qtyoper.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_qtyoper.Width = 80;
+            // 
+            // cn_QtyAfter
+            // 
+            this.cn_QtyAfter.FillWeight = 80F;
+            this.cn_QtyAfter.HeaderText = "Qty after";
+            this.cn_QtyAfter.Name = "cn_QtyAfter";
+            this.cn_QtyAfter.ReadOnly = true;
+            this.cn_QtyAfter.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_QtyAfter.Width = 80;
+            // 
+            // cn_datacode
+            // 
+            this.cn_datacode.HeaderText = "DataCode";
+            this.cn_datacode.Name = "cn_datacode";
+            this.cn_datacode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // cn_comments
+            // 
+            this.cn_comments.FillWeight = 120F;
+            this.cn_comments.HeaderText = "Comments";
+            this.cn_comments.Name = "cn_comments";
+            this.cn_comments.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_comments.Width = 120;
+            // 
+            // cn_manufbatch
+            // 
+            this.cn_manufbatch.HeaderText = "Manuf. batch";
+            this.cn_manufbatch.Name = "cn_manufbatch";
+            this.cn_manufbatch.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // btn_OK
             // 
             this.btn_OK.DialogResult = System.Windows.Forms.DialogResult.OK;
@@ -551,6 +518,7 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.chk_blockdelivery);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel33);
             this.kryptonPanel1.Controls.Add(this.txt_Total2);
             this.kryptonPanel1.Controls.Add(this.txt_ManufBatch);
@@ -623,6 +591,26 @@
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
             this.kryptonPanel1.Size = new System.Drawing.Size(645, 394);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // kryptonLabel33
+            // 
+            this.kryptonLabel33.Location = new System.Drawing.Point(15, 224);
+            this.kryptonLabel33.Name = "kryptonLabel33";
+            this.kryptonLabel33.Size = new System.Drawing.Size(91, 20);
+            this.kryptonLabel33.TabIndex = 303;
+            this.kryptonLabel33.Values.Text = "Total (manual):";
+            // 
+            // txt_Total2
+            // 
+            this.txt_Total2.AllowDecimalSeparator = true;
+            this.txt_Total2.AllowSpace = false;
+            this.txt_Total2.Location = new System.Drawing.Point(120, 224);
+            this.txt_Total2.Name = "txt_Total2";
+            this.txt_Total2.Size = new System.Drawing.Size(63, 21);
+            this.txt_Total2.StateActive.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txt_Total2.StateActive.Content.Padding = new System.Windows.Forms.Padding(3);
+            this.txt_Total2.TabIndex = 302;
+            this.txt_Total2.Text = "0";
             // 
             // txt_ManufBatch
             // 
@@ -966,7 +954,7 @@
             this.gradientPanel22.BackgroundGradientMode = Owf.Controls.GradientPanel2.PanelGradientMode.BackwardDiagonal;
             this.gradientPanel22.borderColor = System.Drawing.Color.Transparent;
             this.gradientPanel22.EndColor = System.Drawing.Color.Lime;
-            this.gradientPanel22.Location = new System.Drawing.Point(15, 263);
+            this.gradientPanel22.Location = new System.Drawing.Point(15, 267);
             this.gradientPanel22.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.gradientPanel22.Name = "gradientPanel22";
             this.gradientPanel22.Padding = new System.Windows.Forms.Padding(1);
@@ -1229,6 +1217,7 @@
             this.cmb_Articles1.ArticleIdRec = 0;
             this.cmb_Articles1.ArtType = null;
             this.cmb_Articles1.BOMState = 0;
+            this.cmb_Articles1.CertState = "";
             this.cmb_Articles1.Comments = null;
             this.cmb_Articles1.CustCode = null;
             this.cmb_Articles1.CustCodeId = 0;
@@ -1236,7 +1225,6 @@
             this.cmb_Articles1.DeptId = 0;
             this.cmb_Articles1.Description = null;
             this.cmb_Articles1.IsActive = -1;
-            this.cmb_Articles1.CertState = "";
             this.cmb_Articles1.IsPF = 0;
             this.cmb_Articles1.Location = new System.Drawing.Point(120, 42);
             this.cmb_Articles1.Manufacturer = "";
@@ -1273,25 +1261,13 @@
             this.kryptonPalette1.GridStyles.GridCustom1.StateCommon.HeaderRow.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.kryptonPalette1.PanelStyles.PanelCustom1.StateCommon.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             // 
-            // kryptonLabel33
+            // chk_blockdelivery
             // 
-            this.kryptonLabel33.Location = new System.Drawing.Point(15, 224);
-            this.kryptonLabel33.Name = "kryptonLabel33";
-            this.kryptonLabel33.Size = new System.Drawing.Size(40, 20);
-            this.kryptonLabel33.TabIndex = 303;
-            this.kryptonLabel33.Values.Text = "Total (manual):";
-            // 
-            // numericTetxBox1
-            // 
-            this.txt_Total2.AllowDecimalSeparator = true;
-            this.txt_Total2.AllowSpace = false;
-            this.txt_Total2.Location = new System.Drawing.Point(120, 224);
-            this.txt_Total2.Name = "txt_Total2";
-            this.txt_Total2.Size = new System.Drawing.Size(63, 21);
-            this.txt_Total2.StateActive.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txt_Total2.StateActive.Content.Padding = new System.Windows.Forms.Padding(3);
-            this.txt_Total2.TabIndex = 302;
-            this.txt_Total2.Text = "0";
+            this.chk_blockdelivery.Location = new System.Drawing.Point(120, 246);
+            this.chk_blockdelivery.Name = "chk_blockdelivery";
+            this.chk_blockdelivery.Size = new System.Drawing.Size(98, 20);
+            this.chk_blockdelivery.TabIndex = 304;
+            this.chk_blockdelivery.Values.Text = "Block delivery";
             // 
             // ctl_StockInDets
             // 
@@ -1309,7 +1285,6 @@
             this.kryptonHeaderGroup2.Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2)).EndInit();
             this.kryptonHeaderGroup2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.tv_Rests)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel5)).EndInit();
             this.kryptonPanel5.ResumeLayout(false);
             this.kryptonPanel5.PerformLayout();
@@ -1429,5 +1404,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_manufbatch;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel33;
         private Owf.Controls.NumericTetxBox txt_Total2;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_blockdelivery;
     }
 }
