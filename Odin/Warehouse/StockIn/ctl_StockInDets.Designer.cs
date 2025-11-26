@@ -72,6 +72,8 @@
             this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel10 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonLabel33 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.txt_Total2 = new Owf.Controls.NumericTetxBox();
             this.txt_ManufBatch = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.buttonSpecAny5 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.kryptonLabel31 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -133,8 +135,7 @@
             this.cmb_Articles1 = new Odin.CMB_Components.Articles.cmb_Articles();
             this.bs_List = new System.Windows.Forms.BindingSource(this.components);
             this.kryptonPalette1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
-            this.kryptonLabel33 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.txt_Total2 = new Owf.Controls.NumericTetxBox();
+            this.chk_blockdelivery = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel3)).BeginInit();
             this.kryptonPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2)).BeginInit();
@@ -551,6 +552,7 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.chk_blockdelivery);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel33);
             this.kryptonPanel1.Controls.Add(this.txt_Total2);
             this.kryptonPanel1.Controls.Add(this.txt_ManufBatch);
@@ -623,6 +625,26 @@
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
             this.kryptonPanel1.Size = new System.Drawing.Size(645, 394);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // kryptonLabel33
+            // 
+            this.kryptonLabel33.Location = new System.Drawing.Point(15, 224);
+            this.kryptonLabel33.Name = "kryptonLabel33";
+            this.kryptonLabel33.Size = new System.Drawing.Size(91, 20);
+            this.kryptonLabel33.TabIndex = 303;
+            this.kryptonLabel33.Values.Text = "Total (manual):";
+            // 
+            // txt_Total2
+            // 
+            this.txt_Total2.AllowDecimalSeparator = true;
+            this.txt_Total2.AllowSpace = false;
+            this.txt_Total2.Location = new System.Drawing.Point(120, 224);
+            this.txt_Total2.Name = "txt_Total2";
+            this.txt_Total2.Size = new System.Drawing.Size(63, 21);
+            this.txt_Total2.StateActive.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txt_Total2.StateActive.Content.Padding = new System.Windows.Forms.Padding(3);
+            this.txt_Total2.TabIndex = 302;
+            this.txt_Total2.Text = "0";
             // 
             // txt_ManufBatch
             // 
@@ -966,7 +988,7 @@
             this.gradientPanel22.BackgroundGradientMode = Owf.Controls.GradientPanel2.PanelGradientMode.BackwardDiagonal;
             this.gradientPanel22.borderColor = System.Drawing.Color.Transparent;
             this.gradientPanel22.EndColor = System.Drawing.Color.Lime;
-            this.gradientPanel22.Location = new System.Drawing.Point(15, 263);
+            this.gradientPanel22.Location = new System.Drawing.Point(15, 258);
             this.gradientPanel22.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.gradientPanel22.Name = "gradientPanel22";
             this.gradientPanel22.Padding = new System.Windows.Forms.Padding(1);
@@ -1229,6 +1251,7 @@
             this.cmb_Articles1.ArticleIdRec = 0;
             this.cmb_Articles1.ArtType = null;
             this.cmb_Articles1.BOMState = 0;
+            this.cmb_Articles1.CertState = "";
             this.cmb_Articles1.Comments = null;
             this.cmb_Articles1.CustCode = null;
             this.cmb_Articles1.CustCodeId = 0;
@@ -1236,7 +1259,6 @@
             this.cmb_Articles1.DeptId = 0;
             this.cmb_Articles1.Description = null;
             this.cmb_Articles1.IsActive = -1;
-            this.cmb_Articles1.CertState = "";
             this.cmb_Articles1.IsPF = 0;
             this.cmb_Articles1.Location = new System.Drawing.Point(120, 42);
             this.cmb_Articles1.Manufacturer = "";
@@ -1273,25 +1295,14 @@
             this.kryptonPalette1.GridStyles.GridCustom1.StateCommon.HeaderRow.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.kryptonPalette1.PanelStyles.PanelCustom1.StateCommon.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             // 
-            // kryptonLabel33
+            // chk_blockdelivery
             // 
-            this.kryptonLabel33.Location = new System.Drawing.Point(15, 224);
-            this.kryptonLabel33.Name = "kryptonLabel33";
-            this.kryptonLabel33.Size = new System.Drawing.Size(40, 20);
-            this.kryptonLabel33.TabIndex = 303;
-            this.kryptonLabel33.Values.Text = "Total (manual):";
-            // 
-            // numericTetxBox1
-            // 
-            this.txt_Total2.AllowDecimalSeparator = true;
-            this.txt_Total2.AllowSpace = false;
-            this.txt_Total2.Location = new System.Drawing.Point(120, 224);
-            this.txt_Total2.Name = "txt_Total2";
-            this.txt_Total2.Size = new System.Drawing.Size(63, 21);
-            this.txt_Total2.StateActive.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txt_Total2.StateActive.Content.Padding = new System.Windows.Forms.Padding(3);
-            this.txt_Total2.TabIndex = 302;
-            this.txt_Total2.Text = "0";
+            this.chk_blockdelivery.Location = new System.Drawing.Point(200, 224);
+            this.chk_blockdelivery.Name = "chk_blockdelivery";
+            this.chk_blockdelivery.Size = new System.Drawing.Size(98, 20);
+            this.chk_blockdelivery.TabIndex = 306;
+            this.chk_blockdelivery.Values.Text = "Block delivery";
+            this.chk_blockdelivery.Visible = false;
             // 
             // ctl_StockInDets
             // 
@@ -1429,5 +1440,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_manufbatch;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel33;
         private Owf.Controls.NumericTetxBox txt_Total2;
+        public ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_blockdelivery;
     }
 }
