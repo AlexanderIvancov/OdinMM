@@ -713,12 +713,14 @@ namespace Odin.Register.Articles
             var frm = new frm_cmbArt();
             frm.txt_Comments.Visible = false;
             frm.lbl_Comments.Visible = false;
+            frm.chk_checkbox.Visible = true;
+            frm.chk_checkbox.Text = "Copy positions";
             DialogResult result = frm.ShowDialog();
             frm.HeaderText = "Copy BOM from " + cmb_Articles1.Article;
 
             if (result == DialogResult.OK)
             {
-                Reg.CopyBOM(ArtId, frm.ArticleId);
+                Reg.CopyBOM(ArtId, frm.ArticleId, frm.chk_checkbox.CheckState == CheckState.Checked? -1:0);
                 cmb_Articles1.ArticleId = frm.ArticleId;
             }
         }

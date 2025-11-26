@@ -37,12 +37,14 @@
             this.cmb_Articles1 = new Odin.CMB_Components.Articles.cmb_Articles();
             this.btn_Cancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.chk_checkbox = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.chk_checkbox);
             this.kryptonPanel1.Controls.Add(this.txt_Comments);
             this.kryptonPanel1.Controls.Add(this.lbl_Comments);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
@@ -53,7 +55,7 @@
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonPanel1.Size = new System.Drawing.Size(357, 173);
+            this.kryptonPanel1.Size = new System.Drawing.Size(357, 194);
             this.kryptonPanel1.TabIndex = 0;
             // 
             // txt_Comments
@@ -95,6 +97,7 @@
             this.cmb_Articles1.ArticleIdRec = 0;
             this.cmb_Articles1.ArtType = null;
             this.cmb_Articles1.BOMState = 0;
+            this.cmb_Articles1.CertState = "";
             this.cmb_Articles1.Comments = null;
             this.cmb_Articles1.CustCode = null;
             this.cmb_Articles1.CustCodeId = 0;
@@ -144,12 +147,21 @@
             this.btn_OK.Values.Image = global::Odin.Global_Resourses.Ok;
             this.btn_OK.Values.Text = "OK";
             // 
+            // chk_checkbox
+            // 
+            this.chk_checkbox.Location = new System.Drawing.Point(88, 167);
+            this.chk_checkbox.Name = "chk_checkbox";
+            this.chk_checkbox.Size = new System.Drawing.Size(104, 20);
+            this.chk_checkbox.TabIndex = 305;
+            this.chk_checkbox.Values.Text = "Copy positions";
+            this.chk_checkbox.Visible = false;
+            // 
             // frm_cmbArt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(357, 173);
+            this.ClientSize = new System.Drawing.Size(357, 194);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -159,7 +171,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
@@ -173,5 +185,6 @@
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny1;
         public ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_Comments;
         public ComponentFactory.Krypton.Toolkit.KryptonLabel lbl_Comments;
+        public ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_checkbox;
     }
 }

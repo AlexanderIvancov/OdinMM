@@ -544,12 +544,13 @@ namespace Odin.Register
             var p = new SqlParameter("Id", SqlDbType.Int) { Value = Id };
             Helper.ExecuteSP("sp_DeleteBOMLineById", p);
         }
-        public void CopyBOM(int IdCseSource, int IdCseTarget)
+        public void CopyBOM(int IdCseSource, int IdCseTarget, int CopyPositions)
         {
             var sqlparams = new List<SqlParameter>
                                     {
                                         new SqlParameter("@IdCseSource", SqlDbType.Int) {Value = IdCseSource},
-                                        new SqlParameter("@IdCseTarget", SqlDbType.Int) {Value = IdCseTarget}
+                                        new SqlParameter("@IdCseTarget", SqlDbType.Int) {Value = IdCseTarget},
+                                        new SqlParameter("@CopyPositions", SqlDbType.Int) {Value = CopyPositions}
                                     };
 
             Helper.ExecuteSP("sp_CopyBOM", sqlparams.ToArray());

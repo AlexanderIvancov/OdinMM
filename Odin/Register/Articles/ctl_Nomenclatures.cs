@@ -407,10 +407,11 @@ namespace Odin.Register.Articles
             var frm = new frm_cmbArt();
             DialogResult result = frm.ShowDialog();
             frm.HeaderText = "Copy nomenclature from " + cmb_Articles1.Article;
+            frm.chk_checkbox.Visible = true;
 
             if (result == DialogResult.OK)
             {
-                BLL.CopyBOM(ArtId, frm.ArticleId);
+                BLL.CopyBOM(ArtId, frm.ArticleId, frm.chk_checkbox.CheckState == CheckState.Checked ? -1 : 0);
                 cmb_Articles1.ArticleId = frm.ArticleId;
             }
         }
