@@ -377,20 +377,6 @@ namespace Odin.Warehouse.StockIn
             get { return txt_ManufBatch.Text; }
             set { txt_ManufBatch.Text = value; }
         }
-
-        public int BlockDelivery
-        {
-            get
-            {
-                return chk_blockdelivery.Checked == true ? -1 : 0;
-            }
-            set
-            {
-                chk_blockdelivery.Checked = value == -1;
-
-            }
-        }
-
         #endregion
 
         #region Methods
@@ -907,8 +893,7 @@ namespace Odin.Warehouse.StockIn
                 if (_test == true)
                 {
                     int _NewInwardId = SIBll.AddStockIn(HeadId, ArtId, SupArticle, StockMoveTypeId, Qty, UnitId, Comments, UnitPrice, Discount,
-                                                        Vat, CoefConv, Weight, CustCodeId, BatchId, StateId, PurchaseOrderLineId, Producer, DataCode, 
-                                                        Dutycost, Total2, TotalVAT, BlockDelivery);
+                                                        Vat, CoefConv, Weight, CustCodeId, BatchId, StateId, PurchaseOrderLineId, Producer, DataCode, Dutycost, Total2, TotalVAT);
 
                     //Deallocation
                     if (_NewInwardId != 0)

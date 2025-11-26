@@ -79,14 +79,12 @@
             this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.cmb_Articles1 = new Odin.CMB_Components.Articles.cmb_Articles();
             this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.chk_blockdelivery = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
-            this.kryptonPanel1.Controls.Add(this.chk_blockdelivery);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel30);
             this.kryptonPanel1.Controls.Add(this.txt_DataCode);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel5);
@@ -618,7 +616,6 @@
             this.cmb_Articles1.ArticleIdRec = 0;
             this.cmb_Articles1.ArtType = null;
             this.cmb_Articles1.BOMState = 0;
-            this.cmb_Articles1.CertState = "";
             this.cmb_Articles1.Comments = null;
             this.cmb_Articles1.CustCode = null;
             this.cmb_Articles1.CustCodeId = 0;
@@ -626,6 +623,7 @@
             this.cmb_Articles1.DeptId = 0;
             this.cmb_Articles1.Description = null;
             this.cmb_Articles1.IsActive = -1;
+            this.cmb_Articles1.CertState = "";
             this.cmb_Articles1.IsPF = 0;
             this.cmb_Articles1.Location = new System.Drawing.Point(120, 42);
             this.cmb_Articles1.Manufacturer = "";
@@ -660,14 +658,6 @@
             this.btn_OK.Values.Image = global::Odin.Global_Resourses.Save_24x24;
             this.btn_OK.Values.Text = "Save";
             this.btn_OK.Click += new System.EventHandler(this.btn_OK_Click);
-            // 
-            // chk_blockdelivery
-            // 
-            this.chk_blockdelivery.Location = new System.Drawing.Point(427, 340);
-            this.chk_blockdelivery.Name = "chk_blockdelivery";
-            this.chk_blockdelivery.Size = new System.Drawing.Size(98, 20);
-            this.chk_blockdelivery.TabIndex = 305;
-            this.chk_blockdelivery.Values.Text = "Block delivery";
             // 
             // ctl_StockInEdit
             // 
@@ -736,6 +726,5 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel30;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_DataCode;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny3;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_blockdelivery;
     }
 }

@@ -56,7 +56,6 @@ namespace Odin.Warehouse.StockIn
                 Dutycost = Bll.Dutycost;
                 Total = Bll.Total;
                 PriceWVat = UnitPrice * (Vat + 100) / 100;
-                BlockDelivery = Bll.BlockDelivery;
             }
 
         }
@@ -279,19 +278,6 @@ namespace Odin.Warehouse.StockIn
             get { return txt_DataCode.Text; }
             set { txt_DataCode.Text = value; }
         }
-
-        public int BlockDelivery
-        {
-            get
-            {
-                return chk_blockdelivery.Checked == true ? -1 : 0;
-            }
-            set
-            {
-                chk_blockdelivery.Checked = value == -1;
-
-            }
-        }
         #endregion
 
         private void txt_Total_TextChanged(object sender, EventArgs e)
@@ -326,7 +312,7 @@ namespace Odin.Warehouse.StockIn
 
             int _NewInwardId = Bll.EditStockIn(Id, IncomeDocId, ArtId, SupArticle, StockMoveTypeId, Qty, UnitId,
                                                 Comments, UnitPrice, Discount, Vat, CoefConv, Weight, CustCodeId, 
-                                                BatchId, Producer, DataCode, Dutycost, Total, TotalVAT, BlockDelivery);
+                                                BatchId, Producer, DataCode, Dutycost, Total, TotalVAT);
 
             //Deallocation
             if (_NewInwardId != 0)
