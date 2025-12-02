@@ -363,9 +363,7 @@ namespace Odin.Workshop
                                     }
                                     //Add New Serial
                                     //MessageBox.Show("Adding!");
-                                    var s = txt_Oper.Text.Trim();
-                                    var d = cmb_BatchPDA1.Batch.Substring(1);
-                                    if (s.StartsWith(d) || ProdBll.CheckSerialNumberTracing(BatchId) == -1)
+                                    if (txt_Oper.Text.Trim().StartsWith(cmb_BatchPDA1.Batch) || ProdBll.CheckSerialNumberTracing(BatchId) == -1)
                                         AddSerialTracing(StageId, BatchId, txt_Oper.Text.Trim());
                                     else
                                     {
