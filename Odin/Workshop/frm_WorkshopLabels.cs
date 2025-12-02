@@ -25,11 +25,6 @@ namespace Odin.Workshop
         PrinterLabels PrintLabels = new PrinterLabels();
         Tools_BLL BLL = new Tools_BLL();
 
-        public int Length
-        {
-            get { return Convert.ToInt32(txt_Len.Text); }
-        }
-
         #endregion
 
         private void buttonSpecAny1_Click(object sender, EventArgs e)
@@ -40,11 +35,6 @@ namespace Odin.Workshop
         private void buttonSpecAny2_Click(object sender, EventArgs e)
         {
             txt_Till36.Text = string.Empty;
-        }
-
-        private void buttonSpecAny3_Click(object sender, EventArgs e)
-        {
-            txt_Batch.Text = string.Empty;
         }
 
         public bool CheckLabels()
@@ -108,9 +98,7 @@ namespace Odin.Workshop
                     string TemplateLabelText = BLL.TempLabelText;
                     //string _fieldname = "";
 
-                    string _TmpBatch = txt_Batch.Text;
-                    _TmpBatch = _TmpBatch.Replace("L", "");
-                    _TmpBatch = _TmpBatch.Replace("l", "");
+                    string _TmpBatch = cmb_Launches1.Launch;
 
                     TemplateLabelText = TemplateLabelText.Replace("[BATCH]", _TmpBatch);
                     TemplateLabelText = TemplateLabelText.Replace("[SN]", txt_From36.Text);
@@ -118,13 +106,13 @@ namespace Odin.Workshop
                     //Print pervoj
                     int k = Convert.ToInt32(txt_From10.Text);
                     _tmpstr = globClass.Convert_10to36(k);
-                    while (Length - _tmpstr.Length > 0)
+                    while (3 - _tmpstr.Length > 0)
                     {
                         _tmpstr = "0" + _tmpstr;
                     }
                     List<SqlParameter> parameters1 = new List<SqlParameter>
                             {
-                                new SqlParameter("@batch", SqlDbType.NVarChar) {Value = txt_Batch.Text},
+                                new SqlParameter("@batch", SqlDbType.NVarChar) {Value = cmb_Launches1.Launch},
                                 new SqlParameter("@sn", SqlDbType.NVarChar) {Value = _TmpBatch + "-" + _tmpstr},
                                 new SqlParameter("@counter", SqlDbType.Int) {Value = k}
                             };
@@ -136,7 +124,7 @@ namespace Odin.Workshop
                     while (k <= Convert.ToInt32(txt_Till10.Text))
                     {
                         _tmpstr = globClass.Convert_10to36(k);
-                        while (Length - _tmpstr.Length > 0)
+                        while (3 - _tmpstr.Length > 0)
                         {
                             _tmpstr = "0" + _tmpstr;
                         }
@@ -160,7 +148,7 @@ namespace Odin.Workshop
 
                         List<SqlParameter> parameters = new List<SqlParameter>
                             {
-                                new SqlParameter("@batch", SqlDbType.NVarChar) {Value = txt_Batch.Text},
+                                new SqlParameter("@batch", SqlDbType.NVarChar) {Value = cmb_Launches1.Launch},
                                 new SqlParameter("@sn", SqlDbType.NVarChar) {Value = _TmpBatch + "-" + _tmpstr},
                                 new SqlParameter("@counter", SqlDbType.Int) {Value = k}
                             };
@@ -198,6 +186,15 @@ namespace Odin.Workshop
                 RecalcDiff();
             }
             catch { txt_From10.Text = "0"; }
+        }
+
+        private void cmb_Launches1_LaunchChanged(object sender)
+        {
+            try
+            {
+                numericTetxBox1.Text = Convert.ToString(Helper.GetOneRecord(string.Format("SELECT dbo.fn_SelectLaunchLabelQTY(" + cmb_Launches1.LaunchId + ")")));
+            }
+            catch { numericTetxBox1.Text = "0"; }
         }
 
         public void RecalcDiff()
@@ -287,7 +284,7 @@ namespace Odin.Workshop
             {
                 txt_From36.Text = globClass.Convert_10to36(Convert.ToInt32(txt_From10.Text));
 
-                while (Length - txt_From36.Text.Length > 0)
+                while (3 - txt_From36.Text.Length > 0)
                 {
                     txt_From36.Text = "0" + txt_From36.Text;
                 }
@@ -303,7 +300,7 @@ namespace Odin.Workshop
             {
                 txt_Till36.Text = globClass.Convert_10to36(Convert.ToInt32(txt_Till10.Text));
 
-                while (Length - txt_Till36.Text.Length > 0)
+                while (3 - txt_Till36.Text.Length > 0)
                 {
                     txt_Till36.Text = "0" + txt_Till36.Text;
                 }
@@ -322,13 +319,13 @@ namespace Odin.Workshop
 
             var sqlparams = new List<SqlParameter>
                 {
-                 new SqlParameter("@batch",SqlDbType.NVarChar){Value = txt_Batch.Text},
+                 new SqlParameter("@batch",SqlDbType.NVarChar){Value = cmb_Launches1.Launch},
                  };
 
             Template_DataGridView frm = new Template_DataGridView();
 
 
-            frm.Text = "PCB labels creation details for: " + txt_Batch.Text;
+            frm.Text = "PCB labels creation details for: " + cmb_Launches1.Launch;
 
             frm.Query = _query;
             frm.SqlParams = sqlparams;

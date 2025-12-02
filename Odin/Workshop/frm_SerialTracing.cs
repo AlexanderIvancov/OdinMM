@@ -314,7 +314,7 @@ namespace Odin.Workshop
                     if (_batchid == 0)
                     {
                         //Trying to read batch from scanned serial label
-                        string _batchtry = "L" + txt_Oper.Text.Trim().Substring(0, txt_Oper.Text.Trim().IndexOf("-") < 0 ? 0 : txt_Oper.Text.Trim().IndexOf("-")).ToString();
+                        string _batchtry = txt_Oper.Text.Trim().Substring(0, txt_Oper.Text.Trim().IndexOf("-") < 0 ? 0 : txt_Oper.Text.Trim().IndexOf("-")).ToString();
                         _batchid = Convert.ToInt32(Helper.GetOneRecord("select top 1 id from prod_batchhead where Batch = '" + _batchtry + "'"));
                         if (_batchid == 0)
                             _batchid = Convert.ToInt32(Helper.GetOneRecord("select top 1 batchid from prod_serialtracing where analog = '" + txt_Oper.Text.Trim() + "' or serial = '" + txt_Oper.Text.Trim() + "' order by id desc"));

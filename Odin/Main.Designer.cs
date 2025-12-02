@@ -978,8 +978,7 @@
             // 
             this.kryptonRibbonGroup5.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupContainer[] {
             this.kryptonRibbonGroupTriple14,
-            this.kryptonRibbonGroupTriple27,
-            this.kryptonRibbonGroupTriple40});
+            this.kryptonRibbonGroupTriple27});
             this.kryptonRibbonGroup5.TextLine1 = "Withdraw";
             // 
             // kryptonRibbonGroupTriple14
@@ -1453,7 +1452,8 @@
             // 
             this.kryptonRibbonGroup25.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupContainer[] {
             this.kryptonRibbonGroupTriple35,
-            this.kryptonRibbonGroupTriple39});
+            this.kryptonRibbonGroupTriple39,
+            this.kryptonRibbonGroupTriple40});
             // 
             // kryptonRibbonGroupTriple35
             // 
