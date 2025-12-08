@@ -1285,7 +1285,7 @@ namespace Odin.Sales
 
         public void EditExInvoiceDets(int id, int artid, string payment, double qty, int unitid, double unitprice, double vat,
                                    double discount, string custcode, string comments, int coid, int isservice, int additexpences, 
-                                   int quotid, int ispaid, double paidinadvance, int isactive, string salescomments)
+                                   int quotid, int ispaid, double paidinadvance, int isactive, string salescomments, double total, double totalvat)
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_EditExInvoiceDets", sqlConn);
@@ -1309,6 +1309,8 @@ namespace Odin.Sales
             sqlComm.Parameters.AddWithValue("@paidinadvance", paidinadvance);
             sqlComm.Parameters.AddWithValue("@isactive", isactive);
             sqlComm.Parameters.AddWithValue("@salescomments", salescomments);
+            sqlComm.Parameters.AddWithValue("@total", total);
+            sqlComm.Parameters.AddWithValue("@totalvat", totalvat);
 
             //try
             //{
@@ -1405,6 +1407,8 @@ namespace Odin.Sales
                         InvArtId = Convert.ToInt32(dr["artid"]);
                         InvCOId = Convert.ToInt32(dr["coid"]);
                         InvQty = Convert.ToDouble(dr["Qty"]);
+                        InvTotal = Convert.ToDouble(dr["total"]);
+                        InvTotalVAT = Convert.ToDouble(dr["totalvat"]);
                         InvUnitId = Convert.ToInt32(dr["unitid"]);
                         InvUnitPrice = Convert.ToDouble(dr["UnitPrice"]);
                         InvDelivId = Convert.ToInt32(dr["delivid"]);
@@ -1439,6 +1443,10 @@ namespace Odin.Sales
         public int InvArtId
         { get; set; }
         public double InvQty
+        { get; set; }
+        public double InvTotal
+        { get; set; }
+        public double InvTotalVAT
         { get; set; }
         public string InvComments
         { get; set; }
@@ -1486,6 +1494,8 @@ namespace Odin.Sales
             InvArtId = 0;
             InvCOId = 0;
             InvQty = 0;
+            InvTotal = 0;
+            InvTotalVAT = 0;
             InvUnitId = 0;
             InvUnitPrice = 0;
             InvDelivId = 0;

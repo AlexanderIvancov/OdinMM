@@ -282,6 +282,10 @@ namespace Odin.Sales
                 AdditExpenses = COBll.InvIsAdditExpences;
                 Discount = COBll.InvDiscount;
                 DelivNote = COBll.InvDelivNote;
+                Total = COBll.InvTotal;
+                TotalVat = COBll.InvTotalVAT;
+                TotalWithVat = Total + TotalVat;
+
                 if (DelivNote.Trim() != "")
                 {
                     cmb_SalesOrdersWithLines1.Enabled = false;
@@ -303,7 +307,7 @@ namespace Odin.Sales
                 SalesComments = COBll.InvSalesComments;
                 //AllowToinvoice = COBll.InvAllowToInvoice;
 
-                RecalcTotals();
+                if (Total + TotalVat == 0) RecalcTotals();
             }
         }
 

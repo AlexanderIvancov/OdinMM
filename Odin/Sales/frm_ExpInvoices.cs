@@ -671,7 +671,7 @@ namespace Odin.Sales
                         //Edit line
                         Bll.EditExInvoiceDets(_id, frm.ArtId, frm.Product, frm.Qty, frm.UnitId, frm.UnitPrice,
                                                frm.FirmVAT, 0, frm.CustCode, frm.Comments, frm.COId, frm.IsService,
-                                               frm.AdditExpenses, frm.QuotId, frm.IsPaid, frm.InAdvance, frm.IsActive, frm.SalesComments);
+                                               frm.AdditExpenses, frm.QuotId, frm.IsPaid, frm.InAdvance, frm.IsActive, frm.SalesComments, frm.Total, frm.TotalVat);
 
                         DataGridViewColumn oldColumn = gv_List.SortedColumn;
                         var dir = Helper.SaveDirection(gv_List);
