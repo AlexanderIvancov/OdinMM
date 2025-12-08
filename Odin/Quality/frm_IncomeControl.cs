@@ -90,7 +90,7 @@ namespace Odin.Quality
         public void bw_List(object sender, DoWorkEventArgs e)
         {
             //MessageBox.Show(cmb_DeliveryNotes1.DelivNoteId.ToString());
-            var data = Quality_BLL.getIncomeControlList(cmb_Types1.TypeId, cmb_Firms1.FirmId, cmb_Articles1.ArticleId, cmb_Articles1.Article, txt_SecArticle.Text);
+            var data = Quality_BLL.getIncomeControlList(cmb_Types1.TypeId, cmb_Firms1.FirmId, cmb_Articles1.ArticleId, cmb_Articles1.Article, txt_SecArticle.Text, checkBox1.CheckState == CheckState.Checked ? -1 : checkBox1.CheckState == CheckState.Unchecked ? 0 : 1);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -266,7 +266,7 @@ namespace Odin.Quality
 
             if (result == DialogResult.OK)
             {
-                BLL.SaveIncomeControl(0, frm.ArtId, frm.SupId, frm.Comments);
+                BLL.SaveIncomeControl(0, frm.ArtId, frm.SupId, frm.Comments, frm.State);
 
                 bwStart(bw_List);
             }
@@ -277,12 +277,14 @@ namespace Odin.Quality
             int _id = 0;
             int _artid = 0;
             int _supid = 0;
+            int _state = 0;
             string _comments = "";
             try {
                 _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
                 _artid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_artid"].Value);
                 _supid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_supid"].Value);
                 _comments = gv_List.CurrentRow.Cells["cn_comments"].Value.ToString();
+                _state = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_state"].Value == "Active" ? -1 : 0);
 
             }
 
@@ -301,7 +303,7 @@ namespace Odin.Quality
 
                 if (result == DialogResult.OK)
                 {
-                    BLL.SaveIncomeControl(_id, frm.ArtId, frm.SupId, frm.Comments);
+                    BLL.SaveIncomeControl(_id, frm.ArtId, frm.SupId, frm.Comments, frm.State);
 
                     bwStart(bw_List);
                 }

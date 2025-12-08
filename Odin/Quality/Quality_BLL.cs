@@ -11,7 +11,7 @@ namespace Odin.Quality
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
 
         public static DataTable getIncomeControlList(int _typeid, int _supid, int _artid, string _article,
-                                                    string _secname)
+                                                    string _secname, int _state)
         {
             string query = "sp_IncomeControlList";
 
@@ -21,13 +21,14 @@ namespace Odin.Quality
                 new SqlParameter("@supid",SqlDbType.Int){Value = _supid },
                 new SqlParameter("@artid",SqlDbType.Int){Value = _artid },
                 new SqlParameter("@article",SqlDbType.NVarChar){Value = _article },
-                new SqlParameter("@secname",SqlDbType.NVarChar){Value = _secname}
+                new SqlParameter("@secname",SqlDbType.NVarChar){Value = _secname},
+                new SqlParameter("@state",SqlDbType.Int){Value = _state}
             };
 
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
 
-        public void SaveIncomeControl(int id, int artid, int supid,   string comments)
+        public void SaveIncomeControl(int id, int artid, int supid, string comments, int state)
         {
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
@@ -38,7 +39,8 @@ namespace Odin.Quality
             sqlComm.Parameters.AddWithValue("@artid", artid);
             sqlComm.Parameters.AddWithValue("@supid", supid);
             sqlComm.Parameters.AddWithValue("@comments", comments);
-            
+            sqlComm.Parameters.AddWithValue("@state", state);
+
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();

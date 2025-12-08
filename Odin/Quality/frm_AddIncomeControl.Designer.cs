@@ -38,6 +38,7 @@
             this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Cancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.checkBox1 = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -52,6 +53,7 @@
             this.kryptonPanel1.Controls.Add(this.btn_OK);
             this.kryptonPanel1.Controls.Add(this.btn_Cancel);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
+            this.kryptonPanel1.Controls.Add(this.checkBox1);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
@@ -169,6 +171,15 @@
             this.kryptonLabel1.TabIndex = 9;
             this.kryptonLabel1.Values.Text = "Comments:";
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(101, 70);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(56, 17);
+            this.checkBox1.TabIndex = 23;
+            this.checkBox1.Text = "Active";
+            // 
             // frm_AddIncomeControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -198,5 +209,6 @@
         private CMB_Components.Companies.cmb_Firms cmb_Firms1;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
         private CMB_Components.Articles.cmb_Articles cmb_Articles1;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox checkBox1;
     }
 }

@@ -30,6 +30,13 @@ namespace Odin.Quality
             set { cmb_Articles1.ArticleId = value; }
         }
 
+        public int State
+        {
+            get { return checkBox1.Checked == true ? -1 : 0; }
+            set { checkBox1.Checked = value == -1 ? true : false; }
+        }
+
+
         public int SupId
         { get { return cmb_Firms1.FirmId; }
         set { cmb_Firms1.FirmId = value; } }
