@@ -98,10 +98,11 @@ namespace Odin.Workshop
                     string TemplateLabelText = BLL.TempLabelText;
                     //string _fieldname = "";
 
-                    string _TmpBatch = cmb_Launches1.Launch;
+                    string _TmpBatch = cmb_Launches1.Launch.Split('-')[0];
+                    string _TmpLaunch = cmb_Launches1.Launch.Split('-')[1];
 
                     TemplateLabelText = TemplateLabelText.Replace("[BATCH]", _TmpBatch);
-                    TemplateLabelText = TemplateLabelText.Replace("[SN]", txt_From36.Text);
+                    TemplateLabelText = TemplateLabelText.Replace("[SN]", _TmpLaunch + "-" + txt_From36.Text);
 
                     //Print pervoj
                     int k = Convert.ToInt32(txt_From10.Text);
@@ -112,8 +113,8 @@ namespace Odin.Workshop
                     }
                     List<SqlParameter> parameters1 = new List<SqlParameter>
                             {
-                                new SqlParameter("@batch", SqlDbType.NVarChar) {Value = cmb_Launches1.Launch},
-                                new SqlParameter("@sn", SqlDbType.NVarChar) {Value = _TmpBatch + "-" + _tmpstr},
+                                new SqlParameter("@batch", SqlDbType.NVarChar) {Value = _TmpBatch},
+                                new SqlParameter("@sn", SqlDbType.NVarChar) {Value = cmb_Launches1.Launch + "-" + _tmpstr},
                                 new SqlParameter("@counter", SqlDbType.Int) {Value = k}
                             };
 
@@ -130,8 +131,8 @@ namespace Odin.Workshop
                         }
 
                         TemplateLabelText = TemplateLabelText + "\r\nR VAR1-1;" + _TmpBatch;
-                        TemplateLabelText = TemplateLabelText + "\r\nR VAR2-1;" + _TmpBatch + "-" + _tmpstr;
-                        TemplateLabelText = TemplateLabelText + "\r\nR VAR3-1;" + /*globClass.Convert_10to36(k)*/_tmpstr;
+                        TemplateLabelText = TemplateLabelText + "\r\nR VAR2-1;" + _TmpLaunch + "-" + _tmpstr;
+                        TemplateLabelText = TemplateLabelText + "\r\nR VAR4-1;" + cmb_Launches1.Launch + "-" + _tmpstr;
                         TemplateLabelText = TemplateLabelText + "\r\nA 1";
                         TemplateLabelText = TemplateLabelText + "\r\n";
 
