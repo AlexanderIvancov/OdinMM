@@ -810,26 +810,13 @@ namespace Odin.Global_Classes
         public string WeekFromDate(string Date)
         {
             string _Res = "";
-            SqlConnection sqlConn = new SqlConnection(sConnStr);
-            string strSQL = "SELECT DISTINCT 'W' + Left(Right(datejalon, 4), 2) + '/' + Left(datejalon, 4) as [Week] FROM PRI_Date WHERE DateJMA = @Date";
-            SqlCommand sqlComm = new SqlCommand(strSQL, sqlConn);
-            sqlComm.Parameters.AddWithValue("@Date", Date);
-            sqlConn.Open();
 
-            try
-            {
-                SqlDataReader reader = sqlComm.ExecuteReader();
-                if (reader.HasRows == true)
-                {
-                    reader.Read();
-                    _Res = reader["Week"].ToString();
-                    reader.Close();
-                }
-
-            }
-            catch { }
-
-            sqlConn.Close();
+            int _tmpyear = (WeekNumber(Convert.ToDateTime(Date)) == 1
+                           && Convert.ToDateTime(Date).Month == 12 ?
+                           Convert.ToDateTime(Date).Year + 1 :
+                           Convert.ToDateTime(Date).Year);
+            _Res = "W" + (WeekNumber(Convert.ToDateTime(Date)).ToString().Length == 1 ? "0" + WeekNumber(Convert.ToDateTime(Date)).ToString() : WeekNumber(Convert.ToDateTime(Date)).ToString()) + "." + _tmpyear.ToString();
+                        
             return _Res;
         }
 

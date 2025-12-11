@@ -1381,8 +1381,20 @@ namespace Odin.Planning
 
         private void txt_StartFrom_ValueChanged(object sender, EventArgs e)
         {
-            //cmb_Week1.Week = cmb_Week1.WeekNumber(Convert.ToDateTime(txt_StartFrom.Value));
-            Week = "W" + (cmb_Week1.WeekNumber(Convert.ToDateTime(txt_StartFrom.Value)).ToString().Length == 1 ? "0" + cmb_Week1.WeekNumber(Convert.ToDateTime(txt_StartFrom.Value)).ToString() : cmb_Week1.WeekNumber(Convert.ToDateTime(txt_StartFrom.Value)).ToString()) + "." + Convert.ToDateTime(txt_StartFrom.Value).Year.ToString();
+            /*Week = "W" + (cmb_Week1.WeekNumber(Convert.ToDateTime(txt_StartFrom.Value)).ToString().Length == 1 ? "0" + cmb_Week1.WeekNumber(Convert.ToDateTime(txt_StartFrom.Value)).ToString() : cmb_Week1.WeekNumber(Convert.ToDateTime(txt_StartFrom.Value)).ToString()) + "." + Convert.ToDateTime(txt_StartFrom.Value).Year.ToString();
+            txt_StartFrom.Value = cmb_Week1.FirstDateOfWeek;*/
+
+            int _tmpyear = (cmb_Week1.WeekNumber(Convert.ToDateTime(txt_StartFrom.Value)) == 1
+                           && Convert.ToDateTime(txt_StartFrom.Value).Month == 12 ?
+                           Convert.ToDateTime(txt_StartFrom.Value).Year + 1 :
+                           Convert.ToDateTime(txt_StartFrom.Value).Year);
+
+
+            //iif(DATEPART(iso_week, co.reqdate) = 1 AND DATEPART(month, co.reqdate) = 12,
+            //        datepart(year, co.reqdate) + 1,
+            //        datepart(year, co.reqdate)
+
+            Week = "W" + (cmb_Week1.WeekNumber(Convert.ToDateTime(txt_StartFrom.Value)).ToString().Length == 1 ? "0" + cmb_Week1.WeekNumber(Convert.ToDateTime(txt_StartFrom.Value)).ToString() : cmb_Week1.WeekNumber(Convert.ToDateTime(txt_StartFrom.Value)).ToString()) + "." + _tmpyear.ToString();//Convert.ToDateTime(txt_StartFrom.Value).Year.ToString();
             txt_StartFrom.Value = cmb_Week1.FirstDateOfWeek;
         }
 
@@ -1513,8 +1525,10 @@ namespace Odin.Planning
                     //    curdate = Convert.ToDateTime(cell.OwningColumn.HeaderText);
                     //}
                     _tmpweek = DAL.WeekNumber(curdate);
-                    _tmpyear = curdate.Year;
-
+                    _tmpyear = (DAL.WeekNumber(curdate) == 1
+                          && curdate.Month == 12 ?
+                          curdate.Year + 1 :
+                          curdate.Year);//curdate.Year;
                     //MessageBox.Show("true");
 
 
@@ -1522,7 +1536,11 @@ namespace Odin.Planning
                 else
                 {
                     _tmpweek = DAL.WeekNumber(System.DateTime.Now);
-                    _tmpyear = System.DateTime.Now.Year;
+                    _tmpyear =
+                          _tmpyear = (DAL.WeekNumber(System.DateTime.Now) == 1
+                           && System.DateTime.Now.Month == 12 ?
+                           System.DateTime.Now.Year + 1 :
+                           System.DateTime.Now.Year); //System.DateTime.Now.Year;
                 }
                 FirstDate = DAL.DateOfWeek(_tmpweek, _tmpyear).ToShortDateString();
             }
