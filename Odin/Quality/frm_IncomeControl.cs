@@ -284,7 +284,7 @@ namespace Odin.Quality
                 _artid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_artid"].Value);
                 _supid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_supid"].Value);
                 _comments = gv_List.CurrentRow.Cells["cn_comments"].Value.ToString();
-                _state = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_state"].Value == "Active" ? -1 : 0);
+                _state = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_state"].Value.ToString() == "Active" ? -1 : 0);
 
             }
 
@@ -298,6 +298,7 @@ namespace Odin.Quality
                 frm.ArtId = _artid;
                 frm.SupId = _supid;
                 frm.Comments = _comments;
+                frm.State = _state;
 
                 DialogResult result = frm.ShowDialog();
 
