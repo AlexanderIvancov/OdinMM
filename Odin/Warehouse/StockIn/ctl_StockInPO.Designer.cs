@@ -38,6 +38,7 @@
             this.cn_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_porder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_adetails = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_line = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_supplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_suparticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -95,6 +96,7 @@
             this.cn_qty,
             this.cn_unit,
             this.cn_porder,
+            this.cn_adetails,
             this.cn_line,
             this.cn_supplier,
             this.cn_suparticle,
@@ -153,6 +155,12 @@
             this.cn_porder.DataPropertyName = "porder";
             this.cn_porder.HeaderText = "Purchase order";
             this.cn_porder.Name = "cn_porder";
+            // 
+            // cn_adetails
+            // 
+            this.cn_adetails.DataPropertyName = "adetails";
+            this.cn_adetails.HeaderText = "Account details";
+            this.cn_adetails.Name = "cn_adetails";
             // 
             // cn_line
             // 
@@ -361,6 +369,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_unit;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_porder;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_adetails;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_line;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_supplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_suparticle;
