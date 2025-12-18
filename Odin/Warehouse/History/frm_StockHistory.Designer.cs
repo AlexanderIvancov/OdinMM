@@ -191,6 +191,7 @@
             this.cn_oid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_oheadid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_oname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_blockdelivery = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_odelivdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_odocdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_ocustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -1958,6 +1959,7 @@
             this.cn_oheadid,
             this.cn_oname,
             this.cn_odelivdate,
+            this.cn_blockdelivery,
             this.cn_odocdate,
             this.cn_ocustomer,
             this.cn_oartid,
@@ -2022,6 +2024,16 @@
             this.cn_oname.HeaderText = "Outcome doc.";
             this.cn_oname.Name = "cn_oname";
             this.cn_oname.ReadOnly = true;
+            // 
+            // cn_blockdelivery
+            // 
+            this.cn_blockdelivery.DataPropertyName = "blockdelivery";
+            this.cn_blockdelivery.FillWeight = 90F;
+            this.cn_blockdelivery.HeaderText = "blockdelivery";
+            this.cn_blockdelivery.Name = "cn_blockdelivery";
+            this.cn_blockdelivery.ReadOnly = true;
+            this.cn_blockdelivery.Width = 90;
+            this.cn_blockdelivery.Visible = false;
             // 
             // cn_odelivdate
             // 
@@ -4341,7 +4353,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_oid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_oheadid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_oname;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_odelivdate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_odelivdate; 
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_blockdelivery; 
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_odocdate;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_ocustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_oartid;
