@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.chk_blockdelivery = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonLabel30 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_DataCode = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.buttonSpecAny3 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
@@ -79,7 +80,6 @@
             this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.cmb_Articles1 = new Odin.CMB_Components.Articles.cmb_Articles();
             this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.chk_blockdelivery = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -139,6 +139,14 @@
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
             this.kryptonPanel1.Size = new System.Drawing.Size(643, 367);
             this.kryptonPanel1.TabIndex = 1;
+            // 
+            // chk_blockdelivery
+            // 
+            this.chk_blockdelivery.Location = new System.Drawing.Point(427, 340);
+            this.chk_blockdelivery.Name = "chk_blockdelivery";
+            this.chk_blockdelivery.Size = new System.Drawing.Size(98, 20);
+            this.chk_blockdelivery.TabIndex = 307;
+            this.chk_blockdelivery.Values.Text = "Block delivery";
             // 
             // kryptonLabel30
             // 
@@ -660,15 +668,6 @@
             this.btn_OK.Values.Image = global::Odin.Global_Resourses.Save_24x24;
             this.btn_OK.Values.Text = "Save";
             this.btn_OK.Click += new System.EventHandler(this.btn_OK_Click);
-            // 
-            // chk_blockdelivery
-            // 
-            this.chk_blockdelivery.Location = new System.Drawing.Point(427, 340);
-            this.chk_blockdelivery.Name = "chk_blockdelivery";
-            this.chk_blockdelivery.Size = new System.Drawing.Size(98, 20);
-            this.chk_blockdelivery.TabIndex = 307;
-            this.chk_blockdelivery.Values.Text = "Block delivery";
-            this.chk_blockdelivery.Visible = false;
             // 
             // ctl_StockInEdit
             // 
