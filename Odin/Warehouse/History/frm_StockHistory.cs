@@ -554,9 +554,7 @@ namespace Odin.Warehouse.History
             foreach (DataGridViewRow row in this.gv_OutcomeList.Rows)
             {
 
-                if (Convert.ToInt32(row.Cells["cn_oid"].Value) == 418857)
-
-                    if (Convert.ToInt32(row.Cells["cn_blockdelivery"].Value) != 0)
+                if (Convert.ToInt32(row.Cells["cn_blockdelivery"].Value) != 0)
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Brown;
             }
