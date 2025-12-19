@@ -48,6 +48,37 @@ namespace Odin.Warehouse.Deliveries
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
 
+        public int CheckBlockDeliveryRM(int batchid)
+        {
+            int _res = 0;
+            SqlConnection conn = new SqlConnection(sConnStr);
+            conn.Open();
+
+            DataSet ds = new DataSet();
+
+            SqlDataAdapter adapter =
+                new SqlDataAdapter("SELECT top 1 dbo.fn_CheckBlockDeliveryRM(" + batchid.ToString() + ") as qty", conn);
+            adapter.Fill(ds);
+
+            conn.Close();
+
+            DataTable dt = ds.Tables[0];
+
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    _res = Convert.ToInt32(dr["qty"]);
+                }
+            }
+            else
+            {
+                _res = 0;
+            }
+
+            return _res;
+        }
+
         public int AddDeliveryLine(int headid, int artid, int coid, string custarticle,
                                     double qty, double coefconv, int unitid, double unitprice,
                                     string comments, double netweight, double brutweight,

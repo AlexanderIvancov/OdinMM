@@ -533,6 +533,7 @@ namespace Odin.Warehouse.Deliveries
             bwStart(bw_List);
             AvailableQty = ShowAvailQty(ArticleId);
             RecalcLeftToSend();
+            txt_deliveryblock.Visible = DLBll.CheckBlockDeliveryRM(BatchId) > 0 ? true : false;
         }
 
         public void SetCellsColor()
