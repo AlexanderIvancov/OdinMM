@@ -313,7 +313,7 @@ namespace Odin.Warehouse.History
                 gv_OutcomeList.DataSource = bs_OutcomeList;
 
                 RecalcTotalOutcomes();
-
+                SetCellsColor();
             });
 
 
@@ -321,7 +321,6 @@ namespace Odin.Warehouse.History
             {
                 bn_OutcomeList.BindingSource = bs_OutcomeList;
             });
-            SetCellsColor();
         }
 
         public void RecalcTotalsCost()
@@ -399,6 +398,7 @@ namespace Odin.Warehouse.History
             }
 
             TotalOutcomes = Math.Round(_total, 2);
+            SetCellsColor();
 
         }
 
@@ -549,14 +549,12 @@ namespace Odin.Warehouse.History
 
     public void SetCellsColor()
     {
-
-
             foreach (DataGridViewRow row in this.gv_OutcomeList.Rows)
             {
 
                 if (Convert.ToInt32(row.Cells["cn_blockdelivery"].Value) != 0)
                     foreach (DataGridViewCell cell in row.Cells)
-                        cell.Style.BackColor = Color.Brown;
+                        cell.Style.BackColor = Color.LightCoral;
             }
         }
 
@@ -1630,6 +1628,8 @@ namespace Odin.Warehouse.History
 
                 bwStart(bw_ListOutcomes);
                 Helper.RestoreDirection(gv_OutcomeList, oldColumn, dir);
+                SetCellsColor();
+
             }
             else if (dn_Pages.SelectedPage == pg_Movements)
             {
