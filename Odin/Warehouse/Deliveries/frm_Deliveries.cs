@@ -190,7 +190,7 @@ namespace Odin.Warehouse.Deliveries
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
-                if (Convert.ToString(row.Cells["cn_certstate"].Value) == "Certified" || Convert.ToString(row.Cells["cn_certstate"].Value) == "  ")
+                if (Convert.ToString(row.Cells["cn_certstate"].Value) == "Certified" || Convert.ToString(row.Cells["cn_certstate"].Value) == "Will be certified")
                     if (Convert.ToString(row.Cells["cn_custcode"].Value) == "")
                         row.Cells["cn_certstate"].Style.BackColor = Color.Coral;//LightCoral;
                     else if (Convert.ToString(row.Cells["cn_isvalid"].Value) != "-1")
