@@ -651,5 +651,37 @@ namespace Odin.Sales
             frm.SqlParams = sqlparams;
             frm.Show(); frm.GetKryptonFormFields();
         }
+
+        private void btn_RMConsulting_Click(object sender, EventArgs e)
+        {
+            if (cmb_Articles1.ArticleId != 0)
+            {
+                frm_cmbNumber frm = new frm_cmbNumber();
+                frm.LabelText = "Qty of final product";
+                frm.HeaderText = "Enter qty of final product";
+
+                DialogResult result = frm.ShowDialog();
+                if (result == DialogResult.OK
+                    && Convert.ToInt32(frm.FormNumber) != 0)
+                {
+
+                    var _query = "sp_BOMDetailsForecast";
+                    var sqlparams = new List<SqlParameter>()
+                {
+                    new SqlParameter("@id",SqlDbType.Int) {Value = cmb_Articles1.ArticleId},
+                    new SqlParameter("@qtycse",SqlDbType.Int) {Value = Convert.ToInt32(frm.FormNumber)}
+                };
+
+                    Template_DataGridView frm1 = new Template_DataGridView();
+
+                    frm1.Text = "Stock forecast for: " + cmb_Articles1.Article + ", Qty: " + frm.FormNumber.ToString();
+                    frm1.Query = _query;
+                    frm1.SqlParams = sqlparams;
+                    frm1.Show();
+                }
+            }
+            else
+                globClass.ShowMessage("Choose article in filter for analyze!", "Choose article in filter for analyze!", "Article is not selected!");
+        }
     }
 }
