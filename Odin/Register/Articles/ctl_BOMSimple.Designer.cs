@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctl_BOMSimple));
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.txt_Comments = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.btn_back = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_History = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Refresh = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -114,8 +116,7 @@
             this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bs_List = new Odin.Global_Classes.SyncBindingSource();
-            this.txt_Comments = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.btn_Forecast = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bn_List)).BeginInit();
@@ -149,6 +150,21 @@
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
             this.kryptonPanel1.Size = new System.Drawing.Size(1053, 75);
             this.kryptonPanel1.TabIndex = 1;
+            // 
+            // txt_Comments
+            // 
+            this.txt_Comments.Location = new System.Drawing.Point(98, 41);
+            this.txt_Comments.Name = "txt_Comments";
+            this.txt_Comments.Size = new System.Drawing.Size(809, 23);
+            this.txt_Comments.TabIndex = 56;
+            // 
+            // kryptonLabel5
+            // 
+            this.kryptonLabel5.Location = new System.Drawing.Point(10, 41);
+            this.kryptonLabel5.Name = "kryptonLabel5";
+            this.kryptonLabel5.Size = new System.Drawing.Size(72, 20);
+            this.kryptonLabel5.TabIndex = 55;
+            this.kryptonLabel5.Values.Text = "Comments:";
             // 
             // btn_back
             // 
@@ -268,6 +284,7 @@
             this.cmb_Articles1.ArticleIdRec = 0;
             this.cmb_Articles1.ArtType = null;
             this.cmb_Articles1.BOMState = 0;
+            this.cmb_Articles1.CertState = "";
             this.cmb_Articles1.Comments = null;
             this.cmb_Articles1.CustCode = null;
             this.cmb_Articles1.CustCodeId = 0;
@@ -275,7 +292,6 @@
             this.cmb_Articles1.DeptId = 0;
             this.cmb_Articles1.Description = null;
             this.cmb_Articles1.IsActive = -1;
-            this.cmb_Articles1.CertState = "";
             this.cmb_Articles1.IsPF = 0;
             this.cmb_Articles1.Location = new System.Drawing.Point(98, 15);
             this.cmb_Articles1.Manufacturer = "";
@@ -321,7 +337,8 @@
             this.btn_Copy,
             this.btn_DeleteNorm,
             this.btn_Excel,
-            this.btn_ExportForQuote});
+            this.btn_ExportForQuote,
+            this.btn_Forecast});
             this.bn_List.Location = new System.Drawing.Point(0, 75);
             this.bn_List.MoveFirstItem = null;
             this.bn_List.MoveLastItem = null;
@@ -914,20 +931,15 @@
             this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
             this.dataGridViewTextBoxColumn20.Visible = false;
             // 
-            // txt_Comments
+            // btn_Forecast
             // 
-            this.txt_Comments.Location = new System.Drawing.Point(98, 41);
-            this.txt_Comments.Name = "txt_Comments";
-            this.txt_Comments.Size = new System.Drawing.Size(809, 23);
-            this.txt_Comments.TabIndex = 56;
-            // 
-            // kryptonLabel5
-            // 
-            this.kryptonLabel5.Location = new System.Drawing.Point(10, 41);
-            this.kryptonLabel5.Name = "kryptonLabel5";
-            this.kryptonLabel5.Size = new System.Drawing.Size(72, 20);
-            this.kryptonLabel5.TabIndex = 55;
-            this.kryptonLabel5.Values.Text = "Comments:";
+            this.btn_Forecast.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_Forecast.Image = global::Odin.Global_Resourses.Blackbox;
+            this.btn_Forecast.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_Forecast.Name = "btn_Forecast";
+            this.btn_Forecast.Size = new System.Drawing.Size(23, 22);
+            this.btn_Forecast.Text = "Forecast";
+            this.btn_Forecast.Click += new System.EventHandler(this.btn_Forecast_Click);
             // 
             // ctl_BOMSimple
             // 
@@ -1042,5 +1054,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_valanalog;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_Comments;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel5;
+        private System.Windows.Forms.ToolStripButton btn_Forecast;
     }
 }
