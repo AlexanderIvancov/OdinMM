@@ -363,11 +363,10 @@ namespace Odin.Sales
                 if (row.Cells["cn_salescomments"].Value.ToString().Trim() != "")
                     foreach (DataGridViewCell cell in row.Cells)
                     { cell.Style.BackColor = Color.Plum; }
-                if (row.Cells["cn_iscertified"].Value.ToString() == "Certified")
-                    {
-                        row.Cells["cn_artid"].Style.BackColor = Color.LightGreen;
-                        row.Cells["cn_article"].Style.BackColor = Color.LightGreen;
-                    }
+                if (Convert.ToString(row.Cells["cn_certstate"].Value) == "Will be certified ")
+                    if (Convert.ToString(row.Cells["cn_custcode"].Value) == "")
+                        row.Cells["cn_certstate"].Style.BackColor = Color.Coral;//LightCoral;
+                    else row.Cells["cn_certstate"].Style.BackColor = Color.Gold;//LightCoral;
             }
         }
 

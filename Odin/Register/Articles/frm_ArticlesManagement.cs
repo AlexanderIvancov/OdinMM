@@ -165,8 +165,7 @@ namespace Odin.Register.Articles
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
-                if (row.Cells["cn_certState"].Value.ToString() != "Will not be certified")
-                    if (Convert.ToInt32(Helper.GetOneRecord("select dbo.fn_CheckArtCert(" + Convert.ToInt32(row.Cells["cn_id"].Value) + ")")) == 0)
+                if (row.Cells["cn_certState"].Value.ToString() == "Will be certified ")
                         row.Cells["cn_certState"].Style.BackColor = Color.Crimson;
 
                 if (Convert.ToInt32(row.Cells["cn_isactive"].Value) == 0)
