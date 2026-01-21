@@ -445,6 +445,7 @@ namespace Odin.Warehouse.StockIn
                 frm.CreateSubBatch = Reg.CreateSubBatch;
                 frm.Weight = Reg.Weight;
                 frm.IsActive = Reg.IsActive;
+                frm.CertState = Reg.CertState;
                 frm.Revision = Reg.Revision;
                 frm.StoreRules = Reg.StorageRules;
                 frm.SpoilNorm = Reg.SpoilNorm;

@@ -369,7 +369,6 @@
             this.cmb_CertState.FormattingEnabled = true;
             this.cmb_CertState.Items.AddRange(new object[] {
             "Certified",
-            "Will be certified",
             "Will not be certified"});
             this.cmb_CertState.Location = new System.Drawing.Point(90, 247);
             this.cmb_CertState.Name = "cmb_CertState";

@@ -402,6 +402,8 @@ namespace Odin.Register.Articles
         private void btn_AddNew_Click(object sender, EventArgs e)
         {
             frm_AddArticle frm = new frm_AddArticle();
+            frm.CertState = "Will not be certified";
+
             frm.CheckEmpty();
             frm.Id = 0;
 

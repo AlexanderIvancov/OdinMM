@@ -1004,6 +1004,8 @@ namespace Odin.Register.Articles
         private void btn_AddNew_Click(object sender, EventArgs e)
         {
             frm_AddArticle frm = new frm_AddArticle();
+            frm.CertState = "Will not be certified";
+
             frm.CheckEmpty();
             frm.Id = 0;
 
@@ -1077,6 +1079,7 @@ namespace Odin.Register.Articles
             frm.CreateSubBatch = Reg.CreateSubBatch;
             frm.Weight = Reg.Weight;
             frm.IsActive = Reg.IsActive;
+            frm.CertState = Reg.CertState;
             frm.Revision = Reg.Revision;
             frm.StoreRules = Reg.StorageRules;
             frm.SpoilNorm = Reg.SpoilNorm;

@@ -73,6 +73,7 @@ namespace Odin.CMB_Components.Articles
         {
             _showingModal = true;
             frm_AddArticle frm = new frm_AddArticle();
+            frm.CertState = "Will not be certified";
             frm.CheckEmpty();
             frm.Id = 0;
 
@@ -568,6 +569,7 @@ namespace Odin.CMB_Components.Articles
                 frm.CreateSubBatch = Reg.CreateSubBatch;
                 frm.Weight = Reg.Weight;
                 frm.IsActive = Reg.IsActive;
+                frm.CertState = Reg.CertState;
                 frm.Revision = Reg.Revision;
                 frm.StoreRules = Reg.StorageRules;
                 frm.SpoilNorm = Reg.SpoilNorm;
