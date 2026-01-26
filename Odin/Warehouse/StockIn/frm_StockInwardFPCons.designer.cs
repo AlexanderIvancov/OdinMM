@@ -80,6 +80,8 @@
             this.btn_Delete = new System.Windows.Forms.ToolStripButton();
             this.btn_MapToBox = new System.Windows.Forms.ToolStripButton();
             this.kryptonPanel3 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonLabel13 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.txt_Weight = new Owf.Controls.NumericTetxBox();
             this.pic_Image = new System.Windows.Forms.PictureBox();
             this.kryptonLabel11 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_DelivPlace = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
@@ -144,8 +146,7 @@
             this.bs_List = new System.Windows.Forms.BindingSource(this.components);
             this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
             this.bs_RMDetails = new System.Windows.Forms.BindingSource(this.components);
-            this.kryptonLabel13 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.txt_Weight = new Owf.Controls.NumericTetxBox();
+            this.txt_deliveryblock = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).BeginInit();
             this.kryptonHeaderGroup1.Panel.SuspendLayout();
@@ -206,14 +207,14 @@
             this.kryptonHeaderGroup4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonHeaderGroup4.HeaderStylePrimary = ComponentFactory.Krypton.Toolkit.HeaderStyle.Secondary;
             this.kryptonHeaderGroup4.HeaderVisibleSecondary = false;
-            this.kryptonHeaderGroup4.Location = new System.Drawing.Point(0, 382);
+            this.kryptonHeaderGroup4.Location = new System.Drawing.Point(0, 404);
             this.kryptonHeaderGroup4.Name = "kryptonHeaderGroup4";
             // 
             // kryptonHeaderGroup4.Panel
             // 
             this.kryptonHeaderGroup4.Panel.Controls.Add(this.gv_Delivery);
             this.kryptonHeaderGroup4.Panel.Controls.Add(this.txt_Oper);
-            this.kryptonHeaderGroup4.Size = new System.Drawing.Size(842, 185);
+            this.kryptonHeaderGroup4.Size = new System.Drawing.Size(842, 163);
             this.kryptonHeaderGroup4.TabIndex = 38;
             this.kryptonHeaderGroup4.ValuesPrimary.Heading = "List of orders for selected batch";
             this.kryptonHeaderGroup4.ValuesPrimary.Image = global::Odin.Global_Resourses.Docs24x24;
@@ -238,7 +239,7 @@
             this.gv_Delivery.Location = new System.Drawing.Point(0, 0);
             this.gv_Delivery.Name = "gv_Delivery";
             this.gv_Delivery.RowHeadersWidth = 25;
-            this.gv_Delivery.Size = new System.Drawing.Size(840, 156);
+            this.gv_Delivery.Size = new System.Drawing.Size(840, 134);
             this.gv_Delivery.TabIndex = 5;
             // 
             // cn_did
@@ -435,7 +436,7 @@
             this.kryptonHeaderGroup3.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonHeaderGroup3.HeaderStylePrimary = ComponentFactory.Krypton.Toolkit.HeaderStyle.Secondary;
             this.kryptonHeaderGroup3.HeaderVisibleSecondary = false;
-            this.kryptonHeaderGroup3.Location = new System.Drawing.Point(0, 198);
+            this.kryptonHeaderGroup3.Location = new System.Drawing.Point(0, 220);
             this.kryptonHeaderGroup3.Name = "kryptonHeaderGroup3";
             // 
             // kryptonHeaderGroup3.Panel
@@ -692,6 +693,7 @@
             // 
             // kryptonPanel3
             // 
+            this.kryptonPanel3.Controls.Add(this.txt_deliveryblock);
             this.kryptonPanel3.Controls.Add(this.kryptonLabel13);
             this.kryptonPanel3.Controls.Add(this.txt_Weight);
             this.kryptonPanel3.Controls.Add(this.pic_Image);
@@ -719,15 +721,40 @@
             this.kryptonPanel3.Location = new System.Drawing.Point(0, 56);
             this.kryptonPanel3.Name = "kryptonPanel3";
             this.kryptonPanel3.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonPanel3.Size = new System.Drawing.Size(842, 142);
+            this.kryptonPanel3.Size = new System.Drawing.Size(842, 164);
             this.kryptonPanel3.TabIndex = 35;
+            // 
+            // kryptonLabel13
+            // 
+            this.kryptonLabel13.Location = new System.Drawing.Point(504, 58);
+            this.kryptonLabel13.Name = "kryptonLabel13";
+            this.kryptonLabel13.Size = new System.Drawing.Size(53, 20);
+            this.kryptonLabel13.TabIndex = 48;
+            this.kryptonLabel13.Values.Text = "Weight:";
+            this.kryptonLabel13.Visible = false;
+            // 
+            // txt_Weight
+            // 
+            this.txt_Weight.AllowDecimalSeparator = false;
+            this.txt_Weight.AllowSpace = false;
+            this.txt_Weight.Enabled = false;
+            this.txt_Weight.Location = new System.Drawing.Point(616, 59);
+            this.txt_Weight.Name = "txt_Weight";
+            this.txt_Weight.Size = new System.Drawing.Size(70, 21);
+            this.txt_Weight.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txt_Weight.StateCommon.Content.Padding = new System.Windows.Forms.Padding(3);
+            this.txt_Weight.StateDisabled.Back.Color1 = System.Drawing.Color.White;
+            this.txt_Weight.StateDisabled.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txt_Weight.TabIndex = 47;
+            this.txt_Weight.Text = "0";
+            this.txt_Weight.Visible = false;
             // 
             // pic_Image
             // 
             this.pic_Image.Dock = System.Windows.Forms.DockStyle.Right;
             this.pic_Image.Location = new System.Drawing.Point(695, 0);
             this.pic_Image.Name = "pic_Image";
-            this.pic_Image.Size = new System.Drawing.Size(147, 142);
+            this.pic_Image.Size = new System.Drawing.Size(147, 164);
             this.pic_Image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pic_Image.TabIndex = 46;
             this.pic_Image.TabStop = false;
@@ -787,6 +814,7 @@
             this.cmb_Articles1.ArticleIdRec = 0;
             this.cmb_Articles1.ArtType = null;
             this.cmb_Articles1.BOMState = 0;
+            this.cmb_Articles1.CertState = "";
             this.cmb_Articles1.Comments = null;
             this.cmb_Articles1.CustCode = null;
             this.cmb_Articles1.CustCodeId = 0;
@@ -1374,30 +1402,16 @@
             // 
             this.kryptonManager1.GlobalPaletteMode = ComponentFactory.Krypton.Toolkit.PaletteModeManager.Office2010Silver;
             // 
-            // kryptonLabel13
+            // txt_deliveryblock
             // 
-            this.kryptonLabel13.Location = new System.Drawing.Point(504, 58);
-            this.kryptonLabel13.Name = "kryptonLabel13";
-            this.kryptonLabel13.Size = new System.Drawing.Size(53, 20);
-            this.kryptonLabel13.TabIndex = 48;
-            this.kryptonLabel13.Values.Text = "Weight:";
-            this.kryptonLabel13.Visible = false;
-            // 
-            // txt_Weight
-            // 
-            this.txt_Weight.AllowDecimalSeparator = false;
-            this.txt_Weight.AllowSpace = false;
-            this.txt_Weight.Enabled = false;
-            this.txt_Weight.Location = new System.Drawing.Point(616, 59);
-            this.txt_Weight.Name = "txt_Weight";
-            this.txt_Weight.Size = new System.Drawing.Size(70, 21);
-            this.txt_Weight.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txt_Weight.StateCommon.Content.Padding = new System.Windows.Forms.Padding(3);
-            this.txt_Weight.StateDisabled.Back.Color1 = System.Drawing.Color.White;
-            this.txt_Weight.StateDisabled.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txt_Weight.TabIndex = 47;
-            this.txt_Weight.Text = "0";
-            this.txt_Weight.Visible = false;
+            this.txt_deliveryblock.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.BoldControl;
+            this.txt_deliveryblock.Location = new System.Drawing.Point(228, 140);
+            this.txt_deliveryblock.Name = "txt_deliveryblock";
+            this.txt_deliveryblock.Size = new System.Drawing.Size(270, 20);
+            this.txt_deliveryblock.StateCommon.ShortText.Color1 = System.Drawing.Color.Crimson;
+            this.txt_deliveryblock.TabIndex = 57;
+            this.txt_deliveryblock.Values.Text = "Stock income is blocked (check RM incomes)";
+            this.txt_deliveryblock.Visible = false;
             // 
             // frm_StockInwardFPCons
             // 
@@ -1453,7 +1467,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bs_Delivery)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_RMDetails)).EndInit();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
@@ -1575,5 +1589,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_mapped;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel13;
         private Owf.Controls.NumericTetxBox txt_Weight;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel txt_deliveryblock;
     }
 }

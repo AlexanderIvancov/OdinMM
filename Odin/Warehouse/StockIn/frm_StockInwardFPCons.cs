@@ -3,6 +3,7 @@ using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
 using Odin.Tools;
 using Odin.Warehouse.StockOut;
+using Odin.Warehouse.Deliveries;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -43,7 +44,7 @@ namespace Odin.Warehouse.StockIn
         ExportData ED;
         Helper MyHelper = new Helper();
         DataTable databoxes;
-
+        DelivNote_BLL DLBll = new DelivNote_BLL();
         public int ArticleId
         {
             get { return cmb_Articles1.ArticleId; }
@@ -289,6 +290,7 @@ namespace Odin.Warehouse.StockIn
 
             }
 
+            txt_deliveryblock.Visible = DLBll.CheckBlockDeliveryRM(BatchId) > 0 ? true : false;
 
             QtyBefore = QtyOnShelf(ArticleId, PlaceId);
 
@@ -507,7 +509,8 @@ namespace Odin.Warehouse.StockIn
             if (cmb_Places1.PlaceId == 0
                 || QtyIn <= 0
                 || UnitPrice < 0
-                || Weight <= 0)
+                || Weight <= 0
+                || DLBll.CheckBlockDeliveryRM(BatchId) > 0/*txt_deliveryblock.Visible = DLBll.CheckBlockDeliveryRM(BatchId) > 0 ? true : false;*/)
             {
                 _res = false;
                 btn_OK.Enabled = false;
