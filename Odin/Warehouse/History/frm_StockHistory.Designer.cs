@@ -198,6 +198,7 @@
             this.cn_oartid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_oarticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_ocustarticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_osuparticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_otype = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_ooperation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_oqty = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -1965,6 +1966,7 @@
             this.cn_oartid,
             this.cn_oarticle,
             this.cn_ocustarticle,
+            this.cn_osuparticle,
             this.cn_otype,
             this.cn_ooperation,
             this.cn_oqty,
@@ -2088,6 +2090,16 @@
             this.cn_ocustarticle.Name = "cn_ocustarticle";
             this.cn_ocustarticle.ReadOnly = true;
             this.cn_ocustarticle.Width = 200;
+            // 
+            // cn_ocustarticle
+            // 
+            this.cn_osuparticle.DataPropertyName = "suparticle";
+            this.cn_osuparticle.FillWeight = 200F;
+            this.cn_osuparticle.HeaderText = "Supplier\'s article";
+            this.cn_osuparticle.Name = "cn_osuparticle";
+            this.cn_osuparticle.ReadOnly = true;
+            this.cn_osuparticle.Width = 200;
+            this.cn_osuparticle.Visible = false;
             // 
             // cn_otype
             // 
@@ -4360,6 +4372,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_oartid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_oarticle;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_ocustarticle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_osuparticle;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_otype;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_ooperation;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_oqty;
