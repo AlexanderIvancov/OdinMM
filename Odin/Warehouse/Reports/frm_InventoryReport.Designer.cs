@@ -51,6 +51,25 @@
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonPanel4 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.cn_autoincrement = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_artid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_article = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_label = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_stage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_regdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_Supplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_placedate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_fullplace = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_unitlat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_unitprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_batch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_invnumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_suparticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bn_List = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -102,25 +121,6 @@
             this.btn_FixedAssets = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.btn_Refresh = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.btn_Clear = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.cn_autoincrement = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_artid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_article = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_label = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_stage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_regdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_Supplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_placedate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_fullplace = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_unitlat = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_unitprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_batch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_invnumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_suparticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).BeginInit();
             this.mnu_Lines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
@@ -325,6 +325,160 @@
             this.gv_List.RowHeadersWidth = 20;
             this.gv_List.Size = new System.Drawing.Size(817, 276);
             this.gv_List.TabIndex = 5;
+            // 
+            // cn_autoincrement
+            // 
+            this.cn_autoincrement.DataPropertyName = "autoincrement";
+            this.cn_autoincrement.FillWeight = 60F;
+            this.cn_autoincrement.HeaderText = "Num.";
+            this.cn_autoincrement.Name = "cn_autoincrement";
+            this.cn_autoincrement.ReadOnly = true;
+            this.cn_autoincrement.Width = 60;
+            // 
+            // cn_artid
+            // 
+            this.cn_artid.DataPropertyName = "artid";
+            this.cn_artid.FillWeight = 80F;
+            this.cn_artid.HeaderText = "Art. id";
+            this.cn_artid.Name = "cn_artid";
+            this.cn_artid.ReadOnly = true;
+            this.cn_artid.Width = 80;
+            // 
+            // cn_article
+            // 
+            this.cn_article.DataPropertyName = "article";
+            this.cn_article.FillWeight = 150F;
+            this.cn_article.HeaderText = "Article";
+            this.cn_article.Name = "cn_article";
+            this.cn_article.ReadOnly = true;
+            this.cn_article.Width = 150;
+            // 
+            // cn_label
+            // 
+            this.cn_label.DataPropertyName = "label";
+            this.cn_label.HeaderText = "Label";
+            this.cn_label.Name = "cn_label";
+            this.cn_label.ReadOnly = true;
+            // 
+            // cn_stage
+            // 
+            this.cn_stage.DataPropertyName = "stage";
+            this.cn_stage.FillWeight = 50F;
+            this.cn_stage.HeaderText = "Stage";
+            this.cn_stage.Name = "cn_stage";
+            this.cn_stage.ReadOnly = true;
+            this.cn_stage.Width = 50;
+            // 
+            // cn_name
+            // 
+            this.cn_name.DataPropertyName = "incomedoc";
+            this.cn_name.HeaderText = "Income doc.";
+            this.cn_name.Name = "cn_name";
+            this.cn_name.ReadOnly = true;
+            // 
+            // cn_regdate
+            // 
+            this.cn_regdate.DataPropertyName = "regdate";
+            this.cn_regdate.FillWeight = 90F;
+            this.cn_regdate.HeaderText = "Reg. date";
+            this.cn_regdate.Name = "cn_regdate";
+            this.cn_regdate.ReadOnly = true;
+            this.cn_regdate.Width = 90;
+            // 
+            // cn_type
+            // 
+            this.cn_type.DataPropertyName = "type";
+            this.cn_type.HeaderText = "Type";
+            this.cn_type.Name = "cn_type";
+            this.cn_type.ReadOnly = true;
+            this.cn_type.Width = 70;
+            // 
+            // cn_Supplier
+            // 
+            this.cn_Supplier.DataPropertyName = "supplier";
+            this.cn_Supplier.FillWeight = 120F;
+            this.cn_Supplier.HeaderText = "Supplier";
+            this.cn_Supplier.Name = "cn_Supplier";
+            this.cn_Supplier.ReadOnly = true;
+            this.cn_Supplier.Width = 120;
+            // 
+            // cn_placedate
+            // 
+            this.cn_placedate.DataPropertyName = "place";
+            this.cn_placedate.HeaderText = "Place";
+            this.cn_placedate.Name = "cn_placedate";
+            this.cn_placedate.ReadOnly = true;
+            // 
+            // cn_fullplace
+            // 
+            this.cn_fullplace.DataPropertyName = "fullplace";
+            this.cn_fullplace.FillWeight = 200F;
+            this.cn_fullplace.HeaderText = "Full place";
+            this.cn_fullplace.Name = "cn_fullplace";
+            this.cn_fullplace.ReadOnly = true;
+            this.cn_fullplace.Width = 200;
+            // 
+            // cn_qty
+            // 
+            this.cn_qty.DataPropertyName = "qtyrest";
+            this.cn_qty.FillWeight = 80F;
+            this.cn_qty.HeaderText = "Qty";
+            this.cn_qty.Name = "cn_qty";
+            this.cn_qty.ReadOnly = true;
+            this.cn_qty.Width = 80;
+            // 
+            // cn_unit
+            // 
+            this.cn_unit.DataPropertyName = "unit";
+            this.cn_unit.FillWeight = 40F;
+            this.cn_unit.HeaderText = "Unit";
+            this.cn_unit.Name = "cn_unit";
+            this.cn_unit.ReadOnly = true;
+            this.cn_unit.Width = 40;
+            // 
+            // cn_unitlat
+            // 
+            this.cn_unitlat.DataPropertyName = "unitlat";
+            this.cn_unitlat.FillWeight = 40F;
+            this.cn_unitlat.HeaderText = "Unit (BR)";
+            this.cn_unitlat.Name = "cn_unitlat";
+            this.cn_unitlat.ReadOnly = true;
+            this.cn_unitlat.Width = 40;
+            // 
+            // cn_unitprice
+            // 
+            this.cn_unitprice.DataPropertyName = "unitprice";
+            this.cn_unitprice.HeaderText = "Unit price (BR)";
+            this.cn_unitprice.Name = "cn_unitprice";
+            this.cn_unitprice.ReadOnly = true;
+            // 
+            // cn_total
+            // 
+            this.cn_total.DataPropertyName = "total";
+            this.cn_total.HeaderText = "Total (BR)";
+            this.cn_total.Name = "cn_total";
+            this.cn_total.ReadOnly = true;
+            // 
+            // cn_batch
+            // 
+            this.cn_batch.DataPropertyName = "batch";
+            this.cn_batch.HeaderText = "Batch";
+            this.cn_batch.Name = "cn_batch";
+            this.cn_batch.ReadOnly = true;
+            // 
+            // cn_invnumber
+            // 
+            this.cn_invnumber.DataPropertyName = "invnumber";
+            this.cn_invnumber.HeaderText = "Inv. number";
+            this.cn_invnumber.Name = "cn_invnumber";
+            this.cn_invnumber.ReadOnly = true;
+            // 
+            // cn_suparticle
+            // 
+            this.cn_suparticle.DataPropertyName = "suparticle";
+            this.cn_suparticle.HeaderText = "Sup. article";
+            this.cn_suparticle.Name = "cn_suparticle";
+            this.cn_suparticle.ReadOnly = true;
             // 
             // bn_List
             // 
@@ -616,7 +770,7 @@
             this.btn_OthersRefresh.Size = new System.Drawing.Size(101, 31);
             this.btn_OthersRefresh.TabIndex = 1;
             this.btn_OthersRefresh.Values.Image = global::Odin.Global_Resourses.reload_24x24;
-            this.btn_OthersRefresh.Values.Text = "Others";
+            this.btn_OthersRefresh.Values.Text = "21";
             this.btn_OthersRefresh.Click += new System.EventHandler(this.btn_OthersRefresh_Click);
             // 
             // btn_RMRefresh
@@ -878,160 +1032,6 @@
             this.btn_Clear.Image = global::Odin.Global_Resourses.clear;
             this.btn_Clear.UniqueName = "3502D2542D5C42F0078623FF0A695273";
             this.btn_Clear.Click += new System.EventHandler(this.btn_Clear_Click);
-            // 
-            // cn_autoincrement
-            // 
-            this.cn_autoincrement.DataPropertyName = "autoincrement";
-            this.cn_autoincrement.FillWeight = 60F;
-            this.cn_autoincrement.HeaderText = "Num.";
-            this.cn_autoincrement.Name = "cn_autoincrement";
-            this.cn_autoincrement.ReadOnly = true;
-            this.cn_autoincrement.Width = 60;
-            // 
-            // cn_artid
-            // 
-            this.cn_artid.DataPropertyName = "artid";
-            this.cn_artid.FillWeight = 80F;
-            this.cn_artid.HeaderText = "Art. id";
-            this.cn_artid.Name = "cn_artid";
-            this.cn_artid.ReadOnly = true;
-            this.cn_artid.Width = 80;
-            // 
-            // cn_article
-            // 
-            this.cn_article.DataPropertyName = "article";
-            this.cn_article.FillWeight = 150F;
-            this.cn_article.HeaderText = "Article";
-            this.cn_article.Name = "cn_article";
-            this.cn_article.ReadOnly = true;
-            this.cn_article.Width = 150;
-            // 
-            // cn_label
-            // 
-            this.cn_label.DataPropertyName = "label";
-            this.cn_label.HeaderText = "Label";
-            this.cn_label.Name = "cn_label";
-            this.cn_label.ReadOnly = true;
-            // 
-            // cn_stage
-            // 
-            this.cn_stage.DataPropertyName = "stage";
-            this.cn_stage.FillWeight = 50F;
-            this.cn_stage.HeaderText = "Stage";
-            this.cn_stage.Name = "cn_stage";
-            this.cn_stage.ReadOnly = true;
-            this.cn_stage.Width = 50;
-            // 
-            // cn_name
-            // 
-            this.cn_name.DataPropertyName = "incomedoc";
-            this.cn_name.HeaderText = "Income doc.";
-            this.cn_name.Name = "cn_name";
-            this.cn_name.ReadOnly = true;
-            // 
-            // cn_regdate
-            // 
-            this.cn_regdate.DataPropertyName = "regdate";
-            this.cn_regdate.FillWeight = 90F;
-            this.cn_regdate.HeaderText = "Reg. date";
-            this.cn_regdate.Name = "cn_regdate";
-            this.cn_regdate.ReadOnly = true;
-            this.cn_regdate.Width = 90;
-            // 
-            // cn_type
-            // 
-            this.cn_type.DataPropertyName = "type";
-            this.cn_type.HeaderText = "Type";
-            this.cn_type.Name = "cn_type";
-            this.cn_type.ReadOnly = true;
-            this.cn_type.Width = 70;
-            // 
-            // cn_Supplier
-            // 
-            this.cn_Supplier.DataPropertyName = "supplier";
-            this.cn_Supplier.FillWeight = 120F;
-            this.cn_Supplier.HeaderText = "Supplier";
-            this.cn_Supplier.Name = "cn_Supplier";
-            this.cn_Supplier.ReadOnly = true;
-            this.cn_Supplier.Width = 120;
-            // 
-            // cn_placedate
-            // 
-            this.cn_placedate.DataPropertyName = "place";
-            this.cn_placedate.HeaderText = "Place";
-            this.cn_placedate.Name = "cn_placedate";
-            this.cn_placedate.ReadOnly = true;
-            // 
-            // cn_fullplace
-            // 
-            this.cn_fullplace.DataPropertyName = "fullplace";
-            this.cn_fullplace.FillWeight = 200F;
-            this.cn_fullplace.HeaderText = "Full place";
-            this.cn_fullplace.Name = "cn_fullplace";
-            this.cn_fullplace.ReadOnly = true;
-            this.cn_fullplace.Width = 200;
-            // 
-            // cn_qty
-            // 
-            this.cn_qty.DataPropertyName = "qtyrest";
-            this.cn_qty.FillWeight = 80F;
-            this.cn_qty.HeaderText = "Qty";
-            this.cn_qty.Name = "cn_qty";
-            this.cn_qty.ReadOnly = true;
-            this.cn_qty.Width = 80;
-            // 
-            // cn_unit
-            // 
-            this.cn_unit.DataPropertyName = "unit";
-            this.cn_unit.FillWeight = 40F;
-            this.cn_unit.HeaderText = "Unit";
-            this.cn_unit.Name = "cn_unit";
-            this.cn_unit.ReadOnly = true;
-            this.cn_unit.Width = 40;
-            // 
-            // cn_unitlat
-            // 
-            this.cn_unitlat.DataPropertyName = "unitlat";
-            this.cn_unitlat.FillWeight = 40F;
-            this.cn_unitlat.HeaderText = "Unit (BR)";
-            this.cn_unitlat.Name = "cn_unitlat";
-            this.cn_unitlat.ReadOnly = true;
-            this.cn_unitlat.Width = 40;
-            // 
-            // cn_unitprice
-            // 
-            this.cn_unitprice.DataPropertyName = "unitprice";
-            this.cn_unitprice.HeaderText = "Unit price (BR)";
-            this.cn_unitprice.Name = "cn_unitprice";
-            this.cn_unitprice.ReadOnly = true;
-            // 
-            // cn_total
-            // 
-            this.cn_total.DataPropertyName = "total";
-            this.cn_total.HeaderText = "Total (BR)";
-            this.cn_total.Name = "cn_total";
-            this.cn_total.ReadOnly = true;
-            // 
-            // cn_batch
-            // 
-            this.cn_batch.DataPropertyName = "batch";
-            this.cn_batch.HeaderText = "Batch";
-            this.cn_batch.Name = "cn_batch";
-            this.cn_batch.ReadOnly = true;
-            // 
-            // cn_invnumber
-            // 
-            this.cn_invnumber.DataPropertyName = "invnumber";
-            this.cn_invnumber.HeaderText = "Inv. number";
-            this.cn_invnumber.Name = "cn_invnumber";
-            this.cn_invnumber.ReadOnly = true;
-            // 
-            // cn_suparticle
-            // 
-            this.cn_suparticle.DataPropertyName = "suparticle";
-            this.cn_suparticle.HeaderText = "Sup. article";
-            this.cn_suparticle.Name = "cn_suparticle";
-            this.cn_suparticle.ReadOnly = true;
             // 
             // frm_InventoryReport
             // 
