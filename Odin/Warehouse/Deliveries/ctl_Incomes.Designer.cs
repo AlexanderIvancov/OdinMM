@@ -45,6 +45,7 @@
             this.bs_List = new System.Windows.Forms.BindingSource(this.components);
             this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_certstate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_docdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -88,6 +89,7 @@
             this.gv_List.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cn_id,
             this.cn_name,
+            this.cn_certstate,
             this.cn_docdate,
             this.cn_qty,
             this.cn_unit,
@@ -213,6 +215,12 @@
             this.cn_name.HeaderText = "Income doc.";
             this.cn_name.Name = "cn_name";
             // 
+            // cn_certstate
+            // 
+            this.cn_certstate.DataPropertyName = "certstate";
+            this.cn_certstate.HeaderText = "Cert. state";
+            this.cn_certstate.Name = "cn_certstate";
+            // 
             // cn_docdate
             // 
             this.cn_docdate.DataPropertyName = "docdate";
@@ -315,6 +323,7 @@
         private System.Windows.Forms.BindingSource bs_List;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_certstate;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_docdate;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_unit;
