@@ -636,6 +636,7 @@ namespace Odin.Planning
                         break;
                 }
             }
+            RecalcCapaCoef();
         }
 
         public void ClearCapacity()
@@ -1306,6 +1307,18 @@ namespace Odin.Planning
             NGPA = _NGPA * CGPA;
         }
 
+        public void RecalcCapaCoef()
+        {
+            NSMT = _NSMT * CSMT;
+            NQSMT = _NQSMT * CQSMT;
+            NXRAY = _NXRAY * CXRAY;
+            NTHT = _NTHT * CTHT;
+            NQTHT = _NQTHT * CQTHT;
+            NFTA = _NFTA * CFTA;
+            NFQC = _NFQC * CFQC;
+            NIPA = _NIPA * CIPA;
+            NGPA = _NGPA * CGPA;
+        }
         #endregion  
         private void txt_StartFrom_DropDown(object sender, DateTimePickerDropArgs e)
         {
