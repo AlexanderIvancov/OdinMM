@@ -89,7 +89,6 @@
             this.gv_List.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cn_id,
             this.cn_name,
-            this.cn_certstate,
             this.cn_docdate,
             this.cn_qty,
             this.cn_unit,
@@ -97,6 +96,7 @@
             this.cn_currency,
             this.cn_total,
             this.cn_supplier,
+            this.cn_certstate,
             this.cn_creatat,
             this.cn_creatby});
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
