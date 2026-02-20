@@ -283,6 +283,7 @@ namespace Odin.Warehouse.StockIn
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
 
+
         public static DataTable getStockInPOs(int _idin)
         {
             string query = "sp_SelectStockInPODets";

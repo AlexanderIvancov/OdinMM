@@ -991,6 +991,16 @@ namespace Odin {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap chart_stock {
+            get {
+                object obj = ResourceManager.GetObject("chart_stock", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon check_3773 {
@@ -2843,6 +2853,16 @@ namespace Odin {
         internal static string LogoImageName {
             get {
                 return ResourceManager.GetString("LogoImageName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap lorry {
+            get {
+                object obj = ResourceManager.GetObject("lorry", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

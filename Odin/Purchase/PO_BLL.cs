@@ -1110,5 +1110,40 @@ namespace Odin.Purchase
         }
 
         #endregion
+
+        #region Indicators
+
+        public static DataTable getNeedProcIndicators(string _datefrom, string _datetill)
+        {
+            string query = "sp_PurchaseIndicatorNeedsProc";
+
+            var sqlparams = new List<SqlParameter>
+            {
+                new SqlParameter("@datefrom",SqlDbType.NVarChar){Value = _datefrom},
+                new SqlParameter("@datetill",SqlDbType.NVarChar){Value = _datetill}
+
+            };
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
+        }
+
+
+        public static DataTable getPurchaseDeliveryIndicators(string _datefrom, string _datetill, int _supid)
+        {
+            string query = "sp_PurchaseIndicatorDelivery";
+
+            var sqlparams = new List<SqlParameter>
+            {
+                new SqlParameter("@datefrom",SqlDbType.NVarChar){Value = _datefrom},
+                new SqlParameter("@datetill",SqlDbType.NVarChar){Value = _datetill},
+                new SqlParameter("@supid",SqlDbType.Int){Value = _supid}
+
+            };
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
+        }
+
+        #endregion  
+
     }
 }

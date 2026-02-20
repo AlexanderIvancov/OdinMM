@@ -1794,6 +1794,18 @@
     <Compile Include="Purchase\frm_PurchaseOrders.Designer.cs">
       <DependentUpon>frm_PurchaseOrders.cs</DependentUpon>
     </Compile>
+    <Compile Include="Purchase\Indicators\frm_NeedsProcIndicator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\Indicators\frm_NeedsProcIndicator.designer.cs">
+      <DependentUpon>frm_NeedsProcIndicator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\Indicators\frm_PurDeliveryIndicator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\Indicators\frm_PurDeliveryIndicator.designer.cs">
+      <DependentUpon>frm_PurDeliveryIndicator.cs</DependentUpon>
+    </Compile>
     <Compile Include="Purchase\PO_BLL.cs" />
     <Compile Include="Purchase\Reports\frm_rptPurchaseOrder.cs">
       <SubType>Form</SubType>
@@ -2855,6 +2867,12 @@
     </Compile>
     <Compile Include="Warehouse\StockIn\frm_AddStockIn.Designer.cs">
       <DependentUpon>frm_AddStockIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\StockIn\frm_AddStockPlacementWiz.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\StockIn\frm_AddStockPlacementWiz.Designer.cs">
+      <DependentUpon>frm_AddStockPlacementWiz.cs</DependentUpon>
     </Compile>
     <Compile Include="Warehouse\StockIn\frm_AddStockInFromPO.cs">
       <SubType>Form</SubType>
@@ -3930,6 +3948,12 @@
     <EmbeddedResource Include="Purchase\frm_PurchaseOrders.resx">
       <DependentUpon>frm_PurchaseOrders.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\Indicators\frm_NeedsProcIndicator.resx">
+      <DependentUpon>frm_NeedsProcIndicator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\Indicators\frm_PurDeliveryIndicator.resx">
+      <DependentUpon>frm_PurDeliveryIndicator.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Purchase\Reports\frm_rptPurchaseOrder.resx">
       <DependentUpon>frm_rptPurchaseOrder.cs</DependentUpon>
     </EmbeddedResource>
@@ -4208,11 +4232,13 @@
     <EmbeddedResource Include="Warehouse\Reports\frm_TurnoverReports.resx">
       <DependentUpon>frm_TurnoverReports.cs</DependentUpon>
     </EmbeddedResource>
+    <Content Include="Resourses\chart_stock.png" />
     <Content Include="Resourses\company_small.png" />
     <Content Include="Resourses\crm.png" />
     <Content Include="Resourses\events.png" />
     <Content Include="Resourses\factory.png" />
     <Content Include="Resourses\certificates.png" />
+    <Content Include="Resourses\lorry.png" />
     <Content Include="Resourses\microscope-test-icon.png" />
     <Content Include="Resourses\new_logo2.png" />
     <Content Include="Warehouse\Reports\rpt_TurnoverReport.rpt">
@@ -4225,6 +4251,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\Requests\frm_AddRequestSimple.resx">
       <DependentUpon>frm_AddRequestSimple.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\StockIn\frm_AddStockPlacementWiz.resx">
+      <DependentUpon>frm_AddStockPlacementWiz.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\StockIn\frm_EditBoxContent.resx">
       <DependentUpon>frm_EditBoxContent.cs</DependentUpon>

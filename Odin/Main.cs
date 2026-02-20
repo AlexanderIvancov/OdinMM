@@ -39,6 +39,7 @@ using System.Windows.Forms;
 using System.Windows.Threading;
 using System.Xml;
 using WeifenLuo.WinFormsUI.Docking;
+using Odin.Purchase.Indicators;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 
@@ -1460,6 +1461,22 @@ namespace Odin
             // public Main _Main;
             //Articles.InitiateResize();
             IncomeControlResult.Show(pn_Main);
+        }
+
+        private void btn_DeliveryIndicator_Click(object sender, EventArgs e)
+        {
+            if (glob_Class.IsFormAlreadyOpen("frm_PurDeliveryIndicator")) return;
+
+            frm_PurDeliveryIndicator frm = new frm_PurDeliveryIndicator();
+            frm.Show();
+        }
+
+        private void btn_PurchaseIndic_Click(object sender, EventArgs e)
+        {
+            if (glob_Class.IsFormAlreadyOpen("frm_NeedsProcIndicator")) return;
+
+            frm_NeedsProcIndicator frm = new frm_NeedsProcIndicator();
+            frm.Show();
         }
     }
 }
