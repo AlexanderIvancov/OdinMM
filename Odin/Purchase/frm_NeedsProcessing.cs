@@ -1645,24 +1645,32 @@ namespace Odin.Purchase
         {
             int _id = 0;
             string _comments = "";
+            string _procbefore = "";
             try
             {
                 _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
                 _comments = gv_List.CurrentRow.Cells["cn_comments"].Value.ToString();
+                _procbefore = gv_List.CurrentRow.Cells["cn_procbefore"].Value.ToString();
             }
             catch { }
 
             if (_id != 0)
             {
                 frm_cmbText frm = new frm_cmbText();
+                frm.HeaderText = "Edit header";
                 frm.LabelText = "Comments: ";
                 frm.FormText = _comments;
+                frm.ShowDate = true;
+                frm.FormDate = _procbefore;
+                frm.LabelText2 = "Proceed before: ";
+
                 DialogResult result = frm.ShowDialog();
 
                 if (result == DialogResult.OK)
                 {
-                    POBll.EditPONeedComments(_id, frm.FormText);
+                    POBll.EditPONeedComments(_id, frm.FormText, frm.FormDate);
                     gv_List.CurrentRow.Cells["cn_comments"].Value = frm.FormText;
+                    gv_List.CurrentRow.Cells["cn_procbefore"].Value = (Convert.ToDateTime(frm.FormDate)).ToShortDateString();
                 }
             }
 

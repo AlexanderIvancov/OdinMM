@@ -35,12 +35,17 @@
             this.lbl_Text = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.btn_Cancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.txt_Date = new Odin.CustomControls.NullableDateTimePicker();
+            this.buttonSpecAny3 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.lbl_Text2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.txt_Date);
+            this.kryptonPanel1.Controls.Add(this.lbl_Text2);
             this.kryptonPanel1.Controls.Add(this.txt_Text);
             this.kryptonPanel1.Controls.Add(this.lbl_Text);
             this.kryptonPanel1.Controls.Add(this.btn_Cancel);
@@ -96,6 +101,36 @@
             this.btn_OK.Values.Image = global::Odin.Global_Resourses.Ok;
             this.btn_OK.Values.Text = "OK";
             // 
+            // txt_Date
+            // 
+            this.txt_Date.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
+            this.buttonSpecAny3});
+            this.txt_Date.CalendarShowWeekNumbers = true;
+            this.txt_Date.CustomFormat = null;
+            this.txt_Date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.txt_Date.Location = new System.Drawing.Point(110, 65);
+            this.txt_Date.Name = "txt_Date";
+            this.txt_Date.NullValue = " ";
+            this.txt_Date.Size = new System.Drawing.Size(105, 21);
+            this.txt_Date.TabIndex = 315;
+            this.txt_Date.Visible = false;
+            this.txt_Date.DropDown += new System.EventHandler<ComponentFactory.Krypton.Toolkit.DateTimePickerDropArgs>(this.txt_Date_DropDown);
+            // 
+            // buttonSpecAny3
+            // 
+            this.buttonSpecAny3.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Context;
+            this.buttonSpecAny3.UniqueName = "E61697DA9D484B901DB9E49E0F0EE20E";
+            this.buttonSpecAny3.Click += new System.EventHandler(this.buttonSpecAny3_Click);
+            // 
+            // lbl_Text2
+            // 
+            this.lbl_Text2.Location = new System.Drawing.Point(11, 65);
+            this.lbl_Text2.Name = "lbl_Text2";
+            this.lbl_Text2.Size = new System.Drawing.Size(39, 20);
+            this.lbl_Text2.TabIndex = 314;
+            this.lbl_Text2.Values.Text = "Date:";
+            this.lbl_Text2.Visible = false;
+            // 
             // frm_cmbText
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -112,7 +147,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
@@ -124,5 +159,8 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Cancel;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_OK;
         public ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_Text;
+        private CustomControls.NullableDateTimePicker txt_Date;
+        private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny3;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel lbl_Text2;
     }
 }

@@ -43,17 +43,6 @@
             this.btn_CloseNeeds = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
             this.btn_DeleteNeeds = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
             this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_batch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_isactive = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_createdat = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_createdby = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_article = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_conforder = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_endcustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mnu_Lines = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mni_FilterFor = new System.Windows.Forms.ToolStripTextBox();
             this.mni_Search = new System.Windows.Forms.ToolStripMenuItem();
@@ -84,6 +73,33 @@
             this.kryptonSplitContainer2 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.kryptonHeaderGroup2 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.tv_Details = new AdvancedDataGridView.TreeGridView();
+            this.attachmentColumn = new System.Windows.Forms.DataGridViewImageColumn();
+            this.cn_darticle = new AdvancedDataGridView.TreeGridColumn();
+            this.cn_dartid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_dsecname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_dunit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_dsupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_dqtyneed = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_adddet = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.cn_dqtyinpo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_dunitprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_dcurr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_dunitpricee = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_ddatacode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_ddelivterm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_dmoq = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_dmpq = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_dmanufacturer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_dcomments = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_did = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_dstate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_dcatid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_pocatid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_doldqtyinpo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_dtechmissings = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_dcatdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_qtyproject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_analogs = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mnu_DLines = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mni_SearchD = new System.Windows.Forms.ToolStripMenuItem();
             this.mni_CopyD = new System.Windows.Forms.ToolStripMenuItem();
@@ -168,33 +184,18 @@
             this.bs_POList = new Odin.Global_Classes.SyncBindingSource();
             this.bs_Dets = new Odin.Global_Classes.SyncBindingSource();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.attachmentColumn = new System.Windows.Forms.DataGridViewImageColumn();
-            this.cn_darticle = new AdvancedDataGridView.TreeGridColumn();
-            this.cn_dartid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_dsecname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_dunit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_dsupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_dqtyneed = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btn_adddet = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.cn_dqtyinpo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_dunitprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_dcurr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_dunitpricee = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_ddatacode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_ddelivterm = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_dmoq = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_dmpq = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_dmanufacturer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_dcomments = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_did = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_dstate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_dcatid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_pocatid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_doldqtyinpo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_dtechmissings = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_dcatdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_qtyproject = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_analogs = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_batch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_isactive = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_createdat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_createdby = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_article = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_conforder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_endcustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_procbefore = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
@@ -348,7 +349,8 @@
             this.cn_article,
             this.cn_conforder,
             this.cn_customer,
-            this.cn_endcustomer});
+            this.cn_endcustomer,
+            this.cn_procbefore});
             this.gv_List.ContextMenuStrip = this.mnu_Lines;
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_List.Location = new System.Drawing.Point(0, 92);
@@ -358,77 +360,6 @@
             this.gv_List.TabIndex = 12;
             this.gv_List.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_List_ColumnHeaderMouseClick);
             this.gv_List.SelectionChanged += new System.EventHandler(this.gv_List_SelectionChanged);
-            // 
-            // cn_id
-            // 
-            this.cn_id.DataPropertyName = "id";
-            this.cn_id.HeaderText = "id";
-            this.cn_id.Name = "cn_id";
-            this.cn_id.Visible = false;
-            // 
-            // cn_name
-            // 
-            this.cn_name.DataPropertyName = "name";
-            this.cn_name.FillWeight = 80F;
-            this.cn_name.HeaderText = "Need name";
-            this.cn_name.Name = "cn_name";
-            this.cn_name.ReadOnly = true;
-            this.cn_name.Width = 80;
-            // 
-            // cn_batch
-            // 
-            this.cn_batch.DataPropertyName = "batch";
-            this.cn_batch.HeaderText = "Batch";
-            this.cn_batch.Name = "cn_batch";
-            // 
-            // cn_isactive
-            // 
-            this.cn_isactive.DataPropertyName = "isactive";
-            this.cn_isactive.HeaderText = "isactive";
-            this.cn_isactive.Name = "cn_isactive";
-            this.cn_isactive.Visible = false;
-            // 
-            // cn_createdat
-            // 
-            this.cn_createdat.DataPropertyName = "createdat";
-            this.cn_createdat.HeaderText = "Created at";
-            this.cn_createdat.Name = "cn_createdat";
-            // 
-            // cn_createdby
-            // 
-            this.cn_createdby.DataPropertyName = "createdby";
-            this.cn_createdby.HeaderText = "Created by";
-            this.cn_createdby.Name = "cn_createdby";
-            // 
-            // cn_comments
-            // 
-            this.cn_comments.DataPropertyName = "comments";
-            this.cn_comments.HeaderText = "Comments";
-            this.cn_comments.Name = "cn_comments";
-            // 
-            // cn_article
-            // 
-            this.cn_article.DataPropertyName = "article";
-            this.cn_article.HeaderText = "Article";
-            this.cn_article.Name = "cn_article";
-            // 
-            // cn_conforder
-            // 
-            this.cn_conforder.DataPropertyName = "conforder";
-            this.cn_conforder.HeaderText = "Conf. order";
-            this.cn_conforder.Name = "cn_conforder";
-            // 
-            // cn_customer
-            // 
-            this.cn_customer.DataPropertyName = "customer";
-            this.cn_customer.HeaderText = "Customer";
-            this.cn_customer.Name = "cn_customer";
-            // 
-            // cn_endcustomer
-            // 
-            this.cn_endcustomer.DataPropertyName = "endcustomer";
-            this.cn_endcustomer.HeaderText = "End customer";
-            this.cn_endcustomer.Name = "cn_endcustomer";
             // 
             // mnu_Lines
             // 
@@ -656,8 +587,10 @@
             // 
             this.cmb_Articles1.Article = "";
             this.cmb_Articles1.ArticleId = 0;
+            this.cmb_Articles1.ArticleIdRec = 0;
             this.cmb_Articles1.ArtType = null;
             this.cmb_Articles1.BOMState = 0;
+            this.cmb_Articles1.CertState = "";
             this.cmb_Articles1.Comments = null;
             this.cmb_Articles1.CustCode = null;
             this.cmb_Articles1.CustCodeId = 0;
@@ -674,6 +607,7 @@
             this.cmb_Articles1.ProjectId = 0;
             this.cmb_Articles1.QtyAvail = 0D;
             this.cmb_Articles1.QtyConsStock = 0D;
+            this.cmb_Articles1.RMId = 0;
             this.cmb_Articles1.SecName = null;
             this.cmb_Articles1.Size = new System.Drawing.Size(265, 20);
             this.cmb_Articles1.SMTType = 0;
@@ -814,6 +748,229 @@
             this.tv_Details.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.tv_Details_CellPainting);
             this.tv_Details.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.tv_Details_CellValidated);
             this.tv_Details.SelectionChanged += new System.EventHandler(this.tv_Details_SelectionChanged);
+            // 
+            // attachmentColumn
+            // 
+            this.attachmentColumn.HeaderText = "attachmentColumn";
+            this.attachmentColumn.Name = "attachmentColumn";
+            this.attachmentColumn.Visible = false;
+            // 
+            // cn_darticle
+            // 
+            this.cn_darticle.DataPropertyName = "article";
+            this.cn_darticle.DefaultNodeImage = null;
+            this.cn_darticle.FillWeight = 200F;
+            this.cn_darticle.HeaderText = "Article";
+            this.cn_darticle.Name = "cn_darticle";
+            this.cn_darticle.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_darticle.Width = 200;
+            // 
+            // cn_dartid
+            // 
+            this.cn_dartid.DataPropertyName = "artid";
+            this.cn_dartid.FillWeight = 70F;
+            this.cn_dartid.HeaderText = "Art. id";
+            this.cn_dartid.Name = "cn_dartid";
+            this.cn_dartid.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_dartid.Width = 70;
+            // 
+            // cn_dsecname
+            // 
+            this.cn_dsecname.DataPropertyName = "secname";
+            this.cn_dsecname.HeaderText = "Sup. article";
+            this.cn_dsecname.Name = "cn_dsecname";
+            this.cn_dsecname.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // cn_dunit
+            // 
+            this.cn_dunit.DataPropertyName = "unit";
+            this.cn_dunit.FillWeight = 40F;
+            this.cn_dunit.HeaderText = "Unit";
+            this.cn_dunit.Name = "cn_dunit";
+            this.cn_dunit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_dunit.Width = 40;
+            // 
+            // cn_dsupplier
+            // 
+            this.cn_dsupplier.DataPropertyName = "supplier";
+            this.cn_dsupplier.FillWeight = 110F;
+            this.cn_dsupplier.HeaderText = "Supplier";
+            this.cn_dsupplier.Name = "cn_dsupplier";
+            this.cn_dsupplier.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_dsupplier.Width = 110;
+            // 
+            // cn_dqtyneed
+            // 
+            this.cn_dqtyneed.DataPropertyName = "qtyneeds";
+            this.cn_dqtyneed.FillWeight = 70F;
+            this.cn_dqtyneed.HeaderText = "Qty needs";
+            this.cn_dqtyneed.Name = "cn_dqtyneed";
+            this.cn_dqtyneed.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_dqtyneed.Width = 70;
+            // 
+            // btn_adddet
+            // 
+            this.btn_adddet.FillWeight = 25F;
+            this.btn_adddet.HeaderText = "";
+            this.btn_adddet.Name = "btn_adddet";
+            this.btn_adddet.Width = 25;
+            // 
+            // cn_dqtyinpo
+            // 
+            this.cn_dqtyinpo.DataPropertyName = "qtyinpo";
+            this.cn_dqtyinpo.FillWeight = 80F;
+            this.cn_dqtyinpo.HeaderText = "Qty in PO";
+            this.cn_dqtyinpo.Name = "cn_dqtyinpo";
+            this.cn_dqtyinpo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_dqtyinpo.Width = 80;
+            // 
+            // cn_dunitprice
+            // 
+            this.cn_dunitprice.DataPropertyName = "unitprice";
+            this.cn_dunitprice.FillWeight = 80F;
+            this.cn_dunitprice.HeaderText = "Unit price";
+            this.cn_dunitprice.Name = "cn_dunitprice";
+            this.cn_dunitprice.ReadOnly = true;
+            this.cn_dunitprice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_dunitprice.Width = 80;
+            // 
+            // cn_dcurr
+            // 
+            this.cn_dcurr.DataPropertyName = "currency";
+            this.cn_dcurr.FillWeight = 40F;
+            this.cn_dcurr.HeaderText = "Curr.";
+            this.cn_dcurr.Name = "cn_dcurr";
+            this.cn_dcurr.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_dcurr.Width = 40;
+            // 
+            // cn_dunitpricee
+            // 
+            this.cn_dunitpricee.DataPropertyName = "unitpriceeur";
+            this.cn_dunitpricee.FillWeight = 90F;
+            this.cn_dunitpricee.HeaderText = "Unit price (BYN)";
+            this.cn_dunitpricee.Name = "cn_dunitpricee";
+            this.cn_dunitpricee.ReadOnly = true;
+            this.cn_dunitpricee.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_dunitpricee.Width = 90;
+            // 
+            // cn_ddatacode
+            // 
+            this.cn_ddatacode.DataPropertyName = "datacode";
+            this.cn_ddatacode.FillWeight = 70F;
+            this.cn_ddatacode.HeaderText = "Data code";
+            this.cn_ddatacode.Name = "cn_ddatacode";
+            this.cn_ddatacode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_ddatacode.Width = 70;
+            // 
+            // cn_ddelivterm
+            // 
+            this.cn_ddelivterm.DataPropertyName = "delivterm";
+            this.cn_ddelivterm.FillWeight = 60F;
+            this.cn_ddelivterm.HeaderText = "Deliv. term";
+            this.cn_ddelivterm.Name = "cn_ddelivterm";
+            this.cn_ddelivterm.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_ddelivterm.Width = 60;
+            // 
+            // cn_dmoq
+            // 
+            this.cn_dmoq.DataPropertyName = "moq";
+            this.cn_dmoq.FillWeight = 60F;
+            this.cn_dmoq.HeaderText = "MOQ";
+            this.cn_dmoq.Name = "cn_dmoq";
+            this.cn_dmoq.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_dmoq.Width = 60;
+            // 
+            // cn_dmpq
+            // 
+            this.cn_dmpq.DataPropertyName = "mpq";
+            this.cn_dmpq.FillWeight = 60F;
+            this.cn_dmpq.HeaderText = "MPQ";
+            this.cn_dmpq.Name = "cn_dmpq";
+            this.cn_dmpq.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_dmpq.Width = 60;
+            // 
+            // cn_dmanufacturer
+            // 
+            this.cn_dmanufacturer.DataPropertyName = "manufacturer";
+            this.cn_dmanufacturer.HeaderText = "Manufacturer";
+            this.cn_dmanufacturer.Name = "cn_dmanufacturer";
+            this.cn_dmanufacturer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // cn_dcomments
+            // 
+            this.cn_dcomments.DataPropertyName = "comments";
+            this.cn_dcomments.HeaderText = "Comments";
+            this.cn_dcomments.Name = "cn_dcomments";
+            this.cn_dcomments.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // cn_did
+            // 
+            this.cn_did.DataPropertyName = "id";
+            this.cn_did.HeaderText = "id";
+            this.cn_did.Name = "cn_did";
+            this.cn_did.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // cn_dstate
+            // 
+            this.cn_dstate.DataPropertyName = "state";
+            this.cn_dstate.HeaderText = "State";
+            this.cn_dstate.Name = "cn_dstate";
+            this.cn_dstate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_dstate.Visible = false;
+            // 
+            // cn_dcatid
+            // 
+            this.cn_dcatid.DataPropertyName = "catid";
+            this.cn_dcatid.HeaderText = "catid";
+            this.cn_dcatid.Name = "cn_dcatid";
+            this.cn_dcatid.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_dcatid.Visible = false;
+            // 
+            // cn_pocatid
+            // 
+            this.cn_pocatid.DataPropertyName = "pocatid";
+            this.cn_pocatid.HeaderText = "pocatid";
+            this.cn_pocatid.Name = "cn_pocatid";
+            this.cn_pocatid.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_pocatid.Visible = false;
+            // 
+            // cn_doldqtyinpo
+            // 
+            this.cn_doldqtyinpo.DataPropertyName = "oldqtyinpo";
+            this.cn_doldqtyinpo.HeaderText = "oldqtyinpo";
+            this.cn_doldqtyinpo.Name = "cn_doldqtyinpo";
+            this.cn_doldqtyinpo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_doldqtyinpo.Visible = false;
+            // 
+            // cn_dtechmissings
+            // 
+            this.cn_dtechmissings.DataPropertyName = "techmissings";
+            this.cn_dtechmissings.FillWeight = 60F;
+            this.cn_dtechmissings.HeaderText = "Tech. missings";
+            this.cn_dtechmissings.Name = "cn_dtechmissings";
+            this.cn_dtechmissings.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_dtechmissings.Width = 60;
+            // 
+            // cn_dcatdate
+            // 
+            this.cn_dcatdate.DataPropertyName = "creatdate";
+            this.cn_dcatdate.HeaderText = "Cat. date";
+            this.cn_dcatdate.Name = "cn_dcatdate";
+            this.cn_dcatdate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // cn_qtyproject
+            // 
+            this.cn_qtyproject.DataPropertyName = "inproject";
+            this.cn_qtyproject.HeaderText = "In project";
+            this.cn_qtyproject.Name = "cn_qtyproject";
+            this.cn_qtyproject.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // cn_analogs
+            // 
+            this.cn_analogs.DataPropertyName = "analogs";
+            this.cn_analogs.HeaderText = "Analogs";
+            this.cn_analogs.Name = "cn_analogs";
+            this.cn_analogs.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // mnu_DLines
             // 
@@ -1580,228 +1737,82 @@
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip1.ToolTipTitle = "Help";
             // 
-            // attachmentColumn
+            // cn_id
             // 
-            this.attachmentColumn.HeaderText = "attachmentColumn";
-            this.attachmentColumn.Name = "attachmentColumn";
-            this.attachmentColumn.Visible = false;
+            this.cn_id.DataPropertyName = "id";
+            this.cn_id.HeaderText = "id";
+            this.cn_id.Name = "cn_id";
+            this.cn_id.Visible = false;
             // 
-            // cn_darticle
+            // cn_name
             // 
-            this.cn_darticle.DataPropertyName = "article";
-            this.cn_darticle.DefaultNodeImage = null;
-            this.cn_darticle.FillWeight = 200F;
-            this.cn_darticle.HeaderText = "Article";
-            this.cn_darticle.Name = "cn_darticle";
-            this.cn_darticle.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cn_darticle.Width = 200;
+            this.cn_name.DataPropertyName = "name";
+            this.cn_name.FillWeight = 80F;
+            this.cn_name.HeaderText = "Need name";
+            this.cn_name.Name = "cn_name";
+            this.cn_name.ReadOnly = true;
+            this.cn_name.Width = 80;
             // 
-            // cn_dartid
+            // cn_batch
             // 
-            this.cn_dartid.DataPropertyName = "artid";
-            this.cn_dartid.FillWeight = 70F;
-            this.cn_dartid.HeaderText = "Art. id";
-            this.cn_dartid.Name = "cn_dartid";
-            this.cn_dartid.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cn_dartid.Width = 70;
+            this.cn_batch.DataPropertyName = "batch";
+            this.cn_batch.HeaderText = "Batch";
+            this.cn_batch.Name = "cn_batch";
             // 
-            // cn_dsecname
+            // cn_isactive
             // 
-            this.cn_dsecname.DataPropertyName = "secname";
-            this.cn_dsecname.HeaderText = "Sup. article";
-            this.cn_dsecname.Name = "cn_dsecname";
-            this.cn_dsecname.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_isactive.DataPropertyName = "isactive";
+            this.cn_isactive.HeaderText = "isactive";
+            this.cn_isactive.Name = "cn_isactive";
+            this.cn_isactive.Visible = false;
             // 
-            // cn_dunit
+            // cn_createdat
             // 
-            this.cn_dunit.DataPropertyName = "unit";
-            this.cn_dunit.FillWeight = 40F;
-            this.cn_dunit.HeaderText = "Unit";
-            this.cn_dunit.Name = "cn_dunit";
-            this.cn_dunit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cn_dunit.Width = 40;
+            this.cn_createdat.DataPropertyName = "createdat";
+            this.cn_createdat.HeaderText = "Created at";
+            this.cn_createdat.Name = "cn_createdat";
             // 
-            // cn_dsupplier
+            // cn_createdby
             // 
-            this.cn_dsupplier.DataPropertyName = "supplier";
-            this.cn_dsupplier.FillWeight = 110F;
-            this.cn_dsupplier.HeaderText = "Supplier";
-            this.cn_dsupplier.Name = "cn_dsupplier";
-            this.cn_dsupplier.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cn_dsupplier.Width = 110;
+            this.cn_createdby.DataPropertyName = "createdby";
+            this.cn_createdby.HeaderText = "Created by";
+            this.cn_createdby.Name = "cn_createdby";
             // 
-            // cn_dqtyneed
+            // cn_comments
             // 
-            this.cn_dqtyneed.DataPropertyName = "qtyneeds";
-            this.cn_dqtyneed.FillWeight = 70F;
-            this.cn_dqtyneed.HeaderText = "Qty needs";
-            this.cn_dqtyneed.Name = "cn_dqtyneed";
-            this.cn_dqtyneed.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cn_dqtyneed.Width = 70;
+            this.cn_comments.DataPropertyName = "comments";
+            this.cn_comments.HeaderText = "Comments";
+            this.cn_comments.Name = "cn_comments";
             // 
-            // btn_adddet
+            // cn_article
             // 
-            this.btn_adddet.FillWeight = 25F;
-            this.btn_adddet.HeaderText = "";
-            this.btn_adddet.Name = "btn_adddet";
-            this.btn_adddet.Width = 25;
+            this.cn_article.DataPropertyName = "article";
+            this.cn_article.HeaderText = "Article";
+            this.cn_article.Name = "cn_article";
             // 
-            // cn_dqtyinpo
+            // cn_conforder
             // 
-            this.cn_dqtyinpo.DataPropertyName = "qtyinpo";
-            this.cn_dqtyinpo.FillWeight = 80F;
-            this.cn_dqtyinpo.HeaderText = "Qty in PO";
-            this.cn_dqtyinpo.Name = "cn_dqtyinpo";
-            this.cn_dqtyinpo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cn_dqtyinpo.Width = 80;
+            this.cn_conforder.DataPropertyName = "conforder";
+            this.cn_conforder.HeaderText = "Conf. order";
+            this.cn_conforder.Name = "cn_conforder";
             // 
-            // cn_dunitprice
+            // cn_customer
             // 
-            this.cn_dunitprice.DataPropertyName = "unitprice";
-            this.cn_dunitprice.FillWeight = 80F;
-            this.cn_dunitprice.HeaderText = "Unit price";
-            this.cn_dunitprice.Name = "cn_dunitprice";
-            this.cn_dunitprice.ReadOnly = true;
-            this.cn_dunitprice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cn_dunitprice.Width = 80;
+            this.cn_customer.DataPropertyName = "customer";
+            this.cn_customer.HeaderText = "Customer";
+            this.cn_customer.Name = "cn_customer";
             // 
-            // cn_dcurr
+            // cn_endcustomer
             // 
-            this.cn_dcurr.DataPropertyName = "currency";
-            this.cn_dcurr.FillWeight = 40F;
-            this.cn_dcurr.HeaderText = "Curr.";
-            this.cn_dcurr.Name = "cn_dcurr";
-            this.cn_dcurr.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cn_dcurr.Width = 40;
+            this.cn_endcustomer.DataPropertyName = "endcustomer";
+            this.cn_endcustomer.HeaderText = "End customer";
+            this.cn_endcustomer.Name = "cn_endcustomer";
             // 
-            // cn_dunitpricee
+            // cn_procbefore
             // 
-            this.cn_dunitpricee.DataPropertyName = "unitpriceeur";
-            this.cn_dunitpricee.FillWeight = 90F;
-            this.cn_dunitpricee.HeaderText = "Unit price (BYN)";
-            this.cn_dunitpricee.Name = "cn_dunitpricee";
-            this.cn_dunitpricee.ReadOnly = true;
-            this.cn_dunitpricee.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cn_dunitpricee.Width = 90;
-            // 
-            // cn_ddatacode
-            // 
-            this.cn_ddatacode.DataPropertyName = "datacode";
-            this.cn_ddatacode.FillWeight = 70F;
-            this.cn_ddatacode.HeaderText = "Data code";
-            this.cn_ddatacode.Name = "cn_ddatacode";
-            this.cn_ddatacode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cn_ddatacode.Width = 70;
-            // 
-            // cn_ddelivterm
-            // 
-            this.cn_ddelivterm.DataPropertyName = "delivterm";
-            this.cn_ddelivterm.FillWeight = 60F;
-            this.cn_ddelivterm.HeaderText = "Deliv. term";
-            this.cn_ddelivterm.Name = "cn_ddelivterm";
-            this.cn_ddelivterm.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cn_ddelivterm.Width = 60;
-            // 
-            // cn_dmoq
-            // 
-            this.cn_dmoq.DataPropertyName = "moq";
-            this.cn_dmoq.FillWeight = 60F;
-            this.cn_dmoq.HeaderText = "MOQ";
-            this.cn_dmoq.Name = "cn_dmoq";
-            this.cn_dmoq.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cn_dmoq.Width = 60;
-            // 
-            // cn_dmpq
-            // 
-            this.cn_dmpq.DataPropertyName = "mpq";
-            this.cn_dmpq.FillWeight = 60F;
-            this.cn_dmpq.HeaderText = "MPQ";
-            this.cn_dmpq.Name = "cn_dmpq";
-            this.cn_dmpq.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cn_dmpq.Width = 60;
-            // 
-            // cn_dmanufacturer
-            // 
-            this.cn_dmanufacturer.DataPropertyName = "manufacturer";
-            this.cn_dmanufacturer.HeaderText = "Manufacturer";
-            this.cn_dmanufacturer.Name = "cn_dmanufacturer";
-            this.cn_dmanufacturer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // cn_dcomments
-            // 
-            this.cn_dcomments.DataPropertyName = "comments";
-            this.cn_dcomments.HeaderText = "Comments";
-            this.cn_dcomments.Name = "cn_dcomments";
-            this.cn_dcomments.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // cn_did
-            // 
-            this.cn_did.DataPropertyName = "id";
-            this.cn_did.HeaderText = "id";
-            this.cn_did.Name = "cn_did";
-            this.cn_did.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // cn_dstate
-            // 
-            this.cn_dstate.DataPropertyName = "state";
-            this.cn_dstate.HeaderText = "State";
-            this.cn_dstate.Name = "cn_dstate";
-            this.cn_dstate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cn_dstate.Visible = false;
-            // 
-            // cn_dcatid
-            // 
-            this.cn_dcatid.DataPropertyName = "catid";
-            this.cn_dcatid.HeaderText = "catid";
-            this.cn_dcatid.Name = "cn_dcatid";
-            this.cn_dcatid.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cn_dcatid.Visible = false;
-            // 
-            // cn_pocatid
-            // 
-            this.cn_pocatid.DataPropertyName = "pocatid";
-            this.cn_pocatid.HeaderText = "pocatid";
-            this.cn_pocatid.Name = "cn_pocatid";
-            this.cn_pocatid.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cn_pocatid.Visible = false;
-            // 
-            // cn_doldqtyinpo
-            // 
-            this.cn_doldqtyinpo.DataPropertyName = "oldqtyinpo";
-            this.cn_doldqtyinpo.HeaderText = "oldqtyinpo";
-            this.cn_doldqtyinpo.Name = "cn_doldqtyinpo";
-            this.cn_doldqtyinpo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cn_doldqtyinpo.Visible = false;
-            // 
-            // cn_dtechmissings
-            // 
-            this.cn_dtechmissings.DataPropertyName = "techmissings";
-            this.cn_dtechmissings.FillWeight = 60F;
-            this.cn_dtechmissings.HeaderText = "Tech. missings";
-            this.cn_dtechmissings.Name = "cn_dtechmissings";
-            this.cn_dtechmissings.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cn_dtechmissings.Width = 60;
-            // 
-            // cn_dcatdate
-            // 
-            this.cn_dcatdate.DataPropertyName = "creatdate";
-            this.cn_dcatdate.HeaderText = "Cat. date";
-            this.cn_dcatdate.Name = "cn_dcatdate";
-            this.cn_dcatdate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // cn_qtyproject
-            // 
-            this.cn_qtyproject.DataPropertyName = "inproject";
-            this.cn_qtyproject.HeaderText = "In project";
-            this.cn_qtyproject.Name = "cn_qtyproject";
-            this.cn_qtyproject.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // cn_analogs
-            // 
-            this.cn_analogs.DataPropertyName = "analogs";
-            this.cn_analogs.HeaderText = "Analogs";
-            this.cn_analogs.Name = "cn_analogs";
-            this.cn_analogs.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cn_procbefore.DataPropertyName = "procbefore";
+            this.cn_procbefore.HeaderText = "Proceed before";
+            this.cn_procbefore.Name = "cn_procbefore";
             // 
             // frm_NeedsProcessing
             // 
@@ -1874,7 +1885,7 @@
             this.kryptonHeaderGroup4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bs_POList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_Dets)).EndInit();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
@@ -2003,17 +2014,6 @@
         private Owf.Controls.GradientPanel2 gradientPanel22;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup btn_NeedsList;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_batch;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_isactive;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_createdat;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_createdby;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_comments;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_article;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_conforder;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_customer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_endcustomer;
         private System.Windows.Forms.DataGridViewImageColumn attachmentColumn;
         private AdvancedDataGridView.TreeGridColumn cn_darticle;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_dartid;
@@ -2041,5 +2041,17 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_dcatdate;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_qtyproject;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_analogs;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_batch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_isactive;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_createdat;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_createdby;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_comments;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_article;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_conforder;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_customer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_endcustomer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_procbefore;
     }
 }

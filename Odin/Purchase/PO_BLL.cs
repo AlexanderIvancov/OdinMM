@@ -1095,18 +1095,20 @@ namespace Odin.Purchase
             return _res;
         }
 
-        public void EditPONeedComments(int id, string comments)
+        public void EditPONeedComments(int id, string comments, string procbefore)
         {
-            
+
             SqlConnection sqlConn = new SqlConnection(sConnStr);
-            SqlCommand sqlComm = new SqlCommand("update pur_needsheader set comments = @comments where id = @id ", sqlConn);
+            SqlCommand sqlComm = new SqlCommand("set dateformat dmy update pur_needsheader set comments = @comments, procbefore = convert(date, nullif(@procbefore, '')) where id = @id ", sqlConn);
             sqlComm.Parameters.AddWithValue("@id", id);
             sqlComm.Parameters.AddWithValue("@comments", comments);
-          
+            sqlComm.Parameters.AddWithValue("@procbefore", procbefore);
+
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-            
+
+
         }
 
         #endregion
