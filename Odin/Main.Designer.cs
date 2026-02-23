@@ -95,6 +95,8 @@
             this.kryptonRibbonGroup12 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
             this.kryptonRibbonGroupTriple9 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
             this.btn_SupEvaluation = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.btn_DeliveryIndicator = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.btn_PurchaseIndic = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.tab_Production = new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab();
             this.kryptonRibbonGroup13 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
             this.kryptonRibbonGroupTriple10 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
@@ -242,9 +244,6 @@
             this.kryptonPalette1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.pn_Main = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.mdiClientController1 = new Panels.MdiClientController();
-            this.btn_DeliveryIndicator = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
-            this.btn_PurchaseIndic = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
-            this.kryptonRibbonGroup27 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonRibbon1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -642,8 +641,7 @@
             // 
             this.tab_Purchase.Groups.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup[] {
             this.kryptonRibbonGroup9,
-            this.kryptonRibbonGroup12,
-            this.kryptonRibbonGroup27});
+            this.kryptonRibbonGroup12});
             this.tab_Purchase.Text = "Purchase";
             // 
             // kryptonRibbonGroup9
@@ -725,6 +723,22 @@
             this.btn_SupEvaluation.ImageSmall = global::Odin.Global_Resourses.medal_gold_2;
             this.btn_SupEvaluation.TextLine1 = "Supplier\'s";
             this.btn_SupEvaluation.TextLine2 = "evaluation";
+            // 
+            // btn_DeliveryIndicator
+            // 
+            this.btn_DeliveryIndicator.ImageLarge = global::Odin.Global_Resourses.lorry;
+            this.btn_DeliveryIndicator.ImageSmall = global::Odin.Global_Resourses.lorry;
+            this.btn_DeliveryIndicator.TextLine2 = "Delivery";
+            this.btn_DeliveryIndicator.ToolTipBody = "indicator";
+            this.btn_DeliveryIndicator.Click += new System.EventHandler(this.btn_DeliveryIndicator_Click);
+            // 
+            // btn_PurchaseIndic
+            // 
+            this.btn_PurchaseIndic.ImageLarge = global::Odin.Global_Resourses.chart_stock;
+            this.btn_PurchaseIndic.ImageSmall = global::Odin.Global_Resourses.chart_stock;
+            this.btn_PurchaseIndic.TextLine1 = "Purchase";
+            this.btn_PurchaseIndic.TextLine2 = "processing";
+            this.btn_PurchaseIndic.Click += new System.EventHandler(this.btn_PurchaseIndic_Click);
             // 
             // tab_Production
             // 
@@ -1749,22 +1763,6 @@
             this.mdiClientController1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.mdiClientController1.ParentForm = this;
             // 
-            // btn_DeliveryIndicator
-            // 
-            this.btn_DeliveryIndicator.ImageLarge = global::Odin.Global_Resourses.lorry;
-            this.btn_DeliveryIndicator.ImageSmall = global::Odin.Global_Resourses.lorry;
-            this.btn_DeliveryIndicator.TextLine2 = "Delivery";
-            this.btn_DeliveryIndicator.ToolTipBody = "indicator";
-            this.btn_DeliveryIndicator.Click += new System.EventHandler(this.btn_DeliveryIndicator_Click);
-            // 
-            // btn_PurchaseIndic
-            // 
-            this.btn_PurchaseIndic.ImageLarge = global::Odin.Global_Resourses.chart_stock;
-            this.btn_PurchaseIndic.ImageSmall = global::Odin.Global_Resourses.chart_stock;
-            this.btn_PurchaseIndic.TextLine1 = "Purchase";
-            this.btn_PurchaseIndic.TextLine2 = "processing";
-            this.btn_PurchaseIndic.Click += new System.EventHandler(this.btn_PurchaseIndic_Click);
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2007,6 +2005,5 @@
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_IncomeControlResult;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_DeliveryIndicator;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_PurchaseIndic;
-        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup kryptonRibbonGroup27;
     }
 }
