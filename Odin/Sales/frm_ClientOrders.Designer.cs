@@ -157,6 +157,8 @@
             this.btn_Excel = new System.Windows.Forms.ToolStripButton();
             this.kryptonDockableWorkspace1 = new ComponentFactory.Krypton.Docking.KryptonDockableWorkspace();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.btn_Planning = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btn_RMConsulting = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_CapacityAnalyze = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Invoices = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Launches = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -171,7 +173,6 @@
             this.btn_Deliveries = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Confirmations = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.bs_List = new Odin.Global_Classes.SyncBindingSource();
-            this.btn_RMConsulting = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.mnu_Lines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
@@ -304,7 +305,7 @@
             // 
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.kryptonDockableWorkspace1);
             this.kryptonSplitContainer1.SeparatorStyle = ComponentFactory.Krypton.Toolkit.SeparatorStyle.HighInternalProfile;
-            this.kryptonSplitContainer1.Size = new System.Drawing.Size(1628, 685);
+            this.kryptonSplitContainer1.Size = new System.Drawing.Size(1896, 685);
             this.kryptonSplitContainer1.SplitterDistance = 440;
             this.kryptonSplitContainer1.TabIndex = 5;
             // 
@@ -360,7 +361,7 @@
             this.kryptonSplitContainer2.Panel2.Controls.Add(this.gv_List);
             this.kryptonSplitContainer2.Panel2.Controls.Add(this.bn_List);
             this.kryptonSplitContainer2.SeparatorStyle = ComponentFactory.Krypton.Toolkit.SeparatorStyle.HighProfile;
-            this.kryptonSplitContainer2.Size = new System.Drawing.Size(1628, 440);
+            this.kryptonSplitContainer2.Size = new System.Drawing.Size(1896, 440);
             this.kryptonSplitContainer2.SplitterDistance = 299;
             this.kryptonSplitContainer2.TabIndex = 0;
             // 
@@ -897,7 +898,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.gv_List.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.gv_List.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gv_List.Size = new System.Drawing.Size(1324, 415);
+            this.gv_List.Size = new System.Drawing.Size(1592, 415);
             this.gv_List.TabIndex = 3;
             this.gv_List.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_List_CellDoubleClick);
             this.gv_List.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_List_ColumnHeaderMouseClick);
@@ -1281,7 +1282,7 @@
             this.bn_List.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bn_List.Name = "bn_List";
             this.bn_List.PositionItem = this.bindingNavigatorPositionItem;
-            this.bn_List.Size = new System.Drawing.Size(1324, 25);
+            this.bn_List.Size = new System.Drawing.Size(1592, 25);
             this.bn_List.TabIndex = 1;
             this.bn_List.Text = "bindingNavigator1";
             // 
@@ -1446,12 +1447,13 @@
             this.kryptonDockableWorkspace1.Root.UniqueName = "3603EBC349EA4AA52F8724469FC85DA3";
             this.kryptonDockableWorkspace1.Root.WorkspaceControl = this.kryptonDockableWorkspace1;
             this.kryptonDockableWorkspace1.ShowMaximizeButton = false;
-            this.kryptonDockableWorkspace1.Size = new System.Drawing.Size(1628, 240);
+            this.kryptonDockableWorkspace1.Size = new System.Drawing.Size(1896, 240);
             this.kryptonDockableWorkspace1.TabIndex = 4;
             this.kryptonDockableWorkspace1.TabStop = true;
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.btn_Planning);
             this.kryptonPanel1.Controls.Add(this.btn_RMConsulting);
             this.kryptonPanel1.Controls.Add(this.btn_CapacityAnalyze);
             this.kryptonPanel1.Controls.Add(this.btn_Invoices);
@@ -1469,8 +1471,28 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(1628, 49);
+            this.kryptonPanel1.Size = new System.Drawing.Size(1896, 49);
             this.kryptonPanel1.TabIndex = 2;
+            // 
+            // btn_Planning
+            // 
+            this.btn_Planning.Location = new System.Drawing.Point(855, 5);
+            this.btn_Planning.Name = "btn_Planning";
+            this.btn_Planning.Size = new System.Drawing.Size(109, 39);
+            this.btn_Planning.TabIndex = 20;
+            this.btn_Planning.Values.Image = global::Odin.Global_Resourses.schedule_1405;
+            this.btn_Planning.Values.Text = "Planning";
+            this.btn_Planning.Click += new System.EventHandler(this.btn_Planning_Click);
+            // 
+            // btn_RMConsulting
+            // 
+            this.btn_RMConsulting.Location = new System.Drawing.Point(1359, 5);
+            this.btn_RMConsulting.Name = "btn_RMConsulting";
+            this.btn_RMConsulting.Size = new System.Drawing.Size(144, 39);
+            this.btn_RMConsulting.TabIndex = 19;
+            this.btn_RMConsulting.Values.Image = global::Odin.Global_Resourses.Blackbox;
+            this.btn_RMConsulting.Values.Text = "RM consulting";
+            this.btn_RMConsulting.Click += new System.EventHandler(this.btn_RMConsulting_Click);
             // 
             // btn_CapacityAnalyze
             // 
@@ -1484,7 +1506,7 @@
             // 
             // btn_Invoices
             // 
-            this.btn_Invoices.Location = new System.Drawing.Point(1424, 7);
+            this.btn_Invoices.Location = new System.Drawing.Point(1677, 7);
             this.btn_Invoices.Name = "btn_Invoices";
             this.btn_Invoices.Size = new System.Drawing.Size(105, 39);
             this.btn_Invoices.TabIndex = 16;
@@ -1495,7 +1517,7 @@
             // 
             // btn_Launches
             // 
-            this.btn_Launches.Location = new System.Drawing.Point(971, 5);
+            this.btn_Launches.Location = new System.Drawing.Point(970, 5);
             this.btn_Launches.Name = "btn_Launches";
             this.btn_Launches.Size = new System.Drawing.Size(100, 39);
             this.btn_Launches.TabIndex = 15;
@@ -1505,7 +1527,7 @@
             // 
             // btn_AwaitingCost
             // 
-            this.btn_AwaitingCost.Location = new System.Drawing.Point(1076, 5);
+            this.btn_AwaitingCost.Location = new System.Drawing.Point(1075, 5);
             this.btn_AwaitingCost.Name = "btn_AwaitingCost";
             this.btn_AwaitingCost.Size = new System.Drawing.Size(128, 39);
             this.btn_AwaitingCost.TabIndex = 11;
@@ -1553,12 +1575,13 @@
             // 
             // btn_Documents
             // 
-            this.btn_Documents.Location = new System.Drawing.Point(856, 5);
+            this.btn_Documents.Location = new System.Drawing.Point(1784, 7);
             this.btn_Documents.Name = "btn_Documents";
             this.btn_Documents.Size = new System.Drawing.Size(109, 39);
             this.btn_Documents.TabIndex = 8;
             this.btn_Documents.Values.Image = global::Odin.Global_Resourses.folder_documents;
             this.btn_Documents.Values.Text = "Documents";
+            this.btn_Documents.Visible = false;
             // 
             // btn_General
             // 
@@ -1600,21 +1623,11 @@
             this.btn_Confirmations.Values.Text = "Confirmations";
             this.btn_Confirmations.Click += new System.EventHandler(this.btn_Confirmations_Click);
             // 
-            // btn_RMConsulting
-            // 
-            this.btn_RMConsulting.Location = new System.Drawing.Point(1359, 5);
-            this.btn_RMConsulting.Name = "btn_RMConsulting";
-            this.btn_RMConsulting.Size = new System.Drawing.Size(144, 39);
-            this.btn_RMConsulting.TabIndex = 19;
-            this.btn_RMConsulting.Values.Image = global::Odin.Global_Resourses.Blackbox;
-            this.btn_RMConsulting.Values.Text = "RM consulting";
-            this.btn_RMConsulting.Click += new System.EventHandler(this.btn_RMConsulting_Click);
-            // 
             // frm_ClientOrders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1628, 734);
+            this.ClientSize = new System.Drawing.Size(1896, 734);
             this.Controls.Add(this.kryptonSplitContainer1);
             this.Controls.Add(this.kryptonPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1790,5 +1803,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_salescomments;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chk_isprimary;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_RMConsulting;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Planning;
     }
 }

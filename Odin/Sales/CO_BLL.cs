@@ -1952,6 +1952,25 @@ namespace Odin.Sales
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
         #endregion
+
+        #region Indicators
+
+        public static DataTable getSalesDeliveryIndicators(string _datefrom, string _datetill)
+        {
+            string query = "sp_SalesDeliveryIndicator";
+
+            var sqlparams = new List<SqlParameter>
+            {
+                new SqlParameter("@datefrom",SqlDbType.NVarChar){Value = _datefrom},
+                new SqlParameter("@datetill",SqlDbType.NVarChar){Value = _datetill}
+
+            };
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
+        }
+
+        #endregion
+
     }
 
 }
