@@ -107,6 +107,8 @@
             this.btn_Capacity = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.btn_Worker = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.btn_SerialTracing = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.kryptonRibbonGroupTriple42 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
+            this.btn_Package1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.kryptonRibbonGroupTriple29 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
             this.btn_FCPacking = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.btn_LaunchPassport1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
@@ -244,6 +246,11 @@
             this.kryptonPalette1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.pn_Main = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.mdiClientController1 = new Panels.MdiClientController();
+            this.kryptonRibbonGroup27 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
+            this.kryptonRibbonGroupTriple43 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
+            this.btn_SalesDeliveryIndicator = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.kryptonRibbonGroupButton2 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.kryptonRibbonGroupButton4 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonRibbon1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -274,7 +281,7 @@
             this.tab_ReadOnly,
             this.tab_Settings});
             this.kryptonRibbon1.SelectedContext = null;
-            this.kryptonRibbon1.SelectedTab = this.tab_Register;
+            this.kryptonRibbon1.SelectedTab = this.tab_Sales;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1660, 115);
             this.kryptonRibbon1.TabIndex = 0;
             // 
@@ -347,7 +354,8 @@
             // 
             this.tab_Sales.Groups.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup[] {
             this.kryptonRibbonGroup2,
-            this.kryptonRibbonGroup7});
+            this.kryptonRibbonGroup7,
+            this.kryptonRibbonGroup27});
             this.tab_Sales.Text = "Sales";
             // 
             // kryptonRibbonGroup2
@@ -752,6 +760,7 @@
             this.kryptonRibbonGroup13.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupContainer[] {
             this.kryptonRibbonGroupTriple10,
             this.kryptonRibbonGroupTriple24,
+            this.kryptonRibbonGroupTriple42,
             this.kryptonRibbonGroupTriple29});
             this.kryptonRibbonGroup13.TextLine1 = "Manufacturing process";
             // 
@@ -815,6 +824,18 @@
             this.btn_SerialTracing.TextLine2 = "tracing";
             this.btn_SerialTracing.Visible = false;
             this.btn_SerialTracing.Click += new System.EventHandler(this.btn_SerialTracing_Click);
+            // 
+            // kryptonRibbonGroupTriple42
+            // 
+            this.kryptonRibbonGroupTriple42.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupItem[] {
+            this.btn_Package1});
+            // 
+            // btn_Package1
+            // 
+            this.btn_Package1.ImageLarge = global::Odin.Global_Resourses.package;
+            this.btn_Package1.ImageSmall = global::Odin.Global_Resourses.package;
+            this.btn_Package1.TextLine1 = "Package";
+            this.btn_Package1.Click += new System.EventHandler(this.btn_Package_Click);
             // 
             // kryptonRibbonGroupTriple29
             // 
@@ -1763,6 +1784,26 @@
             this.mdiClientController1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.mdiClientController1.ParentForm = this;
             // 
+            // kryptonRibbonGroup27
+            // 
+            this.kryptonRibbonGroup27.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupContainer[] {
+            this.kryptonRibbonGroupTriple43});
+            // 
+            // kryptonRibbonGroupTriple43
+            // 
+            this.kryptonRibbonGroupTriple43.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupItem[] {
+            this.btn_SalesDeliveryIndicator,
+            this.kryptonRibbonGroupButton2,
+            this.kryptonRibbonGroupButton4});
+            // 
+            // btn_SalesDeliveryIndicator
+            // 
+            this.btn_SalesDeliveryIndicator.ImageLarge = global::Odin.Global_Resourses.lorry;
+            this.btn_SalesDeliveryIndicator.ImageSmall = global::Odin.Global_Resourses.lorry;
+            this.btn_SalesDeliveryIndicator.TextLine1 = "Delivery";
+            this.btn_SalesDeliveryIndicator.TextLine2 = "indicator";
+            this.btn_SalesDeliveryIndicator.Click += new System.EventHandler(this.btn_SalesDeliveryIndicator_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2005,5 +2046,12 @@
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_IncomeControlResult;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_DeliveryIndicator;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_PurchaseIndic;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple42;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_Package1;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup kryptonRibbonGroup27;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple43;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_SalesDeliveryIndicator;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton2;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton4;
     }
 }

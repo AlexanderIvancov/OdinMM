@@ -1478,5 +1478,13 @@ namespace Odin
             frm_NeedsProcIndicator frm = new frm_NeedsProcIndicator();
             frm.Show();
         }
+
+        private void btn_SalesDeliveryIndicator_Click(object sender, EventArgs e)
+        {
+            if (glob_Class.IsFormAlreadyOpen("frm_DeliveryIndicator")) return;
+
+            frm_DeliveryIndicator frm = new frm_DeliveryIndicator();
+            frm.Show();
+        }
     }
 }

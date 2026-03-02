@@ -12,6 +12,8 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Odin.Planning;
+
 
 namespace Odin.Sales
 {
@@ -1151,6 +1153,24 @@ namespace Odin.Sales
             }
             else
                 globClass.ShowMessage("Choose article in filter for analyze!", "Choose article in filter for analyze!", "Article is not selected!");
+        }
+
+        private void btn_Planning_Click(object sender, EventArgs e)
+        {
+            int _coid = 0;
+
+            try
+            {
+                _coid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
+
+            }
+            catch { }
+
+            frm_ProductionPlanningDets frm = new frm_ProductionPlanningDets();
+            frm.SalesOrderId = _coid;
+            frm.Show();
+
+            frm.FillPlanning();
         }
     }
 
