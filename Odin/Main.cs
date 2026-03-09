@@ -40,6 +40,7 @@ using System.Windows.Threading;
 using System.Xml;
 using WeifenLuo.WinFormsUI.Docking;
 using Odin.Purchase.Indicators;
+using Odin.CRM;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 
@@ -156,6 +157,7 @@ namespace Odin
         frm_TurnoverReports TurnoverReport = null;
         frm_ProductionPlanning ProductionPlanning = null;
         frm_IncomeControlResult IncomeControlResult = null;
+        frm_CRMCompanies CRMCompanies = null;
 
         #endregion
 
@@ -1485,6 +1487,26 @@ namespace Odin
 
             frm_DeliveryIndicator frm = new frm_DeliveryIndicator();
             frm.Show();
+        }
+
+        private void btn_Schedule_Click(object sender, EventArgs e)
+        {
+            if (glob_Class.IsFormAlreadyOpen("frm_CRMSchedule")) return;
+
+            frm_CRMSchedule frm = new frm_CRMSchedule();
+            frm.Show();
+        }
+
+        private void btn_CRMReg_Click(object sender, EventArgs e)
+        {
+            foreach (var f in MdiChildren.Where(f => f.Name == "frm_CRMCompanies"))
+            {
+                f.BringToFront();
+                return;
+            }
+            CRMCompanies = new frm_CRMCompanies();
+            CRMCompanies._Main = this;
+            CRMCompanies.Show(pn_Main);
         }
     }
 }
