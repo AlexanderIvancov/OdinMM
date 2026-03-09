@@ -3532,6 +3532,74 @@ namespace Odin.CMB_Components.BLL
         }
 
         #endregion
+
+        #region Activities
+
+        public static DataTable getActivities(string _beg)
+        {
+            string query = "EXECUTE sp_ActivitiesSelectLike @Beg = '" + _beg + "'";
+
+            return Helper.QueryDT(query);
+        }
+
+        public void DeleteActivity(int Id)
+        {
+
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_DeleteActivity", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+
+            sqlComm.Parameters.AddWithValue("@id", Id);
+
+            try
+            {
+                sqlConn.Open();
+                sqlComm.ExecuteNonQuery();
+                sqlConn.Close();
+            }
+            catch { }
+        }
+
+        public int AddActivity(string Activity, string Comments)
+        {
+            int _res = 0;
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_AddActivity", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+
+            sqlComm.Parameters.AddWithValue("@activity", Activity);
+            sqlComm.Parameters.AddWithValue("@comments", Comments);
+            sqlComm.Parameters.Add("@insertedid", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            _res = Convert.ToInt32(sqlComm.Parameters["@insertedid"].Value);
+            sqlConn.Close();
+            return _res;
+        }
+
+        public void EditActivity(int Id, string Activity, string Comments)
+        {
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_EditActivity", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@id", Id);
+            sqlComm.Parameters.AddWithValue("@activity", Activity);
+            sqlComm.Parameters.AddWithValue("@comments", Comments);
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+
+        }
+
+        #endregion
     }
 
 }

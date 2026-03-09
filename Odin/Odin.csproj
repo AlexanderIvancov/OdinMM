@@ -272,6 +272,24 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CMB_Components\Activities\cmb_Activities.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CMB_Components\Activities\cmb_Activities.designer.cs">
+      <DependentUpon>cmb_Activities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CMB_Components\Activities\frm_Activities.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CMB_Components\Activities\frm_Activities.designer.cs">
+      <DependentUpon>frm_Activities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CMB_Components\Activities\frm_AddActivity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CMB_Components\Activities\frm_AddActivity.designer.cs">
+      <DependentUpon>frm_AddActivity.cs</DependentUpon>
+    </Compile>
     <Compile Include="CMB_Components\Addresses\cmb_Address.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1071,6 +1089,61 @@
     </Compile>
     <Compile Include="CMB_Components\Week\cmb_Week.Designer.cs">
       <DependentUpon>cmb_Week.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CRM\CRM_BLL.cs" />
+    <Compile Include="CRM\ctl_Activities.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CRM\ctl_Activities.designer.cs">
+      <DependentUpon>ctl_Activities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CRM\ctl_CRMGeneral.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CRM\ctl_CRMGeneral.designer.cs">
+      <DependentUpon>ctl_CRMGeneral.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CRM\ctl_Events.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CRM\ctl_Events.designer.cs">
+      <DependentUpon>ctl_Events.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CRM\frm_AddActivity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CRM\frm_AddActivity.designer.cs">
+      <DependentUpon>frm_AddActivity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CRM\frm_AddCRMCompany.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CRM\frm_AddCRMCompany.designer.cs">
+      <DependentUpon>frm_AddCRMCompany.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CRM\frm_AddEvent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CRM\frm_AddEvent.designer.cs">
+      <DependentUpon>frm_AddEvent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CRM\frm_AddEventSchedule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CRM\frm_AddEventSchedule.designer.cs">
+      <DependentUpon>frm_AddEventSchedule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CRM\frm_CRMCompanies.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CRM\frm_CRMCompanies.designer.cs">
+      <DependentUpon>frm_CRMCompanies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CRM\frm_CRMSchedule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CRM\frm_CRMSchedule.designer.cs">
+      <DependentUpon>frm_CRMSchedule.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\CheckLabel.cs">
       <SubType>UserControl</SubType>
@@ -3206,6 +3279,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Productivity.xsd</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CMB_Components\Activities\cmb_Activities.resx">
+      <DependentUpon>cmb_Activities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CMB_Components\Activities\frm_Activities.resx">
+      <DependentUpon>frm_Activities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CMB_Components\Activities\frm_AddActivity.resx">
+      <DependentUpon>frm_AddActivity.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CMB_Components\Addresses\cmb_Address.resx">
       <DependentUpon>cmb_Address.cs</DependentUpon>
     </EmbeddedResource>
@@ -3604,6 +3686,33 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CMB_Components\Week\cmb_Week.resx">
       <DependentUpon>cmb_Week.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRM\ctl_Activities.resx">
+      <DependentUpon>ctl_Activities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRM\ctl_CRMGeneral.resx">
+      <DependentUpon>ctl_CRMGeneral.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRM\ctl_Events.resx">
+      <DependentUpon>ctl_Events.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRM\frm_AddActivity.resx">
+      <DependentUpon>frm_AddActivity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRM\frm_AddCRMCompany.resx">
+      <DependentUpon>frm_AddCRMCompany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRM\frm_AddEvent.resx">
+      <DependentUpon>frm_AddEvent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRM\frm_AddEventSchedule.resx">
+      <DependentUpon>frm_AddEventSchedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRM\frm_CRMCompanies.resx">
+      <DependentUpon>frm_CRMCompanies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRM\frm_CRMSchedule.resx">
+      <DependentUpon>frm_CRMSchedule.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\CheckLabel.resx">
       <DependentUpon>CheckLabel.cs</DependentUpon>

@@ -138,50 +138,50 @@ namespace Odin.Warehouse.StockIn
             TotalWithVat = Total + TotalVAT;
         }
 
-        public void FillCustCodes()
-        {
-            foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
-                DataGridViewComboBoxCell setDGVCMBCell = row.Cells["cn_custcodecmb"] as DataGridViewComboBoxCell;
+        //public void FillCustCodes()
+        //{
+        //    foreach (DataGridViewRow row in this.gv_List.Rows)
+        //    {
+        //        DataGridViewComboBoxCell setDGVCMBCell = row.Cells["cn_custcodecmb"] as DataGridViewComboBoxCell;
 
                
-                setDGVCMBCell.DataSource = DAL_Functions.getCustomCodes();
+        //        setDGVCMBCell.DataSource = DAL_Functions.getCustomCodes();
                 
-                setDGVCMBCell.ValueMember = "cid";
-                setDGVCMBCell.DisplayMember = "code";
-                setDGVCMBCell.ReadOnly = false;
+        //        setDGVCMBCell.ValueMember = "cid";
+        //        setDGVCMBCell.DisplayMember = "code";
+        //        setDGVCMBCell.ReadOnly = false;
                 
-                setDGVCMBCell.Value = Convert.ToInt32(row.Cells["cn_custcodeid"].Value);
+        //        setDGVCMBCell.Value = Convert.ToInt32(row.Cells["cn_custcodeid"].Value);
                 
-            }
-        }
+        //    }
+        //}
 
-        public void FillCountries()
-        {
-            foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
-                DataGridViewComboBoxCell setDGVCMBCell = row.Cells["cn_country"] as DataGridViewComboBoxCell;
+        //public void FillCountries()
+        //{
+        //    foreach (DataGridViewRow row in this.gv_List.Rows)
+        //    {
+        //        DataGridViewComboBoxCell setDGVCMBCell = row.Cells["cn_country"] as DataGridViewComboBoxCell;
 
 
-                setDGVCMBCell.DataSource = DAL_Functions.getCountries();
+        //        setDGVCMBCell.DataSource = DAL_Functions.getCountries();
 
-                setDGVCMBCell.ValueMember = "cid";
-                setDGVCMBCell.DisplayMember = "country";
-                setDGVCMBCell.ReadOnly = false;
+        //        setDGVCMBCell.ValueMember = "cid";
+        //        setDGVCMBCell.DisplayMember = "country";
+        //        setDGVCMBCell.ReadOnly = false;
 
-                setDGVCMBCell.Value = 0;//Convert.ToInt32(row.Cells["cn_custcodeid"].Value);
+        //        setDGVCMBCell.Value = 0;//Convert.ToInt32(row.Cells["cn_custcodeid"].Value);
 
-            }
-        }
+        //    }
+        //}
 
-        public void FillnewCustCodes(string custcode, int custcodeid)
-        {
-            foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
-                if (row.Cells["cn_custcode"].Value.ToString() == custcode)
-                    row.Cells["cn_custcodeid"].Value = custcodeid;
-            }
-        }
+        //public void FillnewCustCodes(string custcode, int custcodeid)
+        //{
+        //    foreach (DataGridViewRow row in this.gv_List.Rows)
+        //    {
+        //        if (row.Cells["cn_custcode"].Value.ToString() == custcode)
+        //            row.Cells["cn_custcodeid"].Value = custcodeid;
+        //    }
+        //}
 
         public void LoadColumns(DataGridView grid)
         {

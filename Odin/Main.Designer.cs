@@ -251,6 +251,11 @@
             this.kryptonPalette1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.pn_Main = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.mdiClientController1 = new Panels.MdiClientController();
+            this.kryptonRibbonGroup28 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
+            this.kryptonRibbonGroupTriple44 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
+            this.btn_CRMReg = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.btn_Schedule = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.kryptonRibbonGroupButton9 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonRibbon1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -280,6 +285,7 @@
             this.tab_DataCollection,
             this.tab_ReadOnly,
             this.tab_Settings});
+            this.kryptonRibbon1.SelectedContext = null;
             this.kryptonRibbon1.SelectedTab = this.tab_Register;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1660, 115);
             this.kryptonRibbon1.TabIndex = 0;
@@ -354,6 +360,7 @@
             this.tab_Sales.Groups.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup[] {
             this.kryptonRibbonGroup2,
             this.kryptonRibbonGroup7,
+            this.kryptonRibbonGroup28,
             this.kryptonRibbonGroup27});
             this.tab_Sales.Text = "Sales";
             // 
@@ -1812,6 +1819,37 @@
             this.mdiClientController1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.mdiClientController1.ParentForm = this;
             // 
+            // kryptonRibbonGroup28
+            // 
+            this.kryptonRibbonGroup28.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupContainer[] {
+            this.kryptonRibbonGroupTriple44});
+            this.kryptonRibbonGroup28.TextLine1 = "CRM";
+            // 
+            // kryptonRibbonGroupTriple44
+            // 
+            this.kryptonRibbonGroupTriple44.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupItem[] {
+            this.btn_CRMReg,
+            this.btn_Schedule,
+            this.kryptonRibbonGroupButton9});
+            // 
+            // btn_CRMReg
+            // 
+            this.btn_CRMReg.ImageLarge = global::Odin.Global_Resourses.crm;
+            this.btn_CRMReg.ImageSmall = global::Odin.Global_Resourses.crm;
+            this.btn_CRMReg.TextLine1 = "Register";
+            this.btn_CRMReg.Click += new System.EventHandler(this.btn_CRMReg_Click);
+            // 
+            // btn_Schedule
+            // 
+            this.btn_Schedule.ImageLarge = global::Odin.Global_Resourses.schedule_1405;
+            this.btn_Schedule.ImageSmall = global::Odin.Global_Resourses.schedule_1405;
+            this.btn_Schedule.TextLine1 = "Schedule";
+            this.btn_Schedule.Click += new System.EventHandler(this.btn_Schedule_Click);
+            // 
+            // kryptonRibbonGroupButton9
+            // 
+            this.kryptonRibbonGroupButton9.Visible = false;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2061,5 +2099,10 @@
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_SalesDeliveryIndicator;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton2;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton4;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup kryptonRibbonGroup28;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple44;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_CRMReg;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_Schedule;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton9;
     }
 }
