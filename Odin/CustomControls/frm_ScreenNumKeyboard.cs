@@ -32,7 +32,7 @@ namespace Odin.CustomControls
 
         public string DecSeparator
         {
-            get { return _decSeparator; }
+            get { return ManyDecimals == true ? "," : _decSeparator; }
         }
 
         public bool ShowingModal
