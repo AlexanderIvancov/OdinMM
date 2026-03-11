@@ -516,6 +516,8 @@ namespace Odin.Warehouse.StockIn
 
             //    StockLineSaved?.Invoke(this);
             //}
+            StockLineSaved?.Invoke(this);
+
         }
 
         private void gv_List_CellContentClick(object sender, DataGridViewCellEventArgs e)

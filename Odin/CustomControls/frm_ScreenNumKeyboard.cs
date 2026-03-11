@@ -7,19 +7,29 @@ using System.Windows.Forms;
 namespace Odin.CustomControls
 {
     public delegate void DisplayKeyboardSymbolEventHandler(string symbol, bool symremove);
-    
+    public delegate void SendClosingEventHandler(object sender);
 
     public partial class frm_ScreenNumKeyboard : Template_CMB
     {
         public event DisplayKeyboardSymbolEventHandler DisplayKeyboardSymbol;
+        public event SendClosingEventHandler SendClosing;
 
         PopupWindowHelper PopupHelper = null;
 
         Font boldFont;
 
         bool _showingModal = false;
+        bool _manydecimals = false;
+
 
         string _decSeparator = System.Threading.Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator[0].ToString();
+
+        public bool ManyDecimals
+        {
+            get { return _manydecimals; }
+            set { _manydecimals = value; }
+        }
+
         public string DecSeparator
         {
             get { return _decSeparator; }
@@ -170,7 +180,8 @@ namespace Odin.CustomControls
                             case ",":
                                 tempString = CellText;
 
-                                if (tempString.Contains(DecSeparator))
+                                //if (tempString.Contains(DecSeparator))
+                                if (tempString.Contains(DecSeparator) && ManyDecimals == false)
                                 {
                                     return;
                                 }

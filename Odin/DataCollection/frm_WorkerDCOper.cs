@@ -243,6 +243,12 @@ namespace Odin.DataCollection
             sqlConn.Close();
 
         }
+         public List<int> ParsedOperations;
+
+        public int CheckOperNO()
+        {
+            return ParsedOperations.Count;        
+        }
 
         private void insertKeyboardSymbol(string symbol, bool symremove)
         {
@@ -256,6 +262,8 @@ namespace Odin.DataCollection
                 //dataGridView1.CurrentRow.Cells["cn_value"].Value += symbol;
                 focusedtextbox.Text += symbol;
             }
+
+            ParsedOperations = globClass.StringToIntList(focusedtextbox.Text);
         }
 
         private static void NumericCheck(object sender, KeyPressEventArgs e)
@@ -266,10 +274,12 @@ namespace Odin.DataCollection
                 e.KeyChar = System.Threading.Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
                 e.Handled = s.Text.Contains(e.KeyChar);
             }
-            else
+            else if (e.KeyChar == '-')
             {
-                e.Handled = e.KeyChar == '-' ? s.Text.Contains(e.KeyChar) : !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar);
+                e.Handled = s.Text.Contains(e.KeyChar);
             }
+            else
+                e.Handled = !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar);
         }
 
         private void ShowScreenNumKeyboard(KryptonTextBox _focusedtextbox)
@@ -277,8 +287,10 @@ namespace Odin.DataCollection
             //MessageBox.Show(focusedtextbox.Name);
             //focusedtextbox.Focus();
             popup = new frm_ScreenNumKeyboard();
+            popup.ManyDecimals = true;
             popup.DisplayKeyboardSymbol += new CustomControls.DisplayKeyboardSymbolEventHandler(insertKeyboardSymbol);
             popup.FormClosing += new FormClosingEventHandler(FocusOn);
+            popup.SendClosing += new SendClosingEventHandler(CheckParams);
             //popup.frm_MainOne = this;
 
             Form f;
@@ -298,6 +310,44 @@ namespace Odin.DataCollection
         {
             txt_Oper.Text = string.Empty;
             txt_Oper.Focus();
+
+            //foreach (int OperNO in ParsedOperations.OrderBy(num => num))
+            //    DCBll.CheckLaunchParamNecessity(LaunchId, OperNO);
+
+            ////MessageBox.Show(OldOperNO.ToString() + " " + OperNO.ToString() + " " + LaunchId.ToString() + " " + WorkerId.ToString());
+            //foreach (int OperNO in ParsedOperations.OrderBy(num => num))
+            //{
+            //    if (OldOperNO != OperNO
+            //      && DCBll.CheckParameters == -1
+            //      && LaunchId != 0
+            //      && WorkerId != 0)
+            //    {
+            //        frm_AdditContent frm = new frm_AdditContent();
+            //        frm.Instructions = DCBll.CheckInstructions;
+
+            //        OldOperNO = OperNO;
+
+            //        DialogResult result = frm.ShowDialog();
+
+            //        frm.CheckEmpty();
+
+
+            //        if (result == DialogResult.OK)
+            //        {
+            //            DCBll.AddDataCollectionCheckParams(WorkerId, LaunchId, OperNO, frm.Parameters);
+
+            //            txt_Oper.Text = string.Empty;
+            //            txt_Oper.Focus();
+            //        }
+            //    }
+            //}
+        }
+
+        public void CheckParams(object sender)
+        {
+            //OldOperNO = OperNO;
+
+            
         }
 
         public void FocusOnGvUpdate(object sender, FormClosingEventArgs e)
@@ -306,6 +356,8 @@ namespace Odin.DataCollection
             txt_Oper.Text = string.Empty;
             txt_Oper.Focus();
         }
+
+
         #endregion
 
         #region Controls
@@ -381,12 +433,14 @@ namespace Odin.DataCollection
                 }
                 sqlConn.Close();
                 txt_OperNO.Text = "";
+                ParsedOperations?.Clear();
                 IsLast = 0;
                 LaunchId = 0;
                 Launch = "";
 
                 FillList(WorkerId, LaunchId);
                 txt_OperNO.Text = "";
+                ParsedOperations?.Clear();
                 //FillMaterials(WorkerId);
                 txt_Oper.Text = "";
                 txt_Oper.Focus();
@@ -458,6 +512,7 @@ namespace Odin.DataCollection
                 txt_Oper.Text = "";
                 txt_Oper.Focus();
                 txt_OperNO.Text = "";
+                ParsedOperations?.Clear();
                 //OperNO = 0;
                 IsLast = 0;
             }
@@ -493,6 +548,7 @@ namespace Odin.DataCollection
                     DialogResult result1 = frm1.ShowDialog();
                 }
                 txt_Oper.Text = "";
+                //ParsedOperations?.Clear();
                 txt_Oper.Focus();
             }
         }
@@ -536,6 +592,7 @@ namespace Odin.DataCollection
                 }
                 FillList(WorkerId, LaunchId);
                 txt_Oper.Text = "";
+                //ParsedOperations?.Clear();
                 txt_Oper.Focus();
             }
         }
@@ -635,7 +692,9 @@ namespace Odin.DataCollection
             {
                 if (WorkerId == 0
                     || LaunchId == 0
-                    || OperNO == 0)
+                     //|| OperNO == 0
+                     || CheckOperNO() == 0
+                    )
                 {
                     System.Media.SystemSounds.Exclamation.Play();
                     frm_Error frm1 = new frm_Error();
@@ -662,35 +721,37 @@ namespace Odin.DataCollection
                     {
                         string _res = "";
 
-                        _res = DCBll.AddDataCollectionSerialOper(WorkerId, _serial, LaunchId, PrevStageId, OperNO, OperNO == 0 ? -1 : IsLast, cmb_CommonPDA1.SelectedValue);
-                        //MessageBox.Show(DCBll.SuccessId.ToString());
-                        if (DCBll.SuccessId == -1)
-                            FillList(WorkerId, LaunchId);
-                        else if (DCBll.SuccessId == 1)
-                            FillMaterialsByLaunch(LaunchId);
-                        else if (DCBll.SuccessId == -2)
+                        foreach (int OperNO in ParsedOperations.OrderBy(num => num))
                         {
-                            TmpSerial = _serial;
-                            ShowFrmAnalog();
+                            _res = DCBll.AddDataCollectionSerialOper(WorkerId, _serial, LaunchId, PrevStageId, OperNO, OperNO == 0 ? -1 : IsLast, cmb_CommonPDA1.SelectedValue);
+                            //MessageBox.Show(DCBll.SuccessId.ToString());
+                            if (DCBll.SuccessId == -1)
+                                FillList(WorkerId, LaunchId);
+                            else if (DCBll.SuccessId == 1)
+                                FillMaterialsByLaunch(LaunchId);
+                            else if (DCBll.SuccessId == -2)
+                            {
+                                TmpSerial = _serial;
+                                ShowFrmAnalog();
+                            }
+                            else
+                            {
+                                System.Media.SystemSounds.Exclamation.Play();
+                                frm_Error frm1 = new frm_Error();
+                                frm1.HeaderText = "Something wrong! " + _res;
+                                DialogResult result = frm1.ShowDialog();
+                            }
                         }
-                        else
-                        {
-                            System.Media.SystemSounds.Exclamation.Play();
-                            frm_Error frm1 = new frm_Error();
-                            frm1.HeaderText = "Something wrong! " + _res;
-                            DialogResult result = frm1.ShowDialog();
-                        }
-
                         if (IsFreezed != 0)
                         {
                             CMB_Components.AddSerialFreezed.frm_AddSerialFreezed frm = new CMB_Components.AddSerialFreezed.frm_AddSerialFreezed();
                             frm.Serial = _serial;
                             frm.LaunchId = _launchid;
                             DialogResult result = frm.ShowDialog();
-
                             if (result == DialogResult.OK)
                                 ProdBll.AddSerialFreezed(frm.StageId, frm.BatchId, frm.LaunchId, frm.Serial, frm.Position, frm.FreezedReasonId);
                         }
+                        
                         txt_Oper.Text = "";
                         txt_Oper.Focus();
                     }
@@ -702,7 +763,9 @@ namespace Odin.DataCollection
         {
             if (WorkerId == 0
                      || LaunchId == 0
-                     || OperNO == 0)
+                       //|| OperNO == 0
+                       || CheckOperNO() == 0
+               )
             {
                 System.Media.SystemSounds.Exclamation.Play();
                 frm_Error frm1 = new frm_Error();
@@ -717,17 +780,21 @@ namespace Odin.DataCollection
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    string _res = DCBll.AddDataCollectionQtyOper(WorkerId, LaunchId, frm.Qty, OperNO, OperNO == 0 ? -1 : IsLast, cmb_CommonPDA1.SelectedValue);
-                    if (DCBll.SuccessId == -1)
-                        FillList(WorkerId, LaunchId);
-                    else
+                    foreach (int OperNO in ParsedOperations.OrderBy(num => num))
                     {
-                        System.Media.SystemSounds.Exclamation.Play();
-                        frm_Error frm1 = new frm_Error();
-                        frm1.HeaderText = "Something wrong! " + _res;
-                        DialogResult result1 = frm1.ShowDialog();
+
+                        string _res = DCBll.AddDataCollectionQtyOper(WorkerId, LaunchId, frm.Qty, OperNO, OperNO == 0 ? -1 : IsLast, cmb_CommonPDA1.SelectedValue);
+                        if (DCBll.SuccessId == -1)
+                            FillList(WorkerId, LaunchId);
+                        else
+                        {
+                            System.Media.SystemSounds.Exclamation.Play();
+                            frm_Error frm1 = new frm_Error();
+                            frm1.HeaderText = "Something wrong! " + _res;
+                            DialogResult result1 = frm1.ShowDialog();
+                        }
+                        //MessageBox.Show(frm.Qty.ToString());
                     }
-                    //MessageBox.Show(frm.Qty.ToString());
                 }
             }
             txt_Oper.Text = "";
@@ -765,20 +832,22 @@ namespace Odin.DataCollection
 
             if (check)
             {
-                string _res = DCBll.AddDataCollectionSerialOper(WorkerId, _serial, LaunchId, PrevStageId, OperNO, OperNO == 0 ? -1 : IsLast, cmb_CommonPDA1.SelectedValue);
-
-                if (DCBll.SuccessId == -1)
-                    FillList(WorkerId, LaunchId);
-                else if (DCBll.SuccessId == 1)
-                    FillMaterialsByLaunch(LaunchId);
-                else
+                foreach (int OperNO in ParsedOperations.OrderBy(num => num))
                 {
-                    System.Media.SystemSounds.Exclamation.Play();
-                    frm_Error frm1 = new frm_Error();
-                    frm1.HeaderText = "Something wrong! " + _res;
-                    DialogResult result = frm1.ShowDialog();
-                }
+                    string _res = DCBll.AddDataCollectionSerialOper(WorkerId, _serial, LaunchId, PrevStageId, OperNO, OperNO == 0 ? -1 : IsLast, cmb_CommonPDA1.SelectedValue);
 
+                    if (DCBll.SuccessId == -1)
+                        FillList(WorkerId, LaunchId);
+                    else if (DCBll.SuccessId == 1)
+                        FillMaterialsByLaunch(LaunchId);
+                    else
+                    {
+                        System.Media.SystemSounds.Exclamation.Play();
+                        frm_Error frm1 = new frm_Error();
+                        frm1.HeaderText = "Something wrong! " + _res;
+                        DialogResult result = frm1.ShowDialog();
+                    }
+                }
                 if (IsFreezed != 0)
                 {
                     CMB_Components.AddSerialFreezed.frm_AddSerialFreezed frm = new CMB_Components.AddSerialFreezed.frm_AddSerialFreezed();
@@ -796,7 +865,9 @@ namespace Odin.DataCollection
         private void btn_Assembling_Click(object sender, EventArgs e)
         {
             if (WorkerId == 0
-                || LaunchId == 0)
+                || LaunchId == 0
+                || CheckOperNO() == 0
+                )
             {
                 System.Media.SystemSounds.Exclamation.Play();
                 frm_Error frm1 = new frm_Error();

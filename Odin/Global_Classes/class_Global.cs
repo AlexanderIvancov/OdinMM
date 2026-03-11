@@ -1,8 +1,13 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using System;
-using System.Data;
-using System.Data.SqlClient;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+using System.Data;
+using System.Text.RegularExpressions;
+using ComponentFactory.Krypton.Toolkit;
+
 
 namespace Odin.Global_Classes
 {
@@ -97,7 +102,25 @@ namespace Odin.Global_Classes
             result = MessageBox.Show(message, caption, buttons, icon);
             return result == DialogResult.Yes;
         }
-        
+
+        public List<int> StringToIntList(string input)
+        {
+            int number;
+            List<int> numbers = new List<int>();
+            MatchCollection matches = Regex.Matches(input, @"\d+");
+
+            foreach (Match match in matches)
+            {
+                if (int.TryParse(match.Value, out number))
+                {
+                    numbers.Add(number);
+                }
+            }
+
+            return numbers;
+        }
+
+
         /// <summary>
         /// Displays delete confirm message box
         /// </summary>

@@ -905,5 +905,14 @@ namespace Odin.Warehouse.StockIn
         {
             txt_ManufBatch.Text = string.Empty;
         }
+
+        private void btn_Wizard_Click(object sender, EventArgs e)
+        {
+            if (glob_Class.IsFormAlreadyOpen("frm_AddStockPlacementWiz")) return;
+            frm_AddStockPlacementWiz frm = new frm_AddStockPlacementWiz();
+            frm.StockLineSaved += new StockSavedEventHandler(delegate { bwStart(bw_List); });
+
+            frm.Show();
+        }
     }
 }

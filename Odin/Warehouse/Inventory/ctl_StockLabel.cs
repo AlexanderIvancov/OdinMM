@@ -32,7 +32,7 @@ namespace Odin.Warehouse.Inventory
         Reg_BLL RegBll = new Reg_BLL();
         PrinterLabels PrintLabels = new PrinterLabels();
         StockMove_BLL MovBLL = new StockMove_BLL();
-
+        Helper MyHelper = new Helper();
 
         #region Variables
 
@@ -48,6 +48,10 @@ namespace Odin.Warehouse.Inventory
             }
             set { txt_Label.Text = value.ToString(); }
         }
+        public string IncomeDoc
+        { get; set; }
+        public string SupArticle
+        { get; set; }
 
         public int ParentLabel
         {
@@ -255,6 +259,8 @@ namespace Odin.Warehouse.Inventory
                     DataCode = dr["datacode"].ToString();
                     NoExpDate = Convert.ToInt32(dr["nodate"]);
                     ManufBatch = dr["manufbatch"].ToString();
+                    IncomeDoc = dr["incomedoc"].ToString();
+                    SupArticle = dr["suparticle"].ToString();
                 }
             }
             else
@@ -277,6 +283,8 @@ namespace Odin.Warehouse.Inventory
             DataCode = "";
             NoExpDate = 0;
             ManufBatch = "";
+            IncomeDoc = "";
+            SupArticle = "";
         }
         #endregion
 
@@ -319,7 +327,32 @@ namespace Odin.Warehouse.Inventory
 
                 if (result == DialogResult.OK)
                 {
+                    string emailaddresses = "";
+
+                    int _iscommis = Convert.ToInt32(Helper.GetOneRecord("select top 1 value from bas_defaults where field = 'commissioning'"));
+
                     RegBll.AddProperty(0, Label, frm.CategoryId, frm.Value, frm.Comments);
+
+                    if (frm.CategoryId == _iscommis)
+                    {
+                        emailaddresses = Fun.EmailAddressesByType(15);
+
+                        string strMessage = "Income doc.: " + IncomeDoc;
+                        strMessage = strMessage + "\r\nLabel: " + Label;
+                        strMessage = strMessage + "\r\nArticle: " + cmb_Articles1.Article;
+                        strMessage = strMessage + "\r\nSupl. article: " + SupArticle;
+                        strMessage = strMessage + "\r\nFixed asset commissioning: " + frm.Value;
+                        
+                        /*
+                            Income doc.:
+                            Label:
+                            Article:
+                            Supl. article:
+                            Fixed Asset Commissioning [Дата (Value)]
+                         */
+                        MyHelper.SendMessage(emailaddresses, "Commissioning for: " + Label.ToString(), strMessage);
+
+                    }
 
                     FillSpecs(Label);
                 }
@@ -349,7 +382,32 @@ namespace Odin.Warehouse.Inventory
 
                 if (result == DialogResult.OK)
                 {
+                    string emailaddresses = "";
+
+                    int _iscommis = Convert.ToInt32(Helper.GetOneRecord("select top 1 value from bas_defaults where field = 'commissioning'"));
+
                     RegBll.EditProperty(_id, 0, Label, frm.CategoryId, frm.Value, frm.Comments);
+
+                    if (frm.CategoryId == _iscommis)
+                    {
+                        emailaddresses = Fun.EmailAddressesByType(15);
+
+                        string strMessage = "Income doc.: " + IncomeDoc;
+                        strMessage = strMessage + "\r\nLabel: " + Label;
+                        strMessage = strMessage + "\r\nArticle: " + cmb_Articles1.Article;
+                        strMessage = strMessage + "\r\nSupl. article: " + SupArticle;
+                        strMessage = strMessage + "\r\nFixed asset commissioning: " + frm.Value;
+
+                        /*
+                            Income doc.:
+                            Label:
+                            Article:
+                            Supl. article:
+                            Fixed Asset Commissioning [Дата (Value)]
+                         */
+                        MyHelper.SendMessage(emailaddresses, "Commissioning for: " + Label.ToString(), strMessage);
+
+                    }
 
                     FillSpecs(Label);
                 }
