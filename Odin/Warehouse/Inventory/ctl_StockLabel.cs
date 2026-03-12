@@ -328,6 +328,14 @@ namespace Odin.Warehouse.Inventory
                 if (result == DialogResult.OK)
                 {
                     string emailaddresses = "";
+                    string invnumbner = Helper.GetOneRecord("select p.value " +
+                                                               " from BAS_Properties p " +
+                                                               " inner join BAS_Defaults def on def.value = p.categoryid " +
+                                                               " where p.label = " + Label + " and def.field = 'invnumber'").ToString();
+                    string fac = Helper.GetOneRecord("select p.value " +
+                                                                " from BAS_Properties p " +
+                                                                " inner join BAS_Defaults def on def.value = p.categoryid " +
+                                                                " where p.label = " + Label + " and def.field = 'fac'").ToString();
 
                     int _iscommis = Convert.ToInt32(Helper.GetOneRecord("select top 1 value from bas_defaults where field = 'commissioning'"));
 
@@ -339,10 +347,12 @@ namespace Odin.Warehouse.Inventory
 
                         string strMessage = "Income doc.: " + IncomeDoc;
                         strMessage = strMessage + "\r\nLabel: " + Label;
+                        strMessage = strMessage + "\r\nInventory No.: " + invnumbner;
                         strMessage = strMessage + "\r\nArticle: " + cmb_Articles1.Article;
                         strMessage = strMessage + "\r\nSupl. article: " + SupArticle;
+                        strMessage = strMessage + "\r\nFixed asset code: " + fac;
                         strMessage = strMessage + "\r\nFixed asset commissioning: " + frm.Value;
-                        
+
                         /*
                             Income doc.:
                             Label:
@@ -383,6 +393,14 @@ namespace Odin.Warehouse.Inventory
                 if (result == DialogResult.OK)
                 {
                     string emailaddresses = "";
+                    string invnumbner = Helper.GetOneRecord("select p.value " +
+                                                                " from BAS_Properties p " +
+                                                                " inner join BAS_Defaults def on def.value = p.categoryid " +
+                                                                " where p.label = " + Label + " and def.field = 'invnumber'").ToString();
+                    string fac = Helper.GetOneRecord("select p.value " +
+                                                                " from BAS_Properties p " +
+                                                                " inner join BAS_Defaults def on def.value = p.categoryid " +
+                                                                " where p.label = " + Label + " and def.field = 'fac'").ToString();
 
                     int _iscommis = Convert.ToInt32(Helper.GetOneRecord("select top 1 value from bas_defaults where field = 'commissioning'"));
 
@@ -394,8 +412,10 @@ namespace Odin.Warehouse.Inventory
 
                         string strMessage = "Income doc.: " + IncomeDoc;
                         strMessage = strMessage + "\r\nLabel: " + Label;
+                        strMessage = strMessage + "\r\nInventory No.: " + invnumbner;
                         strMessage = strMessage + "\r\nArticle: " + cmb_Articles1.Article;
                         strMessage = strMessage + "\r\nSupl. article: " + SupArticle;
+                        strMessage = strMessage + "\r\nFixed asset code: " + fac;
                         strMessage = strMessage + "\r\nFixed asset commissioning: " + frm.Value;
 
                         /*
