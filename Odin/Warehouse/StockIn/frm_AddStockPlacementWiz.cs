@@ -110,34 +110,34 @@ namespace Odin.Warehouse.StockIn
             //Check currency
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
-                if (Convert.ToInt32(row.Cells["cn_curid"].Value) != CurId)
-                    row.Cells["cn_currency"].Style.BackColor = Color.Tomato;
-                if (Convert.ToInt32(row.Cells["cn_unitid"].Value) == 0)
-                    row.Cells["cn_unit"].Style.BackColor = Color.Tomato;
-                row.Cells["cn_custcode"].Style.BackColor = Convert.ToInt32(row.Cells["cn_custcodeid"].Value) == 0 ? Color.Yellow : Color.White;
+                //if (Convert.ToInt32(row.Cells["cn_curid"].Value) != CurId)
+                //    row.Cells["cn_currency"].Style.BackColor = Color.Tomato;
+                //if (Convert.ToInt32(row.Cells["cn_unitid"].Value) == 0)
+                //    row.Cells["cn_unit"].Style.BackColor = Color.Tomato;
+                //row.Cells["cn_custcode"].Style.BackColor = Convert.ToInt32(row.Cells["cn_custcodeid"].Value) == 0 ? Color.Yellow : Color.White;
             }
         }
 
         public void RecalcTotals()
         {
-            gv_List.EndEdit();
+            //gv_List.EndEdit();
 
-            double _total = 0;
-            double _vat = 0;
+            //double _total = 0;
+            //double _vat = 0;
            
-            foreach (DataGridViewRow row in this.gv_List.Rows)
-            {
-                if (Convert.ToInt32(row.Cells["chk_add"].Value) != 0)
-                {
-                    _total = _total + Math.Round(Convert.ToDouble(row.Cells["cn_unitprice"].Value) * Convert.ToDouble(row.Cells["cn_qty"].Value), 2);
-                    if (_vat == 0)
-                        _vat = Convert.ToDouble(row.Cells["cn_vat"].Value);
-                }
-            }
+            //foreach (DataGridViewRow row in this.gv_List.Rows)
+            //{
+            //    if (Convert.ToInt32(row.Cells["chk_add"].Value) != 0)
+            //    {
+            //        _total = _total + Math.Round(Convert.ToDouble(row.Cells["cn_unitprice"].Value) * Convert.ToDouble(row.Cells["cn_qty"].Value), 2);
+            //        if (_vat == 0)
+            //            _vat = Convert.ToDouble(row.Cells["cn_vat"].Value);
+            //    }
+            //}
 
-            Total = Math.Round(_total, 2);
-            TotalVAT = Math.Round((_total / 100 * _vat), 2);
-            TotalWithVat = Total + TotalVAT;
+            //Total = Math.Round(_total, 2);
+            //TotalVAT = Math.Round((_total / 100 * _vat), 2);
+            //TotalWithVat = Total + TotalVAT;
         }
 
         //public void FillCustCodes()
@@ -427,51 +427,106 @@ namespace Odin.Warehouse.StockIn
             int _res = 0;
 
             gv_List.EndEdit();
-            if (chk_PrintLabels.CheckState == CheckState.Checked)
+            bool _test = true;
+
+            if (CheckPlace() == false)
             {
-                frm_Print frm = new frm_Print();
-                frm.cmb_LabPrinter1.ShowDefaults();
-                DialogResult result = frm.ShowDialog();
+                DialogResult result = KryptonTaskDialog.Show("Placement warning!",
+                                                                "Are you want to save changes?",
+                                                                "You selected to make placement but place is not selected!",
+                                                                MessageBoxIcon.Warning,
+                                                                TaskDialogButtons.Yes |
+                                                                TaskDialogButtons.No);
+                _test = result == DialogResult.Yes;
 
-                if (result == DialogResult.OK)
+            }
+
+            if (_test == true)
+            {
+                if (chk_PrintLabels.CheckState == CheckState.Checked)
                 {
-                    PrintLabels.PrinterIp = frm.IP_Address;
-                    PrintLabels.PrinterDPI = frm.Printer_DPI;
+                    frm_Print frm = new frm_Print();
+                    frm.cmb_LabPrinter1.ShowDefaults();
+                    DialogResult result = frm.ShowDialog();
 
-                    foreach (DataGridViewRow row in this.gv_List.Rows)
+                    if (result == DialogResult.OK)
                     {
-                        try
-                        {
-                            _res = SIBll.AddStockDeallocation(Convert.ToInt32(row.Cells["cn_inid"].Value),
-                                                        Convert.ToInt32(row.Cells["cn_ilabel"].Value),
-                                                        Convert.ToInt32(row.Cells["cn_iartid"].Value),
-                                                        Convert.ToInt32(row.Cells["cn_iplaceid"].Value),
-                                                        Convert.ToDouble(row.Cells["cn_iqty"].Value),
-                                                        row.Cells["cn_expdate"].Value.ToString(),
-                                                        0,
-                                                        -1,
-                                                        row.Cells["cn_comments"].Value.ToString(),
-                                                        row.Cells["cn_idatacode"].Value.ToString(),
-                                                        row.Cells["cn_manufbatch"].Value.ToString());
-                            //if (_res != 0
-                            //    && NoExpDate == -1)
-                            //    SIBll.SetNoExpDate(_res);
+                        PrintLabels.PrinterIp = frm.IP_Address;
+                        PrintLabels.PrinterDPI = frm.Printer_DPI;
 
-                            var sqlparamsfields = new List<SqlParameter>()
+                        foreach (DataGridViewRow row in this.gv_List.Rows)
+                        {
+                            if (Convert.ToInt32(row.Cells["chk_add"].Value) != 0)
+                            {
+                                try
+                                {
+                                    _res = SIBll.AddStockDeallocation(Convert.ToInt32(row.Cells["cn_id"].Value),
+                                                                0,
+                                                                Convert.ToInt32(row.Cells["cn_artid"].Value),
+                                                                cmb_Places1.PlaceId,
+                                                                Convert.ToDouble(row.Cells["cn_qty"].Value),
+                                                                row.Cells["cn_expdate"].Value.ToString(),
+                                                                0,
+                                                                -1,
+                                                                row.Cells["cn_comments"].Value.ToString(),
+                                                                row.Cells["cn_datacode"].Value.ToString(),
+                                                                row.Cells["cn_manufbatch"].Value.ToString());
+                                    //if (_res != 0
+                                    //    && NoExpDate == -1)
+                                    //    SIBll.SetNoExpDate(_res);
+
+                                    var sqlparamsfields = new List<SqlParameter>()
                             {
                                 new SqlParameter("@id",SqlDbType.Int) {Value = _res},
                                 new SqlParameter("@qty",SqlDbType.Float) {Value =  Convert.ToDouble(row.Cells["cn_iqty"].Value)},
                                 new SqlParameter("@labelqty",SqlDbType.Int) {Value = frm.LabelQty}
                             };
 
-                            if (DAL.CheckMSL(Convert.ToInt32(row.Cells["cn_iartid"].Value)) != "0")
-                            {
-                                PrintLabels.PrintLabel(PrintLabels.LabelConstructor(1, "sp_SelectStockLabelDetsPrint", sqlparamsfields.ToArray()), /*frm.LabelQty*/1);
-                                //Thread.Sleep(1000);
+                                    if (DAL.CheckMSL(Convert.ToInt32(row.Cells["cn_iartid"].Value)) != "0")
+                                    {
+                                        PrintLabels.PrintLabel(PrintLabels.LabelConstructor(1, "sp_SelectStockLabelDetsPrint", sqlparamsfields.ToArray()), /*frm.LabelQty*/1);
+                                        //Thread.Sleep(1000);
+                                    }
+                                }
+
+                                catch { }
                             }
                         }
+                        DataGridViewColumn oldColumn = gv_List.SortedColumn;
+                        var dir = Helper.SaveDirection(gv_List);
 
-                        catch { }
+                        FillList();
+
+                        Helper.RestoreDirection(gv_List, oldColumn, dir);
+
+                        SetCellsColor();
+                    }
+
+                }
+                else
+                {
+                    foreach (DataGridViewRow row in this.gv_List.Rows)
+                    {
+                        if (Convert.ToInt32(row.Cells["chk_add"].Value) != 0)
+                        {
+                            try
+                            {
+                                _res = SIBll.AddStockDeallocation(Convert.ToInt32(row.Cells["cn_id"].Value),
+                                                                0,
+                                                                Convert.ToInt32(row.Cells["cn_artid"].Value),
+                                                                cmb_Places1.PlaceId,
+                                                                Convert.ToDouble(row.Cells["cn_qty"].Value),
+                                                                row.Cells["cn_expdate"].Value.ToString(),
+                                                                0,
+                                                                -1,
+                                                                row.Cells["cn_comments"].Value.ToString(),
+                                                                row.Cells["cn_datacode"].Value.ToString(),
+                                                                row.Cells["cn_manufbatch"].Value.ToString());
+
+                            }
+
+                            catch { }
+                        }
                     }
                     DataGridViewColumn oldColumn = gv_List.SortedColumn;
                     var dir = Helper.SaveDirection(gv_List);
@@ -482,9 +537,7 @@ namespace Odin.Warehouse.StockIn
 
                     SetCellsColor();
                 }
-
             }
-
             //bool _test = true;
             //bool _testresale = false;
             //int _NewInwardId = 0;

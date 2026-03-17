@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_AddStockPlacementWiz));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonHeaderGroup1 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.mnu_Lines = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -54,6 +55,7 @@
             this.btn_Clear = new System.Windows.Forms.ToolStripButton();
             this.btn_Excel = new System.Windows.Forms.ToolStripButton();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.chk_PrintLabels = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.cmb_Places1 = new Odin.CMB_Components.Places.cmb_Places();
             this.kryptonLabel25 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -97,7 +99,9 @@
             this.cn_incomecontrol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_msl = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_resale = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chk_PrintLabels = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
+            this.cn_expdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_datacode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_manufbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).BeginInit();
             this.kryptonHeaderGroup1.Panel.SuspendLayout();
@@ -151,7 +155,10 @@
             this.cn_unitid,
             this.cn_incomecontrol,
             this.cn_msl,
-            this.cn_resale});
+            this.cn_resale,
+            this.cn_expdate,
+            this.cn_datacode,
+            this.cn_manufbatch});
             this.gv_List.ContextMenuStrip = this.mnu_Lines;
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_List.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
@@ -379,6 +386,14 @@
             this.kryptonPanel2.Size = new System.Drawing.Size(1301, 50);
             this.kryptonPanel2.TabIndex = 1;
             // 
+            // chk_PrintLabels
+            // 
+            this.chk_PrintLabels.Location = new System.Drawing.Point(1050, 17);
+            this.chk_PrintLabels.Name = "chk_PrintLabels";
+            this.chk_PrintLabels.Size = new System.Drawing.Size(84, 20);
+            this.chk_PrintLabels.TabIndex = 272;
+            this.chk_PrintLabels.Values.Text = "Print labels";
+            // 
             // kryptonLabel2
             // 
             this.kryptonLabel2.Location = new System.Drawing.Point(653, 17);
@@ -407,6 +422,7 @@
             this.kryptonLabel25.Size = new System.Drawing.Size(71, 20);
             this.kryptonLabel25.TabIndex = 269;
             this.kryptonLabel25.Values.Text = "Total+VAT:";
+            this.kryptonLabel25.Visible = false;
             // 
             // txt_TotalVAT
             // 
@@ -418,6 +434,7 @@
             this.txt_TotalVAT.StateActive.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txt_TotalVAT.TabIndex = 265;
             this.txt_TotalVAT.Text = "0";
+            this.txt_TotalVAT.Visible = false;
             // 
             // kryptonLabel24
             // 
@@ -426,6 +443,7 @@
             this.kryptonLabel24.Size = new System.Drawing.Size(62, 20);
             this.kryptonLabel24.TabIndex = 268;
             this.kryptonLabel24.Values.Text = "Total Vat:";
+            this.kryptonLabel24.Visible = false;
             // 
             // txt_TotalWVAT
             // 
@@ -437,6 +455,7 @@
             this.txt_TotalWVAT.StateActive.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txt_TotalWVAT.TabIndex = 266;
             this.txt_TotalWVAT.Text = "0";
+            this.txt_TotalWVAT.Visible = false;
             // 
             // kryptonLabel23
             // 
@@ -445,6 +464,7 @@
             this.kryptonLabel23.Size = new System.Drawing.Size(40, 20);
             this.kryptonLabel23.TabIndex = 267;
             this.kryptonLabel23.Values.Text = "Total:";
+            this.kryptonLabel23.Visible = false;
             // 
             // txt_Total
             // 
@@ -456,6 +476,7 @@
             this.txt_Total.StateActive.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txt_Total.TabIndex = 264;
             this.txt_Total.Text = "0";
+            this.txt_Total.Visible = false;
             // 
             // btn_OK
             // 
@@ -648,6 +669,7 @@
             this.cn_incomedoc.FillWeight = 120F;
             this.cn_incomedoc.HeaderText = "Income doc.";
             this.cn_incomedoc.Name = "cn_incomedoc";
+            this.cn_incomedoc.ReadOnly = true;
             this.cn_incomedoc.Width = 120;
             // 
             // cn_supplier
@@ -656,6 +678,7 @@
             this.cn_supplier.FillWeight = 150F;
             this.cn_supplier.HeaderText = "Supplier";
             this.cn_supplier.Name = "cn_supplier";
+            this.cn_supplier.ReadOnly = true;
             this.cn_supplier.Width = 150;
             // 
             // cn_artid
@@ -682,6 +705,7 @@
             this.cn_suparticle.FillWeight = 250F;
             this.cn_suparticle.HeaderText = "Supplier\'s article";
             this.cn_suparticle.Name = "cn_suparticle";
+            this.cn_suparticle.ReadOnly = true;
             this.cn_suparticle.Width = 250;
             // 
             // cn_qty
@@ -690,6 +714,7 @@
             this.cn_qty.FillWeight = 80F;
             this.cn_qty.HeaderText = "Qty";
             this.cn_qty.Name = "cn_qty";
+            this.cn_qty.ReadOnly = true;
             this.cn_qty.Width = 80;
             // 
             // cn_iunit
@@ -714,6 +739,7 @@
             this.cn_unitprice.DataPropertyName = "unitprice";
             this.cn_unitprice.HeaderText = "Unit price";
             this.cn_unitprice.Name = "cn_unitprice";
+            this.cn_unitprice.ReadOnly = true;
             // 
             // cn_comments
             // 
@@ -728,6 +754,7 @@
             this.cn_unitid.DataPropertyName = "unitid";
             this.cn_unitid.HeaderText = "unitid";
             this.cn_unitid.Name = "cn_unitid";
+            this.cn_unitid.ReadOnly = true;
             this.cn_unitid.Visible = false;
             // 
             // cn_incomecontrol
@@ -735,6 +762,7 @@
             this.cn_incomecontrol.DataPropertyName = "incomecontrol";
             this.cn_incomecontrol.HeaderText = "incomecontrol";
             this.cn_incomecontrol.Name = "cn_incomecontrol";
+            this.cn_incomecontrol.ReadOnly = true;
             this.cn_incomecontrol.Visible = false;
             // 
             // cn_msl
@@ -743,6 +771,8 @@
             this.cn_msl.FillWeight = 40F;
             this.cn_msl.HeaderText = "MSL";
             this.cn_msl.Name = "cn_msl";
+            this.cn_msl.ReadOnly = true;
+            this.cn_msl.Visible = false;
             this.cn_msl.Width = 40;
             // 
             // cn_resale
@@ -750,15 +780,29 @@
             this.cn_resale.DataPropertyName = "resale";
             this.cn_resale.HeaderText = "Resale";
             this.cn_resale.Name = "cn_resale";
+            this.cn_resale.ReadOnly = true;
             this.cn_resale.Visible = false;
             // 
-            // chk_PrintLabels
+            // cn_expdate
             // 
-            this.chk_PrintLabels.Location = new System.Drawing.Point(1050, 17);
-            this.chk_PrintLabels.Name = "chk_PrintLabels";
-            this.chk_PrintLabels.Size = new System.Drawing.Size(84, 20);
-            this.chk_PrintLabels.TabIndex = 272;
-            this.chk_PrintLabels.Values.Text = "Print labels";
+            this.cn_expdate.DataPropertyName = "expdate";
+            dataGridViewCellStyle1.Format = "d";
+            dataGridViewCellStyle1.NullValue = null;
+            this.cn_expdate.DefaultCellStyle = dataGridViewCellStyle1;
+            this.cn_expdate.HeaderText = "Exp.date";
+            this.cn_expdate.Name = "cn_expdate";
+            // 
+            // cn_datacode
+            // 
+            this.cn_datacode.DataPropertyName = "datacode";
+            this.cn_datacode.HeaderText = "Datacode";
+            this.cn_datacode.Name = "cn_datacode";
+            // 
+            // cn_manufbatch
+            // 
+            this.cn_manufbatch.DataPropertyName = "manufbatch";
+            this.cn_manufbatch.HeaderText = "Manuf. batch";
+            this.cn_manufbatch.Name = "cn_manufbatch";
             // 
             // frm_AddStockPlacementWiz
             // 
@@ -847,6 +891,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
         private CMB_Components.IncomeDocs.cmb_IncomeDoc cmb_IncomeDoc1;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Refresh;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_PrintLabels;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_id;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chk_add;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_incomedoc;
@@ -863,6 +908,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_incomecontrol;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_msl;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_resale;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_PrintLabels;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_expdate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_datacode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_manufbatch;
     }
 }
