@@ -100,6 +100,7 @@ namespace Odin.Workshop
                             "Convert(FTA, 'System.String') <> '0' OR " +
                             "Convert(FQC, 'System.String') <> '0' OR " +
                             "Convert(IPA, 'System.String') <> '0' OR " +
+                            "Convert(GPA, 'System.String') <> '0' OR " +
                             "Convert(FCS, 'System.String') <> '0')"
                     : Processing == 0
                     ? "NOT(Convert(SMT, 'System.String') <> '0' OR " +
@@ -109,6 +110,7 @@ namespace Odin.Workshop
                             "Convert(FTA, 'System.String') <> '0' OR " +
                             "Convert(FQC, 'System.String') <> '0' OR " +
                             "Convert(IPA, 'System.String') <> '0' OR " +
+                            "Convert(GPA, 'System.String') <> '0' OR " +
                             "Convert(FCS, 'System.String') <> '0')"
                     : "'A' = 'A'";
             }
