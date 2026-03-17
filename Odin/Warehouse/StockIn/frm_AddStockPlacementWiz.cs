@@ -3,6 +3,7 @@ using Odin.CMB_Components.BLL;
 using Odin.Global_Classes;
 using Odin.Tools;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
@@ -37,6 +38,7 @@ namespace Odin.Warehouse.StockIn
         PopupWindowHelper PopupHelper = null;
         bool _showingModal = false;
         Helper MyHelper = new Helper();
+        PrinterLabels PrintLabels = new PrinterLabels();
 
         public bool ShowingModal
         {
@@ -422,6 +424,67 @@ namespace Odin.Warehouse.StockIn
         
         private void btn_OK_Click(object sender, EventArgs e)
         {
+            int _res = 0;
+
+            gv_List.EndEdit();
+            if (chk_PrintLabels.CheckState == CheckState.Checked)
+            {
+                frm_Print frm = new frm_Print();
+                frm.cmb_LabPrinter1.ShowDefaults();
+                DialogResult result = frm.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    PrintLabels.PrinterIp = frm.IP_Address;
+                    PrintLabels.PrinterDPI = frm.Printer_DPI;
+
+                    foreach (DataGridViewRow row in this.gv_List.Rows)
+                    {
+                        try
+                        {
+                            _res = SIBll.AddStockDeallocation(Convert.ToInt32(row.Cells["cn_inid"].Value),
+                                                        Convert.ToInt32(row.Cells["cn_ilabel"].Value),
+                                                        Convert.ToInt32(row.Cells["cn_iartid"].Value),
+                                                        Convert.ToInt32(row.Cells["cn_iplaceid"].Value),
+                                                        Convert.ToDouble(row.Cells["cn_iqty"].Value),
+                                                        row.Cells["cn_expdate"].Value.ToString(),
+                                                        0,
+                                                        -1,
+                                                        row.Cells["cn_comments"].Value.ToString(),
+                                                        row.Cells["cn_idatacode"].Value.ToString(),
+                                                        row.Cells["cn_manufbatch"].Value.ToString());
+                            //if (_res != 0
+                            //    && NoExpDate == -1)
+                            //    SIBll.SetNoExpDate(_res);
+
+                            var sqlparamsfields = new List<SqlParameter>()
+                            {
+                                new SqlParameter("@id",SqlDbType.Int) {Value = _res},
+                                new SqlParameter("@qty",SqlDbType.Float) {Value =  Convert.ToDouble(row.Cells["cn_iqty"].Value)},
+                                new SqlParameter("@labelqty",SqlDbType.Int) {Value = frm.LabelQty}
+                            };
+
+                            if (DAL.CheckMSL(Convert.ToInt32(row.Cells["cn_iartid"].Value)) != "0")
+                            {
+                                PrintLabels.PrintLabel(PrintLabels.LabelConstructor(1, "sp_SelectStockLabelDetsPrint", sqlparamsfields.ToArray()), /*frm.LabelQty*/1);
+                                //Thread.Sleep(1000);
+                            }
+                        }
+
+                        catch { }
+                    }
+                    DataGridViewColumn oldColumn = gv_List.SortedColumn;
+                    var dir = Helper.SaveDirection(gv_List);
+
+                    FillList();
+
+                    Helper.RestoreDirection(gv_List, oldColumn, dir);
+
+                    SetCellsColor();
+                }
+
+            }
+
             //bool _test = true;
             //bool _testresale = false;
             //int _NewInwardId = 0;
@@ -538,46 +601,7 @@ namespace Odin.Warehouse.StockIn
             if (gv_List.CurrentRow.Cells["cn_qty"].Selected == true
                 || gv_List.CurrentRow.Cells["cn_unitprice"].Selected == true)
                 btn_OK.Enabled = false;
-        }
-
-        private void gv_List_CellValidated(object sender, DataGridViewCellEventArgs e)
-        {
-            gv_List.EndEdit();
-
-            if (gv_List.CurrentRow.Cells["cn_custcode"].Selected == true)
-            {
-                string _custcode = gv_List.CurrentRow.Cells["cn_custcode"].Value.ToString();
-
-                DataSet ds = new DataSet();
-
-                SqlDataAdapter adapter =
-                    new SqlDataAdapter(
-                        "SELECT DISTINCT TOP 1 id FROM BAS_CustCodes WHERE code = '" + _custcode.ToString() + "'", sConnStr);
-
-                adapter.Fill(ds);
-
-                DataTable dt = ds.Tables[0];
-
-                try
-                {
-                    gv_List.CurrentRow.Cells["cn_custcodeid"].Value = Convert.ToInt32(dt.Rows[0]["id"].ToString());
-                }
-                catch
-                {
-
-                    gv_List.CurrentRow.Cells["cn_custcodeid"].Value = 0;
-                
-                }
-
-
-                SetCellsColor();
-            }
-
-
-            RecalcTotals();
-
-            btn_OK.Enabled = true;
-        }
+        }        
 
         private void gv_List_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
@@ -603,6 +627,11 @@ namespace Odin.Warehouse.StockIn
         private void gv_List_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             SetCellsColor();
+        }
+
+        private void btn_Refresh_Click(object sender, EventArgs e)
+        {
+            FillList();
         }
     }
 }
