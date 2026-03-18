@@ -404,10 +404,10 @@ namespace Odin.Warehouse.Inventory
                                                                 " from BAS_Properties p " +
                                                                 " inner join BAS_Defaults def on def.value = p.categoryid " +
                                                                 " where p.label = " + Label + " and def.field = 'invnumber'")).ToString();
-                    string fac = (Helper.GetOneRecord("select p.value " +
+                    string fac = Convert.ToString(Helper.GetOneRecord("select p.value " +
                                                                 " from BAS_Properties p " +
                                                                 " inner join BAS_Defaults def on def.value = p.categoryid " +
-                                                                " where p.label = " + Label + " and def.field = 'fac'")).ToString();
+                                                                " where p.label = " + Label + " and def.field = 'fac'"));
 
 
                     if (frm.CategoryId == _iscommis)
