@@ -134,21 +134,23 @@ namespace Odin.Warehouse.StockIn
             return _res;
         }
 
-        public void SetNoExpDate(int label)
+        public void SetNoExpDate(int label, int state)
         {
-           
+
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SetNoExpDate", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
 
             sqlComm.Parameters.AddWithValue("@label", label);
-          
+            sqlComm.Parameters.AddWithValue("@state", state);
+
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
 
         }
+
 
         public int EditStockIn(int id, int headid, int artid, string suparticle, int type, double qty, int unitid, string comments,
                             double unitprice, double discount, double vat, double coefconv, double weight, int custcodeid,

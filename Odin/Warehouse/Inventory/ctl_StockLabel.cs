@@ -167,6 +167,9 @@ namespace Odin.Warehouse.Inventory
             }
         }
 
+        public int OldNoExpDate
+        { get; set; }
+
         public string ManufBatch
         {
             get { return txt_ManufBatch.Text; }
@@ -261,6 +264,7 @@ namespace Odin.Warehouse.Inventory
                     ManufBatch = dr["manufbatch"].ToString();
                     IncomeDoc = dr["incomedoc"].ToString();
                     SupArticle = dr["suparticle"].ToString();
+                    OldNoExpDate = Convert.ToInt32(dr["nodate"]);
                 }
             }
             else
@@ -285,6 +289,7 @@ namespace Odin.Warehouse.Inventory
             ManufBatch = "";
             IncomeDoc = "";
             SupArticle = "";
+            OldNoExpDate = 0;
         }
         #endregion
 
@@ -308,8 +313,8 @@ namespace Odin.Warehouse.Inventory
         private void btn_OK_Click(object sender, EventArgs e)
         {
             SIBll.EditStockLabel(Label, ExpDate, Available, ParentLabel, Comments, DataCode, ManufBatch);
-            if (NoExpDate == -1)
-                SINBll.SetNoExpDate(Label);
+            if (NoExpDate != OldNoExpDate)
+                SINBll.SetNoExpDate(Label, NoExpDate);
             ShowDets(Label);
             SaveLabel?.Invoke(this);
         }

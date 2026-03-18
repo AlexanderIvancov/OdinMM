@@ -923,7 +923,7 @@ namespace Odin.Warehouse.StockIn
                                                             row.Cells["cn_manufbatch"].Value.ToString());
                             if (_inslab != 0
                                 && NoExpDate == -1)
-                                SIBll.SetNoExpDate(_inslab);
+                                SIBll.SetNoExpDate(_inslab, -1);
                         }
 
                         PO_BLL POB = new PO_BLL();

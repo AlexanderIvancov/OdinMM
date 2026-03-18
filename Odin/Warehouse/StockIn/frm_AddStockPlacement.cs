@@ -781,7 +781,7 @@ namespace Odin.Warehouse.StockIn
                                                         row.Cells["cn_manufbatch"].Value.ToString());
                             if (_res != 0
                                 && NoExpDate == -1)
-                                SIBll.SetNoExpDate(_res);
+                                SIBll.SetNoExpDate(_res, -1);
 
                             var sqlparamsfields = new List<SqlParameter>()
                             {
@@ -830,7 +830,7 @@ namespace Odin.Warehouse.StockIn
                                                     row.Cells["cn_manufbatch"].Value.ToString());
                         if (_res != 0
                                 && NoExpDate == -1)
-                            SIBll.SetNoExpDate(_res);
+                            SIBll.SetNoExpDate(_res, -1);
                     }
 
                     catch { }
