@@ -339,14 +339,15 @@ namespace Odin.Warehouse.Inventory
 
                     RegBll.AddProperty(0, Label, frm.CategoryId, frm.Value, frm.Comments);
 
-                    string invnumbner = (Helper.GetOneRecord("select p.value " +
-                                                               " from BAS_Properties p " +
-                                                               " inner join BAS_Defaults def on def.value = p.categoryid " +
-                                                               " where p.label = " + Label + " and def.field = 'invnumber'")).ToString();
-                    string fac = (Helper.GetOneRecord("select p.value " +
-                                                                " from BAS_Properties p " +
-                                                                " inner join BAS_Defaults def on def.value = p.categoryid " +
-                                                                " where p.label = " + Label + " and def.field = 'fac'")).ToString();
+                    string invnumbner = Convert.ToString(Helper.GetOneRecord("select p.value " +
+                        " from BAS_Properties p " +
+                        " inner join BAS_Defaults def on def.value = p.categoryid " +
+                        " where p.label = " + Label + " and def.field = 'invnumber'"));
+
+                    string fac = Convert.ToString(Helper.GetOneRecord("select p.value " +
+                        " from BAS_Properties p " +
+                        " inner join BAS_Defaults def on def.value = p.categoryid " +
+                        " where p.label = " + Label + " and def.field = 'fac'"));
 
                     if (frm.CategoryId == _iscommis)
                     {
