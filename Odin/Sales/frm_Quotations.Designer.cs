@@ -33,6 +33,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_Quotations));
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.btn_RMConsulting = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.ctl_btnNum2 = new Odin.CustomControls.ctl_btnNum();
             this.ctl_btnNum1 = new Odin.CustomControls.ctl_btnNum();
             this.btn_PCBNeeds = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -144,7 +145,6 @@
             this.kryptonDockingManager1 = new ComponentFactory.Krypton.Docking.KryptonDockingManager();
             this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
             this.bs_List = new Odin.Global_Classes.SyncBindingSource();
-            this.btn_RMConsulting = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
@@ -183,6 +183,16 @@
             this.kryptonPanel1.Size = new System.Drawing.Size(1103, 49);
             this.kryptonPanel1.TabIndex = 3;
             // 
+            // btn_RMConsulting
+            // 
+            this.btn_RMConsulting.Location = new System.Drawing.Point(477, 4);
+            this.btn_RMConsulting.Name = "btn_RMConsulting";
+            this.btn_RMConsulting.Size = new System.Drawing.Size(144, 39);
+            this.btn_RMConsulting.TabIndex = 20;
+            this.btn_RMConsulting.Values.Image = global::Odin.Global_Resourses.Blackbox;
+            this.btn_RMConsulting.Values.Text = "RM consulting";
+            this.btn_RMConsulting.Click += new System.EventHandler(this.btn_RMConsulting_Click);
+            // 
             // ctl_btnNum2
             // 
             this.ctl_btnNum2.BackColor = System.Drawing.Color.Transparent;
@@ -190,7 +200,7 @@
             this.ctl_btnNum2.FormText = "Confirmed BOM\'s list";
             this.ctl_btnNum2.GetCountQuery = "exec sp_SelectConfirmedBOMsCount";
             this.ctl_btnNum2.IconPath = global::Odin.Global_Resourses.Confirm_History;
-            this.ctl_btnNum2.Location = new System.Drawing.Point(393, 2);
+            this.ctl_btnNum2.Location = new System.Drawing.Point(291, 1);
             this.ctl_btnNum2.Name = "ctl_btnNum2";
             this.ctl_btnNum2.Padding = new System.Windows.Forms.Padding(3);
             this.ctl_btnNum2.Qty = "1";
@@ -205,7 +215,7 @@
             this.ctl_btnNum1.FormText = "Invalide BOM\'s list";
             this.ctl_btnNum1.GetCountQuery = "exec sp_SelectInvalideBOMsCount";
             this.ctl_btnNum1.IconPath = ((System.Drawing.Image)(resources.GetObject("ctl_btnNum1.IconPath")));
-            this.ctl_btnNum1.Location = new System.Drawing.Point(216, 2);
+            this.ctl_btnNum1.Location = new System.Drawing.Point(114, 1);
             this.ctl_btnNum1.Name = "ctl_btnNum1";
             this.ctl_btnNum1.Padding = new System.Windows.Forms.Padding(3);
             this.ctl_btnNum1.Qty = "9";
@@ -215,7 +225,7 @@
             // 
             // btn_PCBNeeds
             // 
-            this.btn_PCBNeeds.Location = new System.Drawing.Point(107, 5);
+            this.btn_PCBNeeds.Location = new System.Drawing.Point(5, 4);
             this.btn_PCBNeeds.Name = "btn_PCBNeeds";
             this.btn_PCBNeeds.Size = new System.Drawing.Size(109, 39);
             this.btn_PCBNeeds.TabIndex = 9;
@@ -256,12 +266,13 @@
             // 
             // btn_General
             // 
-            this.btn_General.Location = new System.Drawing.Point(4, 5);
+            this.btn_General.Location = new System.Drawing.Point(753, 4);
             this.btn_General.Name = "btn_General";
             this.btn_General.Size = new System.Drawing.Size(100, 39);
             this.btn_General.TabIndex = 1;
             this.btn_General.Values.Image = global::Odin.Global_Resourses.Docs;
             this.btn_General.Values.Text = "General";
+            this.btn_General.Visible = false;
             this.btn_General.Click += new System.EventHandler(this.btn_General_Click);
             // 
             // kryptonSplitContainer1
@@ -339,7 +350,7 @@
             // 
             this.chk_PCB.Checked = true;
             this.chk_PCB.CheckState = System.Windows.Forms.CheckState.Indeterminate;
-            this.chk_PCB.Location = new System.Drawing.Point(91, 259);
+            this.chk_PCB.Location = new System.Drawing.Point(91, 232);
             this.chk_PCB.Name = "chk_PCB";
             this.chk_PCB.Size = new System.Drawing.Size(108, 20);
             this.chk_PCB.TabIndex = 308;
@@ -371,10 +382,11 @@
             // 
             this.cmb_Week1.FirstDateOfWeek = new System.DateTime(((long)(0)));
             this.cmb_Week1.LastDateOfWeek = new System.DateTime(((long)(0)));
-            this.cmb_Week1.Location = new System.Drawing.Point(119, 324);
+            this.cmb_Week1.Location = new System.Drawing.Point(119, 380);
             this.cmb_Week1.Name = "cmb_Week1";
             this.cmb_Week1.Size = new System.Drawing.Size(104, 20);
             this.cmb_Week1.TabIndex = 245;
+            this.cmb_Week1.Visible = false;
             this.cmb_Week1.Week = "W  .";
             this.cmb_Week1.weekNumber = 0;
             this.cmb_Week1.SelectedValueChanged += new Odin.CMB_Components.Week.WeekEventHandler(this.cmb_Week1_SelectedValueChanged);
@@ -386,11 +398,12 @@
             this.txt_ReqDateTill.CalendarShowWeekNumbers = true;
             this.txt_ReqDateTill.CustomFormat = null;
             this.txt_ReqDateTill.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.txt_ReqDateTill.Location = new System.Drawing.Point(189, 348);
+            this.txt_ReqDateTill.Location = new System.Drawing.Point(189, 404);
             this.txt_ReqDateTill.Name = "txt_ReqDateTill";
             this.txt_ReqDateTill.NullValue = " ";
             this.txt_ReqDateTill.Size = new System.Drawing.Size(105, 21);
             this.txt_ReqDateTill.TabIndex = 217;
+            this.txt_ReqDateTill.Visible = false;
             this.txt_ReqDateTill.DropDown += new System.EventHandler<ComponentFactory.Krypton.Toolkit.DateTimePickerDropArgs>(this.txt_ReqDateTill_DropDown);
             // 
             // buttonSpecAny6
@@ -406,7 +419,7 @@
             this.txt_CreatDateTill.CalendarShowWeekNumbers = true;
             this.txt_CreatDateTill.CustomFormat = null;
             this.txt_CreatDateTill.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.txt_CreatDateTill.Location = new System.Drawing.Point(190, 300);
+            this.txt_CreatDateTill.Location = new System.Drawing.Point(190, 273);
             this.txt_CreatDateTill.Name = "txt_CreatDateTill";
             this.txt_CreatDateTill.NullValue = " ";
             this.txt_CreatDateTill.Size = new System.Drawing.Size(105, 21);
@@ -426,11 +439,12 @@
             this.txt_ReqDateFrom.CalendarShowWeekNumbers = true;
             this.txt_ReqDateFrom.CustomFormat = null;
             this.txt_ReqDateFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.txt_ReqDateFrom.Location = new System.Drawing.Point(54, 348);
+            this.txt_ReqDateFrom.Location = new System.Drawing.Point(54, 404);
             this.txt_ReqDateFrom.Name = "txt_ReqDateFrom";
             this.txt_ReqDateFrom.NullValue = " ";
             this.txt_ReqDateFrom.Size = new System.Drawing.Size(105, 21);
             this.txt_ReqDateFrom.TabIndex = 215;
+            this.txt_ReqDateFrom.Visible = false;
             this.txt_ReqDateFrom.DropDown += new System.EventHandler<ComponentFactory.Krypton.Toolkit.DateTimePickerDropArgs>(this.txt_ReqDateFrom_DropDown);
             // 
             // buttonSpecAny3
@@ -446,7 +460,7 @@
             this.txt_CreatDateFrom.CalendarShowWeekNumbers = true;
             this.txt_CreatDateFrom.CustomFormat = null;
             this.txt_CreatDateFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.txt_CreatDateFrom.Location = new System.Drawing.Point(54, 300);
+            this.txt_CreatDateFrom.Location = new System.Drawing.Point(54, 273);
             this.txt_CreatDateFrom.Name = "txt_CreatDateFrom";
             this.txt_CreatDateFrom.NullValue = " ";
             this.txt_CreatDateFrom.Size = new System.Drawing.Size(105, 21);
@@ -479,7 +493,7 @@
             // 
             // kryptonLabel16
             // 
-            this.kryptonLabel16.Location = new System.Drawing.Point(7, 187);
+            this.kryptonLabel16.Location = new System.Drawing.Point(7, 160);
             this.kryptonLabel16.Name = "kryptonLabel16";
             this.kryptonLabel16.Size = new System.Drawing.Size(48, 20);
             this.kryptonLabel16.TabIndex = 35;
@@ -501,7 +515,7 @@
             this.cmb_Articles1.Description = null;
             this.cmb_Articles1.IsActive = -1;
             this.cmb_Articles1.IsPF = 0;
-            this.cmb_Articles1.Location = new System.Drawing.Point(12, 207);
+            this.cmb_Articles1.Location = new System.Drawing.Point(12, 180);
             this.cmb_Articles1.Manufacturer = "";
             this.cmb_Articles1.Margin = new System.Windows.Forms.Padding(0);
             this.cmb_Articles1.Name = "cmb_Articles1";
@@ -524,25 +538,27 @@
             // 
             // kryptonLabel15
             // 
-            this.kryptonLabel15.Location = new System.Drawing.Point(7, 140);
+            this.kryptonLabel15.Location = new System.Drawing.Point(7, 431);
             this.kryptonLabel15.Name = "kryptonLabel15";
             this.kryptonLabel15.Size = new System.Drawing.Size(79, 20);
             this.kryptonLabel15.TabIndex = 33;
             this.kryptonLabel15.Values.Text = "Department:";
+            this.kryptonLabel15.Visible = false;
             // 
             // cmb_Department1
             // 
             this.cmb_Department1.Department = "";
             this.cmb_Department1.DeptId = 0;
-            this.cmb_Department1.Location = new System.Drawing.Point(91, 140);
+            this.cmb_Department1.Location = new System.Drawing.Point(91, 431);
             this.cmb_Department1.Name = "cmb_Department1";
             this.cmb_Department1.SelectedNode = null;
             this.cmb_Department1.Size = new System.Drawing.Size(179, 20);
             this.cmb_Department1.TabIndex = 32;
+            this.cmb_Department1.Visible = false;
             // 
             // kryptonLabel14
             // 
-            this.kryptonLabel14.Location = new System.Drawing.Point(7, 233);
+            this.kryptonLabel14.Location = new System.Drawing.Point(7, 206);
             this.kryptonLabel14.Name = "kryptonLabel14";
             this.kryptonLabel14.Size = new System.Drawing.Size(76, 20);
             this.kryptonLabel14.TabIndex = 31;
@@ -552,7 +568,7 @@
             // 
             this.txt_CustArticle.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
             this.buttonSpecAny7});
-            this.txt_CustArticle.Location = new System.Drawing.Point(91, 233);
+            this.txt_CustArticle.Location = new System.Drawing.Point(91, 206);
             this.txt_CustArticle.Name = "txt_CustArticle";
             this.txt_CustArticle.Size = new System.Drawing.Size(204, 23);
             this.txt_CustArticle.StateCommon.Back.Color1 = System.Drawing.Color.White;
@@ -566,7 +582,7 @@
             // 
             // kryptonLabel5
             // 
-            this.kryptonLabel5.Location = new System.Drawing.Point(7, 373);
+            this.kryptonLabel5.Location = new System.Drawing.Point(6, 300);
             this.kryptonLabel5.Name = "kryptonLabel5";
             this.kryptonLabel5.Size = new System.Drawing.Size(72, 20);
             this.kryptonLabel5.TabIndex = 29;
@@ -576,7 +592,7 @@
             // 
             this.txt_Comments.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
             this.buttonSpecAny2});
-            this.txt_Comments.Location = new System.Drawing.Point(91, 373);
+            this.txt_Comments.Location = new System.Drawing.Point(90, 300);
             this.txt_Comments.Multiline = true;
             this.txt_Comments.Name = "txt_Comments";
             this.txt_Comments.Size = new System.Drawing.Size(204, 52);
@@ -592,7 +608,7 @@
             // 
             this.cmb_Common1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cmb_Common1.IsEmptyColor = false;
-            this.cmb_Common1.Location = new System.Drawing.Point(91, 166);
+            this.cmb_Common1.Location = new System.Drawing.Point(91, 139);
             this.cmb_Common1.Name = "cmb_Common1";
             this.cmb_Common1.OrderBy = "id";
             this.cmb_Common1.sCurrentValue = "";
@@ -606,7 +622,7 @@
             // 
             // kryptonLabel13
             // 
-            this.kryptonLabel13.Location = new System.Drawing.Point(7, 167);
+            this.kryptonLabel13.Location = new System.Drawing.Point(7, 140);
             this.kryptonLabel13.Name = "kryptonLabel13";
             this.kryptonLabel13.Size = new System.Drawing.Size(41, 20);
             this.kryptonLabel13.TabIndex = 26;
@@ -614,15 +630,16 @@
             // 
             // kryptonLabel12
             // 
-            this.kryptonLabel12.Location = new System.Drawing.Point(161, 349);
+            this.kryptonLabel12.Location = new System.Drawing.Point(161, 405);
             this.kryptonLabel12.Name = "kryptonLabel12";
             this.kryptonLabel12.Size = new System.Drawing.Size(26, 20);
             this.kryptonLabel12.TabIndex = 24;
             this.kryptonLabel12.Values.Text = "till:";
+            this.kryptonLabel12.Visible = false;
             // 
             // kryptonLabel11
             // 
-            this.kryptonLabel11.Location = new System.Drawing.Point(161, 300);
+            this.kryptonLabel11.Location = new System.Drawing.Point(161, 273);
             this.kryptonLabel11.Name = "kryptonLabel11";
             this.kryptonLabel11.Size = new System.Drawing.Size(26, 20);
             this.kryptonLabel11.TabIndex = 23;
@@ -630,23 +647,25 @@
             // 
             // kryptonLabel9
             // 
-            this.kryptonLabel9.Location = new System.Drawing.Point(7, 349);
+            this.kryptonLabel9.Location = new System.Drawing.Point(7, 405);
             this.kryptonLabel9.Name = "kryptonLabel9";
             this.kryptonLabel9.Size = new System.Drawing.Size(41, 20);
             this.kryptonLabel9.TabIndex = 22;
             this.kryptonLabel9.Values.Text = "From:";
+            this.kryptonLabel9.Visible = false;
             // 
             // kryptonLabel10
             // 
-            this.kryptonLabel10.Location = new System.Drawing.Point(7, 324);
+            this.kryptonLabel10.Location = new System.Drawing.Point(7, 380);
             this.kryptonLabel10.Name = "kryptonLabel10";
             this.kryptonLabel10.Size = new System.Drawing.Size(106, 20);
             this.kryptonLabel10.TabIndex = 21;
             this.kryptonLabel10.Values.Text = "Lead time (week):";
+            this.kryptonLabel10.Visible = false;
             // 
             // kryptonLabel8
             // 
-            this.kryptonLabel8.Location = new System.Drawing.Point(7, 301);
+            this.kryptonLabel8.Location = new System.Drawing.Point(7, 274);
             this.kryptonLabel8.Name = "kryptonLabel8";
             this.kryptonLabel8.Size = new System.Drawing.Size(41, 20);
             this.kryptonLabel8.TabIndex = 18;
@@ -654,7 +673,7 @@
             // 
             // kryptonLabel7
             // 
-            this.kryptonLabel7.Location = new System.Drawing.Point(7, 280);
+            this.kryptonLabel7.Location = new System.Drawing.Point(7, 253);
             this.kryptonLabel7.Name = "kryptonLabel7";
             this.kryptonLabel7.Size = new System.Drawing.Size(118, 20);
             this.kryptonLabel7.TabIndex = 16;
@@ -1339,16 +1358,6 @@
             this.imageListSmall.Images.SetKeyName(0, "document_plain.png");
             this.imageListSmall.Images.SetKeyName(1, "preferences.png");
             this.imageListSmall.Images.SetKeyName(2, "information2.png");
-            // 
-            // btn_RMConsulting
-            // 
-            this.btn_RMConsulting.Location = new System.Drawing.Point(579, 5);
-            this.btn_RMConsulting.Name = "btn_RMConsulting";
-            this.btn_RMConsulting.Size = new System.Drawing.Size(144, 39);
-            this.btn_RMConsulting.TabIndex = 20;
-            this.btn_RMConsulting.Values.Image = global::Odin.Global_Resourses.Blackbox;
-            this.btn_RMConsulting.Values.Text = "RM consulting";
-            this.btn_RMConsulting.Click += new System.EventHandler(this.btn_RMConsulting_Click);
             // 
             // frm_Quotations
             // 

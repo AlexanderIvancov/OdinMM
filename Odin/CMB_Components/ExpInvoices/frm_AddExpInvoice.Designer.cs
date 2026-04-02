@@ -181,7 +181,7 @@
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonPanel1.Size = new System.Drawing.Size(451, 543);
+            this.kryptonPanel1.Size = new System.Drawing.Size(453, 543);
             this.kryptonPanel1.TabIndex = 0;
             // 
             // kryptonLabel28
@@ -302,6 +302,7 @@
             this.txt_ProformaNR.Name = "txt_ProformaNR";
             this.txt_ProformaNR.Size = new System.Drawing.Size(107, 23);
             this.txt_ProformaNR.TabIndex = 79;
+            this.txt_ProformaNR.Visible = false;
             // 
             // buttonSpecAny8
             // 
@@ -316,6 +317,7 @@
             this.kryptonLabel24.Size = new System.Drawing.Size(84, 20);
             this.kryptonLabel24.TabIndex = 269;
             this.kryptonLabel24.Values.Text = "Proforma NR:";
+            this.kryptonLabel24.Visible = false;
             // 
             // txt_AdvanceDate
             // 
@@ -354,6 +356,7 @@
             this.kryptonLabel22.Size = new System.Drawing.Size(81, 20);
             this.kryptonLabel22.TabIndex = 265;
             this.kryptonLabel22.Values.Text = "By proforma:";
+            this.kryptonLabel22.Visible = false;
             // 
             // txt_InAdvance
             // 
@@ -366,6 +369,7 @@
             this.txt_InAdvance.Size = new System.Drawing.Size(106, 23);
             this.txt_InAdvance.TabIndex = 78;
             this.txt_InAdvance.Text = "0";
+            this.txt_InAdvance.Visible = false;
             // 
             // buttonSpecAny6
             // 
@@ -934,7 +938,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(451, 543);
+            this.ClientSize = new System.Drawing.Size(453, 543);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
