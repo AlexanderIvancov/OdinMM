@@ -32,9 +32,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_ClientOrders));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mnu_Lines = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mni_FilterFor = new System.Windows.Forms.ToolStripTextBox();
             this.mni_Search = new System.Windows.Forms.ToolStripMenuItem();
@@ -895,8 +895,8 @@
             this.gv_List.Name = "gv_List";
             this.gv_List.ReadOnly = true;
             this.gv_List.RowHeadersWidth = 20;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gv_List.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gv_List.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.gv_List.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.gv_List.Size = new System.Drawing.Size(1592, 415);
             this.gv_List.TabIndex = 3;
@@ -1091,8 +1091,8 @@
             // cn_comments
             // 
             this.cn_comments.DataPropertyName = "comments";
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.cn_comments.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.cn_comments.DefaultCellStyle = dataGridViewCellStyle4;
             this.cn_comments.FillWeight = 150F;
             this.cn_comments.HeaderText = "Comments";
             this.cn_comments.Name = "cn_comments";
@@ -1102,8 +1102,8 @@
             // cn_comments1
             // 
             this.cn_comments1.DataPropertyName = "comments1";
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.cn_comments1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.cn_comments1.DefaultCellStyle = dataGridViewCellStyle5;
             this.cn_comments1.HeaderText = "Comments part 2";
             this.cn_comments1.Name = "cn_comments1";
             this.cn_comments1.ReadOnly = true;
@@ -1476,7 +1476,7 @@
             // 
             // btn_Planning
             // 
-            this.btn_Planning.Location = new System.Drawing.Point(855, 5);
+            this.btn_Planning.Location = new System.Drawing.Point(761, 5);
             this.btn_Planning.Name = "btn_Planning";
             this.btn_Planning.Size = new System.Drawing.Size(109, 39);
             this.btn_Planning.TabIndex = 20;
@@ -1486,7 +1486,7 @@
             // 
             // btn_RMConsulting
             // 
-            this.btn_RMConsulting.Location = new System.Drawing.Point(1359, 5);
+            this.btn_RMConsulting.Location = new System.Drawing.Point(1226, 5);
             this.btn_RMConsulting.Name = "btn_RMConsulting";
             this.btn_RMConsulting.Size = new System.Drawing.Size(144, 39);
             this.btn_RMConsulting.TabIndex = 19;
@@ -1496,7 +1496,7 @@
             // 
             // btn_CapacityAnalyze
             // 
-            this.btn_CapacityAnalyze.Location = new System.Drawing.Point(1209, 5);
+            this.btn_CapacityAnalyze.Location = new System.Drawing.Point(982, 5);
             this.btn_CapacityAnalyze.Name = "btn_CapacityAnalyze";
             this.btn_CapacityAnalyze.Size = new System.Drawing.Size(144, 39);
             this.btn_CapacityAnalyze.TabIndex = 18;
@@ -1517,7 +1517,7 @@
             // 
             // btn_Launches
             // 
-            this.btn_Launches.Location = new System.Drawing.Point(970, 5);
+            this.btn_Launches.Location = new System.Drawing.Point(876, 5);
             this.btn_Launches.Name = "btn_Launches";
             this.btn_Launches.Size = new System.Drawing.Size(100, 39);
             this.btn_Launches.TabIndex = 15;
@@ -1527,17 +1527,18 @@
             // 
             // btn_AwaitingCost
             // 
-            this.btn_AwaitingCost.Location = new System.Drawing.Point(1075, 5);
+            this.btn_AwaitingCost.Location = new System.Drawing.Point(1543, 7);
             this.btn_AwaitingCost.Name = "btn_AwaitingCost";
             this.btn_AwaitingCost.Size = new System.Drawing.Size(128, 39);
             this.btn_AwaitingCost.TabIndex = 11;
             this.btn_AwaitingCost.Values.Image = global::Odin.Global_Resourses.coins_delete;
             this.btn_AwaitingCost.Values.Text = "Awaiting cost";
+            this.btn_AwaitingCost.Visible = false;
             this.btn_AwaitingCost.Click += new System.EventHandler(this.btn_AwaitingCost_Click);
             // 
             // btn_Delays
             // 
-            this.btn_Delays.Location = new System.Drawing.Point(422, 5);
+            this.btn_Delays.Location = new System.Drawing.Point(328, 5);
             this.btn_Delays.Name = "btn_Delays";
             this.btn_Delays.Size = new System.Drawing.Size(95, 39);
             this.btn_Delays.TabIndex = 9;
@@ -1546,7 +1547,7 @@
             // 
             // btn_Process
             // 
-            this.btn_Process.Location = new System.Drawing.Point(107, 5);
+            this.btn_Process.Location = new System.Drawing.Point(1445, 7);
             this.btn_Process.Name = "btn_Process";
             this.btn_Process.Size = new System.Drawing.Size(92, 39);
             this.btn_Process.TabIndex = 2;
@@ -1555,7 +1556,7 @@
             // 
             // btn_Batches
             // 
-            this.btn_Batches.Location = new System.Drawing.Point(202, 5);
+            this.btn_Batches.Location = new System.Drawing.Point(108, 5);
             this.btn_Batches.Name = "btn_Batches";
             this.btn_Batches.Size = new System.Drawing.Size(92, 39);
             this.btn_Batches.TabIndex = 3;
@@ -1565,7 +1566,7 @@
             // 
             // btn_History
             // 
-            this.btn_History.Location = new System.Drawing.Point(742, 5);
+            this.btn_History.Location = new System.Drawing.Point(648, 5);
             this.btn_History.Name = "btn_History";
             this.btn_History.Size = new System.Drawing.Size(109, 39);
             this.btn_History.TabIndex = 7;
@@ -1595,7 +1596,7 @@
             // 
             // btn_Payments
             // 
-            this.btn_Payments.Location = new System.Drawing.Point(634, 5);
+            this.btn_Payments.Location = new System.Drawing.Point(540, 5);
             this.btn_Payments.Name = "btn_Payments";
             this.btn_Payments.Size = new System.Drawing.Size(105, 39);
             this.btn_Payments.TabIndex = 6;
@@ -1605,7 +1606,7 @@
             // 
             // btn_Deliveries
             // 
-            this.btn_Deliveries.Location = new System.Drawing.Point(521, 5);
+            this.btn_Deliveries.Location = new System.Drawing.Point(427, 5);
             this.btn_Deliveries.Name = "btn_Deliveries";
             this.btn_Deliveries.Size = new System.Drawing.Size(109, 39);
             this.btn_Deliveries.TabIndex = 5;
@@ -1615,7 +1616,7 @@
             // 
             // btn_Confirmations
             // 
-            this.btn_Confirmations.Location = new System.Drawing.Point(297, 5);
+            this.btn_Confirmations.Location = new System.Drawing.Point(203, 5);
             this.btn_Confirmations.Name = "btn_Confirmations";
             this.btn_Confirmations.Size = new System.Drawing.Size(121, 39);
             this.btn_Confirmations.TabIndex = 4;
