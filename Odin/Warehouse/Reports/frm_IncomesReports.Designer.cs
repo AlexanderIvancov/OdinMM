@@ -88,6 +88,10 @@
             this.rb_3rd = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
             this.rb_ES = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
             this.rb_LV = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
+            this.kryptonGroupBoxLang = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
+            this.rb_RusLang = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
+            this.rb_EnglishLang = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
+            this.rb_LatLang = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.cmb_Types1 = new Odin.CMB_Components.Types.cmb_Types();
             this.chk_Summary = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
@@ -126,6 +130,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).BeginInit();
             this.kryptonGroupBox1.Panel.SuspendLayout();
             this.kryptonGroupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBoxLang)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBoxLang.Panel)).BeginInit();
+            this.kryptonGroupBoxLang.Panel.SuspendLayout();
+            this.kryptonGroupBoxLang.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
             this.kryptonPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).BeginInit();
@@ -595,6 +603,7 @@
             // 
             this.kryptonPanel3.Controls.Add(this.chk_includena);
             this.kryptonPanel3.Controls.Add(this.kryptonGroupBox1);
+            this.kryptonPanel3.Controls.Add(this.kryptonGroupBoxLang);
             this.kryptonPanel3.Controls.Add(this.kryptonLabel2);
             this.kryptonPanel3.Controls.Add(this.cmb_Types1);
             this.kryptonPanel3.Controls.Add(this.chk_Summary);
@@ -669,6 +678,45 @@
             this.rb_LV.Size = new System.Drawing.Size(36, 20);
             this.rb_LV.TabIndex = 0;
             this.rb_LV.Values.Text = "LV";
+            // 
+            // kryptonGroupBoxLang
+            // 
+            this.kryptonGroupBoxLang.Location = new System.Drawing.Point(302, 83);
+            this.kryptonGroupBoxLang.Name = "kryptonGroupBoxLang";
+            // 
+            // kryptonGroupBoxLang.Panel
+            // 
+            this.kryptonGroupBoxLang.Panel.Controls.Add(this.rb_RusLang);
+            this.kryptonGroupBoxLang.Panel.Controls.Add(this.rb_EnglishLang);
+            this.kryptonGroupBoxLang.Panel.Controls.Add(this.rb_LatLang);
+            this.kryptonGroupBoxLang.Size = new System.Drawing.Size(223, 55);
+            this.kryptonGroupBoxLang.TabIndex = 278;
+            this.kryptonGroupBoxLang.Values.Heading = "Printing language";
+            // 
+            // rb_RusLang
+            // 
+            this.rb_RusLang.Location = new System.Drawing.Point(151, 3);
+            this.rb_RusLang.Name = "rb_RusLang";
+            this.rb_RusLang.Size = new System.Drawing.Size(64, 20);
+            this.rb_RusLang.TabIndex = 2;
+            this.rb_RusLang.Values.Text = "Russian";
+            // 
+            // rb_EnglishLang
+            // 
+            this.rb_EnglishLang.Checked = true;
+            this.rb_EnglishLang.Location = new System.Drawing.Point(71, 3);
+            this.rb_EnglishLang.Name = "rb_EnglishLang";
+            this.rb_EnglishLang.Size = new System.Drawing.Size(61, 20);
+            this.rb_EnglishLang.TabIndex = 1;
+            this.rb_EnglishLang.Values.Text = "English";
+            // 
+            // rb_LatLang
+            // 
+            this.rb_LatLang.Location = new System.Drawing.Point(4, 3);
+            this.rb_LatLang.Name = "rb_LatLang";
+            this.rb_LatLang.Size = new System.Drawing.Size(61, 20);
+            this.rb_LatLang.TabIndex = 0;
+            this.rb_LatLang.Values.Text = "Latvian";
             // 
             // kryptonLabel2
             // 
@@ -922,6 +970,11 @@
             this.kryptonGroupBox1.Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).EndInit();
             this.kryptonGroupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBoxLang.Panel)).EndInit();
+            this.kryptonGroupBoxLang.Panel.ResumeLayout(false);
+            this.kryptonGroupBoxLang.Panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBoxLang)).EndInit();
+            this.kryptonGroupBoxLang.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).EndInit();
             this.kryptonPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
@@ -985,6 +1038,10 @@
         private ComponentFactory.Krypton.Toolkit.KryptonRadioButton rb_ES;
         private ComponentFactory.Krypton.Toolkit.KryptonRadioButton rb_LV;
         private ComponentFactory.Krypton.Toolkit.KryptonRadioButton rb_ALL;
+        private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBoxLang;
+        private ComponentFactory.Krypton.Toolkit.KryptonRadioButton rb_RusLang;
+        private ComponentFactory.Krypton.Toolkit.KryptonRadioButton rb_EnglishLang;
+        private ComponentFactory.Krypton.Toolkit.KryptonRadioButton rb_LatLang;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_headid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_num;

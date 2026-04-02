@@ -43,10 +43,20 @@ namespace Odin.Warehouse.Reports
             get {
                 return rb_LV.Checked == true ? 1 : rb_ES.Checked == true ? 2 : rb_3rd.Checked == true ? 3 : 99;
             }
-            set {
+            set { }
+        }
 
-
+        public string Language
+        {
+            get
+            {
+                if (rb_LatLang.Checked == true)
+                    return "LAT";
+                else if (rb_RusLang.Checked == true)
+                    return "RUS";
+                return "ENG";
             }
+            set { }
         }
 
         #endregion
@@ -134,14 +144,14 @@ namespace Odin.Warehouse.Reports
             {
                 ReportDocument rd;
 
-                rd = OpenReport(data, chk_Summary.CheckState == CheckState.Checked);
+                rd = OpenReport(data, chk_Summary.CheckState == CheckState.Checked, Language);
 
                 crystalReportViewer1.ReportSource = rd;
             });
             
         }
 
-        public ReportDocument OpenReport(DataTable data, bool isum)
+        public ReportDocument OpenReport(DataTable data, bool isum, string Lang)
         {
             ReportDocument report = new ReportDocument();
             string repname = isum == true ? "rpt_IncomeReportSum.rpt" : "rpt_IncomeReport.rpt";
@@ -157,9 +167,12 @@ namespace Odin.Warehouse.Reports
             drow = dt.NewRow();
             drow[0] = DAL.LogoToByte();
             dt.Rows.Add(drow);
-                       
+
+            DataTable datalab = new DataTable();
+            datalab = DAL_Functions.getReportLabels("IncomeRep", Lang);
+
             ////
-            
+
             //data source
             report.Database.Tables[0].SetDataSource(dt);
             report.Database.Tables[1].SetDataSource(data);
@@ -169,6 +182,14 @@ namespace Odin.Warehouse.Reports
             report.SetParameterValue("From", txt_CreatDateFrom.Value == null ? "" : Convert.ToDateTime(txt_CreatDateFrom.Value).ToShortDateString().Trim());
             report.SetParameterValue("Till", txt_CreatDateTill.Value == null ? "" : Convert.ToDateTime(txt_CreatDateTill.Value).ToShortDateString().Trim());
             report.SetParameterValue("OperType", cmb_StockInTypes1.StockMovType);
+
+            //Labels
+
+            foreach (DataRow row in datalab.Rows)
+            {
+                //MessageBox.Show(row["paramvalue"].ToString());
+                report.SetParameterValue(row["paramname"].ToString(), row["paramvalue"].ToString());
+            }
 
             return report;
 
