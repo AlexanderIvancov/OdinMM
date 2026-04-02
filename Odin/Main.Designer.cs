@@ -285,8 +285,7 @@
             this.tab_DataCollection,
             this.tab_ReadOnly,
             this.tab_Settings});
-            this.kryptonRibbon1.SelectedContext = null;
-            this.kryptonRibbon1.SelectedTab = this.tab_Register;
+            this.kryptonRibbon1.SelectedTab = this.tab_BookKeeping;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1660, 115);
             this.kryptonRibbon1.TabIndex = 0;
             // 
@@ -1393,8 +1392,8 @@
             // btn_Export1c
             // 
             this.btn_Export1c.ImageLarge = global::Odin.Global_Resourses._1c_32x32px;
-            this.btn_Export1c.TextLine1 = "Export";
-            this.btn_Export1c.TextLine2 = "into 1C";
+            this.btn_Export1c.TextLine1 = "Save";
+            this.btn_Export1c.TextLine2 = "for 1C";
             this.btn_Export1c.Click += new System.EventHandler(this.btn_Export1c_Click);
             // 
             // btn_DocRegister
@@ -1432,6 +1431,7 @@
             this.btn_Intrastat.ImageLarge = global::Odin.Global_Resourses.european_union_flag_3872;
             this.btn_Intrastat.ImageSmall = global::Odin.Global_Resourses.european_union_flag_3872;
             this.btn_Intrastat.TextLine1 = "Intrastat";
+            this.btn_Intrastat.Visible = false;
             this.btn_Intrastat.Click += new System.EventHandler(this.btn_Intrastat_Click);
             // 
             // kryptonRibbonGroupButton15

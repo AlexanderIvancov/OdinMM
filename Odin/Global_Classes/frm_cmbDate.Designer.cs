@@ -34,12 +34,14 @@
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.btn_Cancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btn_History = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.btn_History);
             this.kryptonPanel1.Controls.Add(this.txt_Date);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
             this.kryptonPanel1.Controls.Add(this.btn_Cancel);
@@ -88,6 +90,17 @@
             this.btn_OK.Values.Image = global::Odin.Global_Resourses.Ok;
             this.btn_OK.Values.Text = "OK";
             // 
+            // btn_History
+            // 
+            this.btn_History.Location = new System.Drawing.Point(223, 95);
+            this.btn_History.Name = "btn_History";
+            this.btn_History.Size = new System.Drawing.Size(90, 36);
+            this.btn_History.TabIndex = 226;
+            this.btn_History.Values.Image = global::Odin.Global_Resourses.history24x24;
+            this.btn_History.Values.Text = "History";
+            this.btn_History.Visible = false;
+            this.btn_History.Click += new System.EventHandler(this.btn_History_Click);
+            // 
             // frm_cmbDate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -101,7 +114,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
@@ -112,5 +125,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Cancel;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_OK;
         private ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker txt_Date;
+        public ComponentFactory.Krypton.Toolkit.KryptonButton btn_History;
     }
 }

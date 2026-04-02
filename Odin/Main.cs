@@ -889,7 +889,7 @@ namespace Odin
             frm_cmbDate frm = new frm_cmbDate();
             try { frm.Date = BlockDate; }
             catch { frm.Date = System.DateTime.Now.ToShortDateString(); }
-
+            frm.btn_History.Visible = true;
             DialogResult result = frm.ShowDialog();
 
             if (result == DialogResult.OK)
