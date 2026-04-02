@@ -181,12 +181,12 @@
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonPanel1.Size = new System.Drawing.Size(451, 648);
+            this.kryptonPanel1.Size = new System.Drawing.Size(453, 543);
             this.kryptonPanel1.TabIndex = 0;
             // 
             // kryptonLabel28
             // 
-            this.kryptonLabel28.Location = new System.Drawing.Point(24, 602);
+            this.kryptonLabel28.Location = new System.Drawing.Point(437, 289);
             this.kryptonLabel28.Name = "kryptonLabel28";
             this.kryptonLabel28.Size = new System.Drawing.Size(64, 20);
             this.kryptonLabel28.TabIndex = 280;
@@ -198,7 +198,7 @@
             this.txt_Recipient.AllowButtonSpecToolTips = true;
             this.txt_Recipient.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
             this.buttonSpecAny10});
-            this.txt_Recipient.Location = new System.Drawing.Point(89, 601);
+            this.txt_Recipient.Location = new System.Drawing.Point(502, 288);
             this.txt_Recipient.Name = "txt_Recipient";
             this.txt_Recipient.Size = new System.Drawing.Size(179, 23);
             this.txt_Recipient.TabIndex = 279;
@@ -212,7 +212,7 @@
             // 
             // chk_esignature
             // 
-            this.chk_esignature.Location = new System.Drawing.Point(354, 619);
+            this.chk_esignature.Location = new System.Drawing.Point(353, 514);
             this.chk_esignature.Name = "chk_esignature";
             this.chk_esignature.Size = new System.Drawing.Size(85, 20);
             this.chk_esignature.TabIndex = 278;
@@ -220,7 +220,7 @@
             // 
             // chk_ValueForCustoms
             // 
-            this.chk_ValueForCustoms.Location = new System.Drawing.Point(112, 619);
+            this.chk_ValueForCustoms.Location = new System.Drawing.Point(112, 514);
             this.chk_ValueForCustoms.Name = "chk_ValueForCustoms";
             this.chk_ValueForCustoms.Size = new System.Drawing.Size(242, 20);
             this.chk_ValueForCustoms.TabIndex = 277;
@@ -271,7 +271,7 @@
             this.txt_PayDate.CalendarShowWeekNumbers = true;
             this.txt_PayDate.CustomFormat = null;
             this.txt_PayDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.txt_PayDate.Location = new System.Drawing.Point(332, 390);
+            this.txt_PayDate.Location = new System.Drawing.Point(722, 177);
             this.txt_PayDate.Name = "txt_PayDate";
             this.txt_PayDate.NullValue = " ";
             this.txt_PayDate.Size = new System.Drawing.Size(106, 21);
@@ -286,7 +286,7 @@
             // 
             // kryptonLabel25
             // 
-            this.kryptonLabel25.Location = new System.Drawing.Point(224, 391);
+            this.kryptonLabel25.Location = new System.Drawing.Point(614, 178);
             this.kryptonLabel25.Name = "kryptonLabel25";
             this.kryptonLabel25.Size = new System.Drawing.Size(88, 20);
             this.kryptonLabel25.TabIndex = 271;
@@ -298,10 +298,11 @@
             this.txt_ProformaNR.AllowButtonSpecToolTips = true;
             this.txt_ProformaNR.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
             this.buttonSpecAny8});
-            this.txt_ProformaNR.Location = new System.Drawing.Point(332, 445);
+            this.txt_ProformaNR.Location = new System.Drawing.Point(722, 232);
             this.txt_ProformaNR.Name = "txt_ProformaNR";
             this.txt_ProformaNR.Size = new System.Drawing.Size(107, 23);
             this.txt_ProformaNR.TabIndex = 79;
+            this.txt_ProformaNR.Visible = false;
             // 
             // buttonSpecAny8
             // 
@@ -311,11 +312,12 @@
             // 
             // kryptonLabel24
             // 
-            this.kryptonLabel24.Location = new System.Drawing.Point(224, 445);
+            this.kryptonLabel24.Location = new System.Drawing.Point(614, 232);
             this.kryptonLabel24.Name = "kryptonLabel24";
             this.kryptonLabel24.Size = new System.Drawing.Size(84, 20);
             this.kryptonLabel24.TabIndex = 269;
             this.kryptonLabel24.Values.Text = "Proforma NR:";
+            this.kryptonLabel24.Visible = false;
             // 
             // txt_AdvanceDate
             // 
@@ -324,11 +326,12 @@
             this.txt_AdvanceDate.CalendarShowWeekNumbers = true;
             this.txt_AdvanceDate.CustomFormat = null;
             this.txt_AdvanceDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.txt_AdvanceDate.Location = new System.Drawing.Point(332, 418);
+            this.txt_AdvanceDate.Location = new System.Drawing.Point(722, 205);
             this.txt_AdvanceDate.Name = "txt_AdvanceDate";
             this.txt_AdvanceDate.NullValue = " ";
             this.txt_AdvanceDate.Size = new System.Drawing.Size(106, 21);
             this.txt_AdvanceDate.TabIndex = 77;
+            this.txt_AdvanceDate.Visible = false;
             this.txt_AdvanceDate.DropDown += new System.EventHandler<ComponentFactory.Krypton.Toolkit.DateTimePickerDropArgs>(this.txt_AdvanceDate_DropDown);
             // 
             // buttonSpecAny7
@@ -339,19 +342,21 @@
             // 
             // kryptonLabel23
             // 
-            this.kryptonLabel23.Location = new System.Drawing.Point(224, 419);
+            this.kryptonLabel23.Location = new System.Drawing.Point(614, 206);
             this.kryptonLabel23.Name = "kryptonLabel23";
             this.kryptonLabel23.Size = new System.Drawing.Size(87, 20);
             this.kryptonLabel23.TabIndex = 266;
             this.kryptonLabel23.Values.Text = "Advance date:";
+            this.kryptonLabel23.Visible = false;
             // 
             // kryptonLabel22
             // 
-            this.kryptonLabel22.Location = new System.Drawing.Point(14, 443);
+            this.kryptonLabel22.Location = new System.Drawing.Point(404, 230);
             this.kryptonLabel22.Name = "kryptonLabel22";
             this.kryptonLabel22.Size = new System.Drawing.Size(81, 20);
             this.kryptonLabel22.TabIndex = 265;
             this.kryptonLabel22.Values.Text = "By proforma:";
+            this.kryptonLabel22.Visible = false;
             // 
             // txt_InAdvance
             // 
@@ -359,11 +364,12 @@
             this.txt_InAdvance.AllowSpace = false;
             this.txt_InAdvance.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
             this.buttonSpecAny6});
-            this.txt_InAdvance.Location = new System.Drawing.Point(112, 444);
+            this.txt_InAdvance.Location = new System.Drawing.Point(502, 231);
             this.txt_InAdvance.Name = "txt_InAdvance";
             this.txt_InAdvance.Size = new System.Drawing.Size(106, 23);
             this.txt_InAdvance.TabIndex = 78;
             this.txt_InAdvance.Text = "0";
+            this.txt_InAdvance.Visible = false;
             // 
             // buttonSpecAny6
             // 
@@ -377,11 +383,12 @@
             this.txt_PayBefore.CalendarShowWeekNumbers = true;
             this.txt_PayBefore.CustomFormat = null;
             this.txt_PayBefore.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.txt_PayBefore.Location = new System.Drawing.Point(112, 417);
+            this.txt_PayBefore.Location = new System.Drawing.Point(502, 204);
             this.txt_PayBefore.Name = "txt_PayBefore";
             this.txt_PayBefore.NullValue = " ";
             this.txt_PayBefore.Size = new System.Drawing.Size(106, 21);
             this.txt_PayBefore.TabIndex = 76;
+            this.txt_PayBefore.Visible = false;
             this.txt_PayBefore.DropDown += new System.EventHandler<ComponentFactory.Krypton.Toolkit.DateTimePickerDropArgs>(this.txt_PayBefore_DropDown);
             // 
             // buttonSpecAny5
@@ -404,11 +411,12 @@
             // 
             // kryptonLabel21
             // 
-            this.kryptonLabel21.Location = new System.Drawing.Point(14, 417);
+            this.kryptonLabel21.Location = new System.Drawing.Point(404, 204);
             this.kryptonLabel21.Name = "kryptonLabel21";
             this.kryptonLabel21.Size = new System.Drawing.Size(71, 20);
             this.kryptonLabel21.TabIndex = 261;
             this.kryptonLabel21.Values.Text = "Pay before:";
+            this.kryptonLabel21.Visible = false;
             // 
             // kryptonLabel20
             // 
@@ -431,7 +439,7 @@
             // cmb_PlaceOfLoading
             // 
             this.cmb_PlaceOfLoading.IsEmptyColor = false;
-            this.cmb_PlaceOfLoading.Location = new System.Drawing.Point(112, 549);
+            this.cmb_PlaceOfLoading.Location = new System.Drawing.Point(112, 444);
             this.cmb_PlaceOfLoading.Name = "cmb_PlaceOfLoading";
             this.cmb_PlaceOfLoading.OrderBy = "id";
             this.cmb_PlaceOfLoading.sCurrentValue = "";
@@ -446,7 +454,7 @@
             // 
             // kryptonLabel19
             // 
-            this.kryptonLabel19.Location = new System.Drawing.Point(14, 549);
+            this.kryptonLabel19.Location = new System.Drawing.Point(14, 444);
             this.kryptonLabel19.Name = "kryptonLabel19";
             this.kryptonLabel19.Size = new System.Drawing.Size(100, 20);
             this.kryptonLabel19.TabIndex = 256;
@@ -455,7 +463,7 @@
             // cmb_SenderAddress
             // 
             this.cmb_SenderAddress.IsEmptyColor = false;
-            this.cmb_SenderAddress.Location = new System.Drawing.Point(112, 523);
+            this.cmb_SenderAddress.Location = new System.Drawing.Point(112, 418);
             this.cmb_SenderAddress.Name = "cmb_SenderAddress";
             this.cmb_SenderAddress.OrderBy = "id";
             this.cmb_SenderAddress.sCurrentValue = "";
@@ -469,7 +477,7 @@
             // 
             // kryptonLabel18
             // 
-            this.kryptonLabel18.Location = new System.Drawing.Point(14, 575);
+            this.kryptonLabel18.Location = new System.Drawing.Point(14, 470);
             this.kryptonLabel18.Name = "kryptonLabel18";
             this.kryptonLabel18.Size = new System.Drawing.Size(72, 20);
             this.kryptonLabel18.TabIndex = 254;
@@ -480,7 +488,7 @@
             this.txt_Comments.AllowButtonSpecToolTips = true;
             this.txt_Comments.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
             this.buttonSpecAny2});
-            this.txt_Comments.Location = new System.Drawing.Point(112, 576);
+            this.txt_Comments.Location = new System.Drawing.Point(112, 471);
             this.txt_Comments.Multiline = true;
             this.txt_Comments.Name = "txt_Comments";
             this.txt_Comments.Size = new System.Drawing.Size(326, 37);
@@ -494,7 +502,7 @@
             // 
             // kryptonLabel17
             // 
-            this.kryptonLabel17.Location = new System.Drawing.Point(14, 523);
+            this.kryptonLabel17.Location = new System.Drawing.Point(14, 418);
             this.kryptonLabel17.Name = "kryptonLabel17";
             this.kryptonLabel17.Size = new System.Drawing.Size(97, 20);
             this.kryptonLabel17.TabIndex = 252;
@@ -502,16 +510,17 @@
             // 
             // kryptonLabel16
             // 
-            this.kryptonLabel16.Location = new System.Drawing.Point(14, 497);
+            this.kryptonLabel16.Location = new System.Drawing.Point(404, 260);
             this.kryptonLabel16.Name = "kryptonLabel16";
             this.kryptonLabel16.Size = new System.Drawing.Size(42, 20);
             this.kryptonLabel16.TabIndex = 250;
             this.kryptonLabel16.Values.Text = "Asset:";
+            this.kryptonLabel16.Visible = false;
             // 
             // cmb_Asset
             // 
             this.cmb_Asset.IsEmptyColor = false;
-            this.cmb_Asset.Location = new System.Drawing.Point(112, 497);
+            this.cmb_Asset.Location = new System.Drawing.Point(502, 260);
             this.cmb_Asset.Name = "cmb_Asset";
             this.cmb_Asset.OrderBy = "id";
             this.cmb_Asset.sCurrentValue = "";
@@ -522,11 +531,12 @@
             this.cmb_Asset.sText_Filled = "asset";
             this.cmb_Asset.sTitle = "Assets";
             this.cmb_Asset.TabIndex = 81;
+            this.cmb_Asset.Visible = false;
             this.cmb_Asset.SelectedValueChanged += new Odin.CMB_Components.Common.CommonEventHandler(this.cmb_Asset_SelectedValueChanged);
             // 
             // kryptonLabel14
             // 
-            this.kryptonLabel14.Location = new System.Drawing.Point(14, 471);
+            this.kryptonLabel14.Location = new System.Drawing.Point(14, 393);
             this.kryptonLabel14.Name = "kryptonLabel14";
             this.kryptonLabel14.Size = new System.Drawing.Size(86, 20);
             this.kryptonLabel14.TabIndex = 248;
@@ -535,7 +545,7 @@
             // cmb_BankCont
             // 
             this.cmb_BankCont.IsEmptyColor = false;
-            this.cmb_BankCont.Location = new System.Drawing.Point(112, 471);
+            this.cmb_BankCont.Location = new System.Drawing.Point(112, 393);
             this.cmb_BankCont.Name = "cmb_BankCont";
             this.cmb_BankCont.OrderBy = "asdefault";
             this.cmb_BankCont.sCurrentValue = "";
@@ -550,21 +560,23 @@
             // 
             // kryptonLabel13
             // 
-            this.kryptonLabel13.Location = new System.Drawing.Point(14, 391);
+            this.kryptonLabel13.Location = new System.Drawing.Point(404, 178);
             this.kryptonLabel13.Name = "kryptonLabel13";
             this.kryptonLabel13.Size = new System.Drawing.Size(61, 20);
             this.kryptonLabel13.TabIndex = 246;
             this.kryptonLabel13.Values.Text = "Payment:";
+            this.kryptonLabel13.Visible = false;
             // 
             // cmb_Payterms1
             // 
             this.cmb_Payterms1.EnableSearchId = false;
-            this.cmb_Payterms1.Location = new System.Drawing.Point(89, 391);
+            this.cmb_Payterms1.Location = new System.Drawing.Point(479, 178);
             this.cmb_Payterms1.Name = "cmb_Payterms1";
             this.cmb_Payterms1.Payterms = "";
             this.cmb_Payterms1.PaytermsId = 0;
             this.cmb_Payterms1.Size = new System.Drawing.Size(129, 20);
             this.cmb_Payterms1.TabIndex = 75;
+            this.cmb_Payterms1.Visible = false;
             // 
             // kryptonLabel12
             // 
@@ -686,20 +698,22 @@
             // 
             // kryptonLabel15
             // 
-            this.kryptonLabel15.Location = new System.Drawing.Point(213, 155);
+            this.kryptonLabel15.Location = new System.Drawing.Point(413, 316);
             this.kryptonLabel15.Name = "kryptonLabel15";
             this.kryptonLabel15.Size = new System.Drawing.Size(76, 20);
             this.kryptonLabel15.TabIndex = 231;
             this.kryptonLabel15.Values.Text = "Stamp date:";
+            this.kryptonLabel15.Visible = false;
             // 
             // txt_StampDate
             // 
             this.txt_StampDate.CalendarShowWeekNumbers = true;
             this.txt_StampDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.txt_StampDate.Location = new System.Drawing.Point(302, 155);
+            this.txt_StampDate.Location = new System.Drawing.Point(502, 316);
             this.txt_StampDate.Name = "txt_StampDate";
             this.txt_StampDate.Size = new System.Drawing.Size(92, 21);
             this.txt_StampDate.TabIndex = 62;
+            this.txt_StampDate.Visible = false;
             // 
             // kryptonLabel6
             // 
@@ -807,7 +821,7 @@
             // 
             this.gp_Type.GroupBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
             this.gp_Type.GroupBorderStyle = ComponentFactory.Krypton.Toolkit.PaletteBorderStyle.ControlRibbon;
-            this.gp_Type.Location = new System.Drawing.Point(14, 42);
+            this.gp_Type.Location = new System.Drawing.Point(469, 343);
             this.gp_Type.Name = "gp_Type";
             // 
             // gp_Type.Panel
@@ -818,6 +832,7 @@
             this.gp_Type.Size = new System.Drawing.Size(315, 54);
             this.gp_Type.TabIndex = 62;
             this.gp_Type.Values.Heading = "Invoice type";
+            this.gp_Type.Visible = false;
             // 
             // rb_CreditNote
             // 
@@ -923,7 +938,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(451, 648);
+            this.ClientSize = new System.Drawing.Size(453, 543);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -939,7 +954,7 @@
             this.gp_Type.Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gp_Type)).EndInit();
             this.gp_Type.ResumeLayout(false);
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
