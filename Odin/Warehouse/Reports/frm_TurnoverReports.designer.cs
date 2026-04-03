@@ -577,8 +577,8 @@
             this.btn_OthersRefresh.Size = new System.Drawing.Size(101, 31);
             this.btn_OthersRefresh.TabIndex = 1;
             this.btn_OthersRefresh.Values.Image = global::Odin.Global_Resourses.reload_24x24;
-            this.btn_OthersRefresh.Values.Text = "Others";
-            this.btn_OthersRefresh.Visible = false;
+            this.btn_OthersRefresh.Values.Text = "21";
+            this.btn_OthersRefresh.Click += new System.EventHandler(this.btn_OthersRefresh_Click);
             // 
             // btn_RMRefresh
             // 

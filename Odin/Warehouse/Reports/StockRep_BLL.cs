@@ -169,7 +169,7 @@ namespace Odin.Warehouse.Reports
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
 
-        public static DataTable getTurnover2110(string _datefrom, string _datetill)
+        public static DataTable getTurnover2110(string _datefrom, string _datetill, int pftype)
         {
             string query = "sp_BookTurnover2110";
 
@@ -177,7 +177,8 @@ namespace Odin.Warehouse.Reports
             {
 
                 new SqlParameter("@datefrom",SqlDbType.NVarChar){Value = _datefrom},
-                new SqlParameter("@datetill",SqlDbType.NVarChar){Value = _datetill}
+                new SqlParameter("@datetill",SqlDbType.NVarChar){Value = _datetill},
+                new SqlParameter("@pftypecheck",SqlDbType.NVarChar){Value = pftype}
             };
 
             return Helper.QuerySP(query, sqlparams.ToArray());

@@ -104,7 +104,7 @@ namespace Odin.Warehouse.Reports
             
             DataTable data;
             data = StockRep_BLL.getTurnover2110(txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
-                                           txt_CreatDateTill.Value == null ? "" : txt_CreatDateTill.Value.ToString().Trim());
+                                           txt_CreatDateTill.Value == null ? "" : txt_CreatDateTill.Value.ToString().Trim(), 0);
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -189,6 +189,38 @@ namespace Odin.Warehouse.Reports
                 ReportDocument rd;
 
                 rd = OpenReport(data, "Счет 43");
+
+                crystalReportViewer1.ReportSource = rd;
+            });
+
+        }
+
+        public void bw_List2140(object sender, DoWorkEventArgs e)
+        {
+
+            DataTable data;
+            data = StockRep_BLL.getTurnover2110(txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
+                                           txt_CreatDateTill.Value == null ? "" : txt_CreatDateTill.Value.ToString().Trim(), 1);
+
+            gv_List.ThreadSafeCall(delegate
+            {
+                gv_List.AutoGenerateColumns = false;
+                bs_List.DataSource = data;
+                gv_List.DataSource = bs_List;
+
+            });
+
+
+            bn_List.ThreadSafeCall(delegate
+            {
+                bn_List.BindingSource = bs_List;
+            });
+
+            crystalReportViewer1.ThreadSafeCall(delegate
+            {
+                ReportDocument rd;
+
+                rd = OpenReport(data, "Счет 21");
 
                 crystalReportViewer1.ReportSource = rd;
             });
@@ -414,6 +446,16 @@ namespace Odin.Warehouse.Reports
             var dir = Helper.SaveDirection(gv_List);
 
             bwStart(bw_List2110);
+
+            Helper.RestoreDirection(gv_List, oldColumn, dir);
+        }
+
+        private void btn_OthersRefresh_Click(object sender, EventArgs e)
+        {
+            DataGridViewColumn oldColumn = gv_List.SortedColumn;
+            var dir = Helper.SaveDirection(gv_List);
+
+            bwStart(bw_List2140);
 
             Helper.RestoreDirection(gv_List, oldColumn, dir);
         }
