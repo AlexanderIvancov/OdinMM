@@ -890,6 +890,7 @@ namespace Odin.Sales
                     {
                         QArtId = Convert.ToInt32(dr["artid"]);
                         QComments = dr["comments"].ToString();
+                        QSalesComments = dr["salescomments"].ToString();
                         QContract = dr["contract"].ToString();
                         QCreatAt = dr["createdat"].ToString();
                         QCreatBy = dr["createdby"].ToString();
@@ -981,6 +982,11 @@ namespace Odin.Sales
             get; set;
         }
 
+        public string QSalesComments
+        {
+            get; set;
+        }
+
         public string QContract
         {
             get; set;
@@ -1052,6 +1058,7 @@ namespace Odin.Sales
             QName = "";
             QArtId = 0;
             QComments = "";
+            QSalesComments = "";
             QContract = "";
             QRevision = "";
             QCreatAt = "";
@@ -1085,7 +1092,7 @@ namespace Odin.Sales
             QDelivAddressId = 0;
         }
         public int SaveQuotation(int id, int artid, string revision, string custarticle, double qty, int unitid, string reqdate,
-                                string expdate, string week, int stateid, double unitprice, string comments, int custid,
+                                string expdate, string week, int stateid, double unitprice, string comments, string salescomments, int custid,
                                 int pcb, DataTable stages, int CurId, string corder, string coline, int issent, string sentdate,
                                 int endcustomerid, int _internal, double _spoilage, int _resale, int _blockdelivery, int _isproject,
                                 int _isprimary, int _delivplaceid, int _delivaddressid, int _npi, string _contract)
@@ -1109,6 +1116,7 @@ namespace Odin.Sales
             sqlComm.Parameters.AddWithValue("@stateid", stateid);
             sqlComm.Parameters.AddWithValue("@unitprice", unitprice);
             sqlComm.Parameters.AddWithValue("@comments", comments);
+            sqlComm.Parameters.AddWithValue("@salescomments", salescomments);
             sqlComm.Parameters.AddWithValue("@custid", custid);
             sqlComm.Parameters.AddWithValue("@pcb", pcb);
             sqlComm.Parameters.AddWithValue("@curid", CurId);

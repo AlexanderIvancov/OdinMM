@@ -68,7 +68,7 @@
             this.ctl_QuotDets1.Revision = "";
             this.ctl_QuotDets1.SentDate = "05.09.2019 14:23:24 ";
             this.ctl_QuotDets1.SentDateD = new System.DateTime(2019, 9, 5, 14, 23, 24, 573);
-            this.ctl_QuotDets1.Size = new System.Drawing.Size(548, 469);
+            this.ctl_QuotDets1.Size = new System.Drawing.Size(548, 553);
             this.ctl_QuotDets1.Spoilage = 0D;
             this.ctl_QuotDets1.StateId = 0;
             this.ctl_QuotDets1.TabIndex = 0;
@@ -83,7 +83,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(548, 469);
+            this.ClientSize = new System.Drawing.Size(548, 553);
             this.Controls.Add(this.ctl_QuotDets1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "frm_AddQuotation";

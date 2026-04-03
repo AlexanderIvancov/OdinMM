@@ -146,6 +146,12 @@ namespace Odin.Sales
             set { txt_Comments.Text = value; }
         }
 
+        public string SalesComments
+        {
+            get { return txt_salescomment.Text; }
+            set { txt_salescomment.Text = value; }
+        }
+
         public string Contract
         {
             get { return txt_Contract.Text; }
@@ -347,6 +353,7 @@ namespace Odin.Sales
         {
             ArtId = 0;
             Comments = "";
+            SalesComments = "";
             CreatAt = "";
             CreatBy = "";
             CustArticle = "";
@@ -433,6 +440,7 @@ namespace Odin.Sales
                     Quotation = COBll.QName;
                 ArtId = COBll.QArtId;
                 Comments = COBll.QComments;
+                SalesComments = COBll.QSalesComments;
                 Contract = COBll.QContract;
                 CreatAt = COBll.QCreatAt;
                 CreatBy = COBll.QCreatBy;
@@ -510,9 +518,13 @@ namespace Odin.Sales
 
         private void buttonSpecAny4_Click(object sender, EventArgs e)
         {
-            txt_Comments.Text = string.Empty;
+            txt_Comments.Text = string.Empty; 
         }
 
+        private void buttonSpecAny7_Click(object sender, EventArgs e)
+        {
+            txt_salescomment.Text = string.Empty; 
+        }
 
         private void btn_OK_Click(object sender, EventArgs e)
         {
@@ -549,7 +561,7 @@ namespace Odin.Sales
                     }
 
                     NewLineId = COBll.SaveQuotation(QuotId, DLL.CheckArtId(ArtId), Revision, CustArticle, Qty, UnitId, ReqDate, ExpDate, Week, StateId,
-                                                UnitPrice, Comments, CustId, PCB, datastages, CurId, CustOrder, CustLine, IsSent, SentDate, EndCustomerId,
+                                                UnitPrice, Comments, SalesComments, CustId, PCB, datastages, CurId, CustOrder, CustLine, IsSent, SentDate, EndCustomerId,
                                                 Internal, Spoilage, Resale, Blocked, IsProject, Primary, DelivPlaceId, DelivAddressId, 0, Contract);
                     QuotId = NewLineId;
                     COBll.QuotId = QuotId;
@@ -594,6 +606,7 @@ namespace Odin.Sales
                             strMessage = strMessage + "\r\nStages: " + COBll.COStages;
                             strMessage = strMessage + "\r\nLead week: " + COBll.COLeadWeek;//QWeek;
                             strMessage = strMessage + "\r\nComments: " + COBll.COComments;
+                            strMessage = strMessage + "\r\nComments: " + COBll.COSalesComments;
                             strMessage = strMessage + "\r\n" + _neworder;
                             MyHelper.SendMessage(glob_Class.ReplaceChar(emailaddresses, ";", ","), "Order: " + COBll.COHeader, strMessage);
                             //MessageBox.Show(COBll.COHeader + " was created!");
