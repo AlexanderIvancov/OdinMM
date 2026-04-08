@@ -1553,6 +1553,7 @@
             this.btn_Process.TabIndex = 2;
             this.btn_Process.Values.Image = global::Odin.Global_Resourses.Settings_24x24;
             this.btn_Process.Values.Text = "Process";
+            this.btn_Process.Visible = false;
             // 
             // btn_Batches
             // 
