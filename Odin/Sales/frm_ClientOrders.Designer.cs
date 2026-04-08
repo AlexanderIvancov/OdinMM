@@ -32,9 +32,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_ClientOrders));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mnu_Lines = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mni_FilterFor = new System.Windows.Forms.ToolStripTextBox();
             this.mni_Search = new System.Windows.Forms.ToolStripMenuItem();
@@ -895,8 +895,8 @@
             this.gv_List.Name = "gv_List";
             this.gv_List.ReadOnly = true;
             this.gv_List.RowHeadersWidth = 20;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gv_List.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gv_List.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.gv_List.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.gv_List.Size = new System.Drawing.Size(1592, 415);
             this.gv_List.TabIndex = 3;
@@ -1091,8 +1091,8 @@
             // cn_comments
             // 
             this.cn_comments.DataPropertyName = "comments";
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.cn_comments.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.cn_comments.DefaultCellStyle = dataGridViewCellStyle1;
             this.cn_comments.FillWeight = 150F;
             this.cn_comments.HeaderText = "Comments";
             this.cn_comments.Name = "cn_comments";
@@ -1102,8 +1102,8 @@
             // cn_comments1
             // 
             this.cn_comments1.DataPropertyName = "comments1";
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.cn_comments1.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.cn_comments1.DefaultCellStyle = dataGridViewCellStyle2;
             this.cn_comments1.HeaderText = "Comments part 2";
             this.cn_comments1.Name = "cn_comments1";
             this.cn_comments1.ReadOnly = true;
@@ -1486,7 +1486,7 @@
             // 
             // btn_RMConsulting
             // 
-            this.btn_RMConsulting.Location = new System.Drawing.Point(1226, 5);
+            this.btn_RMConsulting.Location = new System.Drawing.Point(1132, 5);
             this.btn_RMConsulting.Name = "btn_RMConsulting";
             this.btn_RMConsulting.Size = new System.Drawing.Size(144, 39);
             this.btn_RMConsulting.TabIndex = 19;
@@ -1506,7 +1506,7 @@
             // 
             // btn_Invoices
             // 
-            this.btn_Invoices.Location = new System.Drawing.Point(1677, 7);
+            this.btn_Invoices.Location = new System.Drawing.Point(1514, 5);
             this.btn_Invoices.Name = "btn_Invoices";
             this.btn_Invoices.Size = new System.Drawing.Size(105, 39);
             this.btn_Invoices.TabIndex = 16;
@@ -1527,7 +1527,7 @@
             // 
             // btn_AwaitingCost
             // 
-            this.btn_AwaitingCost.Location = new System.Drawing.Point(1543, 7);
+            this.btn_AwaitingCost.Location = new System.Drawing.Point(1380, 5);
             this.btn_AwaitingCost.Name = "btn_AwaitingCost";
             this.btn_AwaitingCost.Size = new System.Drawing.Size(128, 39);
             this.btn_AwaitingCost.TabIndex = 11;
@@ -1547,7 +1547,7 @@
             // 
             // btn_Process
             // 
-            this.btn_Process.Location = new System.Drawing.Point(1445, 7);
+            this.btn_Process.Location = new System.Drawing.Point(1282, 5);
             this.btn_Process.Name = "btn_Process";
             this.btn_Process.Size = new System.Drawing.Size(92, 39);
             this.btn_Process.TabIndex = 2;
@@ -1576,7 +1576,7 @@
             // 
             // btn_Documents
             // 
-            this.btn_Documents.Location = new System.Drawing.Point(1784, 7);
+            this.btn_Documents.Location = new System.Drawing.Point(1625, 5);
             this.btn_Documents.Name = "btn_Documents";
             this.btn_Documents.Size = new System.Drawing.Size(109, 39);
             this.btn_Documents.TabIndex = 8;
