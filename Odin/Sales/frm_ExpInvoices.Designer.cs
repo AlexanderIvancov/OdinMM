@@ -114,7 +114,6 @@
             this.cn_total = new System.Windows.Forms.DataGridViewTextBoxColumn();   
             this.cn_totalvat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_contract = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_corder = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_docdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_totalwithvat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -869,7 +868,6 @@
             this.cn_totalwithvat,
             this.cn_comments,
             this.cn_contract,
-            this.cn_corder,
             this.cn_docdate,
             this.chk_Service,
             this.chk_AddExp,
@@ -1082,15 +1080,6 @@
             this.cn_contract.Name = "cn_contract";
             this.cn_contract.ReadOnly = true;
             this.cn_contract.Width = 150;
-            // 
-            // cn_corder
-            // 
-            this.cn_corder.DataPropertyName = "corder";
-            this.cn_corder.FillWeight = 150F;
-            this.cn_corder.HeaderText = "CO order";
-            this.cn_corder.Name = "cn_corder";
-            this.cn_corder.ReadOnly = true;
-            this.cn_corder.Width = 150;
             // 
             // cn_docdate
             // 
@@ -1656,7 +1645,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_totalwithvat;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_comments;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_contract;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_corder;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_docdate;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chk_Service;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chk_AddExp;
