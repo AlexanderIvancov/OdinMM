@@ -134,6 +134,7 @@
             this.cn_paid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chk_resale = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.cn_qtystock = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_qtygpa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_blockdelivery = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.cn_salescomments = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chk_isprimary = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -886,6 +887,7 @@
             this.cn_paid,
             this.chk_resale,
             this.cn_qtystock,
+            this.cn_qtygpa,
             this.cn_blockdelivery,
             this.cn_salescomments,
             this.chk_isprimary});
@@ -1218,6 +1220,15 @@
             this.cn_qtystock.Name = "cn_qtystock";
             this.cn_qtystock.ReadOnly = true;
             this.cn_qtystock.Width = 80;
+            // 
+            // cn_qtygpa
+            // 
+            this.cn_qtygpa.DataPropertyName = "qtygpa";
+            this.cn_qtygpa.FillWeight = 80F;
+            this.cn_qtygpa.HeaderText = "Qty GPA";
+            this.cn_qtygpa.Name = "cn_qtygpa";
+            this.cn_qtygpa.ReadOnly = true;
+            this.cn_qtygpa.Width = 80;
             // 
             // cn_blockdelivery
             // 
@@ -1801,6 +1812,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_paid;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chk_resale;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_qtystock;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_qtygpa;
         private System.Windows.Forms.DataGridViewCheckBoxColumn cn_blockdelivery;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_salescomments;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chk_isprimary;
