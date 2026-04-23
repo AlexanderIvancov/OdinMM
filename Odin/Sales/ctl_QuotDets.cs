@@ -606,7 +606,6 @@ namespace Odin.Sales
                             strMessage = strMessage + "\r\nStages: " + COBll.COStages;
                             strMessage = strMessage + "\r\nLead week: " + COBll.COLeadWeek;//QWeek;
                             strMessage = strMessage + "\r\nComments: " + COBll.COComments;
-                            strMessage = strMessage + "\r\nSales comments: " + COBll.COSalesComments;
                             strMessage = strMessage + "\r\n" + _neworder;
                             MyHelper.SendMessage(glob_Class.ReplaceChar(emailaddresses, ";", ","), "Order: " + COBll.COHeader, strMessage);
                             //MessageBox.Show(COBll.COHeader + " was created!");
