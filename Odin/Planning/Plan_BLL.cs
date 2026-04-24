@@ -629,6 +629,7 @@ namespace Odin.Planning
             BatchProject = "";
             BatchQuotId = 0;
             IsFrozen = 0;
+            FrozenComments = "";
             BatchSerials = "";
             BatchResDate = "";
             BatchToFollow = 0;
