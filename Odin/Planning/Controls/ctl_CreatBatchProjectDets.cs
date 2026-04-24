@@ -156,6 +156,17 @@ namespace Odin.Planning.Controls
             get { return txt_Customer.Text; }
             set { txt_Customer.Text = value; }
         }
+        public int IsFrozen
+        {
+            get
+            {
+                return chk_IsFrozen.CheckState == CheckState.Checked ? -1 : chk_IsFrozen.CheckState == CheckState.Unchecked ? 0 : 1;
+            }
+            set
+            {
+                chk_IsFrozen.CheckState = value == -1 ? CheckState.Checked : value == 0 ? CheckState.Unchecked : CheckState.Indeterminate;
+            }
+        }
         public int AllSpoil
         {
             get
@@ -757,7 +768,7 @@ namespace Odin.Planning.Controls
                 else
                 {
                     //Creation of header of new batch
-                    int _id = PlanBll.AddBatchProjectHeader(ArticleId, QtyInBatch, Comments, StartDate, (QuotId == 0 ? 0 : -1), ResDate, 0);
+                    int _id = PlanBll.AddBatchProjectHeader(ArticleId, QtyInBatch, Comments, StartDate, (QuotId == 0 ? 0 : -1), ResDate, 0, IsFrozen);
                     if (_id != 0)
                     {
                         //Creation of the link between Client order and batch
@@ -805,7 +816,7 @@ namespace Odin.Planning.Controls
                         )
                     {
                         //Header
-                        PlanBll.EditBatchProjectHeader(BatchId, ArticleId, QtyInBatch, Comments, StartDate, ResDate, 0);
+                        PlanBll.EditBatchProjectHeader(BatchId, ArticleId, QtyInBatch, Comments, StartDate, ResDate, 0, IsFrozen);
 
                     }
                     if (QtyInBatch != fOldQtyInBatch

@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctl_CreatBatchProjectDets));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.chk_IsFrozen = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.txt_ResDate = new Odin.CustomControls.NullableDateTimePicker();
             this.kryptonLabel10 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.chk_SelectAll = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
@@ -113,6 +114,7 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.chk_IsFrozen);
             this.kryptonPanel1.Controls.Add(this.txt_ResDate);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel10);
             this.kryptonPanel1.Controls.Add(this.chk_SelectAll);
@@ -142,6 +144,14 @@
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
             this.kryptonPanel1.Size = new System.Drawing.Size(1289, 221);
             this.kryptonPanel1.TabIndex = 2;
+            // 
+            // chk_IsFrozen
+            // 
+            this.chk_IsFrozen.Location = new System.Drawing.Point(465, 121);
+            this.chk_IsFrozen.Name = "chk_IsFrozen";
+            this.chk_IsFrozen.Size = new System.Drawing.Size(72, 20);
+            this.chk_IsFrozen.TabIndex = 269;
+            this.chk_IsFrozen.Values.Text = "Is Frozen";
             // 
             // txt_ResDate
             // 
@@ -395,6 +405,7 @@
             this.cmb_Articles1.ArticleIdRec = 0;
             this.cmb_Articles1.ArtType = null;
             this.cmb_Articles1.BOMState = 0;
+            this.cmb_Articles1.CertState = "";
             this.cmb_Articles1.Comments = null;
             this.cmb_Articles1.CustCode = null;
             this.cmb_Articles1.CustCodeId = 0;
@@ -888,8 +899,8 @@
             this.bn_List.ResumeLayout(false);
             this.bn_List.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tv_BOM)).EndInit();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
-            this.PerformLayout(); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -968,5 +979,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_SelectAll;
         private CustomControls.NullableDateTimePicker txt_ResDate;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel10;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_IsFrozen;
     }
 }

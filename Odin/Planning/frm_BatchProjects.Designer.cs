@@ -115,6 +115,7 @@
             this.cn_artid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_article = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_secname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chk_IsFrozen = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.cn_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_description = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -617,6 +618,7 @@
             this.cmb_Articles1.ArticleIdRec = 0;
             this.cmb_Articles1.ArtType = null;
             this.cmb_Articles1.BOMState = 0;
+            this.cmb_Articles1.CertState = "";
             this.cmb_Articles1.Comments = null;
             this.cmb_Articles1.CustCode = null;
             this.cmb_Articles1.CustCodeId = 0;
@@ -746,6 +748,7 @@
             this.cn_artid,
             this.cn_article,
             this.cn_secname,
+            this.chk_IsFrozen,
             this.cn_qty,
             this.cn_unit,
             this.cn_description,
@@ -1133,6 +1136,20 @@
             this.cn_secname.ReadOnly = true;
             this.cn_secname.Width = 200;
             // 
+            // chk_IsFrozen
+            // 
+            this.chk_IsFrozen.DataPropertyName = "isfrozen";
+            this.chk_IsFrozen.FalseValue = "0";
+            this.chk_IsFrozen.FillWeight = 40F;
+            this.chk_IsFrozen.HeaderText = "IsFrozen";
+            this.chk_IsFrozen.IndeterminateValue = "1";
+            this.chk_IsFrozen.Name = "chk_IsFrozen";
+            this.chk_IsFrozen.ReadOnly = true;
+            this.chk_IsFrozen.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.chk_IsFrozen.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.chk_IsFrozen.TrueValue = "-1";
+            this.chk_IsFrozen.Width = 40;
+            // 
             // cn_qty
             // 
             this.cn_qty.DataPropertyName = "qty";
@@ -1487,6 +1504,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_artid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_article;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_secname;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn chk_IsFrozen;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_unit;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_description;
