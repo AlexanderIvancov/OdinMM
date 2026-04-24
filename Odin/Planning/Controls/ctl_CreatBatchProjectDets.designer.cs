@@ -32,6 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctl_CreatBatchProjectDets));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonLabel11 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.txt_FrozenComments = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.buttonSpecAny2 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.chk_IsFrozen = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.txt_ResDate = new Odin.CustomControls.NullableDateTimePicker();
             this.kryptonLabel10 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -114,6 +117,8 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel11);
+            this.kryptonPanel1.Controls.Add(this.txt_FrozenComments);
             this.kryptonPanel1.Controls.Add(this.chk_IsFrozen);
             this.kryptonPanel1.Controls.Add(this.txt_ResDate);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel10);
@@ -145,13 +150,41 @@
             this.kryptonPanel1.Size = new System.Drawing.Size(1289, 221);
             this.kryptonPanel1.TabIndex = 2;
             // 
+            // kryptonLabel11
+            // 
+            this.kryptonLabel11.Location = new System.Drawing.Point(543, 94);
+            this.kryptonLabel11.Name = "kryptonLabel11";
+            this.kryptonLabel11.Size = new System.Drawing.Size(88, 20);
+            this.kryptonLabel11.TabIndex = 283;
+            this.kryptonLabel11.Values.Text = "Freeze reason:";
+            this.kryptonLabel11.Visible = false;
+            // 
+            // txt_FrozenComments
+            // 
+            this.txt_FrozenComments.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
+            this.buttonSpecAny2});
+            this.txt_FrozenComments.Location = new System.Drawing.Point(543, 122);
+            this.txt_FrozenComments.Multiline = true;
+            this.txt_FrozenComments.Name = "txt_FrozenComments";
+            this.txt_FrozenComments.Size = new System.Drawing.Size(432, 44);
+            this.txt_FrozenComments.StateActive.Back.Color1 = System.Drawing.Color.White;
+            this.txt_FrozenComments.TabIndex = 282;
+            this.txt_FrozenComments.Visible = false;
+            // 
+            // buttonSpecAny2
+            // 
+            this.buttonSpecAny2.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
+            this.buttonSpecAny2.UniqueName = "D5B6C03750554195328E4B264796E65F";
+            // 
             // chk_IsFrozen
             // 
-            this.chk_IsFrozen.Location = new System.Drawing.Point(465, 121);
+            this.chk_IsFrozen.Location = new System.Drawing.Point(543, 68);
             this.chk_IsFrozen.Name = "chk_IsFrozen";
             this.chk_IsFrozen.Size = new System.Drawing.Size(72, 20);
             this.chk_IsFrozen.TabIndex = 269;
             this.chk_IsFrozen.Values.Text = "Is Frozen";
+            this.chk_IsFrozen.Visible = true;
+            this.chk_IsFrozen.CheckedChanged += new System.EventHandler(this.chk_IsFrozen_CheckedChanged);
             // 
             // txt_ResDate
             // 
@@ -175,7 +208,7 @@
             // 
             // chk_SelectAll
             // 
-            this.chk_SelectAll.Location = new System.Drawing.Point(608, 91);
+            this.chk_SelectAll.Location = new System.Drawing.Point(465, 38);
             this.chk_SelectAll.Name = "chk_SelectAll";
             this.chk_SelectAll.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Silver;
             this.chk_SelectAll.Size = new System.Drawing.Size(72, 20);
@@ -980,5 +1013,8 @@
         private CustomControls.NullableDateTimePicker txt_ResDate;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel10;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_IsFrozen;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel11;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_FrozenComments;
+        private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny2;
     }
 }

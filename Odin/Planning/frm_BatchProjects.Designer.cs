@@ -111,6 +111,7 @@
             this.kryptonDockingManager1 = new ComponentFactory.Krypton.Docking.KryptonDockingManager();
             this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
             this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_frozencomments = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_project = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_artid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_article = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -744,6 +745,7 @@
             this.gv_List.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv_List.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cn_id,
+            this.cn_frozencomments,
             this.cn_project,
             this.cn_artid,
             this.cn_article,
@@ -1099,6 +1101,14 @@
             this.cn_id.Name = "cn_id";
             this.cn_id.ReadOnly = true;
             this.cn_id.Visible = false;
+            // 
+            // FrozenComments
+            // 
+            this.cn_frozencomments.DataPropertyName = "frozencomments";
+            this.cn_frozencomments.HeaderText = "Freeze reason";
+            this.cn_frozencomments.Name = "FrozenComments";
+            this.cn_frozencomments.ReadOnly = true;
+
             // 
             // cn_project
             // 
@@ -1500,6 +1510,7 @@
         private CMB_Components.Companies.cmb_Firms cmb_Firms1;
         private System.Windows.Forms.ToolStripButton btn_ToFollow;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_frozencomments;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_project;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_artid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_article;

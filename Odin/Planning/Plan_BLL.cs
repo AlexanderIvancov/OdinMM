@@ -505,6 +505,8 @@ namespace Odin.Planning
         { get; set; }
         public int IsFrozen
         { get; set; }
+        public string FrozenComments
+        { get; set; }
         public string BatchResDate
         { get; set; }
         public int BatchToFollow
@@ -586,6 +588,7 @@ namespace Odin.Planning
                         BatchSerials = dr["serialnumbers"].ToString();
                         BatchQuotId = Convert.ToInt32(dr["quotid"]);
                         IsFrozen = Convert.ToInt32(dr["isfrozen"]);
+                        FrozenComments = dr["frozencomments"].ToString();
                         BatchResDate = dr["resdate"].ToString();
                         BatchToFollow = Convert.ToInt32(dr["tofollow"]);
                         BatchCopyTHT = Convert.ToInt32(dr["copyvizatht"]);
@@ -2078,7 +2081,7 @@ namespace Odin.Planning
             set { _ProjectName = value; }
         }
 
-        public int AddBatchProjectHeader(int ArtId, double Qty, string Comments, string StartDate, int IsQuot, string ResDate, int ProdPlaceId, int IsFrozen)
+        public int AddBatchProjectHeader(int ArtId, double Qty, string Comments, string StartDate, int IsQuot, string ResDate, int ProdPlaceId, int IsFrozen, string FrozenComments)
         {
             int _res = 0;
             SqlConnection sqlConn = new SqlConnection(sConnStr);
@@ -2095,6 +2098,7 @@ namespace Odin.Planning
             sqlComm.Parameters.AddWithValue("@ResDate", ResDate);
             sqlComm.Parameters.AddWithValue("@ProdPlaceId", ProdPlaceId);
             sqlComm.Parameters.AddWithValue("@IsFrozen", IsFrozen);
+            sqlComm.Parameters.AddWithValue("@FrozenComments", FrozenComments);
 
             sqlComm.Parameters.Add("@insertedname", SqlDbType.NVarChar, 25).Direction = ParameterDirection.Output;
             sqlComm.Parameters.Add("@insertedid", SqlDbType.Int).Direction = ParameterDirection.Output;
@@ -2110,7 +2114,7 @@ namespace Odin.Planning
             return _res;
         }
 
-        public void EditBatchProjectHeader(int BatchId, int ArtId, double Qty, string Comments, string StartDate, string ResDate, int ProdPlaceId, int IsFrozen)
+        public void EditBatchProjectHeader(int BatchId, int ArtId, double Qty, string Comments, string StartDate, string ResDate, int ProdPlaceId, int IsFrozen, string FrozenComments)
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_editbatchprojectheader", sqlConn);
@@ -2125,6 +2129,7 @@ namespace Odin.Planning
             sqlComm.Parameters.AddWithValue("@ResDate", ResDate);
             sqlComm.Parameters.AddWithValue("@ProdPlaceId", ProdPlaceId);
             sqlComm.Parameters.AddWithValue("@IsFrozen", IsFrozen);
+            sqlComm.Parameters.AddWithValue("@FrozenComments", FrozenComments);
             //try
             //{
             sqlConn.Open();

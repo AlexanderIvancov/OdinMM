@@ -54,6 +54,7 @@
             this.ctl_CreatBatchProjectDets1.QtyInBatch = 0D;
             this.ctl_CreatBatchProjectDets1.QtyInCO = 0D;
             this.ctl_CreatBatchProjectDets1.IsFrozen = 0;
+            this.ctl_CreatBatchProjectDets1.FrozenComments = "";
             this.ctl_CreatBatchProjectDets1.SalesOrderId = 0;
             this.ctl_CreatBatchProjectDets1.Size = new System.Drawing.Size(1075, 599);
             this.ctl_CreatBatchProjectDets1.TabIndex = 0;

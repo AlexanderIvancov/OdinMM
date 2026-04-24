@@ -140,6 +140,12 @@ namespace Odin.Planning.Controls
             set { txt_Comments.Text = value; }
         }
 
+        public string FrozenComments
+        {
+            get { return txt_FrozenComments.Text; }
+            set { txt_FrozenComments.Text = value; }
+        }
+
         int _SpoilType = 0;
         public int SalesOrderId
         {
@@ -409,6 +415,11 @@ namespace Odin.Planning.Controls
             //    }
 
             //}
+        }
+
+        private void chk_IsFrozen_CheckedChanged(object sender, EventArgs e)
+        {
+            this.kryptonLabel11.Visible = this.txt_FrozenComments.Visible = chk_IsFrozen.CheckState == CheckState.Checked ? true : chk_IsFrozen.CheckState == CheckState.Unchecked ? false : true;
         }
 
         public void FillBatchUnits()
@@ -768,7 +779,7 @@ namespace Odin.Planning.Controls
                 else
                 {
                     //Creation of header of new batch
-                    int _id = PlanBll.AddBatchProjectHeader(ArticleId, QtyInBatch, Comments, StartDate, (QuotId == 0 ? 0 : -1), ResDate, 0, IsFrozen);
+                    int _id = PlanBll.AddBatchProjectHeader(ArticleId, QtyInBatch, Comments, StartDate, (QuotId == 0 ? 0 : -1), ResDate, 0, IsFrozen, FrozenComments);
                     if (_id != 0)
                     {
                         //Creation of the link between Client order and batch
@@ -816,7 +827,7 @@ namespace Odin.Planning.Controls
                         )
                     {
                         //Header
-                        PlanBll.EditBatchProjectHeader(BatchId, ArticleId, QtyInBatch, Comments, StartDate, ResDate, 0, IsFrozen);
+                        PlanBll.EditBatchProjectHeader(BatchId, ArticleId, QtyInBatch, Comments, StartDate, ResDate, 0, IsFrozen, FrozenComments);
 
                     }
                     if (QtyInBatch != fOldQtyInBatch

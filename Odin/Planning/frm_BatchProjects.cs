@@ -417,6 +417,7 @@ namespace Odin.Planning
                 frm.ctl_CreatBatchProjectDets1.fOldStartDate = PlanBll.BatchStartDate;
                 frm.ctl_CreatBatchProjectDets1.QuotId = PlanBll.BatchQuotId;
                 frm.ctl_CreatBatchProjectDets1.IsFrozen = PlanBll.IsFrozen;
+                frm.ctl_CreatBatchProjectDets1.FrozenComments = PlanBll.FrozenComments;
                 frm.ctl_CreatBatchProjectDets1.FillDecNum();
                 frm.ctl_CreatBatchProjectDets1.FillGridBatch(_batchid);
 
