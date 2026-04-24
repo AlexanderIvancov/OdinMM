@@ -167,6 +167,7 @@
             this.kryptonPanel3 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.btn_Delete = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.btn_SaveWeek = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonLabel34 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.cmb_Common1 = new Odin.CMB_Components.Common.cmb_Common();
@@ -195,7 +196,6 @@
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Cancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.btn_SaveWeek = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.mnu_Lines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).BeginInit();
             this.mnu_LinesP.SuspendLayout();
@@ -429,10 +429,10 @@
             this.cn_prodplace});
             this.gv_List.ContextMenuStrip = this.mnu_Lines;
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gv_List.Location = new System.Drawing.Point(72, 121);
+            this.gv_List.Location = new System.Drawing.Point(72, 124);
             this.gv_List.Name = "gv_List";
             this.gv_List.RowHeadersWidth = 10;
-            this.gv_List.Size = new System.Drawing.Size(1812, 515);
+            this.gv_List.Size = new System.Drawing.Size(1812, 512);
             this.gv_List.TabIndex = 25;
             this.gv_List.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gv_List_CellFormatting);
             this.gv_List.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_List_CellValidated);
@@ -547,6 +547,7 @@
             // cn_prodplace
             // 
             this.cn_prodplace.DataPropertyName = "prodplace";
+            this.cn_prodplace.Frozen = true;
             this.cn_prodplace.HeaderText = "Prod. place";
             this.cn_prodplace.Name = "cn_prodplace";
             // 
@@ -1526,10 +1527,10 @@
             // 
             this.kryptonPanel3.Controls.Add(this.btn_Delete);
             this.kryptonPanel3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.kryptonPanel3.Location = new System.Drawing.Point(0, 121);
+            this.kryptonPanel3.Location = new System.Drawing.Point(0, 124);
             this.kryptonPanel3.Name = "kryptonPanel3";
             this.kryptonPanel3.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.TabDock;
-            this.kryptonPanel3.Size = new System.Drawing.Size(72, 793);
+            this.kryptonPanel3.Size = new System.Drawing.Size(72, 790);
             this.kryptonPanel3.TabIndex = 14;
             this.kryptonPanel3.Visible = false;
             // 
@@ -1571,12 +1572,23 @@
             this.kryptonPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonPanel2.Location = new System.Drawing.Point(0, 36);
             this.kryptonPanel2.Name = "kryptonPanel2";
-            this.kryptonPanel2.Size = new System.Drawing.Size(1884, 85);
+            this.kryptonPanel2.Size = new System.Drawing.Size(1884, 88);
             this.kryptonPanel2.TabIndex = 12;
+            // 
+            // btn_SaveWeek
+            // 
+            this.btn_SaveWeek.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btn_SaveWeek.Location = new System.Drawing.Point(1176, 6);
+            this.btn_SaveWeek.Name = "btn_SaveWeek";
+            this.btn_SaveWeek.Size = new System.Drawing.Size(168, 39);
+            this.btn_SaveWeek.TabIndex = 296;
+            this.btn_SaveWeek.Values.Image = global::Odin.Global_Resourses.db_update;
+            this.btn_SaveWeek.Values.Text = "Save selected week";
+            this.btn_SaveWeek.Click += new System.EventHandler(this.btn_SaveWeek_Click);
             // 
             // kryptonButton1
             // 
-            this.kryptonButton1.Location = new System.Drawing.Point(1139, 54);
+            this.kryptonButton1.Location = new System.Drawing.Point(1446, 12);
             this.kryptonButton1.Name = "kryptonButton1";
             this.kryptonButton1.Size = new System.Drawing.Size(90, 25);
             this.kryptonButton1.TabIndex = 294;
@@ -1609,7 +1621,7 @@
             // 
             // btn_Launches
             // 
-            this.btn_Launches.Location = new System.Drawing.Point(1095, 3);
+            this.btn_Launches.Location = new System.Drawing.Point(1073, 6);
             this.btn_Launches.Name = "btn_Launches";
             this.btn_Launches.Size = new System.Drawing.Size(100, 39);
             this.btn_Launches.TabIndex = 291;
@@ -1620,7 +1632,7 @@
             // btn_Save
             // 
             this.btn_Save.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btn_Save.Location = new System.Drawing.Point(1002, 3);
+            this.btn_Save.Location = new System.Drawing.Point(980, 6);
             this.btn_Save.Name = "btn_Save";
             this.btn_Save.Size = new System.Drawing.Size(90, 39);
             this.btn_Save.TabIndex = 290;
@@ -1631,7 +1643,7 @@
             // btn_Print
             // 
             this.btn_Print.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_Print.Location = new System.Drawing.Point(1002, 43);
+            this.btn_Print.Location = new System.Drawing.Point(1350, 6);
             this.btn_Print.Name = "btn_Print";
             this.btn_Print.Size = new System.Drawing.Size(90, 38);
             this.btn_Print.TabIndex = 289;
@@ -1796,7 +1808,7 @@
             // btn_Refresh1
             // 
             this.btn_Refresh1.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.LowProfile;
-            this.btn_Refresh1.Location = new System.Drawing.Point(941, 19);
+            this.btn_Refresh1.Location = new System.Drawing.Point(930, 17);
             this.btn_Refresh1.Name = "btn_Refresh1";
             this.btn_Refresh1.Size = new System.Drawing.Size(44, 38);
             this.btn_Refresh1.TabIndex = 275;
@@ -1886,17 +1898,6 @@
             this.btn_Cancel.TabIndex = 10;
             this.btn_Cancel.Values.Image = global::Odin.Global_Resourses.Cancel;
             this.btn_Cancel.Values.Text = "Cancel";
-            // 
-            // btn_SaveWeek
-            // 
-            this.btn_SaveWeek.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btn_SaveWeek.Location = new System.Drawing.Point(1198, 3);
-            this.btn_SaveWeek.Name = "btn_SaveWeek";
-            this.btn_SaveWeek.Size = new System.Drawing.Size(168, 39);
-            this.btn_SaveWeek.TabIndex = 296;
-            this.btn_SaveWeek.Values.Image = global::Odin.Global_Resourses.db_update;
-            this.btn_SaveWeek.Values.Text = "Save selected week";
-            this.btn_SaveWeek.Click += new System.EventHandler(this.btn_SaveWeek_Click);
             // 
             // frm_ProductionPlanning
             // 
@@ -2146,5 +2147,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
         private System.Windows.Forms.ToolStripMenuItem mni_Holidays;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_SaveWeek;
+        public System.Collections.Generic.List<ComponentFactory.Krypton.Toolkit.KryptonLabel> weekLabels = new System.Collections.Generic.List<ComponentFactory.Krypton.Toolkit.KryptonLabel>();
     }
 }

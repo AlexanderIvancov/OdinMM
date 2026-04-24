@@ -529,9 +529,10 @@ namespace Odin.Planning
                     gv_List.DataSource = bs_List;
 
                     Helper.RestoreDirection(gv_List, oldColumn, dir);
-
+                    CreateWeekHeaderLabels();
                 });
-
+                gv_List.Scroll += gv_List_Scroll;
+                gv_List.ColumnWidthChanged += gv_List_ColumnWidthChanged;
 
                 bn_List.ThreadSafeCall(delegate
                 {
@@ -1941,6 +1942,90 @@ namespace Odin.Planning
                 glob_Class.ShowMessage("Warning!", "Please choose date for week to be saved!", "Please choose date for week to be saved!");
             }
         }
-    
+        private void CreateWeekHeaderLabels()
+        {
+            foreach (var lbl in weekLabels)
+            {
+                if (lbl.Parent != null) lbl.Parent.Controls.Remove(lbl);
+                lbl.Dispose();
+            }
+            weekLabels.Clear();
+
+            int startIndex = gv_List.Columns["cn_prodplace"].Index + 1;
+
+            const int groupSize = 8;  
+
+            for (int i = startIndex; i < gv_List.Columns.Count; i += groupSize)
+            {
+                int groupWidth = 0;
+                int colsInGroup = 0;
+                for (int j = 0; j < groupSize && i + j < gv_List.Columns.Count; j++)
+                {
+                    var col = gv_List.Columns[i + j];
+                    if (col.Visible)
+                    {
+                        groupWidth += col.Width;
+                        colsInGroup++;
+                    }
+                }
+
+                if (colsInGroup == 0) break;
+
+                Rectangle firstColRect = gv_List.GetCellDisplayRectangle(i, -1, true);
+                string weekText = "";
+
+                var weekLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel
+                {
+                    Text = "                                " + gv_List.Columns[i].ToolTipText.Substring(0, 3), 
+                    Font = new Font("Segoe UI", 12f, FontStyle.Bold),
+                    ForeColor = Color.DarkBlue,
+                    AutoSize = false,
+                    Height = 25,
+                    Width = groupWidth,
+                    Location = new Point(                         
+                        firstColRect.X,           
+                        55),
+                    Tag = i,
+                    Visible = false
+                };
+
+                try
+                {
+                    weekText = gv_List.Columns[i].ToolTipText.Substring(0, 3);
+                }
+                catch { }
+
+                kryptonPanel2.Controls.Add(weekLabel);
+
+                weekLabels.Add(weekLabel);
+            }
+            RepositionWeekLabels();
+        }
+
+        private void gv_List_Scroll(object sender, ScrollEventArgs e)
+        {
+                RepositionWeekLabels();
+        }
+
+        private void gv_List_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
+        {
+            RepositionWeekLabels();
+        }
+
+        private void RepositionWeekLabels()
+        {
+            foreach (var lbl in weekLabels)
+            {
+                int startColIndex = (int)lbl.Tag;
+                Rectangle firstRect = gv_List.GetCellDisplayRectangle(startColIndex, -1, true);
+
+                lbl.Left = firstRect.X + gv_List.Left;
+
+                int labelCenterX = lbl.Left + lbl.Width / 2;  
+
+                lbl.Visible = labelCenterX >= 500;
+            }
+        }
+
     }
 }

@@ -288,6 +288,9 @@ namespace Odin.Planning
                     row.Cells["cn_article"].Style.Font = new Font(this.Font, FontStyle.Bold);
                     row.Cells["cn_article"].Style.ForeColor = Color.Red;
                 }
+                if (Convert.ToBoolean(row.Cells["chk_IsFrozen"].Value))
+                    foreach (DataGridViewCell cell in row.Cells)
+                        cell.Style.BackColor = Color.LightBlue;
             }
         }
 
