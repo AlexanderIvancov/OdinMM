@@ -64,6 +64,17 @@ namespace Odin.Planning
             return Helper.QueryDT("execute sp_SelectBatchNomenclatureNew @batchid = " + batchid);
         }
 
+        public void UpdateUrgentStatus(int projectId, int isUrgent)
+        {
+            try
+            {
+                Helper.QueryDT("UPDATE [OdinDB].[dbo].[PROD_BatchHead] SET Urgent = " + isUrgent + " WHERE Id = " + projectId);
+            }
+            catch (Exception ex)            { }
+
+        }
+
+
         public int AddBatchHeader(string BatchName1, int ArtId, double Qty, string ResDate, string Comments, int ParentBatchId, int ChildBatchId, string EndDate, int Urgent, int ProdPlaceId)
         {
             int _res = 0;

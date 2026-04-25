@@ -277,11 +277,11 @@ namespace Odin.Planning
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Gainsboro;
                 if (DateTime.Parse(row.Cells["cn_createdat"].Value.ToString())
-                    < DateTime.Now.AddDays(-24) && DateTime.Parse(row.Cells["cn_createdat"].Value.ToString())
-                    > DateTime.Now.AddDays(-21))
+                    > DateTime.Now.AddDays(-18) && DateTime.Parse(row.Cells["cn_createdat"].Value.ToString())
+                    < DateTime.Now.AddDays(-15))
                     row.Cells["cn_createdat"].Style.BackColor = Color.Orange;
                 else if (DateTime.Parse(row.Cells["cn_createdat"].Value.ToString())
-                    < DateTime.Now.AddDays(-21))
+                    < DateTime.Now.AddDays(-15))
                     row.Cells["cn_createdat"].Style.BackColor = Color.Red;
                 if (Convert.ToInt32(row.Cells["cn_artid"].Value) != Convert.ToInt32(row.Cells["cn_coartid"].Value))
                 {
@@ -741,8 +741,42 @@ namespace Odin.Planning
             kryptonDockingManager1.ManageFloating(this);
 
             LoadColumns(gv_List);
+            gv_List.ReadOnly = false;
+            foreach (DataGridViewColumn col in gv_List.Columns)
+            {
+                col.ReadOnly = true;
+            }
+            if (gv_List.Columns.Contains("chk_urgent")) gv_List.Columns["chk_urgent"].ReadOnly = false;
 
             ClearFilter();
+        }
+
+        private void gv_List_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (gv_List.IsCurrentCellDirty && gv_List.CurrentCell is DataGridViewCheckBoxCell)
+            {
+                gv_List.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            }
+        }
+
+        private void gv_List_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && gv_List.Columns[e.ColumnIndex].Name == "chk_urgent")
+            {
+                try
+                {
+                    if (gv_List.Rows[e.RowIndex].Cells["chk_urgent"].Value.ToString() == "") 
+                        PlanBll.UpdateUrgentStatus(Convert.ToInt32(gv_List.Rows[e.RowIndex].Cells["cn_id"].Value), 0);
+                    else
+                        PlanBll.UpdateUrgentStatus(Convert.ToInt32(gv_List.Rows[e.RowIndex].Cells["cn_id"].Value), 1);
+
+                    SetCellsColor();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ошибка при сохранении статуса: " + ex.Message);
+                }
+            }
         }
 
         private void frm_BatchProjects_Resize(object sender, EventArgs e)

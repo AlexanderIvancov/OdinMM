@@ -788,6 +788,8 @@
             this.gv_List.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_List_CellDoubleClick);
             this.gv_List.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_List_ColumnHeaderMouseClick);
             this.gv_List.SelectionChanged += new System.EventHandler(this.gv_List_SelectionChanged);
+            this.gv_List.CellValueChanged += gv_List_CellValueChanged;
+            this.gv_List.CurrentCellDirtyStateChanged += gv_List_CurrentCellDirtyStateChanged;
             // 
             // mnu_Lines
             // 
@@ -1216,7 +1218,7 @@
             this.chk_urgent.FillWeight = 40F;
             this.chk_urgent.HeaderText = "Urgent";
             this.chk_urgent.Name = "chk_urgent";
-            this.chk_urgent.ReadOnly = true;
+            //this.chk_urgent.ReadOnly = true;
             this.chk_urgent.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.chk_urgent.Width = 40;
             // 
