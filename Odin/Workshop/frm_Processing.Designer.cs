@@ -122,6 +122,7 @@
             this.cn_Rest = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_firsmovedate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_FreezeHistory = new System.Windows.Forms.ToolStripButton();
             this.cn_isprimary = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bn_List = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
@@ -1131,7 +1132,8 @@
             this.bindingNavigatorMoveNextItem,
             this.bindingNavigatorMoveLastItem,
             this.bindingNavigatorSeparator2,
-            this.btn_Excel});
+            this.btn_Excel,
+            this.btn_FreezeHistory});
             this.bn_List.Location = new System.Drawing.Point(0, 401);
             this.bn_List.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.bn_List.MoveLastItem = this.bindingNavigatorMoveLastItem;
@@ -1142,6 +1144,16 @@
             this.bn_List.Size = new System.Drawing.Size(786, 25);
             this.bn_List.TabIndex = 1;
             this.bn_List.Text = "bindingNavigator1";
+            // 
+            // btn_FreezeHistory
+            // 
+            this.btn_FreezeHistory.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_FreezeHistory.Image = global::Odin.Global_Resourses.snowflake24x24;
+            this.btn_FreezeHistory.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_FreezeHistory.Name = "btn_FreezeHistory";
+            this.btn_FreezeHistory.Size = new System.Drawing.Size(23, 22);
+            this.btn_FreezeHistory.Text = "Show freezing history";
+            this.btn_FreezeHistory.Click += new System.EventHandler(this.btn_FreezeHistory_Click);
             // 
             // bindingNavigatorCountItem
             // 
@@ -1390,6 +1402,7 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
         private System.Windows.Forms.BindingNavigator bn_List;
+        private System.Windows.Forms.ToolStripButton btn_FreezeHistory;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny1;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny6;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel9;
