@@ -124,6 +124,13 @@ namespace Odin.Workshop
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
 
+        public static DataTable getFreezedProcess()
+        {
+            string query = "sp_SelectBatchCurrentFreezed";
+
+            return Helper.QuerySP(query);
+        }
+
         public static DataTable getProcessingHistory(int _stageid, string _datefrom,
                             string _datetill)
         {

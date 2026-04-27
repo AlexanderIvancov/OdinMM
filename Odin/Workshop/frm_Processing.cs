@@ -77,6 +77,7 @@ namespace Odin.Workshop
         public int _PrevId = 0;
 
         public ctl_Process ctlProc = null;
+        public ctl_CurrentFreezed ctlFProc = null;
         public ctl_ProcessHistory ctlProcHis = null;
         public ctl_ProcessHistoryOnDate ctlProcHisOnDate = null;
         public ctl_Launches ctlBatchLaunches = null;
@@ -255,6 +256,16 @@ namespace Odin.Workshop
             ctlProc.StageUpdating += new StageUpdatingEventHandler(RefreshData);
 
             return NewPage("Processing", 1, ctlProc, ctlProc.Width);
+        }
+
+        private KryptonPage NewInputFreezedProcess()
+        {
+            ctlFProc = new ctl_CurrentFreezed();
+
+            ControlWidth = ctlFProc.Width;
+            //ctlGen.CheckEmpty();
+
+            return NewPage("Current Freezed", 1, ctlFProc, ctlFProc.Width);
         }
 
         private KryptonPage NewInputLaunchProcess(int _batchid)
@@ -597,6 +608,14 @@ namespace Odin.Workshop
                                              DockingEdge.Left,
                                              new KryptonPage[] { NewInputProcess(BatchId) });
         }
+        private void btn_btn_CurrentFreezed_Click(object sender, EventArgs e)
+        {
+            //kryptonDockingManager1.AddToWorkspace("Workspace", new KryptonPage[] { NewInputProcess(BatchId) });
+            kryptonDockingManager1.AddDockspace("Control",
+                                             DockingEdge.Left,
+                                             new KryptonPage[] { NewInputFreezedProcess() });
+        }
+
 
 
         private void buttonSpecAny5_Click(object sender, EventArgs e)

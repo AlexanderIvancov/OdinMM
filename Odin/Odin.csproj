@@ -3213,6 +3213,12 @@
     <Compile Include="Workshop\ctl_ProductivityDets.Designer.cs">
       <DependentUpon>ctl_ProductivityDets.cs</DependentUpon>
     </Compile>
+    <Compile Include="Workshop\ctl_CurrentFreezed.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Workshop\ctl_CurrentFreezed.Designer.cs">
+      <DependentUpon>ctl_CurrentFreezed.cs</DependentUpon>
+    </Compile>
     <Compile Include="Workshop\frm_AddSerialAnalog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -3822,6 +3828,7 @@
     <EmbeddedResource Include="Global_Resourses.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Global_Resourses.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
@@ -4350,6 +4357,7 @@
     <EmbeddedResource Include="Warehouse\Reports\frm_TurnoverReports.resx">
       <DependentUpon>frm_TurnoverReports.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Resourses\Freezed_stats.png" />
     <Content Include="Resourses\chart_stock.png" />
     <Content Include="Resourses\company_small.png" />
     <Content Include="Resourses\crm.png" />
@@ -4405,6 +4413,9 @@
       <LastGenOutput>rpt_StockIn.cs</LastGenOutput>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="Workshop\ctl_CurrentFreezed.resx">
+      <DependentUpon>ctl_CurrentFreezed.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Workshop\frm_ProductionResult.resx">
       <DependentUpon>frm_ProductionResult.cs</DependentUpon>
     </EmbeddedResource>

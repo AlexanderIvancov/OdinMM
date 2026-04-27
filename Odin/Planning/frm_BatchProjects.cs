@@ -282,7 +282,7 @@ namespace Odin.Planning
                     row.Cells["cn_createdat"].Style.BackColor = Color.Orange;
                 else if (DateTime.Parse(row.Cells["cn_createdat"].Value.ToString())
                     < DateTime.Now.AddDays(-15))
-                    row.Cells["cn_createdat"].Style.BackColor = Color.Red;
+                    row.Cells["cn_startdate"].Style.BackColor = Color.Red;
                 if (Convert.ToInt32(row.Cells["cn_artid"].Value) != Convert.ToInt32(row.Cells["cn_coartid"].Value))
                 {
                     row.Cells["cn_article"].Style.Font = new Font(this.Font, FontStyle.Bold);

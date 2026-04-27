@@ -134,7 +134,6 @@
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btn_Excel = new System.Windows.Forms.ToolStripButton();
-            this.btn_FreezeHistory = new System.Windows.Forms.ToolStripButton();
             this.kryptonPanel3 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonDockableWorkspace1 = new ComponentFactory.Krypton.Docking.KryptonDockableWorkspace();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
@@ -144,6 +143,7 @@
             this.btn_History = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Process = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.bs_List = new Odin.Global_Classes.SyncBindingSource();
+            this.btn_CurrentFreezed = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.mnu_Lines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
@@ -1131,8 +1131,7 @@
             this.bindingNavigatorMoveNextItem,
             this.bindingNavigatorMoveLastItem,
             this.bindingNavigatorSeparator2,
-            this.btn_Excel,
-            this.btn_FreezeHistory});
+            this.btn_Excel});
             this.bn_List.Location = new System.Drawing.Point(0, 401);
             this.bn_List.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.bn_List.MoveLastItem = this.bindingNavigatorMoveLastItem;
@@ -1221,16 +1220,6 @@
             this.btn_Excel.Text = "Export into excel";
             this.btn_Excel.Click += new System.EventHandler(this.btn_Excel_Click);
             // 
-            // btn_FreezeHistory
-            // 
-            this.btn_FreezeHistory.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btn_FreezeHistory.Image = global::Odin.Global_Resourses.snowflake24x24;
-            this.btn_FreezeHistory.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_FreezeHistory.Name = "btn_FreezeHistory";
-            this.btn_FreezeHistory.Size = new System.Drawing.Size(23, 22);
-            this.btn_FreezeHistory.Text = "Show freezing history";
-            this.btn_FreezeHistory.Click += new System.EventHandler(this.btn_FreezeHistory_Click);
-            // 
             // kryptonPanel3
             // 
             this.kryptonPanel3.Controls.Add(this.kryptonDockableWorkspace1);
@@ -1261,6 +1250,7 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.btn_CurrentFreezed);
             this.kryptonPanel1.Controls.Add(this.btn_LaunchProcess);
             this.kryptonPanel1.Controls.Add(this.btn_Launches);
             this.kryptonPanel1.Controls.Add(this.btn_OnDate);
@@ -1321,6 +1311,16 @@
             this.btn_Process.Values.Image = global::Odin.Global_Resourses.memory_32x32;
             this.btn_Process.Values.Text = "Batch process";
             this.btn_Process.Click += new System.EventHandler(this.btn_Process_Click);
+            // 
+            // btn_CurrentFreezed
+            // 
+            this.btn_CurrentFreezed.Location = new System.Drawing.Point(660, 5);
+            this.btn_CurrentFreezed.Name = "btn_CurrentFreezed";
+            this.btn_CurrentFreezed.Size = new System.Drawing.Size(137, 39);
+            this.btn_CurrentFreezed.TabIndex = 16;
+            this.btn_CurrentFreezed.Values.Image = global::Odin.Global_Resourses.Freezed_stats;
+            this.btn_CurrentFreezed.Values.Text = "Current Freezed";
+            this.btn_CurrentFreezed.Click += new System.EventHandler(this.btn_btn_CurrentFreezed_Click);
             // 
             // frm_Processing
             // 
@@ -1439,7 +1439,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_OnDate;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel14;
         private CMB_Components.Companies.cmb_Firms cmb_Firms1;
-        private System.Windows.Forms.ToolStripButton btn_FreezeHistory;
         private Global_Classes.SyncBindingSource bs_List;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Launches;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_LaunchProcess;
@@ -1476,5 +1475,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_customer;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_firsmovedate;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_isprimary;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btn_CurrentFreezed;
     }
 }
