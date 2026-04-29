@@ -46,6 +46,8 @@
             this.cn_artid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_art = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_qtyavailable = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_qtystock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_who = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_when = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -212,6 +214,8 @@
             this.cn_artid,
             this.cn_art,
             this.cn_qty,
+            this.cn_qtyavailable,
+            this.cn_qtystock,
             this.cn_comments,
             this.cn_who,
             this.cn_when,
@@ -269,6 +273,22 @@
             this.cn_qty.HeaderText = "Qty";
             this.cn_qty.Name = "cn_qty";
             this.cn_qty.Width = 60;
+            // 
+            // cn_qtystock
+            // 
+            this.cn_qtystock.DataPropertyName = "stock";
+            this.cn_qtystock.FillWeight = 60F;
+            this.cn_qtystock.HeaderText = "Stock Qty";
+            this.cn_qtystock.Name = "cn_qtystock";
+            this.cn_qtystock.Width = 60;
+            // 
+            // cn_qtyavailable
+            // 
+            this.cn_qtyavailable.DataPropertyName = "available";
+            this.cn_qtyavailable.FillWeight = 60F;
+            this.cn_qtyavailable.HeaderText = "Available Qty";
+            this.cn_qtyavailable.Name = "cn_qtyavailable";
+            this.cn_qtyavailable.Width = 60;
             // 
             // cn_comments
             // 
@@ -360,6 +380,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_artid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_art;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_qty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_qtyavailable;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_qtystock;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_comments;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_who;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_when;

@@ -104,6 +104,7 @@
             this.bs_List = new Odin.Global_Classes.SyncBindingSource();
             this.bs_HistoryList = new Odin.Global_Classes.SyncBindingSource();
             this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_available = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_article = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_secname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_description = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -444,8 +445,10 @@
             // 
             this.cmb_Articles1.Article = "";
             this.cmb_Articles1.ArticleId = 0;
+            this.cmb_Articles1.ArticleIdRec = 0;
             this.cmb_Articles1.ArtType = null;
             this.cmb_Articles1.BOMState = 0;
+            this.cmb_Articles1.CertState = "";
             this.cmb_Articles1.Comments = null;
             this.cmb_Articles1.CustCode = null;
             this.cmb_Articles1.CustCodeId = 0;
@@ -462,6 +465,7 @@
             this.cmb_Articles1.ProjectId = 0;
             this.cmb_Articles1.QtyAvail = 0D;
             this.cmb_Articles1.QtyConsStock = 0D;
+            this.cmb_Articles1.RMId = 0;
             this.cmb_Articles1.SecName = null;
             this.cmb_Articles1.Size = new System.Drawing.Size(281, 20);
             this.cmb_Articles1.SMTType = 0;
@@ -517,11 +521,12 @@
             this.btn_Setup.Image = global::Odin.Global_Resourses.setting_tools;
             this.btn_Setup.UniqueName = "FF1C913391914D498CB82BD60A85CED3";
             this.btn_Setup.Click += new System.EventHandler(this.btn_Setup_Click);
-
+            // 
+            // btn_Supplier
+            // 
             this.btn_Supplier.Image = global::Odin.Global_Resourses.Anketa;
             this.btn_Supplier.UniqueName = "FF1C913391914D498CB82BD59A85CED3";
             this.btn_Supplier.Click += new System.EventHandler(this.btn_Supplier_Click);
-
             // 
             // btn_Rationing
             // 
@@ -543,6 +548,7 @@
             this.gv_List.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv_List.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cn_id,
+            this.cn_available,
             this.cn_article,
             this.cn_secname,
             this.cn_description,
@@ -876,13 +882,15 @@
             // ctl_BOMSimple1
             // 
             this.ctl_BOMSimple1.ArtId = 0;
+            this.ctl_BOMSimple1.Comments = "";
             this.ctl_BOMSimple1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ctl_BOMSimple1.fileName = null;
-            this.ctl_BOMSimple1.igvArtId = 0;
+            this.ctl_BOMSimple1.igvArtId = 169;
             this.ctl_BOMSimple1.Location = new System.Drawing.Point(0, 0);
             this.ctl_BOMSimple1.Lock = 0;
             this.ctl_BOMSimple1.Name = "ctl_BOMSimple1";
-            this.ctl_BOMSimple1.OldigvArtId = 0;
+            this.ctl_BOMSimple1.OldigvArtId = 169;
+            this.ctl_BOMSimple1.PrevId = 0;
             this.ctl_BOMSimple1.Size = new System.Drawing.Size(1040, 171);
             this.ctl_BOMSimple1.TabIndex = 0;
             this.ctl_BOMSimple1.ValidAt = "";
@@ -933,6 +941,14 @@
             this.cn_id.HeaderText = "Art. id";
             this.cn_id.Name = "cn_id";
             this.cn_id.ReadOnly = true;
+            // 
+            // cn_available
+            // 
+            this.cn_available.DataPropertyName = "available";
+            this.cn_available.HeaderText = "Available";
+            this.cn_available.Name = "cn_available";
+            this.cn_available.ReadOnly = true;
+            this.cn_available.Visible = false;
             // 
             // cn_article
             // 
@@ -1201,7 +1217,7 @@
             this.kryptonHeaderGroup2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_HistoryList)).EndInit();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
@@ -1279,6 +1295,7 @@
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny btn_RatioList;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_OrderExists;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_available;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_article;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_secname;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_description;
