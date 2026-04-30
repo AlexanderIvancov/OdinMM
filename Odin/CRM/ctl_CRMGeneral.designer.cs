@@ -29,7 +29,9 @@
         private void InitializeComponent()
         {
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_Budget = new Owf.Controls.NumericTetxBox();
+            this.cmb_RespManager = new Odin.CMB_Components.Common.cmb_Common();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.cmb_Common1 = new Odin.CMB_Components.Common.cmb_Common();
@@ -66,14 +68,22 @@
             this.lbl_Name = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_Name = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.buttonSpecAny1 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.cmb_RespManager = new Odin.CMB_Components.Common.cmb_Common();
+            this.kryptonLabel11 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.txt_VAT = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.buttonSpecAny3 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.kryptonLabel12 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.txt_RegNR = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.buttonSpecAny2 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
             this.kryptonPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel2
             // 
+            this.kryptonPanel2.Controls.Add(this.kryptonLabel11);
+            this.kryptonPanel2.Controls.Add(this.txt_VAT);
+            this.kryptonPanel2.Controls.Add(this.kryptonLabel12);
+            this.kryptonPanel2.Controls.Add(this.txt_RegNR);
             this.kryptonPanel2.Controls.Add(this.kryptonLabel6);
             this.kryptonPanel2.Controls.Add(this.txt_Budget);
             this.kryptonPanel2.Controls.Add(this.cmb_RespManager);
@@ -105,26 +115,48 @@
             this.kryptonPanel2.Controls.Add(this.btn_Validation);
             this.kryptonPanel2.Controls.Add(this.lbl_Name);
             this.kryptonPanel2.Controls.Add(this.txt_Name);
-            this.kryptonPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel2.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel2.Name = "kryptonPanel2";
             this.kryptonPanel2.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonPanel2.Size = new System.Drawing.Size(535, 317);
+            this.kryptonPanel2.Size = new System.Drawing.Size(535, 340);
             this.kryptonPanel2.TabIndex = 3;
+            // 
+            // kryptonLabel6
+            // 
+            this.kryptonLabel6.Location = new System.Drawing.Point(12, 297);
+            this.kryptonLabel6.Name = "kryptonLabel6";
+            this.kryptonLabel6.Size = new System.Drawing.Size(130, 20);
+            this.kryptonLabel6.TabIndex = 58;
+            this.kryptonLabel6.Values.Text = "Responsible manager:";
             // 
             // txt_Budget
             // 
             this.txt_Budget.AllowDecimalSeparator = true;
             this.txt_Budget.AllowSpace = false;
-            this.txt_Budget.Location = new System.Drawing.Point(328, 251);
+            this.txt_Budget.Location = new System.Drawing.Point(332, 268);
             this.txt_Budget.Name = "txt_Budget";
             this.txt_Budget.Size = new System.Drawing.Size(87, 23);
             this.txt_Budget.TabIndex = 56;
             this.txt_Budget.Text = "0";
             // 
+            // cmb_RespManager
+            // 
+            this.cmb_RespManager.IsEmptyColor = false;
+            this.cmb_RespManager.Location = new System.Drawing.Point(152, 297);
+            this.cmb_RespManager.Name = "cmb_RespManager";
+            this.cmb_RespManager.OrderBy = "id";
+            this.cmb_RespManager.sCurrentValue = "";
+            this.cmb_RespManager.SelectedValue = 0;
+            this.cmb_RespManager.sID_Filled = "id";
+            this.cmb_RespManager.Size = new System.Drawing.Size(231, 20);
+            this.cmb_RespManager.sTable = "vw_CRMManagers";
+            this.cmb_RespManager.sText_Filled = "crmmanager";
+            this.cmb_RespManager.sTitle = "Responsible manager";
+            this.cmb_RespManager.TabIndex = 57;
+            // 
             // kryptonLabel2
             // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(189, 251);
+            this.kryptonLabel2.Location = new System.Drawing.Point(193, 268);
             this.kryptonLabel2.Name = "kryptonLabel2";
             this.kryptonLabel2.Size = new System.Drawing.Size(133, 20);
             this.kryptonLabel2.TabIndex = 55;
@@ -157,7 +189,7 @@
             // 
             this.txt_Turnover.AllowDecimalSeparator = true;
             this.txt_Turnover.AllowSpace = false;
-            this.txt_Turnover.Location = new System.Drawing.Point(82, 251);
+            this.txt_Turnover.Location = new System.Drawing.Point(86, 268);
             this.txt_Turnover.Name = "txt_Turnover";
             this.txt_Turnover.Size = new System.Drawing.Size(87, 23);
             this.txt_Turnover.TabIndex = 46;
@@ -165,7 +197,7 @@
             // 
             // kryptonLabel14
             // 
-            this.kryptonLabel14.Location = new System.Drawing.Point(8, 251);
+            this.kryptonLabel14.Location = new System.Drawing.Point(12, 268);
             this.kryptonLabel14.Name = "kryptonLabel14";
             this.kryptonLabel14.Size = new System.Drawing.Size(62, 20);
             this.kryptonLabel14.TabIndex = 45;
@@ -173,7 +205,7 @@
             // 
             // chk_SalesPotential
             // 
-            this.chk_SalesPotential.Location = new System.Drawing.Point(8, 222);
+            this.chk_SalesPotential.Location = new System.Drawing.Point(12, 239);
             this.chk_SalesPotential.Name = "chk_SalesPotential";
             this.chk_SalesPotential.Size = new System.Drawing.Size(106, 20);
             this.chk_SalesPotential.TabIndex = 37;
@@ -183,7 +215,7 @@
             // 
             this.txt_SPComments.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
             this.buttonSpecAny11});
-            this.txt_SPComments.Location = new System.Drawing.Point(120, 222);
+            this.txt_SPComments.Location = new System.Drawing.Point(124, 239);
             this.txt_SPComments.Name = "txt_SPComments";
             this.txt_SPComments.Size = new System.Drawing.Size(397, 23);
             this.txt_SPComments.TabIndex = 35;
@@ -233,7 +265,7 @@
             // 
             // kryptonLabel10
             // 
-            this.kryptonLabel10.Location = new System.Drawing.Point(8, 193);
+            this.kryptonLabel10.Location = new System.Drawing.Point(12, 210);
             this.kryptonLabel10.Name = "kryptonLabel10";
             this.kryptonLabel10.Size = new System.Drawing.Size(72, 20);
             this.kryptonLabel10.TabIndex = 23;
@@ -243,7 +275,7 @@
             // 
             this.txt_Comments.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
             this.buttonSpecAny10});
-            this.txt_Comments.Location = new System.Drawing.Point(82, 193);
+            this.txt_Comments.Location = new System.Drawing.Point(86, 210);
             this.txt_Comments.Name = "txt_Comments";
             this.txt_Comments.Size = new System.Drawing.Size(435, 23);
             this.txt_Comments.TabIndex = 22;
@@ -259,7 +291,7 @@
             this.txt_Link.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
             this.buttonSpecAny8,
             this.buttonSpecAny9});
-            this.txt_Link.Location = new System.Drawing.Point(82, 163);
+            this.txt_Link.Location = new System.Drawing.Point(86, 180);
             this.txt_Link.Name = "txt_Link";
             this.txt_Link.Size = new System.Drawing.Size(435, 24);
             this.txt_Link.TabIndex = 21;
@@ -279,7 +311,7 @@
             // 
             // kryptonLabel9
             // 
-            this.kryptonLabel9.Location = new System.Drawing.Point(8, 163);
+            this.kryptonLabel9.Location = new System.Drawing.Point(12, 180);
             this.kryptonLabel9.Name = "kryptonLabel9";
             this.kryptonLabel9.Size = new System.Drawing.Size(38, 20);
             this.kryptonLabel9.TabIndex = 20;
@@ -434,28 +466,49 @@
             this.buttonSpecAny1.UniqueName = "0A0081F22486475415BE69C7CDFDA743";
             this.buttonSpecAny1.Click += new System.EventHandler(this.buttonSpecAny1_Click);
             // 
-            // kryptonLabel6
+            // kryptonLabel11
             // 
-            this.kryptonLabel6.Location = new System.Drawing.Point(8, 280);
-            this.kryptonLabel6.Name = "kryptonLabel6";
-            this.kryptonLabel6.Size = new System.Drawing.Size(130, 20);
-            this.kryptonLabel6.TabIndex = 58;
-            this.kryptonLabel6.Values.Text = "Responsible manager:";
+            this.kryptonLabel11.Location = new System.Drawing.Point(232, 163);
+            this.kryptonLabel11.Name = "kryptonLabel11";
+            this.kryptonLabel11.Size = new System.Drawing.Size(35, 20);
+            this.kryptonLabel11.TabIndex = 64;
+            this.kryptonLabel11.Values.Text = "VAT:";
             // 
-            // cmb_RespManager
+            // txt_VAT
             // 
-            this.cmb_RespManager.IsEmptyColor = false;
-            this.cmb_RespManager.Location = new System.Drawing.Point(148, 280);
-            this.cmb_RespManager.Name = "cmb_RespManager";
-            this.cmb_RespManager.OrderBy = "id";
-            this.cmb_RespManager.sCurrentValue = "";
-            this.cmb_RespManager.SelectedValue = 0;
-            this.cmb_RespManager.sID_Filled = "id";
-            this.cmb_RespManager.Size = new System.Drawing.Size(231, 20);
-            this.cmb_RespManager.sTable = "vw_CRMManagers";
-            this.cmb_RespManager.sText_Filled = "crmmanager";
-            this.cmb_RespManager.sTitle = "Responsible manager";
-            this.cmb_RespManager.TabIndex = 57;
+            this.txt_VAT.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
+            this.buttonSpecAny3});
+            this.txt_VAT.Location = new System.Drawing.Point(279, 163);
+            this.txt_VAT.Name = "txt_VAT";
+            this.txt_VAT.Size = new System.Drawing.Size(142, 23);
+            this.txt_VAT.TabIndex = 63;
+            // 
+            // buttonSpecAny3
+            // 
+            this.buttonSpecAny3.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
+            this.buttonSpecAny3.UniqueName = "0A0081F22486475415BE69C7CDFDA743";
+            // 
+            // kryptonLabel12
+            // 
+            this.kryptonLabel12.Location = new System.Drawing.Point(8, 163);
+            this.kryptonLabel12.Name = "kryptonLabel12";
+            this.kryptonLabel12.Size = new System.Drawing.Size(57, 20);
+            this.kryptonLabel12.TabIndex = 62;
+            this.kryptonLabel12.Values.Text = "Reg. NR:";
+            // 
+            // txt_RegNR
+            // 
+            this.txt_RegNR.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
+            this.buttonSpecAny2});
+            this.txt_RegNR.Location = new System.Drawing.Point(82, 163);
+            this.txt_RegNR.Name = "txt_RegNR";
+            this.txt_RegNR.Size = new System.Drawing.Size(142, 23);
+            this.txt_RegNR.TabIndex = 61;
+            // 
+            // buttonSpecAny2
+            // 
+            this.buttonSpecAny2.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
+            this.buttonSpecAny2.UniqueName = "0A0081F22486475415BE69C7CDFDA743";
             // 
             // ctl_CRMGeneral
             // 
@@ -513,5 +566,11 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel6;
         private CMB_Components.Common.cmb_Common cmb_RespManager;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel11;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_VAT;
+        private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny3;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel12;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_RegNR;
+        private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny2;
     }
 }

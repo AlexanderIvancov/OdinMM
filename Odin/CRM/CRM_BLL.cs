@@ -248,7 +248,7 @@ namespace Odin.CRM
 
         public int SaveCRMCompany(int id, string name, string phone, string fax, string email, int parentid, int countryid,
                                string webaddress, int supmark, int custmark, int isactive, double turnover, int crmstate, 
-                               string crmcomments, int salespotential, string spcomments, double budget, string crmmanager)
+                               string crmcomments, int salespotential, string spcomments, double budget, string crmmanager, string VAT, string RegNR)
         {
             int _res = 0;
             SqlConnection sqlConn = new SqlConnection(sConnStr);
@@ -273,6 +273,8 @@ namespace Odin.CRM
             sqlComm.Parameters.AddWithValue("@spcomments", spcomments);
             sqlComm.Parameters.AddWithValue("@budget", budget);
             sqlComm.Parameters.AddWithValue("@crmmanager", crmmanager);
+            sqlComm.Parameters.AddWithValue("@vat", VAT);
+            sqlComm.Parameters.AddWithValue("@regcode", RegNR);
 
             sqlComm.Parameters.Add("@insertedid", SqlDbType.Int).Direction = ParameterDirection.Output;
 

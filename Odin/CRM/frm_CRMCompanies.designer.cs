@@ -49,6 +49,8 @@
             this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.kryptonSplitContainer2 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
+            this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.cmb_RespManager = new Odin.CMB_Components.Common.cmb_Common();
             this.chk_potential = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.cmb_Common1 = new Odin.CMB_Components.Common.cmb_Common();
@@ -68,30 +70,6 @@
             this.btn_Refresh = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.btn_Clear = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_company = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.cn_phone = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.cn_fax = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.cn_email = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.cn_parentid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_parentcompany = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.cn_comments = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.cn_countryid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_country = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.cn_webaddress = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.chk_custmark = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
-            this.chk_supmark = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
-            this.cn_isactive = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_when = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.cn_who = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.cn_turnover = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chk_salespotential = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.cn_spcomments = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_crmstate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_crmstateid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_budget = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_crmmanager = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_activities = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bn_List = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -118,8 +96,32 @@
             this.btn_General = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Contacts = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Addresses = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.cmb_RespManager = new Odin.CMB_Components.Common.cmb_Common();
+            this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VAT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.regnr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_company = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.cn_phone = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.cn_fax = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.cn_email = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.cn_parentid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_parentcompany = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.cn_comments = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.cn_countryid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_country = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.cn_webaddress = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.chk_custmark = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
+            this.chk_supmark = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
+            this.cn_isactive = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_when = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.cn_who = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.cn_turnover = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chk_salespotential = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.cn_spcomments = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_crmstate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_crmstateid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_budget = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_crmmanager = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_activities = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mnu_Lines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
@@ -292,6 +294,29 @@
             this.kryptonSplitContainer2.Size = new System.Drawing.Size(1081, 277);
             this.kryptonSplitContainer2.SplitterDistance = 280;
             this.kryptonSplitContainer2.TabIndex = 0;
+            // 
+            // kryptonLabel5
+            // 
+            this.kryptonLabel5.Location = new System.Drawing.Point(4, 235);
+            this.kryptonLabel5.Name = "kryptonLabel5";
+            this.kryptonLabel5.Size = new System.Drawing.Size(94, 20);
+            this.kryptonLabel5.TabIndex = 60;
+            this.kryptonLabel5.Values.Text = "Resp. manager:";
+            // 
+            // cmb_RespManager
+            // 
+            this.cmb_RespManager.IsEmptyColor = false;
+            this.cmb_RespManager.Location = new System.Drawing.Point(101, 235);
+            this.cmb_RespManager.Name = "cmb_RespManager";
+            this.cmb_RespManager.OrderBy = "id";
+            this.cmb_RespManager.sCurrentValue = "";
+            this.cmb_RespManager.SelectedValue = 0;
+            this.cmb_RespManager.sID_Filled = "id";
+            this.cmb_RespManager.Size = new System.Drawing.Size(176, 20);
+            this.cmb_RespManager.sTable = "vw_CRMManagers";
+            this.cmb_RespManager.sText_Filled = "crmmanager";
+            this.cmb_RespManager.sTitle = "Responsible manager";
+            this.cmb_RespManager.TabIndex = 59;
             // 
             // chk_potential
             // 
@@ -476,6 +501,8 @@
             this.gv_List.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv_List.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cn_id,
+            this.VAT,
+            this.regnr,
             this.cn_company,
             this.cn_phone,
             this.cn_fax,
@@ -512,220 +539,6 @@
             this.gv_List.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_List_CellDoubleClick);
             this.gv_List.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_List_ColumnHeaderMouseClick);
             this.gv_List.SelectionChanged += new System.EventHandler(this.gv_List_SelectionChanged);
-            // 
-            // cn_id
-            // 
-            this.cn_id.DataPropertyName = "id";
-            this.cn_id.HeaderText = " id";
-            this.cn_id.Name = "cn_id";
-            this.cn_id.ReadOnly = true;
-            this.cn_id.Visible = false;
-            // 
-            // cn_company
-            // 
-            this.cn_company.DataPropertyName = "company";
-            this.cn_company.FillWeight = 150F;
-            this.cn_company.HeaderText = "Company";
-            this.cn_company.Name = "cn_company";
-            this.cn_company.ReadOnly = true;
-            this.cn_company.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.cn_company.Width = 150;
-            // 
-            // cn_phone
-            // 
-            this.cn_phone.DataPropertyName = "phone";
-            this.cn_phone.HeaderText = "Phone";
-            this.cn_phone.Name = "cn_phone";
-            this.cn_phone.ReadOnly = true;
-            this.cn_phone.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.cn_phone.Width = 100;
-            // 
-            // cn_fax
-            // 
-            this.cn_fax.DataPropertyName = "fax";
-            this.cn_fax.HeaderText = "Fax";
-            this.cn_fax.Name = "cn_fax";
-            this.cn_fax.ReadOnly = true;
-            this.cn_fax.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.cn_fax.Width = 100;
-            // 
-            // cn_email
-            // 
-            this.cn_email.DataPropertyName = "email";
-            this.cn_email.HeaderText = "Email";
-            this.cn_email.Name = "cn_email";
-            this.cn_email.ReadOnly = true;
-            this.cn_email.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.cn_email.Width = 100;
-            // 
-            // cn_parentid
-            // 
-            this.cn_parentid.DataPropertyName = "parentid";
-            this.cn_parentid.HeaderText = "Parentid";
-            this.cn_parentid.Name = "cn_parentid";
-            this.cn_parentid.ReadOnly = true;
-            this.cn_parentid.Visible = false;
-            // 
-            // cn_parentcompany
-            // 
-            this.cn_parentcompany.DataPropertyName = "parentcompany";
-            this.cn_parentcompany.FillWeight = 150F;
-            this.cn_parentcompany.HeaderText = "Parent company";
-            this.cn_parentcompany.Name = "cn_parentcompany";
-            this.cn_parentcompany.ReadOnly = true;
-            this.cn_parentcompany.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.cn_parentcompany.Width = 150;
-            // 
-            // cn_comments
-            // 
-            this.cn_comments.DataPropertyName = "comments";
-            this.cn_comments.FillWeight = 150F;
-            this.cn_comments.HeaderText = "Comments";
-            this.cn_comments.Name = "cn_comments";
-            this.cn_comments.ReadOnly = true;
-            this.cn_comments.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.cn_comments.Width = 150;
-            // 
-            // cn_countryid
-            // 
-            this.cn_countryid.DataPropertyName = "countryid";
-            this.cn_countryid.HeaderText = "Countryid";
-            this.cn_countryid.Name = "cn_countryid";
-            this.cn_countryid.ReadOnly = true;
-            this.cn_countryid.Visible = false;
-            // 
-            // cn_country
-            // 
-            this.cn_country.DataPropertyName = "country";
-            this.cn_country.HeaderText = "Country";
-            this.cn_country.Name = "cn_country";
-            this.cn_country.ReadOnly = true;
-            this.cn_country.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.cn_country.Width = 100;
-            // 
-            // cn_webaddress
-            // 
-            this.cn_webaddress.DataPropertyName = "webaddress";
-            this.cn_webaddress.HeaderText = "Web address";
-            this.cn_webaddress.Name = "cn_webaddress";
-            this.cn_webaddress.ReadOnly = true;
-            this.cn_webaddress.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.cn_webaddress.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // chk_custmark
-            // 
-            this.chk_custmark.DataPropertyName = "custmark";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.NullValue = false;
-            this.chk_custmark.DefaultCellStyle = dataGridViewCellStyle1;
-            this.chk_custmark.FalseValue = "0";
-            this.chk_custmark.HeaderText = "Customer";
-            this.chk_custmark.IndeterminateValue = "1";
-            this.chk_custmark.Name = "chk_custmark";
-            this.chk_custmark.ReadOnly = true;
-            this.chk_custmark.TrueValue = "-1";
-            // 
-            // chk_supmark
-            // 
-            this.chk_supmark.DataPropertyName = "supmark";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.NullValue = false;
-            this.chk_supmark.DefaultCellStyle = dataGridViewCellStyle2;
-            this.chk_supmark.FalseValue = "0";
-            this.chk_supmark.HeaderText = "Supplier";
-            this.chk_supmark.IndeterminateValue = "1";
-            this.chk_supmark.Name = "chk_supmark";
-            this.chk_supmark.ReadOnly = true;
-            this.chk_supmark.TrueValue = "-1";
-            // 
-            // cn_isactive
-            // 
-            this.cn_isactive.DataPropertyName = "isactive";
-            this.cn_isactive.HeaderText = "isactive";
-            this.cn_isactive.Name = "cn_isactive";
-            this.cn_isactive.ReadOnly = true;
-            this.cn_isactive.Visible = false;
-            // 
-            // cn_when
-            // 
-            this.cn_when.DataPropertyName = "when";
-            this.cn_when.HeaderText = "When";
-            this.cn_when.Name = "cn_when";
-            this.cn_when.ReadOnly = true;
-            this.cn_when.Width = 100;
-            // 
-            // cn_who
-            // 
-            this.cn_who.DataPropertyName = "who";
-            this.cn_who.HeaderText = "Who";
-            this.cn_who.Name = "cn_who";
-            this.cn_who.ReadOnly = true;
-            this.cn_who.Width = 100;
-            // 
-            // cn_turnover
-            // 
-            this.cn_turnover.DataPropertyName = "turnover";
-            this.cn_turnover.HeaderText = "Turnover(€)";
-            this.cn_turnover.Name = "cn_turnover";
-            this.cn_turnover.ReadOnly = true;
-            // 
-            // chk_salespotential
-            // 
-            this.chk_salespotential.DataPropertyName = "salespotential";
-            this.chk_salespotential.FalseValue = "0";
-            this.chk_salespotential.FillWeight = 40F;
-            this.chk_salespotential.HeaderText = "Potential";
-            this.chk_salespotential.IndeterminateValue = "1";
-            this.chk_salespotential.Name = "chk_salespotential";
-            this.chk_salespotential.ReadOnly = true;
-            this.chk_salespotential.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.chk_salespotential.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.chk_salespotential.TrueValue = "-1";
-            this.chk_salespotential.Width = 40;
-            // 
-            // cn_spcomments
-            // 
-            this.cn_spcomments.DataPropertyName = "spcomments";
-            this.cn_spcomments.FillWeight = 150F;
-            this.cn_spcomments.HeaderText = "Potential comments";
-            this.cn_spcomments.Name = "cn_spcomments";
-            this.cn_spcomments.ReadOnly = true;
-            this.cn_spcomments.Width = 150;
-            // 
-            // cn_crmstate
-            // 
-            this.cn_crmstate.DataPropertyName = "crmstate";
-            this.cn_crmstate.HeaderText = "State";
-            this.cn_crmstate.Name = "cn_crmstate";
-            this.cn_crmstate.ReadOnly = true;
-            // 
-            // cn_crmstateid
-            // 
-            this.cn_crmstateid.HeaderText = "crmstateid";
-            this.cn_crmstateid.Name = "cn_crmstateid";
-            this.cn_crmstateid.ReadOnly = true;
-            this.cn_crmstateid.Visible = false;
-            // 
-            // cn_budget
-            // 
-            this.cn_budget.DataPropertyName = "budget";
-            this.cn_budget.HeaderText = "Budget for electronics";
-            this.cn_budget.Name = "cn_budget";
-            this.cn_budget.ReadOnly = true;
-            // 
-            // cn_crmmanager
-            // 
-            this.cn_crmmanager.DataPropertyName = "crmmanager";
-            this.cn_crmmanager.HeaderText = "CRM manager";
-            this.cn_crmmanager.Name = "cn_crmmanager";
-            this.cn_crmmanager.ReadOnly = true;
-            // 
-            // cn_activities
-            // 
-            this.cn_activities.DataPropertyName = "activities";
-            this.cn_activities.HeaderText = "Activities";
-            this.cn_activities.Name = "cn_activities";
-            this.cn_activities.ReadOnly = true;
             // 
             // bn_List
             // 
@@ -1001,28 +814,233 @@
             this.btn_Addresses.Values.Text = "Addresses";
             this.btn_Addresses.Click += new System.EventHandler(this.btn_Addresses_Click);
             // 
-            // kryptonLabel5
+            // cn_id
             // 
-            this.kryptonLabel5.Location = new System.Drawing.Point(4, 235);
-            this.kryptonLabel5.Name = "kryptonLabel5";
-            this.kryptonLabel5.Size = new System.Drawing.Size(94, 20);
-            this.kryptonLabel5.TabIndex = 60;
-            this.kryptonLabel5.Values.Text = "Resp. manager:";
+            this.cn_id.DataPropertyName = "id";
+            this.cn_id.HeaderText = " id";
+            this.cn_id.Name = "cn_id";
+            this.cn_id.ReadOnly = true;
+            this.cn_id.Visible = false;
             // 
-            // cmb_RespManager
+            // VAT
             // 
-            this.cmb_RespManager.IsEmptyColor = false;
-            this.cmb_RespManager.Location = new System.Drawing.Point(101, 235);
-            this.cmb_RespManager.Name = "cmb_RespManager";
-            this.cmb_RespManager.OrderBy = "id";
-            this.cmb_RespManager.sCurrentValue = "";
-            this.cmb_RespManager.SelectedValue = 0;
-            this.cmb_RespManager.sID_Filled = "id";
-            this.cmb_RespManager.Size = new System.Drawing.Size(176, 20);
-            this.cmb_RespManager.sTable = "vw_CRMManagers";
-            this.cmb_RespManager.sText_Filled = "crmmanager";
-            this.cmb_RespManager.sTitle = "Responsible manager";
-            this.cmb_RespManager.TabIndex = 59;
+            this.VAT.DataPropertyName = "vat";
+            this.VAT.HeaderText = "VAT";
+            this.VAT.Name = "VAT";
+            this.VAT.ReadOnly = true;
+            // 
+            // regnr
+            // 
+            this.regnr.DataPropertyName = "regcode";
+            this.regnr.HeaderText = "Reg. NR.";
+            this.regnr.Name = "regnr";
+            this.regnr.ReadOnly = true;
+            // 
+            // cn_company
+            // 
+            this.cn_company.DataPropertyName = "company";
+            this.cn_company.FillWeight = 150F;
+            this.cn_company.HeaderText = "Company";
+            this.cn_company.Name = "cn_company";
+            this.cn_company.ReadOnly = true;
+            this.cn_company.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.cn_company.Width = 150;
+            // 
+            // cn_phone
+            // 
+            this.cn_phone.DataPropertyName = "phone";
+            this.cn_phone.HeaderText = "Phone";
+            this.cn_phone.Name = "cn_phone";
+            this.cn_phone.ReadOnly = true;
+            this.cn_phone.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.cn_phone.Width = 100;
+            // 
+            // cn_fax
+            // 
+            this.cn_fax.DataPropertyName = "fax";
+            this.cn_fax.HeaderText = "Fax";
+            this.cn_fax.Name = "cn_fax";
+            this.cn_fax.ReadOnly = true;
+            this.cn_fax.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.cn_fax.Width = 100;
+            // 
+            // cn_email
+            // 
+            this.cn_email.DataPropertyName = "email";
+            this.cn_email.HeaderText = "Email";
+            this.cn_email.Name = "cn_email";
+            this.cn_email.ReadOnly = true;
+            this.cn_email.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.cn_email.Width = 100;
+            // 
+            // cn_parentid
+            // 
+            this.cn_parentid.DataPropertyName = "parentid";
+            this.cn_parentid.HeaderText = "Parentid";
+            this.cn_parentid.Name = "cn_parentid";
+            this.cn_parentid.ReadOnly = true;
+            this.cn_parentid.Visible = false;
+            // 
+            // cn_parentcompany
+            // 
+            this.cn_parentcompany.DataPropertyName = "parentcompany";
+            this.cn_parentcompany.FillWeight = 150F;
+            this.cn_parentcompany.HeaderText = "Parent company";
+            this.cn_parentcompany.Name = "cn_parentcompany";
+            this.cn_parentcompany.ReadOnly = true;
+            this.cn_parentcompany.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.cn_parentcompany.Width = 150;
+            // 
+            // cn_comments
+            // 
+            this.cn_comments.DataPropertyName = "comments";
+            this.cn_comments.FillWeight = 150F;
+            this.cn_comments.HeaderText = "Comments";
+            this.cn_comments.Name = "cn_comments";
+            this.cn_comments.ReadOnly = true;
+            this.cn_comments.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.cn_comments.Width = 150;
+            // 
+            // cn_countryid
+            // 
+            this.cn_countryid.DataPropertyName = "countryid";
+            this.cn_countryid.HeaderText = "Countryid";
+            this.cn_countryid.Name = "cn_countryid";
+            this.cn_countryid.ReadOnly = true;
+            this.cn_countryid.Visible = false;
+            // 
+            // cn_country
+            // 
+            this.cn_country.DataPropertyName = "country";
+            this.cn_country.HeaderText = "Country";
+            this.cn_country.Name = "cn_country";
+            this.cn_country.ReadOnly = true;
+            this.cn_country.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.cn_country.Width = 100;
+            // 
+            // cn_webaddress
+            // 
+            this.cn_webaddress.DataPropertyName = "webaddress";
+            this.cn_webaddress.HeaderText = "Web address";
+            this.cn_webaddress.Name = "cn_webaddress";
+            this.cn_webaddress.ReadOnly = true;
+            this.cn_webaddress.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.cn_webaddress.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // chk_custmark
+            // 
+            this.chk_custmark.DataPropertyName = "custmark";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.NullValue = false;
+            this.chk_custmark.DefaultCellStyle = dataGridViewCellStyle1;
+            this.chk_custmark.FalseValue = "0";
+            this.chk_custmark.HeaderText = "Customer";
+            this.chk_custmark.IndeterminateValue = "1";
+            this.chk_custmark.Name = "chk_custmark";
+            this.chk_custmark.ReadOnly = true;
+            this.chk_custmark.TrueValue = "-1";
+            // 
+            // chk_supmark
+            // 
+            this.chk_supmark.DataPropertyName = "supmark";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.NullValue = false;
+            this.chk_supmark.DefaultCellStyle = dataGridViewCellStyle2;
+            this.chk_supmark.FalseValue = "0";
+            this.chk_supmark.HeaderText = "Supplier";
+            this.chk_supmark.IndeterminateValue = "1";
+            this.chk_supmark.Name = "chk_supmark";
+            this.chk_supmark.ReadOnly = true;
+            this.chk_supmark.TrueValue = "-1";
+            // 
+            // cn_isactive
+            // 
+            this.cn_isactive.DataPropertyName = "isactive";
+            this.cn_isactive.HeaderText = "isactive";
+            this.cn_isactive.Name = "cn_isactive";
+            this.cn_isactive.ReadOnly = true;
+            this.cn_isactive.Visible = false;
+            // 
+            // cn_when
+            // 
+            this.cn_when.DataPropertyName = "when";
+            this.cn_when.HeaderText = "When";
+            this.cn_when.Name = "cn_when";
+            this.cn_when.ReadOnly = true;
+            this.cn_when.Width = 100;
+            // 
+            // cn_who
+            // 
+            this.cn_who.DataPropertyName = "who";
+            this.cn_who.HeaderText = "Who";
+            this.cn_who.Name = "cn_who";
+            this.cn_who.ReadOnly = true;
+            this.cn_who.Width = 100;
+            // 
+            // cn_turnover
+            // 
+            this.cn_turnover.DataPropertyName = "turnover";
+            this.cn_turnover.HeaderText = "Turnover(€)";
+            this.cn_turnover.Name = "cn_turnover";
+            this.cn_turnover.ReadOnly = true;
+            // 
+            // chk_salespotential
+            // 
+            this.chk_salespotential.DataPropertyName = "salespotential";
+            this.chk_salespotential.FalseValue = "0";
+            this.chk_salespotential.FillWeight = 40F;
+            this.chk_salespotential.HeaderText = "Potential";
+            this.chk_salespotential.IndeterminateValue = "1";
+            this.chk_salespotential.Name = "chk_salespotential";
+            this.chk_salespotential.ReadOnly = true;
+            this.chk_salespotential.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.chk_salespotential.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.chk_salespotential.TrueValue = "-1";
+            this.chk_salespotential.Width = 40;
+            // 
+            // cn_spcomments
+            // 
+            this.cn_spcomments.DataPropertyName = "spcomments";
+            this.cn_spcomments.FillWeight = 150F;
+            this.cn_spcomments.HeaderText = "Potential comments";
+            this.cn_spcomments.Name = "cn_spcomments";
+            this.cn_spcomments.ReadOnly = true;
+            this.cn_spcomments.Width = 150;
+            // 
+            // cn_crmstate
+            // 
+            this.cn_crmstate.DataPropertyName = "crmstate";
+            this.cn_crmstate.HeaderText = "State";
+            this.cn_crmstate.Name = "cn_crmstate";
+            this.cn_crmstate.ReadOnly = true;
+            // 
+            // cn_crmstateid
+            // 
+            this.cn_crmstateid.HeaderText = "crmstateid";
+            this.cn_crmstateid.Name = "cn_crmstateid";
+            this.cn_crmstateid.ReadOnly = true;
+            this.cn_crmstateid.Visible = false;
+            // 
+            // cn_budget
+            // 
+            this.cn_budget.DataPropertyName = "budget";
+            this.cn_budget.HeaderText = "Budget for electronics";
+            this.cn_budget.Name = "cn_budget";
+            this.cn_budget.ReadOnly = true;
+            // 
+            // cn_crmmanager
+            // 
+            this.cn_crmmanager.DataPropertyName = "crmmanager";
+            this.cn_crmmanager.HeaderText = "CRM manager";
+            this.cn_crmmanager.Name = "cn_crmmanager";
+            this.cn_crmmanager.ReadOnly = true;
+            // 
+            // cn_activities
+            // 
+            this.cn_activities.DataPropertyName = "activities";
+            this.cn_activities.HeaderText = "Activities";
+            this.cn_activities.Name = "cn_activities";
+            this.cn_activities.ReadOnly = true;
             // 
             // frm_CRMCompanies
             // 
@@ -1126,7 +1144,12 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
         private CMB_Components.Common.cmb_Common cmb_Common1;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_schedule;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_potential;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel5;
+        private CMB_Components.Common.cmb_Common cmb_RespManager;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn VAT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn regnr;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn cn_company;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn cn_phone;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn cn_fax;
@@ -1150,8 +1173,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_budget;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_crmmanager;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_activities;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_potential;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel5;
-        private CMB_Components.Common.cmb_Common cmb_RespManager;
     }
 }

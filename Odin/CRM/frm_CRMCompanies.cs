@@ -538,7 +538,7 @@ namespace Odin.CRM
                 //Add new 
                 int _res = Reg.SaveCRMCompany(frm.Id, frm.FirmName, frm.Phone, frm.Fax, frm.Email, frm.ParentId, frm.CountryId,
                                            frm.WebLink, frm.SupMark, frm.CustMark, frm.IsActive, frm.Turnover, frm.CRMState, frm.Comments,
-                                           frm.SalesPotential, frm.SPComments, frm.Budget, frm.CRMManager);
+                                           frm.SalesPotential, frm.SPComments, frm.Budget, frm.CRMManager, frm.VAT, frm.RegNR);
                 if (_res != 0)
                 {
                     cmb_Firms1.FirmId = _res;
@@ -578,7 +578,10 @@ namespace Odin.CRM
             frm.IsActive = Reg.CompanyIsActive;
             frm.Budget = Reg.Budget;
             frm.CRMManager = Reg.CRMManager;
+            frm.VAT = Reg.VAT;
+            frm.RegNR = Reg.RegNR;
             
+
             //frm.Sup
             DialogResult result = frm.ShowDialog();
 
@@ -587,7 +590,7 @@ namespace Odin.CRM
                 //Edit-
                 int _res = Reg.SaveCRMCompany(frm.Id, frm.FirmName, frm.Phone, frm.Fax, frm.Email, frm.ParentId, frm.CountryId,
                                             frm.WebLink, frm.SupMark, frm.CustMark, frm.IsActive, frm.Turnover, frm.CRMState, frm.Comments, 
-                                            frm.SalesPotential, frm.SPComments, frm.Budget, frm.CRMManager);
+                                            frm.SalesPotential, frm.SPComments, frm.Budget, frm.CRMManager, frm.VAT, frm.RegNR);
                 if (_res != 0)
                 {
                     //cmb_Firms1.FirmId = _res;

@@ -175,6 +175,18 @@ namespace Odin.CRM
             set { cmb_RespManager.sCurrentValue = value; }
         }
 
+        public string RegNR
+        {
+            get { return txt_RegNR.Text; }
+            set { txt_RegNR.Text = value; }
+        }
+
+        public string VAT
+        {
+            get { return txt_VAT.Text; }
+            set { txt_VAT.Text = value; }
+        }
+
         #endregion
 
         #region Methods
@@ -182,6 +194,8 @@ namespace Odin.CRM
         public void CheckEmpty()
         {
             if (CompanyName == ""
+                && RegNR == ""
+                && VAT == ""
                )
                 btn_OK.Enabled = false;
             else

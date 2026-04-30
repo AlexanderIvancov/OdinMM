@@ -56,6 +56,8 @@ namespace Odin.CRM
                 SalesPotential = CRMBll.SalesPotential;
                 Budget = CRMBll.Budget;
                 CRMManager = CRMBll.CRMManager;
+                VAT = CRMBll.VAT;
+                RegNR = CRMBll.RegNR;
             }
         }
 
@@ -213,6 +215,18 @@ namespace Odin.CRM
             set { cmb_RespManager.sCurrentValue = value; }
         }
 
+        public string RegNR
+        {
+            get { return txt_RegNR.Text; }
+            set { txt_RegNR.Text = value; }
+        }
+
+        public string VAT
+        {
+            get { return txt_VAT.Text; }
+            set { txt_VAT.Text = value; }
+        }
+
         #endregion
 
         #region Controls
@@ -264,7 +278,7 @@ namespace Odin.CRM
         {
             CRMBll.SaveCRMCompany(FirmId, FirmName, Phone, Fax, Email, ParentId, CountryId,
                                             WebLink, SupMark, CustMark, IsActive, Turnover, CRMState,Comments,
-                                           SalesPotential, SPComments, Budget, CRMManager);
+                                           SalesPotential, SPComments, Budget, CRMManager, VAT, RegNR);
             //Reg.SaveCompany(FirmId, FirmName, RegNR, VAT, Phone, Fax, Email, ParentId, CountryId, WebLink,
             //                Comments, SupMark, CustMark, SupPayment, CustPayment, SupIncoterms, CustIncoterms,
             //                IsActive, OneC, SupComments, CustPayTerms, TransportId, BankContId);
