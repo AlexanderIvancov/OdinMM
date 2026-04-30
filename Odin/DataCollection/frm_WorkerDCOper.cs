@@ -189,7 +189,7 @@ namespace Odin.DataCollection
 
         public void FillMaterialsByLaunch(int _launchid)
         {
-            var data = DC_BLL.getMaterialsByLaunch(_launchid);
+            var data = DC_BLL.getMaterialsByLaunch(_launchid, 0);
 
 
             gv_Materials.ThreadSafeCall(delegate

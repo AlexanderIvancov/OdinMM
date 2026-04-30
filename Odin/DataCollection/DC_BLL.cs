@@ -117,17 +117,19 @@ namespace Odin.DataCollection
 
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
-        public static DataTable getMaterialsByLaunch(int launchid)
+        public static DataTable getMaterialsByLaunch(int launchid, int topbot)
         {
             string query = "sp_SelectMaterialsByLaunch";
 
             var sqlparams = new List<SqlParameter>
             {
-                 new SqlParameter("@launchid",SqlDbType.Int){Value = launchid }
+                 new SqlParameter("@launchid",SqlDbType.Int){Value = launchid },
+                 new SqlParameter("@topbot",SqlDbType.Int){Value = topbot }
             };
 
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
+
         int _matlabel = 0;
         public int MaterialLabel
         {
