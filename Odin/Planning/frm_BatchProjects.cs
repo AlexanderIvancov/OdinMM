@@ -279,7 +279,7 @@ namespace Odin.Planning
                 if (DateTime.Parse(row.Cells["cn_createdat"].Value.ToString())
                     > DateTime.Now.AddDays(-18) && DateTime.Parse(row.Cells["cn_createdat"].Value.ToString())
                     < DateTime.Now.AddDays(-15))
-                    row.Cells["cn_createdat"].Style.BackColor = Color.Orange;
+                    row.Cells["cn_startdate"].Style.BackColor = Color.Orange;
                 else if (DateTime.Parse(row.Cells["cn_createdat"].Value.ToString())
                     < DateTime.Now.AddDays(-15))
                     row.Cells["cn_startdate"].Style.BackColor = Color.Red;
