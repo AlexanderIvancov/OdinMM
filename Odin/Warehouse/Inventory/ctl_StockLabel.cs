@@ -429,7 +429,7 @@ namespace Odin.Warehouse.Inventory
                         emailaddresses = Fun.EmailAddressesByType(15);
 
                         string strMessage = "Income doc.: " + IncomeDoc;
-                        strMessage = strMessage + "\r\nReg. date: " + regdate;
+                        strMessage = strMessage + "\r\nReg. date: " + regdate.Split(' ')[0];
 
                         strMessage = strMessage + "\r\nLabel: " + Label;
                         strMessage = strMessage + "\r\nInventory No.: " + invnumbner;
