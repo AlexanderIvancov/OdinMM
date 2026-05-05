@@ -419,6 +419,9 @@ namespace Odin.Warehouse.Inventory
                                                                 " from BAS_Properties p " +
                                                                 " inner join BAS_Defaults def on def.value = p.categoryid " +
                                                                 " where p.label = " + Label + " and def.field = 'fac'"));
+                    string regdate = Convert.ToString(Helper.GetOneRecord("select p.regdate " +
+    " from STO_StockInHead p " +
+    " where p.name = '" + IncomeDoc + "'"));
 
 
                     if (frm.CategoryId == _iscommis)
@@ -426,6 +429,8 @@ namespace Odin.Warehouse.Inventory
                         emailaddresses = Fun.EmailAddressesByType(15);
 
                         string strMessage = "Income doc.: " + IncomeDoc;
+                        strMessage = strMessage + "\r\nReg. date: " + regdate;
+
                         strMessage = strMessage + "\r\nLabel: " + Label;
                         strMessage = strMessage + "\r\nInventory No.: " + invnumbner;
                         strMessage = strMessage + "\r\nArticle: " + cmb_Articles1.Article;
