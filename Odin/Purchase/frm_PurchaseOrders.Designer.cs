@@ -42,6 +42,7 @@
             this.btn_General = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Deliveries = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Confirmations = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btn_Estdat = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonDockingManager1 = new ComponentFactory.Krypton.Docking.KryptonDockingManager();
             this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
             this.mnu_Lines = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -123,6 +124,7 @@
             this.cn_catalogid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_coefconv = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_createdat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_estdat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_createdby = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_inprocess = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_confdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -182,6 +184,7 @@
             this.kryptonPanel1.Controls.Add(this.btn_General);
             this.kryptonPanel1.Controls.Add(this.btn_Deliveries);
             this.kryptonPanel1.Controls.Add(this.btn_Confirmations);
+            this.kryptonPanel1.Controls.Add(this.btn_Estdat);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
@@ -268,6 +271,16 @@
             this.btn_Confirmations.Values.Image = global::Odin.Global_Resourses.signature_5789;
             this.btn_Confirmations.Values.Text = "Confirmations";
             this.btn_Confirmations.Click += new System.EventHandler(this.btn_Confirmations_Click);
+            // 
+            // btn_Estdat
+            // 
+            this.btn_Estdat.Location = new System.Drawing.Point(562, 5);
+            this.btn_Estdat.Name = "btn_Estdat";
+            this.btn_Estdat.Size = new System.Drawing.Size(121, 39);
+            this.btn_Estdat.TabIndex = 4;
+            this.btn_Estdat.Values.Image = global::Odin.Global_Resourses.timespan;
+            this.btn_Estdat.Values.Text = "Estimated date";
+            this.btn_Estdat.Click += new System.EventHandler(this.btn_Estdat_Click);
             // 
             // kryptonDockingManager1
             // 
@@ -867,6 +880,7 @@
             this.cn_catalogid,
             this.cn_coefconv,
             this.cn_createdat,
+            this.cn_estdat,
             this.cn_createdby,
             this.cn_inprocess,
             this.cn_confdate,
@@ -1087,6 +1101,14 @@
             this.cn_createdat.HeaderText = "Created at";
             this.cn_createdat.Name = "cn_createdat";
             this.cn_createdat.Width = 50;
+            // 
+            // cn_estdat
+            // 
+            this.cn_estdat.DataPropertyName = "estdat";
+            this.cn_estdat.FillWeight = 50F;
+            this.cn_estdat.HeaderText = "Estimated date";
+            this.cn_estdat.Name = "cn_estdat";
+            this.cn_estdat.Width = 50;
             // 
             // cn_createdby
             // 
@@ -1382,6 +1404,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_General;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Deliveries;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Confirmations;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Estdat;
         private ComponentFactory.Krypton.Docking.KryptonDockingManager kryptonDockingManager1;
         private ComponentFactory.Krypton.Toolkit.KryptonManager kryptonManager1;
         private System.Windows.Forms.ContextMenuStrip mnu_Lines;
@@ -1482,7 +1505,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_bestbefore;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_catalogid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_coefconv;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_createdat;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_createdat; 
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_estdat; 
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_createdby;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_inprocess;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_confdate;

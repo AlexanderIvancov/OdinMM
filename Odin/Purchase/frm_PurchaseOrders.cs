@@ -41,6 +41,7 @@ namespace Odin.Purchase
         public ctl_PODets ctlGen = null;
         public ctl_AddFromNeeds ctlNeeds = null;
         public ctl_POConfirms ctlConf = null;
+        public ctl_POEstdat ctlEstdat = null;
         public ctl_PODeliveries ctlDeliveries = null;
         public ctl_POHistory ctlHistory = null;
 
@@ -207,6 +208,20 @@ namespace Odin.Purchase
             
             return NewPage("Confirmations ", 1, ctlConf, ctlConf.Width);
         }
+
+        private KryptonPage NewInputEstdat(int _POId)
+        {
+            ctlEstdat = new ctl_POEstdat();
+
+            ControlWidth = ctlEstdat.Width;
+            //ctlConf.COId = _COId;
+            ctlEstdat.cmb_PurchaseOrdersLines1.PurchaseOrderLineId = _POId;
+            //ctlConf.ShowSaveButton(true);
+            //ctlConf.SendCOId += new COIdSendingEventHandler(ChangeCOIdSelection);
+
+            return NewPage("Estimated date ", 1, ctlEstdat, ctlEstdat.Width);
+        }
+
 
         private KryptonPage NewInputHistory(int _COId)
         {
@@ -767,6 +782,12 @@ namespace Odin.Purchase
             kryptonDockingManager1.AddDockspace("Control",
                                               DockingEdge.Left,
                                               new KryptonPage[] { NewInputConfirmation(POBll.POId) });
+        }
+        private void btn_Estdat_Click(object sender, EventArgs e)
+        {
+            kryptonDockingManager1.AddDockspace("Control",
+                                              DockingEdge.Left,
+                                              new KryptonPage[] { NewInputEstdat(POBll.POId) });
         }
 
         private void frm_PurchaseOrders_Resize(object sender, EventArgs e)

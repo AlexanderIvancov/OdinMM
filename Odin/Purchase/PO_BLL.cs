@@ -373,6 +373,7 @@ namespace Odin.Purchase
                         POQty = Convert.ToDouble(dr["qty"]);
                         POQtyLeft = Convert.ToDouble(dr["qtyleft"]);
                         POReqDate = dr["reqdate"].ToString();
+                        POEstDate = dr["estdat"].ToString();
                         POMinExpDate = dr["minexpdate"].ToString();
                         POStateId = Convert.ToInt32(dr["stateid"]);
                         POUnitId = Convert.ToInt32(dr["unitid"]);
@@ -419,6 +420,8 @@ namespace Odin.Purchase
         { get; set; }    
         public string POReqDate
         { get; set; }
+        public string POEstDate
+        { get; set; }
         public string POMinExpDate
         { get; set; }
         public int POStateId
@@ -459,6 +462,7 @@ namespace Odin.Purchase
             POLine = 0;
             POQty = 0;
             POReqDate = string.Empty;
+            POEstDate = string.Empty;
             POMinExpDate = string.Empty;
             POStateId = 0;
             POUnitId = 0;
@@ -643,6 +647,13 @@ namespace Odin.Purchase
             return Helper.QueryDT(query);
         }
 
+        public static DataTable getPOEstdat(int _poid)
+        {
+            string query = "EXECUTE sp_SelectPOEstdat @poid = " + _poid;
+
+            return Helper.QueryDT(query);
+        }
+
         int _confid = 0;
 
         public int ConfId
@@ -781,6 +792,24 @@ namespace Odin.Purchase
             sqlConn.Close();
 
         }
+
+        public void EditPOEstdat(int poid, string estdat)
+        {
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_EditPOEstdat", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@poid", poid);
+            sqlComm.Parameters.AddWithValue("@estdat", estdat);
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+
+            sqlConn.Close();
+
+        }
+
 
         public void DeletePOConfirmation(int id)
         {
