@@ -231,6 +231,11 @@ namespace Odin.Sales
             return _test;
         }
 
+        public int ArtType(int artid)
+        {
+            return Convert.ToInt32(Helper.GetOneRecord(string.Format("SELECT [TypeID] FROM [BAS_Articles] WHERE [ID] = '{0}'", artid)));
+        }
+
         public int COId
         {
             get { return _coid; }

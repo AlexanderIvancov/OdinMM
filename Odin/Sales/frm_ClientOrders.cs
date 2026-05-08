@@ -945,16 +945,30 @@ namespace Odin.Sales
             {
                 string emailaddresses = "";
                 string _neworder = "";
-                if (COBll.IsNewOrderForArt(COBll.COArtId, COId) == false)
+                bool isNewOrder = COBll.IsNewOrderForArt(COBll.COArtId, COId);
+                int emailType;
+
+                switch (COBll.ArtType(COBll.COArtId))
                 {
-                    emailaddresses = DAL.EmailAddressesByType(1);
-                    _neworder = "Repeat";
+                    case 1:
+                        emailType = isNewOrder ? 2 : 1;
+                        break;
+
+                    case 79:
+                        emailType = isNewOrder ? 4 : 3;
+                        break;
+
+                    case 119:
+                        emailType = isNewOrder ? 6 : 5;
+                        break;
+
+                    default:                   
+                        emailType = isNewOrder ? 8 : 7;
+                        break;
                 }
-                else
-                {
-                    emailaddresses = DAL.EmailAddressesByType(2);
-                    _neworder = "New order";
-                }
+
+                emailaddresses = DAL.EmailAddressesByType(emailType);
+                _neworder = isNewOrder ? "New order" : "Repeat";
                 string _endcustomer = "";
                 try { _endcustomer = Helper.GetOneRecord("select company from bas_companies where id = " + COBll.COEndCustId).ToString(); }
                 catch { }
