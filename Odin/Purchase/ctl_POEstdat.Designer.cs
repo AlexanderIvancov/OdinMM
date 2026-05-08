@@ -35,6 +35,7 @@
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonHeaderGroup1 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.cn_estdat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bn_List = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -45,9 +46,9 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.bs_List = new System.Windows.Forms.BindingSource(this.components);
             this.btn_Edit = new System.Windows.Forms.ToolStripButton();
-            this.cn_estdat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bs_List = new System.Windows.Forms.BindingSource(this.components);
+            this.btn_Delete = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
@@ -121,6 +122,12 @@
             this.gv_List.Size = new System.Drawing.Size(698, 287);
             this.gv_List.TabIndex = 1;
             // 
+            // cn_estdat
+            // 
+            this.cn_estdat.DataPropertyName = "estdat";
+            this.cn_estdat.HeaderText = "Estimated date";
+            this.cn_estdat.Name = "cn_estdat";
+            // 
             // bn_List
             // 
             this.bn_List.AddNewItem = null;
@@ -137,7 +144,8 @@
             this.bindingNavigatorMoveNextItem,
             this.bindingNavigatorMoveLastItem,
             this.bindingNavigatorSeparator2,
-            this.btn_Edit});
+            this.btn_Edit,
+            this.btn_Delete});
             this.bn_List.Location = new System.Drawing.Point(0, 0);
             this.bn_List.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.bn_List.MoveLastItem = this.bindingNavigatorMoveLastItem;
@@ -226,11 +234,15 @@
             this.btn_Edit.Text = "Edit";
             this.btn_Edit.Click += new System.EventHandler(this.btn_Edit_Click);
             // 
-            // cn_estdat
+            // btn_Delete
             // 
-            this.cn_estdat.DataPropertyName = "estdat";
-            this.cn_estdat.HeaderText = "Estimated date";
-            this.cn_estdat.Name = "cn_estdat";
+            this.btn_Delete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_Delete.Image = ((System.Drawing.Image)(resources.GetObject("btn_Delete.Image")));
+            this.btn_Delete.Name = "btn_Delete";
+            this.btn_Delete.RightToLeftAutoMirrorImage = true;
+            this.btn_Delete.Size = new System.Drawing.Size(23, 22);
+            this.btn_Delete.Text = "Delete";
+            this.btn_Delete.Click += new System.EventHandler(this.btn_Delete_Click);
             // 
             // ctl_POEstdat
             // 
@@ -277,5 +289,6 @@
         public CMB_Components.PurchaseOrders.cmb_PurchaseOrdersLines cmb_PurchaseOrdersLines1;
         private System.Windows.Forms.ToolStripButton btn_Edit;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_estdat;
+        private System.Windows.Forms.ToolStripButton btn_Delete;
     }
 }
