@@ -72,6 +72,10 @@ namespace Odin.Purchase
         {
            
         }
+        private void btn_Delete_Click(object sender, EventArgs e)
+        {
+            POBll.EditPOEstdat(POId, "");
+        }
 
         private void cmb_PurchaseOrdersLines1_PurchaseOrderChanged(object sender)
         {

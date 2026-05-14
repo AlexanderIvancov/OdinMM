@@ -945,35 +945,53 @@ namespace Odin.Sales
             {
                 string emailaddresses = "";
                 string _neworder = "";
-                if (COBll.IsNewOrderForArt(COBll.COArtId, COId) == false)
+                bool isNewOrder = COBll.IsNewOrderForArt(COBll.COArtId, COId);
+                int emailType;
+                int artType = COBll.ArtType(COBll.COArtId);
+                switch (artType)
                 {
-                    emailaddresses = DAL.EmailAddressesByType(1);
-                    _neworder = "Repeat";
+                    case 1:
+                        emailType = isNewOrder ? 20 : 21;
+                        break;
+
+                    case 79:
+                        emailType = isNewOrder ? 22 : 23;
+                        break;
+
+                    case 119:
+                        emailType = isNewOrder ? 24 : 24;
+                        break;
+
+                    default:                   
+                        emailType = isNewOrder ? 2 : 1;
+                        break;
                 }
-                else
-                {
-                    emailaddresses = DAL.EmailAddressesByType(2);
-                    _neworder = "New order";
-                }
+
+                emailaddresses = DAL.EmailAddressesByType(emailType);
+                _neworder = isNewOrder ? "\r\nNew order" : "\r\nRepeat";
                 string _endcustomer = "";
                 try { _endcustomer = Helper.GetOneRecord("select company from bas_companies where id = " + COBll.COEndCustId).ToString(); }
                 catch { }
                 //if (emailaddresses != "")
                 //{
+                string headTitle = artType == 79 ? "Semi-finished Goods:\r\n" : (artType == 119 ? "MM Stencils:\r\n" : "");
+                string endCustLine = (artType != 79 && artType != 119) ? "\r\nEnd Customer: " + _endcustomer : "";
+                string custArtLine = (artType != 119) ? "\r\nCust. article: " + COBll.COCustArticle : "";
+                string stagesLine = (artType != 119) ? "\r\nStages: " + COBll.COStages : "";
+                string statusLine = (artType != 119) ? _neworder : "";
 
-                string strMessage = "Order: " + COBll.COHeader;
-                strMessage = strMessage + "\r\nCustomer: " + COBll.COCustomer;
-                strMessage = strMessage + "\r\nEnd Customer: " + _endcustomer;
-                strMessage = strMessage + "\r\nArticle: " + DAL.Article(COBll.COArtId);
+                string strMessage = headTitle
+                    + "\r\nOrder: " + COBll.COHeader
+                    + "\r\nCustomer: " + COBll.COCustomer 
+                    + endCustLine
+                    + "\r\nArticle: " + DAL.Article(COBll.COArtId) 
+                    + custArtLine
+                    + "\r\nQty: " + COBll.COQty
+                    + stagesLine
+                    + "\r\nLead week: " + COBll.COLeadWeek
+                    + "\r\nComments: " + COBll.COComments
+                    + statusLine;
 
-                //strMessage = strMessage + "\r\nArticle: " + DAL.Article();
-                strMessage = strMessage + "\r\nCust. article: " + COBll.COCustArticle;
-                strMessage = strMessage + "\r\nQty: " + COBll.COQty;
-                //strMessage = strMessage + System.Environment.NewLine + "PCB: " + COBll.QPCBText;
-                strMessage = strMessage + "\r\nStages: " + COBll.COStages;
-                strMessage = strMessage + "\r\nLead week: " + COBll.COLeadWeek;
-                strMessage = strMessage + "\r\nComments: " + COBll.COComments;
-                strMessage = strMessage + "\r\n" + _neworder;
                 MyHelper.SendMessage(emailaddresses, "Order: " + COBll.COHeader, strMessage);
 
             }
