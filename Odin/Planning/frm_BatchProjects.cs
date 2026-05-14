@@ -277,11 +277,10 @@ namespace Odin.Planning
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Gainsboro;
                 if (DateTime.Parse(row.Cells["cn_startdate"].Value.ToString())
-                    > DateTime.Now.AddDays(-18) && DateTime.Parse(row.Cells["cn_startdate"].Value.ToString())
-                    < DateTime.Now.AddDays(-15))
+                    < DateTime.Now.AddDays(17) )
                     row.Cells["cn_startdate"].Style.BackColor = Color.Orange;
-                else if (DateTime.Parse(row.Cells["cn_startdate"].Value.ToString())
-                    < DateTime.Now.AddDays(-15))
+                if (DateTime.Parse(row.Cells["cn_startdate"].Value.ToString())
+                    < DateTime.Now.AddDays(14))
                     row.Cells["cn_startdate"].Style.BackColor = Color.Red;
                 if (Convert.ToInt32(row.Cells["cn_artid"].Value) != Convert.ToInt32(row.Cells["cn_coartid"].Value))
                 {
