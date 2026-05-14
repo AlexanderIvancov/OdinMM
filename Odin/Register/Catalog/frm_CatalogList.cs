@@ -499,6 +499,7 @@ namespace Odin.Register.Catalog
                 frm.DataCode = RegBll.CatDataCode;
                 frm.ForCustomer = RegBll.CatForCust;
                 frm.ValidTill = RegBll.CatValidTill;
+                frm.DelivTermTxt = RegBll.CatDelivTermTxt;
 
                 frm.CatSaved += new CatSavedEventHandler(CatEdited);
 
