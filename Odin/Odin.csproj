@@ -1163,11 +1163,23 @@
     <Compile Include="CustomControls\ctl_btnNum.Designer.cs">
       <DependentUpon>ctl_btnNum.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\frm_Feeders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomControls\frm_Feeders.designer.cs">
+      <DependentUpon>frm_Feeders.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\frm_ScreenNumKeyboard.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CustomControls\frm_ScreenNumKeyboard.Designer.cs">
       <DependentUpon>frm_ScreenNumKeyboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\frm_ScreenNumKeyboard16.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomControls\frm_ScreenNumKeyboard16.designer.cs">
+      <DependentUpon>frm_ScreenNumKeyboard16.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\NullableDateTimePicker.cs" />
     <Compile Include="CustomControls\NullableDateTimePicker.Designer.cs">
@@ -3738,8 +3750,14 @@
     <EmbeddedResource Include="CustomControls\ctl_btnNum.resx">
       <DependentUpon>ctl_btnNum.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\frm_Feeders.resx">
+      <DependentUpon>frm_Feeders.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\frm_ScreenNumKeyboard.resx">
       <DependentUpon>frm_ScreenNumKeyboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\frm_ScreenNumKeyboard16.resx">
+      <DependentUpon>frm_ScreenNumKeyboard16.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataCollection\frm_DataCollection.resx">
       <DependentUpon>frm_DataCollection.cs</DependentUpon>
