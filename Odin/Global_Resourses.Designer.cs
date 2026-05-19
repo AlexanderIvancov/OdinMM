@@ -123,6 +123,16 @@ namespace Odin {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap action_log {
+            get {
+                object obj = ResourceManager.GetObject("action_log", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap add {
             get {
                 object obj = ResourceManager.GetObject("add", resourceCulture);
@@ -953,6 +963,16 @@ namespace Odin {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Cat48x48 {
+            get {
+                object obj = ResourceManager.GetObject("Cat48x48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap certificates {
             get {
                 object obj = ResourceManager.GetObject("certificates", resourceCulture);
@@ -1173,9 +1193,39 @@ namespace Odin {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap clock_pause {
+            get {
+                object obj = ResourceManager.GetObject("clock_pause", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap clock_play {
+            get {
+                object obj = ResourceManager.GetObject("clock_play", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap clock_red {
             get {
                 object obj = ResourceManager.GetObject("clock_red", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap clock_stop {
+            get {
+                object obj = ResourceManager.GetObject("clock_stop", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1296,6 +1346,26 @@ namespace Odin {
         internal static System.Drawing.Bitmap Confirm_History {
             get {
                 object obj = ResourceManager.GetObject("Confirm_History", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap control_panel {
+            get {
+                object obj = ResourceManager.GetObject("control_panel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap control_pause_record {
+            get {
+                object obj = ResourceManager.GetObject("control_pause_record", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1653,6 +1723,16 @@ namespace Odin {
         internal static System.Drawing.Bitmap document_prepare {
             get {
                 object obj = ResourceManager.GetObject("document_prepare", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap document_quote {
+            get {
+                object obj = ResourceManager.GetObject("document_quote", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2140,6 +2220,16 @@ namespace Odin {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Finish_small {
+            get {
+                object obj = ResourceManager.GetObject("Finish_small", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap FirstRecord {
             get {
                 object obj = ResourceManager.GetObject("FirstRecord", resourceCulture);
@@ -2153,6 +2243,16 @@ namespace Odin {
         internal static System.Drawing.Bitmap FirstRecordDisabled {
             get {
                 object obj = ResourceManager.GetObject("FirstRecordDisabled", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap flag_finish {
+            get {
+                object obj = ResourceManager.GetObject("flag_finish", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2363,6 +2463,16 @@ namespace Odin {
         internal static System.Drawing.Bitmap history24x24 {
             get {
                 object obj = ResourceManager.GetObject("history24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap hourglass_go {
+            get {
+                object obj = ResourceManager.GetObject("hourglass_go", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -3070,6 +3180,16 @@ namespace Odin {
         internal static System.Drawing.Bitmap Negative_24x24 {
             get {
                 object obj = ResourceManager.GetObject("Negative_24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap network_adapter {
+            get {
+                object obj = ResourceManager.GetObject("network_adapter", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -3953,6 +4073,26 @@ namespace Odin {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap server_components {
+            get {
+                object obj = ResourceManager.GetObject("server_components", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap session_idle_time {
+            get {
+                object obj = ResourceManager.GetObject("session_idle_time", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap setting_tools {
             get {
                 object obj = ResourceManager.GetObject("setting_tools", resourceCulture);
@@ -3986,6 +4126,16 @@ namespace Odin {
         internal static System.Drawing.Bitmap Settings_32x32 {
             get {
                 object obj = ResourceManager.GetObject("Settings_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sheduled_task {
+            get {
+                object obj = ResourceManager.GetObject("sheduled_task", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -4076,6 +4226,16 @@ namespace Odin {
         internal static System.Drawing.Bitmap signature_5789 {
             get {
                 object obj = ResourceManager.GetObject("signature_5789", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap siren {
+            get {
+                object obj = ResourceManager.GetObject("siren", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -4366,6 +4526,36 @@ namespace Odin {
         internal static System.Drawing.Bitmap thumb_up {
             get {
                 object obj = ResourceManager.GetObject("thumb_up", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap time {
+            get {
+                object obj = ResourceManager.GetObject("time", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap time_add {
+            get {
+                object obj = ResourceManager.GetObject("time_add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap time_delete {
+            get {
+                object obj = ResourceManager.GetObject("time_delete", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -4716,6 +4906,16 @@ namespace Odin {
         internal static System.Drawing.Bitmap wand {
             get {
                 object obj = ResourceManager.GetObject("wand", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap weight {
+            get {
+                object obj = ResourceManager.GetObject("weight", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

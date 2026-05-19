@@ -158,6 +158,7 @@ namespace Odin
         frm_ProductionPlanning ProductionPlanning = null;
         frm_IncomeControlResult IncomeControlResult = null;
         frm_CRMCompanies CRMCompanies = null;
+        frm_MachineDCOper MachineDCOper = null;
 
         #endregion
 
@@ -1241,14 +1242,23 @@ namespace Odin
 
         private void btn_ControlCard_Click(object sender, EventArgs e)
         {
-            foreach (var f in MdiChildren.Where(f => f.Name == "frm_MasterApproveTot"))
+            //foreach (var f in MdiChildren.Where(f => f.Name == "frm_MasterApproveTot"))
+            //{
+            //    f.BringToFront();
+            //    return;
+            //}
+            //MasterApproveTot = new frm_MasterApproveTot();
+            //MasterApproveTot._frm_Main = this;
+            //MasterApproveTot.Show(pn_Main);
+            foreach (var f in MdiChildren.Where(f => f.Name == "frm_MachineDCOper"))
             {
                 f.BringToFront();
                 return;
             }
-            MasterApproveTot = new frm_MasterApproveTot();
-            MasterApproveTot._frm_Main = this;
-            MasterApproveTot.Show(pn_Main);
+            MachineDCOper = new frm_MachineDCOper();
+            MachineDCOper._frm_Main = this;
+            MachineDCOper.Show(pn_Main);
+            MachineDCOper.FillLine();
         }
 
         private void btn_DCApprove_Click(object sender, EventArgs e)

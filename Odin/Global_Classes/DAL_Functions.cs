@@ -1535,7 +1535,7 @@ namespace Odin.Global_Classes
         }
 
         #endregion
-        #region Places&PCs
+        #region Places&Lines&PCs
 
         public void MakeDefaultPlace(int PlaceId)
         {
@@ -1552,6 +1552,26 @@ namespace Odin.Global_Classes
 
 
         }
+
+       
+        
+        public void MakeDefaultLine(int LineId)
+        {
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_MakeLineByDefault", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@lineid", LineId);
+            sqlComm.Parameters.AddWithValue("@pcname", System.Environment.MachineName);
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+
+
+        }
+
+       
 
         #endregion
     }

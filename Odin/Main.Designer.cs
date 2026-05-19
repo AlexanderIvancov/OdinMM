@@ -285,7 +285,7 @@
             this.tab_DataCollection,
             this.tab_ReadOnly,
             this.tab_Settings});
-            this.kryptonRibbon1.SelectedTab = this.tab_Register;
+            this.kryptonRibbon1.SelectedTab = this.tab_DataCollection;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1660, 115);
             this.kryptonRibbon1.TabIndex = 0;
             // 
@@ -1646,18 +1646,18 @@
             // 
             // btn_WorkersData
             // 
-            this.btn_WorkersData.ImageLarge = global::Odin.Global_Resourses.db_update;
-            this.btn_WorkersData.ImageSmall = global::Odin.Global_Resourses.db_update;
+            this.btn_WorkersData.ImageLarge = global::Odin.Global_Resourses.session_idle_time;
+            this.btn_WorkersData.ImageSmall = global::Odin.Global_Resourses.session_idle_time;
             this.btn_WorkersData.TextLine1 = "Worker\'s";
             this.btn_WorkersData.TextLine2 = "processing";
             this.btn_WorkersData.Click += new System.EventHandler(this.btn_WorkersData_Click);
             // 
             // btn_ControlCard
             // 
-            this.btn_ControlCard.ImageLarge = global::Odin.Global_Resourses.ksysguard;
-            this.btn_ControlCard.ImageSmall = global::Odin.Global_Resourses.ksysguard;
-            this.btn_ControlCard.TextLine1 = "Control";
-            this.btn_ControlCard.TextLine2 = "card";
+            this.btn_ControlCard.ImageLarge = global::Odin.Global_Resourses.pci;
+            this.btn_ControlCard.ImageSmall = global::Odin.Global_Resourses.pci;
+            this.btn_ControlCard.TextLine1 = "SMT";
+            this.btn_ControlCard.TextLine2 = "processing";
             this.btn_ControlCard.Visible = false;
             this.btn_ControlCard.Click += new System.EventHandler(this.btn_ControlCard_Click);
             // 

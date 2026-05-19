@@ -1191,12 +1191,36 @@
     <Compile Include="CustomControls\SevenSegmentArray.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="CustomControls\txtFocused.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomControls\txtFocused.designer.cs">
+      <DependentUpon>txtFocused.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataCollection\DC_BLL.cs" />
+    <Compile Include="DataCollection\frm_AddMachDC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataCollection\frm_AddMachDC.designer.cs">
+      <DependentUpon>frm_AddMachDC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataCollection\frm_AddMachDCDet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataCollection\frm_AddMachDCDet.designer.cs">
+      <DependentUpon>frm_AddMachDCDet.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataCollection\frm_DataCollection.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DataCollection\frm_DataCollection.Designer.cs">
       <DependentUpon>frm_DataCollection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataCollection\frm_MachineDCOper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataCollection\frm_MachineDCOper.designer.cs">
+      <DependentUpon>frm_MachineDCOper.cs</DependentUpon>
     </Compile>
     <Compile Include="DataCollection\frm_MasterApprove.cs">
       <SubType>Form</SubType>
@@ -3759,8 +3783,20 @@
     <EmbeddedResource Include="CustomControls\frm_ScreenNumKeyboard16.resx">
       <DependentUpon>frm_ScreenNumKeyboard16.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\txtFocused.resx">
+      <DependentUpon>txtFocused.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataCollection\frm_AddMachDC.resx">
+      <DependentUpon>frm_AddMachDC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataCollection\frm_AddMachDCDet.resx">
+      <DependentUpon>frm_AddMachDCDet.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataCollection\frm_DataCollection.resx">
       <DependentUpon>frm_DataCollection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataCollection\frm_MachineDCOper.resx">
+      <DependentUpon>frm_MachineDCOper.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataCollection\frm_MasterApprove.resx">
       <DependentUpon>frm_MasterApprove.cs</DependentUpon>
@@ -4394,15 +4430,35 @@
       <DependentUpon>frm_TurnoverReports.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Resourses\Freezed_stats.png" />
+    <Content Include="Resourses\action_log.png" />
+    <Content Include="Resourses\Cat48x48.png" />
     <Content Include="Resourses\chart_stock.png" />
+    <Content Include="Resourses\clock_pause.png" />
+    <Content Include="Resourses\clock_play.png" />
+    <Content Include="Resourses\clock_stop.png" />
     <Content Include="Resourses\company_small.png" />
+    <Content Include="Resourses\control_panel.png" />
+    <Content Include="Resourses\control_pause_record.png" />
     <Content Include="Resourses\crm.png" />
+    <Content Include="Resourses\document_quote.png" />
     <Content Include="Resourses\events.png" />
     <Content Include="Resourses\factory.png" />
     <Content Include="Resourses\certificates.png" />
+    <Content Include="Resourses\Finish_small.png" />
+    <Content Include="Resourses\flag_finish.png" />
+    <Content Include="Resourses\hourglass_go.png" />
     <Content Include="Resourses\lorry.png" />
     <Content Include="Resourses\microscope-test-icon.png" />
+    <Content Include="Resourses\network_adapter.png" />
     <Content Include="Resourses\new_logo2.png" />
+    <Content Include="Resourses\server_components.png" />
+    <Content Include="Resourses\session_idle_time.png" />
+    <Content Include="Resourses\sheduled_task.png" />
+    <Content Include="Resourses\siren.png" />
+    <Content Include="Resourses\time.png" />
+    <Content Include="Resourses\time_add.png" />
+    <Content Include="Resourses\time_delete.png" />
+    <Content Include="Resourses\weight.png" />
     <Content Include="Warehouse\Reports\rpt_TurnoverReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rpt_TurnoverReport.cs</LastGenOutput>

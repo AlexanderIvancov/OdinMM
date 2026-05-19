@@ -1531,4 +1531,64 @@
   <data name="Freezed_stats" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resourses\Freezed_stats.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="action_log" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resourses\action_log.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Cat48x48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resourses\Cat48x48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="clock_pause" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resourses\clock_pause.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="clock_play" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resourses\clock_play.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="clock_stop" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resourses\clock_stop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="control_panel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resourses\control_panel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="control_pause_record" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resourses\control_pause_record.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_quote" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resourses\document_quote.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Finish_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resourses\Finish_small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="flag_finish" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resourses\flag_finish.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hourglass_go" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resourses\hourglass_go.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="network_adapter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resourses\network_adapter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="server_components" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resourses\server_components.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="session_idle_time" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resourses\session_idle_time.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sheduled_task" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resourses\sheduled_task.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="siren" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resourses\siren.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="time" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resourses\time.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="time_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resourses\time_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="time_delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resourses\time_delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="weight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resourses\weight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
