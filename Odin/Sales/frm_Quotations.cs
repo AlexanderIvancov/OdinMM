@@ -171,7 +171,7 @@ namespace Odin.Sales
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
                 //Yellow - in Progress
-                if (Convert.ToInt32(row.Cells["cn_stateid"].Value) == 2)
+                if (Convert.ToInt32(row.Cells["cn_stateid"].Value) == 6)
                 {
                     if (Convert.ToInt32(row.Cells["chk_issent"].Value) == 0)
                     foreach (DataGridViewCell cell in row.Cells)
