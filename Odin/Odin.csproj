@@ -2025,6 +2025,12 @@
     <Compile Include="Register\Articles\ctl_BOMSetup.Designer.cs">
       <DependentUpon>ctl_BOMSetup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Register\Articles\ctl_BOMSetup2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Register\Articles\ctl_BOMSetup2.Designer.cs">
+      <DependentUpon>ctl_BOMSetup2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Register\Articles\ctl_BOMSimple.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -4196,6 +4202,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Register\Articles\ctl_BOMSetup.resx">
       <DependentUpon>ctl_BOMSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Register\Articles\ctl_BOMSetup2.resx">
+      <DependentUpon>ctl_BOMSetup2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Register\Articles\ctl_BOMSimple.resx">
       <DependentUpon>ctl_BOMSimple.cs</DependentUpon>

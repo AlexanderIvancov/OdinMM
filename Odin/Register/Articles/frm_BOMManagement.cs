@@ -46,6 +46,8 @@ namespace Odin.Register.Articles
 
         public ctl_BOMHistory ctlHis = null;
         public ctl_BOMSetup ctlSetup = null;
+
+        //public ctl_BOMSetup2 ctlSetup = null;
         public ctl_BOMSupplier ctlSupplier = null;
         public ctl_RationingExtended ctlRatio = null;
         public int ControlWidth = 250;
@@ -100,6 +102,7 @@ namespace Odin.Register.Articles
         private KryptonPage NewSetup(string Article, int ArtId)
         {
             ctlSetup = new ctl_BOMSetup();
+            //ctlSetup = new ctl_BOMSetup2();
             ControlWidth = ctlSetup.Width;
 
             ctlSetup.cmb_Articles1.ArticleId = ArtId;
