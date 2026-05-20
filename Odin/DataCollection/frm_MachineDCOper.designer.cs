@@ -451,7 +451,7 @@
             this.btn_EditCardDet.Size = new System.Drawing.Size(68, 64);
             this.btn_EditCardDet.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btn_EditCardDet.TabIndex = 267;
-            this.btn_EditCardDet.Values.Image = global::Odin.Global_Resourses.control_pause_record;
+            this.btn_EditCardDet.Values.Image = global::Odin.Global_Resourses.reload;
             this.btn_EditCardDet.Values.Text = "";
             this.btn_EditCardDet.Click += new System.EventHandler(this.btn_EditCardDet_Click);
             // 

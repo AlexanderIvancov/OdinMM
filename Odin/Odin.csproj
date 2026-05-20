@@ -4451,6 +4451,7 @@
     <Content Include="Resourses\microscope-test-icon.png" />
     <Content Include="Resourses\network_adapter.png" />
     <Content Include="Resourses\new_logo2.png" />
+    <Content Include="Resourses\reload.png" />
     <Content Include="Resourses\server_components.png" />
     <Content Include="Resourses\session_idle_time.png" />
     <Content Include="Resourses\sheduled_task.png" />
