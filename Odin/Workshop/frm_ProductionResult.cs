@@ -19,6 +19,7 @@ using System.Data.SqlClient;
 using Odin.Tools;
 using Odin.Register.Catalog;
 using System.Text.RegularExpressions;
+using Odin.DataCollection;
 
 namespace Odin.Workshop
 {
@@ -29,15 +30,16 @@ namespace Odin.Workshop
             InitializeComponent();
             ED = new ExportData(this.gv_List, "ProductionResults.xls", this.Name);
             ED1 = new ExportData(this.gv_Materials, "ProductionResultsMaterials.xls", this.Name);
+            ED2 = new ExportData(this.gv_Machines, "ProductionResultsSMT.xls", this.Name);
         }
 
         #region Variables
 
 
         ExportData ED;
-
-
         ExportData ED1;
+        ExportData ED2;
+
 
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
         class_Global glob_Class = new class_Global();
@@ -46,7 +48,7 @@ namespace Odin.Workshop
         AdmMenu mMenu = new AdmMenu();
         class_Global globClass = new class_Global();
         Helper MyHelper = new Helper();
-
+        DC_BLL DCBll = new DC_BLL();
 
         public int ControlWidth = 250;
 
@@ -58,6 +60,10 @@ namespace Odin.Workshop
         public int mColumnIndex = 0;
         public string mColumnName = "";
         public string mCellValue = "";
+        public int macRowIndex = 0;
+        public int macColumnIndex = 0;
+        public string macColumnName = "";
+        public string macCellValue = "";
 
         public int Id
         { get; set; }
@@ -93,6 +99,31 @@ namespace Odin.Workshop
                     row.DefaultCellStyle.BackColor = Color.FromArgb(192, 255, 192);
             }
         }
+
+        public void SetCellsColorMaterial()
+        {
+            //foreach (DataGridViewRow row in this.gv_List.Rows)
+            //{
+            //    if (Convert.ToInt32(row.Cells["cn_islast"].Value) == -1)
+            //        row.DefaultCellStyle.BackColor = Color.Gold;
+
+            //    if (Convert.ToInt32(row.Cells["cn_isapproved"].Value) == -1)
+            //        row.DefaultCellStyle.BackColor = Color.FromArgb(192, 255, 192);
+            //}
+        }
+
+        public void SetCellsColorMachine()
+        {
+            //foreach (DataGridViewRow row in this.gv_List.Rows)
+            //{
+            //    if (Convert.ToInt32(row.Cells["cn_islast"].Value) == -1)
+            //        row.DefaultCellStyle.BackColor = Color.Gold;
+
+            //    if (Convert.ToInt32(row.Cells["cn_isapproved"].Value) == -1)
+            //        row.DefaultCellStyle.BackColor = Color.FromArgb(192, 255, 192);
+            //}
+        }
+
 
         public void LoadColumns(DataGridView grid)
         {
@@ -131,6 +162,28 @@ namespace Odin.Workshop
 
         }
 
+        public void FillLabels()
+        {
+            if (dn_Pages.SelectedPage == pg_Workers)
+            {
+                cmb_Lines.Visible = false;
+                lbl_Line.Visible = false;
+                cmb_Worker.Visible = true;
+                lbl_Worker.Visible = true;
+                //txt_Serial.Visible = true;
+                //lbl_Serial.Visible = true;
+            }
+            else
+            {
+                cmb_Lines.Visible = true;
+                lbl_Line.Visible = true;
+                cmb_Worker.Visible = false;
+                lbl_Worker.Visible = false;
+                txt_Serial.Visible = false;
+                lbl_Serial.Visible = false;
+            }
+
+        }
         #endregion
 
         #region Controls
@@ -405,16 +458,153 @@ namespace Odin.Workshop
         }
 
         #endregion
+
+        #region Context menu machines
+
+
+        private void mnu_macLines_Opening(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                Point mpoint = gv_Machines.PointToClient(DataGridView.MousePosition);
+                DataGridView.HitTestInfo info = gv_Machines.HitTest(mpoint.X, mpoint.Y);
+
+                macRowIndex = info.RowIndex;
+                macColumnIndex = info.ColumnIndex;
+                //MessageBox.Show(RowIndex.ToString() + "MO," + ColumnIndex.ToString());
+
+                gv_Machines.ClearSelection();
+                gv_Machines.Rows[macRowIndex].Cells[macColumnIndex].Selected = true;
+                gv_Machines.CurrentCell = gv_Machines.Rows[macRowIndex].Cells[macColumnIndex];
+
+                macCellValue = gv_Machines.Rows[macRowIndex].Cells[macColumnIndex].Value.ToString();
+                macColumnName = gv_Machines.Columns[macColumnIndex].DataPropertyName.ToString();
+                //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
+
+            }
+            catch
+            {
+                macRowIndex = 0;
+                macColumnIndex = 0;
+                return;
+            }
+        }
+
+        private void mni_macFilterFor_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                //if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                bs_Machines.Filter = "Convert(" + macColumnName + " , 'System.String') like '%" + mni_macFilterFor.Text + "%'";
+                //else
+                //    bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') like '%" + mni_FilterFor.Text + "%'";
+                //bs_List.Filter = ("Convert(" + ColumnName + " , 'System.String') like '%" + mni_FilterFor.Text + "%'");//ColumnName + " like '%" + mni_FilterFor.Text + "%'";
+            }
+            catch
+            { }
+            SetCellsColorMachine();
+
+        }
+
+        private void mni_macSearch_Click(object sender, EventArgs e)
+        {
+            frm_Find frm = new frm_Find();
+            frm.grid = gv_Machines;
+            frm.ColumnNumber = gv_Machines.CurrentCell.ColumnIndex;
+            frm.ColumnText = gv_Machines.Columns[frm.ColumnNumber].HeaderText;
+            frm.ShowDialog();
+        }
+
+        private void mni_macFilterBy_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (String.IsNullOrEmpty(bs_Machines.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(macCellValue) == true)
+                        bs_Machines.Filter = "(" + macColumnName + " is null OR Convert(" + macColumnName + ", 'System.String') = '')";
+                    else
+                        bs_Machines.Filter = "Convert(" + macColumnName + " , 'System.String') = '" + glob_Class.NES(macCellValue) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(macCellValue) == true)
+                        bs_Machines.Filter = bs_Machines.Filter + "AND (" + macColumnName + " is null OR Convert(" + macColumnName + ", 'System.String') = '')";
+                    else
+                        bs_Machines.Filter = bs_Machines.Filter + " AND Convert(" + macColumnName + " , 'System.String') = '" + glob_Class.NES(macCellValue) + "'";
+                }
+                //MessageBox.Show(bs_List.Filter);
+
+            }
+            catch { }
+            SetCellsColorMachine();
+
+        }
+
+        private void mni_macFilterExcludingSel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (String.IsNullOrEmpty(bs_Machines.Filter) == true)
+                    bs_Machines.Filter = "Convert(" + macColumnName + " , 'System.String') <> '" + macCellValue + "'";
+                else
+                    bs_Machines.Filter = bs_Machines.Filter + " AND " + macColumnName + " <> '" + macCellValue + "'";
+            }
+            catch { }
+            SetCellsColorMachine();
+
+        }
+
+        private void mni_macRemoveFilter_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                bs_Machines.RemoveFilter();
+            }
+            catch { }
+            SetCellsColorMachine();
+
+        }
+        
+        private void mni_macCopy_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(CellValue.ToString());
+        }
+
+        private void mni_macAdmin_Click(object sender, EventArgs e)
+        {
+            frm_GridViewAdm frm = new frm_GridViewAdm();
+
+            frm.HeaderText = "Select view for batches list";
+            frm.grid = this.gv_Machines;
+            frm.formname = this.Name;
+            DAL.UserLogin = System.Environment.UserName;
+            frm.UserId = DAL.UserId;
+
+            frm.FillData(frm.grid);
+
+            DialogResult result = frm.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                mMenu.CommitUserColumn(frm.UserId, frm.formname, frm.grid.Name, frm.gvList);
+                LoadColumns(gv_Machines);
+            }
+        }
+
+        private void btn_macExcel_Click(object sender, EventArgs e)
+        {
+            ED2.DgvIntoExcel();
+        }
+        #endregion
+
         public void bw_List(object sender, DoWorkEventArgs e)
         {
 
             var data = Processing_BLL.getProductionResults(txt_Serial.Text, cmb_Launches1.LaunchId, cmb_Batches1.BatchId, cmb_SalesOrdersWithLines1.SalesOrderLineId, cmb_Articles1.ArticleId, 
-                                            cmb_Types1.TypeId, cmb_Common1.SelectedValue, txt_DateFrom.Value == null ? "" : txt_DateFrom.Value.ToString().Trim(),
+                                            cmb_Types1.TypeId, cmb_Worker.SelectedValue, txt_DateFrom.Value == null ? "" : txt_DateFrom.Value.ToString().Trim(),
                                             txt_DateTill.Value == null ? "" : txt_DateTill.Value.ToString().Trim(), chk_Sum.Checked == true ? -1 : 0, chk_ConcOperations.Checked == true ? -1 : 0);
 
-            var datam = Processing_BLL.getProductionMaterials(cmb_Launches1.LaunchId, cmb_Batches1.BatchId, cmb_SalesOrdersWithLines1.SalesOrderLineId, cmb_Articles1.ArticleId,
-                                            cmb_Types1.TypeId, cmb_Common1.SelectedValue, txt_DateFrom.Value == null ? "" : txt_DateFrom.Value.ToString().Trim(),
-                                            txt_DateTill.Value == null ? "" : txt_DateTill.Value.ToString().Trim());
+            
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -430,24 +620,60 @@ namespace Odin.Workshop
             {
                 bn_List.BindingSource = bs_List;
             });
-            //Materials
+           
+            
+
+        }
+
+        public void bw_ListMachines(object sender, DoWorkEventArgs e)
+        {
+
+            var data = Processing_BLL.getProductionResultsMachine(txt_Serial.Text, cmb_Launches1.LaunchId, cmb_Batches1.BatchId, cmb_SalesOrdersWithLines1.SalesOrderLineId, cmb_Articles1.ArticleId,
+                                            cmb_Types1.TypeId, cmb_Lines.SelectedValue, txt_DateFrom.Value == null ? "" : txt_DateFrom.Value.ToString().Trim(),
+                                            txt_DateTill.Value == null ? "" : txt_DateTill.Value.ToString().Trim());
+
+
+
+            gv_Machines.ThreadSafeCall(delegate
+            {
+                gv_Machines.AutoGenerateColumns = false;
+                bs_Machines.DataSource = data;
+                gv_Machines.DataSource = bs_Machines;
+
+                SetCellsColorMachine();
+            });
+
+
+            bn_Machines.ThreadSafeCall(delegate
+            {
+                bn_Machines.BindingSource = bs_Machines;
+            });
+
+
+
+        }
+
+        public void bw_MaterialList(object sender, DoWorkEventArgs e)
+        {
+            var datam = Processing_BLL.getProductionMaterials(cmb_Launches1.LaunchId, cmb_Batches1.BatchId, cmb_SalesOrdersWithLines1.SalesOrderLineId, cmb_Articles1.ArticleId,
+                                            cmb_Types1.TypeId, cmb_Worker.SelectedValue, txt_DateFrom.Value == null ? "" : txt_DateFrom.Value.ToString().Trim(),
+                                            txt_DateTill.Value == null ? "" : txt_DateTill.Value.ToString().Trim());
+
             gv_Materials.ThreadSafeCall(delegate
             {
                 gv_Materials.AutoGenerateColumns = false;
                 bs_Materials.DataSource = datam;
                 gv_Materials.DataSource = bs_Materials;
-                
+
             });
 
-
+            //Materials
             bn_Materials.ThreadSafeCall(delegate
             {
                 bn_Materials.BindingSource = bs_Materials;
             });
 
         }
-
-        
 
         private void btn_Clear_Click(object sender, EventArgs e)
         {
@@ -457,6 +683,8 @@ namespace Odin.Workshop
         private void frm_ProductionResult_Load(object sender, EventArgs e)
         {
             LoadColumns(gv_List);
+            LoadColumns(gv_Materials);
+            LoadColumns(gv_Machines);
 
             txt_DateFrom.Value = null;// Convert.ToDateTime("01/01/2000");
             txt_DateTill.Value = null;
@@ -472,15 +700,40 @@ namespace Odin.Workshop
         }
 
         private void btn_Refresh_Click(object sender, EventArgs e)
-        {
-            DataGridViewColumn oldColumn = gv_List.SortedColumn;
-            var dir = Helper.SaveDirection(gv_List);
+        {           
 
-            bwStart(bw_List);
+            if (dn_Pages.SelectedPage == pg_Workers)
+            {
+                DataGridViewColumn oldColumn = gv_List.SortedColumn;
+                var dir = Helper.SaveDirection(gv_List);
 
-            Helper.RestoreDirection(gv_List, oldColumn, dir);
+                bwStart(bw_List);
 
-            gv_List.ThreadSafeCall(delegate { SetCellsColor(); });
+                Helper.RestoreDirection(gv_List, oldColumn, dir);
+
+                gv_List.ThreadSafeCall(delegate { SetCellsColor(); });
+            }
+            else
+            {
+                DataGridViewColumn oldColumn = gv_Machines.SortedColumn;
+                var dir = Helper.SaveDirection(gv_List);
+
+                bwStart(bw_ListMachines);
+
+                Helper.RestoreDirection(gv_Machines, oldColumn, dir);
+
+                gv_Machines.ThreadSafeCall(delegate { SetCellsColorMachine(); });
+            }
+
+
+            DataGridViewColumn oldColumnm = gv_Materials.SortedColumn;
+            var dirm = Helper.SaveDirection(gv_Materials);
+
+            bwStart(bw_MaterialList);
+
+            Helper.RestoreDirection(gv_Materials, oldColumnm, dirm);
+
+            gv_Materials.ThreadSafeCall(delegate { SetCellsColorMaterial(); });
         }
 
         private void gv_List_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -575,6 +828,234 @@ namespace Odin.Workshop
             //Label2.Text = "Deposits Total: " + DepositTotal.ToString();
             txt_Sum.Text = SelectedCellTotal.ToString();
             //Label4.Text = "Total entries: " + DataGridView1.RowCount.ToString();
+        }
+
+        private void btn_EditHeader_Click(object sender, EventArgs e)
+        {
+            int _headid = 0;
+            string _when = "";
+            int _prodtime = 0;
+            DataTable dataworkers = new DataTable();
+            dataworkers.Columns.Add("id", typeof(int));
+
+            try { _headid = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_headid"].Value);
+               
+                _prodtime = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_prodtime"].Value);
+            }
+            catch { }
+
+            if (_headid != 0)
+            {
+                _when = Helper.GetOneRecord("set dateformat dmy select convert(nvarchar(10), proddate, 103) from PROD_SerialAssemblingHead where id = " + _headid).ToString();//Convert.ToDateTime(gv_List.CurrentRow.Cells["cn_headid"].Value).ToShortDateString();
+
+                string strSQL = "select w.id, w.name + ' ' + w.surname as worker " +
+                        " from PROD_SerialAssemblingWorkers sw inner join PROD_Workers w on w.id = sw.workerid where sw.headid = " + _headid;
+                SqlConnection conn = new SqlConnection(sConnStr);
+                conn.Open();
+                DataSet ds = new DataSet();
+
+                SqlDataAdapter adapter =
+                    new SqlDataAdapter(strSQL, conn);
+
+
+                conn.Close();
+
+                adapter.Fill(ds);
+
+                DataTable dt = ds.Tables[0];
+
+
+                frm_FinishShift frm = new frm_FinishShift();
+                frm.HeaderText = "Finish work";
+                frm.txt_Date.Visible = true;
+                frm.lbl_Date.Visible = true;
+                frm.ProdDate = _when;
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    frm.gv_Workers.ThreadSafeCall(delegate { frm.AddWorkerToList(Convert.ToInt32(row["id"]), row["worker"].ToString()); });
+                }
+
+                frm.WorkTime = _prodtime;
+                
+                DialogResult result = frm.ShowDialog();
+
+
+                if (result == DialogResult.OK)
+                {
+                    dataworkers.Rows.Clear();
+
+                    foreach (DataGridViewRow row in frm.gv_Workers.Rows)
+                    {
+                        DataRow dr = dataworkers.NewRow();
+                        dr["id"] = Convert.ToInt32(row.Cells["cn_id"].Value);
+                        dataworkers.Rows.Add(dr);
+                    }
+
+                    DCBll.EditDataCollectionFinish(_headid, frm.ProdDate, frm.WorkTime, dataworkers);
+
+
+                    DataGridViewColumn oldColumn = gv_List.SortedColumn;
+                    var dir = Helper.SaveDirection(gv_List);
+
+                    bwStart(bw_List);
+
+                    Helper.RestoreDirection(gv_List, oldColumn, dir);
+
+                    gv_List.ThreadSafeCall(delegate { SetCellsColor(); });
+                }
+
+                //if (dt.Rows.Count > 0)
+                //{
+                //    foreach (DataRow dr in dt.Rows)
+                //    {
+                //        CheckInstructions = dr["instructions"].ToString();
+                //        CheckParameters = Convert.ToInt32(dr["checkbefore"].ToString());
+
+                //    }
+                //}
+
+            }
+        }
+
+        private void btn_Cancel_Click(object sender, EventArgs e)
+        {
+            int _id = 0;
+            string _serial = "";
+            if (globClass.MessageConfirm("Cancelling of shift", "Are you sure you want to cancel of shift for these lines?") == true)
+            {
+                foreach (DataGridViewRow row in gv_List.SelectedRows)
+                {
+                    try { _id = Convert.ToInt32(row.Cells["cn_id"].Value);
+                        _serial = row.Cells["cn_sn"].Value.ToString();
+                    }
+                    catch { }
+
+                    if (_id != 0)
+                    {
+                        DCBll.CancelDataCollectionFinish(_id, _serial);
+                    }
+                }
+
+                DataGridViewColumn oldColumn = gv_List.SortedColumn;
+                var dir = Helper.SaveDirection(gv_List);
+
+                bwStart(bw_List);
+
+                Helper.RestoreDirection(gv_List, oldColumn, dir);
+
+                gv_List.ThreadSafeCall(delegate { SetCellsColor(); });
+            }
+        }
+
+        private void btn_Finish_Click(object sender, EventArgs e)
+        {
+            DataTable dataworkers = new DataTable();
+            dataworkers.Columns.Add("id", typeof(int));
+
+            DataTable dataworkerstmp = new DataTable();
+            dataworkerstmp.Columns.Add("id", typeof(int));
+            dataworkerstmp.Columns.Add("worker", typeof(string));
+
+            DataTable dataworks = new DataTable();
+            dataworks.Columns.Add("id", typeof(int));
+            dataworks.Columns.Add("string", typeof(string));
+
+            foreach (DataGridViewRow row in gv_List.SelectedRows)
+            {
+                if (Convert.ToInt32(row.Cells["cn_id"].Value) != 0
+                    && Convert.ToInt32(row.Cells["cn_headid"].Value) == 0)
+                {
+                    //Work
+                    DataRow dr = dataworks.NewRow();
+                    dr["id"] = Convert.ToInt32(row.Cells["cn_id"].Value);
+                    dr["string"] = row.Cells["cn_sn"].Value.ToString();
+                    dataworks.Rows.Add(dr);
+
+                    DataRow dr1 = dataworkerstmp.NewRow();
+                    dr1["id"] = Convert.ToInt32(row.Cells["cn_workerid"].Value);
+                    dr1["worker"] = row.Cells["cn_worker"].Value.ToString();
+                    dataworkerstmp.Rows.Add(dr1);
+
+                }               
+            }
+
+
+            if (dataworks.Rows.Count == 0)
+            {
+                System.Media.SystemSounds.Exclamation.Play();
+                frm_Error frm1 = new frm_Error();
+                frm1.HeaderText = "Empty fields detected! Please check selected rows!";
+                DialogResult result1 = frm1.ShowDialog();
+            }
+            else
+            {
+                frm_FinishShift frm = new frm_FinishShift();
+                frm.HeaderText = "Finish work";
+                foreach (DataRow row in dataworkerstmp.Rows)
+                {
+                    frm.gv_Workers.ThreadSafeCall(delegate { frm.AddWorkerToList(Convert.ToInt32(row["id"]), row["worker"].ToString()); });
+                    //frm.WorkerMain = Worker;
+                    //frm.WorkerIdMain = WorkerId;
+                }
+
+
+                DialogResult result = frm.ShowDialog();
+
+
+                if (result == DialogResult.OK)
+                {
+                    dataworkers.Rows.Clear();
+
+                    foreach (DataGridViewRow row in frm.gv_Workers.Rows)
+                    {
+                        DataRow dr = dataworkers.NewRow();
+                        dr["id"] = Convert.ToInt32(row.Cells["cn_id"].Value);
+                        dataworkers.Rows.Add(dr);
+                    }
+
+                    DCBll.AddDataCollectionFinishOutdated(System.DateTime.Now.ToShortDateString(), frm.WorkTime, dataworkers, dataworks);
+
+
+                    DataGridViewColumn oldColumn = gv_List.SortedColumn;
+                    var dir = Helper.SaveDirection(gv_List);
+
+                    bwStart(bw_List);
+
+                    Helper.RestoreDirection(gv_List, oldColumn, dir);
+
+                    gv_List.ThreadSafeCall(delegate { SetCellsColor(); });
+                }
+            }
+        }
+
+        private void btn_ShowParameter_Click(object sender, EventArgs e)
+        {
+            string _batch = "";
+            try { _batch = gv_List.CurrentRow.Cells["cn_batch"].Value.ToString(); }
+            catch { }
+
+            if (_batch != "")
+            {
+                var _query = "sp_SelectDataCollectionParams";
+
+                var sqlparams = new List<SqlParameter>()
+                {
+                    new SqlParameter("@batch",SqlDbType.NVarChar) {Value = _batch}
+                };
+
+                Template_DataGridView frm = new Template_DataGridView();
+
+                frm.Text = "Parameters : " + txt_Serial.Text;
+                frm.Query = _query;
+                frm.SqlParams = sqlparams;
+                frm.Show();
+            }
+        }
+
+        private void dn_Pages_Click(object sender, EventArgs e)
+        {
+            FillLabels();
         }
     }
 }

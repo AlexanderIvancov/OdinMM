@@ -33,7 +33,9 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_ProductionResult));
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.btn_Content = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btn_ShowParameter = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btn_Cancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btn_Finish = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Edit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.mni_FilterExcludingSel = new System.Windows.Forms.ToolStripMenuItem();
             this.mni_FilterBy = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,9 +59,11 @@
             this.gradientPanel22 = new Owf.Controls.GradientPanel2();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.buttonSpecAny4 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.kryptonLabel12 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.lbl_Serial = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_Serial = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonSplitContainer2 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
+            this.lbl_Line = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.cmb_Lines = new Odin.CMB_Components.Common.cmb_Common();
             this.chk_ConcOperations = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.chk_Sum = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.txt_DateTill = new Odin.CustomControls.NullableDateTimePicker();
@@ -68,8 +72,8 @@
             this.buttonSpecAny3 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.lbl_Till = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.lbl_From = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.cmb_Common1 = new Odin.CMB_Components.Common.cmb_Common();
+            this.lbl_Worker = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.cmb_Worker = new Odin.CMB_Components.Common.cmb_Common();
             this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.cmb_Launches1 = new Odin.CMB_Components.Launches.cmb_Launches();
             this.cmb_Batches1 = new Odin.CMB_Components.Batches.cmb_Batches();
@@ -77,6 +81,8 @@
             this.kryptonHeader1 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.btn_Refresh = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.btn_Clear = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.dn_Pages = new ComponentFactory.Krypton.Docking.KryptonDockableNavigator();
+            this.pg_Workers = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.kryptonHeaderGroup1 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.cn_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -97,6 +103,10 @@
             this.cn_teortime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_teortotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_parameters = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_prodtime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_prodplace = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_headid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_workerid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bn_List = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -110,8 +120,71 @@
             this.btn_Excel = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.txt_Sum = new System.Windows.Forms.ToolStripTextBox();
+            this.pg_Machines = new ComponentFactory.Krypton.Navigator.KryptonPage();
+            this.kryptonHeaderGroup3 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
+            this.gv_Machines = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.cn_macid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_macheadid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_macline = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_mactopbot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_macpcbsn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_macfeeder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_macprevlabel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_macnewlabel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_macreplacedat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_macreplacedby = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_mactermprofiledate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_mactermprofileby = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_macpastedate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_macpasteby = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_macmounterat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_macmounterby = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_macovencheckat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_macovencheckby = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mnu_macLines = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mni_macFilterFor = new System.Windows.Forms.ToolStripTextBox();
+            this.mni_macSearch = new System.Windows.Forms.ToolStripMenuItem();
+            this.mni_macFilterBy = new System.Windows.Forms.ToolStripMenuItem();
+            this.mni_macFilterExSelection = new System.Windows.Forms.ToolStripMenuItem();
+            this.mni_macRemoveFilter = new System.Windows.Forms.ToolStripMenuItem();
+            this.mni_macCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.mni_macAdmin = new System.Windows.Forms.ToolStripMenuItem();
+            this.bn_Machines = new System.Windows.Forms.BindingNavigator(this.components);
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripTextBox2 = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.btn_macExcel = new System.Windows.Forms.ToolStripButton();
+            this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
+            this.txt_MachSum = new System.Windows.Forms.ToolStripTextBox();
             this.kryptonHeaderGroup2 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.gv_Materials = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.cn_mid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_mlabel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_matartid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_matarticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_mbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_mlaunch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_martid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_marticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_msecname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_mconforder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_mwhen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_mworker = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_manufbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_incomedoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mnu_mLines = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mni_mFilterFor = new System.Windows.Forms.ToolStripTextBox();
             this.mni_mSearch = new System.Windows.Forms.ToolStripMenuItem();
@@ -134,20 +207,8 @@
             this.btn_mExcel = new System.Windows.Forms.ToolStripButton();
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.bs_Materials = new Odin.Global_Classes.SyncBindingSource();
-            this.cn_mid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_mlabel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_matartid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_matarticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_mbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_mlaunch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_martid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_marticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_msecname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_mconforder = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_mwhen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_mworker = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_manufbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_incomedoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.miniToolStrip = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bs_Machines = new Odin.Global_Classes.SyncBindingSource();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.mnu_Lines.SuspendLayout();
@@ -159,6 +220,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2.Panel2)).BeginInit();
             this.kryptonSplitContainer2.Panel2.SuspendLayout();
             this.kryptonSplitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dn_Pages)).BeginInit();
+            this.dn_Pages.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pg_Workers)).BeginInit();
+            this.pg_Workers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).BeginInit();
             this.kryptonHeaderGroup1.Panel.SuspendLayout();
@@ -166,6 +231,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.gv_List)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bn_List)).BeginInit();
             this.bn_List.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pg_Machines)).BeginInit();
+            this.pg_Machines.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup3.Panel)).BeginInit();
+            this.kryptonHeaderGroup3.Panel.SuspendLayout();
+            this.kryptonHeaderGroup3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gv_Machines)).BeginInit();
+            this.mnu_macLines.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bn_Machines)).BeginInit();
+            this.bn_Machines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2.Panel)).BeginInit();
             this.kryptonHeaderGroup2.Panel.SuspendLayout();
@@ -181,11 +256,15 @@
             this.kryptonSplitContainer1.Panel2.SuspendLayout();
             this.kryptonSplitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_Materials)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.miniToolStrip)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_Machines)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
-            this.kryptonPanel1.Controls.Add(this.btn_Content);
+            this.kryptonPanel1.Controls.Add(this.btn_ShowParameter);
+            this.kryptonPanel1.Controls.Add(this.btn_Cancel);
+            this.kryptonPanel1.Controls.Add(this.btn_Finish);
             this.kryptonPanel1.Controls.Add(this.btn_Edit);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
@@ -195,27 +274,50 @@
             this.kryptonPanel1.TabIndex = 3;
             this.kryptonPanel1.Visible = false;
             // 
-            // btn_Content
+            // btn_ShowParameter
             // 
-            this.btn_Content.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_Content.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btn_Content.Location = new System.Drawing.Point(110, 5);
-            this.btn_Content.Name = "btn_Content";
-            this.btn_Content.Size = new System.Drawing.Size(115, 39);
-            this.btn_Content.TabIndex = 236;
-            this.btn_Content.Values.Image = global::Odin.Global_Resourses.barcode_2d;
-            this.btn_Content.Values.Text = "Show content";
+            this.btn_ShowParameter.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btn_ShowParameter.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btn_ShowParameter.Location = new System.Drawing.Point(389, 5);
+            this.btn_ShowParameter.Name = "btn_ShowParameter";
+            this.btn_ShowParameter.Size = new System.Drawing.Size(151, 39);
+            this.btn_ShowParameter.TabIndex = 237;
+            this.btn_ShowParameter.Values.Image = global::Odin.Global_Resourses.Settings_24x24;
+            this.btn_ShowParameter.Values.Text = "Show parameters";
+            this.btn_ShowParameter.Click += new System.EventHandler(this.btn_ShowParameter_Click);
+            // 
+            // btn_Cancel
+            // 
+            this.btn_Cancel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btn_Cancel.Location = new System.Drawing.Point(261, 5);
+            this.btn_Cancel.Name = "btn_Cancel";
+            this.btn_Cancel.Size = new System.Drawing.Size(128, 39);
+            this.btn_Cancel.TabIndex = 236;
+            this.btn_Cancel.Values.Image = global::Odin.Global_Resourses.Cancel_Big;
+            this.btn_Cancel.Values.Text = "Cancel shift";
+            this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click);
+            // 
+            // btn_Finish
+            // 
+            this.btn_Finish.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btn_Finish.Location = new System.Drawing.Point(133, 5);
+            this.btn_Finish.Name = "btn_Finish";
+            this.btn_Finish.Size = new System.Drawing.Size(128, 39);
+            this.btn_Finish.TabIndex = 235;
+            this.btn_Finish.Values.Image = global::Odin.Global_Resourses.Finish_small;
+            this.btn_Finish.Values.Text = "Finish shift";
+            this.btn_Finish.Click += new System.EventHandler(this.btn_Finish_Click);
             // 
             // btn_Edit
             // 
-            this.btn_Edit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_Edit.Dock = System.Windows.Forms.DockStyle.Left;
             this.btn_Edit.Location = new System.Drawing.Point(5, 5);
             this.btn_Edit.Name = "btn_Edit";
-            this.btn_Edit.Size = new System.Drawing.Size(105, 39);
+            this.btn_Edit.Size = new System.Drawing.Size(128, 39);
             this.btn_Edit.TabIndex = 234;
             this.btn_Edit.Values.Image = global::Odin.Global_Resourses.edit;
-            this.btn_Edit.Values.Text = "Edit box";
+            this.btn_Edit.Values.Text = "Edit shift";
+            this.btn_Edit.Click += new System.EventHandler(this.btn_EditHeader_Click);
             // 
             // mni_FilterExcludingSel
             // 
@@ -375,6 +477,7 @@
             this.cmb_Articles1.ArticleIdRec = 0;
             this.cmb_Articles1.ArtType = null;
             this.cmb_Articles1.BOMState = 0;
+            this.cmb_Articles1.CertState = "";
             this.cmb_Articles1.Comments = null;
             this.cmb_Articles1.CustCode = null;
             this.cmb_Articles1.CustCodeId = 0;
@@ -436,13 +539,14 @@
             this.buttonSpecAny4.UniqueName = "00654834D5824273E0820F141B99704A";
             this.buttonSpecAny4.Click += new System.EventHandler(this.buttonSpecAny4_Click);
             // 
-            // kryptonLabel12
+            // lbl_Serial
             // 
-            this.kryptonLabel12.Location = new System.Drawing.Point(9, 50);
-            this.kryptonLabel12.Name = "kryptonLabel12";
-            this.kryptonLabel12.Size = new System.Drawing.Size(124, 20);
-            this.kryptonLabel12.TabIndex = 287;
-            this.kryptonLabel12.Values.Text = "Serial NR of product:";
+            this.lbl_Serial.Location = new System.Drawing.Point(9, 50);
+            this.lbl_Serial.Name = "lbl_Serial";
+            this.lbl_Serial.Size = new System.Drawing.Size(124, 20);
+            this.lbl_Serial.TabIndex = 287;
+            this.lbl_Serial.Values.Text = "Serial NR of product:";
+            this.lbl_Serial.Visible = false;
             // 
             // txt_Serial
             // 
@@ -453,6 +557,7 @@
             this.txt_Serial.Size = new System.Drawing.Size(159, 23);
             this.txt_Serial.StateDisabled.Back.Color1 = System.Drawing.Color.White;
             this.txt_Serial.TabIndex = 286;
+            this.txt_Serial.Visible = false;
             // 
             // kryptonSplitContainer2
             // 
@@ -464,17 +569,19 @@
             // 
             // kryptonSplitContainer2.Panel1
             // 
+            this.kryptonSplitContainer2.Panel1.Controls.Add(this.lbl_Line);
+            this.kryptonSplitContainer2.Panel1.Controls.Add(this.cmb_Lines);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.chk_ConcOperations);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.chk_Sum);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.txt_DateTill);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.txt_DateFrom);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.lbl_Till);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.lbl_From);
-            this.kryptonSplitContainer2.Panel1.Controls.Add(this.kryptonLabel5);
-            this.kryptonSplitContainer2.Panel1.Controls.Add(this.cmb_Common1);
+            this.kryptonSplitContainer2.Panel1.Controls.Add(this.lbl_Worker);
+            this.kryptonSplitContainer2.Panel1.Controls.Add(this.cmb_Worker);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.kryptonLabel6);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.cmb_Launches1);
-            this.kryptonSplitContainer2.Panel1.Controls.Add(this.kryptonLabel12);
+            this.kryptonSplitContainer2.Panel1.Controls.Add(this.lbl_Serial);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.txt_Serial);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.cmb_SalesOrdersWithLines1);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.kryptonLabel4);
@@ -489,12 +596,37 @@
             // 
             // kryptonSplitContainer2.Panel2
             // 
-            this.kryptonSplitContainer2.Panel2.Controls.Add(this.kryptonHeaderGroup1);
+            this.kryptonSplitContainer2.Panel2.Controls.Add(this.dn_Pages);
             this.kryptonSplitContainer2.Panel2.Controls.Add(this.kryptonHeaderGroup2);
             this.kryptonSplitContainer2.SeparatorStyle = ComponentFactory.Krypton.Toolkit.SeparatorStyle.HighProfile;
             this.kryptonSplitContainer2.Size = new System.Drawing.Size(1253, 705);
             this.kryptonSplitContainer2.SplitterDistance = 303;
             this.kryptonSplitContainer2.TabIndex = 0;
+            // 
+            // lbl_Line
+            // 
+            this.lbl_Line.Location = new System.Drawing.Point(5, 220);
+            this.lbl_Line.Name = "lbl_Line";
+            this.lbl_Line.Size = new System.Drawing.Size(35, 20);
+            this.lbl_Line.TabIndex = 301;
+            this.lbl_Line.Values.Text = "Line:";
+            this.lbl_Line.Visible = false;
+            // 
+            // cmb_Lines
+            // 
+            this.cmb_Lines.IsEmptyColor = false;
+            this.cmb_Lines.Location = new System.Drawing.Point(94, 221);
+            this.cmb_Lines.Name = "cmb_Lines";
+            this.cmb_Lines.OrderBy = "name";
+            this.cmb_Lines.sCurrentValue = "";
+            this.cmb_Lines.SelectedValue = 0;
+            this.cmb_Lines.sID_Filled = "id";
+            this.cmb_Lines.Size = new System.Drawing.Size(199, 20);
+            this.cmb_Lines.sTable = "PROD_Lines";
+            this.cmb_Lines.sText_Filled = "name";
+            this.cmb_Lines.sTitle = "SMT Lines";
+            this.cmb_Lines.TabIndex = 300;
+            this.cmb_Lines.Visible = false;
             // 
             // chk_ConcOperations
             // 
@@ -566,28 +698,28 @@
             this.lbl_From.TabIndex = 294;
             this.lbl_From.Values.Text = "From:";
             // 
-            // kryptonLabel5
+            // lbl_Worker
             // 
-            this.kryptonLabel5.Location = new System.Drawing.Point(6, 220);
-            this.kryptonLabel5.Name = "kryptonLabel5";
-            this.kryptonLabel5.Size = new System.Drawing.Size(53, 20);
-            this.kryptonLabel5.TabIndex = 293;
-            this.kryptonLabel5.Values.Text = "Worker:";
+            this.lbl_Worker.Location = new System.Drawing.Point(6, 220);
+            this.lbl_Worker.Name = "lbl_Worker";
+            this.lbl_Worker.Size = new System.Drawing.Size(53, 20);
+            this.lbl_Worker.TabIndex = 293;
+            this.lbl_Worker.Values.Text = "Worker:";
             // 
-            // cmb_Common1
+            // cmb_Worker
             // 
-            this.cmb_Common1.IsEmptyColor = false;
-            this.cmb_Common1.Location = new System.Drawing.Point(94, 220);
-            this.cmb_Common1.Name = "cmb_Common1";
-            this.cmb_Common1.OrderBy = "surname";
-            this.cmb_Common1.sCurrentValue = "";
-            this.cmb_Common1.SelectedValue = 0;
-            this.cmb_Common1.sID_Filled = "id";
-            this.cmb_Common1.Size = new System.Drawing.Size(199, 20);
-            this.cmb_Common1.sTable = "vw_Workers";
-            this.cmb_Common1.sText_Filled = "worker";
-            this.cmb_Common1.sTitle = "Workers";
-            this.cmb_Common1.TabIndex = 292;
+            this.cmb_Worker.IsEmptyColor = false;
+            this.cmb_Worker.Location = new System.Drawing.Point(94, 220);
+            this.cmb_Worker.Name = "cmb_Worker";
+            this.cmb_Worker.OrderBy = "surname";
+            this.cmb_Worker.sCurrentValue = "";
+            this.cmb_Worker.SelectedValue = 0;
+            this.cmb_Worker.sID_Filled = "id";
+            this.cmb_Worker.Size = new System.Drawing.Size(199, 20);
+            this.cmb_Worker.sTable = "vw_Workers";
+            this.cmb_Worker.sText_Filled = "worker";
+            this.cmb_Worker.sTitle = "Workers";
+            this.cmb_Worker.TabIndex = 292;
             // 
             // kryptonLabel6
             // 
@@ -681,6 +813,33 @@
             this.btn_Clear.UniqueName = "3502D2542D5C42F0078623FF0A695273";
             this.btn_Clear.Click += new System.EventHandler(this.btn_Clear_Click);
             // 
+            // dn_Pages
+            // 
+            this.dn_Pages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dn_Pages.Location = new System.Drawing.Point(0, 0);
+            this.dn_Pages.Name = "dn_Pages";
+            this.dn_Pages.Pages.AddRange(new ComponentFactory.Krypton.Navigator.KryptonPage[] {
+            this.pg_Workers,
+            this.pg_Machines});
+            this.dn_Pages.SelectedIndex = 0;
+            this.dn_Pages.Size = new System.Drawing.Size(945, 368);
+            this.dn_Pages.TabIndex = 11;
+            this.dn_Pages.Text = "kryptonDockableNavigator1";
+            this.dn_Pages.Click += new System.EventHandler(this.dn_Pages_Click);
+            // 
+            // pg_Workers
+            // 
+            this.pg_Workers.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
+            this.pg_Workers.Controls.Add(this.kryptonHeaderGroup1);
+            this.pg_Workers.Flags = 65534;
+            this.pg_Workers.LastVisibleSet = true;
+            this.pg_Workers.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pg_Workers.Name = "pg_Workers";
+            this.pg_Workers.Size = new System.Drawing.Size(943, 341);
+            this.pg_Workers.Text = "Worker\'s processing";
+            this.pg_Workers.ToolTipTitle = "Page ToolTip";
+            this.pg_Workers.UniqueName = "5AC48C67E25A403CC3BEFE848DA97E15";
+            // 
             // kryptonHeaderGroup1
             // 
             this.kryptonHeaderGroup1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -691,10 +850,10 @@
             // 
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.gv_List);
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.bn_List);
-            this.kryptonHeaderGroup1.Size = new System.Drawing.Size(945, 368);
-            this.kryptonHeaderGroup1.TabIndex = 10;
-            this.kryptonHeaderGroup1.ValuesPrimary.Heading = "Serial numbers of products";
-            this.kryptonHeaderGroup1.ValuesPrimary.Image = global::Odin.Global_Resourses.pci;
+            this.kryptonHeaderGroup1.Size = new System.Drawing.Size(943, 341);
+            this.kryptonHeaderGroup1.TabIndex = 11;
+            this.kryptonHeaderGroup1.ValuesPrimary.Heading = "Worker\'s processing result";
+            this.kryptonHeaderGroup1.ValuesPrimary.Image = global::Odin.Global_Resourses.session_idle_time;
             this.kryptonHeaderGroup1.ValuesSecondary.Heading = "";
             // 
             // gv_List
@@ -719,13 +878,17 @@
             this.cn_analogs,
             this.cn_teortime,
             this.cn_teortotal,
-            this.cn_parameters});
+            this.cn_parameters,
+            this.cn_prodtime,
+            this.cn_prodplace,
+            this.cn_headid,
+            this.cn_workerid});
             this.gv_List.ContextMenuStrip = this.mnu_Lines;
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_List.Location = new System.Drawing.Point(0, 0);
             this.gv_List.Name = "gv_List";
             this.gv_List.RowHeadersWidth = 25;
-            this.gv_List.Size = new System.Drawing.Size(943, 303);
+            this.gv_List.Size = new System.Drawing.Size(941, 276);
             this.gv_List.TabIndex = 8;
             this.gv_List.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_List_ColumnHeaderMouseClick);
             this.gv_List.SelectionChanged += new System.EventHandler(this.gv_List_SelectionChanged);
@@ -859,6 +1022,32 @@
             this.cn_parameters.HeaderText = "Check parameters";
             this.cn_parameters.Name = "cn_parameters";
             // 
+            // cn_prodtime
+            // 
+            this.cn_prodtime.DataPropertyName = "prodtime";
+            this.cn_prodtime.HeaderText = "Prod. time";
+            this.cn_prodtime.Name = "cn_prodtime";
+            // 
+            // cn_prodplace
+            // 
+            this.cn_prodplace.DataPropertyName = "prodplace";
+            this.cn_prodplace.HeaderText = "Prod. place";
+            this.cn_prodplace.Name = "cn_prodplace";
+            // 
+            // cn_headid
+            // 
+            this.cn_headid.DataPropertyName = "headid";
+            this.cn_headid.HeaderText = "headid";
+            this.cn_headid.Name = "cn_headid";
+            this.cn_headid.Visible = false;
+            // 
+            // cn_workerid
+            // 
+            this.cn_workerid.DataPropertyName = "workerid";
+            this.cn_workerid.HeaderText = "workerid";
+            this.cn_workerid.Name = "cn_workerid";
+            this.cn_workerid.Visible = false;
+            // 
             // bn_List
             // 
             this.bn_List.AddNewItem = null;
@@ -879,14 +1068,14 @@
             this.btn_Excel,
             this.toolStripLabel2,
             this.txt_Sum});
-            this.bn_List.Location = new System.Drawing.Point(0, 303);
+            this.bn_List.Location = new System.Drawing.Point(0, 276);
             this.bn_List.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.bn_List.MoveLastItem = this.bindingNavigatorMoveLastItem;
             this.bn_List.MoveNextItem = this.bindingNavigatorMoveNextItem;
             this.bn_List.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bn_List.Name = "bn_List";
             this.bn_List.PositionItem = this.bindingNavigatorPositionItem;
-            this.bn_List.Size = new System.Drawing.Size(943, 25);
+            this.bn_List.Size = new System.Drawing.Size(941, 25);
             this.bn_List.TabIndex = 3;
             this.bn_List.Text = "bindingNavigator1";
             // 
@@ -965,7 +1154,6 @@
             this.btn_Excel.Name = "btn_Excel";
             this.btn_Excel.Size = new System.Drawing.Size(23, 22);
             this.btn_Excel.Text = "Export into excel";
-            this.btn_Excel.Click += new System.EventHandler(this.btn_Excel_Click);
             // 
             // toolStripLabel2
             // 
@@ -977,6 +1165,434 @@
             // 
             this.txt_Sum.Name = "txt_Sum";
             this.txt_Sum.Size = new System.Drawing.Size(100, 25);
+            // 
+            // pg_Machines
+            // 
+            this.pg_Machines.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
+            this.pg_Machines.Controls.Add(this.kryptonHeaderGroup3);
+            this.pg_Machines.Flags = 65534;
+            this.pg_Machines.LastVisibleSet = true;
+            this.pg_Machines.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pg_Machines.Name = "pg_Machines";
+            this.pg_Machines.Size = new System.Drawing.Size(943, 341);
+            this.pg_Machines.Text = "SMT processing";
+            this.pg_Machines.ToolTipTitle = "Page ToolTip";
+            this.pg_Machines.UniqueName = "7BF16B8200CE446DD6A546007AED1D83";
+            // 
+            // kryptonHeaderGroup3
+            // 
+            this.kryptonHeaderGroup3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonHeaderGroup3.Location = new System.Drawing.Point(0, 0);
+            this.kryptonHeaderGroup3.Name = "kryptonHeaderGroup3";
+            // 
+            // kryptonHeaderGroup3.Panel
+            // 
+            this.kryptonHeaderGroup3.Panel.Controls.Add(this.gv_Machines);
+            this.kryptonHeaderGroup3.Panel.Controls.Add(this.bn_Machines);
+            this.kryptonHeaderGroup3.Size = new System.Drawing.Size(943, 341);
+            this.kryptonHeaderGroup3.TabIndex = 12;
+            this.kryptonHeaderGroup3.ValuesPrimary.Heading = "SMT processing result";
+            this.kryptonHeaderGroup3.ValuesPrimary.Image = global::Odin.Global_Resourses.pci;
+            this.kryptonHeaderGroup3.ValuesSecondary.Heading = "";
+            // 
+            // gv_Machines
+            // 
+            this.gv_Machines.AllowUserToAddRows = false;
+            this.gv_Machines.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.gv_Machines.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.cn_macid,
+            this.cn_macheadid,
+            this.dataGridViewTextBoxColumn5,
+            this.cn_macline,
+            this.cn_mactopbot,
+            this.cn_macpcbsn,
+            this.cn_macfeeder,
+            this.cn_macprevlabel,
+            this.cn_macnewlabel,
+            this.cn_macreplacedat,
+            this.cn_macreplacedby,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn7,
+            this.dataGridViewTextBoxColumn8,
+            this.dataGridViewTextBoxColumn9,
+            this.dataGridViewTextBoxColumn10,
+            this.cn_mactermprofiledate,
+            this.cn_mactermprofileby,
+            this.cn_macpastedate,
+            this.cn_macpasteby,
+            this.cn_macmounterat,
+            this.cn_macmounterby,
+            this.cn_macovencheckat,
+            this.cn_macovencheckby});
+            this.gv_Machines.ContextMenuStrip = this.mnu_macLines;
+            this.gv_Machines.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gv_Machines.Location = new System.Drawing.Point(0, 0);
+            this.gv_Machines.Name = "gv_Machines";
+            this.gv_Machines.RowHeadersWidth = 25;
+            this.gv_Machines.Size = new System.Drawing.Size(941, 276);
+            this.gv_Machines.TabIndex = 8;
+            // 
+            // cn_macid
+            // 
+            this.cn_macid.DataPropertyName = "id";
+            this.cn_macid.FillWeight = 5F;
+            this.cn_macid.HeaderText = "id";
+            this.cn_macid.Name = "cn_macid";
+            this.cn_macid.ReadOnly = true;
+            this.cn_macid.Visible = false;
+            this.cn_macid.Width = 5;
+            // 
+            // cn_macheadid
+            // 
+            this.cn_macheadid.DataPropertyName = "headid";
+            this.cn_macheadid.HeaderText = "headid";
+            this.cn_macheadid.Name = "cn_macheadid";
+            this.cn_macheadid.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "launch";
+            this.dataGridViewTextBoxColumn5.HeaderText = "Launch";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            // 
+            // cn_macline
+            // 
+            this.cn_macline.DataPropertyName = "line";
+            this.cn_macline.FillWeight = 50F;
+            this.cn_macline.HeaderText = "Line";
+            this.cn_macline.Name = "cn_macline";
+            this.cn_macline.Width = 50;
+            // 
+            // cn_mactopbot
+            // 
+            this.cn_mactopbot.DataPropertyName = "topbot";
+            this.cn_mactopbot.FillWeight = 50F;
+            this.cn_mactopbot.HeaderText = "TOP/BOT";
+            this.cn_mactopbot.Name = "cn_mactopbot";
+            this.cn_mactopbot.Width = 50;
+            // 
+            // cn_macpcbsn
+            // 
+            this.cn_macpcbsn.DataPropertyName = "pcbsn";
+            this.cn_macpcbsn.FillWeight = 120F;
+            this.cn_macpcbsn.HeaderText = "PCB S/N.";
+            this.cn_macpcbsn.Name = "cn_macpcbsn";
+            this.cn_macpcbsn.ReadOnly = true;
+            this.cn_macpcbsn.Width = 120;
+            // 
+            // cn_macfeeder
+            // 
+            this.cn_macfeeder.DataPropertyName = "feeder";
+            this.cn_macfeeder.HeaderText = "Feeder";
+            this.cn_macfeeder.Name = "cn_macfeeder";
+            // 
+            // cn_macprevlabel
+            // 
+            this.cn_macprevlabel.DataPropertyName = "prevlabel";
+            this.cn_macprevlabel.HeaderText = "Prev. label";
+            this.cn_macprevlabel.Name = "cn_macprevlabel";
+            // 
+            // cn_macnewlabel
+            // 
+            this.cn_macnewlabel.DataPropertyName = "newlabel";
+            this.cn_macnewlabel.HeaderText = "New label";
+            this.cn_macnewlabel.Name = "cn_macnewlabel";
+            // 
+            // cn_macreplacedat
+            // 
+            this.cn_macreplacedat.DataPropertyName = "replacedat";
+            this.cn_macreplacedat.HeaderText = "Replaced at";
+            this.cn_macreplacedat.Name = "cn_macreplacedat";
+            // 
+            // cn_macreplacedby
+            // 
+            this.cn_macreplacedby.DataPropertyName = "replacedby";
+            this.cn_macreplacedby.FillWeight = 150F;
+            this.cn_macreplacedby.HeaderText = "Replaced by";
+            this.cn_macreplacedby.Name = "cn_macreplacedby";
+            this.cn_macreplacedby.Width = 150;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "batch";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Batch";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "artid";
+            this.dataGridViewTextBoxColumn7.FillWeight = 60F;
+            this.dataGridViewTextBoxColumn7.HeaderText = "Art. ID";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.Width = 60;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "article";
+            this.dataGridViewTextBoxColumn8.FillWeight = 120F;
+            this.dataGridViewTextBoxColumn8.HeaderText = "Article";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            this.dataGridViewTextBoxColumn8.Width = 120;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.DataPropertyName = "secname";
+            this.dataGridViewTextBoxColumn9.HeaderText = "Sec. name";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.DataPropertyName = "conforder";
+            this.dataGridViewTextBoxColumn10.HeaderText = "Conf. order";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.ReadOnly = true;
+            // 
+            // cn_mactermprofiledate
+            // 
+            this.cn_mactermprofiledate.DataPropertyName = "termprofiledate";
+            this.cn_mactermprofiledate.HeaderText = "Termprofile date";
+            this.cn_mactermprofiledate.Name = "cn_mactermprofiledate";
+            // 
+            // cn_mactermprofileby
+            // 
+            this.cn_mactermprofileby.DataPropertyName = "termprofileby";
+            this.cn_mactermprofileby.HeaderText = "Termprofile by";
+            this.cn_mactermprofileby.Name = "cn_mactermprofileby";
+            // 
+            // cn_macpastedate
+            // 
+            this.cn_macpastedate.DataPropertyName = "pastedate";
+            this.cn_macpastedate.HeaderText = "Paste check date";
+            this.cn_macpastedate.Name = "cn_macpastedate";
+            // 
+            // cn_macpasteby
+            // 
+            this.cn_macpasteby.DataPropertyName = "pasteby";
+            this.cn_macpasteby.HeaderText = "Paste check by";
+            this.cn_macpasteby.Name = "cn_macpasteby";
+            // 
+            // cn_macmounterat
+            // 
+            this.cn_macmounterat.DataPropertyName = "mounterat";
+            this.cn_macmounterat.HeaderText = "Mounter program date";
+            this.cn_macmounterat.Name = "cn_macmounterat";
+            // 
+            // cn_macmounterby
+            // 
+            this.cn_macmounterby.DataPropertyName = "mounterby";
+            this.cn_macmounterby.HeaderText = "Mounter program by";
+            this.cn_macmounterby.Name = "cn_macmounterby";
+            // 
+            // cn_macovencheckat
+            // 
+            this.cn_macovencheckat.DataPropertyName = "ovencheckat";
+            this.cn_macovencheckat.HeaderText = "Placement check at";
+            this.cn_macovencheckat.Name = "cn_macovencheckat";
+            // 
+            // cn_macovencheckby
+            // 
+            this.cn_macovencheckby.DataPropertyName = "ovencheckby";
+            this.cn_macovencheckby.HeaderText = "Placement check by";
+            this.cn_macovencheckby.Name = "cn_macovencheckby";
+            // 
+            // mnu_macLines
+            // 
+            this.mnu_macLines.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.mnu_macLines.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mni_macFilterFor,
+            this.mni_macSearch,
+            this.mni_macFilterBy,
+            this.mni_macFilterExSelection,
+            this.mni_macRemoveFilter,
+            this.mni_macCopy,
+            this.toolStripSeparator9,
+            this.mni_macAdmin});
+            this.mnu_macLines.Name = "mnu_Requests";
+            this.mnu_macLines.Size = new System.Drawing.Size(211, 167);
+            this.mnu_macLines.Opening += new System.ComponentModel.CancelEventHandler(this.mnu_macLines_Opening);
+            // 
+            // mni_macFilterFor
+            // 
+            this.mni_macFilterFor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mni_macFilterFor.Name = "mni_macFilterFor";
+            this.mni_macFilterFor.Size = new System.Drawing.Size(150, 23);
+            this.mni_macFilterFor.TextChanged += new System.EventHandler(this.mni_macFilterFor_TextChanged);
+            // 
+            // mni_macSearch
+            // 
+            this.mni_macSearch.Image = global::Odin.Global_Resourses.binoculars_8090;
+            this.mni_macSearch.Name = "mni_macSearch";
+            this.mni_macSearch.Size = new System.Drawing.Size(210, 22);
+            this.mni_macSearch.Text = "Search for record";
+            this.mni_macSearch.Click += new System.EventHandler(this.mni_macSearch_Click);
+            // 
+            // mni_macFilterBy
+            // 
+            this.mni_macFilterBy.Image = global::Odin.Global_Resourses.FilterBySel;
+            this.mni_macFilterBy.Name = "mni_macFilterBy";
+            this.mni_macFilterBy.Size = new System.Drawing.Size(210, 22);
+            this.mni_macFilterBy.Text = "Filter by selection";
+            this.mni_macFilterBy.Click += new System.EventHandler(this.mni_macFilterBy_Click);
+            // 
+            // mni_macFilterExSelection
+            // 
+            this.mni_macFilterExSelection.Image = global::Odin.Global_Resourses.scissors_3838;
+            this.mni_macFilterExSelection.Name = "mni_macFilterExSelection";
+            this.mni_macFilterExSelection.Size = new System.Drawing.Size(210, 22);
+            this.mni_macFilterExSelection.Text = "Filter excluding selection";
+            this.mni_macFilterExSelection.Click += new System.EventHandler(this.mni_macFilterExcludingSel_Click);
+            // 
+            // mni_macRemoveFilter
+            // 
+            this.mni_macRemoveFilter.Image = global::Odin.Global_Resourses.RemoveFilter;
+            this.mni_macRemoveFilter.Name = "mni_macRemoveFilter";
+            this.mni_macRemoveFilter.Size = new System.Drawing.Size(210, 22);
+            this.mni_macRemoveFilter.Text = "Remove filter";
+            this.mni_macRemoveFilter.Click += new System.EventHandler(this.mni_macRemoveFilter_Click);
+            // 
+            // mni_macCopy
+            // 
+            this.mni_macCopy.Image = global::Odin.Global_Resourses.Copy_16x16;
+            this.mni_macCopy.Name = "mni_macCopy";
+            this.mni_macCopy.Size = new System.Drawing.Size(210, 22);
+            this.mni_macCopy.Text = "Copy";
+            this.mni_macCopy.Click += new System.EventHandler(this.mni_macCopy_Click);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(207, 6);
+            // 
+            // mni_macAdmin
+            // 
+            this.mni_macAdmin.Image = global::Odin.Global_Resourses.Settings_24x24;
+            this.mni_macAdmin.Name = "mni_macAdmin";
+            this.mni_macAdmin.Size = new System.Drawing.Size(210, 22);
+            this.mni_macAdmin.Text = "List settings";
+            this.mni_macAdmin.Click += new System.EventHandler(this.mni_macAdmin_Click);
+            // 
+            // bn_Machines
+            // 
+            this.bn_Machines.AddNewItem = null;
+            this.bn_Machines.CountItem = this.toolStripLabel3;
+            this.bn_Machines.DeleteItem = null;
+            this.bn_Machines.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.bn_Machines.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.bn_Machines.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton5,
+            this.toolStripButton6,
+            this.toolStripSeparator6,
+            this.toolStripTextBox2,
+            this.toolStripLabel3,
+            this.toolStripSeparator7,
+            this.toolStripButton7,
+            this.toolStripButton8,
+            this.toolStripSeparator8,
+            this.btn_macExcel,
+            this.toolStripLabel4,
+            this.txt_MachSum});
+            this.bn_Machines.Location = new System.Drawing.Point(0, 276);
+            this.bn_Machines.MoveFirstItem = this.toolStripButton5;
+            this.bn_Machines.MoveLastItem = this.toolStripButton8;
+            this.bn_Machines.MoveNextItem = this.toolStripButton7;
+            this.bn_Machines.MovePreviousItem = this.toolStripButton6;
+            this.bn_Machines.Name = "bn_Machines";
+            this.bn_Machines.PositionItem = this.toolStripTextBox2;
+            this.bn_Machines.Size = new System.Drawing.Size(941, 25);
+            this.bn_Machines.TabIndex = 3;
+            this.bn_Machines.Text = "Machines";
+            // 
+            // toolStripLabel3
+            // 
+            this.toolStripLabel3.Name = "toolStripLabel3";
+            this.toolStripLabel3.Size = new System.Drawing.Size(35, 22);
+            this.toolStripLabel3.Text = "of {0}";
+            this.toolStripLabel3.ToolTipText = "Total number of items";
+            // 
+            // toolStripButton5
+            // 
+            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
+            this.toolStripButton5.Name = "toolStripButton5";
+            this.toolStripButton5.RightToLeftAutoMirrorImage = true;
+            this.toolStripButton5.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton5.Text = "Move first";
+            // 
+            // toolStripButton6
+            // 
+            this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
+            this.toolStripButton6.Name = "toolStripButton6";
+            this.toolStripButton6.RightToLeftAutoMirrorImage = true;
+            this.toolStripButton6.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton6.Text = "Move previous";
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripTextBox2
+            // 
+            this.toolStripTextBox2.AccessibleName = "Position";
+            this.toolStripTextBox2.AutoSize = false;
+            this.toolStripTextBox2.Name = "toolStripTextBox2";
+            this.toolStripTextBox2.Size = new System.Drawing.Size(50, 23);
+            this.toolStripTextBox2.Text = "0";
+            this.toolStripTextBox2.ToolTipText = "Current position";
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButton7
+            // 
+            this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton7.Image")));
+            this.toolStripButton7.Name = "toolStripButton7";
+            this.toolStripButton7.RightToLeftAutoMirrorImage = true;
+            this.toolStripButton7.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton7.Text = "Move next";
+            // 
+            // toolStripButton8
+            // 
+            this.toolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton8.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton8.Image")));
+            this.toolStripButton8.Name = "toolStripButton8";
+            this.toolStripButton8.RightToLeftAutoMirrorImage = true;
+            this.toolStripButton8.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton8.Text = "Move last";
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 25);
+            // 
+            // btn_macExcel
+            // 
+            this.btn_macExcel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_macExcel.Image = global::Odin.Global_Resourses.ExcelSpreadsheetSmall;
+            this.btn_macExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_macExcel.Name = "btn_macExcel";
+            this.btn_macExcel.Size = new System.Drawing.Size(23, 22);
+            this.btn_macExcel.Text = "Export into excel";
+            this.btn_macExcel.Click += new System.EventHandler(this.btn_macExcel_Click);
+            // 
+            // toolStripLabel4
+            // 
+            this.toolStripLabel4.Name = "toolStripLabel4";
+            this.toolStripLabel4.Size = new System.Drawing.Size(77, 22);
+            this.toolStripLabel4.Text = "Selected sum";
+            this.toolStripLabel4.Visible = false;
+            // 
+            // txt_MachSum
+            // 
+            this.txt_MachSum.Name = "txt_MachSum";
+            this.txt_MachSum.Size = new System.Drawing.Size(100, 25);
+            this.txt_MachSum.Visible = false;
             // 
             // kryptonHeaderGroup2
             // 
@@ -1020,6 +1636,110 @@
             this.gv_Materials.RowHeadersWidth = 25;
             this.gv_Materials.Size = new System.Drawing.Size(943, 277);
             this.gv_Materials.TabIndex = 9;
+            // 
+            // cn_mid
+            // 
+            this.cn_mid.DataPropertyName = "id";
+            this.cn_mid.FillWeight = 5F;
+            this.cn_mid.HeaderText = "id";
+            this.cn_mid.Name = "cn_mid";
+            this.cn_mid.ReadOnly = true;
+            this.cn_mid.Visible = false;
+            this.cn_mid.Width = 5;
+            // 
+            // cn_mlabel
+            // 
+            this.cn_mlabel.DataPropertyName = "label";
+            this.cn_mlabel.FillWeight = 120F;
+            this.cn_mlabel.HeaderText = "Label";
+            this.cn_mlabel.Name = "cn_mlabel";
+            this.cn_mlabel.ReadOnly = true;
+            this.cn_mlabel.Width = 120;
+            // 
+            // cn_matartid
+            // 
+            this.cn_matartid.DataPropertyName = "matartid";
+            this.cn_matartid.FillWeight = 80F;
+            this.cn_matartid.HeaderText = "Mat. art.id.";
+            this.cn_matartid.Name = "cn_matartid";
+            this.cn_matartid.Width = 80;
+            // 
+            // cn_matarticle
+            // 
+            this.cn_matarticle.DataPropertyName = "matarticle";
+            this.cn_matarticle.FillWeight = 120F;
+            this.cn_matarticle.HeaderText = "Material ";
+            this.cn_matarticle.Name = "cn_matarticle";
+            this.cn_matarticle.Width = 120;
+            // 
+            // cn_mbatch
+            // 
+            this.cn_mbatch.DataPropertyName = "batch";
+            this.cn_mbatch.HeaderText = "Batch";
+            this.cn_mbatch.Name = "cn_mbatch";
+            this.cn_mbatch.ReadOnly = true;
+            // 
+            // cn_mlaunch
+            // 
+            this.cn_mlaunch.DataPropertyName = "launch";
+            this.cn_mlaunch.HeaderText = "Launch";
+            this.cn_mlaunch.Name = "cn_mlaunch";
+            // 
+            // cn_martid
+            // 
+            this.cn_martid.DataPropertyName = "artid";
+            this.cn_martid.FillWeight = 60F;
+            this.cn_martid.HeaderText = "Product art. ID";
+            this.cn_martid.Name = "cn_martid";
+            this.cn_martid.Width = 60;
+            // 
+            // cn_marticle
+            // 
+            this.cn_marticle.DataPropertyName = "article";
+            this.cn_marticle.FillWeight = 120F;
+            this.cn_marticle.HeaderText = "Product article";
+            this.cn_marticle.Name = "cn_marticle";
+            this.cn_marticle.ReadOnly = true;
+            this.cn_marticle.Width = 120;
+            // 
+            // cn_msecname
+            // 
+            this.cn_msecname.DataPropertyName = "secname";
+            this.cn_msecname.HeaderText = "Product sec. name";
+            this.cn_msecname.Name = "cn_msecname";
+            // 
+            // cn_mconforder
+            // 
+            this.cn_mconforder.DataPropertyName = "conforder";
+            this.cn_mconforder.HeaderText = "Conf. order";
+            this.cn_mconforder.Name = "cn_mconforder";
+            this.cn_mconforder.ReadOnly = true;
+            // 
+            // cn_mwhen
+            // 
+            this.cn_mwhen.DataPropertyName = "when";
+            this.cn_mwhen.HeaderText = "When";
+            this.cn_mwhen.Name = "cn_mwhen";
+            // 
+            // cn_mworker
+            // 
+            this.cn_mworker.DataPropertyName = "worker";
+            this.cn_mworker.FillWeight = 180F;
+            this.cn_mworker.HeaderText = "Worker";
+            this.cn_mworker.Name = "cn_mworker";
+            this.cn_mworker.Width = 180;
+            // 
+            // cn_manufbatch
+            // 
+            this.cn_manufbatch.DataPropertyName = "manufbatch";
+            this.cn_manufbatch.HeaderText = "Manuf. batch";
+            this.cn_manufbatch.Name = "cn_manufbatch";
+            // 
+            // cn_incomedoc
+            // 
+            this.cn_incomedoc.DataPropertyName = "incomedoc";
+            this.cn_incomedoc.HeaderText = "Income doc.";
+            this.cn_incomedoc.Name = "cn_incomedoc";
             // 
             // mnu_mLines
             // 
@@ -1225,109 +1945,25 @@
             this.kryptonSplitContainer1.SplitterDistance = 470;
             this.kryptonSplitContainer1.TabIndex = 6;
             // 
-            // cn_mid
+            // miniToolStrip
             // 
-            this.cn_mid.DataPropertyName = "id";
-            this.cn_mid.FillWeight = 5F;
-            this.cn_mid.HeaderText = "id";
-            this.cn_mid.Name = "cn_mid";
-            this.cn_mid.ReadOnly = true;
-            this.cn_mid.Visible = false;
-            this.cn_mid.Width = 5;
-            // 
-            // cn_mlabel
-            // 
-            this.cn_mlabel.DataPropertyName = "label";
-            this.cn_mlabel.FillWeight = 120F;
-            this.cn_mlabel.HeaderText = "Label";
-            this.cn_mlabel.Name = "cn_mlabel";
-            this.cn_mlabel.ReadOnly = true;
-            this.cn_mlabel.Width = 120;
-            // 
-            // cn_matartid
-            // 
-            this.cn_matartid.DataPropertyName = "matartid";
-            this.cn_matartid.FillWeight = 80F;
-            this.cn_matartid.HeaderText = "Mat. art.id.";
-            this.cn_matartid.Name = "cn_matartid";
-            this.cn_matartid.Width = 80;
-            // 
-            // cn_matarticle
-            // 
-            this.cn_matarticle.DataPropertyName = "matarticle";
-            this.cn_matarticle.FillWeight = 120F;
-            this.cn_matarticle.HeaderText = "Material ";
-            this.cn_matarticle.Name = "cn_matarticle";
-            this.cn_matarticle.Width = 120;
-            // 
-            // cn_mbatch
-            // 
-            this.cn_mbatch.DataPropertyName = "batch";
-            this.cn_mbatch.HeaderText = "Batch";
-            this.cn_mbatch.Name = "cn_mbatch";
-            this.cn_mbatch.ReadOnly = true;
-            // 
-            // cn_mlaunch
-            // 
-            this.cn_mlaunch.DataPropertyName = "launch";
-            this.cn_mlaunch.HeaderText = "Launch";
-            this.cn_mlaunch.Name = "cn_mlaunch";
-            // 
-            // cn_martid
-            // 
-            this.cn_martid.DataPropertyName = "artid";
-            this.cn_martid.FillWeight = 60F;
-            this.cn_martid.HeaderText = "Product art. ID";
-            this.cn_martid.Name = "cn_martid";
-            this.cn_martid.Width = 60;
-            // 
-            // cn_marticle
-            // 
-            this.cn_marticle.DataPropertyName = "article";
-            this.cn_marticle.FillWeight = 120F;
-            this.cn_marticle.HeaderText = "Product article";
-            this.cn_marticle.Name = "cn_marticle";
-            this.cn_marticle.ReadOnly = true;
-            this.cn_marticle.Width = 120;
-            // 
-            // cn_msecname
-            // 
-            this.cn_msecname.DataPropertyName = "secname";
-            this.cn_msecname.HeaderText = "Product sec. name";
-            this.cn_msecname.Name = "cn_msecname";
-            // 
-            // cn_mconforder
-            // 
-            this.cn_mconforder.DataPropertyName = "conforder";
-            this.cn_mconforder.HeaderText = "Conf. order";
-            this.cn_mconforder.Name = "cn_mconforder";
-            this.cn_mconforder.ReadOnly = true;
-            // 
-            // cn_mwhen
-            // 
-            this.cn_mwhen.DataPropertyName = "when";
-            this.cn_mwhen.HeaderText = "When";
-            this.cn_mwhen.Name = "cn_mwhen";
-            // 
-            // cn_mworker
-            // 
-            this.cn_mworker.DataPropertyName = "worker";
-            this.cn_mworker.FillWeight = 180F;
-            this.cn_mworker.HeaderText = "Worker";
-            this.cn_mworker.Name = "cn_mworker";
-            this.cn_mworker.Width = 180;
-            // 
-            // cn_manufbatch
-            // 
-            this.cn_manufbatch.DataPropertyName = "manufbatch";
-            this.cn_manufbatch.HeaderText = "Manuf. batch";
-            this.cn_manufbatch.Name = "cn_manufbatch";
-            // 
-            // cn_incomedoc
-            // 
-            this.cn_incomedoc.DataPropertyName = "incomedoc";
-            this.cn_incomedoc.HeaderText = "Income doc.";
-            this.cn_incomedoc.Name = "cn_incomedoc";
+            this.miniToolStrip.AddNewItem = null;
+            this.miniToolStrip.AutoSize = false;
+            this.miniToolStrip.CanOverflow = false;
+            this.miniToolStrip.CountItem = null;
+            this.miniToolStrip.DeleteItem = null;
+            this.miniToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.miniToolStrip.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.miniToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.miniToolStrip.Location = new System.Drawing.Point(0, 0);
+            this.miniToolStrip.MoveFirstItem = null;
+            this.miniToolStrip.MoveLastItem = null;
+            this.miniToolStrip.MoveNextItem = null;
+            this.miniToolStrip.MovePreviousItem = null;
+            this.miniToolStrip.Name = "miniToolStrip";
+            this.miniToolStrip.PositionItem = null;
+            this.miniToolStrip.Size = new System.Drawing.Size(943, 25);
+            this.miniToolStrip.TabIndex = 3;
             // 
             // frm_ProductionResult
             // 
@@ -1354,6 +1990,10 @@
             this.kryptonSplitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2)).EndInit();
             this.kryptonSplitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dn_Pages)).EndInit();
+            this.dn_Pages.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pg_Workers)).EndInit();
+            this.pg_Workers.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).EndInit();
             this.kryptonHeaderGroup1.Panel.ResumeLayout(false);
             this.kryptonHeaderGroup1.Panel.PerformLayout();
@@ -1363,6 +2003,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.bn_List)).EndInit();
             this.bn_List.ResumeLayout(false);
             this.bn_List.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pg_Machines)).EndInit();
+            this.pg_Machines.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup3.Panel)).EndInit();
+            this.kryptonHeaderGroup3.Panel.ResumeLayout(false);
+            this.kryptonHeaderGroup3.Panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup3)).EndInit();
+            this.kryptonHeaderGroup3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gv_Machines)).EndInit();
+            this.mnu_macLines.ResumeLayout(false);
+            this.mnu_macLines.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bn_Machines)).EndInit();
+            this.bn_Machines.ResumeLayout(false);
+            this.bn_Machines.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2.Panel)).EndInit();
             this.kryptonHeaderGroup2.Panel.ResumeLayout(false);
             this.kryptonHeaderGroup2.Panel.PerformLayout();
@@ -1381,6 +2034,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).EndInit();
             this.kryptonSplitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bs_Materials)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.miniToolStrip)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_Machines)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1388,7 +2043,6 @@
         #endregion
 
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Content;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Edit;
         private System.Windows.Forms.ToolStripMenuItem mni_FilterExcludingSel;
         private System.Windows.Forms.ToolStripMenuItem mni_FilterBy;
@@ -1412,7 +2066,7 @@
         private Owf.Controls.GradientPanel2 gradientPanel22;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny4;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel12;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel lbl_Serial;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_Serial;
         private ComponentFactory.Krypton.Toolkit.KryptonSplitContainer kryptonSplitContainer2;
         private CMB_Components.Batches.cmb_Batches cmb_Batches1;
@@ -1423,8 +2077,8 @@
         private ComponentFactory.Krypton.Toolkit.KryptonSplitContainer kryptonSplitContainer1;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel6;
         private CMB_Components.Launches.cmb_Launches cmb_Launches1;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel5;
-        private CMB_Components.Common.cmb_Common cmb_Common1;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel lbl_Worker;
+        private CMB_Components.Common.cmb_Common cmb_Worker;
         private CustomControls.NullableDateTimePicker txt_DateTill;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny2;
         private CustomControls.NullableDateTimePicker txt_DateFrom;
@@ -1432,19 +2086,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lbl_Till;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lbl_From;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_Sum;
-        private ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup kryptonHeaderGroup1;
-        public ComponentFactory.Krypton.Toolkit.KryptonDataGridView gv_List;
-        private System.Windows.Forms.BindingNavigator bn_List;
-        private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMovePreviousItem;
-        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator;
-        private System.Windows.Forms.ToolStripTextBox bindingNavigatorPositionItem;
-        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator1;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
-        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
-        private System.Windows.Forms.ToolStripButton btn_Excel;
         private ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup kryptonHeaderGroup2;
         public ComponentFactory.Krypton.Toolkit.KryptonDataGridView gv_Materials;
         private System.Windows.Forms.BindingNavigator bn_Materials;
@@ -1468,9 +2109,30 @@
         private System.Windows.Forms.ToolStripMenuItem mni_mCopy;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem mni_mAdmin;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
-        private System.Windows.Forms.ToolStripTextBox txt_Sum;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_ConcOperations;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mlabel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_matartid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_matarticle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mbatch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mlaunch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_martid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_marticle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_msecname;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mconforder;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mwhen;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mworker;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_manufbatch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_incomedoc;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Finish;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Cancel;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btn_ShowParameter;
+        private System.Windows.Forms.BindingNavigator miniToolStrip;
+        private ComponentFactory.Krypton.Docking.KryptonDockableNavigator dn_Pages;
+        private ComponentFactory.Krypton.Navigator.KryptonPage pg_Workers;
+        private ComponentFactory.Krypton.Navigator.KryptonPage pg_Machines;
+        private ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup kryptonHeaderGroup1;
+        public ComponentFactory.Krypton.Toolkit.KryptonDataGridView gv_List;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_sn;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_operno;
@@ -1489,19 +2151,73 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_teortime;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_teortotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_parameters;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mlabel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_matartid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_matarticle;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mbatch;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mlaunch;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_martid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_marticle;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_msecname;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mconforder;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mwhen;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mworker;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_manufbatch;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_incomedoc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_prodtime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_prodplace;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_headid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_workerid;
+        private System.Windows.Forms.BindingNavigator bn_List;
+        private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMovePreviousItem;
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator;
+        private System.Windows.Forms.ToolStripTextBox bindingNavigatorPositionItem;
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator1;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
+        private System.Windows.Forms.ToolStripButton btn_Excel;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
+        private System.Windows.Forms.ToolStripTextBox txt_Sum;
+        private ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup kryptonHeaderGroup3;
+        public ComponentFactory.Krypton.Toolkit.KryptonDataGridView gv_Machines;
+        private System.Windows.Forms.BindingNavigator bn_Machines;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel3;
+        private System.Windows.Forms.ToolStripButton toolStripButton5;
+        private System.Windows.Forms.ToolStripButton toolStripButton6;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripTextBox toolStripTextBox2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripButton toolStripButton7;
+        private System.Windows.Forms.ToolStripButton toolStripButton8;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ToolStripButton btn_macExcel;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel4;
+        private System.Windows.Forms.ToolStripTextBox txt_MachSum;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel lbl_Line;
+        private CMB_Components.Common.cmb_Common cmb_Lines;
+        private System.Windows.Forms.ContextMenuStrip mnu_macLines;
+        private System.Windows.Forms.ToolStripTextBox mni_macFilterFor;
+        private System.Windows.Forms.ToolStripMenuItem mni_macSearch;
+        private System.Windows.Forms.ToolStripMenuItem mni_macFilterBy;
+        private System.Windows.Forms.ToolStripMenuItem mni_macFilterExSelection;
+        private System.Windows.Forms.ToolStripMenuItem mni_macRemoveFilter;
+        private System.Windows.Forms.ToolStripMenuItem mni_macCopy;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripMenuItem mni_macAdmin;
+        private Global_Classes.SyncBindingSource bs_Machines;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_macid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_macheadid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_macline;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mactopbot;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_macpcbsn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_macfeeder;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_macprevlabel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_macnewlabel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_macreplacedat;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_macreplacedby;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mactermprofiledate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_mactermprofileby;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_macpastedate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_macpasteby;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_macmounterat;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_macmounterby;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_macovencheckat;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_macovencheckby;
     }
 }

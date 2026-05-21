@@ -377,6 +377,89 @@ namespace Odin.DataCollection
 
         }
 
+        public void AddDataCollectionFinish(int WorkerId, string ProdDate, double ProdTime, DataTable dataworkers)
+        {
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_AddDataCollectionFinish", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+            sqlComm.CommandTimeout = 3000;
+
+            sqlComm.Parameters.AddWithValue("@workerid", WorkerId);
+            sqlComm.Parameters.AddWithValue("@proddate", ProdDate);
+            sqlComm.Parameters.AddWithValue("@prodtime", ProdTime);
+            sqlComm.Parameters.Add("@tableworkers", SqlDbType.Structured);
+            sqlComm.Parameters["@tableworkers"].TypeName = "UT_IDs";
+            sqlComm.Parameters["@tableworkers"].Value = dataworkers;
+
+            //try
+            //{
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+
+        }
+
+        public void CancelDataCollectionFinish(int Id, string Serial)
+        {
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_CancelDataCollectionFinish", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+            sqlComm.CommandTimeout = 3000;
+
+            sqlComm.Parameters.AddWithValue("@id", Id);
+            sqlComm.Parameters.AddWithValue("@serial", Serial);
+
+            //try
+            //{
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+
+        }
+
+        public void AddDataCollectionFinishOutdated(string ProdDate, double ProdTime, DataTable dataworkers, DataTable dataworks)
+        {
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_AddDataCollectionFinishOutdated", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+            sqlComm.CommandTimeout = 3000;
+
+            sqlComm.Parameters.AddWithValue("@proddate", ProdDate);
+            sqlComm.Parameters.AddWithValue("@prodtime", ProdTime);
+            sqlComm.Parameters.Add("@tableworkers", SqlDbType.Structured);
+            sqlComm.Parameters["@tableworkers"].TypeName = "UT_IDs";
+            sqlComm.Parameters["@tableworkers"].Value = dataworkers;
+            sqlComm.Parameters.Add("@tableworks", SqlDbType.Structured);
+            sqlComm.Parameters["@tableworks"].TypeName = "UT_IDString";
+            sqlComm.Parameters["@tableworks"].Value = dataworks;
+
+            //try
+            //{
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+
+        }
+
+        public void EditDataCollectionFinish(int Headid, string ProdDate, double ProdTime, DataTable dataworkers)
+        {
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_EditDataCollectionFinish", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+            sqlComm.CommandTimeout = 3000;
+
+            sqlComm.Parameters.AddWithValue("@headid", Headid);
+            sqlComm.Parameters.AddWithValue("@proddate", ProdDate);
+            sqlComm.Parameters.AddWithValue("@prodtime", ProdTime);
+            sqlComm.Parameters.Add("@tableworkers", SqlDbType.Structured);
+            sqlComm.Parameters["@tableworkers"].TypeName = "UT_IDs";
+            sqlComm.Parameters["@tableworkers"].Value = dataworkers;
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+
+        }
 
         #endregion
 

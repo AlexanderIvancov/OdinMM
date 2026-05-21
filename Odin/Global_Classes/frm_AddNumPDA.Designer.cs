@@ -31,9 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_AddNumPDA));
             this.btn_Cancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.txt_Qty = new System.Windows.Forms.TextBox();
-            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.lbl_text = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -52,7 +52,7 @@
             // kryptonPanel1
             // 
             this.kryptonPanel1.Controls.Add(this.txt_Qty);
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel2);
+            this.kryptonPanel1.Controls.Add(this.lbl_text);
             this.kryptonPanel1.Controls.Add(this.btn_OK);
             this.kryptonPanel1.Controls.Add(this.btn_Cancel);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -61,6 +61,27 @@
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
             this.kryptonPanel1.Size = new System.Drawing.Size(393, 199);
             this.kryptonPanel1.TabIndex = 1;
+            // 
+            // txt_Qty
+            // 
+            this.txt_Qty.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_Qty.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txt_Qty.Location = new System.Drawing.Point(134, 147);
+            this.txt_Qty.Name = "txt_Qty";
+            this.txt_Qty.Size = new System.Drawing.Size(162, 40);
+            this.txt_Qty.TabIndex = 254;
+            this.txt_Qty.TextChanged += new System.EventHandler(this.txt_Qty_TextChanged);
+            this.txt_Qty.Enter += new System.EventHandler(this.txt_Qty_Enter);
+            // 
+            // lbl_text
+            // 
+            this.lbl_text.Location = new System.Drawing.Point(13, 155);
+            this.lbl_text.Name = "lbl_text";
+            this.lbl_text.Size = new System.Drawing.Size(95, 26);
+            this.lbl_text.StateCommon.LongText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbl_text.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbl_text.TabIndex = 253;
+            this.lbl_text.Values.Text = "Quantity:";
             // 
             // btn_OK
             // 
@@ -71,27 +92,6 @@
             this.btn_OK.TabIndex = 27;
             this.btn_OK.Values.Image = global::Odin.Global_Resourses.Ok;
             this.btn_OK.Values.Text = "OK";
-            // 
-            // txt_Qty
-            // 
-            this.txt_Qty.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_Qty.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txt_Qty.Location = new System.Drawing.Point(124, 147);
-            this.txt_Qty.Name = "txt_Qty";
-            this.txt_Qty.Size = new System.Drawing.Size(162, 40);
-            this.txt_Qty.TabIndex = 254;
-            this.txt_Qty.TextChanged += new System.EventHandler(this.txt_Qty_TextChanged);
-            this.txt_Qty.Enter += new System.EventHandler(this.txt_Qty_Enter);
-            // 
-            // kryptonLabel2
-            // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(13, 155);
-            this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(95, 26);
-            this.kryptonLabel2.StateCommon.LongText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.kryptonLabel2.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.kryptonLabel2.TabIndex = 253;
-            this.kryptonLabel2.Values.Text = "Quantity:";
             // 
             // frm_AddNumPDA
             // 
@@ -108,7 +108,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
 
         }
 
@@ -118,6 +118,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_OK;
         public System.Windows.Forms.TextBox txt_Qty;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel lbl_text;
     }
 }

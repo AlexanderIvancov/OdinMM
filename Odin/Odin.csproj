@@ -1216,6 +1216,12 @@
     <Compile Include="DataCollection\frm_DataCollection.Designer.cs">
       <DependentUpon>frm_DataCollection.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataCollection\frm_FinishShift.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataCollection\frm_FinishShift.designer.cs">
+      <DependentUpon>frm_FinishShift.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataCollection\frm_MachineDCOper.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -3800,6 +3806,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataCollection\frm_DataCollection.resx">
       <DependentUpon>frm_DataCollection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataCollection\frm_FinishShift.resx">
+      <DependentUpon>frm_FinishShift.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataCollection\frm_MachineDCOper.resx">
       <DependentUpon>frm_MachineDCOper.cs</DependentUpon>
