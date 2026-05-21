@@ -1960,6 +1960,11 @@ namespace Odin.Register
         {
             return Helper.QueryDT("execute sp_SelectBOMSetup @artId = " + Id);
         }
+        public DataTable AssemblyByTool(int Id)
+        {
+            return Helper.QueryDT("execute sp_SelectAssemblyByTool @toolartid = " + Id);
+        }
+
         public DataTable SelectBatchBOMData(int Id, int Check)
         {
             return Helper.QueryDT("execute [sp_SelectBatchBOMNew] @batchid = " + Id + ", @nullcheck =" + Check);

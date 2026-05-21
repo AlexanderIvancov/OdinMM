@@ -33,6 +33,16 @@ namespace Odin.Register.Articles
                 //bwStart(bw_List);
             }
         }
+        public int igvArtId
+        {
+            get;
+            set;
+        }
+        public int OldigvArtId
+        {
+            get;
+            set;
+        }
 
         int _lock = 0;
         public int Lock
@@ -48,6 +58,28 @@ namespace Odin.Register.Articles
         #endregion
 
         #region Methods
+        private bool CheckOldRow()
+        {
+
+            try
+            {
+                igvArtId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_artid"].Value);
+            }
+            catch
+            {
+                igvArtId = 0;
+            }
+
+            if (OldigvArtId == igvArtId)
+            {
+                return true;
+            }
+            else
+            {
+                OldigvArtId = igvArtId;
+                return false;
+            }
+        }
 
         public void ShowDets()
         {
@@ -67,9 +99,33 @@ namespace Odin.Register.Articles
             });
 
 
-            bn_ResList.ThreadSafeCall(delegate
+            bn_List.ThreadSafeCall(delegate
             {
-                bn_ResList.BindingSource = bs_List;
+                bn_List.BindingSource = bs_List;
+            });
+
+        }
+        public void ShowResDets()
+        {
+            var data = Reg.AssemblyByTool(igvArtId);
+
+            gv_List.ThreadSafeCall(delegate
+            {
+                DataGridViewColumn oldColumn = gv_List.SortedColumn;
+                var dir = Helper.SaveDirection(gv_List);
+
+                gv_ResList.AutoGenerateColumns = false;
+                bs_ResList.DataSource = data;
+                gv_ResList.DataSource = bs_ResList;
+
+                Helper.RestoreDirection(gv_List, oldColumn, dir);
+
+            });
+
+
+            bn_List.ThreadSafeCall(delegate
+            {
+                bn_List.BindingSource = bs_ResList;
             });
 
         }
@@ -236,6 +292,21 @@ namespace Odin.Register.Articles
                     ShowDets();
                 }
             }
+        }
+        private void gv_List_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                gv_List.ThreadSafeCall(delegate
+                {
+                    if (CheckOldRow() == false)
+                    {
+                        ShowResDets();
+                    }
+                });
+            }
+            catch { }
+
         }
 
         private void btn_CopySetup_Click(object sender, EventArgs e)

@@ -45,9 +45,9 @@ namespace Odin.Register.Articles
         //private List<CutListTempInstructions> tempInstructions = new List<CutListTempInstructions>();
 
         public ctl_BOMHistory ctlHis = null;
-        public ctl_BOMSetup ctlSetup = null;
+        //public ctl_BOMSetup ctlSetup = null;
 
-        //public ctl_BOMSetup2 ctlSetup = null;
+        public ctl_BOMSetup2 ctlSetup = null;
         public ctl_BOMSupplier ctlSupplier = null;
         public ctl_RationingExtended ctlRatio = null;
         public int ControlWidth = 250;
@@ -101,7 +101,7 @@ namespace Odin.Register.Articles
 
         private KryptonPage NewSetup(string Article, int ArtId)
         {
-            ctlSetup = new ctl_BOMSetup();
+            ctlSetup = new ctl_BOMSetup2();
             //ctlSetup = new ctl_BOMSetup2();
             ControlWidth = ctlSetup.Width;
 
@@ -401,7 +401,7 @@ namespace Odin.Register.Articles
         {
             foreach (var page in kryptonDockingManager1.Pages)
             {
-                ctl_BOMSetup ctlSetup1 = (ctl_BOMSetup)page.Controls.Find("ctl_BOMSetup", true).FirstOrDefault();
+                ctl_BOMSetup2 ctlSetup1 = (ctl_BOMSetup2)page.Controls.Find("ctl_BOMSetup2", true).FirstOrDefault();
                 if (ctlSetup1 != null
                     && ctlSetup1.Lock == 0)
                 {
