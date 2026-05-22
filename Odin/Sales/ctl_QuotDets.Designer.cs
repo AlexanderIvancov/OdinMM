@@ -107,6 +107,8 @@
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bs_List = new Odin.Global_Classes.SyncBindingSource();
+            this.kryptonLabel26 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.cmb_Common2 = new Odin.CMB_Components.Common.cmb_Common();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_List)).BeginInit();
@@ -115,6 +117,8 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.cmb_Common2);
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel26);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel25);
             this.kryptonPanel1.Controls.Add(this.txt_salescomment);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel24);
@@ -386,7 +390,7 @@
             // 
             // lbl_Paid
             // 
-            this.lbl_Paid.Location = new System.Drawing.Point(272, 52);
+            this.lbl_Paid.Location = new System.Drawing.Point(184, 3);
             this.lbl_Paid.Name = "lbl_Paid";
             this.lbl_Paid.Size = new System.Drawing.Size(96, 16);
             this.lbl_Paid.StateCommon.ShortText.Color1 = System.Drawing.Color.Green;
@@ -405,7 +409,7 @@
             // 
             // lbl_NotPaid
             // 
-            this.lbl_NotPaid.Location = new System.Drawing.Point(267, 52);
+            this.lbl_NotPaid.Location = new System.Drawing.Point(178, 3);
             this.lbl_NotPaid.Name = "lbl_NotPaid";
             this.lbl_NotPaid.Size = new System.Drawing.Size(122, 16);
             this.lbl_NotPaid.StateCommon.ShortText.Color1 = System.Drawing.Color.Red;
@@ -627,7 +631,7 @@
             // 
             this.cmb_Common1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cmb_Common1.IsEmptyColor = false;
-            this.cmb_Common1.Location = new System.Drawing.Point(121, 49);
+            this.cmb_Common1.Location = new System.Drawing.Point(85, 49);
             this.cmb_Common1.Name = "cmb_Common1";
             this.cmb_Common1.OrderBy = "id";
             this.cmb_Common1.sCurrentValue = "";
@@ -756,7 +760,7 @@
             this.cmb_Articles1.Description = null;
             this.cmb_Articles1.IsActive = -1;
             this.cmb_Articles1.IsPF = 0;
-            this.cmb_Articles1.Location = new System.Drawing.Point(121, 100);
+            this.cmb_Articles1.Location = new System.Drawing.Point(85, 100);
             this.cmb_Articles1.Manufacturer = "";
             this.cmb_Articles1.Margin = new System.Windows.Forms.Padding(0);
             this.cmb_Articles1.Name = "cmb_Articles1";
@@ -766,7 +770,7 @@
             this.cmb_Articles1.QtyConsStock = 0D;
             this.cmb_Articles1.RMId = 0;
             this.cmb_Articles1.SecName = null;
-            this.cmb_Articles1.Size = new System.Drawing.Size(272, 20);
+            this.cmb_Articles1.Size = new System.Drawing.Size(265, 20);
             this.cmb_Articles1.SMTType = 0;
             this.cmb_Articles1.SpoilConst = 0D;
             this.cmb_Articles1.Stage = "";
@@ -934,6 +938,30 @@
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.Visible = false;
             // 
+            // kryptonLabel26
+            // 
+            this.kryptonLabel26.Location = new System.Drawing.Point(208, 49);
+            this.kryptonLabel26.Name = "kryptonLabel26";
+            this.kryptonLabel26.Size = new System.Drawing.Size(39, 20);
+            this.kryptonLabel26.TabIndex = 349;
+            this.kryptonLabel26.Values.Text = "Type:";
+            // 
+            // cmb_Common2
+            // 
+            this.cmb_Common2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cmb_Common2.IsEmptyColor = false;
+            this.cmb_Common2.Location = new System.Drawing.Point(250, 49);
+            this.cmb_Common2.Name = "cmb_Common2";
+            this.cmb_Common2.OrderBy = "id";
+            this.cmb_Common2.sCurrentValue = "";
+            this.cmb_Common2.SelectedValue = 0;
+            this.cmb_Common2.sID_Filled = "id";
+            this.cmb_Common2.Size = new System.Drawing.Size(166, 20);
+            this.cmb_Common2.sTable = "vw_FinalProduction";
+            this.cmb_Common2.sText_Filled = "name";
+            this.cmb_Common2.sTitle = "Final production";
+            this.cmb_Common2.TabIndex = 350;
+            // 
             // ctl_QuotDets
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1031,5 +1059,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel25;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_salescomment;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny7;
+        private CMB_Components.Common.cmb_Common cmb_Common2;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel26;
     }
 }

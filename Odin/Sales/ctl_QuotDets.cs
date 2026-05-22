@@ -349,6 +349,13 @@ namespace Odin.Sales
             get { return cmb_Address2.AddressId; }
             set { cmb_Address2.AddressId = value; }
         }
+
+        public int TypeId
+        {
+            get { return cmb_Common2.SelectedValue; }
+            set { cmb_Common2.SelectedValue = (value == 0? 1 : value); }
+        }
+
         public void ClearCODets()
         {
             ArtId = 0;
@@ -476,6 +483,7 @@ namespace Odin.Sales
                 Primary = COBll.QPrimary;
                 DelivPlaceId = COBll.QDelivPlaceId;
                 DelivAddressId = COBll.QDelivAddressId;
+                TypeId = COBll.QTypeId;
 
                 FillStages(_quotid);
 
@@ -562,7 +570,7 @@ namespace Odin.Sales
 
                     NewLineId = COBll.SaveQuotation(QuotId, DLL.CheckArtId(ArtId), Revision, CustArticle, Qty, UnitId, ReqDate, ExpDate, Week, StateId,
                                                 UnitPrice, Comments, SalesComments, CustId, PCB, datastages, CurId, CustOrder, CustLine, IsSent, SentDate, EndCustomerId,
-                                                Internal, Spoilage, Resale, Blocked, IsProject, Primary, DelivPlaceId, DelivAddressId, 0, Contract);
+                                                Internal, Spoilage, Resale, Blocked, IsProject, Primary, DelivPlaceId, DelivAddressId, 0, Contract, TypeId);
                     QuotId = NewLineId;
                     COBll.QuotId = QuotId;
 

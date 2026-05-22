@@ -930,6 +930,7 @@ namespace Odin.Sales
                         QPrimary = Convert.ToInt32(dr["isprimary"]);
                         QDelivPlaceId = Convert.ToInt32(dr["delivplaceid"]);
                         QDelivAddressId = Convert.ToInt32(dr["delivaddressid"]);
+                        QTypeId = Convert.ToInt32(dr["typeid"]);
                     }
                 }
                 else
@@ -1057,6 +1058,8 @@ namespace Odin.Sales
         { get; set; }
         public int QDelivAddressId
         { get; set; }
+        public int QTypeId
+        { get; set; }
         public void ClearQuotDets()
         {
             QCustId = 0;
@@ -1095,12 +1098,13 @@ namespace Odin.Sales
             QPrimary = 0;
             QDelivPlaceId = 0;
             QDelivAddressId = 0;
+            QTypeId = 0;
         }
         public int SaveQuotation(int id, int artid, string revision, string custarticle, double qty, int unitid, string reqdate,
                                 string expdate, string week, int stateid, double unitprice, string comments, string salescomments, int custid,
                                 int pcb, DataTable stages, int CurId, string corder, string coline, int issent, string sentdate,
                                 int endcustomerid, int _internal, double _spoilage, int _resale, int _blockdelivery, int _isproject,
-                                int _isprimary, int _delivplaceid, int _delivaddressid, int _npi, string _contract)
+                                int _isprimary, int _delivplaceid, int _delivaddressid, int _npi, string _contract, int _typeid)
         {
             int _res = 0;
 
@@ -1147,11 +1151,13 @@ namespace Odin.Sales
 
             sqlComm.Parameters.Add("@insertedid", SqlDbType.Int).Direction = ParameterDirection.Output;
             sqlComm.Parameters.Add("@isneworder", SqlDbType.Int).Direction = ParameterDirection.Output;
+            sqlComm.Parameters.AddWithValue("@typeid", _typeid);
 
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             _res = Convert.ToInt32(sqlComm.Parameters["@insertedid"].Value);
             CreateOrder = Convert.ToInt32(sqlComm.Parameters["@isneworder"].Value) == -1;
+
             sqlConn.Close();
 
             return _res;
