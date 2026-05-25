@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.cmb_Common2 = new Odin.CMB_Components.Common.cmb_Common();
+            this.kryptonLabel26 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel25 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_salescomment = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.buttonSpecAny7 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
@@ -107,8 +109,6 @@
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bs_List = new Odin.Global_Classes.SyncBindingSource();
-            this.kryptonLabel26 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.cmb_Common2 = new Odin.CMB_Components.Common.cmb_Common();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_List)).BeginInit();
@@ -188,6 +188,30 @@
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
             this.kryptonPanel1.Size = new System.Drawing.Size(551, 573);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // cmb_Common2
+            // 
+            this.cmb_Common2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cmb_Common2.IsEmptyColor = false;
+            this.cmb_Common2.Location = new System.Drawing.Point(121, 49);
+            this.cmb_Common2.Name = "cmb_Common2";
+            this.cmb_Common2.OrderBy = "id";
+            this.cmb_Common2.sCurrentValue = "";
+            this.cmb_Common2.SelectedValue = 0;
+            this.cmb_Common2.sID_Filled = "id";
+            this.cmb_Common2.Size = new System.Drawing.Size(166, 20);
+            this.cmb_Common2.sTable = "vw_FinalProduction";
+            this.cmb_Common2.sText_Filled = "name";
+            this.cmb_Common2.sTitle = "Final production";
+            this.cmb_Common2.TabIndex = 350;
+            // 
+            // kryptonLabel26
+            // 
+            this.kryptonLabel26.Location = new System.Drawing.Point(9, 48);
+            this.kryptonLabel26.Name = "kryptonLabel26";
+            this.kryptonLabel26.Size = new System.Drawing.Size(39, 20);
+            this.kryptonLabel26.TabIndex = 349;
+            this.kryptonLabel26.Values.Text = "Type:";
             // 
             // kryptonLabel25
             // 
@@ -631,7 +655,7 @@
             // 
             this.cmb_Common1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cmb_Common1.IsEmptyColor = false;
-            this.cmb_Common1.Location = new System.Drawing.Point(85, 49);
+            this.cmb_Common1.Location = new System.Drawing.Point(321, 22);
             this.cmb_Common1.Name = "cmb_Common1";
             this.cmb_Common1.OrderBy = "id";
             this.cmb_Common1.sCurrentValue = "";
@@ -645,7 +669,7 @@
             // 
             // kryptonLabel13
             // 
-            this.kryptonLabel13.Location = new System.Drawing.Point(9, 49);
+            this.kryptonLabel13.Location = new System.Drawing.Point(281, 23);
             this.kryptonLabel13.Name = "kryptonLabel13";
             this.kryptonLabel13.Size = new System.Drawing.Size(41, 20);
             this.kryptonLabel13.TabIndex = 299;
@@ -760,7 +784,7 @@
             this.cmb_Articles1.Description = null;
             this.cmb_Articles1.IsActive = -1;
             this.cmb_Articles1.IsPF = 0;
-            this.cmb_Articles1.Location = new System.Drawing.Point(85, 100);
+            this.cmb_Articles1.Location = new System.Drawing.Point(121, 100);
             this.cmb_Articles1.Manufacturer = "";
             this.cmb_Articles1.Margin = new System.Windows.Forms.Padding(0);
             this.cmb_Articles1.Name = "cmb_Articles1";
@@ -888,7 +912,7 @@
             // txt_Quotation
             // 
             this.txt_Quotation.AllowButtonSpecToolTips = true;
-            this.txt_Quotation.Location = new System.Drawing.Point(144, 22);
+            this.txt_Quotation.Location = new System.Drawing.Point(121, 22);
             this.txt_Quotation.Name = "txt_Quotation";
             this.txt_Quotation.ReadOnly = true;
             this.txt_Quotation.Size = new System.Drawing.Size(156, 21);
@@ -937,30 +961,6 @@
             this.dataGridViewTextBoxColumn3.HeaderText = "osid";
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.Visible = false;
-            // 
-            // kryptonLabel26
-            // 
-            this.kryptonLabel26.Location = new System.Drawing.Point(208, 49);
-            this.kryptonLabel26.Name = "kryptonLabel26";
-            this.kryptonLabel26.Size = new System.Drawing.Size(39, 20);
-            this.kryptonLabel26.TabIndex = 349;
-            this.kryptonLabel26.Values.Text = "Type:";
-            // 
-            // cmb_Common2
-            // 
-            this.cmb_Common2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cmb_Common2.IsEmptyColor = false;
-            this.cmb_Common2.Location = new System.Drawing.Point(250, 49);
-            this.cmb_Common2.Name = "cmb_Common2";
-            this.cmb_Common2.OrderBy = "id";
-            this.cmb_Common2.sCurrentValue = "";
-            this.cmb_Common2.SelectedValue = 0;
-            this.cmb_Common2.sID_Filled = "id";
-            this.cmb_Common2.Size = new System.Drawing.Size(166, 20);
-            this.cmb_Common2.sTable = "vw_FinalProduction";
-            this.cmb_Common2.sText_Filled = "name";
-            this.cmb_Common2.sTitle = "Final production";
-            this.cmb_Common2.TabIndex = 350;
             // 
             // ctl_QuotDets
             // 
