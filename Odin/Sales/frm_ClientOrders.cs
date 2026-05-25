@@ -961,7 +961,9 @@ namespace Odin.Sales
                     case 119:
                         emailType = isNewOrder ? 24 : 24;
                         break;
-
+                    case 120:
+                        emailType = isNewOrder ? 25 : 25;
+                        break;
                     default:                   
                         emailType = isNewOrder ? 2 : 1;
                         break;
