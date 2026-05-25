@@ -38,27 +38,9 @@
             this.btn_CopySetup = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Lock = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.cmb_Articles1 = new Odin.CMB_Components.Articles.cmb_Articles();
             this.miniToolStrip = new System.Windows.Forms.BindingNavigator(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.kryptonHeaderGroup2 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
-            this.gv_ResList = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.cn_rartid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_rarticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_rsecname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_rtype = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rcn_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chk_isactive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.bn_ResList = new System.Windows.Forms.BindingNavigator(this.components);
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.cmb_Articles1 = new Odin.CMB_Components.Articles.cmb_Articles();
             this.kryptonHeaderGroup1 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.btn_Refresh = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
             this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
@@ -80,6 +62,24 @@
             this.btn_Copy = new System.Windows.Forms.ToolStripButton();
             this.btn_Delete = new System.Windows.Forms.ToolStripButton();
             this.btn_Excel = new System.Windows.Forms.ToolStripButton();
+            this.kryptonHeaderGroup2 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
+            this.gv_ResList = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.cn_rartid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rarticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rsecname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rtype = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rcn_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chk_isactive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.bn_ResList = new System.Windows.Forms.BindingNavigator(this.components);
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSeparator1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_ResList)).BeginInit();
@@ -90,13 +90,6 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2.Panel)).BeginInit();
-            this.kryptonHeaderGroup2.Panel.SuspendLayout();
-            this.kryptonHeaderGroup2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gv_ResList)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bn_ResList)).BeginInit();
-            this.bn_ResList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).BeginInit();
             this.kryptonHeaderGroup1.Panel.SuspendLayout();
@@ -104,6 +97,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.gv_List)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bn_List)).BeginInit();
             this.bn_List.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2.Panel)).BeginInit();
+            this.kryptonHeaderGroup2.Panel.SuspendLayout();
+            this.kryptonHeaderGroup2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gv_ResList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bn_ResList)).BeginInit();
+            this.bn_ResList.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonSeparator1
@@ -163,6 +163,44 @@
             this.kryptonLabel1.TabIndex = 42;
             this.kryptonLabel1.Values.Text = "Final product:";
             // 
+            // cmb_Articles1
+            // 
+            this.cmb_Articles1.Article = "";
+            this.cmb_Articles1.ArticleId = 0;
+            this.cmb_Articles1.ArticleIdRec = 0;
+            this.cmb_Articles1.ArtType = null;
+            this.cmb_Articles1.BOMState = 0;
+            this.cmb_Articles1.CertState = "";
+            this.cmb_Articles1.Comments = null;
+            this.cmb_Articles1.CustCode = null;
+            this.cmb_Articles1.CustCodeId = 0;
+            this.cmb_Articles1.Department = null;
+            this.cmb_Articles1.DeptId = 0;
+            this.cmb_Articles1.Description = null;
+            this.cmb_Articles1.IsActive = -1;
+            this.cmb_Articles1.IsPF = 0;
+            this.cmb_Articles1.Location = new System.Drawing.Point(105, 15);
+            this.cmb_Articles1.Manufacturer = "";
+            this.cmb_Articles1.Margin = new System.Windows.Forms.Padding(0);
+            this.cmb_Articles1.Name = "cmb_Articles1";
+            this.cmb_Articles1.Project = null;
+            this.cmb_Articles1.ProjectId = 0;
+            this.cmb_Articles1.QtyAvail = 0D;
+            this.cmb_Articles1.QtyConsStock = 0D;
+            this.cmb_Articles1.RMId = 0;
+            this.cmb_Articles1.SecName = null;
+            this.cmb_Articles1.Size = new System.Drawing.Size(265, 20);
+            this.cmb_Articles1.SMTType = 0;
+            this.cmb_Articles1.SpoilConst = 0D;
+            this.cmb_Articles1.Stage = "";
+            this.cmb_Articles1.StageID = 0;
+            this.cmb_Articles1.TabIndex = 0;
+            this.cmb_Articles1.TypeId = 0;
+            this.cmb_Articles1.Unit = null;
+            this.cmb_Articles1.UnitId = 0;
+            this.cmb_Articles1.Weight = 0D;
+            this.cmb_Articles1.ArticleChanged += new Odin.CMB_Components.Articles.ArticlesEventHandler(this.cmb_Articles1_ArticleChanged);
+            // 
             // miniToolStrip
             // 
             this.miniToolStrip.AddNewItem = null;
@@ -199,6 +237,221 @@
             this.splitContainer1.Size = new System.Drawing.Size(1265, 311);
             this.splitContainer1.SplitterDistance = 957;
             this.splitContainer1.TabIndex = 15;
+            // 
+            // kryptonHeaderGroup1
+            // 
+            this.kryptonHeaderGroup1.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup[] {
+            this.btn_Refresh});
+            this.kryptonHeaderGroup1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.kryptonHeaderGroup1.HeaderStylePrimary = ComponentFactory.Krypton.Toolkit.HeaderStyle.Secondary;
+            this.kryptonHeaderGroup1.HeaderVisibleSecondary = false;
+            this.kryptonHeaderGroup1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonHeaderGroup1.Name = "kryptonHeaderGroup1";
+            // 
+            // kryptonHeaderGroup1.Panel
+            // 
+            this.kryptonHeaderGroup1.Panel.Controls.Add(this.gv_List);
+            this.kryptonHeaderGroup1.Panel.Controls.Add(this.bn_List);
+            this.kryptonHeaderGroup1.Size = new System.Drawing.Size(958, 311);
+            this.kryptonHeaderGroup1.TabIndex = 14;
+            this.kryptonHeaderGroup1.ValuesPrimary.Heading = "Initial equipment for analysis";
+            this.kryptonHeaderGroup1.ValuesPrimary.Image = global::Odin.Global_Resourses.ButtonImageLarge;
+            // 
+            // btn_Refresh
+            // 
+            this.btn_Refresh.UniqueName = "410EE55850E94F302FAD125BEE632AE4";
+            // 
+            // gv_List
+            // 
+            this.gv_List.AllowUserToAddRows = false;
+            this.gv_List.ColumnHeadersHeight = 25;
+            this.gv_List.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.gv_List.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.cn_tooltype,
+            this.cn_required,
+            this.cn_artid,
+            this.cn_art,
+            this.cn_qty,
+            this.cn_qtyavailable,
+            this.cn_qtystock,
+            this.cn_comments,
+            this.cn_who,
+            this.cn_when,
+            this.cn_id,
+            this.cn_toolstypeid});
+            this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gv_List.Location = new System.Drawing.Point(0, 25);
+            this.gv_List.Name = "gv_List";
+            this.gv_List.RowHeadersWidth = 25;
+            this.gv_List.Size = new System.Drawing.Size(956, 249);
+            this.gv_List.TabIndex = 47;
+            // 
+            // cn_tooltype
+            // 
+            this.cn_tooltype.DataPropertyName = "tooltype";
+            this.cn_tooltype.FillWeight = 120F;
+            this.cn_tooltype.HeaderText = "Tool type";
+            this.cn_tooltype.Name = "cn_tooltype";
+            this.cn_tooltype.Width = 120;
+            // 
+            // cn_required
+            // 
+            this.cn_required.DataPropertyName = "required";
+            this.cn_required.FalseValue = "0";
+            this.cn_required.FillWeight = 50F;
+            this.cn_required.HeaderText = "Required";
+            this.cn_required.IndeterminateValue = "1";
+            this.cn_required.Name = "cn_required";
+            this.cn_required.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.cn_required.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.cn_required.TrueValue = "-1";
+            this.cn_required.Width = 50;
+            // 
+            // cn_artid
+            // 
+            this.cn_artid.DataPropertyName = "toolartid";
+            this.cn_artid.FillWeight = 80F;
+            this.cn_artid.HeaderText = "Tool art. id.";
+            this.cn_artid.Name = "cn_artid";
+            this.cn_artid.Width = 80;
+            // 
+            // cn_art
+            // 
+            this.cn_art.DataPropertyName = "article";
+            this.cn_art.FillWeight = 150F;
+            this.cn_art.HeaderText = "Article";
+            this.cn_art.Name = "cn_art";
+            this.cn_art.Width = 150;
+            // 
+            // cn_qty
+            // 
+            this.cn_qty.DataPropertyName = "qty";
+            this.cn_qty.FillWeight = 60F;
+            this.cn_qty.HeaderText = "Qty";
+            this.cn_qty.Name = "cn_qty";
+            this.cn_qty.Width = 60;
+            // 
+            // cn_qtyavailable
+            // 
+            this.cn_qtyavailable.DataPropertyName = "available";
+            this.cn_qtyavailable.FillWeight = 60F;
+            this.cn_qtyavailable.HeaderText = "Available Qty";
+            this.cn_qtyavailable.Name = "cn_qtyavailable";
+            this.cn_qtyavailable.Width = 60;
+            // 
+            // cn_qtystock
+            // 
+            this.cn_qtystock.DataPropertyName = "stock";
+            this.cn_qtystock.FillWeight = 60F;
+            this.cn_qtystock.HeaderText = "Stock Qty";
+            this.cn_qtystock.Name = "cn_qtystock";
+            this.cn_qtystock.Width = 60;
+            // 
+            // cn_comments
+            // 
+            this.cn_comments.DataPropertyName = "comments";
+            this.cn_comments.FillWeight = 150F;
+            this.cn_comments.HeaderText = "Comments";
+            this.cn_comments.Name = "cn_comments";
+            this.cn_comments.Width = 150;
+            // 
+            // cn_who
+            // 
+            this.cn_who.DataPropertyName = "createdby";
+            this.cn_who.HeaderText = "Who";
+            this.cn_who.Name = "cn_who";
+            // 
+            // cn_when
+            // 
+            this.cn_when.DataPropertyName = "createdat";
+            this.cn_when.HeaderText = "When";
+            this.cn_when.Name = "cn_when";
+            // 
+            // cn_id
+            // 
+            this.cn_id.DataPropertyName = "id";
+            this.cn_id.FillWeight = 5F;
+            this.cn_id.HeaderText = "id";
+            this.cn_id.Name = "cn_id";
+            this.cn_id.Visible = false;
+            this.cn_id.Width = 5;
+            // 
+            // cn_toolstypeid
+            // 
+            this.cn_toolstypeid.DataPropertyName = "toolstypeid";
+            this.cn_toolstypeid.FillWeight = 50F;
+            this.cn_toolstypeid.HeaderText = "toolstypeid";
+            this.cn_toolstypeid.Name = "cn_toolstypeid";
+            this.cn_toolstypeid.Visible = false;
+            this.cn_toolstypeid.Width = 50;
+            // 
+            // bn_List
+            // 
+            this.bn_List.AddNewItem = null;
+            this.bn_List.CountItem = null;
+            this.bn_List.DeleteItem = null;
+            this.bn_List.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.bn_List.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btn_Add,
+            this.btn_Edit,
+            this.btn_Copy,
+            this.btn_Delete,
+            this.btn_Excel});
+            this.bn_List.Location = new System.Drawing.Point(0, 0);
+            this.bn_List.MoveFirstItem = null;
+            this.bn_List.MoveLastItem = null;
+            this.bn_List.MoveNextItem = null;
+            this.bn_List.MovePreviousItem = null;
+            this.bn_List.Name = "bn_List";
+            this.bn_List.PositionItem = null;
+            this.bn_List.Size = new System.Drawing.Size(956, 25);
+            this.bn_List.TabIndex = 46;
+            this.bn_List.Text = "Bill of materials";
+            // 
+            // btn_Add
+            // 
+            this.btn_Add.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_Add.Image = global::Odin.Global_Resourses.bindingNavigatorAddNewItem_Image;
+            this.btn_Add.Name = "btn_Add";
+            this.btn_Add.RightToLeftAutoMirrorImage = true;
+            this.btn_Add.Size = new System.Drawing.Size(23, 22);
+            this.btn_Add.Text = "Add new";
+            // 
+            // btn_Edit
+            // 
+            this.btn_Edit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_Edit.Image = global::Odin.Global_Resourses.edit;
+            this.btn_Edit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_Edit.Name = "btn_Edit";
+            this.btn_Edit.Size = new System.Drawing.Size(23, 22);
+            this.btn_Edit.Text = "Edit selected line";
+            // 
+            // btn_Copy
+            // 
+            this.btn_Copy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_Copy.Image = global::Odin.Global_Resourses.Copy_16x16;
+            this.btn_Copy.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_Copy.Name = "btn_Copy";
+            this.btn_Copy.Size = new System.Drawing.Size(23, 22);
+            this.btn_Copy.Text = "Copy setup";
+            // 
+            // btn_Delete
+            // 
+            this.btn_Delete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_Delete.Image = global::Odin.Global_Resourses.bindingNavigatorDeleteItem_Image;
+            this.btn_Delete.Name = "btn_Delete";
+            this.btn_Delete.RightToLeftAutoMirrorImage = true;
+            this.btn_Delete.Size = new System.Drawing.Size(23, 22);
+            this.btn_Delete.Text = "Delete";
+            // 
+            // btn_Excel
+            // 
+            this.btn_Excel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_Excel.Image = global::Odin.Global_Resourses.ExcelSpreadsheetSmall;
+            this.btn_Excel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_Excel.Name = "btn_Excel";
+            this.btn_Excel.Size = new System.Drawing.Size(23, 22);
+            this.btn_Excel.Text = "Export into excel";
             // 
             // kryptonHeaderGroup2
             // 
@@ -379,257 +632,6 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
-            // cmb_Articles1
-            // 
-            this.cmb_Articles1.Article = "";
-            this.cmb_Articles1.ArticleId = 0;
-            this.cmb_Articles1.ArticleIdRec = 0;
-            this.cmb_Articles1.ArtType = null;
-            this.cmb_Articles1.BOMState = 0;
-            this.cmb_Articles1.CertState = "";
-            this.cmb_Articles1.Comments = null;
-            this.cmb_Articles1.CustCode = null;
-            this.cmb_Articles1.CustCodeId = 0;
-            this.cmb_Articles1.Department = null;
-            this.cmb_Articles1.DeptId = 0;
-            this.cmb_Articles1.Description = null;
-            this.cmb_Articles1.IsActive = -1;
-            this.cmb_Articles1.IsPF = 0;
-            this.cmb_Articles1.Location = new System.Drawing.Point(105, 15);
-            this.cmb_Articles1.Manufacturer = "";
-            this.cmb_Articles1.Margin = new System.Windows.Forms.Padding(0);
-            this.cmb_Articles1.Name = "cmb_Articles1";
-            this.cmb_Articles1.Project = null;
-            this.cmb_Articles1.ProjectId = 0;
-            this.cmb_Articles1.QtyAvail = 0D;
-            this.cmb_Articles1.QtyConsStock = 0D;
-            this.cmb_Articles1.RMId = 0;
-            this.cmb_Articles1.SecName = null;
-            this.cmb_Articles1.Size = new System.Drawing.Size(265, 20);
-            this.cmb_Articles1.SMTType = 0;
-            this.cmb_Articles1.SpoilConst = 0D;
-            this.cmb_Articles1.Stage = "";
-            this.cmb_Articles1.StageID = 0;
-            this.cmb_Articles1.TabIndex = 0;
-            this.cmb_Articles1.TypeId = 0;
-            this.cmb_Articles1.Unit = null;
-            this.cmb_Articles1.UnitId = 0;
-            this.cmb_Articles1.Weight = 0D;
-            this.cmb_Articles1.ArticleChanged += new Odin.CMB_Components.Articles.ArticlesEventHandler(this.cmb_Articles1_ArticleChanged);
-            // 
-            // kryptonHeaderGroup1
-            // 
-            this.kryptonHeaderGroup1.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup[] {
-            this.btn_Refresh});
-            this.kryptonHeaderGroup1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.kryptonHeaderGroup1.HeaderStylePrimary = ComponentFactory.Krypton.Toolkit.HeaderStyle.Secondary;
-            this.kryptonHeaderGroup1.HeaderVisibleSecondary = false;
-            this.kryptonHeaderGroup1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonHeaderGroup1.Name = "kryptonHeaderGroup1";
-            // 
-            // kryptonHeaderGroup1.Panel
-            // 
-            this.kryptonHeaderGroup1.Panel.Controls.Add(this.gv_List);
-            this.kryptonHeaderGroup1.Panel.Controls.Add(this.bn_List);
-            this.kryptonHeaderGroup1.Size = new System.Drawing.Size(958, 311);
-            this.kryptonHeaderGroup1.TabIndex = 14;
-            this.kryptonHeaderGroup1.ValuesPrimary.Heading = "Initial equipment for analysis";
-            this.kryptonHeaderGroup1.ValuesPrimary.Image = global::Odin.Global_Resourses.ButtonImageLarge;
-            // 
-            // btn_Refresh
-            // 
-            this.btn_Refresh.UniqueName = "410EE55850E94F302FAD125BEE632AE4";
-            // 
-            // gv_List
-            // 
-            this.gv_List.AllowUserToAddRows = false;
-            this.gv_List.ColumnHeadersHeight = 25;
-            this.gv_List.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.gv_List.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.cn_tooltype,
-            this.cn_required,
-            this.cn_artid,
-            this.cn_art,
-            this.cn_qty,
-            this.cn_qtyavailable,
-            this.cn_qtystock,
-            this.cn_comments,
-            this.cn_who,
-            this.cn_when,
-            this.cn_id,
-            this.cn_toolstypeid});
-            this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gv_List.Location = new System.Drawing.Point(0, 25);
-            this.gv_List.Name = "gv_List";
-            this.gv_List.RowHeadersWidth = 25;
-            this.gv_List.Size = new System.Drawing.Size(956, 249);
-            this.gv_List.TabIndex = 47;
-            // 
-            // cn_tooltype
-            // 
-            this.cn_tooltype.DataPropertyName = "tooltype";
-            this.cn_tooltype.FillWeight = 120F;
-            this.cn_tooltype.HeaderText = "Tool type";
-            this.cn_tooltype.Name = "cn_tooltype";
-            this.cn_tooltype.Width = 120;
-            // 
-            // cn_required
-            // 
-            this.cn_required.DataPropertyName = "required";
-            this.cn_required.FalseValue = "0";
-            this.cn_required.FillWeight = 50F;
-            this.cn_required.HeaderText = "Required";
-            this.cn_required.IndeterminateValue = "1";
-            this.cn_required.Name = "cn_required";
-            this.cn_required.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.cn_required.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.cn_required.TrueValue = "-1";
-            this.cn_required.Width = 50;
-            // 
-            // cn_artid
-            // 
-            this.cn_artid.DataPropertyName = "toolartid";
-            this.cn_artid.FillWeight = 80F;
-            this.cn_artid.HeaderText = "Tool art. id.";
-            this.cn_artid.Name = "cn_artid";
-            this.cn_artid.Width = 80;
-            // 
-            // cn_art
-            // 
-            this.cn_art.DataPropertyName = "article";
-            this.cn_art.FillWeight = 150F;
-            this.cn_art.HeaderText = "Article";
-            this.cn_art.Name = "cn_art";
-            this.cn_art.Width = 150;
-            // 
-            // cn_qty
-            // 
-            this.cn_qty.DataPropertyName = "qty";
-            this.cn_qty.FillWeight = 60F;
-            this.cn_qty.HeaderText = "Qty";
-            this.cn_qty.Name = "cn_qty";
-            this.cn_qty.Width = 60;
-            // 
-            // cn_qtyavailable
-            // 
-            this.cn_qtyavailable.DataPropertyName = "available";
-            this.cn_qtyavailable.FillWeight = 60F;
-            this.cn_qtyavailable.HeaderText = "Available Qty";
-            this.cn_qtyavailable.Name = "cn_qtyavailable";
-            this.cn_qtyavailable.Width = 60;
-            // 
-            // cn_qtystock
-            // 
-            this.cn_qtystock.DataPropertyName = "stock";
-            this.cn_qtystock.FillWeight = 60F;
-            this.cn_qtystock.HeaderText = "Stock Qty";
-            this.cn_qtystock.Name = "cn_qtystock";
-            this.cn_qtystock.Width = 60;
-            // 
-            // cn_comments
-            // 
-            this.cn_comments.DataPropertyName = "comments";
-            this.cn_comments.FillWeight = 150F;
-            this.cn_comments.HeaderText = "Comments";
-            this.cn_comments.Name = "cn_comments";
-            this.cn_comments.Width = 150;
-            // 
-            // cn_who
-            // 
-            this.cn_who.DataPropertyName = "createdby";
-            this.cn_who.HeaderText = "Who";
-            this.cn_who.Name = "cn_who";
-            // 
-            // cn_when
-            // 
-            this.cn_when.DataPropertyName = "createdat";
-            this.cn_when.HeaderText = "When";
-            this.cn_when.Name = "cn_when";
-            // 
-            // cn_id
-            // 
-            this.cn_id.DataPropertyName = "id";
-            this.cn_id.FillWeight = 5F;
-            this.cn_id.HeaderText = "id";
-            this.cn_id.Name = "cn_id";
-            this.cn_id.Visible = false;
-            this.cn_id.Width = 5;
-            // 
-            // cn_toolstypeid
-            // 
-            this.cn_toolstypeid.DataPropertyName = "toolstypeid";
-            this.cn_toolstypeid.FillWeight = 50F;
-            this.cn_toolstypeid.HeaderText = "toolstypeid";
-            this.cn_toolstypeid.Name = "cn_toolstypeid";
-            this.cn_toolstypeid.Visible = false;
-            this.cn_toolstypeid.Width = 50;
-            // 
-            // bn_List
-            // 
-            this.bn_List.AddNewItem = null;
-            this.bn_List.CountItem = null;
-            this.bn_List.DeleteItem = null;
-            this.bn_List.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.bn_List.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btn_Add,
-            this.btn_Edit,
-            this.btn_Copy,
-            this.btn_Delete,
-            this.btn_Excel});
-            this.bn_List.Location = new System.Drawing.Point(0, 0);
-            this.bn_List.MoveFirstItem = null;
-            this.bn_List.MoveLastItem = null;
-            this.bn_List.MoveNextItem = null;
-            this.bn_List.MovePreviousItem = null;
-            this.bn_List.Name = "bn_List";
-            this.bn_List.PositionItem = null;
-            this.bn_List.Size = new System.Drawing.Size(956, 25);
-            this.bn_List.TabIndex = 46;
-            this.bn_List.Text = "Bill of materials";
-            // 
-            // btn_Add
-            // 
-            this.btn_Add.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btn_Add.Name = "btn_Add";
-            this.btn_Add.RightToLeftAutoMirrorImage = true;
-            this.btn_Add.Size = new System.Drawing.Size(23, 22);
-            this.btn_Add.Text = "Add new";
-            // 
-            // btn_Edit
-            // 
-            this.btn_Edit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btn_Edit.Image = global::Odin.Global_Resourses.edit;
-            this.btn_Edit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_Edit.Name = "btn_Edit";
-            this.btn_Edit.Size = new System.Drawing.Size(23, 22);
-            this.btn_Edit.Text = "Edit selected line";
-            // 
-            // btn_Copy
-            // 
-            this.btn_Copy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btn_Copy.Image = global::Odin.Global_Resourses.Copy_16x16;
-            this.btn_Copy.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_Copy.Name = "btn_Copy";
-            this.btn_Copy.Size = new System.Drawing.Size(23, 22);
-            this.btn_Copy.Text = "Copy setup";
-            // 
-            // btn_Delete
-            // 
-            this.btn_Delete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btn_Delete.Name = "btn_Delete";
-            this.btn_Delete.RightToLeftAutoMirrorImage = true;
-            this.btn_Delete.Size = new System.Drawing.Size(23, 22);
-            this.btn_Delete.Text = "Delete";
-            // 
-            // btn_Excel
-            // 
-            this.btn_Excel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btn_Excel.Image = global::Odin.Global_Resourses.ExcelSpreadsheetSmall;
-            this.btn_Excel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_Excel.Name = "btn_Excel";
-            this.btn_Excel.Size = new System.Drawing.Size(23, 22);
-            this.btn_Excel.Text = "Export into excel";
-            // 
             // ctl_BOMSetup2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -650,15 +652,6 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2.Panel)).EndInit();
-            this.kryptonHeaderGroup2.Panel.ResumeLayout(false);
-            this.kryptonHeaderGroup2.Panel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2)).EndInit();
-            this.kryptonHeaderGroup2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gv_ResList)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bn_ResList)).EndInit();
-            this.bn_ResList.ResumeLayout(false);
-            this.bn_ResList.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).EndInit();
             this.kryptonHeaderGroup1.Panel.ResumeLayout(false);
             this.kryptonHeaderGroup1.Panel.PerformLayout();
@@ -668,6 +661,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.bn_List)).EndInit();
             this.bn_List.ResumeLayout(false);
             this.bn_List.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2.Panel)).EndInit();
+            this.kryptonHeaderGroup2.Panel.ResumeLayout(false);
+            this.kryptonHeaderGroup2.Panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2)).EndInit();
+            this.kryptonHeaderGroup2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gv_ResList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bn_ResList)).EndInit();
+            this.bn_ResList.ResumeLayout(false);
+            this.bn_ResList.PerformLayout();
             this.ResumeLayout(false);
 
         }
