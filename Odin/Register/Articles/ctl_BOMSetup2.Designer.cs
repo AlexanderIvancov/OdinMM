@@ -285,6 +285,7 @@
             this.gv_List.RowHeadersWidth = 25;
             this.gv_List.Size = new System.Drawing.Size(956, 249);
             this.gv_List.TabIndex = 47;
+            this.gv_List.SelectionChanged += new System.EventHandler(this.gv_List_SelectionChanged);
             // 
             // cn_tooltype
             // 
