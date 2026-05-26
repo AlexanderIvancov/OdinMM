@@ -417,6 +417,7 @@
             this.btn_Add.RightToLeftAutoMirrorImage = true;
             this.btn_Add.Size = new System.Drawing.Size(23, 22);
             this.btn_Add.Text = "Add new";
+            this.btn_Add.Click += new System.EventHandler(this.btn_Add_Click);
             // 
             // btn_Edit
             // 
@@ -426,6 +427,7 @@
             this.btn_Edit.Name = "btn_Edit";
             this.btn_Edit.Size = new System.Drawing.Size(23, 22);
             this.btn_Edit.Text = "Edit selected line";
+            this.btn_Edit.Click += new System.EventHandler(this.btn_Edit_Click);
             // 
             // btn_Copy
             // 
@@ -435,6 +437,7 @@
             this.btn_Copy.Name = "btn_Copy";
             this.btn_Copy.Size = new System.Drawing.Size(23, 22);
             this.btn_Copy.Text = "Copy setup";
+            this.btn_Copy.Click += new System.EventHandler(this.btn_Copy_Click);
             // 
             // btn_Delete
             // 
@@ -444,6 +447,7 @@
             this.btn_Delete.RightToLeftAutoMirrorImage = true;
             this.btn_Delete.Size = new System.Drawing.Size(23, 22);
             this.btn_Delete.Text = "Delete";
+            this.btn_Delete.Click += new System.EventHandler(this.btn_Delete_Click);
             // 
             // btn_Excel
             // 
@@ -453,6 +457,7 @@
             this.btn_Excel.Name = "btn_Excel";
             this.btn_Excel.Size = new System.Drawing.Size(23, 22);
             this.btn_Excel.Text = "Export into excel";
+            this.btn_Excel.Click += new System.EventHandler(this.btn_Excel_Click);
             // 
             // kryptonHeaderGroup2
             // 

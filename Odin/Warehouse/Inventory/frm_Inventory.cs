@@ -157,6 +157,16 @@ namespace Odin.Warehouse.Inventory
                 if (row.Cells["cn_expdate"].Value.ToString() != ""
                    && Convert.ToDateTime(row.Cells["cn_expdate"].Value) <= System.DateTime.Now.AddDays(7))
                     row.Cells["cn_expdate"].Style.BackColor = Color.Red;
+                if ((row.Cells["cn_type"].Value.ToString() == "Трафареты" ||
+                    row.Cells["cn_type"].Value.ToString() == "ММ Трафареты" ||
+                    row.Cells["cn_type"].Value.ToString() == "ММП Трафареты")
+                  && row.Cells["cn_place"].Value.ToString().Contains("Пакет"))
+                    if (Convert.ToInt32(row.Cells["cn_qtyrest"].Value) > 4)
+                        foreach (DataGridViewCell cell in row.Cells)
+                            cell.Style.BackColor = Color.Red;
+                    else if (Convert.ToInt32(row.Cells["cn_qtyrest"].Value) > 3)
+                        foreach (DataGridViewCell cell in row.Cells)
+                            cell.Style.BackColor = Color.LightYellow;
             }
         }
 
