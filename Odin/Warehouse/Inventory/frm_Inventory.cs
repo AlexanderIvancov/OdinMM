@@ -149,24 +149,61 @@ namespace Odin.Warehouse.Inventory
         public void SetCellsColor()
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
+                foreach (DataGridViewCell cell in row.Cells)
+                    cell.Style.BackColor = Color.Empty;
+
+            Dictionary<string, int> placeTotalQty = new Dictionary<string, int>();
+
+            foreach (DataGridViewRow row in this.gv_List.Rows)
             {
+                if (row.Cells["cn_place"].Value == null)
+                    continue;
+
+                string place = row.Cells["cn_place"].Value.ToString();
+
+                string type = row.Cells["cn_type"].Value?.ToString();
+                bool isTargetType = type == "Трафареты" || type == "ММ Трафареты" || type == "ММП Трафареты";
+
+                if (isTargetType && place.Contains("Пакет"))
+                {
+                    int qty = Convert.ToInt32(row.Cells["cn_qtyrest"].Value);
+
+                    if (placeTotalQty.ContainsKey(place))
+                        placeTotalQty[place] += qty;
+                    else
+                        placeTotalQty[place] = qty;
+                }
+            }
+
+            foreach (DataGridViewRow row in this.gv_List.Rows)
+            {
+                if (row.Cells["cn_place"].Value == null)
+                    continue;
+
+                string place = row.Cells["cn_place"].Value.ToString();
+                string type = row.Cells["cn_type"].Value?.ToString();
+                bool isTargetType = type == "Трафареты" || type == "ММ Трафареты" || type == "ММП Трафареты";
+
                 if (Convert.ToInt32(row.Cells["cn_isactive"].Value) == 0
                      || Convert.ToDouble(row.Cells["cn_qtyrest"].Value) <= 0)
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Gainsboro;
+
                 if (row.Cells["cn_expdate"].Value.ToString() != ""
                    && Convert.ToDateTime(row.Cells["cn_expdate"].Value) <= System.DateTime.Now.AddDays(7))
                     row.Cells["cn_expdate"].Style.BackColor = Color.Red;
-                if ((row.Cells["cn_type"].Value.ToString() == "Трафареты" ||
-                    row.Cells["cn_type"].Value.ToString() == "ММ Трафареты" ||
-                    row.Cells["cn_type"].Value.ToString() == "ММП Трафареты")
-                  && row.Cells["cn_place"].Value.ToString().Contains("Пакет"))
-                    if (Convert.ToInt32(row.Cells["cn_qtyrest"].Value) > 4)
+
+                if (isTargetType && place.Contains("Пакет") && placeTotalQty.ContainsKey(place))
+                {
+                    int totalQty = placeTotalQty[place];
+
+                    if (totalQty > 4)
                         foreach (DataGridViewCell cell in row.Cells)
-                            cell.Style.BackColor = Color.Red;
-                    else if (Convert.ToInt32(row.Cells["cn_qtyrest"].Value) > 3)
+                            cell.Style.BackColor = Color.Salmon;
+                    else if (totalQty > 3)
                         foreach (DataGridViewCell cell in row.Cells)
                             cell.Style.BackColor = Color.LightYellow;
+                }
             }
         }
 
