@@ -599,5 +599,48 @@ namespace Odin.Workshop
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
         #endregion
+
+        #region Workplaces
+
+        public void SaveWorkplace(int Id, int LaunchId)
+        {
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_SaveWorkplace", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@Id", Id);
+            sqlComm.Parameters.AddWithValue("@LaunchId", LaunchId);
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+
+            sqlConn.Close();
+
+        }
+
+        public void SaveWorkplaceWA(int Id, int WorkPlaceId, int LaunchId, int WorkerId, int FullWork, string WorkDate, double WorkHours)
+        {
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_SaveWorkplaceWA", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@Id", Id);
+            sqlComm.Parameters.AddWithValue("@WorkPlaceId", WorkPlaceId);
+            sqlComm.Parameters.AddWithValue("@WorkerId", WorkerId);
+            sqlComm.Parameters.AddWithValue("@LaunchId", LaunchId);
+            sqlComm.Parameters.AddWithValue("@FullWork", FullWork);
+            sqlComm.Parameters.AddWithValue("@WorkHours", WorkHours);
+            sqlComm.Parameters.AddWithValue("@WorkDate", WorkDate);
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+
+            sqlConn.Close();
+
+        }
+
+        #endregion
     }
 }

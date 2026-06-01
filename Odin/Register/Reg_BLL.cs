@@ -2190,5 +2190,17 @@ namespace Odin.Register
             sqlConn.Close();
         }
         #endregion
+
+        #region Rooms
+
+
+        public static DataTable getRooms(int _id)
+        {
+            string query = "EXECUTE sp_RoomsList @id = " + _id;
+
+            return Helper.QueryDT(query);
+        }
+
+        #endregion
     }
 }

@@ -581,6 +581,42 @@ namespace Odin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SuperMerchant.
+        /// </summary>
+        internal static string BadgeAccount {
+            get {
+                return ResourceManager.GetString("BadgeAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://192.168.10.162/zk/.
+        /// </summary>
+        internal static string BadgeAddress {
+            get {
+                return ResourceManager.GetString("BadgeAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to item/batchImportItem.
+        /// </summary>
+        internal static string BadgeImportItem {
+            get {
+                return ResourceManager.GetString("BadgeImportItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to So4IP8+KKbstIvQfIY94MLnHnt2rCC8z2zjPM+GTUTbU1V5bphoWW9usd/ZIbleIFZL+eGEILJvqSN1Z0xAjq5UEowHudastm3PZVRVyv5nz7hSQ4ZJlQljq+2Kzg39sm+Z+HIErUUprTHoH0FYgjHP5TZnbFA8WlhR8rDwNJTo=.
+        /// </summary>
+        internal static string BadgePassword {
+            get {
+                return ResourceManager.GetString("BadgePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon Bank {

@@ -159,6 +159,7 @@ namespace Odin
         frm_IncomeControlResult IncomeControlResult = null;
         frm_CRMCompanies CRMCompanies = null;
         frm_MachineDCOper MachineDCOper = null;
+        frm_Workplaces Workplaces = null;
 
         #endregion
 
@@ -1517,6 +1518,25 @@ namespace Odin
             CRMCompanies = new frm_CRMCompanies();
             CRMCompanies._Main = this;
             CRMCompanies.Show(pn_Main);
+        }
+
+        private void btn_Workplaces_Click(object sender, EventArgs e)
+        {
+
+            foreach (var f in MdiChildren.Where(f => f.Name == "frm_Workplaces"))
+            {
+                f.BringToFront();
+                return;
+            }
+            Workplaces = new frm_Workplaces();
+            Workplaces._Main = this;
+            // public Main _Main;
+            //Articles.InitiateResize();
+            Workplaces.Show(pn_Main);
+            //if (glob_Class.IsFormAlreadyOpen("frm_Workplaces")) return;
+
+            //frm_Workplaces frm = new frm_Workplaces();
+            //frm.Show();
         }
     }
 }

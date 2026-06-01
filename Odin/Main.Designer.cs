@@ -256,6 +256,7 @@
             this.kryptonPalette1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.pn_Main = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.mdiClientController1 = new Panels.MdiClientController();
+            this.btn_Workplaces = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonRibbon1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -285,7 +286,6 @@
             this.tab_DataCollection,
             this.tab_ReadOnly,
             this.tab_Settings});
-            this.kryptonRibbon1.SelectedContext = null;
             this.kryptonRibbon1.SelectedTab = this.tab_Register;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1660, 115);
             this.kryptonRibbon1.TabIndex = 0;
@@ -1520,7 +1520,8 @@
             // 
             this.kryptonRibbonGroupTriple48.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupItem[] {
             this.btn_QCSerialFreezed,
-            this.btn_IncomeControlResult});
+            this.btn_IncomeControlResult,
+            this.btn_Workplaces});
             // 
             // btn_QCSerialFreezed
             // 
@@ -1850,6 +1851,14 @@
             this.mdiClientController1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.mdiClientController1.ParentForm = this;
             // 
+            // btn_Workplaces
+            // 
+            this.btn_Workplaces.ImageLarge = global::Odin.Global_Resourses.direction;
+            this.btn_Workplaces.ImageSmall = global::Odin.Global_Resourses.direction;
+            this.btn_Workplaces.TextLine1 = "Workplaces";
+            this.btn_Workplaces.TextLine2 = "assignment";
+            this.btn_Workplaces.Click += new System.EventHandler(this.btn_Workplaces_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2104,5 +2113,6 @@
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_CRMReg;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_Schedule;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton9;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_Workplaces;
     }
 }

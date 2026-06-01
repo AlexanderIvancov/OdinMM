@@ -934,6 +934,18 @@
     <Compile Include="CMB_Components\Requests\frm_Requests.Designer.cs">
       <DependentUpon>frm_Requests.cs</DependentUpon>
     </Compile>
+    <Compile Include="CMB_Components\Rooms\cmb_Rooms.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CMB_Components\Rooms\cmb_Rooms.designer.cs">
+      <DependentUpon>cmb_Rooms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CMB_Components\Rooms\frm_Rooms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CMB_Components\Rooms\frm_Rooms.designer.cs">
+      <DependentUpon>frm_Rooms.cs</DependentUpon>
+    </Compile>
     <Compile Include="CMB_Components\SalesOrders\cmb_SalesOrders.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -3279,6 +3291,30 @@
     <Compile Include="Workshop\ctl_CurrentFreezed.Designer.cs">
       <DependentUpon>ctl_CurrentFreezed.cs</DependentUpon>
     </Compile>
+    <Compile Include="Workshop\ctl_Workplace.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Workshop\ctl_Workplace.designer.cs">
+      <DependentUpon>ctl_Workplace.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Workshop\ctl_Workplaces.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Workshop\ctl_Workplaces.designer.cs">
+      <DependentUpon>ctl_Workplaces.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Workshop\ctl_WorkplacesWA.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Workshop\ctl_WorkplacesWA.designer.cs">
+      <DependentUpon>ctl_WorkplacesWA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Workshop\ctl_WorkplaceWA.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Workshop\ctl_WorkplaceWA.designer.cs">
+      <DependentUpon>ctl_WorkplaceWA.cs</DependentUpon>
+    </Compile>
     <Compile Include="Workshop\frm_AddSerialAnalog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -3332,6 +3368,18 @@
     </Compile>
     <Compile Include="Workshop\frm_Workers.Designer.cs">
       <DependentUpon>frm_Workers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Workshop\frm_Workplaces.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Workshop\frm_Workplaces.designer.cs">
+      <DependentUpon>frm_Workplaces.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Workshop\frm_WorkplacesWA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Workshop\frm_WorkplacesWA.designer.cs">
+      <DependentUpon>frm_WorkplacesWA.cs</DependentUpon>
     </Compile>
     <Compile Include="Workshop\frm_WorkshopLabels.cs">
       <SubType>Form</SubType>
@@ -3674,6 +3722,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CMB_Components\Requests\frm_Requests.resx">
       <DependentUpon>frm_Requests.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CMB_Components\Rooms\cmb_Rooms.resx">
+      <DependentUpon>cmb_Rooms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CMB_Components\Rooms\frm_Rooms.resx">
+      <DependentUpon>frm_Rooms.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CMB_Components\SalesOrders\cmb_SalesOrders.resx">
       <DependentUpon>cmb_SalesOrders.cs</DependentUpon>
@@ -4527,8 +4581,26 @@
     <EmbeddedResource Include="Workshop\ctl_CurrentFreezed.resx">
       <DependentUpon>ctl_CurrentFreezed.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Workshop\ctl_Workplace.resx">
+      <DependentUpon>ctl_Workplace.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Workshop\ctl_Workplaces.resx">
+      <DependentUpon>ctl_Workplaces.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Workshop\ctl_WorkplacesWA.resx">
+      <DependentUpon>ctl_WorkplacesWA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Workshop\ctl_WorkplaceWA.resx">
+      <DependentUpon>ctl_WorkplaceWA.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Workshop\frm_ProductionResult.resx">
       <DependentUpon>frm_ProductionResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Workshop\frm_Workplaces.resx">
+      <DependentUpon>frm_Workplaces.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Workshop\frm_WorkplacesWA.resx">
+      <DependentUpon>frm_WorkplacesWA.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Workshop\frm_WorkshopLabels.resx">
       <DependentUpon>frm_WorkshopLabels.cs</DependentUpon>
