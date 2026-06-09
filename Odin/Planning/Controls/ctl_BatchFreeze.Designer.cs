@@ -100,6 +100,7 @@
             this.cn_allanalogues = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_Analogs = new System.Windows.Forms.DataGridViewButtonColumn();
             this.mnu_Lines = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mni_ShowAnalogStock = new System.Windows.Forms.ToolStripMenuItem();
             this.mni_FilterFor = new System.Windows.Forms.ToolStripTextBox();
             this.mni_Search = new System.Windows.Forms.ToolStripMenuItem();
             this.mni_FilterBy = new System.Windows.Forms.ToolStripMenuItem();
@@ -125,7 +126,6 @@
             this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bs_List = new Odin.Global_Classes.SyncBindingSource();
-            this.mni_ShowAnalogStock = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bn_List)).BeginInit();
@@ -464,6 +464,7 @@
             this.gv_List.CellParsing += new System.Windows.Forms.DataGridViewCellParsingEventHandler(this.gv_List_CellParsing);
             this.gv_List.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_List_CellValidated);
             this.gv_List.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_List_ColumnHeaderMouseClick);
+            this.gv_List.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.gv_List_DataError);
             this.gv_List.SelectionChanged += new System.EventHandler(this.gv_List_SelectionChanged);
             // 
             // cn_id
@@ -801,8 +802,16 @@
             this.toolStripSeparator2,
             this.mni_Admin});
             this.mnu_Lines.Name = "mnu_Requests";
-            this.mnu_Lines.Size = new System.Drawing.Size(211, 211);
+            this.mnu_Lines.Size = new System.Drawing.Size(211, 189);
             this.mnu_Lines.Opening += new System.ComponentModel.CancelEventHandler(this.mnu_Lines_Opening);
+            // 
+            // mni_ShowAnalogStock
+            // 
+            this.mni_ShowAnalogStock.Image = global::Odin.Global_Resourses.agt_reload24x24;
+            this.mni_ShowAnalogStock.Name = "mni_ShowAnalogStock";
+            this.mni_ShowAnalogStock.Size = new System.Drawing.Size(210, 22);
+            this.mni_ShowAnalogStock.Text = "Show valid analog stock";
+            this.mni_ShowAnalogStock.Click += new System.EventHandler(this.mni_ShowAnalogStock_Click);
             // 
             // mni_FilterFor
             // 
@@ -1008,14 +1017,6 @@
             this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
             this.dataGridViewTextBoxColumn16.ReadOnly = true;
             this.dataGridViewTextBoxColumn16.Width = 70;
-            // 
-            // mni_ShowAnalogStock
-            // 
-            this.mni_ShowAnalogStock.Image = global::Odin.Global_Resourses.agt_reload24x24;
-            this.mni_ShowAnalogStock.Name = "mni_ShowAnalogStock";
-            this.mni_ShowAnalogStock.Size = new System.Drawing.Size(210, 22);
-            this.mni_ShowAnalogStock.Text = "Show valid analog stock";
-            this.mni_ShowAnalogStock.Click += new System.EventHandler(this.mni_ShowAnalogStock_Click);
             // 
             // ctl_BatchFreeze
             // 

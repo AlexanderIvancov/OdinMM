@@ -793,6 +793,9 @@ namespace Odin.Planning.Controls
             SendArtId?.Invoke(ArtId, true, false, false, true, true);
         }
 
-
+        private void gv_List_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.ThrowException = false;
+        }
     }
 }

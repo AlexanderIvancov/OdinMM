@@ -608,7 +608,7 @@ namespace Odin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to So4IP8+KKbstIvQfIY94MLnHnt2rCC8z2zjPM+GTUTbU1V5bphoWW9usd/ZIbleIFZL+eGEILJvqSN1Z0xAjq5UEowHudastm3PZVRVyv5nz7hSQ4ZJlQljq+2Kzg39sm+Z+HIErUUprTHoH0FYgjHP5TZnbFA8WlhR8rDwNJTo=.
+        ///   Looks up a localized string similar to BCGnTJCAEP23t+RIhfg3GU/Tmfpc9zfyIOF74ZP0x78tr1n3kxrNf+vQmrbNkAJsiC03qQarPuzeIMovvHv2v+pFNLpJpy+eW5Zf2MV97LFhvVp/7QqMNdm4Dgs1VCkQ760R9cdmniXy1ooPRtoJ/NbEgNVIS6iP+ixVoD5baVI=.
         /// </summary>
         internal static string BadgePassword {
             get {

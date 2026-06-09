@@ -979,5 +979,10 @@ namespace Odin.Planning.Controls
 
             popup.FillList();
         }
+
+        private void gv_List_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.ThrowException = false;
+        }
     }
 }
