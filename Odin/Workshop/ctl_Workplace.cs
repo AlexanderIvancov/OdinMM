@@ -48,6 +48,21 @@ namespace Odin.Workshop
         public string Room
         { get; set; }
 
+        int _isvisible = 0;
+        public int IsVisible
+        {
+
+            get { return _isvisible; }
+            set
+            {
+                _isvisible = value;
+                if (_isvisible == 0)
+                    kryptonPanel1.Visible = false;
+                else
+                    kryptonPanel1.Visible = true;
+            }
+        }
+
         #endregion
 
         #region Methods

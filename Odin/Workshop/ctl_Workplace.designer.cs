@@ -95,7 +95,7 @@
             // 
             // cmb_Launches1
             // 
-            this.cmb_Launches1.Article = null;
+            this.cmb_Launches1.Article = "";
             this.cmb_Launches1.ArticleId = 0;
             this.cmb_Launches1.Batch = "";
             this.cmb_Launches1.BatchId = 0;

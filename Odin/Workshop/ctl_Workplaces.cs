@@ -161,6 +161,7 @@ namespace Odin.Workshop
                     ctl_WP.ESL_Barcode = reader["esl_barcode"].ToString();
                     ctl_WP.COMM_Barcode = reader["comm_barcode"].ToString();
                     ctl_WP.Room = cmb_Rooms1.Room;
+                    ctl_WP.IsVisible = Convert.ToInt32(reader["is_visible"]);
 
                     ctl_WP.Location = new Point(_h, _v);
                     _h = _h + ctl_WP.Width + _interval;
