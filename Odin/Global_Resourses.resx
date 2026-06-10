@@ -1606,4 +1606,7 @@
   <data name="BadgePassword" xml:space="preserve">
     <value>BCGnTJCAEP23t+RIhfg3GU/Tmfpc9zfyIOF74ZP0x78tr1n3kxrNf+vQmrbNkAJsiC03qQarPuzeIMovvHv2v+pFNLpJpy+eW5Zf2MV97LFhvVp/7QqMNdm4Dgs1VCkQ760R9cdmniXy1ooPRtoJ/NbEgNVIS6iP+ixVoD5baVI=</value>
   </data>
+  <data name="legend" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resourses\legend.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

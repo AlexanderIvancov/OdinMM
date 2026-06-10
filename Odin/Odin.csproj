@@ -4519,6 +4519,7 @@
     <Content Include="Resourses\Finish_small.png" />
     <Content Include="Resourses\flag_finish.png" />
     <Content Include="Resourses\hourglass_go.png" />
+    <Content Include="Resourses\legend.png" />
     <Content Include="Resourses\lorry.png" />
     <Content Include="Resourses\microscope-test-icon.png" />
     <Content Include="Resourses\network_adapter.png" />
