@@ -1237,8 +1237,12 @@ namespace Odin.Planning
                         Equipment2 = dr["equipment"].ToString().Split(',').GetLength(0) == 2 ? dr["equipment"].ToString().Split(',')[1] : " - ";
                         Equipmentplace2 = dr["equipmentplace"].ToString().Split(',').GetLength(0) == 2 ? dr["equipmentplace"].ToString().Split(',')[1] : " - ";
                         Solderpaste = dr["solderpaste"].ToString().Split(',').GetLength(0) == 1 ? dr["solderpaste"].ToString().Split(',')[0] : " - ";
-                        perp = dr["perp"].ToString().Split(',').GetLength(0) == 1 ? dr["perp"].ToString().Split(',')[0].Substring(0, dr["perp"].ToString().Length - 3) : " - ";
-                        perl = dr["perl"].ToString().Split(',').GetLength(0) == 1 ? dr["perl"].ToString().Split(',')[0].Substring(0, dr["perp"].ToString().Length - 3) : " - ";
+                        perp = (dr["perp"] != DBNull.Value && dr["perp"] != null && dr["perp"].ToString().Split(',').GetLength(0) == 1) 
+                            ? dr["perp"].ToString().Split(',')[0].Substring(0, dr["perp"].ToString().Length - 3)
+                            : " - ";
+                        perl = (dr["perl"] != DBNull.Value && dr["perl"] != null && dr["perl"].ToString().Split(',').GetLength(0) == 1)
+                            ? dr["perl"].ToString().Split(',')[0].Substring(0, dr["perl"].ToString().Length - 3)
+                            : " - ";
                     }
                 }
                 else
