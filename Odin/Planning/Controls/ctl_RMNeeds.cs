@@ -59,7 +59,7 @@ namespace Odin.Planning.Controls
             set
             {
                 _articleid = value;
-                ShowDets();
+                ShowDets(POId);
                 //bwStart(bw_List);
                 AvailableQty = DLL.AvailQty(cmb_Articles1.ArticleId);
                 RecalcPOQty();
@@ -115,6 +115,13 @@ namespace Odin.Planning.Controls
         {
             get { return _mode; }
             set { _mode = value; }
+        }
+
+        int _poid = 0;
+        public int POId
+        {
+            get { return _poid; }
+            set { _poid = value; }
         }
 
         #endregion
@@ -365,7 +372,11 @@ namespace Odin.Planning.Controls
         public void bw_List(object sender, DoWorkEventArgs e)
         {
 
-            data = Plan_BLL.getNeedsRM(ArtId);
+            if (POId == 0)
+                data = Plan_BLL.getNeedsRM(ArtId);
+            else
+                data = Plan_BLL.getNeedsRMPO(POId);
+
 
             gv_List.ThreadSafeCall(delegate
             {
@@ -384,10 +395,14 @@ namespace Odin.Planning.Controls
 
         }
 
-        public void ShowDets()
+        public void ShowDets(int _poid)
         {
 
-            data = Plan_BLL.getNeedsRM(ArtId);
+            if (_poid == 0)
+                data = Plan_BLL.getNeedsRM(ArtId);
+            else
+                data = Plan_BLL.getNeedsRMPO(_poid);
+
 
             gv_List.ThreadSafeCall(delegate
             {

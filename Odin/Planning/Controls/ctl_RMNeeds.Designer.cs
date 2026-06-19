@@ -140,8 +140,10 @@
             // 
             this.cmb_Articles1.Article = "";
             this.cmb_Articles1.ArticleId = 0;
+            this.cmb_Articles1.ArticleIdRec = 0;
             this.cmb_Articles1.ArtType = null;
             this.cmb_Articles1.BOMState = 0;
+            this.cmb_Articles1.CertState = "";
             this.cmb_Articles1.Comments = null;
             this.cmb_Articles1.CustCode = null;
             this.cmb_Articles1.CustCodeId = 0;
@@ -158,6 +160,7 @@
             this.cmb_Articles1.ProjectId = 0;
             this.cmb_Articles1.QtyAvail = 0D;
             this.cmb_Articles1.QtyConsStock = 0D;
+            this.cmb_Articles1.RMId = 0;
             this.cmb_Articles1.SecName = null;
             this.cmb_Articles1.Size = new System.Drawing.Size(265, 20);
             this.cmb_Articles1.SMTType = 0;
@@ -249,7 +252,6 @@
             // 
             this.bindingNavigatorPositionItem.AccessibleName = "Position";
             this.bindingNavigatorPositionItem.AutoSize = false;
-            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
             this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
             this.bindingNavigatorPositionItem.Text = "0";
@@ -562,7 +564,6 @@
             // mni_FilterFor
             // 
             this.mni_FilterFor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.mni_FilterFor.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.mni_FilterFor.Name = "mni_FilterFor";
             this.mni_FilterFor.Size = new System.Drawing.Size(150, 23);
             this.mni_FilterFor.TextChanged += new System.EventHandler(this.mni_FilterFor_TextChanged);
@@ -780,8 +781,8 @@
             this.mnu_Lines.ResumeLayout(false);
             this.mnu_Lines.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).EndInit();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
-            this.PerformLayout(); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

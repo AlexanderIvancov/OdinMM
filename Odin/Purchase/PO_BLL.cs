@@ -389,6 +389,7 @@ namespace Odin.Purchase
                         POInternalComments = dr["internalcomments"].ToString();
                         POChangeInOrder = dr["changeInOrder"].ToString();
                         POEndCustomer = dr["endcustomer"].ToString();
+                        PONeedsInPO = Convert.ToDouble(dr["needsinpo"]);
                     }
                 }
                 else
@@ -451,6 +452,8 @@ namespace Odin.Purchase
         { get; set; }
         public string POEndCustomer
         { get; set; }
+        public double PONeedsInPO
+        { get; set; }
         public void ClearPODets()
         {
             POName = "";
@@ -479,6 +482,7 @@ namespace Odin.Purchase
             POInternalComments = "";
             POChangeInOrder = "";
             POEndCustomer = "";
+            PONeedsInPO = 0;
         }
 
         public int SavePOLine(int id, int headid, int line, int artid, double qty, int unitid, double unitprice, double vat, 

@@ -91,6 +91,7 @@ namespace Odin.Purchase
                 ProjectId = POBll.POProjectId;
                 ChangeInOrder = POBll.POChangeInOrder;
                 EndCustomer = POBll.POEndCustomer;
+                NeedsInPO = POBll.PONeedsInPO;
 
                 strField = "txt_UnPrice";
                 
@@ -454,8 +455,13 @@ namespace Odin.Purchase
 
         public void EnableNeeds()
         {
-            btn_Needs.Enabled = IsCopy != false
-                || POId == 0;
+            //btn_Needs.Enabled = IsCopy != false
+            //    || POId == 0;
+
+            if (POId != 0)
+                cmb_Articles1.Enabled = false;
+            else
+                cmb_Articles1.Enabled = true;
         }
 
         public double MOQMPQ(double Qty, double MOQ, double MPQ)
@@ -596,6 +602,8 @@ namespace Odin.Purchase
         private void btn_Needs_Click(object sender, EventArgs e)
         {
             frm_AddPONeeds frm = new frm_AddPONeeds();
+
+            frm.ctl_RMNeeds1.POId = POId;
 
             frm.ctl_RMNeeds1.cmb_Articles1.ArticleId = ArtId;
             frm.ctl_RMNeeds1.EnableSave(false);
@@ -957,12 +965,43 @@ namespace Odin.Purchase
                 #endregion
                 else //Existed line
                 {
-                    if (Math.Round(POBll.POQty / (POBll.POCoefConv == 0 ? 1 : POBll.POCoefConv), 5) > Qty
-                        || POBll.POArtId != ArtId
-                        || StateId == 2
-                        || StateId == 3) //We must delete missed mappings
+                    //if (Math.Round(POBll.POQty / (POBll.POCoefConv == 0 ? 1 : POBll.POCoefConv), 5) > Qty
+                    //    || POBll.POArtId != ArtId
+                    //    || StateId == 2
+                    //    || StateId == 3) //We must delete missed mappings
+                    //{
+                    //    POBll.DeletePONeedsMaps(NewLineId);
+                    //}
+                    //if (Math.Round(POBll.POQty / (POBll.POCoefConv == 0 ? 1 : POBll.POCoefConv), 5) > Qty
+                    //    || POBll.POArtId != ArtId
+                    //    || StateId == 2
+                    //    || StateId == 3) //We must delete missed mappings
                     {
                         POBll.DeletePONeedsMaps(NewLineId);
+
+                        foreach (DataRow row in DataNeeds.Rows)
+                        {
+                            if (Convert.ToDouble(row["topurchase"]) > 0
+                                && _QtyDistr > 0)
+                            {
+                                //MessageBox.Show("MAP!!!");
+                                if (Convert.ToDouble(row["topurchase"]) > _QtyDistr)
+                                {
+                                    POBll.MapPONeeds(NewLineId, Convert.ToInt32(row["id"]), Convert.ToInt32(row["typeneed"]), _QtyDistr, "");
+                                    _QtyDistr = 0;
+
+                                    break;
+                                }
+                                else
+                                {
+                                    POBll.MapPONeeds(NewLineId, Convert.ToInt32(row["id"]), Convert.ToInt32(row["typeneed"]), Convert.ToDouble(row["topurchase"]), "");
+                                    _QtyDistr = _QtyDistr - Convert.ToDouble(row["topurchase"]);
+
+                                }
+
+                            }
+                        }
+
                     }
                 }
 

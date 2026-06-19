@@ -707,6 +707,14 @@ namespace Odin.Planning
             return Helper.QueryDT(query);
         }
 
+        public static DataTable getNeedsRMPO(int _poid)
+        {
+            string query = "EXECUTE sp_SelectArticleNeedsDetsPO @poid = " + _poid;
+
+            return Helper.QueryDT(query);
+        }
+
+
         public static DataTable getArtTotalsListRM(int _typeid, int _deptid, int _batchid, int _stageid)
         {
             string query = "sp_SelectArtTotalsList";
