@@ -353,6 +353,11 @@ namespace Odin.Warehouse.Inventory
                         " from STO_StockInHead p " +
                         " where p.name = '" + IncomeDoc +"'"));
 
+                    string frp = Convert.ToString(Helper.GetOneRecord("select p.value " +
+                                            " from BAS_Properties p " +
+                                            " inner join BAS_Defaults def on def.value = p.categoryid " +
+                                            " where p.label = " + Label + " and def.field = 'FRP'"));
+
                     if (frm.CategoryId == _iscommis)
                     {
                         emailaddresses = Fun.EmailAddressesByType(15);
@@ -365,6 +370,8 @@ namespace Odin.Warehouse.Inventory
                         strMessage = strMessage + "\r\nSupl. article: " + SupArticle;
                         strMessage = strMessage + "\r\nFixed asset code: " + fac;
                         strMessage = strMessage + "\r\nFixed asset commissioning: " + frm.Value;
+                        strMessage = strMessage + "\r\nFRP: " + frp;
+
 
                         /*
                             Income doc.:
@@ -420,9 +427,13 @@ namespace Odin.Warehouse.Inventory
                                                                 " inner join BAS_Defaults def on def.value = p.categoryid " +
                                                                 " where p.label = " + Label + " and def.field = 'fac'"));
                     string regdate = Convert.ToString(Helper.GetOneRecord("select p.regdate " +
-    " from STO_StockInHead p " +
-    " where p.name = '" + IncomeDoc + "'"));
+                                                                " from STO_StockInHead p " +
+                                                                " where p.name = '" + IncomeDoc + "'"));
 
+                    string frp = Convert.ToString(Helper.GetOneRecord("select p.value " +
+                                                                " from BAS_Properties p " +
+                                                                " inner join BAS_Defaults def on def.value = p.categoryid " +
+                                                                " where p.label = " + Label + " and def.field = 'FRP'"));
 
                     if (frm.CategoryId == _iscommis)
                     {
@@ -437,6 +448,7 @@ namespace Odin.Warehouse.Inventory
                         strMessage = strMessage + "\r\nSupl. article: " + SupArticle;
                         strMessage = strMessage + "\r\nFixed asset code: " + fac;
                         strMessage = strMessage + "\r\nFixed asset commissioning: " + frm.Value;
+                        strMessage = strMessage + "\r\nFRP: " + frp;
 
                         /*
                             Income doc.:
