@@ -354,10 +354,8 @@ namespace Odin.Warehouse.Inventory
                         " where p.name = '" + IncomeDoc +"'"));
 
                     string frp = Convert.ToString(Helper.GetOneRecord("select p.value " +
-                                            " from BAS_Properties p " +
-                                            " inner join BAS_Defaults def on def.value = p.categoryid " +
-                                            " where p.label = " + Label + " and def.field = 'FRP'"));
-
+                                                                      " from BAS_Properties p " +
+                                                                      " where p.label = " + Label + " and p.categoryid = 1012"));
                     if (frm.CategoryId == _iscommis)
                     {
                         emailaddresses = Fun.EmailAddressesByType(15);
@@ -431,10 +429,8 @@ namespace Odin.Warehouse.Inventory
                                                                 " where p.name = '" + IncomeDoc + "'"));
 
                     string frp = Convert.ToString(Helper.GetOneRecord("select p.value " +
-                                                                " from BAS_Properties p " +
-                                                                " inner join BAS_Defaults def on def.value = p.categoryid " +
-                                                                " where p.label = " + Label + " and def.field = 'FRP'"));
-
+                                                                      " from BAS_Properties p " +
+                                                                      " where p.label = " + Label + " and p.categoryid = 1012"));
                     if (frm.CategoryId == _iscommis)
                     {
                         emailaddresses = Fun.EmailAddressesByType(15);
