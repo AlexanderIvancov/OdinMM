@@ -977,7 +977,12 @@ namespace Odin.Purchase
                     //    || StateId == 2
                     //    || StateId == 3) //We must delete missed mappings
                     {
-                        POBll.DeletePONeedsMaps(NewLineId);
+                        if (DataNeeds != null && DataNeeds.Rows.Count > 0)
+                        {
+                            // MessageBox.Show("Deletin");
+                            POBll.DeletePONeedsMaps(NewLineId);
+                        }
+                       
                         if (DataNeeds != null && DataNeeds.Rows.Count > 0)
                         foreach (DataRow row in DataNeeds.Rows)
                         {
