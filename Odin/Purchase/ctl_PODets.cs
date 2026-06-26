@@ -629,10 +629,16 @@ namespace Odin.Purchase
                 if (_test == true)
                 {
                     NeedsInPO = frm.ctl_RMNeeds1.PurchasedQty;
-                    Qty = NeedsInPO;
 
-                    if (Qty > 0)
-                        Qty = MOQMPQ(Qty / CoefConv, MOQ, MPQ) * CoefConv;
+                    if (POId == 0)
+                    {
+                        Qty = NeedsInPO;
+
+                        if (Qty > 0)
+                            Qty = MOQMPQ(Qty / CoefConv, MOQ, MPQ) * CoefConv;
+                    }
+
+
                     ShowLineTots();
                     CheckEmpty();
 
