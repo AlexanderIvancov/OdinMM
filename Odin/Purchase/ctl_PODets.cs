@@ -458,10 +458,10 @@ namespace Odin.Purchase
             //btn_Needs.Enabled = IsCopy != false
             //    || POId == 0;
 
-            if (POId != 0)
-                cmb_Articles1.Enabled = false;
-            else
-                cmb_Articles1.Enabled = true;
+            //if (POId != 0)
+            //    cmb_Articles1.Enabled = false;
+            //else
+            //    cmb_Articles1.Enabled = true;
         }
 
         public double MOQMPQ(double Qty, double MOQ, double MPQ)
@@ -982,6 +982,8 @@ namespace Odin.Purchase
                     //    || POBll.POArtId != ArtId
                     //    || StateId == 2
                     //    || StateId == 3) //We must delete missed mappings
+                    if (POBll.POArtId == ArtId
+                        || POBll.POQty == POBll.POQtyLeft) //Ne bilo deliveries
                     {
                         if (DataNeeds != null && DataNeeds.Rows.Count > 0)
                         {
