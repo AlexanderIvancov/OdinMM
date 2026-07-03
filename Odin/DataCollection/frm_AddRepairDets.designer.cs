@@ -70,7 +70,7 @@
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonPanel1.Size = new System.Drawing.Size(622, 523);
+            this.kryptonPanel1.Size = new System.Drawing.Size(622, 554);
             this.kryptonPanel1.TabIndex = 30;
             // 
             // kryptonLabel3
@@ -141,13 +141,13 @@
             // kryptonHeaderGroup3
             // 
             this.kryptonHeaderGroup3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.kryptonHeaderGroup3.Location = new System.Drawing.Point(0, 155);
+            this.kryptonHeaderGroup3.Location = new System.Drawing.Point(0, 153);
             this.kryptonHeaderGroup3.Name = "kryptonHeaderGroup3";
             // 
             // kryptonHeaderGroup3.Panel
             // 
             this.kryptonHeaderGroup3.Panel.Controls.Add(this.gv_Defects);
-            this.kryptonHeaderGroup3.Size = new System.Drawing.Size(622, 368);
+            this.kryptonHeaderGroup3.Size = new System.Drawing.Size(622, 401);
             this.kryptonHeaderGroup3.TabIndex = 263;
             this.kryptonHeaderGroup3.ValuesPrimary.Heading = "Defects";
             this.kryptonHeaderGroup3.ValuesPrimary.Image = global::Odin.Global_Resourses.siren;
@@ -170,7 +170,7 @@
             this.gv_Defects.Name = "gv_Defects";
             this.gv_Defects.RowHeadersWidth = 50;
             this.gv_Defects.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gv_Defects.Size = new System.Drawing.Size(620, 310);
+            this.gv_Defects.Size = new System.Drawing.Size(620, 343);
             this.gv_Defects.StateCommon.BackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.GridBackgroundList;
             this.gv_Defects.StateCommon.DataCell.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.gv_Defects.StateCommon.HeaderColumn.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -218,18 +218,20 @@
             // cn_Code
             // 
             this.cn_Code.DataPropertyName = "code";
+            this.cn_Code.FillWeight = 90F;
             this.cn_Code.HeaderText = "Code";
             this.cn_Code.Name = "cn_Code";
             this.cn_Code.ReadOnly = true;
+            this.cn_Code.Width = 90;
             // 
             // cn_defect
             // 
             this.cn_defect.DataPropertyName = "description";
-            this.cn_defect.FillWeight = 200F;
+            this.cn_defect.FillWeight = 225F;
             this.cn_defect.HeaderText = "Defect";
             this.cn_defect.Name = "cn_defect";
             this.cn_defect.ReadOnly = true;
-            this.cn_defect.Width = 200;
+            this.cn_defect.Width = 225;
             // 
             // cn_positions
             // 
@@ -244,7 +246,7 @@
             this.AllowFormChrome = false;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(622, 523);
+            this.ClientSize = new System.Drawing.Size(622, 554);
             this.ControlBox = false;
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
