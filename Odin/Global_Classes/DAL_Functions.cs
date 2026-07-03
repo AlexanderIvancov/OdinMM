@@ -1459,7 +1459,44 @@ namespace Odin.Global_Classes
             return res == -1;
 
         }
+        public bool CheckLabel(string _trystring)
+        {
+            bool _res = false;
 
+            int _label = 0;
+            bool success = Int32.TryParse(_trystring, out _label);
+            if (success)
+            {
+                SqlConnection sqlConn = new SqlConnection(sConnStr);
+                sqlConn.Open();
+                DataSet ds1 = new DataSet();
+
+                SqlDataAdapter adapter1 =
+                    new SqlDataAdapter(
+                        "select artid from sto_rests where id = " + _trystring, sqlConn);
+
+                adapter1.Fill(ds1);
+
+                DataTable dt1 = ds1.Tables[0];
+
+                if (dt1.Rows.Count > 0)
+                {
+                    _res = true;
+                }
+                else
+                {
+                    _res = false;
+                }
+                sqlConn.Close();
+
+            }
+            else
+            {
+                _res = false;
+            }
+
+            return _res;
+        }
         #endregion
 
         #region Printers

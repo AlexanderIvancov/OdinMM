@@ -756,5 +756,143 @@ namespace Odin.DataCollection
 
         #endregion
 
+        #region Repairs
+
+        public static DataTable getDefects()
+        {
+            string query = "sp_SelectDefects";
+
+            var sqlparams = new List<SqlParameter>
+            {
+
+            };
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
+        }
+
+        public void AddDataCollectionRepair(int WorkerId, int LaunchId, string Serial, double Qty, int ProdPlace, double ProdTime, DataTable dataplaces)
+        {
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_AddDataCollectionRepair", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+            sqlComm.CommandTimeout = 3000;
+
+            sqlComm.Parameters.AddWithValue("@workerid", WorkerId);
+            sqlComm.Parameters.AddWithValue("@launchid", LaunchId);
+            sqlComm.Parameters.AddWithValue("@serial", Serial);
+            sqlComm.Parameters.AddWithValue("@qty", Qty);
+            sqlComm.Parameters.AddWithValue("@placeid", ProdPlace);
+            sqlComm.Parameters.AddWithValue("@prodtime", ProdTime);
+            sqlComm.Parameters.Add("@tableplaces", SqlDbType.Structured);
+            sqlComm.Parameters["@tableplaces"].TypeName = "UT_TwoStrings";
+            sqlComm.Parameters["@tableplaces"].Value = dataplaces;
+
+            //try
+            //{
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+
+        }
+
+        public void CopyDataCollectionRepair(int Id, int WorkerId, int LaunchId, string Serial)
+        {
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_CopyDataCollectionRepair", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+            sqlComm.CommandTimeout = 3000;
+
+            sqlComm.Parameters.AddWithValue("@id", Id);
+            sqlComm.Parameters.AddWithValue("@workerid", WorkerId);
+            sqlComm.Parameters.AddWithValue("@launchid", LaunchId);
+            sqlComm.Parameters.AddWithValue("@serial", Serial);
+            //try
+            //{
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+
+        }
+
+        public static DataTable getSerialRepairs(int launchid)
+        {
+            string query = "sp_SelectSerialNumbersRepairs";
+
+            var sqlparams = new List<SqlParameter>
+            {
+                 new SqlParameter("@launchid",SqlDbType.Int){Value = launchid }
+            };
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
+        }
+
+        public static DataTable getMaterialsRepairs(int launchid)
+        {
+            string query = "sp_SelectMaterialsRepairs";
+
+            var sqlparams = new List<SqlParameter>
+            {
+                 new SqlParameter("@launchid",SqlDbType.Int){Value = launchid }
+            };
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
+        }
+
+        public string AddDataCollectionMaterialRepair(int WorkerId, string Serial, int LaunchId)
+        {
+            string _res = "";
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_AddDataCollectionMaterialRepair", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+
+            sqlComm.Parameters.AddWithValue("@workerid", WorkerId);
+            sqlComm.Parameters.AddWithValue("@serial", Serial);
+            sqlComm.Parameters.AddWithValue("@launchid", LaunchId);
+            sqlComm.Parameters.Add("@label", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+            sqlComm.Parameters.Add("@successid", SqlDbType.Int).Direction = ParameterDirection.Output;
+            sqlComm.Parameters.Add("@success", SqlDbType.NVarChar, 150).Direction = ParameterDirection.Output;
+
+            //try
+            //{
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            MaterialLabel = Convert.ToInt32(sqlComm.Parameters["@label"].Value);
+            SuccessId = Convert.ToInt32(sqlComm.Parameters["@successid"].Value);
+            _res = sqlComm.Parameters["@success"].Value.ToString();
+            sqlConn.Close();
+            //}
+            //catch { }
+            return _res;
+        }
+
+        public string DeleteDataCollectionRepair(int Id)
+        {
+            string _res = "";
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_DeleteDataCollectionRepair", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+
+            sqlComm.Parameters.AddWithValue("@id", Id);
+            sqlComm.Parameters.Add("@successid", SqlDbType.Int).Direction = ParameterDirection.Output;
+            sqlComm.Parameters.Add("@success", SqlDbType.NVarChar, 150).Direction = ParameterDirection.Output;
+
+            //try
+            //{
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            SuccessId = Convert.ToInt32(sqlComm.Parameters["@successid"].Value);
+            _res = sqlComm.Parameters["@success"].Value.ToString();
+            sqlConn.Close();
+            //}
+            //catch { }
+            return _res;
+        }
+
+        #endregion
     }
 }

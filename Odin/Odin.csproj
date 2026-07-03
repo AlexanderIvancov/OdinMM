@@ -1222,6 +1222,12 @@
     <Compile Include="DataCollection\frm_AddMachDCDet.designer.cs">
       <DependentUpon>frm_AddMachDCDet.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataCollection\frm_AddRepairDets.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataCollection\frm_AddRepairDets.designer.cs">
+      <DependentUpon>frm_AddRepairDets.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataCollection\frm_DataCollection.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1263,6 +1269,12 @@
     </Compile>
     <Compile Include="DataCollection\frm_MasterApproveTot.designer.cs">
       <DependentUpon>frm_MasterApproveTot.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataCollection\frm_RepairDCOper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataCollection\frm_RepairDCOper.designer.cs">
+      <DependentUpon>frm_RepairDCOper.cs</DependentUpon>
     </Compile>
     <Compile Include="DataCollection\frm_WorkerDC.cs">
       <SubType>Form</SubType>
@@ -3858,6 +3870,9 @@
     <EmbeddedResource Include="DataCollection\frm_AddMachDCDet.resx">
       <DependentUpon>frm_AddMachDCDet.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DataCollection\frm_AddRepairDets.resx">
+      <DependentUpon>frm_AddRepairDets.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataCollection\frm_DataCollection.resx">
       <DependentUpon>frm_DataCollection.cs</DependentUpon>
     </EmbeddedResource>
@@ -3878,6 +3893,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataCollection\frm_MasterApproveTot.resx">
       <DependentUpon>frm_MasterApproveTot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataCollection\frm_RepairDCOper.resx">
+      <DependentUpon>frm_RepairDCOper.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataCollection\frm_WorkerDC.resx">
       <DependentUpon>frm_WorkerDC.cs</DependentUpon>

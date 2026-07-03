@@ -160,6 +160,7 @@ namespace Odin
         frm_CRMCompanies CRMCompanies = null;
         frm_MachineDCOper MachineDCOper = null;
         frm_Workplaces Workplaces = null;
+        frm_RepairDCOper RepairDCOper = null;
 
         #endregion
 
@@ -1537,6 +1538,14 @@ namespace Odin
 
             //frm_Workplaces frm = new frm_Workplaces();
             //frm.Show();
+        }
+
+        private void btn_Repair_Click(object sender, EventArgs e)
+        {
+            RepairDCOper = new frm_RepairDCOper();
+            RepairDCOper._frm_Main = this;
+            RepairDCOper.Show(pn_Main);
+            RepairDCOper.FillPlace();
         }
     }
 }
