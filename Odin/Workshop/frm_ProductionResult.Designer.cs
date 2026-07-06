@@ -169,6 +169,59 @@
             this.btn_macExcel = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
             this.txt_MachSum = new System.Windows.Forms.ToolStripTextBox();
+            this.pg_Repairs = new ComponentFactory.Krypton.Navigator.KryptonPage();
+            this.kryptonHeaderGroup5 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
+            this.gv_Repairs = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.cn_rid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rserial = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rlaunch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rqty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rartid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rarticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rsecname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rconforder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rworker = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rprodtime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_r301 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_r302 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_r303 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_r304 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_r305 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_r306 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_r307 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_r311 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_r316 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_r312 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rprodplace = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rwhen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rheadid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rworkerid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mnu_rLines = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mni_rFilterFor = new System.Windows.Forms.ToolStripTextBox();
+            this.mni_rSearch = new System.Windows.Forms.ToolStripMenuItem();
+            this.mni_rFilterBy = new System.Windows.Forms.ToolStripMenuItem();
+            this.mni_rFilterExcludingSel = new System.Windows.Forms.ToolStripMenuItem();
+            this.mni_rRemoveFilter = new System.Windows.Forms.ToolStripMenuItem();
+            this.mni_rCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
+            this.mni_rAdmin = new System.Windows.Forms.ToolStripMenuItem();
+            this.bn_Repairs = new System.Windows.Forms.BindingNavigator(this.components);
+            this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton10 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripTextBox3 = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton11 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton12 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
+            this.btn_ExcelRepairs = new System.Windows.Forms.ToolStripButton();
+            this.toolStripLabel6 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripTextBox4 = new System.Windows.Forms.ToolStripTextBox();
+            this.kryptonHeaderGroup4 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
+            this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.txt_Legend = new ComponentFactory.Krypton.Toolkit.KryptonRichTextBox();
             this.kryptonHeaderGroup2 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.gv_Materials = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.cn_mid = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -209,6 +262,7 @@
             this.bs_Materials = new Odin.Global_Classes.SyncBindingSource();
             this.miniToolStrip = new System.Windows.Forms.BindingNavigator(this.components);
             this.bs_Machines = new Odin.Global_Classes.SyncBindingSource();
+            this.bs_Repairs = new Odin.Global_Classes.SyncBindingSource();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.mnu_Lines.SuspendLayout();
@@ -241,6 +295,22 @@
             this.mnu_macLines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bn_Machines)).BeginInit();
             this.bn_Machines.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pg_Repairs)).BeginInit();
+            this.pg_Repairs.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup5.Panel)).BeginInit();
+            this.kryptonHeaderGroup5.Panel.SuspendLayout();
+            this.kryptonHeaderGroup5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gv_Repairs)).BeginInit();
+            this.mnu_rLines.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bn_Repairs)).BeginInit();
+            this.bn_Repairs.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup4.Panel)).BeginInit();
+            this.kryptonHeaderGroup4.Panel.SuspendLayout();
+            this.kryptonHeaderGroup4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
+            this.kryptonPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2.Panel)).BeginInit();
             this.kryptonHeaderGroup2.Panel.SuspendLayout();
@@ -258,6 +328,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bs_Materials)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.miniToolStrip)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_Machines)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_Repairs)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonPanel1
@@ -272,7 +343,6 @@
             this.kryptonPanel1.Padding = new System.Windows.Forms.Padding(5);
             this.kryptonPanel1.Size = new System.Drawing.Size(1253, 49);
             this.kryptonPanel1.TabIndex = 3;
-            this.kryptonPanel1.Visible = false;
             // 
             // btn_ShowParameter
             // 
@@ -820,7 +890,8 @@
             this.dn_Pages.Name = "dn_Pages";
             this.dn_Pages.Pages.AddRange(new ComponentFactory.Krypton.Navigator.KryptonPage[] {
             this.pg_Workers,
-            this.pg_Machines});
+            this.pg_Machines,
+            this.pg_Repairs});
             this.dn_Pages.SelectedIndex = 0;
             this.dn_Pages.Size = new System.Drawing.Size(945, 368);
             this.dn_Pages.TabIndex = 11;
@@ -1594,6 +1665,477 @@
             this.txt_MachSum.Size = new System.Drawing.Size(100, 25);
             this.txt_MachSum.Visible = false;
             // 
+            // pg_Repairs
+            // 
+            this.pg_Repairs.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
+            this.pg_Repairs.Controls.Add(this.kryptonHeaderGroup5);
+            this.pg_Repairs.Controls.Add(this.kryptonHeaderGroup4);
+            this.pg_Repairs.Flags = 65534;
+            this.pg_Repairs.LastVisibleSet = true;
+            this.pg_Repairs.MinimumSize = new System.Drawing.Size(50, 50);
+            this.pg_Repairs.Name = "pg_Repairs";
+            this.pg_Repairs.Size = new System.Drawing.Size(943, 341);
+            this.pg_Repairs.Text = "Repairs";
+            this.pg_Repairs.ToolTipTitle = "Page ToolTip";
+            this.pg_Repairs.UniqueName = "7C55254C351F4E51E6BBD7DD10599BC4";
+            // 
+            // kryptonHeaderGroup5
+            // 
+            this.kryptonHeaderGroup5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonHeaderGroup5.Location = new System.Drawing.Point(0, 0);
+            this.kryptonHeaderGroup5.Name = "kryptonHeaderGroup5";
+            // 
+            // kryptonHeaderGroup5.Panel
+            // 
+            this.kryptonHeaderGroup5.Panel.Controls.Add(this.gv_Repairs);
+            this.kryptonHeaderGroup5.Panel.Controls.Add(this.bn_Repairs);
+            this.kryptonHeaderGroup5.Size = new System.Drawing.Size(749, 341);
+            this.kryptonHeaderGroup5.TabIndex = 13;
+            this.kryptonHeaderGroup5.ValuesPrimary.Heading = "Repair result";
+            this.kryptonHeaderGroup5.ValuesPrimary.Image = global::Odin.Global_Resourses.Assembling_32x32;
+            this.kryptonHeaderGroup5.ValuesSecondary.Heading = "";
+            // 
+            // gv_Repairs
+            // 
+            this.gv_Repairs.AllowUserToAddRows = false;
+            this.gv_Repairs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.gv_Repairs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.cn_rid,
+            this.cn_rserial,
+            this.cn_rbatch,
+            this.cn_rlaunch,
+            this.cn_rqty,
+            this.cn_rartid,
+            this.cn_rarticle,
+            this.cn_rsecname,
+            this.cn_rconforder,
+            this.cn_rworker,
+            this.cn_rprodtime,
+            this.cn_r301,
+            this.cn_r302,
+            this.cn_r303,
+            this.cn_r304,
+            this.cn_r305,
+            this.cn_r306,
+            this.cn_r307,
+            this.cn_r311,
+            this.cn_r316,
+            this.cn_r312,
+            this.cn_rprodplace,
+            this.cn_rwhen,
+            this.cn_rheadid,
+            this.cn_rworkerid});
+            this.gv_Repairs.ContextMenuStrip = this.mnu_rLines;
+            this.gv_Repairs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gv_Repairs.Location = new System.Drawing.Point(0, 0);
+            this.gv_Repairs.Name = "gv_Repairs";
+            this.gv_Repairs.RowHeadersWidth = 25;
+            this.gv_Repairs.Size = new System.Drawing.Size(747, 276);
+            this.gv_Repairs.TabIndex = 8;
+            this.gv_Repairs.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_Repairs_ColumnHeaderMouseClick);
+            // 
+            // cn_rid
+            // 
+            this.cn_rid.DataPropertyName = "id";
+            this.cn_rid.FillWeight = 5F;
+            this.cn_rid.HeaderText = "id";
+            this.cn_rid.Name = "cn_rid";
+            this.cn_rid.ReadOnly = true;
+            this.cn_rid.Visible = false;
+            this.cn_rid.Width = 5;
+            // 
+            // cn_rserial
+            // 
+            this.cn_rserial.DataPropertyName = "sn";
+            this.cn_rserial.FillWeight = 120F;
+            this.cn_rserial.HeaderText = "Serial NO";
+            this.cn_rserial.Name = "cn_rserial";
+            this.cn_rserial.ReadOnly = true;
+            this.cn_rserial.Width = 120;
+            // 
+            // cn_rbatch
+            // 
+            this.cn_rbatch.DataPropertyName = "batch";
+            this.cn_rbatch.HeaderText = "Batch";
+            this.cn_rbatch.Name = "cn_rbatch";
+            this.cn_rbatch.ReadOnly = true;
+            // 
+            // cn_rlaunch
+            // 
+            this.cn_rlaunch.DataPropertyName = "launch";
+            this.cn_rlaunch.HeaderText = "Launch";
+            this.cn_rlaunch.Name = "cn_rlaunch";
+            // 
+            // cn_rqty
+            // 
+            this.cn_rqty.DataPropertyName = "qty";
+            this.cn_rqty.FillWeight = 70F;
+            this.cn_rqty.HeaderText = "Qty";
+            this.cn_rqty.Name = "cn_rqty";
+            this.cn_rqty.ReadOnly = true;
+            this.cn_rqty.Width = 70;
+            // 
+            // cn_rartid
+            // 
+            this.cn_rartid.DataPropertyName = "artid";
+            this.cn_rartid.FillWeight = 60F;
+            this.cn_rartid.HeaderText = "Art. ID";
+            this.cn_rartid.Name = "cn_rartid";
+            this.cn_rartid.Width = 60;
+            // 
+            // cn_rarticle
+            // 
+            this.cn_rarticle.DataPropertyName = "article";
+            this.cn_rarticle.FillWeight = 120F;
+            this.cn_rarticle.HeaderText = "Article";
+            this.cn_rarticle.Name = "cn_rarticle";
+            this.cn_rarticle.ReadOnly = true;
+            this.cn_rarticle.Width = 120;
+            // 
+            // cn_rsecname
+            // 
+            this.cn_rsecname.DataPropertyName = "secname";
+            this.cn_rsecname.HeaderText = "Sec. name";
+            this.cn_rsecname.Name = "cn_rsecname";
+            // 
+            // cn_rconforder
+            // 
+            this.cn_rconforder.DataPropertyName = "conforder";
+            this.cn_rconforder.HeaderText = "Conf. order";
+            this.cn_rconforder.Name = "cn_rconforder";
+            this.cn_rconforder.ReadOnly = true;
+            // 
+            // cn_rworker
+            // 
+            this.cn_rworker.DataPropertyName = "worker";
+            this.cn_rworker.FillWeight = 180F;
+            this.cn_rworker.HeaderText = "Worker";
+            this.cn_rworker.Name = "cn_rworker";
+            this.cn_rworker.Width = 180;
+            // 
+            // cn_rprodtime
+            // 
+            this.cn_rprodtime.DataPropertyName = "prodtime";
+            this.cn_rprodtime.FillWeight = 80F;
+            this.cn_rprodtime.HeaderText = "Prod. time(min)";
+            this.cn_rprodtime.Name = "cn_rprodtime";
+            this.cn_rprodtime.Width = 80;
+            // 
+            // cn_r301
+            // 
+            this.cn_r301.DataPropertyName = "301";
+            this.cn_r301.HeaderText = "301";
+            this.cn_r301.Name = "cn_r301";
+            // 
+            // cn_r302
+            // 
+            this.cn_r302.DataPropertyName = "302";
+            this.cn_r302.HeaderText = "302";
+            this.cn_r302.Name = "cn_r302";
+            // 
+            // cn_r303
+            // 
+            this.cn_r303.DataPropertyName = "303";
+            this.cn_r303.HeaderText = "303";
+            this.cn_r303.Name = "cn_r303";
+            // 
+            // cn_r304
+            // 
+            this.cn_r304.DataPropertyName = "304";
+            this.cn_r304.HeaderText = "304";
+            this.cn_r304.Name = "cn_r304";
+            // 
+            // cn_r305
+            // 
+            this.cn_r305.DataPropertyName = "305";
+            this.cn_r305.HeaderText = "305";
+            this.cn_r305.Name = "cn_r305";
+            // 
+            // cn_r306
+            // 
+            this.cn_r306.DataPropertyName = "306";
+            this.cn_r306.HeaderText = "306";
+            this.cn_r306.Name = "cn_r306";
+            // 
+            // cn_r307
+            // 
+            this.cn_r307.DataPropertyName = "307";
+            this.cn_r307.HeaderText = "307";
+            this.cn_r307.Name = "cn_r307";
+            // 
+            // cn_r311
+            // 
+            this.cn_r311.DataPropertyName = "311";
+            this.cn_r311.HeaderText = "311";
+            this.cn_r311.Name = "cn_r311";
+            // 
+            // cn_r316
+            // 
+            this.cn_r316.DataPropertyName = "316";
+            this.cn_r316.HeaderText = "316";
+            this.cn_r316.Name = "cn_r316";
+            // 
+            // cn_r312
+            // 
+            this.cn_r312.DataPropertyName = "312";
+            this.cn_r312.HeaderText = "312";
+            this.cn_r312.Name = "cn_r312";
+            // 
+            // cn_rprodplace
+            // 
+            this.cn_rprodplace.DataPropertyName = "prodplace";
+            this.cn_rprodplace.HeaderText = "Prod. place";
+            this.cn_rprodplace.Name = "cn_rprodplace";
+            // 
+            // cn_rwhen
+            // 
+            this.cn_rwhen.DataPropertyName = "when";
+            this.cn_rwhen.HeaderText = "When";
+            this.cn_rwhen.Name = "cn_rwhen";
+            // 
+            // cn_rheadid
+            // 
+            this.cn_rheadid.DataPropertyName = "headid";
+            this.cn_rheadid.HeaderText = "headid";
+            this.cn_rheadid.Name = "cn_rheadid";
+            this.cn_rheadid.Visible = false;
+            // 
+            // cn_rworkerid
+            // 
+            this.cn_rworkerid.DataPropertyName = "workerid";
+            this.cn_rworkerid.HeaderText = "workerid";
+            this.cn_rworkerid.Name = "cn_rworkerid";
+            this.cn_rworkerid.Visible = false;
+            // 
+            // mnu_rLines
+            // 
+            this.mnu_rLines.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.mnu_rLines.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mni_rFilterFor,
+            this.mni_rSearch,
+            this.mni_rFilterBy,
+            this.mni_rFilterExcludingSel,
+            this.mni_rRemoveFilter,
+            this.mni_rCopy,
+            this.toolStripSeparator13,
+            this.mni_rAdmin});
+            this.mnu_rLines.Name = "mnu_Requests";
+            this.mnu_rLines.Size = new System.Drawing.Size(211, 167);
+            this.mnu_rLines.Opening += new System.ComponentModel.CancelEventHandler(this.mnu_rLines_Opening);
+            // 
+            // mni_rFilterFor
+            // 
+            this.mni_rFilterFor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mni_rFilterFor.Name = "mni_rFilterFor";
+            this.mni_rFilterFor.Size = new System.Drawing.Size(150, 23);
+            this.mni_rFilterFor.TextChanged += new System.EventHandler(this.mni_rFilterFor_TextChanged);
+            // 
+            // mni_rSearch
+            // 
+            this.mni_rSearch.Image = global::Odin.Global_Resourses.binoculars_8090;
+            this.mni_rSearch.Name = "mni_rSearch";
+            this.mni_rSearch.Size = new System.Drawing.Size(210, 22);
+            this.mni_rSearch.Text = "Search for record";
+            this.mni_rSearch.Click += new System.EventHandler(this.mni_rSearch_Click);
+            // 
+            // mni_rFilterBy
+            // 
+            this.mni_rFilterBy.Image = global::Odin.Global_Resourses.FilterBySel;
+            this.mni_rFilterBy.Name = "mni_rFilterBy";
+            this.mni_rFilterBy.Size = new System.Drawing.Size(210, 22);
+            this.mni_rFilterBy.Text = "Filter by selection";
+            this.mni_rFilterBy.Click += new System.EventHandler(this.mni_rFilterBy_Click);
+            // 
+            // mni_rFilterExcludingSel
+            // 
+            this.mni_rFilterExcludingSel.Image = global::Odin.Global_Resourses.scissors_3838;
+            this.mni_rFilterExcludingSel.Name = "mni_rFilterExcludingSel";
+            this.mni_rFilterExcludingSel.Size = new System.Drawing.Size(210, 22);
+            this.mni_rFilterExcludingSel.Text = "Filter excluding selection";
+            this.mni_rFilterExcludingSel.Click += new System.EventHandler(this.mni_rFilterExcludingSel_Click);
+            // 
+            // mni_rRemoveFilter
+            // 
+            this.mni_rRemoveFilter.Image = global::Odin.Global_Resourses.RemoveFilter;
+            this.mni_rRemoveFilter.Name = "mni_rRemoveFilter";
+            this.mni_rRemoveFilter.Size = new System.Drawing.Size(210, 22);
+            this.mni_rRemoveFilter.Text = "Remove filter";
+            this.mni_rRemoveFilter.Click += new System.EventHandler(this.mni_rRemoveFilter_Click);
+            // 
+            // mni_rCopy
+            // 
+            this.mni_rCopy.Image = global::Odin.Global_Resourses.Copy_16x16;
+            this.mni_rCopy.Name = "mni_rCopy";
+            this.mni_rCopy.Size = new System.Drawing.Size(210, 22);
+            this.mni_rCopy.Text = "Copy";
+            this.mni_rCopy.Click += new System.EventHandler(this.mni_rCopy_Click);
+            // 
+            // toolStripSeparator13
+            // 
+            this.toolStripSeparator13.Name = "toolStripSeparator13";
+            this.toolStripSeparator13.Size = new System.Drawing.Size(207, 6);
+            // 
+            // mni_rAdmin
+            // 
+            this.mni_rAdmin.Image = global::Odin.Global_Resourses.Settings_24x24;
+            this.mni_rAdmin.Name = "mni_rAdmin";
+            this.mni_rAdmin.Size = new System.Drawing.Size(210, 22);
+            this.mni_rAdmin.Text = "List settings";
+            this.mni_rAdmin.Click += new System.EventHandler(this.mni_rAdmin_Click);
+            // 
+            // bn_Repairs
+            // 
+            this.bn_Repairs.AddNewItem = null;
+            this.bn_Repairs.CountItem = this.toolStripLabel5;
+            this.bn_Repairs.DeleteItem = null;
+            this.bn_Repairs.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.bn_Repairs.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.bn_Repairs.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton9,
+            this.toolStripButton10,
+            this.toolStripSeparator10,
+            this.toolStripTextBox3,
+            this.toolStripLabel5,
+            this.toolStripSeparator11,
+            this.toolStripButton11,
+            this.toolStripButton12,
+            this.toolStripSeparator12,
+            this.btn_ExcelRepairs,
+            this.toolStripLabel6,
+            this.toolStripTextBox4});
+            this.bn_Repairs.Location = new System.Drawing.Point(0, 276);
+            this.bn_Repairs.MoveFirstItem = this.toolStripButton9;
+            this.bn_Repairs.MoveLastItem = this.toolStripButton12;
+            this.bn_Repairs.MoveNextItem = this.toolStripButton11;
+            this.bn_Repairs.MovePreviousItem = this.toolStripButton10;
+            this.bn_Repairs.Name = "bn_Repairs";
+            this.bn_Repairs.PositionItem = this.toolStripTextBox3;
+            this.bn_Repairs.Size = new System.Drawing.Size(747, 25);
+            this.bn_Repairs.TabIndex = 3;
+            this.bn_Repairs.Text = "bindingNavigator1";
+            // 
+            // toolStripLabel5
+            // 
+            this.toolStripLabel5.Name = "toolStripLabel5";
+            this.toolStripLabel5.Size = new System.Drawing.Size(35, 22);
+            this.toolStripLabel5.Text = "of {0}";
+            this.toolStripLabel5.ToolTipText = "Total number of items";
+            // 
+            // toolStripButton9
+            // 
+            this.toolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton9.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton9.Image")));
+            this.toolStripButton9.Name = "toolStripButton9";
+            this.toolStripButton9.RightToLeftAutoMirrorImage = true;
+            this.toolStripButton9.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton9.Text = "Move first";
+            // 
+            // toolStripButton10
+            // 
+            this.toolStripButton10.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton10.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton10.Image")));
+            this.toolStripButton10.Name = "toolStripButton10";
+            this.toolStripButton10.RightToLeftAutoMirrorImage = true;
+            this.toolStripButton10.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton10.Text = "Move previous";
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            this.toolStripSeparator10.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripTextBox3
+            // 
+            this.toolStripTextBox3.AccessibleName = "Position";
+            this.toolStripTextBox3.AutoSize = false;
+            this.toolStripTextBox3.Name = "toolStripTextBox3";
+            this.toolStripTextBox3.Size = new System.Drawing.Size(50, 23);
+            this.toolStripTextBox3.Text = "0";
+            this.toolStripTextBox3.ToolTipText = "Current position";
+            // 
+            // toolStripSeparator11
+            // 
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            this.toolStripSeparator11.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButton11
+            // 
+            this.toolStripButton11.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton11.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton11.Image")));
+            this.toolStripButton11.Name = "toolStripButton11";
+            this.toolStripButton11.RightToLeftAutoMirrorImage = true;
+            this.toolStripButton11.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton11.Text = "Move next";
+            // 
+            // toolStripButton12
+            // 
+            this.toolStripButton12.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton12.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton12.Image")));
+            this.toolStripButton12.Name = "toolStripButton12";
+            this.toolStripButton12.RightToLeftAutoMirrorImage = true;
+            this.toolStripButton12.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton12.Text = "Move last";
+            // 
+            // toolStripSeparator12
+            // 
+            this.toolStripSeparator12.Name = "toolStripSeparator12";
+            this.toolStripSeparator12.Size = new System.Drawing.Size(6, 25);
+            // 
+            // btn_ExcelRepairs
+            // 
+            this.btn_ExcelRepairs.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_ExcelRepairs.Image = global::Odin.Global_Resourses.ExcelSpreadsheetSmall;
+            this.btn_ExcelRepairs.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_ExcelRepairs.Name = "btn_ExcelRepairs";
+            this.btn_ExcelRepairs.Size = new System.Drawing.Size(23, 22);
+            this.btn_ExcelRepairs.Text = "Export into excel";
+            this.btn_ExcelRepairs.Click += new System.EventHandler(this.btn_ExcelRepairs_Click);
+            // 
+            // toolStripLabel6
+            // 
+            this.toolStripLabel6.Name = "toolStripLabel6";
+            this.toolStripLabel6.Size = new System.Drawing.Size(77, 22);
+            this.toolStripLabel6.Text = "Selected sum";
+            // 
+            // toolStripTextBox4
+            // 
+            this.toolStripTextBox4.Name = "toolStripTextBox4";
+            this.toolStripTextBox4.Size = new System.Drawing.Size(100, 25);
+            // 
+            // kryptonHeaderGroup4
+            // 
+            this.kryptonHeaderGroup4.Dock = System.Windows.Forms.DockStyle.Right;
+            this.kryptonHeaderGroup4.Location = new System.Drawing.Point(749, 0);
+            this.kryptonHeaderGroup4.Name = "kryptonHeaderGroup4";
+            // 
+            // kryptonHeaderGroup4.Panel
+            // 
+            this.kryptonHeaderGroup4.Panel.Controls.Add(this.kryptonPanel2);
+            this.kryptonHeaderGroup4.Size = new System.Drawing.Size(194, 341);
+            this.kryptonHeaderGroup4.TabIndex = 12;
+            this.kryptonHeaderGroup4.ValuesPrimary.Heading = "Legend";
+            this.kryptonHeaderGroup4.ValuesPrimary.Image = global::Odin.Global_Resourses.legend;
+            this.kryptonHeaderGroup4.ValuesSecondary.Heading = "";
+            // 
+            // kryptonPanel2
+            // 
+            this.kryptonPanel2.Controls.Add(this.txt_Legend);
+            this.kryptonPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonPanel2.Location = new System.Drawing.Point(0, 0);
+            this.kryptonPanel2.Name = "kryptonPanel2";
+            this.kryptonPanel2.Size = new System.Drawing.Size(192, 301);
+            this.kryptonPanel2.TabIndex = 0;
+            // 
+            // txt_Legend
+            // 
+            this.txt_Legend.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txt_Legend.Location = new System.Drawing.Point(0, 0);
+            this.txt_Legend.Name = "txt_Legend";
+            this.txt_Legend.Size = new System.Drawing.Size(192, 301);
+            this.txt_Legend.StateCommon.Back.Color1 = System.Drawing.Color.WhiteSmoke;
+            this.txt_Legend.TabIndex = 0;
+            this.txt_Legend.Text = resources.GetString("txt_Legend.Text");
+            // 
             // kryptonHeaderGroup2
             // 
             this.kryptonHeaderGroup2.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -2016,6 +2558,25 @@
             ((System.ComponentModel.ISupportInitialize)(this.bn_Machines)).EndInit();
             this.bn_Machines.ResumeLayout(false);
             this.bn_Machines.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pg_Repairs)).EndInit();
+            this.pg_Repairs.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup5.Panel)).EndInit();
+            this.kryptonHeaderGroup5.Panel.ResumeLayout(false);
+            this.kryptonHeaderGroup5.Panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup5)).EndInit();
+            this.kryptonHeaderGroup5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gv_Repairs)).EndInit();
+            this.mnu_rLines.ResumeLayout(false);
+            this.mnu_rLines.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bn_Repairs)).EndInit();
+            this.bn_Repairs.ResumeLayout(false);
+            this.bn_Repairs.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup4.Panel)).EndInit();
+            this.kryptonHeaderGroup4.Panel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup4)).EndInit();
+            this.kryptonHeaderGroup4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).EndInit();
+            this.kryptonPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup2.Panel)).EndInit();
             this.kryptonHeaderGroup2.Panel.ResumeLayout(false);
             this.kryptonHeaderGroup2.Panel.PerformLayout();
@@ -2036,6 +2597,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bs_Materials)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.miniToolStrip)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_Machines)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_Repairs)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2219,5 +2781,59 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_macmounterby;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_macovencheckat;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_macovencheckby;
+        private ComponentFactory.Krypton.Navigator.KryptonPage pg_Repairs;
+        private ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup kryptonHeaderGroup5;
+        public ComponentFactory.Krypton.Toolkit.KryptonDataGridView gv_Repairs;
+        private System.Windows.Forms.BindingNavigator bn_Repairs;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel5;
+        private System.Windows.Forms.ToolStripButton toolStripButton9;
+        private System.Windows.Forms.ToolStripButton toolStripButton10;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+        private System.Windows.Forms.ToolStripTextBox toolStripTextBox3;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
+        private System.Windows.Forms.ToolStripButton toolStripButton11;
+        private System.Windows.Forms.ToolStripButton toolStripButton12;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
+        private System.Windows.Forms.ToolStripButton btn_ExcelRepairs;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel6;
+        private System.Windows.Forms.ToolStripTextBox toolStripTextBox4;
+        private ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup kryptonHeaderGroup4;
+        private Global_Classes.SyncBindingSource bs_Repairs;
+        private System.Windows.Forms.ContextMenuStrip mnu_rLines;
+        private System.Windows.Forms.ToolStripTextBox mni_rFilterFor;
+        private System.Windows.Forms.ToolStripMenuItem mni_rSearch;
+        private System.Windows.Forms.ToolStripMenuItem mni_rFilterBy;
+        private System.Windows.Forms.ToolStripMenuItem mni_rFilterExcludingSel;
+        private System.Windows.Forms.ToolStripMenuItem mni_rRemoveFilter;
+        private System.Windows.Forms.ToolStripMenuItem mni_rCopy;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
+        private System.Windows.Forms.ToolStripMenuItem mni_rAdmin;
+        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel2;
+        private ComponentFactory.Krypton.Toolkit.KryptonRichTextBox txt_Legend;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_rid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_rserial;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_rbatch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_rlaunch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_rqty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_rartid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_rarticle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_rsecname;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_rconforder;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_rworker;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_rprodtime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_r301;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_r302;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_r303;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_r304;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_r305;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_r306;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_r307;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_r311;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_r316;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_r312;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_rprodplace;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_rwhen;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_rheadid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_rworkerid;
     }
 }

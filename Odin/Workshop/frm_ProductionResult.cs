@@ -31,6 +31,7 @@ namespace Odin.Workshop
             ED = new ExportData(this.gv_List, "ProductionResults.xls", this.Name);
             ED1 = new ExportData(this.gv_Materials, "ProductionResultsMaterials.xls", this.Name);
             ED2 = new ExportData(this.gv_Machines, "ProductionResultsSMT.xls", this.Name);
+            ED3 = new ExportData(this.gv_Repairs, "ProductionResultsRepairs.xls", this.Name);
         }
 
         #region Variables
@@ -39,7 +40,7 @@ namespace Odin.Workshop
         ExportData ED;
         ExportData ED1;
         ExportData ED2;
-
+        ExportData ED3;
 
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
         class_Global glob_Class = new class_Global();
@@ -64,6 +65,10 @@ namespace Odin.Workshop
         public int macColumnIndex = 0;
         public string macColumnName = "";
         public string macCellValue = "";
+        public int rRowIndex = 0;
+        public int rColumnIndex = 0;
+        public string rColumnName = "";
+        public string rCellValue = "";
 
         public int Id
         { get; set; }
@@ -100,6 +105,18 @@ namespace Odin.Workshop
             }
         }
 
+        public void SetCellsColorRepairs()
+        {
+            //foreach (DataGridViewRow row in this.gv_List.Rows)
+            //{
+            //    if (Convert.ToInt32(row.Cells["cn_islast"].Value) == -1)
+            //        row.DefaultCellStyle.BackColor = Color.Gold;
+
+            //    if (Convert.ToInt32(row.Cells["cn_isapproved"].Value) == -1)
+            //        row.DefaultCellStyle.BackColor = Color.FromArgb(192, 255, 192);
+            //}
+        }
+
         public void SetCellsColorMaterial()
         {
             //foreach (DataGridViewRow row in this.gv_List.Rows)
@@ -123,8 +140,7 @@ namespace Odin.Workshop
             //        row.DefaultCellStyle.BackColor = Color.FromArgb(192, 255, 192);
             //}
         }
-
-
+        
         public void LoadColumns(DataGridView grid)
         {
             DAL.UserLogin = System.Environment.UserName;
@@ -170,9 +186,23 @@ namespace Odin.Workshop
                 lbl_Line.Visible = false;
                 cmb_Worker.Visible = true;
                 lbl_Worker.Visible = true;
-                //txt_Serial.Visible = true;
-                //lbl_Serial.Visible = true;
+                txt_Serial.Visible = false;
+                lbl_Serial.Visible = false;
+                chk_ConcOperations.Visible = true;
+                chk_Sum.Visible = true;
             }
+            if (dn_Pages.SelectedPage == pg_Repairs)
+            {
+                cmb_Lines.Visible = false;
+                lbl_Line.Visible = false;
+                cmb_Worker.Visible = true;
+                lbl_Worker.Visible = true;
+                txt_Serial.Visible = true;
+                lbl_Serial.Visible = true;
+                chk_ConcOperations.Visible = false;
+                chk_Sum.Visible = false;
+            }
+
             else
             {
                 cmb_Lines.Visible = true;
@@ -181,6 +211,8 @@ namespace Odin.Workshop
                 lbl_Worker.Visible = false;
                 txt_Serial.Visible = false;
                 lbl_Serial.Visible = false;
+                chk_ConcOperations.Visible = true;
+                chk_Sum.Visible = true;
             }
 
         }
@@ -386,14 +418,14 @@ namespace Odin.Workshop
             {
                 if (String.IsNullOrEmpty(bs_Materials.Filter) == true)
                 {
-                    if (String.IsNullOrEmpty(CellValue) == true)
+                    if (String.IsNullOrEmpty(mCellValue) == true)
                         bs_Materials.Filter = "(" + mColumnName + " is null OR Convert(" + mColumnName + ", 'System.String') = '')";
                     else
                         bs_Materials.Filter = "Convert(" + mColumnName + " , 'System.String') = '" + glob_Class.NES(mCellValue) + "'";
                 }
                 else
                 {
-                    if (String.IsNullOrEmpty(CellValue) == true)
+                    if (String.IsNullOrEmpty(mCellValue) == true)
                         bs_Materials.Filter = bs_Materials.Filter + "AND (" + mColumnName + " is null OR Convert(" + mColumnName + ", 'System.String') = '')";
                     else
                         bs_Materials.Filter = bs_Materials.Filter + " AND Convert(" + mColumnName + " , 'System.String') = '" + glob_Class.NES(mCellValue) + "'";
@@ -568,7 +600,7 @@ namespace Odin.Workshop
         
         private void mni_macCopy_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(CellValue.ToString());
+            Clipboard.SetText(macCellValue.ToString());
         }
 
         private void mni_macAdmin_Click(object sender, EventArgs e)
@@ -596,6 +628,140 @@ namespace Odin.Workshop
             ED2.DgvIntoExcel();
         }
         #endregion
+
+        #region Context menu repairs
+        private void mnu_rLines_Opening(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                Point mpoint = gv_Repairs.PointToClient(DataGridView.MousePosition);
+                DataGridView.HitTestInfo info = gv_Repairs.HitTest(mpoint.X, mpoint.Y);
+
+                rRowIndex = info.RowIndex;
+                rColumnIndex = info.ColumnIndex;
+                //MessageBox.Show(RowIndex.ToString() + "MO," + ColumnIndex.ToString());
+
+                gv_Repairs.ClearSelection();
+                gv_Repairs.Rows[rRowIndex].Cells[rColumnIndex].Selected = true;
+                gv_Repairs.CurrentCell = gv_Repairs.Rows[rRowIndex].Cells[rColumnIndex];
+
+                rCellValue = gv_Repairs.Rows[rRowIndex].Cells[rColumnIndex].Value.ToString();
+                rColumnName = gv_Repairs.Columns[rColumnIndex].DataPropertyName.ToString();
+                //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
+
+            }
+            catch
+            {
+                rRowIndex = 0;
+                rColumnIndex = 0;
+                return;
+            }
+        }
+
+        private void mni_rFilterFor_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                //if (String.IsNullOrEmpty(bs_List.Filter) == true)
+                bs_Repairs.Filter = "Convert(" + rColumnName + " , 'System.String') like '%" + mni_rFilterFor.Text + "%'";
+                //else
+                //    bs_List.Filter = bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') like '%" + mni_FilterFor.Text + "%'";
+                //bs_List.Filter = ("Convert(" + ColumnName + " , 'System.String') like '%" + mni_FilterFor.Text + "%'");//ColumnName + " like '%" + mni_FilterFor.Text + "%'";
+            }
+            catch
+            { }
+            SetCellsColorRepairs();
+        }
+
+        private void mni_rSearch_Click(object sender, EventArgs e)
+        {
+            frm_Find frm = new frm_Find();
+            frm.grid = gv_Repairs;
+            frm.ColumnNumber = gv_Repairs.CurrentCell.ColumnIndex;
+            frm.ColumnText = gv_Repairs.Columns[frm.ColumnNumber].HeaderText;
+            frm.ShowDialog();
+        }
+
+        private void mni_rFilterBy_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (String.IsNullOrEmpty(bs_Repairs.Filter) == true)
+                {
+                    if (String.IsNullOrEmpty(rCellValue) == true)
+                        bs_Repairs.Filter = "(" + rColumnName + " is null OR Convert(" + rColumnName + ", 'System.String') = '')";
+                    else
+                        bs_Repairs.Filter = "Convert(" + rColumnName + " , 'System.String') = '" + glob_Class.NES(rCellValue) + "'";
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(rCellValue) == true)
+                        bs_Repairs.Filter = bs_Repairs.Filter + "AND (" + rColumnName + " is null OR Convert(" + rColumnName + ", 'System.String') = '')";
+                    else
+                        bs_Repairs.Filter = bs_Repairs.Filter + " AND Convert(" + rColumnName + " , 'System.String') = '" + glob_Class.NES(rCellValue) + "'";
+                }
+                //MessageBox.Show(bs_List.Filter);
+
+            }
+            catch { }
+            SetCellsColorRepairs();
+        }
+
+        private void mni_rFilterExcludingSel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (String.IsNullOrEmpty(bs_Repairs.Filter) == true)
+                    bs_Repairs.Filter = "Convert(" + rColumnName + " , 'System.String') <> '" + rCellValue + "'";
+                else
+                    bs_Repairs.Filter = bs_Repairs.Filter + " AND " + rColumnName + " <> '" + rCellValue + "'";
+            }
+            catch { }
+            SetCellsColor();
+        }
+
+        private void mni_rRemoveFilter_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                bs_Repairs.RemoveFilter();
+            }
+            catch { }
+            SetCellsColorRepairs();
+        }
+
+        private void mni_rCopy_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(rCellValue.ToString());
+        }
+
+        private void mni_rAdmin_Click(object sender, EventArgs e)
+        {
+            frm_GridViewAdm frm = new frm_GridViewAdm();
+
+            frm.HeaderText = "Select view for batches list";
+            frm.grid = this.gv_Repairs;
+            frm.formname = this.Name;
+            DAL.UserLogin = System.Environment.UserName;
+            frm.UserId = DAL.UserId;
+
+            frm.FillData(frm.grid);
+
+            DialogResult result = frm.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                mMenu.CommitUserColumn(frm.UserId, frm.formname, frm.grid.Name, frm.gvList);
+                LoadColumns(gv_Repairs);
+            }
+        }
+
+
+        private void btn_ExcelRepairs_Click(object sender, EventArgs e)
+        {
+            ED3.DgvIntoExcel();
+        }
+
+        #endregion  
 
         public void bw_List(object sender, DoWorkEventArgs e)
         {
@@ -674,6 +840,28 @@ namespace Odin.Workshop
             });
 
         }
+        
+        public void bw_RepairList(object sender, DoWorkEventArgs e)
+        {
+            var datar = Processing_BLL.getProductionRepairs(txt_Serial.Text, cmb_Launches1.LaunchId, cmb_Batches1.BatchId, cmb_SalesOrdersWithLines1.SalesOrderLineId, cmb_Articles1.ArticleId,
+                                            cmb_Types1.TypeId, cmb_Worker.SelectedValue, txt_DateFrom.Value == null ? "" : txt_DateFrom.Value.ToString().Trim(),
+                                            txt_DateTill.Value == null ? "" : txt_DateTill.Value.ToString().Trim(), chk_Sum.Checked == true ? -1 : 0, chk_ConcOperations.Checked == true ? -1 : 0);
+
+            gv_Repairs.ThreadSafeCall(delegate
+            {
+                gv_Repairs.AutoGenerateColumns = false;
+                bs_Repairs.DataSource = datar;
+                gv_Repairs.DataSource = bs_Repairs;
+
+            });
+
+            //Materials
+            bn_Repairs.ThreadSafeCall(delegate
+            {
+                bn_Repairs.BindingSource = bs_Repairs;
+            });
+
+        }
 
         private void btn_Clear_Click(object sender, EventArgs e)
         {
@@ -685,7 +873,7 @@ namespace Odin.Workshop
             LoadColumns(gv_List);
             LoadColumns(gv_Materials);
             LoadColumns(gv_Machines);
-
+            LoadColumns(gv_Repairs);
             txt_DateFrom.Value = null;// Convert.ToDateTime("01/01/2000");
             txt_DateTill.Value = null;
         }
@@ -713,10 +901,22 @@ namespace Odin.Workshop
 
                 gv_List.ThreadSafeCall(delegate { SetCellsColor(); });
             }
+            if (dn_Pages.SelectedPage == pg_Repairs)
+            {
+                DataGridViewColumn oldColumn = gv_Repairs.SortedColumn;
+                var dir = Helper.SaveDirection(gv_Repairs);
+
+                bwStart(bw_RepairList);
+
+                Helper.RestoreDirection(gv_Repairs, oldColumn, dir);
+
+                gv_Repairs.ThreadSafeCall(delegate { SetCellsColorRepairs(); });
+
+            }
             else
             {
                 DataGridViewColumn oldColumn = gv_Machines.SortedColumn;
-                var dir = Helper.SaveDirection(gv_List);
+                var dir = Helper.SaveDirection(gv_Machines);
 
                 bwStart(bw_ListMachines);
 
@@ -753,6 +953,7 @@ namespace Odin.Workshop
         {
             UpdateTotal();
         }
+
         private void UpdateTotal()
         {
             //int WithdrawalTotal = 0;
@@ -1057,5 +1258,12 @@ namespace Odin.Workshop
         {
             FillLabels();
         }
+
+       
+        private void gv_Repairs_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            SetCellsColorRepairs();
+        }
+
     }
 }

@@ -598,6 +598,29 @@ namespace Odin.Workshop
 
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
+
+        public static DataTable getProductionRepairs(string _serial, int _launchid, int _batchid, int _conforderid, int _artid,
+                                                    int _typeid, int _workerid, string _datefrom, string _datetill, int _sum, int _concoper)
+        {
+            string query = "sp_SelectProductionRepairs";
+
+            var sqlparams = new List<SqlParameter>
+            {
+                new SqlParameter("@serial",SqlDbType.NVarChar){Value = _serial },
+                new SqlParameter("@launchid",SqlDbType.Int){Value = _launchid, },
+                new SqlParameter("@batchid",SqlDbType.Int){Value = _batchid },
+                new SqlParameter("@conforderid",SqlDbType.Int){Value = _conforderid },
+                new SqlParameter("@artid",SqlDbType.Int){Value = _artid },
+                new SqlParameter("@typeid",SqlDbType.Int){Value = _typeid },
+                new SqlParameter("@workerid",SqlDbType.Int){Value = _workerid },
+                new SqlParameter("@datefrom",SqlDbType.NVarChar){Value = _datefrom },
+                new SqlParameter("@datetill",SqlDbType.NVarChar){Value = _datetill },
+                new SqlParameter("@sum",SqlDbType.Int){Value = _sum }
+
+            };
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
+        }
         #endregion
 
         #region Workplaces
