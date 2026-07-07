@@ -65,7 +65,7 @@ namespace Odin.Register.Catalog
 
             NewLineId = BLL.AddCatalogItem(frm.BargType, frm.ArticleId, frm.FirmId, frm.FirmArt, frm.UnitId, frm.UnitPrice, frm.CurId, frm.Manufacturer, frm.Comments,
                                             frm.DelivTerms, frm.MOQ, frm.MPQ, frm.AsDefault, "", Convert.ToInt32(frm.Vat), frm.MinExpDays, frm.CoefConv, frm.DataCode, 
-                                            frm.DelivTermTxt, frm.Quoted, frm.BarCode, frm.ForCustomer, frm.ValidTill);
+                                            frm.DelivTermTxt, frm.Quoted, frm.BarCode, frm.ForCustomer, frm.ValidTill, frm.SetupCost, frm.SalQuotNum);
 
             FillCatalog(ArticleId);
 
@@ -76,7 +76,7 @@ namespace Odin.Register.Catalog
         {
             BLL.EditCatalogItem(frm.CatID, frm.BargType, frm.ArticleId, frm.FirmId, frm.FirmArt, frm.UnitId, frm.UnitPrice, frm.CurId, frm.Manufacturer, frm.Comments,
                                             frm.DelivTerms, frm.MOQ, frm.MPQ, frm.AsDefault, "", Convert.ToInt32(frm.Vat), frm.MinExpDays, frm.CoefConv, frm.DataCode,
-                                            frm.DelivTermTxt, frm.Quoted, frm.BarCode, frm.ForCustomer, frm.ValidTill);
+                                            frm.DelivTermTxt, frm.Quoted, frm.BarCode, frm.ForCustomer, frm.ValidTill, frm.SetupCost, frm.SalQuotNum);
             BLL.CatId = frm.CatID;
             FillCatalog(ArticleId);
             
@@ -137,6 +137,8 @@ namespace Odin.Register.Catalog
                 frm.BarCode = BLL.CatBarCode;
                 frm.ForCustomer = BLL.CatForCust;
                 frm.ValidTill = BLL.CatValidTill;
+                frm.SetupCost = BLL.CatSetupCost;
+                frm.SalQuotNum = BLL.CatSalQuotNum;
                 frm.CatSaved += new CatSavedEventHandler(CatEdited);
                 
 

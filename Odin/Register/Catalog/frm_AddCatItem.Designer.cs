@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.txt_ExpDate = new Odin.CustomControls.NullableDateTimePicker();
+            this.kryptonLabel19 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel18 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.cmb_Firms2 = new Odin.CMB_Components.Companies.cmb_Firms();
             this.txt_BarCode = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
@@ -79,8 +81,11 @@
             this.btn_Cancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.txt_ExpDate = new Odin.CustomControls.NullableDateTimePicker();
-            this.kryptonLabel19 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.txt_SalQuotNum = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.buttonSpecAny7 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.kryptonLabel20 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel21 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.txt_SetupCost = new Owf.Controls.NumericTetxBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).BeginInit();
@@ -91,6 +96,10 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel21);
+            this.kryptonPanel1.Controls.Add(this.txt_SetupCost);
+            this.kryptonPanel1.Controls.Add(this.txt_SalQuotNum);
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel20);
             this.kryptonPanel1.Controls.Add(this.txt_ExpDate);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel19);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel18);
@@ -138,12 +147,32 @@
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonPanel1.Size = new System.Drawing.Size(398, 411);
+            this.kryptonPanel1.Size = new System.Drawing.Size(398, 435);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // txt_ExpDate
+            // 
+            this.txt_ExpDate.CalendarShowWeekNumbers = true;
+            this.txt_ExpDate.CustomFormat = null;
+            this.txt_ExpDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.txt_ExpDate.Location = new System.Drawing.Point(209, 78);
+            this.txt_ExpDate.Name = "txt_ExpDate";
+            this.txt_ExpDate.NullValue = " ";
+            this.txt_ExpDate.Size = new System.Drawing.Size(78, 21);
+            this.txt_ExpDate.TabIndex = 290;
+            this.txt_ExpDate.DropDown += new System.EventHandler<ComponentFactory.Krypton.Toolkit.DateTimePickerDropArgs>(this.txt_ExpDate_DropDown);
+            // 
+            // kryptonLabel19
+            // 
+            this.kryptonLabel19.Location = new System.Drawing.Point(146, 78);
+            this.kryptonLabel19.Name = "kryptonLabel19";
+            this.kryptonLabel19.Size = new System.Drawing.Size(57, 20);
+            this.kryptonLabel19.TabIndex = 291;
+            this.kryptonLabel19.Values.Text = "Valid till:";
             // 
             // kryptonLabel18
             // 
-            this.kryptonLabel18.Location = new System.Drawing.Point(12, 376);
+            this.kryptonLabel18.Location = new System.Drawing.Point(12, 407);
             this.kryptonLabel18.Name = "kryptonLabel18";
             this.kryptonLabel18.Size = new System.Drawing.Size(85, 20);
             this.kryptonLabel18.TabIndex = 82;
@@ -160,7 +189,7 @@
             this.cmb_Firms2.Firm = "";
             this.cmb_Firms2.FirmId = 0;
             this.cmb_Firms2.IsEmptyColor = false;
-            this.cmb_Firms2.Location = new System.Drawing.Point(100, 375);
+            this.cmb_Firms2.Location = new System.Drawing.Point(100, 406);
             this.cmb_Firms2.Name = "cmb_Firms2";
             this.cmb_Firms2.Size = new System.Drawing.Size(204, 20);
             this.cmb_Firms2.SupComments = null;
@@ -247,7 +276,7 @@
             // 
             // kryptonLabel14
             // 
-            this.kryptonLabel14.Location = new System.Drawing.Point(12, 342);
+            this.kryptonLabel14.Location = new System.Drawing.Point(12, 373);
             this.kryptonLabel14.Name = "kryptonLabel14";
             this.kryptonLabel14.Size = new System.Drawing.Size(72, 20);
             this.kryptonLabel14.TabIndex = 56;
@@ -257,7 +286,7 @@
             // 
             this.txt_Comments.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
             this.buttonSpecAny3});
-            this.txt_Comments.Location = new System.Drawing.Point(100, 342);
+            this.txt_Comments.Location = new System.Drawing.Point(100, 373);
             this.txt_Comments.Multiline = true;
             this.txt_Comments.Name = "txt_Comments";
             this.txt_Comments.Size = new System.Drawing.Size(286, 30);
@@ -299,7 +328,7 @@
             // 
             // kryptonLabel12
             // 
-            this.kryptonLabel12.Location = new System.Drawing.Point(12, 316);
+            this.kryptonLabel12.Location = new System.Drawing.Point(12, 347);
             this.kryptonLabel12.Name = "kryptonLabel12";
             this.kryptonLabel12.Size = new System.Drawing.Size(87, 20);
             this.kryptonLabel12.TabIndex = 51;
@@ -309,7 +338,7 @@
             // 
             this.txt_Manufacturer.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
             this.buttonSpecAny2});
-            this.txt_Manufacturer.Location = new System.Drawing.Point(100, 316);
+            this.txt_Manufacturer.Location = new System.Drawing.Point(100, 347);
             this.txt_Manufacturer.Name = "txt_Manufacturer";
             this.txt_Manufacturer.Size = new System.Drawing.Size(286, 23);
             this.txt_Manufacturer.TabIndex = 70;
@@ -564,6 +593,7 @@
             this.cmb_Articles1.ArticleIdRec = 0;
             this.cmb_Articles1.ArtType = null;
             this.cmb_Articles1.BOMState = 0;
+            this.cmb_Articles1.CertState = "";
             this.cmb_Articles1.Comments = null;
             this.cmb_Articles1.CustCode = null;
             this.cmb_Articles1.CustCodeId = 0;
@@ -624,31 +654,51 @@
             this.kryptonLabel1.TabIndex = 28;
             this.kryptonLabel1.Values.Text = "Article:";
             // 
-            // txt_ExpDate
+            // txt_SalQuotNum
             // 
-            this.txt_ExpDate.CalendarShowWeekNumbers = true;
-            this.txt_ExpDate.CustomFormat = null;
-            this.txt_ExpDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.txt_ExpDate.Location = new System.Drawing.Point(209, 78);
-            this.txt_ExpDate.Name = "txt_ExpDate";
-            this.txt_ExpDate.NullValue = " ";
-            this.txt_ExpDate.Size = new System.Drawing.Size(78, 21);
-            this.txt_ExpDate.TabIndex = 290;
-            this.txt_ExpDate.DropDown += new System.EventHandler<ComponentFactory.Krypton.Toolkit.DateTimePickerDropArgs>(this.txt_ExpDate_DropDown);
+            this.txt_SalQuotNum.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
+            this.buttonSpecAny7});
+            this.txt_SalQuotNum.Location = new System.Drawing.Point(282, 318);
+            this.txt_SalQuotNum.Name = "txt_SalQuotNum";
+            this.txt_SalQuotNum.Size = new System.Drawing.Size(104, 23);
+            this.txt_SalQuotNum.TabIndex = 293;
             // 
-            // kryptonLabel19
+            // buttonSpecAny7
             // 
-            this.kryptonLabel19.Location = new System.Drawing.Point(146, 78);
-            this.kryptonLabel19.Name = "kryptonLabel19";
-            this.kryptonLabel19.Size = new System.Drawing.Size(57, 20);
-            this.kryptonLabel19.TabIndex = 291;
-            this.kryptonLabel19.Values.Text = "Valid till:";
+            this.buttonSpecAny7.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
+            this.buttonSpecAny7.UniqueName = "37A7E4CC6EDD4E03049882481BF8DE9B";
+            // 
+            // kryptonLabel20
+            // 
+            this.kryptonLabel20.Location = new System.Drawing.Point(178, 321);
+            this.kryptonLabel20.Name = "kryptonLabel20";
+            this.kryptonLabel20.Size = new System.Drawing.Size(101, 20);
+            this.kryptonLabel20.TabIndex = 292;
+            this.kryptonLabel20.Values.Text = "Sales quot. num:";
+            // 
+            // kryptonLabel21
+            // 
+            this.kryptonLabel21.Location = new System.Drawing.Point(12, 319);
+            this.kryptonLabel21.Name = "kryptonLabel21";
+            this.kryptonLabel21.Size = new System.Drawing.Size(70, 20);
+            this.kryptonLabel21.TabIndex = 295;
+            this.kryptonLabel21.Values.Text = "Setup cost:";
+            // 
+            // txt_SetupCost
+            // 
+            this.txt_SetupCost.AllowDecimalSeparator = true;
+            this.txt_SetupCost.AllowSpace = false;
+            this.txt_SetupCost.Location = new System.Drawing.Point(83, 318);
+            this.txt_SetupCost.Name = "txt_SetupCost";
+            this.txt_SetupCost.Size = new System.Drawing.Size(87, 23);
+            this.txt_SetupCost.TabIndex = 294;
+            this.txt_SetupCost.Text = "0";
             // 
             // frm_AddCatItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(398, 411);
+            this.ClientSize = new System.Drawing.Size(398, 435);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "frm_AddCatItem";
@@ -722,5 +772,10 @@
         private CMB_Components.Companies.cmb_Firms cmb_Firms2;
         private CustomControls.NullableDateTimePicker txt_ExpDate;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel19;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel21;
+        private Owf.Controls.NumericTetxBox txt_SetupCost;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_SalQuotNum;
+        private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny7;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel20;
     }
 }

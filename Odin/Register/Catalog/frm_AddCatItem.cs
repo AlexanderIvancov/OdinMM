@@ -235,6 +235,22 @@ namespace Odin.Register.Catalog
             }
         }
 
+        public double SetupCost
+        {
+            get
+            {
+                try { return Convert.ToDouble(txt_SetupCost.Text); }
+                catch { return 0; }
+            }
+            set { txt_SetupCost.Text = value.ToString(); }
+        }
+
+        public string SalQuotNum
+        {
+            get { return txt_SalQuotNum.Text; }
+            set { txt_SalQuotNum.Text = value; }
+        }
+
         #endregion
 
         #region Controls

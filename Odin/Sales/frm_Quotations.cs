@@ -683,5 +683,27 @@ namespace Odin.Sales
             else
                 globClass.ShowMessage("Choose article in filter for analyze!", "Choose article in filter for analyze!", "Article is not selected!");
         }
+
+        private void btn_RMQuotes_Click(object sender, EventArgs e)
+        {
+            string _rmquote = "";
+            try { _rmquote = gv_List.CurrentRow.Cells["cn_name"].Value.ToString(); }
+            catch { }
+            {
+
+                var _query = "sp_SelectRMQuote";
+                var sqlparams = new List<SqlParameter>()
+                {
+                    new SqlParameter("@name",SqlDbType.NVarChar) {Value = _rmquote}
+                };
+
+                Template_DataGridView frm1 = new Template_DataGridView();
+
+                frm1.Text = "RM quotes for: " + _rmquote;
+                frm1.Query = _query;
+                frm1.SqlParams = sqlparams;
+                frm1.Show();
+            }
+        }
     }
 }

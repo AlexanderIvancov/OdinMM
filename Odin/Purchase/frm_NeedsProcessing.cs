@@ -352,7 +352,7 @@ namespace Odin.Purchase
                                             frmcat.UnitId, frmcat.UnitPrice, frmcat.CurId, frmcat.Manufacturer, frmcat.Comments,
                                             frmcat.DelivTerms, frmcat.MOQ, frmcat.MPQ, frmcat.AsDefault, "",
                                             Convert.ToInt32(frmcat.Vat), frmcat.MinExpDays, frmcat.CoefConv, frmcat.DataCode, frmcat.DelivTermTxt, 
-                                            frmcat.Quoted, frmcat.BarCode, frmcat.ForCustomer, frmcat.ValidTill);
+                                            frmcat.Quoted, frmcat.BarCode, frmcat.ForCustomer, frmcat.ValidTill, frmcat.SetupCost, frmcat.SalQuotNum);
 
             TreeGridNode node = tv_Details.CurrentNode;
             if (node.Level == 2)

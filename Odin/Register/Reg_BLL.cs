@@ -1465,6 +1465,8 @@ namespace Odin.Register
                         CatBarCode = dr["ean"].ToString();
                         CatForCust = Convert.ToInt32(dr["forcustomer"]);
                         CatValidTill = dr["validtill"].ToString();
+                        CatSetupCost = Convert.ToDouble(dr["setupcost"]);
+                        CatSalQuotNum = dr["salquotnum"].ToString();
                     }
                 }
                 else
@@ -1501,6 +1503,8 @@ namespace Odin.Register
             CatBarCode = "";
             CatForCust = 0;
             CatValidTill = "";
+            CatSetupCost = 0;
+            CatSalQuotNum = "";
         }
 
         public int CatArtId
@@ -1551,10 +1555,15 @@ namespace Odin.Register
         { get; set; }
         public string CatValidTill
         { get; set; }
+        public double CatSetupCost
+        { get; set; }
+        public string CatSalQuotNum
+        { get; set; }
+
         public int AddCatalogItem(int bargtype, int artid, int firmid, string firmart, int unitid, double unitprice, int curid,
                                 string manufacturer, string comments, int delivterm, double moq, double mpq, int asdefault,
                                 string elink, int vat, int minexpdays, double coefconv, string datacode, string delivtermtxt,
-                                int quoted, string barcode, int forcustomer, string validtill)
+                                int quoted, string barcode, int forcustomer, string validtill, double setupcost, string salquotnum)
         {
             int _res = 0;
 
@@ -1603,7 +1612,7 @@ namespace Odin.Register
         public void EditCatalogItem(int id, int bargtype, int artid, int firmid, string firmart, int unitid, double unitprice, int curid,
                                 string manufacturer, string comments, int delivterm, double moq, double mpq, int asdefault,
                                 string elink, int vat, int minexpdays, double coefconv, string datacode, string delivtermtxt,
-                                int quoted, string barcode, int forcustomer, string validtill)
+                                int quoted, string barcode, int forcustomer, string validtill, double setupcost, string salquotnum)
         {
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
