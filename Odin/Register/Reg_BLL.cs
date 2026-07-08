@@ -1594,6 +1594,8 @@ namespace Odin.Register
             sqlComm.Parameters.AddWithValue("@ean", barcode);
             sqlComm.Parameters.AddWithValue("@forcustomer", forcustomer);
             sqlComm.Parameters.AddWithValue("@validtill", validtill);
+            sqlComm.Parameters.AddWithValue("@setupcost", setupcost);
+            sqlComm.Parameters.AddWithValue("@salquotnum", salquotnum);
 
             sqlComm.Parameters.Add("@insertedid", SqlDbType.Int).Direction = ParameterDirection.Output;
 
@@ -1643,6 +1645,8 @@ namespace Odin.Register
             sqlComm.Parameters.AddWithValue("@ean", barcode);
             sqlComm.Parameters.AddWithValue("@forcustomer", forcustomer);
             sqlComm.Parameters.AddWithValue("@validtill", validtill);
+            sqlComm.Parameters.AddWithValue("@setupcost", setupcost);
+            sqlComm.Parameters.AddWithValue("@salquotnum", salquotnum);
             //try
             //{
             sqlConn.Open();
