@@ -590,7 +590,7 @@ namespace Odin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://192.168.10.162/zk/.
+        ///   Looks up a localized string similar to http://192.168.10.98/zk/.
         /// </summary>
         internal static string BadgeAddress {
             get {
@@ -608,7 +608,7 @@ namespace Odin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to BCGnTJCAEP23t+RIhfg3GU/Tmfpc9zfyIOF74ZP0x78tr1n3kxrNf+vQmrbNkAJsiC03qQarPuzeIMovvHv2v+pFNLpJpy+eW5Zf2MV97LFhvVp/7QqMNdm4Dgs1VCkQ760R9cdmniXy1ooPRtoJ/NbEgNVIS6iP+ixVoD5baVI=.
+        ///   Looks up a localized string similar to VyTucx35yaOnPArTuOJ9KvxtuIOIXXHDAgzQXhX3OrjWE3AcdDGUnyc3YVfLWVYyrz96cPhK8/qEQhAlt6A7rFlbGfaBK+GofmrAFbDyXXdc2Gs54U6ddSjjW7NtGGmY5O+7VIeEYqEWC7KgS9yMszYPMBtHikmrzG1ve62eI2k=.
         /// </summary>
         internal static string BadgePassword {
             get {
