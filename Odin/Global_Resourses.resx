@@ -1604,7 +1604,7 @@
     <value>item/batchImportItem</value>
   </data>
   <data name="BadgePassword" xml:space="preserve">
-    <value>VyTucx35yaOnPArTuOJ9KvxtuIOIXXHDAgzQXhX3OrjWE3AcdDGUnyc3YVfLWVYyrz96cPhK8/qEQhAlt6A7rFlbGfaBK+GofmrAFbDyXXdc2Gs54U6ddSjjW7NtGGmY5O+7VIeEYqEWC7KgS9yMszYPMBtHikmrzG1ve62eI2k=</value>
+    <value>GgYHVTtoWBXtNqacBXU88yonb7qQVChT0kMyxntZcXK2/IQ+RAdERq1/P+IMiJzPk8DU1QIgm/CkSQBtjrcg7yBK0okKNDNKfbL2Ye5LQ0DHKVOzCmeJ6TWlEY5r2Km+wFepv7KLjnUe8vSuSm8yntZOlJen133TI7NgUtGc5p0=</value>
   </data>
   <data name="legend" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resourses\legend.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1647,5 +1647,11 @@
   </data>
   <data name="supplier48x48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resourses\supplier48x48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BadgeAgencyId" xml:space="preserve">
+    <value>1597317958637</value>
+  </data>
+  <data name="BadgeMerchantId" xml:space="preserve">
+    <value>1772550124473</value>
   </data>
 </root>

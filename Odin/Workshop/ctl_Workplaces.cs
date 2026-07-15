@@ -43,7 +43,8 @@ namespace Odin.Workshop
         public string MImport = global::Odin.Global_Resourses.BadgeImportItem.ToString();
         public string BadgeAccount = global::Odin.Global_Resourses.BadgeAccount.ToString();
         public string BadgePassword = global::Odin.Global_Resourses.BadgePassword.ToString();
-
+        public string BadgeAgencyId = global::Odin.Global_Resourses.BadgeAgencyId.ToString();
+        public string BadgeMerchantId = global::Odin.Global_Resourses.BadgeMerchantId.ToString();
 
         public int ProdPlaceId
         {
@@ -280,7 +281,7 @@ namespace Odin.Workshop
             using (var streamWriter = new StreamWriter(request.GetRequestStream()))
             {
                 string json = "{\"agencyId\":\"1597317958637\"," +
-                              "\"merchantId\":\"1690197501808\", " +
+                              "\"merchantId\":\"1772550124473\", " +
                               "\"itemList\":" + JsonConvert.SerializeObject(itemList) + "}"
             ;
                 

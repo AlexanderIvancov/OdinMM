@@ -599,6 +599,15 @@ namespace Odin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 1597317958637.
+        /// </summary>
+        internal static string BadgeAgencyId {
+            get {
+                return ResourceManager.GetString("BadgeAgencyId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to item/batchImportItem.
         /// </summary>
         internal static string BadgeImportItem {
@@ -608,7 +617,16 @@ namespace Odin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VyTucx35yaOnPArTuOJ9KvxtuIOIXXHDAgzQXhX3OrjWE3AcdDGUnyc3YVfLWVYyrz96cPhK8/qEQhAlt6A7rFlbGfaBK+GofmrAFbDyXXdc2Gs54U6ddSjjW7NtGGmY5O+7VIeEYqEWC7KgS9yMszYPMBtHikmrzG1ve62eI2k=.
+        ///   Looks up a localized string similar to 1772550124473.
+        /// </summary>
+        internal static string BadgeMerchantId {
+            get {
+                return ResourceManager.GetString("BadgeMerchantId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GgYHVTtoWBXtNqacBXU88yonb7qQVChT0kMyxntZcXK2/IQ+RAdERq1/P+IMiJzPk8DU1QIgm/CkSQBtjrcg7yBK0okKNDNKfbL2Ye5LQ0DHKVOzCmeJ6TWlEY5r2Km+wFepv7KLjnUe8vSuSm8yntZOlJen133TI7NgUtGc5p0=.
         /// </summary>
         internal static string BadgePassword {
             get {
