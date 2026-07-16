@@ -172,31 +172,6 @@
             this.pg_Repairs = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.kryptonHeaderGroup5 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.gv_Repairs = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.cn_rid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_rserial = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_rbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_rlaunch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_rqty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_rartid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_rarticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_rsecname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_rconforder = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_rworker = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_rprodtime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_r301 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_r302 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_r303 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_r304 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_r305 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_r306 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_r307 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_r311 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_r316 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_r312 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_rprodplace = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_rwhen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_rheadid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_rworkerid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mnu_rLines = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mni_rFilterFor = new System.Windows.Forms.ToolStripTextBox();
             this.mni_rSearch = new System.Windows.Forms.ToolStripMenuItem();
@@ -263,6 +238,33 @@
             this.miniToolStrip = new System.Windows.Forms.BindingNavigator(this.components);
             this.bs_Machines = new Odin.Global_Classes.SyncBindingSource();
             this.bs_Repairs = new Odin.Global_Classes.SyncBindingSource();
+            this.cn_rid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rserial = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rbatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rlaunch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rqty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rartid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rarticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rsecname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rconforder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rworker = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rprodtime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_r301 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_r302 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_r303 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_r304 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_r305 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_r306 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_r307 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_r311 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_r312 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_314 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_r316 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_399 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rprodplace = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rwhen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rheadid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_rworkerid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.mnu_Lines.SuspendLayout();
@@ -1719,8 +1721,10 @@
             this.cn_r306,
             this.cn_r307,
             this.cn_r311,
-            this.cn_r316,
             this.cn_r312,
+            this.cn_314,
+            this.cn_r316,
+            this.cn_399,
             this.cn_rprodplace,
             this.cn_rwhen,
             this.cn_rheadid,
@@ -1733,179 +1737,6 @@
             this.gv_Repairs.Size = new System.Drawing.Size(747, 276);
             this.gv_Repairs.TabIndex = 8;
             this.gv_Repairs.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_Repairs_ColumnHeaderMouseClick);
-            // 
-            // cn_rid
-            // 
-            this.cn_rid.DataPropertyName = "id";
-            this.cn_rid.FillWeight = 5F;
-            this.cn_rid.HeaderText = "id";
-            this.cn_rid.Name = "cn_rid";
-            this.cn_rid.ReadOnly = true;
-            this.cn_rid.Visible = false;
-            this.cn_rid.Width = 5;
-            // 
-            // cn_rserial
-            // 
-            this.cn_rserial.DataPropertyName = "sn";
-            this.cn_rserial.FillWeight = 120F;
-            this.cn_rserial.HeaderText = "Serial NO";
-            this.cn_rserial.Name = "cn_rserial";
-            this.cn_rserial.ReadOnly = true;
-            this.cn_rserial.Width = 120;
-            // 
-            // cn_rbatch
-            // 
-            this.cn_rbatch.DataPropertyName = "batch";
-            this.cn_rbatch.HeaderText = "Batch";
-            this.cn_rbatch.Name = "cn_rbatch";
-            this.cn_rbatch.ReadOnly = true;
-            // 
-            // cn_rlaunch
-            // 
-            this.cn_rlaunch.DataPropertyName = "launch";
-            this.cn_rlaunch.HeaderText = "Launch";
-            this.cn_rlaunch.Name = "cn_rlaunch";
-            // 
-            // cn_rqty
-            // 
-            this.cn_rqty.DataPropertyName = "qty";
-            this.cn_rqty.FillWeight = 70F;
-            this.cn_rqty.HeaderText = "Qty";
-            this.cn_rqty.Name = "cn_rqty";
-            this.cn_rqty.ReadOnly = true;
-            this.cn_rqty.Width = 70;
-            // 
-            // cn_rartid
-            // 
-            this.cn_rartid.DataPropertyName = "artid";
-            this.cn_rartid.FillWeight = 60F;
-            this.cn_rartid.HeaderText = "Art. ID";
-            this.cn_rartid.Name = "cn_rartid";
-            this.cn_rartid.Width = 60;
-            // 
-            // cn_rarticle
-            // 
-            this.cn_rarticle.DataPropertyName = "article";
-            this.cn_rarticle.FillWeight = 120F;
-            this.cn_rarticle.HeaderText = "Article";
-            this.cn_rarticle.Name = "cn_rarticle";
-            this.cn_rarticle.ReadOnly = true;
-            this.cn_rarticle.Width = 120;
-            // 
-            // cn_rsecname
-            // 
-            this.cn_rsecname.DataPropertyName = "secname";
-            this.cn_rsecname.HeaderText = "Sec. name";
-            this.cn_rsecname.Name = "cn_rsecname";
-            // 
-            // cn_rconforder
-            // 
-            this.cn_rconforder.DataPropertyName = "conforder";
-            this.cn_rconforder.HeaderText = "Conf. order";
-            this.cn_rconforder.Name = "cn_rconforder";
-            this.cn_rconforder.ReadOnly = true;
-            // 
-            // cn_rworker
-            // 
-            this.cn_rworker.DataPropertyName = "worker";
-            this.cn_rworker.FillWeight = 180F;
-            this.cn_rworker.HeaderText = "Worker";
-            this.cn_rworker.Name = "cn_rworker";
-            this.cn_rworker.Width = 180;
-            // 
-            // cn_rprodtime
-            // 
-            this.cn_rprodtime.DataPropertyName = "prodtime";
-            this.cn_rprodtime.FillWeight = 80F;
-            this.cn_rprodtime.HeaderText = "Prod. time(min)";
-            this.cn_rprodtime.Name = "cn_rprodtime";
-            this.cn_rprodtime.Width = 80;
-            // 
-            // cn_r301
-            // 
-            this.cn_r301.DataPropertyName = "301";
-            this.cn_r301.HeaderText = "301";
-            this.cn_r301.Name = "cn_r301";
-            // 
-            // cn_r302
-            // 
-            this.cn_r302.DataPropertyName = "302";
-            this.cn_r302.HeaderText = "302";
-            this.cn_r302.Name = "cn_r302";
-            // 
-            // cn_r303
-            // 
-            this.cn_r303.DataPropertyName = "303";
-            this.cn_r303.HeaderText = "303";
-            this.cn_r303.Name = "cn_r303";
-            // 
-            // cn_r304
-            // 
-            this.cn_r304.DataPropertyName = "304";
-            this.cn_r304.HeaderText = "304";
-            this.cn_r304.Name = "cn_r304";
-            // 
-            // cn_r305
-            // 
-            this.cn_r305.DataPropertyName = "305";
-            this.cn_r305.HeaderText = "305";
-            this.cn_r305.Name = "cn_r305";
-            // 
-            // cn_r306
-            // 
-            this.cn_r306.DataPropertyName = "306";
-            this.cn_r306.HeaderText = "306";
-            this.cn_r306.Name = "cn_r306";
-            // 
-            // cn_r307
-            // 
-            this.cn_r307.DataPropertyName = "307";
-            this.cn_r307.HeaderText = "307";
-            this.cn_r307.Name = "cn_r307";
-            // 
-            // cn_r311
-            // 
-            this.cn_r311.DataPropertyName = "311";
-            this.cn_r311.HeaderText = "311";
-            this.cn_r311.Name = "cn_r311";
-            // 
-            // cn_r316
-            // 
-            this.cn_r316.DataPropertyName = "316";
-            this.cn_r316.HeaderText = "316";
-            this.cn_r316.Name = "cn_r316";
-            // 
-            // cn_r312
-            // 
-            this.cn_r312.DataPropertyName = "312";
-            this.cn_r312.HeaderText = "312";
-            this.cn_r312.Name = "cn_r312";
-            // 
-            // cn_rprodplace
-            // 
-            this.cn_rprodplace.DataPropertyName = "prodplace";
-            this.cn_rprodplace.HeaderText = "Prod. place";
-            this.cn_rprodplace.Name = "cn_rprodplace";
-            // 
-            // cn_rwhen
-            // 
-            this.cn_rwhen.DataPropertyName = "when";
-            this.cn_rwhen.HeaderText = "When";
-            this.cn_rwhen.Name = "cn_rwhen";
-            // 
-            // cn_rheadid
-            // 
-            this.cn_rheadid.DataPropertyName = "headid";
-            this.cn_rheadid.HeaderText = "headid";
-            this.cn_rheadid.Name = "cn_rheadid";
-            this.cn_rheadid.Visible = false;
-            // 
-            // cn_rworkerid
-            // 
-            this.cn_rworkerid.DataPropertyName = "workerid";
-            this.cn_rworkerid.HeaderText = "workerid";
-            this.cn_rworkerid.Name = "cn_rworkerid";
-            this.cn_rworkerid.Visible = false;
             // 
             // mnu_rLines
             // 
@@ -2507,6 +2338,191 @@
             this.miniToolStrip.Size = new System.Drawing.Size(943, 25);
             this.miniToolStrip.TabIndex = 3;
             // 
+            // cn_rid
+            // 
+            this.cn_rid.DataPropertyName = "id";
+            this.cn_rid.FillWeight = 5F;
+            this.cn_rid.HeaderText = "id";
+            this.cn_rid.Name = "cn_rid";
+            this.cn_rid.ReadOnly = true;
+            this.cn_rid.Visible = false;
+            this.cn_rid.Width = 5;
+            // 
+            // cn_rserial
+            // 
+            this.cn_rserial.DataPropertyName = "sn";
+            this.cn_rserial.FillWeight = 120F;
+            this.cn_rserial.HeaderText = "Serial NO";
+            this.cn_rserial.Name = "cn_rserial";
+            this.cn_rserial.ReadOnly = true;
+            this.cn_rserial.Width = 120;
+            // 
+            // cn_rbatch
+            // 
+            this.cn_rbatch.DataPropertyName = "batch";
+            this.cn_rbatch.HeaderText = "Batch";
+            this.cn_rbatch.Name = "cn_rbatch";
+            this.cn_rbatch.ReadOnly = true;
+            // 
+            // cn_rlaunch
+            // 
+            this.cn_rlaunch.DataPropertyName = "launch";
+            this.cn_rlaunch.HeaderText = "Launch";
+            this.cn_rlaunch.Name = "cn_rlaunch";
+            // 
+            // cn_rqty
+            // 
+            this.cn_rqty.DataPropertyName = "qty";
+            this.cn_rqty.FillWeight = 70F;
+            this.cn_rqty.HeaderText = "Qty";
+            this.cn_rqty.Name = "cn_rqty";
+            this.cn_rqty.ReadOnly = true;
+            this.cn_rqty.Width = 70;
+            // 
+            // cn_rartid
+            // 
+            this.cn_rartid.DataPropertyName = "artid";
+            this.cn_rartid.FillWeight = 60F;
+            this.cn_rartid.HeaderText = "Art. ID";
+            this.cn_rartid.Name = "cn_rartid";
+            this.cn_rartid.Width = 60;
+            // 
+            // cn_rarticle
+            // 
+            this.cn_rarticle.DataPropertyName = "article";
+            this.cn_rarticle.FillWeight = 120F;
+            this.cn_rarticle.HeaderText = "Article";
+            this.cn_rarticle.Name = "cn_rarticle";
+            this.cn_rarticle.ReadOnly = true;
+            this.cn_rarticle.Width = 120;
+            // 
+            // cn_rsecname
+            // 
+            this.cn_rsecname.DataPropertyName = "secname";
+            this.cn_rsecname.HeaderText = "Sec. name";
+            this.cn_rsecname.Name = "cn_rsecname";
+            // 
+            // cn_rconforder
+            // 
+            this.cn_rconforder.DataPropertyName = "conforder";
+            this.cn_rconforder.HeaderText = "Conf. order";
+            this.cn_rconforder.Name = "cn_rconforder";
+            this.cn_rconforder.ReadOnly = true;
+            // 
+            // cn_rworker
+            // 
+            this.cn_rworker.DataPropertyName = "worker";
+            this.cn_rworker.FillWeight = 180F;
+            this.cn_rworker.HeaderText = "Worker";
+            this.cn_rworker.Name = "cn_rworker";
+            this.cn_rworker.Width = 180;
+            // 
+            // cn_rprodtime
+            // 
+            this.cn_rprodtime.DataPropertyName = "prodtime";
+            this.cn_rprodtime.FillWeight = 80F;
+            this.cn_rprodtime.HeaderText = "Prod. time(min)";
+            this.cn_rprodtime.Name = "cn_rprodtime";
+            this.cn_rprodtime.Width = 80;
+            // 
+            // cn_r301
+            // 
+            this.cn_r301.DataPropertyName = "301";
+            this.cn_r301.HeaderText = "301";
+            this.cn_r301.Name = "cn_r301";
+            // 
+            // cn_r302
+            // 
+            this.cn_r302.DataPropertyName = "302";
+            this.cn_r302.HeaderText = "302";
+            this.cn_r302.Name = "cn_r302";
+            // 
+            // cn_r303
+            // 
+            this.cn_r303.DataPropertyName = "303";
+            this.cn_r303.HeaderText = "303";
+            this.cn_r303.Name = "cn_r303";
+            // 
+            // cn_r304
+            // 
+            this.cn_r304.DataPropertyName = "304";
+            this.cn_r304.HeaderText = "304";
+            this.cn_r304.Name = "cn_r304";
+            // 
+            // cn_r305
+            // 
+            this.cn_r305.DataPropertyName = "305";
+            this.cn_r305.HeaderText = "305";
+            this.cn_r305.Name = "cn_r305";
+            // 
+            // cn_r306
+            // 
+            this.cn_r306.DataPropertyName = "306";
+            this.cn_r306.HeaderText = "306";
+            this.cn_r306.Name = "cn_r306";
+            // 
+            // cn_r307
+            // 
+            this.cn_r307.DataPropertyName = "307";
+            this.cn_r307.HeaderText = "307";
+            this.cn_r307.Name = "cn_r307";
+            // 
+            // cn_r311
+            // 
+            this.cn_r311.DataPropertyName = "311";
+            this.cn_r311.HeaderText = "311";
+            this.cn_r311.Name = "cn_r311";
+            // 
+            // cn_r312
+            // 
+            this.cn_r312.DataPropertyName = "312";
+            this.cn_r312.HeaderText = "312";
+            this.cn_r312.Name = "cn_r312";
+            // 
+            // cn_314
+            // 
+            this.cn_314.DataPropertyName = "314";
+            this.cn_314.HeaderText = "314";
+            this.cn_314.Name = "cn_314";
+            // 
+            // cn_r316
+            // 
+            this.cn_r316.DataPropertyName = "316";
+            this.cn_r316.HeaderText = "316";
+            this.cn_r316.Name = "cn_r316";
+            // 
+            // cn_399
+            // 
+            this.cn_399.DataPropertyName = "399";
+            this.cn_399.HeaderText = "399";
+            this.cn_399.Name = "cn_399";
+            // 
+            // cn_rprodplace
+            // 
+            this.cn_rprodplace.DataPropertyName = "prodplace";
+            this.cn_rprodplace.HeaderText = "Prod. place";
+            this.cn_rprodplace.Name = "cn_rprodplace";
+            // 
+            // cn_rwhen
+            // 
+            this.cn_rwhen.DataPropertyName = "when";
+            this.cn_rwhen.HeaderText = "When";
+            this.cn_rwhen.Name = "cn_rwhen";
+            // 
+            // cn_rheadid
+            // 
+            this.cn_rheadid.DataPropertyName = "headid";
+            this.cn_rheadid.HeaderText = "headid";
+            this.cn_rheadid.Name = "cn_rheadid";
+            this.cn_rheadid.Visible = false;
+            // 
+            // cn_rworkerid
+            // 
+            this.cn_rworkerid.DataPropertyName = "workerid";
+            this.cn_rworkerid.HeaderText = "workerid";
+            this.cn_rworkerid.Name = "cn_rworkerid";
+            this.cn_rworkerid.Visible = false;
+            // 
             // frm_ProductionResult
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2829,8 +2845,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_r306;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_r307;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_r311;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_r316;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_r312;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_314;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_r316;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_399;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_rprodplace;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_rwhen;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_rheadid;
