@@ -29,7 +29,7 @@ namespace Odin.DataCollection
 
 
         #region Variables
-        
+
         frm_ScreenNumKeyboard16 popup;
         frm_Feeders popupfed;
 
@@ -47,7 +47,7 @@ namespace Odin.DataCollection
         DC_BLL DCBll = new DC_BLL();
         frm_cmbTextPDA_NC frmSer = null;
 
-      
+
         int _workerid = 0;
         public string Worker
         {
@@ -71,7 +71,7 @@ namespace Odin.DataCollection
             get { return _stateid; }
             set { _stateid = value; }
         }
-               
+
         public string Launch
         {
             get { return txt_Launch.Text; }
@@ -117,7 +117,7 @@ namespace Odin.DataCollection
             get { return lbl_OvenProfile.Values.Text; }
             set { lbl_OvenProfile.Text = value; }
         }
-       
+
         int _batchid = 0;
 
         public int BatchId
@@ -149,15 +149,15 @@ namespace Odin.DataCollection
         }
 
         int _workid = 0;
-               
+
 
         public int WorkId
         {
             get { return _workid; }
             set { _workid = value; }
         }
-              
-              
+
+
         public int LineId
         {
             get { return cmb_CommonPDA1.SelectedValue; }
@@ -173,7 +173,7 @@ namespace Odin.DataCollection
         }
         Processing_BLL ProdBll = new Processing_BLL();
 
-        int _TopBot = 2;      
+        int _TopBot = 2;
 
 
         public int TopBot
@@ -190,7 +190,7 @@ namespace Odin.DataCollection
                         chk_TOP.BackColor = Color.LightGreen;
                         chk_BOT.BackColor = Color.Gainsboro;
                         break;
-                        
+
                     default:
                         chk_TOP.Checked = false;
                         chk_BOT.Checked = true;
@@ -200,7 +200,7 @@ namespace Odin.DataCollection
                 }
             }
         }
-        
+
 
         #endregion
 
@@ -240,7 +240,7 @@ namespace Odin.DataCollection
                             cell.Style.BackColor = Color.Tomato;
                         break;
                     default:
-                        
+
                         break;
                 }
                 //if (Convert.ToInt32(row.Cells["cn_islast"].Value) == -1)
@@ -272,10 +272,10 @@ namespace Odin.DataCollection
                 SetCellsColor();
             });
 
-          
+
         }
 
-        
+
         public void FillMaterialsByLaunch(int _launchid)
         {
             var data = DC_BLL.getMaterialsByLaunch(_launchid, TopBot);
@@ -331,7 +331,7 @@ namespace Odin.DataCollection
             sqlConn.Close();
 
         }
-                      
+
 
         public void FocusOnGvUpdate(object sender, FormClosingEventArgs e)
         {
@@ -384,7 +384,7 @@ namespace Odin.DataCollection
             else
             {
                 TermProfile = -1;
-                TermProfileBy = "Term profile: " + System.Environment.NewLine  + DCBll.MDCTermProfBy + System.Environment.NewLine + DCBll.MDCTermProfDate;
+                TermProfileBy = "Term profile: " + System.Environment.NewLine + DCBll.MDCTermProfBy + System.Environment.NewLine + DCBll.MDCTermProfDate;
             }
             if (DCBll.MDCMountDate.Trim() == "")
             {
@@ -476,7 +476,6 @@ namespace Odin.DataCollection
                             frm_Error frm1 = new frm_Error();
                             frm1.HeaderText = "Wrong worker scanning! Your state is inactive! Please contact your master!";
                             DialogResult result1 = frm1.ShowDialog();
-                            //globClass.ShowMessage("Wrong worker scanning", "Please contact your master", "Your state is inactive!");
                             Worker = "";
                             WorkerId = 0;
                         }
@@ -488,13 +487,11 @@ namespace Odin.DataCollection
                     frm_Error frm1 = new frm_Error();
                     frm1.HeaderText = "Wrong worker scanning! Your rfid is not correct! Please contact your master!";
                     DialogResult result1 = frm1.ShowDialog();
-                    //globClass.ShowMessage("Wrong worker scanning", "Please contact your master", "Your rfid is not correct!");
                     Worker = "";
                     WorkerId = 0;
                 }
-                sqlConn.Close();             
-                            
-                //FillMaterials(WorkerId);
+                sqlConn.Close();
+
                 txt_Oper.Text = "";
                 txt_Oper.Focus();
             }
@@ -591,7 +588,6 @@ namespace Odin.DataCollection
                     }
                     else
                     {
-                        //globClass.ShowMessage("Wrong launch scanning", "Please contact your master", "Your launch is not correct!");
                         System.Media.SystemSounds.Exclamation.Play();
                         frm_Error frm1 = new frm_Error();
                         frm1.HeaderText = "Wrong launch scanning! Scan correct launch!";
@@ -643,7 +639,6 @@ namespace Odin.DataCollection
                     DialogResult result1 = frm1.ShowDialog();
                 }
                 txt_Oper.Text = "";
-                //ParsedOperations?.Clear();
                 txt_Oper.Focus();
             }
         }
@@ -654,7 +649,7 @@ namespace Odin.DataCollection
             try
             {
                 _id = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value);
-                
+
             }
             catch { }
 
@@ -709,10 +704,10 @@ namespace Odin.DataCollection
             }
 
         }
-          
+
         public void AddSerialAnalogue(string serial, string analogue, int asprimary)
         {
-            string _res = ProdBll.AddSerialNumberAnalogue(serial, analogue, asprimary);            
+            string _res = ProdBll.AddSerialNumberAnalogue(serial, analogue, asprimary);
         }
 
         public void AddSerialAnalog(string Analogue)
@@ -722,13 +717,11 @@ namespace Odin.DataCollection
                 AddSerialAnalogue(TmpSerial, Analogue, -1);
                 frmSer.Close();
             }
-            //else
-            //    frmSer.FormClosing += new FormClosingEventHandler();
         }
 
         public string TmpSerial
         { get; set; }
-      
+
 
         private void txt_Oper_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -737,72 +730,46 @@ namespace Odin.DataCollection
                 if (WorkerId == 0
                     || LaunchId == 0
                     || HeadId == 0
-                    
-                    //|| txt_OperNO.Text.Trim() == ""
                     )
                 {
                     System.Media.SystemSounds.Exclamation.Play();
                     frm_Error frm1 = new frm_Error();
                     frm1.HeaderText = "Empty fields detected! Please check worker or launch or operation!";
                     DialogResult result1 = frm1.ShowDialog();
-                    //globClass.ShowMessage("Empty fields detected!", "Please check worker or launch", "Launch or worker are empty!");
                     txt_Oper.Focus();
                 }
                 else
                 {
                     string _serial = txt_Oper.Text.Trim();
                     string _res = "";
-                   
-                        _res = DCBll.AddDataCollectionMachMaterial(WorkerId, _serial, LaunchId, TopBot);
-                        //MessageBox.Show(DCBll.SuccessId.ToString());
-                        if (DCBll.SuccessId == 1)
-                            FillMaterialsByLaunch(LaunchId);
-                        else
-                        {
-                            System.Media.SystemSounds.Exclamation.Play();
-                            frm_Error frm1 = new frm_Error();
-                            frm1.HeaderText = "Something wrong! " + _res;
-                            DialogResult result = frm1.ShowDialog();
-                        }
-                   
+
+                    _res = DCBll.AddDataCollectionMachMaterial(WorkerId, _serial, LaunchId, TopBot);
+                    if (DCBll.SuccessId == 1)
+                        FillMaterialsByLaunch(LaunchId);
+                    else
+                    {
+                        System.Media.SystemSounds.Exclamation.Play();
+                        frm_Error frm1 = new frm_Error();
+                        frm1.HeaderText = "Something wrong! " + _res;
+                        DialogResult result = frm1.ShowDialog();
+                    }
+
                     txt_Oper.Text = "";
                     txt_Oper.Focus();
                 }
             }
         }
 
-        
+
 
         #endregion
-               
-        //public void AddManualSerial(string _Serial)
-        //{
-        //    string _serial = _Serial;
-        //    string _res = "";
-            
-        //       // _res = DCBll.AddDataCollectionSerialOper(WorkerId, _serial, LaunchId, PrevStageId, OperNO, OperNO == 0 ? -1 : IsLast(OperNO), cmb_CommonPDA1.SelectedValue);
-        //        if (DCBll.SuccessId == -1)
-        //            FillList(WorkerId, LaunchId);
-        //        else if (DCBll.SuccessId == 1)
-        //            FillMaterialsByLaunch(LaunchId);
-        //        else
-        //        {
-        //            System.Media.SystemSounds.Exclamation.Play();
-        //            frm_Error frm1 = new frm_Error();
-        //            frm1.HeaderText = "Something wrong! " + _res;
-        //            DialogResult result = frm1.ShowDialog();
-        //        }
-            
-        //}
-
-       
 
         public void FillLine()
         {
             int _id = 0;
             try
             {
-               _id = Convert.ToInt32(Helper.GetOneRecord("select lineid from SYS_PCPlaces where pcname = '" + System.Environment.MachineName + "'"));
+                _id = Convert.ToInt32(Helper.GetOneRecord("select lineid from SYS_PCPlaces where pcname = '" + System.Environment.MachineName + "'"));
             }
             catch { }
             cmb_CommonPDA1.SelectedValue = _id;
@@ -815,51 +782,11 @@ namespace Odin.DataCollection
 
         private void cmb_CommonPDA1_SelectedValueChanged(object sender)
         {
-            
+
         }
 
         private void txt_Launch_TextChanged(object sender, EventArgs e)
         {
-            //SqlConnection sqlConn = new SqlConnection(sConnStr);
-            //sqlConn.Open();
-            //DataSet ds1 = new DataSet();
-
-            //SqlDataAdapter adapter1 =
-            //    new SqlDataAdapter(
-            //        "select id, name, isnull(dbo.fn_PrevQualityStage(id), 0) as prevstageid from prod_launchhead where name = '" + frm.FormText + "'", sqlConn);
-
-            //adapter1.Fill(ds1);
-
-            //DataTable dt1 = ds1.Tables[0];
-
-            //if (dt1.Rows.Count > 0)
-            //{
-            //    foreach (DataRow dr1 in dt1.Rows)
-            //    {
-            //        LaunchId = Convert.ToInt32(dr1["id"].ToString());
-            //        Launch = dr1["name"].ToString();
-            //        PrevStageId = Convert.ToInt32(dr1["prevstageid"].ToString());
-            //    }
-            //    FillList(WorkerId, LaunchId);
-            //    FillMaterialsByLaunch(LaunchId);
-            //    CheckViza(LaunchId);
-            //    txt_Oper.Focus();
-
-            //}
-            //else
-            //{
-            //    LaunchId = 0;
-            //    PrevStageId = 0;
-            //    FillList(WorkerId, LaunchId);
-            //    FillMaterialsByLaunch(0);
-            //    lbl_Viza.Visible = false;
-            //}
-            //sqlConn.Close();
-            //txt_Oper.Text = "";
-
-            //txt_OperNO.Text = "";
-            ////OperNO = 0;
-            //IsLast = 0;
             txt_Oper.Text = "";
             txt_Oper.Focus();
         }
@@ -884,9 +811,9 @@ namespace Odin.DataCollection
         private void btn_Finish_Click(object sender, EventArgs e)
         {
             ClearFields();
-        }        
-              
-        
+        }
+
+
         private void btn_EditCardDet_Click(object sender, EventArgs e)
         {
             frm_AddMachDCDet frm = new frm_AddMachDCDet();
@@ -900,7 +827,7 @@ namespace Odin.DataCollection
 
                 if (result == DialogResult.OK)
                 {
-                    DCBll.SaveControlCardDet(0, HeadId, frm.Feeder, frm.OldLabel, frm.Label, frm.Serial, WorkerId );
+                    DCBll.SaveControlCardDet(0, HeadId, frm.Feeder, frm.OldLabel, frm.Label, frm.Serial, WorkerId);
                     FillList(LaunchId, TopBot);
                 }
 
@@ -942,7 +869,11 @@ namespace Odin.DataCollection
 
         private void btn_ClearOven_Click(object sender, EventArgs e)
         {
-            if (globClass.ConfirmMessage("Are you sure you want to clear oven profile?", "Press OK to clear", "Oven profile deleting") == true)
+            string currentUser = System.Environment.UserName;
+            if ((DAL.IsUserInGroup(currentUser, "RIngen") == true
+                || currentUser.Equals("NLukashevich", StringComparison.OrdinalIgnoreCase)
+                || currentUser.Equals("ALisakovich", StringComparison.OrdinalIgnoreCase))
+                && globClass.ConfirmMessage("Are you sure you want to clear oven profile?", "Press OK to clear", "Oven profile deleting") == true)
             {
                 DCBll.SetControlCardHeaderTerm(HeadId, Worker, 0);
                 FillHeader(HeadId);
@@ -950,17 +881,39 @@ namespace Odin.DataCollection
                 txt_Oper.Text = "";
                 txt_Oper.Focus();
             }
+            else if (!(DAL.IsUserInGroup(currentUser, "RIngen") == true
+                || currentUser.Equals("NLukashevich", StringComparison.OrdinalIgnoreCase)
+                || currentUser.Equals("ALisakovich", StringComparison.OrdinalIgnoreCase)))
+            {
+                System.Media.SystemSounds.Exclamation.Play();
+                frm_Error frm1 = new frm_Error();
+                frm1.HeaderText = "Access denied! Only Masters and Technologists can clear oven profile.";
+                DialogResult result1 = frm1.ShowDialog();
+            }
         }
 
         private void btn_ClearProg_Click(object sender, EventArgs e)
         {
-            if (globClass.ConfirmMessage("Are you sure you want to clear mounter profile?", "Press OK to clear", "Mounter profile deleting") == true)
+            string currentUser = System.Environment.UserName;
+            if ((DAL.IsUserInGroup(currentUser, "RIngen") == true
+                || currentUser.Equals("NLukashevich", StringComparison.OrdinalIgnoreCase)
+                || currentUser.Equals("ALisakovich", StringComparison.OrdinalIgnoreCase))
+                && globClass.ConfirmMessage("Are you sure you want to clear mounter profile?", "Press OK to clear", "Mounter profile deleting") == true)
             {
                 DCBll.SetControlCardHeaderMount(HeadId, Worker, 0);
                 FillHeader(HeadId);
 
                 txt_Oper.Text = "";
                 txt_Oper.Focus();
+            }
+            else if (!(DAL.IsUserInGroup(currentUser, "RIngen") == true
+                || currentUser.Equals("NLukashevich", StringComparison.OrdinalIgnoreCase)
+                || currentUser.Equals("ALisakovich", StringComparison.OrdinalIgnoreCase)))
+            {
+                System.Media.SystemSounds.Exclamation.Play();
+                frm_Error frm1 = new frm_Error();
+                frm1.HeaderText = "Access denied! Only Masters and Technologists can clear mounter profile.";
+                DialogResult result1 = frm1.ShowDialog();
             }
         }
 
@@ -992,9 +945,22 @@ namespace Odin.DataCollection
                         if (Convert.ToInt32(dr1["isactive"]) == -1)
                         {
                             string _Worker = dr1["name"].ToString() + " " + dr1["surname"].ToString();
-                            DCBll.SetControlCardHeaderMount(HeadId, _Worker, -1);
-                            FillHeader(HeadId);
+                            string _userlogin = dr1["userlogin"].ToString();
 
+                            if (DAL.IsUserInGroup(_userlogin, "RIngen") == true
+                                || _userlogin.Equals("NLukashevich", StringComparison.OrdinalIgnoreCase)
+                                || _userlogin.Equals("ALisakovich", StringComparison.OrdinalIgnoreCase))
+                            {
+                                DCBll.SetControlCardHeaderMount(HeadId, _Worker, -1);
+                                FillHeader(HeadId);
+                            }
+                            else
+                            {
+                                System.Media.SystemSounds.Exclamation.Play();
+                                frm_Error frm1 = new frm_Error();
+                                frm1.HeaderText = "Wrong worker scanning! You are not in allowed group (Technologists or Masters)!";
+                                DialogResult result1 = frm1.ShowDialog();
+                            }
                         }
                         else
                         {
@@ -1002,8 +968,6 @@ namespace Odin.DataCollection
                             frm_Error frm1 = new frm_Error();
                             frm1.HeaderText = "Wrong worker scanning! Your state is inactive! Please contact your master!";
                             DialogResult result1 = frm1.ShowDialog();
-                            //globClass.ShowMessage("Wrong worker scanning", "Please contact your master", "Your state is inactive!");
-                            
                         }
                     }
                 }
@@ -1013,21 +977,16 @@ namespace Odin.DataCollection
                     frm_Error frm1 = new frm_Error();
                     frm1.HeaderText = "Wrong worker scanning! Your rfid is not correct! Please contact your master!";
                     DialogResult result1 = frm1.ShowDialog();
-                    //globClass.ShowMessage("Wrong worker scanning", "Please contact your master", "Your rfid is not correct!");
-                  
                 }
                 sqlConn.Close();
 
-                //FillMaterials(WorkerId);
                 txt_Oper.Text = "";
                 txt_Oper.Focus();
-
             }
         }
 
         private void btn_OvenProfile_Click(object sender, EventArgs e)
         {
-
             frm_cmbTextPDA frm = new frm_cmbTextPDA();
             frm.LabelText = "Scan your rfid: ";
             frm.HeaderText = "Scan your rfid: ";
@@ -1054,9 +1013,22 @@ namespace Odin.DataCollection
                         if (Convert.ToInt32(dr1["isactive"]) == -1)
                         {
                             string _Worker = dr1["name"].ToString() + " " + dr1["surname"].ToString();
-                            DCBll.SetControlCardHeaderTerm(HeadId, _Worker, -1);
-                            FillHeader(HeadId);
+                            string _userlogin = dr1["userlogin"].ToString();
 
+                            if (DAL.IsUserInGroup(_userlogin, "RIngen") == true
+                                || _userlogin.Equals("NLukashevich", StringComparison.OrdinalIgnoreCase)
+                                || _userlogin.Equals("ALisakovich", StringComparison.OrdinalIgnoreCase))
+                            {
+                                DCBll.SetControlCardHeaderTerm(HeadId, _Worker, -1);
+                                FillHeader(HeadId);
+                            }
+                            else
+                            {
+                                System.Media.SystemSounds.Exclamation.Play();
+                                frm_Error frm1 = new frm_Error();
+                                frm1.HeaderText = "Wrong worker scanning! You are not in allowed group (Technologists or Masters)!";
+                                DialogResult result1 = frm1.ShowDialog();
+                            }
                         }
                         else
                         {
@@ -1064,8 +1036,6 @@ namespace Odin.DataCollection
                             frm_Error frm1 = new frm_Error();
                             frm1.HeaderText = "Wrong worker scanning! Your state is inactive! Please contact your master!";
                             DialogResult result1 = frm1.ShowDialog();
-                            //globClass.ShowMessage("Wrong worker scanning", "Please contact your master", "Your state is inactive!");
-                           
                         }
                     }
                 }
@@ -1075,12 +1045,9 @@ namespace Odin.DataCollection
                     frm_Error frm1 = new frm_Error();
                     frm1.HeaderText = "Wrong worker scanning! Your rfid is not correct! Please contact your master!";
                     DialogResult result1 = frm1.ShowDialog();
-                    //globClass.ShowMessage("Wrong worker scanning", "Please contact your master", "Your rfid is not correct!");
-                 
                 }
                 sqlConn.Close();
 
-                //FillMaterials(WorkerId);
                 txt_Oper.Text = "";
                 txt_Oper.Focus();
             }
@@ -1116,7 +1083,6 @@ namespace Odin.DataCollection
 
                 if (dt1.Rows.Count > 0)
                 {
-
                     foreach (DataRow dr1 in dt1.Rows)
                     {
                         if (Convert.ToInt32(dr1["isactive"]) == -1)
@@ -1124,7 +1090,7 @@ namespace Odin.DataCollection
                             string _Worker = dr1["name"].ToString() + " " + dr1["surname"].ToString();
                             _userlogin = dr1["userlogin"].ToString();
 
-                            if (DAL.IsUserInGroup(_userlogin, "RQuality") == true)
+                            if (DAL.IsUserInGroup(_userlogin, "RQuality") == true || DAL.IsUserInGroup(_userlogin, "RIngen") == true)
                             {
                                 DCBll.SetControlCardHeaderPaste(HeadId, _Worker, -1);
                                 FillHeader(HeadId);
@@ -1133,10 +1099,10 @@ namespace Odin.DataCollection
                             {
                                 System.Media.SystemSounds.Exclamation.Play();
                                 frm_Error frm1 = new frm_Error();
-                                frm1.HeaderText = "Wrong worker scanning! You are not in quality group!";
+                                frm1.HeaderText = "Wrong worker scanning! You are not in Quality or Ingen group!";
                                 DialogResult result1 = frm1.ShowDialog();
                             }
-                            
+
                         }
                         else
                         {
@@ -1144,8 +1110,6 @@ namespace Odin.DataCollection
                             frm_Error frm1 = new frm_Error();
                             frm1.HeaderText = "Wrong worker scanning! Your state is inactive! Please contact your supervisor!";
                             DialogResult result1 = frm1.ShowDialog();
-                            //globClass.ShowMessage("Wrong worker scanning", "Please contact your master", "Your state is inactive!");
-
                         }
                     }
                 }
@@ -1155,30 +1119,32 @@ namespace Odin.DataCollection
                     frm_Error frm1 = new frm_Error();
                     frm1.HeaderText = "Wrong worker scanning! Your rfid is not correct!";
                     DialogResult result1 = frm1.ShowDialog();
-                    //globClass.ShowMessage("Wrong worker scanning", "Please contact your master", "Your rfid is not correct!");
-
                 }
                 sqlConn.Close();
 
-                //FillMaterials(WorkerId);
                 txt_Oper.Text = "";
                 txt_Oper.Focus();
             }
-
-           
         }
 
         private void btn_ClearPaste_Click(object sender, EventArgs e)
         {
-            if (DAL.IsUserInGroup(System.Environment.UserName, "RQuality") == true
-                &&
-                globClass.ConfirmMessage("Are you sure you want to clear paste check?", "Press OK to clear", "Paste check deleting") == true)
+            string currentUser = System.Environment.UserName;
+            if ((DAL.IsUserInGroup(currentUser, "RQuality") == true || DAL.IsUserInGroup(currentUser, "RIngen") == true)
+                && globClass.ConfirmMessage("Are you sure you want to clear paste check?", "Press OK to clear", "Paste check deleting") == true)
             {
                 DCBll.SetControlCardHeaderPaste(HeadId, Worker, 0);
                 FillHeader(HeadId);
 
                 txt_Oper.Text = "";
                 txt_Oper.Focus();
+            }
+            else if (!(DAL.IsUserInGroup(currentUser, "RQuality") == true || DAL.IsUserInGroup(currentUser, "RIngen") == true))
+            {
+                System.Media.SystemSounds.Exclamation.Play();
+                frm_Error frm1 = new frm_Error();
+                frm1.HeaderText = "Access denied! Only OTK and Technologists can clear paste check.";
+                DialogResult result1 = frm1.ShowDialog();
             }
         }
 
@@ -1236,7 +1202,6 @@ namespace Odin.DataCollection
 
                 if (dt1.Rows.Count > 0)
                 {
-
                     foreach (DataRow dr1 in dt1.Rows)
                     {
                         if (Convert.ToInt32(dr1["isactive"]) == -1)
@@ -1244,7 +1209,7 @@ namespace Odin.DataCollection
                             string _Worker = dr1["name"].ToString() + " " + dr1["surname"].ToString();
                             _userlogin = dr1["userlogin"].ToString();
 
-                            if (DAL.IsUserInGroup(_userlogin, "RQuality") == true)
+                            if (DAL.IsUserInGroup(_userlogin, "RQuality") == true || DAL.IsUserInGroup(_userlogin, "RIngen") == true)
                             {
                                 DCBll.SetControlCardHeaderOvenCheck(HeadId, _Worker, -1);
                                 FillHeader(HeadId);
@@ -1253,10 +1218,9 @@ namespace Odin.DataCollection
                             {
                                 System.Media.SystemSounds.Exclamation.Play();
                                 frm_Error frm1 = new frm_Error();
-                                frm1.HeaderText = "Wrong worker scanning! You are not in quality group!";
+                                frm1.HeaderText = "Wrong worker scanning! You are not in Quality or Ingen group!";
                                 DialogResult result1 = frm1.ShowDialog();
                             }
-
                         }
                         else
                         {
@@ -1264,8 +1228,6 @@ namespace Odin.DataCollection
                             frm_Error frm1 = new frm_Error();
                             frm1.HeaderText = "Wrong worker scanning! Your state is inactive! Please contact your supervisor!";
                             DialogResult result1 = frm1.ShowDialog();
-                            //globClass.ShowMessage("Wrong worker scanning", "Please contact your master", "Your state is inactive!");
-
                         }
                     }
                 }
@@ -1275,12 +1237,9 @@ namespace Odin.DataCollection
                     frm_Error frm1 = new frm_Error();
                     frm1.HeaderText = "Wrong worker scanning! Your rfid is not correct!";
                     DialogResult result1 = frm1.ShowDialog();
-                    //globClass.ShowMessage("Wrong worker scanning", "Please contact your master", "Your rfid is not correct!");
-
                 }
                 sqlConn.Close();
 
-                //FillMaterials(WorkerId);
                 txt_Oper.Text = "";
                 txt_Oper.Focus();
             }
@@ -1288,15 +1247,22 @@ namespace Odin.DataCollection
 
         private void btn_ClearOvenCheck_Click(object sender, EventArgs e)
         {
-            if (DAL.IsUserInGroup(System.Environment.UserName, "RQuality") == true
-               &&
-               globClass.ConfirmMessage("Are you sure you want to clear oven check?", "Press OK to clear", "Oven check deleting") == true)
+            string currentUser = System.Environment.UserName;
+            if ((DAL.IsUserInGroup(currentUser, "RQuality") == true || DAL.IsUserInGroup(currentUser, "RIngen") == true)
+               && globClass.ConfirmMessage("Are you sure you want to clear oven check?", "Press OK to clear", "Oven check deleting") == true)
             {
                 DCBll.SetControlCardHeaderOvenCheck(HeadId, Worker, 0);
                 FillHeader(HeadId);
 
                 txt_Oper.Text = "";
                 txt_Oper.Focus();
+            }
+            else if (!(DAL.IsUserInGroup(currentUser, "RQuality") == true || DAL.IsUserInGroup(currentUser, "RIngen") == true))
+            {
+                System.Media.SystemSounds.Exclamation.Play();
+                frm_Error frm1 = new frm_Error();
+                frm1.HeaderText = "Access denied! Only OTK and Technologists can clear oven check.";
+                DialogResult result1 = frm1.ShowDialog();
             }
         }
     }
