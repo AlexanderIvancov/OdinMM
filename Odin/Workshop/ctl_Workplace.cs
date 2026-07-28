@@ -70,7 +70,6 @@ namespace Odin.Workshop
         public void ClearFields()
         {
             cmb_Launches1.LaunchId = 0;
-            txt_CustArticle.Text = "";
             txt_Article.Text = "";
             //BLL.SaveWorkplace(WorkPlaceID, 0);
         }
@@ -79,7 +78,6 @@ namespace Odin.Workshop
         #region Controls
         private void cmb_Launches1_LaunchChanged(object sender)
         {
-            txt_CustArticle.Text = cmb_Launches1.SecName;
             txt_Article.Text = cmb_Launches1.Article;
         }
 

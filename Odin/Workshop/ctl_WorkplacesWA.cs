@@ -76,7 +76,7 @@ namespace Odin.Workshop
             public string ART_ID { get; set; }
             public string ART_NAME { get; set; }
 
-            public LaunchInfo(string esl_barcode, string comm_barcode, string address, string table, string launch, string art_id, string art_name)
+            public LaunchInfo(string esl_barcode, string comm_barcode, string address, string table, string launch, string art_id)
             {
                 ESL_BARCODE = esl_barcode;
                 COMM_BARCODE = comm_barcode;
@@ -84,7 +84,6 @@ namespace Odin.Workshop
                 TABLE = table;
                 LAUNCH = launch;
                 ART_ID = art_id;
-                ART_NAME = art_name;
             }
         }
 
@@ -241,7 +240,7 @@ namespace Odin.Workshop
                     ctl_Workplace ctl = ctrl as ctl_Workplace;
                     //if (ctl.cmb_Launches1.Launch != ""
                     //    && ctl.txt_Article.Text != "")
-                    lst1.Add(new LaunchInfo(ctl.ESL_Barcode, ctl.COMM_Barcode, ctl.Room, ctl.Workplace, isempty == false? ctl.cmb_Launches1.Launch : "", ctl.txt_Article.Text, ctl.txt_CustArticle.Text));
+                    lst1.Add(new LaunchInfo(ctl.ESL_Barcode, ctl.COMM_Barcode, ctl.Room, ctl.Workplace, isempty == false? ctl.cmb_Launches1.Launch : "", ctl.txt_Article.Text));
                 }
             }
             
