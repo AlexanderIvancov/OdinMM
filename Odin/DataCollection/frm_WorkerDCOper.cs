@@ -148,7 +148,10 @@ namespace Odin.DataCollection
             if (LaunchId != 0)
             {
                 var dtReq = DC_BLL.getRequiredMaterialsByLaunch(LaunchId);
-                _requiredMaterialsCount = dtReq.Rows.Count;
+                _requiredMaterialsCount = dtReq.AsEnumerable()
+                    .Select(r => new { ArtId = r.Field<int>("artid"), TypeId = r.Field<int>("toolstypeid") })
+                    .Distinct()
+                    .Count();
             }
             else
             {
