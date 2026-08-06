@@ -162,7 +162,7 @@ namespace Odin.DataCollection
 
         public void FillMaterials(int _workerid)
         {
-            var data = DC_BLL.getMaterials(_workerid);
+            var data = DC_BLL.getTMPMaterials(_workerid);
 
 
             gv_Materials.ThreadSafeCall(delegate
@@ -512,7 +512,7 @@ namespace Odin.DataCollection
             if (_id != 0
                 && globClass.DeleteConfirm() == true)
             {
-                string _res = DCBll.DeleteDataCollectionMaterial(_id);
+                string _res = DCBll.SpentDataCollectionMaterial(_id);
                 if (DCBll.SuccessId == -1)
                     FillMaterialsByLaunch(LaunchId);
                 else

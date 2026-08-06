@@ -530,7 +530,7 @@
             // 
             // cn_bid
             // 
-            this.cn_bid.DataPropertyName = "id";
+            this.cn_bid.DataPropertyName = "prodid";
             this.cn_bid.HeaderText = "id";
             this.cn_bid.Name = "cn_bid";
             this.cn_bid.Visible = false;

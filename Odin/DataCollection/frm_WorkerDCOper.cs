@@ -131,10 +131,45 @@ namespace Odin.DataCollection
         }
 
         Processing_BLL ProdBll = new Processing_BLL();
-
+        private int _requiredMaterialsCount = 0;
+        private int _scannedMaterialsCount = 0;
+        private bool _allMaterialsScanned = true;
         #endregion
 
         #region Methods
+
+        public void ResetMaterialsState()
+        {
+            if (LaunchId != 0 && WorkerId != 0)
+            {
+                DCBll.ResetSerialMaterials(LaunchId, WorkerId);
+            }
+
+            if (LaunchId != 0)
+            {
+                var dtReq = DC_BLL.getRequiredMaterialsByLaunch(LaunchId);
+                _requiredMaterialsCount = dtReq.Rows.Count;
+            }
+            else
+            {
+                _requiredMaterialsCount = 0;
+            }
+
+            _scannedMaterialsCount = 0;
+            _allMaterialsScanned = (_requiredMaterialsCount == 0);
+
+            gv_Materials.ThreadSafeCall(delegate
+            {
+                gv_Materials.AutoGenerateColumns = false;
+                bs_Materials.DataSource = null;
+                gv_Materials.DataSource = bs_Materials;
+            });
+
+            bn_Materials.ThreadSafeCall(delegate
+            {
+                bn_Materials.BindingSource = bs_Materials;
+            });
+        }
 
         public void SetCellsColor()
         {
@@ -169,7 +204,7 @@ namespace Odin.DataCollection
 
         public void FillMaterials(int _workerid)
         {
-            var data = DC_BLL.getMaterials(_workerid);
+            var data = DC_BLL.getTMPMaterials(_workerid);
 
 
             gv_Materials.ThreadSafeCall(delegate
@@ -442,6 +477,7 @@ namespace Odin.DataCollection
                 txt_OperNO.Text = "";
                 ParsedOperations?.Clear();
                 //FillMaterials(WorkerId);
+                ResetMaterialsState();
                 txt_Oper.Text = "";
                 txt_Oper.Focus();
             }
@@ -491,7 +527,7 @@ namespace Odin.DataCollection
                         PrevStageId = Convert.ToInt32(dr1["prevstageid"].ToString());
                     }
                     FillList(WorkerId, LaunchId);
-                    FillMaterialsByLaunch(LaunchId);
+                    ResetMaterialsState();
                     CheckViza(LaunchId);
                 }
                 else
@@ -505,7 +541,7 @@ namespace Odin.DataCollection
                     Launch = "";
                     PrevStageId = 0;
                     FillList(WorkerId, LaunchId);
-                    FillMaterialsByLaunch(0);
+                    ResetMaterialsState();
                     lbl_Viza.Visible = false;
                 }
                 sqlConn.Close();
@@ -537,18 +573,16 @@ namespace Odin.DataCollection
             if (_id != 0
                 && globClass.DeleteConfirm() == true)
             {
-                string _res = DCBll.DeleteDataCollectionMaterial(_id);
-                if (DCBll.SuccessId == -1)
-                    FillMaterialsByLaunch(LaunchId);
-                else
+                if (bs_Materials.Current != null)
                 {
-                    System.Media.SystemSounds.Exclamation.Play();
-                    frm_Error frm1 = new frm_Error();
-                    frm1.HeaderText = "Something wrong! " + _res;
-                    DialogResult result1 = frm1.ShowDialog();
+                    ((DataRowView)bs_Materials.Current).Delete();
+                    _scannedMaterialsCount--;
+                    _allMaterialsScanned = false;
                 }
+
+                string _res = DCBll.SpentDataCollectionMaterial(_id);
+
                 txt_Oper.Text = "";
-                //ParsedOperations?.Clear();
                 txt_Oper.Focus();
             }
         }
@@ -707,6 +741,48 @@ namespace Odin.DataCollection
                 {
                     string _serial = txt_Oper.Text.Trim();
 
+                    if (!_allMaterialsScanned)
+                    {
+                        int labelId = 0;
+
+                        if (int.TryParse(_serial, out labelId))
+                        {
+                            string msg = DCBll.CheckDataCollectionMaterial(LaunchId, labelId, WorkerId);
+                            if (DCBll.SuccessId == 1)
+                            {
+                                _scannedMaterialsCount++;
+                                FillMaterials(WorkerId);
+
+                                if (_scannedMaterialsCount >= _requiredMaterialsCount)
+                                {
+                                    _allMaterialsScanned = true;
+                                    System.Media.SystemSounds.Asterisk.Play();
+                                    frm_Error frmOk = new frm_Error();
+                                    frmOk.HeaderText = "All materials scanned! You can now scan boards.";
+                                    DialogResult resultOk = frmOk.ShowDialog();
+                                }
+                            }
+                            else
+                            {
+                                System.Media.SystemSounds.Exclamation.Play();
+                                frm_Error frm1 = new frm_Error();
+                                frm1.HeaderText = "Wrong material! " + msg;
+                                DialogResult result1 = frm1.ShowDialog();
+                            }
+                        }
+                        else
+                        {
+                            System.Media.SystemSounds.Exclamation.Play();
+                            frm_Error frm1 = new frm_Error();
+                            frm1.HeaderText = "Please scan a valid material label (numeric)!";
+                            DialogResult result1 = frm1.ShowDialog();
+                        }
+
+                        txt_Oper.Text = "";
+                        txt_Oper.Focus();
+                        return;
+                    }
+
                     bool check = DCBll.CheckDataCollectionSerialOper(_serial, 4, LaunchId);
                     //if (!check)
                     //{
@@ -751,7 +827,7 @@ namespace Odin.DataCollection
                             if (result == DialogResult.OK)
                                 ProdBll.AddSerialFreezed(frm.StageId, frm.BatchId, frm.LaunchId, frm.Serial, frm.Position, frm.FreezedReasonId);
                         }
-                        
+
                         txt_Oper.Text = "";
                         txt_Oper.Focus();
                     }
@@ -819,50 +895,119 @@ namespace Odin.DataCollection
 
         public void AddManualSerial(string _Serial)
         {
-            string _serial = _Serial;
-            bool check = DCBll.CheckDataCollectionSerialOper(_serial, 4, LaunchId);
-            //if (!check)
-            //{
-            //    frm_Confirmation frm2 = new frm_Confirmation();
-            //    frm2.HeaderText = "New serial number! Make sure the side is correct.";
-            //    System.Media.SystemSounds.Exclamation.Play();
-            //    DialogResult result2 = frm2.ShowDialog();
-            //    check = result2 == DialogResult.OK ? true : false;
-            //}
-
-            if (check)
+            if (WorkerId == 0
+                || LaunchId == 0
+                 //|| OperNO == 0
+                 || CheckOperNO() == 0
+                )
             {
-                foreach (int OperNO in ParsedOperations.OrderBy(num => num))
-                {
-                    string _res = DCBll.AddDataCollectionSerialOper(WorkerId, _serial, LaunchId, PrevStageId, OperNO, OperNO == 0 ? -1 : IsLast, cmb_CommonPDA1.SelectedValue);
+                System.Media.SystemSounds.Exclamation.Play();
+                frm_Error frm1 = new frm_Error();
+                frm1.HeaderText = "Empty fields detected! Please check worker or launch or operation!";
+                DialogResult result1 = frm1.ShowDialog();
+                //globClass.ShowMessage("Empty fields detected!", "Please check worker or launch", "Launch or worker are empty!");
+                txt_Oper.Focus();
+            }
+            else
+            {
+                string _serial = _Serial.Trim();
 
-                    if (DCBll.SuccessId == -1)
-                        FillList(WorkerId, LaunchId);
-                    else if (DCBll.SuccessId == 1)
-                        FillMaterialsByLaunch(LaunchId);
+                if (!_allMaterialsScanned)
+                {
+                    int labelId = 0;
+
+                    if (int.TryParse(_serial, out labelId))
+                    {
+                        string msg = DCBll.CheckDataCollectionMaterial(LaunchId, labelId, WorkerId);
+
+                        if (DCBll.SuccessId == 1)
+                        {
+                            FillMaterials(WorkerId);
+
+                            _scannedMaterialsCount++;
+                               
+                            if (_scannedMaterialsCount >= _requiredMaterialsCount)
+                            {
+                                _allMaterialsScanned = true;
+                                System.Media.SystemSounds.Asterisk.Play();
+                                frm_Error frmOk = new frm_Error();
+                                frmOk.HeaderText = "All materials scanned! You can now scan boards.";
+                                DialogResult resultOk = frmOk.ShowDialog();
+                            }
+                        }
+                        else
+                        {
+                            System.Media.SystemSounds.Exclamation.Play();
+                            frm_Error frm1 = new frm_Error();
+                            frm1.HeaderText = "Wrong material! " + msg;
+                            DialogResult result1 = frm1.ShowDialog();
+                        }
+                    }
                     else
                     {
                         System.Media.SystemSounds.Exclamation.Play();
                         frm_Error frm1 = new frm_Error();
-                        frm1.HeaderText = "Something wrong! " + _res;
-                        DialogResult result = frm1.ShowDialog();
+                        frm1.HeaderText = "Please scan a valid material label (numeric)!";
+                        DialogResult result1 = frm1.ShowDialog();
                     }
+
+                    txt_Oper.Text = "";
+                    txt_Oper.Focus();
+                    return;
                 }
-                if (IsFreezed != 0)
+
+                bool check = DCBll.CheckDataCollectionSerialOper(_serial, 4, LaunchId);
+                //if (!check)
+                //{
+                //    frm_Confirmation frm2 = new frm_Confirmation();
+                //    frm2.HeaderText = "New serial number! Make sure the side is correct.";
+                //    System.Media.SystemSounds.Exclamation.Play();
+                //    DialogResult result2 = frm2.ShowDialog();
+                //    check = result2 == DialogResult.OK ? true : false;
+                //}
+
+                if (check)
                 {
-                    CMB_Components.AddSerialFreezed.frm_AddSerialFreezed frm = new CMB_Components.AddSerialFreezed.frm_AddSerialFreezed();
-                    frm.Serial = _serial;
-                    frm.LaunchId = _launchid;
+                    string _res = "";
 
-                    DialogResult result = frm.ShowDialog();
+                    foreach (int OperNO in ParsedOperations.OrderBy(num => num))
+                    {
+                        _res = DCBll.AddDataCollectionSerialOper(WorkerId, _serial, LaunchId, PrevStageId, OperNO, OperNO == 0 ? -1 : IsLast, cmb_CommonPDA1.SelectedValue);
+                        //MessageBox.Show(DCBll.SuccessId.ToString());
+                        if (DCBll.SuccessId == -1)
+                            FillList(WorkerId, LaunchId);
+                        else if (DCBll.SuccessId == 1)
+                            FillMaterialsByLaunch(LaunchId);
+                        else if (DCBll.SuccessId == -2)
+                        {
+                            TmpSerial = _serial;
+                            ShowFrmAnalog();
+                        }
+                        else
+                        {
+                            System.Media.SystemSounds.Exclamation.Play();
+                            frm_Error frm1 = new frm_Error();
+                            frm1.HeaderText = "Something wrong! " + _res;
+                            DialogResult result = frm1.ShowDialog();
+                        }
+                    }
+                    if (IsFreezed != 0)
+                    {
+                        CMB_Components.AddSerialFreezed.frm_AddSerialFreezed frm = new CMB_Components.AddSerialFreezed.frm_AddSerialFreezed();
+                        frm.Serial = _serial;
+                        frm.LaunchId = _launchid;
+                        DialogResult result = frm.ShowDialog();
+                        if (result == DialogResult.OK)
+                            ProdBll.AddSerialFreezed(frm.StageId, frm.BatchId, frm.LaunchId, frm.Serial, frm.Position, frm.FreezedReasonId);
+                    }
 
-                    if (result == DialogResult.OK)
-                        ProdBll.AddSerialFreezed(frm.StageId, frm.BatchId, frm.LaunchId, frm.Serial, frm.Position, frm.FreezedReasonId);
+                    txt_Oper.Text = "";
+                    txt_Oper.Focus();
                 }
             }
-        }
+    }
 
-        private void btn_Assembling_Click(object sender, EventArgs e)
+    private void btn_Assembling_Click(object sender, EventArgs e)
         {
             if (WorkerId == 0
                 || LaunchId == 0

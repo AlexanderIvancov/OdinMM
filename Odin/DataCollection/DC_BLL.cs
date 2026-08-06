@@ -105,7 +105,6 @@ namespace Odin.DataCollection
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
 
-
         public static DataTable getMaterials(int workerid)
         {
             string query = "sp_SelectMaterialsByWorkerByDate";
@@ -117,14 +116,25 @@ namespace Odin.DataCollection
 
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
+
+        public static DataTable getTMPMaterials(int workerid)
+        {
+            string query = "sp_SelectTMPMaterialsByWorkerByDate";
+
+            var sqlparams = new List<SqlParameter>
+            {
+                 new SqlParameter("@workerid",SqlDbType.Int){Value = workerid }
+            };
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
+        }
         public static DataTable getMaterialsByLaunch(int launchid, int topbot)
         {
-            string query = "sp_SelectMaterialsByLaunch";
+            string query = "sp_SelectRequiredMaterialsByLaunch";
 
             var sqlparams = new List<SqlParameter>
             {
                  new SqlParameter("@launchid",SqlDbType.Int){Value = launchid },
-                 new SqlParameter("@topbot",SqlDbType.Int){Value = topbot }
             };
 
             return Helper.QuerySP(query, sqlparams.ToArray());
@@ -334,6 +344,33 @@ namespace Odin.DataCollection
             //catch { }
             return _res;
         }
+
+        public string SpentDataCollectionMaterial(int Id)
+        {
+            string _res = "";
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_SpentDataCollectionMaterial", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+
+            sqlComm.Parameters.AddWithValue("@id", Id);
+
+            sqlComm.Parameters.Add("@successid", SqlDbType.Int).Direction = ParameterDirection.Output;
+            sqlComm.Parameters.Add("@success", SqlDbType.NVarChar, 150).Direction = ParameterDirection.Output;
+
+            //try
+            //{
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            SuccessId = Convert.ToInt32(sqlComm.Parameters["@successid"].Value);
+            _res = sqlComm.Parameters["@success"].Value.ToString();
+            sqlConn.Close();
+            //}
+            //catch { }
+            return _res;
+        }
+
 
         public double ApproveDataCollection(DataTable data, int workerid)
         {
@@ -700,6 +737,69 @@ namespace Odin.DataCollection
             sqlConn.Close();
             //}
             //catch { }           
+        }
+
+        public string CheckDataCollectionMaterial(int LaunchId, int LabelId, int WorkerId)
+        {
+            string _res = "";
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_CheckLaunchMaterialLabel", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@launchId", LaunchId);
+            sqlComm.Parameters.AddWithValue("@labelId", LabelId);
+            sqlComm.Parameters.AddWithValue("@workerId", WorkerId);
+            sqlComm.Parameters.Add("@success", SqlDbType.Int).Direction = ParameterDirection.Output;
+            sqlComm.Parameters.Add("@message", SqlDbType.NVarChar, 255).Direction = ParameterDirection.Output;
+
+            try
+            {
+                sqlConn.Open();
+                sqlComm.ExecuteNonQuery();
+                SuccessId = Convert.ToInt32(sqlComm.Parameters["@success"].Value);
+                _res = sqlComm.Parameters["@message"].Value.ToString();
+            }
+            finally
+            {
+                if (sqlConn.State == ConnectionState.Open)
+                    sqlConn.Close();
+            }
+
+            return _res;
+        }
+
+        public void ResetSerialMaterials(int LaunchId, int WorkerId)
+        {
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_ResetSerialMaterials", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@launchId", LaunchId);
+            sqlComm.Parameters.AddWithValue("@workerId", WorkerId);
+
+            try
+            {
+                sqlConn.Open();
+                sqlComm.ExecuteNonQuery();
+            }
+            finally
+            {
+                if (sqlConn.State == ConnectionState.Open)
+                    sqlConn.Close();
+            }
+        }
+
+        public static DataTable getRequiredMaterialsByLaunch(int launchid)
+        {
+            string query = "sp_SelectRequiredMaterialsByLaunch";
+
+            var sqlparams = new List<SqlParameter>
+            {
+                 new SqlParameter("@launchid",SqlDbType.Int){Value = launchid }
+            };
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
         }
 
         public string AddDataCollectionMachMaterial(int WorkerId, string Serial, int LaunchId, int TopBot)

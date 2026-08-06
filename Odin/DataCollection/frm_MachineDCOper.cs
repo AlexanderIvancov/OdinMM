@@ -173,6 +173,10 @@ namespace Odin.DataCollection
         }
         Processing_BLL ProdBll = new Processing_BLL();
 
+        private int _requiredMaterialsCount = 0;
+        private int _scannedMaterialsCount = 0;
+        private bool _allMaterialsScanned = true;
+
         int _TopBot = 2;
 
 
@@ -205,6 +209,26 @@ namespace Odin.DataCollection
         #endregion
 
         #region Methods
+
+        public void ResetMaterialsState()
+        {
+            if (LaunchId != 0)
+            {
+                var dtReq = DC_BLL.getRequiredMaterialsByLaunch(LaunchId);
+                _requiredMaterialsCount = dtReq.Rows.Count;
+
+                var dtScanned = DC_BLL.getMaterialsByLaunch(LaunchId, TopBot);
+                _scannedMaterialsCount = dtScanned.Rows.Count;
+
+                _allMaterialsScanned = (_scannedMaterialsCount >= _requiredMaterialsCount);
+            }
+            else
+            {
+                _requiredMaterialsCount = 0;
+                _scannedMaterialsCount = 0;
+                _allMaterialsScanned = true;
+            }
+        }
 
         public void SetCellsColor()
         {
@@ -276,9 +300,9 @@ namespace Odin.DataCollection
         }
 
 
-        public void FillMaterialsByLaunch(int _launchid)
+        public void FillMaterialsByLaunch(int _workerid)
         {
-            var data = DC_BLL.getMaterialsByLaunch(_launchid, TopBot);
+            var data = DC_BLL.getTMPMaterials(_workerid);
 
             gv_Materials.ThreadSafeCall(delegate
             {
@@ -367,7 +391,7 @@ namespace Odin.DataCollection
                 HeadId = _res;
             FillHeader(HeadId);
             FillList(LaunchId, TopBot);
-            FillMaterialsByLaunch(LaunchId);
+            FillMaterialsByLaunch(WorkerId);
             CheckViza(LaunchId);
             txt_Oper.Text = "";
             txt_Oper.Focus();
@@ -583,8 +607,8 @@ namespace Odin.DataCollection
 
                         FillHeader(HeadId);
                         FillList(LaunchId, TopBot);
-                        FillMaterialsByLaunch(LaunchId);
                         CheckViza(LaunchId);
+                        ResetMaterialsState();
                     }
                     else
                     {
@@ -597,8 +621,8 @@ namespace Odin.DataCollection
 
                         HeadId = 0;
                         FillList(LaunchId, TopBot);
-                        FillMaterialsByLaunch(0);
                         lbl_Viza.Visible = false;
+                        ResetMaterialsState();
                     }
                     sqlConn.Close();
                     txt_Oper.Text = "";
@@ -628,9 +652,16 @@ namespace Odin.DataCollection
             if (_id != 0
                 && globClass.DeleteConfirm() == true)
             {
-                string _res = DCBll.DeleteDataCollectionMaterial(_id);
+                if (bs_Materials.Current != null)
+                {
+                    ((DataRowView)bs_Materials.Current).Delete();
+                    _scannedMaterialsCount--;
+                    _allMaterialsScanned = false;
+                }
+
+                string _res = DCBll.SpentDataCollectionMaterial(_id);
                 if (DCBll.SuccessId == -1)
-                    FillMaterialsByLaunch(LaunchId);
+                    FillMaterialsByLaunch(WorkerId);
                 else
                 {
                     System.Media.SystemSounds.Exclamation.Play();
@@ -741,17 +772,38 @@ namespace Odin.DataCollection
                 else
                 {
                     string _serial = txt_Oper.Text.Trim();
-                    string _res = "";
 
-                    _res = DCBll.AddDataCollectionMachMaterial(WorkerId, _serial, LaunchId, TopBot);
-                    if (DCBll.SuccessId == 1)
-                        FillMaterialsByLaunch(LaunchId);
-                    else
+                    if (!_allMaterialsScanned)
                     {
-                        System.Media.SystemSounds.Exclamation.Play();
-                        frm_Error frm1 = new frm_Error();
-                        frm1.HeaderText = "Something wrong! " + _res;
-                        DialogResult result = frm1.ShowDialog();
+                        int labelId = 0;
+                        int.TryParse(_serial, out labelId);
+                        
+                        string _res = DCBll.CheckDataCollectionMaterial(LaunchId, labelId, WorkerId);
+                        if (DCBll.SuccessId == 1)
+                        {
+                            FillMaterialsByLaunch(WorkerId);
+                            _scannedMaterialsCount++;
+
+                            if (_scannedMaterialsCount >= _requiredMaterialsCount)
+                            {
+                                _allMaterialsScanned = true;
+                                System.Media.SystemSounds.Asterisk.Play();
+                                frm_Error frmOk = new frm_Error();
+                                frmOk.HeaderText = "All materials scanned! You can now scan boards.";
+                                DialogResult resultOk = frmOk.ShowDialog();
+                            }
+                        }
+                        else
+                        {
+                            System.Media.SystemSounds.Exclamation.Play();
+                            frm_Error frm1 = new frm_Error();
+                            frm1.HeaderText = "Wrong material! " + _res;
+                            DialogResult result1 = frm1.ShowDialog();
+                        }
+
+                        txt_Oper.Text = "";
+                        txt_Oper.Focus();
+                        return; 
                     }
 
                     txt_Oper.Text = "";
@@ -759,7 +811,6 @@ namespace Odin.DataCollection
                 }
             }
         }
-
 
 
         #endregion
