@@ -10,7 +10,7 @@ namespace Odin.Warehouse.History
         public string sConnStr = Properties.Settings.Default.OdinDBConnectionString;
 
         public static DataTable getIncomesHistory(int _headid, int _opertypeid, int _typeid, int _supid, int _batchid, int _salesorderid, int _artid, string _article,
-                                                    string _datefrom, string _datetill, string _suparticle)
+                                                    string _datefrom, string _datetill, string _suparticle, string _nomcode)
         {
             string query = "sp_StockHistoryIncomes";
 
@@ -26,8 +26,8 @@ namespace Odin.Warehouse.History
                 new SqlParameter("@batchid",SqlDbType.Int){Value = _batchid },
                 new SqlParameter("@orderid",SqlDbType.Int){Value = _salesorderid },
                 new SqlParameter("@datefrom",SqlDbType.NVarChar){Value = _datefrom},
-                new SqlParameter("@datetill",SqlDbType.NVarChar){Value = _datetill}
-
+                new SqlParameter("@datetill",SqlDbType.NVarChar){Value = _datetill},
+                new SqlParameter("@nomcode",SqlDbType.NVarChar){Value = _nomcode}
             };
 
             return Helper.QuerySP(query, sqlparams.ToArray());
@@ -56,7 +56,7 @@ namespace Odin.Warehouse.History
             return Helper.QuerySP(query, sqlparams.ToArray());
         }
         public static DataTable getOutcomesHistory(int _headid, int _opertypeid, int _typeid, int _custid, int _batchid, int _custorderid, int _artid, string _article,
-                                                    string _datefrom, string _datetill, string _custarticle, int _placeid, int _groupbybatch)
+                                                    string _datefrom, string _datetill, string _custarticle, int _placeid, int _groupbybatch, string _nomcode)
         {
             string query = "sp_StockHistoryOutcomes";
 
@@ -74,8 +74,8 @@ namespace Odin.Warehouse.History
                 new SqlParameter("@datefrom",SqlDbType.NVarChar){Value = _datefrom},
                 new SqlParameter("@datetill",SqlDbType.NVarChar){Value = _datetill},
                 new SqlParameter("@placeid",SqlDbType.NVarChar){Value = _placeid},
-                new SqlParameter("@groupbybatch",SqlDbType.NVarChar){Value = _groupbybatch}
-
+                new SqlParameter("@groupbybatch",SqlDbType.NVarChar){Value = _groupbybatch},
+                new SqlParameter("@nomcode",SqlDbType.NVarChar){Value = _nomcode}
             };
 
             return Helper.QuerySP(query, sqlparams.ToArray());

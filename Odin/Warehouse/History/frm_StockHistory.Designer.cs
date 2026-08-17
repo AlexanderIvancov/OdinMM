@@ -32,10 +32,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_StockHistory));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mnu_IncomeLines = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mni_FilterForI = new System.Windows.Forms.ToolStripTextBox();
             this.mni_SearchI = new System.Windows.Forms.ToolStripMenuItem();
@@ -191,8 +191,8 @@
             this.cn_oid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_oheadid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_oname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cn_blockdelivery = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_odelivdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_blockdelivery = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_odocdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_ocustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_oartid = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -397,6 +397,8 @@
             this.bs_MovementList = new Odin.Global_Classes.SyncBindingSource();
             this.bs_CostList = new Odin.Global_Classes.SyncBindingSource();
             this.bs_ReturnsList = new Odin.Global_Classes.SyncBindingSource();
+            this.cmb_NomCodes1 = new Odin.CMB_Components.NomCodes.cmb_NomCodes();
+            this.lbl_NomCode = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.mnu_IncomeLines.SuspendLayout();
             this.mnu_OutcomeLines.SuspendLayout();
             this.mnu_MovementLines.SuspendLayout();
@@ -979,6 +981,8 @@
             // 
             // kryptonSplitContainer2.Panel1
             // 
+            this.kryptonSplitContainer2.Panel1.Controls.Add(this.lbl_NomCode);
+            this.kryptonSplitContainer2.Panel1.Controls.Add(this.cmb_NomCodes1);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.chk_Summary);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.chk_groupbybatch);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.cmb_IncomeDoc1);
@@ -1020,7 +1024,7 @@
             // 
             // chk_Summary
             // 
-            this.chk_Summary.Location = new System.Drawing.Point(215, 419);
+            this.chk_Summary.Location = new System.Drawing.Point(215, 482);
             this.chk_Summary.Name = "chk_Summary";
             this.chk_Summary.Size = new System.Drawing.Size(75, 20);
             this.chk_Summary.TabIndex = 296;
@@ -1028,7 +1032,7 @@
             // 
             // chk_groupbybatch
             // 
-            this.chk_groupbybatch.Location = new System.Drawing.Point(9, 419);
+            this.chk_groupbybatch.Location = new System.Drawing.Point(9, 482);
             this.chk_groupbybatch.Name = "chk_groupbybatch";
             this.chk_groupbybatch.Size = new System.Drawing.Size(108, 20);
             this.chk_groupbybatch.TabIndex = 295;
@@ -1137,7 +1141,7 @@
             // 
             // lbl_PlaceTo
             // 
-            this.lbl_PlaceTo.Location = new System.Drawing.Point(3, 372);
+            this.lbl_PlaceTo.Location = new System.Drawing.Point(8, 377);
             this.lbl_PlaceTo.Name = "lbl_PlaceTo";
             this.lbl_PlaceTo.Size = new System.Drawing.Size(59, 20);
             this.lbl_PlaceTo.TabIndex = 283;
@@ -1148,7 +1152,7 @@
             this.cmb_Places2.BackColor = System.Drawing.Color.Transparent;
             this.cmb_Places2.Department = "";
             this.cmb_Places2.IsQuarantine = 0;
-            this.cmb_Places2.Location = new System.Drawing.Point(9, 393);
+            this.cmb_Places2.Location = new System.Drawing.Point(9, 403);
             this.cmb_Places2.Lock = 0;
             this.cmb_Places2.Name = "cmb_Places2";
             this.cmb_Places2.PlaceId = 0;
@@ -1727,9 +1731,9 @@
             // cn_createdat
             // 
             this.cn_createdat.DataPropertyName = "createdat";
-            dataGridViewCellStyle5.Format = "G";
-            dataGridViewCellStyle5.NullValue = null;
-            this.cn_createdat.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Format = "G";
+            dataGridViewCellStyle1.NullValue = null;
+            this.cn_createdat.DefaultCellStyle = dataGridViewCellStyle1;
             this.cn_createdat.FillWeight = 85F;
             this.cn_createdat.HeaderText = "Created at";
             this.cn_createdat.Name = "cn_createdat";
@@ -2027,16 +2031,6 @@
             this.cn_oname.Name = "cn_oname";
             this.cn_oname.ReadOnly = true;
             // 
-            // cn_blockdelivery
-            // 
-            this.cn_blockdelivery.DataPropertyName = "blockdelivery";
-            this.cn_blockdelivery.FillWeight = 90F;
-            this.cn_blockdelivery.HeaderText = "blockdelivery";
-            this.cn_blockdelivery.Name = "cn_blockdelivery";
-            this.cn_blockdelivery.ReadOnly = true;
-            this.cn_blockdelivery.Width = 90;
-            this.cn_blockdelivery.Visible = false;
-            // 
             // cn_odelivdate
             // 
             this.cn_odelivdate.DataPropertyName = "delivdate";
@@ -2045,6 +2039,16 @@
             this.cn_odelivdate.Name = "cn_odelivdate";
             this.cn_odelivdate.ReadOnly = true;
             this.cn_odelivdate.Width = 90;
+            // 
+            // cn_blockdelivery
+            // 
+            this.cn_blockdelivery.DataPropertyName = "blockdelivery";
+            this.cn_blockdelivery.FillWeight = 90F;
+            this.cn_blockdelivery.HeaderText = "blockdelivery";
+            this.cn_blockdelivery.Name = "cn_blockdelivery";
+            this.cn_blockdelivery.ReadOnly = true;
+            this.cn_blockdelivery.Visible = false;
+            this.cn_blockdelivery.Width = 90;
             // 
             // cn_odocdate
             // 
@@ -2091,15 +2095,15 @@
             this.cn_ocustarticle.ReadOnly = true;
             this.cn_ocustarticle.Width = 200;
             // 
-            // cn_ocustarticle
+            // cn_osuparticle
             // 
             this.cn_osuparticle.DataPropertyName = "suparticle";
             this.cn_osuparticle.FillWeight = 200F;
             this.cn_osuparticle.HeaderText = "Supplier\'s article";
             this.cn_osuparticle.Name = "cn_osuparticle";
             this.cn_osuparticle.ReadOnly = true;
-            this.cn_osuparticle.Width = 200;
             this.cn_osuparticle.Visible = false;
+            this.cn_osuparticle.Width = 200;
             // 
             // cn_otype
             // 
@@ -2203,9 +2207,9 @@
             // cn_ocreatat
             // 
             this.cn_ocreatat.DataPropertyName = "createdat";
-            dataGridViewCellStyle6.Format = "G";
-            dataGridViewCellStyle6.NullValue = null;
-            this.cn_ocreatat.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Format = "G";
+            dataGridViewCellStyle2.NullValue = null;
+            this.cn_ocreatat.DefaultCellStyle = dataGridViewCellStyle2;
             this.cn_ocreatat.FillWeight = 85F;
             this.cn_ocreatat.HeaderText = "Created at";
             this.cn_ocreatat.Name = "cn_ocreatat";
@@ -2631,9 +2635,9 @@
             // cn_mcreatedat
             // 
             this.cn_mcreatedat.DataPropertyName = "createdat";
-            dataGridViewCellStyle7.Format = "G";
-            dataGridViewCellStyle7.NullValue = null;
-            this.cn_mcreatedat.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Format = "G";
+            dataGridViewCellStyle3.NullValue = null;
+            this.cn_mcreatedat.DefaultCellStyle = dataGridViewCellStyle3;
             this.cn_mcreatedat.FillWeight = 85F;
             this.cn_mcreatedat.HeaderText = "Created at";
             this.cn_mcreatedat.Name = "cn_mcreatedat";
@@ -2934,9 +2938,9 @@
             // cn_rcreatedat
             // 
             this.cn_rcreatedat.DataPropertyName = "createdat";
-            dataGridViewCellStyle8.Format = "G";
-            dataGridViewCellStyle8.NullValue = null;
-            this.cn_rcreatedat.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Format = "G";
+            dataGridViewCellStyle4.NullValue = null;
+            this.cn_rcreatedat.DefaultCellStyle = dataGridViewCellStyle4;
             this.cn_rcreatedat.FillWeight = 115F;
             this.cn_rcreatedat.HeaderText = "Returned at";
             this.cn_rcreatedat.Name = "cn_rcreatedat";
@@ -3926,6 +3930,24 @@
             this.btn_AwaitingCost.UniqueName = "EDCA732E821046384D85C3730FBA73EB";
             this.btn_AwaitingCost.Click += new System.EventHandler(this.btn_AwaitingCost_Click);
             // 
+            // cmb_NomCodes1
+            // 
+            this.cmb_NomCodes1.EnableSearchId = false;
+            this.cmb_NomCodes1.Location = new System.Drawing.Point(9, 456);
+            this.cmb_NomCodes1.Name = "cmb_NomCodes1";
+            this.cmb_NomCodes1.NomCodes = "";
+            this.cmb_NomCodes1.NomCodesId = 0;
+            this.cmb_NomCodes1.Size = new System.Drawing.Size(200, 20);
+            this.cmb_NomCodes1.TabIndex = 297;
+            // 
+            // lbl_NomCode
+            // 
+            this.lbl_NomCode.Location = new System.Drawing.Point(9, 430);
+            this.lbl_NomCode.Name = "lbl_NomCode";
+            this.lbl_NomCode.Size = new System.Drawing.Size(69, 20);
+            this.lbl_NomCode.TabIndex = 298;
+            this.lbl_NomCode.Values.Text = "NomCode:";
+            // 
             // frm_StockHistory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4402,5 +4424,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn IncomeId;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
         private Owf.Controls.NumericTetxBox txt_TotalIncomes;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel lbl_NomCode;
+        private CMB_Components.NomCodes.cmb_NomCodes cmb_NomCodes1;
     }
 }

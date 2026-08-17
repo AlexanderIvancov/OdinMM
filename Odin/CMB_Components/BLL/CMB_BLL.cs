@@ -3601,7 +3601,17 @@ namespace Odin.CMB_Components.BLL
 
         #endregion
 
-       
+        #region NomCodes
+
+        public static DataTable getNomCodes(string _beg)
+        {
+            string query = "EXECUTE sp_NomCodesSelectLike @Beg = '" + _beg + "'";
+
+            return Helper.QueryDT(query);
+        }
+
+        #endregion
+
 
     }
 

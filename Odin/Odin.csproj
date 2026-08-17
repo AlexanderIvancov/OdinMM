@@ -610,6 +610,18 @@
     <Compile Include="CMB_Components\Departments\frm_TreeViewD.Designer.cs">
       <DependentUpon>frm_TreeViewD.cs</DependentUpon>
     </Compile>
+    <Compile Include="CMB_Components\NomCodes\cmb_NomCodes.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CMB_Components\NomCodes\cmb_NomCodes.Designer.cs">
+      <DependentUpon>cmb_NomCodes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CMB_Components\NomCodes\frm_NomCodes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CMB_Components\NomCodes\frm_NomCodes.Designer.cs">
+      <DependentUpon>frm_NomCodes.cs</DependentUpon>
+    </Compile>
     <Compile Include="CMB_Components\EndCustomers\cmb_EndCustomer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -3572,6 +3584,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CMB_Components\Departments\frm_TreeViewD.resx">
       <DependentUpon>frm_TreeViewD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CMB_Components\NomCodes\cmb_NomCodes.resx">
+      <DependentUpon>cmb_NomCodes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CMB_Components\NomCodes\frm_NomCodes.resx">
+      <DependentUpon>frm_NomCodes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CMB_Components\EndCustomers\cmb_EndCustomer.resx">
       <DependentUpon>cmb_EndCustomer.cs</DependentUpon>

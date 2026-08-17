@@ -276,7 +276,7 @@ namespace Odin.Warehouse.History
 
             var data = StockHistory_BLL.getIncomesHistory(cmb_IncomeDoc1.IncomeDocId, _operid, cmb_Types1.TypeId, cmb_Firms1.FirmId, cmb_Batches1.BatchId, cmb_SalesOrders1.SalesOrderId,
                                             cmb_Articles1.ArticleId, cmb_Articles1.Article, txt_DateFrom.Value == null ? "" : txt_DateFrom.Value.ToString().Trim(),
-                                            txt_DateTill.Value == null ? "" : txt_DateTill.Value.ToString().Trim(), txt_FirmArt.Text);
+                                            txt_DateTill.Value == null ? "" : txt_DateTill.Value.ToString().Trim(), txt_FirmArt.Text, cmb_NomCodes1.NomCodes);
 
             gv_IncomeList.ThreadSafeCall(delegate
             {
@@ -304,7 +304,7 @@ namespace Odin.Warehouse.History
                                             txt_DateTill.Value == null ? "" : txt_DateTill.Value.ToString().Trim(), txt_FirmArt.Text, cmb_Places1.PlaceId, chk_groupbybatch.Checked == true ? -1 : 0)
                : StockHistory_BLL.getOutcomesHistory(cmb_OutcomeDocs1.OutcomeDocId, _operid, cmb_Types1.TypeId, cmb_Firms1.FirmId, cmb_Batches1.BatchId, cmb_SalesOrders1.SalesOrderId,
                                             cmb_Articles1.ArticleId, cmb_Articles1.Article, txt_DateFrom.Value == null ? "" : txt_DateFrom.Value.ToString().Trim(),
-                                            txt_DateTill.Value == null ? "" : txt_DateTill.Value.ToString().Trim(), txt_FirmArt.Text, cmb_Places1.PlaceId, chk_groupbybatch.Checked == true ? -1 : 0);
+                                            txt_DateTill.Value == null ? "" : txt_DateTill.Value.ToString().Trim(), txt_FirmArt.Text, cmb_Places1.PlaceId, chk_groupbybatch.Checked == true ? -1 : 0, cmb_NomCodes1.NomCodes);
 
             gv_OutcomeList.ThreadSafeCall(delegate
             {
@@ -622,6 +622,8 @@ namespace Odin.Warehouse.History
                 cmb_Operation.Visible = true;
                 chk_groupbybatch.Visible = true;
                 chk_Summary.Visible = true;
+                lbl_NomCode.Visible = true;
+                cmb_NomCodes1.Visible = true;
 
             }
             else if (dn_Pages.SelectedPage == pg_Incomes)
@@ -654,6 +656,8 @@ namespace Odin.Warehouse.History
                 cmb_Types1.Visible = true;
                 chk_Summary.Visible = false;
                 chk_Summary.Checked = false;
+                lbl_NomCode.Visible = true;
+                cmb_NomCodes1.Visible = true;
 
                 lbl_Operation.Visible = true;
                 cmb_Operation.Visible = true;
@@ -689,6 +693,8 @@ namespace Odin.Warehouse.History
                 chk_groupbybatch.Visible = false;
                 chk_Summary.Visible = false;
                 chk_Summary.Checked = false;
+                lbl_NomCode.Visible = false;
+                cmb_NomCodes1.Visible = false;
 
 
             }
@@ -725,6 +731,8 @@ namespace Odin.Warehouse.History
                 chk_groupbybatch.Visible = false;
                 chk_Summary.Visible = false;
                 chk_Summary.Checked = false;
+                lbl_NomCode.Visible = false;
+                cmb_NomCodes1.Visible = false;
 
             }
             else if (dn_Pages.SelectedPage == pg_Tracing)
@@ -759,6 +767,8 @@ namespace Odin.Warehouse.History
                 chk_groupbybatch.Visible = false;
                 chk_Summary.Visible = false;
                 chk_Summary.Checked = false;
+                lbl_NomCode.Visible = false;
+                cmb_NomCodes1.Visible = false;
 
             }
             else
@@ -795,6 +805,8 @@ namespace Odin.Warehouse.History
                 chk_groupbybatch.Visible = false;
                 chk_Summary.Visible = false;
                 chk_Summary.Checked = false;
+                lbl_NomCode.Visible = false;
+                cmb_NomCodes1.Visible = false;
 
             }
         }
