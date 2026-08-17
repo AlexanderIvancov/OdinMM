@@ -307,7 +307,7 @@
             this.btn_Feeder.Size = new System.Drawing.Size(54, 54);
             this.btn_Feeder.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btn_Feeder.TabIndex = 272;
-            this.btn_Feeder.Values.Image = global::Odin.Global_Resourses.Cat48x48;
+            this.btn_Feeder.Values.Image = global::Odin.Global_Resourses.feeder48x48;
             this.btn_Feeder.Values.ImageTransparentColor = System.Drawing.Color.White;
             this.btn_Feeder.Values.Text = "";
             this.btn_Feeder.Click += new System.EventHandler(this.btn_Feeder_Click);

@@ -218,9 +218,10 @@ namespace Odin.CustomControls
                 }
             }
             //Rear feeders
-          
-           // bcount = _feedercountrear / 2;
-            count = 1;
+
+            // bcount = _feedercountrear / 2;
+            int rearOffset = (_Machine == "M3") ? 32 : 0;
+            count = 1 + rearOffset;
             countrow = _feedercountrear <= 15 ? 1 : 2;
             buttonheigh = (Int32)pn_rear.Height / countrow - 2;
             bcount = _feedercountrear / countrow; // 2;
@@ -236,8 +237,9 @@ namespace Odin.CustomControls
 
             //Rear tray
 
-           // bcount = _traycountrear / 2;
-            count = 1;
+            // bcount = _traycountrear / 2;
+            int trayOffset = ((LineId == 1) && _Machine == "M3") ? 100 : 0;
+            count = 1  + trayOffset;
             countrow = _traycountrear <= 15 ? 1 : 2;
             bcount = _traycountrear / countrow;
             buttonheigh = (Int32)pn_rear.Height / countrow - 2;

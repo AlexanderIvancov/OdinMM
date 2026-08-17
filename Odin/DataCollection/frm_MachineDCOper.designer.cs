@@ -234,6 +234,7 @@
             this.btn_ClearOvenCheck.TabIndex = 288;
             this.btn_ClearOvenCheck.Values.Image = global::Odin.Global_Resourses.clear;
             this.btn_ClearOvenCheck.Values.Text = "";
+            this.btn_ClearOvenCheck.Visible = false;
             this.btn_ClearOvenCheck.Click += new System.EventHandler(this.btn_ClearOvenCheck_Click);
             // 
             // btn_OvenCheck
@@ -270,6 +271,7 @@
             this.btn_ClearPaste.TabIndex = 285;
             this.btn_ClearPaste.Values.Image = global::Odin.Global_Resourses.clear;
             this.btn_ClearPaste.Values.Text = "";
+            this.btn_ClearPaste.Visible = false;
             this.btn_ClearPaste.Click += new System.EventHandler(this.btn_ClearPaste_Click);
             // 
             // btn_PasteProfile
@@ -294,6 +296,7 @@
             this.btn_ClearOven.TabIndex = 283;
             this.btn_ClearOven.Values.Image = global::Odin.Global_Resourses.clear;
             this.btn_ClearOven.Values.Text = "";
+            this.btn_ClearOven.Visible = false;
             this.btn_ClearOven.Click += new System.EventHandler(this.btn_ClearOven_Click);
             // 
             // btn_ClearProg
@@ -306,6 +309,7 @@
             this.btn_ClearProg.TabIndex = 282;
             this.btn_ClearProg.Values.Image = global::Odin.Global_Resourses.clear;
             this.btn_ClearProg.Values.Text = "";
+            this.btn_ClearProg.Visible = false;
             this.btn_ClearProg.Click += new System.EventHandler(this.btn_ClearProg_Click);
             // 
             // lbl_OvenProfile

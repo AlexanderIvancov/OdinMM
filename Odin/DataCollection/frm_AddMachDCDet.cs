@@ -44,8 +44,7 @@ namespace Odin.DataCollection
 
         public string Feeder
         {
-            get { return txt_Feeder.Text; }
-
+            get { return string.IsNullOrEmpty(txt_Feeder.Text) ? "" : txt_Feeder.Text; }
             set { txt_Feeder.Text = value; }
 
         }

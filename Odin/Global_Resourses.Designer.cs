@@ -2224,6 +2224,16 @@ namespace Odin {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap feeder48x48 {
+            get {
+                object obj = ResourceManager.GetObject("feeder48x48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap fifo24x24 {
             get {
                 object obj = ResourceManager.GetObject("fifo24x24", resourceCulture);

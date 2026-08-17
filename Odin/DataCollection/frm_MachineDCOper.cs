@@ -227,22 +227,22 @@ namespace Odin.DataCollection
 
         public void SetCellsColorMaterial()
         {
-            foreach (DataGridViewRow row in this.gv_Materials.Rows)
-            {
-                switch (Convert.ToInt32(row.Cells["cn_stencilstate"].Value))
-                {
-                    case -1: //OK
-                        foreach (DataGridViewCell cell in row.Cells)
-                            cell.Style.BackColor = Color.GreenYellow;
-                        break;
-                    case 0: //NOT OK
-                        foreach (DataGridViewCell cell in row.Cells)
-                            cell.Style.BackColor = Color.Tomato;
-                        break;
-                    default:
+            //foreach (DataGridViewRow row in this.gv_Materials.Rows)
+            //{
+            //    switch (Convert.ToInt32(row.Cells["cn_stencilstate"].Value))
+            //    {
+            //        case -1: //OK
+            //            foreach (DataGridViewCell cell in row.Cells)
+            //                cell.Style.BackColor = Color.GreenYellow;
+            //            break;
+            //        case 0: //NOT OK
+            //            foreach (DataGridViewCell cell in row.Cells)
+            //                cell.Style.BackColor = Color.Tomato;
+            //            break;
+            //        default:
 
-                        break;
-                }
+            //            break;
+            //    }
                 //if (Convert.ToInt32(row.Cells["cn_islast"].Value) == -1)
                 //    row.DefaultCellStyle.BackColor = Color.Gold;
                 //    //foreach (DataGridViewCell cell in row.Cells)
@@ -255,7 +255,7 @@ namespace Odin.DataCollection
 
                 //if (Convert.ToInt32(row.Cells["cn_headid"].Value) == 0)
                 //    row.Cells["cn_index"].Style.BackColor = Color.Orange;
-            }
+            //}
         }
 
         public void FillList(int _launchid, int _topbot)
@@ -744,14 +744,41 @@ namespace Odin.DataCollection
                     string _res = "";
 
                     _res = DCBll.AddDataCollectionMachMaterial(WorkerId, _serial, LaunchId, TopBot);
+
                     if (DCBll.SuccessId == 1)
+                    {
                         FillMaterialsByLaunch(LaunchId);
+                    }
                     else
                     {
-                        System.Media.SystemSounds.Exclamation.Play();
-                        frm_Error frm1 = new frm_Error();
-                        frm1.HeaderText = "Something wrong! " + _res;
-                        DialogResult result = frm1.ShowDialog();
+                        if (!_res.Contains("already registered") && !_res.Contains("not such RM label") && !_res.Contains("Worker or launch"))
+                        {
+                            int authWorkerId = AuthorizeMaterialScan();
+
+                            if (authWorkerId != 0)
+                            {
+                                _res = DCBll.AddDataCollectionMachMaterial(authWorkerId, _serial, LaunchId, TopBot, true);
+
+                                if (DCBll.SuccessId == 1)
+                                {
+                                    FillMaterialsByLaunch(LaunchId);
+                                }
+                                else
+                                {
+                                    System.Media.SystemSounds.Exclamation.Play();
+                                    frm_Error frm1 = new frm_Error();
+                                    frm1.HeaderText = "Something wrong! " + _res;
+                                    DialogResult result = frm1.ShowDialog();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            System.Media.SystemSounds.Exclamation.Play();
+                            frm_Error frm1 = new frm_Error();
+                            frm1.HeaderText = "Something wrong! " + _res;
+                            DialogResult result = frm1.ShowDialog();
+                        }
                     }
 
                     txt_Oper.Text = "";
@@ -827,7 +854,7 @@ namespace Odin.DataCollection
 
                 if (result == DialogResult.OK)
                 {
-                    DCBll.SaveControlCardDet(0, HeadId, frm.Feeder, frm.OldLabel, frm.Label, frm.Serial, WorkerId);
+                    DCBll.SaveControlCardDet(0, HeadId, frm.Feeder ?? "", frm.OldLabel, frm.Label, frm.Serial, WorkerId);
                     FillList(LaunchId, TopBot);
                 }
 
@@ -917,8 +944,135 @@ namespace Odin.DataCollection
             }
         }
 
+        private int AuthorizeMaterialScan()
+        {
+            frm_cmbTextPDA frm = new frm_cmbTextPDA();
+            frm.LabelText = "Material not in SetUp!\nScan Master/Technologist RFID to authorize:";
+            frm.HeaderText = "Authorization required";
+            DialogResult result = frm.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                SqlConnection sqlConn = new SqlConnection(sConnStr);
+                sqlConn.Open();
+                DataSet ds1 = new DataSet();
+
+                SqlDataAdapter adapter1 = new SqlDataAdapter(
+                    "execute sp_SelectWorkerSN @rfid = '" + frm.FormText + "'", sqlConn);
+
+                adapter1.Fill(ds1);
+                DataTable dt1 = ds1.Tables[0];
+
+                if (dt1.Rows.Count > 0)
+                {
+                    foreach (DataRow dr1 in dt1.Rows)
+                    {
+                        if (Convert.ToInt32(dr1["isactive"]) == -1)
+                        {
+                            string _userlogin = dr1["userlogin"].ToString();
+
+                            if (DAL.IsUserInGroup(_userlogin, "RIngen") == true
+                                || _userlogin.Equals("NLukashevich", StringComparison.OrdinalIgnoreCase)
+                                || _userlogin.Equals("ALisakovich", StringComparison.OrdinalIgnoreCase)
+                                || _userlogin.Equals("AKrivonosov", StringComparison.OrdinalIgnoreCase)) 
+                            {
+                                int _id = Convert.ToInt32(dr1["id"].ToString());
+                                sqlConn.Close();
+                                return _id; 
+                            }
+                            else
+                            {
+                                System.Media.SystemSounds.Exclamation.Play();
+                                frm_Error frm1 = new frm_Error();
+                                frm1.HeaderText = "Access denied! Only Masters and Technologists can authorize this.";
+                                DialogResult result1 = frm1.ShowDialog();
+                                sqlConn.Close();
+                                return 0;
+                            }
+                        }
+                    }
+                }
+
+                System.Media.SystemSounds.Exclamation.Play();
+                frm_Error frmErr = new frm_Error();
+                frmErr.HeaderText = "Wrong scanning! Your rfid is not correct!";
+                DialogResult resErr = frmErr.ShowDialog();
+                sqlConn.Close();
+            }
+            return 0;
+        }
+
+        private bool AuthorizeReplacement(string profileName)
+        {
+            frm_cmbTextPDA frm = new frm_cmbTextPDA();
+            frm.LabelText = profileName + " already exists!\nScan master ID to authorize replacement:";
+            frm.HeaderText = "Master authorization required";
+            DialogResult result = frm.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                SqlConnection sqlConn = new SqlConnection(sConnStr);
+                sqlConn.Open();
+                DataSet ds1 = new DataSet();
+
+                SqlDataAdapter adapter1 =
+                    new SqlDataAdapter(
+                        "execute sp_SelectWorkerSN @rfid = '" + frm.FormText + "'", sqlConn);
+
+                adapter1.Fill(ds1);
+
+                DataTable dt1 = ds1.Tables[0];
+
+                if (dt1.Rows.Count > 0)
+                {
+                    foreach (DataRow dr1 in dt1.Rows)
+                    {
+                        if (Convert.ToInt32(dr1["isactive"]) == -1)
+                        {
+                            string _userlogin = dr1["userlogin"].ToString();
+
+                            if (_userlogin.Equals("AKrivonosov", StringComparison.OrdinalIgnoreCase)
+                                || _userlogin.Equals("NLukashevich", StringComparison.OrdinalIgnoreCase)
+                                || _userlogin.Equals("ALisakovich", StringComparison.OrdinalIgnoreCase))
+                            {
+                                sqlConn.Close();
+                                return true;
+                            }
+                            else
+                            {
+                                System.Media.SystemSounds.Exclamation.Play();
+                                frm_Error frm2 = new frm_Error();
+                                frm2.HeaderText = "Access denied! Only Masters can authorize replacement of " + profileName + ".";
+                                DialogResult result2 = frm2.ShowDialog();
+                                sqlConn.Close();
+                                return false;
+                            }
+                        }
+                    }
+                }
+
+                // Если RFID не найден
+                System.Media.SystemSounds.Exclamation.Play();
+                frm_Error frm1 = new frm_Error();
+                frm1.HeaderText = "Wrong scanning! Your rfid is not correct!";
+                DialogResult result1 = frm1.ShowDialog();
+
+                sqlConn.Close();
+            }
+
+            txt_Oper.Text = "";
+            txt_Oper.Focus();
+            return false;
+        }
+
+
         private void btn_MounterProgram_Click(object sender, EventArgs e)
         {
+            if (Mounter != 0)
+            {
+                if (!AuthorizeReplacement("Mounter profile")) return;
+            }
+
             frm_cmbTextPDA frm = new frm_cmbTextPDA();
             frm.LabelText = "Scan your rfid: ";
             frm.HeaderText = "Scan your rfid: ";
@@ -987,6 +1141,11 @@ namespace Odin.DataCollection
 
         private void btn_OvenProfile_Click(object sender, EventArgs e)
         {
+            if (TermProfile != 0)
+            {
+                if (!AuthorizeReplacement("Oven profile")) return;
+            }
+
             frm_cmbTextPDA frm = new frm_cmbTextPDA();
             frm.LabelText = "Scan your rfid: ";
             frm.HeaderText = "Scan your rfid: ";
@@ -1061,6 +1220,11 @@ namespace Odin.DataCollection
 
         private void btn_PasteProfile_Click(object sender, EventArgs e)
         {
+            if (PasteState != 0)
+            {
+                if (!AuthorizeReplacement("Paste check")) return;
+            }
+
             string _userlogin = "";
             frm_cmbTextPDA frm = new frm_cmbTextPDA();
             frm.LabelText = "Scan your rfid: ";
@@ -1180,6 +1344,11 @@ namespace Odin.DataCollection
 
         private void btn_OvenCheck_Click(object sender, EventArgs e)
         {
+            if (OvenCheck != 0)
+            {
+                if (!AuthorizeReplacement("Placement check")) return;
+            }
+
             string _userlogin = "";
             frm_cmbTextPDA frm = new frm_cmbTextPDA();
             frm.LabelText = "Scan your rfid: ";

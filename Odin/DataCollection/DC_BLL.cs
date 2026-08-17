@@ -702,7 +702,7 @@ namespace Odin.DataCollection
             //catch { }           
         }
 
-        public string AddDataCollectionMachMaterial(int WorkerId, string Serial, int LaunchId, int TopBot)
+        public string AddDataCollectionMachMaterial(int WorkerId, string Serial, int LaunchId, int TopBot, bool Override = false)
         {
             string _res = "";
 
@@ -710,25 +710,25 @@ namespace Odin.DataCollection
             SqlCommand sqlComm = new SqlCommand("sp_AddDataCollectionMachMaterial", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
 
-
             sqlComm.Parameters.AddWithValue("@workerid", WorkerId);
             sqlComm.Parameters.AddWithValue("@serial", Serial);
             sqlComm.Parameters.AddWithValue("@launchid", LaunchId);
             sqlComm.Parameters.Add("@label", SqlDbType.Int).Direction = ParameterDirection.Output;
             sqlComm.Parameters.AddWithValue("@topbot", TopBot);
+
+            // Добавляем новый параметр
+            sqlComm.Parameters.AddWithValue("@override", Override ? 1 : 0);
+
             sqlComm.Parameters.Add("@successid", SqlDbType.Int).Direction = ParameterDirection.Output;
             sqlComm.Parameters.Add("@success", SqlDbType.NVarChar, 150).Direction = ParameterDirection.Output;
 
-            //try
-            //{
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             MaterialLabel = Convert.ToInt32(sqlComm.Parameters["@label"].Value);
             SuccessId = Convert.ToInt32(sqlComm.Parameters["@successid"].Value);
             _res = sqlComm.Parameters["@success"].Value.ToString();
             sqlConn.Close();
-            //}
-            //catch { }
+
             return _res;
         }
 

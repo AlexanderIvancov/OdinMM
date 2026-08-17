@@ -4540,6 +4540,7 @@
     <Content Include="Resourses\events.png" />
     <Content Include="Resourses\factory.png" />
     <Content Include="Resourses\certificates.png" />
+    <Content Include="Resourses\feeder48x48.png" />
     <Content Include="Resourses\Finish_small.png" />
     <Content Include="Resourses\flag_finish.png" />
     <Content Include="Resourses\hourglass_go.png" />
