@@ -924,7 +924,9 @@ namespace Odin.DataCollection
             string currentUser = System.Environment.UserName;
             if ((DAL.IsUserInGroup(currentUser, "RIngen") == true
                 || currentUser.Equals("NLukashevich", StringComparison.OrdinalIgnoreCase)
-                || currentUser.Equals("ALisakovich", StringComparison.OrdinalIgnoreCase))
+                || currentUser.Equals("ALisakovich", StringComparison.OrdinalIgnoreCase)
+                || currentUser.Equals("ABelaya", StringComparison.OrdinalIgnoreCase)
+                || currentUser.Equals("VKuprienko", StringComparison.OrdinalIgnoreCase))
                 && globClass.ConfirmMessage("Are you sure you want to clear mounter profile?", "Press OK to clear", "Mounter profile deleting") == true)
             {
                 DCBll.SetControlCardHeaderMount(HeadId, Worker, 0);
@@ -1103,7 +1105,9 @@ namespace Odin.DataCollection
 
                             if (DAL.IsUserInGroup(_userlogin, "RIngen") == true
                                 || _userlogin.Equals("NLukashevich", StringComparison.OrdinalIgnoreCase)
-                                || _userlogin.Equals("ALisakovich", StringComparison.OrdinalIgnoreCase))
+                                || _userlogin.Equals("ALisakovich", StringComparison.OrdinalIgnoreCase)
+                                || _userlogin.Equals("ABelaya", StringComparison.OrdinalIgnoreCase)
+                                || _userlogin.Equals("VKuprienko", StringComparison.OrdinalIgnoreCase))
                             {
                                 DCBll.SetControlCardHeaderMount(HeadId, _Worker, -1);
                                 FillHeader(HeadId);
@@ -1176,7 +1180,9 @@ namespace Odin.DataCollection
 
                             if (DAL.IsUserInGroup(_userlogin, "RIngen") == true
                                 || _userlogin.Equals("NLukashevich", StringComparison.OrdinalIgnoreCase)
-                                || _userlogin.Equals("ALisakovich", StringComparison.OrdinalIgnoreCase))
+                                || _userlogin.Equals("ALisakovich", StringComparison.OrdinalIgnoreCase)
+                                || _userlogin.Equals("ABelaya", StringComparison.OrdinalIgnoreCase)
+                                || _userlogin.Equals("VKuprienko", StringComparison.OrdinalIgnoreCase))
                             {
                                 DCBll.SetControlCardHeaderTerm(HeadId, _Worker, -1);
                                 FillHeader(HeadId);
