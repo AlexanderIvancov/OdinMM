@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_AddBOM));
+            this.chk_Revision = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.btn_Cancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_OK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.cmb_Articles1 = new Odin.CMB_Components.Articles.cmb_Articles();
@@ -59,6 +60,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // chk_Revision
+            // 
+            this.chk_Revision.Checked = true;
+            this.chk_Revision.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk_Revision.Location = new System.Drawing.Point(141, 75);
+            this.chk_Revision.Name = "chk_Revision";
+            this.chk_Revision.Size = new System.Drawing.Size(44, 20);
+            this.chk_Revision.TabIndex = 20;
+            this.chk_Revision.Values.Text = "Alteration";
+            this.chk_Revision.Visible = true;
+            // 
             // 
             // btn_Cancel
             // 
@@ -243,6 +256,7 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.chk_Revision);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel10);
             this.kryptonPanel1.Controls.Add(this.txt_Comments);
             this.kryptonPanel1.Controls.Add(this.txt_Positions);
@@ -390,6 +404,7 @@
 
         #endregion
 
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_Revision;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Cancel;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_OK;
         private CMB_Components.Articles.cmb_Articles cmb_Articles1;
