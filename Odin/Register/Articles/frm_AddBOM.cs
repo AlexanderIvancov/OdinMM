@@ -81,6 +81,17 @@ namespace Odin.Register.Articles
                 chk_Use.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
             }
         }
+        public int Revision
+        {
+            get
+            {
+                return chk_Revision.CheckState == CheckState.Checked ? -1 : 0;
+            }
+            set
+            {
+                chk_Revision.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
+            }
+        }
         public string Comments
         {
             get { return txt_Comments.Text; }
@@ -204,6 +215,10 @@ namespace Odin.Register.Articles
                 }
                 
             }
+        }
+
+        private void chk_Revision_CheckedChanged(object sender, EventArgs e)
+        {
         }
 
         private void buttonSpecAny2_Click(object sender, EventArgs e)

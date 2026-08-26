@@ -435,6 +435,7 @@ namespace Odin.Register.Articles
             frm.Using = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_using"].Value);
             frm.StageId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_stageid"].Value);
             frm.Positions = gv_List.CurrentRow.Cells["cn_positions"].Value.ToString();
+            frm.Revision = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_revision"].Value);
 
             DialogResult result = frm.ShowDialog();
             int isUsing = frm.Using;// == -1 ? true : false;
@@ -446,7 +447,7 @@ namespace Odin.Register.Articles
                 Reg.EditBOMLine(Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value),
                     frm.IdCST, frm.Number, frm.Qty, frm.Using,
                     frm.Comments, frm.SpoilConst, frm.SpoilPerc, 
-                    frm.StageId, frm.Positions);
+                    frm.StageId, frm.Positions, frm.Revision);
 
                 //DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 //var dir = Helper.SaveDirection(gv_List);
@@ -654,7 +655,7 @@ namespace Odin.Register.Articles
             {
                 var insertedId = Reg.AddBOMLine(frm.IdCSE, frm.IdCST, frm.Number, frm.Qty, frm.Using,
                                                     frm.Comments, frm.SpoilConst, frm.SpoilPerc, frm.StageId,
-                                                    frm.Positions);
+                                                    frm.Positions, frm.Revision);
                 //DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 //var dir = Helper.SaveDirection(gv_List);
 
@@ -690,7 +691,7 @@ namespace Odin.Register.Articles
 
                 var insertedId = Reg.AddBOMLine(frm.IdCSE, frm.IdCST, frm.Number, frm.Qty, frm.Using,
                                                  frm.Comments, frm.SpoilConst, frm.SpoilPerc, frm.StageId,
-                                                 frm.Positions);
+                                                 frm.Positions, frm.Revision);
                 //DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 //var dir = Helper.SaveDirection(gv_List);
 

@@ -215,7 +215,7 @@ namespace Odin.Register.Articles
             if (result == DialogResult.OK)
             {
                 var insertedId = BLL.AddBOMLine(frm.IdCSE, frm.IdCST, frm.Number, frm.Qty, frm.Using,
-                                                    frm.Comments, frm.SpoilConst, frm.SpoilPerc, frm.StageId, frm.Positions);
+                                                    frm.Comments, frm.SpoilConst, frm.SpoilPerc, frm.StageId, frm.Positions, frm.Revision);
                 var id = BLL.IdCstById(insertedId);
                 AddNodeByValue(ArtId);
                 EnableDisableButtons();
@@ -241,7 +241,7 @@ namespace Odin.Register.Articles
             if (result == DialogResult.OK)
             {
                 var insertedId = BLL.AddBOMLine(frm.IdCSE, frm.IdCST, frm.Number, frm.Qty, frm.Using,
-                                                frm.Comments, frm.SpoilConst, frm.SpoilPerc, frm.StageId, frm.Positions);
+                                                frm.Comments, frm.SpoilConst, frm.SpoilPerc, frm.StageId, frm.Positions, frm.Revision);
                 var currentNode = tv_BOM.CurrentNode;
 
 
@@ -307,7 +307,7 @@ namespace Odin.Register.Articles
                                             Convert.ToInt32(tv_BOM.CurrentRow.Cells["cn_num"].Value));
 
                 var insertedId = BLL.AddBOMLine(frm.IdCSE, frm.IdCST, frm.Number, frm.Qty, frm.Using,
-                                                 frm.Comments, frm.SpoilConst, frm.SpoilPerc, frm.StageId, frm.Positions);
+                                                 frm.Comments, frm.SpoilConst, frm.SpoilPerc, frm.StageId, frm.Positions, frm.Revision);
 
                 var currentNode = tv_BOM.CurrentNode;
                 int deleteNodeLevel = currentNode.Level;
@@ -357,6 +357,8 @@ namespace Odin.Register.Articles
             frm.SpoilConst = spoilConst ?? 0;
             frm.SpoilPerc = Convert.ToDouble(tv_BOM.CurrentRow.Cells["cn_spoilnorm"].Value ?? 0);
             frm.Using = Convert.ToInt32(tv_BOM.CurrentRow.Cells["cn_using"].Value);
+            frm.Revision = Convert.ToInt32(tv_BOM.CurrentRow.Cells["cn_revision"].Value);
+
             DialogResult result = frm.ShowDialog();
             int isUsing = frm.Using;// == -1 ? true : false;
 
@@ -370,13 +372,12 @@ namespace Odin.Register.Articles
 
                 BLL.EditBOMLine(Convert.ToInt32(tv_BOM.CurrentRow.Cells["cn_id"].Value),
                     frm.IdCST, frm.Number, frm.Qty, frm.Using,
-                    frm.Comments, frm.SpoilConst, frm.SpoilPerc, frm.StageId, frm.Positions);
+                    frm.Comments, frm.SpoilConst, frm.SpoilPerc, frm.StageId, frm.Positions, frm.Revision);
 
 
 
                 var newNode = new TreeGridNode();
-                newNode = HelperTreeGrid.InsertNode(deleteNodeLevel == 1 ? tv_BOM.Nodes : parentNode.Nodes,
-                    tv_BOM);
+                newNode = HelperTreeGrid.InsertNode(deleteNodeLevel == 1 ? tv_BOM.Nodes : parentNode.Nodes, tv_BOM);
 
                 SetNodeByFormValues(frm, newNode, _ID, isUsing);
 

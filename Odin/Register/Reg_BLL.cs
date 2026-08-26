@@ -449,7 +449,7 @@ namespace Odin.Register
         }
 
         public int AddBOMLine(int IdCSE, int IdCST, int LineNumber, decimal Quantity,
-           int Using, string Comments, double SpoilConst, double SpoilNorm, int StageID, string Positions)
+           int Using, string Comments, double SpoilConst, double SpoilNorm, int StageID, string Positions, int Revision)
         {
             try
             {
@@ -466,6 +466,7 @@ namespace Odin.Register
                                         new SqlParameter("@SpoilNorm", SqlDbType.Float) {Value = SpoilNorm},
                                         new SqlParameter("@StageID", SqlDbType.Int) {Value = StageID},
                                         new SqlParameter("@Positions", SqlDbType.NVarChar) {Value = Positions},
+                                        new SqlParameter("@Revision", SqlDbType.Int) {Value = Revision},
                                         new SqlParameter("@InsertedID", SqlDbType.BigInt) {Direction = ParameterDirection.Output}
                                     };
 
@@ -478,7 +479,7 @@ namespace Odin.Register
         }
 
         public void EditBOMLine(int Id, int IdCST, int LineNumber, decimal Quantity,
-                                int Using, string Comments, double SpoilConst, double SpoilNorm, int StageID, string Positions)
+                                int Using, string Comments, double SpoilConst, double SpoilNorm, int StageID, string Positions, int Revision)
         {
             var sqlparams = new List<SqlParameter>
                                     {
@@ -491,7 +492,8 @@ namespace Odin.Register
                                         new SqlParameter("@SpoilConst", SqlDbType.Float) {Value = SpoilConst},
                                         new SqlParameter("@SpoilNorm", SqlDbType.Float) {Value = SpoilNorm},
                                         new SqlParameter("@StageID", SqlDbType.Int) {Value = StageID},
-                                        new SqlParameter("@Positions", SqlDbType.NVarChar) {Value = Positions}
+                                        new SqlParameter("@Positions", SqlDbType.NVarChar) {Value = Positions},
+                                        new SqlParameter("@Revision", SqlDbType.Int) {Value = Revision}
                                     };
             Helper.ExecuteSP("sp_EditBOMLine", sqlparams.ToArray());
 

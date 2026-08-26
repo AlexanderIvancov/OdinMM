@@ -67,6 +67,7 @@
             this.cn_user = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.cn_id = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.cn_using = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
+            this.cn_revision = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
             this.cn_uniquerow = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.cn_stageid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
@@ -244,6 +245,7 @@
             this.cn_user,
             this.cn_id,
             this.cn_using,
+            this.cn_revision,
             this.cn_uniquerow,
             this.cn_stageid});
             this.tv_BOM.ContextMenuStrip = this.mnu_Lines;
@@ -464,6 +466,17 @@
             this.cn_using.TrueValue = null;
             this.cn_using.Width = 40;
             // 
+            // cn_revision
+            // 
+            this.cn_revision.DefaultCellStyle = dataGridViewCellStyle2;
+            this.cn_revision.FalseValue = null;
+            this.cn_revision.FillWeight = 40F;
+            this.cn_revision.HeaderText = "Alteration";
+            this.cn_revision.IndeterminateValue = null;
+            this.cn_revision.Name = "cn_revision";
+            this.cn_revision.TrueValue = null;
+            this.cn_revision.Width = 40;
+            // 
             // cn_uniquerow
             // 
             this.cn_uniquerow.HeaderText = "uniquerow";
@@ -541,6 +554,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn cn_user;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn cn_id;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn cn_using;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn cn_revision;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn cn_uniquerow;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_stageid;
     }
