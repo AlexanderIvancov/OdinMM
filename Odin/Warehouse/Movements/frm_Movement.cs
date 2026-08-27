@@ -8,6 +8,7 @@ using Odin.Tools;
 using Odin.Warehouse.Deliveries;
 using Odin.Warehouse.StockOut.Reports;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
@@ -45,6 +46,7 @@ namespace Odin.Warehouse.Movements
         public string CellValue = "";
         PopupWindowHelper PopupHelper = null;
         Plan_BLL PlanBll = new Plan_BLL();
+        PrinterLabels PrintLabels = new PrinterLabels();
 
         bool _showingModal = false;
 
@@ -891,6 +893,61 @@ namespace Odin.Warehouse.Movements
                 //                                                   TaskDialogButtons.OK);
                 //    }
                 //}
+        }
+
+        private void btn_PrintNew_Click(object sender, EventArgs e)
+        {
+            frm_Print frm = new frm_Print();
+            frm.cmb_LabPrinter1.ShowDefaults();
+            DialogResult result = frm.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                PrintLabels.PrinterIp = frm.IP_Address;
+                PrintLabels.PrinterDPI = frm.Printer_DPI;
+
+                if (gv_Dets.SelectedRows.Count > 0)
+                {
+
+                    foreach (DataGridViewRow row in this.gv_Dets.SelectedRows)
+                    {
+                        if (Convert.ToInt32(row.Cells["cn_labelto"].Value) != 0
+                            && DAL.CheckMSL(Convert.ToInt32(row.Cells["cn_dartid"].Value)) != "0")
+                        {
+                            // MessageBox.Show(Convert.ToInt32(row.Cells["cn_label"].Value).ToString());
+                            var sqlparamsfields = new List<SqlParameter>()
+                        {
+                            new SqlParameter("@id",SqlDbType.Int) {Value = Convert.ToInt32(row.Cells["cn_labelto"].Value)},
+                            new SqlParameter("@qty",SqlDbType.Float) {Value = Convert.ToDouble(row.Cells["cn_dqtyoper"].Value)},
+                            new SqlParameter("@labelqty",SqlDbType.Int) {Value = frm.LabelQty}
+                        };
+                            if (frm.LabelQty != 0)
+                                PrintLabels.PrintLabel(PrintLabels.LabelConstructor(1, "sp_SelectStockLabelDetsPrint", sqlparamsfields.ToArray()), 1/*frm.LabelQty*/);
+                            //Thread.Sleep(2000);
+                        }
+                    }
+                }
+                else
+                {
+                    if (Convert.ToInt32(gv_Dets.CurrentRow.Cells["cn_labelto"].Value) != 0
+                            && DAL.CheckMSL(Convert.ToInt32(gv_Dets.CurrentRow.Cells["cn_dartid"].Value)) != "0")
+                    {
+                        // MessageBox.Show(Convert.ToInt32(row.Cells["cn_label"].Value).ToString());
+                        var sqlparamsfields = new List<SqlParameter>()
+                        {
+                            new SqlParameter("@id",SqlDbType.Int) {Value = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_labelto"].Value)},
+                            new SqlParameter("@qty",SqlDbType.Float) {Value = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_dqtyoper"].Value)},
+                            new SqlParameter("@labelqty",SqlDbType.Int) {Value = frm.LabelQty}
+                        };
+                        if (frm.LabelQty != 0)
+                            PrintLabels.PrintLabel(PrintLabels.LabelConstructor(1, "sp_SelectStockLabelDetsPrint", sqlparamsfields.ToArray()), 1/*frm.LabelQty*/);
+                        //Thread.Sleep(2000);
+                    }
+                }
+
+            }
+            else
+            { }
         }
 
         private void cmb_Batches2_BatchChanged(object sender)

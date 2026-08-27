@@ -132,6 +132,7 @@
             this.btn_ClearList = new System.Windows.Forms.ToolStripButton();
             this.btn_Excel = new System.Windows.Forms.ToolStripButton();
             this.kryptonPanel3 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.chk_Available = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonLabel20 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txt_QtyOfProduct = new Owf.Controls.NumericTetxBox();
             this.buttonSpecAny2 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
@@ -178,7 +179,7 @@
             this.btn_Delete = new System.Windows.Forms.ToolStripButton();
             this.btn_IntoExcelDets = new System.Windows.Forms.ToolStripButton();
             this.kryptonHeader3 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
-            this.chk_Available = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
+            this.btn_PrintNew = new System.Windows.Forms.ToolStripButton();
             this.mnu_Lines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_List)).BeginInit();
             this.mnu_LinesDets.SuspendLayout();
@@ -1210,6 +1211,16 @@
             this.kryptonPanel3.Size = new System.Drawing.Size(901, 72);
             this.kryptonPanel3.TabIndex = 1;
             // 
+            // chk_Available
+            // 
+            this.chk_Available.Checked = true;
+            this.chk_Available.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk_Available.Location = new System.Drawing.Point(241, 40);
+            this.chk_Available.Name = "chk_Available";
+            this.chk_Available.Size = new System.Drawing.Size(73, 20);
+            this.chk_Available.TabIndex = 248;
+            this.chk_Available.Values.Text = "Available";
+            // 
             // kryptonLabel20
             // 
             this.kryptonLabel20.Location = new System.Drawing.Point(530, 17);
@@ -1615,7 +1626,8 @@
             this.toolStripButton4,
             this.toolStripSeparator4,
             this.btn_Delete,
-            this.btn_IntoExcelDets});
+            this.btn_IntoExcelDets,
+            this.btn_PrintNew});
             this.bn_Dets.Location = new System.Drawing.Point(0, 149);
             this.bn_Dets.MoveFirstItem = this.toolStripButton1;
             this.bn_Dets.MoveLastItem = this.toolStripButton4;
@@ -1725,15 +1737,16 @@
             this.kryptonHeader3.Values.Heading = "Document details";
             this.kryptonHeader3.Values.Image = global::Odin.Global_Resourses.document;
             // 
-            // chk_Available
+            // btn_PrintNew
             // 
-            this.chk_Available.Checked = true;
-            this.chk_Available.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk_Available.Location = new System.Drawing.Point(241, 40);
-            this.chk_Available.Name = "chk_Available";
-            this.chk_Available.Size = new System.Drawing.Size(73, 20);
-            this.chk_Available.TabIndex = 248;
-            this.chk_Available.Values.Text = "Available";
+            this.btn_PrintNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_PrintNew.Image = global::Odin.Global_Resourses.Print_24x24;
+            this.btn_PrintNew.Name = "btn_PrintNew";
+            this.btn_PrintNew.RightToLeftAutoMirrorImage = true;
+            this.btn_PrintNew.Size = new System.Drawing.Size(23, 22);
+            this.btn_PrintNew.Text = "Delete";
+            this.btn_PrintNew.Click += new System.EventHandler(this.btn_PrintNew_Click);
+
             // 
             // frm_Movement
             // 
@@ -1936,5 +1949,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_placeid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_storagerules;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chk_Available;
+        private System.Windows.Forms.ToolStripButton btn_PrintNew;
     }
 }
