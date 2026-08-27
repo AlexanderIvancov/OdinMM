@@ -435,8 +435,7 @@ namespace Odin.Register.Articles
             frm.Using = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_using"].Value);
             frm.StageId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_stageid"].Value);
             frm.Positions = gv_List.CurrentRow.Cells["cn_positions"].Value.ToString();
-            frm.Revision = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_revision"].Value ?? 0);
-
+            frm.Revision = (gv_List.CurrentRow.Cells["cn_revision"].Value as int?) ?? 0;
             DialogResult result = frm.ShowDialog();
             int isUsing = frm.Using;// == -1 ? true : false;
 
