@@ -423,6 +423,7 @@ namespace Odin.Register.Articles
 
             var frm = new frm_AddBOM();
             var spoilConst = gv_List.CurrentRow.Cells["cn_spoilconst"].Value as double?;
+            object Revision = gv_List.CurrentRow.Cells["cn_revision"].Value;
 
             frm.IdCSE = Convert.ToInt32(cmb_Articles1.ArticleId);
             frm.Number = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_num"].Value);
@@ -435,7 +436,8 @@ namespace Odin.Register.Articles
             frm.Using = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_using"].Value);
             frm.StageId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_stageid"].Value);
             frm.Positions = gv_List.CurrentRow.Cells["cn_positions"].Value.ToString();
-            frm.Revision = (gv_List.CurrentRow.Cells["cn_revision"].Value as int?) ?? 0;
+            frm.Revision = (Revision == null || Revision == DBNull.Value) ? 0 : Convert.ToInt32(Revision);
+
             DialogResult result = frm.ShowDialog();
             int isUsing = frm.Using;// == -1 ? true : false;
 

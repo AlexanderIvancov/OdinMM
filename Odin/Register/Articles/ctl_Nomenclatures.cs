@@ -346,6 +346,7 @@ namespace Odin.Register.Articles
             var frm = new frm_AddBOM();
             var parentId = BLL.FindParent(Convert.ToInt32(tv_BOM.CurrentRow.Cells["cn_id"].Value));
             var spoilConst = tv_BOM.CurrentRow.Cells["cn_spoilconst"].Value as double?;
+            object Revision = tv_BOM.CurrentRow.Cells["cn_revision"].Value;
 
             frm.IdCSE = Convert.ToInt32(parentId.Rows[0]["IdCSE"]);
             frm.Number = Convert.ToInt32(tv_BOM.CurrentRow.Cells["cn_num"].Value);
@@ -357,7 +358,7 @@ namespace Odin.Register.Articles
             frm.SpoilConst = spoilConst ?? 0;
             frm.SpoilPerc = Convert.ToDouble(tv_BOM.CurrentRow.Cells["cn_spoilnorm"].Value ?? 0);
             frm.Using = Convert.ToInt32(tv_BOM.CurrentRow.Cells["cn_using"].Value);
-            frm.Revision = Convert.ToInt32(tv_BOM.CurrentRow.Cells["cn_revision"].Value);
+            frm.Revision = (Revision == null || Revision == DBNull.Value) ? 0 : Convert.ToInt32(Revision); 
 
             DialogResult result = frm.ShowDialog();
             int isUsing = frm.Using;// == -1 ? true : false;
