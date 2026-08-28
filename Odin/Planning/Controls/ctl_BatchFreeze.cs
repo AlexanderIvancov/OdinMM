@@ -160,7 +160,6 @@ namespace Odin.Planning.Controls
 
                     ToFreeze = Convert.ToDouble(row.Cells["cn_qty"].Value)
                                 - Convert.ToDouble(row.Cells["cn_reserved"].Value)
-                                //- Convert.ToDouble(row.Cells["cn_requested"].Value)
                                 - Convert.ToDouble(row.Cells["cn_given"].Value)
                                 + Convert.ToDouble(row.Cells["cn_returned"].Value);
                     //Color of available qty
@@ -169,34 +168,24 @@ namespace Odin.Planning.Controls
                         row.Cells["cn_article"].Style.Font = new Font(this.Font, FontStyle.Bold);
                         row.Cells["cn_article"].Style.ForeColor = Color.Red;
                     }
-
                     if (Math.Round(Convert.ToDouble((row.Cells["cn_nomenclature"].Value)), 3) == 0
                         && Convert.ToDouble(row.Cells["cn_qty"].Value) > 0)
-                    {
-                        //green
                         row.Cells["cn_nomenclature"].Style.BackColor = Color.LightGreen;
-                    }
                     else if (Math.Round(Convert.ToDouble((row.Cells["cn_nomenclature"].Value)), 3) > 0
                         && Convert.ToDouble(row.Cells["cn_qty"].Value) == 0)
-                    {
-                        //red
                         row.Cells["cn_nomenclature"].Style.BackColor = Color.LightPink;
-                    }
                     else if (Math.Round(Convert.ToDouble((row.Cells["cn_nomenclature"].Value)), 3) >
                        Math.Round(Convert.ToDouble(row.Cells["cn_qty"].Value), 3))
                     {
                         row.Cells["cn_nomenclature"].Style.Font = new Font(this.Font, FontStyle.Bold);
                         row.Cells["cn_nomenclature"].Style.ForeColor = Color.Red;
                     }
-                    else { }
-                    //if (Convert.ToDouble((row.Cells["cn_TheorRest"].Value)) < 0)
-                    //{
-                    //    row.Cells["cn_TheorRest"].Style.Font = new Font(this.Font, FontStyle.Bold);
-                    //    row.Cells["cn_TheorRest"].Style.ForeColor = Color.Red;
-                    //}
                     if (Convert.ToInt32(row.Cells["cn_isactive"].Value) == 0)
                         foreach (DataGridViewCell cell in row.Cells)
                             cell.Style.BackColor = Color.Gainsboro;
+                    if (Convert.ToInt32(row.Cells["cn_revision"].Value) == -1)
+                        foreach (DataGridViewCell cell in row.Cells)
+                            cell.Style.BackColor = Color.Aqua;
                 }
             }
             catch
