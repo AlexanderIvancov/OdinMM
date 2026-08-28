@@ -97,6 +97,7 @@
             this.cn_bomcomments = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_inbom = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_dnp = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.cn_revision = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_allanalogues = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_Analogs = new System.Windows.Forms.DataGridViewButtonColumn();
             this.mnu_Lines = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -449,7 +450,8 @@
             this.cn_inbom,
             this.cn_dnp,
             this.cn_allanalogues,
-            this.btn_Analogs});
+            this.btn_Analogs,
+            this.cn_revision});
             this.gv_List.ContextMenuStrip = this.mnu_Lines;
             this.gv_List.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_List.Location = new System.Drawing.Point(0, 72);
@@ -780,6 +782,13 @@
             this.cn_allanalogues.DataPropertyName = "allanalogs";
             this.cn_allanalogues.HeaderText = "Analogues";
             this.cn_allanalogues.Name = "cn_allanalogues";
+            // 
+            // cn_revision
+            // 
+            this.cn_revision.DataPropertyName = "Revision";
+            this.cn_revision.HeaderText = "Revision";
+            this.cn_revision.Name = "cn_revision";
+            this.cn_revision.Visible = false;
             // 
             // btn_Analogs
             // 
@@ -1137,6 +1146,7 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn cn_dnp;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_allanalogues;
         private System.Windows.Forms.DataGridViewButtonColumn btn_Analogs;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_revision;
         private System.Windows.Forms.ToolStripMenuItem mni_ShowAnalogStock;
     }
 }

@@ -197,6 +197,9 @@ namespace Odin.Planning.Controls
                     if (Convert.ToInt32(row.Cells["cn_isactive"].Value) == 0)
                         foreach (DataGridViewCell cell in row.Cells)
                             cell.Style.BackColor = Color.Gainsboro;
+                    if (Convert.ToInt32(row.Cells["cn_revision"].Value) == -1)
+                        foreach (DataGridViewCell cell in row.Cells)
+                            cell.Style.BackColor = Color.Aqua;
                 }
             }
             catch
