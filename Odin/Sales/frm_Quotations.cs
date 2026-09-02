@@ -170,45 +170,30 @@ namespace Odin.Sales
         {
             foreach (DataGridViewRow row in this.gv_List.Rows)
             {
-                //Yellow - in Progress
                 if (Convert.ToInt32(row.Cells["cn_stateid"].Value) == 6)
-                {
                     if (Convert.ToInt32(row.Cells["chk_issent"].Value) == 0)
                     foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        cell.Style.BackColor = Color.FromArgb(255, 255, 192);
-                    }
-                    else
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        cell.Style.BackColor = Color.Yellow;
-                    }
-                }
-                //Green - Accepted
+                        cell.Style.BackColor = Color.LemonChiffon;//LemonChiffon - Is sent
+                    else foreach (DataGridViewCell cell in row.Cells)
+                        cell.Style.BackColor = Color.Yellow;//Yellow - in Progress
                 if (Convert.ToInt32(row.Cells["cn_stateid"].Value) == 3)
-                {
+                    if (row.Cells["cn_pcbtext"].Value.ToString() == "No") 
+                        foreach (DataGridViewCell cell in row.Cells)
+                            cell.Style.BackColor = Color.LightCoral;//LightCoral - no PCB
+                    else foreach (DataGridViewCell cell in row.Cells)
+                        cell.Style.BackColor = Color.LightGreen;//Green - Accepted
+                if (Convert.ToInt32(row.Cells["cn_stateid"].Value) == 5)//Declined - WhiteSmoke
                     foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        cell.Style.BackColor = Color.FromArgb(192, 255, 192);
-                    }
-                }
-                //Declined - GREY
-                if (Convert.ToInt32(row.Cells["cn_stateid"].Value) == 5)
-                {
+                        cell.Style.BackColor = Color.WhiteSmoke;
+                if (Convert.ToInt32(row.Cells["cn_stateid"].Value) == 2)//Valuation - LightSkyBlue
                     foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        cell.Style.BackColor = Color.FromArgb(224, 224, 224);
-                    }
-                }
-                //Red - no PCB
-                if (row.Cells["cn_pcbtext"].Value.ToString() == "No"
-                    && Convert.ToInt32(row.Cells["cn_stateid"].Value) == 3)
-                {
+                        cell.Style.BackColor = Color.LightSkyBlue;
+                if (Convert.ToInt32(row.Cells["cn_stateid"].Value) == 4)//Cancelled - Beige
                     foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        cell.Style.BackColor = Color.LightCoral;
-                    }
-                }
+                        cell.Style.BackColor = Color.Beige;
+                if (Convert.ToInt32(row.Cells["cn_stateid"].Value) == 1)//In process - Salmon
+                    foreach (DataGridViewCell cell in row.Cells)
+                        cell.Style.BackColor = Color.LightSalmon;
             }
 
         }
