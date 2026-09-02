@@ -190,10 +190,10 @@ namespace Odin.Sales
                         cell.Style.BackColor = Color.LightSkyBlue;
                 if (Convert.ToInt32(row.Cells["cn_stateid"].Value) == 4)//Cancelled - Beige
                     foreach (DataGridViewCell cell in row.Cells)
-                        cell.Style.BackColor = Color.Beige;
+                        cell.Style.BackColor = Color.SandyBrown;
                 if (Convert.ToInt32(row.Cells["cn_stateid"].Value) == 1)//In process - Salmon
                     foreach (DataGridViewCell cell in row.Cells)
-                        cell.Style.BackColor = Color.LightSalmon;
+                        cell.Style.BackColor = Color.LightPink;
             }
 
         }
