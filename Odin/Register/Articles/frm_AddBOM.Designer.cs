@@ -64,7 +64,7 @@
             // chk_Revision
             // 
             this.chk_Revision.Checked = true;
-            this.chk_Revision.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk_Revision.CheckState = System.Windows.Forms.CheckState.Unchecked;
             this.chk_Revision.Location = new System.Drawing.Point(141, 75);
             this.chk_Revision.Name = "chk_Revision";
             this.chk_Revision.Size = new System.Drawing.Size(44, 20);
