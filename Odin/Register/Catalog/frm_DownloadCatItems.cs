@@ -141,13 +141,14 @@ namespace Odin.Register.Catalog
                     try
                     {
                         string valC = glob_Class.NES(myExcel.GetValue("C" + k)).Trim();
+                        string moqRaw = glob_Class.NES(myExcel.GetValue("T" + k)).Trim();
 
-                        if (glob_Class.NES(myExcel.GetValue("A" + k)).Trim() == "" && valC.StartsWith("Да "))
+                        if (glob_Class.NES(myExcel.GetValue("A" + k)).Trim() == "" && valC.StartsWith("Да ") && !moqRaw.Equals("Отказ", StringComparison.OrdinalIgnoreCase))
                         {
                             string article = valC.Substring(3).Trim();
                             string priceRaw = glob_Class.NES(myExcel.GetValue("AB" + k)).Trim().Replace("$", "").Replace("€", "").Replace(" ", "").Replace(" ", "").Replace(",", ".");
                             double unitPrice = glob_Class.NEN_Double(priceRaw);
-                            double moq = glob_Class.NEN_Double(glob_Class.ReplaceChar(myExcel.GetValue("T" + k), ",", "."));
+                            double moq = glob_Class.NEN_Double(glob_Class.ReplaceChar(moqRaw, ",", "."));
                             string manufacturer = glob_Class.NES(myExcel.GetValue("P" + k)).Trim();
                             string supplierComment = glob_Class.NES(myExcel.GetValue("L" + k)).Trim();
                             string currency = glob_Class.NES(myExcel.GetValue("AM" + k)).Trim();
