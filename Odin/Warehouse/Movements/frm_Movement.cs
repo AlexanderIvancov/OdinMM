@@ -907,47 +907,25 @@ namespace Odin.Warehouse.Movements
                 PrintLabels.PrinterDPI = frm.Printer_DPI;
 
                 if (gv_Dets.SelectedRows.Count > 0)
-                {
-
                     foreach (DataGridViewRow row in this.gv_Dets.SelectedRows)
-                    {
-                        if (Convert.ToInt32(row.Cells["cn_labelto"].Value) != 0
-                            && DAL.CheckMSL(Convert.ToInt32(row.Cells["cn_dartid"].Value)) != "0")
+                        if (Convert.ToInt32(row.Cells["cn_labelto"].Value) != 0 && DAL.CheckMSL(Convert.ToInt32(row.Cells["cn_dartid"].Value)) != "0" && frm.LabelQty != 0)
                         {
-                            // MessageBox.Show(Convert.ToInt32(row.Cells["cn_label"].Value).ToString());
-                            var sqlparamsfields = new List<SqlParameter>()
-                        {
-                            new SqlParameter("@id",SqlDbType.Int) {Value = Convert.ToInt32(row.Cells["cn_labelto"].Value)},
-                            new SqlParameter("@qty",SqlDbType.Float) {Value = Convert.ToDouble(row.Cells["cn_dqtyoper"].Value)},
-                            new SqlParameter("@labelqty",SqlDbType.Int) {Value = frm.LabelQty}
-                        };
-                            if (frm.LabelQty != 0)
-                                PrintLabels.PrintLabel(PrintLabels.LabelConstructor(1, "sp_SelectStockLabelDetsPrint", sqlparamsfields.ToArray()), 1/*frm.LabelQty*/);
-                            //Thread.Sleep(2000);
-                        }
-                    }
-                }
-                else
-                {
-                    if (Convert.ToInt32(gv_Dets.CurrentRow.Cells["cn_labelto"].Value) != 0
-                            && DAL.CheckMSL(Convert.ToInt32(gv_Dets.CurrentRow.Cells["cn_dartid"].Value)) != "0")
-                    {
-                        // MessageBox.Show(Convert.ToInt32(row.Cells["cn_label"].Value).ToString());
-                        var sqlparamsfields = new List<SqlParameter>()
-                        {
-                            new SqlParameter("@id",SqlDbType.Int) {Value = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_labelto"].Value)},
-                            new SqlParameter("@qty",SqlDbType.Float) {Value = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_dqtyoper"].Value)},
-                            new SqlParameter("@labelqty",SqlDbType.Int) {Value = frm.LabelQty}
-                        };
-                        if (frm.LabelQty != 0)
-                            PrintLabels.PrintLabel(PrintLabels.LabelConstructor(1, "sp_SelectStockLabelDetsPrint", sqlparamsfields.ToArray()), 1/*frm.LabelQty*/);
-                        //Thread.Sleep(2000);
-                    }
-                }
+                                PrintLabels.PrintLabel(PrintLabels.LabelConstructor(1, "sp_SelectStockLabelDetsPrint", new List<SqlParameter>()
+                                {
+                                    new SqlParameter("@id", SqlDbType.Int) { Value = Convert.ToInt32(row.Cells["cn_labelto"].Value) },
+                                    new SqlParameter("@qty", SqlDbType.Float) { Value = Convert.ToDouble(row.Cells["cn_dqtyoper"].Value) },
+                                    new SqlParameter("@labelqty", SqlDbType.Int) { Value = frm.LabelQty }
+                                }.ToArray()), 1);
 
+                                if (Convert.ToInt32(row.Cells["cn_labelto"].Value) != Convert.ToInt32(row.Cells["cn_labelid"].Value) && Convert.ToInt32(row.Cells["cn_labelid"].Value) != 0)
+                                    PrintLabels.PrintLabel(PrintLabels.LabelConstructor(1, "sp_SelectStockLabelDetsPrint", new List<SqlParameter>()
+                                    {
+                                        new SqlParameter("@id", SqlDbType.Int) { Value = Convert.ToInt32(row.Cells["cn_labelid"].Value) },
+                                        new SqlParameter("@qty", SqlDbType.Float) { Value = Convert.ToDouble(row.Cells["cn_dqtyrest"].Value) },
+                                        new SqlParameter("@labelqty", SqlDbType.Int) { Value = frm.LabelQty }
+                                    }.ToArray()), 1);
+                        }
             }
-            else
-            { }
         }
 
         private void cmb_Batches2_BatchChanged(object sender)

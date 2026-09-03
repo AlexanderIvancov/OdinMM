@@ -160,6 +160,7 @@
             this.cn_dartid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_darticle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_dqtyoper = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_dqtyrest = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_dunit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_dplace = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_placeto = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -1504,6 +1505,7 @@
             this.gv_Dets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv_Dets.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cn_labelid,
+            this.cn_dqtyrest,
             this.cn_dartid,
             this.cn_darticle,
             this.cn_dqtyoper,
@@ -1530,6 +1532,15 @@
             this.cn_labelid.HeaderText = "Label";
             this.cn_labelid.Name = "cn_labelid";
             this.cn_labelid.ReadOnly = true;
+            // 
+            // cn_dqtyrest
+            // 
+            this.cn_dqtyrest.DataPropertyName = "qtyrest";
+            this.cn_dqtyrest.FillWeight = 80F;
+            this.cn_dqtyrest.HeaderText = "Qty rest";
+            this.cn_dqtyrest.Name = "cn_dqtyrest";
+            this.cn_dqtyrest.ReadOnly = true;
+            this.cn_dqtyrest.Width = 80;
             // 
             // cn_dartid
             // 
@@ -1911,6 +1922,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel18;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny btn_PrintDLN;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_labelid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_dqtyrest;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_dartid;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_darticle;
         private System.Windows.Forms.DataGridViewTextBoxColumn cn_dqtyoper;
