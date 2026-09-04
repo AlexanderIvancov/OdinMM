@@ -12,6 +12,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+
 namespace Odin.Purchase
 {
     public delegate int ReceivePOId();
@@ -55,11 +56,7 @@ namespace Odin.Purchase
         public string CellValue = "";
 
 
-        public int POId
-        {
-            get;
-            set;
-        }
+        public int POId { get; set; }
 
         public int _PrevId = 0;
 
@@ -71,7 +68,7 @@ namespace Odin.Purchase
 
         public void LoadColumns(DataGridView grid)
         {
-            DAL.UserLogin = System.Environment.UserName;
+            DAL.UserLogin = Environment.UserName;
 
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_SelectUserGridViewColumn", sqlConn);
@@ -86,9 +83,7 @@ namespace Odin.Purchase
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
                     foreach (DataGridViewColumn column in grid.Columns)
-                    {
                         if (column.Name == reader["columnname"].ToString())
                         {
                             column.DisplayIndex = Convert.ToInt32(reader["columnorder"]);
@@ -96,14 +91,9 @@ namespace Odin.Purchase
                             column.Visible = glob_Class.NumToBool(reader["columnvisibility"].ToString());
                             column.Width = Convert.ToInt32(reader["columnwidth"]);
                         }
-                    }
-
-                }
                 reader.Close();
             }
-
             sqlConn.Close();
-
         }
 
         public void ClearFilter()
@@ -116,10 +106,10 @@ namespace Odin.Purchase
             cmb_Articles1.Article = "";
             txt_SupOrder.Text = string.Empty;
             txt_Comments.Text = string.Empty;
-            txt_CreatDateFrom.Value = null; //Convert.ToDateTime("01/01/2000");
-            txt_CreatDateTill.Value = null; //Convert.ToDateTime("01/01/2100");
-            txt_ReqDateFrom.Value = null;// Convert.ToDateTime("01/01/2000");
-            txt_ReqDateTill.Value = null;//Convert.ToDateTime("01/01/2100");
+            txt_CreatDateFrom.Value = null;
+            txt_CreatDateTill.Value = null;
+            txt_ReqDateFrom.Value = null;
+            txt_ReqDateTill.Value = null;
             mni_FilterFor.Text = string.Empty;
             bs_List.RemoveFilter();
             txt_ConfBefore.Value = null;
@@ -132,27 +122,21 @@ namespace Odin.Purchase
                 if (Convert.ToInt32(row.Cells["cn_inprocess"].Value) != 0)
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Yellow;
-                try
-                {
-                    if (Convert.ToDateTime(row.Cells["cn_confdate"].Value) <= System.DateTime.Now.AddDays(3)
-                        //Convert.ToDateTime(row.Cells["cn_confdate"].Value).AddDays(5) <= System.DateTime.Now
-                        && row.Cells["cn_state"].Value.ToString().ToLower() == "open")
-                        row.Cells["cn_confdate"].Style.BackColor = Color.Red;
-                }
-                catch { }
+                if (Convert.ToDateTime(row.Cells["cn_confdate"].Value) <= System.DateTime.Now.AddDays(3)
+                    //Convert.ToDateTime(row.Cells["cn_confdate"].Value).AddDays(5) <= System.DateTime.Now
+                    && row.Cells["cn_state"].Value.ToString().ToLower() == "open")
+                    row.Cells["cn_confdate"].Style.BackColor = Color.Red;
             }
         }
 
         public void bw_List(object sender, DoWorkEventArgs e)
         {
-            //MessageBox.Show(txt_CreatDateFrom.Value.ToShortDateString());
             data = PO_BLL.getPurchaseOrders(cmb_PurchaseOrders1.PurchaseOrderId, cmb_Types1.TypeId, cmb_Firms1.FirmId, cmb_Common1.SelectedValue,
                                             cmb_Articles1.ArticleId, cmb_Articles1.Article.Trim(), txt_CreatDateFrom.Value == null ? "" : txt_CreatDateFrom.Value.ToString().Trim(),
                                             txt_CreatDateTill.Value == null ? "" : txt_CreatDateTill.Value.ToString().Trim(), txt_SupOrder.Text, txt_Comments.Text,
                                             txt_ReqDateFrom.Value == null ? "" : txt_ReqDateFrom.Value.ToString().Trim(), 
                                             txt_ReqDateTill.Value == null ? "" : txt_ReqDateTill.Value.ToString().Trim(),
                                             txt_ConfBefore.Value == null ? "" : txt_ConfBefore.Value.ToString().Trim());
-
             gv_List.ThreadSafeCall(delegate
             {
                 gv_List.AutoGenerateColumns = false;
@@ -161,7 +145,6 @@ namespace Odin.Purchase
 
                 SetCellsColor();
             });
-
 
             bn_List.ThreadSafeCall(delegate
             {
@@ -201,10 +184,7 @@ namespace Odin.Purchase
             ctlConf = new ctl_POConfirms();
 
             ControlWidth = ctlConf.Width;
-            //ctlConf.COId = _COId;
             ctlConf.cmb_PurchaseOrdersLines1.PurchaseOrderLineId = _POId;
-            //ctlConf.ShowSaveButton(true);
-            //ctlConf.SendCOId += new COIdSendingEventHandler(ChangeCOIdSelection);
             
             return NewPage("Confirmations ", 1, ctlConf, ctlConf.Width);
         }
@@ -214,14 +194,10 @@ namespace Odin.Purchase
             ctlEstdat = new ctl_POEstdat();
 
             ControlWidth = ctlEstdat.Width;
-            //ctlConf.COId = _COId;
             ctlEstdat.cmb_PurchaseOrdersLines1.PurchaseOrderLineId = _POId;
-            //ctlConf.ShowSaveButton(true);
-            //ctlConf.SendCOId += new COIdSendingEventHandler(ChangeCOIdSelection);
 
             return NewPage("Estimated date ", 1, ctlEstdat, ctlEstdat.Width);
         }
-
 
         private KryptonPage NewInputHistory(int _COId)
         {
@@ -235,22 +211,17 @@ namespace Odin.Purchase
 
         private KryptonPage NewPage(string name, int image, Control content, int _Width)
         {
-            // Create new page with title and image
             KryptonPage p = new KryptonPage();
             p.Text = name;
             p.TextTitle = name;
             p.TextDescription = name;
             p.ImageSmall = imageListSmall.Images[image];
 
-            //p.Width = _Width;
-
-            // Add the control for display inside the page
             content.Dock = DockStyle.Fill;
             p.Controls.Add(content);
             
             return p;
         }
-
 
         private KryptonPage NewInputDeliveries(int _POId)
         {
@@ -262,10 +233,8 @@ namespace Odin.Purchase
 
             return NewPage("Deliveries history ", 1, ctlDeliveries, ctlDeliveries.Width);
         }
-        private void ChangePOIdSelection(object sender)
-        {
-            bwStart(bw_List);
-        }
+
+        private void ChangePOIdSelection(object sender) => bwStart(bw_List);
 
         private bool CheckOldRow()
         {
@@ -279,10 +248,7 @@ namespace Odin.Purchase
                 POId = 0;
             }
 
-            if (_PrevId == POId)
-            {
-                return true;
-            }
+            if (_PrevId == POId) return true;
             else
             {
                 _PrevId = POId;
@@ -300,9 +266,6 @@ namespace Odin.Purchase
             FindConfPages(poid);
             FindDeliveriesPages(poid);
             FindHistoryPages(poid);
-
-            //FindBatchPages(coid);
-
         }
 
         public void ShowEdit()
@@ -326,6 +289,7 @@ namespace Odin.Purchase
                 frm.Show(); frm.GetKryptonFormFields();
             }
         }
+
         public void FindGenPages(int poid)
         {
             foreach (var page in kryptonDockingManager1.Pages)
@@ -338,7 +302,6 @@ namespace Odin.Purchase
 
                     ctlGen1.CheckEmpty();
                 }
-                //break;
             }
         }
 
@@ -347,13 +310,7 @@ namespace Odin.Purchase
             foreach (var page in kryptonDockingManager1.Pages)
             {
                 ctl_POConfirms ctlConf1 = (ctl_POConfirms)page.Controls.Find("ctl_POConfirms", true).FirstOrDefault();
-                if (ctlConf1 != null)
-                {
-                    //MessageBox.Show(coid.ToString());
-                    ctlConf1.cmb_PurchaseOrdersLines1.PurchaseOrderLineId = poid;
-                    //ctlConf11.COId = coid;
-                }
-
+                if (ctlConf1 != null) ctlConf1.cmb_PurchaseOrdersLines1.PurchaseOrderLineId = poid;
             }
         }
 
@@ -364,12 +321,9 @@ namespace Odin.Purchase
                 ctl_PODeliveries ctlDeliveries1 = (ctl_PODeliveries)page.Controls.Find("ctl_PODeliveries", true).FirstOrDefault();
                 if (ctlDeliveries1 != null)
                 {
-                    //MessageBox.Show(coid.ToString());
                     ctlDeliveries1.POId = poid;
                     ctlDeliveries1.HeaderText = "History of deliveries for: " + POBll.POName + '/' + POBll.POLine;
-                    //ctlConf11.COId = coid;
                 }
-
             }
         }
 
@@ -378,12 +332,7 @@ namespace Odin.Purchase
             foreach (var page in kryptonDockingManager1.Pages)
             {
                 ctl_AddFromNeeds ctlNeeds1 = (ctl_AddFromNeeds)page.Controls.Find("ctl_AddFromNeeds", true).FirstOrDefault();
-                if (ctlNeeds1 != null)
-                {
-                    ctlNeeds1.RefreshData();
-                    //ctlNeeds1.POHeadId = poheadid;
-                }
-                //break;
+                if (ctlNeeds1 != null) ctlNeeds1.RefreshData();
             }
         }
 
@@ -392,13 +341,7 @@ namespace Odin.Purchase
             foreach (var page in kryptonDockingManager1.Pages)
             {
                 ctl_POHistory ctlHis1 = (ctl_POHistory)page.Controls.Find("ctl_POHistory", true).FirstOrDefault();
-                if (ctlHis1 != null)
-                {
-                    //MessageBox.Show(coid.ToString());
-                    ctlHis1.POId = poid;
-                    //ctlConf11.COId = coid;
-                }
-                //break;
+                if (ctlHis1 != null) ctlHis1.POId = poid;
             }
         }
 
@@ -413,19 +356,17 @@ namespace Odin.Purchase
             kryptonDockingManager1.ManageFloating(this);
 
             LoadColumns(gv_List);
-            txt_CreatDateFrom.Value = null;// Convert.ToDateTime("01/01/2000");
-            txt_CreatDateTill.Value = null; //Convert.ToDateTime("01/01/2100");
-            txt_ReqDateFrom.Value = null;//Convert.ToDateTime("01/01/2000");
-            txt_ReqDateTill.Value = null;// Convert.ToDateTime("01/01/2100");
+            txt_CreatDateFrom.Value = null;
+            txt_CreatDateTill.Value = null;
+            txt_ReqDateFrom.Value = null;
+            txt_ReqDateTill.Value = null;
             cmb_Common1.SelectedValue = 1;
             txt_ConfBefore.Value = null;
 
             bn_List.Items.Insert(0, new ToolStripControlHost(chk_SelectAll));
         }
 
-
         #region Context menu
-
 
         private void mnu_Lines_Opening(object sender, CancelEventArgs e)
         {
@@ -436,7 +377,6 @@ namespace Odin.Purchase
 
                 RowIndex = info.RowIndex;
                 ColumnIndex = info.ColumnIndex;
-                //MessageBox.Show(RowIndex.ToString() + "MO," + ColumnIndex.ToString());
 
                 gv_List.ClearSelection();
                 gv_List.Rows[RowIndex].Cells[ColumnIndex].Selected = true;
@@ -444,8 +384,6 @@ namespace Odin.Purchase
 
                 CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                 ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
-                //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
             }
             catch
             {
@@ -457,14 +395,8 @@ namespace Odin.Purchase
 
         private void mni_FilterFor_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-                bs_List.Filter = ("Convert(" + ColumnName + " , 'System.String') like '%" + mni_FilterFor.Text + "%'");//ColumnName + " like '%" + mni_FilterFor.Text + "%'";
-            }
-            catch
-            { }
+            bs_List.Filter = ("Convert(" + ColumnName + " , 'System.String') like '%" + mni_FilterFor.Text + "%'");
             SetCellsColor();
-
         }
 
         private void mni_Search_Click(object sender, EventArgs e)
@@ -478,51 +410,31 @@ namespace Odin.Purchase
 
         private void mni_FilterBy_Click(object sender, EventArgs e)
         {
-            try
-            {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? String.IsNullOrEmpty(CellValue) == true
-                        ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
-                    : String.IsNullOrEmpty(CellValue) == true
-                        ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
-                        : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
-                //MessageBox.Show(bs_List.Filter);
-
-            }
-            catch { }
+            bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                ? String.IsNullOrEmpty(CellValue) == true
+                    ? "(" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                    : "Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'"
+                : String.IsNullOrEmpty(CellValue) == true
+                    ? bs_List.Filter + "AND (" + ColumnName + " is null OR Convert(" + ColumnName + ", 'System.String') = '')"
+                    : bs_List.Filter + " AND Convert(" + ColumnName + " , 'System.String') = '" + glob_Class.NES(CellValue) + "'";
             SetCellsColor();
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
         {
-            try
-            {
-                bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
-                    ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
-                    : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
-            }
-            catch { }
+            bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
+                ? "Convert(" + ColumnName + " , 'System.String') <> '" + CellValue + "'"
+                : bs_List.Filter + " AND " + ColumnName + " <> '" + CellValue + "'";
             SetCellsColor();
-
         }
 
         private void mni_RemoveFilter_Click(object sender, EventArgs e)
         {
-            try
-            {
-                bs_List.RemoveFilter();
-            }
-            catch { }
+            bs_List.RemoveFilter();
             SetCellsColor();
-
         }
 
-        private void mni_Copy_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText(CellValue.ToString());
-        }
+        private void mni_Copy_Click(object sender, EventArgs e) => Clipboard.SetText(CellValue.ToString());
 
         private void mni_Admin_Click(object sender, EventArgs e)
         {
@@ -544,20 +456,14 @@ namespace Odin.Purchase
             }
         }
 
-        private void btn_Excel_Click(object sender, EventArgs e)
-        {
-            ED.DgvIntoExcel();
-        }
-
-
+        private void btn_Excel_Click(object sender, EventArgs e) => ED.DgvIntoExcel();
 
         #endregion
 
         private void AddPO(object sender)
         {
            
-            if (frm.ctl_PODets1.POId != 0)
-                frm.Close();
+            if (frm.ctl_PODets1.POId != 0) frm.Close();
 
             gv_List.Invoke(new MethodInvoker(delegate
             {
@@ -568,23 +474,19 @@ namespace Odin.Purchase
 
                 Helper.RestoreDirection(gv_List, oldColumn, dir);
             }));
-
-
-            //FindNeedsPages(cmb_PurchaseOrders1.PurchaseOrderId);
         }
-
 
         #endregion
 
         private void buttonSpecAny1_Click(object sender, EventArgs e) => txt_SupOrder.Text = string.Empty;
 
-        private void buttonSpecAny3_Click(object sender, EventArgs e) => txt_CreatDateFrom.Value = DateTime.Now;// Convert.ToDateTime("01/01/2000");
+        private void buttonSpecAny3_Click(object sender, EventArgs e) => txt_CreatDateFrom.Value = DateTime.Now;
 
-        private void buttonSpecAny4_Click(object sender, EventArgs e) => txt_CreatDateTill.Value = DateTime.Now;//Convert.ToDateTime("01/01/2100");
+        private void buttonSpecAny4_Click(object sender, EventArgs e) => txt_CreatDateTill.Value = DateTime.Now;
 
-        private void buttonSpecAny5_Click(object sender, EventArgs e) => txt_ReqDateFrom.Value = DateTime.Now;//Convert.ToDateTime("01/01/2000");
+        private void buttonSpecAny5_Click(object sender, EventArgs e) => txt_ReqDateFrom.Value = DateTime.Now;
 
-        private void buttonSpecAny6_Click(object sender, EventArgs e) => txt_ReqDateTill.Value = DateTime.Now;//Convert.ToDateTime("01/01/2100");
+        private void buttonSpecAny6_Click(object sender, EventArgs e) => txt_ReqDateTill.Value = DateTime.Now;
 
         private void buttonSpecAny2_Click(object sender, EventArgs e) => txt_Comments.Text = string.Empty;
 
@@ -802,13 +704,13 @@ namespace Odin.Purchase
 
         private void gv_List_CellDoubleClick(object sender, DataGridViewCellEventArgs e) => ShowEdit();
 
-        private void txt_CreatDateFrom_DropDown(object sender, DateTimePickerDropArgs e) => txt_CreatDateFrom.Value = txt_CreatDateFrom.Value == null ? System.DateTime.Now : txt_CreatDateFrom.Value;
+        private void txt_CreatDateFrom_DropDown(object sender, DateTimePickerDropArgs e) => txt_CreatDateFrom.Value = txt_CreatDateFrom.Value == null ? DateTime.Now : txt_CreatDateFrom.Value;
 
-        private void txt_CreatDateTill_DropDown(object sender, DateTimePickerDropArgs e) => txt_CreatDateTill.Value = txt_CreatDateTill.Value == null ? System.DateTime.Now : txt_CreatDateTill.Value;
+        private void txt_CreatDateTill_DropDown(object sender, DateTimePickerDropArgs e) => txt_CreatDateTill.Value = txt_CreatDateTill.Value == null ? DateTime.Now : txt_CreatDateTill.Value;
 
-        private void txt_ReqDateFrom_DropDown(object sender, DateTimePickerDropArgs e) => txt_ReqDateFrom.Value = txt_ReqDateFrom.Value == null ? System.DateTime.Now : txt_ReqDateFrom.Value;
+        private void txt_ReqDateFrom_DropDown(object sender, DateTimePickerDropArgs e) => txt_ReqDateFrom.Value = txt_ReqDateFrom.Value == null ? DateTime.Now : txt_ReqDateFrom.Value;
 
-        private void txt_ReqDateTill_DropDown(object sender, DateTimePickerDropArgs e) => txt_ReqDateTill.Value = txt_ReqDateTill.Value == null ? System.DateTime.Now : txt_ReqDateTill.Value;
+        private void txt_ReqDateTill_DropDown(object sender, DateTimePickerDropArgs e) => txt_ReqDateTill.Value = txt_ReqDateTill.Value == null ? DateTime.Now : txt_ReqDateTill.Value;
 
         private void chk_SelectAll_CheckedChanged(object sender, EventArgs e)
         {
@@ -876,19 +778,10 @@ namespace Odin.Purchase
             return tempPdf;
         }
 
-        private void txt_ConfBefore_DropDown(object sender, DateTimePickerDropArgs e)
-        {
-            txt_ConfBefore.Value = txt_ConfBefore.Value == null ? DateTime.Now : txt_ConfBefore.Value;
-        }
+        private void txt_ConfBefore_DropDown(object sender, DateTimePickerDropArgs e) => txt_ConfBefore.Value = txt_ConfBefore.Value == null ? DateTime.Now : txt_ConfBefore.Value;
 
-        private void btn_History_Click(object sender, EventArgs e)
-        {
-            kryptonDockingManager1.AddDockspace("Control", DockingEdge.Left, new KryptonPage[] { NewInputHistory(POBll.POId) });
-        }
+        private void btn_History_Click(object sender, EventArgs e) => kryptonDockingManager1.AddDockspace("Control", DockingEdge.Left, new KryptonPage[] { NewInputHistory(POBll.POId) });
 
-        private void gv_List_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            SetCellsColor();
-        }
+        private void gv_List_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e) => SetCellsColor();
     }
 }
