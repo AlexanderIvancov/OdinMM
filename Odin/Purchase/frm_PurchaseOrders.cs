@@ -921,14 +921,15 @@ namespace Odin.Purchase
 
         private void btn_SendLetter_Click(object sender, EventArgs e)
         {
-            string emailaddresses = DAL.EmailAddressesByType(3);
+            POBll.POHeadId = cmb_PurchaseOrders1.PurchaseOrderId;
+
+            string emailaddresses = POBll.POHeadSupContPersMail;
             string strMessage = "";
             int c = 0;
 
             if (emailaddresses != "")
             {
                 var data = PO_BLL.getPODets(cmb_PurchaseOrders1.PurchaseOrderId);
-                POBll.POHeadId = cmb_PurchaseOrders1.PurchaseOrderId;
 
                 foreach (DataRow row in data.Rows)
                 {
@@ -948,13 +949,46 @@ namespace Odin.Purchase
 
 
                     }
-                
                 }
-                MyHelper.SendMessage(globClass.ReplaceChar(emailaddresses, ";", ","),
-                                   "Purchase order for resale NR : " + cmb_PurchaseOrders1.PurchaseOrder + ", supplier: " + POBll.POHeadSupplier + " was created!",
-                                   strMessage);
+                if (c == 0) {
+                    strMessage = "Добрый день,\nВо вложении заказ " + cmb_PurchaseOrders1.PurchaseOrder + " - выставьте счет на оплату.\nСпасибо!";
+                    string pdfPath = GeneratePurchaseOrderPdf(cmb_PurchaseOrders1.PurchaseOrderId);
+                    MyHelper.SendDirectEMailWithAttachment(
+                                   globClass.ReplaceChar(emailaddresses, ";", ","),
+                                    "Purchase order for resale NR : " + cmb_PurchaseOrders1.PurchaseOrder + ", supplier: " + POBll.POHeadSupplier + " was created!",
+                                    strMessage,
+                                    pdfPath);
+
+                }
+                else
+                    MyHelper.SendMessage(globClass.ReplaceChar(emailaddresses, ";", ","), "Purchase order for resale NR : " + cmb_PurchaseOrders1.PurchaseOrder + ", supplier: " + POBll.POHeadSupplier + " was created!", strMessage);
             }
           
+        }
+
+        private string GeneratePurchaseOrderPdf(int purchaseOrderId)
+        {
+            frm_rptPurchaseOrder frm = new frm_rptPurchaseOrder();
+            frm.HeadId = purchaseOrderId;
+
+            frm.data = data.Clone();
+            foreach (DataRow dr in data.Rows)
+            {
+                if (Convert.ToInt32(dr["toprint"]) == -1
+                    && Convert.ToInt32(dr["headid"]) == purchaseOrderId)
+                {
+                    frm.data.ImportRow(dr);
+                }
+            }
+
+            CrystalDecisions.CrystalReports.Engine.ReportDocument report = frm.OpenReport();
+
+            string tempPdf = System.IO.Path.Combine(System.IO.Path.GetTempPath(), $"PO_{purchaseOrderId}_{DateTime.Now:yyyyMMddHHmmss}.pdf");
+            report.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, tempPdf);
+
+            report.Close();
+
+            return tempPdf;
         }
 
         private void txt_ConfBefore_DropDown(object sender, DateTimePickerDropArgs e)
