@@ -576,40 +576,19 @@ namespace Odin.Purchase
 
         #endregion
 
-        private void buttonSpecAny1_Click(object sender, EventArgs e)
-        {
-            txt_SupOrder.Text = string.Empty;
-        }
+        private void buttonSpecAny1_Click(object sender, EventArgs e) => txt_SupOrder.Text = string.Empty;
 
-        private void buttonSpecAny3_Click(object sender, EventArgs e)
-        {
-            txt_CreatDateFrom.Value = System.DateTime.Now;// Convert.ToDateTime("01/01/2000");
-        }
+        private void buttonSpecAny3_Click(object sender, EventArgs e) => txt_CreatDateFrom.Value = DateTime.Now;// Convert.ToDateTime("01/01/2000");
 
-        private void buttonSpecAny4_Click(object sender, EventArgs e)
-        {
-            txt_CreatDateTill.Value = System.DateTime.Now;//Convert.ToDateTime("01/01/2100");
-        }
+        private void buttonSpecAny4_Click(object sender, EventArgs e) => txt_CreatDateTill.Value = DateTime.Now;//Convert.ToDateTime("01/01/2100");
 
-        private void buttonSpecAny5_Click(object sender, EventArgs e)
-        {
-            txt_ReqDateFrom.Value = System.DateTime.Now;//Convert.ToDateTime("01/01/2000");
-        }
+        private void buttonSpecAny5_Click(object sender, EventArgs e) => txt_ReqDateFrom.Value = DateTime.Now;//Convert.ToDateTime("01/01/2000");
 
-        private void buttonSpecAny6_Click(object sender, EventArgs e)
-        {
-            txt_ReqDateTill.Value = System.DateTime.Now;//Convert.ToDateTime("01/01/2100");
-        }
+        private void buttonSpecAny6_Click(object sender, EventArgs e) => txt_ReqDateTill.Value = DateTime.Now;//Convert.ToDateTime("01/01/2100");
 
-        private void buttonSpecAny2_Click(object sender, EventArgs e)
-        {
-            txt_Comments.Text = string.Empty;
-        }
+        private void buttonSpecAny2_Click(object sender, EventArgs e) => txt_Comments.Text = string.Empty;
 
-        private void btn_Clear_Click(object sender, EventArgs e)
-        {
-            ClearFilter();
-        }
+        private void btn_Clear_Click(object sender, EventArgs e) => ClearFilter();
 
         private void btn_Refresh_Click(object sender, EventArgs e)
         {
@@ -672,17 +651,12 @@ namespace Odin.Purchase
 
                             //Date of purchase order!!
 
-
-
                             frm.ctl_PODets1.ShowLineTots();
                             frm.ctl_PODets1.CheckEmpty();
 
                             frm.ctl_PODets1.DataNeeds = ctlNeeds1.ctl_RMNeeds1.data.Copy();
                         }
-                        else
-                        {
-                            _globtest = false;
-                        }
+                        else _globtest = false;
                     }
                 }
 
@@ -691,17 +665,11 @@ namespace Odin.Purchase
                     frm.POLineSaved += new POSavedEventHandler(AddPO);
                     frm.Show(); frm.GetKryptonFormFields();
                 }
-                else
-                {
-                    frm = null;
-                }
+                else frm = null;
             }
         }
 
-        private void btn_Edit_Click(object sender, EventArgs e)
-        {
-            ShowEdit();
-        }
+        private void btn_Edit_Click(object sender, EventArgs e) => ShowEdit();
 
         private void btn_Copy_Click(object sender, EventArgs e)
         {
@@ -766,43 +734,23 @@ namespace Odin.Purchase
 
         private void gv_List_SelectionChanged(object sender, EventArgs e)
         {
-            if (CheckOldRow() == false)
-            {
-                ShowDetails(POId);
-            }
+            if (CheckOldRow() == false) ShowDetails(POId);
         }
 
-        private void btn_General_Click(object sender, EventArgs e)
-        {
-            kryptonDockingManager1.AddToWorkspace("Workspace", new KryptonPage[] { NewInputGeneral(POBll.POId) });
-        }
+        private void btn_General_Click(object sender, EventArgs e) => kryptonDockingManager1.AddToWorkspace("Workspace", new KryptonPage[] { NewInputGeneral(POBll.POId) });
 
-        private void btn_Confirmations_Click(object sender, EventArgs e)
-        {
-            kryptonDockingManager1.AddDockspace("Control",
-                                              DockingEdge.Left,
-                                              new KryptonPage[] { NewInputConfirmation(POBll.POId) });
-        }
-        private void btn_Estdat_Click(object sender, EventArgs e)
-        {
-            kryptonDockingManager1.AddDockspace("Control",
-                                              DockingEdge.Left,
-                                              new KryptonPage[] { NewInputEstdat(POBll.POId) });
-        }
+        private void btn_Confirmations_Click(object sender, EventArgs e) => kryptonDockingManager1.AddDockspace("Control", DockingEdge.Left, new KryptonPage[] { NewInputConfirmation(POBll.POId) });
+
+        private void btn_Estdat_Click(object sender, EventArgs e) => kryptonDockingManager1.AddDockspace("Control", DockingEdge.Left, new KryptonPage[] { NewInputEstdat(POBll.POId) });
 
         private void frm_PurchaseOrders_Resize(object sender, EventArgs e)
         {
             if (_Main.WindowState == FormWindowState.Maximized)
-            {
                 foreach (var page in kryptonDockingManager1.PagesDocked)
                 {
                     kryptonDockingManager1.RemovePage(page, false);
-                    kryptonDockingManager1.AddDockspace("Control",
-                                               DockingEdge.Left,
-                                               new KryptonPage[] { page });
-
+                    kryptonDockingManager1.AddDockspace("Control", DockingEdge.Left, new KryptonPage[] { page });
                 }
-            }
         }
 
         private void btn_Requests_Click(object sender, EventArgs e)
@@ -812,30 +760,16 @@ namespace Odin.Purchase
             foreach (var page in kryptonDockingManager1.Pages)
             {
                 ctl_AddFromNeeds ctlNeeds1 = (ctl_AddFromNeeds)page.Controls.Find("ctl_AddFromNeeds", true).FirstOrDefault();
-                if (ctlNeeds1 != null)
-                {
-                    _countcontrols++;
-                }
+                if (ctlNeeds1 != null) _countcontrols++;
             }
 
-            if (_countcontrols > 0)
-                MessageBox.Show("You can't open more than one needs page!");
-            else
-            kryptonDockingManager1.AddDockspace("Control",
-                                             DockingEdge.Left,
-                                             new KryptonPage[] { NewInputNeeds() });
-         
+            if (_countcontrols > 0) MessageBox.Show("You can't open more than one needs page!");
+            else kryptonDockingManager1.AddDockspace("Control", DockingEdge.Left, new KryptonPage[] { NewInputNeeds() });
         }
 
-        private void kryptonDockingManager1_DockspaceAdding(object sender, DockspaceEventArgs e)
-        {
-            e.DockspaceControl.Size = new Size(ControlWidth, kryptonDockableWorkspace1.Height);
-        }
+        private void kryptonDockingManager1_DockspaceAdding(object sender, DockspaceEventArgs e) => e.DockspaceControl.Size = new Size(ControlWidth, kryptonDockableWorkspace1.Height);
 
-        private void cmb_PurchaseOrders1_PurchaseOrderChanged(object sender)
-        {
-            //FindNeedsPages(cmb_PurchaseOrders1.PurchaseOrderId);
-        }
+        private void cmb_PurchaseOrders1_PurchaseOrderChanged(object sender) {}
 
         private void btn_Print_Click(object sender, EventArgs e)
         {
@@ -843,7 +777,6 @@ namespace Odin.Purchase
 
             if (cmb_PurchaseOrders1.PurchaseOrderId != 0)
             {
-
                 frm_rptPurchaseOrder frm = new frm_rptPurchaseOrder();
                 frm.HeadId = cmb_PurchaseOrders1.PurchaseOrderId;
 
@@ -853,14 +786,9 @@ namespace Odin.Purchase
                 frm.data = data.Clone();
 
                 foreach (DataRow dr in data.Rows)
-                {
                     if (Convert.ToInt32(dr["toprint"]) == -1
                         && Convert.ToInt32(dr["headid"]) == cmb_PurchaseOrders1.PurchaseOrderId)
-                    {
                         frm.data.ImportRow(dr);
-                    }
-                }
-
 
                 frm.FillReport();
 
@@ -868,55 +796,28 @@ namespace Odin.Purchase
             }
         }
 
-        private void btn_Batches_Click(object sender, EventArgs e)
-        {
+        private void btn_Batches_Click(object sender, EventArgs e) {}
 
-        }
+        private void btn_Deliveries_Click(object sender, EventArgs e) => kryptonDockingManager1.AddDockspace("Control", DockingEdge.Left, new KryptonPage[] { NewInputDeliveries(POBll.POId) });
 
-        private void btn_Deliveries_Click(object sender, EventArgs e)
-        {
-            kryptonDockingManager1.AddDockspace("Control",
-                                              DockingEdge.Left,
-                                              new KryptonPage[] { NewInputDeliveries(POBll.POId) });
-        }
+        private void gv_List_CellDoubleClick(object sender, DataGridViewCellEventArgs e) => ShowEdit();
 
-        private void gv_List_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            ShowEdit();
-        }
+        private void txt_CreatDateFrom_DropDown(object sender, DateTimePickerDropArgs e) => txt_CreatDateFrom.Value = txt_CreatDateFrom.Value == null ? System.DateTime.Now : txt_CreatDateFrom.Value;
 
-        private void txt_CreatDateFrom_DropDown(object sender, DateTimePickerDropArgs e)
-        {
-            txt_CreatDateFrom.Value = txt_CreatDateFrom.Value == null ? System.DateTime.Now : txt_CreatDateFrom.Value;
-        }
+        private void txt_CreatDateTill_DropDown(object sender, DateTimePickerDropArgs e) => txt_CreatDateTill.Value = txt_CreatDateTill.Value == null ? System.DateTime.Now : txt_CreatDateTill.Value;
 
-        private void txt_CreatDateTill_DropDown(object sender, DateTimePickerDropArgs e)
-        {
-            txt_CreatDateTill.Value = txt_CreatDateTill.Value == null ? System.DateTime.Now : txt_CreatDateTill.Value;
-        }
+        private void txt_ReqDateFrom_DropDown(object sender, DateTimePickerDropArgs e) => txt_ReqDateFrom.Value = txt_ReqDateFrom.Value == null ? System.DateTime.Now : txt_ReqDateFrom.Value;
 
-        private void txt_ReqDateFrom_DropDown(object sender, DateTimePickerDropArgs e)
-        {
-            txt_ReqDateFrom.Value = txt_ReqDateFrom.Value == null ? System.DateTime.Now : txt_ReqDateFrom.Value;
-        }
-
-        private void txt_ReqDateTill_DropDown(object sender, DateTimePickerDropArgs e)
-        {
-            txt_ReqDateTill.Value = txt_ReqDateTill.Value == null ? System.DateTime.Now : txt_ReqDateTill.Value;
-        }
+        private void txt_ReqDateTill_DropDown(object sender, DateTimePickerDropArgs e) => txt_ReqDateTill.Value = txt_ReqDateTill.Value == null ? System.DateTime.Now : txt_ReqDateTill.Value;
 
         private void chk_SelectAll_CheckedChanged(object sender, EventArgs e)
         {
             if (chk_SelectAll.Checked == true)
                 foreach (DataGridViewRow row in this.gv_List.Rows)
-                {
                     row.Cells["chk_print"].Value = -1;
-                }
             else
                 foreach (DataGridViewRow row in this.gv_List.Rows)
-                {
                     row.Cells["chk_print"].Value = 0;
-                }
         }
 
         private void btn_SendLetter_Click(object sender, EventArgs e)
@@ -932,7 +833,6 @@ namespace Odin.Purchase
                 var data = PO_BLL.getPODets(cmb_PurchaseOrders1.PurchaseOrderId);
 
                 foreach (DataRow row in data.Rows)
-                {
                     if (Convert.ToInt32(row["resale"]) == -1)
                     {
                         c++;
@@ -943,25 +843,15 @@ namespace Odin.Purchase
                             : strMessage + "\r\nLine N: " + row["line"] + ", Art.Id: " + row["artid"]
                                                     + ", Suppliers article: " + row["article"]
                                                     + ", Qty: " + row["qty"] + " " + row["unit"];
-                        //strMessage = strMessage + "Art.Id: " + row["artid"];
-                        //strMessage = strMessage + "\r\nSuppliers article: " + row["article"];
-                        //strMessage = strMessage + "\r\nQty: " + row["qty"] + " " + row["unit"];
-
-
                     }
-                }
-                if (c == 0) {
+
+                if (c == 0)
+                {
                     strMessage = "Добрый день,\nВо вложении заказ " + cmb_PurchaseOrders1.PurchaseOrder + " - выставьте счет на оплату.\nСпасибо!";
                     string pdfPath = GeneratePurchaseOrderPdf(cmb_PurchaseOrders1.PurchaseOrderId);
-                    MyHelper.SendDirectEMailWithAttachment(
-                                   globClass.ReplaceChar(emailaddresses, ";", ","),
-                                    "Purchase order for resale NR : " + cmb_PurchaseOrders1.PurchaseOrder + ", supplier: " + POBll.POHeadSupplier + " was created!",
-                                    strMessage,
-                                    pdfPath);
-
+                    MyHelper.SendDirectEMailWithAttachment(globClass.ReplaceChar(emailaddresses, ";", ","), "Purchase order " + cmb_PurchaseOrders1.PurchaseOrder, strMessage, pdfPath);
                 }
-                else
-                    MyHelper.SendMessage(globClass.ReplaceChar(emailaddresses, ";", ","), "Purchase order for resale NR : " + cmb_PurchaseOrders1.PurchaseOrder + ", supplier: " + POBll.POHeadSupplier + " was created!", strMessage);
+                else MyHelper.SendMessage(globClass.ReplaceChar(emailaddresses, ";", ","), "Purchase order for resale NR : " + cmb_PurchaseOrders1.PurchaseOrder + ", supplier: " + POBll.POHeadSupplier + " was created!", strMessage);
             }
           
         }
@@ -973,13 +863,8 @@ namespace Odin.Purchase
 
             frm.data = data.Clone();
             foreach (DataRow dr in data.Rows)
-            {
-                if (Convert.ToInt32(dr["toprint"]) == -1
-                    && Convert.ToInt32(dr["headid"]) == purchaseOrderId)
-                {
+                if (Convert.ToInt32(dr["toprint"]) == -1 && Convert.ToInt32(dr["headid"]) == purchaseOrderId)
                     frm.data.ImportRow(dr);
-                }
-            }
 
             CrystalDecisions.CrystalReports.Engine.ReportDocument report = frm.OpenReport();
 
@@ -993,14 +878,12 @@ namespace Odin.Purchase
 
         private void txt_ConfBefore_DropDown(object sender, DateTimePickerDropArgs e)
         {
-            txt_ConfBefore.Value = txt_ConfBefore.Value == null ? System.DateTime.Now : txt_ConfBefore.Value;
+            txt_ConfBefore.Value = txt_ConfBefore.Value == null ? DateTime.Now : txt_ConfBefore.Value;
         }
 
         private void btn_History_Click(object sender, EventArgs e)
         {
-            kryptonDockingManager1.AddDockspace("Control",
-                                              DockingEdge.Left,
-                                              new KryptonPage[] { NewInputHistory(POBll.POId) });
+            kryptonDockingManager1.AddDockspace("Control", DockingEdge.Left, new KryptonPage[] { NewInputHistory(POBll.POId) });
         }
 
         private void gv_List_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)

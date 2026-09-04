@@ -16,12 +16,7 @@ namespace Odin.CMB_Components.BLL
 
         #region Units
 
-        public static DataTable getUnits(string _beg)
-        {
-            string query = "EXECUTE sp_UnitsSelectLike @Beg = '" + _beg + "'";
-
-            return Helper.QueryDT(query);
-        }
+        public static DataTable getUnits(string _beg) => Helper.QueryDT("EXECUTE sp_UnitsSelectLike @Beg = '" + _beg + "'");
 
         public int AddUnit(string Unit, string Description, int Decims, string UnitLat, int BaseUnitid, double CoefConv)
         {
@@ -46,28 +41,22 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Close();
             return _res;
         }
+
         public void DeleteUnit(int Id)
         {
-
-
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_DeleteUnit", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
 
-
             sqlComm.Parameters.AddWithValue("@id", Id);
 
-            try
-            {
-                sqlConn.Open();
-                sqlComm.ExecuteNonQuery();
-                sqlConn.Close();
-            }
-            catch { }
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
         }
+
         public void EditUnit(int Id, string Unit, string Description, int Decims, string UnitLat, int BaseUnitid, double CoefConv)
         {
-
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_EditUnit", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -83,14 +72,9 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
         }
-        public static DataTable getCharUnits(string _beg, int _baseunitid, int _baseonly)
-        {
-            string query = "EXECUTE sp_CharUnitsSelectLike @Beg = '" + _beg + "', @BaseUnitId = " + _baseunitid + ", @baseonly = " + _baseonly;
 
-            return Helper.QueryDT(query);
-        }
+        public static DataTable getCharUnits(string _beg, int _baseunitid, int _baseonly) => Helper.QueryDT("EXECUTE sp_CharUnitsSelectLike @Beg = '" + _beg + "', @BaseUnitId = " + _baseunitid + ", @baseonly = " + _baseonly);
 
         public int AddCharUnit(string Unit, string Description, int Decims, string UnitLat, int BaseUnitid, double CoefConv)
         {
@@ -115,10 +99,9 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Close();
             return _res;
         }
+
         public void DeleteCharUnit(int Id)
         {
-
-
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_DeleteCharUnit", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -126,17 +109,13 @@ namespace Odin.CMB_Components.BLL
 
             sqlComm.Parameters.AddWithValue("@id", Id);
 
-            try
-            {
-                sqlConn.Open();
-                sqlComm.ExecuteNonQuery();
-                sqlConn.Close();
-            }
-            catch { }
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
         }
+
         public void EditCharUnit(int Id, string Unit, string Description, int Decims, string UnitLat, int BaseUnitid, double CoefConv)
         {
-
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_EditCharUnit", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -152,18 +131,12 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
         }
         #endregion
 
         #region Countries
 
-        public static DataTable getCountries(string _beg)
-        {
-            string query = "EXECUTE sp_CountrySelectLike @Beg = '" + _beg + "'";
-
-            return Helper.QueryDT(query);
-        }
+        public static DataTable getCountries(string _beg) => Helper.QueryDT("EXECUTE sp_CountrySelectLike @Beg = '" + _beg + "'");
 
         public int AddCountry(string CountName, string ShortName, int CurId, int VAT, int ES)
         {
@@ -191,27 +164,19 @@ namespace Odin.CMB_Components.BLL
 
         public void DeleteCountry(int Id)
         {
-
-
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_DeleteCountry", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
 
-
             sqlComm.Parameters.AddWithValue("@id", Id);
 
-            try
-            {
-                sqlConn.Open();
-                sqlComm.ExecuteNonQuery();
-                sqlConn.Close();
-            }
-            catch { }
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
         }
 
         public void EditCountry(int Id, string CountName, string ShortName, int CurId, int VAT, int ES)
         {
-
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_EditCountry", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -226,7 +191,6 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
         }
 
         int _CountryId = 0;
@@ -249,10 +213,7 @@ namespace Odin.CMB_Components.BLL
                 conn.Open();
                 DataSet ds = new DataSet();
 
-                SqlDataAdapter adapter =
-                    new SqlDataAdapter(
-                        "execute sp_SelectCountry @id = " + _CountryId, conn);
-
+                SqlDataAdapter adapter = new SqlDataAdapter("execute sp_SelectCountry @id = " + _CountryId, conn);
 
                 conn.Close();
 
@@ -261,7 +222,6 @@ namespace Odin.CMB_Components.BLL
                 DataTable dt = ds.Tables[0];
 
                 if (dt.Rows.Count > 0)
-                {
                     foreach (DataRow dr in dt.Rows)
                     {
                         Country = dr["country"].ToString();
@@ -270,7 +230,6 @@ namespace Odin.CMB_Components.BLL
                         CountryShortName = dr["shortname"].ToString();
                         CountryVAT = Convert.ToInt32(dr["vat"]);
                     }
-                }
                 else
                 {
                     Country = "";
@@ -278,22 +237,15 @@ namespace Odin.CMB_Components.BLL
                     CountryEU = -1;
                     CountryShortName = "";
                     CountryVAT = 0;
-
                 }
             }
-
         }
 
         #endregion
 
         #region Currencies
 
-        public static DataTable getCurrencies(string _beg)
-        {
-            string query = "EXECUTE sp_CurrencySelectLike @Beg = '" + _beg + "'";
-
-            return Helper.QueryDT(query);
-        }
+        public static DataTable getCurrencies(string _beg) => Helper.QueryDT("EXECUTE sp_CurrencySelectLike @Beg = '" + _beg + "'");
 
         public int AddCurrency(string Currency, string Description, string Symbol)
         {
@@ -315,28 +267,21 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Close();
             return _res;
         }
+
         public void DeleteCurrency(int Id)
         {
-
-
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_DeleteCurrency", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
 
-
             sqlComm.Parameters.AddWithValue("@id", Id);
 
-            try
-            {
-                sqlConn.Open();
-                sqlComm.ExecuteNonQuery();
-                sqlConn.Close();
-            }
-            catch { }
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
         }
         public void EditCurrency(int Id, string Currency, string Description, string Symbol)
         {
-
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_EditCurrency", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -346,23 +291,17 @@ namespace Odin.CMB_Components.BLL
             sqlComm.Parameters.AddWithValue("@description", Description);
             sqlComm.Parameters.AddWithValue("@symbol", Symbol);
 
-
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
         }
 
         #endregion
 
         #region CustCodes
 
-        public static DataTable getCustCodes(string _beg)
-        {
-            string query = "EXECUTE sp_CustCodesSelectLike @Beg = '" + _beg + "'";
+        public static DataTable getCustCodes(string _beg) => Helper.QueryDT("EXECUTE sp_CustCodesSelectLike @Beg = '" + _beg + "'");
 
-            return Helper.QueryDT(query);
-        }
         public int AddCustCode(string CustCode, string Description)
         {
             int _res = 0;
@@ -382,28 +321,22 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Close();
             return _res;
         }
+
         public void DeleteCustCode(int Id)
         {
-
-
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_DeleteCustCode", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
 
-
             sqlComm.Parameters.AddWithValue("@id", Id);
 
-            try
-            {
-                sqlConn.Open();
-                sqlComm.ExecuteNonQuery();
-                sqlConn.Close();
-            }
-            catch { }
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
         }
+
         public void EditCustCode(int Id, string CustCode, string Description)
         {
-
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_EditCustCode", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -415,37 +348,22 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
         }
 
         #endregion
 
         #region Articles
 
-        public static DataTable getArticles(string _beg)
-        {
-            string query = "EXECUTE sp_ArticlesSelectLike @Beg = '" + _beg + "'";
+        public static DataTable getArticles(string _beg) => Helper.QueryDT("EXECUTE sp_ArticlesSelectLike @Beg = '" + _beg + "'");
 
-            return Helper.QueryDT(query);
-        }
-
-        public static DataTable getAliases(int _artid)
-        {
-            string query = "EXECUTE sp_ArticleAliases @artid = '" + _artid + "'";
-
-            return Helper.QueryDT(query);
-        }
+        public static DataTable getAliases(int _artid) => Helper.QueryDT("EXECUTE sp_ArticleAliases @artid = '" + _artid + "'");
 
         #endregion
 
         #region Types
 
-        public static DataTable getTypes(string _beg)
-        {
-            string query = "EXECUTE sp_TypesSelectLike @Beg = '" + _beg + "'";
+        public static DataTable getTypes(string _beg) =>  Helper.QueryDT("EXECUTE sp_TypesSelectLike @Beg = '" + _beg + "'");
 
-            return Helper.QueryDT(query);
-        }
         public int AddType(string Type, string Description, int ParentId, string TypeLat, int CustCodeId)
         {
             int _res = 0;
@@ -493,37 +411,20 @@ namespace Odin.CMB_Components.BLL
 
         public void DeleteType(int Id)
         {
-
-
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_DeleteType", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
 
-
             sqlComm.Parameters.AddWithValue("@id", Id);
 
-            //try
-            //{
-                sqlConn.Open();
-                sqlComm.ExecuteNonQuery();
-                sqlConn.Close();
-            //}
-            //catch { }
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
         }
 
-        public static DataTable getTypeSpecificationsAll(int _typeid)
-        {
-            string query = "EXECUTE sp_TypesSpecificationsAll @typeid = " + _typeid;
+        public static DataTable getTypeSpecificationsAll(int _typeid) => Helper.QueryDT("EXECUTE sp_TypesSpecificationsAll @typeid = " + _typeid);
 
-            return Helper.QueryDT(query);
-        }
-
-        public static DataTable getTypeSpecifications(int _typeid)
-        {
-            string query = "EXECUTE sp_TypesSpecifications @typeid = " + _typeid;
-
-            return Helper.QueryDT(query);
-        }
+        public static DataTable getTypeSpecifications(int _typeid) => Helper.QueryDT("EXECUTE sp_TypesSpecifications @typeid = " + _typeid);
 
         public void AddSpecification(string Specification, string TypeofData, string Comments, int CharUnitId)
         {
@@ -540,7 +441,6 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-            
         }
 
         public void EditSpecification(int Id, string Specification, string TypeofData, string Comments, int CharUnitId)
@@ -558,7 +458,6 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
         }
         
         public void DeleteSpecification(int Id)
@@ -570,7 +469,6 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
         }
 
         public void SaveSpecsForType(int _typeid, DataTable _specs)
@@ -586,7 +484,6 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
         }
 
         #endregion
@@ -638,22 +535,15 @@ namespace Odin.CMB_Components.BLL
 
         public void DeleteDepartment(int Id)
         {
-
-
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_DeleteDepartment", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
 
-
             sqlComm.Parameters.AddWithValue("@id", Id);
 
-            try
-            {
-                sqlConn.Open();
-                sqlComm.ExecuteNonQuery();
-                sqlConn.Close();
-            }
-            catch { }
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
         }
 
         #endregion
@@ -703,88 +593,44 @@ namespace Odin.CMB_Components.BLL
 
         public void DeleteCategory(int Id)
         {
-
-
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_DeleteCategory", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
 
-
             sqlComm.Parameters.AddWithValue("@id", Id);
 
-            try
-            {
-                sqlConn.Open();
-                sqlComm.ExecuteNonQuery();
-                sqlConn.Close();
-            }
-            catch { }
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
         }
 
         #endregion
 
         #region Batches
 
-        public static DataTable getBatches(string _beg)
-        {
-            string query = "EXECUTE sp_BatchSelectLike @Beg = '" + _beg + "'";
+        public static DataTable getBatches(string _beg) => Helper.QueryDT("EXECUTE sp_BatchSelectLike @Beg = '" + _beg + "'");
 
-            return Helper.QueryDT(query);
-        }
+        public static DataTable getBatchesActiveOnly(string _beg) => Helper.QueryDT("EXECUTE sp_BatchSelectLikeActiveOnly @Beg = '" + _beg + "'");
 
-        public static DataTable getBatchesActiveOnly(string _beg)
-        {
-            string query = "EXECUTE sp_BatchSelectLikeActiveOnly @Beg = '" + _beg + "'";
+        public static DataTable getBatchesProject(string _beg) => Helper.QueryDT("EXECUTE sp_BatchProjectSelectLike @Beg = '" + _beg + "'");
 
-            return Helper.QueryDT(query);
-        }
+        public static DataTable getBatchesProjectActiveOnly(string _beg) => Helper.QueryDT("EXECUTE sp_BatchProjectSelectLikeActiveOnly @Beg = '" + _beg + "'");
 
-        public static DataTable getBatchesProject(string _beg)
-        {
-            string query = "EXECUTE sp_BatchProjectSelectLike @Beg = '" + _beg + "'";
+        public static DataTable getBatchesGroups(string _beg) => Helper.QueryDT("EXECUTE sp_BatchGroupsSelectLike @Beg = '" + _beg + "'");
 
-            return Helper.QueryDT(query);
-        }
+        public static DataTable getBatchesGroupsActiveOnly(string _beg) => Helper.QueryDT("EXECUTE sp_BatchGroupsSelectLikeActiveOnly @Beg = '" + _beg + "'");
 
-        public static DataTable getBatchesProjectActiveOnly(string _beg)
-        {
-            string query = "EXECUTE sp_BatchProjectSelectLikeActiveOnly @Beg = '" + _beg + "'";
-
-            return Helper.QueryDT(query);
-        }
-        public static DataTable getBatchesGroups(string _beg)
-        {
-            string query = "EXECUTE sp_BatchGroupsSelectLike @Beg = '" + _beg + "'";
-
-            return Helper.QueryDT(query);
-        }
-        public static DataTable getBatchesGroupsActiveOnly(string _beg)
-        {
-            string query = "EXECUTE sp_BatchGroupsSelectLikeActiveOnly @Beg = '" + _beg + "'";
-
-            return Helper.QueryDT(query);
-        }
         #endregion
 
         #region Companies
 
-        public static DataTable getFirms(string _beg)
-        {
-            string query = "EXECUTE sp_CompaniesSelectLike @Beg = '" + _beg + "'";
-
-            return Helper.QueryDT(query);
-        }
+        public static DataTable getFirms(string _beg) => Helper.QueryDT("EXECUTE sp_CompaniesSelectLike @Beg = '" + _beg + "'");
 
         #endregion
 
         #region Incoterms
 
-        public static DataTable getIncoterms(string _beg)
-        {
-            string query = "EXECUTE sp_IncotermsSelectLike @Beg = '" + _beg + "'";
-
-            return Helper.QueryDT(query);
-        }
+        public static DataTable getIncoterms(string _beg) => Helper.QueryDT("EXECUTE sp_IncotermsSelectLike @Beg = '" + _beg + "'");
 
         public int AddIncoterm(string Incoterm, string Description)
         {
@@ -793,7 +639,6 @@ namespace Odin.CMB_Components.BLL
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_AddIncoterm", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
-
 
             sqlComm.Parameters.AddWithValue("@incoterm", Incoterm);
             sqlComm.Parameters.AddWithValue("@description", Description);
@@ -805,28 +650,22 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Close();
             return _res;
         }
+
         public void DeleteIncoterm(int Id)
         {
-
-
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_DeleteIncoterm", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
 
-
             sqlComm.Parameters.AddWithValue("@id", Id);
 
-            try
-            {
-                sqlConn.Open();
-                sqlComm.ExecuteNonQuery();
-                sqlConn.Close();
-            }
-            catch { }
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
         }
+
         public void EditIncoterm(int Id, string Incoterm, string Description)
         {
-
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_EditIncoterm", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -838,19 +677,13 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
         }
 
         #endregion
 
         #region Projects
 
-        public static DataTable getProjects(string _beg)
-        {
-            string query = "EXECUTE sp_ProjectsSelectLike @Beg = '" + _beg + "'";
-
-            return Helper.QueryDT(query);
-        }
+        public static DataTable getProjects(string _beg) => Helper.QueryDT("EXECUTE sp_ProjectsSelectLike @Beg = '" + _beg + "'");
 
         public int AddProject(string Project)
         {
@@ -859,7 +692,6 @@ namespace Odin.CMB_Components.BLL
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_AddProject", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
-
 
             sqlComm.Parameters.AddWithValue("@project", Project);
             sqlComm.Parameters.Add("@insertedid", SqlDbType.Int).Direction = ParameterDirection.Output;
@@ -870,28 +702,22 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Close();
             return _res;
         }
+
         public void DeleteProject(int Id)
         {
-
-
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_DeleteProject", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
 
-
             sqlComm.Parameters.AddWithValue("@id", Id);
 
-            try
-            {
-                sqlConn.Open();
-                sqlComm.ExecuteNonQuery();
-                sqlConn.Close();
-            }
-            catch { }
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
         }
+
         public void EditProject(int Id, string Project)
         {
-
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_EditProject", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -902,19 +728,13 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
         }
 
         #endregion
 
         #region End Customers
 
-        public static DataTable getEndCustomers(string _beg)
-        {
-            string query = "EXECUTE sp_EndCustomersSelectLike @Beg = '" + _beg + "'";
-
-            return Helper.QueryDT(query);
-        }
+        public static DataTable getEndCustomers(string _beg) => Helper.QueryDT("EXECUTE sp_EndCustomersSelectLike @Beg = '" + _beg + "'");
 
         public int AddEndCustomer(string EndCustomer)
         {
@@ -923,7 +743,6 @@ namespace Odin.CMB_Components.BLL
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_AddEndCustomer", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
-
 
             sqlComm.Parameters.AddWithValue("@endcustomer", EndCustomer);
             sqlComm.Parameters.Add("@insertedid", SqlDbType.Int).Direction = ParameterDirection.Output;
@@ -934,28 +753,22 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Close();
             return _res;
         }
+
         public void DeleteEndCustomer(int Id)
         {
-
-
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_DeleteEndCustomer", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
 
-
             sqlComm.Parameters.AddWithValue("@id", Id);
 
-            try
-            {
-                sqlConn.Open();
-                sqlComm.ExecuteNonQuery();
-                sqlConn.Close();
-            }
-            catch { }
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
         }
+
         public void EditEndCustomer(int Id, string EndCustomer)
         {
-
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_EditEndCustomer", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -966,18 +779,13 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
         }
         #endregion
 
         #region Payment terms
 
-        public static DataTable getPayterms(string _beg)
-        {
-            string query = "EXECUTE sp_PaytermsSelectLike @Beg = '" + _beg + "'";
+        public static DataTable getPayterms(string _beg) => Helper.QueryDT("EXECUTE sp_PaytermsSelectLike @Beg = '" + _beg + "'");
 
-            return Helper.QueryDT(query);
-        }
         public int AddPayterm(string Payterm, string PaytermLat, string Description)
         {
             int _res = 0;
@@ -985,7 +793,6 @@ namespace Odin.CMB_Components.BLL
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_AddPayterm", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
-
 
             sqlComm.Parameters.AddWithValue("@payterm", Payterm);
             sqlComm.Parameters.AddWithValue("@paytermlat", PaytermLat);
@@ -998,28 +805,22 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Close();
             return _res;
         }
+
         public void DeletePayterm(int Id)
         {
-
-
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_DeletePayterm", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
 
-
             sqlComm.Parameters.AddWithValue("@id", Id);
 
-            try
-            {
-                sqlConn.Open();
-                sqlComm.ExecuteNonQuery();
-                sqlConn.Close();
-            }
-            catch { }
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
         }
+
         public void EditPayterm(int Id, string Payterm, string PaytermLat, string Description)
         {
-
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_EditPayterm", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -1032,19 +833,12 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
         }
         #endregion
 
         #region Transport
 
-        public static DataTable getTransport(string _beg)
-        {
-            string query = "EXECUTE sp_TransportSelectLike @Beg = '" + _beg + "'";
-
-            return Helper.QueryDT(query);
-        }
-
+        public static DataTable getTransport(string _beg) => Helper.QueryDT("EXECUTE sp_TransportSelectLike @Beg = '" + _beg + "'");
 
         public int AddTransport(string Name, string IntrastatCode, string TransType)
         {
@@ -1053,7 +847,6 @@ namespace Odin.CMB_Components.BLL
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_AddTransport", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
-
 
             sqlComm.Parameters.AddWithValue("@Name", Name);
             sqlComm.Parameters.AddWithValue("@IntrastatCode", IntrastatCode);
@@ -1070,7 +863,6 @@ namespace Odin.CMB_Components.BLL
 
         public void EditTransport(int Id, string Name, string IntrastatCode, string TransType)
         {
-
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_EditTransport", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -1083,12 +875,10 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
         }
 
         public void DeleteTransport(int Id)
         {
-
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_DeleteTransport", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -1098,7 +888,6 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
         }
 
         int _transportid = 0;
@@ -1122,10 +911,7 @@ namespace Odin.CMB_Components.BLL
                 conn.Open();
                 DataSet ds = new DataSet();
 
-                SqlDataAdapter adapter =
-                    new SqlDataAdapter(
-                        "execute sp_SelectTransport @id = " + _transportid, conn);
-
+                SqlDataAdapter adapter = new SqlDataAdapter("execute sp_SelectTransport @id = " + _transportid, conn);
 
                 conn.Close();
 
@@ -1134,14 +920,12 @@ namespace Odin.CMB_Components.BLL
                 DataTable dt = ds.Tables[0];
 
                 if (dt.Rows.Count > 0)
-                {
                     foreach (DataRow dr in dt.Rows)
                     {
                         Transport = dr["name"].ToString();
                         TransportIntrastat = dr["intrastatcode"].ToString();
                         TransType = dr["transtype"].ToString();
                     }
-                }
                 else
                 {
                     Transport = "";
@@ -1156,13 +940,7 @@ namespace Odin.CMB_Components.BLL
 
         #region ToolsType
 
-        public static DataTable getToolsType(string _beg)
-        {
-            string query = "EXECUTE sp_ToolsTypeSelectLike @Beg = '" + _beg + "'";
-
-            return Helper.QueryDT(query);
-        }
-
+        public static DataTable getToolsType(string _beg) => Helper.QueryDT("EXECUTE sp_ToolsTypeSelectLike @Beg = '" + _beg + "'");
 
         public int AddToolsType(string Name)
         {
@@ -1172,9 +950,7 @@ namespace Odin.CMB_Components.BLL
             SqlCommand sqlComm = new SqlCommand("sp_AddToolsType", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
 
-
             sqlComm.Parameters.AddWithValue("@Name", Name);
-
             sqlComm.Parameters.Add("@insertedid", SqlDbType.Int).Direction = ParameterDirection.Output;
 
             sqlConn.Open();
@@ -1186,7 +962,6 @@ namespace Odin.CMB_Components.BLL
 
         public void EditToolsType(int Id, string Name)
         {
-
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_EditToolsType", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -1197,12 +972,10 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
         }
 
         public void DeleteToolsType(int Id)
         {
-
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_DeleteToolsType", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -1212,7 +985,6 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
         }
 
         int _ToolsTypeid = 0;
@@ -1230,10 +1002,7 @@ namespace Odin.CMB_Components.BLL
                 conn.Open();
                 DataSet ds = new DataSet();
 
-                SqlDataAdapter adapter =
-                    new SqlDataAdapter(
-                        "execute sp_SelectToolsType @id = " + _ToolsTypeid, conn);
-
+                SqlDataAdapter adapter = new SqlDataAdapter("execute sp_SelectToolsType @id = " + _ToolsTypeid, conn);
 
                 conn.Close();
 
@@ -1241,42 +1010,22 @@ namespace Odin.CMB_Components.BLL
 
                 DataTable dt = ds.Tables[0];
 
-                if (dt.Rows.Count > 0)
-                {
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        ToolsType = dr["name"].ToString();
-                    }
-                }
-                else
-                {
-                    ToolsType = "";
-                }
+                if (dt.Rows.Count > 0) foreach (DataRow dr in dt.Rows) ToolsType = dr["name"].ToString();
+                else ToolsType = "";
             }
-
         }
 
         #endregion
 
         #region Sales orders
 
-        public static DataTable getSalesOrders(string _beg)
-        {
-            string query = "EXECUTE sp_SalesOrdersSelectLike @Beg = '" + _beg + "'";
-
-            return Helper.QueryDT(query);
-        }
+        public static DataTable getSalesOrders(string _beg) => Helper.QueryDT("EXECUTE sp_SalesOrdersSelectLike @Beg = '" + _beg + "'");
 
         #endregion
 
         #region Quotations
 
-        public static DataTable getQuotations(string _beg)
-        {
-            string query = "EXECUTE sp_QuotationsSelectLike @Beg = '" + _beg + "'";
-
-            return Helper.QueryDT(query);
-        }
+        public static DataTable getQuotations(string _beg) => Helper.QueryDT("EXECUTE sp_QuotationsSelectLike @Beg = '" + _beg + "'");
 
         #endregion
 
@@ -1529,8 +1278,7 @@ namespace Odin.CMB_Components.BLL
         public void EncryptMailPassword(int UserId, string PWD)
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);
-            string strSQL = "update BAS_Users set mailpwd = " +
-                                "EncryptByPassPhrase(name + surname + userlogin, @pwd, 1, CONVERT(varbinary, id)) where id = @userid";
+            string strSQL = "update BAS_Users set mailpwd = EncryptByPassPhrase(name + surname + userlogin, @pwd, 1, CONVERT(varbinary, id)) where id = @userid";
             SqlCommand sqlComm = new SqlCommand(strSQL, sqlConn);
 
             sqlComm.Parameters.AddWithValue("@userid", UserId);
@@ -1699,10 +1447,7 @@ namespace Odin.CMB_Components.BLL
                 conn.Open();
                 DataSet ds = new DataSet();
 
-                SqlDataAdapter adapter =
-                    new SqlDataAdapter(
-                        "execute sp_SelectIncomeDocHead @id = " + _incomedocheadid, conn);
-
+                SqlDataAdapter adapter = new SqlDataAdapter("execute sp_SelectIncomeDocHead @id = " + _incomedocheadid, conn);
 
                 conn.Close();
 
@@ -1711,7 +1456,6 @@ namespace Odin.CMB_Components.BLL
                 DataTable dt = ds.Tables[0];
 
                 if (dt.Rows.Count > 0)
-                {
                     foreach (DataRow dr in dt.Rows)
                     {
                         IncomeDocName = dr["name"].ToString();
@@ -1737,11 +1481,7 @@ namespace Odin.CMB_Components.BLL
                         IncomeDocPlace = dr["place"].ToString();
                         IncomeDocAllow = Convert.ToInt32(dr["allow"]);
                     }
-                }
-                else
-                {
-                    ClearIncomeDocHead();
-                }
+                else ClearIncomeDocHead();
             }
 
         }
@@ -1833,9 +1573,7 @@ namespace Odin.CMB_Components.BLL
             conn.Open();
             DataSet ds = new DataSet();
 
-            SqlDataAdapter adapter =
-                new SqlDataAdapter(
-                    "execute sp_SelectResalePurchaseOrders @headid = " + _headid, conn);
+            SqlDataAdapter adapter = new SqlDataAdapter("execute sp_SelectResalePurchaseOrders @headid = " + _headid, conn);
             
             conn.Close();
 
@@ -1863,11 +1601,8 @@ namespace Odin.CMB_Components.BLL
                 emailaddresses = Fun.EmailAddressesByType(3);
 
                 if (emailaddresses != "")
-                {
                     MyHelper.SendMessage(globClass.ReplaceChar(emailaddresses, ";", ","), "Resale orders income registration!", strMessage);
-                }
             }
-
         }
 
         public static DataTable getIncomeAdvances(int _headid)
@@ -1893,7 +1628,6 @@ namespace Odin.CMB_Components.BLL
             sqlComm.ExecuteNonQuery();
            
             sqlConn.Close();
-
         }
 
         public void EditIncomeDocAdvance(int _id, double _amount, int _curid, string _curdate, double _currate)
@@ -1912,7 +1646,6 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
         }
 
         public void DeleteIncomeDocAdvance(int _id)
@@ -1927,7 +1660,6 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
         }
 
         #endregion
@@ -2007,7 +1739,6 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
         }
 
         public void DeleteMoveDocHead(int _id)
@@ -2022,7 +1753,6 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
         }
 
         int _movedocheadid = 0;
@@ -2037,10 +1767,7 @@ namespace Odin.CMB_Components.BLL
                 conn.Open();
                 DataSet ds = new DataSet();
 
-                SqlDataAdapter adapter =
-                    new SqlDataAdapter(
-                        "execute sp_SelectMoveDocHead @id = " + _movedocheadid, conn);
-
+                SqlDataAdapter adapter = new SqlDataAdapter("execute sp_SelectMoveDocHead @id = " + _movedocheadid, conn);
 
                 conn.Close();
 
@@ -2049,7 +1776,6 @@ namespace Odin.CMB_Components.BLL
                 DataTable dt = ds.Tables[0];
 
                 if (dt.Rows.Count > 0)
-                {
                     foreach (DataRow dr in dt.Rows)
                     {
                         MoveDocName = dr["name"].ToString();
@@ -2084,13 +1810,8 @@ namespace Odin.CMB_Components.BLL
                         MoveIsReturn = Convert.ToInt32(dr["isreturn"]);
                         MoveCreditAccount = dr["creditaccount"].ToString();
                     }
-                }
-                else
-                {
-                    ClearMoveDocHead();
-                }
+                else ClearMoveDocHead();
             }
-
         }
 
         public string MoveDocName
@@ -2250,7 +1971,6 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
         }
 
         public void DeleteOutcomeDocHead(int _id)
@@ -2265,7 +1985,6 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
         }
 
         int _outdocheadid = 0;
@@ -2277,10 +1996,7 @@ namespace Odin.CMB_Components.BLL
                 conn.Open();
                 DataSet ds = new DataSet();
 
-                SqlDataAdapter adapter =
-                    new SqlDataAdapter(
-                        "execute sp_SelectOutDocHead @id = " + _outdocheadid, conn);
-
+                SqlDataAdapter adapter = new SqlDataAdapter("execute sp_SelectOutDocHead @id = " + _outdocheadid, conn);
 
                 conn.Close();
 
@@ -2289,7 +2005,6 @@ namespace Odin.CMB_Components.BLL
                 DataTable dt = ds.Tables[0];
 
                 if (dt.Rows.Count > 0)
-                {
                     foreach (DataRow dr in dt.Rows)
                     {
                         OutDocName = dr["name"].ToString();
@@ -2301,11 +2016,7 @@ namespace Odin.CMB_Components.BLL
                         OutDocReason = dr["reason"].ToString();
                         OutDocBatchId = Convert.ToInt32(dr["batchid"]);
                     }
-                }
-                else
-                {
-                    ClearOutDocHead();
-                }
+                else ClearOutDocHead();
             }
         }
 
@@ -2381,7 +2092,6 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
         }
 
         public void DeleteRequestHead(int _id)
@@ -2398,6 +2108,7 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Close();
 
         }
+
         int _requestid = 0;
         public int RequestId
         {
@@ -2409,10 +2120,7 @@ namespace Odin.CMB_Components.BLL
                 conn.Open();
                 DataSet ds = new DataSet();
 
-                SqlDataAdapter adapter =
-                    new SqlDataAdapter(
-                        "execute sp_SelectRequestHead @id = " + _requestid, conn);
-
+                SqlDataAdapter adapter = new SqlDataAdapter("execute sp_SelectRequestHead @id = " + _requestid, conn);
 
                 conn.Close();
 
@@ -2421,18 +2129,13 @@ namespace Odin.CMB_Components.BLL
                 DataTable dt = ds.Tables[0];
 
                 if (dt.Rows.Count > 0)
-                {
                     foreach (DataRow dr in dt.Rows)
                     {
                         RequestName = dr["name"].ToString();
                         RequestComments = dr["comments"].ToString();
                         RequestProdPlace = Convert.ToInt32(dr["placeid"]);
                     }
-                }
-                else
-                {
-                    ClearRequestHead();
-                }
+                else ClearRequestHead();
             }
         }
 
@@ -2626,7 +2329,6 @@ namespace Odin.CMB_Components.BLL
                 DataTable dt = ds.Tables[0];
 
                 if (dt.Rows.Count > 0)
-                {
                     foreach (DataRow dr in dt.Rows)
                     {
                         DelivNote = dr["name"].ToString();
@@ -2647,14 +2349,9 @@ namespace Odin.CMB_Components.BLL
                         DLNInternal = Convert.ToInt32(dr["internal"]);
 
                     }
-                }
-                else
-                {
-                    ClearDelivNoteHead();
-                }
+                else ClearDelivNoteHead();
             }
         }
-
 
         #endregion
 
@@ -2673,7 +2370,6 @@ namespace Odin.CMB_Components.BLL
 
             return Helper.QueryDT(query);
         }
-
 
         #endregion
 
@@ -2849,10 +2545,7 @@ namespace Odin.CMB_Components.BLL
                 conn.Open();
                 DataSet ds = new DataSet();
 
-                SqlDataAdapter adapter =
-                    new SqlDataAdapter(
-                        "execute sp_SelectExInvoiceDocHead @id = " + _exinvoiceid, conn);
-
+                SqlDataAdapter adapter = new SqlDataAdapter("execute sp_SelectExInvoiceDocHead @id = " + _exinvoiceid, conn);
 
                 conn.Close();
 
@@ -2861,7 +2554,6 @@ namespace Odin.CMB_Components.BLL
                 DataTable dt = ds.Tables[0];
 
                 if (dt.Rows.Count > 0)
-                {
                     foreach (DataRow dr in dt.Rows)
                     {
                         ExInvoice = dr["name"].ToString();
@@ -2939,13 +2631,8 @@ namespace Odin.CMB_Components.BLL
                         ExInvoiceJobTitle = dr["jobtitle"].ToString();
                         ExInvoiceJobTitleLat = dr["jobtitlelat"].ToString();
                     }
-                }
-                else
-                {
-                    ClearExInvoiceHead();
-                }
+                else ClearExInvoiceHead();
             }
-
         }
 
         public void ClearExInvoiceHead()
@@ -3155,9 +2842,7 @@ namespace Odin.CMB_Components.BLL
 
         public static DataTable getPackage(string _beg)
         {
-            string query = "EXECUTE sp_PackageSelectLike @Beg = '" + _beg + "'";
-
-            return Helper.QueryDT(query);
+            return Helper.QueryDT("EXECUTE sp_PackageSelectLike @Beg = '" + _beg + "'");
         }
         public int AddPackage(string Package, double VolWeight)
         {
@@ -3214,11 +2899,8 @@ namespace Odin.CMB_Components.BLL
         #region Bargains
         public static DataTable getBargains(string _beg)
         {
-            string query = "EXECUTE sp_BargainsSelectLike @Beg = '" + _beg + "'";
-
-            return Helper.QueryDT(query);
+            return Helper.QueryDT("EXECUTE sp_BargainsSelectLike @Beg = '" + _beg + "'");
         }
-
 
         public int AddBargain(string Name, string IntrastatCode, string NameLat)
         {
@@ -3261,7 +2943,6 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
         }
 
         public void DeleteBargain(int Id)
@@ -3276,14 +2957,11 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
         }
-
 
         #endregion
 
         #region Printers
-
 
         string _DefPrinter = "";
         string _DefIPPrinter = "";
@@ -3307,9 +2985,7 @@ namespace Odin.CMB_Components.BLL
 
         public static DataTable getPrinters(string name)
         {
-            string query = "EXECUTE sp_SelectEtPrinters @pcname = '" + name + "'";
-
-            return Helper.QueryDT(query);
+            return Helper.QueryDT("EXECUTE sp_SelectEtPrinters @pcname = '" + name + "'");
         }
 
         public void MakeDefaultPinter(int PrinterId)
@@ -3324,8 +3000,6 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
-
         }
 
         public void AddPrinter(string PrinterName, string IP_Address, int Default)
@@ -3337,17 +3011,10 @@ namespace Odin.CMB_Components.BLL
             sqlComm.Parameters.AddWithValue("@name", PrinterName);
             sqlComm.Parameters.AddWithValue("@ip", IP_Address);
             sqlComm.Parameters.AddWithValue("@default", Default);
-            sqlComm.Parameters.AddWithValue("@pcname", System.Environment.MachineName);
-            
-            try
-            {
-                sqlConn.Open();
-                sqlComm.ExecuteNonQuery();
-                sqlConn.Close();
-            }
-            catch
-            { }
-           
+            sqlComm.Parameters.AddWithValue("@pcname", Environment.MachineName);
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
         }
 
         public void DeletePrinter(int id)
@@ -3356,13 +3023,9 @@ namespace Odin.CMB_Components.BLL
             SqlCommand sqlComm = new SqlCommand("sp_deletePrinter", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
             sqlComm.Parameters.AddWithValue("@id", id);
-            try
-            {
-                sqlConn.Open();
-                sqlComm.ExecuteNonQuery();
-                sqlConn.Close();
-            }
-            catch { }
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
         }
 
         public void EditPrinter(int Id, string PrinterName, string IP_Address, int Default)
@@ -3376,16 +3039,10 @@ namespace Odin.CMB_Components.BLL
             sqlComm.Parameters.AddWithValue("@name", PrinterName);
             sqlComm.Parameters.AddWithValue("@ip", IP_Address);
             sqlComm.Parameters.AddWithValue("@default", Default);
-            sqlComm.Parameters.AddWithValue("@pcname", System.Environment.MachineName);
-            //try
-           // {
-                sqlConn.Open();
-                sqlComm.ExecuteNonQuery();
-                sqlConn.Close();
-            //}
-           // catch
-           // { }
-
+            sqlComm.Parameters.AddWithValue("@pcname", Environment.MachineName);
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
         }
 
         public void ShowDefaultPrinter()
@@ -3394,21 +3051,19 @@ namespace Odin.CMB_Components.BLL
             SqlCommand sqlComm = new SqlCommand("sp_SelectEtPrinters", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
 
-            sqlComm.Parameters.AddWithValue("@pcname", System.Environment.MachineName);
+            sqlComm.Parameters.AddWithValue("@pcname", Environment.MachineName);
 
             sqlConn.Open();
             SqlDataReader sqlReader = sqlComm.ExecuteReader();
             if (sqlReader.HasRows)
             {
                 while (sqlReader.Read())
-                {
                     if (Convert.ToInt32(sqlReader["default"]) == -1)
                     {
                         DefPrinter = sqlReader["name"].ToString();
                         DefIPPrinter = sqlReader["ipadress"].ToString();
                         DefPrinterDPI = (Int32)sqlReader["dpi"];
                     }
-                }
                 sqlReader.Close();
             }
             else
@@ -3418,7 +3073,6 @@ namespace Odin.CMB_Components.BLL
                 DefPrinterDPI = 300;
             }
             sqlConn.Close();
-           
         }
         #endregion
 
@@ -3452,26 +3106,18 @@ namespace Odin.CMB_Components.BLL
         }
         public void DeleteOperation(int Id)
         {
-
-
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_DeleteOperation", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
 
-
             sqlComm.Parameters.AddWithValue("@id", Id);
 
-            try
-            {
-                sqlConn.Open();
-                sqlComm.ExecuteNonQuery();
-                sqlConn.Close();
-            }
-            catch { }
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
         }
         public void EditOperation(int Id, string Operation, string Formula)
         {
-
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_EditOperation", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -3483,26 +3129,14 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
         }
         #endregion
 
         #region Launches
 
-        public static DataTable getLaunches(string _beg)
-        {
-            string query = "EXECUTE sp_LaunchSelectLike @Beg = '" + _beg + "'";
+        public static DataTable getLaunches(string _beg) => Helper.QueryDT("EXECUTE sp_LaunchSelectLike @Beg = '" + _beg + "'");
 
-            return Helper.QueryDT(query);
-        }
-
-        public static DataTable getLaunchGroups(string _beg)
-        {
-            string query = "EXECUTE sp_LaunchGroupsSelectLike @Beg = '" + _beg + "'";
-
-            return Helper.QueryDT(query);
-        }
-
+        public static DataTable getLaunchGroups(string _beg) => Helper.QueryDT("EXECUTE sp_LaunchGroupsSelectLike @Beg = '" + _beg + "'");
 
         #endregion
 
@@ -3526,40 +3160,25 @@ namespace Odin.CMB_Components.BLL
 
         #region FreezedReasons
 
-        public static DataTable getFreezedReasons()
-        {
-            return Helper.QueryDT("SELECT * FROM TMP_FreezedReason where lang = '" + new DAL_Functions().UserLang + "'");
-        }
+        public static DataTable getFreezedReasons() => Helper.QueryDT("SELECT * FROM TMP_FreezedReason where lang = '" + new DAL_Functions().UserLang + "'");
 
         #endregion
 
         #region Activities
 
-        public static DataTable getActivities(string _beg)
-        {
-            string query = "EXECUTE sp_ActivitiesSelectLike @Beg = '" + _beg + "'";
-
-            return Helper.QueryDT(query);
-        }
+        public static DataTable getActivities(string _beg) => Helper.QueryDT("EXECUTE sp_ActivitiesSelectLike @Beg = '" + _beg + "'");
 
         public void DeleteActivity(int Id)
         {
-
-
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_DeleteActivity", sqlConn);
             sqlComm.CommandType = CommandType.StoredProcedure;
 
-
             sqlComm.Parameters.AddWithValue("@id", Id);
 
-            try
-            {
-                sqlConn.Open();
-                sqlComm.ExecuteNonQuery();
-                sqlConn.Close();
-            }
-            catch { }
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
         }
 
         public int AddActivity(string Activity, string Comments)
@@ -3596,23 +3215,14 @@ namespace Odin.CMB_Components.BLL
             sqlConn.Open();
             sqlComm.ExecuteNonQuery();
             sqlConn.Close();
-
         }
 
         #endregion
 
         #region NomCodes
 
-        public static DataTable getNomCodes(string _beg)
-        {
-            string query = "EXECUTE sp_NomCodesSelectLike @Beg = '" + _beg + "'";
-
-            return Helper.QueryDT(query);
-        }
+        public static DataTable getNomCodes(string _beg) => Helper.QueryDT("EXECUTE sp_NomCodesSelectLike @Beg = '" + _beg + "'");
 
         #endregion
-
-
     }
-
 }

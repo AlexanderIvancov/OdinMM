@@ -509,15 +509,9 @@ namespace Odin.Global_Classes
             string _tmpmessage = arr.FirstOrDefault();
 
             for (int i = 1; i < arr.Length; i++)
-            {
                 _tmpmessage = _tmpmessage + "<br>" + arr[i].ToString();
-            }
            
-            mymessage.Body = "<html>" +
-                        "<body>" +
-                        _tmpmessage +
-                        "</body>" +
-                        "</html>";
+            mymessage.Body = "<html><body>" + _tmpmessage + "</body></html>";
 
 
             //MimeAttachment attachment;
@@ -553,7 +547,6 @@ namespace Odin.Global_Classes
 
         public void SendDirectEMailWithAttachment(string To, string Subject, string Message, string Attachments)
         {
-
             if (String.IsNullOrEmpty(To))
             {
                 MessageBox.Show("Missing recipient address.", "Email Error");
@@ -583,64 +576,49 @@ namespace Odin.Global_Classes
             _subject = Subject;
             _message = Message;
 
-            var mail = From;
             var host = Properties.Settings.Default.SMTPAddress;
 
-            DAL.UserLogin = DAL.CurrentDBUser;//System.Environment.UserName;
+            DAL.UserLogin = DAL.CurrentDBUser;
 
             var user = DAL.UserEmail;
             var pass = DAL.UserMailPWD;
-            //MessageBox.Show(pass);
 
-            //Generate Message 
             var mymessage = new MimeMailMessage();
-            mymessage.From = new MimeMailAddress(mail);
-
-
+            mymessage.From = new MimeMailAddress(From);
             mymessage.To.Add(To);
-
             mymessage.Subject = Subject;
             mymessage.IsBodyHtml = true;
             mymessage.Headers.Add("Content-type", "text/html; charset=utf-8");
-            //mymessage.Body = frmMail.Message;
 
             string[] arr = Message.Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
             string _tmpmessage = arr.FirstOrDefault();
 
-            for (int i = 1; i < arr.Length; i++)
-                _tmpmessage = _tmpmessage + "<br>" + arr[i].ToString();
+            for (int i = 1; i < arr.Length; i++) _tmpmessage = _tmpmessage + "<br>" + arr[i].ToString();
 
-            mymessage.Body = "<html>" +
-                        "<body>" +
-                        _tmpmessage +
-                        "</body>" +
-                        "</html>";
+            mymessage.Body = "<html><body>" + _tmpmessage + "</body></html>";
 
-
-            MimeAttachment attachment;
-
-            string[] arr1 = Attachments.Split(';');
-
-            for (int i = 0; i < arr1.Length; i++)
-                if (!String.IsNullOrEmpty(arr1[i].ToString().Trim()))
+            if (!string.IsNullOrWhiteSpace(Attachments))
+            {
+                foreach (string file in Attachments.Split(';'))
                 {
-                    attachment = new MimeAttachment(arr1[i].ToString().Trim());
-                    mymessage.Attachments.Add(attachment);
+                    string path = file.Trim();
+                    if (!string.IsNullOrEmpty(path))
+                    {
+                        var attachment = new MimeAttachment(path);
+                        mymessage.Attachments.Add(attachment);
+                    }
                 }
+            }
 
-            //Create Smtp Client
-            var mailer = new MimeMailer(host, 465);
+                var mailer = new MimeMailer(host, 465);
+                mailer.User = user;
+                mailer.Password = pass;
+                mailer.SslType = SslMode.Ssl;
+                mailer.AuthenticationMode = AuthenticationType.Base64;
 
-            mailer.User = user;
-            mailer.Password = pass;
-            mailer.SslType = SslMode.Ssl;
-            mailer.AuthenticationMode = AuthenticationType.Base64;
-
-            //Set a delegate function for call back
-            mailer.SendCompleted += compEvent;
-            mailer.SendMailAsync(mymessage);
+                mailer.SendCompleted += compEvent;
+                mailer.SendMailAsync(mymessage);
         }
-
         public void compEvent(object sender, AsyncCompletedEventArgs e)
         {
             AddMailLog(_from, _to, _subject, _message, e.Cancelled == true ? "Cancelled" : (e.Error != null ? "Error : " + e.Error.Message : "Mail sent"));
