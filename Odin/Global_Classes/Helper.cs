@@ -313,40 +313,35 @@ namespace Odin.Global_Classes
 
         frm_EmailNew frmMail = null;
         
-        public void SendMessage(string To, string Subject, string Message)
+        public void SendMessage(string To, string Subject, string Message, string Attachments = null)
         {
-
             frmMail = new frm_EmailNew();
 
             frmMail.From = DAL.MyMailAdress();
             frmMail.To = GlobClass.NES(To) != "" ? frmMail.From + ", " + To : frmMail.From;
-
             frmMail.Subject = Subject;
             frmMail.Message = Message;
-            
+            frmMail.Attachments = Attachments;
             frmMail.SendMail += new MailSendingEventHandler(SendEMail);
 
             frmMail.Show();
-            
         }
+
         public void SendMessageWS(string To, string Subject, string Message)
         {
             frmMail = new frm_EmailNew();
 
             frmMail.From = DAL.MyMailAdress();
             frmMail.To = To;
-           
             frmMail.Subject = Subject;
             frmMail.Message = Message;
-
             frmMail.SendMail += new MailSendingEventHandler(SendEMail);
 
             frmMail.Show();
-
         }
+
         public void SendEMail(object sender)
         {
-
             if (String.IsNullOrEmpty(frmMail.To))
             {
                 MessageBox.Show("Missing recipient address.", "Email Error");
@@ -454,7 +449,6 @@ namespace Odin.Global_Classes
 
         public void SendDirectEMail(string To, string Subject, string Message)
         {
-
             if (String.IsNullOrEmpty(To))
             {
                 MessageBox.Show("Missing recipient address.", "Email Error");

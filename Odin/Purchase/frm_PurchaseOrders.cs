@@ -849,7 +849,7 @@ namespace Odin.Purchase
                 {
                     strMessage = "Добрый день,\nВо вложении заказ " + cmb_PurchaseOrders1.PurchaseOrder + " - выставьте счет на оплату.\nСпасибо!";
                     string pdfPath = GeneratePurchaseOrderPdf(cmb_PurchaseOrders1.PurchaseOrderId);
-                    MyHelper.SendDirectEMailWithAttachment(globClass.ReplaceChar(emailaddresses, ";", ","), "Purchase order " + cmb_PurchaseOrders1.PurchaseOrder, strMessage, pdfPath);
+                    MyHelper.SendMessage(globClass.ReplaceChar(emailaddresses, ";", ","), "Purchase order " + cmb_PurchaseOrders1.PurchaseOrder, strMessage, pdfPath);
                 }
                 else MyHelper.SendMessage(globClass.ReplaceChar(emailaddresses, ";", ","), "Purchase order for resale NR : " + cmb_PurchaseOrders1.PurchaseOrder + ", supplier: " + POBll.POHeadSupplier + " was created!", strMessage);
             }
