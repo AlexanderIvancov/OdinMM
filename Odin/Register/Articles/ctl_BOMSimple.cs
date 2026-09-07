@@ -201,7 +201,7 @@ namespace Odin.Register.Articles
                         cell.Style.BackColor = Color.Silver;
                 if (Convert.ToInt32(row.Cells["cn_revision"].Value) == -1)
                     foreach (DataGridViewCell cell in row.Cells)
-                        cell.Style.BackColor = Color.Pink;
+                        cell.Style.BackColor = Color.Aqua;
 
             }
         }
