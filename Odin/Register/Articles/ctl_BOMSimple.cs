@@ -188,23 +188,20 @@ namespace Odin.Register.Articles
                 }
 
                 if (Convert.ToInt32(row.Cells["cn_isvalidated"].Value) == 0)
-                {
                     if (row.Cells["cn_lastchange"].Value.ToString() != ""
-                        && Convert.ToDateTime(row.Cells["cn_lastchange"].Value).AddMinutes(1) >= Convert.ToDateTime(row.Cells["cn_validat"].Value))
-                    { 
+                        && Convert.ToDateTime(row.Cells["cn_lastchange"].Value).AddMinutes(1) >= Convert.ToDateTime(row.Cells["cn_validat"].Value))//
                         if (Convert.ToInt32(row.Cells["cn_typechange"].Value) != 0)
                             foreach (DataGridViewCell cell in row.Cells)
                                 cell.Style.BackColor = Color.Gold;
                         else
                             foreach (DataGridViewCell cell in row.Cells)
                                 cell.Style.BackColor = Color.Plum;
-                    }
-                }
                 if (Convert.ToInt32(row.Cells["cn_isactive"].Value) == 0)
-                {
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Silver;
-                }
+                if (Convert.ToInt32(row.Cells["cn_revision"].Value) == -1)
+                    foreach (DataGridViewCell cell in row.Cells)
+                        cell.Style.BackColor = Color.Pink;
 
             }
         }
