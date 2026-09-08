@@ -996,7 +996,7 @@ namespace Odin.Global_Classes
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             string strSQL = "select distinct id from bas_articles where article = @article";
             SqlCommand sqlComm = new SqlCommand(strSQL, sqlConn);
-            sqlComm.Parameters.AddWithValue("@article", Article);
+            sqlComm.Parameters.Add("@article", SqlDbType.NVarChar, 150).Value = Article;
             sqlConn.Open();
             SqlDataReader reader = sqlComm.ExecuteReader();
             if (reader.HasRows)

@@ -295,7 +295,7 @@ namespace Odin.CMB_Components.Articles
 
                 SqlDataAdapter adapter =
                     new SqlDataAdapter(
-                        "SELECT DISTINCT TOP 1 id FROM BAS_Articles WHERE article = '" + _Article.ToString() + "' collate Cyrillic_General_CI_AI ", conn);
+                        "SELECT DISTINCT TOP 1 id FROM BAS_Articles WHERE article = N'" + _Article.ToString() + "' collate Cyrillic_General_CI_AI ", conn);
 
 
                 conn.Close();
