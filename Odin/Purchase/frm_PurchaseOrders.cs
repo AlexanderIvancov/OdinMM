@@ -122,10 +122,13 @@ namespace Odin.Purchase
                 if (Convert.ToInt32(row.Cells["cn_inprocess"].Value) != 0)
                     foreach (DataGridViewCell cell in row.Cells)
                         cell.Style.BackColor = Color.Yellow;
-                if (Convert.ToDateTime(row.Cells["cn_confdate"].Value) <= System.DateTime.Now.AddDays(3)
-                    //Convert.ToDateTime(row.Cells["cn_confdate"].Value).AddDays(5) <= System.DateTime.Now
-                    && row.Cells["cn_state"].Value.ToString().ToLower() == "open")
-                    row.Cells["cn_confdate"].Style.BackColor = Color.Red;
+                object dateValue = row.Cells["cn_confdate"].Value;
+                if (dateValue != DBNull.Value && dateValue != null)
+                {
+                    DateTime confDate = Convert.ToDateTime(dateValue);
+                    if (confDate <= DateTime.Now.AddDays(3) && row.Cells["cn_state"].Value.ToString().ToLower() == "open")
+                        row.Cells["cn_confdate"].Style.BackColor = Color.Red;
+                }
             }
         }
 
