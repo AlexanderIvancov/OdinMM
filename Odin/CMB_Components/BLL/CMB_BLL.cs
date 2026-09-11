@@ -1447,12 +1447,11 @@ namespace Odin.CMB_Components.BLL
                 conn.Open();
                 DataSet ds = new DataSet();
 
-                SqlDataAdapter adapter = new SqlDataAdapter("execute sp_SelectIncomeDocHead @id = " + _incomedocheadid, conn);
-
-                conn.Close();
-
-                adapter.Fill(ds);
-
+                using (SqlDataAdapter adapter = new SqlDataAdapter("execute sp_SelectIncomeDocHead @id = " + _incomedocheadid, conn))
+                {
+                    adapter.SelectCommand.CommandTimeout = 300;
+                    adapter.Fill(ds);
+                }
                 DataTable dt = ds.Tables[0];
 
                 if (dt.Rows.Count > 0)
