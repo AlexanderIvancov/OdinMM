@@ -52,6 +52,7 @@ namespace Odin.CMB_Components.PurchaseOrders
 
                 //_PurchaseOrder = value;
                 txt_PurchaseOrder.Text = value;
+                _PurchaseOrder = value;
                 DataSet ds = new DataSet();
 
                 SqlDataAdapter adapter =

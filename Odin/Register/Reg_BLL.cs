@@ -448,8 +448,7 @@ namespace Odin.Register
             return Helper.QueryDT("select * from BAS_Nomenclatures where IdCse = " + IdCse);
         }
 
-        public int AddBOMLine(int IdCSE, int IdCST, int LineNumber, decimal Quantity,
-           int Using, string Comments, double SpoilConst, double SpoilNorm, int StageID, string Positions, int Revision)
+        public int AddBOMLine(int IdCSE, int IdCST, int LineNumber, decimal Quantity, int Using, string Comments, double SpoilConst, double SpoilNorm, int StageID, string PositionsTOP, string PositionsBOT, int Revision)
         {
             try
             {
@@ -465,7 +464,8 @@ namespace Odin.Register
                                         new SqlParameter("@SpoilConst", SqlDbType.Float) {Value = SpoilConst},
                                         new SqlParameter("@SpoilNorm", SqlDbType.Float) {Value = SpoilNorm},
                                         new SqlParameter("@StageID", SqlDbType.Int) {Value = StageID},
-                                        new SqlParameter("@Positions", SqlDbType.NVarChar) {Value = Positions},
+                                        new SqlParameter("@Positions", SqlDbType.NVarChar) {Value = PositionsTOP},
+                                        new SqlParameter("@PositionsBOT", SqlDbType.NVarChar) {Value = PositionsBOT},
                                         new SqlParameter("@Revision", SqlDbType.Int) {Value = Revision},
                                         new SqlParameter("@InsertedID", SqlDbType.BigInt) {Direction = ParameterDirection.Output}
                                     };
@@ -478,8 +478,7 @@ namespace Odin.Register
             }
         }
 
-        public void EditBOMLine(int Id, int IdCST, int LineNumber, decimal Quantity,
-                                int Using, string Comments, double SpoilConst, double SpoilNorm, int StageID, string Positions, int Revision)
+        public void EditBOMLine(int Id, int IdCST, int LineNumber, decimal Quantity, int Using, string Comments, double SpoilConst, double SpoilNorm, int StageID, string PositionsTOP, string PositionsBOT, int Revision)
         {
             var sqlparams = new List<SqlParameter>
                                     {
@@ -492,11 +491,11 @@ namespace Odin.Register
                                         new SqlParameter("@SpoilConst", SqlDbType.Float) {Value = SpoilConst},
                                         new SqlParameter("@SpoilNorm", SqlDbType.Float) {Value = SpoilNorm},
                                         new SqlParameter("@StageID", SqlDbType.Int) {Value = StageID},
-                                        new SqlParameter("@Positions", SqlDbType.NVarChar) {Value = Positions},
+                                        new SqlParameter("@Positions", SqlDbType.NVarChar) {Value = PositionsTOP},
+                                        new SqlParameter("@PositionsBOT", SqlDbType.NVarChar) {Value = PositionsBOT},
                                         new SqlParameter("@Revision", SqlDbType.Int) {Value = Revision}
                                     };
             Helper.ExecuteSP("sp_EditBOMLine", sqlparams.ToArray());
-
         }
 
         public void EditBOMLineNumber(int Id, int LineNumber)
@@ -507,7 +506,15 @@ namespace Odin.Register
                                         new SqlParameter("@number", SqlDbType.Int) {Value = LineNumber}
                                     };
             Helper.ExecuteSP("sp_EditBOMLineNumber", sqlparams.ToArray());
+        }
 
+        public void PositionRevers(int artid)
+        {
+            var sqlparams = new List<SqlParameter>
+                                    {
+                                        new SqlParameter("@artid", SqlDbType.Int) {Value = artid},
+                                    };
+            Helper.ExecuteSP("sp_PositionRevers", sqlparams.ToArray());
         }
 
         public int MaxNumber(int id)
@@ -515,6 +522,7 @@ namespace Odin.Register
             var data = BOMDetailsData(id).AsEnumerable();
             return data.Count() > 0 ? data.Max(d => d.Field<int>("LineNumber")) : 0;
         }
+
         public int IdCstById(int Id)
         {
             return Convert.ToInt32(Helper.GetOneRecord("SELECT IdCST FROM BAS_Nomenclatures WHERE ID = " + Id));

@@ -145,6 +145,22 @@
         uuHsQM65cML4ABzY5fA/eQGKIwMcVjm2bAAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="btn_PositionRevers.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABcAAAAWCAYAAAArdgcFAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIzSURBVEhLrZQ9iBNBFMf/egjnF340FtoEURAVxEr2zeyy
+        jhuLkJAUIeDGQgh7JqXFyQUhkEILLYOFhdhEtBDP5gqxESGICmIjCEJAULQxIooIpytPdnXuXW4vfvzg
+        wfLezG92384MMCFxHK9xXfeMzP8XhsPhtOM434noZalU2izrf0UQBC4RXdVav2B5El98398tx05MpVKp
+        KKU+WkKO2HpeDIJgI68PIG/FJulaQj6fnxfSZaGUepIMrwO4AKAP4CSAbUL3m0KhcM+WENErrfUlY0zT
+        yt0W0wyA7J/dbDZnLfEbY8zetDYYDNZzXmt9eumsn2TL4zieIqLFRPyMt54cU61Wp2QuIVter9fTz/4c
+        RdE6WV+FbLkx5gHLXdc9IWsTcJg/TCZ/QUSfHMf5BmBZOyal0WjcIqL7Ms/yd0T0SOYnhf+ZUorb+lXW
+        UooAzib92yeLWfT7/VPJNn0qayl8EMrJIs8BbJcDxsFvXS6Xua0sn5P1FJbvSZ4XAOwU9bFEUbSQng/P
+        81Y8/iy/AeAOgPN2odfrKc/z3kdRtCHNjUajrWEYPrRO7hV7joTlRwEcAjAP4Bgnu93uxVTQbrePNBqN
+        47Va7brW2r4mXnc6nbVSaGO3hS+huZmZmWvWlTA2iOhtckNmwvJzAGYBPM7lcgelSIbW+uZqb5xyIGmF
+        B2ALJ4wxBSl0HOeD1vpysVjcIQV/jO/7+/nOYXEYhrtk/Z/xPG9aKXW31WqtuNUkPwBuTPakjlyOiAAA
+        AABJRU5ErkJggg==
+</value>
+  </data>
   <metadata name="cn_num.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -184,9 +200,6 @@
   <metadata name="cn_using.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="Alteration.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <metadata name="cn_who.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -218,6 +231,9 @@
     <value>True</value>
   </metadata>
   <metadata name="cn_positions.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="cn_positionsBOT.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="cn_type.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

@@ -98,10 +98,16 @@ namespace Odin.Register.Articles
             set { txt_Comments.Text = value; }
         }
 
-        public string Positions
+        public string PositionsTOP
         {
-            get { return txt_Positions.Text; }
-            set { txt_Positions.Text = value; }
+            get { return txt_PositionsTOP.Text; }
+            set { txt_PositionsTOP.Text = value; }
+        }
+
+        public string PositionsBOT
+        {
+            get { return txt_PositionsBOT.Text; }
+            set { txt_PositionsBOT.Text = value; }
         }
 
         public double SpoilConst
@@ -223,32 +229,62 @@ namespace Odin.Register.Articles
 
         private void buttonSpecAny2_Click(object sender, EventArgs e)
         {
-            txt_Positions.Text = string.Empty;
+            txt_PositionsTOP.Text = string.Empty;
         }
 
         private void buttonSpecAny3_Click(object sender, EventArgs e)
         {
-            string _tmpposition = Positions;
+            string _tmpposition = PositionsTOP;
             try
             {
                 _tmpposition = Helper.GetOneRecord("select dbo.fn_FormatPositionsString('" + _tmpposition + "')").ToString();
             }
             catch { }
 
-            Positions = _tmpposition;
+            PositionsTOP = _tmpposition;
         }
 
         private void buttonSpecAny4_Click(object sender, EventArgs e)
         {
-            string _tmpposition = Positions;
+            string _tmpposition = PositionsBOT;
             try
             {
                 _tmpposition = formatPosition(_tmpposition);
             }
             catch { }
 
-            Positions = _tmpposition;
+            PositionsBOT = _tmpposition;
         }
+
+        private void buttonSpecAny5_Click(object sender, EventArgs e)
+        {
+            txt_PositionsBOT.Text = string.Empty;
+        }
+
+        private void buttonSpecAny6_Click(object sender, EventArgs e)
+        {
+            string _tmpposition = PositionsBOT;
+            try
+            {
+                _tmpposition = Helper.GetOneRecord("select dbo.fn_FormatPositionsString('" + _tmpposition + "')").ToString();
+            }
+            catch { }
+
+            PositionsBOT = _tmpposition;
+        }
+
+        private void buttonSpecAny7_Click(object sender, EventArgs e)
+        {
+            string _tmpposition = PositionsBOT;
+            try
+            {
+                _tmpposition = formatPosition(_tmpposition);
+            }
+            catch { }
+
+            PositionsBOT = _tmpposition;
+        }
+
         private string formatPosition(string pos)
         {
             string res = "";

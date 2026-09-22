@@ -4570,6 +4570,7 @@
     <Content Include="Resourses\microscope-test-icon.png" />
     <Content Include="Resourses\network_adapter.png" />
     <Content Include="Resourses\new_logo2.png" />
+    <Content Include="Resourses\position_revers.png" />
     <Content Include="Resourses\reload.png" />
     <Content Include="Resourses\Repair32x32.png" />
     <Content Include="Resourses\Repair48x48.png" />

@@ -215,7 +215,7 @@ namespace Odin.Register.Articles
             if (result == DialogResult.OK)
             {
                 var insertedId = BLL.AddBOMLine(frm.IdCSE, frm.IdCST, frm.Number, frm.Qty, frm.Using,
-                                                    frm.Comments, frm.SpoilConst, frm.SpoilPerc, frm.StageId, frm.Positions, frm.Revision);
+                                                    frm.Comments, frm.SpoilConst, frm.SpoilPerc, frm.StageId, frm.PositionsTOP, frm.PositionsBOT, frm.Revision);
                 var id = BLL.IdCstById(insertedId);
                 AddNodeByValue(ArtId);
                 EnableDisableButtons();
@@ -241,7 +241,7 @@ namespace Odin.Register.Articles
             if (result == DialogResult.OK)
             {
                 var insertedId = BLL.AddBOMLine(frm.IdCSE, frm.IdCST, frm.Number, frm.Qty, frm.Using,
-                                                frm.Comments, frm.SpoilConst, frm.SpoilPerc, frm.StageId, frm.Positions, frm.Revision);
+                                                frm.Comments, frm.SpoilConst, frm.SpoilPerc, frm.StageId, frm.PositionsTOP, frm.PositionsBOT, frm.Revision);
                 var currentNode = tv_BOM.CurrentNode;
 
 
@@ -307,7 +307,7 @@ namespace Odin.Register.Articles
                                             Convert.ToInt32(tv_BOM.CurrentRow.Cells["cn_num"].Value));
 
                 var insertedId = BLL.AddBOMLine(frm.IdCSE, frm.IdCST, frm.Number, frm.Qty, frm.Using,
-                                                 frm.Comments, frm.SpoilConst, frm.SpoilPerc, frm.StageId, frm.Positions, frm.Revision);
+                                                 frm.Comments, frm.SpoilConst, frm.SpoilPerc, frm.StageId, frm.PositionsTOP, frm.PositionsBOT, frm.Revision);
 
                 var currentNode = tv_BOM.CurrentNode;
                 int deleteNodeLevel = currentNode.Level;
@@ -373,7 +373,7 @@ namespace Odin.Register.Articles
 
                 BLL.EditBOMLine(Convert.ToInt32(tv_BOM.CurrentRow.Cells["cn_id"].Value),
                     frm.IdCST, frm.Number, frm.Qty, frm.Using,
-                    frm.Comments, frm.SpoilConst, frm.SpoilPerc, frm.StageId, frm.Positions, frm.Revision);
+                    frm.Comments, frm.SpoilConst, frm.SpoilPerc, frm.StageId, frm.PositionsTOP, frm.PositionsBOT, frm.Revision);
 
 
 

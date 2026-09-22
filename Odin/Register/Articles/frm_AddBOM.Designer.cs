@@ -48,7 +48,8 @@
             this.txt_Num = new Owf.Controls.NumericTetxBox();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonLabel10 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.txt_Positions = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.txt_PositionsTOP = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.buttonSpecAny4 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.buttonSpecAny3 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.buttonSpecAny2 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.kryptonLabel9 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -56,22 +57,22 @@
             this.cmb_Common1 = new Odin.CMB_Components.Common.cmb_Common();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.buttonSpecAny4 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.kryptonLabel11 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.txt_PositionsBOT = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.buttonSpecAny5 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.buttonSpecAny6 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.buttonSpecAny7 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // chk_Revision
             // 
-            this.chk_Revision.Checked = true;
-            this.chk_Revision.CheckState = System.Windows.Forms.CheckState.Unchecked;
             this.chk_Revision.Location = new System.Drawing.Point(141, 75);
             this.chk_Revision.Name = "chk_Revision";
-            this.chk_Revision.Size = new System.Drawing.Size(44, 20);
+            this.chk_Revision.Size = new System.Drawing.Size(77, 20);
             this.chk_Revision.TabIndex = 20;
             this.chk_Revision.Values.Text = "Alteration";
-            this.chk_Revision.Visible = true;
-            // 
             // 
             // btn_Cancel
             // 
@@ -100,6 +101,7 @@
             this.cmb_Articles1.ArticleIdRec = 0;
             this.cmb_Articles1.ArtType = null;
             this.cmb_Articles1.BOMState = 0;
+            this.cmb_Articles1.CertState = "";
             this.cmb_Articles1.Comments = null;
             this.cmb_Articles1.CustCode = null;
             this.cmb_Articles1.CustCodeId = 0;
@@ -167,8 +169,6 @@
             // buttonSpecAny1
             // 
             this.buttonSpecAny1.Image = global::Odin.Global_Resourses.bindingNavigatorDeleteItem_Image;
-            this.buttonSpecAny1.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny1.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny1.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny1.UniqueName = "4687129580114F1960B04C89E02869BE";
             this.buttonSpecAny1.Click += new System.EventHandler(this.buttonSpecAny1_Click);
@@ -194,7 +194,7 @@
             // 
             this.kryptonLabel7.Location = new System.Drawing.Point(12, 197);
             this.kryptonLabel7.Name = "kryptonLabel7";
-            this.kryptonLabel7.Size = new System.Drawing.Size(100, 20);
+            this.kryptonLabel7.Size = new System.Drawing.Size(101, 20);
             this.kryptonLabel7.TabIndex = 18;
             this.kryptonLabel7.Values.Text = "Spoilage (const):";
             // 
@@ -256,10 +256,12 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel11);
+            this.kryptonPanel1.Controls.Add(this.txt_PositionsBOT);
             this.kryptonPanel1.Controls.Add(this.chk_Revision);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel10);
             this.kryptonPanel1.Controls.Add(this.txt_Comments);
-            this.kryptonPanel1.Controls.Add(this.txt_Positions);
+            this.kryptonPanel1.Controls.Add(this.txt_PositionsTOP);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel9);
             this.kryptonPanel1.Controls.Add(this.btn_OK);
             this.kryptonPanel1.Controls.Add(this.btn_Cancel);
@@ -279,43 +281,44 @@
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonPanel1.Size = new System.Drawing.Size(435, 336);
+            this.kryptonPanel1.Size = new System.Drawing.Size(435, 430);
             this.kryptonPanel1.TabIndex = 22;
             // 
             // kryptonLabel10
             // 
             this.kryptonLabel10.Location = new System.Drawing.Point(13, 249);
             this.kryptonLabel10.Name = "kryptonLabel10";
-            this.kryptonLabel10.Size = new System.Drawing.Size(62, 20);
+            this.kryptonLabel10.Size = new System.Drawing.Size(88, 20);
             this.kryptonLabel10.TabIndex = 45;
-            this.kryptonLabel10.Values.Text = "Positions:";
+            this.kryptonLabel10.Values.Text = "Positions TOP:";
             // 
-            // txt_Positions
+            // txt_PositionsTOP
             // 
-            this.txt_Positions.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
+            this.txt_PositionsTOP.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
             this.buttonSpecAny4,
             this.buttonSpecAny3,
             this.buttonSpecAny2});
-            this.txt_Positions.Location = new System.Drawing.Point(90, 249);
-            this.txt_Positions.Multiline = true;
-            this.txt_Positions.Name = "txt_Positions";
-            this.txt_Positions.Size = new System.Drawing.Size(333, 75);
-            this.txt_Positions.TabIndex = 16;
+            this.txt_PositionsTOP.Location = new System.Drawing.Point(108, 249);
+            this.txt_PositionsTOP.Multiline = true;
+            this.txt_PositionsTOP.Name = "txt_PositionsTOP";
+            this.txt_PositionsTOP.Size = new System.Drawing.Size(315, 75);
+            this.txt_PositionsTOP.TabIndex = 16;
+            // 
+            // buttonSpecAny4
+            // 
+            this.buttonSpecAny4.Image = global::Odin.Global_Resourses.ClipboardCut1;
+            this.buttonSpecAny4.UniqueName = "8C354531EA6F4A93229FE463337B7B28";
+            this.buttonSpecAny4.Click += new System.EventHandler(this.buttonSpecAny4_Click);
             // 
             // buttonSpecAny3
             // 
             this.buttonSpecAny3.Image = global::Odin.Global_Resourses.DrawingCanvasSmall1;
-            this.buttonSpecAny3.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny3.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
-            this.buttonSpecAny3.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Generic;
             this.buttonSpecAny3.UniqueName = "2EE667DBAB64498077A25E1C6306FE4D";
             this.buttonSpecAny3.Click += new System.EventHandler(this.buttonSpecAny3_Click);
             // 
             // buttonSpecAny2
             // 
             this.buttonSpecAny2.Image = global::Odin.Global_Resourses.bindingNavigatorDeleteItem_Image;
-            this.buttonSpecAny2.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny2.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
             this.buttonSpecAny2.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny2.UniqueName = "4687129580114F1960B04C89E02869BE";
             this.buttonSpecAny2.Click += new System.EventHandler(this.buttonSpecAny2_Click);
@@ -367,14 +370,44 @@
             this.kryptonLabel2.TabIndex = 0;
             this.kryptonLabel2.Values.Text = "Number";
             // 
-            // buttonSpecAny4
+            // kryptonLabel11
             // 
-            this.buttonSpecAny4.Image = global::Odin.Global_Resourses.ClipboardCut1;
-            this.buttonSpecAny4.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Inherit;
-            this.buttonSpecAny4.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
-            this.buttonSpecAny4.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Generic;
-            this.buttonSpecAny4.UniqueName = "8C354531EA6F4A93229FE463337B7B28";
-            this.buttonSpecAny4.Click += new System.EventHandler(this.buttonSpecAny4_Click);
+            this.kryptonLabel11.Location = new System.Drawing.Point(13, 337);
+            this.kryptonLabel11.Name = "kryptonLabel11";
+            this.kryptonLabel11.Size = new System.Drawing.Size(89, 20);
+            this.kryptonLabel11.TabIndex = 47;
+            this.kryptonLabel11.Values.Text = "Positions BOT:";
+            // 
+            // txt_PositionsBOT
+            // 
+            this.txt_PositionsBOT.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
+            this.buttonSpecAny7,
+            this.buttonSpecAny6,
+            this.buttonSpecAny5});
+            this.txt_PositionsBOT.Location = new System.Drawing.Point(108, 337);
+            this.txt_PositionsBOT.Multiline = true;
+            this.txt_PositionsBOT.Name = "txt_PositionsBOT";
+            this.txt_PositionsBOT.Size = new System.Drawing.Size(315, 75);
+            this.txt_PositionsBOT.TabIndex = 46;
+            // 
+            // buttonSpecAny7
+            // 
+            this.buttonSpecAny7.Image = global::Odin.Global_Resourses.ClipboardCut1;
+            this.buttonSpecAny7.UniqueName = "8C354531EA6F4A93229FE463337B7B28";
+            this.buttonSpecAny7.Click += new System.EventHandler(this.buttonSpecAny7_Click);
+            // 
+            // buttonSpecAny6
+            // 
+            this.buttonSpecAny6.Image = global::Odin.Global_Resourses.DrawingCanvasSmall1;
+            this.buttonSpecAny6.UniqueName = "2EE667DBAB64498077A25E1C6306FE4D";
+            this.buttonSpecAny6.Click += new System.EventHandler(this.buttonSpecAny6_Click);
+            // 
+            // buttonSpecAny5
+            // 
+            this.buttonSpecAny5.Image = global::Odin.Global_Resourses.bindingNavigatorDeleteItem_Image;
+            this.buttonSpecAny5.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
+            this.buttonSpecAny5.UniqueName = "4687129580114F1960B04C89E02869BE";
+            this.buttonSpecAny5.Click += new System.EventHandler(this.buttonSpecAny5_Click);
             // 
             // frm_AddBOM
             // 
@@ -383,7 +416,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.CancelButton = this.btn_Cancel;
-            this.ClientSize = new System.Drawing.Size(435, 336);
+            this.ClientSize = new System.Drawing.Size(435, 430);
             this.Controls.Add(this.txt_Num);
             this.Controls.Add(this.txt_Unit);
             this.Controls.Add(this.txt_Qty);
@@ -397,8 +430,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
-            this.ResumeLayout(false); this.GetKryptonFormFields(this.GetType());
-            this.PerformLayout(); this.GetKryptonFormFields(this.GetType());
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -427,10 +460,15 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel8;
         private CMB_Components.Common.cmb_Common cmb_Common1;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel10;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_Positions;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_PositionsTOP;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny2;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel9;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny3;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny4;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel11;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt_PositionsBOT;
+        private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny5;
+        private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny6;
+        private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny7;
     }
 }

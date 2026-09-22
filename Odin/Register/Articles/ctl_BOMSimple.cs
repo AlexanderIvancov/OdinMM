@@ -432,7 +432,8 @@ namespace Odin.Register.Articles
             frm.SpoilPerc = Convert.ToDouble(gv_List.CurrentRow.Cells["cn_spoilperc"].Value ?? 0);
             frm.Using = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_using"].Value);
             frm.StageId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_stageid"].Value);
-            frm.Positions = gv_List.CurrentRow.Cells["cn_positions"].Value.ToString();
+            frm.PositionsTOP = gv_List.CurrentRow.Cells["cn_positions"].Value.ToString();
+            frm.PositionsBOT = gv_List.CurrentRow.Cells["cn_positionsBOT"].Value.ToString();
             frm.Revision = (Revision == null || Revision == DBNull.Value) ? 0 : Convert.ToInt32(Revision);
 
             DialogResult result = frm.ShowDialog();
@@ -445,7 +446,7 @@ namespace Odin.Register.Articles
                 Reg.EditBOMLine(Convert.ToInt32(gv_List.CurrentRow.Cells["cn_id"].Value),
                     frm.IdCST, frm.Number, frm.Qty, frm.Using,
                     frm.Comments, frm.SpoilConst, frm.SpoilPerc, 
-                    frm.StageId, frm.Positions, frm.Revision);
+                    frm.StageId, frm.PositionsTOP, frm.PositionsBOT, frm.Revision);
 
                 //DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 //var dir = Helper.SaveDirection(gv_List);
@@ -653,7 +654,7 @@ namespace Odin.Register.Articles
             {
                 var insertedId = Reg.AddBOMLine(frm.IdCSE, frm.IdCST, frm.Number, frm.Qty, frm.Using,
                                                     frm.Comments, frm.SpoilConst, frm.SpoilPerc, frm.StageId,
-                                                    frm.Positions, frm.Revision);
+                                                    frm.PositionsTOP, frm.PositionsBOT, frm.Revision);
                 //DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 //var dir = Helper.SaveDirection(gv_List);
 
@@ -689,7 +690,7 @@ namespace Odin.Register.Articles
 
                 var insertedId = Reg.AddBOMLine(frm.IdCSE, frm.IdCST, frm.Number, frm.Qty, frm.Using,
                                                  frm.Comments, frm.SpoilConst, frm.SpoilPerc, frm.StageId,
-                                                 frm.Positions, frm.Revision);
+                                                 frm.PositionsTOP, frm.PositionsBOT, frm.Revision);
                 //DataGridViewColumn oldColumn = gv_List.SortedColumn;
                 //var dir = Helper.SaveDirection(gv_List);
 
@@ -705,6 +706,13 @@ namespace Odin.Register.Articles
         private void btn_EditNorm_Click(object sender, EventArgs e)
         {
             ShowEdit();
+        }
+
+        private void btn_PositionRevers_Click(object sender, EventArgs e)
+        {
+            Reg.PositionRevers(cmb_Articles1.ArticleId);
+            ShowValidation(ArtId);
+            ShowDets();
         }
 
         private void btn_Copy_Click(object sender, EventArgs e)
