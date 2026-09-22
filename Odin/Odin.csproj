@@ -4555,6 +4555,7 @@
     <Content Include="Resourses\customers48x48.png" />
     <Content Include="Resourses\customers48x48_1.png" />
     <Content Include="Resourses\document_quote.png" />
+    <Content Include="Resourses\draw_smudge.png" />
     <Content Include="Resourses\events.png" />
     <Content Include="Resourses\factory.png" />
     <Content Include="Resourses\certificates.png" />
