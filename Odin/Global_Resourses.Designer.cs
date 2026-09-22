@@ -1944,6 +1944,16 @@ namespace Odin {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap draw_smudge {
+            get {
+                object obj = ResourceManager.GetObject("draw_smudge", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap drawer_open {
             get {
                 object obj = ResourceManager.GetObject("drawer_open", resourceCulture);
@@ -2917,6 +2927,16 @@ namespace Odin {
         internal static System.Drawing.Bitmap ksysguard {
             get {
                 object obj = ResourceManager.GetObject("ksysguard", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ktouch {
+            get {
+                object obj = ResourceManager.GetObject("ktouch", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
