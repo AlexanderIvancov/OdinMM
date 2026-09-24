@@ -185,6 +185,7 @@
             this.gv_List.Size = new System.Drawing.Size(760, 447);
             this.gv_List.TabIndex = 7;
             this.gv_List.SelectionChanged += new System.EventHandler(this.gv_List_SelectionChanged);
+            this.gv_List.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.gv_List_DataError);
             // 
             // mnu_Lines
             // 

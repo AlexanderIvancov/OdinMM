@@ -226,18 +226,24 @@ namespace Odin.Sales
                 Point mpoint = gv_List.PointToClient(DataGridView.MousePosition);
                 DataGridView.HitTestInfo info = gv_List.HitTest(mpoint.X, mpoint.Y);
 
+                if (info.RowIndex < 0 || info.ColumnIndex < 0 ||
+                    info.RowIndex >= gv_List.Rows.Count ||
+                    info.ColumnIndex >= gv_List.Columns.Count)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+
                 RowIndex = info.RowIndex;
                 ColumnIndex = info.ColumnIndex;
-                //MessageBox.Show(RowIndex.ToString() + "MO," + ColumnIndex.ToString());
 
                 gv_List.ClearSelection();
                 gv_List.Rows[RowIndex].Cells[ColumnIndex].Selected = true;
                 gv_List.CurrentCell = gv_List.Rows[RowIndex].Cells[ColumnIndex];
 
-                CellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
-                ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName.ToString();
-                //gv_List.SelectionChanged += new EventHandler(gv_List_SelectionChanged(this));
-
+                var cellValue = gv_List.Rows[RowIndex].Cells[ColumnIndex].Value;
+                CellValue = cellValue?.ToString() ?? string.Empty;
+                ColumnName = gv_List.Columns[ColumnIndex].DataPropertyName ?? string.Empty;
             }
             catch
             {
@@ -249,6 +255,7 @@ namespace Odin.Sales
 
         private void mni_FilterFor_TextChanged(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(ColumnName)) return;
             try
             {
                 bs_List.Filter = ("Convert(" + ColumnName + " , 'System.String') like '%" + mni_FilterFor.Text + "%'");//ColumnName + " like '%" + mni_FilterFor.Text + "%'";
@@ -261,6 +268,8 @@ namespace Odin.Sales
 
         private void mni_Search_Click(object sender, EventArgs e)
         {
+            if (gv_List.CurrentCell == null) return;
+
             frm_Find frm = new frm_Find();
             frm.grid = gv_List;
             frm.ColumnNumber = gv_List.CurrentCell.ColumnIndex;
@@ -270,6 +279,7 @@ namespace Odin.Sales
 
         private void mni_FilterBy_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(ColumnName)) return;
             try
             {
                 bs_List.Filter = String.IsNullOrEmpty(bs_List.Filter) == true
@@ -284,7 +294,6 @@ namespace Odin.Sales
             }
             catch { }
             SetCellsColor();
-
         }
 
         private void mni_FilterExcludingSel_Click(object sender, EventArgs e)
@@ -313,7 +322,7 @@ namespace Odin.Sales
 
         private void mni_Copy_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(CellValue.ToString());
+            if (!string.IsNullOrEmpty(CellValue)) Clipboard.SetText(CellValue);
         }
 
         private void mni_Admin_Click(object sender, EventArgs e)
