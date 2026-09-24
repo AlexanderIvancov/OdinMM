@@ -246,7 +246,7 @@ namespace Odin.Register.Articles
 
         private void buttonSpecAny4_Click(object sender, EventArgs e)
         {
-            string _tmpposition = PositionsBOT;
+            string _tmpposition = PositionsTOP;
             try
             {
                 _tmpposition = formatPosition(_tmpposition);
