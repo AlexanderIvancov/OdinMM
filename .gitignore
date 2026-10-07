@@ -242,3 +242,4 @@ ModelManifest.xml
 .fake/
 /Odin/Properties/Settings.Designer.cs
 /Odin/Properties/Settings.settings
+/Odin/App.config
