@@ -840,32 +840,31 @@ namespace Odin.DataCollection
 
         public string AddDataCollectionMaterialRepair(int WorkerId, string Serial, int LaunchId)
         {
-            string _res = "";
+            SuccessId = 0;
+            string result = "";
 
-            SqlConnection sqlConn = new SqlConnection(sConnStr);
-            SqlCommand sqlComm = new SqlCommand("sp_AddDataCollectionMaterialRepair", sqlConn);
-            sqlComm.CommandType = CommandType.StoredProcedure;
+            using (SqlConnection sqlConn = new SqlConnection(sConnStr))
+            using (SqlCommand sqlComm = new SqlCommand("sp_AddDataCollectionMaterialRepair", sqlConn))
+            {
+                sqlComm.CommandType = CommandType.StoredProcedure;
 
+                sqlComm.Parameters.AddWithValue("@workerid", WorkerId);
+                sqlComm.Parameters.AddWithValue("@serial", Serial);
+                sqlComm.Parameters.AddWithValue("@launchid", LaunchId);
 
-            sqlComm.Parameters.AddWithValue("@workerid", WorkerId);
-            sqlComm.Parameters.AddWithValue("@serial", Serial);
-            sqlComm.Parameters.AddWithValue("@launchid", LaunchId);
-            sqlComm.Parameters.Add("@label", SqlDbType.Int).Direction = ParameterDirection.Output;
+                sqlComm.Parameters.Add("@label", SqlDbType.Int).Direction = ParameterDirection.Output;
+                sqlComm.Parameters.Add("@successid", SqlDbType.Int).Direction = ParameterDirection.Output;
+                sqlComm.Parameters.Add("@success", SqlDbType.NVarChar, 150).Direction = ParameterDirection.Output;
 
-            sqlComm.Parameters.Add("@successid", SqlDbType.Int).Direction = ParameterDirection.Output;
-            sqlComm.Parameters.Add("@success", SqlDbType.NVarChar, 150).Direction = ParameterDirection.Output;
+                sqlConn.Open();
+                sqlComm.ExecuteNonQuery();
 
-            //try
-            //{
-            sqlConn.Open();
-            sqlComm.ExecuteNonQuery();
-            MaterialLabel = Convert.ToInt32(sqlComm.Parameters["@label"].Value);
-            SuccessId = Convert.ToInt32(sqlComm.Parameters["@successid"].Value);
-            _res = sqlComm.Parameters["@success"].Value.ToString();
-            sqlConn.Close();
-            //}
-            //catch { }
-            return _res;
+                object sid = sqlComm.Parameters["@successid"].Value;
+                SuccessId = (sid == null || sid == DBNull.Value) ? 0 : Convert.ToInt32(sid);
+                result = sqlComm.Parameters["@success"].Value?.ToString() ?? "";
+            }
+
+            return result;
         }
 
         public string DeleteDataCollectionRepair(int Id)

@@ -2131,7 +2131,7 @@ namespace Odin.Register
             sqlConn.Close();
         }
 
-        public void AddArtCertificates(string dateFrom, string dateTo, string comments, string certNum, string TNVED, int ArtId, string isValid)
+        public void AddArtCertificates(string dateFrom, string dateTo, string workDate, string comments, string certNum, string TNVED, int ArtId, string isValid)
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_AddArtCertificates", sqlConn);
@@ -2141,6 +2141,7 @@ namespace Odin.Register
             sqlComm.Parameters.AddWithValue("@comments", comments);
             sqlComm.Parameters.AddWithValue("@dateFrom", dateFrom);
             sqlComm.Parameters.AddWithValue("@dateTo", dateTo);
+            sqlComm.Parameters.AddWithValue("@workDate", workDate);
             sqlComm.Parameters.AddWithValue("@TNVED", TNVED);
             sqlComm.Parameters.AddWithValue("@artId", ArtId);
             sqlComm.Parameters.AddWithValue("@isValid", isValid);
@@ -2150,7 +2151,7 @@ namespace Odin.Register
             sqlConn.Close();
         }
 
-        public void EditArtCertificates(int id, string dateFrom, string dateTo, string comments, string certNum, string TNVED, string isValid, int ArtId)
+        public void EditArtCertificates(int id, string dateFrom, string dateTo, string workDate, string comments, string certNum, string TNVED, string isValid, int ArtId)
         {
             SqlConnection sqlConn = new SqlConnection(sConnStr);
             SqlCommand sqlComm = new SqlCommand("sp_EditArtCertificates", sqlConn);
@@ -2161,6 +2162,7 @@ namespace Odin.Register
             sqlComm.Parameters.AddWithValue("@comments", comments);
             sqlComm.Parameters.AddWithValue("@dateFrom", dateFrom);
             sqlComm.Parameters.AddWithValue("@dateTo", dateTo);
+            sqlComm.Parameters.AddWithValue("@workDate", workDate);
             sqlComm.Parameters.AddWithValue("@TNVED", TNVED);
             sqlComm.Parameters.AddWithValue("@isValid", isValid);
             sqlComm.Parameters.AddWithValue("@artId", ArtId);

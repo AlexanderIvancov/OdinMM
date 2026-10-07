@@ -29,7 +29,6 @@ namespace Odin.Register.Articles
             set { _lock = value; }
         }
 
-
         public int ArtId
         {
             get { return cmb_Articles1.ArticleId; }
@@ -65,12 +64,10 @@ namespace Odin.Register.Articles
 
             });
 
-
             bn_List.ThreadSafeCall(delegate
             {
                 bn_List.BindingSource = bs_List;
             });
-
         }
 
         #endregion
@@ -88,7 +85,6 @@ namespace Odin.Register.Articles
             ShowDets();
         }
 
-
         private void btn_Add_Click(object sender, EventArgs e)
         {
             frm_AddArtCertificates frm = new frm_AddArtCertificates();
@@ -98,7 +94,7 @@ namespace Odin.Register.Articles
             if (result == DialogResult.OK
                   && ArtId != 0)
             {
-                Reg.AddArtCertificates(frm.dateFrom, frm.dateTo, frm.Comments, frm.certNum, frm.TNVED, frm.ArtId, frm.isValid.ToString());
+                Reg.AddArtCertificates(frm.dateFrom, frm.dateTo, frm.workDate, frm.Comments, frm.certNum, frm.TNVED, frm.ArtId, frm.isValid.ToString());
                 ShowDets();
             }
         }
@@ -110,6 +106,7 @@ namespace Odin.Register.Articles
             string _comments = "";
             string _dateFrom = "";
             string _dateTo = "";
+            string _workDate = "";
             string _TNVED = "";
             int _IsValid = 0;
             int _artId = 0;
@@ -121,6 +118,7 @@ namespace Odin.Register.Articles
                 _comments = Convert.ToString(gv_List.CurrentRow.Cells["cn_comments"].Value);
                 _dateFrom = gv_List.CurrentRow.Cells["cn_dateFrom"].Value.ToString();
                 _dateTo = gv_List.CurrentRow.Cells["cn_dateTo"].Value.ToString();
+                _workDate = gv_List.CurrentRow.Cells["cn_workDate"].Value.ToString();
                 _TNVED = gv_List.CurrentRow.Cells["cn_tnved"].Value.ToString();
                 _IsValid = Convert.ToInt32(gv_List.CurrentRow.Cells["chk_IsValid"].Value);
                 _artId = Convert.ToInt32(gv_List.CurrentRow.Cells["cn_artid"].Value);
@@ -136,6 +134,7 @@ namespace Odin.Register.Articles
                 frm.Comments = _comments;
                 frm.dateFrom = _dateFrom;
                 frm.dateTo = _dateTo;
+                frm.workDate = _workDate;
                 frm.TNVED = _TNVED;
                 frm.isValid = _IsValid;
                 frm.cmb_Articles1.ArticleId = _artId;
@@ -143,16 +142,13 @@ namespace Odin.Register.Articles
                 DialogResult result = frm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    Reg.EditArtCertificates(frm.Id, frm.dateFrom, frm.dateTo, frm.Comments, frm.certNum, frm.TNVED, frm.isValid.ToString(), frm.ArtId);
+                    Reg.EditArtCertificates(frm.Id, frm.dateFrom, frm.dateTo, frm.workDate, frm.Comments, frm.certNum, frm.TNVED, frm.isValid.ToString(), frm.ArtId);
                     ShowDets();
                 }
             }
         }
 
-        private void btn_Copy_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void btn_Copy_Click(object sender, EventArgs e) {}
 
         private void btn_Delete_Click(object sender, EventArgs e)
         {
@@ -172,7 +168,6 @@ namespace Odin.Register.Articles
             }
         }
 
-
         private void btn_Lock_Click(object sender, EventArgs e)
         {
             if (Lock == -1)
@@ -187,7 +182,6 @@ namespace Odin.Register.Articles
                 Lock = -1;
             }
         }
-
 
         #endregion
     }

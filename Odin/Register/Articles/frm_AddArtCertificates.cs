@@ -9,51 +9,43 @@ namespace Odin.Register.Articles
         public frm_AddArtCertificates()
         {
             InitializeComponent();
+            cn_workDate.Value = new DateTime(2010, 1, 1);
         }
 
         #region Variables
 
         public string HeaderText
         {
-            get { return this.Text; }
-            set { this.Text = value; }
+            get { return Text; }
+            set { Text = value; }
         }
 
-        public int Id
-        { get; set; }
+        public int Id { get; set; }
 
         public int _ArtId = 0;
+
         public int ArtId
         {
-            get
-            {
-                return cmb_Articles1.ArticleId;
-            }
-            set
-            {
-                _ArtId = value;
-            }
+            get { return cmb_Articles1.ArticleId; }
+            set { _ArtId = value; }
         }
 
         public string certNum
-        { get { return cn_certNum.Text; }
-        set { cn_certNum.Text = value; } }
+        {
+            get { return cn_certNum.Text; }
+            set { cn_certNum.Text = value; }
+        }
 
         public int isValid
         {
-            get
-            {
-                return chk_IsValid.CheckState == CheckState.Checked ? -1 : 0;
-            }
-            set
-            {
-                chk_IsValid.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked;
-            }
+            get { return chk_IsValid.CheckState == CheckState.Checked ? -1 : 0; }
+            set { chk_IsValid.CheckState = value == -1 ? CheckState.Checked : CheckState.Unchecked; }
         }
 
         public string Comments
-        { get { return cn_comment.Text; }
-        set { cn_comment.Text = value; }
+        {
+            get { return cn_comment.Text; }
+            set { cn_comment.Text = value; }
         }
 
         public string TNVED
@@ -72,6 +64,12 @@ namespace Odin.Register.Articles
             get { return cn_dateTo.Value.ToString(); }
             set { cn_dateTo.Value = Convert.ToDateTime(value); }
         }
+        public string workDate
+        {
+            get { return cn_workDate.Value.ToString(); }
+            set { cn_workDate.Value = Convert.ToDateTime(value); }
+        }
+
         #endregion
 
         private void buttonSpecAny1_Click(object sender, EventArgs e)

@@ -31,10 +31,16 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctl_ArtCertificates));
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.btn_Lock = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.cmb_Articles1 = new Odin.CMB_Components.Articles.cmb_Articles();
             this.cmb_Certs1 = new Odin.CMB_Components.ArtCerts.cmb_ArtCerts();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.gv_List = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.btn_Add = new System.Windows.Forms.ToolStripButton();
+            this.btn_Edit = new System.Windows.Forms.ToolStripButton();
+            this.btn_Delete = new System.Windows.Forms.ToolStripButton();
+            this.bn_List = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bs_List = new Odin.Global_Classes.SyncBindingSource();
             this.cn_certid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_certNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_artid = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,16 +48,11 @@
             this.cn_tnved = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_dateFrom = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_dateTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_workDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chk_IsValid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_createdby = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_createdat = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btn_Add = new System.Windows.Forms.ToolStripButton();
-            this.btn_Edit = new System.Windows.Forms.ToolStripButton();
-            this.btn_Delete = new System.Windows.Forms.ToolStripButton();
-            this.bn_List = new System.Windows.Forms.BindingNavigator(this.components);
-            this.bs_List = new Odin.Global_Classes.SyncBindingSource();
-            this.btn_Lock = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_List)).BeginInit();
@@ -72,6 +73,17 @@
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
             this.kryptonPanel1.Size = new System.Drawing.Size(924, 52);
             this.kryptonPanel1.TabIndex = 1;
+            // 
+            // btn_Lock
+            // 
+            this.btn_Lock.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.LowProfile;
+            this.btn_Lock.Location = new System.Drawing.Point(529, 15);
+            this.btn_Lock.Name = "btn_Lock";
+            this.btn_Lock.Size = new System.Drawing.Size(27, 25);
+            this.btn_Lock.TabIndex = 46;
+            this.btn_Lock.Values.Image = global::Odin.Global_Resourses.lock_open;
+            this.btn_Lock.Values.Text = "";
+            this.btn_Lock.Click += new System.EventHandler(this.btn_Lock_Click);
             // 
             // cmb_Articles1
             // 
@@ -143,6 +155,7 @@
             this.cn_tnved,
             this.cn_dateFrom,
             this.cn_dateTo,
+            this.cn_workDate,
             this.cn_comments,
             this.chk_IsValid,
             this.cn_createdby,
@@ -154,6 +167,57 @@
             this.gv_List.RowHeadersWidth = 25;
             this.gv_List.Size = new System.Drawing.Size(924, 248);
             this.gv_List.TabIndex = 46;
+            // 
+            // btn_Add
+            // 
+            this.btn_Add.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_Add.Image = ((System.Drawing.Image)(resources.GetObject("btn_Add.Image")));
+            this.btn_Add.Name = "btn_Add";
+            this.btn_Add.RightToLeftAutoMirrorImage = true;
+            this.btn_Add.Size = new System.Drawing.Size(23, 22);
+            this.btn_Add.Text = "Add new";
+            this.btn_Add.Click += new System.EventHandler(this.btn_Add_Click);
+            // 
+            // btn_Edit
+            // 
+            this.btn_Edit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_Edit.Image = global::Odin.Global_Resourses.edit;
+            this.btn_Edit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_Edit.Name = "btn_Edit";
+            this.btn_Edit.Size = new System.Drawing.Size(23, 22);
+            this.btn_Edit.Text = "Edit selected line";
+            this.btn_Edit.Click += new System.EventHandler(this.btn_Edit_Click);
+            // 
+            // btn_Delete
+            // 
+            this.btn_Delete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btn_Delete.Image = ((System.Drawing.Image)(resources.GetObject("btn_Delete.Image")));
+            this.btn_Delete.Name = "btn_Delete";
+            this.btn_Delete.RightToLeftAutoMirrorImage = true;
+            this.btn_Delete.Size = new System.Drawing.Size(23, 22);
+            this.btn_Delete.Text = "Delete";
+            this.btn_Delete.Click += new System.EventHandler(this.btn_Delete_Click);
+            // 
+            // bn_List
+            // 
+            this.bn_List.AddNewItem = null;
+            this.bn_List.CountItem = null;
+            this.bn_List.DeleteItem = null;
+            this.bn_List.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.bn_List.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btn_Add,
+            this.btn_Edit,
+            this.btn_Delete});
+            this.bn_List.Location = new System.Drawing.Point(0, 52);
+            this.bn_List.MoveFirstItem = null;
+            this.bn_List.MoveLastItem = null;
+            this.bn_List.MoveNextItem = null;
+            this.bn_List.MovePreviousItem = null;
+            this.bn_List.Name = "bn_List";
+            this.bn_List.PositionItem = null;
+            this.bn_List.Size = new System.Drawing.Size(924, 25);
+            this.bn_List.TabIndex = 45;
+            this.bn_List.Text = "Bill of materials";
             // 
             // cn_certid
             // 
@@ -214,6 +278,14 @@
             this.cn_dateTo.Name = "cn_dateTo";
             this.cn_dateTo.Width = 150;
             // 
+            // cn_workDate
+            // 
+            this.cn_workDate.DataPropertyName = "workDate";
+            this.cn_workDate.FillWeight = 150F;
+            this.cn_workDate.HeaderText = "Work date";
+            this.cn_workDate.Name = "cn_workDate";
+            this.cn_workDate.Width = 150;
+            // 
             // cn_comments
             // 
             this.cn_comments.DataPropertyName = "comments";
@@ -243,68 +315,6 @@
             this.cn_createdat.HeaderText = "When";
             this.cn_createdat.Name = "cn_createdat";
             // 
-            // btn_Add
-            // 
-            this.btn_Add.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btn_Add.Image = ((System.Drawing.Image)(resources.GetObject("btn_Add.Image")));
-            this.btn_Add.Name = "btn_Add";
-            this.btn_Add.RightToLeftAutoMirrorImage = true;
-            this.btn_Add.Size = new System.Drawing.Size(23, 22);
-            this.btn_Add.Text = "Add new";
-            this.btn_Add.Click += new System.EventHandler(this.btn_Add_Click);
-            // 
-            // btn_Edit
-            // 
-            this.btn_Edit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btn_Edit.Image = global::Odin.Global_Resourses.edit;
-            this.btn_Edit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_Edit.Name = "btn_Edit";
-            this.btn_Edit.Size = new System.Drawing.Size(23, 22);
-            this.btn_Edit.Text = "Edit selected line";
-            this.btn_Edit.Click += new System.EventHandler(this.btn_Edit_Click);
-            // 
-            // btn_Delete
-            // 
-            this.btn_Delete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btn_Delete.Image = ((System.Drawing.Image)(resources.GetObject("btn_Delete.Image")));
-            this.btn_Delete.Name = "btn_Delete";
-            this.btn_Delete.RightToLeftAutoMirrorImage = true;
-            this.btn_Delete.Size = new System.Drawing.Size(23, 22);
-            this.btn_Delete.Text = "Delete";
-            this.btn_Delete.Click += new System.EventHandler(this.btn_Delete_Click);
-            // 
-            // bn_List
-            // 
-            this.bn_List.AddNewItem = null;
-            this.bn_List.CountItem = null;
-            this.bn_List.DeleteItem = null;
-            this.bn_List.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.bn_List.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btn_Add,
-            this.btn_Edit,
-            this.btn_Delete});
-            this.bn_List.Location = new System.Drawing.Point(0, 52);
-            this.bn_List.MoveFirstItem = null;
-            this.bn_List.MoveLastItem = null;
-            this.bn_List.MoveNextItem = null;
-            this.bn_List.MovePreviousItem = null;
-            this.bn_List.Name = "bn_List";
-            this.bn_List.PositionItem = null;
-            this.bn_List.Size = new System.Drawing.Size(924, 25);
-            this.bn_List.TabIndex = 45;
-            this.bn_List.Text = "Bill of materials";
-            // 
-            // btn_Lock
-            // 
-            this.btn_Lock.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.LowProfile;
-            this.btn_Lock.Location = new System.Drawing.Point(529, 15);
-            this.btn_Lock.Name = "btn_Lock";
-            this.btn_Lock.Size = new System.Drawing.Size(27, 25);
-            this.btn_Lock.TabIndex = 46;
-            this.btn_Lock.Values.Image = global::Odin.Global_Resourses.lock_open;
-            this.btn_Lock.Values.Text = "";
-            this.btn_Lock.Click += new System.EventHandler(this.btn_Lock_Click);
-            // 
             // ctl_ArtCertificates
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -333,17 +343,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridView gv_List;
         private Global_Classes.SyncBindingSource bs_List;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_certid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_certNum;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_artid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_article;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_tnved;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_dateTo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_comments;
-        private System.Windows.Forms.DataGridViewTextBoxColumn chk_IsValid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_createdby;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_createdat;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cn_dateFrom;
         public CMB_Components.Articles.cmb_Articles cmb_Articles1;
         public CMB_Components.ArtCerts.cmb_ArtCerts cmb_Certs1;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
@@ -352,5 +351,17 @@
         private System.Windows.Forms.ToolStripButton btn_Delete;
         private System.Windows.Forms.BindingNavigator bn_List;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_Lock;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_certid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_certNum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_artid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_article;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_tnved;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_dateFrom;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_dateTo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_workDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_comments;
+        private System.Windows.Forms.DataGridViewTextBoxColumn chk_IsValid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_createdby;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_createdat;
     }
 }

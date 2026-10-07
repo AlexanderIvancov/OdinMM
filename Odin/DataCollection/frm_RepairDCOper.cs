@@ -650,8 +650,22 @@ namespace Odin.DataCollection
                     {
                         if (DAL.CheckLabel(_serial) == true)
                         {
-                            DCBll.AddDataCollectionMaterialRepair(WorkerId, _serial, LaunchId);
-                            FillMaterialsByLaunch(LaunchId);
+                            string _res = DCBll.AddDataCollectionMaterialRepair(WorkerId, _serial, LaunchId);
+
+                            if (DCBll.SuccessId == 1)
+                            {
+                                FillMaterialsByLaunch(LaunchId);
+                            }
+                            else
+                            {
+                                System.Media.SystemSounds.Exclamation.Play();
+                                frm_Error frm1 = new frm_Error();
+                                frm1.HeaderText = "Something wrong! " + _res;
+                                frm1.ShowDialog();
+                            }
+
+                            txt_Oper.Text = "";
+                            txt_Oper.Focus();
                         }
                         else
                         {
