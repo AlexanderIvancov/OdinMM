@@ -97,6 +97,8 @@
             this.mni_AdminR = new System.Windows.Forms.ToolStripMenuItem();
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.kryptonSplitContainer2 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
+            this.lbl_NomCode = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.cmb_NomCodes1 = new Odin.CMB_Components.NomCodes.cmb_NomCodes();
             this.chk_Summary = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.chk_groupbybatch = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.cmb_IncomeDoc1 = new Odin.CMB_Components.IncomeDocs.cmb_IncomeDoc();
@@ -359,6 +361,9 @@
             this.cn_crequest = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cn_ccustcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.kryptonPanel6 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.txt_AwaitCost = new Owf.Controls.NumericTetxBox();
+            this.kryptonSeparator1 = new ComponentFactory.Krypton.Toolkit.KryptonSeparator();
             this.btn_awaitingcost2 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_bomcost1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.chk_ExcludeA = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
@@ -397,8 +402,6 @@
             this.bs_MovementList = new Odin.Global_Classes.SyncBindingSource();
             this.bs_CostList = new Odin.Global_Classes.SyncBindingSource();
             this.bs_ReturnsList = new Odin.Global_Classes.SyncBindingSource();
-            this.cmb_NomCodes1 = new Odin.CMB_Components.NomCodes.cmb_NomCodes();
-            this.lbl_NomCode = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.mnu_IncomeLines.SuspendLayout();
             this.mnu_OutcomeLines.SuspendLayout();
             this.mnu_MovementLines.SuspendLayout();
@@ -461,6 +464,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gv_CostList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel6)).BeginInit();
             this.kryptonPanel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSeparator1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bn_CostList)).BeginInit();
             this.bn_CostList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel3)).BeginInit();
@@ -967,7 +971,7 @@
             // 
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.kryptonPanel3);
             this.kryptonSplitContainer1.SeparatorStyle = ComponentFactory.Krypton.Toolkit.SeparatorStyle.HighInternalProfile;
-            this.kryptonSplitContainer1.Size = new System.Drawing.Size(1588, 645);
+            this.kryptonSplitContainer1.Size = new System.Drawing.Size(1796, 645);
             this.kryptonSplitContainer1.SplitterDistance = 547;
             this.kryptonSplitContainer1.TabIndex = 10;
             // 
@@ -1018,9 +1022,27 @@
             // 
             this.kryptonSplitContainer2.Panel2.Controls.Add(this.dn_Pages);
             this.kryptonSplitContainer2.SeparatorStyle = ComponentFactory.Krypton.Toolkit.SeparatorStyle.HighProfile;
-            this.kryptonSplitContainer2.Size = new System.Drawing.Size(1588, 547);
+            this.kryptonSplitContainer2.Size = new System.Drawing.Size(1796, 547);
             this.kryptonSplitContainer2.SplitterDistance = 299;
             this.kryptonSplitContainer2.TabIndex = 0;
+            // 
+            // lbl_NomCode
+            // 
+            this.lbl_NomCode.Location = new System.Drawing.Point(9, 430);
+            this.lbl_NomCode.Name = "lbl_NomCode";
+            this.lbl_NomCode.Size = new System.Drawing.Size(69, 20);
+            this.lbl_NomCode.TabIndex = 298;
+            this.lbl_NomCode.Values.Text = "NomCode:";
+            // 
+            // cmb_NomCodes1
+            // 
+            this.cmb_NomCodes1.EnableSearchId = false;
+            this.cmb_NomCodes1.Location = new System.Drawing.Point(9, 456);
+            this.cmb_NomCodes1.Name = "cmb_NomCodes1";
+            this.cmb_NomCodes1.NomCodes = "";
+            this.cmb_NomCodes1.NomCodesId = 0;
+            this.cmb_NomCodes1.Size = new System.Drawing.Size(200, 20);
+            this.cmb_NomCodes1.TabIndex = 297;
             // 
             // chk_Summary
             // 
@@ -1405,7 +1427,7 @@
             this.pg_Tracing,
             this.pg_Cost});
             this.dn_Pages.SelectedIndex = 0;
-            this.dn_Pages.Size = new System.Drawing.Size(1284, 547);
+            this.dn_Pages.Size = new System.Drawing.Size(1492, 547);
             this.dn_Pages.TabIndex = 0;
             this.dn_Pages.Text = "kryptonDockableNavigator1";
             this.dn_Pages.Click += new System.EventHandler(this.dn_Pages_Click);
@@ -1420,7 +1442,7 @@
             this.pg_Incomes.LastVisibleSet = true;
             this.pg_Incomes.MinimumSize = new System.Drawing.Size(50, 50);
             this.pg_Incomes.Name = "pg_Incomes";
-            this.pg_Incomes.Size = new System.Drawing.Size(1282, 520);
+            this.pg_Incomes.Size = new System.Drawing.Size(1490, 520);
             this.pg_Incomes.Text = "Incomes";
             this.pg_Incomes.ToolTipTitle = "Page ToolTip";
             this.pg_Incomes.UniqueName = "A65C89D28BBC4329B7BA1979C00591EB";
@@ -1475,7 +1497,7 @@
             this.gv_IncomeList.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Silver;
             this.gv_IncomeList.ReadOnly = true;
             this.gv_IncomeList.RowHeadersWidth = 20;
-            this.gv_IncomeList.Size = new System.Drawing.Size(1282, 446);
+            this.gv_IncomeList.Size = new System.Drawing.Size(1490, 446);
             this.gv_IncomeList.TabIndex = 9;
             this.gv_IncomeList.SelectionChanged += new System.EventHandler(this.gv_IncomeList_SelectionChanged);
             // 
@@ -1794,7 +1816,7 @@
             this.bn_IncomeList.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bn_IncomeList.Name = "bn_IncomeList";
             this.bn_IncomeList.PositionItem = this.bindingNavigatorPositionItem;
-            this.bn_IncomeList.Size = new System.Drawing.Size(1282, 25);
+            this.bn_IncomeList.Size = new System.Drawing.Size(1490, 25);
             this.bn_IncomeList.TabIndex = 8;
             this.bn_IncomeList.Text = "bindingNavigator1";
             // 
@@ -1885,7 +1907,7 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(1282, 49);
+            this.kryptonPanel1.Size = new System.Drawing.Size(1490, 49);
             this.kryptonPanel1.TabIndex = 7;
             // 
             // kryptonLabel4
@@ -3436,7 +3458,7 @@
             this.pg_Cost.LastVisibleSet = true;
             this.pg_Cost.MinimumSize = new System.Drawing.Size(50, 50);
             this.pg_Cost.Name = "pg_Cost";
-            this.pg_Cost.Size = new System.Drawing.Size(1282, 520);
+            this.pg_Cost.Size = new System.Drawing.Size(1490, 520);
             this.pg_Cost.Text = "Production cost";
             this.pg_Cost.ToolTipTitle = "Page ToolTip";
             this.pg_Cost.UniqueName = "E4092347B37F43BCEA94D370CC4FCC28";
@@ -3468,7 +3490,7 @@
             this.gv_CostList.Location = new System.Drawing.Point(0, 49);
             this.gv_CostList.Name = "gv_CostList";
             this.gv_CostList.RowHeadersWidth = 25;
-            this.gv_CostList.Size = new System.Drawing.Size(1282, 446);
+            this.gv_CostList.Size = new System.Drawing.Size(1490, 446);
             this.gv_CostList.TabIndex = 23;
             this.gv_CostList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_CostList_CellContentClick);
             // 
@@ -3595,6 +3617,9 @@
             // 
             // kryptonPanel6
             // 
+            this.kryptonPanel6.Controls.Add(this.kryptonLabel6);
+            this.kryptonPanel6.Controls.Add(this.txt_AwaitCost);
+            this.kryptonPanel6.Controls.Add(this.kryptonSeparator1);
             this.kryptonPanel6.Controls.Add(this.btn_awaitingcost2);
             this.kryptonPanel6.Controls.Add(this.btn_bomcost1);
             this.kryptonPanel6.Controls.Add(this.chk_ExcludeA);
@@ -3612,12 +3637,41 @@
             this.kryptonPanel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonPanel6.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel6.Name = "kryptonPanel6";
-            this.kryptonPanel6.Size = new System.Drawing.Size(1282, 49);
+            this.kryptonPanel6.Size = new System.Drawing.Size(1490, 49);
             this.kryptonPanel6.TabIndex = 22;
+            // 
+            // kryptonLabel6
+            // 
+            this.kryptonLabel6.Location = new System.Drawing.Point(1214, 13);
+            this.kryptonLabel6.Name = "kryptonLabel6";
+            this.kryptonLabel6.Size = new System.Drawing.Size(134, 20);
+            this.kryptonLabel6.TabIndex = 35;
+            this.kryptonLabel6.Values.Text = "Awaiting cost price (€):";
+            // 
+            // txt_AwaitCost
+            // 
+            this.txt_AwaitCost.AllowDecimalSeparator = true;
+            this.txt_AwaitCost.AllowSpace = false;
+            this.txt_AwaitCost.Location = new System.Drawing.Point(1354, 13);
+            this.txt_AwaitCost.Name = "txt_AwaitCost";
+            this.txt_AwaitCost.Size = new System.Drawing.Size(73, 21);
+            this.txt_AwaitCost.StateActive.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txt_AwaitCost.StateActive.Content.Color1 = System.Drawing.Color.Blue;
+            this.txt_AwaitCost.StateActive.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txt_AwaitCost.StateActive.Content.Padding = new System.Windows.Forms.Padding(3);
+            this.txt_AwaitCost.TabIndex = 34;
+            this.txt_AwaitCost.Text = "0";
+            // 
+            // kryptonSeparator1
+            // 
+            this.kryptonSeparator1.Location = new System.Drawing.Point(945, -3);
+            this.kryptonSeparator1.Name = "kryptonSeparator1";
+            this.kryptonSeparator1.Size = new System.Drawing.Size(5, 52);
+            this.kryptonSeparator1.TabIndex = 33;
             // 
             // btn_awaitingcost2
             // 
-            this.btn_awaitingcost2.Location = new System.Drawing.Point(1196, 11);
+            this.btn_awaitingcost2.Location = new System.Drawing.Point(1433, 11);
             this.btn_awaitingcost2.Name = "btn_awaitingcost2";
             this.btn_awaitingcost2.Size = new System.Drawing.Size(46, 25);
             this.btn_awaitingcost2.TabIndex = 29;
@@ -3627,7 +3681,7 @@
             // 
             // btn_bomcost1
             // 
-            this.btn_bomcost1.Location = new System.Drawing.Point(1144, 11);
+            this.btn_bomcost1.Location = new System.Drawing.Point(1162, 11);
             this.btn_bomcost1.Name = "btn_bomcost1";
             this.btn_bomcost1.Size = new System.Drawing.Size(46, 25);
             this.btn_bomcost1.TabIndex = 28;
@@ -3645,7 +3699,7 @@
             // 
             // kryptonLabel14
             // 
-            this.kryptonLabel14.Location = new System.Drawing.Point(947, 15);
+            this.kryptonLabel14.Location = new System.Drawing.Point(965, 15);
             this.kryptonLabel14.Name = "kryptonLabel14";
             this.kryptonLabel14.Size = new System.Drawing.Size(122, 20);
             this.kryptonLabel14.TabIndex = 21;
@@ -3663,7 +3717,7 @@
             // 
             this.txt_BOMCost.AllowDecimalSeparator = true;
             this.txt_BOMCost.AllowSpace = false;
-            this.txt_BOMCost.Location = new System.Drawing.Point(1065, 14);
+            this.txt_BOMCost.Location = new System.Drawing.Point(1083, 14);
             this.txt_BOMCost.Name = "txt_BOMCost";
             this.txt_BOMCost.Size = new System.Drawing.Size(73, 21);
             this.txt_BOMCost.StateActive.Content.Color1 = System.Drawing.Color.Fuchsia;
@@ -3785,7 +3839,7 @@
             this.bn_CostList.MovePreviousItem = this.toolStripButton14;
             this.bn_CostList.Name = "bn_CostList";
             this.bn_CostList.PositionItem = this.toolStripTextBox2;
-            this.bn_CostList.Size = new System.Drawing.Size(1282, 25);
+            this.bn_CostList.Size = new System.Drawing.Size(1490, 25);
             this.bn_CostList.TabIndex = 21;
             this.bn_CostList.Text = "bindingNavigator1";
             // 
@@ -3872,7 +3926,7 @@
             this.kryptonPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel3.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel3.Name = "kryptonPanel3";
-            this.kryptonPanel3.Size = new System.Drawing.Size(1588, 93);
+            this.kryptonPanel3.Size = new System.Drawing.Size(1796, 93);
             this.kryptonPanel3.TabIndex = 6;
             // 
             // kryptonDockableWorkspace1
@@ -3890,7 +3944,7 @@
             this.kryptonDockableWorkspace1.Root.UniqueName = "3603EBC349EA4AA52F8724469FC85DA3";
             this.kryptonDockableWorkspace1.Root.WorkspaceControl = this.kryptonDockableWorkspace1;
             this.kryptonDockableWorkspace1.ShowMaximizeButton = false;
-            this.kryptonDockableWorkspace1.Size = new System.Drawing.Size(1588, 93);
+            this.kryptonDockableWorkspace1.Size = new System.Drawing.Size(1796, 93);
             this.kryptonDockableWorkspace1.TabIndex = 7;
             this.kryptonDockableWorkspace1.TabStop = true;
             // 
@@ -3930,29 +3984,11 @@
             this.btn_AwaitingCost.UniqueName = "EDCA732E821046384D85C3730FBA73EB";
             this.btn_AwaitingCost.Click += new System.EventHandler(this.btn_AwaitingCost_Click);
             // 
-            // cmb_NomCodes1
-            // 
-            this.cmb_NomCodes1.EnableSearchId = false;
-            this.cmb_NomCodes1.Location = new System.Drawing.Point(9, 456);
-            this.cmb_NomCodes1.Name = "cmb_NomCodes1";
-            this.cmb_NomCodes1.NomCodes = "";
-            this.cmb_NomCodes1.NomCodesId = 0;
-            this.cmb_NomCodes1.Size = new System.Drawing.Size(200, 20);
-            this.cmb_NomCodes1.TabIndex = 297;
-            // 
-            // lbl_NomCode
-            // 
-            this.lbl_NomCode.Location = new System.Drawing.Point(9, 430);
-            this.lbl_NomCode.Name = "lbl_NomCode";
-            this.lbl_NomCode.Size = new System.Drawing.Size(69, 20);
-            this.lbl_NomCode.TabIndex = 298;
-            this.lbl_NomCode.Values.Text = "NomCode:";
-            // 
             // frm_StockHistory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1588, 645);
+            this.ClientSize = new System.Drawing.Size(1796, 645);
             this.Controls.Add(this.kryptonSplitContainer1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frm_StockHistory";
@@ -4046,6 +4082,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel6)).EndInit();
             this.kryptonPanel6.ResumeLayout(false);
             this.kryptonPanel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSeparator1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bn_CostList)).EndInit();
             this.bn_CostList.ResumeLayout(false);
             this.bn_CostList.PerformLayout();
@@ -4426,5 +4463,8 @@
         private Owf.Controls.NumericTetxBox txt_TotalIncomes;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lbl_NomCode;
         private CMB_Components.NomCodes.cmb_NomCodes cmb_NomCodes1;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel6;
+        private Owf.Controls.NumericTetxBox txt_AwaitCost;
+        private ComponentFactory.Krypton.Toolkit.KryptonSeparator kryptonSeparator1;
     }
 }

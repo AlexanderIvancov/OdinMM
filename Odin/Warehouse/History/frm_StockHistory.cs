@@ -198,6 +198,16 @@ namespace Odin.Warehouse.History
         public int _tempbatchid = 0;
         public string _tempbatch = "";
 
+        public double AwaitCost
+        {
+            get
+            {
+                try { return Convert.ToDouble(txt_AwaitCost.Text); }
+                catch { return 0; }
+            }
+            set { txt_AwaitCost.Text = value.ToString(); }
+        }
+
         #endregion
 
         #region Methods
@@ -342,6 +352,7 @@ namespace Odin.Warehouse.History
                 UnitCost = 0;
                 COPrice = 0;
                 BOMCost = 0;
+                AwaitCost = 0;
             }
             else
             {
@@ -365,11 +376,16 @@ namespace Odin.Warehouse.History
                     new SqlParameter("@batchid", SqlDbType.Int) {Value = cmb_Batches1.BatchId},
                     new SqlParameter("@coid", SqlDbType.Int) {Value = cmb_SalesOrders1.SalesOrderId}
                 };
-
+                var param1 = new List<SqlParameter>
+                {
+                    new SqlParameter("@batchid", SqlDbType.Int) {Value = cmb_Batches1.BatchId},
+                    new SqlParameter("@coid", SqlDbType.Int) {Value = cmb_SalesOrders1.SalesOrderId}
+                };
                 try
                 {
                     //BOMCost = Convert.ToDouble(Helper.GetOneRecord("SELECT DISTINCT dbo.fn_NetUnitCostForBatch(@batchid)", param.ToArray()));
                     BOMCost = Convert.ToDouble(Helper.GetOneRecord("SELECT DISTINCT dbo.fn_NetUnitCostForBatchCO(@batchid, @coid)", param.ToArray()));
+                    AwaitCost = Convert.ToDouble(Helper.GetOneRecord("SELECT DISTINCT dbo.fn_AwaitingUnitCostForBatchDetsCO(@batchid, @coid)", param1.ToArray()));
                 }
                 catch { BOMCost = 0; }
             }
