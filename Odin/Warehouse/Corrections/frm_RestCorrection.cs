@@ -172,11 +172,12 @@ namespace Odin.Warehouse.Corrections
                 bn_List.BindingSource = bs_List;
             });
 
-            chk_RemoveReservation.CheckState = CheckState.Unchecked;
-
-            chk_DataScanner.CheckState = CheckState.Unchecked;
-
-            chk_CheckMode.CheckState = CheckState.Unchecked;
+            this.ThreadSafeCall(delegate
+            {
+                chk_RemoveReservation.CheckState = CheckState.Unchecked;
+                chk_DataScanner.CheckState = CheckState.Unchecked;
+                chk_CheckMode.CheckState = CheckState.Unchecked;
+            });
         }
 
         public void AddQtyForLabel(int label, double qty, int printlabels)
@@ -703,8 +704,7 @@ namespace Odin.Warehouse.Corrections
                     //{ 
                     bool _check = Int32.TryParse(txt_Oper.Text, out ReadValue);
 
-                    if (_check == false)
-                        ReadValue = 0;
+                    if (_check == false) ReadValue = 0;
                     //int begindex = ReadValue.IndexOf(strLabelMark);
                     //int endindex = 0;
 
@@ -714,7 +714,6 @@ namespace Odin.Warehouse.Corrections
                     //    Result = ReadValue.Substring(begindex + 4, endindex);
 
                     foreach (DataGridViewRow row in this.gv_List.Rows)
-                    {
                         if (Convert.ToInt32(row.Cells["cn_label"].Value) == /*Convert.ToInt32(txt_Oper.Text)*/ReadValue)
                         {
                             _isok = true;
@@ -723,8 +722,6 @@ namespace Odin.Warehouse.Corrections
                             _unit = row.Cells["cn_unit"].Value.ToString();
                             break;
                         }
-
-                    }
                     if (_isok == true)
                     {
                         //MessageBox.Show(Result);
@@ -748,7 +745,6 @@ namespace Odin.Warehouse.Corrections
                                               MessageBoxIcon.Warning,
                                               TaskDialogButtons.OK);
                         txt_Oper.Text = "";
-
                     }
                     //Clear temp field
                     txt_Oper.Text = "";
@@ -770,10 +766,8 @@ namespace Odin.Warehouse.Corrections
                     //{ 
                     bool _check = Int32.TryParse(txt_Oper.Text, out ReadValue);
 
-                    if (_check == false)
-                        ReadValue = 0;
+                    if (_check == false) ReadValue = 0;
                     foreach (DataGridViewRow row in this.gv_List.Rows)
-                    {
                         if (Convert.ToInt32(row.Cells["cn_label"].Value) == /*Convert.ToInt32(txt_Oper.Text)*/ReadValue)
                         {
                             foreach (DataGridViewCell cell in row.Cells)
@@ -783,8 +777,6 @@ namespace Odin.Warehouse.Corrections
                             txt_Oper.Focus();
                             break;
                         }
-
-                    }
                     if (_count == 0)
                     {
                         MessageBox.Show("There is no such label on batch!");
@@ -797,7 +789,6 @@ namespace Odin.Warehouse.Corrections
 
         private void txt_Oper_Validated(object sender, EventArgs e)
         {
-            
             //MessageBox.Show(Result);
         }
 
@@ -830,7 +821,6 @@ namespace Odin.Warehouse.Corrections
             //}
             //    //txt_Oper.Text = "";
             ////}
-
         }
 
         private void frm_RestCorrection_FormClosing(object sender, FormClosingEventArgs e)
@@ -851,16 +841,9 @@ namespace Odin.Warehouse.Corrections
                         e.Cancel = false;
                         DAL.DeleteBatchLock(cmb_Batches1.BatchId, this.Name);
                     }
-                    else //(result1 == DialogResult.No)
-                    {
-                        e.Cancel = true;
-                    }
-
+                    else e.Cancel = true;
                 }
-                else
-                {
-                    DAL.DeleteBatchLock(cmb_Batches1.BatchId, this.Name);
-                }
+                else DAL.DeleteBatchLock(cmb_Batches1.BatchId, this.Name);
             });
             //e.Cancel = true;
         }
@@ -885,28 +868,19 @@ namespace Odin.Warehouse.Corrections
                     cmb_Batches1.BatchId = 0;
                 }
             }
-            else
-            {
-                DAL.DeleteBatchLock(cmb_Batches1.BatchId, this.Name);
-            }
-
+            else DAL.DeleteBatchLock(cmb_Batches1.BatchId, this.Name);
 
             CheckEmpty();
-            
         }
 
         private void chk_SelectAll_CheckedChanged(object sender, EventArgs e)
         {
             if (chk_SelectAll.Checked == true)
                 foreach (DataGridViewRow row in this.gv_List.Rows)
-                {
                     row.Cells["chk_removeres"].Value = -1;
-                }
             else
                 foreach (DataGridViewRow row in this.gv_List.Rows)
-                {
                     row.Cells["chk_removeres"].Value = 0;
-                }
         }
 
         private void gv_List_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -918,7 +892,7 @@ namespace Odin.Warehouse.Corrections
         {
             if (chk_CheckMode.CheckState == CheckState.Checked)
             {
-                chk_CheckMode.Text = "Data scanner " + System.Environment.NewLine + "check mode ON";
+                chk_CheckMode.Text = "Data scanner " + Environment.NewLine + "check mode ON";
                 chk_CheckMode.BackColor = Color.LightPink;
                 OutMode = 3;
                 txt_Oper.Focus();
@@ -929,14 +903,12 @@ namespace Odin.Warehouse.Corrections
             }
             else
             {
-                chk_CheckMode.Text = "Data scanner " + System.Environment.NewLine + "check mode OFF";
+                chk_CheckMode.Text = "Data scanner " + Environment.NewLine + "check mode OFF";
                 chk_CheckMode.BackColor = Color.LightGreen;
-                if (chk_DataScanner.CheckState == CheckState.Checked)
-                    OutMode = 2;
-                else
-                    OutMode = 1;
+                if (chk_DataScanner.CheckState == CheckState.Checked) OutMode = 2;
+                else OutMode = 1;
                 btn_OK.Visible = true;
-                bwStart(bw_List);
+                //bwStart(bw_List);
                 //cmb_Articles1.Focus();
             }
         }
