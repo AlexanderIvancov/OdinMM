@@ -428,7 +428,7 @@ namespace Odin.Warehouse.StockOut.Reports
             report.SetParameterValue("UserName", System.Environment.UserName);
             report.SetParameterValue("Customer", Customer);
             report.SetParameterValue("BatchLab", "Запуск:");
-            report.SetParameterValue("QtyLab", "Кол-вл в зап.:");
+            report.SetParameterValue("QtyLab", "Кол-во в зап.:");
             report.SetParameterValue("Stage", Stage);
             report.SetParameterValue("MoveDate", MoveDate);
             report.SetParameterValue("Serials", Serials);
