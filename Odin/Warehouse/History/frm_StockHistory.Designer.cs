@@ -3646,7 +3646,7 @@
             this.kryptonLabel6.Name = "kryptonLabel6";
             this.kryptonLabel6.Size = new System.Drawing.Size(134, 20);
             this.kryptonLabel6.TabIndex = 35;
-            this.kryptonLabel6.Values.Text = "Awaiting cost price (€):";
+            this.kryptonLabel6.Values.Text = "Awaiting cost price (BR):";
             // 
             // txt_AwaitCost
             // 
