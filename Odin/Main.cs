@@ -161,6 +161,7 @@ namespace Odin
         frm_MachineDCOper MachineDCOper = null;
         frm_Workplaces Workplaces = null;
         frm_RepairDCOper RepairDCOper = null;
+        frm_RepairCardFin RepairCardFin = null;
 
         #endregion
 
@@ -1546,6 +1547,21 @@ namespace Odin
             RepairDCOper._frm_Main = this;
             RepairDCOper.Show(pn_Main);
             RepairDCOper.FillPlace();
+        }
+
+        private void btn_Repaircard_Click(object sender, EventArgs e)
+        {
+            if (RepairCardFin != null && !RepairCardFin.IsDisposed)
+            {
+                RepairCardFin.Activate();
+                return;
+            }
+
+            // Создаем и открываем новую тач-форму
+            RepairCardFin = new frm_RepairCardFin();
+            RepairCardFin._frm_Main = this;
+            RepairCardFin.Show(pn_Main);
+            RepairCardFin.FillPlace();
         }
     }
 }

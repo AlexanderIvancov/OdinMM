@@ -1234,6 +1234,18 @@
     <Compile Include="DataCollection\frm_AddMachDCDet.designer.cs">
       <DependentUpon>frm_AddMachDCDet.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataCollection\frm_AddRepairCard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataCollection\frm_AddRepairCard.designer.cs">
+      <DependentUpon>frm_AddRepairCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataCollection\frm_AddRepairCardDet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataCollection\frm_AddRepairCardDet.designer.cs">
+      <DependentUpon>frm_AddRepairCardDet.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataCollection\frm_AddRepairDets.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1282,6 +1294,12 @@
     <Compile Include="DataCollection\frm_MasterApproveTot.designer.cs">
       <DependentUpon>frm_MasterApproveTot.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataCollection\frm_RepairCardFin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataCollection\frm_RepairCardFin.designer.cs">
+      <DependentUpon>frm_RepairCardFin.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataCollection\frm_RepairDCOper.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1299,6 +1317,13 @@
     </Compile>
     <Compile Include="DataCollection\frm_WorkerDCOper.designer.cs">
       <DependentUpon>frm_WorkerDCOper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataCollection\RepairCard.cs" />
+    <Compile Include="DataCollection\uc_RepairCardItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DataCollection\uc_RepairCardItem.designer.cs">
+      <DependentUpon>uc_RepairCardItem.cs</DependentUpon>
     </Compile>
     <Compile Include="DataSets\Common.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3888,6 +3913,12 @@
     <EmbeddedResource Include="DataCollection\frm_AddMachDCDet.resx">
       <DependentUpon>frm_AddMachDCDet.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DataCollection\frm_AddRepairCard.resx">
+      <DependentUpon>frm_AddRepairCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataCollection\frm_AddRepairCardDet.resx">
+      <DependentUpon>frm_AddRepairCardDet.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataCollection\frm_AddRepairDets.resx">
       <DependentUpon>frm_AddRepairDets.cs</DependentUpon>
     </EmbeddedResource>
@@ -3912,6 +3943,9 @@
     <EmbeddedResource Include="DataCollection\frm_MasterApproveTot.resx">
       <DependentUpon>frm_MasterApproveTot.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DataCollection\frm_RepairCardFin.resx">
+      <DependentUpon>frm_RepairCardFin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataCollection\frm_RepairDCOper.resx">
       <DependentUpon>frm_RepairDCOper.cs</DependentUpon>
     </EmbeddedResource>
@@ -3920,6 +3954,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataCollection\frm_WorkerDCOper.resx">
       <DependentUpon>frm_WorkerDCOper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataCollection\uc_RepairCardItem.resx">
+      <DependentUpon>uc_RepairCardItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Finances\frm_CheckAccounts.resx">
       <DependentUpon>frm_CheckAccounts.cs</DependentUpon>
@@ -4585,6 +4622,7 @@
     <Content Include="Resourses\time.png" />
     <Content Include="Resourses\time_add.png" />
     <Content Include="Resourses\time_delete.png" />
+    <None Include="Resourses\watchman.png" />
     <Content Include="Resourses\weight.png" />
     <Content Include="Warehouse\Reports\rpt_TurnoverReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

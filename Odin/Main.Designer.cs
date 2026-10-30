@@ -231,6 +231,10 @@
             this.btn_WorkersData = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.btn_ControlCard = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.btn_DCApprove = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.kryptonRibbonGroupTriple45 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
+            this.btn_Repair = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.btn_Repaircard = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.kryptonRibbonGroupButton14 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.tab_ReadOnly = new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab();
             this.kryptonRibbonGroup23 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
             this.kryptonRibbonGroupTriple30 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
@@ -257,10 +261,6 @@
             this.kryptonPalette1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.pn_Main = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.mdiClientController1 = new Panels.MdiClientController();
-            this.kryptonRibbonGroupTriple45 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
-            this.btn_Repair = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
-            this.kryptonRibbonGroupButton7 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
-            this.kryptonRibbonGroupButton14 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonRibbon1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -290,8 +290,7 @@
             this.tab_DataCollection,
             this.tab_ReadOnly,
             this.tab_Settings});
-            this.kryptonRibbon1.SelectedContext = null;
-            this.kryptonRibbon1.SelectedTab = this.tab_Register;
+            this.kryptonRibbon1.SelectedTab = this.tab_DataCollection;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1660, 115);
             this.kryptonRibbon1.TabIndex = 0;
             // 
@@ -1684,6 +1683,33 @@
             this.btn_DCApprove.TextLine2 = "Approval";
             this.btn_DCApprove.Click += new System.EventHandler(this.btn_DCApprove_Click);
             // 
+            // kryptonRibbonGroupTriple45
+            // 
+            this.kryptonRibbonGroupTriple45.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupItem[] {
+            this.btn_Repair,
+            this.btn_Repaircard,
+            this.kryptonRibbonGroupButton14});
+            // 
+            // btn_Repair
+            // 
+            this.btn_Repair.ImageLarge = global::Odin.Global_Resourses.Assembling_48x48;
+            this.btn_Repair.ImageSmall = global::Odin.Global_Resourses.Assembling_48x48;
+            this.btn_Repair.TextLine1 = "Rework";
+            this.btn_Repair.TextLine2 = "processing";
+            this.btn_Repair.Click += new System.EventHandler(this.btn_Repair_Click);
+            // 
+            // btn_Repaircard
+            // 
+            this.btn_Repaircard.ImageLarge = global::Odin.Global_Resourses.Repair48x48;
+            this.btn_Repaircard.ImageSmall = global::Odin.Global_Resourses.Repair48x48;
+            this.btn_Repaircard.TextLine1 = "Repair";
+            this.btn_Repaircard.TextLine2 = "card";
+            this.btn_Repaircard.Click += new System.EventHandler(this.btn_Repaircard_Click);
+            // 
+            // kryptonRibbonGroupButton14
+            // 
+            this.kryptonRibbonGroupButton14.Visible = false;
+            // 
             // tab_ReadOnly
             // 
             this.tab_ReadOnly.Groups.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup[] {
@@ -1864,29 +1890,6 @@
             // 
             this.mdiClientController1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.mdiClientController1.ParentForm = this;
-            // 
-            // kryptonRibbonGroupTriple45
-            // 
-            this.kryptonRibbonGroupTriple45.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupItem[] {
-            this.btn_Repair,
-            this.kryptonRibbonGroupButton7,
-            this.kryptonRibbonGroupButton14});
-            // 
-            // btn_Repair
-            // 
-            this.btn_Repair.ImageLarge = global::Odin.Global_Resourses.setting_tools;
-            this.btn_Repair.ImageSmall = global::Odin.Global_Resourses.setting_tools;
-            this.btn_Repair.TextLine1 = "Repair";
-            this.btn_Repair.TextLine2 = "processing";
-            this.btn_Repair.Click += new System.EventHandler(this.btn_Repair_Click);
-            // 
-            // kryptonRibbonGroupButton7
-            // 
-            this.kryptonRibbonGroupButton7.Visible = false;
-            // 
-            // kryptonRibbonGroupButton14
-            // 
-            this.kryptonRibbonGroupButton14.Visible = false;
             // 
             // Main
             // 
@@ -2145,7 +2148,7 @@
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_Workplaces;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple45;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_Repair;
-        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton7;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton btn_Repaircard;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton14;
     }
 }

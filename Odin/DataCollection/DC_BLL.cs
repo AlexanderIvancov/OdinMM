@@ -893,5 +893,206 @@ namespace Odin.DataCollection
         }
 
         #endregion
+
+        #region Repair card
+
+
+
+        public static DataTable getRepairCards(int stateid)
+        {
+            string query = "sp_SelectRepairCards";
+
+            var sqlparams = new List<SqlParameter>
+            {
+                 new SqlParameter("@stateid",SqlDbType.Int){Value = stateid }
+            };
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
+        }
+
+        public static DataTable getRepairCardsDets(int headid)
+        {
+            string query = "sp_SelectRepairCardsDets";
+
+            var sqlparams = new List<SqlParameter>
+            {
+                 new SqlParameter("@headid",SqlDbType.Int){Value = headid }
+            };
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
+        }
+
+        public static DataTable getRepairCardsMaterials(int headid)
+        {
+            string query = "sp_SelectRepairCardsMaterials";
+
+            var sqlparams = new List<SqlParameter>
+            {
+                 new SqlParameter("@headid",SqlDbType.Int){Value = headid }
+            };
+
+            return Helper.QuerySP(query, sqlparams.ToArray());
+        }
+        public string InsertedRC = "";
+        public int SaveRepairCardHead(int _headid, string _serial, string _analog, int _batchid, int _state, string _conclusion, string _comments, string _worker)
+        {
+            int _res = 0;
+            InsertedRC = "";
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_SaveRepairCardHead", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+
+            sqlComm.Parameters.AddWithValue("@id", _headid);
+            sqlComm.Parameters.AddWithValue("@serial", _serial);
+            sqlComm.Parameters.AddWithValue("@analog", _analog);
+            sqlComm.Parameters.AddWithValue("@batchid", _batchid);
+            sqlComm.Parameters.AddWithValue("@state", _state);
+            sqlComm.Parameters.AddWithValue("@conclusion", _conclusion);
+            sqlComm.Parameters.AddWithValue("@comments", _comments);
+            sqlComm.Parameters.AddWithValue("@worker", _worker);
+
+            sqlComm.Parameters.Add("@insertedid", SqlDbType.Int).Direction = ParameterDirection.Output;
+            sqlComm.Parameters.Add("@insertedname", SqlDbType.NVarChar, 50).Direction = ParameterDirection.Output;
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            _res = Convert.ToInt32(sqlComm.Parameters["@insertedid"].Value);
+            InsertedRC = sqlComm.Parameters["@insertedname"].Value.ToString();
+            sqlConn.Close();
+
+            return _res;
+        }
+
+        public int SaveRepairCardDets(int _id, int _headid, string _defect, string _repairdescription, string _repairby, int _validstate,
+                                            string _validby, string _comments, double _worktime, string _worker, string _visualby)
+        {
+
+            int _res = 0;
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_SaveRepairCardDet", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+
+            sqlComm.Parameters.AddWithValue("@id", _id);
+            sqlComm.Parameters.AddWithValue("@headid", _headid);
+            sqlComm.Parameters.AddWithValue("@defect", _defect);
+            sqlComm.Parameters.AddWithValue("@repair_description", _repairdescription);
+            sqlComm.Parameters.AddWithValue("@repairby", _repairby);
+            sqlComm.Parameters.AddWithValue("@validstate", _validstate);
+            sqlComm.Parameters.AddWithValue("@validby", _validby);
+            sqlComm.Parameters.AddWithValue("@comments", _comments);
+            sqlComm.Parameters.AddWithValue("@worktime", _worktime);
+            sqlComm.Parameters.AddWithValue("@who", _worker);
+            sqlComm.Parameters.AddWithValue("@visualby", _visualby);
+            sqlComm.Parameters.Add("@insertedid", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            _res = Convert.ToInt32(sqlComm.Parameters["@insertedid"].Value);
+            sqlConn.Close();
+            return _res;
+        }
+
+        public void SaveRepairCardMaterials(int _id, int _headid, int _detid, int _label, double _qty, string _comments, string _worker)
+        {
+
+            InsertedRC = "";
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_SaveRepairCardMaterials", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+            sqlComm.Parameters.AddWithValue("@id", _id);
+            sqlComm.Parameters.AddWithValue("@headid", _headid);
+            sqlComm.Parameters.AddWithValue("@detid", _detid);
+            sqlComm.Parameters.AddWithValue("@label", _label);
+            sqlComm.Parameters.AddWithValue("@qty", _qty);
+            sqlComm.Parameters.AddWithValue("@who", _worker);
+            sqlComm.Parameters.AddWithValue("@comments", _comments);
+
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+
+        }
+
+        public string DeleteRepairCard(int id)
+        {
+            string _res = "";
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_DeleteRepairCard", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+
+            sqlComm.Parameters.AddWithValue("@id", id);
+            sqlComm.Parameters.Add("@successid", SqlDbType.Int).Direction = ParameterDirection.Output;
+            sqlComm.Parameters.Add("@success", SqlDbType.NVarChar, 150).Direction = ParameterDirection.Output;
+
+            //try
+            //{
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            SuccessId = Convert.ToInt32(sqlComm.Parameters["@successid"].Value);
+            _res = sqlComm.Parameters["@success"].Value.ToString();
+            sqlConn.Close();
+            //}
+            //catch { }
+            return _res;
+        }
+
+        public string DeleteRepairCardDets(int id)
+        {
+            string _res = "";
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_DeleteRepairCardDet", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+
+            sqlComm.Parameters.AddWithValue("@id", id);
+            sqlComm.Parameters.Add("@successid", SqlDbType.Int).Direction = ParameterDirection.Output;
+            sqlComm.Parameters.Add("@success", SqlDbType.NVarChar, 150).Direction = ParameterDirection.Output;
+
+            //try
+            //{
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            SuccessId = Convert.ToInt32(sqlComm.Parameters["@successid"].Value);
+            _res = sqlComm.Parameters["@success"].Value.ToString();
+            sqlConn.Close();
+            //}
+            //catch { }
+            return _res;
+        }
+
+        public string DeleteRepairCardMaterial(int id)
+        {
+            string _res = "";
+
+            SqlConnection sqlConn = new SqlConnection(sConnStr);
+            SqlCommand sqlComm = new SqlCommand("sp_DeleteRepairCardMaterial", sqlConn);
+            sqlComm.CommandType = CommandType.StoredProcedure;
+
+
+            sqlComm.Parameters.AddWithValue("@id", id);
+            sqlComm.Parameters.Add("@successid", SqlDbType.Int).Direction = ParameterDirection.Output;
+            sqlComm.Parameters.Add("@success", SqlDbType.NVarChar, 150).Direction = ParameterDirection.Output;
+
+            //try
+            //{
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            SuccessId = Convert.ToInt32(sqlComm.Parameters["@successid"].Value);
+            _res = sqlComm.Parameters["@success"].Value.ToString();
+            sqlConn.Close();
+            //}
+            //catch { }
+            return _res;
+        }
+        #endregion
     }
 }

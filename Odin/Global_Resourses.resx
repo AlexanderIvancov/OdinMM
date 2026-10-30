@@ -1663,4 +1663,7 @@
   <data name="draw_smudge" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resourses\draw_smudge.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="watchman" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resourses\watchman.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
