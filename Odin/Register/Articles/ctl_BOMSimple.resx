@@ -148,17 +148,17 @@
   <data name="btn_PositionRevers.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABcAAAAWCAYAAAArdgcFAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIzSURBVEhLrZQ9iBNBFMf/egjnF340FtoEURAVxEr2zeyy
-        jhuLkJAUIeDGQgh7JqXFyQUhkEILLYOFhdhEtBDP5gqxESGICmIjCEJAULQxIooIpytPdnXuXW4vfvzg
-        wfLezG92384MMCFxHK9xXfeMzP8XhsPhtOM434noZalU2izrf0UQBC4RXdVav2B5El98398tx05MpVKp
-        KKU+WkKO2HpeDIJgI68PIG/FJulaQj6fnxfSZaGUepIMrwO4AKAP4CSAbUL3m0KhcM+WENErrfUlY0zT
-        yt0W0wyA7J/dbDZnLfEbY8zetDYYDNZzXmt9eumsn2TL4zieIqLFRPyMt54cU61Wp2QuIVter9fTz/4c
-        RdE6WV+FbLkx5gHLXdc9IWsTcJg/TCZ/QUSfHMf5BmBZOyal0WjcIqL7Ms/yd0T0SOYnhf+ZUorb+lXW
-        UooAzib92yeLWfT7/VPJNn0qayl8EMrJIs8BbJcDxsFvXS6Xua0sn5P1FJbvSZ4XAOwU9bFEUbSQng/P
-        81Y8/iy/AeAOgPN2odfrKc/z3kdRtCHNjUajrWEYPrRO7hV7joTlRwEcAjAP4Bgnu93uxVTQbrePNBqN
-        47Va7brW2r4mXnc6nbVSaGO3hS+huZmZmWvWlTA2iOhtckNmwvJzAGYBPM7lcgelSIbW+uZqb5xyIGmF
-        B2ALJ4wxBSl0HOeD1vpysVjcIQV/jO/7+/nOYXEYhrtk/Z/xPG9aKXW31WqtuNUkPwBuTPakjlyOiAAA
-        AABJRU5ErkJggg==
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAI6SURBVEhLrZQ9iBNBFMf/egjnF340FtoEURAVxMrMm9ll
+        s65CJCEpQiCJhbBsTEqLOy4IgRRaaBksLMQmooV4NleIjQhBVBAbQRACgqKNEVFEOF0Z2Tn33l321o8f
+        PFjem/nNztudAVIShuE6y7LO8fx/YTQaTQshfhDRq2KxuJXX/wrP8ywiuqaUeqnlOrLZ7FfHcfbysakp
+        l8tlKeUnI4wijC2w6HneZr0+gBOx2MJdy/A8b55JV4SU8mk0vAHgIoABgNMAdjDdb/L5/H0mei2lvOy6
+        biuWu8OmuQCSP3ar1ZqJbfut67r7TW04HG7UeaXU2eWzfpEsD8NwSgixGMmf61+Pj6lUKlM8F5EsbzQa
+        ZttfgiDYwOtrkCzP5XIPtdyyrBqvpeCo3hhPLiGE+CyE+A5gRTvS4vv+bSJ6wPMgovdE9Jjn06K/mZRS
+        t/UbrxkKAGaj/h3gxSQGg8EZ3VYiesZrBn0QStEiLwDs5ANWQ791qVTSbdXyOV43aPm+6HkBwG5WX5Ug
+        CBbM+bBte+Lx1/KbAO4CuBAv9Pt9adv2hyAINpnceDzeXqvVHhkxEV2Nz+FoeQ7AEQDzAI7rZK/Xu2QE
+        nU7nmO/7J6vV6g2l1NI1QURvut3uei6ME2+LvoTmms3mdSOYFET0LrohE9Hy8wBmADzJZDKHuYiHlPLW
+        Wm9sOBS1wgawTSdc1z3FhUKIj0qpK4VCYRcX/DGO4xzUd44W1+v1Pbz+z9i2PS2lvNdutyf+apyfon/2
+        faOn7KoAAAAASUVORK5CYII=
 </value>
   </data>
   <metadata name="cn_num.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -243,6 +243,9 @@
     <value>True</value>
   </metadata>
   <metadata name="cn_valanalog.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="cn_aliases.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="mnu_Lines.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
