@@ -194,6 +194,8 @@ namespace Odin.CustomControls
             int buttonheigh = (Int32)pn_front.Height / countrow - 2;
             int bcount = _feedercountfront / 2;
             //Front feeders
+            int frontOffset = (_Machine == "M2") ? 32 : 0;
+            count = 1 + frontOffset;
             for (int row = 0; row < countrow; row++)
             {
                 for (int button_in_row = 0; button_in_row < bcount; button_in_row++)
@@ -204,8 +206,7 @@ namespace Odin.CustomControls
             }
             //Front trays
             //bcount = _traycountfront / 2;
-            int frontOffset = (_Machine == "M2") ? 32 : 0;
-            count = 1 + frontOffset;
+            count = 1;
             countrow = _traycountfront <= 15 ? 1 : 2;
             bcount = _traycountfront / countrow; // /2
             buttonheigh = (Int32)pn_front.Height / countrow - 2;
