@@ -4600,6 +4600,7 @@
     <Content Include="Resourses\Finish_small.png" />
     <Content Include="Resourses\flag_finish.png" />
     <Content Include="Resourses\hourglass_go.png" />
+    <Content Include="Resourses\kenolaba.png" />
     <Content Include="Resourses\ktouch.png" />
     <Content Include="Resourses\legend.png" />
     <Content Include="Resourses\lorry.png" />
@@ -4617,8 +4618,12 @@
     <Content Include="Resourses\session_idle_time.png" />
     <Content Include="Resourses\sheduled_task.png" />
     <Content Include="Resourses\siren.png" />
+    <Content Include="Resourses\soldering_icon.png" />
+    <Content Include="Resourses\soldering_icon50x50.png" />
     <Content Include="Resourses\supplier32x32.png" />
     <Content Include="Resourses\supplier48x48.png" />
+    <Content Include="Resourses\Tacking32x32.png" />
+    <Content Include="Resourses\Tacking48x48.png" />
     <Content Include="Resourses\time.png" />
     <Content Include="Resourses\time_add.png" />
     <Content Include="Resourses\time_delete.png" />
