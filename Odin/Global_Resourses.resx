@@ -1666,4 +1666,16 @@
   <data name="watchman" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resourses\watchman.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="soldering_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resourses\soldering_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="soldering_icon50x50" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resourses\soldering_icon50x50.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tacking32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resourses\Tacking32x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tacking48x48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resourses\Tacking48x48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

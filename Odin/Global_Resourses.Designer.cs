@@ -4487,6 +4487,26 @@ namespace Odin {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap soldering_icon {
+            get {
+                object obj = ResourceManager.GetObject("soldering_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap soldering_icon50x50 {
+            get {
+                object obj = ResourceManager.GetObject("soldering_icon50x50", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap sort_ascending {
             get {
                 object obj = ResourceManager.GetObject("sort_ascending", resourceCulture);
@@ -4720,6 +4740,26 @@ namespace Odin {
         internal static System.Drawing.Bitmap table_tab_search {
             get {
                 object obj = ResourceManager.GetObject("table_tab_search", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tacking32x32 {
+            get {
+                object obj = ResourceManager.GetObject("Tacking32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tacking48x48 {
+            get {
+                object obj = ResourceManager.GetObject("Tacking48x48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
