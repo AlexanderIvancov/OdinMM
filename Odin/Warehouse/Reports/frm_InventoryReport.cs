@@ -427,6 +427,7 @@ namespace Odin.Warehouse.Reports
             report.SetParameterValue("AktNr", txt_ActNum.Text);
             report.SetParameterValue("TypeReport", Account);
             report.SetParameterValue("AktDate", txt_ActDate.Value.ToShortDateString());
+            report.SetParameterValue("Language", Language);
             //report.SetParameterValue("InvoiceDate", BLL.ExInvoiceDocDate);
             //report.SetParameterValue("Seller", BLL.ExInvoiceSender);
             //report.SetParameterValue("SellerVAT", BLL.ExInvoiceSenderVAT);

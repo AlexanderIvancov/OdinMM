@@ -127,7 +127,7 @@
               <xs:element name="unit" msprop:Generator_ColumnVarNameInTable="columnunit" msprop:Generator_ColumnPropNameInRow="unit" msprop:Generator_ColumnPropNameInTable="unitColumn" msprop:Generator_UserColumnName="unit" type="xs:string" minOccurs="0" />
               <xs:element name="unitlat" msprop:Generator_ColumnVarNameInTable="columnunitlat" msprop:Generator_ColumnPropNameInRow="unitlat" msprop:Generator_ColumnPropNameInTable="unitlatColumn" msprop:Generator_UserColumnName="unitlat" type="xs:string" minOccurs="0" />
               <xs:element name="label" msprop:Generator_ColumnVarNameInTable="columnlabel" msprop:Generator_ColumnPropNameInRow="label" msprop:Generator_ColumnPropNameInTable="labelColumn" msprop:Generator_UserColumnName="label" type="xs:string" minOccurs="0" />
-              <xs:element name="incomedoc" msprop:Generator_ColumnVarNameInTable="columnincomedoc" msprop:Generator_ColumnPropNameInRow="incomedoc" msprop:Generator_ColumnPropNameInTable="incomedocColumn" msprop:Generator_UserColumnName="incomedoc" type="xs:string" minOccurs="0" />
+              <xs:element name="inid" msprop:Generator_ColumnVarNameInTable="columninid" msprop:Generator_ColumnPropNameInRow="inid" msprop:Generator_ColumnPropNameInTable="inidColumn" msprop:Generator_UserColumnName="inid" type="xs:string" minOccurs="0" />
               <xs:element name="regdate" msprop:Generator_ColumnVarNameInTable="columnregdate" msprop:Generator_ColumnPropNameInRow="regdate" msprop:Generator_ColumnPropNameInTable="regdateColumn" msprop:Generator_UserColumnName="regdate" type="xs:dateTime" minOccurs="0" />
               <xs:element name="supplier" msprop:Generator_ColumnVarNameInTable="columnsupplier" msprop:Generator_ColumnPropNameInRow="supplier" msprop:Generator_ColumnPropNameInTable="supplierColumn" msprop:Generator_UserColumnName="supplier" type="xs:string" minOccurs="0" />
               <xs:element name="place" msprop:Generator_ColumnVarNameInTable="columnplace" msprop:Generator_ColumnPropNameInRow="place" msprop:Generator_ColumnPropNameInTable="placeColumn" msprop:Generator_UserColumnName="place" type="xs:string" minOccurs="0" />
@@ -137,6 +137,7 @@
               <xs:element name="unitprice" msprop:Generator_ColumnVarNameInTable="columnunitprice" msprop:Generator_ColumnPropNameInRow="unitprice" msprop:Generator_ColumnPropNameInTable="unitpriceColumn" msprop:Generator_UserColumnName="unitprice" type="xs:double" minOccurs="0" />
               <xs:element name="batch" msprop:Generator_ColumnVarNameInTable="columnbatch" msprop:Generator_ColumnPropNameInRow="batch" msprop:Generator_ColumnPropNameInTable="batchColumn" msprop:Generator_UserColumnName="batch" type="xs:string" minOccurs="0" />
               <xs:element name="respperson" msprop:Generator_ColumnVarNameInTable="columnrespperson" msprop:Generator_ColumnPropNameInRow="respperson" msprop:Generator_ColumnPropNameInTable="resppersonColumn" msprop:Generator_UserColumnName="respperson" type="xs:string" minOccurs="0" />
+              <xs:element name="gcode" msprop:Generator_ColumnVarNameInTable="columngcode" msprop:Generator_ColumnPropNameInRow="gcode" msprop:Generator_ColumnPropNameInTable="gcodeColumn" msprop:Generator_UserColumnName="gcode" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

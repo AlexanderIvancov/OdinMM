@@ -2928,7 +2928,7 @@ namespace Odin.Warehouse.DataSets {
             
             private global::System.Data.DataColumn columnlabel;
             
-            private global::System.Data.DataColumn columnincomedoc;
+            private global::System.Data.DataColumn columninid;
             
             private global::System.Data.DataColumn columnregdate;
             
@@ -2947,6 +2947,8 @@ namespace Odin.Warehouse.DataSets {
             private global::System.Data.DataColumn columnbatch;
             
             private global::System.Data.DataColumn columnrespperson;
+            
+            private global::System.Data.DataColumn columngcode;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -3031,9 +3033,9 @@ namespace Odin.Warehouse.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn incomedocColumn {
+            public global::System.Data.DataColumn inidColumn {
                 get {
-                    return this.columnincomedoc;
+                    return this.columninid;
                 }
             }
             
@@ -3111,6 +3113,14 @@ namespace Odin.Warehouse.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn gcodeColumn {
+                get {
+                    return this.columngcode;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -3153,7 +3163,7 @@ namespace Odin.Warehouse.DataSets {
                         string unit, 
                         string unitlat, 
                         string label, 
-                        string incomedoc, 
+                        string inid, 
                         System.DateTime regdate, 
                         string supplier, 
                         string place, 
@@ -3162,7 +3172,8 @@ namespace Odin.Warehouse.DataSets {
                         double total, 
                         double unitprice, 
                         string batch, 
-                        string respperson) {
+                        string respperson, 
+                        string gcode) {
                 dt_InventoryRow rowdt_InventoryRow = ((dt_InventoryRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         artid,
@@ -3171,7 +3182,7 @@ namespace Odin.Warehouse.DataSets {
                         unit,
                         unitlat,
                         label,
-                        incomedoc,
+                        inid,
                         regdate,
                         supplier,
                         place,
@@ -3180,7 +3191,8 @@ namespace Odin.Warehouse.DataSets {
                         total,
                         unitprice,
                         batch,
-                        respperson};
+                        respperson,
+                        gcode};
                 rowdt_InventoryRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowdt_InventoryRow);
                 return rowdt_InventoryRow;
@@ -3209,7 +3221,7 @@ namespace Odin.Warehouse.DataSets {
                 this.columnunit = base.Columns["unit"];
                 this.columnunitlat = base.Columns["unitlat"];
                 this.columnlabel = base.Columns["label"];
-                this.columnincomedoc = base.Columns["incomedoc"];
+                this.columninid = base.Columns["inid"];
                 this.columnregdate = base.Columns["regdate"];
                 this.columnsupplier = base.Columns["supplier"];
                 this.columnplace = base.Columns["place"];
@@ -3219,6 +3231,7 @@ namespace Odin.Warehouse.DataSets {
                 this.columnunitprice = base.Columns["unitprice"];
                 this.columnbatch = base.Columns["batch"];
                 this.columnrespperson = base.Columns["respperson"];
+                this.columngcode = base.Columns["gcode"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3236,8 +3249,8 @@ namespace Odin.Warehouse.DataSets {
                 base.Columns.Add(this.columnunitlat);
                 this.columnlabel = new global::System.Data.DataColumn("label", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnlabel);
-                this.columnincomedoc = new global::System.Data.DataColumn("incomedoc", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnincomedoc);
+                this.columninid = new global::System.Data.DataColumn("inid", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columninid);
                 this.columnregdate = new global::System.Data.DataColumn("regdate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnregdate);
                 this.columnsupplier = new global::System.Data.DataColumn("supplier", typeof(string), null, global::System.Data.MappingType.Element);
@@ -3256,6 +3269,8 @@ namespace Odin.Warehouse.DataSets {
                 base.Columns.Add(this.columnbatch);
                 this.columnrespperson = new global::System.Data.DataColumn("respperson", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnrespperson);
+                this.columngcode = new global::System.Data.DataColumn("gcode", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columngcode);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9740,17 +9755,17 @@ namespace Odin.Warehouse.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string incomedoc {
+            public string inid {
                 get {
                     try {
-                        return ((string)(this[this.tabledt_Inventory.incomedocColumn]));
+                        return ((string)(this[this.tabledt_Inventory.inidColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'incomedoc\' in table \'dt_Inventory\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'inid\' in table \'dt_Inventory\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledt_Inventory.incomedocColumn] = value;
+                    this[this.tabledt_Inventory.inidColumn] = value;
                 }
             }
             
@@ -9900,6 +9915,22 @@ namespace Odin.Warehouse.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string gcode {
+                get {
+                    try {
+                        return ((string)(this[this.tabledt_Inventory.gcodeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'gcode\' in table \'dt_Inventory\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledt_Inventory.gcodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsartidNull() {
                 return this.IsNull(this.tabledt_Inventory.artidColumn);
             }
@@ -9972,14 +10003,14 @@ namespace Odin.Warehouse.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsincomedocNull() {
-                return this.IsNull(this.tabledt_Inventory.incomedocColumn);
+            public bool IsinidNull() {
+                return this.IsNull(this.tabledt_Inventory.inidColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetincomedocNull() {
-                this[this.tabledt_Inventory.incomedocColumn] = global::System.Convert.DBNull;
+            public void SetinidNull() {
+                this[this.tabledt_Inventory.inidColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10088,6 +10119,18 @@ namespace Odin.Warehouse.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetresppersonNull() {
                 this[this.tabledt_Inventory.resppersonColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsgcodeNull() {
+                return this.IsNull(this.tabledt_Inventory.gcodeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetgcodeNull() {
+                this[this.tabledt_Inventory.gcodeColumn] = global::System.Convert.DBNull;
             }
         }
         
