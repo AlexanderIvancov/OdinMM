@@ -20,7 +20,7 @@ namespace Odin.CustomControls
 
         bool _showingModal = false;
         bool _manydecimals = false;
-
+        bool _repairCardMode = false;
 
         string _decSeparator = System.Threading.Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator[0].ToString();
 
@@ -29,7 +29,11 @@ namespace Odin.CustomControls
             get { return _manydecimals; }
             set { _manydecimals = value; }
         }
-
+        public bool RepairCardMode
+        {
+            get { return _repairCardMode; }
+            set { _repairCardMode = value; }
+        }
         public string DecSeparator
         {
             get { return ManyDecimals == true ? "," : _decSeparator; }
@@ -115,14 +119,28 @@ namespace Odin.CustomControls
                     }
                     else if (row == 3 && button_in_row == 0)
                     {
-                        drawButton(row, button_in_row, "0", buttonwidth * 2, buttonheigh);
+                        drawButton(row, button_in_row, "0", RepairCardMode ? buttonwidth : buttonwidth * 2, buttonheigh);
                     }
                     else if (row == 3 && button_in_row == 1)
                     {
-                        drawButton(row, button_in_row, ",", buttonwidth, buttonheigh);
+                        if (RepairCardMode)
+                        {
+                            drawButton(row, button_in_row, "L", buttonwidth, buttonheigh);
+                        }
+                        else
+                        {
+                            drawButton(row, button_in_row, ",", buttonwidth, buttonheigh);
+                            break;
+                        }
+                    }
+                    else if (row == 3 && button_in_row == 2)
+                    {
+                        if (RepairCardMode)
+                        {
+                            drawButton(row, button_in_row, "RC", buttonwidth, buttonheigh);
+                        }
                         break;
                     }
-
                     if (row == 2 && button_in_row == 3)
                     {
                         drawButton(row, button_in_row, "OK", buttonwidth, buttonheigh * 2);
@@ -193,18 +211,15 @@ namespace Odin.CustomControls
                                 break;
 
                             case "-":
-                                tempString = CellText != null ? CellText : string.Empty;
-
-                                if (tempString.Contains("-"))
+                                if (RepairCardMode) DisplayKeyboardSymbol("-", false);
+                                else
                                 {
-                                    return;
-                                }
+                                    tempString = CellText != null ? CellText : string.Empty;
 
-                                else if (string.IsNullOrEmpty(tempString))
-                                {
-                                     DisplayKeyboardSymbol("-", false);//
-                                }
+                                    if (tempString.Contains("-")) return;
 
+                                    if (string.IsNullOrEmpty(tempString)) DisplayKeyboardSymbol("-", false);
+                                }
                                 break;
 
                             case "OK":

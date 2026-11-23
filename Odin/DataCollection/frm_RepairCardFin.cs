@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
 using Odin.Global_Classes;
 using Odin.Tools;
 using Odin.CustomControls;
-using Odin.Workshop;
+using System.Drawing;
+using ComponentFactory.Krypton.Toolkit;
 
 namespace Odin.DataCollection
 {
@@ -19,7 +17,9 @@ namespace Odin.DataCollection
         private int _currentPage = 0;
         private DataTable _dtCardsAll = new DataTable();
         private readonly List<uc_RepairCardItem> _cardSlots = new List<uc_RepairCardItem>();
-
+        frm_ScreenNumKeyboard popup;
+        PopupWindowHelper PopupHelper = new PopupWindowHelper();
+        KryptonTextBox focusedtextbox;
         private int _selectedCardId = 0;
         private uc_RepairCardItem _selectedSlot = null;
 
@@ -94,7 +94,6 @@ namespace Odin.DataCollection
         {
             base.OnKeyPress(e);
 
-            // Если нажата клавиша, а фокус не в поле сканера — перекидываем туда
             if (!txt_Oper.Focused && !char.IsControl(e.KeyChar))
             {
                 txt_Oper.Focus();
@@ -109,6 +108,57 @@ namespace Odin.DataCollection
             txt_Oper.Focus();
         }
 
+        private void insertKeyboardSymbol(string symbol, bool symremove)
+        {
+            if (focusedtextbox == null) return;
+
+            if (symremove)
+            {
+                focusedtextbox.Text = symbol;
+            }
+            else
+            {
+                focusedtextbox.Text += symbol;
+            }
+
+            focusedtextbox.SelectionStart = focusedtextbox.Text.Length;
+
+            if (popup != null && !popup.IsDisposed)
+                popup.CellText = focusedtextbox.Text;
+        }
+        private void ShowScreenNumKeyboard(KryptonTextBox _focusedtextbox)
+        {
+            popup = new frm_ScreenNumKeyboard();
+            popup.RepairCardMode = true;
+            popup.DisplayKeyboardSymbol += new CustomControls.DisplayKeyboardSymbolEventHandler(insertKeyboardSymbol);
+            popup.FormClosing += new FormClosingEventHandler(popup_FormClosing);
+
+            popup.CellText = _focusedtextbox.Text;
+
+            var wa = Screen.FromControl(this).WorkingArea;
+            int x = wa.Left + (wa.Width - popup.Width) / 2;
+            int y = wa.Top + (wa.Height - popup.Height) / 2;
+            Point _location = new Point(x, y);
+
+            PopupHelper.ClosePopup();
+            PopupHelper.ShowPopup(this, popup, _location);
+        }
+
+        private void popup_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            txt_Oper.Focus();
+            txt_Oper.SelectAll();
+            if (focusedtextbox == txt_Oper)
+            {
+                BeginInvoke(new Action(() =>
+                {
+                    txt_Oper_KeyPress(
+                        txt_Oper,
+                        new KeyPressEventArgs((char)Keys.Enter)
+                    );
+                }));
+            }
+        }
         public void LoadData(int stateId, int targetCardId = 0)
         {
             var data = DC_BLL.getRepairCards(stateId);
@@ -308,12 +358,18 @@ namespace Odin.DataCollection
                 return;
             }
 
-            frm_AddRepairCardDet frm = new frm_AddRepairCardDet { FormMode = 0 };
-            frm.SetFocus();
-            if (frm.ShowDialog() == DialogResult.OK && CheckWorker())
+            if (string.IsNullOrEmpty(Worker)) CheckWorker();
+            if (!string.IsNullOrEmpty(Worker))
             {
-                DCBll.SaveRepairCardDets(detId, RC.Id, "", frm.FormText, "", -99, "", "", 0, Worker, "");
-                RenderCurrentPage();
+
+                frm_AddRepairCardDet frm = new frm_AddRepairCardDet { FormMode = 0, Worker = Worker, HeadId = RC.Id };
+                frm.SetFocus();
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    DCBll.SaveRepairCardDets(detId, RC.Id, "", frm.FormText, "", -99, "", "", 0, Worker, "");
+                    SaveScannedMaterials(frm);
+                    RenderCurrentPage();
+                }
             }
             txt_Oper.Focus();
         }
@@ -333,17 +389,20 @@ namespace Odin.DataCollection
                 return;
             }
 
-            frm_AddRepairCardDet frm = new frm_AddRepairCardDet { FormMode = 1 };
-            frm.SetFocus();
-            if (frm.ShowDialog() == DialogResult.OK)
+            if (string.IsNullOrEmpty(Worker)) CheckWorker();
+            if (!string.IsNullOrEmpty(Worker))
             {
-                if (string.IsNullOrEmpty(Worker)) CheckWorker();
-                if (!string.IsNullOrEmpty(Worker))
+
+                frm_AddRepairCardDet frm = new frm_AddRepairCardDet { FormMode = 1, Worker = Worker, HeadId = RC.Id };
+                frm.SetFocus();
+                if (frm.ShowDialog() == DialogResult.OK)
                 {
                     DCBll.SaveRepairCardDets(detId, RC.Id, "", "", Worker, -99, "", frm.FormText, frm.WorkTime, "", "");
+                    SaveScannedMaterials(frm);
                     RenderCurrentPage();
                 }
             }
+
             txt_Oper.Focus();
         }
 
@@ -365,13 +424,18 @@ namespace Odin.DataCollection
             int detId = _selectedSlot.GetSelectedDetailId();
             if (detId == 0) return;
 
-            frm_AddRepairCardDet frm = new frm_AddRepairCardDet { FormMode = -1 };
-            frm.SetFocus();
-            if (frm.ShowDialog() == DialogResult.OK && CheckWorker())
+            if (string.IsNullOrEmpty(Worker)) CheckWorker();
+            if (!string.IsNullOrEmpty(Worker))
             {
-                DCBll.SaveRepairCardDets(detId, RC.Id, "", "", Worker, 0, "", frm.FormText, frm.WorkTime, Worker, "");
-                DCBll.SaveRepairCardDets(0, RC.Id, frm.FormText, "", "", -99, "", "", 0, Worker, "");
-                RenderCurrentPage();
+                frm_AddRepairCardDet frm = new frm_AddRepairCardDet { FormMode = -1, Worker = Worker, HeadId = RC.Id };
+                frm.SetFocus();
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    DCBll.SaveRepairCardDets(detId, RC.Id, "", "", Worker, 0, "", frm.FormText, frm.WorkTime, Worker, "");
+                    DCBll.SaveRepairCardDets(0, RC.Id, frm.FormText, "", "", -99, "", "", 0, Worker, "");
+                    SaveScannedMaterials(frm);
+                    RenderCurrentPage();
+                }
             }
             txt_Oper.Focus();
         }
@@ -383,13 +447,17 @@ namespace Odin.DataCollection
                 ShowError("Card is not selected or closed!");
                 return;
             }
-
-            frm_AddRepairCardDet frm = new frm_AddRepairCardDet { FormMode = 2 };
-            frm.SetFocus();
-            if (frm.ShowDialog() == DialogResult.OK && CheckWorker())
+            if (string.IsNullOrEmpty(Worker)) CheckWorker();
+            if (!string.IsNullOrEmpty(Worker))
             {
-                DCBll.SaveRepairCardHead(_selectedCardId, "", "", 0, 0, frm.FormText, "", Worker);
-                LoadData(-1);
+                frm_AddRepairCardDet frm = new frm_AddRepairCardDet { FormMode = 2, Worker = Worker, HeadId = RC.Id };
+                frm.SetFocus();
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    DCBll.SaveRepairCardHead(_selectedCardId, "", "", 0, 0, frm.FormText, "", Worker);
+                    SaveScannedMaterials(frm);
+                    LoadData(-1);
+                }
             }
             txt_Oper.Focus();
         }
@@ -401,13 +469,17 @@ namespace Odin.DataCollection
                 ShowError("Select the card!!");
                 return;
             }
-
-            frm_AddRepairCardDet frm = new frm_AddRepairCardDet { FormMode = -1 };
-            frm.SetFocus();
-            if (frm.ShowDialog() == DialogResult.OK && CheckWorker())
+            if (string.IsNullOrEmpty(Worker)) CheckWorker();
+            if (!string.IsNullOrEmpty(Worker))
             {
-                DCBll.SaveRepairCardDets(0, RC.Id, frm.FormText, "", "", -99, "", "", 0, Worker, Worker);
-                RenderCurrentPage();
+                frm_AddRepairCardDet frm = new frm_AddRepairCardDet { FormMode = -1, Worker = Worker, HeadId = RC.Id };
+                frm.SetFocus();
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    DCBll.SaveRepairCardDets(0, RC.Id, frm.FormText, "", "", -99, "", "", 0, Worker, Worker);
+                    SaveScannedMaterials(frm);
+                    RenderCurrentPage();
+                }
             }
             txt_Oper.Focus();
         }
@@ -438,44 +510,27 @@ namespace Odin.DataCollection
             txt_Oper.Focus();
         }
 
+        private void kryptonButton1_Click(object sender, EventArgs e)
+        {
+            focusedtextbox = txt_Oper;
+            ShowScreenNumKeyboard(txt_Oper);
+        }
+
         private void txt_Oper_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
                 string input = txt_Oper.Text.Trim();
-                if (input.StartsWith("RC"))
-                {
-                    // Поиск карты по номеру
-                    for (int i = 0; i < _dtCardsAll.Rows.Count; i++)
+                string column = System.Text.RegularExpressions.Regex.IsMatch(input, @"^RC\d{4}-\d{2}$") ? "name" : "serial";
+                for (int i = 0; i < _dtCardsAll.Rows.Count; i++)
+                    if (_dtCardsAll.Rows[i][column].ToString().Trim() == input)
                     {
-                        if (_dtCardsAll.Rows[i]["name"].ToString().Trim() == input)
-                        {
-                            _selectedCardId = Convert.ToInt32(_dtCardsAll.Rows[i]["id"]);
-                            RC.Id = _selectedCardId;
-                            _currentPage = i / PageSize;
-                            RenderCurrentPage();
-                            break;
-                        }
+                        _selectedCardId = Convert.ToInt32(_dtCardsAll.Rows[i]["id"]);
+                        RC.Id = _selectedCardId;
+                        _currentPage = i / PageSize;
+                        RenderCurrentPage();
+                        break;
                     }
-                }
-                else if (DAL.CheckLabel(input))
-                {
-                    // Сканирование материала в активную карточку
-                    if (_selectedCardId != 0)
-                    {
-                        if (string.IsNullOrEmpty(Worker)) CheckWorker();
-                        int detId = _selectedSlot != null ? _selectedSlot.GetSelectedDetailId() : 0;
-                        if (!string.IsNullOrEmpty(Worker))
-                        {
-                            DCBll.SaveRepairCardMaterials(0, _selectedCardId, detId, Convert.ToInt32(input), 1, "", Worker);
-                            RenderCurrentPage();
-                        }
-                    }
-                    else
-                    {
-                        ShowError("Select card for material adding!");
-                    }
-                }
 
                 txt_Oper.Text = "";
                 txt_Oper.Focus();
@@ -504,6 +559,19 @@ namespace Odin.DataCollection
             }
             ShowError("Worker scan failed or inactive!");
             return false;
+        }
+
+        private void SaveScannedMaterials(frm_AddRepairCardDet frm)
+        {
+            if (frm == null) return;
+            List<int> newMats = frm.NewMaterials;
+            if (newMats == null || newMats.Count == 0) return;
+
+            int detId = _selectedSlot != null ? _selectedSlot.GetSelectedDetailId() : 0;
+            foreach (int matId in newMats)
+            {
+                DCBll.SaveRepairCardMaterials(0, RC.Id, detId, matId, 1, "", Worker);
+            }
         }
 
         private void btn_ChangeWorker_Click(object sender, EventArgs e)

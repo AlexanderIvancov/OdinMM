@@ -87,12 +87,15 @@
             // 
             // lbl_Text
             // 
+            this.lbl_Text.AutoSize = false;
             this.lbl_Text.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.TitleControl;
-            this.lbl_Text.Location = new System.Drawing.Point(181, 93);
+            this.lbl_Text.Location = new System.Drawing.Point(0, 82);
             this.lbl_Text.Name = "lbl_Text";
-            this.lbl_Text.Size = new System.Drawing.Size(158, 36);
+            this.lbl_Text.Size = new System.Drawing.Size(522, 36);
             this.lbl_Text.StateCommon.LongText.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lbl_Text.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Text.StateCommon.ShortText.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Center;
+            this.lbl_Text.StateCommon.ShortText.TextV = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.lbl_Text.TabIndex = 250;
             this.lbl_Text.Values.Text = "Instruction:";
             // 
@@ -101,8 +104,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(522, 223);
-            this.Controls.Add(this.kryptonPanel1);
             this.Controls.Add(this.txt_Text);
+            this.Controls.Add(this.kryptonPanel1);
             this.Controls.Add(this.btn_OK);
             this.Controls.Add(this.btn_Cancel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -113,7 +116,6 @@
             this.Activated += new System.EventHandler(this.frm_cmbTextPDA_Activated);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
-            this.kryptonPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

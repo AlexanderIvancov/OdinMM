@@ -37,6 +37,7 @@
             this.btn_AddCard = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Close = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btn_Create = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.pnlBottom)).BeginInit();
             this.pnlBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroupTop)).BeginInit();
@@ -62,6 +63,7 @@
             // 
             // pnlBottom
             // 
+            this.pnlBottom.Controls.Add(this.kryptonButton1);
             this.pnlBottom.Controls.Add(this.lbl_OperPrompt);
             this.pnlBottom.Controls.Add(this.btn_Refresh);
             this.pnlBottom.Controls.Add(this.txt_Oper);
@@ -78,12 +80,12 @@
             // lbl_OperPrompt
             // 
             this.lbl_OperPrompt.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lbl_OperPrompt.Location = new System.Drawing.Point(1276, 10);
+            this.lbl_OperPrompt.Location = new System.Drawing.Point(1299, 10);
             this.lbl_OperPrompt.Name = "lbl_OperPrompt";
-            this.lbl_OperPrompt.Size = new System.Drawing.Size(154, 50);
+            this.lbl_OperPrompt.Size = new System.Drawing.Size(131, 50);
             this.lbl_OperPrompt.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lbl_OperPrompt.TabIndex = 6;
-            this.lbl_OperPrompt.Values.Text = "SCAN RESULT";
+            this.lbl_OperPrompt.Values.Text = "SEARCH RC";
             // 
             // btn_Refresh
             // 
@@ -340,6 +342,18 @@
             this.btn_Create.Values.Text = "Create";
             this.btn_Create.Click += new System.EventHandler(this.btn_Create_Click);
             // 
+            // kryptonButton1
+            // 
+            this.kryptonButton1.Location = new System.Drawing.Point(1231, 6);
+            this.kryptonButton1.Name = "kryptonButton1";
+            this.kryptonButton1.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Silver;
+            this.kryptonButton1.Size = new System.Drawing.Size(62, 58);
+            this.kryptonButton1.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.kryptonButton1.TabIndex = 260;
+            this.kryptonButton1.Values.Image = global::Odin.Global_Resourses.keyboard_add;
+            this.kryptonButton1.Values.Text = "";
+            this.kryptonButton1.Click += kryptonButton1_Click;
+            // 
             // frm_RepairCardFin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -388,5 +402,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lbl_OperPrompt;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_VisualControl;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btn_DeleteCard;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
     }
 }

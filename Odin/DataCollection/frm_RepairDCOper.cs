@@ -8,12 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ComponentFactory.Krypton.Toolkit;
-using ComponentFactory.Krypton.Ribbon;
 using Odin.Global_Classes;
 using Odin.Tools;
 using System.Data.SqlClient;
-using System.Runtime.InteropServices;
-using System.Threading;
 using Odin.CustomControls;
 using Odin.Workshop;
 
