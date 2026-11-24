@@ -287,7 +287,9 @@
             "4",
             "5",
             "5A",
-            "6"});
+            "6",
+            "S",
+            "V"});
             this.cmb_MSL.Location = new System.Drawing.Point(376, 92);
             this.cmb_MSL.Name = "cmb_MSL";
             this.cmb_MSL.Size = new System.Drawing.Size(44, 21);

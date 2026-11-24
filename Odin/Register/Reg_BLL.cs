@@ -151,7 +151,30 @@ namespace Odin.Register
             _res = Convert.ToInt32(sqlComm.Parameters["@insertedid"].Value);
             sqlConn.Close();
 
+            try
+            {
+                if (_res != 0
+                    && !string.IsNullOrEmpty(msl)
+                    && msl.Trim().Equals("V", StringComparison.OrdinalIgnoreCase))
+                {
+                    Helper myHelper = new Helper();
+                    DAL_Functions dalFunc = new DAL_Functions();
 
+                    string emailaddresses = dalFunc.EmailAddressesByType(26);
+                    if (!string.IsNullOrEmpty(emailaddresses))
+                    {
+                        string subject = "Article: " + article;
+                        string body = "\r\nArticle: " + article
+                            + "\r\nName: " + secname
+                            + "\r\nMSL: " + msl
+                            + "\r\nSaved by: " + Environment.UserName
+                            + "\r\nDate: " + DateTime.Now.ToString("dd.MM.yyyy HH:mm");
+
+                        myHelper.SendMessage(emailaddresses, subject, body);
+                    }
+                }
+            }
+            catch { }
 
             return _res;
         }
